@@ -1,4 +1,4 @@
-/* NON_MATCHING: sort-key operand order and the result local now match retail; retail copies leftSlot into r2 (mov r2, r0) before the push instead of loading through r0. */
+/* Built with the unit's cflags (-O2 -Otime). */
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "gamedata/NkmBaseRecordA.h"
 

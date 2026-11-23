@@ -1,4 +1,4 @@
-/* NON_MATCHING: IDENTICAL when compiled with --cpu=MPCore --fpu=softvfp (retail forwards the stack words with core ldm/stm, as its neighbours FUN_00426634/FUN_00426940 that need the same flag); the default build copies them through VFP. Needs that unit cflags. */
+/* IDENTICAL as the unit is compiled (its cflags entry) with --cpu=MPCore --fpu=softvfp (retail forwards the stack words with core ldm/stm, as its neighbours FUN_00426634/FUN_00426940 that need the same flag); the default build copies them through VFP. */
 #include "shard/W6_W6Match2_HandleRequest.h"
 #include "nn/Result.h"
 

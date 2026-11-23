@@ -617,6 +617,7 @@
 0x00144a64 FUN_00144a64 twin
 0x00144f44 nn_os_Thread_ThreadStart name
 0x00144f88 svcExitThread name
+0x00144f90 FUN_00144f90 library
 0x00146518 nn_fs_GetPriority name
 0x00146538 FUN_00146538 between
 0x00146540 nn_fs_detail_FileBase_TrySetPosition name
@@ -1529,6 +1530,7 @@
 0x002ad3a4 FUN_002ad3a4 between
 0x002ad44c nn_math_ARMv6_VEC3TransformAsm_2AD44C name
 0x002ad488 nn_fnd_DateTime_FromParameters name
+0x002ad4f8 FUN_002ad4f8 library
 0x002ad8b4 __ARM_common_memcpy4_8 name
 0x002ad8c8 nn_fs_ipc_FileSystem_CloseArchive name
 0x002ad8f8 nn_fs_ipc_FileSystem_OpenArchive name
@@ -3000,6 +3002,7 @@
 0x003eb078 mathlib_ceilf name
 0x003eb108 FUN_003eb108 callers
 0x003eb2c8 FUN_003eb2c8 callers
+0x003ec298 FUN_003ec298 library
 0x003f41ec mobiclipAudioDeviceInitializeStatics name
 0x003f51fc FUN_003f51fc between
 0x003f5754 moCreateValueRecordThunk between

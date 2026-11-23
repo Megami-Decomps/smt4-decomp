@@ -1,4 +1,4 @@
-/* NON_MATCHING: sub-block base now matches retail (one add pair); the 0.0f pool load is scheduled before the second add instead of after it. */
+/* Built with the unit's cflags (-O2 -Otime). */
 #include "common.h"
 
 extern "C" {

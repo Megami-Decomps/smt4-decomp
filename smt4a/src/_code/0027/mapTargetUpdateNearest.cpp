@@ -5,50 +5,12 @@
 #include "game/GameStateA.h"
 #include "map/LmapGlobals.h"
 #include "map/MapVector.h"
+#include "map/MapNpc.h"
 #include "gamedata/DataTableAccess_Smt4a.h"
 #include "code/Code0027_Smt4a.h"
 #include "shard/W6_W6Match1_PositionedStream.h"
 
-#define MAP_TARGET_COUNT 0x40
-
-/* One interaction target of the map (0x3C bytes). */
-struct MapTarget {
-    /* 0x00 */ u8 unk00[0x0C];
-    /* 0x0C */ u8 active;
-    /* 0x0D */ u8 unk0D[3];
-    /* 0x10 */ s16 kind;           /* 2: wide trigger, 4: ignored */
-    /* 0x12 */ s16 hintId;
-    /* 0x14 */ s16 textId;
-    /* 0x16 */ u8 unk16[6];
-    /* 0x1C */ MapVector position;
-    /* 0x28 */ f32 heading;
-    /* 0x2C */ u8 unk2C[0x10];
-};
-
-struct MapTargetText {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u32 icon;
-    /* 0x0C */ char text[1];
-};
-
-struct MapTargetWork {
-    /* 0x0000 */ MapTarget targets[MAP_TARGET_COUNT];
-    /* 0x0F00 */ u8 unk0F00[0xC];
-    /* 0x0F0C */ u8 hasTarget;
-    /* 0x0F0D */ u8 unk0F0D[3];
-    /* 0x0F10 */ s32 target;
-    /* 0x0F14 */ s32 hintId;
-    /* 0x0F18 */ u8 unk0F18[4];
-    /* 0x0F1C */ u32 icon;
-    /* 0x0F20 */ char text[0x20];
-    /* 0x0F40 */ u8 disabled;
-    /* 0x0F41 */ u8 unk0F41[0xB];
-    /* 0x0F4C */ s32 holdFrames;
-    /* 0x0F50 */ s32 lastTarget;
-};
-
 extern "C" {
-extern MapTargetWork *DAT_00581280;
 
 void FUN_00234044(s32 show, s32 target);
 char *libc_strcpy(char *destination, const char *source);
@@ -69,21 +31,21 @@ void mapTargetUpdateNearest(MapVector position, f32 heading)
     f32 nearLimit = MAP_TARGET_NEAR_LIMIT;
     f32 angleLimit = MAP_TARGET_ANGLE_LIMIT;
 
-    if (DAT_00581280->disabled != 0)
+    if (g_mapNpcWork->disabled != 0)
         return;
-    DAT_00581280->hasTarget = 0;
+    g_mapNpcWork->hasTarget = 0;
     if (g_gameState.inputBlocked != 0)
         return;
 
-    for (s32 i = 0; i < MAP_TARGET_COUNT; i++) {
-        if (DAT_00581280->targets[i].active != 0 && DAT_00581280->targets[i].kind != 4) {
-            if (DAT_00581280->targets[i].kind == 2) {
+    for (s32 i = 0; i < MAP_NPC_COUNT; i++) {
+        if (g_mapNpcWork->npcs[i].active != 0 && g_mapNpcWork->npcs[i].kind != MAP_NPC_KIND_IGNORED) {
+            if (g_mapNpcWork->npcs[i].kind == MAP_NPC_KIND_WIDE_TRIGGER) {
                 nearLimit = MAP_TARGET_WIDE_NEAR_LIMIT;
                 angleLimit = MAP_TARGET_WIDE_ANGLE_LIMIT;
             }
-            f32 distance = distSpatial(position, DAT_00581280->targets[i].position);
+            f32 distance = distSpatial(position, g_mapNpcWork->npcs[i].position);
             if (distance < nearLimit) {
-                f32 angle = mathAbsHeadingErrorToPoint(position, heading, DAT_00581280->targets[i].position);
+                f32 angle = mathAbsHeadingErrorToPoint(position, heading, g_mapNpcWork->npcs[i].position);
                 if (angle < angleLimit && (best == -1 || distance < bestDistance)) {
                     best = i;
                     bestDistance = distance;
@@ -92,40 +54,40 @@ void mapTargetUpdateNearest(MapVector position, f32 heading)
         }
     }
 
-    if (best != -1 || DAT_00581280->holdFrames > 0) {
-        DAT_00581280->hasTarget = 1;
-        s32 index = best != -1 ? best : DAT_00581280->lastTarget;
+    if (best != -1 || g_mapNpcWork->holdFrames > 0) {
+        g_mapNpcWork->hasTarget = 1;
+        s32 index = best != -1 ? best : g_mapNpcWork->lastTarget;
         if (best != -1) {
-            DAT_00581280->holdFrames = MAP_TARGET_HOLD_FRAMES;
-            DAT_00581280->lastTarget = best;
+            g_mapNpcWork->holdFrames = MAP_TARGET_HOLD_FRAMES;
+            g_mapNpcWork->lastTarget = best;
         }
-        DAT_00581280->target = index;
-        DAT_00581280->hintId = DAT_00581280->targets[index].hintId;
-        MapTargetText *entry = (MapTargetText *)dataTable2aGetEntryWithAoc(DAT_00581280->targets[index].textId);
+        g_mapNpcWork->target = index;
+        g_mapNpcWork->targetModelId = g_mapNpcWork->npcs[index].modelId;
+        MapNpcRecord *entry = (MapNpcRecord *)dataTable2aGetEntryWithAoc(g_mapNpcWork->npcs[index].tableIndex);
         const char *text = entry->text;
         if (text != NULL && !(text[0] == '0' && text[1] == 0)) {
-            f32 angle = mathAbsHeadingErrorToPoint(DAT_00581280->targets[index].position,
-                                                   DAT_00581280->targets[index].heading,
+            f32 angle = mathAbsHeadingErrorToPoint(g_mapNpcWork->npcs[index].position,
+                                                   g_mapNpcWork->npcs[index].heading,
                                                    g_lmapScene->pose.position);
             if (angle >= MAP_TARGET_NEAR_ICON_ANGLE)
                 g_gameState.targetIconNear = 0;
             else
                 g_gameState.targetIconNear = 1;
             FUN_00234044(1, index);
-            libc_strcpy(DAT_00581280->text, entry->text);
-            DAT_00581280->icon = entry->icon;
+            libc_strcpy(g_mapNpcWork->text, entry->text);
+            g_mapNpcWork->icon = entry->icon;
         } else {
-            DAT_00581280->text[0] = 0;
-            DAT_00581280->text[1] = 0;
+            g_mapNpcWork->text[0] = 0;
+            g_mapNpcWork->text[1] = 0;
         }
     }
-    if (DAT_00581280->holdFrames > 0) {
-        DAT_00581280->holdFrames--;
+    if (g_mapNpcWork->holdFrames > 0) {
+        g_mapNpcWork->holdFrames--;
     } else {
-        DAT_00581280->holdFrames = 0;
-        DAT_00581280->lastTarget = -1;
+        g_mapNpcWork->holdFrames = 0;
+        g_mapNpcWork->lastTarget = -1;
     }
-    if (DAT_00581280->hasTarget == 0 && DAT_00581280->holdFrames <= 0)
+    if (g_mapNpcWork->hasTarget == 0 && g_mapNpcWork->holdFrames <= 0)
         FUN_00234044(0, 0);
 }
 

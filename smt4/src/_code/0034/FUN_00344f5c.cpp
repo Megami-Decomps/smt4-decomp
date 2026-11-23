@@ -64,7 +64,7 @@ int transitionClearAxisVectors(...);
 int FUN_003d86a0(...);
 int btlReflectQueuePendingRosterFade(...);
 
-int FUN_0023c638(...);
+int btlUnitClearMatchingPairs(...);
 int asdModelSetUnitSlotColor(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_0023c700(...);
 int FUN_00244fb0(...);
@@ -116,7 +116,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: btlReflectSetValuePair. */
 /* Supplied declaration required: FUN_0023c5c0. */
 /* Supplied declaration required: btlReflectCreateKind18. */
-/* Supplied declaration required: FUN_0023c638. */
+/* Supplied declaration required: btlUnitClearMatchingPairs. */
 extern int FUN_0023c684(unsigned int);
 /* Supplied declaration required: asdModelSetUnitSlotColor. */
 /* Supplied declaration required: FUN_0023c700. */
@@ -580,7 +580,7 @@ LAB_00345938:
         FUN_003d1388();
         temp_v11 = temp_v5 < 2;
         temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
-        FUN_0023c638(g_btlScriptUnit,(int)*(short *)(*(int *)(temp_v5 + 0x20) + 0x6e));
+        btlUnitClearMatchingPairs(g_btlScriptUnit,(int)*(short *)(*(int *)(temp_v5 + 0x20) + 0x6e));
         FUN_0027dbc8(temp_v4,1);
       }
       if (temp_v11) break;

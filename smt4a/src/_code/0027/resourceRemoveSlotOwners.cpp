@@ -19,7 +19,7 @@ typedef struct SlotTable {
     /* 0x40 */ Slot slots[0x40];
 } SlotTable;
 extern u32 g_handleRegistry;
-extern SlotTable *DAT_00581280;
+extern SlotTable *g_mapNpcWork;
 
 /* Calls ptrListRemoveClearOwner for the handle of each of the 0x40 slot objects that has one, from the last slot to the first. */
 void resourceRemoveSlotOwners(void)
@@ -30,8 +30,8 @@ void resourceRemoveSlotOwners(void)
 
     i = 0x3F;
     do {
-        object = DAT_00581280->slots[i].object;
-        handle = (s32)DAT_00581280;
+        object = g_mapNpcWork->slots[i].object;
+        handle = (s32)g_mapNpcWork;
         if (object != NULL) {
             handle = object->handle;
         }

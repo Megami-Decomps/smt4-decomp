@@ -1,4 +1,4 @@
-/* NON_MATCHING: entry (mov r0,#0), slot-pointer arithmetic and arm placement now match retail; armcc still emits three compiler nop hints around the shared scrSetResult call and a different tail layout. */
+/* Built with the unit's cflags (-O2 -Otime). */
 #include "common.h"
 #include "result/Result.h"
 #include "script/ScriptArgs.h"

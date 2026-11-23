@@ -27,7 +27,7 @@ int mapGimicReleaseAll(void);
 int mapRangeDestroyModels(void);
 int asdMdlBanksDestroyAll(void);
 int gfxDestroyModelGroups(void);
-int FUN_0026f960(...);
+int sequenceRequestKind5(...);
 int bgmReleaseStopped(void);
 int encounterFlagsRollSlots(void);
 int mapRestoreSavedSelection(void);
@@ -484,7 +484,7 @@ extern int FUN_0021e4bc(void);
 /* Supplied declaration required: mdlManagerMarkAllDestroy. */
 /* Supplied declaration required: FUN_0022373c. */
 /* Supplied declaration required: FUN_0026f950. */
-/* Supplied declaration required: FUN_0026f960. */
+/* Supplied declaration required: sequenceRequestKind5. */
 /* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_0026fa30. */
 /* Supplied declaration required: slotFindByPair. */
@@ -5718,7 +5718,7 @@ joined_r0x001bfcb4:
       temp_v10 = rosterGetLeaderId();
       if ((temp_v10 != 0) && (temp_v12 = table1bOr1cGetRecordValue(), temp_v12 == 6)) {
         questDataGetRecord();
-        FUN_0026f960(*(unsigned short *)(temp_v10 + 0x148));
+        sequenceRequestKind5(*(unsigned short *)(temp_v10 + 0x148));
         return 0xffffffff;
       }
       (*(unsigned short *)((unsigned char *)&uStack_1c8 + 0)) = (unsigned short)uStack_1c8 & 0xff00;

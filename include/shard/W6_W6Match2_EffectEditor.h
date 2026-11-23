@@ -99,6 +99,8 @@ typedef char EffectEditorSettingsLayoutCheck[
 extern "C" {
 extern EffectEditor g_effectEditor;
 EffMenuNode* effMenuNodeCreate(const char* name);
+/* Places a menu node: its first two words (linker-inlined: `stm r0, {r1, r2}`, config/inlined.txt). */
+void effMenuNodeSetOrigin(EffMenuNode *node, s32 x, s32 y);
 }
 
 #ifdef __cplusplus

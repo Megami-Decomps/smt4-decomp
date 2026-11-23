@@ -8995,3 +8995,28 @@
 0028fce8 statusPanelStartRowChange inferred starts the status panel's row change (rows added or removed, gauges refreshed) (w82-f2)
 0057f3b4 g_eventEffect inferred size:0x1C the module words before the banner textures: every EventEffect.cpp function pools g_eventEffect and a second word for the data after it (8 units fdiff IDENTICAL or closer with the split, none worse)
 0057f3d0 g_eventBannerTextures inferred size:0x18 the two banner textures eventInitializeBlinkFade loads (retail pools them apart from g_eventEffect; w82-o4)
+00284fdc appRefundAllPoints inferred twin of smt4 appRefundAllPoints (w83-o1)
+00270c58 sequenceRequestKind5 inferred look-alike of smt4 sequenceRequestKind5 (same request, Apocalypse's packet)
+00423c0c frameStreamStop inferred twin of smt4 frameStreamStop (Obj557f00::close inlines it)
+00376628 effPartAppendClone inferred twin of smt4 effPartAppendClone
+0037667c effPartAppendFromFile inferred twin of smt4 effPartAppendFromFile
+00500254 tokenRegistryGetValue inferred twin of smt4 tokenRegistryGetValue
+00428334 tokenRegistryCheckEntryFlags inferred twin of smt4 tokenRegistryCheckEntryFlags
+00158900 movieOpenFileOpenPath inferred opens a movie file by path (w83-o4)
+0015f2ec jobAppletMessageUpdate inferred twin of smt4 jobAppletMessageUpdate
+002d02cc btlViewPositionAroundTarget inferred places the battle view 150 units out from the target at heading+30 and faces it (w83-s1)
+0035aa90 progressUnlockGetNthEarnedTitle inferred returns the index-th earned CampCec title, else "" (w83-s1)
+003e40d0 engineGetEnabledFloatTableValue inferred a float-table value when the logical key is active, else 1.0 (w83-s1)
+003426c0 uiDrawDirectoryRowsByKind inferred fills the visible directory rows by kind and draws their backing sprites (w83-s1)
+004e699c btlUnitClearMatchingPairs inferred twin of smt4 btlUnitClearMatchingPairs
+004a7ba0 entryWindowDrawEntryName inferred draws an entry's name for EntryWindowDraw, with the fallback layout (w83-s2)
+001764f4 appletShowOperationMessage inferred twin of smt4 appletShowOperationMessage
+00472820 aocBoardDraw inferred twin of smt4 aocBoardDraw; registered by FUN_00472f58 as the Aoc board draw job (w83-f1)
+003ea2b0 btlSummonLoadAndSpawn inferred twin of smt4 btlSummonLoadAndSpawn (w83-f1)
+0057a634 g_btlMarkerTimings inferred the BattleMarkerTimings table, as smt4's g_btlMarkerTimings (w83-f1)
+00295e54 mapNpcLoadStep inferred one step of loading the current area's NPCs (map/mapNpc.cpp) (w83-f2)
+00295d40 vectorQueueFinishPath inferred builds the active queue's backward directions, then advances to the next queue (w83-f2)
+003b564c dataTable42GetCombinedCount inferred the record count of table 0x2A with the add-on records (w83-f2)
+0013f7c4 messageBannerDraw inferred draws the message banner window (w83-f2)
+00581280 g_mapNpcWork inferred the map NPC loader's work (MapNpcWork *) (w83-f2)
+00500924 fsArchiveFileRequireHandle inferred twin of smt4 fsArchiveFileRequireHandle

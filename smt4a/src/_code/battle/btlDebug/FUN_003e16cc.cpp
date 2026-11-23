@@ -51,7 +51,7 @@ extern "C" {
 
 extern s32 g_btlCamera;
 extern u8* g_btlAux;
-extern BtlRefreshLayout DAT_0057a634;
+extern BtlRefreshLayout g_btlMarkerTimings;
 extern BtlEncounterGlobalsA g_btlEncount;
 
 void qsort(void* base, s32 count, s32 size, s32 (*compare)(const void*, const void*));
@@ -100,15 +100,15 @@ s32 FUN_003e16cc(StateObject* object, BattleState* state)
                     unit->status |= 0x800;
                     s16 stride, base, extra, start;
                     if ((unit->flags & 0x10) != 0) {
-                        stride = DAT_0057a634.player.stride;
-                        base = DAT_0057a634.player.base;
-                        extra = DAT_0057a634.player.extra;
-                        start = DAT_0057a634.start;
+                        stride = g_btlMarkerTimings.player.stride;
+                        base = g_btlMarkerTimings.player.base;
+                        extra = g_btlMarkerTimings.player.extra;
+                        start = g_btlMarkerTimings.start;
                     } else {
-                        stride = DAT_0057a634.enemy.stride;
-                        base = DAT_0057a634.enemy.base;
-                        extra = DAT_0057a634.enemy.extra;
-                        start = DAT_0057a634.start;
+                        stride = g_btlMarkerTimings.enemy.stride;
+                        base = g_btlMarkerTimings.enemy.base;
+                        extra = g_btlMarkerTimings.enemy.extra;
+                        start = g_btlMarkerTimings.start;
                     }
                     FUN_004cae0c(state, unit, 0, 0);
                     btlReflectQueueKind44(start + base + shown * stride, object, unit, 0xff, extra, 0);

@@ -27,7 +27,7 @@ typedef struct ReflectLookup {
     u16 key;
 } ReflectLookup;
 
-extern const s32 DAT_0057a634[7];
+extern const s32 g_btlMarkerTimings[7];
 
 s32 qsort(void *base, s32 count, s32 size, s32 (*compare)(const void *, const void *));
 s32 FUN_00221a94(const void *a, const void *b);
@@ -77,15 +77,15 @@ void FUN_003e2840(u32 actor, ReflectBattle *battle, s32 mode)
         s16 size;
 
         if ((entry->flags & 0x10) != 0) {
-            spacing = (s16)DAT_0057a634[3];
-            x = (s16)DAT_0057a634[4];
-            size = (s16)DAT_0057a634[5];
+            spacing = (s16)g_btlMarkerTimings[3];
+            x = (s16)g_btlMarkerTimings[4];
+            size = (s16)g_btlMarkerTimings[5];
         } else {
-            spacing = (s16)DAT_0057a634[0];
-            x = (s16)DAT_0057a634[1];
-            size = (s16)DAT_0057a634[2];
+            spacing = (s16)g_btlMarkerTimings[0];
+            x = (s16)g_btlMarkerTimings[1];
+            size = (s16)g_btlMarkerTimings[2];
         }
-        s32 position = placed * spacing + (s16)DAT_0057a634[6];
+        s32 position = placed * spacing + (s16)g_btlMarkerTimings[6];
 
         FUN_004cae0c(battle, entry, 0, 0);
         btlReflectQueueKind44(x + yOffset + position, actor, entry, 255, size, 0);

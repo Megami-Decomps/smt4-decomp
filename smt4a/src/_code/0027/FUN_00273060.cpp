@@ -28,7 +28,7 @@ typedef struct {
 } void_stack;
 
 extern int *g_lmapView; /* 0x5806a4 */
-extern int DAT_00581280; /* 0x581280 */
+extern int g_mapNpcWork; /* 0x581280 */
 extern int g_lmapScene; /* 0x581288 */
 
 extern signed char DAT_005f1bc4; /* 0x5f1bc4 */
@@ -96,7 +96,7 @@ void FUN_00273060(void)
   temp_v1 = ((int)g_mapEnemy);
   if (DAT_005f1be0 == 0) {
     if (g_gameState.loading == '\0') {
-      if ((*g_lmapView == 3) || (*(char *)(DAT_00581280 + 0xf40) != '\0')) {
+      if ((*g_lmapView == 3) || (*(char *)(g_mapNpcWork + 0xf40) != '\0')) {
         temp_v2 = 0;
         do {
           temp_v3 = temp_v1 + temp_v2 * 0x188;

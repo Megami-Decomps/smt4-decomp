@@ -38,7 +38,7 @@ int FUN_0031416c(...);
 int FUN_00316580(...);
 int statusBustUpPortraitAcquire(int, int);
 int statusBustUpPortraitRelease(...);
-int FUN_003e40d0(...);
+int engineGetEnabledFloatTableValue(...);
 int linkHolderApplyFirst(...);
 int linkHolderClearFlag(...);
 int aocResourceStartOnce(...);
@@ -109,7 +109,7 @@ extern int statusDownGetMode(void);
 /* Supplied declaration required: statusBustUpPortraitRelease. */
 extern int partyPanelIsStateThree(void);
 /* Supplied declaration required: devilIsTextureLoaded. */
-/* Supplied declaration required: FUN_003e40d0. */
+/* Supplied declaration required: engineGetEnabledFloatTableValue. */
 /* Supplied declaration required: linkHolderApplyFirst. */
 /* Supplied declaration required: linkHolderRunAll. */
 /* Supplied declaration required: FUN_003e5558. */
@@ -195,7 +195,7 @@ unsigned int FUN_00208c08(void)
     FUN_00316580(temp_v2 + 0x530,0);
     if (*(int *)(temp_v2 + 0x10) >= 6) {
       if ((DAT_00588fd4 != 0) && (*(char *)(DAT_00588fd4 + 0x20d1) != '\0')) {
-        FUN_003e40d0(DAT_00588fd4 + 0x20d4,0,9);
+        engineGetEnabledFloatTableValue(DAT_00588fd4 + 0x20d4,0,9);
       }
       temp_v3 = uiSpriteAdvanceAnimation(temp_v2 + 0x5bc);
       if (temp_v3 != 0) {
@@ -209,7 +209,7 @@ unsigned int FUN_00208c08(void)
     temp_v3 = 7;
     do {
       if ((DAT_00588fd4 != 0) && (*(char *)(DAT_00588fd4 + 0x20d1) != '\0')) {
-        FUN_003e40d0(DAT_00588fd4 + 0x20d4,0,9);
+        engineGetEnabledFloatTableValue(DAT_00588fd4 + 0x20d4,0,9);
       }
       temp_v7 = uiSpriteAdvanceAnimation(temp_v2 + temp_v3 * 0x8c + 0x44);
       if (temp_v7 == 0) {
@@ -482,12 +482,12 @@ LAB_002093e4:
     break;
   case 8:
     if ((DAT_00588fd4 != 0) && (*(char *)(DAT_00588fd4 + 0x20d1) != '\0')) {
-      FUN_003e40d0(DAT_00588fd4 + 0x20d4,0,9);
+      engineGetEnabledFloatTableValue(DAT_00588fd4 + 0x20d4,0,9);
     }
     temp_v3 = uiSpriteAdvanceAnimation(temp_v2 + 0x6d4);
     if (temp_v3 != 0) {
       if ((DAT_00588fd4 != 0) && (*(char *)(DAT_00588fd4 + 0x20d1) != '\0')) {
-        FUN_003e40d0(DAT_00588fd4 + 0x20d4,0,9);
+        engineGetEnabledFloatTableValue(DAT_00588fd4 + 0x20d4,0,9);
       }
       temp_v3 = uiSpriteAdvanceAnimation(temp_v2 + 0x760);
       if (temp_v3 != 0) {
@@ -744,12 +744,12 @@ LAB_00209dc4:
         do {
           if (temp_v3 <= *(int *)(temp_v2 + 0x18)) {
             if ((DAT_00588fd4 != 0) && (*(char *)(DAT_00588fd4 + 0x20d1) != '\0')) {
-              FUN_003e40d0(DAT_00588fd4 + 0x20d4,0,9);
+              engineGetEnabledFloatTableValue(DAT_00588fd4 + 0x20d4,0,9);
             }
             temp_v7 = temp_v2 + temp_v3 * 0x8c;
             uiSpriteAdvanceAnimation(temp_v7 + 0x7ec);
             if ((DAT_00588fd4 != 0) && (*(char *)(DAT_00588fd4 + 0x20d1) != '\0')) {
-              FUN_003e40d0(DAT_00588fd4 + 0x20d4,0,9);
+              engineGetEnabledFloatTableValue(DAT_00588fd4 + 0x20d4,0,9);
             }
             uiSpriteAdvanceAnimation(temp_v7 + 0xd64);
           }
@@ -759,7 +759,7 @@ LAB_00209dc4:
         *(int *)(temp_v2 + 0x18) = *(int *)(temp_v2 + 0x18) + 1;
       }
       if ((DAT_00588fd4 != 0) && (*(char *)(DAT_00588fd4 + 0x20d1) != '\0')) {
-        FUN_003e40d0(DAT_00588fd4 + 0x20d4,0,9);
+        engineGetEnabledFloatTableValue(DAT_00588fd4 + 0x20d4,0,9);
       }
       uiSpriteAdvanceAnimation(temp_v2 + 0x12dc);
     }

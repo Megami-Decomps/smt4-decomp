@@ -14,7 +14,7 @@ int __ARM_common_memcpy4_9(...);
 int asdSequenceRequest(...);
 int jobStop(...);
 int bgmReleaseStopped(void);
-int FUN_00270c58(...);
+int sequenceRequestKind5(...);
 int cameraRegistryRemove(...);
 int FUN_00363c58(...);
 int FUN_00376f84(void);
@@ -233,7 +233,7 @@ extern int g_aocMain; /* 0x570260 */
 extern int g_aocSystem; /* 0x570280 */
 extern unsigned int *g_lmapMainState; /* 0x580238 */
 extern int g_lmapView; /* 0x5806a4 */
-extern int DAT_00581280; /* 0x581280 */
+extern int g_mapNpcWork; /* 0x581280 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned char g_localCamera; /* 0x5f10cc */
 extern int DAT_005f1600; /* 0x5f1600 */
@@ -448,7 +448,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00249dec. */
 /* Supplied declaration required: scrScriptProcessGetEntry. */
 /* Supplied declaration required: bgmReleaseStopped. */
-/* Supplied declaration required: FUN_00270c58. */
+/* Supplied declaration required: sequenceRequestKind5. */
 /* Supplied declaration required: FUN_002737a8. */
 /* Supplied declaration required: mapIfResetRecords. */
 /* Supplied declaration required: popupStateSetAndShow. */
@@ -1773,12 +1773,12 @@ LAB_00276f5c:
                                 }
 LAB_00278b38:
                                 FUN_002b80fc(*(float *)(g_lmapScene + 0x28), *(float *)(g_lmapScene + 0x2C), *(float *)(g_lmapScene + 0x30));
-                                if (((*(char *)(DAT_00581280 + 0xf0c) != '\0') &&
+                                if (((*(char *)(g_mapNpcWork + 0xf0c) != '\0') &&
                                     (temp_v8 = inputConfirmPressed(), temp_v8 != 0)) &&
                                    (*(char *)(g_lmapView + 0xb4) == '\0')) {
                                   DAT_005f1614 = '\x01';
                                   DAT_005f165c = -1;
-                                  libc_strcpy(&DAT_005f1660,DAT_00581280 + 0xf20);
+                                  libc_strcpy(&DAT_005f1660,g_mapNpcWork + 0xf20);
                                   puVar2[3] = 0x23;
                                   puVar2[4] = 0;
                                   mapPopupReset();
@@ -4571,7 +4571,7 @@ joined_r0x0027ce58:
       temp_v8 = rosterGetLeaderId();
       if ((temp_v8 != 0) && (temp_v5 = table1bOr1cGetRecordValue(), temp_v5 == 6)) {
         questDataGetRecord();
-        FUN_00270c58(*(unsigned short *)(temp_v8 + 0xd4));
+        sequenceRequestKind5(*(unsigned short *)(temp_v8 + 0xd4));
         return 0xffffffff;
       }
       (*(unsigned short *)((unsigned char *)&uStack_b0 + 0)) = (unsigned short)uStack_b0 & 0xff00;

@@ -2695,6 +2695,7 @@
 0x00189938 FUN_00189938 between
 0x00189a04 FUN_00189a04 callers
 0x00189a38 errThrowFatal between
+0x00189a80 FUN_00189a80 library
 0x00189b9c nn_fnd_ExpHeapBase_Allocate name
 0x00189c00 FUN_00189c00 callers
 0x00189cbc FUN_00189cbc between
@@ -3205,6 +3206,7 @@
 0x001ab67c FUN_001ab67c between
 0x001ab810 FUN_001ab810 between
 0x001ab818 nn_math_ARMv6_MTX34CopyAsm name
+0x001ab838 FUN_001ab838 library
 0x001ab850 FUN_001ab850 callers
 0x001aeb40 nn_cx_UncompressLZ name
 0x001aec9c nn_cx_UncompressRL name
@@ -7399,6 +7401,7 @@
 0x0050db54 mathlib_ceilf name
 0x0050dbe4 FUN_0050dbe4 callers
 0x0050dda4 libm_tanf name
+0x0050e4c4 FUN_0050e4c4 library
 0x00512850 returnMinusOne1 callers
 0x00512858 returnMinusOne2 callers
 0x00512860 returnMinusOne3 callers

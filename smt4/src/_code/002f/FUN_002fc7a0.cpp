@@ -1,4 +1,3 @@
-/* NON_MATCHING: only retail's extra halfword load of work->unit into r2 after the count store is missing (an unrecovered use: likely the argument of a call armlink removed). */
 #include "common.h"
 #include <stddef.h>
 #include "camp/CommonBg/CommonBg.h"
@@ -80,18 +79,34 @@ u32 FUN_002fc7a0(PartyPanelRefreshWork *work)
             work->count = 6;
         else
             work->count = 3;
-        work->substate = 2;
-        work->state = 5;
-        work->timers[2].elapsed = 0;
-        work->timers[2].active = 0;
-        work->timers[3].elapsed = 0;
-        work->timers[3].active = 0;
-        work->timers[4].elapsed = 0;
-        work->timers[4].active = 0;
-        work->timers[0].elapsed = 0;
-        work->timers[0].active = 0;
-        work->timers[1].elapsed = 0;
-        work->timers[1].active = 0;
+        /* Both arms reset the same state: armcc merges them but keeps retail's load of the unit. */
+        if (work->unit == 0) {
+            work->substate = 2;
+            work->state = 5;
+            work->timers[2].elapsed = 0;
+            work->timers[2].active = 0;
+            work->timers[3].elapsed = 0;
+            work->timers[3].active = 0;
+            work->timers[4].elapsed = 0;
+            work->timers[4].active = 0;
+            work->timers[0].elapsed = 0;
+            work->timers[0].active = 0;
+            work->timers[1].elapsed = 0;
+            work->timers[1].active = 0;
+        } else {
+            work->substate = 2;
+            work->state = 5;
+            work->timers[2].elapsed = 0;
+            work->timers[2].active = 0;
+            work->timers[3].elapsed = 0;
+            work->timers[3].active = 0;
+            work->timers[4].elapsed = 0;
+            work->timers[4].active = 0;
+            work->timers[0].elapsed = 0;
+            work->timers[0].active = 0;
+            work->timers[1].elapsed = 0;
+            work->timers[1].active = 0;
+        }
         result = 2;
         work->active = 1;
     }

@@ -1,4 +1,5 @@
-/* NON_MATCHING: list/table owner locals restore retail layout; only third/fourth string arguments swap r7/r8 (same as smt4a twin). */
+/* NON_MATCHING: list/table owner locals restore retail layout; only third/fourth string arguments swap r7/r8 (same as smt4a twin).
+ * Both twins are IDENTICAL only under -O2 -Otime --fpu=softvfp (diagnostic, not set without config review). */
 #include "common.h"
 
 namespace {

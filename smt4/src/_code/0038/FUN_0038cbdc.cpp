@@ -12,7 +12,7 @@ int recordClearWideHandle(...);
 int archiveFileReplaceHandle(int *, int, int);
 int stringFormatUnbounded(...);
 int legacyResourceIdRemap(...);
-int FUN_00352e6c(...);
+int aocServiceQueryCatalog(...);
 int FUN_00352f9c(int *, unsigned char [1024], int);
 int FUN_003531dc(...);
 int aocApplicationRecreatePrimaryRequest(...);
@@ -51,7 +51,7 @@ extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: archiveFileReplaceHandle. */
 /* Supplied declaration required: stringFormatUnbounded. */
 /* Supplied declaration required: legacyResourceIdRemap. */
-/* Supplied declaration required: FUN_00352e6c. */
+/* Supplied declaration required: aocServiceQueryCatalog. */
 /* Supplied declaration required: FUN_00352f9c. */
 /* Supplied declaration required: FUN_003531dc. */
 /* Supplied declaration required: aocApplicationRecreatePrimaryRequest. */
@@ -207,7 +207,7 @@ int * FUN_0038cbdc(int param_1)
     sprintf((char *)temp_v10,(const char *)&LAB_0038d04c);
     temp_v16 = temp_v8;
     while( 1 ) {
-      FUN_00352e6c(&temp_v11,*(unsigned int *)(temp_v0 + 0x5a8),*(unsigned int *)(temp_v0 + 0x684),0x40,
+      aocServiceQueryCatalog(&temp_v11,*(unsigned int *)(temp_v0 + 0x5a8),*(unsigned int *)(temp_v0 + 0x684),0x40,
                    piVar6);
       *(unsigned int *)(param_1 + 0xc) = temp_v11;
       *(unsigned int *)(param_1 + 0x10) = uStack_a4;

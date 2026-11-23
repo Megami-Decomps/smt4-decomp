@@ -680,6 +680,18 @@ typedef struct BtlMainStateA {
             /* 0x4554 */ s32 index;
             /* 0x4558 */ BattleCleanupResource *resource;
         } retiredUnit;
+        /* The summon effect's load (btlSummonLoadAndSpawn, the twin of Shin Megami Tensei IV's btlSummonLoadAndSpawn): the
+         * load slots before the resources, the load's step and what it spawned. */
+        struct {
+            /* 0x2000 */ u8 unk2000BeforeActionLoad[0x1C];
+            /* 0x201C */ BtlActionLoadSlot slots[42]; /* slots[0] tracks the summon's resource */
+            /* 0x216C */ BattleCleanupResource *resources[42];
+            /* 0x2214 */ u8 unk2214[0x233C];
+            /* 0x4550 */ u8 step;              /* 0: find or request the resource, 1: wait for it and spawn */
+            /* 0x4551 */ u8 unk4551[3];
+            /* 0x4554 */ s32 selectedAction;   /* the roster record spawned, -1 while none */
+            /* 0x4558 */ BattleCleanupResource *selectedResource;
+        } actionLoad;
         struct {
             u8 prefix[0x1030];
             u32 state; /* 0x3030 */
@@ -898,6 +910,10 @@ typedef struct BtlMainGlobalsA {
             /* 0x0A0 */ u64 recruitRolled; /* entry flags it sets when it rolls for an enemy */
         } recruitMasks;
         struct {
+            /* 0x090 */ u8 unk090BeforeSummon[8];
+            /* 0x098 */ u64 summoned;      /* entry flags a summoned unit's entry starts with, besides `required` */
+        } summonMasks;
+        struct {
             /* 0x090 */ u8 unk090[0x28];
             /* 0x0B8 */ u64 excluded;
         } compatibility;
@@ -1024,6 +1040,10 @@ static __inline void btlStepEnter(BtlStep *step, u32 state)
 typedef char BtlMainStateARewardsOffsetCheck[
     offsetof(BtlMainStateA, rewards.totals) == 0x1B0 && sizeof(BattleRewardsA) == 0x3C ? 1 : -1];
 
+typedef char BtlMainStateAActionLoadOffsetCheck[offsetof(BtlMainStateA, actionLoad.slots) == 0x201C &&
+    offsetof(BtlMainStateA, actionLoad.resources) == 0x216C && offsetof(BtlMainStateA, actionLoad.step) == 0x4550 &&
+    offsetof(BtlMainStateA, actionLoad.selectedAction) == 0x4554 &&
+    offsetof(BtlMainGlobalsA, summonMasks.summoned) == 0x98 ? 1 : -1];
 typedef char BtlMainStateAFlaggedRosterCountOffsetCheck[
     offsetof(BtlMainStateA, flaggedRoster.count) == 0x1ED9 ? 1 : -1];
 

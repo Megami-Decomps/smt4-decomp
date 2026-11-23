@@ -1,7 +1,9 @@
-/* NON_MATCHING: initialization merges the index/object stores and pairs the first two direction components instead of retail's final two components. */
+/* NON_MATCHING: the direction is the normalized (-1, -2, -1) (armcc folds VEC3Normalize; with it the literal pool is
+ * retail's); retail keeps y in s0 and stores x alone, then y and z with one vstmia, where the build pairs x and y. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/Model/AsdScene.h"
+#include "nw/math/VEC3.h"
 
 struct SceneLightColor {
     f32 r, g, b, a;
@@ -79,8 +81,12 @@ SceneLight *asdSceneCreateDefaultLight(void)
     light->object = _ZN9Obj55b5a86createEPvP18AsdAllocatorObject(&description, allocator);
     light->data = light->object->data;
     light->data->kind = 0;
-    setLightDirection(light->data, -0.40824827551841736f, -0.8164965510368347f,
-                      -0.40824827551841736f);
+    nw::math::VEC3 direction;
+    direction.x = -1.0f;
+    direction.y = -2.0f;
+    direction.z = -1.0f;
+    nw::math::VEC3Normalize(&direction, &direction);
+    setLightDirection(light->data, direction.x, direction.y, direction.z);
     setLightGray(&light->data->ambient, 0.2f);
     light->data->packedAmbient = nw_ut_FloatColor_ToPicaU32(&light->data->ambient);
     setLightGray(&light->data->diffuse, 1.0f);

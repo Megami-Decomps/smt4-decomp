@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } param_2_stack;
 
-extern int DAT_00581280; /* 0x581280 */
+extern int g_mapNpcWork; /* 0x581280 */
 extern int g_lmapScene; /* 0x581288 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -68,13 +68,13 @@ void FUN_002750d8(int param_1,int param_2)
   unsigned int uStack_5c;
   unsigned char temp_v16 [52];
   
-  temp_v0 = DAT_00581280;
-  *(unsigned char *)(DAT_00581280 + 0xf40) = 0;
+  temp_v0 = g_mapNpcWork;
+  *(unsigned char *)(g_mapNpcWork + 0xf40) = 0;
   if (param_1 == 0) {
     temp_v0 = 0;
     do {
       temp_v1 = temp_v0 + 1;
-      temp_v0 = DAT_00581280 + temp_v0 * 0x3c;
+      temp_v0 = g_mapNpcWork + temp_v0 * 0x3c;
       if (*(char *)(temp_v0 + 0xc) != '\0') {
         *(unsigned char *)(temp_v0 + 0xe) = 0;
       }
@@ -92,7 +92,7 @@ void FUN_002750d8(int param_1,int param_2)
     temp_v6 = *(float *)(temp_v0 + 0x28);
     temp_v4 = 0.0f;
     temp_v11 = 180.0f;
-    *(unsigned char *)(DAT_00581280 + 0xf40) = 1;
+    *(unsigned char *)(g_mapNpcWork + 0xf40) = 1;
     temp_v12 = 0x3c8efa3543c80000;
     g_gameState.rayStart.x = *(float *)(temp_v0 + 0x1c);
     g_gameState.rayStart.y = *(float *)(temp_v0 + 0x20) + 100.0f;
@@ -220,9 +220,9 @@ void FUN_002750d8(int param_1,int param_2)
       }
     }
   }
-  temp_v0 = DAT_00581280;
+  temp_v0 = g_mapNpcWork;
   if (param_2 != 0) {
-    *(unsigned char *)(DAT_00581280 + 0xf0c) = 0;
+    *(unsigned char *)(g_mapNpcWork + 0xf0c) = 0;
     *(unsigned int *)(temp_v0 + 0xf4c) = 0;
   }
   return;

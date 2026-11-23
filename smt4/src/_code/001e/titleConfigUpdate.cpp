@@ -16,7 +16,7 @@ s32 listCursorGetRowIfUnblocked(const void *cursor);
 const void *dataTableGet(u32 table, u32 group);
 const TitleConfigHelpEntry *dataTableGetEntries(const void *table);
 void buttonHelpSetText(const char *text, u32 color);
-void FUN_00259e98(void);
+void titleConfigRebuildTouchRegions(void);
 s32 ifTouchGetSelectionModeForRegion(s32 button);
 s32 inputQueryButtonState(u32 action, u32 repeat);
 s32 bgmVolumeToStep(u32 value);
@@ -50,7 +50,7 @@ static __inline void titleConfigShowHelp(void)
     const TitleConfigHelpEntry *help = dataTableGetEntries(dataTableGet(0x3A, 1));
 
     buttonHelpSetText(help[selected].text, 0x323232FF);
-    FUN_00259e98();
+    titleConfigRebuildTouchRegions();
 }
 
 /* Sends the edited volumes to the sound system. */

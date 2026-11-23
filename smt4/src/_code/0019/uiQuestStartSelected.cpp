@@ -1,36 +1,9 @@
-/* NON_MATCHING: only the state-change stores differ: retail stores the previous state, then the new one with a writeback (str [r0,#8]; str [r0,#4]!) and the timer through that pointer; the build merges them into stm */
 #include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "code/Code0029_VariantB.h"
+#include "shard/W4_W4Match2_UiQuest.h"
 
 extern "C" {
-
-typedef struct StateTrack00199024 {
-    /* 0x0 */ u32 state;
-    /* 0x4 */ u32 previous;
-    /* 0x8 */ u8 unk8[4];
-    /* 0xc */ u32 timer;
-} StateTrack00199024;
-
-typedef struct UiQuest00199024 {
-    /* 0x000 */ u8 unk000[4];
-    /* 0x004 */ StateTrack00199024 track;
-    /* 0x014 */ u8 unk014[0x250];
-    /* 0x264 */ u8 panel[0x350];
-    /* 0x5b4 */ u32 script;
-    /* 0x5b8 */ u8 unk5b8[0x3b];
-    /* 0x5f3 */ u8 busy;
-    /* 0x5f4 */ u8 unk5f4[0x6c];
-    /* 0x660 */ u8 list[0x12a];
-    /* 0x78a */ u16 ids[1];
-} UiQuest00199024;
-
-static __inline void uiQuestEnterState(StateTrack00199024 *track, u32 next)
-{
-    track->previous = track->state;
-    track->state = next;
-    track->timer = 0;
-}
 
 s32 uiBindRecordRewardText(u32 id, s32 a, s32 b);
 void gameOptionsEnableAndReset(void);
@@ -39,33 +12,31 @@ void uiQuestCountDetailPages(u32 id);
 void uiQuestShowStatusHelp(void);
 void gameGetOptionProgressStatus(void);
 void buttonHelpSetPreset(s32 preset);
-s32 scrScriptProcessStartEntry(u32 script, s32 entry);
-s32 resourceRunOperationIfUnblocked(u8 *list);
-
-extern UiQuest00199024 *g_uiQuest; /* 0x43dd50 */
+s32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
+s32 resourceRunOperationIfUnblocked(const void *list);
 
 /* Starts the selected quest's script entry 3; when it starts, enters state 0xc. */
 void uiQuestStartSelected(void)
 {
-    UiQuest00199024 *quest = g_uiQuest;
+    UiQuest *quest = g_uiQuest;
     s32 base;
     s32 offset;
     u16 id;
 
-    quest->busy = 1;
-    base = resourceRunOperationIfUnblocked(quest->list);
-    offset = listCursorGetRowIfUnblocked(quest->list);
-    id = quest->ids[offset + base];
+    quest->panelView.panel.unkF3 = 1;
+    base = resourceRunOperationIfUnblocked(&quest->cursor);
+    offset = listCursorGetRowIfUnblocked(&quest->cursor);
+    id = quest->list[offset + base];
     gameFlagEntryActivate(id);
     gameGetOptionProgressStatus();
     gameOptionsEnableAndReset();
     uiQuestCountDetailPages(id);
-    spriteStartAnimationByIndex((UiSpriteState *)quest->panel, 2);
+    spriteStartAnimationByIndex(&quest->sprites[4], 2);
     uiBindRecordRewardText(id, 0, 1);
-    if (scrScriptProcessStartEntry(quest->script, 3) != 0) {
+    if (scrScriptProcessStartEntry(quest->script.process, 3) != 0) {
         buttonHelpSetPreset(0x9e);
         uiQuestShowStatusHelp();
-        uiQuestEnterState(&g_uiQuest->track, 0xc);
+        uiQuestEnterState(g_uiQuest, 0xc);
     }
 }
 

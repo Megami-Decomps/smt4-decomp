@@ -2,6 +2,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "nn/Result.h"
+#include "code/Code0050_Smt4a.h"
 
 struct ResourceMappingKey { u32 words[2]; };
 struct ResourceMappingInfo {
@@ -30,14 +31,13 @@ static inline u32 resourceMappingFlags(u8 kind)
 extern "C" {
 extern u32 DAT_00589368;
 extern ResourceMappingPacket DAT_0062d000[];
-u32 FUN_00500254(u32 resource, u32 *count);
-u32 tokenRegistryCopyEntries(u32 resource, ResourceMappingInfo *info, const ResourceMappingKey *key, u32 count);
-u32 FUN_00500350(u32 resource, u32 *key, ResourceMappingInfo *info, u32 count, u32 index);
+u32 tokenRegistryCopyEntries(const u32 *resource, ResourceMappingInfo *info, const ResourceMappingKey *key, u32 count);
+u32 FUN_00500350(const u32 *resource, u32 *key, ResourceMappingInfo *info, u32 count, u32 index);
 
-u32 FUN_00428428(u32 resource, const ResourceMappingKey *keys, u32 count)
+u32 FUN_00428428(const u32 *resource, const ResourceMappingKey *keys, u32 count)
 {
     u32 available;
-    u32 result = FUN_00500254(resource, &available);
+    u32 result = tokenRegistryGetValue(resource, &available);
     if (nnResultIsFailure(result)) {
         return result;
     }

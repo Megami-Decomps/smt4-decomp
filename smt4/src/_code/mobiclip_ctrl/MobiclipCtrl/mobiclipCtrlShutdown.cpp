@@ -7,7 +7,7 @@ extern "C" {
 
 int asdFatalError(void);
 int mobiclipS4FsReaderDestroy(S4FsReader *reader);
-int FUN_0034f5f8(void *obj);
+int frameStreamStop(void *obj);
 int FUN_0034f6e8(void *obj);
 int movieSyncDrainSourcePositions(S4Player *player);
 int mobiclipS4PlayerDestroy(S4Player *player);
@@ -25,7 +25,7 @@ void mobiclipCtrlShutdown(void)
 {
     u32 *handle;
 
-    FUN_0034f5f8(DAT_004c3af8);
+    frameStreamStop(DAT_004c3af8);
     movieSyncDrainSourcePositions(&g_mobiclipPlayer);
     mobiclipS4PlayerDestroy(&g_mobiclipPlayer);
     ((Obj420a2c *)DAT_004c3a50)->Obj420a2c::releaseSources();

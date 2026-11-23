@@ -12,7 +12,7 @@ struct BattleDebugAux;
 }
 extern "C" {
 extern BattleDebugAux *g_btlAux;
-extern BattleDebugLayout DAT_0057a634;
+extern BattleDebugLayout g_btlMarkerTimings;
 s32 FUN_00221b34(const void *first, const void *second);
 void qsort(void *array, u32 count, u32 stride, s32 (*compare)(const void *, const void *));
 void nameEntriesRegisterVerNames(void *work);
@@ -42,11 +42,11 @@ void FUN_003e89bc(BtlMainStateA *battle)
             (record->marker.flags & 0x800) == 0) {
             record->marker.flags |= 0x800;
             const BattleDebugSpacing *spacing = (record->render.flags & 0x10) != 0 ?
-                &DAT_0057a634.alternate : &DAT_0057a634.normal;
+                &g_btlMarkerTimings.alternate : &g_btlMarkerTimings.normal;
             s16 step = static_cast<s16>(spacing->step);
             s16 offset = static_cast<s16>(spacing->offset);
             s16 height = static_cast<s16>(spacing->height);
-            s16 origin = static_cast<s16>(DAT_0057a634.origin);
+            s16 origin = static_cast<s16>(g_btlMarkerTimings.origin);
             FUN_004cae0c(battle, record, 0, 0);
             btlReflectQueueKind44(position * step + offset + origin, 0, record, 255, height, 0);
             u32 icon = (record->render.flags & 0x10) != 0 ? 7 : 6;

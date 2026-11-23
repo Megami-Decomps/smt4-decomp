@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation: retail computes the entry address in a separate register (r2) and keeps the arguments in r7/r8 */
+/* Built with the unit's cflags (-O3 -Otime --fpu=softvfp). */
 #include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 
 extern "C" {

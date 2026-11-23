@@ -18,7 +18,7 @@ typedef struct {
 extern unsigned int DAT_0062d388; /* 0x62d388 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-extern unsigned int FUN_00500924(int);
+extern unsigned int fsArchiveFileRequireHandle(int);
 extern unsigned int *nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
 extern int nn_fs_ipc_FileSystem_OpenFile(unsigned int *, unsigned int *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
@@ -37,7 +37,7 @@ int FUN_0042b8dc(int param_1,unsigned int *param_2,unsigned int *param_3,unsigne
   }
   else {
     temp_v1 = 0;
-    temp_v2[0] = FUN_00500924(param_1);
+    temp_v2[0] = fsArchiveFileRequireHandle(param_1);
     temp_v0 = nn_fs_ipc_FileSystem_OpenFile
                       (temp_v2,(unsigned int *)&temp_v1,0,param_3[2],*(unsigned int *)(param_1 + 8),
                        *(unsigned int *)(param_1 + 0xc),*param_3,param_3[1],param_3[2],param_4,0);

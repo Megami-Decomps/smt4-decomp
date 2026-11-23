@@ -1,6 +1,9 @@
 /* NON_MATCHING: retail loads the current value into r2 (offset in r2, previous address in r1) and keeps it there to the tail call;
  * this build swaps r1/r2. The twin smt4a FUN_00284fdc has the same swap (it matched only by passing (reset, 0, current)
- * to a callee that takes no arguments, a one-caller prototype; it is NON_MATCHING again). */
+ * to a callee that takes no arguments, a one-caller prototype; it is NON_MATCHING again).
+ * A one-iteration u32 "history shift" loop over the two words also matches (wave 83), but they are the
+ * point total and the points still available (smt4a FUN_002f0bd8 spends from the second), not a history:
+ * rejected as steering. */
 #include "common.h"
 
 __packed struct HistoryReset {

@@ -25,7 +25,7 @@ int btlDowngradeRandomResistance(void);
 int mapCategoryToDestinationGroup(...);
 int btlGetAffinity(...);
 int halfTable152TopIs2(...);
-int FUN_004e699c(...);
+int btlUnitClearMatchingPairs(...);
 int FUN_004fb5dc(...);
 int FUN_004fb6f4(...);
 int btlRecoverHpMpByPercent(...);
@@ -280,7 +280,7 @@ extern int FUN_004c6b8c(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_004e5a40. */
 /* Supplied declaration required: FUN_004e5f2c. */
 /* Supplied declaration required: battleApplyInteractionSelection. */
-/* Supplied declaration required: FUN_004e699c. */
+/* Supplied declaration required: btlUnitClearMatchingPairs. */
 extern int btlActionTargetSlotScore(unsigned int *, unsigned int *, int);
 extern int btlUnitGet(unsigned int *);
 extern int btlUnitGetSkillValue(int);
@@ -1480,7 +1480,7 @@ LAB_004e45bc:
     puVar9 = (unsigned int *)(unsigned int)(unsigned char)puVar9[0x13];
   }
   if ((temp_v14 && temp_v15) && puVar9 != (unsigned int *)0x0) {
-    FUN_004e699c(param_1,param_8,3);
+    btlUnitClearMatchingPairs(param_1,param_8,3);
   }
   param_2[0x162] = temp_v83 + param_2[0x162];
   temp_v33 = temp_v48;
@@ -1553,7 +1553,7 @@ LAB_004e45bc:
         if ((temp_v45 != '\0') &&
            ((temp_v5 = FUN_004c6b8c(puVar9,temp_v108), temp_v5 != 0 || ((temp_v21[0x9d] & 0x10) == 0))))
         {
-          FUN_004e699c(param_1,param_8,3);
+          btlUnitClearMatchingPairs(param_1,param_8,3);
         }
         else {
           temp_v18 = btlEffectFindSlotId(g_btlAux);
@@ -1651,11 +1651,11 @@ LAB_004e4b04:
                         temp_v8 = btlFindEntryValue(param_8,0xb);
                         if (temp_v5 == temp_v8) {
 LAB_004e4b94:
-                          FUN_004e699c(param_1,param_8,3);
+                          btlUnitClearMatchingPairs(param_1,param_8,3);
                           FUN_004e5a40(param_1,param_8,2);
                           if ((puVar13 != (unsigned int *)0x0) &&
                              ((*puVar13 & DAT_00571170) != 0 || (puVar13[1] & DAT_00571174) != 0)) {
-                            FUN_004e699c(param_1,param_8,2);
+                            btlUnitClearMatchingPairs(param_1,param_8,2);
                           }
                         }
                       }
@@ -1678,7 +1678,7 @@ LAB_004e4b94:
           temp_v5 = FUN_002c7bf4(temp_v108);
           if (((temp_v5 != 0) && ((*(unsigned int *)(temp_v5 + 0xc) & 2) != 0 && puVar13 != (unsigned int *)0x0)) &&
              ((*puVar13 & DAT_00571170) != 0 || (puVar13[1] & DAT_00571174) != 0)) {
-            FUN_004e699c(param_1,param_8,3);
+            btlUnitClearMatchingPairs(param_1,param_8,3);
           }
           if ((*temp_v21 & DAT_00571170) != 0 || (temp_v21[1] & DAT_00571174) != 0) {
             btlReflectCreateKind41(0,param_2,1);

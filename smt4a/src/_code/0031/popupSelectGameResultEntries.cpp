@@ -22,19 +22,19 @@ struct PopupWork {
     /* 0xF14 */ u8 unkF14[0x2C];
     /* 0xF40 */ u8 requested;
 };
-extern PopupWork *DAT_00581280;
+extern PopupWork *g_mapNpcWork;
 
 /* Marks active entries of kind 16 selected (and makes the last one the current selection), the others unselected. */
 void popupSelectGameResultEntries(void)
 {
     for (s32 index = 0; index < 64; ++index) {
-        PopupEntryState *state = &DAT_00581280->entries[index].state;
+        PopupEntryState *state = &g_mapNpcWork->entries[index].state;
         if (state->active != 0) {
             if (state->kind == 16) {
                 state->selected = 1;
-                DAT_00581280->selected = index;
-                DAT_00581280->requested = 1;
-                DAT_00581280->changed = 1;
+                g_mapNpcWork->selected = index;
+                g_mapNpcWork->requested = 1;
+                g_mapNpcWork->changed = 1;
             } else {
                 state->selected = 0;
             }

@@ -65,7 +65,7 @@ void FUN_003e0174(u16 skill);
 s32 partySlotFindIndex(const SlotRecordA *record);
 void flagValueAdd(s32 id, u32 amount);
 void partyRefreshOrInsertSlot(u16 id, u16 value);
-void FUN_00284fdc(void);
+void appRefundAllPoints(void);
 void FUN_003e49e8(void);
 void partyAdjustCounterIfEnoughActive(u16 counter);
 void *__aeabi_memset4(void *dest, s32 size, s32 value);
@@ -129,7 +129,7 @@ void FUN_003f1d74(BattlePresetState *state, u32 index)
         if (preset->flags[i][0] != 0 && preset->flags[i][1] != 0)
             flagValueAdd(preset->flags[i][0], preset->flags[i][1]);
     }
-    FUN_00284fdc();
+    appRefundAllPoints();
     slots->money = preset->money;
     state->presetA = preset->a;
     state->presetB = preset->b;

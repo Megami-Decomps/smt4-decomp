@@ -32,7 +32,7 @@ struct LocationTableEntry {
 };
 
 extern "C" {
-extern NearbyLocationState *DAT_00581280;
+extern NearbyLocationState *g_mapNpcWork;
 const LocationTableEntry *dataTable2aGetEntryWithAoc(s32 index);
 char *libc_strcpy(char *destination, const char *source);
 void FUN_00234044(s32 found, s32 index);
@@ -42,19 +42,19 @@ void FUN_00234044(s32 found, s32 index);
 void FUN_002b80fc(MapVector point)
 {
     for (s32 i = 0; i < 64; i++) {
-        if (DAT_00581280->entries[i].active &&
-            distSpatial(point, DAT_00581280->entries[i].position) < 200.0f) {
-            const LocationTableEntry *entry = dataTable2aGetEntryWithAoc(DAT_00581280->entries[i].tableIndex);
-            DAT_00581280->active = 1;
-            DAT_00581280->index = i;
-            DAT_00581280->area = DAT_00581280->entries[i].area;
-            libc_strcpy(DAT_00581280->label, entry->name);
-            DAT_00581280->value = entry->value;
+        if (g_mapNpcWork->entries[i].active &&
+            distSpatial(point, g_mapNpcWork->entries[i].position) < 200.0f) {
+            const LocationTableEntry *entry = dataTable2aGetEntryWithAoc(g_mapNpcWork->entries[i].tableIndex);
+            g_mapNpcWork->active = 1;
+            g_mapNpcWork->index = i;
+            g_mapNpcWork->area = g_mapNpcWork->entries[i].area;
+            libc_strcpy(g_mapNpcWork->label, entry->name);
+            g_mapNpcWork->value = entry->value;
             FUN_00234044(1, i);
             return;
         }
     }
     FUN_00234044(0, 0);
-    DAT_00581280->active = 0;
+    g_mapNpcWork->active = 0;
 }
 }

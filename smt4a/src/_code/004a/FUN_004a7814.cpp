@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "ui/UiControl.h"
-/* NON_MATCHING: prologue scheduling only: retail moves panel/value (r0/r1) after the vpush and stack adjust. */
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -12,7 +11,7 @@ typedef char NumericPanelLayoutOffset[offsetof(NumericPanelView, layout) == 0xc8
 
 extern "C" {
 
-// Draw a value at its row anchor using the wider-number offset for three-digit values.
+/* Draw a value at its row anchor using the wider-number offset for three-digit values. */
 void FUN_004a7814(NumericPanelView *panel, s32 value, s32 row, s32 alternate, u32 opacity, u32 color)
 {
     const TextureTableEntryIV *base;

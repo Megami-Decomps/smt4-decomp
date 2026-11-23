@@ -21,7 +21,7 @@ typedef struct {
 
 extern unsigned char LAB_00111388; /* 0x111388 */
 extern unsigned char LAB_00111398; /* 0x111398 */
-extern int FUN_00121e5c(unsigned int job); /* 0x121e5c */
+extern int jobAppletMessageUpdate(unsigned int job); /* 0x121e5c */
 
 extern int FUN_0011b918(int);
 extern int clearU64(int);
@@ -121,7 +121,7 @@ unsigned int * FUN_00111184(int param_1)
   aocThreadAllocateStorage(puVar2 + -0x1b5,0x8000);
   FUN_001270f8(puVar2 + -0x1b1);
   uiResourceParametersInitDefault(puVar2 + 4);
-  temp_v3 = FUN_00121e5c;
+  temp_v3 = jobAppletMessageUpdate;
   uStack_1c = 0;
   puVar5 = &LAB_00111398;
   temp_v4 = puVar2 + -0x1d7;

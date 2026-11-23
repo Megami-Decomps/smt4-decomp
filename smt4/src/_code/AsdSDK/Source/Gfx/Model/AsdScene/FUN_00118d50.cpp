@@ -1,6 +1,9 @@
-/* NON_MATCHING: the direction constants load in source order (retail loads 1.0 before -0.816 and stores direction[0] alone, then [1] and [2] with vstmia). */
+/* NON_MATCHING: the direction is the normalized (-1, -2, -1) (armcc folds VEC3Normalize; with it the literal pool is
+ * retail's); retail keeps y in s0 and stores direction[0] alone, then [1] and [2] with one vstmia, where the build
+ * pairs [0] and [1]. */
 #include "AsdSDK/Source/Gfx/Model/AsdSceneLight.h"
 #include "AsdSDK/AsdDebug.h"
+#include "nw/math/VEC3.h"
 #include "AsdSDK/asdMemoryGetDefaultAllocator.h"
 
 extern "C" {
@@ -38,7 +41,12 @@ AsdSceneLight *FUN_00118d50()
     light->parameters = light->object->parameters;
     reinterpret_cast<LightColorView *>(light->parameters)->kind = 0;
     LightColorView *parameters = reinterpret_cast<LightColorView *>(light->parameters);
-    asdSceneLightSetVector(parameters->direction, -0.40824828f, -0.81649655f, -0.40824828f);
+    nw::math::VEC3 direction;
+    direction.x = -1.0f;
+    direction.y = -2.0f;
+    direction.z = -1.0f;
+    nw::math::VEC3Normalize(&direction, &direction);
+    asdSceneLightSetVector(parameters->direction, direction.x, direction.y, direction.z);
     asdSceneLightSetGray(reinterpret_cast<LightColorView *>(light->parameters)->ambient, 0.2f);
     reinterpret_cast<LightColorView *>(light->parameters)->packedColors[0] =
         nw_ut_FloatColor_ToPicaU32(reinterpret_cast<LightColorView *>(light->parameters)->ambient);

@@ -28,7 +28,7 @@ extern DeferredMapModels *g_deferredMapModels;
 void asdMdlManagerMarkDestroy(void *);
 void asdMdlManagerDestroy(void *);
 void FUN_002e00e0(void *);
-s32 FUN_001e34fc(s32 map, s32 area, u32 flags);
+s32 mapNpcLoadStep(s32 map, s32 area, u32 flags);
 
 // Mark stale map models, allow two frames to drain, then release them.
 u32 mapModelsPollDeferredDestroy(void)
@@ -70,7 +70,7 @@ u32 mapModelsPollDeferredDestroy(void)
         }
         break;
     case 2:
-        if (FUN_001e34fc(g_deferredMapModels->map, g_deferredMapModels->area, 1))
+        if (mapNpcLoadStep(g_deferredMapModels->map, g_deferredMapModels->area, 1))
             return 1;
         break;
     }

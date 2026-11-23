@@ -25270,12 +25270,12 @@
     },
     {
       "address": "0x13f7c4",
-      "function": "FUN_0013f7c4",
+      "function": "messageBannerDraw",
       "module": "_code",
-      "object": "build/obj/_code/0013/FUN_0013f7c4.o",
+      "object": "build/obj/_code/0013/messageBannerDraw.o",
       "size": 2152,
-      "source": "src/_code/0013/FUN_0013f7c4.cpp",
-      "target": "orig/target/_code/0013/FUN_0013f7c4.o",
+      "source": "src/_code/0013/messageBannerDraw.cpp",
+      "target": "orig/target/_code/0013/messageBannerDraw.o",
       "thumb": false
     },
     {
@@ -28978,12 +28978,12 @@
     },
     {
       "address": "0x158900",
-      "function": "FUN_00158900",
+      "function": "movieOpenFileOpenPath",
       "module": "_code",
-      "object": "build/obj/_code/0015/FUN_00158900.o",
+      "object": "build/obj/_code/0015/movieOpenFileOpenPath.o",
       "size": 156,
-      "source": "src/_code/0015/FUN_00158900.cpp",
-      "target": "orig/target/_code/0015/FUN_00158900.o",
+      "source": "src/_code/0015/movieOpenFileOpenPath.cpp",
+      "target": "orig/target/_code/0015/movieOpenFileOpenPath.o",
       "thumb": false
     },
     {
@@ -30458,12 +30458,12 @@
     },
     {
       "address": "0x15f2ec",
-      "function": "FUN_0015f2ec",
+      "function": "jobAppletMessageUpdate",
       "module": "_code",
-      "object": "build/obj/_code/0015/FUN_0015f2ec.o",
+      "object": "build/obj/_code/0015/jobAppletMessageUpdate.o",
       "size": 140,
-      "source": "src/_code/0015/FUN_0015f2ec.cpp",
-      "target": "orig/target/_code/0015/FUN_0015f2ec.o",
+      "source": "src/_code/0015/jobAppletMessageUpdate.cpp",
+      "target": "orig/target/_code/0015/jobAppletMessageUpdate.o",
       "thumb": false
     },
     {
@@ -35223,12 +35223,12 @@
     },
     {
       "address": "0x1764f4",
-      "function": "FUN_001764f4",
+      "function": "appletShowOperationMessage",
       "module": "_code",
-      "object": "build/obj/_code/0017/FUN_001764f4.o",
+      "object": "build/obj/_code/0017/appletShowOperationMessage.o",
       "size": 68,
-      "source": "src/_code/0017/FUN_001764f4.cpp",
-      "target": "orig/target/_code/0017/FUN_001764f4.o",
+      "source": "src/_code/0017/appletShowOperationMessage.cpp",
+      "target": "orig/target/_code/0017/appletShowOperationMessage.o",
       "thumb": false
     },
     {
@@ -61169,12 +61169,12 @@
     },
     {
       "address": "0x270c58",
-      "function": "FUN_00270c58",
+      "function": "sequenceRequestKind5",
       "module": "_code",
-      "object": "build/obj/_code/0027/FUN_00270c58.o",
+      "object": "build/obj/_code/0027/sequenceRequestKind5.o",
       "size": 92,
-      "source": "src/_code/0027/FUN_00270c58.cpp",
-      "target": "orig/target/_code/0027/FUN_00270c58.o",
+      "source": "src/_code/0027/sequenceRequestKind5.cpp",
+      "target": "orig/target/_code/0027/sequenceRequestKind5.o",
       "thumb": false
     },
     {
@@ -63010,12 +63010,12 @@
     },
     {
       "address": "0x284fdc",
-      "function": "FUN_00284fdc",
+      "function": "appRefundAllPoints",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_00284fdc.o",
+      "object": "build/obj/_code/0028/appRefundAllPoints.o",
       "size": 60,
-      "source": "src/_code/0028/FUN_00284fdc.cpp",
-      "target": "orig/target/_code/0028/FUN_00284fdc.o",
+      "source": "src/_code/0028/appRefundAllPoints.cpp",
+      "target": "orig/target/_code/0028/appRefundAllPoints.o",
       "thumb": false
     },
     {
@@ -64314,23 +64314,23 @@
     },
     {
       "address": "0x295d40",
-      "function": "FUN_00295d40",
+      "function": "vectorQueueFinishPath",
       "module": "_code",
-      "object": "build/obj/_code/0029/FUN_00295d40.o",
+      "object": "build/obj/_code/0029/vectorQueueFinishPath.o",
       "size": 264,
-      "source": "src/_code/0029/FUN_00295d40.cpp",
-      "target": "orig/target/_code/0029/FUN_00295d40.o",
+      "source": "src/_code/0029/vectorQueueFinishPath.cpp",
+      "target": "orig/target/_code/0029/vectorQueueFinishPath.o",
       "thumb": false
     },
     {
       "address": "0x295e54",
       "file": "map/mapNpc",
-      "function": "FUN_00295e54",
+      "function": "mapNpcLoadStep",
       "module": "_code",
-      "object": "build/obj/_code/map/mapNpc/FUN_00295e54.o",
+      "object": "build/obj/_code/map/mapNpc/mapNpcLoadStep.o",
       "size": 1516,
-      "source": "src/_code/map/mapNpc/FUN_00295e54.cpp",
-      "target": "orig/target/_code/map/mapNpc/FUN_00295e54.o",
+      "source": "src/_code/map/mapNpc/mapNpcLoadStep.cpp",
+      "target": "orig/target/_code/map/mapNpc/mapNpcLoadStep.o",
       "thumb": false
     },
     {
@@ -70282,12 +70282,12 @@
     },
     {
       "address": "0x2d02cc",
-      "function": "FUN_002d02cc",
+      "function": "btlViewPositionAroundTarget",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002d02cc.o",
+      "object": "build/obj/_code/002d/btlViewPositionAroundTarget.o",
       "size": 180,
-      "source": "src/_code/002d/FUN_002d02cc.cpp",
-      "target": "orig/target/_code/002d/FUN_002d02cc.o",
+      "source": "src/_code/002d/btlViewPositionAroundTarget.cpp",
+      "target": "orig/target/_code/002d/btlViewPositionAroundTarget.o",
       "thumb": false
     },
     {
@@ -101970,12 +101970,12 @@
     },
     {
       "address": "0x3426c0",
-      "function": "FUN_003426c0",
+      "function": "uiDrawDirectoryRowsByKind",
       "module": "_code",
-      "object": "build/obj/_code/0034/FUN_003426c0.o",
+      "object": "build/obj/_code/0034/uiDrawDirectoryRowsByKind.o",
       "size": 332,
-      "source": "src/_code/0034/FUN_003426c0.cpp",
-      "target": "orig/target/_code/0034/FUN_003426c0.o",
+      "source": "src/_code/0034/uiDrawDirectoryRowsByKind.cpp",
+      "target": "orig/target/_code/0034/uiDrawDirectoryRowsByKind.o",
       "thumb": false
     },
     {
@@ -105355,12 +105355,12 @@
     },
     {
       "address": "0x35aa90",
-      "function": "FUN_0035aa90",
+      "function": "progressUnlockGetNthEarnedTitle",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_0035aa90.o",
+      "object": "build/obj/_code/0035/progressUnlockGetNthEarnedTitle.o",
       "size": 172,
-      "source": "src/_code/0035/FUN_0035aa90.cpp",
-      "target": "orig/target/_code/0035/FUN_0035aa90.o",
+      "source": "src/_code/0035/progressUnlockGetNthEarnedTitle.cpp",
+      "target": "orig/target/_code/0035/progressUnlockGetNthEarnedTitle.o",
       "thumb": false
     },
     {
@@ -110122,22 +110122,22 @@
     },
     {
       "address": "0x376628",
-      "function": "FUN_00376628",
+      "function": "effPartAppendClone",
       "module": "_code",
-      "object": "build/obj/_code/0037/FUN_00376628.o",
+      "object": "build/obj/_code/0037/effPartAppendClone.o",
       "size": 84,
-      "source": "src/_code/0037/FUN_00376628.cpp",
-      "target": "orig/target/_code/0037/FUN_00376628.o",
+      "source": "src/_code/0037/effPartAppendClone.cpp",
+      "target": "orig/target/_code/0037/effPartAppendClone.o",
       "thumb": false
     },
     {
       "address": "0x37667c",
-      "function": "FUN_0037667c",
+      "function": "effPartAppendFromFile",
       "module": "_code",
-      "object": "build/obj/_code/0037/FUN_0037667c.o",
+      "object": "build/obj/_code/0037/effPartAppendFromFile.o",
       "size": 112,
-      "source": "src/_code/0037/FUN_0037667c.cpp",
-      "target": "orig/target/_code/0037/FUN_0037667c.o",
+      "source": "src/_code/0037/effPartAppendFromFile.cpp",
+      "target": "orig/target/_code/0037/effPartAppendFromFile.o",
       "thumb": false
     },
     {
@@ -121440,12 +121440,12 @@
     },
     {
       "address": "0x3b564c",
-      "function": "FUN_003b564c",
+      "function": "dataTable42GetCombinedCount",
       "module": "_code",
-      "object": "build/obj/_code/003b/FUN_003b564c.o",
+      "object": "build/obj/_code/003b/dataTable42GetCombinedCount.o",
       "size": 52,
-      "source": "src/_code/003b/FUN_003b564c.cpp",
-      "target": "orig/target/_code/003b/FUN_003b564c.o",
+      "source": "src/_code/003b/dataTable42GetCombinedCount.cpp",
+      "target": "orig/target/_code/003b/dataTable42GetCombinedCount.o",
       "thumb": false
     },
     {
@@ -128373,12 +128373,12 @@
     },
     {
       "address": "0x3e40d0",
-      "function": "FUN_003e40d0",
+      "function": "engineGetEnabledFloatTableValue",
       "module": "_code",
-      "object": "build/obj/_code/003e/FUN_003e40d0.o",
+      "object": "build/obj/_code/003e/engineGetEnabledFloatTableValue.o",
       "size": 104,
-      "source": "src/_code/003e/FUN_003e40d0.cpp",
-      "target": "orig/target/_code/003e/FUN_003e40d0.o",
+      "source": "src/_code/003e/engineGetEnabledFloatTableValue.cpp",
+      "target": "orig/target/_code/003e/engineGetEnabledFloatTableValue.o",
       "thumb": false
     },
     {
@@ -129580,12 +129580,12 @@
     {
       "address": "0x3ea2b0",
       "file": "battle/btlDebug",
-      "function": "FUN_003ea2b0",
+      "function": "btlSummonLoadAndSpawn",
       "module": "_code",
-      "object": "build/obj/_code/battle/btlDebug/FUN_003ea2b0.o",
+      "object": "build/obj/_code/battle/btlDebug/btlSummonLoadAndSpawn.o",
       "size": 960,
-      "source": "src/_code/battle/btlDebug/FUN_003ea2b0.cpp",
-      "target": "orig/target/_code/battle/btlDebug/FUN_003ea2b0.o",
+      "source": "src/_code/battle/btlDebug/btlSummonLoadAndSpawn.cpp",
+      "target": "orig/target/_code/battle/btlDebug/btlSummonLoadAndSpawn.o",
       "thumb": false
     },
     {
@@ -137828,12 +137828,12 @@
     },
     {
       "address": "0x423c0c",
-      "function": "FUN_00423c0c",
+      "function": "frameStreamStop",
       "module": "_code",
-      "object": "build/obj/_code/0042/FUN_00423c0c.o",
+      "object": "build/obj/_code/0042/frameStreamStop.o",
       "size": 56,
-      "source": "src/_code/0042/FUN_00423c0c.cpp",
-      "target": "orig/target/_code/0042/FUN_00423c0c.o",
+      "source": "src/_code/0042/frameStreamStop.cpp",
+      "target": "orig/target/_code/0042/frameStreamStop.o",
       "thumb": false
     },
     {
@@ -139201,13 +139201,24 @@
     },
     {
       "address": "0x428334",
-      "function": "FUN_00428334",
+      "function": "tokenRegistryCheckEntryFlags",
       "module": "_code",
-      "object": "build/obj/_code/0042/FUN_00428334.o",
+      "object": "build/obj/_code/0042/tokenRegistryCheckEntryFlags.o",
       "size": 136,
-      "source": "src/_code/0042/FUN_00428334.cpp",
-      "target": "orig/target/_code/0042/FUN_00428334.o",
-      "thumb": false
+      "source": "src/_code/0042/tokenRegistryCheckEntryFlags.cpp",
+      "target": "orig/target/_code/0042/tokenRegistryCheckEntryFlags.o",
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x4283c0",
@@ -153891,12 +153902,12 @@
     },
     {
       "address": "0x472820",
-      "function": "FUN_00472820",
+      "function": "aocBoardDraw",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_00472820.o",
+      "object": "build/obj/_code/0047/aocBoardDraw.o",
       "size": 1524,
-      "source": "src/_code/0047/FUN_00472820.cpp",
-      "target": "orig/target/_code/0047/FUN_00472820.o",
+      "source": "src/_code/0047/aocBoardDraw.cpp",
+      "target": "orig/target/_code/0047/aocBoardDraw.o",
       "thumb": false
     },
     {
@@ -160847,12 +160858,12 @@
     },
     {
       "address": "0x4a7ba0",
-      "function": "FUN_004a7ba0",
+      "function": "entryWindowDrawEntryName",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004a7ba0.o",
+      "object": "build/obj/_code/004a/entryWindowDrawEntryName.o",
       "size": 248,
-      "source": "src/_code/004a/FUN_004a7ba0.cpp",
-      "target": "orig/target/_code/004a/FUN_004a7ba0.o",
+      "source": "src/_code/004a/entryWindowDrawEntryName.cpp",
+      "target": "orig/target/_code/004a/entryWindowDrawEntryName.o",
       "thumb": false
     },
     {
@@ -167843,12 +167854,12 @@
     },
     {
       "address": "0x4e699c",
-      "function": "FUN_004e699c",
+      "function": "btlUnitClearMatchingPairs",
       "module": "_code",
-      "object": "build/obj/_code/004e/FUN_004e699c.o",
+      "object": "build/obj/_code/004e/btlUnitClearMatchingPairs.o",
       "size": 76,
-      "source": "src/_code/004e/FUN_004e699c.cpp",
-      "target": "orig/target/_code/004e/FUN_004e699c.o",
+      "source": "src/_code/004e/btlUnitClearMatchingPairs.cpp",
+      "target": "orig/target/_code/004e/btlUnitClearMatchingPairs.o",
       "thumb": false,
       "multifile": [
         "btlUnitGet"
@@ -170951,12 +170962,12 @@
     },
     {
       "address": "0x500254",
-      "function": "FUN_00500254",
+      "function": "tokenRegistryGetValue",
       "module": "_code",
-      "object": "build/obj/_code/0050/FUN_00500254.o",
+      "object": "build/obj/_code/0050/tokenRegistryGetValue.o",
       "size": 56,
-      "source": "src/_code/0050/FUN_00500254.cpp",
-      "target": "orig/target/_code/0050/FUN_00500254.o",
+      "source": "src/_code/0050/tokenRegistryGetValue.cpp",
+      "target": "orig/target/_code/0050/tokenRegistryGetValue.o",
       "thumb": false,
       "cflags": [
         "--cpu=MPCore",
@@ -171105,12 +171116,12 @@
     },
     {
       "address": "0x500924",
-      "function": "FUN_00500924",
+      "function": "fsArchiveFileRequireHandle",
       "module": "_code",
-      "object": "build/obj/_code/0050/FUN_00500924.o",
+      "object": "build/obj/_code/0050/fsArchiveFileRequireHandle.o",
       "size": 36,
-      "source": "src/_code/0050/FUN_00500924.cpp",
-      "target": "orig/target/_code/0050/FUN_00500924.o",
+      "source": "src/_code/0050/fsArchiveFileRequireHandle.cpp",
+      "target": "orig/target/_code/0050/fsArchiveFileRequireHandle.o",
       "thumb": false,
       "cflags": [
         "--cpu=MPCore",

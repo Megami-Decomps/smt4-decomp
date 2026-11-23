@@ -42,8 +42,8 @@ void mapSelectNearestInteractiveModel(f32 x, f32 y, f32 z, f32 heading)
     if (selected != -1) {
         g_deferredMapModels->pending = 1;
         g_deferredMapModels->pendingCount = selected;
-        g_deferredMapModels->selection.id = g_deferredMapModels->entries[selected].id;
-        ModelSelectionLabel *label = dataTable2AGetEntryWithAoc(g_deferredMapModels->entries[selected].modelId);
+        g_deferredMapModels->selection.id = g_deferredMapModels->entries[selected].modelId;
+        ModelSelectionLabel *label = dataTable2AGetEntryWithAoc(g_deferredMapModels->entries[selected].tableIndex);
         const char *name = label->name;
         if (name != NULL && (name[0] != '0' || name[1] != '\0')) {
             libc_strcpy(g_deferredMapModels->selection.label, label->name);

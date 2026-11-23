@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_4_stack;
 
-extern unsigned int FUN_00500924(void);
+extern unsigned int fsArchiveFileRequireHandle(void);
 /* Supplied declaration required: nn_fs_ipc_FileSystem_CreateFile. */
 
 
@@ -35,7 +35,7 @@ void FUN_0042b48c(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
     temp_v4 = param_2[1];
     temp_v0 = *(unsigned int *)(param_1 + 8);
     temp_v1 = *(unsigned int *)(param_1 + 0xc);
-    temp_v5 = FUN_00500924();
+    temp_v5 = fsArchiveFileRequireHandle();
     nn_fs_ipc_FileSystem_CreateFile(&temp_v5,0,temp_v0,temp_v1,temp_v3,temp_v4,temp_v2,0,param_3,param_4);
   }
   return;

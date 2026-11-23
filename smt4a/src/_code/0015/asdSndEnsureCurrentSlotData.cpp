@@ -1,4 +1,4 @@
-/* NON_MATCHING: the heap pointer now comes from base + 0x1000 as in retail; only the zero constant and the result copy are in swapped registers (retail r6/r8, built r8/r6). */
+/* Built with the unit's cflags (-O2 -Otime). */
 #include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 
 namespace {

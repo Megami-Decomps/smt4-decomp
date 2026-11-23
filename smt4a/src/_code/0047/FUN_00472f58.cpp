@@ -4,7 +4,7 @@
 
 extern "C" {
 s32 aocBoardUpdateAnimation(u32 job);
-s32 FUN_00472820(u32 job);
+s32 aocBoardDraw(u32 job);
 s32 aocBoardDrawParameterOverlay(u32 job);
 void taskCreateDraw(const char *, u32, u32, u32, s32 (*)(u32), void (*)(u32), AocBoardWork *, u32);
 void *FUN_00473754(AocMain *, u32, void *);
@@ -25,8 +25,8 @@ extern "C" void FUN_00472f58(AocBoardWork *board, u32 request, u8 mode, u32 cont
         board->owner.control.flags |= 0x10;
         board->owner.spinnerFrame = 0;
         board->owner.control.process = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_005271ac), 4, 0, 0, aocBoardUpdateAnimation, 0, reinterpret_cast<u32>(board));
-        taskCreateDraw(DAT_0052719c, 0x87, 1, 0, FUN_00472820, 0, board, board->owner.control.process);
-        taskCreateDraw(DAT_0052718c, 0xE3, 1, 0, FUN_00472820, 0, board, board->owner.control.process);
+        taskCreateDraw(DAT_0052719c, 0x87, 1, 0, aocBoardDraw, 0, board, board->owner.control.process);
+        taskCreateDraw(DAT_0052718c, 0xE3, 1, 0, aocBoardDraw, 0, board, board->owner.control.process);
         taskCreateDraw(DAT_0052717c, 0x160, 1, 0, aocBoardDrawParameterOverlay, 0, board, board->owner.control.process);
     }
 }

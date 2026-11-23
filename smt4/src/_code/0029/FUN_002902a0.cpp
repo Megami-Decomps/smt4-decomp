@@ -1,5 +1,9 @@
-/* NON_MATCHING: only the restore flag's 1 differs: built in r1 where retail uses r0. */
+/* NON_MATCHING: the state-20 entry at the end: retail builds the new state in r1 and the quest pointer in r0
+ * (the build swaps them) and stores the timer before the preset argument. With the local view of
+ * detailSpeed/restoreSelection this unit was 4 lines off (only the restore flag's register); the shared
+ * UiQuestPanel fields are kept (one struct per object). */
 #include "shard/W4_W4Match2_UiQuest.h"
+#include "ui/UiSpriteApi.h"
 #include "code/Code0029.h"
 #include "code/Code001b.h"
 extern "C" s32 gridNavigationGetItemCount(void *cursor);
@@ -8,31 +12,20 @@ extern "C" {
 void uiFadeRequestClear(void);
 void scrollListSetSelectionMarkChanged(void *cursor, s32 index);
 void buttonHelpSetPreset(s32 preset);
-void uiSpriteSetKeyframe(void *timer, s32 start, s32 mode); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void soundPlaySeUnpanned(u32 event);
 
 /* Opens a quest detail panel, optionally restoring its selected list entry. */
 void FUN_002902a0(u32 questId, s32 restoreSelection)
 {
-    /* A float view of panel unkE8[9] would pad that union and move the following byte fields. */
-    struct QuestDetailView {
-        /* 0x000 */ u8 unk000[0x408];
-        /* 0x408 */ u8 timer[0x1E4];
-        /* 0x5EC */ f32 speed;
-        /* 0x5F0 */ u8 restoreSelection;
-    };
-    typedef char QuestDetailOffsetsCheck[offsetof(QuestDetailView, speed) == 0x5EC &&
-        offsetof(QuestDetailView, restoreSelection) == 0x5F0 ? 1 : -1];
     UiQuest *quest = g_uiQuest;
-    QuestDetailView *detail = (QuestDetailView *)quest;
     quest->questId = (s16)questId;
     quest->panelView.panel.detailMode = dataTable1bOr1cRecordHasFlag1(questId);
-    detail->speed = 0.2088f;
-    uiSpriteSetKeyframe(detail->timer, 0, 0);
+    quest->panelView.panel.detailSpeed = 0.2088f;
+    uiSpriteSetKeyframe(&quest->sprites[7], 0, 0);
     if (restoreSelection == 0) {
-        detail->restoreSelection = 0;
+        quest->panelView.panel.restoreSelection = 0;
     } else {
-        detail->restoreSelection = 1;
+        quest->panelView.panel.restoreSelection = 1;
         void *cursor;
         u16 *ids;
         if (quest->panelView.panel.detailMode != 0) {
@@ -48,7 +41,7 @@ void FUN_002902a0(u32 questId, s32 restoreSelection)
                 break;
             }
         }
-        uiSpriteSetKeyframe(quest->mainSprite, 0, 0);
+        uiSpriteSetKeyframe(&quest->sprites[0], 0, 0);
     }
     uiFadeRequestClear();
     uiQuestEnterState(g_uiQuest, 20);

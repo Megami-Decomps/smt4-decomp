@@ -13,7 +13,7 @@ void asdTMTexTableLoadSprites(s32 table);
 void infoWindowInitialize(void);
 void comWinInitialize(void);
 void FUN_001409e4(void);
-s32 FUN_0013f7c4(u32 handle);
+s32 messageBannerDraw(u32 handle);
 void messageSetSkipPoll(void (*callback)(void));
 void messageSetAdvancePoll(void (*callback)(void));
 void FUN_001456fc(void);
@@ -44,7 +44,7 @@ void FUN_00137144(void)
     infoWindowInitialize();
     comWinInitialize();
     FUN_001409e4();
-    taskCreateDraw((const s8 *)"MESS_D", 239, 0, 0, FUN_0013f7c4, NULL, (u32)g_messageMain.window, (void *)g_messageMain.window->job);
+    taskCreateDraw((const s8 *)"MESS_D", 239, 0, 0, messageBannerDraw, NULL, (u32)g_messageMain.window, (void *)g_messageMain.window->job);
     MessageWindowA *window = g_messageMain.window;
     window->displayEnabled = 1;
     g_messageMain.banner->displayEnabled = 0;

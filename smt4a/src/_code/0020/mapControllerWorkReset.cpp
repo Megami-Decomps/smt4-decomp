@@ -2,7 +2,7 @@
 #include <stddef.h>
 
 extern "C" {
-extern MapWorkEntries *DAT_00581280;
+extern MapWorkEntries *g_mapNpcWork;
 void mapTimerBanksReset();
 
 /* Clears the controller work and its 64 records to their defaults, then finishes the reset. */
@@ -40,7 +40,7 @@ void mapControllerWorkReset()
         offsetof(ControllerWorkView, records) == 0xc &&
         offsetof(ControllerWorkView, active) == 0xf0c &&
         offsetof(ControllerWorkView, selected) == 0xf50 ? 1 : -1];
-    ControllerWorkView *work = (ControllerWorkView *)DAT_00581280;
+    ControllerWorkView *work = (ControllerWorkView *)g_mapNpcWork;
     work->third = 0;
     work->first = 0;
     work->second = 0;

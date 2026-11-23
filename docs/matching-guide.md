@@ -253,6 +253,12 @@ difference a register tie-break.
 - A field has one view per function: smt4 `FUN_00308d5c` updated `battleFlags` (32-bit) at three sites and `battleMask`
   (64-bit) at two, each chosen by score (110 lines); the review put all five on `battleMask`, the view retail's reload
   supports (225 lines).
+- One view across functions too: smt4a `btlPopulateSelectedSlot` matched only through a `u64` view of the roster
+  record's word at 0x58, which `FUN_004caca0` updates as the `u32` `motion.renderFlags` and does not match as a `u64`;
+  the wave 83 review kept the `u32` view (8 lines). Two clears of one word that retail does as a single `bic #15`
+  (`clear(work, 8); clear(work, 7);` in smt4 `FUN_00121e5c`) are one statement split to move registers, and a
+  one-iteration "history shift" loop for a two-word copy needs other code that indexes the pair (smt4a
+  `FUN_00284fdc`'s words are a point total and the points left): both rejected (wave 83).
 - `if (a == b) { X } else { Y }` moves `X` out of line after the next unconditional branch; the `!=`
   spelling does not. `cmp; beq; cmp; beq; b` is an if/else-if chain, `cmp; beq; cmp; bne; b` a
   `switch`. Which copy of identical tail blocks survives follows `return` against `break`, and
@@ -636,6 +642,9 @@ asks for.
   `FUN_00331380` got worse with it, 23 -> 30), and a second spelling of the render-stack pop with the apply test
   written out (smt4a `FUN_0041c1d4`): both out-of-line `renderCtxPopState` copies are IDENTICAL with either spelling,
   so they decide nothing, and `renderCtxPopCounted`'s 20 users lose 5 IDENTICAL with the other one.
+- Two pop spellings in one function (`renderCtxPopCounted` for the inner pop, `renderStackPop` for the outer, both on
+  `RENDER_STACK_A`) are the same operation chosen per site by score: rejected for smt4 `FUN_003844a0` and smt4a
+  `btlGameOverDrawOverlay`/`FUN_004cf58c` (wave 83).
 - nn::os's `WaitObject::WaitOne` and `Thread::Join` are per-game header inlines (`nn/os/WaitObject.h`: IV waits through
   `WaitSynchronizationN`, Apocalypse through `WaitSynchronization1`); `nn::os::ThreadJoin` made smt4 `FUN_002ecfe4`
   IDENTICAL and moved two smt4a thread teardowns from 12/14 to 2/4 lines (wave 82).
@@ -809,6 +818,12 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
 - `asdMdlNodeGetCurrentMotion` (`ldr r0, [r0, #56]`) is a linker-inlined getter: the compared slot field is loaded
   after it, as after a call; with the calls and the `inlined.txt` rows smt4 `mapObjectVisibilityRestore`,
   `mapGimicUpdate` and smt4a `FUN_002d8cec` came 5-11 lines closer (wave 80).
+- `stm r0, {r1, r2}` right after `mov r2, #y; mov r1, #x` on a node just returned in `r0`, followed by the call padding
+  `nop {0}` twice or a reload of the node's global, is a linker-inlined two-word setter (`effMenuNodeSetOrigin`, the
+  same body as `soundInitStackSet` but its own row): smt4 `FUN_00313704` and smt4a `FUN_003aa520` IDENTICAL (wave 83).
+- A linker NOP with no argument set up before it, at the same place in both twins (smt4a `FUN_00295e54` and smt4
+  `FUN_001e34fc`, before queueing a path's points), is a call the release build dropped: write `asdDebugHookVoid()`
+  from `AsdSDK/AsdDebugHooks.h`, never omit it (wave 83).
 
 ## Sweeps
 

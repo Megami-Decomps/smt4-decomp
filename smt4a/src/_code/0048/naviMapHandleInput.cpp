@@ -208,7 +208,7 @@ void naviMapHandleInput(NavigationFadeWork *work)
             work->interpolation.drag.velocity.x = 0.0f;
             work->interpolation.drag.velocity.y = 0.0f;
             work->interpolation.drag.stillFrames = 0;
-            work->interpolation.drag.unk055 = 0;
+            work->interpolation.drag.heldFrames = 0;
         }
     }
 

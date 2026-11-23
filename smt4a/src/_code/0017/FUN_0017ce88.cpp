@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler forwards stack arguments with VFP loads/stores; retail uses integer LDM/STM and more saved registers. */
+/* Built with the unit's cflags (-O3 -Otime --fpu=softvfp). */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {

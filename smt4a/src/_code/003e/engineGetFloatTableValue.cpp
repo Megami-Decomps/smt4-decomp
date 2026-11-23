@@ -1,15 +1,7 @@
-#include "common.h"
+#include "ui/FloatTableLookup.h"
 
-extern "C" {
-
-extern const f32 DAT_00536bcc[];
-
-f32 engineGetFloatTableValue(const f32 *values, u32 index)
+/* Reads one float from the supplied table or its built-in fallback. */
+extern "C" f32 engineGetFloatTableValue(const f32 *values, u32 index)
 {
-    if (values == NULL) {
-        values = DAT_00536bcc;
-    }
-    return values[index];
+    return engineFloatTableValue(values, index);
 }
-
-} /* extern "C" */

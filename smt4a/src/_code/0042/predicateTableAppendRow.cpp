@@ -1,4 +1,5 @@
-/* NON_MATCHING: list/table owner locals restore their retail allocation; third/fourth string arguments still use swapped r7/r8. */
+/* NON_MATCHING: list/table owner locals restore their retail allocation; third/fourth string arguments still use swapped r7/r8.
+ * Both twins are IDENTICAL only under -O2 -Otime --fpu=softvfp (diagnostic, not set without config review). */
 #include "common.h"
 
 namespace {

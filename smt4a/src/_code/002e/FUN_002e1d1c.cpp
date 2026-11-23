@@ -49,7 +49,7 @@ void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 void gxResetColorQuadToWhite(void);
 void uiSpawnSlotMarkers(void *screen, s32 a, s32 b, s32 c, s32 d, s32 e);
-void FUN_003426c0(void *screen, u32 a, u32 b, s32 c, s32 d, s32 e, s32 f);
+void uiDrawDirectoryRowsByKind(void *screen, u32 a, u32 b, s32 c, s32 d, s32 e, s32 f);
 void FUN_0036cb0c(u32 a, u32 b, s32 c, s32 d, s32 e, s32 f, s32 g, s32 h, s32 i);
 void FUN_0039a1b8(void *screen, s32 a, s32 b, u32 c, u32 d, u32 e, u32 f, s32 g, s32 h, s32 i);
 }
@@ -101,7 +101,7 @@ extern "C" u32 FUN_002e1d1c(void)
             extra = edit->detail.unk34;
             break;
         }
-        FUN_003426c0(&edit->alpha, edit->unk05C, edit->unk058, edit->detail.unk24, edit->detail.unk20, extra, variant);
+        uiDrawDirectoryRowsByKind(&edit->alpha, edit->unk05C, edit->unk058, edit->detail.unk24, edit->detail.unk20, extra, variant);
         if (height < 11)
             height = 11;
         if (edit->detail.mode != 5 && edit->detail.mode != 1) {

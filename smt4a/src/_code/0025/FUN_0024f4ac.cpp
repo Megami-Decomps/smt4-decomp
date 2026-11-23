@@ -36,7 +36,7 @@ unsigned int FUN_0024f4ac(void)
     iVar5 = rosterGetLeaderId();
     if ((iVar5 != 0) && (iVar6 = table1bOr1cGetRecordValue(), iVar6 == 6)) {
       questDataGetRecord();
-      FUN_00270c58(*(unsigned short *)(iVar5 + 0xd4));
+      sequenceRequestKind5(*(unsigned short *)(iVar5 + 0xd4));
       return 0xffffffff;
     }
     uStack0000000c = (unsigned short)_uStack0000000c & 0xff00;

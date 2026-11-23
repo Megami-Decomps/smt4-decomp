@@ -4,6 +4,7 @@
 #include "ui/UiSpriteApi.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "addon/PackageSelection.h"
+#include "addon/ContentListScreen.h"
 
 struct ContentListState {
     /* 0x000 */ u8 unk000[4];
@@ -35,7 +36,6 @@ void FUN_004029f4(ContentListState* list, u32 state, u32 entry);
 void FUN_00403e2c(ContentListState* list);
 void* textureGetIndexedResource(u32 table);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
-void FUN_00402f58(ContentListState* list);
 s32 useCounterIsFinished(void);
 void useCounterRelease(void);
 s32 useCounterGetCurrentValue(void);
@@ -132,7 +132,7 @@ extern "C" u32 FUN_00405268(ContentListState* list)
         }
         break;
     case 7:
-        FUN_00402f58(list);
+        FUN_00402f58((ContentListScreen *)list);
         break;
     case 8:
         if (useCounterIsFinished()) {

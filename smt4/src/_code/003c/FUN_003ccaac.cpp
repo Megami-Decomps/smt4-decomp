@@ -14,7 +14,7 @@ int FUN_00227fac(void);
 int FUN_002280b0(...);
 int FUN_0023c0d0(...);
 int FUN_0023c154(...);
-int FUN_0023c638(...);
+int btlUnitClearMatchingPairs(...);
 int FUN_002551ac(...);
 int btlQueueSkillReflectActions(...);
 int FUN_0027e3e8(...);
@@ -146,7 +146,7 @@ extern int btlUnitIsDeadAndUncopied(int *, unsigned int *, int);
 /* Supplied declaration required: btlTargetSetFlag10. */
 /* Supplied declaration required: FUN_0023c0d0. */
 /* Supplied declaration required: FUN_0023c154. */
-/* Supplied declaration required: FUN_0023c638. */
+/* Supplied declaration required: btlUnitClearMatchingPairs. */
 extern int FUN_0023c684(unsigned int);
 extern int btlQueueParamLimitForKind(void);
 /* Supplied declaration required: btlReflectInitKind9. */
@@ -1010,7 +1010,7 @@ LAB_003ce46c:
     temp_v4 = (unsigned int)*(unsigned char *)(temp_v4 + 0x44);
   }
   if ((temp_v17 && temp_v19) && temp_v4 != 0) {
-    FUN_0023c638(param_1,param_8,3);
+    btlUnitClearMatchingPairs(param_1,param_8,3);
   }
   temp_v4 = temp_v30;
   param_2[0x162] = temp_v44 + param_2[0x162];
@@ -1120,10 +1120,10 @@ LAB_003ce848:
                   temp_v7 = battleGetEntryHalfword(param_8,0xb);
                   if (temp_v5 == temp_v7) {
 LAB_003ce8b0:
-                    FUN_0023c638(param_1,param_8,3);
+                    btlUnitClearMatchingPairs(param_1,param_8,3);
                     FUN_00228930(param_1,param_8,2);
                     if ((puVar11 != (unsigned int *)0x0) && ((*puVar11 & 0x20) != 0)) {
-                      FUN_0023c638(param_1,param_8,2);
+                      btlUnitClearMatchingPairs(param_1,param_8,2);
                     }
                   }
                 }
@@ -1140,7 +1140,7 @@ LAB_003ce8b0:
         temp_v5 = FUN_0023c684(temp_v71);
         if (((temp_v5 != 0) && ((*(unsigned int *)(temp_v5 + 8) & 2) != 0 && puVar11 != (unsigned int *)0x0)) &&
            ((*puVar11 & 0x20) != 0)) {
-          FUN_0023c638(param_1,param_8,3);
+          btlUnitClearMatchingPairs(param_1,param_8,3);
         }
         temp_v5 = btlFindEffectValueByNamePrefix(g_btlAux);
         temp_v16 = param_2[7];

@@ -66,7 +66,7 @@ typedef struct AsdTrackSlot {
 } AsdTrackSlot;
 
 typedef struct AsdTrackChannel {
-    /* 0x00 */ u8 unk00[4];
+    /* 0x00 */ f32 weight;
     /* 0x04 */ f32 value;
 } AsdTrackChannel;
 
@@ -90,7 +90,10 @@ struct AsdTrackBlendNode : AsdTrackNode {
 };
 
 typedef struct AsdTrackList {
-    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ void **groupsBegin;    /* the animation groups the tracks belong to */
+    /* 0x10 */ void **groupsEnd;
+    /* 0x14 */ u8 unk14[8];
     /* 0x1C */ AsdTrackNode **items;
     /* 0x20 */ u8 unk20[8];
     /* 0x28 */ s32 stride;
@@ -98,6 +101,18 @@ typedef struct AsdTrackList {
     AsdTrackNode *getItem(s32 index, s32 slot) const
     {
         return items[index * stride + slot];
+    }
+
+    /* nw::gfx::AnimBinding::SetAnimObject: the animation object of group `index`. */
+    void setItem(s32 index, void *object, s32 slot = 0)
+    {
+        if (index < 0 || index >= groupsEnd - groupsBegin) {
+            return;
+        }
+        if (stride <= slot) {
+            return;
+        }
+        items[index * stride + slot] = (AsdTrackNode *)object;
     }
 } AsdTrackList;
 

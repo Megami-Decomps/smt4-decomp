@@ -1,4 +1,3 @@
-/* NON_MATCHING: rangeInit argument scheduling adds one register move and reorders the second channel's loads. */
 #include "gfx/RangeAnimationSelection.h"
 
 extern "C" {
@@ -6,15 +5,21 @@ s32 rangeIsValid(Range *);
 void objClearFields(Range *);
 void rangeInit(Range *, f32, f32, s16, s16);
 
+/* Starts the preset range animations of group `group` whose id is `id` on both animation channels. */
 void actionSequenceTriggerRangeAnimation(RangeAnimationOwnerIV *owner, s32 id, s32 group)
 {
     RangeAnimationPresetPair *presets = NULL;
-    if (group == 1)
+    switch (group) {
+    case 1:
         presets = owner->animation.presets->groups[0];
-    else if (group == 2)
+        break;
+    case 2:
         presets = owner->animation.presets->groups[1];
-    else if (group == 3)
+        break;
+    case 3:
         presets = owner->animation.presets->groups[2];
+        break;
+    }
     for (s32 index = 0; index < 2; ++index) {
         if (owner->animation.first && presets[index].first.duration != 0 && presets[index].first.id == id) {
             if (!rangeIsValid(owner->animation.first))

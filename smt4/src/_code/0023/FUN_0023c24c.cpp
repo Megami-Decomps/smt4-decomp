@@ -1,19 +1,9 @@
-/* NON_MATCHING: explicit hidden-state branches match; only action-table index arithmetic register assignment differs. */
+/* NON_MATCHING: only the action-table index arithmetic differs: retail loads the actions base into r2 and scales the index in r0, this build the other way round. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match2_KeyedValueTable.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
-
-static inline void setModelHidden(AsdMdlObject *model, bool hidden)
-{
-    if (hidden) {
-        model->flags &= ~2;
-    } else {
-        model->flags |= 2;
-    }
-    model->node->sceneNode->positionFollowed = hidden;
-}
 
 extern "C" {
 void modelSetAnimationChannels(AsdMdlObject *model, s32 channels, f32 frame);
@@ -28,14 +18,14 @@ void FUN_0023c24c(KeyedValueTable *table, s32 firstKey, s32 secondKey)
             slot->firstKey == firstKey && slot->secondKey == secondKey) {
             modelSetAnimationChannels(slot->model, 0, 0.0f);
             animOwnerSetScale(slot->model, 1.0f);
-            setModelHidden(slot->model, true);
+            asdMdlObjectShow(slot->model);
             slot->action.flags |= 8;
             BtlActionRecord *action = &btlGetMainState()->actions[slot->action.index];
             if ((action->status & 0x10) != 0) {
                 if ((action->stateFlags & 2) == 0)
-                    setModelHidden(slot->model, false);
+                    asdMdlObjectHide(slot->model);
             } else if ((action->status & 0x80000) == 0) {
-                setModelHidden(slot->model, false);
+                asdMdlObjectHide(slot->model);
             }
         }
     }

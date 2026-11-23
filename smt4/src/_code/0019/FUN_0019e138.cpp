@@ -18,7 +18,7 @@ int btlUiTargetListStep(void);
 int FUN_00222b5c(...);
 int playSceneResumeState(...);
 int FUN_00287188(...);
-int FUN_00289f18(...);
+int btlUiSlotMeterStart(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_00289fa8(...);
 int FUN_0028a0d0(...);
 int partyPanelReleaseResources(void);
@@ -110,7 +110,7 @@ extern int FUN_00225220(int);
 extern int battleTalkGetBustState(void);
 /* Supplied declaration required: recordQueryStateThree. */
 /* Supplied declaration required: FUN_00287188. */
-/* Supplied declaration required: FUN_00289f18. */
+/* Supplied declaration required: btlUiSlotMeterStart. */
 /* Supplied declaration required: FUN_00289fa8. */
 /* Supplied declaration required: FUN_0028a0d0. */
 /* Supplied declaration required: partyPanelReleaseResources. */
@@ -701,7 +701,7 @@ LAB_0019ef1c:
           temp_v18 = 1;
           temp_v13 = (unsigned int)((temp_v8 & 1) == 0);
           temp_v17 = temp_v13;
-          FUN_00289f18(g_btlUiBlock + 0x2460,10,iRam00439ca4,0);
+          btlUiSlotMeterStart(g_btlUiBlock + 0x2460,10,iRam00439ca4,0);
           temp_v7 = 0;
           if (temp_v4 == 0) {
             temp_v7 = 0x3fa;

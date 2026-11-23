@@ -17,7 +17,7 @@ void movieSyncConsumeReadyFrame(MovieSync *sync);
 s32 FUN_004252b0(MovieSync *sync);
 s32 block158OwnerCheck(MovieSync *sync);
 s32 block158OwnerReady(MovieSync *sync);
-void FUN_00423c0c(MovieReadHandle *read);
+void frameStreamStop(MovieReadHandle *read);
 void movieSyncDrainSourcePositions(MovieSync *sync);
 void FUN_004241e0(MovieSync *sync);
 void FUN_00425448(MovieSync *sync);
@@ -51,7 +51,7 @@ bool moviePumpUntilReady()
         if (block158OwnerReady(&g_mobiclipPlayer)) {
             s64 position = FUN_00425610(&g_mobiclipPlayer);
             if (position >= g_mobiclipCtrl.position * 6) {
-                FUN_00423c0c(&DAT_00617f18);
+                frameStreamStop(&DAT_00617f18);
                 movieSyncDrainSourcePositions(&g_mobiclipPlayer);
                 FUN_004241e0(&g_mobiclipPlayer);
             } else if (position >= 0) {

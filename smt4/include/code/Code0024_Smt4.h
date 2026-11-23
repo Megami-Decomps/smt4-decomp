@@ -1,5 +1,6 @@
 #pragma once
 #include "common.h"
+#include "shard/W5_W5Match2_ShiftRandom.h" /* shiftRandomNextFraction */
 
 /* Functions in the 0x00240000 code block whose subsystem is not known yet; each declaration matches its definition. */
 struct TextureSlot;
@@ -34,7 +35,6 @@ void bufferObjDestroy(Obj *obj);
 
 struct Table2dSection2Record *FUN_0024ad14(u32 index);
 
-f32 shiftRandomNextFraction(ShiftRandomState* state);
 
 int effEditorNodeListCount(Owner *owner);
 

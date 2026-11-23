@@ -35,7 +35,9 @@ typedef struct UiQuestPanel {
         /* 0xE0 */ u32 entryDirectory;
     };
     /* 0xE4 */ u32 sysImages;   /* event/quest/QuestSys.mbm */
-    /* 0xE8 */ u8 unkE8[9];
+    /* 0xE8 */ s32 detailFrames;    /* frames the detail panel has been open, counted to 2; the offset of its arrows' shadows */
+    /* 0xEC */ f32 detailSpeed;
+    /* 0xF0 */ u8 restoreSelection; /* reopen the list on the entry the panel was opened from */
     /* 0xF1 */ s8 confirming;   /* a confirmation is pending */
     /* 0xF2 */ u8 unkF2;
     /* 0xF3 */ u8 unkF3;
@@ -90,10 +92,12 @@ typedef struct UiQuest {
     /* 0x980 */ u16 unk980;
     /* 0x982 */ u16 selectedId;
     /* 0x984 */ s16 detailMode;
+    /* 0x986 */ u8 unk986[2];
     union {
-        /* 0x986 */ u8 unk986[0x76];
+        /* 0x988 */ u8 unk988[0x74];
+        /* 0x988 */ s32 bandY[7];              /* the detail panel's background bands */
         struct {
-            /* 0x986 */ u8 unk986BeforeRegions[0x56];
+            /* 0x988 */ u8 unk988BeforeRegions[0x54];
             /* 0x9DC */ s16 rowRegions[11];    /* touch regions of the visible list rows */
             /* 0x9F2 */ s16 scrollUpRegion;    /* touch regions of the list's scroll bar: its two arrows */
             /* 0x9F4 */ s16 scrollDownRegion;

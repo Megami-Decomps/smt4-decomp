@@ -66,7 +66,7 @@ u32 FUN_00439750(u32 id, u32 option, void *first, u32 firstSize, void *second, u
 s32 libc_strncmp(const char *a, const char *b, u32 count);
 u32 FUN_001029f4(const char *text, s32 end, s32 base);
 void sysFatalBreak(void);
-s32 FUN_00428334(Catalog *catalog, u32 *record, u32 version);
+s32 tokenRegistryCheckEntryFlags(Catalog *catalog, u32 *record, u32 version);
 
 /* Queries the catalogue service for the title `id` and fills `catalog`: appends the six
  * attribute names to ask for, runs the query, then registers every returned entry with its
@@ -140,7 +140,7 @@ s32 FUN_004275f0(Catalog *catalog, u32 id, u32 option, CatalogRequest *request)
 
         record[0] = itemId;
         record[1] = (typeFlag << 16) | ((low & 0xFF) << 8) | kind;
-        result = FUN_00428334(catalog, record, version);
+        result = tokenRegistryCheckEntryFlags(catalog, record, version);
         if (nnResultIsFailure(result)) {
             return result;
         }

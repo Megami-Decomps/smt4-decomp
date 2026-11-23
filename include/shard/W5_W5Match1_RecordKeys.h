@@ -156,28 +156,6 @@ struct DistanceSortRecord {
     /* 0xFC */ s32 height;
 };
 
-struct MapTimerEntry {
-    /* 0x00 */ u32 active;
-    /* 0x04 */ u8 unk04[0x24];
-};
-
-struct MapTimerBank {
-    /* 0x000 */ MapTimerEntry entries[16];
-    /* 0x280 */ u32 count;
-};
-
-struct MapTimerSlot {
-    /* 0x00 */ u8 active;
-    /* 0x01 */ u8 unk01[0x2B];
-    /* 0x2C */ s32 id;
-};
-
-struct MapTimerBanks {
-    /* 0x0000 */ MapTimerBank banks[16];
-    /* 0x2840 */ u32 count;
-    /* 0x2844 */ MapTimerSlot slots[32];
-};
-
 struct CallbackBinding {
     /* 0x00 */ void (*callback)(void *);
     /* 0x04 */ void *context;

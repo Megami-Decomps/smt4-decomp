@@ -1,6 +1,7 @@
-/* The spiral emitters (Apocalypse): effSpiralEmitterUpdate and effSwingEmitterUpdate, the same emitter without the two
- * curve values. Both lay out their particles, motions and definition as below and build their vectors in
- * g_vectorScratch with the same inline operations. Only Apocalypse's units include this. */
+/* The spiral emitters: Apocalypse's effSpiralEmitterUpdate and effSwingEmitterUpdate, the same emitter without the two
+ * curve values (SMT IV's effSwingEmitterUpdate, which has no time step and counts its emission inline). They lay out their
+ * particles, motions and definition as below and build their vectors in g_vectorScratch with the same inline
+ * operations. */
 #ifndef GFX_SPIRALEMITTER_H
 #define GFX_SPIRALEMITTER_H
 
@@ -9,7 +10,6 @@
 #include "gfx/VectorScratch.h"
 #include "gfx/QuaternionWorkspace.h"
 #include "shard/W5_W5Match2_ShiftRandom.h"
-#include "code/Code0051_Smt4a.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include <math.h>
 
@@ -46,14 +46,18 @@ struct SpiralEmitterDefinition {
     /* 0x00 */ Vector4 origin;
     /* 0x10 */ RotationQuaternion rotation;
     /* 0x20 */ s32 duration;        /* 0: the emitter loops */
-    /* 0x24 */ u8 unk24[0x48];
+    /* 0x24 */ u32 rate;            /* particles a frame */
+    /* 0x28 */ f32 randomness;      /* of the rate */
+    /* 0x2C */ u8 unk2C[0x40];
     /* 0x6C */ f32 scaleVariance;
     /* 0x70 */ u8 unk70[0x28];
     /* 0x98 */ f32 angleVariance;
     /* 0x9C */ u8 angleMode;        /* 1: random angle and spin direction, 2: no rotation */
     /* 0x9D */ u8 unk9D[0x1B];
     /* 0xB8 */ s32 lifetime;        /* frames a particle lives */
-    /* 0xBC */ u8 unkBC[0xC];
+    /* 0xBC */ u8 unkBC;
+    /* 0xBD */ u8 burstOnFirstFrame;
+    /* 0xBE */ u8 unkBE[0xA];
     /* 0xC8 */ f32 spread;
     /* 0xCC */ f32 speed;
     /* 0xD0 */ f32 speedVariance;
@@ -69,7 +73,8 @@ struct SpiralEmitterDefinition {
     /* 0x124 */ u8 curveB[0x2C];
 };
 typedef char SpiralEmitterOffsets[sizeof(SpiralParticle) == 0x28 && sizeof(SpiralMotion) == 0x3C &&
-    offsetof(SpiralEmitterDefinition, scaleVariance) == 0x6C && offsetof(SpiralEmitterDefinition, angleMode) == 0x9C &&
+    offsetof(SpiralEmitterDefinition, randomness) == 0x28 && offsetof(SpiralEmitterDefinition, scaleVariance) == 0x6C &&
+    offsetof(SpiralEmitterDefinition, burstOnFirstFrame) == 0xBD && offsetof(SpiralEmitterDefinition, angleMode) == 0x9C &&
     offsetof(SpiralEmitterDefinition, lifetime) == 0xB8 && offsetof(SpiralEmitterDefinition, spread) == 0xC8 &&
     offsetof(SpiralEmitterDefinition, phaseStep) == 0xE8 && offsetof(SpiralEmitterDefinition, curveA) == 0xF8 &&
     offsetof(SpiralEmitterDefinition, curveB) == 0x124 ? 1 : -1];

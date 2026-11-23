@@ -1,6 +1,5 @@
 #include "battle/BtlMainAccess.h"
 #include "code/Code003e.h"
-/* NON_MATCHING: only the scratch register for the hp/maxHp stack store differs (retail add ip, sp, #16; armcc reuses r4). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"

@@ -1,7 +1,5 @@
 #include "shard/W6_W6Match2_VectorQueue.h"
 
-extern "C" VectorQueueWork* g_vectorQueueWork;
-
 /* Appends a vector of the given kind to a queue. */
 static __inline void vectorQueuePush(VectorQueue* queue, u32 kind, f32 x, f32 y, f32 z)
 {

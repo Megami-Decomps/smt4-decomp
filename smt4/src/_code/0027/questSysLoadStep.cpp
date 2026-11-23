@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the tail merge of the state stores differs: retail shares case 1's store with case 2's (state 3), this build shares case 0's with case 1's. */
 #include "addon/QuestScriptLoader.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 #include "script/scrScriptProcess.h"
@@ -35,27 +34,26 @@ u32 questSysLoadStep(AocScriptHolder *step)
             step->state = 2;
         }
         break;
-    case 2: {
-        if (scrRunOpcodesStub(step->process) != 2)
-            break;
-        u32 selection = rosterGetLeaderId();
-        if (FUN_00298dc8()) {
-            FUN_0029016c(selection, 0);
+    case 2:
+        if (scrRunOpcodesStub(step->process) == 2) {
+            u32 selection = rosterGetLeaderId();
+            if (FUN_00298dc8()) {
+                FUN_0029016c(selection, 0);
+            }
+            FUN_002900d0();
+            if (gameJumpRequestIsPending()) {
+                scrScriptProcessStartEntry(step->process, 13);
+                step->state = 3;
+            } else {
+                step->state = 4;
+            }
         }
-        FUN_002900d0();
-        if (gameJumpRequestIsPending()) {
-            scrScriptProcessStartEntry(step->process, 13);
-            step->state = 3;
-            break;
-        }
-        step->state = 4;
         break;
-    }
     case 3:
         if (scrRunOpcodesStub(step->process) == 2) {
             step->state = 4;
         }
-        break;
+        return 0;
     case 4:
         return 1;
     }

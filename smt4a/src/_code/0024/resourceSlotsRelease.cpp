@@ -24,7 +24,7 @@ typedef struct Pool {
     /* 0x3C */ Slot slots[SLOT_COUNT];
 } Pool;
 
-extern Pool *DAT_00581280;
+extern Pool *g_mapNpcWork;
 
 int mapControllerWorkReset(void);
 int vectorQueueClearActiveSlots(void);
@@ -35,11 +35,11 @@ void resourceSlotsRelease(void)
     int i;
 
     for (i = SLOT_COUNT - 1; i >= 0; i--) {
-        Resource *resource = DAT_00581280->slots[i].resource;
+        Resource *resource = g_mapNpcWork->slots[i].resource;
 
         if (resource != NULL) {
             resource->vtbl->release(resource);
-            DAT_00581280->slots[i].resource = NULL;
+            g_mapNpcWork->slots[i].resource = NULL;
         }
     }
     vectorQueueClearActiveSlots();

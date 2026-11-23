@@ -16,7 +16,7 @@ void FUN_00275dec(void);
 void frameTexApplyMode(s32 arg);
 u32 rosterGetLeaderId(void);
 void qcMainSetMode(s32 mode);
-void FUN_0026f960(u16 rewardId);
+void sequenceRequestKind5(u16 rewardId);
 void buttonHelpRelease(void);
 
 /* Steps the quest clear scene: queue its event on frame 7, start the effect, then hand out the reward. */
@@ -48,7 +48,7 @@ void FUN_0038358c(QuestClearScene *scene)
 
         if (quest != 0 && table1bOr1cGetRecordValue(quest) == 6) {
             qcMainSetMode(1);
-            FUN_0026f960(questDataGetRecord(quest)->event.package);
+            sequenceRequestKind5(questDataGetRecord(quest)->event.package);
             buttonHelpRelease();
         }
         break;

@@ -10,7 +10,7 @@ struct InterfaceSoundPosition {
 };
 
 extern "C" {
-extern InterfaceSoundPosition *DAT_00581280;
+extern InterfaceSoundPosition *g_mapNpcWork;
 s32 soundActorStartOnFreeChannel(u32, f32, f32, f32);
 
 // Change the active interface mode and reset its movement state.
@@ -46,10 +46,10 @@ void FUN_00234044(s32 mode, s32 id)
     } else {
         block->id = id;
         if (g_gameState.mapId <= 100)
-            soundActorStartOnFreeChannel(0x10002ab, DAT_00581280[id].position[0], DAT_00581280[id].position[1], DAT_00581280[id].position[2]);
+            soundActorStartOnFreeChannel(0x10002ab, g_mapNpcWork[id].position[0], g_mapNpcWork[id].position[1], g_mapNpcWork[id].position[2]);
         else
-            soundActorStartOnFreeChannel(0x10002ab, DAT_00581280[id].position[0] * (1.0f / 3.0f),
-                        DAT_00581280[id].position[1] * (1.0f / 3.0f), DAT_00581280[id].position[2] * (1.0f / 3.0f));
+            soundActorStartOnFreeChannel(0x10002ab, g_mapNpcWork[id].position[0] * (1.0f / 3.0f),
+                        g_mapNpcWork[id].position[1] * (1.0f / 3.0f), g_mapNpcWork[id].position[2] * (1.0f / 3.0f));
         block->position[0] = 0.0f;
         block->position[1] = 20.0f;
         block->position[2] = 0.0f;

@@ -19,7 +19,7 @@ extern "C" {
 int regionFindRecord(void);
 int cameraRegistryRemove(...);
 int FUN_0026f950(void);
-int FUN_0026f960(...);
+int sequenceRequestKind5(...);
 int bgmReleaseStopped(void);
 int FUN_0026fa30(...);
 int encounterFlagsRollSlots(void);
@@ -373,7 +373,7 @@ extern int lmapMainUpdateScriptTransition(void);
 /* Supplied declaration required: FUN_002666b0. */
 /* Supplied declaration required: lmapUpdateMapBgm. */
 /* Supplied declaration required: FUN_0026f950. */
-/* Supplied declaration required: FUN_0026f960. */
+/* Supplied declaration required: sequenceRequestKind5. */
 /* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_0026fa30. */
 /* Supplied declaration required: encounterFlagsRollSlots. */
@@ -3310,7 +3310,7 @@ joined_r0x001d8c24:
       temp_v6 = rosterGetLeaderId();
       if ((temp_v6 != 0) && (temp_v4 = table1bOr1cGetRecordValue(), temp_v4 == 6)) {
         questDataGetRecord();
-        FUN_0026f960(*(unsigned short *)(temp_v6 + 0x148));
+        sequenceRequestKind5(*(unsigned short *)(temp_v6 + 0x148));
         return 0xffffffff;
       }
       (*(unsigned short *)((unsigned char *)&temp_v15 + 0)) = (unsigned short)temp_v15 & 0xff00;

@@ -1,0 +1,42 @@
+/* NON_MATCHING: retail loads the point's kind separately in each arm where armcc hoists one load above
+ * the index test (which also moves the previous-point address), and loads the previous point's z apart from x/y. */
+#include "shard/W6_W6Match2_VectorQueue.h"
+#include "map/MapVector.h"
+
+extern "C" {
+f32 mathDistanceBetweenPoints(MapVector from, MapVector to); // declcheck: local (util/MathFunctions.h declares six floats for its float callers; retail moves this caller's points as by-value vectors, as in mapSelectNearbyDeferredModel)
+// Finish the active path by storing each point's direction toward its predecessor.
+void vectorQueueFinishPath(void)
+{
+    VectorQueue *queue = &g_vectorQueueWork->queues[g_vectorQueueWork->activeQueue];
+    for (s32 index = 0; index < (s32)queue->count; ++index) {
+        QueuedVector *point = &queue->entries[index];
+        if (index == 0) {
+            point->kind |= ~1U;
+            point->direction.x = 0.0f;
+            point->direction.y = 0.0f;
+            point->direction.z = 0.0f;
+        } else {
+            QueuedVector *previous = point - 1;
+            point->kind |= 1;
+            f32 distance = mathDistanceBetweenPoints(point->position, previous->position);
+            if (distance < 0.0f)
+                distance = -distance;
+            MapVector previousPosition = previous->position;
+            MapVector position = point->position;
+            MapVector direction;
+            direction.x = previousPosition.x - position.x;
+            direction.y = previousPosition.y - position.y;
+            direction.z = previousPosition.z - position.z;
+            if (distance != 0.0f) {
+                f32 inverseDistance = 1.0f / distance;
+                direction.x *= inverseDistance;
+                direction.y *= inverseDistance;
+                direction.z *= inverseDistance;
+            }
+            point->direction = direction;
+        }
+    }
+    ++g_vectorQueueWork->activeQueue;
+}
+}

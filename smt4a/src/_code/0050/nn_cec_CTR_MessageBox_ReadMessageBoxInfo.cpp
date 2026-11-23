@@ -1,4 +1,4 @@
-/* NON_MATCHING: fixed-header read behavior is recovered; two outgoing-argument moves are reversed and the empty-read result path has one extra branch. */
+/* Built with the unit's cflags (-O2 -Otime). */
 #include "common.h"
 
 struct HeaderReadInterface;

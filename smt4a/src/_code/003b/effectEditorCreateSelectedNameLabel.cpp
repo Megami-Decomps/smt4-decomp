@@ -1,4 +1,7 @@
-/* NON_MATCHING: the paired origin store matches (local node, unk04 before initialKind); remaining: the unk14 store loads its constant before the global reload, and the index+offset add is scheduled after the list load. */
+/* NON_MATCHING: the paired origin store matches (local node, unk04 before initialKind); remaining: the unk14 store loads its constant before the global reload, and the index+offset add is scheduled after the list load.
+ * The origin pair (stm r0, {r1, r2}) and the 0x14 word (str r1, [r0, #20]) look like calls of one-instruction setters
+ * armlink inlined: written as calls with inlined.txt rows (effMenuNodeSetOrigin = 0xe8800006, a 0x14 setter =
+ * 0xe5801014) this unit is IDENTICAL; the pair setter alone makes FUN_00313704 / smt4a FUN_003aa520 IDENTICAL. */
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
 #include "AsdSDK/Source/Gfx/EffectEditor/EffectEditor.h"

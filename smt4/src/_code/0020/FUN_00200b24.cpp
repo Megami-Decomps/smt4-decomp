@@ -1,4 +1,4 @@
-/* NON_MATCHING: IDENTICAL when the unit is compiled with -O2 like its matched twin smt4a FUN_002c1664 (needs a cflags entry); under the default -O3 the scaleStep[0]=0.0f store in the reset is scheduled earlier. */
+/* IDENTICAL as the unit is compiled (its cflags entry) with -O2 like its matched twin smt4a FUN_002c1664; under the default -O3 the scaleStep[0]=0.0f store in the reset is scheduled earlier. */
 #include "ui/PanelTransition.h"
 
 static __inline void resetPanelTransition(PanelTransition *transition)

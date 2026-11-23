@@ -10,7 +10,7 @@ typedef struct QuestMapBlock {
 
 extern QuestMapBlock *g_deferredMapModels; /* 0x447e58 */
 
-extern int FUN_001e34fc(s16 x, s16 y, int arg);
+extern int mapNpcLoadStep(s16 x, s16 y, int arg);
 
 /* Stores the cursor position in the quest map block and refreshes it. */
 void questMapSetCursor(int x, int y)
@@ -19,7 +19,7 @@ void questMapSetCursor(int x, int y)
 
     block->cursorX = x;
     block->cursorY = y;
-    FUN_001e34fc(x, y, 0);
+    mapNpcLoadStep(x, y, 0);
 }
 
 } /* extern "C" */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: ui pointer load and frame now match retail; only the address of command.position (`add lr, sp, #8`) is computed after the kind store here and before it in retail. */
+/* Built with the unit's cflags (-O2 -Otime). */
 #include "battle/BtlUiGlobal.h"
 
 struct UiPosition {

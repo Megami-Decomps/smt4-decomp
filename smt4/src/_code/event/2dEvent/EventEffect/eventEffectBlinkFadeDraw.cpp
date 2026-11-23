@@ -1,6 +1,6 @@
 #include "event/2dEvent/BlinkFade.h"
 #include "camp/RenderCtx.h"
-#include "shard/W9_W9Match8_WorkRecords.h"
+#include "shard/TextureDrawCall_Payload.h"
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
@@ -10,7 +10,6 @@ void gxResetColorQuadToWhite();
 void renderCtxSelectStereoLayout(RenderCtx *context);
 u32 renderCtxPackPassFlags(u32 value, bool enabled);
 void efctSetSpeed(f32 speed);
-void texDrawTableEntryAtStoredOrigin(u32 flags, u32 table, s32 entry, u32 argument, TextureDrawPayloadIV payload);
 u32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
 

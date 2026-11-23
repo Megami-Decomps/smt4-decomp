@@ -1,7 +1,7 @@
 /* NON_MATCHING: register allocation only: the y/x offset loads use r1/r2/r3 where retail reuses the pool-constant register (r2, r1); the gxSetMirroredClippedScissor argument loads are scheduled in a different order. */
 #include "camp/RenderCtxTitle.h"
 #include "util/BitsAndBytes_VariantA.h"
-#include "shard/W9_W9Match8_WorkRecords.h"
+#include "shard/TextureDrawCall_Payload.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "ui/UiSpriteApi.h"
 
@@ -29,7 +29,6 @@ struct IconScroller {
 extern "C" {
 
 void efctSetSpeed(f32 speed);
-void texDrawTableEntryAtStoredOrigin(u32 flags, u32 table, s32 entry, u32 argument, TextureDrawPayloadIV payload);
 void gxSetMirroredClippedScissor(s32 x, s32 y, u32 width, s32 height, s32 useNarrowScreen);
 
 static __inline TextureDrawPayloadIV payloadAt(s32 y)

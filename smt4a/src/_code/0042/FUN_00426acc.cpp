@@ -73,7 +73,7 @@ s32 FUN_004396bc(s32 a, u32 b, s32 *c, s32 d, u8 *s0, u32 s4, s32 *s8, s32 s12, 
 s32 libc_strncmp(const char *a, const char *b, u32 count);
 u16 FUN_001029f4(u32 value, s32 a, s32 b);
 void sysFatalBreak(void);
-s32 FUN_00428334(TableLoader *loader, TableEntry *entry, u16 id);
+s32 tokenRegistryCheckEntryFlags(TableLoader *loader, TableEntry *entry, u16 id);
 
 #define TABLE_BUILD_EMPTY ((s32)0xC8A13908)
 
@@ -138,7 +138,7 @@ s32 FUN_00426acc(TableLoader *loader, u32 argA, u32 argB, TableBuildConfig *conf
         TableEntry entry;
         entry.id = id;
         entry.flags = category | ((word0 & 0xFF) << 8) | (premium << 16);
-        result = FUN_00428334(loader, &entry, version);
+        result = tokenRegistryCheckEntryFlags(loader, &entry, version);
         if (nnResultIsFailure(result))
             return result;
     }

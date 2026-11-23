@@ -3,11 +3,11 @@
 
 extern "C" {
 
-void FUN_00270c58(u32 value);
+void sequenceRequestKind5(u32 value);
 void sequenceRequestDefer(u32 a, u32 b);
 u32 scrGetArg(s32 index);
 
-/* Script command: runs sequenceRequestDefer on arguments 1 and 2 and FUN_00270c58 on argument 0. */
+/* Script command: runs sequenceRequestDefer on arguments 1 and 2 and sequenceRequestKind5 on argument 0. */
 s32 FUN_002e57e0(void)
 {
     u32 a = scrGetArg(0);
@@ -16,7 +16,7 @@ s32 FUN_002e57e0(void)
 
     sequenceRequestDefer(b, c);
     g_gameState.unk454 = -1;
-    FUN_00270c58(a);
+    sequenceRequestKind5(a);
     return 3;
 }
 

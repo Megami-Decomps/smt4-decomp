@@ -8,7 +8,7 @@ extern "C" {
 
 int sysFatalBreak(void);
 int mobiclipS4FsReaderDestroy(S4FsReader *reader);
-int FUN_00423c0c(void *obj);
+int frameStreamStop(void *obj);
 int movieSyncDrainSourcePositions(S4Player *player);
 int mobiclipS4PlayerDestroy(S4Player *player);
 int mobiclipCtrlReleaseResource(u32 handle);
@@ -25,7 +25,7 @@ void mobiclipCtrlShutdown(void)
 {
     u32 *handle;
 
-    FUN_00423c0c(DAT_00617f18);
+    frameStreamStop(DAT_00617f18);
     movieSyncDrainSourcePositions(&g_mobiclipPlayer);
     mobiclipS4PlayerDestroy(&g_mobiclipPlayer);
     ((Obj420a2c *)DAT_00617e70)->Obj420a2c::releaseSources();

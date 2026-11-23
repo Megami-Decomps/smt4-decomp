@@ -142,3 +142,12 @@ arm 0x1585ec 0x158624 nn::fs file object finaliser: tag check, close through slo
 # nw_gfx_RenderContext_ActivateParticleContext; it reads a field the temporaries leave uninitialised (not writable as
 # defined C). Twin of smt4 0x2a5960.
 arm 0x1b0e44 0x1b12a4 NintendoWare-gfx AnimEvaluator set-up between nw_gfx_SceneBuilder_CreateObject and the NW render context; twin of smt4 0x2a5960
+# The CTR-SDK's hand-written svc 0x35 (GetProcessId) wrapper, the same output-handle shape as svcCreateSemaphore and
+# svcReleaseSemaphore (`push {r0}; svc N; ldr r2, [sp]; str r1, [r2]`), which armcc cannot produce; smt4 twin 0x144f90.
+arm 0x1ab838 0x1ab850 CTR-SDK svcGetProcessId: push {r0}; svc 0x35; ldr r2, [sp]; str r1, [r2]; add sp, sp, #4
+# nn::err's connection to the err:f service: under the module's critical section it connects to the port
+# (svcConnectToPort), reads the process id (svcGetProcessId) and throws nn::err FatalErr on failure, then waits on a
+# LightEvent; and the file's static initialiser that sets up that handle state and constructs the nn::os::CriticalSection
+# (registered with __aeabi_atexit). nn_applet_CTR_detail_NotifyToWait uses the same handle and lock.
+arm 0x189a80 0x189b88 nn::err err:f port connection: CriticalSection Enter, svcConnectToPort, svcGetProcessId, nn_err_CTR_FatalErr_Throw, LightEvent wait; smt4 twin 0x2ad4f8
+arm 0x50e4c4 0x50e500 nn::err static initialiser: err:f handle state and its nn::os::CriticalSection (atexit-registered destructor); smt4 counterpart 0x3ec298

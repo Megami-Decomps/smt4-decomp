@@ -8,7 +8,7 @@ int recordTableAppend(unsigned char *);
 int FUN_002c5e80(unsigned int, int, int);
 int pricingSelectionBuildPredicate(int);
 int wordPairClear(void);
-int FUN_0035361c(int, unsigned char **, unsigned int);
+int tokenRegistryCheckEntryFlags(int, unsigned char **, unsigned int);
 int FUN_003536c4(int, int, int);
 int FUN_0035f834(int, unsigned int, int *, int);
 
@@ -46,7 +46,7 @@ extern int libc_strncmp(unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002c5e80. */
 /* Supplied declaration required: pricingSelectionBuildPredicate. */
 /* Supplied declaration required: wordPairClear. */
-/* Supplied declaration required: FUN_0035361c. */
+/* Supplied declaration required: tokenRegistryCheckEntryFlags. */
 extern unsigned char *FUN_003536a8(int);
 extern unsigned int FUN_003536b4(int);
 /* Supplied declaration required: FUN_003536c4. */
@@ -193,7 +193,7 @@ LAB_00352594:
           }
           temp_v10 = temp_v1 | (temp_v7 & 0xffff0000) | ((*puVar6 & 0xff) << 8);
           temp_v0 = param_1;
-          FUN_0035361c(param_1,&temp_v9,temp_v4 & 0xffff);
+          tokenRegistryCheckEntryFlags(param_1,&temp_v9,temp_v4 & 0xffff);
           if (temp_v0 < 0) {
             return temp_v0;
           }

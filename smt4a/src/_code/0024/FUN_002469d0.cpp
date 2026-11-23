@@ -2,7 +2,7 @@
 #include "map/MapCircleObstacles.h"
 
 extern "C" {
-extern MapCircleObstacleTable* DAT_00581280;
+extern MapCircleObstacleTable* g_mapNpcWork;
 s32 mapResolveCircleOverlapXZ(MapVector* result, MapVector position, f32 radius,
                              MapVector obstaclePosition, f32 obstacleRadius);
 void FUN_002947b8(MapVector* result, MapVector position);
@@ -14,7 +14,7 @@ u32 FUN_002469d0(MapVector* result, MapVector position)
     u32 collided = 0;
     MapVector resolved;
     for (s32 index = 0; index < 64; ++index) {
-        MapCircleObstacle* obstacle = &DAT_00581280->entries[index];
+        MapCircleObstacle* obstacle = &g_mapNpcWork->entries[index];
         if (obstacle->active) {
             if (obstacle->pointOnly) {
                 if (mapResolveCircleOverlapXZ(&resolved, position, 50.0f, obstacle->position, 0.0f)) {

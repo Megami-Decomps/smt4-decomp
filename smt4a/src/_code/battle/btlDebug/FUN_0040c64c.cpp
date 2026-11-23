@@ -69,7 +69,7 @@ struct BattleAuxView {
 extern "C" {
 extern BlockedStateMasks g_btlActionReflect;
 extern BattleAuxView *g_btlAux;
-extern UiMarkerLayout DAT_0057a634;
+extern UiMarkerLayout g_btlMarkerTimings;
 
 void FUN_003e7ef0(BattleStateView *state);
 void FUN_003ed238(BattleStateView *state, u32 flags);
@@ -121,9 +121,9 @@ void FUN_0040c64c(u32 unused, UnitSelectStep *step)
                 return;
             }
             step->phase = 3;
-            s16 a = DAT_0057a634.left;
-            s16 b = DAT_0057a634.offset;
-            s16 c = DAT_0057a634.top;
+            s16 a = g_btlMarkerTimings.left;
+            s16 b = g_btlMarkerTimings.offset;
+            s16 c = g_btlMarkerTimings.top;
             FUN_004cae0c(state, unit, 0, 0);
             btlReflectQueueKind44(b + a, step->id, unit, 0xff, c, 0);
             u32 style = 6;

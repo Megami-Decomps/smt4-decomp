@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003df37c(int, unsigned int *);
+int tokenRegistryGetValue(int, unsigned int *); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int tokenRegistryCopyEntries(int, unsigned int *, unsigned int);
 int FUN_003df478(int, unsigned char [4], unsigned int *, int, unsigned int);
 
@@ -20,7 +20,7 @@ typedef struct {
 extern unsigned int DAT_0044e5f0; /* 0x44e5f0 */
 extern unsigned char DAT_004d4000; /* 0x4d4000 */
 
-/* Supplied declaration required: FUN_003df37c. */
+/* Supplied declaration required: tokenRegistryGetValue. */
 /* Supplied declaration required: tokenRegistryCopyEntries. */
 /* Supplied declaration required: FUN_003df478. */
 
@@ -39,7 +39,7 @@ void FUN_003536c4(int param_1,int param_2,unsigned int param_3)
   unsigned char temp_v7;
   
   temp_v0 = param_1;
-  FUN_003df37c(param_1,&temp_v3);
+  tokenRegistryGetValue(param_1,&temp_v3);
   temp_v1 = DAT_0044e5f0;
   if ((-1 < temp_v0) && (temp_v3 != 0)) {
     if (param_3 != 0) {

@@ -6,7 +6,7 @@ extern EffectSelectionContext g_effectEditorState;
 extern EffectSelectionCatalogEntry *DAT_0059e624[13];
 
 EffectSelectionItem *linkedFindItemByIndex(void *owner, s32 index);
-EffectSelectionItem *FUN_00376628(void *owner, EffectSelectionBlock *block);
+EffectSelectionItem *effPartAppendClone(void *owner, EffectSelectionBlock *block);
 EffectSelectionItem *nodeListFindByKey(void *owner, u32 key);
 void linkedItemsRedirectToReplacement(void *owner, EffectSelectionItem *item, EffectSelectionItem *previous);
 void rt_memcpy_w144(void *destination, const void *source);
@@ -44,7 +44,7 @@ extern "C" u32 FUN_003c597c()
     struct ItemView { EffectSelectionItem item; u32 related; u32 flags; char name[1]; };
     s32 position = g_effectEditorState.index + g_effectEditor.index;
     EffectSelectionItem *source = linkedFindItemByIndex(g_effectEditor.list, position);
-    EffectSelectionItem *copy = FUN_00376628(g_effectEditor.list, source->block);
+    EffectSelectionItem *copy = effPartAppendClone(g_effectEditor.list, source->block);
     g_effectEditor.item = copy;
     rt_memcpy_w144(copy, source);
     ItemView *sourceView = reinterpret_cast<ItemView *>(source);

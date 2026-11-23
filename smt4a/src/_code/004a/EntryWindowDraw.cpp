@@ -41,7 +41,7 @@ void gxResetColorQuadToWhite(void);
 void FUN_004a80d8(EntryWindow *window, s32 index, s32 fade, s32 variant, f32 scale);
 void demonIconPanelDrawRow(EntryWindow *window, s32 enabled, u32 textId, s32 index, s32 alternate, s32 fade);
 void FUN_004a7cb0(EntryWindow *window, u32 textId, s32 index, s32 alternate, s32 fade, f32 scale);
-void FUN_004a7ba0(EntryWindow *window, u32 textId, s32 index, s32 alternate, s32 fade, f32 scale);
+void entryWindowDrawEntryName(EntryWindow *window, u32 textId, s32 index, s32 alternate, s32 fade, f32 scale);
 void FUN_004a7814(EntryWindow *window, u32 first, s32 index, s32 alternate, s32 fade, u32 second);
 
 void FUN_004a2a30(EntryWindow *panel, s32 entry, s32 alternate, u32 textId, f32 scale)
@@ -61,7 +61,7 @@ void FUN_004a2a30(EntryWindow *panel, s32 entry, s32 alternate, u32 textId, f32 
     efctSetSpeed(entryScale);
     demonIconPanelDrawRow(panel, enabled, textId, entry, alternate, fade);
     FUN_004a7cb0(panel, textId, entry, alternate, fade, entryScale);
-    FUN_004a7ba0(panel, textId, entry, alternate, fade, entryScale);
+    entryWindowDrawEntryName(panel, textId, entry, alternate, fade, entryScale);
     efctSetSpeed(entryScale);
     FUN_004a7814(panel, g_entryWindowNumberFirst[entry], entry, alternate, fade, g_entryWindowNumberSecond[entry]);
     drawSetColorFromRGBA8(g_entryWindowColors[entry]);
@@ -106,7 +106,7 @@ void FUN_004a3238(EntryWindow *window, s32 index, u32 mode, s32 enabled, u32 tex
         FUN_004a7cb0(window, text, index, enabled, color, scale * textScale);
         break;
     case 3:
-        FUN_004a7ba0(window, text, index, enabled, color, scale * textScale);
+        entryWindowDrawEntryName(window, text, index, enabled, color, scale * textScale);
         return;
     case 4:
         efctSetSpeed(scale * textScale);

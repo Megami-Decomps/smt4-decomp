@@ -1,11 +1,6 @@
-#include "common.h"
+#include "addon/ContentListScreen.h"
 
-struct ContentGrid { u8 data[0x64]; };
-struct ContentNavigation {
-    u8 unk00[0x28];
-    ContentGrid grid; // 0x28
-    s32 topRow; // 0x8c
-};
+typedef GridNavigation ContentGrid;
 extern "C" {
 s32 resourceRunOperationIfUnblocked(ContentGrid *);
 s32 listCursorGetRowIfUnblocked(ContentGrid *);
@@ -16,38 +11,39 @@ s32 flaggedEntryGetValueA(ContentGrid *);
 void eventQueueAddUniqueIfValid(u32);
 void scrollOwnerSetValue(ContentGrid *, s32);
 
-void contentListUpdateNavigation(ContentNavigation *screen)
+/* Updates the grid cursor and scroll offset for the content list. */
+void contentListUpdateNavigation(ContentListScreen *screen)
 {
-    s32 previousRow = resourceRunOperationIfUnblocked(&screen->grid);
-    if (gridNavigationHandleConfirm(&screen->grid, 0)) {
-        if (gridNavigationGetItemCount(&screen->grid) > 8) {
-            resourceRunOperationIfUnblocked(&screen->grid);
-            if (listCursorGetRowIfUnblocked(&screen->grid) != 7 && listCursorGetRowIfUnblocked(&screen->grid) != 0)
+    s32 previousRow = resourceRunOperationIfUnblocked(&screen->navigation);
+    if (gridNavigationHandleConfirm(&screen->navigation, 0)) {
+        if (gridNavigationGetItemCount(&screen->navigation) > 8) {
+            resourceRunOperationIfUnblocked(&screen->navigation);
+            if (listCursorGetRowIfUnblocked(&screen->navigation) != 7 && listCursorGetRowIfUnblocked(&screen->navigation) != 0)
                 eventQueueAddUniqueIfValid(0x100020d);
-            while (resourceRunOperationIfUnblocked(&screen->grid) == previousRow) {
-                if (resourceRunOperationIfUnblocked(&screen->grid) == 0 && listCursorGetRowIfUnblocked(&screen->grid) == 0)
+            while (resourceRunOperationIfUnblocked(&screen->navigation) == previousRow) {
+                if (resourceRunOperationIfUnblocked(&screen->navigation) == 0 && listCursorGetRowIfUnblocked(&screen->navigation) == 0)
                     break;
-                if (resourceRunOperationIfUnblocked(&screen->grid) == gridNavigationGetItemCount(&screen->grid) - 8 &&
-                    listCursorGetRowIfUnblocked(&screen->grid) == 7)
+                if (resourceRunOperationIfUnblocked(&screen->navigation) == gridNavigationGetItemCount(&screen->navigation) - 8 &&
+                    listCursorGetRowIfUnblocked(&screen->navigation) == 7)
                     break;
-                gridNavigationHandleConfirm(&screen->grid, 0);
+                gridNavigationHandleConfirm(&screen->navigation, 0);
             }
         }
-        screen->topRow = resourceRunOperationIfUnblocked(&screen->grid);
+        screen->topRow = resourceRunOperationIfUnblocked(&screen->navigation);
     }
     if (padQueryLogicalKey(9, 0)) {
-        if (resourceRunOperationIfUnblocked(&screen->grid) == 0)
+        if (resourceRunOperationIfUnblocked(&screen->navigation) == 0)
             return;
         eventQueueAddUniqueIfValid(0x100020d);
-        scrollOwnerSetValue(&screen->grid, --screen->topRow);
+        scrollOwnerSetValue(&screen->navigation, --screen->topRow);
     }
-    if (padQueryLogicalKey(10, 0) && gridNavigationGetItemCount(&screen->grid) >= 8) {
-        s32 row = resourceRunOperationIfUnblocked(&screen->grid);
-        s32 count = gridNavigationGetItemCount(&screen->grid);
+    if (padQueryLogicalKey(10, 0) && gridNavigationGetItemCount(&screen->navigation) >= 8) {
+        s32 row = resourceRunOperationIfUnblocked(&screen->navigation);
+        s32 count = gridNavigationGetItemCount(&screen->navigation);
         if (row != count - 8 &&
-            (flaggedEntryGetValueA(&screen->grid) || gridNavigationGetItemCount(&screen->grid) >= 8)) {
+            (flaggedEntryGetValueA(&screen->navigation) || gridNavigationGetItemCount(&screen->navigation) >= 8)) {
             eventQueueAddUniqueIfValid(0x100020d);
-            scrollOwnerSetValue(&screen->grid, ++screen->topRow);
+            scrollOwnerSetValue(&screen->navigation, ++screen->topRow);
         }
     }
 }

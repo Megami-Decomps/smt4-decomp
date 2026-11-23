@@ -14,14 +14,14 @@ struct StatRecord {
 
 extern StatRecord *g_engineRecordList;
 extern StatRecord *g_mapObj;
-extern StatRecord *DAT_00581280;
+extern StatRecord *g_mapNpcWork;
 
 /* Recomputes the remaining allowance: the limit minus the base and the average of three stat values, floored at the minimum. */
 void FUN_003b959c(void)
 {
     s32 limit = g_gameState.limit;
     s32 first = FUN_0032530c();
-    s32 value = limit - ((g_engineRecordList->value + g_mapObj->value + first) / 3 + DAT_00581280->base);
+    s32 value = limit - ((g_engineRecordList->value + g_mapObj->value + first) / 3 + g_mapNpcWork->base);
 
     if (value < g_gameState.minimum) {
         value = g_gameState.minimum;

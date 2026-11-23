@@ -5,6 +5,7 @@
 #include "shard/X14_EngineUnits.h"
 #include "ui/UiSpriteApi.h"
 #include "ui/UiControl.h"
+#include "ui/FloatTableLookup.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/GameDataAccess.h"
@@ -42,7 +43,6 @@ void resultSetMode(ResultWorkA *result, s32 state);
 u32 statsAreAllCapped(const StatBlock *block);
 void FUN_003df7c4(PlayerStats *stats);
 void FUN_00372100(s32 first, s32 second);
-f32 engineGetFloatTableValue(const f32 *values, u32 index);
 u32 NaviMain_GetPosY(void);
 
 /* A stat's cap. Its own enum: with the sound ids above 0xFFFF in the same enum its type would be unsigned and the

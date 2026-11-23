@@ -1,32 +1,20 @@
-/* NON_MATCHING: real BtlCombatantEntryA scratch restores the 1056-byte frame and ip push; only the final transitionFlags load is still hoisted above the alternate compare (8 diff lines). */
+/* NON_MATCHING: 8 lines, the render-flags update at the end: retail builds it in r2, the build in r1. It matches
+ * through a 64-bit view of the word at 0x58 (BattleRosterRecordA::removal.flags), but the record's other users
+ * update that word as the u32 motion.renderFlags (FUN_004caca0, battleUnitUpdateModelLoad), and FUN_004caca0 does not
+ * match with a u64 field: one view per field. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "gamedata/NkmEnemyLookup.h"
 #include "battle/BtlUiGlobal.h"
 #include "battle/BtlEntryA.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 struct BattleSlotCore { u8 data[0x2ac]; };
-struct BattleSlotScratch {
-    u8 unk000[0x164];
-    BattleSlotCore core; // 0x164
-};
-struct BattleSlotVisual {
-    u8 unk00[0x48];
-    u32 state; // 0x48
-    u32 phase; // 0x4c
-    u32 flags; // 0x50
-    u32 unk54;
-    u32 transitionFlags; // 0x58
-    u8 unk5c[0x12];
-    s16 unitIndex; // 0x6e
-    u8 unk70[0x30];
-    u8 alternate; // 0xa0
-    u8 unka1[0x12f];
-};
+struct BattleSlotVisual;
 struct BattleSlotId { u32 id; u32 unk04; };
 struct BattleSlotState {
     u8 unk0000[0x1ed4];
-    BattleSlotVisual *units; // 0x1ed4
+    BattleRosterRecordA *units; /* 0x1ed4 */
     u8 unk1ed8[0x130];
     BattleSlotId slots[1]; // 0x2008
 };
@@ -66,15 +54,15 @@ void btlPopulateSelectedSlot(s32 kind, s32 slot, s32 destination, s32 animate)
         }
         btlInitializeDemonUnitState(battle, (BattleSlotCore *)&scratch.data, record, 0);
         if (party->selected[slot] >= 0) {
-            BattleSlotVisual *unit = FUN_003e83b4(battle, destination, 0);
-            s32 assignedIndex = unit->unitIndex - 1;
+            const BtlCombatantEntryA *unit = (const BtlCombatantEntryA *)FUN_003e83b4(battle, destination, 0);
+            s32 assignedIndex = unit->selectionIndex - 1;
             party->assigned[assignedIndex] = party->selected[slot];
             s32 immediate = 1;
             if (animate > 0) {
                 immediate = 0;
                 btlQueueActionMessage(0, 0, 0x1000271, 0, 0, 0, 0);
             }
-            FUN_004a9c24(g_btlUiBlock, unit->unitIndex, party->selected[slot], immediate);
+            FUN_004a9c24(g_btlUiBlock, unit->selectionIndex, party->selected[slot], immediate);
         }
     } else {
         void *definition = nkmEnemyFindById((u16)battle->slots[slot].id);
@@ -84,13 +72,16 @@ void btlPopulateSelectedSlot(s32 kind, s32 slot, s32 destination, s32 animate)
     }
     FUN_004ca63c(battle, (BattleSlotCore *)&scratch.data, kind, destination, 1);
     if (kind == 1) {
-        BattleSlotVisual *unit = &battle->units[destination];
-        u32 flags = unit->flags;
+        BattleRosterRecordA *unit = &battle->units[destination];
+        u32 flags = unit->motion.flags;
         if ((flags & 1) && (flags & 0x80) && !(flags & 2)) {
-            unit->state = unit->alternate == 0 ? 5 : 6;
-            unit->phase = 0;
-            unit->transitionFlags &= ~6u;
-            unit->transitionFlags |= 1;
+            if (unit->motion.useAlternateState == 0) {
+                unit->motion.state = 5;
+            } else {
+                unit->motion.state = 6;
+            }
+            unit->motion.stateFrame = 0;
+            unit->motion.renderFlags = (unit->motion.renderFlags & ~6u) | 1;
         }
     }
 }

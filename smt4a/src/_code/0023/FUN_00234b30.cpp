@@ -33,7 +33,7 @@ typedef struct {
 } void_stack;
 
 extern int *g_lmapView; /* 0x5806a4 */
-extern int DAT_00581280; /* 0x581280 */
+extern int g_mapNpcWork; /* 0x581280 */
 extern int g_lmapScene; /* 0x581288 */
 extern signed char DAT_005f161f; /* 0x5f161f */
 
@@ -97,8 +97,8 @@ void FUN_00234b30(void)
   temp_v16 = 0x47c34f8000000000;
   temp_v24 = 0;
   do {
-    temp_v10 = DAT_00581280;
-    temp_v4 = DAT_00581280 + temp_v24 * 0x3c;
+    temp_v10 = g_mapNpcWork;
+    temp_v4 = g_mapNpcWork + temp_v24 * 0x3c;
     if ((*(char *)(temp_v4 + 0xc) != '\0') && (*(char *)(temp_v4 + 0xf) == '\0')) {
       temp_v5 = *(int *)(*(int *)(temp_v4 + 0x40) + 4);
       if (DAT_005f161f != '\0') {
@@ -144,7 +144,7 @@ void FUN_00234b30(void)
               *(unsigned int *)(temp_v4 + 0x28) = *(unsigned int *)(temp_v10 + 0x28);
             }
           }
-          if (((*(char *)(DAT_00581280 + 0xf40) == '\0') && (*g_lmapView != 3)) &&
+          if (((*(char *)(g_mapNpcWork + 0xf40) == '\0') && (*g_lmapView != 3)) &&
              (*(char *)(temp_v4 + 0xe) == '\0')) {
             temp_v13 = g_lmapView[0x14];
             FUN_002941b0();
@@ -174,7 +174,7 @@ void FUN_00234b30(void)
             temp_v11 = 0;
             temp_v23[2] = -1;
             do {
-              temp_v2 = DAT_00581280 + temp_v11 * 0x3c;
+              temp_v2 = g_mapNpcWork + temp_v11 * 0x3c;
               if (*(char *)(temp_v2 + 0xc) != '\0') {
                 *(unsigned char *)(temp_v2 + 0xd) = 0;
                 temp_v14 = *(float *)(g_lmapScene + 0x1c);
@@ -239,7 +239,7 @@ void FUN_00234b30(void)
               do {
                 piVar11 = temp_v23 + temp_v11;
                 temp_v11 = temp_v11 + 1;
-                temp_v2 = DAT_00581280 + *piVar11 * 0x3c;
+                temp_v2 = g_mapNpcWork + *piVar11 * 0x3c;
                 if (*(char *)(temp_v2 + 0xc) != '\0') {
                   *(unsigned char *)(temp_v2 + 0xd) = 1;
                 }
@@ -251,7 +251,7 @@ void FUN_00234b30(void)
             mathPositionHeadingDegrees();
             temp_v10 = 0;
             do {
-              temp_v11 = DAT_00581280 + temp_v10 * 0x3c;
+              temp_v11 = g_mapNpcWork + temp_v10 * 0x3c;
               temp_v21 = temp_v14;
               if (*(char *)(temp_v11 + 0xc) != '\0') {
                 temp_v17 = (float)temp_v18;
@@ -281,7 +281,7 @@ void FUN_00234b30(void)
           controllerSetDestination(temp_v5,temp_v4 + 0x1c);
           temp_v10 = (int)temp_v16;
           controllerSetRotationEulerDegrees(temp_v5);
-          if (((*(char *)(DAT_00581280 + 0xf40) != '\0') && (*(char *)(temp_v4 + 0xe) != '\0')) &&
+          if (((*(char *)(g_mapNpcWork + 0xf40) != '\0') && (*(char *)(temp_v4 + 0xe) != '\0')) &&
              (*(short *)(temp_v4 + 0x10) == 2)) {
             temp_v10 = *(int *)(temp_v4 + 0x1c);
             mathAbsHeadingErrorToPoint();
@@ -336,7 +336,7 @@ void FUN_00234b30(void)
             }
           }
           *(int *)(temp_v4 + 0x30) = temp_v10;
-          if ((*(char *)(DAT_00581280 + 0xf40) == '\0') && (*g_lmapView != 3)) {
+          if ((*(char *)(g_mapNpcWork + 0xf40) == '\0') && (*g_lmapView != 3)) {
             if (*(char *)(temp_v4 + 0xd) != '\0') {
               *(unsigned int *)(temp_v5 + 4) = *(unsigned int *)(temp_v5 + 4) & 0xfffffffc;
             }

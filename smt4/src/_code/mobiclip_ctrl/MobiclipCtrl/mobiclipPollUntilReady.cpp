@@ -23,7 +23,7 @@ void movieSyncConsumeReadyFrame(MovieSync *, s64 interval);
 s32 FUN_00350c98(MovieSync *, s64 interval);
 void block158OwnerCheck(MovieSync *);
 s32 block158OwnerReady(MovieSync *);
-void FUN_0034f5f8(MovieReadHandle *);
+void frameStreamStop(MovieReadHandle *);
 void movieSyncDrainSourcePositions(MovieSync *);
 void FUN_0034fbc8(MovieSync *);
 void FUN_00350e30(MovieSync *);
@@ -54,7 +54,7 @@ u8 mobiclipPollUntilReady(void)
         if (block158OwnerReady(&g_mobiclipPlayer)) {
             s64 elapsed = FUN_00350ff8(&g_mobiclipPlayer);
             if (elapsed >= g_mobiclipCtrl.interval * 6) {
-                FUN_0034f5f8(&DAT_004c3af8);
+                frameStreamStop(&DAT_004c3af8);
                 movieSyncDrainSourcePositions(&g_mobiclipPlayer);
                 FUN_0034fbc8(&g_mobiclipPlayer);
             } else if (elapsed >= 0) {

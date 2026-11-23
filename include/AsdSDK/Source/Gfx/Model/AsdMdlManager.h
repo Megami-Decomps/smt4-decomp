@@ -29,7 +29,9 @@ typedef struct AsdMdlSceneNode {
     /* 0x0BC */ u8 unk0bc[0x8C];
     /* 0x148 */ s32 secondaryActive;              /* a secondary motion track exists */
     /* 0x14C */ s32 secondaryIndex;               /* its track index */
-    /* 0x150 */ u8 unk150[0x6C];
+    /* 0x150 */ void *visibilityGroup;            /* the visibility animation group, NULL when the model has none */
+    /* 0x154 */ s32 visibilityIndex;              /* its track index */
+    /* 0x158 */ u8 unk158[0x64];
     /* 0x1BC */ SkeletonMatrix34 viewMatrix;
     /* 0x1EC */ u8 unk1ec[0xA];
     /* 0x1F6 */ u8 positionFollowed;              /* set when an effect takes over the model's position */
@@ -38,6 +40,10 @@ typedef struct AsdMdlSceneNode {
     /* 0x224 */ u32 unk224;
     /* 0x228 */ ModelBoneAnimationTarget *activeTarget;
     /* 0x22C */ s32 activeIndex;                  /* the primary motion's track index */
+    /* 0x230 */ u8 unk230;
+    /* 0x231 */ u8 fullBakedAnimEnabled;          /* nw::gfx SkeletalModel::SetFullBakedAnimEnabled: the primary motion
+                                                   plays directly, without the model's blender */
+    /* 0x232 */ u8 unk232[2];
 } AsdMdlSceneNode;
 
 /* A model (0xA8 bytes): the loaded model image, its scene node, the motion tables, the playing
@@ -55,15 +61,27 @@ typedef struct AsdMdlNode {
     /* 0x30 */ void **motionTable;
     /* 0x34 */ s32 motionCount;
     /* 0x38 */ s32 currentMotion;
-    /* 0x3C */ u8 unk3c[0x10];
+    /* 0x3C */ s32 motionMembers;        /* the most animated members any motion has */
+    /* 0x40 */ u8 unk40[8];
+    /* 0x48 */ struct AsdTrackNode *blender; /* blends the playing motion with a pending one */
     /* 0x4C */ AsdMotionInstance *active;
     /* 0x50 */ AsdMotionInstance *pending;
     /* 0x54 */ void **secondaryMotionTable;
     /* 0x58 */ s32 secondaryMotionCount;
     /* 0x5C */ s32 secondaryCurrentMotion;
     /* 0x60 */ AsdMotionInstance *secondaryInstance;
-    /* 0x64 */ u32 unk64[3];
-    /* 0x70 */ u8 unk70[4];
+    union {
+        /* 0x64 */ u32 unk64[3];
+        struct {
+            /* 0x64 */ void **table;
+            /* 0x68 */ s32 count;
+            /* 0x6C */ s32 current;
+        } visibilityMotion;
+    };
+    union {
+        /* 0x70 */ u8 unk70[4];
+        /* 0x70 */ AsdMotionInstance *visibilityInstance;
+    };
     /* 0x74 */ f32 animationSpeed;       /* 1 by default */
     /* 0x78 */ f32 speed;                /* primary motion rate */
     /* 0x7C */ f32 secondarySpeed;       /* secondary motion rate */
@@ -113,7 +131,9 @@ typedef char AsdMdlSceneNodeLayoutCheck[
     offsetof(AsdMdlSceneNode, transform) == 0x4C && offsetof(AsdMdlSceneNode, worldMatrix) == 0x8C &&
     offsetof(AsdMdlSceneNode, secondaryActive) == 0x148 && offsetof(AsdMdlSceneNode, viewMatrix) == 0x1BC &&
     offsetof(AsdMdlSceneNode, positionFollowed) == 0x1F6 && offsetof(AsdMdlSceneNode, skeleton) == 0x220 &&
-    offsetof(AsdMdlSceneNode, activeTarget) == 0x228 && sizeof(AsdMdlSceneNode) == 0x230 ? 1 : -1];
+    offsetof(AsdMdlSceneNode, activeTarget) == 0x228 && offsetof(AsdMdlSceneNode, visibilityGroup) == 0x150 &&
+    offsetof(AsdMdlSceneNode, fullBakedAnimEnabled) == 0x231 &&
+    sizeof(AsdMdlSceneNode) == 0x234 /* FUN_002b3acc allocates 0x234 bytes for it */ ? 1 : -1];
 
 /* A vector for the node setters, which take theirs by value . */
 static __inline NodeVec3 nodeVec3(f32 x, f32 y, f32 z)

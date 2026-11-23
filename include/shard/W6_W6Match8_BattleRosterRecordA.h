@@ -49,6 +49,22 @@ struct BattleRosterRecordA {
             /* 0x068 */ s16 combatantIndex;
             /* 0x06A */ s16 parameterIndex;
         } combatant;
+        /* What the summon effect sets on the record it takes (btlSummonLoadAndSpawn). */
+        struct {
+            /* 0x000 */ u8 unk000[0xC];
+            /* 0x00C */ f32 position[3];
+            /* 0x018 */ u8 unk018[0x28];
+            /* 0x040 */ f32 scale;
+            /* 0x044 */ u8 unk044[0xC];
+            /* 0x050 */ u32 status;
+            /* 0x054 */ u8 unk054[0xC];
+            /* 0x060 */ u16 presentationFlags;
+            /* 0x062 */ u16 unk062;
+            /* 0x064 */ u8 unk064[4];
+            /* 0x068 */ s16 combatantIndex;
+            /* 0x06A */ s16 memberId;
+            /* 0x06C */ u32 tints[3];
+        } summon;
         struct {
             /* 0x000 */ u8 unk000[0x60];
             /* 0x060 */ u16 flags;
@@ -90,6 +106,9 @@ struct BattleRosterRecordA {
     };
 };
 typedef char BattleRosterRecordASizeCheck[sizeof(BattleRosterRecordA) == 0x1D0 ? 1 : -1];
+typedef char BattleRosterRecordASummonCheck[offsetof(BattleRosterRecordA, summon.scale) == 0x40 &&
+    offsetof(BattleRosterRecordA, summon.status) == 0x50 && offsetof(BattleRosterRecordA, summon.combatantIndex) == 0x68 &&
+    offsetof(BattleRosterRecordA, summon.tints) == 0x6C ? 1 : -1];
 typedef char BattleRosterRecordARemovalCheck[offsetof(BattleRosterRecordA, removal.combatantIndex) == 0x68 &&
     offsetof(BattleRosterRecordA, removal.stateFlags) == 0x9C && offsetof(BattleRosterRecordA, removal.slot) == 0x104 &&
     offsetof(BattleRosterRecordA, removal.workState) == 0x128 && offsetof(BattleRosterRecordA, removal.holder) == 0x1BC ? 1 : -1];

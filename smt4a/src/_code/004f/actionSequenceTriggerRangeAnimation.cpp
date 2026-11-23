@@ -1,4 +1,3 @@
-/* NON_MATCHING: rangeInit's integer argument scheduling adds one register move; percentage conversions otherwise match. */
 #include "gfx/RangeAnimationSelection.h"
 
 extern "C" {
@@ -6,16 +5,20 @@ s32 rangeIsValid(Range *range);
 void words5Clear(Range *range);
 void rangeInit(Range *range, f32 start, f32 end, s16 duration, s16 delay);
 
-// Apply matching percentage-based range presets to both animation channels.
+/* Applies the matching percentage-based range presets to both animation channels. */
 void actionSequenceTriggerRangeAnimation(RangeAnimationOwner *owner, s32 id, s32 group)
 {
     RangeAnimationPresetPair *presets = NULL;
-    if (group == 1) {
+    switch (group) {
+    case 1:
         presets = owner->animation.presets->groups[0];
-    } else if (group == 2) {
+        break;
+    case 2:
         presets = owner->animation.presets->groups[1];
-    } else if (group == 3) {
+        break;
+    case 3:
         presets = owner->animation.presets->groups[2];
+        break;
     }
     for (s32 index = 0; index < 2; ++index) {
         if (owner->animation.first != NULL && presets[index].first.duration != 0 &&

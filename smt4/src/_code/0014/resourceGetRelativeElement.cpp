@@ -1,4 +1,4 @@
-/* NON_MATCHING: IDENTICAL when the unit is compiled with -O2 (needs a cflags entry: -O2 -Otime); under the default -O3 retail's hoisted NULL register and offset + base order differ. */
+/* IDENTICAL as the unit is compiled (its cflags entry) with -O2 -Otime; under the default -O3 retail's hoisted NULL register and offset + base order differ. */
 #include "shard/W6_W6Match4_RelativeResourceGraph.h"
 
 extern "C" {

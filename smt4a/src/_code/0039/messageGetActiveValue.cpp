@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail places the 0.0f literal before g_messageMain in the pool. */
+/* Built with the unit's cflags (-O2 -Otime). */
 #include "ui/MessageMainA.h"
 
 extern "C" {

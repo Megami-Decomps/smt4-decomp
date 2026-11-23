@@ -1,19 +1,10 @@
-/* NON_MATCHING: retail interleaves each slot's packed read-modify-write with the next slot's stores (no hoisted loads, no stm); built hoists the four loads */
+/* NON_MATCHING: written as its Apocalypse twin Obj55bccc::Obj55bccc: retail clears each array's capacity word as two
+ * read-modify-writes (and #0xC0000000, then bic) where armcc folds them into a zero store, and orders the first
+ * stores differently. */
 #include "classes/Obj4218b0.h"
 
-/* Starts with every word and slot cleared. */
+/* Starts with every word cleared and the five arrays empty. */
 Obj4218b0::Obj4218b0(u32 second, u32 third, u32 first)
-    : first(first), second(second), unk0c(0), unk10(0), unk14(0), third(third)
+    : first(first), second(second), third(third), unk60(0), unk64(0)
 {
-    packed18.value = 0;
-    packed18.tag = 0;
-    for (s32 i = 0; i < 4; i++) {
-        slots[i].unk00 = 0;
-        slots[i].unk04 = 0;
-        slots[i].unk08 = 0;
-        slots[i].packed.value = 0;
-        slots[i].packed.tag = 0;
-    }
-    unk60 = 0;
-    unk64 = 0;
 }

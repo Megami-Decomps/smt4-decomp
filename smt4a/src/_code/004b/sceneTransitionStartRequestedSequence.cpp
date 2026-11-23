@@ -49,7 +49,7 @@ void soundChannelStopAll(s32 channel);
 void *rosterGetLeaderId(void);
 SceneRecord *menu4CGetCurrentEntry(void *sprites);
 void FUN_004b7a08(SceneWork *work);
-void FUN_00270c58(u32 id);
+void sequenceRequestKind5(u32 id);
 void obj04Finish(void);
 
 /* Starts the sequence the scene transition asked for, from its request flags, then closes the
@@ -108,7 +108,7 @@ void sceneTransitionStartRequestedSequence(SceneWork *work)
         if (entry != NULL && table1bOr1cGetRecordValue(reinterpret_cast<u32>(entry)) == 6) {
             work->record = menu4CGetCurrentEntry(work->sprites);
             FUN_004b7a08(work);
-            FUN_00270c58(questDataGetRecord(reinterpret_cast<u32>(entry))->event.package);
+            sequenceRequestKind5(questDataGetRecord(reinterpret_cast<u32>(entry))->event.package);
         }
     } else if (work->requestEnding != 0) {
         bgmReleaseStopped();

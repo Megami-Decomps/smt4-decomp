@@ -15,7 +15,7 @@ void FUN_00350bd0(MobiclipStartTable *table, u32 first, u32 second);
 void movieSelectStream(MobiclipStartTable *table, u32 index);
 const MobiclipStartRecord *movieRecordTableGetEntry(MobiclipStartTable *table, u32 index);
 const void *tableRecordGetChecked(MobiclipStartTable *table, s32 index);
-u32 FUN_0034f488(void *audio, u32 *context, const void *record, u32 depth, u32 mode);
+u32 frameStreamOpen(void *audio, u32 *context, const void *record, u32 depth, u32 mode);
 void sysBreakWithCallback(u32 error);
 s32 stateObjectClassify(MobiclipStartTable *table, const MobiclipStartRecord *record);
 u32 FUN_0034fbc8(ThreadControl *control);
@@ -31,7 +31,7 @@ void FUN_001a14e8()
         sysBreakWithCallback(1);
     if (g_mobiclipPlayer.audioIndex != -1) {
         const void *audioRecord = tableRecordGetChecked(&g_mobiclipPlayer, g_mobiclipPlayer.audioIndex);
-        if (!FUN_0034f488(DAT_004c3af8, &DAT_004c3a44, audioRecord, 1, 16))
+        if (!frameStreamOpen(DAT_004c3af8, &DAT_004c3a44, audioRecord, 1, 16))
             sysBreakWithCallback(1);
     }
     g_mobiclipCtrl.position = ll_sdiv((s64)((u64)record->ticks * 1000000), record->timeScale).quotient;

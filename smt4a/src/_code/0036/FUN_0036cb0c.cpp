@@ -10,7 +10,7 @@ extern "C" {
 void texDrawCompositeSprite(s32 layer, s32 group, s32 index, s32 x, s32 y, s32 z);
 void efctSetSpeed(f32 speed);
 void asdTextDrawDirectoryEntry(u32 text, s32 a, u32 b, s32 c, s32 d, u32 name, s32 index);
-const char *FUN_0035aa90(s32 index);
+const char *progressUnlockGetNthEarnedTitle(s32 index);
 void asdTextFormatStream(u32 text, u32 a, u32 b, u32 c, u32 d, const char *format, ...);
 s32 progressUnlockFindNthEarnedIndex(s32 index);
 u32 gameDataToggleFlagIsSet(s32 bit);
@@ -52,7 +52,7 @@ void FUN_0036cb0c(u32 text, u32 name, s32 base, s32 offset, s32 row, s32 selecte
         asdTextDrawDirectoryEntry(text, 3, 0xffffffff, 0, 3, name, index);
         break;
     case 1: {
-        const char *source = FUN_0035aa90(index);
+        const char *source = progressUnlockGetNthEarnedTitle(index);
         char *converted = textExpandGlyphsToBuffer(source, NULL, 0);
         asdTextFormatStream(text, 3, 0xffffffff, 0, 3, converted);
         break;

@@ -18,7 +18,7 @@ extern u8 DAT_00400001;
 extern u8 DAT_00400002;
 
 extern s32 effectEditorPollTextRequest(const char *path, s32 flags, FileInfo *info);
-extern EditorEntry *FUN_002f325c(void *current, FileInfo *info);
+extern EditorEntry *effPartAppendFromFile(void *current, FileInfo *info);
 extern const char **FUN_00246854(void);
 extern char *libc_strcpy(char *dst, const char *src);
 
@@ -34,7 +34,7 @@ u8 *FUN_003238d0(void)
         result = (u8 *)0x400000;
     } else if (info.type == 1) {
         if (g_effectEditor.list != NULL) {
-            EditorEntry *entry = FUN_002f325c(g_effectEditor.list, &info);
+            EditorEntry *entry = effPartAppendFromFile(g_effectEditor.list, &info);
 
             libc_strcpy(entry->path, *FUN_00246854());
         }

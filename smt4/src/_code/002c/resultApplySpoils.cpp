@@ -24,7 +24,7 @@ PartySlots *gameGetSlotTable(void);
 void *gameGetPlayerData(void);
 void resultSetMenuState(ResultWork *result, s32 arg);
 void uiQuestCreate(void);
-void FUN_00203640(u16 battleId);
+void uiQuestOpenPage(u16 battleId);
 s32 mapMainIsBusy(void);
 s32 lmapMainIsRunning(void);
 void bgmReleaseStopped(void);
@@ -66,7 +66,7 @@ void resultApplySpoils(ResultSpoils *spoils)
     gameGetPlayerData();
     resultSetMenuState(result, 0);
     uiQuestCreate();
-    FUN_00203640(spoils->sourceId);
+    uiQuestOpenPage(spoils->sourceId);
     if (mapMainIsBusy() != 0 || lmapMainIsRunning() != 0) {
         bgmReleaseStopped();
         soundChannelStopAll(15);

@@ -54,23 +54,38 @@ typedef struct BtlUiPositionEntry {
 typedef struct BtlUiObjC {
     /* 0x0000 */ u8 unk[0x307c];
     /* 0x307c */ u8 unk307C;
-    /* 0x307d */ u8 unk307D[1];
+    /* 0x307d */ u8 unk307D[3];
     union {
-        /* 0x307e */ u8 unk307E[0x26da];
+        /* 0x3080 */ u8 unk3080[0x26d8];
         struct {
-            u8 prefix[0x882];
+            u8 prefix[0x880];
             /* 0x3900 */ BtlUiUnitRecord records[4];
         } unitRecords;
         struct {
-            u8 prefix[0x19A];
+            u8 prefix[0x198];
             /* 0x3218 */ u8 cursor[0x6E8];  /* the support-unit selection list */
         } supportSelection;
+        /* Five slots, each started with a mode and a kind; the kind picks which accumulator an amount goes to
+         * (btlUiSlotMeterStart). */
+        struct {
+            u8 prefix[0x73C];
+            /* 0x37BC */ u8 active[5];
+            /* 0x37C1 */ u8 unk37C1[7];
+            /* 0x37C8 */ s32 addA[5];
+            /* 0x37DC */ s32 addB[5];
+            /* 0x37F0 */ s32 elapsed[5];
+            /* 0x3804 */ u8 mode[5];
+            /* 0x3809 */ s8 kind[5];
+        } slotMeters;
     };
     /* 0x5758 */ s32 positionCount;
     /* 0x575c */ u8 unk575C[4];
     /* 0x5760 */ BtlUiPositionEntry positions[13];
     /* 0x599c */ u8 unk599C[4];
 } BtlUiObjC;
+/* Starts meter slot `slot` with `mode` and `kind` and adds `amount` to the kind's accumulator. Both callers
+ * pass a sixth argument (FUN_0023cc00 1, FUN_003adc64 0) that the function never reads. */
+extern "C" void btlUiSlotMeterStart(BtlUiObjC *ui, s32 amount, s32 slot, u8 mode, s8 kind, s32 unused);
 typedef struct BtlUiAvailabilityRow {
     u8 active;
     u8 padding01[0x9F];
@@ -435,7 +450,10 @@ typedef char BtlUiColumnLayoutCheck[sizeof(BtlUiObjC) == 0x59a0 &&
     sizeof(BtlUiPositionEntry) == 0x2c &&
     offsetof(BtlUiObjC, positionCount) == 0x5758 &&
     offsetof(BtlUiObjC, positions) == 0x5760 &&
-    offsetof(BtlUiObjC, supportSelection.cursor) == 0x3218 ? 1 : -1];
+    offsetof(BtlUiObjC, supportSelection.cursor) == 0x3218 &&
+    offsetof(BtlUiObjC, slotMeters.active) == 0x37BC &&
+    offsetof(BtlUiObjC, slotMeters.addA) == 0x37C8 &&
+    offsetof(BtlUiObjC, slotMeters.kind) == 0x3809 ? 1 : -1];
 typedef char BtlUiLayoutCheck[sizeof(BtlUi) == 0xf040 &&
     offsetof(BtlUi, objC) == 0x2460 &&
     offsetof(BtlUi, panelState) == 0x7e00 &&

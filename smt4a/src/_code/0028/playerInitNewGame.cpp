@@ -28,7 +28,7 @@ void gameWorldResetForNewGame(void);
 void flagValueAdd(s32 flag, s32 amount);
 void playerResetToStartingStats(s32 arg);
 void FUN_003df7c4(s32 arg);
-void FUN_00284fdc(void);
+void appRefundAllPoints(void);
 void gameDataBlocksClearSlots(void);
 void gameFlagUnlockEntryById(s32 arg);
 void rosterAddUnit(s32 arg);
@@ -74,7 +74,7 @@ void playerInitNewGame(s32 loaded)
     FUN_003df7c4(0);
     player->hp = player->maxHp;
     player->mp = player->maxMp;
-    FUN_00284fdc();
+    appRefundAllPoints();
     gameDataBlocksClearSlots();
     sprintf((char *)gameDataGetPlayerName(), texts->nameFormat);
     flagValueAdd(0x33F, 1);

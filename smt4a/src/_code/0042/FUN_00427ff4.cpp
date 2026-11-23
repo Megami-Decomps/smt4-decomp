@@ -1,4 +1,4 @@
-/* NON_MATCHING: IDENTICAL when compiled with --cpu=MPCore --fpu=softvfp (the no-VFP build of this request library, see FUN_00426634/FUN_00426940); the default build saves the owner and output in swapped registers (r6/r5). */
+/* IDENTICAL as the unit is compiled (its cflags entry) with --cpu=MPCore --fpu=softvfp (the no-VFP build of this request library, see FUN_00426634/FUN_00426940); the default build saves the owner and output in swapped registers (r6/r5). */
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 

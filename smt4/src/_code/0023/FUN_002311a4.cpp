@@ -1,4 +1,5 @@
-/* NON_MATCHING: IDENTICAL when the unit is compiled with -O2 (needs a cflags entry: -O2 -Otime); under the default -O3 armcc merges the flag stores of states 0 and 2 into one predicated tail. */
+/* Built with the unit's cflags entry (-O2 -Otime): under the default -O3 armcc merges the flag stores of states 0 and 2
+ * into one predicated tail. */
 #include "common.h"
 #include "shard/W5_W5Match2_ScalarArguments.h"
 #include "ui/UiSpriteApi.h"

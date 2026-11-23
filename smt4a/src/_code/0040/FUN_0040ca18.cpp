@@ -53,7 +53,7 @@ s32 btlAiBestTargetScore(s32 unit);
 BtlUnit* btlUnitGet(s32 unit);
 ActionTarget* FUN_002c7bf4(void* request);
 s32 FUN_004ea5e8(s32 unit);
-void FUN_004e699c(s32 unit, s32 side, s32 score);
+void btlUnitClearMatchingPairs(s32 unit, s32 side, s32 score);
 s32 FUN_004c86ec(void* request);
 s32 FUN_004c600c(s32 side);
 void FUN_004c9160(s32 id, void* target, s32 arg, s32 flag);
@@ -135,7 +135,7 @@ void FUN_0040ca18(u32 unused, ActionStep* step)
         } else {
             id = 0x25;
             if (FUN_004ea5e8(g_btlScriptUnit) <= 1) pending = true;
-            FUN_004e699c(g_btlScriptUnit, unit->side->selectionIndex, score);
+            btlUnitClearMatchingPairs(g_btlScriptUnit, unit->side->selectionIndex, score);
             direct = false;
         }
         if (direct) FUN_004c8d8c(id, target, arg);

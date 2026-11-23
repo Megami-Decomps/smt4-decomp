@@ -138,3 +138,12 @@ arm 0x2bb484 0x2bb4bc nn::fs file object finaliser before nn_fs_detail_FileBase_
 # it, nw_anim_PlayPolicy_Loop stored as the default policy, then nw_gfx_AnimEvaluator_SetCacheBufferPointers(this));
 # the same code as smt4a 0x1b0e44, which is linked between nw_gfx_SceneBuilder_CreateObject and the NW render context.
 arm 0x2a5960 0x2a5dc4 NintendoWare-gfx AnimEvaluator set-up: stores nw_anim_PlayPolicy_Loop, calls nw_gfx_AnimEvaluator_SetCacheBufferPointers; twin of smt4a 0x1b0e44
+# The CTR-SDK's hand-written svc 0x35 (GetProcessId) wrapper, the same output-handle shape as svcCreateSemaphore and
+# svcReleaseSemaphore (`push {r0}; svc N; ldr r2, [sp]; str r1, [r2]`), which armcc cannot produce; smt4a twin 0x1ab838.
+arm 0x144f90 0x144fa8 CTR-SDK svcGetProcessId: push {r0}; svc 0x35; ldr r2, [sp]; str r1, [r2]; add sp, sp, #4
+# nn::err's connection to the err:f service: under the module's critical section it connects to the port
+# (svcConnectToPort), reads the process id (svcGetProcessId) and throws nn::err FatalErr on failure, then waits on a
+# LightEvent; and the file's static initialiser that sets up that handle state and constructs the nn::os::CriticalSection
+# (registered with __aeabi_atexit). nn_applet_CTR_detail_NotifyToWait uses the same handle and lock.
+arm 0x2ad4f8 0x2ad600 nn::err err:f port connection: CriticalSection Enter, svcConnectToPort, svcGetProcessId, nn_err_CTR_FatalErr_Throw, LightEvent wait; smt4a twin 0x189a80
+arm 0x3ec298 0x3ec2ec nn::err static initialiser: err:f handle state and its nn::os::CriticalSection (atexit-registered destructor); smt4a counterpart 0x50e4c4

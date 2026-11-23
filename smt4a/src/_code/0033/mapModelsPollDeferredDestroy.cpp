@@ -29,34 +29,34 @@ struct DeferredDepartModels {
 };
 
 extern "C" {
-extern DeferredDepartModels *DAT_00581280;
+extern DeferredDepartModels *g_mapNpcWork;
 extern void *g_handleRegistry;
 void ptrListRemoveClearOwner(void *, u32);
-s32 FUN_00295e54(s16, s16, u32);
+s32 mapNpcLoadStep(s16, s16, u32);
 
 // Unregister stale map models, allow two frames to drain, release them, then wait for the flag pair.
 u32 mapModelsPollDeferredDestroy(void)
 {
     s32 i;
     DeferredDepartModel *entry;
-    switch (DAT_00581280->phase) {
+    switch (g_mapNpcWork->phase) {
     case 0:
         for (i = 0; i < 64; ++i) {
-            entry = &DAT_00581280->entries[i];
+            entry = &g_mapNpcWork->entries[i];
             if (entry->active && !flagPairCondition(entry->firstFlag, entry->secondFlag) && entry->handle) {
-                RegisteredHandle *handle = DAT_00581280->entries[i].handle;
+                RegisteredHandle *handle = g_mapNpcWork->entries[i].handle;
                 if (handle->id)
                     ptrListRemoveClearOwner(g_handleRegistry, handle->id);
                 entry->pending = 1;
             }
         }
-        ++DAT_00581280->phase;
-        DAT_00581280->timer = 0;
+        ++g_mapNpcWork->phase;
+        g_mapNpcWork->timer = 0;
         break;
     case 1:
-        if (++DAT_00581280->timer >= 2) {
+        if (++g_mapNpcWork->timer >= 2) {
             for (i = 0; i < 64; ++i) {
-                entry = &DAT_00581280->entries[i];
+                entry = &g_mapNpcWork->entries[i];
                 if (entry->active && entry->pending) {
                     if (entry->handle) {
                         delete entry->handle;
@@ -70,12 +70,12 @@ u32 mapModelsPollDeferredDestroy(void)
                     entry->pending = 0;
                 }
             }
-            ++DAT_00581280->phase;
-            DAT_00581280->timer = 0;
+            ++g_mapNpcWork->phase;
+            g_mapNpcWork->timer = 0;
         }
         break;
     case 2:
-        if (FUN_00295e54(DAT_00581280->firstFlag, DAT_00581280->secondFlag, 1))
+        if (mapNpcLoadStep(g_mapNpcWork->firstFlag, g_mapNpcWork->secondFlag, 1))
             return 1;
         break;
     }

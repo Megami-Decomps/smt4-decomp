@@ -3,7 +3,7 @@
 extern "C" {
 
 int sequenceRequestDefer(u32 a, u32 b);
-int FUN_0026f960(u32 value);
+int sequenceRequestKind5(u32 value);
 extern u32 scrGetArg(u32 index);
 
 u32 FUN_00211f50(void)
@@ -13,7 +13,7 @@ u32 FUN_00211f50(void)
     u32 a = scrGetArg(1);
 
     sequenceRequestDefer(a, b);
-    FUN_0026f960(value);
+    sequenceRequestKind5(value);
     return 2;
 }
 

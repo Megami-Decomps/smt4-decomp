@@ -1,4 +1,4 @@
-/* NON_MATCHING: the status is an nn::Result from a callee declared returning nn::Result (classes/WindowStatus.h), which fixes retail's lsrs-before-copy order; remaining: argument register allocation (retail saves the four arguments in r5-r8 in order). */
+/* Built with the unit's cflags (-O3 -Otime --fpu=softvfp). */
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 

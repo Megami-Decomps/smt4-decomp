@@ -1,4 +1,4 @@
-/* NON_MATCHING: IDENTICAL when compiled with --cpu=MPCore --fpu=softvfp (the SDK-side build without VFP, as its neighbours FUN_00426634/FUN_00426940 need); the default build loads the two limit bytes into swapped registers. Needs that unit cflags. */
+/* IDENTICAL as the unit is compiled (its cflags entry) with --cpu=MPCore --fpu=softvfp (the SDK-side build without VFP, as its neighbours FUN_00426634/FUN_00426940 need); the default build loads the two limit bytes into swapped registers. */
 #include "common.h"
 #include "nn/Result.h"
 #include "shard/W6_W6Match1_CriticalSection.h"

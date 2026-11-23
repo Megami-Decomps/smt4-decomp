@@ -15,7 +15,7 @@ void frameTexRequestFade(s32 a);
 void *rosterGetLeaderId(void);
 s32 table1bOr1cGetRecordValue(void); // declcheck: local (the shared declaration in code/Code001b.h does not compile here: too few arguments in function call)
 void qcMainSetMode(s32 mode);
-void FUN_00270c58(u16 id);
+void sequenceRequestKind5(u16 id);
 void campButtonHelpRelease(void);
 
 /* Steps a timed sequence: queues event 0x1000222 at frame 7, waits out a short delay, then hands over to the quest record once mode 6 is reached. */
@@ -48,7 +48,7 @@ void FUN_00469d38(StepWork *work)
         source = rosterGetLeaderId();
         if (source != NULL && table1bOr1cGetRecordValue() == 6) {
             qcMainSetMode(1);
-            FUN_00270c58(questDataGetRecord(reinterpret_cast<u32>(source))->event.package);
+            sequenceRequestKind5(questDataGetRecord(reinterpret_cast<u32>(source))->event.package);
             campButtonHelpRelease();
         }
         break;

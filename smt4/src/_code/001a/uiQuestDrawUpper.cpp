@@ -45,7 +45,7 @@ extern QuestUi* g_uiQuest;
 void renderCtxSelectStereoLayout(TitleScene* scene);
 u32 renderCtxPackPassFlags(u32 a, u32 b);
 void FUN_00197e34(void);
-void FUN_00186a48(void);
+void uiQuestDrawDetailPanel(void);
 f32 renderCtxCalculateStereoParallax(TitleScene* scene, f32 amount);
 void uiFadeDraw(u32 id);
 void drawSkillCategoryLabel(u16 id, s32 x, s32 y, u32 arg);
@@ -101,7 +101,7 @@ s32 uiQuestDrawUpper(u32 job)
         FUN_00197e34();
         break;
     case 17: case 18: case 19:
-        FUN_00186a48();
+        uiQuestDrawDetailPanel();
         break;
     case 20: case 21: case 22: {
         if (quest->revealed == 0) FUN_00197e34();

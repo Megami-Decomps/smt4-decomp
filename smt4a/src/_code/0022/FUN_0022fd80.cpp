@@ -1,5 +1,4 @@
 #include "gamedata/DataTableAccess_VariantE_EntrySort.h"
-/* NON_MATCHING: minimum-one guard still emits an extra conditional branch; percentage accumulator now matches retail multiply operand order. */
 #include "gamedata/GamePlayerData.h"
 #include "shard/W5_W5Match7_EntrySort.h"
 #include "gamedata/SkillDataRecord.h"
@@ -7,7 +6,7 @@
 extern "C" {
 u32 dataTable9Type3GetClamped(u16 playerId, u32 kind);
 
-// Apply all equipped percentage modifiers, then the player's table-specific rate.
+/* Apply all equipped percentage modifiers, then the player's table-specific rate. */
 u32 FUN_0022fd80(s32 value, u32 kind)
 {
     const PlayerDataA *player = gameGetPlayerData();

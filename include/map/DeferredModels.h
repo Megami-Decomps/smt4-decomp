@@ -5,29 +5,33 @@
 #include <stddef.h>
 #include "map/MapVector.h"
 
+struct MapTimerSlot;
+struct AsdMdlObject;
+
+/* One NPC model of the map (IV's map NPC; Apocalypse's is MapNpc in map/MapNpc.h). */
 struct DeferredModelEntry {
     /* 0x00 */ u8 active;
     /* 0x01 */ u8 ready;
     /* 0x02 */ u8 visible;
     /* 0x03 */ u8 unk03[3];
-    /* 0x06 */ s16 id;
-    /* 0x08 */ s16 modelId;
-    /* 0x0A */ u16 flags;
-    /* 0x0C */ float speed;
+    /* 0x06 */ s16 modelId;         /* character/npc/npc_%02d.bam */
+    /* 0x08 */ s16 tableIndex;      /* its record in table 0x2A */
+    /* 0x0A */ s16 pathIndex;       /* the record's path (s8 at +0x32) */
+    /* 0x0C */ float pathDuration;  /* 4.0f, passed to FUN_0021e16c with the path */
     /* 0x10 */ MapVector position;
     /* 0x1C */ float angle;
     /* 0x20 */ u32 handle;
     /* 0x24 */ float z;
-    /* 0x28 */ u16 state;
-    /* 0x2A */ u16 timer;
-    /* 0x2C */ u32 callback;
-    /* 0x30 */ u32 userData;
+    /* 0x28 */ s16 flagFirst;       /* the flag pair that must hold for the model to appear */
+    /* 0x2A */ s16 flagSecond;
+    /* 0x2C */ MapTimerSlot *pathTimer; /* FUN_0021e16c's result */
+    /* 0x30 */ AsdMdlObject *model;     /* asdMdlManagerClone / asdMdlManagerCreateSecondList */
     /* 0x34 */ u32 resource;
 };
 struct DeferredModelWork {
-    /* 0x000 */ u32 state;
-    /* 0x004 */ u32 count;
-    /* 0x008 */ u32 current;
+    /* 0x000 */ u32 loadState;
+    /* 0x004 */ u32 tableIndex;      /* the table 0x2A record being loaded */
+    /* 0x008 */ u32 count;           /* models placed so far */
     /* 0x00C */ DeferredModelEntry entries[64];
     /* 0xE0C */ u8 pending;
     /* 0xE0D */ u8 unkE0D[3];
@@ -44,7 +48,7 @@ struct DeferredModelWork {
 };
 
 typedef char DeferredModelEntrySizeCheck[sizeof(DeferredModelEntry) == 0x38 ? 1 : -1];
-typedef char DeferredModelIdOffsetCheck[offsetof(DeferredModelEntry, id) == 6 && offsetof(DeferredModelEntry, position) == 0x10 &&
+typedef char DeferredModelIdOffsetCheck[offsetof(DeferredModelEntry, modelId) == 6 && offsetof(DeferredModelEntry, position) == 0x10 &&
     offsetof(DeferredModelEntry, angle) == 0x1C ? 1 : -1];
 typedef char DeferredModelWorkEntriesCheck[offsetof(DeferredModelWork, entries) == 0xC ? 1 : -1];
 typedef char DeferredModelWorkPendingCheck[offsetof(DeferredModelWork, pending) == 0xE0C ? 1 : -1];

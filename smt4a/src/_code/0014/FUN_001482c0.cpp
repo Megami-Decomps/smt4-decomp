@@ -23,7 +23,7 @@ typedef struct {
 
 extern unsigned char LAB_001484e4; /* 0x1484e4 */
 extern unsigned char LAB_001484f4; /* 0x1484f4 */
-extern int FUN_0015f2ec(unsigned int job); /* 0x15f2ec */
+extern int jobAppletMessageUpdate(unsigned int job); /* 0x15f2ec */
 
 /* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_001585bc(int);
@@ -123,7 +123,7 @@ unsigned int * FUN_001482c0(int param_1)
   aocThreadAllocateStorage(puVar2 + -0x1b5,0x8000);
   FUN_0016ce28(puVar2 + -0x1b1);
   FUN_0015f258(puVar2 + 4);
-  temp_v3 = FUN_0015f2ec;
+  temp_v3 = jobAppletMessageUpdate;
   uStack_1c = 0;
   puVar5 = &LAB_001484f4;
   temp_v4 = puVar2 + -0x1d7;

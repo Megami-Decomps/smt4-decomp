@@ -44,7 +44,6 @@ struct BlurScatterSample {
 };
 extern "C" {
 extern const char g_effBlurFilterSourceFileName[];
-f32 shiftRandomNextFraction(u32 stream);
 
 BlurSample *effBlurFilterCreateScatterSamples(const BlurScatterParameters *parameters)
 {
@@ -62,9 +61,9 @@ BlurSample *effBlurFilterCreateScatterSamples(const BlurScatterParameters *param
         packedColorBytesSet(&quad->color, parameters->color);
         f32 spread = parameters->spread;
         f32 halfSize = (f32)parameters->size * 0.5f;
-        f32 randomX = (shiftRandomNextFraction(0) - 0.5f) * 2.0f;
+        f32 randomX = (shiftRandomNextFraction(NULL) - 0.5f) * 2.0f;
         f32 x = parameters->centerX + spread * randomX;
-        f32 randomY = (shiftRandomNextFraction(0) - 0.5f) * 2.0f;
+        f32 randomY = (shiftRandomNextFraction(NULL) - 0.5f) * 2.0f;
         f32 y = parameters->centerY + spread * randomY;
         quad->x = x;
         quad->y = y;

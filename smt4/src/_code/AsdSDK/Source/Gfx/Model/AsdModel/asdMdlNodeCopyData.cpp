@@ -24,7 +24,7 @@ extern "C" {
 
 AsdMdlSceneNode *FUN_002b3acc(AsdMdlBuildDesc *desc, s32 mode, ModelBoneResource *resource, void *allocator);
 void FUN_002fb604(AsdMdlSceneNode *sceneNode);
-void FUN_002a9244(AsdMdlNode *node);
+void asdMdlNodeBuildMotionTables(AsdMdlNode *node);
 void FUN_001457ec(AsdMdlNode *node, u8 *data);
 void *asdMemoryAlloc(u32 size, u32 alignment, u32 flags, u32 bytes, u32 enabled);
 
@@ -61,7 +61,7 @@ void asdMdlNodeCopyData(AsdMdlNode *dest, AsdMdlNode *source, s32 mode)
     dest->table = (void **)asdMemoryAlloc(0x100, 0x100, 0, dest->count << 2, 1);
     dest->table[0] = dest->sceneNode;
     if (mode == 0) {
-        FUN_002a9244(dest);
+        asdMdlNodeBuildMotionTables(dest);
     }
     FUN_001457ec(dest, dest->file->data);
 }

@@ -3,12 +3,12 @@
 extern "C" {
 
 extern void asdGxWaitForPreviousFrame(void);
-extern void FUN_002b4828(u32 detail);
+extern void appletShowOperationMessage(u32 detail);
 
 void FUN_002b4810(AocMain *, u32 detail)
 {
     asdGxWaitForPreviousFrame();
-    FUN_002b4828(detail);
+    appletShowOperationMessage(detail);
 }
 
 } /* extern "C" */

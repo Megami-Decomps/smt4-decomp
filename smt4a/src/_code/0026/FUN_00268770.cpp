@@ -60,7 +60,7 @@ int buttonHelpSetPanelMode(...);
 int uiScrollHandleActionsOrTouch(...);
 int uiStoreTextureEntryCenter(...);
 int statusDownInitializeSkillList(int);
-int FUN_003e40d0(...);
+int engineGetEnabledFloatTableValue(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -148,7 +148,7 @@ extern int FUN_0037b564(void);
 extern int fieldStateAllowsAction(void);
 extern unsigned int sysPlayVoice(unsigned int);
 /* Supplied declaration required: FUN_003d4104. */
-/* Supplied declaration required: FUN_003e40d0. */
+/* Supplied declaration required: engineGetEnabledFloatTableValue. */
 /* Supplied declaration required: table8Type5GetValue. */
 
 
@@ -211,7 +211,7 @@ unsigned int FUN_00268770(void)
   switch(*(unsigned int *)(temp_v2 + 0x518)) {
   case 1:
     if (*(char *)(g_statusDown + 0x2584) != '\0') {
-      FUN_003e40d0(g_statusDown + 0x2588,0);
+      engineGetEnabledFloatTableValue(g_statusDown + 0x2588,0);
     }
     temp_v14 = uiSpriteAdvanceAnimation(temp_v2 + 0x28);
     temp_v6 = g_statusDown;
@@ -228,7 +228,7 @@ unsigned int FUN_00268770(void)
     break;
   case 2:
     if (*(char *)(g_statusDown + 0x2584) != '\0') {
-      FUN_003e40d0(g_statusDown + 0x2588,0);
+      engineGetEnabledFloatTableValue(g_statusDown + 0x2588,0);
     }
     uiSpriteAdvanceAnimation(temp_v2 + 0x28);
     if (*(char *)(temp_v2 + 0xb2) != '\0') {
@@ -501,12 +501,12 @@ LAB_00268d68:
         *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
       }
       if (*(char *)(g_statusDown + 0x2584) != '\0') {
-        FUN_003e40d0(g_statusDown + 0x2588,0);
+        engineGetEnabledFloatTableValue(g_statusDown + 0x2588,0);
       }
       temp_v6 = uiSpriteAdvanceAnimation(temp_v2 + 0x2e4);
       if (temp_v6 != 0) {
         if (*(char *)(g_statusDown + 0x2584) != '\0') {
-          FUN_003e40d0(g_statusDown + 0x2588,1);
+          engineGetEnabledFloatTableValue(g_statusDown + 0x2588,1);
         }
         temp_v6 = uiSpriteAdvanceAnimation(temp_v2 + 0x370);
         if (temp_v6 != 0) {

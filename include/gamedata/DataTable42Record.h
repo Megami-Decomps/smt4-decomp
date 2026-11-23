@@ -6,7 +6,9 @@
 #include "common.h"
 
 typedef struct DataTable42Record {
-    /* 0x00 */ u8 unk00[0xC];
+    /* 0x00 */ s32 x;   /* a path's header record holds its area here; 999998 ends the path */
+    /* 0x04 */ s32 y;   /* a path's header record holds its sub-area here */
+    /* 0x08 */ s32 z;
 } DataTable42Record;
 
 typedef char DataTable42RecordSizeCheck[sizeof(DataTable42Record) == 0xC ? 1 : -1];

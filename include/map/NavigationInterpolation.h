@@ -34,7 +34,7 @@ struct NavigationInterpolation {
             /* 0x044 */ NavigationPoint touch;         /* the latest touch position */
             /* 0x04C */ NavigationPoint previousTouch;
             /* 0x054 */ s8 stillFrames;                /* frames the touch has not moved (up to 99) */
-            /* 0x055 */ u8 unk055;
+            /* 0x055 */ s8 heldFrames;              /* frames the stylus has stayed down on the map */
             /* 0x056 */ u8 nextTimer;                  /* highlight frames of each button help entry */
             /* 0x057 */ u8 zoomOutTimer;
             /* 0x058 */ u8 confirmTimer;

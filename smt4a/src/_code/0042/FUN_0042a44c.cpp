@@ -6,7 +6,7 @@ extern "C" {
 
 int nn_fs_ipc_FileSystem_CloseArchive(...);
 int FUN_0042b8dc(char **, int **, int *, int);
-int FUN_00500924(char **);
+int fsArchiveFileRequireHandle(char **);
 
 typedef int romwright_code(...);
 /* stack frame of void: 16 slot(s), 64 byte(s) */
@@ -33,7 +33,7 @@ extern unsigned int DAT_005893a8; /* 0x5893a8 */
 
 /* Supplied declaration required: nn_fs_ipc_FileSystem_CloseArchive. */
 /* Supplied declaration required: FUN_0042b8dc. */
-/* Supplied declaration required: FUN_00500924. */
+/* Supplied declaration required: fsArchiveFileRequireHandle. */
 extern unsigned int nn_fs_ipc_FileSystem_OpenArchive(unsigned int, unsigned long long *, unsigned int, unsigned int, unsigned char *, unsigned int);
 
 
@@ -81,7 +81,7 @@ char ** FUN_0042a44c(void)
   if ((int)ppcVar3 < 0) {
     temp_v6 = "룜B떨B듼B";
     if (temp_v8 != 0 || temp_v9 != 0) {
-      temp_v4 = FUN_00500924(&temp_v6);
+      temp_v4 = fsArchiveFileRequireHandle(&temp_v6);
       temp_v11 = (unsigned int)temp_v4;
       nn_fs_ipc_FileSystem_CloseArchive(&temp_v11,(int)((unsigned long long)temp_v4 >> 0x20),temp_v8,temp_v9);
     }
@@ -101,7 +101,7 @@ char ** FUN_0042a44c(void)
     if ((int)ppcVar3 < 0) {
       temp_v6 = "룜B떨B듼B";
       if (temp_v8 != 0 || temp_v9 != 0) {
-        temp_v4 = FUN_00500924(&temp_v6);
+        temp_v4 = fsArchiveFileRequireHandle(&temp_v6);
         temp_v16 = (unsigned int)temp_v4;
         nn_fs_ipc_FileSystem_CloseArchive(&temp_v16,(int)((unsigned long long)temp_v4 >> 0x20),temp_v8,temp_v9);
       }
@@ -113,7 +113,7 @@ char ** FUN_0042a44c(void)
         temp_v1 = temp_v9;
         temp_v0 = temp_v8;
         if (temp_v8 != 0 || temp_v9 != 0) {
-          FUN_00500924(&temp_v6);
+          fsArchiveFileRequireHandle(&temp_v6);
           nn_fs_ipc_FileSystem_CloseArchive(&temp_v5,temp_v2,temp_v0,temp_v1);
           temp_v8 = 0;
           temp_v9 = 0;
@@ -123,14 +123,14 @@ char ** FUN_0042a44c(void)
         temp_v7 = 0;
         temp_v6 = "룜B떨B듼B";
         if (temp_v8 != 0 || temp_v9 != 0) {
-          FUN_00500924(&temp_v6);
+          fsArchiveFileRequireHandle(&temp_v6);
           nn_fs_ipc_FileSystem_CloseArchive(&temp_v5,temp_v3,temp_v0,temp_v1);
         }
         return (char **)0x0;
       }
       (**(romwright_code **)(*temp_v10 + 0x30))();
       if (temp_v8 != 0 || temp_v9 != 0) {
-        temp_v4 = FUN_00500924(&temp_v6);
+        temp_v4 = fsArchiveFileRequireHandle(&temp_v6);
         temp_v17 = (unsigned int)temp_v4;
         nn_fs_ipc_FileSystem_CloseArchive(&temp_v17,(int)((unsigned long long)temp_v4 >> 0x20),temp_v8,temp_v9);
         temp_v8 = 0;
@@ -139,7 +139,7 @@ char ** FUN_0042a44c(void)
       temp_v7 = 0;
       temp_v6 = "룜B떨B듼B";
       if (temp_v9 != 0 || temp_v8 != 0) {
-        temp_v4 = FUN_00500924(&temp_v6);
+        temp_v4 = fsArchiveFileRequireHandle(&temp_v6);
         temp_v18 = (unsigned int)temp_v4;
         nn_fs_ipc_FileSystem_CloseArchive(&temp_v18,(int)((unsigned long long)temp_v4 >> 0x20),temp_v8,temp_v9);
       }

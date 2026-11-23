@@ -6,7 +6,7 @@ extern "C" {
 int lmapViewUpdateCloseUpSequence(void);
 int mapDepartAdvanceCameraSequence(void);
 int FUN_0021b0f0(void);
-int FUN_0021b2ec(void);
+int lmapViewUpdateSelectableSequence(void);
 int vectorPairTransitionStart(int *);
 int calcHeadingRoundedToCardinalDirection(void);
 int libm_cosf(void); // declcheck: local (the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "libm_sinf" has "C" linkage)
@@ -61,7 +61,7 @@ extern int DAT_0049fa10; /* 0x49fa10 */
 /* Supplied declaration required: lmapViewUpdateCloseUpSequence. */
 /* Supplied declaration required: mapDepartAdvanceCameraSequence. */
 /* Supplied declaration required: FUN_0021b0f0. */
-/* Supplied declaration required: FUN_0021b2ec. */
+/* Supplied declaration required: lmapViewUpdateSelectableSequence. */
 extern int vectorPairTransitionStep(void);
 /* Supplied declaration required: vectorPairTransitionStart. */
 /* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
@@ -534,7 +534,7 @@ void FUN_003079b4(void)
     }
     break;
   case 0xc:
-    FUN_0021b2ec();
+    lmapViewUpdateSelectableSequence();
     break;
   case 0xd:
     lmapViewUpdateCloseUpSequence();
