@@ -1,5 +1,6 @@
 /* NON_MATCHING: at the first match the section byte loads into r0 and the refresh constant into r1; retail swaps them (the fallback match is identical). */
 #include "map/NavigationInterpolation.h"
+#include "code/Code0023_Smt4.h"
 #include "gamedata/MapNaviCategories.h"
 #include "shard/MapNaviTable_GetCategoryCount.h"
 struct MapNaviSectionRecord {
@@ -23,8 +24,6 @@ struct NaviSectionSelectionView {
 };
 typedef char NaviSectionSelectionOffsets[(sizeof(MapNaviSectionRecord) == 0x14 && offsetof(NaviSectionSelectionView, refreshFirst) == 0x5A8C && offsetof(NaviSectionSelectionView, selectedSection) == 0x121CC) ? 1 : -1];
 extern "C" {
-s32 NaviMain_GetPosX(const u8 *cursor);
-s32 NaviMain_GetPosY(const u8 *cursor);
 u32 dataTable2bSub1GetCount(MapNaviTableContext *context);
 const MapNaviSectionRecord *dataTable2bSub1GetRecord(MapNaviTableContext *context, u32 index);
 const MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext *context, u32 index);

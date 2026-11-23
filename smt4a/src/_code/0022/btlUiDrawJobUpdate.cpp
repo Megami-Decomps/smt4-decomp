@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `btlUiDrawJobUpdate` (_code @ 0x2248f8, 0x14e4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
+#include "util/Random.h"
 #include "battle/BtlPositionedRequestsA.h"
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -13,7 +14,6 @@ int phaseSine(void);
 int asdOperatorDelete(...);
 int partyReleasePreviewResources(...);
 
-int randRange(...);
 int eventQueueAddUniqueIfValid(...);
 int uiSpriteSetKeyframeThree(...);
 int uiSpriteSetImageKeyframe(...);

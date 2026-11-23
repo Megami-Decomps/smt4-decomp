@@ -1,6 +1,3 @@
-/* NON_MATCHING: 14 lines, every one the name of a VFP register: the same instructions row for row (307), but retail
- * keeps the depth z in s17 and the constant 1.0f in s16, the build the other way round. IV's shopDrawAppraisalRow,
- * written the same way, gets retail's order from its longer selected block. */
 #include <stdio.h>
 #include "shard/Shard004A.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -18,8 +15,8 @@ void FUN_0049368c(const ScreenRect *rect, u32 image, s32 offsetX, s32 offsetY, u
 void renderSetClippedScissor(s32 x, s32 y, s32 width, s32 height);
 void devilDrawIconRelative(const ScreenRect *rect, u32 demon, s32 x, s32 y, u32 style);
 s32 textMeasureOnLayer(const char *text, u32 layer);
-f32 drawTextAtSnappedRectangle(const ScreenRect *rect, f32 x, f32 y, u32 layer, u32 color, const char *text,
-                               f32 depth, f32 spacing, f32 opacity);
+f32 drawTextAtSnappedRectangle(const ScreenRect *rect, f32 x, f32 y, f32 depth, f32 spacing, u32 layer,
+                               u32 color, f32 opacity, const char *text);
 
 /* Draws one row of the analyze list: the selected row's frame and scrolling band, then the demon's icon, its race
  * (centred in its box), its name, its level and the money it carries. An id of 0 leaves the row empty. */
@@ -91,7 +88,7 @@ void bibleAnalyzeDrawRow(Screen4A *screen, s32 index, s32 selected, s32 id)
         const TextureTableEntryIV *raceBox = layoutFindTableEntry(&screen->layout.rect, raceSprite);
         s32 raceX = x + raceBox->placement->width / 2 + raceBox->x - raceWidth / 2;
         s32 raceY = raceBox->y + y;
-        drawTextAtSnappedRectangle(&screen->layout.rect, (f32)raceX, (f32)raceY, layer, raceColor, race, z, 0.0f, 1.0f);
+        drawTextAtSnappedRectangle(&screen->layout.rect, (f32)raceX, (f32)raceY, z, 0.0f, layer, raceColor, 1.0f, race);
 
         const char *name = (const char *)dataTable01GetRecordWithAocOverride((u16)id);
         u32 nameColor;
@@ -106,7 +103,7 @@ void bibleAnalyzeDrawRow(Screen4A *screen, s32 index, s32 selected, s32 id)
         const TextureTableEntryIV *nameBox = layoutFindTableEntry(&screen->layout.rect, nameSprite);
         s32 nameX = nameBox->x + x;
         s32 nameY = nameBox->y + y;
-        drawTextAtSnappedRectangle(&screen->layout.rect, (f32)nameX, (f32)nameY, layer, nameColor, name, z, 0.0f, 1.0f);
+        drawTextAtSnappedRectangle(&screen->layout.rect, (f32)nameX, (f32)nameY, z, 0.0f, layer, nameColor, 1.0f, name);
 
         char text[32];
         u32 level = 0;

@@ -1,4 +1,5 @@
 #include "battle/BtlMainAccess.h"
+#include "util/Random.h"
 #include "gamedata/UnitStats.h"
 #include "gamedata/FlagBitTests.h"
 #include "gamedata/UnitRecordAccess.h"
@@ -16,7 +17,6 @@ typedef char ReserveSlotSelectionViewOffsets[
 
 extern "C" {
 ReserveSlotSelectionView *gameGetSlotTable(void);
-s32 randRange(u32 maximum);
 
 // Choose at most one eligible reserve unit using its encounter probability tier.
 u32 FUN_003bef90(void)
@@ -39,7 +39,7 @@ u32 FUN_003bef90(void)
                     }
                     if (btlGetMainState()->editorControl.flags & 0x10000)
                         chance = 100;
-                    if (randRange(99) < chance && selected < 1) {
+                    if ((s32)randRange(99) < chance && selected < 1) {
                         btlGetMainState()->core.selectedIds[selected] = unit->id;
                         ++selected;
                     }

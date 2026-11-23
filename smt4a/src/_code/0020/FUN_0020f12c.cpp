@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020f12c` (_code @ 0x20f12c, 0x2fec bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlockA.h"
+#include "util/Random.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -102,7 +103,6 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-extern int randRange(unsigned int);
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: mapCollisionQueueQuad. */
 /* Supplied declaration required: FUN_002de124. */

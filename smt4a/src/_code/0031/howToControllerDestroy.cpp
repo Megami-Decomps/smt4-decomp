@@ -1,4 +1,3 @@
-/* NON_MATCHING: the draw-job and resource-work pointers swap registers at entry. */
 #include "battle/Talk/btlTalkBustUpRelease.h"
 #include "ui/HowToController.h"
 #include "sys/RuntimeObjects.h"
@@ -6,13 +5,12 @@
 
 extern "C" {
 
-
 /* Tears down the controller's work: touch regions, memory slots, buffers and texture table 51,
  * then stops its job and deletes the work area. */
 void howToControllerDestroy(void)
 {
     CallbackControllerWork *work = (CallbackControllerWork *)g_callbackController.work;
-    work->releaseInputAndBuffers();
+    ((CallbackControllerWork *)g_callbackController.work)->releaseInputAndBuffers();
     for (s32 i = 0; i < 19; ++i) {
         if (asdTMTexTableNodeIsLoaded(51, i) != 0) {
             asdTMTexTableReleaseNode(51, i);

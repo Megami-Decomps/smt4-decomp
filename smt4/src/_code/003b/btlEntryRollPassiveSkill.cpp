@@ -1,4 +1,5 @@
 #include "battle/BtlEntry.h"
+#include "util/Random.h"
 #include "battle/btlMain.h"
 #include "shard/PassiveSkill.h"
 #include "battle/BtlMainAccess.h"
@@ -7,7 +8,6 @@
 extern "C" {
 
 void btlEntryGetPassiveSkillIds(BtlEntry *entry, u16 *skills);
-s32 randRange(u32 range);
 
 /* Rolls the listed entry's passive skills in order and returns the first that triggers, or 0. */
 u16 btlEntryRollPassiveSkill(u32 id)

@@ -1,10 +1,10 @@
 #include "gamedata/GameSaveDataA.h"
+#include "util/Random.h"
 #include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 s32 saveIsRecordValueBounded(u32 id);
 bool gameDataFlagTestBit(u32 bit);
-s32 randRange(u32 limit);
 
 bool FUN_003f2fb0(PartySlotA *unit, s32 attempts, s32 force)
 {

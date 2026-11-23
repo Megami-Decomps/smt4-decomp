@@ -10,6 +10,7 @@
 #include "shard/W5_W5Match2_PlainData.h"
 #include "shard/W6_W6Match7_NumericStepper.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 struct ScriptProcess;
 struct MoriModelContent;
@@ -18,6 +19,7 @@ class Obj536044;
 extern "C" void shopEnterQuantitySelection(Obj536044 *shop, s32 nextState);
 extern "C" void shopTrackSelectedItemPreview(Obj536044 *scene);
 extern "C" void shopDrawSelectedItem(Obj536044 *shop);
+extern "C" void FUN_00494d68(Obj536044 *shop, s32 row, s32 selected, const EquipmentMenuItem *entry);
 
 /* A scene whose step functions are listed in the table at 0x536044 (named after it until its real
  * name is known): the table holds member-function pointers, not a vtable. */
@@ -105,10 +107,15 @@ protected:
     /* 0x394 */ void *resultTable;
     /* 0x398 */ void *resultMessages;
     /* 0x39C */ ScriptProcess *resultScript;
-    /* 0x3A0 */ u8 unk3A0[4];
-    /* 0x3A4 */ f32 cursorPosition[2];      /* where the appraisal cursor is drawn */
-    /* 0x3AC */ u8 unk3AC[0xC];
-    /* 0x3B8 */ EmptyRange panelRect;       /* where the quantity panel is drawn */
+    /* 0x3A0 */ s32 depth;                  /* the layer the lists are drawn on; the selected row is one above */
+    union {
+        /* 0x3A4 */ AsdTextureRegion region;    /* the shop's layout: its rows and texts are placed against it */
+        /* 0x3A4 */ f32 cursorPosition[2];      /* where the appraisal cursor is drawn */
+        struct {
+            u8 unk3A4[0x14];
+            /* 0x3B8 */ EmptyRange rect;        /* where the quantity panel is drawn */
+        } quantityPanel;
+    };
     /* 0x3CC */ SpritePresetBank animation; /* the scene's thirteen sprites: 0 the cursor, 6 slides the quantity panel in, 7 out */
     /* 0xB08 */ u8 touchSelection[0x34];    /* the list's touch selection (menuSynchronizeFlaggedSelection) */
     /* 0xB3C */ ShopPanel *view;
@@ -141,6 +148,7 @@ protected:
     friend void shopEnterQuantitySelection(Obj536044 *shop, s32 nextState);
     friend void shopTrackSelectedItemPreview(Obj536044 *scene);
     friend void shopDrawSelectedItem(Obj536044 *shop);
+    friend void FUN_00494d68(Obj536044 *shop, s32 row, s32 selected, const EquipmentMenuItem *entry);
     friend struct Obj536044LayoutCheck;
 };
 
@@ -159,7 +167,9 @@ struct Obj536044LayoutCheck {
     char rows[offsetof(Obj536044, rows) == 0x1600C ? 1 : -1];
     char resultScript[offsetof(Obj536044, resultScript) == 0x39C ? 1 : -1];
     char previewReady[offsetof(Obj536044, previewReady) == 0x23 ? 1 : -1];
-    char panelRect[offsetof(Obj536044, panelRect) == 0x3B8 ? 1 : -1];
+    char panelRect[offsetof(Obj536044, quantityPanel.rect) == 0x3B8 ? 1 : -1];
+    char depth[offsetof(Obj536044, depth) == 0x3A0 ? 1 : -1];
+    char region[offsetof(Obj536044, region) == 0x3A4 ? 1 : -1];
     char cursorPosition[offsetof(Obj536044, cursorPosition) == 0x3A4 ? 1 : -1];
     char animation[offsetof(Obj536044, animation) == 0x3CC ? 1 : -1];
     char cursorSprite[offsetof(Obj536044, animation.sprites[0].finished) == 0x476 ? 1 : -1];

@@ -1,11 +1,11 @@
 #include "gamedata/DataTable.h"
+#include "util/Random.h"
 
 struct RandomEntryRowView {
     s16 values[12]; // 0x00
 };
 
 extern "C" {
-s32 randRange(u32 inclusiveMaximum);
 
 // Select a random entry from the nonzero prefix of the requested table row.
 s32 dataTable4dSelectRowEntry(u32, s32 rowIndex)

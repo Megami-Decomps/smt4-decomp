@@ -1,5 +1,6 @@
 /* NON_MATCHING: 72 lines (191 vs 191 rows): retail hoists the g_lmapScene load into the switch dispatch before case 1/2 and swaps a few scratch registers; all loops, callee-saved registers, and VFP arithmetic match. */
 #include "map/EnemySpawnState.h"
+#include "util/Random.h"
 #include "map/LmapGlobals.h"
 #include <math.h>
 #include "gamedata/DataTable.h"
@@ -8,7 +9,6 @@ extern "C" {
 const EnemySpawnRecord *fieldFindAreaPlacementRecord(u32 index);
 const EnemySpawnCondition *dataTable29GetEntry(u16 id);
 s32 gameFlagIsSet(u32 flag);
-s32 randRange(u32 maximum);
 void FUN_00483304(EnemySpawnOwner *owner, u32 sourceIndex);
 }
 

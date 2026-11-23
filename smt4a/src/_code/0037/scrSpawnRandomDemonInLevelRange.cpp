@@ -1,4 +1,5 @@
 #include "gamedata/NkmBaseRecordA.h"
+#include "util/Random.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "code/Code0029.h"
 
@@ -23,7 +24,6 @@ s32 scrGetArg(u32 index);
 u32 scrWorkGetValue(u32 slot);
 void scrWorkSetValue(u32 slot, u32 value);
 void jyoucyuGetTableEntry(s32 index);
-u32 randRange(u32 maximum);
 u32 partyFindFirstUnusedEntry(void);
 u32 npc2dCreateDemonPortrait(u32 id, s32 a, s32 b, s32 c, f32 scale);
 void eventTexSetJobParam(u32 job);

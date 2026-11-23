@@ -1452,6 +1452,7 @@
 0x002a4b10 FUN_002a4b10 callers
 0x002a4b4c nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile name
 0x002a4d34 nn_math_ARMv6_MTX34MultAsm name
+0x002a5960 FUN_002a5960 library
 0x002a688c FUN_002a688c callers
 0x002a691c FUN_002a691c callers
 0x002a69e4 nw_snd_internal_SoundArchiveFile_SoundInfo_GetSoundType name
@@ -1477,6 +1478,7 @@
 0x002a8330 nn_snd_CTR_Dspsnd_SetAuxReturnVolume name
 0x002a83a0 nn_snd_CTR_Dspsnd_SetMasterVolume name
 0x002a83ec nn_fnd_DateTime_DateToDays name
+0x002a84e8 archiveDeviceSendPathRequest library
 0x002a8554 FUN_002a8554 between
 0x002a856c nn_fs_CTR_MPCore_detail_UserFileSystem_TryGetFileSize name
 0x002a8598 nn_fnd_UnitHeapBase_Initialize name
@@ -1618,6 +1620,7 @@
 0x002bb434 nn_applet_CTR_detail_UnlockTransition name
 0x002bb470 FUN_002bb470 between
 0x002bb47c FUN_002bb47c between
+0x002bb484 FUN_002bb484 library
 0x002bb4bc FUN_002bb4bc between
 0x002bb4c4 nn_fs_detail_FileBase_TryRead name
 0x002bb54c nn_fs_detail_FileBase_TryGetSize name
@@ -1654,6 +1657,7 @@
 0x002bf7ac nw_gfx_TransformNode_DynamicBuilder_Create name
 0x002bfc24 voiceRequestPlayFile between
 0x002bfe20 FUN_002bfe20 between
+0x002bfe28 mtx44Copy library
 0x002bfedc nn_math_ARMv6_MTX34CopyAsm name
 0x002bfefc __cxa_guard_acquire name
 0x002bff38 messageSetDisplayMode between

@@ -84,7 +84,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001f87d4. */
+/* Supplied declaration required: lmapViewUpdateCloseUpSequence. */
 /* Supplied declaration required: mapDepartAdvanceCameraSequence. */
 /* Supplied declaration required: FUN_0021b0f0. */
 /* Supplied declaration required: FUN_0021b2ec. */

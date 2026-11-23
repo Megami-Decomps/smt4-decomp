@@ -1,5 +1,6 @@
 /* NON_MATCHING: rectangle and radial particle initialization are recovered; one LDRD and the VFP constant/register allocation differ. */
 #include "classes/Obj420794.h"
+#include "util/Random.h"
 
 struct FilterRectVertex {
     /* 0x00 */ u8 unk00[0xc];
@@ -36,7 +37,6 @@ struct Filter4PolyView {
 
 extern "C" {
 s32 randBetween(s32 minimum, s32 maximum);
-u32 randRange(u32 limit);
 f32 phaseCosine(f32 phase);
 f32 phaseSine(f32 phase);
 }

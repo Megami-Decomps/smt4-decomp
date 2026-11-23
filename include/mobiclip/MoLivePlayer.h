@@ -2,7 +2,7 @@
 #define MOBICLIP_MOLIVEPLAYER_H
 
 #include "mobiclip/MoLiveContainers.h"
-#include "mobiclip/MoLiveTree.h"
+#include "mobiclip/MoLiveHandlers.h"
 
 namespace MoLive {
 
@@ -69,22 +69,6 @@ struct PlayerArray {
 struct PlayerQuad {
     u64 first;
     u64 second;
-};
-
-struct MessageHandler;
-
-extern "C" void registerFour4AD02C(void *table);
-
-/* Handlers by message mode (see FUN_004ad02c). */
-struct MessageHandlerTable {
-    MessageHandlerTable(MoLive::Allocator *allocator, void (*hook)())
-        : allocator(allocator), handlers(allocator, hook)
-    {
-        registerFour4AD02C(this);
-    }
-
-    /* 0x00 */ MoLive::Allocator *allocator;
-    /* 0x04 */ MoLive::Tree<PlayerUnknownValue> handlers;
 };
 
 /* The worker/source the player runs; slot 1 gets kind, slot 3 checks readiness, slot 4 destroys it. */

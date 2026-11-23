@@ -1,4 +1,5 @@
 #include "gamedata/MapSaveBlockA.h"
+#include "util/Random.h"
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "map/PopupStateA.h"
@@ -7,7 +8,6 @@
 extern "C" {
 
 void messageVoiceFlagsGet(void);
-s32 randRange(u32 id);
 s32 gameFlagIsSet(u32 flag);
 const char *popupSelectWeightedMessage(u32 kind, u16 id);
 

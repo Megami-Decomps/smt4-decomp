@@ -1,4 +1,5 @@
 #include "gamedata/SaveSlotRecord.h"
+#include "util/Random.h"
 #include "gamedata/SaveSlotTable.h"
 #include "shard/Shard0034.h"
 #include "gamedata/GamePlayerData.h"
@@ -6,7 +7,6 @@
 
 extern "C" {
 s32 gameSlotTableFindFree(void);
-s32 randRange(s32 maximum);
 
 /* Apply a probabilistic status to the selected player and party groups. */
 void partyTryInflictCondition(u32 group, u32 condition, s32 chance)
@@ -19,7 +19,7 @@ void partyTryInflictCondition(u32 group, u32 condition, s32 chance)
         (gameGetPlayerData()->ailments & 2) == 0 &&
         (gameGetPlayerData()->ailments & 0x400) == 0 &&
         (gameGetPlayerData()->ailments & mask) == 0 &&
-        randRange(99) < chance) {
+        (s32)randRange(99) < chance) {
         s32 canApply = 1;
         if (condition == 5) {
             u16 affinities[21];
@@ -60,7 +60,7 @@ void partyTryInflictCondition(u32 group, u32 condition, s32 chance)
         if (unit->ailments & mask) {
             continue;
         }
-        if (randRange(99) < chance) {
+        if ((s32)randRange(99) < chance) {
             if (condition == 5 && !unitAffinityAllows(unit))
                 continue;
             unit->ailments |= mask;

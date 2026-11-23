@@ -1,12 +1,12 @@
 /* NON_MATCHING: retail keeps the zero in r8 (shared by the cleared weights and the zero percentages); the build rematerialises #0 and addresses the candidate row from r1. */
 #include "battle/BattleChoiceWeights.h"
+#include "util/Random.h"
 #include "gamedata/DataTable.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlTables.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
-s32 randRange(u16 maximum);
 
 s32 FUN_003a9d48(void)
 {

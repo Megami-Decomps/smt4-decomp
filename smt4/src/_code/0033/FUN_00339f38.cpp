@@ -14,7 +14,8 @@ void playerModelListCreate(Obj4206e8 *model, s32 kind);
 /* Releases the scene's player model (if any) and builds a fresh one. */
 void FUN_00339f38(StatusModelScene *scene)
 {
-    void *owner;
+    void *owner; /* never set, as in filterCreateQuad: retail passes r5, which this function neither saves nor
+                  * assigns (the caller's value, no known value) */
 
     if (scene->playerModel != NULL) {
         mdlPartsRelease(scene->playerModel);

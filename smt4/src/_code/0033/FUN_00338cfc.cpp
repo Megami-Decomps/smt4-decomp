@@ -2,6 +2,7 @@
  * a linker-inlined `mov r0, #0` call after the 70 clamp, tests bit 5 of the word at 0x44ac as part of a 64-bit
  * mask (and/movs) and shares the flag-8 store with the fail tail; the member status tests and operand orders match. */
 #include "common.h"
+#include "util/Random.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "battle/BattleBalanceRow.h"
 #include "gamedata/NkmEnemyLookup.h"
@@ -36,7 +37,6 @@ struct SlotTable {
 
 extern "C" {
 
-s32 randRange(s32 range);
 PartyMember* saveResolvePartySlot(s32 index);
 s32 FUN_002973ec(void);
 SlotTable* gameGetSlotTable(void);

@@ -125,7 +125,7 @@ int ifTouchRegionAddRequested(...);
 int buttonHelpSelectSlot(...);
 int buttonHelpSetText(...);
 int gridNavigationHandleConfirm(...);
-int FUN_00231574(void);
+int uniteSyncPreviewPortraits(void);
 int resourceRunOperationIfUnblocked(...);
 int listCursorGetRowIfUnblocked(...);
 int gridNavigationGetItemCount(...);
@@ -249,7 +249,7 @@ extern int scrRunOpcodesStub(int);
 extern unsigned long long FUN_00229210(int);
 extern int FUN_0022e714(void);
 /* Supplied declaration required: statusPanelClose. */
-/* Supplied declaration required: FUN_00231574. */
+/* Supplied declaration required: uniteSyncPreviewPortraits. */
 extern int messageMainIsWindowActive(void);
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
@@ -978,7 +978,7 @@ s32 FUN_001f5294(u32)
         piVar3[0x103] = 0xb;
         uniteMenuChangeState(0x24,1);
         if (*(char *)(temp_v4 + 0x38) == '\0') {
-          FUN_00231574();
+          uniteSyncPreviewPortraits();
         }
         FUN_002a7b74();
         uniteStartOrQueueRequest(4);
@@ -1798,7 +1798,7 @@ LAB_001f732c:
       *(unsigned char *)(piVar3 + 0x125) = 0;
     }
     if (*(char *)(temp_v4 + 0x38) == '\0') {
-      FUN_00231574();
+      uniteSyncPreviewPortraits();
     }
     temp_v5 = messageMainIsWindowActive();
     if (temp_v5 == 0) {
@@ -1963,7 +1963,7 @@ LAB_001f77ec:
     if (temp_v5 == 0) {
       temp_v5 = useCounterGetCurrentValue();
       if ((temp_v5 != 0x69) && (uniteSortCandidateList(), *(char *)(temp_v4 + 0x38) == '\0')) {
-        FUN_00231574();
+        uniteSyncPreviewPortraits();
       }
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
@@ -3301,7 +3301,7 @@ LAB_001f9868:
     }
     fusionClassifyRecipeAvailability(*piVar3,temp_v30,&temp_v33);
     if (*(char *)(temp_v4 + 0x38) == '\0') {
-      FUN_00231574();
+      uniteSyncPreviewPortraits();
     }
     if (g_unite != (int *)0x0) {
       temp_v5 = g_unite[0x10d];

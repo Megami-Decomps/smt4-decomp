@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/Random.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ typedef struct Options0037d358 {
 } Options0037d358;
 
 void scrSetResult(s32 value);
-u32 randRange(s32 limit);
 Options0037d358 *gameGetOptions(void);
 s32 gameOptionsClassifyMode(void);
 

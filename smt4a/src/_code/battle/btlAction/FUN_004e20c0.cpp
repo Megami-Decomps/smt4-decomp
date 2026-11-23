@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e20c0` (_code @ 0x4e20c0, 0x3590 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/Random.h"
 #include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
 #include "battle/BattleCommandValue.h"
@@ -231,7 +232,6 @@ extern unsigned int g_btlEvent; /* 0x573898 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: __ARM_common_memcpy4_9. */
-extern char randRange(unsigned int);
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: skillDataFindById. */

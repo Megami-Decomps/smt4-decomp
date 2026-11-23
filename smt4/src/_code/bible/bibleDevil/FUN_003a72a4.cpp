@@ -4,6 +4,7 @@
 #include "bible/bibleDevil.h"
 #include "code/Code0029.h"
 #include "ui/UiSpriteApi.h"
+#include "quest_center/qcMain.h"
 
 /* One animated cursor channel of the screen's widget. */
 struct BibleDevilWidget {
@@ -62,8 +63,7 @@ s32 FUN_00293b8c(void);
 s32 inputIsQuestConfirmPressed(void);
 void FUN_002328b4(void);
 void devilListUpdatePreview(BibleDevilScreen *);
-void buttonHelpGetStatus(void);
-void buttonHelpSetPreset(void);
+s32 buttonHelpGetStatus(void);
 void listCursorStepForward(void *);
 void listCursorStepBack(void *);
 void FUN_00233404(void);
@@ -120,8 +120,7 @@ void FUN_003a72a4(BibleDevilScreen *screen)
         screen->pageChanged = 1;
         g_bibleDevilCallbackContext.selected = -1;
         devilListUpdatePreview(screen);
-        buttonHelpGetStatus();
-        buttonHelpSetPreset();
+        buttonHelpSetPreset(buttonHelpGetStatus());
     }
     if (screen->mode == 1) {
         if (screen->page == 1) {

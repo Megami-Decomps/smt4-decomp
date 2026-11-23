@@ -4,7 +4,9 @@
  * at sp+36 and x and y at sp+40/44, which armcc then loads with one ldrd: three rows fewer), keeps the name in
  * the outgoing-argument slot sp+16 and the badge's y in sp+8 (here sp+4 and sp+16), spills the scroll sprite and
  * its layout entry in the other order, computes the price's x and y before storing either, and sets up the
- * mark's stack arguments after loading its position. */
+ * mark's stack arguments after loading its position. With drawTextAtSnappedRectangle's swept parameter order
+ * (wave 82) both name draws set their arguments up in retail's order; the build's frame slots moved with it (the
+ * font is at sp+36 and the name at sp+8 here), so the line count is 177 (117 by shape), up from 153. */
 #include <stdio.h>
 #include "shard/S2Scene3a.h"
 #include "shard/S1ListPanel.h"
@@ -21,8 +23,8 @@ void uiDrawBottomRightOffset(const AsdTextureRegion *region, u32 id, s32 x, s32 
 void FUN_00231bcc(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth, u32 mode);
 void FUN_00230d2c(const AsdTextureRegion *region, u32 id, s32 x, s32 y, s32 depth, s32 showEquipped);
 void gxSetClippedBottomScreenScissor(s32 x, s32 y, s32 width, s32 height);
-f32 drawTextAtSnappedRectangle(const AsdTextureRegion *region, f32 x, f32 y, u32 layer, u32 color,
-                               const char *text, f32 depth, f32 spacing, f32 opacity);
+f32 drawTextAtSnappedRectangle(const AsdTextureRegion *region, f32 x, f32 y, f32 depth, f32 spacing,
+                               u32 layer, u32 color, f32 opacity, const char *text);
 const char *itemGetNameOrFallback(u32 id, s32 payload);
 s32 aocItemGetPrice(const AocItemRef *ref);
 s8 touchSelectionGetSelected(const Obj55ca08 *selection);
@@ -109,7 +111,7 @@ void shopDrawAppraisalRow(Scene3a *scene, s32 row, s32 selected, s32 index)
     const TextureTableEntryIV *nameOrigin = layoutFindTableEntry(&scene->region, nameSprite);
     s32 nameX = nameOrigin->x + x;
     s32 nameY = nameOrigin->y + y;
-    drawTextAtSnappedRectangle(&scene->region, (f32)nameX, (f32)nameY, font, color, name, z, 0.0f, 1.0f);
+    drawTextAtSnappedRectangle(&scene->region, (f32)nameX, (f32)nameY, z, 0.0f, font, color, 1.0f, name);
 
     char text[32];
     if (!aocEntryIsKindTen(second)) {
@@ -139,8 +141,8 @@ void shopDrawAppraisalRow(Scene3a *scene, s32 row, s32 selected, s32 index)
         const TextureTableEntryIV *secondOrigin = layoutFindTableEntry(&scene->region, secondSprite);
         s32 secondNameX = secondOrigin->x + x;
         s32 secondNameY = secondOrigin->y + y;
-        drawTextAtSnappedRectangle(&scene->region, (f32)secondNameX, (f32)secondNameY, font, secondColor, secondName, z,
-                                   0.0f, 1.0f);
+        drawTextAtSnappedRectangle(&scene->region, (f32)secondNameX, (f32)secondNameY, z, 0.0f, font, secondColor,
+                                   1.0f, secondName);
     } else {
         /* A kind-10 item: its price. */
         AocItemRef item;

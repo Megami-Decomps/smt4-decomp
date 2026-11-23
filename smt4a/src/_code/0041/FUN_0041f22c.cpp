@@ -4,6 +4,7 @@
 #include "code/Code002c.h"
 #include "shard/Shard004A.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/SavedUnitSelection.h"
 
 /* The selection screen work (accessed fields). */
 struct SelectScreen {
@@ -59,7 +60,6 @@ void saveLoadApplySelectedPlayerRecord(SelectScreen *screen);
 void FUN_0041e450(SelectScreen *screen);
 void FUN_0041e7c0(SelectScreen *screen);
 void FUN_0041e9d4(SelectScreen *screen);
-void FUN_0041fc24(SelectScreen *screen);
 void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 }
 
@@ -107,7 +107,7 @@ extern "C" void FUN_0041f22c(SelectScreen *screen)
     screen->pulseCopy = screen->pulse;
     FUN_0041e450(screen);
     FUN_0041e7c0(screen);
-    FUN_0041fc24(screen);
+    saveLoadRefreshHighlightedPlayerPreview((SavedUnitSelection *)screen);
     saveLoadApplySelectedPlayerRecord(screen);
     if ((objBStateAllowsAction() != 0 && padButtonIsPressed(1) != 0) || buttonHelpIsActionActive(2) != 0) {
         eventQueueAddUnique(0x100020F);

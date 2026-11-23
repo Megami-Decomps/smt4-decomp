@@ -4,7 +4,7 @@
 
 extern "C" {
 
-u32 NaviMain_GetCurrentMap(void)
+u32 NaviMain_GetCurrentMap(const void *unused)
 {
     return g_naviMain->currentMap;
 }

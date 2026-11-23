@@ -1,5 +1,6 @@
 /* NON_MATCHING: local save/candidate array placement, packed prerequisite test and final count branches differ from retail. */
 #include "shard/W6_W6Match8_DevilRecordA.h"
+#include "util/Random.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/DataTable.h"
 #include "shard/Shard0032.h"
@@ -14,7 +15,6 @@ static inline u16 saveRequirementFlags(const SavedUnitRecordA &saved)
 }
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-u32 randRange(u32 maximum);
 
 // Choose an unlocked demon of the requested level that is neither excluded nor already owned.
 u32 FUN_0023e32c(u32 excludedA, u32 excludedB, u32 excludedC, u32 level)

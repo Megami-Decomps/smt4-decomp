@@ -1,4 +1,5 @@
 #include "gamedata/NkmBaseRecordA.h"
+#include "util/Random.h"
 
 namespace {
 
@@ -15,7 +16,6 @@ struct CharacterRow {
 
 extern "C" {
 CharacterRow *dataTableLookupCharacter(u16 character);
-s32 randRange(u32 limit);
 s32 gameDataFlagTestBit(u32 bit);
 
 // Pick a random entry of the demon's character row: the first 12 are chosen on a roll, the rest otherwise.

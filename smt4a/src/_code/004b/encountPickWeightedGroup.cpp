@@ -1,11 +1,11 @@
 /* NON_MATCHING: retail stores `selected`'s zero after copying excludeSpecial (ours before); the rest matches. */
 #include "gamedata/EncountData.h"
+#include "util/Random.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/NkmEnemyRecord.h"
 #include "gamedata/NkmEnemyLookup.h"
 extern "C" {
 extern void *g_aocSystem;
-s32 randRange(u16 maximum);
 EncountTableRecordA *resourceFindType27Record(void *system, u32 index);
 
 // Select an encounter by weight, excluding special portrait groups from the total when requested.

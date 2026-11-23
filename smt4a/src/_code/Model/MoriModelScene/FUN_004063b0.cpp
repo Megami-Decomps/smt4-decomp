@@ -1,4 +1,4 @@
-/* NON_MATCHING: the final store of the element array pointer (scene+0xe8) is scheduled ahead of the strd of elements/count; the element constructor _ZN16MoriSceneElementC1Ev still needs its _ZN16MoriSceneElementC1Ev name */
+/* NON_MATCHING: the build publishes the element-array pointer before storing the elements/count pair; retail publishes it afterward. */
 // Builds a model scene: allocates its resource pool from the extra heap and constructs its element array.
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"

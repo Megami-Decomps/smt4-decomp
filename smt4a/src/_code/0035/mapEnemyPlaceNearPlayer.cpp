@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail hoists &g_mapEnemy->spawnAttempts out of the loop (r4) and lays the normal-area arm out
  * first after the wide-area test; the step and distance constants now sit in each arm as in retail. */
 #include "common.h"
+#include "util/Random.h"
 #include "map/LmapViewGlobals.h"
 #include "game/GameStateA.h"
 #include "util/MathFunctions.h"
@@ -9,7 +10,6 @@
 
 extern "C" {
 
-u32 randRange(u32 limit);
 
 s32 mapCollisionRaySegmentTest(MapVector *start, MapVector *end, s32 flags);
 s32 mapResolveCollisionSphere(MapVector *position, MapVector *ground, s32 flags);

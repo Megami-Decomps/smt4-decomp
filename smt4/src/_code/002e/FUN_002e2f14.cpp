@@ -1,3 +1,4 @@
+#include "nn/os/WaitObject.h"
 #include "nn/Result.h"
 #include "nn/os/Handle.h"
 #include "nn/os/Thread.h"
@@ -13,21 +14,13 @@ struct ThreadOwner {
 };
 
 extern "C" {
-s32 svcWaitSynchronizationN(s32 *signaled, u32 *handles, s32 count, s32 waitAll, s64 timeout);
 void addressSpaceRegionFree(void *state);
 void asdMemFree(void *block);
 
 // Waits for the worker thread to end, then releases the thread, its buffer and the wake handle.
 void FUN_002e2f14(ThreadOwner *owner)
 {
-    s32 signaled;
-    u32 handles[1] = { owner->thread.handle };
-    s32 result = svcWaitSynchronizationN(&signaled, handles, 1, 0, -1);
-    bool failed = nnResultIsFailure(result);
-    if (failed) {
-        resultHandleFailure(result, failed);
-    }
-    owner->thread.joined = 1;
+    nn::os::ThreadJoin(&owner->thread);
     /* Joined above: finalize the thread, then close its handle through the handle's destructor. */
     owner->thread.finalize();
     owner->thread.NnOsHandle::~NnOsHandle();

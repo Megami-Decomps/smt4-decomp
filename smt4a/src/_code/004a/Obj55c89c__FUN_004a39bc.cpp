@@ -1,4 +1,4 @@
-/* NON_MATCHING: scheduling only: retail loads the constants 3 and 1 into r1/r2 in the choice setup (built r2/r1). */
+/* NON_MATCHING: the two choice constants are loaded in reverse order, and the price is negated before setting panelSetMode3's second argument instead of after. */
 #include "shard/Shard004A.h"
 #include "classes/Obj55c89c.h"
 #include "shop/ShopItemDescription.h"

@@ -1,17 +1,6 @@
-#include "common.h"
-#include <stddef.h>
+#include "sound/SoundTestWork.h"
 
 namespace {
-struct SoundTestRequestWork {
-    u32 job;
-    u32 unk04;
-    u32 state;
-    u32 frame;
-    s32 selection;
-};
-typedef char SoundTestRequestWorkOffsetsCheck[
-    offsetof(SoundTestRequestWork, state) == 8 &&
-    offsetof(SoundTestRequestWork, selection) == 0x10 ? 1 : -1];
 
 /* Moves the menu selection by `step`, wrapping around the ten entries. */
 inline s32 stepSoundTestSelection(s32 selection, s32 step)
@@ -28,7 +17,6 @@ inline s32 stepSoundTestSelection(s32 selection, s32 step)
 }
 
 extern "C" {
-extern SoundTestRequestWork *g_requestWork;
 void jobStop(u32 job, s32 flags);
 u32 padButtonIsPressed(u32 button);
 u32 padButtonRepeat(u32 button);
@@ -42,7 +30,7 @@ void FUN_0021c118(s32 sound, s32 frames);
 /* The sound test's action menu: picks one of ten sound actions and runs it on A; B leaves. */
 u32 soundTestActionMenuUpdate()
 {
-    SoundTestRequestWork *work = g_requestWork;
+    SoundTestWork *work = g_requestWork;
     if (work->state != 99 && padButtonIsPressed(2)) {
         work->state = 99;
     }

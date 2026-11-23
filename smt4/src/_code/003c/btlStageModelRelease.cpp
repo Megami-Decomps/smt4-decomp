@@ -2,6 +2,7 @@
  * r0 after the store (the build loads it first into r1). A memset of unkc0 to 0xFF matches, but unkc0's type is unknown
  * (one word as far as any user shows), so the bytewise clear would be chosen for the schedule alone (rejected in the
  * wave 76 review, with btlStageDestroy, whose teardown is the same). */
+#include "nn/os/WaitObject.h"
 #include "shard/W6_W6Match1_BattleStageModel.h"
 #include "battle/BtlStageStackRegion.h"
 #include "nn/Result.h"
@@ -11,21 +12,13 @@
 #include "sys/ResultReport.h"
 
 extern "C" {
-s32 svcWaitSynchronizationN(s32 *signaled, u32 *handles, s32 count, s32 waitAll, s64 timeout);
 void FUN_002759bc(void);
 void mdlHandleArrayDestroy(BattleStageModel *stage);
 
 /* Waits for the loader thread to end, then finalizes and closes it. */
 static __inline void stageStopThread(BattleStageModel *stage)
 {
-    s32 signaled;
-    u32 handles[1] = { stage->thread.handle };
-    s32 result = svcWaitSynchronizationN(&signaled, handles, 1, 0, -1);
-    bool failed = nnResultIsFailure(result);
-    if (failed) {
-        resultHandleFailure(result, failed);
-    }
-    stage->thread.joined = 1;
+    nn::os::ThreadJoin(&stage->thread);
     stage->thread.finalize();
     stage->thread.NnOsHandle::~NnOsHandle();
 }

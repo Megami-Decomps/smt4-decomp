@@ -1,5 +1,5 @@
 /* NON_MATCHING: 42 lines. The descriptors are nn::gr's BindSymbolVSInput (VertexAttributeDescription, as in
- * vertexAttributeUploadStreams) and FUN_0034711c takes only the render data. Remaining: the descriptors' frame slots
+ * vertexAttributeUploadStreams) and primRenderDataVertexBytes takes only the render data. Remaining: the descriptors' frame slots
  * (retail colour +8, texture coordinates +16, positions +24; the build puts positions at +32, the same difference as
  * vertexAttributeUploadStreams), the vertex count loaded before the stream pointer store (retail stores first), and
  * the index allocations' stack arguments stored before the argument loads. */
@@ -7,35 +7,12 @@
 #include "AsdSDK/AsdDebug.h"
 #include "gfx/RenderTargetState.h"
 #include "gfx/VertexAttributeState.h"
+#include "AsdSDK/Source/Gfx/Prim/AsdPrimRenderData.h"
 
 extern "C" {
 
-/* A primitive's render data: which attribute arrays it has (flags) and where they live in one
- * shared buffer (only the fields used here, by their offsets). */
-typedef struct PrimRenderData {
-    /* 0x000 */ u8 unk000[4];
-    /* 0x004 */ u32 flags;           /* 1 positions, 2 float colours, 4 texture coords, 0x20 byte colours, 0x100 GPU buffer */
-    /* 0x008 */ u8 unk008[4];
-    /* 0x00C */ u32 vertexCount;
-    /* 0x010 */ u8 unk010[8];
-    /* 0x018 */ u32 indexCount;
-    /* 0x01C */ u8 unk01C[0x10];
-    /* 0x02C */ u8 *buffer;
-    /* 0x030 */ f32 *positions;
-    /* 0x034 */ f32 *colors;
-    /* 0x038 */ u8 *byteColors;
-    /* 0x03C */ u8 *texCoords;
-    /* 0x040 */ u8 unk040[8];
-    /* 0x048 */ u16 *indices;
-    /* 0x04C */ u8 commands[0x790];
-    /* 0x7DC */ u32 indexPhysAddress;
-    /* 0x7E0 */ u32 indexPhysCount;
-    /* 0x7E4 */ u8 indexPhysFlag;
-} PrimRenderData;
-
 extern const char DAT_004094c8[];    /* source path used by the trace calls */
 
-s32 FUN_0034711c(const PrimRenderData *prim); /* the vertex buffer size its attribute flags need */
 void *memAlloc(u32 size, u32 alignment, u32 a, u32 name, u32 b, u32 c);
 void *asdMemoryAllocAligned(u32 size, u32 alignment, u32 a, u32 count, u32 b, u32 c);
 void FUN_0023b9d0(void *commands, const VertexAttributeDescription *attribute, u32 address, u32 format);
@@ -52,10 +29,10 @@ void primRenderDataAllocateBuffers(PrimRenderData *prim)
 
     if ((prim->flags & 0x100) != 0) {
         asdDebugTrace(DAT_004094c8, 314);
-        prim->buffer = (u8 *)memAlloc(0x10000, 0x100, 0, FUN_0034711c(prim), 16, 1);
+        prim->buffer = (u8 *)memAlloc(0x10000, 0x100, 0, primRenderDataVertexBytes(prim), 16, 1);
     } else {
         asdDebugTrace(DAT_004094c8, 311);
-        prim->buffer = (u8 *)memAlloc(0x100, 0x100, 0, FUN_0034711c(prim), 16, 1);
+        prim->buffer = (u8 *)memAlloc(0x100, 0x100, 0, primRenderDataVertexBytes(prim), 16, 1);
     }
     offset = 0;
     if ((prim->flags & 1) != 0) {

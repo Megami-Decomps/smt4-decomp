@@ -198,7 +198,6 @@ u32 FUN_00370794(void);
 extern "C" {
 #endif
 
-void registerFour4AD02C(u32 owner);
 
 #ifdef __cplusplus
 }

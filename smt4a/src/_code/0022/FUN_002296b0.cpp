@@ -1,5 +1,6 @@
 /* NON_MATCHING: armcc folds the (height - 2) row offset into the store displacement and addresses the start cell fields through a separate base; retail keeps `sub 2` before the row multiply and reads startX/startY directly. */
 #include "gamedata/MapSaveBlockA.h"
+#include "util/Random.h"
 
 namespace {
 /* The random-maze generator's state (module global). */
@@ -21,7 +22,6 @@ struct RandomMazeState {
 
 extern "C" {
 extern RandomMazeState g_mapRndMaze;
-u32 randRange(u16 max);
 
 /* Starts a random maze, using11x11 unless keepSize is set; fills the border/even lattice
    with walls, then places four randomized border-adjacent wall segments. */
@@ -62,15 +62,15 @@ void FUN_002296b0(s32 keepSize)
         }
     }
     if (randRange(100) < 50) {
-        flags->grid.cells[1][(randRange(flags->maze.width - 4) + 2) & 0xfffefffe].state = 1;
-        flags->grid.cells[flags->maze.height - 2][(randRange(flags->maze.width - 4) + 2) & 0xfffefffe].state = 1;
-        flags->grid.cells[(randRange(flags->maze.height - 8) + 4) & 0xfffefffe][1].state = 1;
-        flags->grid.cells[(randRange(flags->maze.height - 8) + 4) & 0xfffefffe][flags->maze.width - 2].state = 1;
+        flags->grid.cells[1][(randRange((u16)(flags->maze.width - 4)) + 2) & 0xfffefffe].state = 1;
+        flags->grid.cells[flags->maze.height - 2][(randRange((u16)(flags->maze.width - 4)) + 2) & 0xfffefffe].state = 1;
+        flags->grid.cells[(randRange((u16)(flags->maze.height - 8)) + 4) & 0xfffefffe][1].state = 1;
+        flags->grid.cells[(randRange((u16)(flags->maze.height - 8)) + 4) & 0xfffefffe][flags->maze.width - 2].state = 1;
     } else {
-        flags->grid.cells[1][(randRange(flags->maze.width - 8) + 4) & 0xfffefffe].state = 1;
-        flags->grid.cells[flags->maze.height - 2][(randRange(flags->maze.width - 8) + 4) & 0xfffefffe].state = 1;
-        flags->grid.cells[(randRange(flags->maze.height - 4) + 2) & 0xfffefffe][1].state = 1;
-        flags->grid.cells[(randRange(flags->maze.height - 4) + 2) & 0xfffefffe][flags->maze.width - 2].state = 1;
+        flags->grid.cells[1][(randRange((u16)(flags->maze.width - 8)) + 4) & 0xfffefffe].state = 1;
+        flags->grid.cells[flags->maze.height - 2][(randRange((u16)(flags->maze.width - 8)) + 4) & 0xfffefffe].state = 1;
+        flags->grid.cells[(randRange((u16)(flags->maze.height - 4)) + 2) & 0xfffefffe][1].state = 1;
+        flags->grid.cells[(randRange((u16)(flags->maze.height - 4)) + 2) & 0xfffefffe][flags->maze.width - 2].state = 1;
     }
 }
 

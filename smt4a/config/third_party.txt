@@ -2326,6 +2326,7 @@
 0x0014a948 svcGetResourceLimit name
 0x0014f280 wstrBufferPutChar name
 0x001582dc mobiclipPlayerReleaseHandle name
+0x001585ec FUN_001585ec library
 0x00158624 FUN_00158624 callers
 0x00158694 fileSystemOpenFileDirectly between
 0x00158818 FUN_00158818 between
@@ -2656,6 +2657,8 @@
 0x0017fd20 svcCreateEvent name
 0x0017fd38 svcWaitSynchronizationN name
 0x0017fd5c FUN_0017fd5c library
+0x00188444 archiveDeviceSendPathRequest library
+0x001884b0 vcallSlot12IfValid twin
 0x001884c8 fsCountdownSleep callers
 0x00188558 nn_fs_ipc_FileSystem_OpenArchive name
 0x001885b8 nn_fs_ipc_FileSystem_CloseArchive name
@@ -2952,6 +2955,7 @@
 0x00199f84 nn_math_ARMv6_MTX34InverseAsm name
 0x0019a0a0 nn_math_ARMv6_VEC3TransformAsm_2AD44C name
 0x0019a0dc FUN_0019a0dc between
+0x0019a0e8 mtx44Copy library
 0x0019a0fc nn_math_ARMv6_MTX44MultAsm name
 0x0019a258 nn_math_ARMv6_MTX34ToMTX33Asm name
 0x0019a270 FUN_0019a270 library
@@ -3258,6 +3262,7 @@
 0x001b0928 FUN_001b0928 between
 0x001b0c5c FUN_001b0c5c between
 0x001b0e10 nw_gfx_SceneBuilder_CreateObject name
+0x001b0e44 FUN_001b0e44 library
 0x001b1394 nw_gfx_RenderContext_ActivateParticleContext name
 0x001b18cc _ZN9Obj55bea0C1Ev callers
 0x001b1998 FUN_001b1998 between

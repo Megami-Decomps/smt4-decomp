@@ -19,6 +19,7 @@
 #include "ui/ButtonHelp.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "code/Code001b.h"
+#include "quest_center/QuestStatus_Smt4.h"
 
 extern "C" {
 
@@ -31,7 +32,6 @@ u32 screenFadeIsBusy(void);
 s32 gameFlagIsSet(u32 flag); // declcheck: local (its headers belong to the battle and camp menus)
 u32 questIsCompleted(int index);
 u32 questReadRuntimeFlag(u32 questId, u32 selector);
-u32 goalConditionsSatisfied(u32 id);
 u8 idIsAtLeast350(u32 value);
 void uiQuestCreate(void);
 void uiQuestAnswerConfirm(s8 choice);

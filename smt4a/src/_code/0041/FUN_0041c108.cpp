@@ -1,4 +1,4 @@
-#include "common.h"
+#include "ui/MarkerRing.h"
 
 struct PanelDrawState {
     /* 0x000 */ u8 unk000[5];
@@ -11,7 +11,7 @@ struct PanelDrawState {
     /* 0x010 */ u8 unk10[0x3c8];
     /* 0x3D8 */ u8 unk3d8[0x24c];
     /* 0x624 */ u8 sub624[0xd4];
-    /* 0x6F8 */ u8 sub6f8[0x18];
+    /* 0x6F8 */ MarkerRing markerRing;
     /* 0x710 */ u8 sub710[1];
 };
 
@@ -21,7 +21,6 @@ void compositeSpriteDrawRequest(void *block);
 void FUN_0041f9e4(PanelDrawState *self);
 void effectRequestSubmit(void *effect, void *source);
 void uiDrawScreenDimmer(void *block, u32 value);
-void FUN_0041c1d4(void *ring);
 
 /* Draws the composite sprite and its effect, dims the screen unless the panel is already settled, then draws the marker ring. */
 static __inline void drawPanel(PanelDrawState *self)
@@ -32,8 +31,8 @@ static __inline void drawPanel(PanelDrawState *self)
     if (self->unk0e == 0 || self->unk0f != 0) {
         return;
     }
-    uiDrawScreenDimmer(self->sub6f8, 0);
-    FUN_0041c1d4(self->sub6f8);
+    uiDrawScreenDimmer(&self->markerRing, 0);
+    uiDrawMarkerRing(&self->markerRing);
 }
 
 /* Virtual slot: for panel types 3..21 draws the composite sprite and its effect, dims the screen unless the panel is already

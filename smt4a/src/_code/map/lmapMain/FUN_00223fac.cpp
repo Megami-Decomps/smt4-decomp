@@ -1,10 +1,10 @@
 #include "map/mapDepart.h"
+#include "util/Random.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "map/PopupStateA.h"
 
 extern "C" {
-s32 randRange(s32 maximum);
 s32 gameFlagIsSet(u32 flag);
 s32 gameFlagStateIsOne(void);
 const char *popupSelectWeightedMessage(u32 kind, u32 speakerId);

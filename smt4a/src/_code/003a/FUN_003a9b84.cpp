@@ -1,10 +1,10 @@
 /* Looks up the table for the current kind (17, or 18 when scrGetArg says so) and runs scrSetResult on the entry for its last index. */
 #include "battle/BtlMainAccess.h"
+#include "util/Random.h"
 #include "common.h"
 
 extern "C" {
 
-extern s32 randRange(u16 count);
 extern u16 dataTableGetCount(u32 table);
 extern u16 *dataTableGetEntries(u32 table);
 extern s32 scrGetArg(s32 arg);
@@ -22,7 +22,7 @@ s32 FUN_003a9b84(void)
     }
     table = btlGetTable(reinterpret_cast<u32>(btlGetMainState()), kind);
     entries = dataTableGetEntries(table);
-    scrSetResult(entries[randRange(dataTableGetCount(table) - 1)]);
+    scrSetResult(entries[randRange((u16)(dataTableGetCount(table) - 1))]);
     return 1;
 }
 

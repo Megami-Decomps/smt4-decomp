@@ -1,5 +1,6 @@
 /* Prepares an idle party popup from the selected slot when its unit meets the level limit. */
 #include <stdio.h>
+#include "util/Random.h"
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "gamedata/NkmEnemyLookup.h"
@@ -10,7 +11,6 @@
 extern "C" {
 void messageVoiceFlagsGet(void);
 s32 gameFlagIsSet(u32 flag);
-s32 randRange(s32 maximum);
 const char *popupSelectWeightedMessage(u32 kind, u16 slot);
 void __aeabi_memcpy(void *destination, const void *source, u32 bytes);
 u32 dataTable01GetRecordWithAocOverride(u32 value);
@@ -26,7 +26,7 @@ void partyTryOpenLevelLimitPopup(void)
         return;
     }
     SlotView *slot = (SlotView *)saveSlotFindSelected();
-    if (slot == NULL || (gameFlagIsSet(418) && randRange(99) + 1 <= 50)) {
+    if (slot == NULL || (gameFlagIsSet(418) && (s32)randRange(99) + 1 <= 50)) {
         return;
     }
     u32 unitId = g_gameState.unk308;

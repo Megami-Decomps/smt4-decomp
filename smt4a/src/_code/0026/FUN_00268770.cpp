@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00268770` (_code @ 0x268770, 0x2944 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include <stdio.h>
+#include "util/Random.h"
 #include "romwright_types.h"
 #include "event/2dEvent/2dEventTex.h"
 #include "addon/LookupRecord.h"
@@ -79,7 +80,6 @@ extern int entryRefCompareByRankOrderId(...); /* 0x35fd60 */
 extern int g_statusDown; /* 0x588fe8 */
 
 /* Supplied declaration required: qsort. */
-extern int randRange(unsigned int);
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: FUN_0015f490. */

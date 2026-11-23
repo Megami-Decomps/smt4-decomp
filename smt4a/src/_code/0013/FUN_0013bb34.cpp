@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013bb34` (_code @ 0x13bb34, 0x280 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/Random.h"
 #include "gamedata/DataTableAccess_Smt4a.h"
 
 extern "C" {
@@ -20,7 +21,6 @@ extern unsigned short *statisticsGetCounter(char, unsigned int, short);
 extern int gameTestFlagBit32(unsigned int);
 /* Supplied declaration required: FUN_00148bb8. */
 extern unsigned short *dataTableFindCategoryVariant(char, unsigned int, short);
-extern unsigned int randRange(unsigned int);
 extern int FUN_0015fb68(void);
 /* Supplied declaration required: dataTable18Sub0GetCount. */
 /* Supplied declaration required: dataTable18Sub0GetEntries. */

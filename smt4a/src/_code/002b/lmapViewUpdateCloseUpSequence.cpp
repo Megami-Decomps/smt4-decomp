@@ -1,7 +1,6 @@
-/* NON_MATCHING: 210 lines (352 vs 352 rows), complete: the same instructions with the saved registers permuted (retail
- * keeps the zero in r6, the holder in r4 and the scene in r5; the build r5, r6, r4). Retail also loads the two phase
- * numbers 10 and 50 before it tells phase 1 from phase 2, and keeps the pull-back's eye height in the register it
- * compares (vmovle against the build's vmovgt). */
+/* NON_MATCHING: complete; the same instructions with three registers permuted. Retail keeps the phase in r3 and
+ * the hoisted phase numbers 10 and 50 in r2 and ip (the build ip, r3, r2). The pull-back's first point is loaded
+ * and stored as three floats at once (vldmia/vstmia s0-s2) where the build moves them one by one. */
 #include "map/LmapViewGlobals.h"
 #include "util/TrigF32.h"
 
@@ -23,29 +22,13 @@ enum {
     kPhasePullBackHold = 51
 };
 
-/* Starts the next phase of the camera sequence. */
-static __inline void viewAdvancePhase(void)
-{
-    LmapViewA *view = g_lmapViewHolder.view;
-
-    view->phase++;
-    view->unk008 = 0;
-}
-
-/* Jumps to `phase`. */
-static __inline void viewSetPhase(s32 phase)
-{
-    LmapViewA *view = g_lmapViewHolder.view;
-
-    view->phase = phase;
-    view->unk008 = 0;
-}
-
 extern "C" {
 
 /* Runs the map camera's close-up of the player (lmapViewUpdateOrbitSequence's sibling): the look-at point (`first`)
  * and the eye (`second`) are placed around the player by an angle off its heading, a distance and a height. From the
- * wait phase the sequence goes on to an overhead view or pulls back behind the player. */
+ * wait phase the sequence goes on to an overhead view or pulls back behind the player. The view is read through
+ * its holder at every use and the phase changes are written in place, as retail does (it loads the two phase numbers
+ * 10 and 50 once for the settle and wait phases). */
 void lmapViewUpdateCloseUpSequence(void)
 {
     VectorPairTransitionA request;
@@ -72,14 +55,17 @@ void lmapViewUpdateCloseUpSequence(void)
         request.value.smoothingDivisor = 0.0f;
         vectorPairTransitionStart(&request);
         g_lmapViewHolder.view->moving = 1;
-        viewAdvancePhase();
+        g_lmapViewHolder.view->phase++;
+        g_lmapViewHolder.view->unk008 = 0;
         g_lmapViewHolder.eyeFloor = request.value.target.second.y;
         break;
     case kPhaseCloseUpSettle:
         if (g_lmapViewHolder.view->unk00C == 1) {
-            viewSetPhase(kPhaseOverhead);
+            g_lmapViewHolder.view->phase = kPhaseOverhead;
+            g_lmapViewHolder.view->unk008 = 0;
         } else if (g_lmapViewHolder.view->unk00C == 2) {
-            viewSetPhase(kPhasePullBack);
+            g_lmapViewHolder.view->phase = kPhasePullBack;
+            g_lmapViewHolder.view->unk008 = 0;
         } else if (vectorPairTransitionStep() != 0) {
             request.value.start.first = *(const BattleVector3 *)&g_lmapViewHolder.view->savedTarget;
             request.value.start.second = *(const BattleVector3 *)&g_lmapViewHolder.view->savedEye;
@@ -97,15 +83,18 @@ void lmapViewUpdateCloseUpSequence(void)
             request.value.smoothing = 0;
             request.value.smoothingDivisor = 0.0f;
             vectorPairTransitionStart(&request);
-            viewAdvancePhase();
+            g_lmapViewHolder.view->phase++;
+            g_lmapViewHolder.view->unk008 = 0;
             g_lmapViewHolder.eyeFloor = request.value.target.second.y;
         }
         break;
     case kPhaseWait:
         if (g_lmapViewHolder.view->unk00C == 1) {
-            viewSetPhase(kPhaseOverhead);
+            g_lmapViewHolder.view->phase = kPhaseOverhead;
+            g_lmapViewHolder.view->unk008 = 0;
         } else if (g_lmapViewHolder.view->unk00C == 2) {
-            viewSetPhase(kPhasePullBack);
+            g_lmapViewHolder.view->phase = kPhasePullBack;
+            g_lmapViewHolder.view->unk008 = 0;
         } else {
             vectorPairTransitionStep();
         }
@@ -127,11 +116,13 @@ void lmapViewUpdateCloseUpSequence(void)
         request.value.duration = 30;
         request.value.smoothingDivisor = 0.0f;
         vectorPairTransitionStart(&request);
-        viewAdvancePhase();
+        g_lmapViewHolder.view->phase++;
+        g_lmapViewHolder.view->unk008 = 0;
         break;
     case kPhaseOverheadMove:
         if (vectorPairTransitionStep() != 0) {
-            viewAdvancePhase();
+            g_lmapViewHolder.view->phase++;
+            g_lmapViewHolder.view->unk008 = 0;
         }
         break;
     case kPhasePullBack:
@@ -156,7 +147,8 @@ void lmapViewUpdateCloseUpSequence(void)
         request.value.smoothingDivisor = 0.0f;
         vectorPairTransitionStart(&request);
         vectorPairTransitionStep();
-        viewAdvancePhase();
+        g_lmapViewHolder.view->phase++;
+        g_lmapViewHolder.view->unk008 = 0;
         break;
     case kPhasePullBackHold:
         request.value.start.first = *(const BattleVector3 *)&g_lmapViewHolder.view->savedTarget;

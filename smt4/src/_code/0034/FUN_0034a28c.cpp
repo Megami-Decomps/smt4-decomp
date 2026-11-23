@@ -17,7 +17,7 @@ int FUN_00349cdc(int, int, int, unsigned char [52]);
 int FUN_00349d88(...);
 unsigned int *commandProfileWriteDefault(unsigned int *commands);
 unsigned int *asdGxEmitAlphaDepthWritePreset(unsigned int *commands);
-unsigned int *FUN_0034dc10(void);
+unsigned int *gfxBuildBlackAddCombinerCommands(void);
 unsigned int *asdGxBuildAlphaDepthPresetCommands(unsigned int *commands);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
@@ -172,7 +172,7 @@ void FUN_0034a28c(int param_1,unsigned int param_2)
   temp_v6 = 0;
   temp_v7 = 0;
   temp_v45 = temp_v23[0];
-  temp_v23[0] = (int)FUN_0034dc10();
+  temp_v23[0] = (int)gfxBuildBlackAddCombinerCommands();
   temp_v23[0] = (int)commandProfileWriteDefault((unsigned int *)temp_v23[0]);
   temp_v4 = 0;
   temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 8) + 8))();

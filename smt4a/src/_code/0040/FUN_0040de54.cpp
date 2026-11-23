@@ -195,7 +195,7 @@ extern unsigned int FUN_003e53ec(void);
 extern int btlIsExtendedState(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003e7ef0. */
 /* Supplied declaration required: btlGetCombatantDrawPosition. */
-extern unsigned int FUN_003e82d4(int);
+extern unsigned int btlGetTurnEntryAfterPicker(int);
 /* Supplied declaration required: btlScriptUnitHasFlags. */
 extern int btlSlotStateIsNot456(unsigned int, unsigned int);
 /* Supplied declaration required: stateFinishIfPresent. */
@@ -930,7 +930,7 @@ joined_r0x0040ec14:
     }
     else {
       if ((*unaff_r8 & 0x2000) == 0) {
-        temp_v8 = FUN_003e82d4(temp_v3);
+        temp_v8 = btlGetTurnEntryAfterPicker(temp_v3);
       }
       if (psVar2[0x12] == 0) {
         temp_v8 = 0xffffffff;

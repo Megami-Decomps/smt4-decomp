@@ -1,5 +1,6 @@
 #include "common.h"
 #include "gamedata/GameDataAccess_Shard0031.h"
+#include "gamedata/SavedUnitSelection.h"
 #include "saveLoadUI/SaveLoadInteractionsA.h"
 
 extern "C" {
@@ -29,7 +30,6 @@ typedef struct Menu {
 s32 sysPlaySe(u32 id);
 s32 __aeabi_memcpy4(void *dest, void *src, s32 size);
 s32 resourceRunOperationIfUnblocked(Entry *entry);
-s32 FUN_0041fc24(Menu *menu);
 s32 saveLoadApplySelectedPlayerRecord(Menu *menu);
 
 /* Switches the menu between its two entries (`selected` nonzero: B), refreshes the current entry's values and the total. */
@@ -60,7 +60,7 @@ void FUN_0041dbdc(Menu *menu, bool selected)
     menu->value = flaggedEntryGetValueA(reinterpret_cast<FlaggedEntry *>(&menu->current));
     menu->prevTotal = menu->total;
     menu->total = menu->value + menu->extra + menu->bonus;
-    FUN_0041fc24(menu);
+    saveLoadRefreshHighlightedPlayerPreview((SavedUnitSelection *)menu);
     if (menu->busy != 0) {
         return;
     }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: native global object ctors match all instructions and relocations; only ldr/str scheduling around Obj42cd08 construction differs. */
+/* NON_MATCHING: each LightEvent's lockState store follows the atexit argument loads instead of preceding them; the deferred critical section loads -1 before storing the zero state rather than after. */
 #include "classes/Obj42cd08.h"
 #include "nn/os/CriticalSection.h"
 

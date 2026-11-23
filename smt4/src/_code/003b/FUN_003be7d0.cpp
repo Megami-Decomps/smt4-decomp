@@ -1,4 +1,5 @@
 #include "battle/BtlEntry.h"
+#include "util/Random.h"
 #include "battle/btlMain.h"
 #include <stddef.h>
 #include "battle/BtlMainAccess.h"
@@ -22,7 +23,6 @@ typedef char BattleRewardLayoutCheck[
     offsetof(BattleRewardView, rewards) == 0x174 &&
     offsetof(BattleRewardView, bonusDrops) == 0x44b7 ? 1 : -1];
 extern "C" {
-s32 randRange(u32);
 }
 
 extern "C" void FUN_003be7d0(const BtlEntry *entry)
@@ -39,7 +39,7 @@ extern "C" void FUN_003be7d0(const BtlEntry *entry)
         for (s32 i = 0; i < 3; ++i) {
             const Table00Choice *drop = &record->drops[i];
             if (drop->value != 0 &&
-                (randRange(99) < drop->chance + bonus || (entry->flags & 0x4000000))) {
+                ((s32)randRange(99) < drop->chance + bonus || (entry->flags & 0x4000000))) {
                 for (s32 j = 0; j < 6; ++j) {
                     if (rewards->items[j] == 0 || rewards->items[j] == drop->value) {
                         rewards->items[j] = drop->value;

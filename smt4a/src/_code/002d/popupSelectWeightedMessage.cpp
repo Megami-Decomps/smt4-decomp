@@ -1,8 +1,8 @@
 /* NON_MATCHING: entry argument scheduling, table bounds comparison and null-result allocation differ. */
 #include "gamedata/PartnerInfoTable.h"
+#include "util/Random.h"
 #include "map/PopupStateA.h"
 extern "C" {
-s32 randRange(u32 maximum);
 s32 gameFlagIsSet(u32 flag);
 
 /* Select a weighted popup matching its category, ID and required/excluded game flags. */

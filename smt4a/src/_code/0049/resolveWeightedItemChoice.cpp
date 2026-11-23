@@ -1,11 +1,11 @@
 /* NON_MATCHING: choice addressing and selected initialization recovered; saved input registers differ. */
 #include "AsdSDK/AsdDebugHooks.h"
+#include "util/Random.h"
 #include "shard/W6_W6Match7_WeightedChoices.h"
 
 extern "C" {
 u32 aocEntryGetKind(u32);
 const WeightedAlternateRecord* aocRecordLookup83(u32);
-u32 randRange(s32);
 void bitTableSetFlag(u32, u32, u32);
 
 /* Resolve a weighted item kind while retaining its optional flag/history bookkeeping. */

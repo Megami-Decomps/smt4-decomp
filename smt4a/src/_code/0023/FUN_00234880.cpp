@@ -1,5 +1,6 @@
 /* NON_MATCHING: table-row, count and loop-index registers differ, as do the order of the threshold loads and the scratch register used for the out-of-range NULL. */
 #include "common.h"
+#include "util/Random.h"
 #include "game/GameStateA.h"
 #include "gamedata/PartnerInfoTable.h"
 #include "code/Code0015.h"
@@ -17,7 +18,6 @@ extern "C" {
 
 
 s32 gameFlagIsSet(s32 flag);
-s32 randRange(s32 range);
 s32 FUN_003e0024(void);
 s32 FUN_003e0154(void);
 s32 gameSlotTableFindFree(void);
@@ -35,7 +35,7 @@ void FUN_00234880(void)
     if (slot == NULL) return;
 
     bool special = false;
-    if (gameFlagIsSet(0x1a2) && randRange(99) + 1 <= 50 &&
+    if (gameFlagIsSet(0x1a2) && (s32)randRange(99) + 1 <= 50 &&
         (g_gameState.mapId == 0x1c || g_gameState.mapId == 0x1d || g_gameState.mapId == 0x1e ||
          g_gameState.mapId == 0x1f || g_gameState.mapId == 0x20)) {
         special = true;

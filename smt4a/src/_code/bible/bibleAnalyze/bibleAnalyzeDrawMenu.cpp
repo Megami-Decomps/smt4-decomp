@@ -19,7 +19,7 @@ void uiDrawCompositeSpriteAtRectCorner(void *panel, s32 id, s32 a, s32 b, s32 sl
 void FUN_0049368c(void *panel, s32 id, s32 a, s32 b, s32 slide, s32 c);
 u32 dataLookupDisplayName(u8 *out, u32 id);
 s32 textMeasureOnLayer(const char *text, s32 mode);
-void drawTextAtSnappedRectangle(void *panel, f32 x, f32 y, s32 a, s32 b, const char *text, f32 scale, f32 c, f32 d);
+void drawTextAtSnappedRectangle(void *panel, f32 x, f32 y, f32 scale, f32 c, s32 a, s32 b, f32 d, const char *text);
 void bibleAnalyzeDrawRow(Screen4A *screen, s32 index, s32 selected, s32 id);
 void owner4ASetSizeAndCall(Screen4A *screen, s32 step);
 
@@ -48,8 +48,8 @@ void bibleAnalyzeDrawMenu(Screen4A *screen)
 
     s32 width = textMeasureOnLayer(text, 2);
 
-    drawTextAtSnappedRectangle(&screen->layout.rect, (f32)(box->x + box->placement->width / 2 - width / 2), (f32)box->y, 2, -1, text,
-                 opacity, 1.0f, 0.0f);
+    drawTextAtSnappedRectangle(&screen->layout.rect, (f32)(box->x + box->placement->width / 2 - width / 2), (f32)box->y, opacity, 1.0f, 2,
+                 -1, 0.0f, text);
 
     s32 first = resourceDispatchTaggedOperation(&screen->selection.holder);
     s32 visible = screen->selection.holder.count;

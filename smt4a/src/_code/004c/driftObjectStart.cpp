@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/Random.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ struct DriftObject {
     /* 0xE8 */ f32 baseSpeed;
 };
 
-s32 randRange(u32 max);
 
 /* Starts the drift with a speed chosen by type and a random direction. */
 void driftObjectStart(DriftObject *object, s32 type)

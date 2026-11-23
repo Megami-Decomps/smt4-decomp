@@ -8974,3 +8974,24 @@
 00156f34 _ZN18MoriModelShadowMapC1Ev inferred the class whose shadow-map set-up (FUN_003fed38, FUN_00156ea8) asserts Model\MoriModelShadowMap.cpp; build/w81_names_post.py renames the class in the sources (w81-f2)
 00557b28 DAT_00557b28 inferred the vtable is renamed with its class (next row)
 00557b28 _ZTV18MoriModelShadowMap inferred size:0x10 MoriModelShadowMap's vtable (was _ZTV9Obj557b28)
+00190aec soundArchiveLoaderConvertWaveArchiveToIndividual inferred twin of smt4 soundArchiveLoaderConvertWaveArchiveToIndividual
+0054baf4 g_waveArchiveFileBlockSignature inferred size:0x4 twin of smt4 g_waveArchiveFileBlockSignature
+002a1ca0 bufferHandleRelease inferred twin of smt4 bufferHandleRelease (the same code; w82-o2 ported it)
+003e82d4 btlGetTurnEntryAfterPicker inferred twin of smt4 btlGetTurnEntryAfterPicker
+00231574 uniteSyncPreviewPortraits inferred twin of smt4 uniteSyncPreviewPortraits
+001860e4 asdFileHashPackContains inferred whether a hash pack holds `path` (w82-o4)
+00372d60 scrCommBtlAverageLevelAtLeast inferred twin of smt4 scrCommBtlAverageLevelAtLeast (the same test over Apocalypse's combatants) (w82-s1)
+002a0a38 soundTestCreate inferred allocates the sound test's work and starts its control and draw processes (soundTest.cpp:49 trace) (w82-s1)
+00335384 uiQuestStepIntro inferred the quest UI's intro step (w82-s1)
+0041c1d4 uiDrawMarkerRing inferred draws the marker ring's nine slot sprites and the two rotating highlight pairs (w82-s2)
+0041fc24 saveLoadRefreshHighlightedPlayerPreview inferred applies the highlighted save profile to the player preview and the global name/options (w82-s2)
+004ad184 selectionCreateKindFour inferred allocates a kind-four selection node (Obj55c99c) from its owner's allocator (w82-s2)
+003f2be4 _ZN19SceneCameraElementAC1Ev inferred Apocalypse's 0x548-byte scene camera element constructor (FloatState at 0x4dc); twin of smt4 _ZN18SceneCameraElementC1Ev; native member written by build/w82_names_pre.py (w82-s2)
+003f2c00 _ZN19SceneCameraElementAD1Ev inferred its destructor; twin of smt4 _ZN18SceneCameraElementD1Ev
+00416d04 _ZN23SceneCameraElementPairAD1Ev inferred the pair's destructor (__aeabi_vec_dtor over two 0x548-byte elements); twin of smt4 _ZN22SceneCameraElementPairD1Ev
+00498408 playerSlotHoldsEntry inferred at smt4 playerSlotHoldsEntry's position in the twin callers (w82-f1)
+0037be64 cecRankingRebuild inferred rebuilds the StreetPass ranking's scores and ranks (w82-f2)
+0048981c naviMapHandleTouchButtons inferred the navigation map's touch-button handler (sibling of naviMapHandleInput) (w82-f2)
+0028fce8 statusPanelStartRowChange inferred starts the status panel's row change (rows added or removed, gauges refreshed) (w82-f2)
+0057f3b4 g_eventEffect inferred size:0x1C the module words before the banner textures: every EventEffect.cpp function pools g_eventEffect and a second word for the data after it (8 units fdiff IDENTICAL or closer with the split, none worse)
+0057f3d0 g_eventBannerTextures inferred size:0x18 the two banner textures eventInitializeBlinkFade loads (retail pools them apart from g_eventEffect; w82-o4)

@@ -32,6 +32,7 @@ s16 uiSpriteGetOperationMode(const UiSpriteState *sprite); /* the position key *
 s16 uiSpriteGetMode(const UiSpriteState *sprite);          /* the opacity key */
 void spriteSetLayer(UiSpriteState *sprite, u16 layer);
 void spriteSetVisible(UiSpriteState *sprite, u8 visible);       /* the active flag */
+void uiSpriteSetExtraScale(UiSpriteState *sprite, f32 scale);   /* the extra scale */
 s8 frameAnimationGetBusy(const UiSpriteState *sprite);     /* the updated flag */
 
 /* Starts position key `key` and moves the sprite to its first point (its last one when `reverse`). */

@@ -1,11 +1,11 @@
 #include "gamedata/SaveSlotRecord.h"
+#include "util/Random.h"
 #include "gamedata/SaveSlotTable.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/StatusAffinity.h"
 
 extern "C" {
 s32 gameSlotTableFindFree(void);
-s32 randRange(u32 maximum);
 
 /* Rolls a status ailment for each eligible member of the selected party groups. */
 void partyTryInflictConditionScaled(u32 group, u32 statusBit, f32 chance)
@@ -16,7 +16,7 @@ void partyTryInflictConditionScaled(u32 group, u32 statusBit, f32 chance)
     u32 mask = 1u << statusBit;
     if ((group == 0 || group == 2 || group == 3) &&
         !(gameGetPlayerData()->ailments & 2) && !(gameGetPlayerData()->ailments & 0x400) &&
-        !(gameGetPlayerData()->ailments & mask) && static_cast<f32>(randRange(99)) < chance) {
+        !(gameGetPlayerData()->ailments & mask) && (f32)(s32)randRange(99) < chance) {
         s32 canApply = 1;
         if (statusBit == 5) {
             /* Block-scoped as in partyTryInflictCondition: retail gives this array and the later units'
@@ -60,7 +60,7 @@ void partyTryInflictConditionScaled(u32 group, u32 statusBit, f32 chance)
         if (unit->ailments & mask) {
             continue;
         }
-        if (static_cast<f32>(randRange(99)) < chance) {
+        if ((f32)(s32)randRange(99) < chance) {
             if (statusBit == 5 && !unitAffinityAllows(unit))
                 continue;
             unit->ailments |= mask;

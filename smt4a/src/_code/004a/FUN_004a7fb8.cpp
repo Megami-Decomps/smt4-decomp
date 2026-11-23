@@ -13,8 +13,8 @@ extern PanelTextDefaultsPrefixA DAT_0057f0ac;
 u32 compendiumEntryIsRegistered(u16 textId);
 u32 dataTable01GetRecordWithAocOverride(u16 textId);
 void drawTextAtSnappedRectangle(TextLayoutContextA *context, f32 x,
-                                f32 y, u32 style,
-                                u32 color, u32 textValue, f32 opacity, f32 extraZero, f32 scale);
+                                f32 y, f32 opacity,
+                                f32 extraZero, u32 style, u32 color, f32 scale, u32 textValue);
 
 // Position a text label relative to its row and tint highlighted entries.
 void FUN_004a7fb8(HighlightedPanelTextView *panel, u32 textId, s32 entryIndex,
@@ -52,6 +52,6 @@ void FUN_004a7fb8(HighlightedPanelTextView *panel, u32 textId, s32 entryIndex,
     s32 x = static_cast<s32>(offset->x) + baseX;
     s32 y = static_cast<s32>(offset->y) + baseY;
     drawTextAtSnappedRectangle(reinterpret_cast<TextLayoutContextA *>(panel->layout),
-        static_cast<f32>(x), static_cast<f32>(y), style, color, textValue, opacity, 0.0f, scale);
+        static_cast<f32>(x), static_cast<f32>(y), opacity, 0.0f, style, color, scale, textValue);
 }
 }

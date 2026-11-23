@@ -1,4 +1,3 @@
-/* NON_MATCHING: the group count is BtlMainState::groupCount (0x1E9C); only the sorted-ID address in the second pass differs: retail computes index*3 into r1, the build into r0. */
 #include "battle/btlMain.h"
 
 struct BattleActionOrderingRecord {
@@ -28,16 +27,24 @@ void qsort(void *records, u32 count, u32 stride,
 /* Numbers the flagged actions of each group (field 0x45) in ascending weight order. */
 void btlAssignGroupedActionOrder(BtlMainState *state, u32 unusedFlags)
 {
-    for (s32 group = 0; group < state->groupCount; ++group) {
-        BattleActionOrderEntry entries[20];
-        for (s32 index = 0; index < 20; ++index) {
+    BattleActionOrderEntry entries[20];
+    BattleActionOrderingRecord *action;
+    s32 group;
+    s32 index;
+    s32 count;
+    u32 order;
+    s32 actionIndex;
+    s16 id;
+
+    for (group = 0; group < state->groupCount; ++group) {
+        for (index = 0; index < 20; ++index) {
             entries[index].id = -1;
             entries[index].weight = 0.0f;
             entries[index].flags = 0;
         }
-        s32 count = 0;
-        for (s32 index = 4; index < 54; ++index) {
-            BattleActionOrderingRecord *action = &((BattleActionOrderingRecord *)state->actions)[index];
+        count = 0;
+        for (index = 4; index < 54; ++index) {
+            action = &((BattleActionOrderingRecord *)state->actions)[index];
             if ((action->flags & 1) && (action->flags & 0x80) && action->group == group) {
                 entries[count].id = action->id;
                 entries[count].weight = action->weight;
@@ -45,12 +52,11 @@ void btlAssignGroupedActionOrder(BtlMainState *state, u32 unusedFlags)
             }
         }
         qsort(entries, count, sizeof(BattleActionOrderEntry), sortCompareWeightAscending);
-        u32 order = 0;
-        s32 actionIndex;
-        for (s32 index = 0; index < 20; ++index) {
-            s16 id = entries[index].id;
+        order = 0;
+        for (index = 0; index < 20; ++index) {
+            id = entries[index].id;
             for (actionIndex = 4; actionIndex < 54; ++actionIndex) {
-                BattleActionOrderingRecord *action = &((BattleActionOrderingRecord *)state->actions)[actionIndex];
+                action = &((BattleActionOrderingRecord *)state->actions)[actionIndex];
                 if ((action->flags & 1) && (action->flags & 0x80) &&
                     action->group == group && action->id == id) {
                     action->order = (u8)order++;

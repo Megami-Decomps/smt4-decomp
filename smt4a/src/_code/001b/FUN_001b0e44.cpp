@@ -1,5 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b0e44` (_code @ 0x1b0e44, 0x460 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches.
+ * NintendoWare, not game code: nw::gfx::AnimEvaluator::Initialize(animData, maxMembers, maxAnimMembers, allocCache)
+ * with BaseAnimEvaluator::Initialize inlined. It sets the animation data, the frame range and the play policy,
+ * allocates the bind and reverse-bind index tables and the cache-pointer table (each `table = ut::MoveArray<T>(memory,
+ * size, allocator)`: a temporary whose capacity word is masked before it is set, swapped in, then destroyed), resizes
+ * the cache pointers to the member-animation count and, when asked, allocates the cache and calls
+ * SetCacheBufferPointers. It sits between nw_gfx_SceneBuilder_CreateObject and
+ * nw_gfx_RenderContext_ActivateParticleContext; IV's copy is FUN_002a5960. */
 #include "romwright_types.h"
 
 extern "C" {

@@ -29,6 +29,9 @@ void providerEntrySetVector(Owner *owner, u32 *vector);
 
 /* The navigator's X position; callers pass their navi handle (`unused`), which it never reads. */
 u32 NaviMain_GetPosX(const void *unused);
+/* The navigator's Y position and its scalar state (the heading); callers pass their navi handle, unread. */
+u32 NaviMain_GetPosY(const void *unused);
+f32 NaviMain_GetState(const void *unused);
 
 void sub10OwnerStart(Obj *obj);
 

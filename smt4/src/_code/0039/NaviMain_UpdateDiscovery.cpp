@@ -11,7 +11,7 @@ int gxResetColorQuadToWhite(void);
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int renderCtxSelectStereoLayout(...);
-int FUN_003996c8(void);
+int naviMapDraw(void);
 int FUN_00399d0c(...);
 int FUN_0039ba2c(...);
 int FUN_0039bd04(...);
@@ -57,7 +57,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
-/* Supplied declaration required: FUN_003996c8. */
+/* Supplied declaration required: naviMapDraw. */
 /* Supplied declaration required: FUN_00399d0c. */
 /* Supplied declaration required: FUN_0039ba2c. */
 /* Supplied declaration required: FUN_0039bd04. */
@@ -310,7 +310,7 @@ LAB_0039f450:
       if ((g_gameState.mapId != 0x13) ||
          ((DAT_0049f920 != 6 && (!(DAT_0049f920 == 7 || DAT_0049f920 == 8))))) {
         if (*(char *)(param_1 + 0xc) != '\0') {
-          FUN_003996c8();
+          naviMapDraw();
         }
         else {
           FUN_00399d0c(param_1);

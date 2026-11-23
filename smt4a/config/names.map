@@ -4577,7 +4577,7 @@
 0023c068 uniteNotBusy
 0042614c resourceSlotRelease
 00135b16 elemCopyForward
-00416d04 objFillFromTemplate
+00416d04 _ZN23SceneCameraElementPairAD1Ev
 00340f58 labelsReset
 002deb98 aocBootRelease
 002e1308 dataTableAndTexRelease
@@ -4810,7 +4810,7 @@
 00162758 drawTextAtSnappedRectangle
 0040a4cc statsTestFlag
 0040a55c statsSetFlag
-002a1ca0 textureOwnerReset
+002a1ca0 bufferHandleRelease
 002e08c8 animationEvaluateCallback
 0025cab8 effectSubmitDefaultVectors
 0049c7a0 contentGetUpgradedKindValue
@@ -8232,3 +8232,19 @@
 0041b8e0 saveSlotRowDrawPlayTime
 0041b204 saveSlotRowDrawIcons
 0041af74 saveSlotRowDrawNumber
+00190aec soundArchiveLoaderConvertWaveArchiveToIndividual
+003e82d4 btlGetTurnEntryAfterPicker
+00231574 uniteSyncPreviewPortraits
+001860e4 asdFileHashPackContains
+00372d60 scrCommBtlAverageLevelAtLeast
+002a0a38 soundTestCreate
+00335384 uiQuestStepIntro
+0041c1d4 uiDrawMarkerRing
+0041fc24 saveLoadRefreshHighlightedPlayerPreview
+004ad184 selectionCreateKindFour
+003f2be4 _ZN19SceneCameraElementAC1Ev
+003f2c00 _ZN19SceneCameraElementAD1Ev
+00498408 playerSlotHoldsEntry
+0037be64 cecRankingRebuild
+0048981c naviMapHandleTouchButtons
+0028fce8 statusPanelStartRowChange

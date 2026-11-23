@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail places the header-variant compare chain first and shares the three variant stores with the settings chain; the build lays the complex arm first and keeps hoisted constants in different registers. */
 #include "battle/btlMain.h"
+#include "util/Random.h"
 #include "battle/BtlEntryLookup.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleEffects.h"
@@ -18,7 +19,6 @@ void battleEffectUpdateProjectionScale(BattleEffectSetup *);
 s32 idSetFindSubjectIndex(BtlMainStateA *, BattleEffectSetup *);
 u32 stateEntryFindById(BtlMainStateA *, u32 handle);
 f32 asdAnimGetTrackLastFrame(u32 handle, s32 index);
-u16 randRange(u16 maximum);
 
 // Resolve the effect variant, reset its position/state and choose an initial animation frame.
 void battleEffectInitializeVariant(BtlMainStateA *battle, BattleEffectSetup *effect)

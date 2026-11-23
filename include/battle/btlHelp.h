@@ -125,7 +125,8 @@ u32 *asdListBoxGetItemValuePtr(void *listBox, u32 id);
 extern "C" {
 #endif
 
-void FUN_00229a24(void);
+/* Callers pass the battle UI block; the function reaches it through g_btlUi instead. */
+void FUN_00229a24(BtlUi *ui);
 
 #ifdef __cplusplus
 }

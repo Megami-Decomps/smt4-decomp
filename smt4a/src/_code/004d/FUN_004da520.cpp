@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/Random.h"
 #include "shard/Shard0034.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "gamedata/GamePlayerData.h"
@@ -6,7 +7,6 @@
 
 extern "C" {
 
-u32 randRange(u32 range);
 
 /* Rolls whether two demons trigger an event: the chance grows with the player flag, each demon's
  * flags, and doubles when either demon belongs to race 35. */

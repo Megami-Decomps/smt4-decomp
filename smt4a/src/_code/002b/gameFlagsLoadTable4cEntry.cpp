@@ -1,4 +1,5 @@
 #include "gamedata/MapSaveBlockA.h"
+#include "util/Random.h"
 #include "code/Code002b.h"
 
 extern "C" {
@@ -12,7 +13,6 @@ typedef struct Table4cEntry {
 } Table4cEntry;
 
 Table4cEntry *dataTable4CGetEntry(s32 id);
-u32 randRange(s32 max);
 
 /* Loads table 0x4C entry `id` into the flag block, with a level of -1 when it has none and at most 15. */
 void gameFlagsLoadTable4cEntry(s32 id)

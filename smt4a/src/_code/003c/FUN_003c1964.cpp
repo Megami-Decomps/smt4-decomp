@@ -1,22 +1,15 @@
 /* NON_MATCHING: only the third 64-bit mask test (excluded) allocates its AND/ORR registers
  * differently (retail ands the low words into the mask pair and or's the high result first). */
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
 
-/* The shared combatant's byte/halfword-aligned union cannot gain the property words in place. */
-struct BattleThresholdEntryView {
-    u64 flags;
-    u8 unk008[0x6C];
-    s32 values[12];
-    u8 unk0A4[0x364];
-};
-typedef char BattleThresholdEntrySizeCheck[sizeof(BattleThresholdEntryView) == 0x408 ? 1 : -1];
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 s32 btlResolveEntryChoice(s32 choice);
-BattleThresholdEntryView *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
+BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 
 /* Tests whether an eligible member of the selected group, or the enabled special member, exceeds a threshold. */
 u32 FUN_003c1964(void)
@@ -37,17 +30,17 @@ u32 FUN_003c1964(void)
     s32 first, count;
     btlGetEntryChoiceRange(group, &first, &count);
     for (s32 index = first; index < count + first; ++index) {
-        BattleThresholdEntryView *entry = &((BattleThresholdEntryView *)btlGetMainState()->entries)[index];
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
-            (g_btlCandidateMasks.excluded & entry->flags) == 0 && entry->values[property] > threshold) {
+            (g_btlCandidateMasks.excluded & entry->flags) == 0 && entry->properties[property] > threshold) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
-        BattleThresholdEntryView *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry != NULL && entry->values[property] > threshold) {
+        BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
+        if (entry != NULL && entry->properties[property] > threshold) {
             scrSetResult(1);
             return 1;
         }
@@ -55,4 +48,5 @@ u32 FUN_003c1964(void)
     scrSetResult(0);
     return 1;
 }
-}
+
+} /* extern "C" */

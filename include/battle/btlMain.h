@@ -945,29 +945,37 @@ typedef struct BtlMainGlobalsA {
             u8 prefix[0x80];
             /* 0x1C0 */ u64 mask;
         } fullRoster;
+        struct {
+            u8 prefix[0x10];
+            /* 0x150 */ u64 mask;  /* the state flag set once the picker has advanced (IV: battleMask bit 0x1000000) */
+        } pickerAdvanced;
     };
     /* 0x1C8 */ u64 suppressDefeat;
+    /* 0x1D0 */ u8 unk1D0[0x20];
+    /* 0x1F0 */ u64 pickerHoldMask;  /* the marker that holds the picker (IV: editor flag 0x10) */
 } BtlMainGlobalsA;
-typedef char BtlMainGlobalsASizeCheck[sizeof(BtlMainGlobalsA) == 0x1D0 ? 1 : -1];
+typedef char BtlMainGlobalsASizeCheck[sizeof(BtlMainGlobalsA) == 0x1F8 ? 1 : -1];
 typedef char BtlMainPhaseTransitionOffsetsCheck[
     offsetof(BtlMainStateA, phase) == 0x8C &&
     offsetof(BtlMainGlobalsA, transition.mask) == 0x108 &&
-    sizeof(BtlMainStateA) == 0x4CF0 && sizeof(BtlMainGlobalsA) == 0x1D0 ? 1 : -1];
+    sizeof(BtlMainStateA) == 0x4CF0 && sizeof(BtlMainGlobalsA) == 0x1F8 ? 1 : -1];
 typedef char BtlMainSelectionMaskOffsetCheck[offsetof(BtlMainGlobalsA, selectionMask) == 0x88 ? 1 : -1];
 typedef char BtlMainSuppressionMaskOffsetCheck[offsetof(BtlMainGlobalsA, suppressionMask) == 0x138 ? 1 : -1];
 typedef char BtlMainSuppressDefeatOffsetCheck[offsetof(BtlMainGlobalsA, suppressDefeat) == 0x1C8 ? 1 : -1];
+typedef char BtlMainPickerMaskOffsetsCheck[offsetof(BtlMainGlobalsA, pickerAdvanced.mask) == 0x150 &&
+    offsetof(BtlMainGlobalsA, pickerHoldMask) == 0x1F0 ? 1 : -1];
 typedef char BtlMainTurnOrderMaskOffsetCheck[offsetof(BtlMainGlobalsA, turnOrderMasks.excluded) == 0xA8 ? 1 : -1];
 typedef char BtlMainCompatibilityMaskOffsetCheck[
     offsetof(BtlMainGlobalsA, compatibility.excluded) == 0xB8 ? 1 : -1];
 typedef char BtlMainQueuedSkillMaskOffsetCheck[offsetof(BtlMainGlobalsA, skillQueue.queuedSkillMask) == 0x1B8 ? 1 : -1];
 typedef char BtlMainSelectionGateOffsetCheck[
     offsetof(BtlMainGlobalsA, selectionGate.words) == 0x190 &&
-    sizeof(BtlMainGlobalsA) == 0x1D0 ? 1 : -1];
+    sizeof(BtlMainGlobalsA) == 0x1F8 ? 1 : -1];
 typedef char BtlMainVoiceStateOffsetsCheck[
     offsetof(BtlMainStateA, voiceGate.blocked) == 0x45B8 &&
     offsetof(BtlMainGlobalsA, voiceBlocking.blocked) == 0x100 &&
     offsetof(BtlMainGlobalsA, voiceState.attempted) == 0x168 &&
-    sizeof(BtlMainStateA) == 0x4CF0 && sizeof(BtlMainGlobalsA) == 0x1D0 ? 1 : -1];
+    sizeof(BtlMainStateA) == 0x4CF0 && sizeof(BtlMainGlobalsA) == 0x1F8 ? 1 : -1];
 typedef char BtlMainTargetCapacityOffsetCheck[
     offsetof(BtlMainStateA, targetCapacity.counts) == 0x4C70 &&
     sizeof(BtlMainStateA) == 0x4CF0 ? 1 : -1];

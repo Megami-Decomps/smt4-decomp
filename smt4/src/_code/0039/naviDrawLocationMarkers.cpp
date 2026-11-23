@@ -1,5 +1,7 @@
 /* NON_MATCHING: draws the title map's location markers (16 entries, scaled into the view around the cursor, only the active ones). The control flow and the active refresh are retail's; the frame (retail 44 bytes: it keeps the sprite in fp and spills the hoisted draw tag 11) and the VFP register allocation of the marker and view arithmetic differ, retail loading the icon size while it computes the marker position. */
 #include "gamedata/MapSaveBlock.h"
+#include "shard/NaviMain_GetCurrentMap.h"
+#include "code/Code0023_Smt4.h"
 #include "shard/NaviMain.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
@@ -43,8 +45,6 @@ struct MapMarkerScreen {
 
 extern "C" {
 
-void NaviMain_GetPosY(void *navi);
-s32 NaviMain_GetCurrentMap(void *navi);
 void pairCopy(void *source, f32 *destination);
 void uiGetEntrySize(u32 table, u32 sprite, s32 *width, s32 *height);
 void efctSetSpeed(f32 speed);

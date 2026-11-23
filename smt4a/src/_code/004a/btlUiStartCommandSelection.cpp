@@ -13,7 +13,7 @@ void btlUiStartCommandSelection(u32 unused, s32 mode, s8 first, s8 second, bool 
     ui->opening.first = first;
     ui->opening.second = second;
     eventPanelSelectSpritePreset(&ui->base.objB, mode, options, mode == 0 ? 0 : firstStrike, 0);
-    statusPanelResetRows(&ui->base.objA, ui->opening.mode, ui->opening.first, ui->opening.second);
+    statusPanelResetRows((StatusPanel *)&ui->base.objA, ui->opening.mode, ui->opening.first, ui->opening.second);
     if (mode == 1 && firstStrike) {
         ui->notice.active = 1;
         ui->notice.duration = 40;

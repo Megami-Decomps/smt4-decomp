@@ -1,8 +1,8 @@
 #include "gamedata/SkillFlags.h"
+#include "util/Random.h"
 
 extern "C" {
 SkillFlagsRecord *findSkillMetadataById(u32 skillId);
-s32 randRange(u32 maximum);
 
 /* Chooses a random nonempty slot whose skill has the required metadata flag. */
 s32 skillChooseRandomFlaggedSlot(const u16 *skills)

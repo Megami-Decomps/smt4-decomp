@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "util/Random.h"
 #include "classes/Obj55ac38.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00413e50` (_code @ 0x413e50, 0x37c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
@@ -71,7 +72,6 @@ extern unsigned char DAT_0055cacc; /* 0x55cacc */
 /* Supplied declaration required: _ZN9Obj5596acaSERKS_. */
 /* Supplied declaration required: FUN_0011b648. */
 /* Supplied declaration required: FUN_0012055e. */
-extern unsigned int randRange(unsigned int);
 extern int gameFlagIsSet(unsigned int);
 extern int campCecHasObject(void);
 extern unsigned int campCecGetOwnRecord(void);

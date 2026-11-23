@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b67a0` (_code @ 0x2b67a0, 0x4d4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlockA.h"
+#include "util/Random.h"
 #include "romwright_types.h"
 #include "map/MapEnemyGlobal.h"
 
@@ -34,7 +35,6 @@ extern int g_lmapScene; /* 0x581288 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int randRange(unsigned int);
 /* Supplied declaration required: gameFlagsGetBlock. */
 /* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameFlagIsSet(void);

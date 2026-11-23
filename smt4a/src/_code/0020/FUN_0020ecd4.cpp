@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps shared constants 0 (r8) and 1 (r6) in registers and has one exit for the no-slot and success returns; build rematerialises them (record null select, timer store and epilogue order differ). */
 #include "common.h"
+#include "util/Random.h"
 #include <stdio.h>
 #include "game/GameStateA.h"
 #include "gamedata/PartnerInfoTable.h"
@@ -15,7 +16,6 @@ struct SaveSlotView {
 
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-s32 randRange(s32 max);
 const char *popupSelectWeightedMessage(u32 kind, u32 id);
 void *__aeabi_memcpy(void *dest, const void *src, u32 size);
 

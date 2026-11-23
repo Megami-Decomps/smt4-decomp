@@ -2,6 +2,7 @@
 #define BATTLE_BTLUIOPENING_H
 
 #include "battle/btlUI.h"
+#include "battle/BtlStatusPanelA.h"
 
 /* Apocalypse battle UI fields set when a command selection opens. Local overlays of BtlUiA avoid
  * changing opaque storage used by other battle UI panels. */
@@ -32,7 +33,6 @@ extern BtlUiGlobalsA g_btlUi;
 void btlUiStartCommandSelection(u32 unused, s32 mode, s8 first, s8 second, bool firstStrike, bool options);
 void FUN_004abe2c(BtlUiA *unused, s32 mode, s8 first, s8 second, bool firstStrike, bool options);
 void eventPanelSelectSpritePreset(BtlUiObjBA *panel, s32 mode, u8 optionB, u8 optionA, u8 animated);
-void statusPanelResetRows(BtlUiObjAA *panel, s32 mode, s32 first, s32 second);
 void btlMenuSetMessageText(const char *message);
 void menuStateReset();
 void menuStateStartSelect(s32 selection);

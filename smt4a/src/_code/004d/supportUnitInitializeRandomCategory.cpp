@@ -1,10 +1,10 @@
 #include "gamedata/UnitStatInitialization.h"
+#include "util/Random.h"
 #include "shard/Shard0032.h"
 #include "gamedata/GamePlayerData.h"
 
 extern "C" {
 InitializedUnitStatsA *gameGetOptions(void);
-u32 randRange(u32 maximum);
 s32 equipmentTableFindIndexById(u32 categoryId, u16 playerId);
 void sysMemClear(void *data, u32 size);
 

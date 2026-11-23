@@ -1,3 +1,4 @@
+#include "nn/os/WaitObject.h"
 #include "battle/BtlStageStackRegion.h"
 #include "nn/Result.h"
 #include "nn/os/Thread.h"
@@ -30,7 +31,6 @@ typedef char CampCecThreadWorkOffsets[
 
 extern "C" {
 extern CampCecThreadWork *g_campCec;
-s32 svcWaitSynchronizationN(s32 *signaled, u32 *handles, s32 count, s32 waitAll, s64 timeout);
 u8 FUN_0026f784(void *scene);
 void campCecResetViewState(void *scene);
 void linkHolderApplyFlag(void *scene, u32 flag);
@@ -43,14 +43,7 @@ void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 /* Waits for the communication thread to end, then finalizes it and closes its handle. */
 static __inline void campCecStopThread(CampCecThreadWork *work)
 {
-    s32 signaled;
-    u32 handles[1] = { work->thread.handle };
-    s32 result = svcWaitSynchronizationN(&signaled, handles, 1, 0, -1);
-    bool failed = nnResultIsFailure(result);
-    if (failed) {
-        resultHandleFailure(result, failed);
-    }
-    work->thread.joined = 1;
+    nn::os::ThreadJoin(&work->thread);
     work->thread.finalize();
     work->thread.NnOsHandle::~NnOsHandle();
 }

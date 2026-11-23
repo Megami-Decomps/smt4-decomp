@@ -12,7 +12,7 @@ int asdModelAdvanceCommandCursor(unsigned int);
 int gxGetCommandListParameter(int, int *);
 int FUN_00349d88(int, int, int, unsigned char [48]);
 unsigned int *asdGxEmitAlphaDepthWritePreset(unsigned int *commands);
-unsigned int *FUN_0034dc10(void);
+unsigned int *gfxBuildBlackAddCombinerCommands(void);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_MTX34MultAsm(unsigned char [48], unsigned char [48], float *);
@@ -143,7 +143,7 @@ void FUN_00342250(int param_1,unsigned int param_2)
   temp_v8 = 0;
   temp_v9 = 0;
   temp_v7 = 0;
-  temp_v22 = (int)FUN_0034dc10();
+  temp_v22 = (int)gfxBuildBlackAddCombinerCommands();
   temp_v22 = (int)asdGxEmitAlphaDepthWritePreset((unsigned int *)temp_v22);
   temp_v6 = 0;
   temp_v1 = (**(romwright_code **)(**(int **)(param_1 + 8) + 8))();

@@ -3,6 +3,7 @@
  * here, the flag folded away) and multiplies the experience share with its operands swapped (`mul r0, r2, r0`, the
  * player's experience loaded before it). */
 #include "common.h"
+#include "util/Random.h"
 #include "game/GameStateA.h"
 #include "mapnavi/naviMain.h"
 
@@ -16,7 +17,6 @@
 #include "shard/W5_W5Match2_PairedIds.h"
 
 extern "C" {
-u32 randRange(u32 range);
 void playerGetWords(u16 *words, s32 withUnit);
 void playerMaskSetBit(u32 bit);
 void halves34Copy(const SlotRecordA *unit, u16 *words);

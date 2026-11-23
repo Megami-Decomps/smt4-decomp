@@ -27,6 +27,9 @@ u32 lcgRandomRange(s32 limit);
 
 u32 randNextInRange(int limit);
 
+/* Steps the LCG and returns a value in 0..range. Unsigned, as the definition computes it and as callers that
+ * convert it to float unsigned (btlRollAilmentChance) use it; callers that compare it signed convert it with
+ * (s32), callers that narrow the bound pass it as (u16). */
 u32 randRange(int range);
 
 } /* extern "C" */

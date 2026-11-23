@@ -1,4 +1,5 @@
-/* NON_MATCHING: svc 0x24 (wrapper), the thread destructor (nn/os/Thread.h) and the control flow match; armcc computes the thread address (state + 0x7fc) before the wait where retail computes it after (add/add/mov r5, r0) and loads the zero into r6 right after the wait. */
+/* NON_MATCHING: with nn::os's Join inline (nn/os/WaitObject.h) the thread's address is formed after the wait as in retail; only the shared zero is placed after the thread finalize where retail hoists `mov r6, #0` above the svc (as in FUN_0035d7bc, FUN_003f19dc and FUN_0036d41c). */
+#include "nn/os/WaitObject.h"
 #include "common.h"
 #include "nn/os/AddressSpaceManager.h"
 #include "nn/Result.h"
@@ -42,7 +43,6 @@ typedef char ScriptLoadStateOffsets[offsetof(ScriptLoadState, loadState) == 0x7f
     offsetof(ScriptLoadState, threadStack) == 0x804 ? 1 : -1];
 
 extern "C" {
-s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 void nn_os_Thread_FinalizeImpl(u32 *thread);
 void addressSpaceRegionFree(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);
@@ -73,13 +73,9 @@ extern "C" u32 FUN_0035a840(ScriptLoadState *state)
 
     if (state->loadState == 2) {
         state->stopRequested = 1;
-        s32 result = svcWaitSynchronization1(state->thread.handle, -1);
-        bool failed = nnResultIsFailure(result);
-        if (failed) {
-            resultHandleFailure(result, failed);
-        }
-        state->thread.joined = 1;
-        state->thread.~NnOsThread();
+        nn::os::ThreadJoin(&state->thread);
+        state->thread.finalize();
+        state->thread.NnOsHandle::~NnOsHandle();
         addressSpaceRegionFree(state->stackRegion);
         delete state->stackRegion;
         state->stackRegion = NULL;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bdab0` (_code @ 0x3bdab0, 0x878 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
+#include "util/Random.h"
 #include "romwright_types.h"
 #include "battle/BtlGlobals.h"
 
@@ -42,7 +43,6 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int randRange(unsigned int);
 /* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */

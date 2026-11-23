@@ -1,308 +1,212 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00494d68` (_code @ 0x494d68, 0x750 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: 230 lines (146 by shape); same calls, branches and 84-byte frame as retail. What differs:
+ * - the build keeps the constant 1 (FUN_0049368c's flags) in r6 and spills the highlight sprite's address and the
+ *   badge's y; retail writes `mov r0, #1` at each call and keeps those two in r6;
+ * - `row != 0` is `mov #1; moveq #0` in retail (`movne #1` here), as in IV's shopDrawListRow;
+ * - retail moves the shop into r0 (`moveq r0, r4`) before each branch to the selling list's test, the build after it;
+ * - retail loads the entry id into r2 before it moves the price for shopAffordableCount;
+ * - the spilled price position and the text buffer sit in other frame slots. */
 #include <stdio.h>
-#include "romwright_types.h"
+#include "classes/Obj536044.h"
+#include "classes/Obj55ca08.h"
+#include "shard/W6_W6Match2_OffsetPosition2D.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
+#include "ui/UiControl.h"
+#include "ui/AnimatedMessage.h"
+#include "shop/ShopBuyItem.h"
+#include "code/Code0049_Smt4a.h"
+#include "addon/AocSystem_Smt4a.h"
 
 extern "C" {
+void uiDrawCompositeSpriteAtRectCorner(ScreenRect *rect, u32 id, s32 dx, s32 dy, u32 extra);
+void FUN_0049368c(const AsdTextureRegion *region, u32 image, s32 offsetX, s32 offsetY, u32 color, u32 flags);
+f32 drawTextAtSnappedRectangle(const AsdTextureRegion *region, f32 x, f32 y, f32 depth, f32 spacing,
+                               u32 layer, u32 color, f32 opacity, const char *text);
+const char *itemGetNameOrFallback(u32 id, s32 payload);
+u32 playerSlotHoldsEntry(Obj536044 *scene, u32 id);
+s32 FUN_001ba3d0(u32 id); // declcheck: local (a forwarder: this caller passes the id and uses the count)
+u32 FUN_0047fe44(u32 id);
+bool equipmentHasPositiveUpgrade(u32 item);
+u32 equipmentIsFullyUpgraded(u32 itemId);
+s8 touchSelectionGetSelected(const Obj55ca08 *selection);
 
-int drawTextAtSnappedRectangle(...);
-int efctSetSpeed(void);
-int layoutFindTableEntry(...);
-int FUN_001ba3d0(...);
-int equipmentIsFullyUpgraded(void);
-int uiDrawCompositeSpriteAtRectCorner(...);
-int drawTextAtRelativePosition(...);
-int uiDrawTableTextureAtRectCorner(...);
-int FUN_0049368c(...);
-int shopGetEntryPrice(...);
-int VectorSignedToFloat(...);
-
-/* stack frame of param_4: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp80; /* 0x80: local_80 */
-    unsigned int sp84; /* 0x84: local_84 */
-    unsigned int sp88; /* 0x88: local_88 */
-    unsigned int sp8C; /* 0x8c: local_8c */
-    unsigned int sp90; /* 0x90: local_90 */
-} param_4_stack;
-
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: drawTextAtSnappedRectangle. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: layoutFindTableEntry. */
-/* Supplied declaration required: FUN_001ba3d0. */
-/* Supplied declaration required: equipmentIsFullyUpgraded. */
-extern int FUN_0047fe44(unsigned int);
-extern int equipmentHasPositiveUpgrade(unsigned int);
-/* Supplied declaration required: uiDrawCompositeSpriteAtRectCorner. */
-/* Supplied declaration required: drawTextAtRelativePosition. */
-/* Supplied declaration required: uiDrawTableTextureAtRectCorner. */
-/* Supplied declaration required: FUN_0049368c. */
-extern int FUN_00498408(int, unsigned int);
-extern int itemGetNameOrFallback(unsigned int, unsigned int);
-/* Supplied declaration required: shopGetEntryPrice. */
-extern int shopAffordableCount(unsigned short, unsigned int); // declcheck: local (the shared declaration does not compile here or changes this unit)
-extern unsigned int aocItemGetPrice(unsigned short *);
-
-
-void FUN_00494d68(int param_1,int param_2,int param_3,unsigned short *param_4)
-
+/* Whether the selling list keeps the item: playerSlotHoldsEntry names it and the player holds at most one, or
+ * FUN_0047fe44 refuses it. */
+static __inline bool shopItemIsKept(Obj536044 *shop, u32 id)
 {
-/* irregular: 1 goto(s); irregular input(s): in_fpscr; 14 native warning(s); review required */
-  unsigned short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  int temp_v11;
-  unsigned int temp_v12;
-  unsigned int in_fpscr;
-  unsigned char temp_v13 [32];
-  int temp_v14;
-  unsigned int temp_v15;
-  int iStack_34;
-  int temp_v16;
-  int iStack_2c;
-  unsigned short *puStack_28;
-  
-  temp_v0 = *param_4;
-  temp_v12 = (unsigned int)temp_v0;
-  if (temp_v12 == 0) {
-    return;
-  }
-  temp_v9 = *(int *)(param_1 + 0x3a0);
-  if (param_3 != 0) {
-    temp_v9 = temp_v9 + 1;
-  }
-  VectorSignedToFloat(0x100 - temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
-  iStack_34 = param_1;
-  temp_v16 = param_2;
-  iStack_2c = param_3;
-  puStack_28 = param_4;
-  if (param_3 == 0) {
-    temp_v3 = layoutFindTableEntry(param_1 + 0x3a4,param_2 + 0x27);
-  }
-  else {
-    temp_v3 = layoutFindTableEntry(param_1 + 0x3a4,param_2 + 0x4f);
-  }
-  temp_v11 = (int)*(short *)(temp_v3 + 8);
-  temp_v3 = (int)*(short *)(temp_v3 + 10);
-  if (param_3 != 0) {
-    efctSetSpeed();
-    uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x47,temp_v11,temp_v3,temp_v9);
-    uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x48,temp_v11,temp_v3,temp_v9);
-    uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x49,temp_v11,temp_v3,temp_v9);
-    efctSetSpeed();
-    FUN_0049368c(param_1 + 0x3a4,0x4a,temp_v11,temp_v3,temp_v9,1);
-    if (*(char *)(param_1 + 0xb19) != '\0') {
-      uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x108,temp_v11,temp_v3,temp_v9);
-      uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x109,temp_v11,temp_v3,temp_v9);
-      uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x10a,temp_v11,temp_v3,temp_v9);
-      efctSetSpeed();
-      uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x10b,temp_v11,temp_v3,temp_v9);
-      efctSetSpeed();
-    }
-    else {
-      uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x4b,temp_v11,temp_v3,temp_v9);
-      uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x4c,temp_v11,temp_v3,temp_v9);
-      uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x4d,temp_v11,temp_v3,temp_v9);
-      efctSetSpeed();
-      uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x105,temp_v11,temp_v3,temp_v9);
-      efctSetSpeed();
-    }
-    temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xac);
-  }
-  else {
-    temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0x99);
-  }
-  temp_v1 = *(short *)(temp_v4 + 10);
-  temp_v4 = *(short *)(temp_v4 + 8) + temp_v11;
-  if (param_3 != 0) {
-    FUN_0049368c(param_1 + 0x3a4,0xaa,temp_v11,temp_v3,temp_v9,1);
-  }
-  FUN_00493344((const OffsetPosition2D *)(param_1 + 0x3a4),(int)(short)temp_v0,temp_v4,temp_v1 + temp_v3,temp_v9,temp_v16 != 0);
-  if (temp_v16 != 0) {
-    if ((param_4[1] & 1) != 0) {
-      if (param_3 != 0) {
-        temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xab);
-      }
-      else {
-        temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0x98);
-      }
-      uiDrawCompositeSpriteAtRectCorner(param_1 + 0x3a4,5,*(short *)(temp_v4 + 8) + temp_v11,*(short *)(temp_v4 + 10) + temp_v3,
-                   temp_v9);
-    }
-    if ((param_4[1] & 2) != 0) {
-      if (param_3 != 0) {
-        temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xb2);
-      }
-      else {
-        temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0x9f);
-      }
-      temp_v8 = *(short *)(temp_v4 + 8) + temp_v11;
-      temp_v4 = *(short *)(temp_v4 + 10) + temp_v3;
-      if (*(int *)(param_1 + 0xb40) != 8) {
-        uiDrawCompositeSpriteAtRectCorner(param_1 + 0x3a4,6,temp_v8,temp_v4,temp_v9);
-      }
-      else {
-        uiDrawCompositeSpriteAtRectCorner(param_1 + 0x3a4,7,temp_v8,temp_v4,temp_v9);
-      }
-    }
-  }
-  if (param_3 == 0) {
-    temp_v5 = 2;
-  }
-  else {
-    temp_v5 = 3;
-  }
-  temp_v14 = itemGetNameOrFallback(temp_v12,0);
-  if (param_3 != 0) {
-    temp_v15 = 0xad;
-    if (*(char *)(param_1 + 0xb19) == '\0') {
-      temp_v10 = -0x60180001;
-    }
-    else {
-      temp_v10 = -0xa006001;
-    }
-    if (*(int *)(param_1 + 0xb40) != 8) {
-      temp_v6 = shopGetEntryPrice(param_4);
-      temp_v4 = shopAffordableCount(*param_4,temp_v6);
-      if (temp_v4 == 0) {
-        temp_v10 = 0x787878ff;
-      }
-      else {
-LAB_00495274:
-        temp_v4 = 0x787878ff;
-        if (temp_v10 != 0x787878ff) {
-          temp_v4 = -0x64646401;
-        }
-        if (!(temp_v10 == 0x787878ff || temp_v10 == temp_v4)) {
-          temp_v4 = equipmentHasPositiveUpgrade(temp_v12);
-          if (temp_v4 != 0) {
-            temp_v7 = temp_v12;
-            equipmentIsFullyUpgraded();
-            if (temp_v7 == 0) {
-              temp_v10 = 0x8400ff;
-            }
-            else {
-              temp_v10 = -0x414c601;
-            }
-          }
-        }
-      }
-    }
-    else {
-      temp_v4 = FUN_00498408(param_1,temp_v12);
-      if (((temp_v4 == 0) || (temp_v4 = FUN_001ba3d0(temp_v12), temp_v4 >= 2)) &&
-         (temp_v4 = FUN_0047fe44(temp_v12), temp_v4 == 0)) goto LAB_00495274;
-      temp_v10 = 0x787878ff;
-    }
-  }
-  else {
-    temp_v8 = *(int *)(param_1 + 0xb40);
-    temp_v10 = -1;
-    temp_v4 = temp_v8;
-    if (temp_v8 == 8) {
-      temp_v4 = param_1;
-    }
-    temp_v15 = 0x9a;
-    if (temp_v8 != 8) {
-      temp_v6 = shopGetEntryPrice(param_4);
-      temp_v4 = shopAffordableCount(*param_4,temp_v6);
-      if (temp_v4 == 0) {
-        temp_v10 = -0x64646401;
-      }
-      else {
-        temp_v4 = equipmentHasPositiveUpgrade(temp_v12);
-        if (temp_v4 != 0) {
-          temp_v7 = temp_v12;
-          equipmentIsFullyUpgraded();
-          if (temp_v7 == 0) {
-            temp_v10 = 0x8400ff;
-          }
-          else {
-            temp_v10 = -0x414c601;
-          }
-        }
-      }
-    }
-    else {
-      temp_v4 = FUN_00498408(temp_v4,temp_v12);
-      if (((temp_v4 != 0) && (temp_v4 = FUN_001ba3d0(temp_v12), temp_v4 < 2)) ||
-         (temp_v4 = FUN_0047fe44(temp_v12), temp_v4 != 0)) {
-        temp_v10 = -0x64646401;
-      }
-      else {
-        temp_v4 = equipmentHasPositiveUpgrade(temp_v12);
-        if (temp_v4 != 0) {
-          temp_v7 = temp_v12;
-          equipmentIsFullyUpgraded();
-          if (temp_v7 == 0) {
-            temp_v10 = 0x8400ff;
-          }
-          else {
-            temp_v10 = -0x414c601;
-          }
-        }
-      }
-    }
-  }
-  temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,temp_v15);
-  VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
-  drawTextAtSnappedRectangle(param_1 + 0x3a4,temp_v5,temp_v10,temp_v14);
-  if (temp_v16 != 0) {
-    if (*(int *)(param_1 + 0xb40) != 8) {
-      temp_v5 = shopGetEntryPrice();
-    }
-    else {
-      temp_v5 = aocItemGetPrice(param_4);
-    }
-    if (param_3 != 0) {
-      temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xba);
-      temp_v6 = 0xffffffff;
-    }
-    else {
-      temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xa7);
-      temp_v6 = 0x9b9b9bff;
-    }
-    temp_v1 = *(short *)(temp_v4 + 8);
-    temp_v14 = *(short *)(temp_v4 + 10) + temp_v3;
-    sprintf((char *)temp_v13,"%8d",temp_v5);
-    if ((*(int *)(param_1 + 0xb40) == 8) &&
-       (((temp_v4 = FUN_00498408(param_1,temp_v12), temp_v4 != 0 &&
-         (temp_v4 = FUN_001ba3d0(temp_v12), temp_v4 < 2)) || (temp_v4 = FUN_0047fe44(temp_v12), temp_v4 != 0))))
-    {
-      sprintf((char *)temp_v13,"     ---");
-    }
-    drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v1 + temp_v11,temp_v14,0,7,temp_v6,temp_v9,temp_v13);
-  }
-  temp_v5 = FUN_001ba3d0(temp_v12);
-  if (param_3 != 0) {
-    temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xbc);
-    temp_v6 = 0x57d8ffff;
-  }
-  else {
-    temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xa9);
-    temp_v6 = 0x9fddddff;
-  }
-  temp_v1 = *(short *)(temp_v4 + 8);
-  temp_v2 = *(short *)(temp_v4 + 10);
-  sprintf((char *)temp_v13,"%2d",temp_v5);
-  drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v11 + temp_v1,temp_v2 + temp_v3,0,7,temp_v6,temp_v9,temp_v13);
-  return;
+    return (playerSlotHoldsEntry(shop, id) != 0 && FUN_001ba3d0(id) <= 1) || FUN_0047fe44(id) != 0;
 }
 
-} /* extern "C" */
+/* Draw one row of the shop list: the selected row's frame and its highlight, the item's category
+ * badge, its marks, its name (greyed when the player can afford none, or when the selling list
+ * keeps it; tinted for upgraded equipment), its price and the count the player owns. Row 0 shows
+ * neither marks nor price. */
+void FUN_00494d68(Obj536044 *shop, s32 row, s32 selected, const EquipmentMenuItem *entry)
+{
+    u32 id = entry->id;
+    if (id == 0) {
+        return;
+    }
+    s32 depth = shop->depth;
+    if (selected) {
+        depth++;
+    }
+    f32 z = (f32)(256 - depth) * 0.00390625f;
+    const TextureTableEntryIV *origin;
+    if (!selected) {
+        origin = layoutFindTableEntry(&shop->region, row + 0x27);
+    } else {
+        origin = layoutFindTableEntry(&shop->region, row + 0x4F);
+    }
+    s32 x = origin->x;
+    s32 y = origin->y;
+
+    if (selected) {
+        efctSetSpeed(vec2GetSpeed(&shop->animation.sprites[2]));
+        uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x47, x, y, depth);
+        uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x48, x, y, depth);
+        uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x49, x, y, depth);
+        efctSetSpeed(1.0f);
+        FUN_0049368c(&shop->region, 0x4A, x, y, depth, 1);
+        if (touchSelectionGetSelected((Obj55ca08 *)shop->touchSelection) != 0) {
+            uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x108, x, y, depth);
+            uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x109, x, y, depth);
+            uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x10A, x, y, depth);
+            efctSetSpeed(vec2GetSpeed(&shop->animation.sprites[12]));
+            uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x10B, x, y, depth);
+            efctSetSpeed(1.0f);
+        } else {
+            uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x4B, x, y, depth);
+            uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x4C, x, y, depth);
+            uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x4D, x, y, depth);
+            efctSetSpeed(vec2GetSpeed(&shop->animation.sprites[12]));
+            uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x105, x, y, depth);
+            efctSetSpeed(1.0f);
+        }
+    }
+    const TextureTableEntryIV *badge;
+    if (!selected) {
+        badge = layoutFindTableEntry(&shop->region, 0x99);
+    } else {
+        badge = layoutFindTableEntry(&shop->region, 0xAC);
+    }
+    s32 badgeX = badge->x + x;
+    s32 badgeY = badge->y + y;
+    if (selected) {
+        FUN_0049368c(&shop->region, 0xAA, x, y, depth, 1);
+    }
+    FUN_00493344((const OffsetPosition2D *)&shop->region, (s16)id, badgeX, badgeY, depth, row != 0);
+
+    if (row != 0) {
+        if (entry->unk02 & 1) {
+            const TextureTableEntryIV *mark;
+            if (!selected) {
+                mark = layoutFindTableEntry(&shop->region, 0x98);
+            } else {
+                mark = layoutFindTableEntry(&shop->region, 0xAB);
+            }
+            s32 markX = mark->x + x;
+            s32 markY = mark->y + y;
+            uiDrawCompositeSpriteAtRectCorner((ScreenRect *)&shop->region, 5, markX, markY, depth);
+        }
+        if (entry->unk02 & 2) {
+            const TextureTableEntryIV *mark;
+            if (!selected) {
+                mark = layoutFindTableEntry(&shop->region, 0x9F);
+            } else {
+                mark = layoutFindTableEntry(&shop->region, 0xB2);
+            }
+            s32 markX = mark->x + x;
+            s32 markY = mark->y + y;
+            if (shop->slot == 8) {
+                uiDrawCompositeSpriteAtRectCorner((ScreenRect *)&shop->region, 7, markX, markY, depth);
+            } else {
+                uiDrawCompositeSpriteAtRectCorner((ScreenRect *)&shop->region, 6, markX, markY, depth);
+            }
+        }
+    }
+
+    u32 font = !selected ? 2 : 3;
+    const char *name = itemGetNameOrFallback(id, 0);
+    u32 color;
+    u32 nameSprite;
+    if (!selected) {
+        color = 0xFFFFFFFF;
+        nameSprite = 0x9A;
+        if (shop->slot != 8) {
+            if (!shopAffordableCount(entry->id, shopGetEntryPrice((const ShopEntry *)entry))) {
+                color = 0x9B9B9BFF;
+            }
+        } else if (shopItemIsKept(shop, id)) {
+            color = 0x9B9B9BFF;
+        }
+    } else {
+        nameSprite = 0xAD;
+        if (touchSelectionGetSelected((Obj55ca08 *)shop->touchSelection) != 0) {
+            color = 0xF5FF9FFF;
+        } else {
+            color = 0x9FE7FFFF;
+        }
+        if (shop->slot != 8) {
+            if (!shopAffordableCount(entry->id, shopGetEntryPrice((const ShopEntry *)entry))) {
+                color = 0x787878FF;
+            }
+        } else if (shopItemIsKept(shop, id)) {
+            color = 0x787878FF;
+        }
+    }
+    if (color != 0x787878FF && color != 0x9B9B9BFF && equipmentHasPositiveUpgrade(id)) {
+        if (equipmentIsFullyUpgraded(id)) {
+            color = 0xFBEB39FF;
+        } else {
+            color = 0x008400FF;
+        }
+    }
+    const TextureTableEntryIV *nameOrigin = layoutFindTableEntry(&shop->region, nameSprite);
+    s32 nameX = nameOrigin->x + x;
+    s32 nameY = nameOrigin->y + y;
+    drawTextAtSnappedRectangle(&shop->region, (f32)nameX, (f32)nameY, z, -1.0f, font, color, 1.0f, name);
+
+    char text[32];
+    if (row != 0) {
+        s32 price;
+        if (shop->slot == 8) {
+            price = aocItemGetPrice((AocPricedItem *)entry);
+        } else {
+            price = shopGetEntryPrice((const ShopEntry *)entry);
+        }
+        const TextureTableEntryIV *priceOrigin;
+        u32 priceColor;
+        if (!selected) {
+            priceOrigin = layoutFindTableEntry(&shop->region, 0xA7);
+            priceColor = 0x9B9B9BFF;
+        } else {
+            priceOrigin = layoutFindTableEntry(&shop->region, 0xBA);
+            priceColor = 0xFFFFFFFF;
+        }
+        s32 priceX = priceOrigin->x + x;
+        s32 priceY = priceOrigin->y + y;
+        sprintf(text, "%8d", price);
+        if (shop->slot == 8 && shopItemIsKept(shop, id)) {
+            sprintf(text, "     ---");
+        }
+        drawTextAtRelativePosition(&shop->region, 0, priceX, priceY, 0, 7, priceColor, depth, text);
+    }
+
+    s32 owned = FUN_001ba3d0(id);
+    const TextureTableEntryIV *ownedOrigin;
+    u32 ownedColor;
+    if (!selected) {
+        ownedOrigin = layoutFindTableEntry(&shop->region, 0xA9);
+        ownedColor = 0x9FDDDDFF;
+    } else {
+        ownedOrigin = layoutFindTableEntry(&shop->region, 0xBC);
+        ownedColor = 0x57D8FFFF;
+    }
+    s32 ownedX = ownedOrigin->x + x;
+    s32 ownedY = ownedOrigin->y + y;
+    sprintf(text, "%2d", owned);
+    drawTextAtRelativePosition(&shop->region, 0, ownedX, ownedY, 0, 7, ownedColor, depth, text);
+}
+}

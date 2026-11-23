@@ -2,6 +2,7 @@
  * sibling FUN_003bdab0 lists them, give that table here) and does not thread case 0's cleared `scaled` past the random
  * bonus test (this build branches straight past it); with the explicit cases the threading costs more rows (52 rows). */
 #include "battle/BtlMainAccess.h"
+#include "util/Random.h"
 #include "battle/BtlEntryLookup.h"
 #include "gamedata/SkillDataLookup.h"
 #include "gamedata/ConsumableRecord.h"
@@ -32,7 +33,6 @@ extern "C" {
 void btlEntryBuildSummary(ActionInfo *info, BtlMainState *battle, BtlEntry *entry);
 s32 FUN_003be918(s32 skill, s32 attacker, s32 target, s32 column, s32 row, f32 power, f32 multiplier);
 s32 flagWordTestBit(void *record, u32 bit);
-s32 randRange(u32 limit);
 
 /* Estimates the effect of a skill (`wantDamage`) or of an item-like record on `target` by
  * `attacker`: the damage with its random bonus for a skill, or the value change (a stat percentage

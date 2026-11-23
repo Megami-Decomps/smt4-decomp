@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the entry-table and scaled-index address registers r0/r1 are exchanged (retail adds the pointer offsets into r1, the index multiply into r0). */
 #include "battle/BtlMainAccess.h"
+#include "util/Random.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -11,7 +12,6 @@ void scrSetResult(s32 result);
 s32 btlResolveEntryChoice(s32 choice);
 s32 btlCombatantMatchesCategory(BtlCombatantEntryA *entry, u32 category);
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
-s32 randRange(u32 maximum);
 
 /* Chooses a random eligible group member whose available action matches the requested category. */
 u32 FUN_0039d87c(void)

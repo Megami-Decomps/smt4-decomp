@@ -4,6 +4,7 @@
  * between the active action and the held/current value; and it picks other scratch registers for the first next-command
  * store, the second opposing-side scan and the status-0x400 scan. */
 #include "battle/BattleCommandController.h"
+#include "util/Random.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleHelpers_Smt4.h"
 #include "battle/btlAction.h"
@@ -26,7 +27,6 @@ void FUN_00246e24(s32 a, CommandState *work, BtlActionRecord *record, u32 mask, 
 void btlSubmitAction(s32 effect, BtlEntry *entry, s32 mode);
 void FUN_003c05e8(s32 value);
 void FUN_00229a3c(s32 a, CommandState *work, s32 b, s32 c, s32 d);
-s32 randRange(s32 range);
 s32 FUN_003cfe14(BtlMainState **block, CommandState *work, s32 value);
 void btlReflectQueueSelectionMarks(s32 a, CommandState *work, BtlEntry *entry);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);

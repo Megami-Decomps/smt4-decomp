@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail hoists the constants 0 (r6) and 1 (r1) to the top of the function and stores done before loading entry; built materializes them at the use. */
+/* NON_MATCHING: retail materializes zero at entry and one after jobFind; the build materializes both near the done store and compares entry before that store. */
 /* Polls the quest center's shutdown: while its task is running or hasn't finished returns the
  * current result byte; otherwise releases the active entry, frees the work area and returns -1. */
 #include "common.h"

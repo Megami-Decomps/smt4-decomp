@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `mapDepartUpdate` (_code @ 0x2991d4, 0x15bc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/Random.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -112,7 +113,6 @@ extern short DAT_005f1e1a; /* 0x5f1e1a */
 
 extern unsigned int messageVoiceBankGet(void);
 /* Supplied declaration required: asdTMTexTablePrepareNodeImage. */
-extern int randRange(unsigned int);
 extern unsigned int messageVoiceFlagsGet(void);
 extern int asdTMTexTableGetHeaderValue(unsigned int);
 /* Supplied declaration required: FUN_001628c0. */

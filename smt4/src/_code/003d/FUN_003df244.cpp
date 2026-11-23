@@ -1,4 +1,4 @@
-/* NON_MATCHING: register assignment: retail keeps the resource in r4, the index in r5 and one zero in r7 (also the not-found code), passing a found value straight to strncpy in r1; the build gives the code its own register (r7) and the zero r9. */
+/* NON_MATCHING: 44 lines with the token-registry module's --fpu=softvfp (wave 82); before it: register assignment: retail keeps the resource in r4, the index in r5 and one zero in r7 (also the not-found code), passing a found value straight to strncpy in r1; the build gives the code its own register (r7) and the zero r9. */
 #include "gamedata/ItemCodeInfo.h"
 
 extern "C" {

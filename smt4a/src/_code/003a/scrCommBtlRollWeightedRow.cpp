@@ -1,11 +1,11 @@
 #include "battle/BtlMainAccess.h"
+#include "util/Random.h"
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
 #include "battle/BtlTables.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
-s32 randRange(u32 maximum);
 void scrSetResult(s32 value);
 
 /* Script command: rolls 0-99 against the percentage weights of section 10, 11 or 12 (argument 0 =

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `btlUnitSetParam` (_code @ 0x24c614, 0xe18 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
+#include "util/Random.h"
 #include "romwright_types.h"
 #include "battle/BattleUnitSlot.h"
 
@@ -24,7 +25,6 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: btlMarkLowestHpUnit. */
-extern int randRange(unsigned int);
 /* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlUnitGet. */
 /* Supplied declaration required: itemTableGetItemRecord. */

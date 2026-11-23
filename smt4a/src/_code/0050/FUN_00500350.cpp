@@ -1,4 +1,4 @@
-/* NON_MATCHING: the parameters' saved registers differ (retail keeps copied in r6, destination in r7, token in r8) and the clamp compares available against requested (cmp; movls) where this compares requested (cmp; movhi). */
+/* NON_MATCHING: 10 lines with the token-registry module's --fpu=softvfp (wave 82); before it: the parameters' saved registers differ (retail keeps copied in r6, destination in r7, token in r8) and the clamp compares available against requested (cmp; movls) where this compares requested (cmp; movhi). */
 #include "common.h"
 #include "nn/Result.h"
 

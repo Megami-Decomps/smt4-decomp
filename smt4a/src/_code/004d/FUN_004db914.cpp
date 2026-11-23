@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (212 vs ~206 rows); goto-based early exits and register allocation differ from retail's single result slot */
 #include "common.h"
+#include "util/Random.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "gamedata/DataTableSections.h"
 #include "code/Code002a_Smt4a.h"
@@ -39,7 +40,6 @@ struct DataTable5 {
 extern "C" {
 
 s32 FUN_004dc3b4(UniteContext* ctx, u16* first, u16* second, FusionResult* result);
-u32 randRange(u32 range);
 s32 slotRecordFindById(u32 id);
 u32 FUN_0023e32c(u16* first, u16* second, u32 id, u32 level);
 u16 uniteFindClosestEligibleCandidate(UniteContext* ctx, u32 race, u32 level, s32 flag);

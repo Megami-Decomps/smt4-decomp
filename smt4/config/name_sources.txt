@@ -6302,3 +6302,20 @@
 001f42d4 eventTexDrawJobs inferred twin of smt4a eventTexDrawJobs
 001e2350 btlStageCreate inferred twin of smt4a btlStageCreate
 0033e7c4 nkdwLoadWorldData inferred twin of smt4a nkdwLoadWorldData
+00333a38 questCountLinkedQuests inferred counts the quests whose excluded-quest pair names `id` (only active ones when asked) (w82-o1)
+00333af8 questCollectLinkedQuests inferred collects the ids of those quests into `out` (w82-o1)
+001e4ac0 btlDrawTopColorOverlay inferred draws the battle's full-screen colour overlay (slotColorFade.baseColor[0]) on the top screen (w82-o1)
+0020f3a8 btlDrawBottomColorOverlay inferred the same overlay with baseColor[1] on the bottom screen (w82-o1)
+001dd930 appRefundAllPoints inferred restores points to pointsTotal, clears the purchase bits and unlocks the free apps (w82-o1)
+002ac4a0 soundArchiveLoaderConvertWaveArchiveToIndividual inferred copies an embedded wave archive's header and gives it a FILE block of per-wave file pointers (w82-o2)
+004148c4 g_waveArchiveFileBlockSignature inferred size:0x4 the FILE block signature both wave-archive loaders copy (sound/WaveArchiveConvert.h)
+00336740 btlGetTurnEntryAfterPicker inferred advances the picker once unless the editor holds it, then returns the entry whose turn it is or -1 (w82-o3)
+002ecfe4 cecProcessStopWorker inferred joins and finalises the CEC process's worker thread, then frees the process (w82-o3)
+0034711c primRenderDataVertexBytes inferred the vertex buffer size of every stream a PrimRenderData carries (w82-o3)
+0034dc10 gfxBuildBlackAddCombinerCommands inferred builds the combiner command list with a black constant colour and the twelve cleared stage records (w82-o3)
+0029ec94 uniteSyncPreviewPortraits inferred keeps the four fusion preview portrait slots in step with the selection (w82-o4)
+001b72e0 btlUiDrawUpperScreen inferred the battle UI's top-screen draw (registered by btlUiCreateTasks as "btlUI DrawUpLeft/DrawUpRight") (w82-f1)
+003996c8 naviMapDraw inferred the navigation map screen's draw step (w82-f1)
+003d317c btlCommandStart inferred starts the selected battle command (w82-f1)
+00439cc0 g_btlUiTestTextureIds inferred the texture ids the battle UI's test readout draws (w82-f1)
+001f87d4 lmapViewUpdateCloseUpSequence inferred twin of smt4a lmapViewUpdateCloseUpSequence (w82-f2 ported it)

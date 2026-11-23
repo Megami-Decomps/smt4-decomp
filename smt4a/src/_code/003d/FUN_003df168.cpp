@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the loot-weight total differs: retail keeps the two unrolled accumulators in ip/r5 and walks the slots from r1/r0, the build uses r0/r3 and r1/r5. */
 #include "gamedata/SubQuestLootTable.h"
+#include "util/Random.h"
 #include "quest_center/QuestRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 #include "addon/AocSystemA.h"
@@ -14,7 +15,6 @@ struct AocDropEntry {
 
 extern "C" {
 
-s32 randRange(u16 maximum);
 u32 gameGetUnlockedCountLimit(void);
 u32 levelGetExpRequirement(u32 level);
 
@@ -61,7 +61,7 @@ void FUN_003df168(ResultSpoilsA *result, s32 index)
 
         s32 added = 0;
         for (u32 roll = record->count; roll != 0; roll--) {
-            s32 remaining = randRange(total - 1);
+            s32 remaining = randRange((u16)(total - 1));
             for (s32 j = 0; j < 8; j++) {
                 u32 weight = entry->slots[j].weight;
                 if (weight != 0 && (remaining -= weight) < 0) {

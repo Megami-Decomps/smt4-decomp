@@ -4,7 +4,7 @@
 extern "C" {
 s32 FUN_001ba3d0(u32 id); // declcheck: local (the forwarder receives an ID and returns its count)
 s32 FUN_0031d174(EquipmentMenuCursor *cursor); // declcheck: local (the forwarder returns the cursor row)
-u32 FUN_00498408(Obj536044 *shop, u32 id);
+u32 playerSlotHoldsEntry(Obj536044 *shop, u32 id);
 s32 shopGetEntryPrice(const EquipmentMenuItem *item); // declcheck: local (the shop's item type)
 s32 shopAffordableCount(u32 id, s32 divisor); // declcheck: local (the shared declaration does not compile here or changes this unit)
 }
@@ -30,7 +30,7 @@ extern "C" void shopEnterQuantitySelection(Obj536044 *shop, s32 nextState)
             held = 99;
         }
         maximum = held;
-        if (FUN_00498408(shop, item->id) != 0) {
+        if (playerSlotHoldsEntry(shop, item->id) != 0) {
             --maximum;
         }
     } else {

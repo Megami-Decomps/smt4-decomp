@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/Random.h"
 
 #define TABLE29_KIND_CHANCE 3 /* triggers when its game flag is set or on a chance roll */
 
@@ -35,7 +36,6 @@ struct Table29Target {
 extern "C" {
 
 const Table29Entry *dataTable29GetEntry(u32 index);
-s32 randRange(s32 max);
 s32 gameFlagIsSet(s32 flag);
 
 /* Applies data table 29 entry `index` to the target, randomizing its two values; returns 1 when the
@@ -58,7 +58,7 @@ s32 table29ApplyEntry(Table29Target *target, u32 index)
     target->rolled = 0;
     if (target->kind == TABLE29_KIND_CHANCE) {
         if (!gameFlagIsSet(target->flag)) {
-            if (randRange(99) <= target->chance) {
+            if ((s32)randRange(99) <= target->chance) {
                 triggered = 1;
                 target->rolled = 1;
             }

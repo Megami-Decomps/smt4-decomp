@@ -78,7 +78,7 @@ extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_002f15f8. */
 /* Supplied declaration required: questUiPlaySelectionSound. */
-extern int FUN_00335384(int);
+extern int uiQuestStepIntro(int);
 /* Supplied declaration required: buttonHelpGetValue. */
 /* Supplied declaration required: useCounterRelease. */
 /* Supplied declaration required: uiQuestSortListByEntryKind. */
@@ -629,7 +629,7 @@ joined_r0x002167bc:
     break;
   case 0x11:
     uiSpriteAdvanceAnimation(temp_v1 + 0x34);
-    temp_v9 = FUN_00335384(temp_v1);
+    temp_v9 = uiQuestStepIntro(temp_v1);
     if (temp_v9 == 0) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;

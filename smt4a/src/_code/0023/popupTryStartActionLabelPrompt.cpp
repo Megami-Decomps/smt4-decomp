@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/Random.h"
 #include <stdio.h>
 #include "code/Code0015.h"
 #include "gamedata/SaveSlotTable.h"
@@ -7,7 +8,6 @@ struct PopupSubstitutionNames { const char *names[12]; };
 extern "C" {
 extern PopupSubstitutionNames DAT_00531a98;
 s32 gameFlagIsSet(u32 flag);
-s32 randRange(u32 maximum);
 const char *popupSelectWeightedMessage(s32 category, s32 id);
 void __aeabi_memcpy(void *destination, const void *source, u32 size);
 
@@ -24,7 +24,7 @@ u32 popupTryStartActionLabelPrompt(s32 action, s32 count)
         return 0;
     if (gameFlagIsSet(0x8D) && !gameFlagIsSet(0xC2) && unit->id == 0xB1)
         return 0;
-    if (gameFlagIsSet(0x1A2) && randRange(99) + 1 <= 50)
+    if (gameFlagIsSet(0x1A2) && (s32)randRange(99) + 1 <= 50)
         return 0;
     s32 category = 12;
     if (count >= 3)

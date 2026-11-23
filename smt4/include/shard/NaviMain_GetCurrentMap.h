@@ -7,7 +7,8 @@
 extern "C" {
 #endif
 
-u32 NaviMain_GetCurrentMap(void);
+/* The map the navigator shows; callers pass their navi handle (`unused`), which it never reads. */
+u32 NaviMain_GetCurrentMap(const void *unused);
 
 #ifdef __cplusplus
 }

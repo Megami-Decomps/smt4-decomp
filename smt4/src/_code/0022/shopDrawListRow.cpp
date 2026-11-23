@@ -1,4 +1,4 @@
-/* NON_MATCHING: 120 lines (58 by shape); same calls, branches, registers and 84-byte frame as retail. What differs:
+/* NON_MATCHING: 112 lines (50 by shape); same calls, branches, registers and 84-byte frame as retail. What differs:
  * - where the spilled locals live: retail keeps the font at sp+36, the text at sp+40 and the name and its sprite at
  *   sp+72/76, the scroll highlight's layout entry, sprite and x in sp+0/4/12 and the helper's id copy and the price
  *   in sp+8; the build puts the text at sp+48, the name at sp+40 and the others in the outgoing-argument slots
@@ -6,8 +6,7 @@
  *   differs the same way;
  * - `row != 0` is `mov #1; moveq #0` in retail (`movne #1; moveq #0` here);
  * - retail loads the entry id into r2 before it moves the price for shopAffordableCount, as its four other callers do
- *   (a plain `static` helper around the call gives that, but moves the id's slot to sp+28);
- * - the name draw loads the 0.0 spacing after the colour move (before it here). */
+ *   (a plain `static` helper around the call gives that, but moves the id's slot to sp+28). */
 #include <stdio.h>
 #include "shard/S2Scene3a.h"
 #include "shard/S1ListPanel.h"
@@ -24,8 +23,8 @@ void FUN_00231bcc(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 dept
 void FUN_00230d2c(const AsdTextureRegion *region, u32 id, s32 x, s32 y, s32 depth, s32 showEquipped);
 void uiRectDrawAtBottomRight(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 depth);
 void gxSetClippedBottomScreenScissor(s32 x, s32 y, s32 width, s32 height);
-f32 drawTextAtSnappedRectangle(const AsdTextureRegion *region, f32 x, f32 y, u32 layer, u32 color,
-                               const char *text, f32 depth, f32 spacing, f32 opacity);
+f32 drawTextAtSnappedRectangle(const AsdTextureRegion *region, f32 x, f32 y, f32 depth, f32 spacing,
+                               u32 layer, u32 color, f32 opacity, const char *text);
 const char *itemGetNameOrFallback(u32 id, s32 payload);
 s32 shopSlotGetPrice(const Scene3aEntry *entry);
 s32 aocItemGetPrice(const Scene3aEntry *entry);
@@ -157,7 +156,7 @@ void shopDrawListRow(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *
     const TextureTableEntryIV *nameOrigin = layoutFindTableEntry(&scene->region, nameSprite);
     s32 nameX = nameOrigin->x + x;
     s32 nameY = nameOrigin->y + y;
-    drawTextAtSnappedRectangle(&scene->region, (f32)nameX, (f32)nameY, font, color, name, z, 0.0f, 1.0f);
+    drawTextAtSnappedRectangle(&scene->region, (f32)nameX, (f32)nameY, z, 0.0f, font, color, 1.0f, name);
 
     char text[32];
     if (row != 0) {

@@ -1,4 +1,5 @@
 #include "gamedata/NkmBaseRecordA.h"
+#include "util/Random.h"
 
 struct SkillRollUnit {
     /* 0x00 */ u8 unk00[0x34];
@@ -16,7 +17,6 @@ extern "C" {
 
 s32 saveIsRecordValueBounded(u16 id);
 s32 gameDataFlagTestBit(u32 bit);
-s32 randRange(u32 max);
 SkillRollMetadata *findSkillMetadataById(u16 id);
 
 /* Rolls `tries` times against the unit's level-based chance (always succeeding when `force` is

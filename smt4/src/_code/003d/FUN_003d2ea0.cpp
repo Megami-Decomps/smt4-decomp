@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/Random.h"
 #include "battle/btlHelp.h"
 #include "battle/BattleCommandController.h"
 #include "battle/BtlMainAccess.h"
@@ -22,7 +23,6 @@ void btlSubmitAction(s32 effect, BtlEntry *entry, s32 mode);
 void btlMenuCursorStepReflectAction(s32 chance, CommandState *work, s32 a, BtlActionRecord *record, s32 b);
 void frameRangeExtend(BtlMainState **turn, CommandState *work, s32 id, s32 a, s32 b, s32 c);
 void btlAdjustPropertyClamped(s32 id, s32 stat, s32 delta, s32 preview);
-s32 randRange(s32 range);
 void FUN_003c0484(BtlEntry *entry, s32 conditions, s32 context);
 
 /* Starts the action of a combatant whose turn came: picks the response its pending flags call for. */

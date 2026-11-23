@@ -57,7 +57,7 @@ extern "C" {
 s8 touchSelectionGetSelected(const CursorState *cursor);
 LayoutSlot *layoutFindTableEntry(u8 *layout, u32 id);
 void uiDrawScrollingSelectionEntry(RowPanel *panel, s32 index, s32 alpha, s32 row);
-void drawTextAtSnappedRectangle(u8 *layout, f32 x, f32 y, s32 style, u32 color, const char *text, f32 scale, f32 c, f32 d);
+void drawTextAtSnappedRectangle(u8 *layout, f32 x, f32 y, f32 scale, f32 c, s32 style, u32 color, f32 d, const char *text);
 void FUN_00231bcc(u8 *layout, u32 image, s32 x, s32 y, s32 alpha, u32 flags);
 s32 FUN_00262cb0(u16 id);
 s32 table8Type5GetValue(s32 id);
@@ -95,7 +95,7 @@ void FUN_003abae8(RowPanel *panel, s32 index, s32 row, s32 selected, s32 alpha)
         color = 0x5A5A5AFF;
     const char *name = panel->list.entries[row].name;
     LayoutSlot *box = layoutFindTableEntry(panel->layout, nameBox);
-    drawTextAtSnappedRectangle(panel->layout, (f32)(box->x + baseX), (f32)(box->y + baseY), style, color, name, scale, 1.0f, 0.0f);
+    drawTextAtSnappedRectangle(panel->layout, (f32)(box->x + baseX), (f32)(box->y + baseY), scale, 1.0f, style, color, 0.0f, name);
     u32 iconBox;
     if (selected == 0) {
         iconBox = 0x4CD;

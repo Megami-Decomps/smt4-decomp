@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00385c44` (_code @ 0x385c44, 0x8e0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/Random.h"
 #include "gamedata/GameFlags.h"
 #include "battle/BtlUiOpening.h"
 
@@ -71,7 +72,6 @@ extern unsigned int DAT_00573b00; /* 0x573b00 */
 extern unsigned int DAT_00573b04; /* 0x573b04 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
-extern int randRange(unsigned int);
 extern int gameFlagIsSet(unsigned int);
 extern unsigned int flagSelectVariant(void);
 extern int gameDataGetTableValue(void);

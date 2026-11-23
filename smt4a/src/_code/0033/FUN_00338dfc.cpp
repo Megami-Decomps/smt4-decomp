@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00338dfc` (_code @ 0x338dfc, 0x45c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include <stdio.h>
+#include "util/Random.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 #include "mapnavi/naviMain.h"
@@ -35,7 +36,6 @@ extern unsigned char uRam005f0cd7; /* 0x5f0cd7 */
 extern int DAT_005f0cf4; /* 0x5f0cf4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int randRange(unsigned int);
 extern int recordGetScaledMaximum(void);
 extern int gameFlagIsSet(unsigned int);
 extern int gameGetSlotRecord(void);

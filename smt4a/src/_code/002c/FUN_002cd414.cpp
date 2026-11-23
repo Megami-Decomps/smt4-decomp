@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cd414` (_code @ 0x2cd414, 0x4cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/Random.h"
 #include "battle/Talk/btlTalkBustUp.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -18,7 +19,6 @@ int VectorSignedToFloat(int, int);
 extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int randRange(unsigned int);
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */

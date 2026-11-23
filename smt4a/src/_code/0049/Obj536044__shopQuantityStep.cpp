@@ -42,7 +42,7 @@ s32 inputIsQuestMenuPressed(void);
 s32 FUN_0031d174(EquipmentMenuCursor *list); // declcheck: local (a forwarder: this caller uses the row it returns)
 s32 shopAffordableCount(u32 id, s32 divisor); // declcheck: local (the shared declaration does not compile here or changes this unit)
 s32 FUN_001ba3d0(u32 id); // declcheck: local (a forwarder: this caller passes the id and uses the count)
-u32 FUN_00498408(Obj536044 *scene, u32 id);
+u32 playerSlotHoldsEntry(Obj536044 *scene, u32 id);
 void FUN_00498ff0(Obj536044 *scene);
 u8 messageMainIsIdle(void);
 const char *itemGetNameOrFallback(u32 id, s32 payload);
@@ -108,7 +108,7 @@ void Obj536044::shopQuantityStep()
         flagWordSet(&flags, 0x1000);
         uiSpriteBankApplyPreset(&animation, 6);
         uiSpriteBankApplyPreset(&animation, 7);
-        rectangleInitializeSelection(&panelRect, 320, 0, 32);
+        rectangleInitializeSelection(&quantityPanel.rect, 320, 0, 32);
         substate = 1;
         sysPlaySe(0x87);
         quantityIndex = -1;
@@ -118,7 +118,7 @@ void Obj536044::shopQuantityStep()
         UiSpriteState *slide = &animation.sprites[6];
 
         entryDispatchUpdate(&animation, 6);
-        pointConvertToFloat((FloatPoint *)&panelRect, vec2GetXInt(slide), vec2GetYInt(slide));
+        pointConvertToFloat((FloatPoint *)&quantityPanel.rect, vec2GetXInt(slide), vec2GetYInt(slide));
         if (uiSpriteGetCompletionState(slide) != 0) {
             FUN_00493a7c(&quantity);
             substate = 2;
@@ -197,7 +197,7 @@ void Obj536044::shopQuantityStep()
                     held = 99;
                 }
                 maximum = held;
-                if (FUN_00498408(this, item->id) != 0) {
+                if (playerSlotHoldsEntry(this, item->id) != 0) {
                     maximum--;
                 }
             } else {
@@ -219,7 +219,7 @@ void Obj536044::shopQuantityStep()
             UiSpriteState *slide = &animation.sprites[7];
 
             entryDispatchUpdate(&animation, 7);
-            pointConvertToFloat((FloatPoint *)&panelRect, vec2GetXInt(slide), vec2GetYInt(slide));
+            pointConvertToFloat((FloatPoint *)&quantityPanel.rect, vec2GetXInt(slide), vec2GetYInt(slide));
             if (uiSpriteGetCompletionState(slide) == 0) {
                 break;
             }
@@ -307,7 +307,7 @@ void Obj536044::shopQuantityStep()
             UiSpriteState *slide = &animation.sprites[7];
 
             entryDispatchUpdate(&animation, 7);
-            pointConvertToFloat((FloatPoint *)&panelRect, vec2GetXInt(slide), vec2GetYInt(slide));
+            pointConvertToFloat((FloatPoint *)&quantityPanel.rect, vec2GetXInt(slide), vec2GetYInt(slide));
             if (uiSpriteGetCompletionState(slide) != 0) {
                 flagWordClear(&flags, 0x1000);
             }
@@ -340,7 +340,7 @@ void Obj536044::shopQuantityStep()
         if (scrRunOpcodesStub(controller) != 2) {
             break;
         }
-        if (slot != 7 && slot != 8 && FUN_00498408(this, selectedItem()->id) == 0) {
+        if (slot != 7 && slot != 8 && playerSlotHoldsEntry(this, selectedItem()->id) == 0) {
             startScript("shop_IsEquip");
             messageMainSetTargetFlags(1);
             substate = 10;

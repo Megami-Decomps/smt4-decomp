@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d3ba8` (_code @ 0x3d3ba8, 0x1ae8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/Random.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {
@@ -128,7 +129,6 @@ extern int btlUnitIsDeadAndUncopied(unsigned int *, unsigned int *, int);
 /* Supplied declaration required: FUN_0023c5c0. */
 extern int FUN_0023c684(unsigned int);
 extern unsigned int btlQueueParamLimitForKind(unsigned int);
-extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_0023f27c. */
 /* Supplied declaration required: FUN_00246080. */
 /* Supplied declaration required: btlReflectQueueSelectionMarks. */

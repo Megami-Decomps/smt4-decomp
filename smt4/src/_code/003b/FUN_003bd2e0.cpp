@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bd2e0` (_code @ 0x3bd2e0, 0x6ec bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
+#include "util/Random.h"
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "battle/BtlGlobals.h"
@@ -67,7 +68,6 @@ typedef struct {
 /* Supplied declaration required: selectionCopySupportedValue. */
 /* Supplied declaration required: btlEntryGetPassiveSkillIds. */
 extern int FUN_0023ea94(void);
-extern int randRange(unsigned int);
 /* Supplied declaration required: btlSkillHitFlags. */
 extern unsigned int FUN_002463e8(unsigned int);
 /* Supplied declaration required: btlEntryBuildSummary. */

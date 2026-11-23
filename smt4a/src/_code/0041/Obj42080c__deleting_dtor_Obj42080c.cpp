@@ -1,15 +1,15 @@
 #include "shard/Shard0041.h"
 #include "classes/Obj42080c.h"
+#include "classes/Obj420794Resources.h"
 
 extern "C" {
 extern u8 _ZTV9Obj420794[];
-void textureOwnerReset(u32 handle);
 
 void _ZN9Obj42080cD0Ev(FilterObj *object)
 {
     object->vtbl = _ZTV9Obj420794 + 8;
     if (object->handle != 0) {
-        textureOwnerReset(object->handle);
+        bufferHandleRelease(object->handle);
         object->handle = 0;
     }
     if (object->buffer != 0) {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023e52c` (_code @ 0x23e52c, 0x4d4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/Random.h"
 
 extern "C" {
 
@@ -20,7 +21,6 @@ extern unsigned char DAT_00439ad0; /* 0x439ad0 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int randRange(unsigned int);
 /* Supplied declaration required: asdMemFreeIfNotNull. */
 extern int btlScriptUnitIsIncapacitated(int);
 /* Supplied declaration required: qsort. */

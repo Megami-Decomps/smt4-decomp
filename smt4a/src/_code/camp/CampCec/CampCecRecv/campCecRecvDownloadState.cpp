@@ -81,7 +81,7 @@ s32 gameDataGetRecordValue(void);
 u8 FUN_00280250(void);
 void FUN_0036d41c(void);
 u32 FUN_0033004c(void);
-void FUN_0037be64(void);
+void cecRankingRebuild(void);
 void FUN_00330b7c(void);
 u8 FUN_0031cee0(void);
 SlotRecordA *stockFindSelectedUnit(void);
@@ -281,7 +281,7 @@ s32 campCecRecvDownloadState(CampCecRecv *recv)
                 gameDataAddMoneySaturating(1);
                 s32 total = gameDataBlocksGetWord27E90();
                 if (total % 100 == 0 && total > 0) {
-                    FUN_0037be64();
+                    cecRankingRebuild();
                     FUN_00330b7c();
                     if (gameFlagIsSet(0x45B)) {
                         recv->receive.pending |= 0x10;

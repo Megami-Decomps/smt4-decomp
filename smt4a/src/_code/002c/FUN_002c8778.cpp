@@ -24,8 +24,8 @@ void FUN_002c8778(u16 questId)
         uiSpriteSelectAnim(menu->sprite(14), 8);
         spriteSetLayer(menu->sprite(14), 2);
         uiSpriteSelectAnim(menu->sprite(15), 10);
-        menu->firstCounter = 0;
-        menu->secondCounter = 0;
+        menu->introPhase = 0;
+        menu->introTimer = 0;
     }
     uiQuestEnterMenuState(g_uiQuest, 0x11);
     sysPlaySe(0x1a);

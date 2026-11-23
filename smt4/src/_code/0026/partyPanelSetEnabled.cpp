@@ -1,6 +1,19 @@
-/* NON_MATCHING: compiler reuses the loaded party-panel pointer instead of retail reloading it after flag normalization. */
+/* NON_MATCHING: 8 lines, the same instructions as retail: retail tests the argument before it reloads g_partyPanel
+ * and builds the flag in r1 (as in smt4a partyPanelSetHidden); the build reloads the panel first. */
 #include "ui/PartyPanelState.h"
+
 extern "C" {
-/* Store the inverse enabled flag when the party panel exists. */
-void partyPanelSetEnabled(s32 enabled) { if (g_partyPanel!=NULL) g_partyPanel->disabled=enabled==0; }
+
+/* Shows or hides the party panel if it exists. */
+void partyPanelSetEnabled(s32 enabled)
+{
+    if (g_partyPanel != NULL) {
+        if (enabled) {
+            g_partyPanel->disabled = 0;
+        } else {
+            g_partyPanel->disabled = 1;
+        }
+    }
 }
+
+} /* extern "C" */

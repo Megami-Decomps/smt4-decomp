@@ -1,5 +1,6 @@
 /* NON_MATCHING: the remaining-index loop and the 100-byte copy still use a different register schedule. */
 #include "network/DataStore/DataStoreMain.h"
+#include "util/Random.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
 
@@ -14,7 +15,6 @@ extern const char DAT_00533030[];
 void asdMemFree(void *block);
 void asdOperatorDelete(void *object);
 void asdOperatorDeleteArray(void *array);
-s32 randRange(u32 maximum);
 s32 FUN_00413e28(DataStoreReply *reply);
 void FUN_00413af4(ReplyString *result, DataStoreReply *reply, s32 index);
 void *FUN_00414a24(void *reply);

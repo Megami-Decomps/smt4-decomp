@@ -1,4 +1,5 @@
 #include "gamedata/EncounterSelection.h"
+#include "util/Random.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00303f48` (_code @ 0x303f48, 0xd64 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlockA.h"
@@ -11,7 +12,6 @@ extern "C" {
 int moriModelContentCopyBody(void);
 int handleRegistryRegisterObject(...);
 
-int randRange(...);
 int asdMemoryAllocTraced(...);
 int gameFlagIsSet(...);
 int nkmEnemyFindById(void);

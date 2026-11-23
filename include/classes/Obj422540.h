@@ -16,6 +16,10 @@ struct OwnerAllocator {
  * node pools and their auxiliary halfword buffers. */
 class Obj422540 {
 public:
+    /* Constructors for kinds that supply their own size and storage. */
+    Obj422540(OwnerAllocator *allocator, void *storage)
+        : allocator(allocator), storage(storage), type(-1) {}
+
     Obj422540(OwnerAllocator *allocator, void *storage, u32 size)
         : allocator(allocator), storage(storage), type(-1)
     {

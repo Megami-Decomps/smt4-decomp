@@ -11,8 +11,8 @@ static __inline UiLayoutResourceIV *ownerResource(void *owner)
 extern "C" {
 UiLayoutEntryPrefixIV *layoutFindTableEntry(UiLayoutResourceIV *resource, u32 entryId); // declcheck: local (the shared declaration in AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h does not compile here: a value of type "TextureTableEntryIV *" cannot be assigned to an entity of type "const UiLayoutEntryPrefixIV *")
 void drawTextAtSnappedRectangle(UiLayoutResourceIV *resource, f32 x, f32 y,
-                  u32 layer, u32 mask, u32 convertedValue, f32 opacity,
-                  f32 rotation, f32 scale);
+                  f32 opacity, f32 rotation, u32 layer, u32 mask,
+                  f32 scale, u32 convertedValue);
 
 void FUN_0022daac(void *owner, u32 value, u32 entryIndex,
                   s32 alternate, s32 fade)
@@ -43,8 +43,8 @@ void FUN_0022daac(void *owner, u32 value, u32 entryIndex,
     const UiLayoutEntryPrefixIV *anchor = layoutFindTableEntry(ownerResource(owner), anchorId);
     const s32 x = anchor->x + entryX;
     const s32 y = anchor->y + entryY;
-    drawTextAtSnappedRectangle(ownerResource(owner), static_cast<f32>(x), static_cast<f32>(y), layer,
-                 mask, convertedValue,
-                 opacity, 0.0f, 1.0f);
+    drawTextAtSnappedRectangle(ownerResource(owner), static_cast<f32>(x), static_cast<f32>(y), opacity,
+                 0.0f, layer,
+                 mask, 1.0f, convertedValue);
 }
 }

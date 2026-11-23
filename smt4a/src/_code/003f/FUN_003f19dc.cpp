@@ -1,4 +1,5 @@
 /* NON_MATCHING: only the placement of the shared zero constant differs (retail hoists `mov r7, #0` above the svc; the build emits it after the thread finalize). */
+#include "nn/os/WaitObject.h"
 #include "nn/Result.h"
 #include "nn/os/AddressSpaceManager.h"
 #include "nn/os/Thread.h"
@@ -26,7 +27,6 @@ extern "C" {
 void addressSpaceRegionFree(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);
 void asdMemFree(void *block);
-s32 svcWaitSynchronization1(u32 handle, s64 timeout); /* svc 0x24 */
 
 }
 
@@ -45,12 +45,7 @@ extern "C" {
 // Waits for the worker thread to end, then releases the thread, its stack, its buffer and the position.
 void FUN_003f19dc(StreamWorker *worker)
 {
-    s32 result = svcWaitSynchronization1(worker->thread.handle, -1);
-    bool failed = nnResultIsFailure(result);
-    if (failed) {
-        resultHandleFailure(result, failed);
-    }
-    worker->thread.joined = 1;
+    nn::os::ThreadJoin(&worker->thread);
     worker->thread.~NnOsThread();
     if (worker->stack != NULL) {
         addressSpaceRegionFree(worker->stack);

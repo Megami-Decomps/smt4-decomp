@@ -73,6 +73,8 @@ typedef struct LmapView {
 typedef struct LmapViewHolder {
     /* 0x00 */ u32 job;
     /* 0x04 */ LmapView *view;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ f32 eyeFloor;    /* the eye height of the last close-up; the pull-back does not go below it */
 } LmapViewHolder;
 
 typedef char LmapViewOffsets[offsetof(LmapView, heading) == 0x18 && offsetof(LmapView, up) == 0x1C &&
@@ -85,6 +87,7 @@ typedef char LmapViewOffsets[offsetof(LmapView, heading) == 0x18 && offsetof(Lma
     offsetof(LmapView, tracking) == 0x21C && offsetof(LmapView, move) == 0x220 &&
     offsetof(LmapView, targetOffset) == 0x294 &&
     offsetof(LmapView, moving) == 0x2B0 && offsetof(LmapView, presetEnabled) == 0x2B8 &&
-    sizeof(LmapView) == 0x2C0 && offsetof(LmapViewHolder, view) == 4 ? 1 : -1];
+    sizeof(LmapView) == 0x2C0 && offsetof(LmapViewHolder, view) == 4 &&
+    offsetof(LmapViewHolder, eyeFloor) == 0x10 ? 1 : -1];
 
 #endif

@@ -65,8 +65,8 @@ s32 battleMainProcessUpdate(u32 job);
 void FUN_0020f04c(u32 job);
 s32 btlEditorQueryFalse(u32 job);
 s32 sceneQueryFalse(u32 job);
-s32 FUN_001e4ac0(u32 job);
-s32 FUN_0020f3a8(u32 job);
+s32 btlDrawTopColorOverlay(u32 job);
+s32 btlDrawBottomColorOverlay(u32 job);
 
 /* Allocates the battle's work area and its saved copies, applies the start request and starts the battle jobs. */
 void FUN_001b0db4(const BtlStartRequest *request, s32 size)
@@ -113,9 +113,9 @@ void FUN_001b0db4(const BtlStartRequest *request, s32 size)
     work->mainJob = asdProcessCreateSimple(reinterpret_cast<const s8 *>("BTLMAIN C"), 2, 0, 0, battleMainProcessUpdate, FUN_0020f04c, reinterpret_cast<u32>(g_btlMainState.work));
     taskCreateDraw(reinterpret_cast<const s8 *>("BTLMAIN U"), 0x73, 0, 0, btlEditorQueryFalse, NULL, 0, work->mainJob);
     taskCreateDraw(reinterpret_cast<const s8 *>("BTLMAIN D"), 0xe6, 0, 0, sceneQueryFalse, NULL, 0, work->mainJob);
-    taskCreateDraw(reinterpret_cast<const s8 *>("BTLFADE UL"), 0x80, 0, 0, FUN_001e4ac0, NULL, 0, work->mainJob);
-    taskCreateDraw(reinterpret_cast<const s8 *>("BTLFADE UR"), 0xde, 0, 0, FUN_001e4ac0, NULL, 0, work->mainJob);
-    taskCreateDraw(reinterpret_cast<const s8 *>("BTLFADE D"), 0xe9, 0, 0, FUN_0020f3a8, NULL, 0, work->mainJob);
+    taskCreateDraw(reinterpret_cast<const s8 *>("BTLFADE UL"), 0x80, 0, 0, btlDrawTopColorOverlay, NULL, 0, work->mainJob);
+    taskCreateDraw(reinterpret_cast<const s8 *>("BTLFADE UR"), 0xde, 0, 0, btlDrawTopColorOverlay, NULL, 0, work->mainJob);
+    taskCreateDraw(reinterpret_cast<const s8 *>("BTLFADE D"), 0xe9, 0, 0, btlDrawBottomColorOverlay, NULL, 0, work->mainJob);
 }
 
 } /* extern "C" */

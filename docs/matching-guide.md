@@ -187,6 +187,12 @@ difference a register tie-break.
 - A "fourth float" a function reads after a three-float by-value struct can be a separate `f32` argument: smt4/smt4a
   `residentApplyFallbackValues(MapVector position, f32 angle)` forwards both to `soundListenerSetPose(const MapVector *, f32)`
   and is IDENTICAL in both games; a four-float struct made armcc reload the spilled fourth word (wave 81).
+- A halfword field compared with `ldrh` but passed with `ldrsh` is a `u16` field converted with `(s16)` at the calls,
+  when the callees take `s32` (the portrait functions test `id < 0`): `UniteWork`'s `portraitSelection*.loaded` made
+  smt4 `FUN_0029ec94` and smt4a `FUN_00231574` IDENTICAL (wave 82). Keep such casts only where the callee is wider.
+- `randRange` returns `u32` (`util/Random.h`, as the definition computes it and as unsigned float conversions use it);
+  a caller that compares it signed writes `(s32)randRange(n)`, one that narrows the bound `randRange((u16)(n))`:
+  with those, the header replaced about 95 local prototypes and every caller kept its score (wave 82).
 
 ### 64-bit flag masks
 
@@ -434,6 +440,8 @@ difference a register tie-break.
 - When retail reaches a field through its own pool word even in a function that already holds the
   enclosing object's base, the field is a separate object: split the symbol (smt4's `g_mapSelection`
   at 0x49FD14 was carved out of `g_gameState`).
+  smt4a's `g_eventEffect` is several EventEffect.cpp globals: every function of the file pools its base and a second
+  word; sized 0x1C with `g_eventBannerTextures` at 0x57f3d0, seven of them come out IDENTICAL by `fdiff` (wave 82).
 - Two globals that retail reaches from one pool word plus an offset (status as `g_asdSoundDuck + 0x1c`) are
   defined in the same file: armcc folds them onto one base only for data the translation unit defines. Define them
   in the unit that owns the file's data and keep every other declaration `extern` (smt4 `asdSoundInitialize`,
@@ -621,6 +629,16 @@ asks for.
 - A translation unit only helps when retail keeps the callee out of line: built as one file, smt4
   `buttonHelpSetSlot` was inlined into `buttonHelpCalc` (153 retail rows against 222), although both address the
   queued arrays from one pool word; the TU was not made (wave 80).
+- When a caller inlines a real function, its out-of-line copy should call the shared inline and stay IDENTICAL:
+  `gameSetFlag1E60` (`shard/GameGlobals.h`, FUN_0029dfc0's body written flat; the comma-assigned spelling is 38 lines
+  off) made smt4 `campMenuSessionReset` IDENTICAL, `questReadRuntimeFlagInline` the quest-list collectors (wave 82).
+- Not evidence (wave 82 review): an inline used only by a twin pair (`partyPanelWriteVisible`; the sibling
+  `FUN_00331380` got worse with it, 23 -> 30), and a second spelling of the render-stack pop with the apply test
+  written out (smt4a `FUN_0041c1d4`): both out-of-line `renderCtxPopState` copies are IDENTICAL with either spelling,
+  so they decide nothing, and `renderCtxPopCounted`'s 20 users lose 5 IDENTICAL with the other one.
+- nn::os's `WaitObject::WaitOne` and `Thread::Join` are per-game header inlines (`nn/os/WaitObject.h`: IV waits through
+  `WaitSynchronizationN`, Apocalypse through `WaitSynchronization1`); `nn::os::ThreadJoin` made smt4 `FUN_002ecfe4`
+  IDENTICAL and moved two smt4a thread teardowns from 12/14 to 2/4 lines (wave 82).
 
 ### Loops and data
 
@@ -651,11 +669,19 @@ asks for.
   keeps retail's zero store before the `Initialize` call and before the deferred constructor's other stores, which made
   five static initialisers IDENTICAL (smt4 `FUN_003ec728`, `FUN_003eb734`, `FUN_003f2028`, `FUN_003f2134`, smt4a
   `FUN_00511778`; wave 79). relink still keeps their retail bytes (their `.bss` objects cannot be placed).
+  `Obj42cd08` is nn::os's `LightEvent` (its `Signal` reloads the state between two tests): `volatile s32 state` made the
+  AsdFile static initialiser smt4a `FUN_0050e2e0` IDENTICAL (wave 82).
+- A descending clear whose following store keeps the object in a saved register is a `u32` count-down,
+  `for (u32 i = 3; i-- != 0;)`: `btlStageCreate` is IDENTICAL in both games with it (`s32 i = 2; i >= 0` stores through
+  r0; wave 82).
 - Sleeps and timeouts take an `nn::fnd::TimeSpan` (`FromMicroSeconds`, `FromMilliSeconds`) by value,
   which rematerialises the constant at each call as retail does.
 
 ### Classes
 
+- A destructor slot whose whole body is `b <Base>::~Base` names the base class: smt4a `Obj55c99c` (slot 0 is a tail
+  call of `Obj422540::~Obj422540`, the Apocalypse twin vtable `_ZTV9Obj422540`) derives from `Obj422540`, and its
+  creator `FUN_004ad184` is IDENTICAL built through the base's constructor (wave 82).
 - A vtable whose slots 0/1 are destructors: declare a virtual destructor and write `delete`; it fixes
   the predication around the call. Not when slot 0 is an ordinary method.
 - A slot-0 function whose whole body is a removed tail call is not a native destructor even when the derived class's
@@ -885,6 +911,11 @@ register tie-breaks. Fix the source; don't change the compiler per unit.
   Not applied: `asdCmdBufferAppendCopyTransfer`/`asdCmdBufferAppendTextureTransfer` (both games) go from 107/54-56 to
   39/10-18 lines with softvfp and contain no VFP instruction, but nothing next to them is proven with the flag and the
   large functions right after them (smt4 0x143280, 0x144228) use VFP registers, so there is no run to extend (wave 78).
+  Applied: the token-registry module (smt4 0x3df1d4-0x3df4dc, smt4a 0x500054 and 0x500234-0x5003b4) contains no VFP
+  instruction, two twin pairs (`FUN_003df1d4`/`FUN_00500054`, `FUN_003df37c`/`FUN_00500254`, a 32-byte local copied
+  through core registers) are IDENTICAL only with softvfp and every proven unit of the run stays so (wave 82; smt4a
+  `FUN_005000c4` is worse with it and keeps the default). `-O2 -Otime` for smt4a `FUN_0020e5f0`/`FUN_00231464` was not
+  applied: their proven neighbours break with it, so there is no contiguous run.
 
 ### `--multifile`
 

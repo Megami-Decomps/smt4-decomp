@@ -1,5 +1,6 @@
 /* NON_MATCHING: the saturating attempt count now matches; retail places the failed-escape arm after the epilogue and branches back to the shared FUN_00229a3c call, and pools g_btlAux in another slot. */
 #include "battle/btlMain.h"
+#include "util/Random.h"
 #include "battle/btlEvent.h"
 #include "shard/W4_Match6_BtlScript.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
@@ -41,7 +42,6 @@ bool FUN_00256940(BtlCamera *, const BtlMainState *, s32);
 void btlReflectQueueKind34(s16, u32);
 u32 btlMenuCursorStepReflectAction(u32, u32, u32, u32, u32);
 s32 FUN_003bf1e4();
-u32 randRange(s32);
 void gameCounterAddSaturating(s32, u32);
 u32 isEntryUsable(BtlEvent *); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "BtlEvent *" is incompatible with parameter of type "int *")
 u32 btlEventSelectTrigger(BtlEvent *, u32, s32, u32);

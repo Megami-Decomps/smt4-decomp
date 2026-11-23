@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads g_messageMain's work pointer into r0 right after the owner call and again just before the call (the global is read through a reloaded base); the build hoists it through r2/ip. */
+/* NON_MATCHING: retail moves the owner to r1 and loads the g_messageMain base before setting up the stacked arguments; the build sets the stack arguments first and reads the window through r2/ip. */
 #include "ui/MessageMainA.h"
 extern "C" {
 u32 scrGetCommandOwner();

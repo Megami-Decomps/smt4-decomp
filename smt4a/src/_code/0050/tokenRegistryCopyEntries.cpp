@@ -1,4 +1,4 @@
-/* NON_MATCHING: the search loop now has retail shape (found flag, copy after the loop); retail allocates the arguments to r4/r7/r8/r9 and the outer index to r3 where armcc picks other registers. */
+/* NON_MATCHING: 61 lines with the token-registry module's --fpu=softvfp (wave 82); before it: the search loop now has retail shape (found flag, copy after the loop); retail allocates the arguments to r4/r7/r8/r9 and the outer index to r3 where armcc picks other registers. */
 #include "nn/Result.h"
 #include "sys/TokenRegistry.h"
 

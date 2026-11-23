@@ -122,3 +122,19 @@ arm 0x15d0c8 0x15d0d8 armlib VFP float-to-unsigned conversion called only by pow
 # result 0xd8601837 (module 6 = OS); placed between nnosGetApplicationMemorySize and the SDK heap set-up.
 arm 0x10f830 0x10f88c nn::os memory block allocate: nn_os_AddressSpaceManager_Allocate, OS result 0xd8601837; twin of smt4a 0x1468a8
 arm 0x123a38 0x123aa4 nn::os memory block initialise: clears the block, nn_os_AddressSpaceManager_Allocate, OS result 0xd8601837; twin of smt4a 0x161b14
+# nn::math's MTX44CopyAsm (mtx44Copy): `cmp r1, r0; bxeq lr; vldmia r1, {s0-s15}; vstmia r0, {s0-s15}; bx lr`, an early
+# `bxeq lr` before any frame that b1454 never emits from C; placed just before nn_math_ARMv6_MTX34CopyAsm. Exact twin of
+# smt4a 0x19a0e8, which lies between nn_math_ARMv6_VEC3TransformAsm and nn_math_ARMv6_MTX44MultAsm.
+arm 0x2bfe28 0x2bfe3c nn::math MTX44CopyAsm: cmp r1, r0; bxeq lr; vldmia/vstmia s0-s15; twin of smt4a 0x19a0e8
+# nn::fs: the wide-path request an archive device sends (kind 4, the UTF-16 path and its byte size), linked between
+# nn_fnd_DateTime_DateToDays and the nn::fs UserFileSystem functions (FUN_002a8554, TryGetFileSize). Exact twin of
+# smt4a's archiveDeviceSendPathRequest (0x188444, just before fsCountdownSleep and nn_fs_ipc_FileSystem_OpenArchive).
+arm 0x2a84e8 0x2a8550 nn::fs wide-path archive request (kind 4, UTF-16 path, byte size); between nn_fnd_DateTime and nn::fs UserFileSystem; twin of smt4a 0x188444
+# nn::fs: a file object's finaliser (closes the handle through its virtual slot 12 after rejecting the low ownership
+# tag with a fatal break, then clears it), linked between the third-party FUN_002bb47c/FUN_002bb4bc and right before
+# nn_fs_detail_FileBase_TryRead. Exact twin of smt4a FUN_001585ec.
+arm 0x2bb484 0x2bb4bc nn::fs file object finaliser before nn_fs_detail_FileBase_TryRead: tag check, close through slot 12, clear; twin of smt4a 0x1585ec
+# NintendoWare gfx: an nw::gfx::AnimEvaluator set-up (MoveArray temporaries that mask the capacity word before setting
+# it, nw_anim_PlayPolicy_Loop stored as the default policy, then nw_gfx_AnimEvaluator_SetCacheBufferPointers(this));
+# the same code as smt4a 0x1b0e44, which is linked between nw_gfx_SceneBuilder_CreateObject and the NW render context.
+arm 0x2a5960 0x2a5dc4 NintendoWare-gfx AnimEvaluator set-up: stores nw_anim_PlayPolicy_Loop, calls nw_gfx_AnimEvaluator_SetCacheBufferPointers; twin of smt4a 0x1b0e44

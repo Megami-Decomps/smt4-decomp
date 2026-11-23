@@ -1,5 +1,6 @@
 /* NON_MATCHING: unsigned successorId and branch layout match retail; saved-register rotation (retail successorId/successor/source = r4/r5/r6 vs built r6/r4/r5), same as smt4 twin btlTalkCommand_SelectTalkTarget. */
 #include "AsdSDK/AsdDebug.h"
+#include "util/Random.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "gamedata/NkmEnemyLookup.h"
 #include "gamedata/GamePlayerData.h"
@@ -10,7 +11,6 @@ s32 gameStockContainsEntry(u16);
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 s32 randBetween(s32, s32);
 void dataTable01GetRecordWithAocOverride(u16);
-s32 randRange(u32);
 void scrSetResult(s32);
 void asdMemFree(void *);
 

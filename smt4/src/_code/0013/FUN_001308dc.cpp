@@ -9,7 +9,7 @@ int nw_snd_SoundArchive_GetSoundType(...);
 int soundArchiveReadBankInfo(...);
 int FUN_0014d530(...);
 int _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(unsigned char [20], int);
-int FUN_002ac4a0(...);
+int soundArchiveLoaderConvertWaveArchiveToIndividual(...);
 int FUN_002ac5d8(...);
 int _ZN2nw3snd8internal14BankFileReaderC1EPKv(...);
 int nw_snd_internal_SoundArchiveLoader_Load(int *, unsigned int, unsigned int, unsigned int, unsigned int);
@@ -53,7 +53,7 @@ extern int FUN_0014d478(int, unsigned int, unsigned int *);
 extern int FUN_0014d4ec(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_0014d530. */
 /* Supplied declaration required: _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv. */
-/* Supplied declaration required: FUN_002ac4a0. */
+/* Supplied declaration required: soundArchiveLoaderConvertWaveArchiveToIndividual. */
 /* Supplied declaration required: FUN_002ac5d8. */
 /* Supplied declaration required: _ZN2nw3snd8internal14BankFileReaderC1EPKv. */
 /* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_Load. */
@@ -154,7 +154,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
               temp_v0 = *piVar2;
             }
             if ((piVar2 != (int *)0x0 && temp_v0 != 0) && (piVar2 + 1 != (int *)0x0)) {
-              FUN_002ac4a0(param_1,piVar2[1],param_3);
+              soundArchiveLoaderConvertWaveArchiveToIndividual(param_1,piVar2[1],param_3);
             }
           }
         }
@@ -185,7 +185,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
                   temp_v0 = nw_snd_internal_WaveSoundFileReader_ReadNoteInfo
                                     (temp_v25,(unsigned int *)&temp_v4,temp_v14[2],0);
                   if (temp_v0 != 0) {
-                    FUN_002ac4a0(param_1,temp_v4,param_3);
+                    soundArchiveLoaderConvertWaveArchiveToIndividual(param_1,temp_v4,param_3);
                   }
                 }
               }
@@ -216,7 +216,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
                         temp_v0 = *piVar2;
                       }
                       if ((piVar2 != (int *)0x0 && temp_v0 != 0) && (piVar2 + 1 != (int *)0x0)) {
-                        FUN_002ac4a0(param_1,piVar2[1],param_3);
+                        soundArchiveLoaderConvertWaveArchiveToIndividual(param_1,piVar2[1],param_3);
                       }
                     }
                     temp_v2 = temp_v2 + 1;
@@ -256,7 +256,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
                   temp_v0 = *piVar2;
                 }
                 if ((piVar2 != (int *)0x0 && temp_v0 != 0) && (piVar2 + 1 != (int *)0x0)) {
-                  FUN_002ac4a0(param_1,piVar2[1],param_3);
+                  soundArchiveLoaderConvertWaveArchiveToIndividual(param_1,piVar2[1],param_3);
                 }
               }
               temp_v1 = temp_v1 + 1;

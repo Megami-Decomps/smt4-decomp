@@ -1,4 +1,6 @@
-/* NON_MATCHING: only the tail differs: retail stores the result before `asr r0, r0, #31` (destination r0), the build sign-extends into r1 first. */
+/* NON_MATCHING: 8 lines. Retail leaves the seek mode unset for an origin other than 0-2 (it passes the file pointer
+ * still in r0); the mode is initialised here to keep the source defined (4 lines without it). The rest is the tail:
+ * retail stores the result before `asr r0, r0, #31`, the build sign-extends into r1 first. */
 #include "common.h"
 #include "util/PlatformResultCheck.h"
 
@@ -21,7 +23,7 @@ static __inline u32 seekFile(SeekableFile *file, s64 offset, s32 mode)
 /* Seeks the file by `offset` from the origin (0 begin, 1 current, 2 end); records the new position when tracked, else reports failures. */
 s32 fileHandleSeek(SeekableFile *file, s32 offset, s32 origin)
 {
-    s32 mode;
+    s32 mode = 0; /* an origin other than 0-2 seeks from the beginning (retail passes a stale register) */
 
     if (origin == 0) {
         mode = 0;

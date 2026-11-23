@@ -39,7 +39,7 @@ void FUN_0039c09c(MapNaviDisplay *display)
         work->flags = (work->flags & ~2u) | 0x1000000;
         u16 *mapState = &work->mapState;
         work->state = 1;
-        if (NaviMain_GetCurrentMap() != NaviMain_GetPosX(mapState)) {
+        if (NaviMain_GetCurrentMap(mapState) != NaviMain_GetPosX(mapState)) {
             s32 map = NaviMain_GetPosX(mapState);
             naviMainSetCurrentMap(mapState, map);
             FUN_0039f860(reinterpret_cast<u32>(mapState), 0);

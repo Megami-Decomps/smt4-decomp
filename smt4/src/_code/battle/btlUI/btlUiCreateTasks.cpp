@@ -14,7 +14,7 @@ u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, 
 void FUN_003ad76c(BtlUi *, BattleUiTaskOwner *);
 s32 FUN_0019e138(u32 job);
 void btlEditorNotifyNoop(u32 job);
-s32 FUN_001b72e0(u32 job);
+s32 btlUiDrawUpperScreen(u32 job);
 s32 FUN_001e4bf0(u32 job);
 s32 btlUiDrawFloatingNumbersWhenLoaded(u32 job);
 
@@ -29,8 +29,8 @@ void btlUiCreateTasks(BattleUiTaskOwner *owner)
     BtlUi *ui = g_btlUi.ui;
     u32 task = taskCreateDraw("btlUI Calc", 2, 0, 0, FUN_0019e138, btlEditorNotifyNoop, owner, owner->process);
     owner->uiTask = task;
-    taskCreateDraw("btlUI DrawUpLeft", 0x7a, 0, 0, FUN_001b72e0, NULL, owner, task);
-    taskCreateDraw("btlUI DrawUpRight", 0xd8, 0, 0, FUN_001b72e0, NULL, owner, owner->uiTask);
+    taskCreateDraw("btlUI DrawUpLeft", 0x7a, 0, 0, btlUiDrawUpperScreen, NULL, owner, task);
+    taskCreateDraw("btlUI DrawUpRight", 0xd8, 0, 0, btlUiDrawUpperScreen, NULL, owner, owner->uiTask);
     taskCreateDraw("btlUI DrawDown", 0xe7, 0, 0, FUN_001e4bf0, NULL, owner, owner->uiTask);
     taskCreateDraw("btlUI DrawNumber", 0xe9, 0, 0, btlUiDrawFloatingNumbersWhenLoaded, NULL, owner, owner->uiTask);
     FUN_003ad76c(ui, owner);

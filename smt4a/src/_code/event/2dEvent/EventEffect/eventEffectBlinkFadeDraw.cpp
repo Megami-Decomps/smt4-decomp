@@ -20,7 +20,7 @@ struct BlinkFadeImage {
 
 extern "C" {
 extern BlinkFadeDrawState *g_eventEffect;
-extern BlinkFadeImage DAT_0057f3d0[2];
+extern BlinkFadeImage g_eventBannerTextures[2];
 void gxResetColorQuadToWhite();
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *);
 s32 renderCtxPackPassFlags(u32, u32);
@@ -39,14 +39,14 @@ u8 eventEffectBlinkFadeDraw()
     renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     renderCtxPushB(g_renderCtx, packNibblesAndByte(6, 1, 0));
     renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
-    s32 firstEntry = DAT_0057f3d0[0].index * 1000;
+    s32 firstEntry = g_eventBannerTextures[0].index * 1000;
     efctSetSpeed(work->alpha);
-    texDrawTableEntryAtStoredOrigin(2, DAT_0057f3d0[0].group, firstEntry, 0, 0, 0xfa);
+    texDrawTableEntryAtStoredOrigin(2, g_eventBannerTextures[0].group, firstEntry, 0, 0, 0xfa);
     renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);
-    s32 secondEntry = DAT_0057f3d0[1].index * 1000;
+    s32 secondEntry = g_eventBannerTextures[1].index * 1000;
     efctSetSpeed(1.0f);
-    texDrawTableEntryAtStoredOrigin(2, DAT_0057f3d0[1].group, secondEntry, 0, -work->position, 0xfb);
-    texDrawTableEntryAtStoredOrigin(2, DAT_0057f3d0[1].group, secondEntry + 1, 0, work->position, 0xfb);
+    texDrawTableEntryAtStoredOrigin(2, g_eventBannerTextures[1].group, secondEntry, 0, -work->position, 0xfb);
+    texDrawTableEntryAtStoredOrigin(2, g_eventBannerTextures[1].group, secondEntry + 1, 0, work->position, 0xfb);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);

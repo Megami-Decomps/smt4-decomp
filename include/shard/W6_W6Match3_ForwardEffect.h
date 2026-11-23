@@ -49,7 +49,7 @@ u32 cecProcessForward(const void *card);
 extern "C" {
 #endif
 
-void forwardRecoveredCallback(void *context);
+void forwardRecoveredCallback(void);
 
 #ifdef __cplusplus
 }

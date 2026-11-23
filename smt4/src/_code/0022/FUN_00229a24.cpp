@@ -6,7 +6,7 @@ extern "C" {
 void FUN_00225168(BtlUiObjC *obj);
 
 
-void FUN_00229a24(void)
+void FUN_00229a24(BtlUi *)
 {
     FUN_00225168(&g_btlUi.ui->objC);
 }

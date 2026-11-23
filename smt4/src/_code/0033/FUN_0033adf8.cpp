@@ -48,7 +48,7 @@ struct BattleMainBlock {
 
 extern "C" {
 
-void FUN_001dd930(void);
+void appRefundAllPoints(void);
 void playerSkillInsertFirstFree(u32 skill);
 void saveFlagSetOrAddCounter(u32 id, u32 count);
 void playerRecalcStatsFromEquipment(s32 arg);
@@ -120,7 +120,7 @@ void FUN_0033adf8(BattleMainBlock* battle, u32 row)
     for (s32 i = 0; i < 8; i++) {
         if (scenario->skills[i] != 0) playerSkillInsertFirstFree(scenario->skills[i]);
     }
-    FUN_001dd930();
+    appRefundAllPoints();
     slots->macca = scenario->macca;
     battle->mapId = scenario->mapId;
     battle->spawnId = scenario->spawnId;

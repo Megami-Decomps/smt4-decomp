@@ -1,9 +1,9 @@
 #include "shard/Shard003B.h"
+#include "util/Random.h"
 
 extern "C" {
 
 extern s32 partyCountActiveSlots(void);
-extern s32 randRange(u32 value);
 extern Rec12C *partyGetSlot(u32 index);
 extern s32 partySlotIsOccupied(Rec12C *entry);
 extern void scrSetResult(u32 value);

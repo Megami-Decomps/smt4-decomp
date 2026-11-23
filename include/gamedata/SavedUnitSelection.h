@@ -82,6 +82,8 @@ extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
 void buttonHelpTransitionPresetFlags(u32 id);
+/* Refreshes the player preview after the selected slot changes. */
+void saveLoadRefreshHighlightedPlayerPreview(SavedUnitSelection *work);
 #ifdef __cplusplus
 }
 #endif

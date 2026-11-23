@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00276264` (_code @ 0x276264, 0x6f00 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "runtime/Stdio.h"
+#include "util/Random.h"
 #include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
@@ -11,7 +12,6 @@ extern "C" {
 
 int __ARM_common_memcpy4_9(...);
 int asdSequenceRequest(...);
-int randRange(...);
 int jobStop(...);
 int bgmReleaseStopped(void);
 int FUN_00270c58(...);

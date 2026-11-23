@@ -17,7 +17,7 @@ u32 naviMainConditionsHold(NavigationPollingWork *work);
 u32 FUN_00488ce8(NavigationPollingWork *work);
 void naviMainSetValuePair(void *scene, const NavigationPoint *position);
 void naviInputHandleMapToggle(NavigationPollingWork *work);
-void FUN_0048981c(NavigationPollingWork *work);
+void naviMapHandleTouchButtons(NavigationPollingWork *work);
 
 u32 FUN_00485d1c(NavigationPollingWork *work)
 {
@@ -46,7 +46,7 @@ u32 FUN_00485d1c(NavigationPollingWork *work)
                 }
             }
             naviInputHandleMapToggle(work);
-            FUN_0048981c(work);
+            naviMapHandleTouchButtons(work);
         }
     }
     if (g_gameState.alternateNaviMap) {

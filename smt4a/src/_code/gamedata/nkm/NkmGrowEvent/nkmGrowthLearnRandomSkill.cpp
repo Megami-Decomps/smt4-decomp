@@ -1,4 +1,5 @@
 #include "AsdSDK/AsdDebug.h"
+#include "util/Random.h"
 #include "gamedata/nkm/NkmGrowEvent.h"
 #include <string.h>
 #include "gamedata/NkmBaseRecordA.h"
@@ -15,7 +16,6 @@ union ExcludedSkills {
 extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
 void asdMemFree(void *);
-s32 randRange(u32);
 s32 uiCompareHalfwordKeysDescending(const void *, const void *);
 void qsort(void *, u32, u32, s32 (*)(const void *, const void *));
 void unitRecomputeDerivedStats(SlotRecordA *demon);

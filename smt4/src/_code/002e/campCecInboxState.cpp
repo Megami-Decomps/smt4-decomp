@@ -34,7 +34,7 @@ void objectFlagsClear(StatBlock *unit, u16 mask);
 void FUN_0026b9bc(void);
 void runWinClose(void);
 u8 FUN_001db56c(void);
-void FUN_002ecfe4(void);
+void cecProcessStopWorker(void);
 void gameDataRemoveHomeButtonHold(u32 mask);
 u32 FUN_002cd680(void);
 u32 FUN_0025981c(void);
@@ -118,7 +118,7 @@ s32 campCecInboxState(CampCecMenu *work)
         if (inbox->count > 0) {
             inbox->step++;
         } else {
-            FUN_002ecfe4();
+            cecProcessStopWorker();
             gameDataRemoveHomeButtonHold(2);
             gameDataFlagsClearAndRefresh(2);
             runWinClose();
@@ -127,7 +127,7 @@ s32 campCecInboxState(CampCecMenu *work)
         break;
     case 2:
         if (FUN_002cd680()) {
-            FUN_002ecfe4();
+            cecProcessStopWorker();
             FUN_00220ffc();
             gameDataRemoveHomeButtonHold(2);
             gameDataFlagsClearAndRefresh(2);

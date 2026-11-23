@@ -1,4 +1,5 @@
 #include "battle/BtlMainAccess.h"
+#include "util/Random.h"
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -25,7 +26,6 @@ extern TalkCandidateMasks g_btlMessageFlagMasks;
 s32 scrGetArg(u32);
 void scrSetResult(s32);
 u32 slotIsReservePick(SlotRecordA *);
-u32 randRange(s32);
 
 u32 btlTalkChooseRandomPartyTarget()
 {

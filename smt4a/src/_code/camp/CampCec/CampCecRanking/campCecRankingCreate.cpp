@@ -161,13 +161,13 @@ static __inline void rankingLoadEntries(void)
         rt_aeabi_memclr(ranking->categories, sizeof(ranking->categories));
         for (u32 i = 0; i < RANK_PLAYERS; i++) {
             ranking->players[i].id = save->cecRanking.players[i].id;
-            ranking->players[i].score = save->cecRanking.players[i].scoreAndRank & 0x3FF;
-            ranking->players[i].rank = save->cecRanking.players[i].scoreAndRank >> 10;
+            ranking->players[i].score = save->cecRanking.players[i].score;
+            ranking->players[i].rank = save->cecRanking.players[i].rank;
         }
         for (u32 i = 0; i < RANK_CATEGORIES; i++) {
             ranking->categories[i].id = save->cecRanking.categories[i].id;
-            ranking->categories[i].score = save->cecRanking.categories[i].scoreAndRank & 0x3FF;
-            ranking->categories[i].rank = save->cecRanking.categories[i].scoreAndRank >> 10;
+            ranking->categories[i].score = save->cecRanking.categories[i].score;
+            ranking->categories[i].rank = save->cecRanking.categories[i].rank;
         }
     }
 }

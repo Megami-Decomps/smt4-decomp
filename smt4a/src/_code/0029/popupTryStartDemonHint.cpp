@@ -4,6 +4,7 @@
  * per list gives that and 126 lines, but each would have one call site), keeps 0 in a saved register for the
  * entry lookup and the popup timer, and allocates the registers differently. */
 #include <stdio.h>
+#include "util/Random.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "gamedata/NkmEnemyLookup.h"
@@ -43,7 +44,6 @@ struct HintCandidates {
 extern "C" {
 SaveSlotView *saveSlotFindSelected(void);
 s32 gameFlagIsSet(s32 flag);
-s32 randRange(u32 maximum);
 HintCandidates *dataTable02GetRecordWithAocPackage(u32 owner);
 const char *popupSelectWeightedMessage(s32 kind, u32 id);
 void __aeabi_memcpy(void *destination, const void *source, u32 size);

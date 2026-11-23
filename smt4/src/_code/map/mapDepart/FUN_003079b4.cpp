@@ -3,7 +3,7 @@
 #include "game/GameState.h"
 extern "C" {
 
-int FUN_001f87d4(void);
+int lmapViewUpdateCloseUpSequence(void);
 int mapDepartAdvanceCameraSequence(void);
 int FUN_0021b0f0(void);
 int FUN_0021b2ec(void);
@@ -58,7 +58,7 @@ extern int DAT_0049fa08; /* 0x49fa08 */
 extern int DAT_0049fa0c; /* 0x49fa0c */
 extern int DAT_0049fa10; /* 0x49fa10 */
 
-/* Supplied declaration required: FUN_001f87d4. */
+/* Supplied declaration required: lmapViewUpdateCloseUpSequence. */
 /* Supplied declaration required: mapDepartAdvanceCameraSequence. */
 /* Supplied declaration required: FUN_0021b0f0. */
 /* Supplied declaration required: FUN_0021b2ec. */
@@ -537,7 +537,7 @@ void FUN_003079b4(void)
     FUN_0021b2ec();
     break;
   case 0xd:
-    FUN_001f87d4();
+    lmapViewUpdateCloseUpSequence();
     break;
   case 0xe:
     temp_v6 = g_mapCamera[1];

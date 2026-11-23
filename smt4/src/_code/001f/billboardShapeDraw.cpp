@@ -10,6 +10,7 @@
 #include "camp/RenderCtxTitle.h"
 #include "code/Code002a_Smt4.h"
 #include "gfx/BillboardShape.h"
+#include "shard/W6_W6Match3_ForwardEffect.h"
 #include "nw/math/MTX44Transform.h"
 #include "nw/math/Trig.h"
 #include "nw/math/VEC3.h"
@@ -24,7 +25,6 @@ void nn_math_ARMv6_MTX44TransposeAsm(nw::math::MTX44 *out, const nw::math::MTX44
 void mtx44TransformPosition(nw::math::VEC4 *out, const nw::math::MTX44 *matrix, const nw::math::VEC3 *position);
 void billboardShapeGetStream(BillboardShape *shape, u32 attribute, BillboardStream *out);
 void FUN_002573d8(void);
-void forwardRecoveredCallback(void); // declcheck: local (the shared declaration takes a context this caller does not set)
 } /* extern "C" */
 
 namespace nw {

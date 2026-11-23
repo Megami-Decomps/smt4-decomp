@@ -1,6 +1,7 @@
-/* NON_MATCHING: 53 lines: retail's frame is 140 bytes with the header scratch at sp+16 (104 bytes) below the reader at sp+120, where this build puts the reader first; the heap-bound test is one predicated compare chain in retail, and the wave count, allocator and size get other registers. */
+/* NON_MATCHING: 46 lines: retail's frame is 140 bytes with the header scratch at sp+16 (104 bytes) below the reader at sp+120, where this build puts the reader first; the heap-bound test is one predicated compare chain in retail, and the wave count, allocator and size get other registers. */
 #include "shard/S3SoundArchiveLoader.h"
 #include "shard/W6_W6Match3_WaveArchiveReader.h"
+#include "sound/WaveArchiveConvert.h"
 
 class WaveArchiveAllocator {
 public:
@@ -27,7 +28,6 @@ u32 nnosGetHeapBase(void);
 u32 nnosGetHeapSize(void);
 void FUN_001a5e84(WaveArchiveReader *reader, void *file, u32 individual);
 void FUN_001b1e88(WaveArchiveReader *reader);
-extern const u32 DAT_0054baf4;
 
 // Load the archive header/info and reserve a wave-pointer table instead of copying all wave data.
 void *FUN_001b1ab8(SoundArchiveLoaderA *loader, u32 archiveId, WaveArchiveAllocator *allocator, u32 flags)
@@ -67,7 +67,7 @@ void *FUN_001b1ab8(SoundArchiveLoaderA *loader, u32 archiveId, WaveArchiveAlloca
         return 0;
     if (FUN_001b1c40(loader, fileId, data, fileOffset, 0, flags) != fileOffset)
         return 0;
-    *(u32 *)(data + fileOffset) = DAT_0054baf4;
+    waveArchiveWriteFileSignature(data, fileOffset);
     WaveArchiveReader reader;
     FUN_001a5e84(&reader, data, 1);
     FUN_001b1e88(&reader);

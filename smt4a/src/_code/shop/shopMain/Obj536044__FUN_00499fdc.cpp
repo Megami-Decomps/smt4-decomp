@@ -14,7 +14,7 @@ extern const ShopSlotStep g_shopItemTabNeighbors[]; /* the tab reached from each
 
 void messageMainSetFlag(u8 value);
 s32 inputConfirmPressed(void);
-u32 FUN_00498408(Obj536044 *scene, u32 id);
+u32 playerSlotHoldsEntry(Obj536044 *scene, u32 id);
 s32 FUN_001ba3d0(u32 id); // declcheck: local (a forwarder: this caller passes the id and uses the count)
 s32 FUN_0047fe44(u32 id);
 void sendEvent100020E(void);
@@ -35,11 +35,11 @@ void buttonHelpSetText(const s8 *text, u32 color);
 } /* extern "C" */
 
 /* Tests whether the item can be traded: every item off the selling list (slot 8); on it, an item that
- * FUN_00498408 clears or of which more than one is held, unless FUN_0047fe44 refuses it. */
+ * playerSlotHoldsEntry clears or of which more than one is held, unless FUN_0047fe44 refuses it. */
 inline bool Obj536044::canSellItem(const EquipmentMenuItem *entry)
 {
     u16 item = entry->id;
-    return slot != 8 || ((FUN_00498408(this, item) == 0 || FUN_001ba3d0(item) > 1) && FUN_0047fe44(item) == 0);
+    return slot != 8 || ((playerSlotHoldsEntry(this, item) == 0 || FUN_001ba3d0(item) > 1) && FUN_0047fe44(item) == 0);
 }
 
 /* Updates the shop item list: waits for the intro script, then handles buying the selected item, moving

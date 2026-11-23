@@ -34,11 +34,17 @@ public:
     void FUN_004a321c();
 
     /* 0x0860 */ u8 mode;
-    /* 0x0861 */ u8 unk861[0xa878 - 0x861];
+    /* 0x0861 */ u8 unk861[0xa874 - 0x861];
+    /* 0xA874 */ s16 track;
+    /* 0xA876 */ s8 alternate;
+    /* 0xA877 */ u8 unkA877;
     /* 0xA878 */ Handler handlers[16];
     /* 0xA8F8 */ EnterHandler enterHandlers[16];
     /* 0xA978 */ LeaveHandler leaveHandlers[16];
 };
+
+typedef char Obj55c89cPageOffsets[offsetof(Obj55c89c, track) == 0xA874 &&
+    offsetof(Obj55c89c, alternate) == 0xA876 && offsetof(Obj55c89c, handlers) == 0xA878 ? 1 : -1];
 
 /* Callback-table view shared by the menu's state-dispatch implementation. */
 struct BibleMenuHandlerView {

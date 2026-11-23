@@ -1,5 +1,6 @@
 /* NON_MATCHING: the result is a default-0 local returned once as in retail, but retail spills it to [sp] (saving r3), keeps the loop bound 30 in r8 and the table in r7 (selected with movne/addeq); the build keeps the result in fp and saves ip. */
 #include "gamedata/EncountData.h"
+#include "util/Random.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/NkmEnemyRecord.h"
 #include "gamedata/GameDataEntries.h"
@@ -11,7 +12,6 @@ extern "C" {
 void weightedTableRollNextValue(u32, u32, s32);
 
 EncountTableRecordA *resourceFindType27Record(AocSystemA *, u32);
-s32 randRange(u16);
 }
 
 static bool groupHasPortrait(u16 id)
@@ -47,7 +47,7 @@ extern "C" u16 FUN_004bc420(u32 first, u32 second, s32 excludePortraitGroups)
         if (entry->groupId && (!excludePortraitGroups || !groupHasPortrait(entry->groupId)))
             totalWeight += entry->weight;
     }
-    s32 random = randRange(totalWeight - 1);
+    s32 random = randRange((u16)(totalWeight - 1));
     for (s32 i = 0; i < 30; ++i) {
         const EncountChoice *entry = &table->choices[i];
         if (entry->groupId) {

@@ -100,8 +100,8 @@ struct UiQuestApoc {
             /* 0xd42 */ s16 scrollThumbRegion; /* and its thumb */
         } touch;
     };
-    /* 0xd48 */ u32 firstCounter;
-    /* 0xd4c */ u32 secondCounter;
+    /* 0xd48 */ u32 introPhase;
+    /* 0xd4c */ s32 introTimer;
 
     /* The state history as the array it is: menuState, then previousMenuState. */
     s32 *menuStates()
@@ -152,7 +152,7 @@ typedef char UiQuestApocScriptOffsets[
     offsetof(UiQuestApoc, script.messages) == 0x8F4 && offsetof(UiQuestApoc, script.process) == 0x8FC &&
     offsetof(UiQuestApoc, detailTimer) == 0x934 && offsetof(UiQuestApoc, focusSpeed) == 0x938 &&
     offsetof(UiQuestApoc, repositioned) == 0x93C && offsetof(UiQuestApoc, unk93D) == 0x93D &&
-    offsetof(UiQuestApoc, firstCounter) == 0xD48 ? 1 : -1];
+    offsetof(UiQuestApoc, introPhase) == 0xD48 && offsetof(UiQuestApoc, introTimer) == 0xD4C ? 1 : -1];
 typedef char UiQuestApocMessageOwnershipOffsets[
     offsetof(UiQuestApoc, detailMessages) == 0x92C &&
     offsetof(UiQuestApoc, messageOwnership.addonOwned) == 0x943 &&

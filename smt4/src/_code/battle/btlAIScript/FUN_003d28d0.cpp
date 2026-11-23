@@ -33,7 +33,7 @@ extern u32 g_btlActionReflect;
 extern void *g_btlAux;
 extern void *g_btlEvent;
 
-u32 FUN_003d317c(BtlMainState **block, CommandState *work);
+u32 btlCommandStart(BtlMainState **block, CommandState *work);
 u32 btlCommandMenuStep(BtlMainState **block, CommandState *work);
 u32 FUN_003d2ea0(BtlMainState **block, CommandState *work);
 u32 FUN_003cbf40(BtlMainState **block, CommandState *work);
@@ -78,7 +78,7 @@ u32 FUN_003d28d0(BtlMainState **block, u32 phase)
     u8 pending;
     switch (phase) {
     case 0:
-        return FUN_003d317c(block, work);
+        return btlCommandStart(block, work);
     case 1:
         return btlCommandMenuStep(block, work);
     case 2:

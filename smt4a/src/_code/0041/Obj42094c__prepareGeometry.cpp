@@ -1,9 +1,9 @@
 /* NON_MATCHING: retail fills the matrix from integer registers (no 1.0f in its pool), keeps the speed's
  * product and sum apart (no vmla) and reloads the direction before scaling it. */
 #include "classes/Obj42094c.h"
+#include "util/Random.h"
 extern "C" {
 s32 randBetween(s32 minimum, s32 maximum);
-u32 randRange(u32 limit);
 f32 phaseSine(f32 phase);
 f32 phaseCosine(f32 phase);
 }

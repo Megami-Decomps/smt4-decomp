@@ -14,7 +14,7 @@ int naviRequestSelectedMap(void);
 int FUN_003a35a4(void);
 int sysPlayVoice(...);
 int naviInputHandleMapToggle(int);
-int FUN_0048981c(void);
+int naviMapHandleTouchButtons(void);
 int naviSelectRequestedCategory(...);
 int rectRecRead(int, int, int *, unsigned int **);
 int naviMainGetValue(...);
@@ -83,7 +83,7 @@ extern int FUN_00167c0c(unsigned int **, int *);
 /* Supplied declaration required: FUN_003a35a4. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: naviInputHandleMapToggle. */
-/* Supplied declaration required: FUN_0048981c. */
+/* Supplied declaration required: naviMapHandleTouchButtons. */
 /* Supplied declaration required: naviSelectRequestedCategory. */
 /* Supplied declaration required: rectRecRead. */
 /* Supplied declaration required: naviMainGetValue. */
@@ -138,7 +138,7 @@ unsigned int FUN_00488ce8(int param_1)
   temp_v0 = (int)gameFlagsGetBlock();
   naviInputHandleMapToggle(param_1);
   temp_v1 = param_1;
-  FUN_0048981c();
+  naviMapHandleTouchButtons();
   if (temp_v1 != 0) {
     return 0;
   }

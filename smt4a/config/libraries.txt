@@ -127,3 +127,18 @@ arm 0x1cd32c 0x1cd33c armlib VFP float-to-unsigned conversion called only by pow
 # and 0x123a38 (the latter already third-party there).
 arm 0x1468a8 0x146904 nn::os memory block allocate: nn_os_AddressSpaceManager_Allocate, OS result 0xd8601837; twin of smt4 0x10f830
 arm 0x161b14 0x161b80 nn::os memory block initialise: nn_os_AddressSpaceManager_Allocate, OS result 0xd8601837; twin of smt4 0x123a38
+# nn::math's MTX44CopyAsm (mtx44Copy): `cmp r1, r0; bxeq lr; vldmia r1, {s0-s15}; vstmia r0, {s0-s15}; bx lr`, linked
+# between nn_math_ARMv6_VEC3TransformAsm and nn_math_ARMv6_MTX44MultAsm; an early `bxeq lr` b1454 never emits from C.
+# Exact twin of smt4 0x2bfe28.
+arm 0x19a0e8 0x19a0fc nn::math MTX44CopyAsm between nn_math_ARMv6 VEC3TransformAsm and MTX44MultAsm; twin of smt4 0x2bfe28
+# nn::fs: the wide-path archive request (kind 4, the UTF-16 path and its byte size), linked right before
+# fsCountdownSleep and nn_fs_ipc_FileSystem_OpenArchive; exact twin of smt4 0x2a84e8, which lies among nn::fs code.
+arm 0x188444 0x1884ac nn::fs wide-path archive request (kind 4, UTF-16 path, byte size) before nn_fs_ipc; twin of smt4 0x2a84e8
+# nn::fs: a file object's finaliser (tag check with a fatal break, close through virtual slot 12, clear), right before
+# the third-party FUN_00158624 and fileSystemOpenFileDirectly; exact twin of smt4 0x2bb484 (before nn_fs_detail_FileBase_TryRead).
+arm 0x1585ec 0x158624 nn::fs file object finaliser: tag check, close through slot 12, clear; twin of smt4 0x2bb484
+# NintendoWare gfx: an nw::gfx::AnimEvaluator set-up (MoveArray temporaries, nw_anim_PlayPolicy_Loop stored, then
+# nw_gfx_AnimEvaluator_SetCacheBufferPointers(this)), linked between nw_gfx_SceneBuilder_CreateObject and
+# nw_gfx_RenderContext_ActivateParticleContext; it reads a field the temporaries leave uninitialised (not writable as
+# defined C). Twin of smt4 0x2a5960.
+arm 0x1b0e44 0x1b12a4 NintendoWare-gfx AnimEvaluator set-up between nw_gfx_SceneBuilder_CreateObject and the NW render context; twin of smt4 0x2a5960

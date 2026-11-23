@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/Random.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "map/mapDepart.h"
@@ -7,7 +8,6 @@
 
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-s32 randRange(u32 range);
 
 const char *popupSelectWeightedMessage(u32 kind, u32 speakerId);
 

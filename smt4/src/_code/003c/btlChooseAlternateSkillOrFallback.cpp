@@ -1,5 +1,6 @@
 /* NON_MATCHING: final fallback actor-command register assignment (r0/r1/r2/r3) differs around btlActionGetSlot. */
 #include "battle/btlAction.h"
+#include "util/Random.h"
 #include "battle/BtlUnitWork.h"
 #include "gamedata/SkillDataLookup.h"
 #include "battle/BtlGlobals.h"
@@ -33,7 +34,6 @@ struct AlternateActionSkill {
     } kind;
 };
 extern "C" {
-s32 randRange(u32);
 void btlEntryGetPassiveSkillIds(AlternateActionActor *, u16 *);
 void qsort(void *, s32, s32, s32 (*)(const void *, const void *));
 s32 FUN_00333670(const void *, const void *);

@@ -13,7 +13,7 @@ void gameWorldResetForNewGame(void);
 void saveFlagSetOrAddCounter(u32 item, u32 count);
 void playerInitializeStats(u32 mode);
 void playerRecalcStatsFromEquipment(u32 slot);
-void FUN_001dd930(void);
+void appRefundAllPoints(void);
 char *gameDataGetPlayerName(void);
 extern const InitialEquipment g_initialEquipment;
 /* The default player name and the format the player's display name is built with. */
@@ -56,7 +56,7 @@ void playerInitNewGame(s32 mode)
         playerRecalcStatsFromEquipment(0);
         player->hp = player->maxHp;
         player->mp = player->maxMp;
-        FUN_001dd930();
+        appRefundAllPoints();
         sprintf(gameDataGetPlayerName(), texts->nameFormat);
         saveFlagSetOrAddCounter(0x370, 1);
     }

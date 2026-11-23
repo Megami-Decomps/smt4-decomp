@@ -11,13 +11,13 @@
 #include "code/Code0028_Smt4.h"
 #include "camp/ButtonHelp/ButtonHelp.h"
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "quest_center/QuestStatus_Smt4.h"
 
 extern "C" {
 
 void scrWorkSetValue(s32 index, u32 value);
 u32 scrWorkGetValue(s32 index);
 void *fileSlotGetBuffer(u32 id);
-u32 goalConditionsSatisfied(u32 id);
 u32 btlTalkBustUpIsIdle(void);
 void eventTexSetFlag(s32 flag);
 void bustupCutAnimSetFlag(u8 value);
@@ -30,8 +30,8 @@ void messageSlotSet(s32 value);
 void resultCreate(u8 kind);
 void scrResultStopJobAndReleaseUi(void);
 u16 rosterGetLeaderId(void); // declcheck: local (its headers belong to the sound and shard units)
-int FUN_00333a38(u32 id, int checkFlag);
-void FUN_00333af8(u32 area, u16 *out, s32 onlyActive);
+int questCountLinkedQuests(u32 id, int checkFlag);
+void questCollectLinkedQuests(u32 area, u16 *out, s32 onlyActive);
 u8 questDeactivate(u32 id);
 u32 gameFlagEntryResetIfActive(u32 index);
 GameOptions *gameGetSupportUnitData(void); // declcheck: local (GameDataAccess.h returns it as an int)
@@ -142,7 +142,7 @@ u32 scrComm_Quest_UpdateObjective(void)
         if (rosterHasLeader() != 0 && rosterGetLeaderId() == questId) {
             FUN_002900d0();
 
-            s32 unlocked = FUN_00333a38(questId, 1);
+            s32 unlocked = questCountLinkedQuests(questId, 1);
 
             if (unlocked != 0) {
                 scrWorkSetValue(0, 7);
@@ -261,7 +261,7 @@ u32 scrComm_Quest_UpdateObjective(void)
         s32 count = scrWorkGetValue(2);
         u16 *unlocked = (u16 *)asdOperatorNewC(count * sizeof(u16));
 
-        FUN_00333af8(questId, unlocked, 1);
+        questCollectLinkedQuests(questId, unlocked, 1);
         uiBindRecordRewardText(unlocked[index], 0, 1);
         messageSetConfirmDisplayMode();
 

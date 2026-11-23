@@ -18,9 +18,9 @@ extern "C" {
 u32 demonGetRaceLabel(u16 textId, u32 flags);
 s32 textMeasureOnLayer(u32 textValue, u32 style);
 void drawTextAtSnappedRectangle(TextLayoutContextA *context, f32 x,
-                                f32 y, u32 style,
-                                u32 color, u32 textValue, f32 opacity,
-                                f32 extraZero, f32 scale);
+                                f32 y, f32 opacity,
+                                f32 extraZero, u32 style, u32 color,
+                                f32 scale, u32 textValue);
 
 /* Center the selected text in a layout region, with the panel fade and scale. */
 void FUN_004a7cb0(PanelLayoutOwnerView *panel, u32 textId,
@@ -50,7 +50,7 @@ void FUN_004a7cb0(PanelLayoutOwnerView *panel, u32 textId,
         layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), offsetEntry));
     s32 x = baseX + *offset->width / 2 + offset->position.x - textWidth / 2;
     s32 y = offset->position.y + baseY;
-    drawTextAtSnappedRectangle(reinterpret_cast<TextLayoutContextA *>(panel->layout), static_cast<f32>(x), static_cast<f32>(y), style,
-        color, textValue, opacity, 0.0f, scale);
+    drawTextAtSnappedRectangle(reinterpret_cast<TextLayoutContextA *>(panel->layout), static_cast<f32>(x), static_cast<f32>(y), opacity,
+        0.0f, style, color, scale, textValue);
 }
 }

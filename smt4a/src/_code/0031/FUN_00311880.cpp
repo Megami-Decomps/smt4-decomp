@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00311880` (_code @ 0x311880, 0x2e4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlockA.h"
+#include "util/Random.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -30,7 +31,6 @@ typedef struct {
 extern unsigned char LAB_00311b68; /* 0x311b68 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int randRange(unsigned int);
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_0035363c. */
 /* Supplied declaration required: FUN_003a30e8. */

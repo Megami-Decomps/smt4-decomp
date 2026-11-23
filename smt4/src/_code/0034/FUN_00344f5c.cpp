@@ -155,7 +155,7 @@ extern unsigned int FUN_002bf80c(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 extern int FUN_002d8e10(void);
 /* Supplied declaration required: asdModelBankGetModelUnk08. */
-extern unsigned int FUN_00336740(int);
+extern unsigned int btlGetTurnEntryAfterPicker(int);
 /* Supplied declaration required: FUN_00338060. */
 /* Supplied declaration required: btlScriptQueueRequestIfIdle. */
 /* Supplied declaration required: FUN_00343f44. */
@@ -697,7 +697,7 @@ LAB_00345938:
       }
     }
     else {
-      temp_v4 = FUN_00336740(temp_v5);
+      temp_v4 = btlGetTurnEntryAfterPicker(temp_v5);
       if (psVar2[0x12] == 0) {
         temp_v4 = 0xffffffff;
       }

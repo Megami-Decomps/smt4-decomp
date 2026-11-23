@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the success tail differs: retail sets the 0x100000 flag through r1 with the return value moved into r0 between the load and the orr; the build uses r0 and then sets it to 1. */
 #include "battle/BtlEntry.h"
+#include "util/Random.h"
 #include "battle/btlMain.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "shard/W6_W6Match3_NameFormState.h"
@@ -8,7 +9,6 @@
 extern "C" {
 s32 playerPadTestBit(u32);
 s32 gameFlagIsSet(u32);
-s32 randRange(u32);
 
 /* Mark the first eligible low-HP enemy for its rare emergency action. */
 u32 FUN_00338584(BtlMainState *state)
@@ -48,7 +48,7 @@ u32 FUN_00338584(BtlMainState *state)
             chance = 0;
         else if (chance > 10)
             chance = 10;
-        if (randRange(99) > chance)
+        if ((s32)randRange(99) > chance)
             return 0;
     }
     entry->flags |= 0x100000;

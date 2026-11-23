@@ -1,5 +1,6 @@
 /* NON_MATCHING: registers of the entries base and index*0x408 are swapped in the entry address computation (retail base in r1, product in r0); everything else matches. */
 #include "battle/BtlMainAccess.h"
+#include "util/Random.h"
 #include "battle/BattleHelpers.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -10,7 +11,6 @@ extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlCombatantHasSkillAction(BtlCombatantEntryA *, u32 condition);
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *);
-u32 randRange(u16 maximum);
 
 // Pick a random battle entry satisfying the current masks and script-supplied condition.
 u32 btlScriptChooseRandomMatchingEntry(void)

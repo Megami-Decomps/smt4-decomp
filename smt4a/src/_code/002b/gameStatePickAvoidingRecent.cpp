@@ -1,9 +1,9 @@
 #include "common.h"
+#include "util/Random.h"
 #include "game/GameStateA.h"
 
 extern "C" {
 
-s32 randRange(u16 max);
 
 /* Picks one of four choices at random, avoiding the last two picked, and records it as the latest pick. */
 s32 gameStatePickAvoidingRecent(void)

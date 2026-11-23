@@ -1,5 +1,6 @@
 /* NON_MATCHING: candidate flags collapse to an OR test, loop branches and status-query scratch allocation differ. */
 #include "battle/BtlEntry.h"
+#include "util/Random.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "battle/BtlGlobals.h"
@@ -9,7 +10,6 @@ void *asdOperatorNewC(u32);
 void asdMemFreeIfNotNull(void *);
 u32 btlSkillHitFlags(s32, u32, s32, s32);
 u32 btlGetPassiveAffinityOverride(u32, u32);
-s32 randRange(u16);
 void FUN_00246e24(u32, u32, BtlActionRecord *, u32, s32);
 void btlSubmitAction(u32, BtlEntry *, s32);
 

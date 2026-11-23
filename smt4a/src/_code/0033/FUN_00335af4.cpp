@@ -1,4 +1,4 @@
-/* NON_MATCHING: entry-address operand registers (retail loads the entries base into r0 before the index multiply) and the record-address/HP-copy scheduling differ; the sequence counter increment now matches. */
+/* NON_MATCHING: the entries base and scaled index are allocated to r1 and r0, respectively; retail uses r0 and r1. */
 #include "battle/BtlMainAccess.h"
 #include "code/Code003e.h"
 #include "shard/W5_W5Match7_BattleMask.h"

@@ -267,9 +267,17 @@ typedef struct BtlUi {
 
 /* The module global (Shin Megami Tensei IV). */
 typedef struct BtlUiGlobals {
-    /* 0x00 */ u8 unk00[0x20];
+    /* 0x00 */ u8 testNotice;       /* the upper screens show the test-data notice */
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ s32 testCursor;      /* the line of the test readout the cursor is on */
+    /* 0x08 */ s32 testTexture;     /* which test texture is shown */
+    /* 0x0C */ f32 testBustUpDepth; /* stereo depths of the test bust-up and window */
+    /* 0x10 */ f32 testWinDepth;
+    /* 0x14 */ u8 unk14[0xC];
     /* 0x20 */ BtlUi *ui;
 } BtlUiGlobals;
+typedef char BtlUiGlobalsLayoutCheck[offsetof(BtlUiGlobals, testWinDepth) == 0x10 &&
+    offsetof(BtlUiGlobals, ui) == 0x20 ? 1 : -1];
 
 /* Apocalypse layout: the same four widgets at other offsets. */
 typedef struct BtlUiObjAA {

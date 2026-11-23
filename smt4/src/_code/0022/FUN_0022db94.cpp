@@ -9,7 +9,7 @@ extern "C" {
 SpriteInfo *layoutFindTableEntry(UiSpriteState *, u32); // declcheck: local (the shared declaration in AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h does not compile here: a value of type "TextureTableEntryIV *" cannot be assigned to an entity of type "SpriteInfo *")
 const char *demonGetRaceLabel(u16, u32);
 s32 textMeasureOnLayer(const char *, u32);
-void drawTextAtSnappedRectangle(UiSpriteState *, f32, f32, u32, u32, const char *, f32, f32, f32);
+void drawTextAtSnappedRectangle(UiSpriteState *, f32, f32, f32, f32, u32, u32, f32, const char *);
 }
 
 extern "C" void FUN_0022db94(ListLabelWork *work, u32 id, s32 row, s32 highlighted, s32 depth)
@@ -37,5 +37,5 @@ extern "C" void FUN_0022db94(ListLabelWork *work, u32 id, s32 row, s32 highlight
     SpriteInfo *frame = layoutFindTableEntry(&work->sprite, background);
     s32 x = rowX + frame->size[0] / 2 + frame->x - width / 2;
     s32 y = frame->y + rowY;
-    drawTextAtSnappedRectangle(&work->sprite, f32(x), f32(y), font, color, text, z, 0.0f, 1.0f);
+    drawTextAtSnappedRectangle(&work->sprite, f32(x), f32(y), z, 0.0f, font, color, 1.0f, text);
 }

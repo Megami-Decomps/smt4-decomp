@@ -22,7 +22,7 @@ typedef char BlinkFadeWorkLayoutCheck[
 
 extern "C" {
 extern EventEffectA *g_eventEffect;
-extern EventFilterTexture DAT_0057f3d0[2];
+extern EventFilterTexture g_eventBannerTextures[2];
 u32 eventBannerUpdate(void);
 u32 eventEffectBlinkFadeDraw(void);
 void *asdMemoryAllocTracked(u32 alignment, u32 size, u32 heap, u32 category, s32 clear);
@@ -49,13 +49,13 @@ void eventInitializeBlinkFade(void)
     effect->opacity = 1.0f;
     effect->duration = 40;
     for (s32 index = 0; index < 2; ++index) {
-        if (textureGetIndexedResource(DAT_0057f3d0[index].table) == NULL) {
-            asdTMTexTableLoadTmx(DAT_0057f3d0[index].table, 0);
-            DAT_0057f3d0[index].unk09[0] = 1;
+        if (textureGetIndexedResource(g_eventBannerTextures[index].table) == NULL) {
+            asdTMTexTableLoadTmx(g_eventBannerTextures[index].table, 0);
+            g_eventBannerTextures[index].unk09[0] = 1;
         }
-        if (!asdTMTexTableNodeIsLoaded(DAT_0057f3d0[index].table, DAT_0057f3d0[index].node)) {
-            asdTMTexLoadMainHeap(DAT_0057f3d0[index].table, DAT_0057f3d0[index].node);
-            DAT_0057f3d0[index].requested = 1;
+        if (!asdTMTexTableNodeIsLoaded(g_eventBannerTextures[index].table, g_eventBannerTextures[index].node)) {
+            asdTMTexLoadMainHeap(g_eventBannerTextures[index].table, g_eventBannerTextures[index].node);
+            g_eventBannerTextures[index].requested = 1;
         }
     }
 }

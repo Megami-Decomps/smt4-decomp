@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00228220` (_code @ 0x228220, 0x5e4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
+#include "util/Random.h"
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "battle/BtlGlobals.h"
@@ -12,7 +13,6 @@ int btlGetPassiveAffinityOverride(unsigned int, unsigned int);
 int btlEntryHasSkillCategory(unsigned int *, unsigned int);
 int selectionCopySupportedValue(int, unsigned int [3]);
 int FUN_0023ea94(void);
-int randRange(int);
 int btlSkillHitFlags(...);
 int FUN_002463e8(...);
 int btlEntryBuildSummary(unsigned char [2], unsigned int, unsigned int *);

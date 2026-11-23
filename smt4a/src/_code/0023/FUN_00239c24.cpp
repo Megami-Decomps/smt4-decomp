@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00239c24` (_code @ 0x239c24, 0x908 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlockA.h"
+#include "util/Random.h"
 #include "map/MapSceneAccess_Smt4a.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include "romwright_types.h"
@@ -8,7 +9,6 @@
 
 extern "C" {
 
-int randRange(...);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(int, int); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int FUN_002296b0(int);

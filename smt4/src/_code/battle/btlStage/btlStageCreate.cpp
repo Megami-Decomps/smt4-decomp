@@ -1,4 +1,3 @@
-/* NON_MATCHING: the -1 selection store goes through r0 instead of the stage copy in r5. */
 #include "battle/btlMain.h"
 #include "battle/btlStage.h"
 #include "AsdSDK/AsdDebug.h"
@@ -19,7 +18,7 @@ void btlStageCreate(BtlMainState* battle)
                                 btlStageRunWork, btlStageDestroy, battle, battle->job);
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlStage.cpp", 577);
     BtlStage *stage = g_btlStage.stage = (BtlStage *)asdMemAlloc(0x100, 0x100, 0, sizeof(BtlStage), 1);
-    for (s32 i = 2; i >= 0; --i) {
+    for (u32 i = 3; i-- != 0;) {
         stage->setup.parameters[i] = 0.0f;
     }
     stage->setup.selection = -1;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e933c` (_code @ 0x4e933c, 0x4d0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/Random.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
 #include "shard/W4_Match6_BtlScript.h"
 
@@ -40,7 +41,6 @@ extern unsigned int DAT_0057116c; /* 0x57116c */
 extern unsigned int DAT_00571178; /* 0x571178 */
 extern unsigned int DAT_0057117c; /* 0x57117c */
 
-extern int randRange(unsigned int);
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: itemTableGetEquipmentRecord. */

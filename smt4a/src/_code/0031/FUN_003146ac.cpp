@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003146ac` (_code @ 0x3146ac, 0x4c4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlockA.h"
+#include "util/Random.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -32,7 +33,6 @@ extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 
 extern unsigned int DAT_005f176c; /* 0x5f176c */
 
 extern int gameDataBlocksGetSaveData(void);
-extern int randRange(unsigned int);
 extern int itemGetStackLimit(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int gameFlagIsSet(void);

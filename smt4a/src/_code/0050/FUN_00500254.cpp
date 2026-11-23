@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses mov r5, r0 where the compiled block uses mov r4, r0. */
 #include "shard/W5_W5Match5_TwinRecords.h"
 #include "nn/Result.h"
 

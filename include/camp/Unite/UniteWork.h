@@ -183,7 +183,7 @@ struct UniteWork {
             u8 unk0438BeforePortraits[0x5DDC];
             /* 0x6214 */ u8 cursor[0x64];
             /* 0x6278 */ u16 desired[500];
-            /* 0x6660 */ s16 loaded[4];
+            /* 0x6660 */ u16 loaded[4]; /* portrait ids; passed as (s16) to the s32 portrait functions (retail ldrsh) */
             /* 0x6668 */ u8 unk6668[8];
             /* 0x6670 */ u32 candidateCount;
             /* 0x6674 */ u8 unk6674[0x2C60];
@@ -422,7 +422,7 @@ struct UniteWorkA {
             u8 unk0438BeforePortraits[0x5E04];
             /* 0x623C */ u8 cursor[0x64];
             /* 0x62A0 */ u16 desired[500];
-            /* 0x6688 */ s16 loaded[4];
+            /* 0x6688 */ u16 loaded[4]; /* portrait ids; passed as (s16) to the s32 portrait functions (retail ldrsh) */
             u8 unk6690[0x2884];
             /* 0x8F14 */ u8 alternateCursor[0x64];
         } portraitSelectionA;

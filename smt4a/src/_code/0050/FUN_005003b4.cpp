@@ -1,4 +1,4 @@
-/* NON_MATCHING: the result-return storage and the buffer arguments occupy different saved registers (retail r5 and r6/r7 stored with strd, this build r7 and r5/r6 with stm), and this build copies the forwarded result to r1 before its compares. */
+/* NON_MATCHING: 38 lines with the token-registry module's --fpu=softvfp (wave 82); before it: the result-return storage and the buffer arguments occupy different saved registers (retail r5 and r6/r7 stored with strd, this build r7 and r5/r6 with stm), and this build copies the forwarded result to r1 before its compares. */
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 #include "code/Code0042.h"

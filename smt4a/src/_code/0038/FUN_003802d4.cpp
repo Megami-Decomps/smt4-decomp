@@ -1,9 +1,9 @@
 /* NON_MATCHING: unrolled predicated structure now matches retail; only the constant/value register pair (r3/r2) is swapped. */
 #include "gamedata/NkmEnemyRecord.h"
+#include "util/Random.h"
 #include "script/ScriptArgs.h"
 #include "gamedata/NkmEnemyLookup.h"
 extern "C" {
-u32 randRange(u16);
 void scrSetResult(s32);
 
 u32 FUN_003802d4(void)

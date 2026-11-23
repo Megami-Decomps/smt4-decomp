@@ -10,7 +10,7 @@ struct FileProbeHandle;
 
 extern "C" {
 void rt_aeabi_memclr(void *, u32);
-u32 FUN_001860e4(const char *);
+u32 asdFileHashPackContains(const char *);
 s32 refIsNullOrZero(FileProbeConversionState *);
 u32 FUN_00100836(const char *, u32, FileProbeConversionState *);
 u32 FUN_002e3c44(u16 *, const char *, u32, FileProbeConversionState *);
@@ -55,7 +55,7 @@ extern "C" u32 asdLoadFileExists(const char *path)
         sprintf(fullPath, "rom:/%s", path);
     }
     bool inHashPack = false;
-    if (asdFileHashPackIsOpen() && FUN_001860e4(fullPath)) {
+    if (asdFileHashPackIsOpen() && asdFileHashPackContains(fullPath)) {
         inHashPack = true;
     }
     FileProbeHandle file;

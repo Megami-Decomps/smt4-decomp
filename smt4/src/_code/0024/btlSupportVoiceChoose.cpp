@@ -1,5 +1,6 @@
 /* NON_MATCHING: the record search keeps retail's found-index exit; retail lays the default-progress loop after the alternate one, keeps a zero in r9 from the second table lookup to the candidate clears (category in sl, one more saved register, 104-byte frame) where armcc here rematerialises it. */
 #include "shard/GameOptions.h"
+#include "util/Random.h"
 #include "gamedata/DataTable.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
@@ -13,7 +14,6 @@ struct SupportVoiceRecord {
 extern "C" {
 GameOptions *gameGetSupportUnitData();
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-u32 randRange(u32 maximum);
 u8 messageVoiceBankGet();
 u32 voiceRequestPlayFile(u32 channel, u32 voice, s32 enabled, u8 kind, f32 left, f32 right);
 

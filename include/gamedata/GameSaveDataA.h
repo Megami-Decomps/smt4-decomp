@@ -153,7 +153,7 @@ typedef struct GameSavedItemA {
     /* 0x36 */ u16 bits;
     /* 0x38 */ u32 experience;
     /* 0x3C */ s8 categoryRanks[18]; /* SlotRecordA.categoryRanks */
-    /* 0x4E */ s16 counter;
+    /* 0x4E */ u16 counter;
 } GameSavedItemA;
 
 typedef char GameSavedItemAOffsetCheck[offsetof(GameSavedItemA, flags) == 0x16 &&
@@ -185,7 +185,8 @@ typedef struct GameSavedPairA {
 /* One saved StreetPass ranking entry (4 bytes). */
 typedef struct GameSavedCecRankA {
     /* 0x00 */ u16 id;                    /* a demon id (players) or a category kind */
-    /* 0x02 */ u16 scoreAndRank;          /* bits 0-9: the score, bits 10 and up: the rank */
+    /* 0x02 */ u16 score : 10;
+    /* 0x02 */ u16 rank : 6;              /* 1 for the best score; equal scores share a rank */
 } GameSavedCecRankA;
 typedef char GameSavedCecRankASizeCheck[sizeof(GameSavedCecRankA) == 4 ? 1 : -1];
 
@@ -258,7 +259,7 @@ typedef struct GameSaveBodyA {
         struct {
             u8 prefix[0x480];
             /* 0x28310 */ GameSavedCecRankA players[20];   /* the StreetPass ranking's entries (CampCecRanking) */
-            /* 0x28360 */ GameSavedCecRankA categories[7];
+            /* 0x28360 */ GameSavedCecRankA categories[12];  /* seven are used; the block is cleared whole */
         } cecRanking;
         struct {
             u8 prefix[0x500];

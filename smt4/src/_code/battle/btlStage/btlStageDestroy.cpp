@@ -1,6 +1,7 @@
 /* NON_MATCHING: the thread stop matches (wait, joined flag, finalize, NnOsHandle close as in uniteScreenDestroy); only
  * the context load is scheduled before the -1 store to unkc0 (retail loads it after the store), as in btlStageModelRelease
  * (a memset of unkc0 matches both and was rejected: the field's type is unknown). */
+#include "nn/os/WaitObject.h"
 #include "shard/W6_W6Match1_BattleStageModel.h"
 #include "battle/btlStage.h"
 #include "nn/Result.h"
@@ -28,7 +29,6 @@ extern BtlStageGlobals g_btlStage;
 s32 jobIsValid(u32 job);
 void jobStop(u32 job, s32 arg);
 void addressSpaceRegionFree(AddressSpaceRegion *region);
-s32 svcWaitSynchronizationN(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
 void FUN_002759bc(void);
 void mdlHandleArrayDestroy(BattleStageModel *stage);
 }
@@ -46,14 +46,7 @@ inline void StackRegion::operator delete(void *block)
 /* Waits for the loader thread to end, then finalizes it and closes its handle. */
 static __inline void stageStopThread(BattleStageModel *stage)
 {
-    s32 signaled;
-    u32 handles[1] = { stage->thread.handle };
-    s32 result = svcWaitSynchronizationN(&signaled, handles, 1, 0, -1);
-    bool failed = nnResultIsFailure(result);
-    if (failed) {
-        resultHandleFailure(result, failed);
-    }
-    stage->thread.joined = 1;
+    nn::os::ThreadJoin(&stage->thread);
     stage->thread.finalize();
     stage->thread.NnOsHandle::~NnOsHandle();
 }

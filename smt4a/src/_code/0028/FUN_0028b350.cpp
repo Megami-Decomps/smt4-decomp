@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028b350` (_code @ 0x28b350, 0xd0c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "ui/UiSpriteApi.h"
+#include "util/Random.h"
 #include "romwright_types.h"
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_TextHistory.h"
@@ -9,7 +10,6 @@
 extern "C" {
 
 
-int randRange(...);
 int padQueryLogicalKey(...);
 int uiApplyIndexedPanelSpriteSizes(...);
 int sentinelLookupGetValue(void);

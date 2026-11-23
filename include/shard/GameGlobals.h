@@ -12,7 +12,11 @@ typedef struct GameData {
     /* 0x0000 */ u32 job;
     /* 0x0004 */ u8 unk0004[0xC];
     /* 0x0010 */ u32 unk10;
-    /* 0x0014 */ u8 unk14[0x260];
+    /* 0x0014 */ u8 unk14[4];
+    /* 0x0018 */ u32 unk18;           /* cleared with unk1C and unk20 by campMenuSessionReset */
+    /* 0x001C */ u32 unk1C;
+    /* 0x0020 */ u8 unk20;
+    /* 0x0021 */ u8 unk21[0x253];
     /* 0x0274 */ u8 unk274[1];
     /* 0x0275 */ u8 unk0275[0x8B];
     /* 0x0300 */ u8 unk300[1];
@@ -90,6 +94,22 @@ typedef char GameGlobalsLayoutCheck[sizeof(GameGlobals) == 8 && sizeof(GameData)
 
 typedef char GameGlobalsOffsets[offsetof(GameGlobals, data) == 4 && offsetof(GameData, activeState) == 0x12DC && offsetof(GameData, statusCameraHeightOffset) == 0x1EA0 && offsetof(GameData, statusCameraHeightMode) == 0x1EA4 ? 1 : -1];
 typedef char GameDataPanelOffsets[offsetof(GameData, panelSprites) == 0x38C && offsetof(GameData, restoreTabPending) == 0x12E8 ? 1 : -1];
+typedef char GameDataSessionOffsets[offsetof(GameData, unk18) == 0x18 && offsetof(GameData, unk1C) == 0x1C &&
+    offsetof(GameData, unk20) == 0x20 && offsetof(GameData, unk1E60) == 0x1E60 ? 1 : -1];
+
+/* Stores unk1E60; clearing it outside mode 9 (unk1E67) also clears unk12E0 in the states 4-6. The body of
+ * FUN_0029dfc0, which campMenuSessionReset inlines (retail reloads g_gameGlobals.data for it and derives the 0x1E67
+ * offset from 0x1E60, which the statements written in place do not give). */
+static __inline void gameSetFlag1E60(int value)
+{
+    GameData *data = g_gameGlobals.data;
+
+    data->unk1E60 = value;
+    if (value == 0 && data->unk1E67 != 9 &&
+        (data->activeState == 4 || data->activeState == 5 || data->activeState == 6)) {
+        data->unk12E0 = 0;
+    }
+}
 
 #ifdef __cplusplus
 extern "C" {
