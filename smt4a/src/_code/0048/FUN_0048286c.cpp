@@ -1,4 +1,6 @@
-/* NON_MATCHING: the position is now assigned as one vector (vstmia + vstr as in retail); retail still loads stateFlags only after the flag byte store, where the build hoists it. */
+/* NON_MATCHING: the position is now assigned as one vector (vstmia + vstr as in retail); retail still loads stateFlags only after the flag byte store, where the build hoists it.
+ * Setting the byte through a `u8 *` (which may alias stateFlags) gives retail's order here and in smt4's FUN_00396044, but
+ * nothing in retail shows such a pointer or a byte-flag helper. */
 #include "common.h"
 struct Vector3 {
     Vector3() {}

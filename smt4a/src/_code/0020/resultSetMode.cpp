@@ -1,4 +1,3 @@
-/* NON_MATCHING: state-block and touch-region-count base registers r5/r6 are exchanged. */
 #include "shard/X14_EngineUnits.h"
 #include "shard/Shard0031.h"
 #include "code/Code0023.h"
@@ -23,34 +22,19 @@ void FUN_003a7b2c(void);
 u32 gameDataBlocksGetWord(void);
 s32 aocDataBlockHasEntries(void);
 
-void resultSetMode(ResultWorkA *result, s32 mode)
+void resultSetMode(ResultWorkA *result, s32 state)
 {
-    struct ResultModeView {
-        u8 unk0000[0x4364];
-        s32 mode;
-        s32 previousMode;
-        s32 frame;
-        u32 unk4370;
-        u32 progress;
-        u32 unk4378;
-        u32 pending;
-        u8 unk4380[0x20];
-        ScriptProcess *script;
-        u8 unk43a4[0x10];
-        s16 touchRegionCount;
-    };
-    ResultModeView *work = reinterpret_cast<ResultModeView *>(result);
-    work->previousMode = work->mode;
-    work->mode = mode;
-    work->frame = 0;
-    work->progress = 0;
-    work->pending = 0;
-    for (s32 region = 0; region < work->touchRegionCount; ++region)
+    result->previousState = result->state;
+    result->state = state;
+    result->step = 0;
+    result->progress = 0;
+    result->timer = 0;
+    for (s32 region = 0; region < result->touchRegionCount; ++region)
         ifTouchRegionRemove();
-    work->touchRegionCount = 0;
+    result->touchRegionCount = 0;
 
     s32 sound = -1;
-    switch (work->mode) {
+    switch (result->state) {
     case 1: sound = 100; break;
     case 11: sound = 0xa0; break;
     case 12: sound = 0x67; break;
@@ -66,7 +50,7 @@ void resultSetMode(ResultWorkA *result, s32 mode)
         buttonHelpSetText(0, 0xf4f4f4ff);
         sysPlaySe(static_cast<u16>(sound));
     }
-    if (work->mode == 23) {
+    if (result->state == 23) {
         if (aocDataBlockHasEntries()) {
             FUN_00371f18();
             FUN_003a7b2c();
@@ -78,15 +62,15 @@ void resultSetMode(ResultWorkA *result, s32 mode)
             gameGlobalsReleaseReference();
             u32 required = gameDataBlocksGetWord();
             if (required != 0 && required <= *reinterpret_cast<const u32 *>(gameGetSlotTable())) {
-                work->mode = 22;
+                result->state = 22;
                 sysPlaySe(0x92);
-                scrScriptProcessStartEntry(work->script, 5);
+                scrScriptProcessStartEntry(result->process, 5);
             } else {
                 buttonHelpSetTextVisible(0);
                 buttonHelpTransitionPresetFlags(3);
             }
         } else {
-            work->mode = 24;
+            result->state = 24;
         }
     }
 }

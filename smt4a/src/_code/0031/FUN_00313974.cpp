@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00281b94(...);
+int mapCollisionQueueBoxWalls(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int sceneRegisterBoxEffect(...);
 int VectorSignedToFloat(...);
 
@@ -51,7 +51,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int gameDataIsFlagByteSet(int);
-/* Supplied declaration required: FUN_00281b94. */
+/* Supplied declaration required: mapCollisionQueueBoxWalls. */
 /* Supplied declaration required: sceneRegisterBoxEffect. */
 extern short *dataTable4CGetEntry(fn_00313974_arg0 *);
 extern int lmapGetSpawnIndex(void);
@@ -134,7 +134,7 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
       sceneRegisterBoxEffect(0,0,"PREV",0x4f,0x29,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[10],
                    (int)psVar5[0xb],(int)psVar5[0xc],0);
     }
-    FUN_00281b94(0);
+    mapCollisionQueueBoxWalls(0);
   }
   temp_v4 = (int)*(char *)(temp_v2 + 0xe03);
   temp_v3 = (int)*(char *)(temp_v2 + 0xe02);
@@ -179,7 +179,7 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
         temp_v8 = 4;
         if (temp_v6 == 0) {
           sceneRegisterBoxEffect(0,0,"NEXT",0x51,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,temp_v4,temp_v3,temp_v2,0);
-          FUN_00281b94(0);
+          mapCollisionQueueBoxWalls(0);
           return;
         }
         temp_v7 = 0x54;
@@ -190,7 +190,7 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
         if (temp_v2 != 0) {
           sceneRegisterBoxEffect(0,0,"NEXT",0x54,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[6],
                        (int)psVar5[7],(int)psVar5[8],0);
-          FUN_00281b94(0);
+          mapCollisionQueueBoxWalls(0);
           return;
         }
         temp_v4 = (int)psVar5[6];
@@ -208,7 +208,7 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
     sceneRegisterBoxEffect(0,0,"NEXT",0x4e,0x2a,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[6],
                  (int)psVar5[7],(int)psVar5[8],0);
   }
-  FUN_00281b94(0);
+  mapCollisionQueueBoxWalls(0);
   return;
 }
 

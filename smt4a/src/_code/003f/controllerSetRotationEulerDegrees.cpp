@@ -3,7 +3,6 @@
 #include "gfx/ControllerModel.h"
 
 extern "C" {
-extern const PhaseTrigEntry g_sinCosTable[];
 
 // Build the body's 3x4 rotation matrix from Euler angles in degrees.
 void controllerSetRotationEulerDegrees(Obj557b18 *body, f32 x, f32 y, f32 z)

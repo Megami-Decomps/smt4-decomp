@@ -1,4 +1,6 @@
-/* NON_MATCHING: register allocation only (r5-r9 rotated). Retail addresses the texture array as g_eventEffect+0x1c, likely a separate global of the original unit placed after it. */
+/* NON_MATCHING: register allocation only (r5-r9 rotated). Retail addresses the texture array as g_eventEffect+0x1c, likely a separate global of the original unit placed after it:
+ * with the work pointer and the textures as two separate globals the registers match (5 lines: a second pool word), as in
+ * smt4's eventEffectFreeTextures, but g_eventEffect is one shared struct here. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"

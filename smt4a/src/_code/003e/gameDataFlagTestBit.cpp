@@ -1,10 +1,8 @@
 /* Returns whether flag `bit` is set in the flag array. */
-#include "common.h"
+#include "gamedata/AppUnlockBits.h"
 #include "shard/W6_W6Match8_StatGrowth.h"
 
 extern "C" {
-
-extern u8 *gameDataBlockGetArea2D68(void);
 
 u8 gameDataFlagTestBit(u32 bit)
 {

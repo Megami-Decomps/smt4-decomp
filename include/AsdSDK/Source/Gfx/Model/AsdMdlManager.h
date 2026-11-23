@@ -168,6 +168,8 @@ AsdMdlObject *asdMdlManagerClone(AsdMdlObject *src, u32 mode);
 void asdMdlManagerDestroy(AsdMdlObject *obj);
 /* Marks a model object for destruction by the manager. */
 void asdMdlManagerMarkDestroy(AsdMdlObject *obj);
+/* The playing motion of a model (one load; armlink inlined it at every call, see config/inlined.txt). */
+s32 asdMdlNodeGetCurrentMotion(const AsdMdlNode *node);
 /* Builds the per-part bounds records of a model object. */
 u32 asdMdlObjectBuildBounds(AsdMdlObject *object);
 /* Builds a model's scene node and tables from its loaded image. */

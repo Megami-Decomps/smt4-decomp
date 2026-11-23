@@ -28,7 +28,7 @@ void FUN_002d8cec(void);
 void FUN_0023a52c(void);
 void FUN_003254a0(void);
 void gameStateSelectKind(void);
-void FUN_00275558(void);
+void ambientSoundUpdateByDistance(void);
 
 /* Updates the field-map subsystems and refreshes its cached status byte. */
 void FUN_0037a07c(void)
@@ -58,6 +58,6 @@ void FUN_0037a07c(void)
     FUN_0023a52c();
     FUN_003254a0();
     gameStateSelectKind();
-    FUN_00275558();
+    ambientSoundUpdateByDistance();
 }
 }

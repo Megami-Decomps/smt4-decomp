@@ -12,7 +12,7 @@ extern u32 DAT_004c3a44;
 extern u8 DAT_004c3af8[];
 extern MobiclipStartClock g_mobiclipCtrl;
 void FUN_00350bd0(MobiclipStartTable *table, u32 first, u32 second);
-void FUN_00350ac4(MobiclipStartTable *table, u32 index);
+void movieSelectStream(MobiclipStartTable *table, u32 index);
 const MobiclipStartRecord *movieRecordTableGetEntry(MobiclipStartTable *table, u32 index);
 const void *tableRecordGetChecked(MobiclipStartTable *table, s32 index);
 u32 FUN_0034f488(void *audio, u32 *context, const void *record, u32 depth, u32 mode);
@@ -24,7 +24,7 @@ u32 FUN_0034fbc8(ThreadControl *control);
 void FUN_001a14e8()
 {
     FUN_00350bd0(&g_mobiclipPlayer, 0, 0);
-    FUN_00350ac4(&g_mobiclipPlayer, 0);
+    movieSelectStream(&g_mobiclipPlayer, 0);
     const MobiclipStartRecord *record = movieRecordTableGetEntry(&g_mobiclipPlayer, table46COwnerGet(&g_mobiclipPlayer, 0));
     if (!DAT_004c3a50.Obj420a2c::buildEntries((Obj420a2cOwner *)&DAT_004c3a44,
                                            (Obj420a2cSource *)record, NULL))

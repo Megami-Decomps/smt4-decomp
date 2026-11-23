@@ -42,7 +42,7 @@ void FUN_0046605c(int param_1)
   }
   temp_v2 = 0;
   do {
-    wordsFlag8Reset(&((RangeOwner *)param_1)->flags[temp_v2]);
+    wordsFlag8Reset(&((RangeOwnerA *)param_1)->flags[temp_v2]);
     wordsFlagReset(param_1 + temp_v2 * 0x10 + 0xf4);
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 4);

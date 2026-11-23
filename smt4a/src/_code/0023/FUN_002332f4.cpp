@@ -13,7 +13,7 @@ int ptrListRemoveClearOwner(...);
 int FUN_00245f70(int);
 void mapIfClearMatchingRecord(int id);
 int FUN_00274a30(void);
-int FUN_002941c8(...);
+int mapDepartInit(...);
 int lmapRequestTimedEffect(int, int, int);
 int FUN_002d8a48(void);
 int lmapCameraSetMode(...);
@@ -79,7 +79,7 @@ extern int g_lmapScene; /* 0x581288 */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_00245f70. */
 /* Supplied declaration required: FUN_00274a30. */
-/* Supplied declaration required: FUN_002941c8. */
+/* Supplied declaration required: mapDepartInit. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_002b63d0. */
@@ -435,7 +435,7 @@ LAB_00233a04:
             }
             g_gameState.inputBlocked = 1;
             g_gameState.unk3EF = 1;
-            FUN_002941c8(&temp_v16,0x84);
+            mapDepartInit(&temp_v16,0x84);
           }
           *(unsigned short *)(temp_v5 + 0xae) = 0;
         }

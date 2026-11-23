@@ -1,6 +1,8 @@
 /* NON_MATCHING: with the area accessors inlined as copies of their real bodies only the first (known) bit set differs: retail loads the byte into r1 and the shift into r2, the build the reverse. The accessors are the adjacent functions 0x3e41f8-0x3e4740 of the same original file. */
 #include "common.h"
+#include "gamedata/AppUnlockBits.h"
 #include "gamedata/DataTableAccess.h"
+#include "gamedata/GameDataAccess_VariantE.h"
 
 extern "C" {
 
@@ -10,9 +12,7 @@ typedef struct AreaBits {
     /* 0x12 */ u8 marked[0x12];
 } AreaBits;
 
-s32 gameFlagIsSet(u32 flag);
 AreaBits *gameDataBlockGetArea28350(void);
-u8 *gameDataBlockGetArea2D68(void);
 s32 shopGetEntryAvailability(u32 id);
 
 /* Copies of the area block's bit accessors (gameDataArea28350TestBit, gameDataAreaBitTest, gameDataFlagTestBit,
@@ -33,15 +33,6 @@ static u8 areaMarkedTest(u32 bit)
     u32 shift = bit & 7;
 
     return (area->marked[byte] & (1 << shift)) != 0;
-}
-
-static u8 areaFlagTest(u32 bit)
-{
-    u8 *flags = gameDataBlockGetArea2D68();
-    s32 byte = bit / 8;
-    s32 position = bit % 8;
-
-    return (flags[byte] & (1 << position)) != 0;
 }
 
 static void areaKnownSet(u32 index, s32 enabled)
@@ -86,7 +77,7 @@ u32 FUN_003e42f0(void)
                 return 1;
             }
         } else if ((s32)dataFindKeyedRecordWithOverrides(id) != 0 &&
-                   (areaFlagTest(id) || shopGetEntryAvailability(id) != 2)) {
+                   (appUnlockBitIsSet(id) || shopGetEntryAvailability(id) != 2)) {
             areaKnownSet(id, 1);
             areaMarkedSet(id, 1);
             return 1;

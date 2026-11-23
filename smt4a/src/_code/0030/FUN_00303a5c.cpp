@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail uses s1 for the 0.0 constant; the build uses s2. */
+/* NON_MATCHING: retail uses s1 for the 0.0 constant; the build (in a multifile run with mathAngleDeltaDegrees,
+ * which keeps s4-s6 live across the call as retail does) uses s2. */
 #include "common.h"
 #include "util/MathFunctions.h"
 

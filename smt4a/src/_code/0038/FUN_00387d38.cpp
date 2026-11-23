@@ -1,6 +1,4 @@
-/* NON_MATCHING: only registers: retail keeps the state+0x100 base in r7 and the slot pointer in r8 (swapped here) and
-   loads the record id into r0 before the selected id. */
-#include "camp/CampCec/CharacterRefreshWork.h"
+#include "shard/Shard0032.h"
 #include "shard/Shard0031.h"
 #include "gamedata/GameSaveDataA.h"
 #include "event/2dEvent/EventEffect.h"
@@ -15,71 +13,51 @@ void sysPlaySe(s32 sound);
 s32 partyPanelExists();
 void linkHolderApplyFlag(u32 handle, s32 enabled);
 
-u32 FUN_00387d38(CharacterRefreshWork *work)
+s32 FUN_00387d38(StateAtF4 *edit)
 {
-    // This return-state subtype extends past the shared refresh work prefix.
-    struct ReturnState {
-        u32 reserved;
-        u32 link;
-        PartySlotA *source;
-        u8 padding0C[0xDC];
-        s32 previousChoice;
-        s32 destination;
-        u8 paddingF0[8];
-        s32 phase;
-        s32 returnMode;
-        u8 padding100[8];
-        s16 selectedId;
-        u16 previousId;
-        u8 padding10C[0x40];
-        u32 command;
-        u8 padding150[4];
-        u8 cancelled;
-    };
-    ReturnState *state = reinterpret_cast<ReturnState *>(work);
-    u32 result = 0;
+    s32 result = 0;
     if (partyPanelGetRequestedUnitId() != 0) {
-        state->previousId = state->selectedId;
-        state->selectedId = partyPanelGetRequestedUnitId();
-        state->destination = -1;
+        edit->unk10A = edit->unk108;
+        edit->unk108 = partyPanelGetRequestedUnitId();
+        edit->table.nextState = -1;
         SaveSlotTableA *party = gameGetSlotTable();
         for (s32 index = 0; index < 3; ++index) {
             if (party->reserve[index] >= 0 &&
-                gameGetSlotRecord(party->reserve[index])->id == state->selectedId &&
-                gameGetSlotRecord(party->reserve[index])->id == state->source->record.ailments) {
+                gameGetSlotRecord(party->reserve[index])->id == edit->unk108 &&
+                gameGetSlotRecord(party->reserve[index])->id == edit->slot->record.ailments) {
                 messageMainRequestBanner();
-                state->destination = 5;
+                edit->table.nextState = 5;
                 break;
             }
         }
-        if (state->destination == -1) {
+        if (edit->table.nextState == -1) {
             for (s32 index = 0; index < 24; ++index) {
                 if (party->party[index] >= 0 &&
-                    gameGetSlotRecord(party->party[index])->id == state->selectedId &&
-                    gameGetSlotRecord(party->party[index])->id == state->source->record.ailments) {
+                    gameGetSlotRecord(party->party[index])->id == edit->unk108 &&
+                    gameGetSlotRecord(party->party[index])->id == edit->slot->record.ailments) {
                     messageMainRequestBanner();
-                    state->destination = 5;
+                    edit->table.nextState = 5;
                     break;
                 }
             }
         }
-        if (state->destination == -1) {
+        if (edit->table.nextState == -1) {
             FUN_00331380(0);
-            state->destination = 4;
+            edit->table.nextState = 4;
         }
         sysPlaySe(0xE4);
-        state->phase = 2;
+        edit->phase = 2;
         result = 3;
     } else if (partyPanelExists() && FUN_00284e94()) {
         campCecSetObjectValue(0);
-        state->cancelled = 1;
+        edit->unk154 = 1;
         FUN_00331380(0);
-        linkHolderApplyFlag(state->link, 1);
-        state->returnMode = 1;
-        state->previousChoice = -1;
-        state->phase = 5;
-        state->destination = -1;
-        state->command = 0;
+        linkHolderApplyFlag(edit->unk04, 1);
+        edit->followingPhase = 1;
+        edit->table.state = -1;
+        edit->phase = 5;
+        edit->table.nextState = -1;
+        edit->editItem = 0;
         result = 3;
     }
     return result;

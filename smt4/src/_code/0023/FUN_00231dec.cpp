@@ -11,7 +11,7 @@ extern "C" {
 int pairCopy(int, float *);
 int FUN_00231bcc(...);
 int lmapSceneGetObj(int);
-int FUN_0025090c(unsigned int, unsigned int, int, unsigned char [128]);
+int mapDepartFormatPlaceName(unsigned int, unsigned int, int, unsigned char [128]);
 int mapClassifyPlaceState(...);
 int textDrawString(...);
 int gxResetColorQuadToWhite(void);
@@ -45,7 +45,7 @@ extern int DAT_0049f920; /* 0x49f920 */
 /* Supplied declaration required: FUN_00231bcc. */
 /* Supplied declaration required: lmapSceneGetObj. */
 extern unsigned int textMeasureOnLayer(int, unsigned int);
-/* Supplied declaration required: FUN_0025090c. */
+/* Supplied declaration required: mapDepartFormatPlaceName. */
 /* Supplied declaration required: mapClassifyPlaceState. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
@@ -113,7 +113,7 @@ void FUN_00231dec(int param_1)
     if (*(char *)(param_1 + 0xc) != '\0') {
       temp_v3 = NaviMain_GetCurrentMap(temp_v18);
       temp_v4 = NaviMain_GetPosY(temp_v18);
-      FUN_0025090c(temp_v3,temp_v4,1,temp_v15);
+      mapDepartFormatPlaceName(temp_v3,temp_v4,1,temp_v15);
       libc_strcpy(temp_v9,temp_v15);
     }
     else {

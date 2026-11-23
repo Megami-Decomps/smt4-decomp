@@ -6,7 +6,7 @@
 extern "C" {
 
 int dataTable2eSub2GetCount(...);
-int FUN_0025090c(int, int, int, unsigned char [144]);
+int mapDepartFormatPlaceName(int, int, int, unsigned char [144]);
 int forwardRecoveredCallback(void);
 int textDrawString(int, unsigned int, unsigned char [144]);
 int gxSubmitDrawZeroExtraParams(unsigned int);
@@ -27,7 +27,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int dataTable2eSub2GetRecord(int);
 /* Supplied declaration required: dataTable2eSub2GetCount. */
-/* Supplied declaration required: FUN_0025090c. */
+/* Supplied declaration required: mapDepartFormatPlaceName. */
 /* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: textDrawString. */
 extern unsigned long long asdTMTexTableEntryAt(unsigned int, unsigned int);
@@ -163,7 +163,7 @@ unsigned int FUN_0021ef10(void)
         texDrawTableEntryAtStoredOrigin(2,0xe,temp_v4,(int)((unsigned long long)temp_v9 >> 0x20),0,0xb);
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 0x10b);
-      FUN_0025090c((int)*(short *)(temp_v1 + 0xccbc),(int)*(short *)(temp_v1 + 0xccbe),0,temp_v11);
+      mapDepartFormatPlaceName((int)*(short *)(temp_v1 + 0xccbc),(int)*(short *)(temp_v1 + 0xccbe),0,temp_v11);
       VectorSignedToFloat((int)*(short *)((int)temp_v10 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)((int)temp_v10 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(3,0xffffffff,temp_v11);

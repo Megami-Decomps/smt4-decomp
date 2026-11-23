@@ -12,7 +12,7 @@ int randRange(...);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(int, int); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int FUN_002296b0(int);
-int FUN_00281b94(...);
+int mapCollisionQueueBoxWalls(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int mapRebuildWallAutoTiles(void);
 int FUN_002c553c(void);
 int FUN_002c670c(int);
@@ -45,7 +45,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_002296b0. */
 extern int gameDataIsFlagByteSet(int);
-/* Supplied declaration required: FUN_00281b94. */
+/* Supplied declaration required: mapCollisionQueueBoxWalls. */
 /* Supplied declaration required: mapRebuildWallAutoTiles. */
 /* Supplied declaration required: FUN_002c553c. */
 /* Supplied declaration required: FUN_002c670c. */
@@ -267,7 +267,7 @@ void FUN_00239c24(void)
         FUN_003276f0(temp_v4 + 0x186,0);
         lmapUpdateEngineRecordNavigation();
       }
-      FUN_00281b94((int)(short)(int)temp_v17);
+      mapCollisionQueueBoxWalls((int)(short)(int)temp_v17);
     }
     const MapSaveBlockA *flags = gameFlagsGetBlock();
     if (flags->spawnPending != 0) {

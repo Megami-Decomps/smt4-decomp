@@ -12,7 +12,7 @@ int sysMemClear(float *, int);
 int randomAdvanceShiftRegister(void);
 int shiftRandomNextFraction(...);
 int FUN_005145f4(void);
-int FUN_005147dc(void);
+int matrixSetRotationX(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 int __aeabi_uidivmod(void);
@@ -91,7 +91,7 @@ extern unsigned int effGetFrameStep(void);
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: shiftRandomNextFraction. */
 /* Supplied declaration required: FUN_005145f4. */
-/* Supplied declaration required: FUN_005147dc. */
+/* Supplied declaration required: matrixSetRotationX. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -215,7 +215,7 @@ void FUN_003939e4(int param_1)
                   temp_v13 = -temp_v13;
                 }
                 temp_v23 = CONCAT44(temp_v13 / temp_v27,temp_v29[10]);
-                FUN_005147dc();
+                matrixSetRotationX();
                 matrixSetRotationY(temp_v29[3]);
                 FUN_005145f4();
                 temp_v25 = 40.743664f;

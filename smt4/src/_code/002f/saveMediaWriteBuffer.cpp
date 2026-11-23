@@ -1,6 +1,6 @@
 /* NON_MATCHING: LocalStream RAII + open/create/writeAt/close and nnResultModule/nnResultDescriptionBits match 195 of 196 instructions; only one prologue `mov r2, sp; mov r3, r2` differs (shifting branch targets by 4 bytes). */
 #include "common.h"
-#include "nn/Result.h"
+#include "sys/FilePaths.h"
 
 extern "C" {
 
@@ -27,7 +27,6 @@ nn::Result FUN_00220330(LocalStream *stream, u32 path, u32 size);
 nn::Result FUN_002e1380(LocalStream *stream, u32 path, u32 size);
 void fileSendPathRequestRoot0(u32 path);
 void archivePathRequestRoot1(u32 path);
-void archivePathRequestRoot2(u32 path);
 nn::Result fileObjSeekRead(LocalStream *stream, u32 offset, u32 buffer, u32 size);
 nn::Result FUN_002104c8(LocalStream *stream, u32 offset, u32 buffer, u32 size);
 nn::Result FUN_002d5f90(LocalStream *stream, u32 offset, u32 buffer, u32 size);
@@ -159,7 +158,7 @@ static __inline void deletePath(s32 media, u32 path)
         archivePathRequestRoot1(path);
         break;
     case 2:
-        archivePathRequestRoot2(path);
+        archivePathRequestRoot2((const char *)path);
         break;
     }
 }

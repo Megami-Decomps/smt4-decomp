@@ -12,7 +12,7 @@
 
 extern "C" {
 s32 mapGimicStepUnitSpawner(void);
-void FUN_002671f4(s32 id, f32 x, f32 y, f32 z, f32 w, f32 a, f32 b, f32 c);
+void mapCollisionQueueBoxWalls(s32 id, f32 x, f32 y, f32 z, f32 w, f32 a, f32 b, f32 c);
 void modelPartSetRotationDegrees(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z); // declcheck: local (the header's NodeVec3 by-value form builds a stack temporary here: 127 against 111 lines)
 
 /* Per-frame update of the map gimics: keeps their models' visibility and motion in sync with the map, and runs
@@ -46,7 +46,7 @@ void mapGimicUpdate(void)
                 MapGimicEntry *entry = &g_mapGimic->entries[i];
 
                 if (entry->active != 0 && entry->kind == 12) {
-                    FUN_002671f4((s16)entry->gimicId, entry->position[0], entry->position[1], entry->position[2],
+                    mapCollisionQueueBoxWalls((s16)entry->gimicId, entry->position[0], entry->position[1], entry->position[2],
                                  entry->position[3], 600.0f, 350.0f, 160.0f);
                 }
             }
@@ -78,7 +78,7 @@ void mapGimicUpdate(void)
             if (entry->dirty != 0) {
                 nodeSetTranslation(entry->model->node, 0, entry->position);
                 modelPartSetRotationDegrees(entry->model->node, 0, 350.0f, entry->position[3], 350.0f);
-                if (entry->model->node->currentMotion != entry->motion) {
+                if (asdMdlNodeGetCurrentMotion(entry->model->node) != entry->motion) {
                     modelSelectPrimaryMotion(entry->model->node, entry->motion, 350.0f);
                 }
                 entry->dirty = 0;

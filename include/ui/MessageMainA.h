@@ -121,7 +121,7 @@ struct MessageWindowA {
     /* 0x19F1 */ s8 closeBusy;
     /* 0x19F2 */ u8 closePending;
     /* 0x19F3 */ u8 unk19F3;
-    /* 0x19F4 */ u32 unk19F4;
+    /* 0x19F4 */ u32 panelTextureVariant; /* added to texture IDs when drawing sprite 34 */
     /* 0x19F8 */ u8 unk19F8;
     /* 0x19F9 */ u8 unk19F9;
     /* 0x19FA */ u8 unk19FA;

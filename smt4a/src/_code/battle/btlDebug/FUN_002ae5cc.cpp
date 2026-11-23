@@ -41,8 +41,8 @@ int fontMeasureLineAdvance(...);
 int drawSetColorFromRGBA8(...);
 int gameGetSlotRecord(...);
 int FUN_0025e704(...);
-int FUN_002b4dcc(...);
-int FUN_002b4e7c(void);
+int btlUnitMaxHp(...);
+int btlPlayerMaxHp(void);
 int heldAmountLessThan(...);
 int gxSetMirroredClippedScissor(...);
 int VectorSignedToFloat(...);
@@ -131,8 +131,8 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: FUN_0025e704. */
 extern int btlMainGetUnk14(void);
-/* Supplied declaration required: FUN_002b4dcc. */
-/* Supplied declaration required: FUN_002b4e7c. */
+/* Supplied declaration required: btlUnitMaxHp. */
+/* Supplied declaration required: btlPlayerMaxHp. */
 extern int valueAtMostFifthOfTotal(int, int);
 /* Supplied declaration required: heldAmountLessThan. */
 /* Supplied declaration required: efctCallRoutineWithSpeedOverride. */
@@ -499,7 +499,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
             else {
               temp_v8 = gameGetSlotRecord();
             }
-            temp_v1 = FUN_002b4dcc(temp_v8);
+            temp_v1 = btlUnitMaxHp(temp_v8);
             temp_v30 = (int)temp_v1;
             temp_v31 = (int)*(short *)(temp_v8 + 0x10);
             temp_v12 = (unsigned int)table01RecordLookupForContent(*(unsigned short *)(temp_v8 + 0x62));
@@ -509,7 +509,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
         }
         else {
           temp_v7 = btlMainGetUnk14();
-          temp_v1 = FUN_002b4dcc();
+          temp_v1 = btlUnitMaxHp();
           temp_v30 = (int)temp_v1;
           temp_v31 = (int)*(short *)(temp_v7 + 0x10);
           temp_v12 = (unsigned int)table01RecordLookupForContent(*(unsigned short *)(temp_v7 + 0x62));
@@ -520,7 +520,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
       else {
         temp_v13 = gameGetPlayerData();
         temp_v8 = temp_v13;
-        FUN_002b4e7c();
+        btlPlayerMaxHp();
         temp_v30 = (int)(short)temp_v8;
         temp_v31 = (int)*(short *)(temp_v13 + 0x1e);
         temp_v12 = gameGetPlayerName();

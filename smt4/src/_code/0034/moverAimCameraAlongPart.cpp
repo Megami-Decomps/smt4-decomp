@@ -8,7 +8,6 @@
 
 extern "C" {
 
-extern const PhaseTrigEntry g_sinCosTable[];
 
 Vec3f *cameraGetProviderEntryPayload(MovedPart *part);
 void cameraExportProviderEntryWords(MovedPart *part, f32 *fovy, f32 *aspect, f32 *nearClip, f32 *farClip); // declcheck: local (code/Code002a_Smt4.h declares the outputs as u32 words; they are the camera's f32 field of view, aspect and clip distances)

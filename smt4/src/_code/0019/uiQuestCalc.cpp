@@ -7,7 +7,7 @@ extern "C" {
 
 int uiQuestStartSelected(void);
 int uiFadeRequestHalf(void);
-int FUN_0028fe0c(...);
+int uiQuestLoadDetailText(...);
 int uiQuestCountDetailPages(...);
 int FUN_002900d0(void);
 int FUN_0029016c(...);
@@ -52,7 +52,7 @@ extern int g_uiQuest; /* 0x43dd50 */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: uiQuestListInput. */
 /* Supplied declaration required: uiFadeRequestHalf. */
-/* Supplied declaration required: FUN_0028fe0c. */
+/* Supplied declaration required: uiQuestLoadDetailText. */
 /* Supplied declaration required: uiQuestCountDetailPages. */
 /* Supplied declaration required: FUN_002900d0. */
 /* Supplied declaration required: FUN_0029016c. */
@@ -930,7 +930,7 @@ joined_r0x0019627c:
       }
       *(unsigned int *)(temp_v1 + 0x5e0) = 0;
     }
-    FUN_0028fe0c(*(unsigned short *)(temp_v1 + 0x97e),1);
+    uiQuestLoadDetailText(*(unsigned short *)(temp_v1 + 0x97e),1);
     uiSpriteSetKeyframe(temp_v1 + 0x494,0);
     spriteStartAnimationByIndex(temp_v1 + 0x520,5);
     temp_v7 = 0x18;
@@ -1116,7 +1116,7 @@ joined_r0x0019627c:
           }
           *(unsigned int *)(temp_v1 + 0x5e0) = 0;
         }
-        FUN_0028fe0c(temp_v3,1);
+        uiQuestLoadDetailText(temp_v3,1);
       }
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;

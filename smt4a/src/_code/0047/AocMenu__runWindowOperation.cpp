@@ -25,7 +25,6 @@ void jobFlagsWorkStop(u32 *job);
 void *windowCreateStatusOperation(void *operation, s32 mode); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void aocLoadingTaskStart(u32 *job, s32 mode);
 void aocMenuSetButtonHelp(u32 *job, s32 a, s32 b);
-void FUN_0047bc90(u32 *job, RequestParameters *event);
 void releaseEntriesB(u32 *regions);
 void releaseEntriesA(u32 *entries);
 void FUN_00476e58(u32 *job, s32 a, s32 b);
@@ -69,7 +68,7 @@ void AocMenu::runWindowOperation()
                     break;
                 case 0x66: {
                     RequestParameters copy = event;
-                    FUN_0047bc90(job, &copy);
+                    FUN_0047bc90(this, &copy);
                     break;
                 }
                 default:

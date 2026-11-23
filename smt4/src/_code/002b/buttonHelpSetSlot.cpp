@@ -1,11 +1,13 @@
-/* NON_MATCHING: retained queued-value base matches; saved-register allocation for queued arrays, sentinel and active flag still differs. */
 #include "ui/UiSpriteApi.h"
 #include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-extern ButtonHelpQueuedSelections DAT_0043da50;
+/* The selections queued while slot animations run (-1: none), kinds then values: this file's data
+ * (declared in ui/ButtonHelpGlobal.h for buttonHelpCalc). */
+s32 g_buttonHelpQueuedKinds[6] = { -1, -1, -1, -1, -1, -1 };
+s32 g_buttonHelpQueuedValues[6] = { -1, -1, -1, -1, -1, -1 };
 
-// Set an indexed help item immediately, or defer it until active help animations finish.
+/* Sets a help slot immediately, or defers it until the active help animations finish. */
 void buttonHelpSetSlot(u8 slot, u8 kind, u16 value, s32 defer)
 {
     if (slot >= 6)
@@ -14,20 +16,19 @@ void buttonHelpSetSlot(u8 slot, u8 kind, u16 value, s32 defer)
     if (!work)
         return;
     if (defer) {
-        s32 *queuedValues = DAT_0043da50.values;
-        s32 queuedKind = DAT_0043da50.kinds[slot];
+        s32 queuedKind = g_buttonHelpQueuedKinds[slot];
         if (queuedKind < 0) {
             for (s32 index = 0; index < 6; ++index) {
                 if (work->touchPressed[index]) {
-                    DAT_0043da50.kinds[slot] = kind;
-                    queuedValues[slot] = value;
+                    g_buttonHelpQueuedKinds[slot] = kind;
+                    g_buttonHelpQueuedValues[slot] = value;
                     return;
                 }
             }
         }
-        if (queuedKind == kind && queuedValues[slot] == value) {
-            DAT_0043da50.kinds[slot] = -1;
-            queuedValues[slot] = -1;
+        if (queuedKind == kind && g_buttonHelpQueuedValues[slot] == value) {
+            g_buttonHelpQueuedKinds[slot] = -1;
+            g_buttonHelpQueuedValues[slot] = -1;
         }
     }
     work->slots[slot].kind = kind;

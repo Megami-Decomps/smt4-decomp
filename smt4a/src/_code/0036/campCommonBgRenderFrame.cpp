@@ -16,7 +16,7 @@ int efctSetSpeed(void);
 int FUN_0018098c(...);
 int texDrawTableEntrySized(...);
 int floatInterpolateOverDuration(...);
-int FUN_001f3f34(void);
+int curveInterpolatePacked(void);
 int effectSpawnDefaultArguments(...);
 int campMenuEntryDraw(...);
 int VectorFloatToUnsigned(...);
@@ -46,7 +46,7 @@ extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: texDrawTableEntrySized. */
 extern unsigned int FUN_001f3e80(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: floatInterpolateOverDuration. */
-/* Supplied declaration required: FUN_001f3f34. */
+/* Supplied declaration required: curveInterpolatePacked. */
 /* Supplied declaration required: effectSpawnDefaultArguments. */
 /* Supplied declaration required: campMenuEntryDraw. */
 
@@ -134,7 +134,7 @@ int campCommonBgRenderFrame(unsigned int process)
     case 0:
       VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v12 = -16.0f;
-      FUN_001f3f34();
+      curveInterpolatePacked();
       VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
       floatInterpolateOverDuration();
       efctSetSpeed();
@@ -267,7 +267,7 @@ int campCommonBgRenderFrame(unsigned int process)
     VectorSignedToFloat((int)((temp_v9 - in_s0) * temp_v8),(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_0018098c(*(unsigned int *)(temp_v0 + 0x10),(int)*(short *)(temp_v3 + 10));
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001f3f34();
+    curveInterpolatePacked();
     texDrawCompositeSprite(2,0x22,4,(int)temp_v9,0,0xe);
     break;
   case 3:
@@ -334,7 +334,7 @@ int campCommonBgRenderFrame(unsigned int process)
   case 5:
     texDrawCompositeSprite(2,0x22,5,0,0,0xc);
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001f3f34();
+    curveInterpolatePacked();
     texDrawTableEntryAtStoredOrigin(2,0x22,0x30,(int)temp_v9,0,0xd);
     temp_v2 = FUN_001f3e80(0,100,0xc,*(unsigned int *)(temp_v0 + 0x1c),0);
     temp_v3 = g_renderCtx;

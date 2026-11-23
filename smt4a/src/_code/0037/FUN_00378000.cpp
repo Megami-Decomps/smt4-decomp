@@ -8,7 +8,7 @@ extern "C" {
 
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
-int FUN_00281b94(...);
+int mapCollisionQueueBoxWalls(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
-/* Supplied declaration required: FUN_00281b94. */
+/* Supplied declaration required: mapCollisionQueueBoxWalls. */
 
 void FUN_00378000(void)
 
@@ -38,52 +38,52 @@ void FUN_00378000(void)
     temp_v1 = ((int)g_mapGimic) + temp_v2 * 0x3c;
     if (*(char *)(temp_v1 + 0x90) != '\0') {
       if (*(short *)(temp_v1 + 0xa6) == 0x10) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 10) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0xb) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0xc) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x17) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x15) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x14) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x19) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x1a) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x1d) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x27) {
         if (*(char *)(temp_v0 + 0x1525) != '\0') goto LAB_003788d0;
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x28) {
         if (*(char *)(temp_v0 + 0x1524) != '\0') goto LAB_003788d0;
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x29) {
         if (*(char *)(temp_v0 + 0x1526) != '\0') goto LAB_003788d0;
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x2e) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x33) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x36) {
         *(unsigned int *)(temp_v1 + 0xb8) = *(unsigned int *)(temp_v1 + 0x94);
@@ -94,40 +94,40 @@ void FUN_00378000(void)
         temp_v3 = *(float *)(temp_v1 + 0xc4) * (float)((unsigned long long)temp_v4 >> 0x20);
         libm_cosf();
         *(float *)(temp_v1 + 0xc0) = *(float *)(temp_v1 + 0xc0) - temp_v3 * (float)temp_v5;
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x38) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x39) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x3a) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x3b) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x5f) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x55) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x56) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x57) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x4e) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x44) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x4f) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x60) {
         *(unsigned int *)(temp_v1 + 0xc0) = *(unsigned int *)(temp_v1 + 0x9c);
@@ -138,48 +138,48 @@ void FUN_00378000(void)
         temp_v3 = *(float *)(temp_v1 + 0xc4) * (float)((unsigned long long)temp_v4 >> 0x20);
         libm_cosf();
         *(float *)(temp_v1 + 0xc0) = *(float *)(temp_v1 + 0xc0) - temp_v3 * (float)temp_v5;
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x50) {
         if (*(short *)(temp_v1 + 0xa4) == 2) goto LAB_003788d0;
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x25) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x45) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x46) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x47) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x48) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x49) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x4c) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x4a) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x4b) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
       if (*(short *)(temp_v1 + 0xa6) == 0x67) {
-        FUN_00281b94((int)(short)*(unsigned int *)(temp_v1 + 0xac));
+        mapCollisionQueueBoxWalls((int)(short)*(unsigned int *)(temp_v1 + 0xac));
       }
     }
 LAB_003788d0:
     temp_v2 = temp_v2 + 1;
     if (temp_v2 >= 0x23) {
       if (*(char *)(((int)g_mapGimic) + 0x9b4) != '\0') {
-        FUN_00281b94(0x201e);
+        mapCollisionQueueBoxWalls(0x201e);
         return;
       }
       return;

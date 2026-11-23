@@ -5,7 +5,6 @@
 
 extern "C" {
 
-extern const PhaseTrigEntry g_sinCosTable[];
 
 s32 padButtonIsPressed(u32 button);
 s32 slotIsActive(u32 button);

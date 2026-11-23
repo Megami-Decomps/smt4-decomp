@@ -1,4 +1,3 @@
-/* NON_MATCHING: first wrap test branches BNE/add then B/wrap instead of retail BEQ/wrap then B/add. */
 #include "shard/W6_W6Match7_NumericStepper.h"
 #include "code/Code003c.h"
 #include "code/Code003c_Smt4.h"
@@ -26,13 +25,12 @@ extern "C" void numericStepperHandleInput(NumericStepper* stepper)
         stepper->decrementActive = 1;
     }
 
-    if (ifTouchIsInitialSelection(stepper->incrementKey) != 0) {
-        if (stepper->value != stepper->maximum) {
-            ++stepper->value;
-        } else {
-            stepper->value = stepper->minimum;
-        }
-    } else if (incrementState == 2 && stepper->value < stepper->maximum) {
+    /* A press on the increment button wraps at the maximum; a press, or holding it below the
+     * maximum, steps up. The decrement button's press is only read when the increment one did nothing. */
+    const s32 incrementPressed = ifTouchIsInitialSelection(stepper->incrementKey);
+    if (incrementPressed != 0 && stepper->value == stepper->maximum) {
+        stepper->value = stepper->minimum;
+    } else if (incrementPressed != 0 || (incrementState == 2 && stepper->value < stepper->maximum)) {
         ++stepper->value;
     } else if (ifTouchIsInitialSelection(stepper->decrementKey) != 0) {
         if (stepper->value == stepper->minimum) {

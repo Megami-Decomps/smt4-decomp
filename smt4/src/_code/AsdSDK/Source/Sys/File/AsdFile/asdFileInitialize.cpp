@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the semaphore handle at sp+0 (shared with the call-argument area, 12-byte frame), the shared zero in r7, and ends asdFileStartWorkerThread/FUN_0010f764 with two stripped hook nops before the tail call; armcc allocates the handle at sp+8 and calls bl. */
+/* NON_MATCHING: retail keeps the semaphore handle at sp+0 (shared with the call-argument area, 12-byte frame), the shared zero in r7, and ends asdFileStartWorkerThread/fsInitializeAccessDelay with two stripped hook nops before the tail call; armcc allocates the handle at sp+8 and calls bl. */
 #include "AsdSDK/Source/Sys/File/AsdFile.h"
 #include "AsdSDK/AsdDebug.h"
 #include "nn/Result.h"
@@ -19,7 +19,7 @@ void asdFatalError(void);
 u32 svcCreateSemaphore(u32 *handle, u32 initial, u32 maximum);
 void nn_os_LightEvent_Initialize(void *event, u32 mode);
 void asdFileStartWorkerThread(void);
-void FUN_0010f764(void);
+void fsInitializeAccessDelay(void);
 
 // Start the file service: the "rom:" and "patch:" device workspaces, the request lock and the event.
 void asdFileInitialize(void)
@@ -51,7 +51,7 @@ void asdFileInitialize(void)
     semaphoreRelease(g_asdFileMutex, 1);
     nn_os_LightEvent_Initialize(g_asdFileEvent, 0);
     asdFileStartWorkerThread();
-    FUN_0010f764();
+    fsInitializeAccessDelay();
 }
 
 } /* extern "C" */

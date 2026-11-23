@@ -178,6 +178,13 @@ difference a register tie-break.
 - Parameter order is part of the signature even where the registers agree: see
   [Parameter order](#parameter-order).
 
+- A unit that casts its parameter or global to a unit-local struct view can match once it uses the shared type's
+  fields directly: smt4 `FUN_003bb1f0` (`SceneWidget`), smt4a `resultSetMode` (`ResultWorkA`) and `FUN_00387d38`
+  (`StateAtF4`, the type its registrar declares) are IDENTICAL with no other change (wave 80).
+- A type chosen only for the loads it gives must still say what the field holds: an `nn::fnd::TimeSpan` delay gave
+  retail's two word loads in smt4a `FUN_00146808`/smt4 `FUN_0010f764`, but the field holds milliseconds (the sleeper
+  multiplies it by 1000000), so the review kept `s64` and `NON_MATCHING` (wave 80).
+
 ### 64-bit flag masks
 
 - A flag mask is a real `u64`, tested as `if (a & mask) return 1; return 0;` (or
@@ -322,6 +329,12 @@ difference a register tie-break.
   stack arguments go to `[sp]` and `[sp, #4]`. Two locals overlapping in one frame area is the same evidence: smt4a
   `FUN_002a28c0` keeps its equipment profile at `sp+4`, inside the 100 bytes the later outbox card occupies (wave 74).
   A block found only by its score is steering.
+
+- A switch case whose result variable's register retail reuses inside the case and zeroes again on the reject path
+  before the shared exit (`mov r7, #0; b exit`) is a resolver inlined with the signature of the sibling cases' calls
+  (`accepted = resolve(owner, a, b, out); break;`), under the mode rule above (its own return copy): smt4
+  `FUN_003c9b94` and smt4a `FUN_004dc3b4` are IDENTICAL; written in place, with or without early returns, 17 lines
+  (wave 80).
 
 ### Locals, constants and literal pools
 
@@ -585,6 +598,16 @@ asks for.
   `procUpdate` in smt4/smt4a `asdProcessUpdate` (312 → 107 lines, wave 70; one arm still branches directly). With
   a single call it still needs evidence besides the diff.
 
+- A per-element update a comparator performs for both records in one loop is a plain `static` helper called twice:
+  `keepStrongest(record, element, &affinity, &strongest)` made smt4 `dataTable08CompareStrongestAffinity` and smt4a
+  `uiCompareEntryRanksDescending` IDENTICAL (46 lines in place; 8 as `static __inline`; wave 80).
+- A reset both games' fusion builders perform after their sort loops is one `static __inline` body
+  (`fusionResetSelection`): smt4a `fusionRaceSelectionInitialize` is IDENTICAL with it (94 lines in place) and the IV
+  twin `uniteCtrlBuildRaceLists` goes from 145 to 33 lines (wave 80).
+- A translation unit only helps when retail keeps the callee out of line: built as one file, smt4
+  `buttonHelpSetSlot` was inlined into `buttonHelpCalc` (153 retail rows against 222), although both address the
+  queued arrays from one pool word; the TU was not made (wave 80).
+
 ### Loops and data
 
 - Read the bound from the structure (`i < table->count`, `index < first + count`) instead of caching
@@ -738,6 +761,14 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
 - A `rev16` on a constant between argument moves (`mov r0, rN; rev16 r0, r0; mov rM, r0`) is a
   one-instruction function armlink inlined, not the compiler's byte-swap idiom: write the call and add
   an `inlined.txt` row (`textCodeSwapBytes`).
+
+- A callback whose pool word is a plain number (no relocation in the retail object) points at code no unit covers:
+  smt4a `FUN_002941c8` registers 0x329d64, four bytes before `FUN_00329d68`'s `push` (an `ldr r0, =g_mapDepart`
+  armcc put first, as in smt4's twin). Move the unit's start with a `units.py add` `move` row and call the symbol;
+  never cast an address in the source. Both are IDENTICAL after the move (wave 80).
+- `asdMdlNodeGetCurrentMotion` (`ldr r0, [r0, #56]`) is a linker-inlined getter: the compared slot field is loaded
+  after it, as after a call; with the calls and the `inlined.txt` rows smt4 `mapObjectVisibilityRestore`,
+  `mapGimicUpdate` and smt4a `FUN_002d8cec` came 5-11 lines closer (wave 80).
 
 ## Sweeps
 

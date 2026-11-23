@@ -8,7 +8,7 @@ extern "C" {
 
 int FUN_002b621c(void);
 int mapEaseSceneHeading(void);
-int FUN_0033ad04(void);
+int mapEnemyAssignSpawns(void);
 int sysPlayVoice(...);
 int controllerGetSourceValue(...);
 int controllerGetSourceTiming(...);
@@ -95,7 +95,7 @@ extern int saveSlotSelectedIsId175(void);
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: FUN_00325998. */
 /* Supplied declaration required: FUN_00327ee8. */
-/* Supplied declaration required: FUN_0033ad04. */
+/* Supplied declaration required: mapEnemyAssignSpawns. */
 /* Supplied declaration required: FUN_00354098. */
 /* Supplied declaration required: sysPlayVoice. */
 extern unsigned int soundActorStartOnFreeChannel(unsigned int);
@@ -620,7 +620,7 @@ void FUN_002b81ec(void)
       }
       FUN_00327ee8();
       if ((temp_v9 & 0x800) != 0) {
-        FUN_0033ad04();
+        mapEnemyAssignSpawns();
       }
       if ((temp_v9 & 0x2000) != 0) {
         FUN_002b621c();

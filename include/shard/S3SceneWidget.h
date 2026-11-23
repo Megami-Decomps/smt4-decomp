@@ -4,11 +4,13 @@
 #define SHARD_S3SCENEWIDGET_H
 
 #include "common.h"
+#include "ui/UiSpriteState.h"
+#include <stddef.h>
 
 #define SCENE_TEXTURE_TABLE 42     /* texture table node the widget's images live in */
 #define SCENE_TEXTURE_COUNT 64
 
-/* The widget's sprite: `ready` is set once its image is up. */
+/* A sprite viewed only up to its `ready` byte (UiSpriteState::finished), set once its image is up. */
 typedef struct SceneSprite {
     /* 0x00 */ u8 unk00[0x8A];
     /* 0x8A */ s8 ready;
@@ -22,11 +24,15 @@ typedef struct SceneImageEntry {
 typedef struct SceneWidget {
     /* 0x000 */ u8 unk000[0x530];
     /* 0x530 */ SceneImageEntry *entries[4];
-    /* 0x540 */ u8 unk540[0xF1];
+    /* 0x540 */ u8 unk540[0xF0];
+    /* 0x630 */ u8 hidden;
     /* 0x631 */ u8 animate;               /* advance `frame` every update */
-    /* 0x632 */ u8 unk632[0x59A];
-    /* 0xBCC */ SceneSprite sprite;
-    /* 0xC57 */ u8 unkC57[5];
+    /* 0x632 */ u8 cursorMarked;
+    /* 0x633 */ u8 unk633;
+    /* 0x634 */ UiResourceParameters parameters;
+    /* 0x654 */ UiSpriteState buttons[10];
+    /* 0xBCC */ UiSpriteState sprite;     /* the shown image; `finished` once it is up */
+    /* 0xC58 */ u32 initialFrame;
     /* 0xC5C */ s32 frame;                /* 0..15 */
     /* 0xC60 */ s32 shownTex;
     /* 0xC64 */ s32 shownKey;
@@ -36,6 +42,9 @@ typedef struct SceneWidget {
     /* 0xC74 */ s32 queuedKey;
     /* 0xC78 */ u8 loaded[SCENE_TEXTURE_COUNT]; /* textures of the table this widget holds */
 } SceneWidget;
+typedef char SceneWidgetOffsets[offsetof(SceneWidget, parameters) == 0x634 &&
+    offsetof(SceneWidget, buttons) == 0x654 && offsetof(SceneWidget, sprite) == 0xBCC &&
+    offsetof(SceneWidget, frame) == 0xC5C && sizeof(SceneWidget) == 0xCB8 ? 1 : -1];
 
 struct SceneObj;
 typedef void (SceneObj::*SceneHandler)(void);

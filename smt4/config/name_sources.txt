@@ -6277,3 +6277,19 @@
 0026493c lmapMainUpdateState inferred twin of smt4a lmapMainUpdateState
 00277b5c mapIfQueueNotice inferred near twin of smt4a mapIfQueueNotice
 002c5df8 __aeabi_memcpy inferred armlib's byte memcpy (0x88 bytes, exact twin of smt4a's): armcc 4.1 calls __aeabi_memcpy for memcpy() and struct copies of unknown alignment (smt4a FUN_00429934's struct return compiles to it at retail's call); beside __aeabi_memcpy4 (w79-o2)
+0010f764 fsInitializeAccessDelay inferred twin of smt4a fsInitializeAccessDelay
+00119e54 cameraCreateDynamic inferred twin of smt4a cameraCreateDynamic
+0043da50 g_buttonHelpQueuedKinds inferred size:0x18 twin of smt4a g_buttonHelpQueuedKinds (0x57f0d8): six -1 words in the image, defined by buttonHelpSetSlot
+0043da68 g_buttonHelpQueuedValues inferred size:0x18 twin of smt4a g_buttonHelpQueuedValues (0x57f0f0), right after the kinds
+00389ddc fieldPlacementGroupSpawn inferred twin of smt4a fieldPlacementGroupSpawn (same body, w80-o3)
+002dcdd0 uiCompareEntryRanksAscending inferred twin of smt4a uiCompareEntryRanksAscending (strongest-affinity comparator, ascending)
+002efd64 smokeFadeDestroy inferred twin of smt4a smokeFadeDestroy
+00350ac4 movieSelectStream inferred twin of smt4a movieSelectStream
+0028fe0c uiQuestLoadDetailText inferred twin of smt4a uiQuestLoadDetailText
+003eae40 rangeOwnerResetIdsInRange inferred resets the owner and the flag records whose ids fall in the inclusive range (w80-s2)
+00247f0c curveInterpolatePacked inferred twin of smt4a curveInterpolatePacked
+002ca6a4 mapDepartSearch3dUpdate inferred the "SEARCH3D" task update MapDepart_Init registers (twin of smt4a mapDepartSearch3dUpdate)
+002ca09c mapDepartSearch2dUpdate inferred the "SEARCH2D" task update MapDepart_Init registers
+002671f4 mapCollisionQueueBoxWalls inferred twin of smt4a mapCollisionQueueBoxWalls
+0025090c mapDepartFormatPlaceName inferred formats the departure's place name from the fixed labels and area names (w80-f2)
+004ea81c g_vectorScratch evidence size:0x1C0 sizeof(VectorScratch) asserted in gfx/VectorScratch.h; no symbol inside the range

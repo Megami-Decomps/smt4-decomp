@@ -1,12 +1,11 @@
 #include "common.h"
-#include "nn/Result.h"
+#include "sys/FilePaths.h"
 #include "shard/GlobalBlocks.h"
 
 extern "C" {
 
 nn::Result fileSendPathRequestRoot0(const char *path);
 nn::Result archivePathRequestRoot1(const char *path);
-nn::Result archivePathRequestRoot2(const char *path);
 
 /* Runs the path request for `path` under archive root `root` (0-2) and returns whether it
  * succeeded; a NULL path fails with the file system's not-found result, recorded as the last

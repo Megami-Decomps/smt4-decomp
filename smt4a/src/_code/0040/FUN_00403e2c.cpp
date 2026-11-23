@@ -44,7 +44,7 @@ void sortMenuAcquire(s32 id, s32 arg);
 s32 uiScrollHandleActionsOrTouch(void *list, const TextureTableEntryIV *touchArea, void *area, s32 x, s32 y, s32 w, u8 *flag, s32 a, s32 b);
 u32 contentFindRecordById(void);
 void FUN_004029f4(ListMenu *menu, s32 a, s32 b);
-void FUN_00404974(ListMenu *menu);
+void contentEntryInitializeTexture(ListMenu *menu);
 s32 ifTouchGetSelectionMode(void);
 s32 resourceRunOperationIfUnblocked(void *list);
 s32 listCursorGetRowIfUnblocked(void *list);
@@ -67,7 +67,7 @@ void FUN_00403e2c(ListMenu *menu)
         return;
     if (padQueryLogicalKey(0, 1) || mode == 6) {
         eventQueueAddUniqueIfValid(0x0100020E);
-        FUN_00404974(menu);
+        contentEntryInitializeTexture(menu);
         uiSpriteSetKeyframe(menu->backSprite, 1, 0);
         uiSpriteSetImageKeyframe(menu->backSprite, 0, 0);
         FUN_004029f4(menu, 5, 7);

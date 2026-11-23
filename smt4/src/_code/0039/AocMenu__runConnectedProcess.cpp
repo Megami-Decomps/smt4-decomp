@@ -11,7 +11,6 @@ int aocMenuSetButtonHelp(...);
 int jobStopAndClearFlags(...);
 int aocLoadingTaskStart(...);
 int FUN_00233e70(...);
-int FUN_00234124(...);
 int asdFsIsSdCardDetected(...);
 int scrScriptProcessStartEntry(...);
 int eventQueueAddUniqueIfValid(...);
@@ -41,7 +40,6 @@ extern int g_aocMain; /* 0x432fc8 */
 /* Supplied declaration required: aocLoadingTaskStart. */
 /* Supplied declaration required: FUN_00233e70. */
 /* Supplied declaration required: windowCreateStatusOperation. */
-/* Supplied declaration required: FUN_00234124. */
 extern int buttonHelpHasEnabledEntryForId(unsigned int);
 extern int strIsEmpty(unsigned int *);
 /* Supplied declaration required: asdFsIsSdCardDetected. */
@@ -134,7 +132,7 @@ void AocMenu::runConnectedProcess()
               uStack_30 = record.word(2);
               uStack_2c = record.word(3);
               uStack_28 = record.word(4);
-              FUN_00234124(param_1,&temp_v5);
+              FUN_00234124(this,(const RequestParameters *)&temp_v5);
               return;
             }
             if ((record.word(0) & 0xff) != 0x67) {

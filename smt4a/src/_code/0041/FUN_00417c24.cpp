@@ -1,24 +1,7 @@
 #include "shard/Shard0041.h"
-#include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
+#include "gamedata/GameFlagWrite.h"
 
 extern "C" {
-
-void encounterRefreshOnFlagChange(u32 flag, s32 value);
-
-/* Reports a game flag change to encounterRefreshOnFlagChange, then sets or clears the flag's bit. */
-static __inline void gameFlagWrite(u32 flag, s32 value)
-{
-    PartyBlockB *block = reinterpret_cast<PartyBlockB *>(gameFlagBlockGet());
-
-    encounterRefreshOnFlagChange(flag, value);
-    u32 index = flag >> 3;
-    if (value) {
-        block->unk00[index] |= 1 << (flag & 7);
-    } else {
-        s32 keep = ~(1 << (flag & 7));
-        block->unk00[index] &= keep;
-    }
-}
 
 /* Clears entry bits 1-2 (and bit 6 plus flags 0x500-0x51f when it is the block's current entry). */
 static __inline void partyEntryReleaseCurrent(u32 index)

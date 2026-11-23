@@ -6,7 +6,7 @@
 #define CAMERA_MODE_STEP_NORMALIZED 3
 
 extern "C" {
-f32 FUN_001f3f34(f32 from, f32 to, f32 duration, f32 elapsed);
+f32 curveInterpolatePacked(f32 from, f32 to, f32 duration, f32 elapsed);
 void FUN_00330108(BattleVector3 *a, BattleVector3 *b, BattleVector3 *out);
 
 static __inline void cameraPoseAdd(VectorPair *pose, const VectorPair *delta)
@@ -47,12 +47,12 @@ u32 vectorPairTransitionStep(void)
         f32 total = (f32)move->duration;
         f32 frame = (f32)move->frame;
         VectorPair eased;
-        eased.first.x = FUN_001f3f34(move->start.first.x, move->target.first.x, total, frame);
-        eased.first.y = FUN_001f3f34(move->start.first.y, move->target.first.y, total, frame);
-        eased.first.z = FUN_001f3f34(move->start.first.z, move->target.first.z, total, frame);
-        eased.second.x = FUN_001f3f34(move->start.second.x, move->target.second.x, total, frame);
-        eased.second.y = FUN_001f3f34(move->start.second.y, move->target.second.y, total, frame);
-        eased.second.z = FUN_001f3f34(move->start.second.z, move->target.second.z, total, frame);
+        eased.first.x = curveInterpolatePacked(move->start.first.x, move->target.first.x, total, frame);
+        eased.first.y = curveInterpolatePacked(move->start.first.y, move->target.first.y, total, frame);
+        eased.first.z = curveInterpolatePacked(move->start.first.z, move->target.first.z, total, frame);
+        eased.second.x = curveInterpolatePacked(move->start.second.x, move->target.second.x, total, frame);
+        eased.second.y = curveInterpolatePacked(move->start.second.y, move->target.second.y, total, frame);
+        eased.second.z = curveInterpolatePacked(move->start.second.z, move->target.second.z, total, frame);
         move->current = eased;
     } else if (move->smoothing == CAMERA_MODE_STEP_NORMALIZED) {
         cameraPoseAdd(&move->current, &move->delta);

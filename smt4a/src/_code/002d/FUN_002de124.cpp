@@ -29,7 +29,6 @@ typedef struct QuadRecord {
 } QuadRecord;
 typedef char QuadRecordSizeCheck[sizeof(QuadRecord) == 0x7C ? 1 : -1];
 
-extern const PhaseTrigEntry g_sinCosTable[];
 extern QuadRecord DAT_00614d7c[];
 extern s32 DAT_006160dc;
 

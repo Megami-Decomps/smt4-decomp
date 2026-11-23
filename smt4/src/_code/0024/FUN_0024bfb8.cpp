@@ -2,7 +2,6 @@
 #include "gfx/EulerPhaseRotation.h"
 
 extern "C" {
-extern const PhaseTrigEntry g_sinCosTable[];
 
 /* Builds the rotation of a 4x4 matrix from three angles in radians, keeping its translation
  * column, and marks the matrix as changed (bit 0x800 of its last word). */

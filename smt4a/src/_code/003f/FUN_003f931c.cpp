@@ -51,7 +51,7 @@ void FUN_00164034(f32 x, f32 y, f32 width, f32 height, // declcheck: local (code
                   PanelColor *topLeft, PanelColor *topRight, PanelColor *bottomLeft, PanelColor *bottomRight, f32 depth);
 void gxResetUniformQuadColorsAndScale(void);
 void efctSetSpeed(f32 speed);
-f32 FUN_001f3f34(f32 a, f32 b, f32 c, f32 d);
+f32 curveInterpolatePacked(f32 a, f32 b, f32 c, f32 d);
 void FUN_003f8a24(void *panel, u32 id, RowEntry *row, f32 x, f32 y, f32 z);
 
 /* Draws the panel: a translucent full-screen fade, its two effect sprites and then each row at its slot. */
@@ -75,7 +75,7 @@ void FUN_003f931c(PanelWork *panel)
     s32 offset = (s32)(0.0f + slide);
     texDrawTableEntryAtStoredOrigin(2, 0xc, 0x54, 0, offset, 0x23);
     texDrawTableEntryAtStoredOrigin(2, 0xc, 0x55, 0, offset, 0x23);
-    f32 scrollBase = FUN_001f3f34(30.0f, 0.0f, 8.0f, fade->scroll);
+    f32 scrollBase = curveInterpolatePacked(30.0f, 0.0f, 8.0f, fade->scroll);
     f32 rowZ = fade->scroll * 0.03125f * fadeOut;
     for (s32 i = 0; i < panel->rowCount; i++) {
         RowEntry *row = &panel->rows[i];

@@ -2,6 +2,7 @@
 #define GFX_ENGINE_RECORD_LIST_H
 #include "common.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
+#include "nw/math/VEC3.h"
 #include "gfx/ControllerModel.h"
 #include "Model/MoriModelContent.h"
 #include <stddef.h>
@@ -16,7 +17,7 @@ struct EngineEffectRecord {
     union {
         f32 position[4];
         struct {
-            BattleVector3 position;
+            nw::math::VEC3 position;
             f32 fourth;
         } spatial;
     };

@@ -14,7 +14,7 @@
 
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-s32 FUN_00480c28(void);
+s32 gameFlagSumWeightedTiers(void);
 const char *popupSelectWeightedMessage(u32 kind);
 
 void FUN_00246128(void)
@@ -23,7 +23,7 @@ void FUN_00246128(void)
         return;
     }
     s32 level = ((PlayerDataA *)gameGetPlayerData())->level;
-    s32 money = FUN_00480c28();
+    s32 money = gameFlagSumWeightedTiers();
     if (level <= 20) {
         if (money < 5000) {
             g_gameState.giftCounter = 0;

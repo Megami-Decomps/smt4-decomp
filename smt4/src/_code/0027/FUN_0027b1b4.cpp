@@ -24,7 +24,7 @@ struct MapStateEffectTable {
 extern "C" {
 
 extern MapStateEffectTable *g_mapStateSlots;
-void FUN_002671f4(s32 layer, f32 first, f32 second, f32 third, f32 fourth, f32 width, f32 height, f32 depth);
+void mapCollisionQueueBoxWalls(s32 layer, f32 first, f32 second, f32 third, f32 fourth, f32 width, f32 height, f32 depth);
 
 /* Place a marker at every active map slot of categories 3, 4, 5 (larger) and 7 (smaller). */
 void FUN_0027b1b4(void)
@@ -36,11 +36,11 @@ void FUN_0027b1b4(void)
             case 3:
             case 4:
             case 5:
-                FUN_002671f4(0, slot->transform[0], slot->transform[1], slot->transform[2], slot->transform[3],
+                mapCollisionQueueBoxWalls(0, slot->transform[0], slot->transform[1], slot->transform[2], slot->transform[3],
                     80.0f, 70.0f, 36.0f);
                 break;
             case 7:
-                FUN_002671f4(0, slot->transform[0], slot->transform[1], slot->transform[2], slot->transform[3],
+                mapCollisionQueueBoxWalls(0, slot->transform[0], slot->transform[1], slot->transform[2], slot->transform[3],
                     60.0f, 70.0f, 36.0f);
                 break;
             }

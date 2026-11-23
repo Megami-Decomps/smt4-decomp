@@ -1,21 +1,21 @@
 /* NON_MATCHING: bitmap loads/stores use different address bases; unlock-flag if-chain now preserves retail test order. */
 #include "gamedata/AppUnlockState.h"
+#include "gamedata/AppUnlockBits.h"
 #include "gamedata/GameFlags.h"
-#include "gamedata/AppPurchaseRecord.h"
+#include "gamedata/GauntletAppTable.h"
 #include "gamedata/DataTableAccess.h"
 
 extern "C" {
 void FUN_002f0bd8(u32 cost);
 void updateUnlockedEntryCount();
 
-AppUnlockState *gameDataBlockGetArea2D68();
 s32 shopGetEntryAvailability(u32 id);
 
 // Unlock or preview an app purchase, charging points and updating category counts and unlock flags.
 u32 appTryPurchase(u32 id, s32 ignoreRequirements, s32 preview)
 {
-    AppUnlockState *state = gameDataBlockGetArea2D68();
-    const AppUnlockState *current = gameDataBlockGetArea2D68();
+    AppUnlockState *state = (AppUnlockState *)gameDataBlockGetArea2D68();
+    const AppUnlockState *current = (const AppUnlockState *)gameDataBlockGetArea2D68();
     if ((current->unlocked[id >> 3] & (1 << (id & 7))) != 0 ||
         (ignoreRequirements == 0 && shopGetEntryAvailability(id) != 0)) {
         return 0;
@@ -27,18 +27,11 @@ u32 appTryPurchase(u32 id, s32 ignoreRequirements, s32 preview)
         state->unlocked[byte] |= mask;
         state->newlyUnlocked[byte] |= mask;
         updateUnlockedEntryCount();
-        const AppPurchaseSortRecord *cost = (const AppPurchaseSortRecord *)dataFindKeyedRecordWithOverrides(id);
-        FUN_002f0bd8(cost != NULL ? cost->primaryKey : 0);
-        // The category extends past the shared sorting prefix.
-        struct CatalogView {
-            u8 unk00[0x22];
-            u8 type;
-            u8 unk23[7];
-            u16 category;
-        };
-        const CatalogView *record = reinterpret_cast<const CatalogView *>((const AppPurchaseSortRecord *)dataFindKeyedRecordWithOverrides(id));
-        if (record->type == 0) {
-            ++state->categoryCounts[record->category & 0x3f];
+        const GauntletAppRecordA *cost = (const GauntletAppRecordA *)dataFindKeyedRecordWithOverrides(id);
+        FUN_002f0bd8(cost != NULL ? cost->cost : 0);
+        const GauntletAppRecordA *record = (const GauntletAppRecordA *)dataFindKeyedRecordWithOverrides(id);
+        if (record->kind == 0) {
+            ++state->categoryCounts[record->levelAndCategory & 0x3f];
         }
         if (id == 46) {
             gameFlagSetValue(0x520, 0, 1);

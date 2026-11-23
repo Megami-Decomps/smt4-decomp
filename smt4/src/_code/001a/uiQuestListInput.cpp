@@ -33,7 +33,7 @@ u32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV
                                  s32 thumbRegion, s32 previousRegion, s32 nextRegion, s8 *touched, s32 secondary,
                                  s32 notify);
 u8 gridNavigationHandleConfirm(GridNavigation *list, s32 notify);
-void FUN_0028fe0c(u16 quest, u32 state);
+void uiQuestLoadDetailText(u16 quest, u32 state);
 void uiQuestShowStatusHelp(void);
 void uiQuestRefreshButtonHelp(void);
 void questClearOwnerModeBitsIfEligible(UiQuest *quest);
@@ -72,7 +72,7 @@ static __inline void questPanelReleaseDirectory(UiQuestPanel *panel)
 static __inline void questListSelect(UiQuest *quest, u16 id)
 {
     questPanelReleaseDirectory(&quest->panelView.panel);
-    FUN_0028fe0c(id, 1);
+    uiQuestLoadDetailText(id, 1);
     uiQuestShowStatusHelp();
     uiQuestRefreshButtonHelp();
     if (quest->selectedId != id && quest->detailMode > 2)

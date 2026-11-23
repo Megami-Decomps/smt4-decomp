@@ -43,7 +43,7 @@ typedef char MarkerPanelOffsets[sizeof(PanelMarker) == 0x54 && offsetof(MarkerPa
 
 extern "C" {
 void gxResetUniformQuadColorsAndScale(void);
-f32 FUN_00247f0c(f32 from, f32 to, f32 frames, f32 frame);
+f32 curveInterpolatePacked(f32 from, f32 to, f32 frames, f32 frame);
 void FUN_0033c72c(MarkerPanel *panel, s32 sprite, f32 x, f32 y, f32 alpha);
 
 /* Draws the marker panel: a darkening screen quad, the panel frame slid in from the side and each marker,
@@ -66,7 +66,7 @@ void FUN_0033cc84(MarkerPanel *panel)
     s32 frameX = (s32)(0.0f + slide);
     texDrawTableEntryAtStoredOrigin(2, 20, 84, 0, frameX, 35);
     texDrawTableEntryAtStoredOrigin(2, 20, 85, 0, frameX, 35);
-    f32 offset = FUN_00247f0c(30.0f, 0.0f, 8.0f, panel->appear);
+    f32 offset = curveInterpolatePacked(30.0f, 0.0f, 8.0f, panel->appear);
     f32 markerAlpha = panel->appear * 0.125f * alpha;
     for (s32 i = 0; i < panel->markerCount; i++) {
         PanelMarker *marker = &panel->markers[i];

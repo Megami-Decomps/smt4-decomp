@@ -1,4 +1,4 @@
-/* NON_MATCHING: screen/system allocation, total-count and texture scheduling differ; -O2 candidate. */
+/* NON_MATCHING: screen/system allocation differs. Retail also keeps the total count in r1 for the call rebuilding the catalog. */
 #include "gamedata/DataTable.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -34,7 +34,7 @@ s32 FUN_00471960(AocSystemA *);
 s32 textureGetIndexedResource(u32);
 
 s32 aocCountTableRecords(AocSystemA *);
-void FUN_00403b84(ContentListScreen *);
+void contentListRebuildAvailableEntries(ContentListScreen *);
 void gridNavigationConfigure(ContentListScroller *, void *, s32, s32, s32, s32);
 u16 ifTouchRegionAddRequested(u32, s32);
 void sortOwnerRun(ContentListScreen *);
@@ -43,11 +43,11 @@ void FUN_004029f4(ContentListScreen *, s32, s32);
 
 static __inline u32 contentListTexture(u8 index)
 {
-    if (index == 0)
-        return 1;
-    if (index == 1)
-        return 15;
-    return -1;
+    switch (index) {
+    case 0: return 1;
+    case 1: return 15;
+    default: return -1;
+    }
 }
 
 // Wait for list resources, then populate downloadable content rows and touch controls.
@@ -68,7 +68,7 @@ void contentListWaitAndInitialize(ContentListScreen *screen)
     dataTableGetEntries(table);
     s32 count = dataTableGetCount(table);
     screen->totalCount = count + aocCountTableRecords(g_aocSystem);
-    FUN_00403b84(screen);
+    contentListRebuildAvailableEntries(screen);
     gridNavigationConfigure(&screen->scroller, screen->rows, screen->visibleCount, 1, 1, 1);
     for (s32 i = 0; i < 10; ++i) {
         if (i >= screen->visibleCount)

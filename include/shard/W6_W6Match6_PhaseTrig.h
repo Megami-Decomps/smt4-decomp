@@ -9,6 +9,9 @@ struct PhaseTrigEntry {
     f32 sineDelta;
     f32 cosineDelta;
 };
+/* nn::math's sine and cosine table (256 entries: base sine, base cosine and their slopes). */
+extern "C" const PhaseTrigEntry g_sinCosTable[];
+
 struct PhaseSinCos { f32 sine, cosine; };
 struct PhaseVector { f32 x, y, z; };
 

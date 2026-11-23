@@ -1,26 +1,11 @@
-/* NON_MATCHING: retail addresses the globals from the texture array (pool word 0x43df00, the work pointer at -24, each texture's table and node by separate loads), as if the original file defined the work pointer and the textures as its own data; here the base is g_eventEffect and the pair loads as one ldrd. Everything else matches. */
-#include "common.h"
+/* NON_MATCHING: retail addresses the work pointer from the textures' pool word (DAT_0043df00 - 24: EventEffect.cpp defines
+ * both); declared extern here they take two pool words, which moves the rest of the literal pool. Everything else matches. */
+#include "event/2dEvent/BlinkFade.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-struct BlinkFadeWork {
-    u32 job;
-    u32 unk04;
-    s32 state;
-    s32 position;
-    s32 frame;
-    f32 alpha;
-    u8 visible;
-    u8 unk19[3];
-};
-
 extern "C" {
-/* The event effect's globals: the work block pointer and the two textures it waits for. */
-struct EventEffectGlobals {
-    BlinkFadeWork *work;
-    u8 unk04[0x14];
-    u32 textures[6];   /* per texture: table, node, ownership flags */
-};
-extern EventEffectGlobals g_eventEffect;
+extern BlinkFadeWork *g_eventEffect;
+extern BlinkFadeTexture DAT_0043df00[2];
 s32 lerpIntSplitClamped(s32 start, s32 end, s32 duration, s32 frame);
 f32 mathInterpolateTimed(s32 duration, s32 frame, f32 from, f32 to);
 s32 eventIsSkipping(void);
@@ -28,12 +13,12 @@ s32 eventIsSkipping(void);
 /* Update the blink-fade event effect: waits for its textures, then slides and fades for 300 frames. */
 s32 eventEffectBlinkFadeUpdate(void)
 {
-    BlinkFadeWork *work = g_eventEffect.work;
+    BlinkFadeWork *work = g_eventEffect;
     switch (work->state) {
     case 0: {
         s32 loaded = 0;
         for (s32 i = 0; i < 2; i++) {
-            if (asdTMTexTableNodeIsLoaded(g_eventEffect.textures[i * 3], g_eventEffect.textures[i * 3 + 1]) != 0) {
+            if (asdTMTexTableNodeIsLoaded(DAT_0043df00[i].table, DAT_0043df00[i].node) != 0) {
                 loaded++;
             }
         }
@@ -85,7 +70,7 @@ s32 eventEffectBlinkFadeUpdate(void)
     if (eventIsSkipping() != 0) {
         s32 loaded = 0;
         for (s32 i = 0; i < 2; i++) {
-            if (asdTMTexTableNodeIsLoaded(g_eventEffect.textures[i * 3], g_eventEffect.textures[i * 3 + 1]) != 0) {
+            if (asdTMTexTableNodeIsLoaded(DAT_0043df00[i].table, DAT_0043df00[i].node) != 0) {
                 loaded++;
             }
         }

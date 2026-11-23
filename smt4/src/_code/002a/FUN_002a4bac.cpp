@@ -1,4 +1,3 @@
-/* NON_MATCHING: owner/slot saved-register allocation differs; the adjacent camera-reset tail call matches. */
 #include "shard/S1GfxModel.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "classes/AsdAllocatorObject.h"
@@ -24,8 +23,8 @@ static inline void destroyManagedModel(AsdMdlObject *&model)
 
 static inline void releaseOwnedModelSlot(ModelSlot *&slot)
 {
-    ModelSlot *object = slot;
-    if (object != NULL) {
+    if (slot != NULL) {
+        ModelSlot *object = slot;
         struct SlotLifecycle {
             void (*destroy)(ModelSlot *);
         };

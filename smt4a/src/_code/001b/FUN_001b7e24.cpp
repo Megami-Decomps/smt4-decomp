@@ -21,7 +21,6 @@ typedef struct PlacementTransform {
     /* 0x3C */ u32 flags;
 } PlacementTransform;
 
-extern const PhaseTrigEntry g_sinCosTable[];
 
 /* Builds the placement transform from `source`: the rotation matrix from the three angles
  * (65536 steps per turn, sampled from the phase table), the offset and the flag bits. */

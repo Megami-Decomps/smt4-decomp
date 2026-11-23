@@ -103,3 +103,7 @@ arm 0x1216bc 0x121990 NintendoWare-snd FsSoundArchive LoadFileHeader/LoadHeader/
 # nn::math); nothing here calls game code. The folder anchors of 0x360364/0x3603f8 (AsdModel) come from the TU
 # assignment, not from evidence.
 arm 0x360294 0x360ac8 CTR-SDK service IPC clients: srv session, command-header IPC calls, fatal break on failure; between nn::snd and nn::math as in smt4a
+# armlib's strchr (Thumb, among the C library near the image start): truncates the character (lsls/lsrs #24),
+# pre-decrements the pointer and scans with ldrb until the character (returning the pointer, the terminator counts)
+# or the terminator (returning 0); it matches only with --cpu=5TE -Ospace, as the runtime was built.
+thumb 0x10024c 0x100262 armlib strchr: lsls/lsrs #24 char, subs r0, #1 then adds/ldrb/cmp loop, movs r0, #0 on the terminator

@@ -39,7 +39,7 @@ struct BattleMaskPresets {
 extern BattleMaskPresets g_battleMaskPresets;
 
 s32 FUN_003e0154(void);
-s32 FUN_003e0164(void);
+s32 playerGetMaxMp(void);
 /* unit-local: the two words btlRecoverHpMpByPercent takes by value (its definition is not written yet) */
 struct RecoverPair {
     u32 first;
@@ -70,7 +70,7 @@ u32 FUN_0035f2f4(void)
 {
     BattleMain* battle = reinterpret_cast<BattleMain *>(btlGetMainState());
     s32 first = FUN_003e0154();
-    s32 second = FUN_003e0164();
+    s32 second = playerGetMaxMp();
     btlRecoverHpMpByPercent(0, 0, 0, battle->units, 0, pairOf(first, second), -1, 2, 0, 0, 9, 0, 0, 1);
 
     s32 tableFlag = gameDataBlocksGetTableFlag();

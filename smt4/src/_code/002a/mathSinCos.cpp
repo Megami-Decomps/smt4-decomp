@@ -2,7 +2,6 @@
 #include "nn/math/MathArithmetic.h"
 
 extern "C" {
-extern const PhaseTrigEntry g_sinCosTable[256];
 
 /* Interpolates sine and cosine from a phase measured in 256 steps per revolution. */
 void mathSinCos(f32 *sine, f32 *cosine, f32 phase)

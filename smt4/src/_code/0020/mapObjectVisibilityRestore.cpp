@@ -62,7 +62,7 @@ extern "C" void mapObjectVisibilityRestore(void)
                         suspendModelGroupSlot(slot);
                     nodeSetTranslation(slot->model->node, 0, slot->position);
                     modelPartSetRotationDegrees(slot->model->node, 0, 0.0f, slot->yaw, 0.0f);
-                    if (slot->model->node->currentMotion != slot->animation)
+                    if (asdMdlNodeGetCurrentMotion(slot->model->node) != slot->animation)
                         modelSelectPrimaryMotion(slot->model->node, slot->animation, 0.0f);
                     slot->dirty = 0;
                 }

@@ -57,10 +57,22 @@ struct MaterialMergeNode {
     /* 0x134 */ u8 unk134[0x0C];
     /* 0x140 */ MaterialMergeTiming timing[3];
 };
+struct ModelDummyNode;
+struct ModelDummyNodeBinding;
+
 struct MaterialMergeMetadata {
-    /* 0x00 */ u8 unk00[0x38];
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ ModelDummyNode *dummyNodes;
     /* 0x38 */ u16 count;
+    /* 0x3A */ u8 unk3A[6];
+    /* 0x40 */ ModelDummyNodeBinding *dummyBindings;
+    /* 0x44 */ s32 dummyBindingCount;
 };
+typedef char MaterialMergeMetadataLayoutCheck[
+    offsetof(MaterialMergeMetadata, dummyNodes) == 0x34 &&
+    offsetof(MaterialMergeMetadata, count) == 0x38 &&
+    offsetof(MaterialMergeMetadata, dummyBindings) == 0x40 &&
+    offsetof(MaterialMergeMetadata, dummyBindingCount) == 0x44 ? 1 : -1];
 struct MaterialMergeResource {
     /* 0x000 */ u8 unk000[0x10C];
     /* 0x10C */ MaterialMergeNode *nodes;

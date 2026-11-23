@@ -1,6 +1,6 @@
 #include "common.h"
 #include "gamedata/GameFlags.h"
-#include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
+#include "gamedata/GameFlagWrite.h"
 #include "code/Code0041_Smt4a.h"
 
 extern "C" {
@@ -15,21 +15,6 @@ typedef struct GameFlagBlock418070 {
     /* 0x2A0 */ GameFlagEntry418070 entries[0x190];
     /* 0x8E0 */ u16 activeEntry;
 } GameFlagBlock418070;
-
-void encounterRefreshOnFlagChange(u32 id, s32 value);
-
-static inline void gameFlagWrite(u32 id, u32 value)
-{
-    u8 *bits = reinterpret_cast<GameFlagBlock418070 *>(gameFlagBlockGet())->bits;
-    encounterRefreshOnFlagChange(id, value);
-    u32 index = id >> 3;
-    if (value) {
-        bits[index] |= 1 << (id & 7);
-    } else {
-        s32 keep = ~(1 << (id & 7));
-        bits[index] &= keep;
-    }
-}
 
 // Clear entry `index`'s bits 1-2 (and 6 plus flags 0x500-0x51f when it is the active entry);
 // returns 1 when something was cleared.

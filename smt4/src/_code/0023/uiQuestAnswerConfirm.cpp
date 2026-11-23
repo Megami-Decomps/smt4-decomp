@@ -5,7 +5,7 @@ extern "C" {
 
 void uiQuestRebuildLists(void);
 void uiQuestLoadResources(void);
-void FUN_0028fe0c(u16 id, s32 mode);
+void uiQuestLoadDetailText(u16 id, s32 mode);
 void buttonHelpWorkSetPreset(s32 sound);
 s32 resourceRunOperationIfUnblocked(void *cursor);
 void uiSpriteSetKeyframe(void *timer, s32 a, s32 b); // declcheck: local (the shared declaration does not compile here or changes this unit)
@@ -23,7 +23,7 @@ void uiQuestAnswerConfirm(s8 choice)
     quest->panelView.panel.detailMode = 0;
     if (quest->state != 13) {
         uiQuestLoadResources();
-        FUN_0028fe0c(quest->list[resourceRunOperationIfUnblocked(quest->cursor.data) + listCursorGetRowIfUnblocked(quest->cursor.data)], 1);
+        uiQuestLoadDetailText(quest->list[resourceRunOperationIfUnblocked(quest->cursor.data) + listCursorGetRowIfUnblocked(quest->cursor.data)], 1);
         uiSpriteSetKeyframe(quest->mainSprite, 0, 0);
         uiQuestEnterState(g_uiQuest, 1);
         return;

@@ -114,12 +114,6 @@ typedef struct ButtonHelpGlobalsA {
     /* 0x10 */ s32 pending;
 } ButtonHelpGlobalsA;
 
-/* Slot selections deferred while the slot animations run (-1: none). */
-struct ButtonHelpQueuedSelections {
-    s32 kinds[6];
-    s32 values[6];
-};
-
 /* Retail 32-bit layout invariants. */
 typedef char ButtonHelpTextSizeCheck[sizeof(ButtonHelpText) == 0x94 ? 1 : -1];
 typedef char ButtonHelpWorkSizeCheck[sizeof(ButtonHelpWork) == 0x564 ? 1 : -1];

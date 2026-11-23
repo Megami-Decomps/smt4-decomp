@@ -1,4 +1,5 @@
-/* NON_MATCHING: armcc strength-reduces the candidate loop to a post-incremented pointer with a down counter; retail indexes candidates->ids[i] and counts up. */
+/* NON_MATCHING: written as smt4's FUN_00337f98: the candidate loop keeps its index (u32 i) but retail compares it signed (blt, bcc
+ * here; an s32 index is strength-reduced to a pointer), and the refill loop's two address temporaries use swapped scratch registers. */
 #include "common.h"
 
 #define BTL_PICK_SLOTS 5
@@ -20,10 +21,7 @@ extern "C" {
 void FUN_003eba0c(BtlPickState *state, const BtlPickCandidates *candidates)
 {
     u8 count = 0;
-    u8 source = 0;
-    s32 i;
-
-    for (i = 0; i < BTL_PICK_CANDIDATES; i++) {
+    for (u32 i = 0; i < BTL_PICK_CANDIDATES; i++) {
         u32 id = candidates->ids[i];
         if (id != 0 && state->picks[0] != id && state->picks[1] != id && state->picks[2] != id &&
             state->picks[3] != id && state->picks[4] != id) {
@@ -31,12 +29,15 @@ void FUN_003eba0c(BtlPickState *state, const BtlPickCandidates *candidates)
             count++;
         }
     }
-    if (count != 0 && count < BTL_PICK_SLOTS) {
-        for (i = count; i < BTL_PICK_SLOTS; i++) {
-            state->picks[i] = state->picks[source];
-            source++;
-            if (source > count) {
-                source = 0;
+    if (count != 0) {
+        u8 source = 0;
+        if (count < BTL_PICK_SLOTS) {
+            for (s32 slot = count; slot < BTL_PICK_SLOTS; slot++) {
+                state->picks[slot] = state->picks[source];
+                source++;
+                if (source > count) {
+                    source = 0;
+                }
             }
         }
     }

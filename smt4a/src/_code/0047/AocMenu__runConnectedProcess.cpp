@@ -16,7 +16,6 @@ int windowCreateStatusOperation(...);
 int FUN_00476e58(...);
 int aocMenuSetButtonHelp(...);
 int jobFlagsWorkStop(...);
-int FUN_0047bc90(...);
 int aocLoadingTaskStart(...);
 
 typedef int romwright_code(...);
@@ -53,7 +52,6 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00476e58. */
 /* Supplied declaration required: aocMenuSetButtonHelp. */
 /* Supplied declaration required: jobFlagsWorkStop. */
-/* Supplied declaration required: FUN_0047bc90. */
 /* Supplied declaration required: aocLoadingTaskStart. */
 extern int strIsEmpty(unsigned int *);
 
@@ -134,7 +132,7 @@ void AocMenu::runConnectedProcess()
               uStack_30 = record.word(2);
               uStack_2c = record.word(3);
               uStack_28 = record.word(4);
-              FUN_0047bc90(param_1,&temp_v5);
+              FUN_0047bc90(this,(const RequestParameters *)&temp_v5);
               return;
             }
             if ((record.word(0) & 0xff) != 0x67) {

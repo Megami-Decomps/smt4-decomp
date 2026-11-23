@@ -4,7 +4,7 @@
 extern "C" {
 void uiSpriteSetKeyframe(void *sprite, u32 keyframe, u32 flags);
 void uiSpriteSetImageKeyframe(void *sprite, u32 image, u32 keyframe);
-void FUN_003d498c(u32 questId, u32 mode);
+void uiQuestLoadDetailText(u32 questId, u32 mode);
 void uiQuestSpritesCreate(void);
 
 /* Selects a quest, creates its sprites and enters the quest-detail transition. */
@@ -15,7 +15,7 @@ void FUN_0038b710(u32 questId)
     quest->unk90c = dataTable1bOr1cRecordHasFlag1(questId);
     quest->questId = (s16)questId;
     uiQuestSpritesCreate();
-    FUN_003d498c(questId, 1);
+    uiQuestLoadDetailText(questId, 1);
     uiSpriteSetKeyframe(quest->mainSprite, 0, 0);
     uiSpriteSetImageKeyframe(quest->mainSprite, 8, 0);
     uiQuestEnterMenuState(g_uiQuest, 1);

@@ -1,30 +1,30 @@
-/* NON_MATCHING: index and flags swap callee-saved registers (r6/r7) and the clip count loads into r1 instead of r2. */
+/* NON_MATCHING: after inlining animationSelectClip, only the two loads of the table's clip pointer differ (base r0 in retail, r1 in the build). */
 #include "shard/W6_W6Match2_AnimationPlayback.h"
 
 struct ModelClipTable {
-    u8 unk00[0x78];        // 0x00
-    AnimationClip** clips; // 0x78
-    u16 count;             // 0x7c
+    /* 0x00 */ u8 unk00[0x78];
+    /* 0x78 */ AnimationClip **clips;
+    /* 0x7C */ u16 count;
 };
 
 struct ModelResource {
-    u8 unk00[0x30];        // 0x00
-    ModelClipTable* table; // 0x30
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ ModelClipTable *table;
 };
 
 struct ModelResourceOwner {
-    u8 unk00[0x0c];         // 0x00
-    ModelResource resource; // 0x0c
+    /* 0x00 */ u8 unk00[0x0c];
+    /* 0x0C */ ModelResource resource;
 };
 
 struct AnimatedModel {
-    u8 unk000[0xb4];               // 0x000
-    AnimationSelection selection;  // 0x0b4
-    u8 unk0d8[0x134];              // 0x0d8
-    ModelResourceOwner* resources; // 0x20c
-    u32 mode;                      // 0x210
-    u8 unk214[0x48];               // 0x214
-    void* effects;                 // 0x25c
+    /* 0x000 */ u8 unk000[0xb4];
+    /* 0x0B4 */ AnimationSelection selection;
+    /* 0x0D8 */ u8 unk0d8[0x134];
+    /* 0x20C */ ModelResourceOwner *resources;
+    /* 0x210 */ u32 mode;
+    /* 0x214 */ u8 unk214[0x48];
+    /* 0x25C */ void *effects;
 };
 
 extern "C" {
@@ -34,18 +34,15 @@ void moriModelUnitStartMaterialAnimation(AnimatedModel* model, u32 index, u8 fla
 void FUN_0045adc0(AnimationPlayback* playback, AnimationClip* clip, u32 mode);
 void modelEffectsSelect(void* effects, u32 index);
 
-// Plays clip `index` on the model: starts both motion layers, selects the clip and its effects.
-void modelPlayClip(AnimatedModel* model, u32 index, u8 flags, f32 time, f32 blend)
+/* The body of animationSelectClip, inlined by retail. */
+static __inline void selectClip(AnimatedModel *model, u32 index, u8 flags, f32 time)
 {
-    motionPlayerStartBlended(model, index, flags, time, blend);
-    moriModelUnitStartMaterialAnimation(model, index, flags, time);
-
-    ModelResource* resource = model->resources != NULL ? &model->resources->resource : NULL;
-    ModelClipTable* table = resource->table;
+    ModelResource *resource = model->resources != NULL ? &model->resources->resource : NULL;
+    ModelClipTable *table = resource->table;
     if (index < table->count) {
-        AnimationClip* clip = table->clips[index];
+        AnimationClip *clip = table->clips[index];
         if (clip != NULL) {
-            AnimationSelection* selection = &model->selection;
+            AnimationSelection *selection = &model->selection;
             selection->index = index;
             selection->time = time;
             selection->clip = clip;
@@ -53,6 +50,14 @@ void modelPlayClip(AnimatedModel* model, u32 index, u8 flags, f32 time, f32 blen
             selection->flags = flags;
         }
     }
+}
+
+/* Starts both motion layers, selects the clip and applies the clip's effects. */
+void modelPlayClip(AnimatedModel *model, u32 index, u8 flags, f32 time, f32 blend)
+{
+    motionPlayerStartBlended(model, index, flags, time, blend);
+    moriModelUnitStartMaterialAnimation(model, index, flags, time);
+    selectClip(model, index, flags, time);
     if (model->effects != NULL) {
         modelEffectsSelect(model->effects, index);
     }

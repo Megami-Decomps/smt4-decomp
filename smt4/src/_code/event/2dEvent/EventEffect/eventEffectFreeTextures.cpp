@@ -1,39 +1,40 @@
-/* NON_MATCHING: addressing, loads and call shapes now match retail; only callee-saved register numbering differs (retail: effect r7, textures r9, per-loop pointers r5/r6). */
-#include "event/2dEvent/EventEffectIV.h"
+/* NON_MATCHING: retail addresses the textures from the work pointer's pool word (g_eventEffect + 0x18: EventEffect.cpp
+ * defines both, with 0x14 unknown bytes between them); declared extern here, they take a second pool word. */
+#include "event/2dEvent/BlinkFade.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-extern EventEffectGlobalsIV g_eventEffect;
+extern BlinkFadeWork *g_eventEffect;
+extern BlinkFadeTexture DAT_0043df00[2];
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 void *textureGetIndexedResource(u32 table);
 void jobStop(u32 job, s32 flags);
 void asdMemFree(void *memory);
 
-// Release both node-level and table-level texture references before stopping the effect.
+/* Releases the blink fade's texture nodes and table entries, stops its job and frees its work. */
 void eventEffectFreeTextures(void)
 {
-    EventEffectGlobalsIV *eventEffectPtr = &g_eventEffect;
-    EventEffectWorkIV *effect = eventEffectPtr->effect;
-    EventFilterTexture *textures = eventEffectPtr->textures;
-    for (s32 index = 0; index < 2; ++index) {
-        if (textures[index].requested) {
-            if (asdTMTexTableNodeIsLoaded(textures[index].table, textures[index].node)) {
-                asdTMTexTableReleaseNode(textures[index].table, textures[index].node);
+    BlinkFadeWork *work = g_eventEffect;
+    s32 i;
+
+    for (i = 0; i < 2; i++) {
+        if (DAT_0043df00[i].ownsNode) {
+            if (asdTMTexTableNodeIsLoaded(DAT_0043df00[i].table, DAT_0043df00[i].node)) {
+                asdTMTexTableReleaseNode(DAT_0043df00[i].table, DAT_0043df00[i].node);
             }
-            textures[index].requested = 0;
+            DAT_0043df00[i].ownsNode = 0;
         }
     }
-    for (s32 index = 0; index < 2; ++index) {
-        // The byte following node ownership tracks the table entry's reference.
-        if (textures[index].unk09[0]) {
-            if (textureGetIndexedResource(textures[index].table) != NULL) {
-                asdTMTexTableFreeEntry(textures[index].table);
+    for (i = 0; i < 2; i++) {
+        if (DAT_0043df00[i].ownsTable) {
+            if (textureGetIndexedResource(DAT_0043df00[i].table) != NULL) {
+                asdTMTexTableFreeEntry(DAT_0043df00[i].table);
             }
-            textures[index].unk09[0] = 0;
+            DAT_0043df00[i].ownsTable = 0;
         }
     }
-    jobStop(effect->job, 0);
-    asdMemFree(effect);
-    eventEffectPtr->effect = NULL;
+    jobStop(work->job, 0);
+    asdMemFree(work);
+    g_eventEffect = NULL;
 }
 }

@@ -105,7 +105,7 @@ int mapEaseSceneHeading(...);
 int FUN_003135bc(...);
 int mapSpawnRandomEventKindEffect(...);
 int FUN_00324e38(...);
-int FUN_0033ad04(...);
+int mapEnemyAssignSpawns(...);
 int sysPlayVoice(...);
 int soundActorStartOnFreeChannel(...);
 int gameDataFlagTestBit(...);
@@ -379,7 +379,7 @@ extern int mapJobIsDone(void);
 /* Supplied declaration required: FUN_0033982c. */
 /* Supplied declaration required: vectorPairTransitionStep. */
 /* Supplied declaration required: FUN_0033abd4. */
-/* Supplied declaration required: FUN_0033ad04. */
+/* Supplied declaration required: mapEnemyAssignSpawns. */
 /* Supplied declaration required: mapIfReleaseRequestObject. */
 /* Supplied declaration required: naviMainApplyRequestValue. */
 /* Supplied declaration required: FUN_00352308. */
@@ -1062,7 +1062,7 @@ LAB_002b82a8:
     }
     FUN_00327ee8();
     if (((unsigned int)piVar18 & 0x800) != 0) {
-      FUN_0033ad04();
+      mapEnemyAssignSpawns();
     }
     if (((unsigned int)piVar18 & 0x2000) != 0) {
       FUN_002b621c();

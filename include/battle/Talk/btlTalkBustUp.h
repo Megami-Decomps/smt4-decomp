@@ -7,10 +7,18 @@
 #include "ui/UiSpriteState.h"
 #include <stddef.h>
 
+struct BtlTalkBustUpPlacement {
+    /* 0x00 */ s8 playing[4];  /* whether each overlay's idle animation is running */
+    /* 0x04 */ u8 unk04;
+    /* 0x05 */ u8 unk05[3];
+};
+
+typedef char BtlTalkBustUpPlacementSizeCheck[sizeof(BtlTalkBustUpPlacement) == 8 ? 1 : -1];
+
 typedef struct BtlTalkBustUp {
     /* 0x000 */ UiResourceParameters resources; /* the sprites' animation streams */
     /* 0x020 */ UiSpriteState sprites[5];      /* [0] is the portrait */
-    /* 0x2DC */ u8 unk2DC[8];
+    /* 0x2DC */ BtlTalkBustUpPlacement placement;
     /* 0x2E4 */ u32 job;
     /* 0x2E8 */ s32 state;          /* 1: loading the texture, 2: shown, 3: released */
     /* 0x2EC */ u32 stateCounter;
@@ -26,7 +34,7 @@ typedef struct BtlTalkBustUp {
 } BtlTalkBustUp;
 
 typedef char BtlTalkBustUpOffsetCheck[offsetof(BtlTalkBustUp, sprites) == 0x20 &&
-    offsetof(BtlTalkBustUp, job) == 0x2E4 && offsetof(BtlTalkBustUp, textureReady) == 0x2F4 &&
+    offsetof(BtlTalkBustUp, placement) == 0x2DC && offsetof(BtlTalkBustUp, job) == 0x2E4 && offsetof(BtlTalkBustUp, textureReady) == 0x2F4 &&
     offsetof(BtlTalkBustUp, textureNode) == 0x2F8 && offsetof(BtlTalkBustUp, devilId) == 0x308 &&
     sizeof(BtlTalkBustUp) == 0x30C ? 1 : -1];
 

@@ -23,7 +23,7 @@ extern "C" {
 extern QuestStateView* g_uiQuest;
 u8 dataTable1bOr1cRecordHasFlag1(void);
 void uiQuestSpritesCreate(void);
-void FUN_003d498c(s32 questId, s32 mode);
+void uiQuestLoadDetailText(s32 questId, s32 mode);
 void uiSpriteSetKeyframe(void* sprite, s32 keyframe, s32 option);
 void uiSpriteSetImageKeyframe(void* sprite, s32 keyframe, s32 option);
 
@@ -36,7 +36,7 @@ void FUN_002f1554(s32 questId)
     questState->unkCCA = (s16)questId;
 
     uiQuestSpritesCreate();
-    FUN_003d498c(questId, 1);
+    uiQuestLoadDetailText(questId, 1);
     uiSpriteSetKeyframe(questState->unk34, 0, 0);
     uiSpriteSetImageKeyframe(questState->unk34, 8, 0);
 

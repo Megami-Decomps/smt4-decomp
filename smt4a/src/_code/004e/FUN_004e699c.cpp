@@ -1,26 +1,14 @@
-/* NON_MATCHING: retail uses separate conditional stores and saves five registers; compiled code groups the pair into STM and pads the call frame with R8. */
-#include "common.h"
-#include "battle/BtlGlobals.h"
-
-struct BattleRecord {
-    s32 first;  // 0x00
-    s32 second; // 0x04
-};
-struct BattleRecordSet {
-    u8 unk000[0x5b8]; // 0x000
-    BattleRecord records[133]; // 0x5b8
-};
-struct BattleReference;
+#include "shard/W6_W6Match4_UnitPairs.h"
 
 extern "C" {
-// Clears every unit record matching the requested pair.
-void FUN_004e699c(BattleReference* reference, s32 first, s32 second)
+/* Clears every pair of the selected battle unit that matches (first, second). */
+void FUN_004e699c(void *contextHandle, s32 first, s32 second)
 {
-    BattleRecordSet* unit = reinterpret_cast<BattleRecordSet*>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(reference)));
-    for (s32 i = 0; i < 133; ++i) {
-        if (unit->records[i].first == first && unit->records[i].second == second) {
-            unit->records[i].first = -1;
-            unit->records[i].second = 0;
+    UnitPairTableA *unit = reinterpret_cast<UnitPairTableA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(contextHandle)));
+    for (s32 index = 0; index < 133; ++index) {
+        if (unit->pairs[index][0] == first && unit->pairs[index][1] == second) {
+            unit->pairs[index][0] = -1;
+            unit->pairs[index][1] = 0;
         }
     }
 }

@@ -26,7 +26,6 @@ struct EulerPlacement {
 };
 
 extern "C" {
-extern const PhaseTrigEntry g_sinCosTable[];
 
 /* Builds a rotation matrix from XYZ Euler angles and sets its translation and position. */
 void FUN_0036a104(EulerTransform *matrix, const EulerPlacement *placement)

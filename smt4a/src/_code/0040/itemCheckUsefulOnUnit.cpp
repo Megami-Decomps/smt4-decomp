@@ -7,8 +7,8 @@ extern "C" {
 
 SlotRecordA *btlMainGetUnk14(void);
 s32 btlIsDefeatSuppressed(void);
-s32 FUN_002b4dcc(SlotRecordA *record);
-s32 FUN_002b4e7c(PlayerDataA *record);
+s32 btlUnitMaxHp(SlotRecordA *record);
+s32 btlPlayerMaxHp(PlayerDataA *record);
 void FUN_003ff524(u16 *flags, s32 kind);
 
 /* Evens out what the item gives (bit 1 hp, bit 2 mp, bit 4 status) against what the unit can
@@ -48,7 +48,7 @@ u32 itemCheckUsefulOnUnit(s32 unit, s32 fromSave, const ConsumableRecordA *item,
     }
     if (unit < 0 && btlIsDefeatSuppressed() == 0) {
         PlayerDataA *player = gameGetPlayerData();
-        if ((gives & 1) != 0 && (player->ailments & 2) == 0 && FUN_002b4e7c(player) != player->hp) {
+        if ((gives & 1) != 0 && (player->ailments & 2) == 0 && btlPlayerMaxHp(player) != player->hp) {
             can = 1;
         }
         if ((gives & 2) != 0 && (player->ailments & 2) == 0 && player->mp != player->maxMp) {
@@ -89,7 +89,7 @@ u32 itemCheckUsefulOnUnit(s32 unit, s32 fromSave, const ConsumableRecordA *item,
         if (member == NULL) {
             return 3;
         }
-        if ((gives & 1) != 0 && (member->ailments & 0x402) == 0 && FUN_002b4dcc(member) != member->hp) {
+        if ((gives & 1) != 0 && (member->ailments & 0x402) == 0 && btlUnitMaxHp(member) != member->hp) {
             can = 1;
         }
         if ((gives & 2) != 0 && (member->ailments & 0x402) == 0 && member->mp != member->maxMp) {

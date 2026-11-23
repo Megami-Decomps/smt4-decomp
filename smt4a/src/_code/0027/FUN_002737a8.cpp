@@ -12,7 +12,7 @@ int controllerSetRotationEulerDegrees(int);
 
 int ptrListRemoveClearOwner(unsigned int);
 int floatInterpolateOverDuration(void);
-int FUN_00281b94(int);
+int mapCollisionQueueBoxWalls(int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_00294854(void);
 int distSpatial(void);
 int mapTableValueSet(...);
@@ -43,7 +43,7 @@ extern int querySlotHasHandle(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: floatInterpolateOverDuration. */
-/* Supplied declaration required: FUN_00281b94. */
+/* Supplied declaration required: mapCollisionQueueBoxWalls. */
 /* Supplied declaration required: FUN_00294854. */
 /* Supplied declaration required: distSpatial. */
 extern int FUN_002ddd7c(void);
@@ -118,7 +118,7 @@ void FUN_002737a8(void)
           do {
             if (((char)((int *)g_mapGimic)[temp_v0 * 0xf + 0x24] != '\0') &&
                (*(short *)((int)((int *)g_mapGimic) + temp_v0 * 0x3c + 0xa6) == 0xc)) {
-              FUN_00281b94((int)(short)((int *)g_mapGimic)[temp_v0 * 0xf + 0x2b]);
+              mapCollisionQueueBoxWalls((int)(short)((int *)g_mapGimic)[temp_v0 * 0xf + 0x2b]);
             }
             piVar1 = ((int *)g_mapGimic);
             temp_v0 = temp_v0 + 1;

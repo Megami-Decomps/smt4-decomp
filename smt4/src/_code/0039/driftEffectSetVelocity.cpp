@@ -19,7 +19,6 @@ struct DriftEffect {
 };
 
 extern "C" {
-extern const PhaseTrigEntry g_sinCosTable[];
 u32 randNextInRange(u32 maximum);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(MapVector *out, const Matrix34Data *matrix, const MapVector *v);
 }

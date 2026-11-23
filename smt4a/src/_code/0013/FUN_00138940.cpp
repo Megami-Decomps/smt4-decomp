@@ -1,4 +1,5 @@
-/* NON_MATCHING: The success result is initialized later, changing the registers used for the two event-state stores. */
+/* NON_MATCHING: retail rematerialises the 1 stored into the two event-state flags (mov r0, #1 before each strb);
+ * the build keeps it in r6. */
 #include "nn/applet/EventState.h"
 
 extern "C" {
@@ -9,7 +10,7 @@ extern u32 g_nnAppletCriticalSection[2];
 void nn_os_LightEvent_Initialize(u32 *event, u8 resetType);
 void nn_os_LightEvent_Signal(u32 *event);
 void nn_os_CriticalSection_Initialize(u32 *section);
-void sleepAllow(void);
+void sleepAllow(s32 sleepIfClosed);
 void FUN_00147328(void (*callback)(void), u32 userData);
 void FUN_00147314(void (*callback)(void), u32 userData);
 void FUN_00144a90(void);
@@ -21,21 +22,23 @@ s32 FUN_0015a410(void);
 /* Initializes and signals the applet events, installs callbacks, and reports whether startup may continue. */
 u32 FUN_00138940(void)
 {
+    u32 result = 1;
+
     nn_os_LightEvent_Initialize(g_appletSleepQueryEvent, 0);
     nn_os_LightEvent_Initialize(g_appletHomeButtonEvent, 0);
     nn_os_CriticalSection_Initialize(g_nnAppletCriticalSection);
     g_appletEventState.initialized = 1;
-    sleepAllow();
+    sleepAllow(1);
     g_appletEventState.enabled = 1;
     nn_os_LightEvent_Signal(g_appletEventState.sleepQueryEvent);
     nn_os_LightEvent_Signal(g_appletEventState.homeButtonEvent);
     FUN_00147328(FUN_00144a90, 0);
     FUN_00147314(appletSleepQuerySignal, 0);
     FUN_00147ad8(1);
-    u32 result = 1;
     if (appletIsExitRequested() || FUN_0015a410()) {
         result = 0;
     }
     return result;
 }
-}
+
+} /* extern "C" */

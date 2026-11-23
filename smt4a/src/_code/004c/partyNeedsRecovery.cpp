@@ -10,7 +10,7 @@
 extern "C" {
 s32 FUN_003e0154();
 s32 FUN_003e0034();
-s32 FUN_003e0164();
+s32 playerGetMaxMp();
 s32 gameSlotTableFindFree();
 
 /* Checks whether the player, stored party, or support roster needs HP, MP or ailment recovery. */
@@ -20,7 +20,7 @@ u32 partyNeedsRecovery()
     s32 hp = FUN_003e0024();
     s32 maxHp = FUN_003e0154();
     s32 mp = FUN_003e0034();
-    s32 maxMp = FUN_003e0164();
+    s32 maxMp = playerGetMaxMp();
     if (hp < maxHp || mp < maxMp || player->ailments != 0)
         return 1;
     s32 count = gameSlotTableFindFree();

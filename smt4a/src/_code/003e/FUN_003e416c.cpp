@@ -1,31 +1,23 @@
-/* NON_MATCHING: Retail add r0, r4, r0, lsr #29 differs from recovered add r1, r4, r0, lsr #29. */
-#include "common.h"
+/* NON_MATCHING: retail and the build use different registers for the bought-app bit operations. */
+#include "gamedata/AppUnlockBits.h"
+#include "gamedata/AppUnlockState.h"
 #include "gamedata/DataTableAccess.h"
-
-struct Entry416cView {
-    u8 unk00[0x26]; // 0x00
-    u16 unk26;     // 0x26
-};
-
-struct Area2D68View {
-    u8 unk00[0x12]; // 0x00
-    u8 unk12[0x12]; // 0x12
-};
+#include "gamedata/GauntletAppTable.h"
 
 extern "C" {
-Area2D68View* gameDataBlockGetArea2D68(void);
+
 s32 shopGetEntryAvailability(s32 entryIndex);
 
-// Set both area bit arrays for present entries with a zero field and status other than 2.
+/* Unlocks each free app whose requirements are met and flags it as newly unlocked. */
 void FUN_003e416c(void)
 {
-    Area2D68View* area = gameDataBlockGetArea2D68();
+    AppUnlockState *area = (AppUnlockState *)gameDataBlockGetArea2D68();
     for (s32 entryIndex = 1; entryIndex < 0x8du; ++entryIndex) {
-        Entry416cView* entry = (Entry416cView*)dataFindKeyedRecordWithOverrides(entryIndex);
-        if (entry == 0) {
+        const GauntletAppRecordA *entry = (const GauntletAppRecordA *)dataFindKeyedRecordWithOverrides(entryIndex);
+        if (entry == NULL) {
             continue;
         }
-        if (entry->unk26 != 0) {
+        if (entry->cost != 0) {
             continue;
         }
         if (shopGetEntryAvailability(entryIndex) == 2) {
@@ -34,8 +26,9 @@ void FUN_003e416c(void)
 
         const s32 byteIndex = entryIndex / 8;
         const u32 mask = 1u << (entryIndex % 8);
-        area->unk00[byteIndex] |= mask;
-        area->unk12[byteIndex] |= mask;
+        area->unlocked[byteIndex] |= mask;
+        area->newlyUnlocked[byteIndex] |= mask;
     }
 }
-}
+
+} /* extern "C" */

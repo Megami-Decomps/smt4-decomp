@@ -47,9 +47,11 @@ typedef struct ResultWorkA {
     /* 0x0854 */ UiSpriteState banner;          /* the slide-in banner */
     /* 0x08E0 */ u8 unk08E0[0x3A84];
     /* 0x4364 */ s32 state;                     /* 0x17: done */
-    /* 0x4368 */ u8 unk4368[4];
+    /* 0x4368 */ s32 previousState;             /* the state before resultSetMode's change */
     /* 0x436C */ s32 step;
-    /* 0x4370 */ u8 unk4370[0xC];
+    /* 0x4370 */ u32 unk4370;
+    /* 0x4374 */ u32 progress;
+    /* 0x4378 */ u32 unk4378;
     /* 0x437C */ s32 timer;
     /* 0x4380 */ u8 unk4380[0x18];
     /* 0x4398 */ u8 exitMode;  /* 1: stop the BGM, 3: play exitSe */
@@ -59,7 +61,8 @@ typedef struct ResultWorkA {
     /* 0x43A0 */ ScriptProcess *process;                   /* the result script's process */
     /* 0x43A4 */ void *buffer43A4;              /* heap block, freed on destroy */
     /* 0x43A8 */ void *buffer43A8;              /* heap block, freed on destroy */
-    /* 0x43AC */ u8 unk43AC[0xA];
+    /* 0x43AC */ u8 unk43AC[8];
+    /* 0x43B4 */ s16 touchRegionCount;          /* touch regions registered by the current state */
     /* 0x43B6 */ s16 statRowRegions[5];         /* touch regions of the stat rows */
     /* 0x43C0 */ u8 unk43C0[0x18];
     /* 0x43D8 */ ResultStatArrowRegions statArrowRegions[5];

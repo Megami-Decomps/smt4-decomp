@@ -47,7 +47,7 @@ s32 btlMainIsRunning();
 s32 btlIsDefeatSuppressed();
 void FUN_0026fd50(StatusDisplayPane *pane, StatusUnitRecord *record, s32 mode, const u32 *parameters);
 void statusScaleUnitDisplayVitals(StatusDisplayPane *pane, u16 id);
-s32 FUN_002b4dcc(StatusUnitRecord *record);
+s32 btlUnitMaxHp(StatusUnitRecord *record);
 }
 
 static __inline StatusDisplayPaneView *statusDisplayPaneView(ObjB *object)
@@ -86,7 +86,7 @@ extern "C" void statusDisplayBindUnitRecord(StatusUnitRecord *record, s32 useBas
             if (base != NULL) {
                 statusDisplayPaneView(object)->pane.maxHp = base->maxHp;
                 statusDisplayPaneView(object)->pane.maxMp = base->maxMp;
-                s32 hp = FUN_002b4dcc(record);
+                s32 hp = btlUnitMaxHp(record);
                 statusDisplayPaneView(object)->pane.hp = hp;
                 statusDisplayPaneView(object)->pane.mp = base->maxMp;
                 if (hp < 0) {

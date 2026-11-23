@@ -1,11 +1,11 @@
-/* NON_MATCHING: 14 lines: retail addresses the queued values from a second register (kinds + 24, the arrays are same-file data in the original) and branches around the queued loop where the build predicates its set-up; retail also computes the touchPressed/touchSelected base twice (r1 and r0) around the six-byte clear. */
+/* NON_MATCHING: 7 lines: retail addresses the queued values as kinds + 24 (the two arrays are same-file data in the
+ * original: this unit and the slot setter that defines them were one file) where the build loads a second pool word; retail
+ * also computes the touchPressed/touchSelected base twice (r1 and r0) around the six-byte clear. */
 #include "ui/ButtonHelp.h"
 #include "ui/UiSpriteApi.h"
 #include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-
-extern ButtonHelpQueuedSelections DAT_0043da50;
 
 void buttonHelpUpdateTouch(void);
 void FUN_002ae028(u8 *help); // declcheck: local (the shared declaration does not compile here or changes this unit)
@@ -73,8 +73,8 @@ s32 buttonHelpCalc(u32 job)
         buttonHelpSetPreset(g_buttonHelp.pending & 0xff);
         if (g_buttonHelp.pending < 0) {
             for (s32 i = 0; i < 6; i++) {
-                if (DAT_0043da50.kinds[i] >= 0) {
-                    buttonHelpSetSlot(i, DAT_0043da50.kinds[i], DAT_0043da50.values[i], 1);
+                if (g_buttonHelpQueuedKinds[i] >= 0) {
+                    buttonHelpSetSlot(i, g_buttonHelpQueuedKinds[i], g_buttonHelpQueuedValues[i], 1);
                 }
             }
         }

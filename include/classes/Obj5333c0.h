@@ -2,6 +2,7 @@
 #define CLASSES_OBJ5333C0_H
 
 #include "common.h"
+#include <stddef.h>
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "quest_center/QuestRecordA.h"
 #include "Model/MoriModelContent.h"
@@ -35,7 +36,12 @@ struct SceneTalkEntry {
 /* A row of data table 0x27 (0x88 bytes): an NPC's display name, the number of its talk script and the script
  * entry to start. */
 struct SceneTalkRecord {
-    /* 0x00 */ char name[0x6A];
+    /* 0x00 */ char name[0x60];
+    /* 0x60 */ u16 kind;                        /* the scene kind (Obj5333c0::kind) the NPC appears in */
+    /* 0x62 */ u16 npc;                         /* its NPC number, 1-based */
+    /* 0x64 */ u16 variant;                     /* which of the NPC's two model variants is shown (1 or 2) */
+    /* 0x66 */ u16 requiredFlag;                /* game flag that must be set, 0 = none */
+    /* 0x68 */ u16 excludingFlag;               /* game flag that must be clear, 0 = none */
     /* 0x6A */ u16 scriptId;
     /* 0x6C */ char entryName[0x1C];
 };
@@ -43,12 +49,14 @@ struct SceneTalkRecord {
 /* A choice row's save-flag test: the mask tested in the scene's flag word and the result shown in the list. */
 struct SceneChoiceFlag {
     /* 0x00 */ u8 set;
-    /* 0x01 */ u8 unk01[3];
+    /* 0x01 */ u8 unk01;
+    /* 0x02 */ u16 npc;                         /* the NPC number of the talk entry with this index */
     /* 0x04 */ u8 mask;
     /* 0x05 */ u8 unk05[5];
 };
 
-typedef char SceneTalkRecordCheck[sizeof(SceneTalkRecord) == 0x88 ? 1 : -1];
+typedef char SceneTalkRecordCheck[offsetof(SceneTalkRecord, kind) == 0x60 && offsetof(SceneTalkRecord, scriptId) == 0x6A &&
+    sizeof(SceneTalkRecord) == 0x88 && offsetof(SceneChoiceFlag, mask) == 4 && sizeof(SceneChoiceFlag) == 10 ? 1 : -1];
 
 extern "C" {
 /* Row `index` of data table 0x27, or NULL when out of range. Callers pass the address of the scene's table byte
@@ -57,6 +65,7 @@ SceneTalkRecord *dataTable27GetEntry(const u8 *table27, u32 index);
 void FUN_0046b18c(Obj5333c0 *scene);
 void FUN_0046ba10(Obj5333c0 *scene);
 void FUN_004688c8(Obj5333c0 *scene);
+void questCenterBuildTalkEntries(Obj5333c0 *scene);
 u16 idOwnerGetRecordHalf(Obj5333c0 *scene);
 s32 pickObjStart(Obj5333c0 *scene, const char *entry);
 void qcCtrlStart(Obj5333c0 *scene, s32 kind, s32 mode, s32 frozen);
@@ -84,6 +93,7 @@ public:
     friend void FUN_0046b18c(Obj5333c0 *scene);
     friend void FUN_0046ba10(Obj5333c0 *scene);
     friend void FUN_004688c8(Obj5333c0 *scene);
+    friend void questCenterBuildTalkEntries(Obj5333c0 *scene);
     friend u16 idOwnerGetRecordHalf(Obj5333c0 *scene);
     friend s32 pickObjStart(Obj5333c0 *scene, const char *entry);
     friend void qcCtrlStart(Obj5333c0 *scene, s32 kind, s32 mode, s32 frozen);

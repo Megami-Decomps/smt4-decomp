@@ -5,7 +5,7 @@
 extern "C" {
 
 void uiQuestLoadResources(void);
-void FUN_0028fe0c(u32 questId, s32 mode);
+void uiQuestLoadDetailText(u32 questId, s32 mode);
 void uiSpriteSetKeyframe(void *timer, s32 key, s32 mode); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Opens the quest detail for a quest id and switches the menu to state 1 (next state 0x1C). */
@@ -17,7 +17,7 @@ void FUN_002fec80(u32 questId)
     quest->panelView.panel.detailMode = dataTable1bOr1cRecordHasFlag1(questId);
     quest->questId = questId;
     uiQuestLoadResources();
-    FUN_0028fe0c(questId, 1);
+    uiQuestLoadDetailText(questId, 1);
     uiSpriteSetKeyframe(quest->mainSprite, 0, 0);
     uiQuestEnterState(g_uiQuest, 1);
     quest->nextState = 0x1C;

@@ -18,7 +18,7 @@ struct MapTrapDisplayView {
 };
 extern "C" {
 extern MapTrapA* g_mapTrap;
-f32 FUN_001f3f34(f32 first, f32 second, f32 duration, f32 frame);
+f32 curveInterpolatePacked(f32 first, f32 second, f32 duration, f32 frame);
 
 /* Per-frame update of the trap's display model: visibility, the swinging motion and pending placement. */
 void FUN_0024aeb0(void)
@@ -44,7 +44,7 @@ void FUN_0024aeb0(void)
             }
             if (g_mapTrap->motion.active && display->mode == 1) {
                 s32 frame = g_mapTrap->motion.alternating ? g_mapTrap->motion.count : g_mapTrap->motion.reverseCount;
-                f32 offset = FUN_001f3f34(g_mapTrap->motion.initialValue, 0.0f,
+                f32 offset = curveInterpolatePacked(g_mapTrap->motion.initialValue, 0.0f,
                     static_cast<f32>(g_mapTrap->motion.halfCount), static_cast<f32>(frame));
                 MapTrapA* trap = g_mapTrap;
                 if (trap->motion.alternating) {

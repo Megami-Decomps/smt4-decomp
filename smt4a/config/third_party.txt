@@ -3,6 +3,7 @@
 0x00100000 entry library
 0x00100024 nninitRegion callers
 0x0010004a FUN_0010004a library
+0x00100238 FUN_00100238 twin
 0x0010024e inputGetKeyFlags callers
 0x001002c2 FUN_001002c2 callers
 0x0010031c copyValueIfDestination between
@@ -3532,7 +3533,7 @@
 0x001c4360 FUN_001c4360 between
 0x001c4370 FUN_001c4370 callers
 0x001c4598 FUN_001c4598 between
-0x001c459c FUN_001c459c between
+0x001c459c FUN_001c459c callers
 0x001c45ec FUN_001c45ec between
 0x001c45fc FUN_001c45fc between
 0x001c4608 FUN_001c4608 between
@@ -7383,6 +7384,7 @@
 0x0050d740 __ARM_common_memcpy4_7 name
 0x0050d75c __ARM_common_memcpy4_9 name
 0x0050d778 __ARM_common_memset4_12 name
+0x0050d7ac FUN_0050d7ac library
 0x0050d8e4 __hardfp_atan2f name
 0x0050db54 mathlib_ceilf name
 0x0050dbe4 FUN_0050dbe4 callers

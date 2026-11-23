@@ -19,7 +19,7 @@ int __ARM_common_memcpy4_9(...);
 int eventQueueAddUnique(...);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
-int FUN_002941c8(int *, int);
+int mapDepartInit(int *, int);
 int engineRecordsRankNearest(void);
 int libc_strcpy(unsigned char *, int);
 int FUN_003146ac(int, int, int);
@@ -113,7 +113,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
-/* Supplied declaration required: FUN_002941c8. */
+/* Supplied declaration required: mapDepartInit. */
 extern int mapDepartIsRunning(void);
 /* Supplied declaration required: engineRecordsRankNearest. */
 /* Supplied declaration required: libc_strcpy. */
@@ -137,7 +137,7 @@ extern int mathCirclesOverlap(void);
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: aocFindPackagePayload. */
 extern unsigned int FUN_00480738(unsigned int);
-extern unsigned int FUN_00480c28(void);
+extern unsigned int gameFlagSumWeightedTiers(void);
 /* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: gamePackedFlagTest. */
 extern int inputConfirmPressed(void);
@@ -312,10 +312,10 @@ joined_r0x00249fd4:
                       temp_v36 = *(unsigned int *)(temp_v8 + 0xcc);
                       temp_v10 = 1;
                       mapIfTriggerNearbyProximityRecord();
-                      FUN_002941c8(&temp_v17,0x84);
+                      mapDepartInit(&temp_v17,0x84);
                       break;
                     }
-                    temp_v10 = FUN_00480c28();
+                    temp_v10 = gameFlagSumWeightedTiers();
                     temp_v7 = 0;
                     *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xce4) = temp_v10;
                     do {
@@ -434,7 +434,7 @@ LAB_0024a684:
                     *(unsigned int *)(temp_v8 + 0xa8) = 2;
                     gameCounterAddSaturating(0x18,1);
                     gameFlagsBitSet((int)(short)*(unsigned int *)(temp_v8 + 0xcc),1);
-                    FUN_002941c8(&temp_v17,0x84);
+                    mapDepartInit(&temp_v17,0x84);
                     break;
                   }
                   temp_v19 = *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xcac);
@@ -462,7 +462,7 @@ LAB_0024a684:
                   }
                   temp_v35 = *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0x18);
                   temp_v37 = *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xce4);
-                  FUN_002941c8(&temp_v17,0x84);
+                  mapDepartInit(&temp_v17,0x84);
                   *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0x18) = 0;
                 }
                 if (DAT_005f1768 == '\0') {

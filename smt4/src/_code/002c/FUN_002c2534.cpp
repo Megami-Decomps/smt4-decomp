@@ -1,4 +1,5 @@
-/* NON_MATCHING: embedded graphics context corrected; format/allocation saved registers still differ. */
+/* NON_MATCHING: 24 lines: with the heap kinds as a switch only the callee-saved registers of format, width, height
+ * (retail r8/r9/sl, build r7/r8/r9) and the allocator hooks (retail r7, build sl) differ. */
 #include "shard/W6_W6Match7_DefaultTextureWork.h"
 #include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 
@@ -25,7 +26,10 @@ extern "C" void FUN_002c2534(u32 format, u32 width, u32 height, u32 heap)
     default:
         return;
     }
-    if (heap == 0x10000 || heap == 0x20000 || heap == 0x30000) {
+    switch (heap) {
+    case 0x10000:
+    case 0x20000:
+    case 0x30000: {
         if (texture->pixels != NULL && g_gfxAllocateCallback.release != NULL) {
             g_gfxAllocateCallback.release(texture->heap, 0x104, texture->id, texture->pixels);
         }
@@ -41,5 +45,7 @@ extern "C" void FUN_002c2534(u32 format, u32 width, u32 height, u32 heap)
         texture->format = format;
         texture->width = width;
         texture->height = height;
+        break;
+    }
     }
 }

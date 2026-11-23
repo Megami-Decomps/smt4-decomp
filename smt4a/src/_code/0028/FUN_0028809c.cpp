@@ -7,7 +7,7 @@
 extern "C" {
 
 int FUN_0023e6d8(int, int, unsigned int);
-int FUN_002b4e7c(void);
+int btlPlayerMaxHp(void);
 int playerClearFlagMask(...);
 int bitsAt60Clear(...);
 
@@ -25,8 +25,8 @@ extern int FUN_0023ad2c(int);
 /* Supplied declaration required: FUN_0023e6d8. */
 extern int btlMainGetUnk14(void);
 extern int btlIsDefeatSuppressed(void);
-extern int FUN_002b4dcc(void);
-/* Supplied declaration required: FUN_002b4e7c. */
+extern int btlUnitMaxHp(void);
+/* Supplied declaration required: btlPlayerMaxHp. */
 extern unsigned int FUN_003d2c20(int, unsigned short);
 /* Supplied declaration required: playerClearFlagMask. */
 extern int bitsAt60Test(int, unsigned int);
@@ -78,13 +78,13 @@ unsigned int FUN_0028809c(unsigned int param_1,int param_2,int param_3,int param
     }
     else {
       temp_v2 = temp_v5;
-      FUN_002b4e7c();
+      btlPlayerMaxHp();
     }
   }
   if (temp_v6 != 0) {
     temp_v8 = reinterpret_cast<int>(btlGetMainState());
     if (temp_v8 != 0) {
-      temp_v8 = FUN_002b4dcc();
+      temp_v8 = btlUnitMaxHp();
     }
     else {
       temp_v8 = recordGetScaledMaximum(temp_v6);

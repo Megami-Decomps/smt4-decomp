@@ -1,5 +1,8 @@
-/* NON_MATCHING: retail routes every exit through shared Leave+`mov r0, r4` tails and keeps the first not-initialised constant in r4; this build duplicates the exits and keeps the constants in r8. */
+/* NON_MATCHING: 30 lines, written as its Apocalypse twin FUN_0042d5b4: control flow and exits match retail; only the
+ * callee-saved register numbering differs (retail: state r6, not-initialised code r7, section r5, request r8; here state
+ * r7, code r8, section r6, request r5), as in the twin. */
 #include "common.h"
+#include "nn/Result.h"
 
 extern "C" {
 
@@ -21,7 +24,7 @@ extern u8 g_moduleCriticalSection2[];
 
 s32 FUN_00239a54(void);
 u32 FUN_003594f0(u32 arg);
-u32 FUN_0035ae74(u32 arg);
+nn::Result FUN_0035ae74(u32 arg);
 void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
 
@@ -29,32 +32,35 @@ void nn_os_CriticalSection_Leave(void *section);
 u32 FUN_0024ee68(s32 request)
 {
     u32 result = 0;
-
-    if (!DAT_004656ca.initialized && !FUN_00239a54()) {
+    if (DAT_004656ca.initialized == 0 && FUN_00239a54() == 0) {
         result = NET_RESULT_NOT_INITIALIZED;
-        return result;
-    }
-    nn_os_CriticalSection_Enter(g_moduleCriticalSection2);
-    if (request) {
-        if (!(FUN_00239a54() | DAT_004656ca.available)) {
-            result = NET_RESULT_NOT_AVAILABLE;
-            nn_os_CriticalSection_Leave(g_moduleCriticalSection2);
-            return result;
+    } else {
+        void *section = g_moduleCriticalSection2;
+        nn_os_CriticalSection_Enter(section);
+        if (request != 0) {
+            if ((FUN_00239a54() | DAT_004656ca.available) == 0) {
+                result = NET_RESULT_NOT_AVAILABLE;
+                nn_os_CriticalSection_Leave(section);
+                return result;
+            }
+            result = FUN_003594f0(14);
         }
-        result = FUN_003594f0(14);
-    }
-    if (!DAT_004656ca.connected) {
-        result = NET_RESULT_NOT_INITIALIZED;
-        nn_os_CriticalSection_Leave(g_moduleCriticalSection2);
-        return result;
-    }
-    if (DAT_004656ca.dirty) {
-        result = FUN_0035ae74(0);
-        if ((s32)(result & NET_RESULT_FAILURE_BIT) >= 0) {
-            DAT_004656ca.dirty = 0;
+        if (DAT_004656ca.connected != 0) {
+            if (DAT_004656ca.dirty != 0) {
+                nn::Result status = FUN_0035ae74(0);
+                result = status;
+                if ((s32)(status & NET_RESULT_FAILURE_BIT) < 0) {
+                    nn_os_CriticalSection_Leave(section);
+                    return result;
+                }
+                DAT_004656ca.dirty = 0;
+            }
+            nn_os_CriticalSection_Leave(section);
+        } else {
+            nn_os_CriticalSection_Leave(section);
+            return NET_RESULT_NOT_INITIALIZED;
         }
     }
-    nn_os_CriticalSection_Leave(g_moduleCriticalSection2);
     return result;
 }
 

@@ -26,7 +26,7 @@ extern unsigned char g_gameGlobals; /* 0x588fd0 */
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: __ARM_common_memcpy4_8. */
-extern unsigned int FUN_002b4dcc(int);
+extern unsigned int btlUnitMaxHp(int);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 extern int getUnlockedSlotCount(int);
@@ -71,7 +71,7 @@ void FUN_0026fd50(unsigned short *param_1,int param_2,int param_3,unsigned int *
   }
   *(int *)(param_1 + 4) = (int)*(short *)(param_2 + 0x2a);
   *(int *)(param_1 + 6) = (int)*(short *)(param_2 + 0x2c);
-  temp_v3 = FUN_002b4dcc(param_2);
+  temp_v3 = btlUnitMaxHp(param_2);
   *(unsigned int *)(param_1 + 8) = temp_v3;
   *(int *)(param_1 + 10) = (int)*(short *)(param_2 + 0x10);
   param_1[0xc] = 0;

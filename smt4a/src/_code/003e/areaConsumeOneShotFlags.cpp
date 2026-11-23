@@ -1,6 +1,6 @@
 #include "common.h"
 
-extern "C" u8 *gameDataBlockGetArea2D68(void);
+#include "gamedata/AppUnlockBits.h"
 
 /* Consume either of the two one-shot flags in the area block. */
 extern "C" s32 areaConsumeOneShotFlags(s32 index)

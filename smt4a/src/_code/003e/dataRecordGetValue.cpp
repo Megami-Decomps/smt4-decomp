@@ -1,17 +1,13 @@
-#include "common.h"
+#include "gamedata/DataTableAccess.h"
+#include "gamedata/GauntletAppTable.h"
 
 extern "C" {
 
-struct DataRecord {
-    /* 0x00 */ u8 unk00[0x26];
-    /* 0x26 */ u16 value;
-};
-DataRecord *dataFindKeyedRecordWithOverrides(u32 id);
-
+/* Looks up an app's cost, returning zero if the app is missing. */
 u32 dataRecordGetValue(u32 id)
 {
-    DataRecord *record = dataFindKeyedRecordWithOverrides(id);
-    return record != NULL ? record->value : 0;
+    const GauntletAppRecordA *record = (const GauntletAppRecordA *)dataFindKeyedRecordWithOverrides(id);
+    return record != NULL ? record->cost : 0;
 }
 
 } /* extern "C" */

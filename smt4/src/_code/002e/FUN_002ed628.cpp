@@ -10,7 +10,7 @@ int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 
 int campMenuEntryDraw(...);
-int FUN_00247f0c(void);
+int curveInterpolatePacked(void);
 int effectSpawnDefaultArguments(...);
 int floatInterpolateOverDuration(...);
 int uiDrawTableTextureSized(...);
@@ -35,7 +35,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: campMenuEntryDraw. */
-/* Supplied declaration required: FUN_00247f0c. */
+/* Supplied declaration required: curveInterpolatePacked. */
 /* Supplied declaration required: effectSpawnDefaultArguments. */
 extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: floatInterpolateOverDuration. */
@@ -135,7 +135,7 @@ int FUN_002ed628(unsigned int handle)
     case 0:
       VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v12 = -16.0f;
-      FUN_00247f0c();
+      curveInterpolatePacked();
       VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
       floatInterpolateOverDuration();
       efctSetSpeed();
@@ -268,7 +268,7 @@ int FUN_002ed628(unsigned int handle)
     VectorSignedToFloat((int)((temp_v9 - in_s0) * temp_v8),(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002b0800(*(unsigned int *)(temp_v0 + 0x10),(int)*(short *)(temp_v3 + 10));
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00247f0c();
+    curveInterpolatePacked();
     texDrawCompositeSprite(2,0x2d,4,(int)temp_v9,0,0xe);
     break;
   case 3:
@@ -335,7 +335,7 @@ int FUN_002ed628(unsigned int handle)
   case 5:
     texDrawCompositeSprite(2,0x2d,5,0,0,0xc);
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00247f0c();
+    curveInterpolatePacked();
     texDrawTableEntryAtStoredOrigin(2,0x2d,0x30,(int)temp_v9,0,0xd);
     temp_v2 = FUN_0026e6a0(0,100,0xc,*(unsigned int *)(temp_v0 + 0x1c),0);
     temp_v3 = g_titleScene;

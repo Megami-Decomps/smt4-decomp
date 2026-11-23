@@ -11,7 +11,6 @@
 #define XPOLY_SOURCE "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\Filter\\FilterXPoly.cpp"
 
 extern "C" {
-extern const PhaseTrigEntry g_sinCosTable[];
 
 void btlFilterLoadTexture(XPolyFilter *filter, u32 argument, u32 base);
 void *asdMemoryAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);

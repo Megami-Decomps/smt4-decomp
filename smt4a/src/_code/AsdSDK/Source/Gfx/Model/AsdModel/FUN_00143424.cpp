@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001529a0(...);
-int FUN_0015493c(int, int *, unsigned int **, unsigned int **);
+int cameraCreateDynamic(int, int *, unsigned int **, unsigned int **);
 int drawableSetRectangle(void);
 int asdMemoryGetDefaultAllocator(void);
 int nw_gfx_Camera_DynamicBuilder_Create(int *, unsigned int);
@@ -50,7 +50,7 @@ extern float DAT_005b3c44; /* 0x5b3c44 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001529a0. */
-/* Supplied declaration required: FUN_0015493c. */
+/* Supplied declaration required: cameraCreateDynamic. */
 /* Supplied declaration required: drawableSetRectangle. */
 /* Supplied declaration required: asdMemoryGetDefaultAllocator. */
 /* Supplied declaration required: nw_gfx_Camera_DynamicBuilder_Create. */
@@ -167,7 +167,7 @@ void FUN_00143424(void)
       temp_v1 = asdMemoryGetDefaultAllocator();
       temp_v6 = 0;
       VectorUnsignedToFloat((unsigned int)DAT_005b3bf8,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_0015493c(temp_v1,&temp_v11,&temp_v14,&temp_v20);
+      cameraCreateDynamic(temp_v1,&temp_v11,&temp_v14,&temp_v20);
       DAT_005b3c38 = temp_v1;
     }
   }

@@ -1,4 +1,6 @@
-/* NON_MATCHING: only the flag temporary register differs (retail r2, build r1); vector store grouping and constant loads match. */
+/* NON_MATCHING: only the flag temporary register differs (retail r2, build r1); vector store grouping and constant loads match.
+ * Setting the byte through a `u8 *` (which may alias `state`) gives retail's code here and in smt4a's FUN_0048286c, but
+ * nothing in retail shows such a pointer or a byte-flag helper. */
 #include "common.h"
 struct TargetVector {
     /* 0x00 */ f32 x;

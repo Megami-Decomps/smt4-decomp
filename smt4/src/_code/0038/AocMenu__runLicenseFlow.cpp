@@ -40,7 +40,6 @@ extern "C" {
 void FUN_00233e70(AocLicenseMenu *menu, s32 first, s32 second);
 void aocMenuSetButtonHelp(AocLicenseMenu *menu, s32 selection, s32 mode);
 void jobStopAndClearFlags(AocLicenseMenu *menu);
-void FUN_00234124(AocLicenseMenu *menu, RequestParameters *parameters);
 void aocLoadingTaskStart(AocLicenseMenu *menu, s32 value);
 s32 strIsEmpty(const RequestParameters *result);
 
@@ -79,7 +78,7 @@ void AocMenu::runLicenseFlow()
                     break;
                 case AOC_RESULT_RETRY: {
                     RequestParameters copy = result;
-                    FUN_00234124(menu, &copy);
+                    FUN_00234124(this, &copy);
                     break;
                 }
                 default:
@@ -127,7 +126,7 @@ void AocMenu::runLicenseFlow()
                     break;
                 case AOC_RESULT_RETRY: {
                     RequestParameters copy = result;
-                    FUN_00234124(menu, &copy);
+                    FUN_00234124(this, &copy);
                     break;
                 }
                 default:
@@ -163,7 +162,7 @@ void AocMenu::runLicenseFlow()
                 break;
             case AOC_RESULT_RETRY: {
                 RequestParameters copy = result;
-                FUN_00234124(menu, &copy);
+                FUN_00234124(this, &copy);
                 break;
             }
             default:

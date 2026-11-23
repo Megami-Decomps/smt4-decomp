@@ -1,11 +1,11 @@
 #include "map/MapGimicGlobal.h"
 #include "npc_room/NpcRoom.h"
 extern "C" {
-void FUN_002671f4(s32 handle, f32 x, f32 y, f32 z, f32 w, f32 range, f32 height, f32 radius);
+void mapCollisionQueueBoxWalls(s32 handle, f32 x, f32 y, f32 z, f32 w, f32 range, f32 height, f32 radius);
 }
 static inline void updateGimicVisualBounds(const MapGimicEntry *record, f32 range, f32 height, f32 radius)
 {
-    FUN_002671f4(static_cast<s16>(record->gimicId), record->position[0], record->position[1], record->position[2], record->position[3], range, height, radius);
+    mapCollisionQueueBoxWalls(static_cast<s16>(record->gimicId), record->position[0], record->position[1], record->position[2], record->position[3], range, height, radius);
 }
 extern "C" void mapGimicUpdateVisualBounds(void)
 {

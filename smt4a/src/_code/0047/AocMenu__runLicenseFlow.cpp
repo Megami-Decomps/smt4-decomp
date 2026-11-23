@@ -41,7 +41,6 @@ AocLicenseHandler *windowCreateStatusOperation(u8 *storage, s32 kind);
 void FUN_00476e58(AocLicenseMenu *menu, s32 first, s32 second);
 void aocMenuSetButtonHelp(AocLicenseMenu *menu, s32 selection, s32 mode);
 void jobFlagsWorkStop(AocLicenseMenu *menu);
-void FUN_0047bc90(AocLicenseMenu *menu, RequestParameters *parameters);
 void aocLoadingTaskStart(AocLicenseMenu *menu, s32 value);
 s32 strIsEmpty(const RequestParameters *result);
 
@@ -80,7 +79,7 @@ void AocMenu::runLicenseFlow()
                     break;
                 case AOC_RESULT_RETRY: {
                     RequestParameters copy = result;
-                    FUN_0047bc90(menu, &copy);
+                    FUN_0047bc90(this, &copy);
                     break;
                 }
                 default:
@@ -128,7 +127,7 @@ void AocMenu::runLicenseFlow()
                     break;
                 case AOC_RESULT_RETRY: {
                     RequestParameters copy = result;
-                    FUN_0047bc90(menu, &copy);
+                    FUN_0047bc90(this, &copy);
                     break;
                 }
                 default:
@@ -164,7 +163,7 @@ void AocMenu::runLicenseFlow()
                 break;
             case AOC_RESULT_RETRY: {
                 RequestParameters copy = result;
-                FUN_0047bc90(menu, &copy);
+                FUN_0047bc90(this, &copy);
                 break;
             }
             default:

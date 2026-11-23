@@ -2,7 +2,6 @@
 #include "nn/math/MathArithmetic.h"
 
 extern "C" {
-extern const PhaseTrigEntry g_sinCosTable[256];
 
 /* The sine of a phase (65536 per turn, odd), interpolated from the 256-entry sine/cosine table
  * (nn::math's SinFIdx). */

@@ -3,12 +3,12 @@
 extern "C" {
 
 void smokeFadeInitialize(u32 a, u32 b);
-void FUN_00371b74(void);
+void smokeFadeDestroy(void);
 u32 scrGetArg(u32 index);
 s32 FUN_00268690(void);
 s32 scrGetCommandFrame(void);
 
-/* Script command: when scrGetCommandFrame reports 0, forwards script arguments 0 and 1 to smokeFadeInitialize and returns 0; otherwise runs FUN_00371b74 if FUN_00268690 allows it and returns whether it did. */
+/* Script command: when scrGetCommandFrame reports 0, forwards script arguments 0 and 1 to smokeFadeInitialize and returns 0; otherwise runs smokeFadeDestroy if FUN_00268690 allows it and returns whether it did. */
 u8 FUN_00227c0c(void)
 {
     s32 result;
@@ -19,7 +19,7 @@ u8 FUN_00227c0c(void)
     if (result != 0) {
         result = FUN_00268690();
         if (result != 0) {
-            FUN_00371b74();
+            smokeFadeDestroy();
         }
         return result != 0;
     }

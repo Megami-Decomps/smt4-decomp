@@ -6,7 +6,6 @@
 #include "shard/W6_W6Match6_PhaseTrig.h"
 
 extern "C" {
-extern const PhaseTrigEntry g_sinCosTable[256];
 
 s32 scrGetArg(u32 index);
 void lmapCameraSetMode(s32 mode);

@@ -32,7 +32,7 @@ u32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV
                                  s32 thumbRegion, s32 previousRegion, s32 nextRegion, s8 *touched, s32 secondary,
                                  s32 notify);
 u8 gridNavigationHandleConfirm(GridNavigation *list, s32 mode);
-void FUN_003d498c(u32 id, u32 mode);
+void uiQuestLoadDetailText(u32 id, u32 mode);
 void FUN_003d474c(void);
 void FUN_0023ff10(void);
 u32 partyEntryBitsBit4(s32 index);
@@ -94,7 +94,7 @@ static __inline void uiQuestSelectSpecialDetailPage(u16 id)
 static __inline void questListSelect(UiQuestApoc *quest, u16 id)
 {
     questReleaseDetailMessages(quest);
-    FUN_003d498c(id, 1);
+    uiQuestLoadDetailText(id, 1);
     FUN_003d474c();
     FUN_0023ff10();
     uiQuestSelectSpecialDetailPage(id);

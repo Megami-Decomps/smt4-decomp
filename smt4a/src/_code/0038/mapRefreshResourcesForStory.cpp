@@ -6,7 +6,7 @@ void mapCollisionRelease(void);
 s32 gameFlagIsSet(u32 flag);
 void mapCollisionLoad(s32 map, s32 area, s32 overrideMap, s32 overrideArea);
 void hakaiEntriesNotify(void);
-void FUN_00385a10(void);
+void mapQueueActiveEngineRecordCollisionBoxes(void);
 void mapObjectSpawnAmbientEffects(void);
 void FUN_00378000(void);
 void FUN_0020f12c(s32 map, s32 area);
@@ -28,7 +28,7 @@ void mapRefreshResourcesForStory(void)
         mapCollisionLoad(map->transition.mapId, map->transition.areaId, 0, 0);
     }
     hakaiEntriesNotify();
-    FUN_00385a10();
+    mapQueueActiveEngineRecordCollisionBoxes();
     mapObjectSpawnAmbientEffects();
     FUN_00378000();
     FUN_0020f12c(map->transition.mapId, map->transition.areaId);

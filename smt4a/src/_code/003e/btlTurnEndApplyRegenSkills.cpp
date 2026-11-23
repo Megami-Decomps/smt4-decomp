@@ -23,7 +23,7 @@ void halves34Copy(const SlotRecordA *src, u16 *out);
 s32 FUN_003e0034(void);
 void playerSetClampedStat(s32 value);
 s32 FUN_003e0154(void);
-s32 FUN_003e0164(void);
+s32 playerGetMaxMp(void);
 void playerSetClampedValue(s32 value);
 s32 recordSetClampedCurrent(SlotRecordA *record, s32 value);
 s32 selectionStateSetClamped(SlotRecordA *record, s32 value);
@@ -97,7 +97,7 @@ void btlTurnEndApplyRegenSkills(BtlMainStateA *battle)
                 gameGetPlayerData()->hp = 0;
             }
             current = FUN_003e0034();
-            value = regenValue(FUN_003e0164(), mp, current);
+            value = regenValue(playerGetMaxMp(), mp, current);
             playerSetClampedValue(value);
             if (value == 0) {
                 gameGetPlayerData()->mp = 0;

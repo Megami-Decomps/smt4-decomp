@@ -155,6 +155,7 @@ typedef struct StateAtF4 {
     union {
         /* 0x08 */ u16 *unk08;
         /* 0x08 */ PlayerSummary *record; /* the StreetPass card being edited */
+        /* 0x08 */ struct PartySlotA *slot; /* the party slot a return state compares against */
     };
     /* 0x0C */ u32 *infoPanel;           /* the character info panel (characterInfoPanelPopulate) */
     union {

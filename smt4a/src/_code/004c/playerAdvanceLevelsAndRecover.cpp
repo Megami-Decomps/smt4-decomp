@@ -4,7 +4,7 @@
 
 extern "C" {
 s32 FUN_003e0154(void);
-s32 FUN_003e0164(void);
+s32 playerGetMaxMp(void);
 u32 gameGetUnlockedCountLimit(void);
 void unitApplyWeightedStatPoint(void *stats, const StatGrowthParameters *recipe, u32 mode);
 void gameDataAddCappedPoints(u32 amount);
@@ -18,7 +18,7 @@ void playerAdvanceLevelsAndRecover(PlayerDataA *player, s32 levels, s32 growStat
     }
     StatGrowthParameters recipe = playerGrowthParameters();
     s32 previousHp = FUN_003e0154();
-    s32 previousMp = FUN_003e0164();
+    s32 previousMp = playerGetMaxMp();
     for (s32 level = 0; level < levels; ++level) {
         if (gameGetUnlockedCountLimit() <= player->level) {
             break;

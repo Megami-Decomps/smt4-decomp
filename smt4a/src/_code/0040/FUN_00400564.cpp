@@ -18,8 +18,8 @@ struct EffectDefinition {
 extern "C" {
 SlotRecordA *btlMainGetUnk14(void);
 u32 btlIsDefeatSuppressed(void);
-s32 FUN_002b4e7c(PlayerDataA *record);
-s32 FUN_002b4dcc(SlotRecordA *record);
+s32 btlPlayerMaxHp(PlayerDataA *record);
+s32 btlUnitMaxHp(SlotRecordA *record);
 void FUN_003ff524(u16 *flags, s32 kind);
 u32 btlCanSelectReservePartyMember(const void *entry);
 s32 FUN_003ff888(void);
@@ -55,7 +55,7 @@ u32 FUN_00400564(s32 slot, s32 fromSave, EffectDefinition *effect)
     u16 curable;
     if (slot < 0 && btlIsDefeatSuppressed() == 0) {
         PlayerDataA *player = gameGetPlayerData();
-        if ((wanted & 1) != 0 && (player->ailments & 2) == 0 && FUN_002b4e7c(player) != player->hp) {
+        if ((wanted & 1) != 0 && (player->ailments & 2) == 0 && btlPlayerMaxHp(player) != player->hp) {
             useful = 1;
         }
         if ((wanted & 4) != 0) {
@@ -92,7 +92,7 @@ u32 FUN_00400564(s32 slot, s32 fromSave, EffectDefinition *effect)
         if (member == 0) {
             return 3;
         }
-        if ((wanted & 1) != 0 && (member->ailments & 0x402) == 0 && FUN_002b4dcc(member) != member->hp) {
+        if ((wanted & 1) != 0 && (member->ailments & 0x402) == 0 && btlUnitMaxHp(member) != member->hp) {
             useful = 1;
         }
         if ((wanted & 4) != 0) {

@@ -10,7 +10,7 @@ int FUN_004ffaf0(...);
 
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
-int FUN_001f3f34(void);
+int curveInterpolatePacked(void);
 int mapResolveCollisionSphere(...);
 int FUN_002826dc(...);
 int distSpatial(void);
@@ -46,7 +46,7 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
-/* Supplied declaration required: FUN_001f3f34. */
+/* Supplied declaration required: curveInterpolatePacked. */
 /* Supplied declaration required: mapResolveCollisionSphere. */
 /* Supplied declaration required: FUN_002826dc. */
 /* Supplied declaration required: distSpatial. */
@@ -465,7 +465,7 @@ LAB_00354dac:
       break;
     case 8:
       VectorSignedToFloat(g_lmapScene[0x75],(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_001f3f34();
+      curveInterpolatePacked();
       piVar4 = g_lmapScene;
       g_lmapScene[0x75] = g_lmapScene[0x75] + 1;
       g_gameState.unk3EC = 0;

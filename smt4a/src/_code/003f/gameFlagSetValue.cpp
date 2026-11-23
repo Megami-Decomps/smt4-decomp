@@ -1,10 +1,9 @@
 /* NON_MATCHING: the flag-block and value registers now match; only the bit write swaps scratch registers (retail: mask r0, index r1). */
 #include "common.h"
 #include "gamedata/GameFlags.h"
+#include "gamedata/GameFlagWrite.h"
 
 extern "C" {
-u8 *gameFlagBlockGet(void);
-void encounterRefreshOnFlagChange(u32, s32);
 
 /* Sets or clears the flag bit `id` in the flag block. */
 static __inline void flagBitWrite(u8 *flags, u32 id, s32 value)

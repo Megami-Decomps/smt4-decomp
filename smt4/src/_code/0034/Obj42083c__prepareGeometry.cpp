@@ -5,7 +5,6 @@
 #include "gfx/EulerPhaseRotation.h"
 
 extern "C" {
-extern const PhaseTrigEntry g_sinCosTable[];
 void matrixScaleColumnsAlt(Matrix34Data *out, const Matrix34Data *matrix, const f32 *scale);
 }
 

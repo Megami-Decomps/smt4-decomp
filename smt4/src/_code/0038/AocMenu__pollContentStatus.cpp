@@ -31,7 +31,6 @@ struct AocPollMenu {
 extern "C" {
 
 void FUN_00233e70(AocPollMenu *menu, s32 first, s32 second);
-void FUN_00234124(AocPollMenu *menu, RequestParameters *result);
 WindowStatusResult FUN_002341d4(AocMain *main);
 s32 strIsEmpty(const RequestParameters *result);
 s32 byteIsAtLeast100(const RequestParameters *result);
@@ -62,7 +61,7 @@ void AocMenu::pollContentStatus()
                 break;
             case 0x66: {
                 RequestParameters copy = result;
-                FUN_00234124(menu, &copy);
+                FUN_00234124(this, &copy);
                 break;
             }
             default:
@@ -94,7 +93,7 @@ void AocMenu::pollContentStatus()
                 break;
             case 0x66: {
                 RequestParameters copy = result;
-                FUN_00234124(menu, &copy);
+                FUN_00234124(this, &copy);
                 break;
             }
             default:

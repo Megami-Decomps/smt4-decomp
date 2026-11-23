@@ -10,9 +10,9 @@ extern "C" {
 extern MapDepart *g_mapDepart;
 s32 mapDepartUpdate(u32 process);
 void mapDepartEnable(u32 process);
-s32 scrCommWaitStateAction(u32 process);
+s32 mapDepartSearch3dUpdate(u32 process);
 void mapDepartSearch3dTaskEnd(u32 process);
-s32 FUN_002ca09c(u32 process);
+s32 mapDepartSearch2dUpdate(u32 process);
 void mapDepartSearch2dTaskEnd(u32 process);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 firstDelay, u16 lastDelay,
     AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
@@ -57,7 +57,7 @@ void MapDepart_Init(const MapDepartureRequest *request, u32 requestSize)
     }
     work->prefix.freeOnEnd = 0;
     work->prefix.job = asdProcessCreateSimple((const s8 *)"DEPART C", 2, 0, 0, mapDepartUpdate, mapDepartEnable, NULL);
-    taskCreateDraw((const s8 *)"SEARCH3D", 111, 0, 0, scrCommWaitStateAction, mapDepartSearch3dTaskEnd, NULL, work->prefix.job);
-    taskCreateDraw((const s8 *)"SEARCH2D", 115, 0, 0, FUN_002ca09c, mapDepartSearch2dTaskEnd, NULL, work->prefix.job);
+    taskCreateDraw((const s8 *)"SEARCH3D", 111, 0, 0, mapDepartSearch3dUpdate, mapDepartSearch3dTaskEnd, NULL, work->prefix.job);
+    taskCreateDraw((const s8 *)"SEARCH2D", 115, 0, 0, mapDepartSearch2dUpdate, mapDepartSearch2dTaskEnd, NULL, work->prefix.job);
 }
 }

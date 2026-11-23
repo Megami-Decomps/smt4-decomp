@@ -20,8 +20,8 @@
 extern "C" {
 
 SlotRecordA *btlMainGetUnk14(void);
-s32 FUN_002b4dcc(SlotRecordA *unit);
-s32 FUN_002b4e7c(PlayerDataA *player);
+s32 btlUnitMaxHp(SlotRecordA *unit);
+s32 btlPlayerMaxHp(PlayerDataA *player);
 u32 heldAmountLessThan(s32 amount, u32 id);
 u8 valueAtMostFifthOfTotal(s32 value, s32 total);
 void drawSetColorFromRGBA8(u32 packed);
@@ -82,7 +82,7 @@ void partyPanelWidgetDraw(PartyPanelWidget *widget, s32 x, s32 y, f32 alpha)
         level = player->level;
         hp = player->hp;
         mp = player->mp;
-        maxHp = FUN_002b4e7c(player);
+        maxHp = btlPlayerMaxHp(player);
         maxMp = gameGetPlayerData()->maxMp;
         hpBelowMaximum = heldAmountLessThan((s16)maxHp, id);
     } else {
@@ -99,7 +99,7 @@ void partyPanelWidgetDraw(PartyPanelWidget *widget, s32 x, s32 y, f32 alpha)
             level = unit->level;
             hp = unit->hp;
             mp = unit->mp;
-            maxHp = FUN_002b4dcc(unit);
+            maxHp = btlUnitMaxHp(unit);
             maxMp = unit->maxMp;
             if (widget->slot == -2) {
                 hpBelowMaximum = maxHp > hp;

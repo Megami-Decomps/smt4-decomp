@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the schedule of the category extent loads in the centers computation and two load registers of the origin sum differ; everything else is identical. */
+/* NON_MATCHING: retail interleaves the two center-offset calculations differently and swaps the origin-sum load registers. */
 #include "gamedata/MapNaviCategories.h"
 #include "gamedata/MapSystemTable.h"
 #include "event/bustupEvent/BustupTex.h"
@@ -66,8 +66,11 @@ void FUN_0048cee0(NaviLayoutWork *work, s32 map)
         if (record->id == map) {
             work->origins[record->slot].x = record->placement.originX + record->placement.offsetX;
             work->origins[record->slot].y = record->placement.originY + record->placement.offsetY;
-            work->centers[record->slot].x = record->placement.originX + (record->endX - record->startX) * 12 / 2;
-            work->centers[record->slot].y = record->placement.originY + (record->endY - record->startY) * 12 / 2;
+            /* A category cell is 12 pixels across; locate the center of its rectangle. */
+            s32 halfWidth = (record->endX - record->startX) * 12 / 2;
+            s32 halfHeight = (record->endY - record->startY) * 12 / 2;
+            work->centers[record->slot].x = record->placement.originX + halfWidth;
+            work->centers[record->slot].y = record->placement.originY + halfHeight;
             work->extents[record->slot].x = record->startX;
             work->extents[record->slot].y = record->startY;
         }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: preset arms and count clamp now match retail; remaining: retail reads `source` through a base+0x500 pointer (add r0,r4,#1280; ldrb [r0,#165]) and updates the window state with a writeback `ldrh r1,[r0,#4]!`. */
+/* NON_MATCHING: only the window flag update differs: retail updates the halfword through a writeback load (`ldrh r1, [r0, #4]!; orr; strh r1, [r0]`), the build addresses it at +4 twice (the same form as FUN_003a8aa0, FUN_003a8fe0, Obj422448::buildList and Obj4223f8::confirmSelection). */
 #include "classes/Obj4223c4.h"
 #include "classes/Obj422594.h"
 #include "shard/MessageIdList.h"
@@ -28,10 +28,6 @@ void Obj4223c4::FUN_003a6e68()
         s32 count;
         u8 remaining[0x9C];
     };
-    struct SourceBlock {
-        u8 unk00[0xA5];
-        u8 source;
-    };
     struct OpeningScreenView {
         u8 prefix[0x14];
         u32 state;
@@ -44,8 +40,8 @@ void Obj4223c4::FUN_003a6e68()
         MessageIdList messages;
         Obj422594 *window;
         u8 prefix594[0x10];
-        u8 previewOnly;
-        u8 source;
+        s8 previewOnly;
+        s8 source;
         u8 prefix5A6[0xA00E];
         s16 selectedChannel;
     };
@@ -64,11 +60,10 @@ void Obj4223c4::FUN_003a6e68()
     if (completed == 0)
         return;
 
-    const SourceBlock *block = reinterpret_cast<const SourceBlock *>(reinterpret_cast<u8 *>(view) + 0x500);
     if (!view->previewOnly)
         buttonHelpSetPreset(0x2D);
     else
-        buttonHelpSetPreset(block->source == 1 ? 0x4C : 0x4D);
+        buttonHelpSetPreset(view->source == 1 ? 0x4C : 0x4D);
     FUN_0029d960(screen);
     gameGlobalsSetSubScreenActive(0);
     view->state = 2;

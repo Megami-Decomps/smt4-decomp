@@ -14,7 +14,7 @@ void playerDataBuildPresentationRecord(UnitPresentationInfo *, void *, u32);
 void unitInitializeFromTemplate(u32, UnitRecord *);
 void unitRecordBuild(s32, UnitRecord *);
 void FUN_0026fd50(UnitPresentationInfo *, UnitRecord *, s32, u32);
-s32 FUN_002b4dcc(UnitRecord *);
+s32 btlUnitMaxHp(UnitRecord *);
 void statusScaleUnitDisplayVitals(UnitPresentationInfo *, s32);
 
 /* Build the player's or selected demon's presentation and update selection eligibility. */
@@ -44,7 +44,7 @@ void FUN_0031f718(s32 id, s32 useBaseStats, u32 flags)
             const BaseStatsView *base = (const BaseStatsView *)record;
             info->hp = base->hp;
             info->mp = base->mp;
-            info->maximumHp = FUN_002b4dcc(&unit);
+            info->maximumHp = btlUnitMaxHp(&unit);
             info->maximumMp = base->mp;
             if (info->maximumHp < 0)
                 info->maximumHp = base->hp;

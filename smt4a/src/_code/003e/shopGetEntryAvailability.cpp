@@ -1,34 +1,23 @@
-/* NON_MATCHING: record and requiredBits trade r5/r6 (register allocation only). */
 #include "code/Code002e.h"
-#include "common.h"
+#include "gamedata/AppUnlockBits.h"
 #include "gamedata/DataTableAccess.h"
+#include "gamedata/GameDataAccess_VariantE.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/GauntletAppTable.h"
 
 extern "C" {
 
-typedef struct ShopRecord {
-    /* 0x00 */ u8 unk00[0x26];
-    /* 0x26 */ u16 price;
-    /* 0x28 */ u8 unk28[2];
-    /* 0x2A */ u16 levelBits; // bits 6-15: level the player needs
-    /* 0x2C */ u16 requiredFlags[3];
-    /* 0x32 */ u16 requiredBits[3]; // bits in the area data block
-} ShopRecord;
-
-s32 gameFlagIsSet(u16 flag);
-u8 *gameDataBlockGetArea2D68(void);
-
+/* Inline body of dataRecordGetValue for the app catalog. */
 static __inline u32 shopRecordGetPrice(u32 id)
 {
-    ShopRecord *record = (ShopRecord *)dataFindKeyedRecordWithOverrides(id);
-
-    return record != NULL ? record->price : 0;
+    const GauntletAppRecordA *record = (const GauntletAppRecordA *)dataFindKeyedRecordWithOverrides(id);
+    return record != NULL ? record->cost : 0;
 }
 
-/* Shop availability: 2 when the entry is locked, 1 when it costs more than the player has, 0 otherwise. */
+/* Returns 2 for a locked app, 1 for an unaffordable app, or 0 if it can be bought. */
 u8 shopGetEntryAvailability(u32 id)
 {
-    ShopRecord *record = (ShopRecord *)dataFindKeyedRecordWithOverrides(id);
+    const GauntletAppRecordA *record = (const GauntletAppRecordA *)dataFindKeyedRecordWithOverrides(id);
     s32 i;
     u32 price;
     u32 money;
@@ -36,7 +25,7 @@ u8 shopGetEntryAvailability(u32 id)
     if (record == NULL) {
         return 2;
     }
-    if (gameGetPlayerData()->level < (record->levelBits >> 6)) {
+    if (gameGetPlayerData()->level < (record->levelAndCategory >> 6)) {
         return 2;
     }
     for (i = 0; i < 3; i++) {
@@ -45,9 +34,7 @@ u8 shopGetEntryAvailability(u32 id)
         }
     }
     for (i = 0; i < 3; i++) {
-        u16 bit = record->requiredBits[i];
-
-        if (bit != 0 && !(gameDataBlockGetArea2D68()[bit >> 3] & (1 << (bit & 7)))) {
+        if (record->requiredApps[i] != 0 && !appUnlockBitIsSet(record->requiredApps[i])) {
             return 2;
         }
     }

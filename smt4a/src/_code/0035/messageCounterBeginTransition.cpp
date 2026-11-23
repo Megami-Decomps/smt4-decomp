@@ -11,7 +11,7 @@ struct MessageCounterTransition {
 };
 
 extern "C" {
-s32 FUN_00480c28(void);
+s32 gameFlagSumWeightedTiers(void);
 
 // Animate the banner counter toward the current total or by a supplied delta.
 u32 messageCounterBeginTransition(u32 value, s32 useTotal)
@@ -24,7 +24,7 @@ u32 messageCounterBeginTransition(u32 value, s32 useTotal)
         transition->delta = value;
         return 1;
     }
-    s32 total = FUN_00480c28();
+    s32 total = gameFlagSumWeightedTiers();
     transition->duration = value;
     transition->state = 3;
     transition->remaining = value;

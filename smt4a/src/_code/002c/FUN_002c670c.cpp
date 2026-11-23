@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00281b94(...);
+int mapCollisionQueueBoxWalls(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_002b7a78(...);
 int recordSetValueAndName(...);
 int FUN_00313974(int);
@@ -33,7 +33,7 @@ typedef struct {
 
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00281b94. */
+/* Supplied declaration required: mapCollisionQueueBoxWalls. */
 /* Supplied declaration required: FUN_002b7a78. */
 /* Supplied declaration required: recordSetValueAndName. */
 /* Supplied declaration required: FUN_00313974. */
@@ -130,7 +130,7 @@ void FUN_002c670c(int param_1)
         sceneRegisterBoxEffect(0,0,"START",0x1b,8,0xffffffff,0,0,0,0,0,0,0,0xd,1,0,0,0,0);
       }
       if (param_1 == 0) {
-        FUN_00281b94(0);
+        mapCollisionQueueBoxWalls(0);
       }
     }
     temp_v3 = (int)*(char *)(temp_v1 + 0xe03);
@@ -201,7 +201,7 @@ void FUN_002c670c(int param_1)
       sceneRegisterBoxEffect(0,0,"GOAL",0x1c,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,0,0,0,0);
     }
     if (param_1 == 0) {
-      FUN_00281b94(0);
+      mapCollisionQueueBoxWalls(0);
       return;
     }
   }

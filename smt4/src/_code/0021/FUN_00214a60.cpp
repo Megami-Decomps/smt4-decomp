@@ -9,7 +9,7 @@ extern "C" {
 
 int screenDrawShadedRect(...);
 int textFormatFullWidthTwoDigits(...);
-int FUN_0025090c(...);
+int mapDepartFormatPlaceName(...);
 float fontMeasureTextWidth(const char *, unsigned int, float); // declcheck: local (romwright prototype; the shared declaration in ui/AnimatedMessage.h does not compile here: more than one instance of overloaded function "textDrawString" has "C" linkage)
 int textFormatFullWidthNumber(...);
 int buttonHelpSetText(int, int);
@@ -70,7 +70,7 @@ extern int g_titleScene; /* 0x44ea00 */
 #endif
 /* Supplied declaration required: screenDrawShadedRect. */
 /* Supplied declaration required: textFormatFullWidthTwoDigits. */
-/* Supplied declaration required: FUN_0025090c. */
+/* Supplied declaration required: mapDepartFormatPlaceName. */
 /* Supplied declaration required: fontMeasureTextWidth. */
 /* Supplied declaration required: textFormatFullWidthNumber. */
 /* Supplied declaration required: buttonHelpSetText. */
@@ -237,7 +237,7 @@ unsigned int FUN_00214a60(void)
           if (temp_v14 - 200 < 100) {
             temp_v14 = 0xcb;
           }
-          FUN_0025090c(temp_v14,*(unsigned short *)(temp_v17 + 0x2a6),2,temp_v27);
+          mapDepartFormatPlaceName(temp_v14,*(unsigned short *)(temp_v17 + 0x2a6),2,temp_v27);
           temp_v2 = **(short **)(temp_v9 + 0xc);
           fontMeasureTextWidth(reinterpret_cast<const char *>(temp_v27), 2, 0.0f);
           temp_v5 = *(int *)(temp_v5 + temp_v4 * 4 + 0x68);

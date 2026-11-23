@@ -28,7 +28,6 @@ struct LookAtCamera {
 };
 
 extern "C" {
-extern const PhaseTrigEntry g_sinCosTable[];
 
 void nn_math_ARMv6_MTX34CopyAsm(nw::math::MTX34 *destination, const nw::math::MTX34 *source);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(f32 *vector, f32 *matrix);

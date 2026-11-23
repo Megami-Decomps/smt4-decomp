@@ -1,9 +1,8 @@
 #include "shard/Shard003E.h"
 #include "gamedata/SaveSlotTable.h"
+#include "gamedata/AppUnlockBits.h"
 
 extern "C" {
-
-extern u8 *gameDataBlockGetArea2D68(void);
 
 /* Counts the unlocked entries: 8, plus the bits set in bytes 9..11 of the table at gameDataBlockGetArea2D68 (the first one jumps to 9), at most 0x18. */
 void updateUnlockedEntryCount(void)

@@ -1,6 +1,5 @@
-/* NON_MATCHING: the linked-id update goes through the siblings' gameFlagWrite inline (retail's hoisted constant 1 in r6); remaining: retail stores flag byte 0 before byte 2 and allocates the bit and the constant 1 to r1/r3 (built r3/r2). */
-#include "common.h"
-#include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
+/* NON_MATCHING: retail finishes and stores flag byte 0 before flag byte 2; the build schedules the last two byte updates in the opposite order. */
+#include "gamedata/GameFlagWrite.h"
 #include "code/Code001b.h"
 #include "code/Code003d_Smt4a.h"
 
@@ -26,30 +25,12 @@ typedef struct FlagBlock {
 
 s32 itemDataIsFlagClear(s32 id);
 s32 rosterAddUnit(s32 id);
-s32 encounterRefreshOnFlagChange(u32 id, s32 arg);
-
-/* Reports a game flag change to encounterRefreshOnFlagChange, then sets or clears the flag's bit (the sibling
- * FUN_00417a60, FUN_00417c24 and FUN_00418070 write flags through the same inline). */
-static __inline void gameFlagWrite(u32 flag, s32 value)
-{
-    FlagBlock *block = reinterpret_cast<FlagBlock *>(gameFlagBlockGet());
-
-    encounterRefreshOnFlagChange(flag, value);
-    u32 index = flag >> 3;
-    if (value) {
-        block->bitmap[index] |= 1 << (flag & 7);
-    } else {
-        s32 keep = ~(1 << (flag & 7));
-        block->bitmap[index] &= keep;
-    }
-}
 
 /* Marks entry `id` as seen and active, runs rosterAddUnit for ids that qualify, and sets the linked id's bit in the bitmap. */
 void gameFlagUnlockEntryById(s32 id)
 {
     FlagEntry *entry = &reinterpret_cast<FlagBlock *>(gameFlagBlockGet())->entries[id];
     s32 kind;
-
 
     entry->unk1 = 0;
     entry->seen = 1;

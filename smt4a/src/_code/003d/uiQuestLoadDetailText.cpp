@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include "shard/W5_W5Match7_UiQuest.h"
+#include "quest_center/QuestRecordA.h"
+#include "text/TextDraw.h"
+#include "addon/AocSystemA.h"
+extern "C" {
+void scrMessageSetSpeakerTitle(u32 id, s32 enabled, s32 flags);
+void *dataSetFindRequestedFileByKey(AocSystemA *system, u32 id);
+void *asdLoadFileSyncDefault(const char *path);
+void asdTextDrawDirectoryEntry(u32 window, s32 mode, u32 color, u32 flags, s32 type, const void *data, s32 entry);
+s32 partyEntryGetByte1(u32 id);
+s32 FUN_003de464(u32 id, u32 mode);
+void asdTextFormatStream(u32 window, s32 mode, u32 color, u32 flags, s32 type, const char *format, const char *text);
+s32 questHasSpecialDetailPage(u32 id);
+s32 itemDataGetCategory(u32 id);
+void uiQuestRefreshDetailPages(u32 id);
+
+/* Loads the quest's text and populates the main and optional detail pages. */
+void uiQuestLoadDetailText(u32 id, u32 mode)
+{
+    UiQuestApoc *work = g_uiQuest;
+    if (!id)
+        return;
+    scrMessageSetSpeakerTitle(id, 1, 1);
+    void *messages = dataSetFindRequestedFileByKey(g_aocSystem, id);
+    if (messages) {
+        work->detailMessages = messages;
+        work->messageOwnership.addonOwned = 1;
+    } else {
+        char path[64];
+        sprintf(path, "event/quest/quest%03d.mbm", id);
+        messages = asdLoadFileSyncDefault(path);
+        work->detailMessages = messages;
+        work->messageOwnership.addonOwned = 0;
+    }
+    asdTextDrawDirectoryEntry(work->sprites[0], 3, 0xFFFFFFFF, 0, 3, messages, 0);
+    s32 extraPage = partyEntryGetByte1(id);
+    if (extraPage > 0)
+        asdTextDrawDirectoryEntry(work->sprites[2], 3, 0xFFFFFFFF, 0, 3, work->detailMessages, extraPage);
+    scrMessageSetSpeakerTitle(id, 1, 0);
+    s32 detail = FUN_003de464(id, mode);
+    if (detail < 0) {
+        const QuestRecordA *record = questDataGetRecord(id);
+        const char *description = textExpandGlyphsToBuffer(record->description, NULL, 0);
+        asdTextFormatStream(work->sprites[1], 3, 0xFFFFFFFF, 0, 3, "%s", description);
+    } else {
+        asdTextDrawDirectoryEntry(work->sprites[1], 3, 0xFFFFFFFF, 0, 3, (const void *)work->messages, detail);
+    }
+    if (questHasSpecialDetailPage(id))
+        asdTextDrawDirectoryEntry(work->sprites[3], 3, 0xFFFFFFFF, 0, 3, work->detailMessages, itemDataGetCategory(id));
+    uiQuestRefreshDetailPages(id);
+}
+
+} /* extern "C" */

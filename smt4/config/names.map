@@ -2328,7 +2328,7 @@
 00295f28 dataTable9EntryOrZero
 002880a8 layoutApplyForState
 00288790 messageKindForward
-002ca6a4 scrCommWaitStateAction
+002ca6a4 mapDepartSearch3dUpdate
 002f5e64 scrCommAnyFlagRangePositive
 003004f8 scrCommConvertEntryValue
 003c88b8 questRecordValueIfState2
@@ -6415,3 +6415,15 @@
 003ddc70 btlQueueUniqueScalarAction
 0026493c lmapMainUpdateState
 00277b5c mapIfQueueNotice
+0010f764 fsInitializeAccessDelay
+00119e54 cameraCreateDynamic
+00389ddc fieldPlacementGroupSpawn
+002dcdd0 uiCompareEntryRanksAscending
+002efd64 smokeFadeDestroy
+00350ac4 movieSelectStream
+0028fe0c uiQuestLoadDetailText
+003eae40 rangeOwnerResetIdsInRange
+00247f0c curveInterpolatePacked
+002ca09c mapDepartSearch2dUpdate
+002671f4 mapCollisionQueueBoxWalls
+0025090c mapDepartFormatPlaceName

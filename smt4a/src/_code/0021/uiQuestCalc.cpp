@@ -19,7 +19,7 @@ int listCursorGetRowIfUnblocked(...);
 int rt_aeabi_memclr(...);
 int FUN_002f15f8(...);
 int sysPlayVoice(...);
-int FUN_003d498c(...);
+int uiQuestLoadDetailText(...);
 void uiQuestRefreshDetailPages(int);
 int FUN_00417a60(...);
 int FUN_00418070(...);
@@ -84,7 +84,7 @@ extern int FUN_00335384(int);
 /* Supplied declaration required: uiQuestSortListByEntryKind. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d474c. */
-/* Supplied declaration required: FUN_003d498c. */
+/* Supplied declaration required: uiQuestLoadDetailText. */
 /* Supplied declaration required: FUN_00417a60. */
 /* Supplied declaration required: FUN_00418070. */
 extern int rosterHasLeader(void);
@@ -821,7 +821,7 @@ joined_r0x002167bc:
       }
       *(unsigned int *)(temp_v1 + 0x92c) = 0;
     }
-    FUN_003d498c(*(unsigned short *)(temp_v1 + 0xcca),1);
+    uiQuestLoadDetailText(*(unsigned short *)(temp_v1 + 0xcca),1);
     uiSpriteSetKeyframe(temp_v1 + 0x494,0);
     uiSpriteSetImageKeyframe(temp_v1 + 0x494,8,0);
     uiSpriteSelectAnim(temp_v1 + 0x520,5);
@@ -1034,7 +1034,7 @@ LAB_00217264:
           }
           *(unsigned int *)(temp_v1 + 0x92c) = 0;
         }
-        FUN_003d498c(temp_v3,1);
+        uiQuestLoadDetailText(temp_v3,1);
       }
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;

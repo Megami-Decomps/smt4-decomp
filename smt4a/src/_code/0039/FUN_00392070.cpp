@@ -16,7 +16,7 @@ int randomAdvanceShiftRegister(...);
 int shiftRandomNextFraction(...);
 int FUN_005145f4(void);
 int matrixCopySelectedToGlobal(float *);
-int FUN_005147dc(void);
+int matrixSetRotationX(void);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 int __aeabi_uidivmod(void);
@@ -112,7 +112,7 @@ extern int effGetFrameStep(void);
 /* Supplied declaration required: shiftRandomNextFraction. */
 /* Supplied declaration required: FUN_005145f4. */
 /* Supplied declaration required: matrixCopySelectedToGlobal. */
-/* Supplied declaration required: FUN_005147dc. */
+/* Supplied declaration required: matrixSetRotationX. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -252,7 +252,7 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
               temp_v43 = (temp_v7 * 0.7f + 0.3f) * temp_v40;
               temp_v12 = (float)temp_v22[10] +
                        ((float)temp_v22[9] + temp_v27 * temp_v12 * 0.5f) * temp_v12;
-              FUN_005147dc();
+              matrixSetRotationX();
               matrixSetRotationY(((f32*)temp_v22)[8]);
               FUN_005145f4();
               temp_v12 = temp_v12 * temp_v15;
@@ -531,7 +531,7 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
             }
             shiftRandomNextFraction(0);
             temp_v22[8] = (int)((temp_v7 - 0.5f) * 2.0f * 3.1415927f);
-            FUN_005147dc();
+            matrixSetRotationX();
             matrixSetRotationY(((f32*)temp_v22)[8]);
             FUN_005145f4();
             temp_v12 = (float)temp_v22[10] * 40.743664f;

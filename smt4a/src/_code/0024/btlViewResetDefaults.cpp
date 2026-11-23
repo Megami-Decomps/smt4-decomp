@@ -33,7 +33,7 @@ void btlViewResetDefaults()
     view->transitionFlags.second = 0;
     view->unk70 = 0.0f;
     view->unk76 = 0;
-    view->unk78 = 0;
+    view->moneyReward = 0;
     view->disabled = 0;
     view->positionsSet = 0;
     view->unk80.x = 0.0f;

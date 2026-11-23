@@ -5,7 +5,7 @@
 
 extern "C" {
 
-f32 FUN_001f3f34(f32 from, f32 to, f32 duration, f32 time);
+f32 curveInterpolatePacked(f32 from, f32 to, f32 duration, f32 time);
 f32 FUN_0016242c(f32 from, f32 to, f32 duration, f32 time);
 
 /* Steps the map interface's slide animation: a state machine that eases the interface in and out
@@ -27,7 +27,7 @@ void FUN_00274a88(void)
         break;
     case 1:
         state->fadeProgress = 1.0f - flags->fadeElapsed / flags->fadeDuration;
-        state->unkCD20 = FUN_001f3f34(-40.0f, 10.0f, 6.0f, (f32)state->fadeStep);
+        state->unkCD20 = curveInterpolatePacked(-40.0f, 10.0f, 6.0f, (f32)state->fadeStep);
         if (++state->fadeStep > 6) {
             state->fadeMode = 2;
             state->fadeStep = 0;

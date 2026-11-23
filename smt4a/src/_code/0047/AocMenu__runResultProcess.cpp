@@ -40,7 +40,6 @@ extern "C" {
 
 void FUN_00476e58(AocQueryMenu *menu, s32 first, s32 second);
 AocQueryHandler *windowCreateStatusOperation(u8 *storage, s32 kind);
-void FUN_0047bc90(AocQueryMenu *menu, RequestParameters *result);
 WindowStatusResult FUN_00473980(AocMain *main);
 s32 strIsEmpty(const RequestParameters *result);
 u32 flaggedValueHolderGetTotal(void *holder);
@@ -79,7 +78,7 @@ void AocMenu::runResultProcess()
                 break;
             case AOC_RESULT_RETRY: {
                 RequestParameters copy = result;
-                FUN_0047bc90(menu, &copy);
+                FUN_0047bc90(this, &copy);
                 break;
             }
             default:
@@ -111,7 +110,7 @@ void AocMenu::runResultProcess()
                 break;
             case AOC_RESULT_RETRY: {
                 RequestParameters copy = result;
-                FUN_0047bc90(menu, &copy);
+                FUN_0047bc90(this, &copy);
                 break;
             }
             default:

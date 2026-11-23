@@ -1,14 +1,8 @@
-/* NON_MATCHING: compiler uses VFP block copies for the 20-byte parameter payload instead of retail's integer loads/stores. */
-#include "shard/W6_W6Match5_SelectionTransition.h"
+#include "classes/AocMenu.h"
 
-// Copy the new selection, enter transition state nineteen, and release its old resource.
-extern "C" void FUN_0047bc90(SelectionTransition *transition, const RequestParameters *parameters)
+/* Copies the new request, moves the menu to step 19 and drops the old window. */
+extern "C" void FUN_0047bc90(AocMenu *menu, const RequestParameters *request)
 {
-    transition->parameters = *parameters;
-    transition->state = 0x13;
-    transition->progress = 0;
-    if (transition->resource != NULL) {
-        transition->resource->vtable->release(transition->resource);
-        transition->resource = NULL;
-    }
+    menu->secondRequest = *request;
+    aocMenuChangeStep(menu, 0x13);
 }

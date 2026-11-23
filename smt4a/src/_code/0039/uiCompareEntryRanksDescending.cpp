@@ -1,11 +1,18 @@
 #include "gamedata/DataTableAccess_VariantE_EntrySort.h"
-/* NON_MATCHING: register assignment (retail keeps the two records in r8/r9 and loads the first FUN_00345098 argument before the rank). */
 #include "shard/W5_W5Match7_EntrySort.h"
 
 extern "C" {
 
+/* Keeps the strongest affinity of a record and the element it is on. */
+static void keepStrongest(const EquipmentRecordA *record, s32 element, s32 *affinity, s32 *strongest)
+{
+    if (FUN_00345098(*affinity, record->affinities[element].raw >> 10) > 0) {
+        *affinity = record->affinities[element].raw >> 10;
+        *strongest = element;
+    }
+}
 
-
+/* Sorts entries by the element of their strongest affinity, then that affinity, then table order, descending. */
 s32 uiCompareEntryRanksDescending(const SortItem *left, const SortItem *right)
 {
     EquipmentRecordA *leftData = itemTableGetEquipmentRecord(left->id);
@@ -15,18 +22,12 @@ s32 uiCompareEntryRanksDescending(const SortItem *left, const SortItem *right)
     s32 leftRank = DAT_0052b8ac[1].left;
     s32 rightRank = DAT_0052b8ac[1].right;
     for (s32 i = 0; i <= 7; i++) {
-        if (FUN_00345098(leftScore, leftData->affinities[i].raw >> 10) > 0) {
-            leftRank = i;
-            leftScore = leftData->affinities[i].raw >> 10;
-        }
-        if (FUN_00345098(rightScore, rightData->affinities[i].raw >> 10) > 0) {
-            rightRank = i;
-            rightScore = rightData->affinities[i].raw >> 10;
-        }
+        keepStrongest(leftData, i, &leftScore, &leftRank);
+        keepStrongest(rightData, i, &rightScore, &rightRank);
     }
-    s32 order = leftRank - rightRank;
+    s32 order = rightRank - leftRank;
     if (order == 0) {
-        order = FUN_00345098(leftScore, rightScore);
+        order = FUN_00345098(rightScore, leftScore);
         if (order == 0) {
             leftData = itemTableGetEquipmentRecord(left->id);
             rightData = itemTableGetEquipmentRecord(right->id);

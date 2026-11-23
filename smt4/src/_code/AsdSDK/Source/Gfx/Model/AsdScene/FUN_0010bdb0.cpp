@@ -1,4 +1,6 @@
-/* NON_MATCHING: the self-relative parameters pointer now matches (AsdResOffset::toPtr); retail stores the create info's last two words with one strd, writes the colour with a write-back vstmia and numbers the fog-range VFP registers differently. */
+/* NON_MATCHING: the create info's last word is 1 (retail's strd of the zero and one registers); retail still writes the
+ * colour with a write-back vstmia, reuses its zero register for toPtr's NULL and numbers the fog-range VFP registers
+ * differently. */
 #include "AsdSDK/AsdSceneFog.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -27,7 +29,7 @@ void FUN_0010bdb0()
         info.allocateResource = 1;
         info.unk04 = 0;
         info.unk08 = 0;
-        info.unk0C = 0;
+        info.unk0C = 1;
         fog->object = _ZN9Obj4217746createEPvP18AsdAllocatorObject(&info, allocator);
         fog->resource = fog->object->resource;
         f32 *color = fog->resource->color;

@@ -4,6 +4,7 @@
 0x00100024 nninitRegion callers
 0x0010004a FUN_0010004a library
 0x00100238 FUN_00100238 twin
+0x0010024c FUN_0010024c library
 0x00100262 inputGetKeyFlags callers
 0x00100330 FUN_00100330 linker
 0x00100338 libc_printfStrDispatch name
@@ -1357,6 +1358,7 @@
 0x0023d240 nn_math_ARMv6_MTX34MultTranslateAsm name
 0x0023d304 nn_gr_CTR_Vertex_LoadArray_DisableAll name
 0x002454f0 __ARM_common_memcpy4_9 name
+0x00245f48 FUN_00245f48 twin
 0x00248ce8 nn_cec_CTR_MessageBox_SetMessageBoxData name
 0x0024db9c __aeabi_llsl name
 0x0024ee4c __ARM_common_memcpy4_7 name
@@ -3037,7 +3039,7 @@
 0x003f6a40 FUN_003f6a40 between
 0x003f6b28 mobiclipCtrlReleaseResource name
 0x003f6c7c FUN_003f6c7c between
-0x003f6d64 FUN_003f6d64 between
+0x003f6d64 FUN_003f6d64 callers
 0x003f6db4 FUN_003f6db4 between
 0x003f6e74 FUN_003f6e74 between
 0x003f6e84 FUN_003f6e84 between

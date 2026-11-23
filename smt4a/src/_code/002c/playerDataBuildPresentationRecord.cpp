@@ -5,7 +5,7 @@
 extern "C" {
 
 int itemTableGetEquipmentRecord(void);
-int FUN_002b4e7c(void);
+int btlPlayerMaxHp(void);
 int libc_strcpy(unsigned short *, unsigned int);
 int sysMemClear(unsigned short *, int);
 int FUN_003df7c4(unsigned short *);
@@ -27,7 +27,7 @@ typedef struct {
 
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: itemTableGetEquipmentRecord. */
-/* Supplied declaration required: FUN_002b4e7c. */
+/* Supplied declaration required: btlPlayerMaxHp. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003df7c4. */
@@ -79,7 +79,7 @@ void playerDataBuildPresentationRecord(unsigned short *param_1,unsigned short *p
   *(int *)(param_1 + 4) = (int)(short)temp_v0;
   *(int *)(param_1 + 6) = (int)(short)temp_v1;
   puVar6 = param_2;
-  FUN_002b4e7c();
+  btlPlayerMaxHp();
   temp_v1 = param_2[0xf];
   temp_v0 = param_2[0x2f];
   *(unsigned int *)(param_1 + 0x2d0) = 0xffffffff;

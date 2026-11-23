@@ -1,25 +1,9 @@
 #include "shard/Shard0041.h"
-#include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
+#include "gamedata/GameFlagWrite.h"
 #include "quest_center/QuestRecordA.h"
 
 extern "C" {
 u32 dataTable1bOr1cRecordHasFlag1(u32 id);
-void encounterRefreshOnFlagChange(u32 flag, u32 value);
-
-/* Reports a game flag change to encounterRefreshOnFlagChange, then sets or clears the flag's bit. */
-static __inline void gameFlagWrite(u32 flag, s32 value)
-{
-    PartyBlockB *block = reinterpret_cast<PartyBlockB *>(gameFlagBlockGet());
-
-    encounterRefreshOnFlagChange(flag, value);
-    u32 index = flag >> 3;
-    if (value) {
-        block->unk00[index] |= 1 << (flag & 7);
-    } else {
-        s32 keep = ~(1 << (flag & 7));
-        block->unk00[index] &= keep;
-    }
-}
 
 /* Clears the selected record's flags 0x500-0x51f. */
 static __inline void clearSelectedFlags(void)

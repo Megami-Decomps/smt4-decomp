@@ -3715,12 +3715,12 @@
     },
     {
       "address": "0x10f764",
-      "function": "FUN_0010f764",
+      "function": "fsInitializeAccessDelay",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010f764.o",
+      "object": "build/obj/_code/0010/fsInitializeAccessDelay.o",
       "size": 80,
-      "source": "src/_code/0010/FUN_0010f764.cpp",
-      "target": "orig/target/_code/0010/FUN_0010f764.o",
+      "source": "src/_code/0010/fsInitializeAccessDelay.cpp",
+      "target": "orig/target/_code/0010/fsInitializeAccessDelay.o",
       "thumb": false
     },
     {
@@ -4869,12 +4869,12 @@
     },
     {
       "address": "0x119e54",
-      "function": "FUN_00119e54",
+      "function": "cameraCreateDynamic",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_00119e54.o",
+      "object": "build/obj/_code/0011/cameraCreateDynamic.o",
       "size": 616,
-      "source": "src/_code/0011/FUN_00119e54.cpp",
-      "target": "orig/target/_code/0011/FUN_00119e54.o",
+      "source": "src/_code/0011/cameraCreateDynamic.cpp",
+      "target": "orig/target/_code/0011/cameraCreateDynamic.o",
       "thumb": false
     },
     {
@@ -39100,12 +39100,12 @@
     },
     {
       "address": "0x247f0c",
-      "function": "FUN_00247f0c",
+      "function": "curveInterpolatePacked",
       "module": "_code",
-      "object": "build/obj/_code/0024/FUN_00247f0c.o",
+      "object": "build/obj/_code/0024/curveInterpolatePacked.o",
       "size": 108,
-      "source": "src/_code/0024/FUN_00247f0c.cpp",
-      "target": "orig/target/_code/0024/FUN_00247f0c.o",
+      "source": "src/_code/0024/curveInterpolatePacked.cpp",
+      "target": "orig/target/_code/0024/curveInterpolatePacked.o",
       "thumb": false
     },
     {
@@ -40659,12 +40659,12 @@
     {
       "address": "0x25090c",
       "file": "map/mapDepart",
-      "function": "FUN_0025090c",
+      "function": "mapDepartFormatPlaceName",
       "module": "_code",
-      "object": "build/obj/_code/map/mapDepart/FUN_0025090c.o",
+      "object": "build/obj/_code/map/mapDepart/mapDepartFormatPlaceName.o",
       "size": 1036,
-      "source": "src/_code/map/mapDepart/FUN_0025090c.cpp",
-      "target": "orig/target/_code/map/mapDepart/FUN_0025090c.o",
+      "source": "src/_code/map/mapDepart/mapDepartFormatPlaceName.cpp",
+      "target": "orig/target/_code/map/mapDepart/mapDepartFormatPlaceName.o",
       "thumb": false
     },
     {
@@ -43699,12 +43699,12 @@
     },
     {
       "address": "0x2671f4",
-      "function": "FUN_002671f4",
+      "function": "mapCollisionQueueBoxWalls",
       "module": "_code",
-      "object": "build/obj/_code/0026/FUN_002671f4.o",
+      "object": "build/obj/_code/0026/mapCollisionQueueBoxWalls.o",
       "size": 2888,
-      "source": "src/_code/0026/FUN_002671f4.cpp",
-      "target": "orig/target/_code/0026/FUN_002671f4.o",
+      "source": "src/_code/0026/mapCollisionQueueBoxWalls.cpp",
+      "target": "orig/target/_code/0026/mapCollisionQueueBoxWalls.o",
       "thumb": false
     },
     {
@@ -48948,12 +48948,12 @@
     },
     {
       "address": "0x28fe0c",
-      "function": "FUN_0028fe0c",
+      "function": "uiQuestLoadDetailText",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_0028fe0c.o",
+      "object": "build/obj/_code/0028/uiQuestLoadDetailText.o",
       "size": 388,
-      "source": "src/_code/0028/FUN_0028fe0c.cpp",
-      "target": "orig/target/_code/0028/FUN_0028fe0c.o",
+      "source": "src/_code/0028/uiQuestLoadDetailText.cpp",
+      "target": "orig/target/_code/0028/uiQuestLoadDetailText.o",
       "thumb": false
     },
     {
@@ -62053,22 +62053,22 @@
     {
       "address": "0x2ca09c",
       "file": "map/mapDepart",
-      "function": "FUN_002ca09c",
+      "function": "mapDepartSearch2dUpdate",
       "module": "_code",
-      "object": "build/obj/_code/map/mapDepart/FUN_002ca09c.o",
+      "object": "build/obj/_code/map/mapDepart/mapDepartSearch2dUpdate.o",
       "size": 1544,
-      "source": "src/_code/map/mapDepart/FUN_002ca09c.cpp",
-      "target": "orig/target/_code/map/mapDepart/FUN_002ca09c.o",
+      "source": "src/_code/map/mapDepart/mapDepartSearch2dUpdate.cpp",
+      "target": "orig/target/_code/map/mapDepart/mapDepartSearch2dUpdate.o",
       "thumb": false
     },
     {
       "address": "0x2ca6a4",
-      "function": "scrCommWaitStateAction",
+      "function": "mapDepartSearch3dUpdate",
       "module": "_code",
-      "object": "build/obj/_code/002c/scrCommWaitStateAction.o",
+      "object": "build/obj/_code/002c/mapDepartSearch3dUpdate.o",
       "size": 52,
-      "source": "src/_code/002c/scrCommWaitStateAction.cpp",
-      "target": "orig/target/_code/002c/scrCommWaitStateAction.o",
+      "source": "src/_code/002c/mapDepartSearch3dUpdate.cpp",
+      "target": "orig/target/_code/002c/mapDepartSearch3dUpdate.o",
       "thumb": false
     },
     {
@@ -65191,12 +65191,12 @@
     },
     {
       "address": "0x2dcdd0",
-      "function": "FUN_002dcdd0",
+      "function": "uiCompareEntryRanksAscending",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002dcdd0.o",
+      "object": "build/obj/_code/002d/uiCompareEntryRanksAscending.o",
       "size": 236,
-      "source": "src/_code/002d/FUN_002dcdd0.cpp",
-      "target": "orig/target/_code/002d/FUN_002dcdd0.o",
+      "source": "src/_code/002d/uiCompareEntryRanksAscending.cpp",
+      "target": "orig/target/_code/002d/uiCompareEntryRanksAscending.o",
       "thumb": false
     },
     {
@@ -68321,12 +68321,12 @@
     {
       "address": "0x2efd64",
       "file": "event/2dEvent/SmokeFade",
-      "function": "FUN_002efd64",
+      "function": "smokeFadeDestroy",
       "module": "_code",
-      "object": "build/obj/_code/event/2dEvent/SmokeFade/FUN_002efd64.o",
+      "object": "build/obj/_code/event/2dEvent/SmokeFade/smokeFadeDestroy.o",
       "size": 196,
-      "source": "src/_code/event/2dEvent/SmokeFade/FUN_002efd64.cpp",
-      "target": "orig/target/_code/event/2dEvent/SmokeFade/FUN_002efd64.o",
+      "source": "src/_code/event/2dEvent/SmokeFade/smokeFadeDestroy.cpp",
+      "target": "orig/target/_code/event/2dEvent/SmokeFade/smokeFadeDestroy.o",
       "thumb": false
     },
     {
@@ -83452,12 +83452,12 @@
     },
     {
       "address": "0x350ac4",
-      "function": "FUN_00350ac4",
+      "function": "movieSelectStream",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_00350ac4.o",
+      "object": "build/obj/_code/0035/movieSelectStream.o",
       "size": 264,
-      "source": "src/_code/0035/FUN_00350ac4.cpp",
-      "target": "orig/target/_code/0035/FUN_00350ac4.o",
+      "source": "src/_code/0035/movieSelectStream.cpp",
+      "target": "orig/target/_code/0035/movieSelectStream.o",
       "thumb": false
     },
     {
@@ -95398,12 +95398,12 @@
     },
     {
       "address": "0x389ddc",
-      "function": "FUN_00389ddc",
+      "function": "fieldPlacementGroupSpawn",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_00389ddc.o",
+      "object": "build/obj/_code/0038/fieldPlacementGroupSpawn.o",
       "size": 252,
-      "source": "src/_code/0038/FUN_00389ddc.cpp",
-      "target": "orig/target/_code/0038/FUN_00389ddc.o",
+      "source": "src/_code/0038/fieldPlacementGroupSpawn.cpp",
+      "target": "orig/target/_code/0038/fieldPlacementGroupSpawn.o",
       "thumb": false
     },
     {
@@ -108849,12 +108849,12 @@
     },
     {
       "address": "0x3eae40",
-      "function": "FUN_003eae40",
+      "function": "rangeOwnerResetIdsInRange",
       "module": "_code",
-      "object": "build/obj/_code/003e/FUN_003eae40.o",
+      "object": "build/obj/_code/003e/rangeOwnerResetIdsInRange.o",
       "size": 160,
-      "source": "src/_code/003e/FUN_003eae40.cpp",
-      "target": "orig/target/_code/003e/FUN_003eae40.o",
+      "source": "src/_code/003e/rangeOwnerResetIdsInRange.cpp",
+      "target": "orig/target/_code/003e/rangeOwnerResetIdsInRange.o",
       "thumb": false
     },
     {

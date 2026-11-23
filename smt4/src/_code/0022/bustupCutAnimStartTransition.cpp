@@ -76,7 +76,7 @@ extern "C" {
 extern BustupCutAnim *g_bustupCutAnim;
 
 s32 floatInterpolateOverDuration();
-s32 FUN_00247f0c();
+s32 curveInterpolatePacked();
 s32 FUN_001241a8();
 
 void cameraExportParameters(void *camera, CutRef *ref);
@@ -133,7 +133,7 @@ void bustupCutAnimStartTransition(s32 id, s32 easeKind, s32 frames)
             anim->ease = floatInterpolateOverDuration;
             break;
         case CUT_EASE_A:
-            anim->ease = FUN_00247f0c;
+            anim->ease = curveInterpolatePacked;
             break;
         case CUT_EASE_B:
             anim->ease = FUN_001241a8;

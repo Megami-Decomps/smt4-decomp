@@ -8,7 +8,7 @@ extern "C" {
 int FUN_002541b8(...);
 int namedEntryTableSetById(...);
 int mapEffectReserveAndSpawn(...);
-int FUN_002671f4(...);
+int mapCollisionQueueBoxWalls(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_1: 14 slot(s), 56 byte(s) */
@@ -35,7 +35,7 @@ extern unsigned char LAB_00285224; /* 0x285224 */
 /* Supplied declaration required: FUN_002541b8. */
 /* Supplied declaration required: namedEntryTableSetById. */
 /* Supplied declaration required: mapEffectReserveAndSpawn. */
-/* Supplied declaration required: FUN_002671f4. */
+/* Supplied declaration required: mapCollisionQueueBoxWalls. */
 extern int mapGetDepartureIndex(void);
 
 
@@ -117,7 +117,7 @@ void FUN_002849a4(int param_1)
       mapEffectReserveAndSpawn(0,0,"START",0x1b,8,0xffffffff,0,0,0,0,0,0,0,0xd,1,0,0,0,0);
     }
     if (param_1 == 0) {
-      FUN_002671f4(0);
+      mapCollisionQueueBoxWalls(0);
     }
   }
   temp_v3 = (int)*(char *)(temp_v1 + 0xdcf);
@@ -189,7 +189,7 @@ void FUN_002849a4(int param_1)
   if (param_1 != 0) {
     return;
   }
-  FUN_002671f4(0);
+  mapCollisionQueueBoxWalls(0);
   return;
 }
 

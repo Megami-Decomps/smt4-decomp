@@ -5,7 +5,7 @@
 extern "C" {
 s32 gridNavigationGetItemCount(void *cursor);
 void uiQuestSpritesCreate(void);
-void FUN_003d498c(u32 quest, s32 mode);
+void uiQuestLoadDetailText(u32 quest, s32 mode);
 void uiSpriteSetKeyframe(void *sprite, s32 sequence, s32 mode);
 void uiSpriteSetImageKeyframe(void *sprite, s32 sequence, s32 mode);
 void sysPlaySe(u32 sound);
@@ -35,7 +35,7 @@ void FUN_003a7c3c(u32 quest)
         }
     }
     uiQuestSpritesCreate();
-    FUN_003d498c(quest, 0);
+    uiQuestLoadDetailText(quest, 0);
     uiSpriteSetKeyframe(work->mainSprite, 0, 0);
     uiSpriteSetKeyframe(work->detailAnimation.sprite, 2, 0);
     uiSpriteSetImageKeyframe(work->mainSprite, 8, 0);

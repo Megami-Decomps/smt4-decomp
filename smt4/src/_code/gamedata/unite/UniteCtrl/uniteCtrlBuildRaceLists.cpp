@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the object in r5 and the table section in r4 (built swaps them) and turns the last sort loop into a counted pointer walk; the rest is identical */
+/* NON_MATCHING: retail schedules the first record loop guard between the final count-clear stores; the build folds the count move and comparison after the stores. */
 #include "AsdSDK/AsdDebug.h"
 #include "gamedata/DataTable.h"
 #include "shard/W5_W5Match2_ScalarRecord.h"
@@ -46,6 +46,28 @@ extern "C" {
 s32 recordCompareRankAndIndex(const RankedRecord *left, const RankedRecord *right);
 void qsort(void *base, s32 count, s32 elementSize, s32 (*compare)(const RankedRecord *, const RankedRecord *));
 
+/* Clears the active choices and their scratch state, as in Apocalypse's fusionRaceSelectionInitialize. */
+static __inline void fusionResetSelection(UniteCtrl *unite)
+{
+    unite->unk11C = 0;
+    unite->unk11E = 0;
+    unite->unk118 = 0;
+    unite->unk11A = 0;
+    unite->unk143 = 0;
+    unite->unk120 = 0;
+    unite->unk121 = 0;
+    unite->unk122 = 0;
+    unite->unk126 = 0;
+    unite->unk12A = 0;
+    unite->unk12E = 0;
+    unite->unk132 = 0;
+    unite->unk134High = 0;
+    unite->unk136 = 0;
+    unite->unk138 = -1;
+    unite->unk13A = -1;
+    unite->unk17C = 0;
+}
+
 /* Counts the fusable demons per race, allocates and fills the per-race lists, sorts them and
  * resets the fusion selection state. */
 UniteCtrl *uniteCtrlBuildRaceLists(UniteCtrl *unite)
@@ -83,23 +105,7 @@ UniteCtrl *uniteCtrlBuildRaceLists(UniteCtrl *unite)
         if (unite->lists[i] != NULL)
             qsort(unite->lists[i], unite->counts[i], sizeof(UniteDevilEntry), recordCompareRankAndIndex);
     }
-    unite->unk11C = 0;
-    unite->unk11E = 0;
-    unite->unk118 = 0;
-    unite->unk11A = 0;
-    unite->unk143 = 0;
-    unite->unk120 = 0;
-    unite->unk121 = 0;
-    unite->unk122 = 0;
-    unite->unk126 = 0;
-    unite->unk12A = 0;
-    unite->unk12E = 0;
-    unite->unk132 = 0;
-    unite->unk134High = 0;
-    unite->unk136 = 0;
-    unite->unk138 = -1;
-    unite->unk13A = -1;
-    unite->unk17C = 0;
+    fusionResetSelection(unite);
     return unite;
 }
 

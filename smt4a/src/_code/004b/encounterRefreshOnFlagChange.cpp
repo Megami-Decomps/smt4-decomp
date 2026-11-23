@@ -1,6 +1,7 @@
 /* NON_MATCHING: record addressing and saved-register allocation differ. */
 #include "gamedata/ItemFlagState.h"
 #include "gamedata/GameFlags.h"
+#include "gamedata/GameFlagWrite.h"
 #include "gamedata/EncountData.h"
 #include "gamedata/GameDataEntries.h"
 

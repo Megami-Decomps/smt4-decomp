@@ -72,3 +72,4 @@ soundInitStackSet = 0xe8800006; // 0x120c94 (nwSoundSystemInitializeBuffers, aft
 resultGetGoldBonusPercent = 0xe3a00000; // 0x2cdfe4 (resultApplySpoils: mov r0, #0 where the call stood, then cmp r0, #0; beq over the gold bonus mul and umull by 1/100; a constant 0 would fold the test)
 effectEditorReadSticks = 0xe3a00000; // 0x21992c (FUN_00219908: after add r0..r3, sp, #88..#100 and str r6 (0), [sp]; the result is unused)
 listGetEntryCount = 0xe590052c; // 0x3b9c1c (FUN_003b9c00, after add r0, r0, #156: the window's list at +0x9C; the same word is smt4a's renderCtxGetStereoMode, a different getter)
+asdMdlNodeGetCurrentMotion = 0xe5900038; // 0x20dabc (mapObjectVisibilityRestore) 0x2751dc (mapGimicUpdate): after ldr r0, [r0, #8] (the model's node), the compared slot field is loaded only after it, as after a call; smt4a has the same row

@@ -162,6 +162,13 @@ static __inline void aocMenuChangeStep(AocMenu *menu, u32 step)
     }
 }
 
+extern "C" {
+/* Copies the new request, moves the menu to step 19 and drops the old window (IV FUN_00234124, Apocalypse
+ * FUN_0047bc90). */
+void FUN_00234124(AocMenu *menu, const RequestParameters *request);
+void FUN_0047bc90(AocMenu *menu, const RequestParameters *request);
+}
+
 typedef char AocMenuSizeCheck[sizeof(AocMenu) == 0x26F0 ? 1 : -1];
 typedef char AocMenuMemberOffsetsCheck[
     offsetof(AocMenu, secondRequest) == 0x224 && offsetof(AocMenu, selection) == 0x240 &&

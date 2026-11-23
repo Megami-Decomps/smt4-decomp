@@ -2,15 +2,12 @@
 #include "common.h"
 #include "shard/S3SceneWidget.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
 void asdTMTexTableReleaseNode(s32 table, s32 index);
-void uiSpriteSetImageKeyframe(SceneSprite *sprite, s32 keyframe, s32 arg2);
-s32 uiSpriteAdvanceAnimation(SceneSprite *sprite);
 s32 flaggedValueHolderGetTotal(SceneWidget *widget);
-/* Whether the sprite's image is up (a signed byte at 0x8a). */
-s32 uiSpriteGetCompletionState(SceneSprite *sprite);
 
 
 /* One widget update: advances the animation frame, switches to the queued image once it is up

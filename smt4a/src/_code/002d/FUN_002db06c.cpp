@@ -14,7 +14,7 @@ int animationSelectClip(...);
 int soundVolumeSettingGet(void);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
-int FUN_001f3f34(void);
+int curveInterpolatePacked(void);
 int soundAllocateSpatialActor(...);
 int mapResolveCollisionSphere(int *, int *, int);
 int FUN_002826dc(int *, int *, int, int);
@@ -82,7 +82,7 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 /* Supplied declaration required: soundVolumeSettingGet. */
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
-/* Supplied declaration required: FUN_001f3f34. */
+/* Supplied declaration required: curveInterpolatePacked. */
 /* Supplied declaration required: soundAllocateSpatialActor. */
 /* Supplied declaration required: mapResolveCollisionSphere. */
 /* Supplied declaration required: eplSlotStartRequest. */
@@ -699,7 +699,7 @@ joined_r0x002dbf24:
       break;
     case 8:
       VectorSignedToFloat(g_lmapScene[0x75],(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_001f3f34();
+      curveInterpolatePacked();
       piVar2 = g_lmapScene;
       g_lmapScene[0x75] = g_lmapScene[0x75] + 1;
       DAT_005f19e8 = 0;

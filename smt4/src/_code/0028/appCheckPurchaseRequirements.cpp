@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail keeps `need` in r8 and the narrowed id in r7 (here swapped), and the entry in r5 / flag in r6 (here swapped); the final need > gameSaveGetPoints() comparison now matches. Declaration order does not affect it. */
+/* NON_MATCHING: retail uses r8 for the cost and r7 for the narrowed id; the build swaps those registers and schedules the level and unlock-bit tests differently. */
 #include "code/Code002e.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "gamedata/GauntletAppTable.h"
@@ -13,6 +13,15 @@ s32 gameFlagIsSet(u32 flag);
 u8 *gameDataGetFlagBits(void);
 
 s32 unsignedKeyRecordCompare(const UnsignedRecordKey32 *left, const UnsignedRecordKey32 *right);
+
+/* Inline body of flagBitIsSet. */
+static __inline u8 appUnlockBitIsSet(u32 bit)
+{
+    u8 *bits = gameDataGetFlagBits();
+    u32 byte = bit >> 3;
+    u32 shift = bit & 7;
+    return (bits[byte] & (1 << shift)) != 0;
+}
 
 /* Entry check for `id`: 2 when it is missing, the player is below its level or a required flag is unset; otherwise whether its cost exceeds gameSaveGetPoints. */
 u8 appCheckPurchaseRequirements(u32 id)
@@ -45,8 +54,7 @@ u8 appCheckPurchaseRequirements(u32 id)
     }
     for (i = 0; i < 3; i++) {
         u16 flag = entry->requiredApps[i];
-
-        if (flag != 0 && (gameDataGetFlagBits()[flag >> 3] & (1 << (flag & 7))) == 0) {
+        if (flag != 0 && !appUnlockBitIsSet(flag)) {
             return 2;
         }
     }

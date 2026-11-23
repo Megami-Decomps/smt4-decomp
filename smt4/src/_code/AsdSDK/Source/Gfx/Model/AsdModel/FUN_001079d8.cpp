@@ -69,7 +69,7 @@ extern u32 g_asdModelSlotArray0;
 extern u32 DAT_00464ba0;
 
 NwCamera *FUN_002c05f4(u32 allocator, const NwVec3 *eye, const NwVec3 *target, u32 flags, NwVec2 lens, f32 near);
-NwCamera *FUN_00119e54(u32 allocator, const NwVec3 *eye, const NwVec3 *target, const NwVec3 *up, u8 mode,
+NwCamera *cameraCreateDynamic(u32 allocator, const NwVec3 *eye, const NwVec3 *target, const NwVec3 *up, u8 mode,
                        NwVec2 lens, f32 near);
 NwCamera *nw_gfx_Camera_DynamicBuilder_Create(NwCameraBuilder *builder, u32 allocator);
 void nw_gfx_SceneNode_AttachChild(u32 parent, u32 child);
@@ -127,7 +127,7 @@ void FUN_001079d8(void)
         eye.set(20.0f, 15.0f, 20.0f);
         target.set(0.0f, 10.0f, 0.0f);
         NwVec3 up(0.0f, 0.0f, 0.0f);
-        DAT_00464b34 = FUN_00119e54((u32)asdMemoryGetDefaultAllocator(), &eye, &target, &up, DAT_00464af4,
+        DAT_00464b34 = cameraCreateDynamic((u32)asdMemoryGetDefaultAllocator(), &eye, &target, &up, DAT_00464af4,
                                     g_asdModelManagerStatic3C, 0.0f);
     }
     nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray0, (u32)DAT_00464b34);

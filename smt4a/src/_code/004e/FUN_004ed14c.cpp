@@ -9,7 +9,7 @@ extern "C" {
 int FUN_004a9308(...);
 int btlAdjustPropertyClamped(...);
 int FUN_004c9160(...);
-int FUN_004dd800(...);
+int btlAiChooseSkillOrAttack(...);
 int FUN_004e5c10(...);
 int btlUnitClearRecordFields(int *, unsigned int);
 int FUN_004fd508(...);
@@ -36,7 +36,7 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 extern int btlFindEntryValue(int, unsigned int);
 /* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: FUN_004c9160. */
-/* Supplied declaration required: FUN_004dd800. */
+/* Supplied declaration required: btlAiChooseSkillOrAttack. */
 /* Supplied declaration required: FUN_004e5c10. */
 /* Supplied declaration required: btlUnitClearRecordFields. */
 /* Supplied declaration required: FUN_004fd508. */
@@ -128,7 +128,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
       FUN_004e5c10(param_1,param_2);
     }
     else if ((temp_v1 & 0x800) != 0) {
-      FUN_004dd800(param_1,param_2);
+      btlAiChooseSkillOrAttack(param_1,param_2);
     }
     else if ((temp_v1 & 0x1000) != 0) {
       if ((temp_v5 & (DAT_00571168 | DAT_00571170)) == 0 &&

@@ -19,7 +19,6 @@ typedef struct QuadRecord {
     /* 0x4C */ PhaseVector edge[4];
 } QuadRecord;
 
-extern const PhaseTrigEntry g_sinCosTable[];
 extern QuadRecord DAT_004c14a0[];
 extern s32 DAT_004c2420;
 

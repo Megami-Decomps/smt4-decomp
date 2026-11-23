@@ -56,7 +56,7 @@ struct BattleViewState {
     };
     /* 0x76 */ s8 unk76;
     /* 0x77 */ u8 unk77;
-    /* 0x78 */ s32 unk78;
+    /* 0x78 */ s32 moneyReward;  /* amount inserted into the money reward message */
     /* 0x7c */ u8 disabled;
     /* 0x7d */ u8 positionsSet;
     /* 0x7e */ u8 unk7e[2];
@@ -100,7 +100,7 @@ struct BattleViewState {
 typedef char BattleViewStateLayoutCheck[offsetof(BattleViewState, camera.position) == 0x18 &&
     offsetof(BattleViewState, unk28) == 0x28 && offsetof(BattleViewState, unk30) == 0x30 &&
     offsetof(BattleViewState, unk70) == 0x70 && offsetof(BattleViewState, unk76) == 0x76 &&
-    offsetof(BattleViewState, children) == 0xc8 ? 1 : -1];
+    offsetof(BattleViewState, moneyReward) == 0x78 && offsetof(BattleViewState, children) == 0xc8 ? 1 : -1];
 typedef char BattleViewResetFieldsLayoutCheck[
     sizeof(BattleViewState) == 0xd4 && offsetof(BattleViewState, reset.enabled) == 4 &&
     offsetof(BattleViewState, resetSettings.refresh) == 0x34 &&

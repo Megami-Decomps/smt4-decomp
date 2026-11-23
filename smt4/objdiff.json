@@ -7723,13 +7723,13 @@
       "target_path": "orig/target/_code/0010/resourceCallDefaultOptions.o"
     },
     {
-      "base_path": "build/obj/_code/0010/FUN_0010f764.o",
+      "base_path": "build/obj/_code/0010/fsInitializeAccessDelay.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0010f764",
+            "name": "fsInitializeAccessDelay",
             "size": 80,
             "vram": "0x10f764"
           }
@@ -7737,10 +7737,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0010/FUN_0010f764.cpp"
+        "source_path": "src/_code/0010/fsInitializeAccessDelay.cpp"
       },
-      "name": "_code/0010/FUN_0010f764",
-      "target_path": "orig/target/_code/0010/FUN_0010f764.o"
+      "name": "_code/0010/fsInitializeAccessDelay",
+      "target_path": "orig/target/_code/0010/fsInitializeAccessDelay.o"
     },
     {
       "base_path": "build/obj/_code/0010/requestForwardKindFive.o",
@@ -9997,13 +9997,13 @@
       "target_path": "orig/target/_code/0011/FUN_00119da8.o"
     },
     {
-      "base_path": "build/obj/_code/0011/FUN_00119e54.o",
+      "base_path": "build/obj/_code/0011/cameraCreateDynamic.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00119e54",
+            "name": "cameraCreateDynamic",
             "size": 616,
             "vram": "0x119e54"
           }
@@ -10011,10 +10011,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0011/FUN_00119e54.cpp"
+        "source_path": "src/_code/0011/cameraCreateDynamic.cpp"
       },
-      "name": "_code/0011/FUN_00119e54",
-      "target_path": "orig/target/_code/0011/FUN_00119e54.o"
+      "name": "_code/0011/cameraCreateDynamic",
+      "target_path": "orig/target/_code/0011/cameraCreateDynamic.o"
     },
     {
       "base_path": "build/obj/_code/0011/asdTextSetRenderSetting.o",
@@ -77379,13 +77379,13 @@
       "target_path": "orig/target/_code/0024/campMenuEntryDraw.o"
     },
     {
-      "base_path": "build/obj/_code/0024/FUN_00247f0c.o",
+      "base_path": "build/obj/_code/0024/curveInterpolatePacked.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00247f0c",
+            "name": "curveInterpolatePacked",
             "size": 108,
             "vram": "0x247f0c"
           }
@@ -77393,10 +77393,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0024/FUN_00247f0c.cpp"
+        "source_path": "src/_code/0024/curveInterpolatePacked.cpp"
       },
-      "name": "_code/0024/FUN_00247f0c",
-      "target_path": "orig/target/_code/0024/FUN_00247f0c.o"
+      "name": "_code/0024/curveInterpolatePacked",
+      "target_path": "orig/target/_code/0024/curveInterpolatePacked.o"
     },
     {
       "base_path": "build/obj/_code/font/SearchWin/RunWin/runWinClose.o",
@@ -80453,13 +80453,13 @@
       "target_path": "orig/target/_code/0025/textFormatFullWidthTwoDigits.o"
     },
     {
-      "base_path": "build/obj/_code/map/mapDepart/FUN_0025090c.o",
+      "base_path": "build/obj/_code/map/mapDepart/mapDepartFormatPlaceName.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0025090c",
+            "name": "mapDepartFormatPlaceName",
             "size": 1036,
             "vram": "0x25090c"
           }
@@ -80468,10 +80468,10 @@
           "_code",
           "map/mapDepart"
         ],
-        "source_path": "src/_code/map/mapDepart/FUN_0025090c.cpp"
+        "source_path": "src/_code/map/mapDepart/mapDepartFormatPlaceName.cpp"
       },
-      "name": "_code/map/mapDepart/FUN_0025090c",
-      "target_path": "orig/target/_code/map/mapDepart/FUN_0025090c.o"
+      "name": "_code/map/mapDepart/mapDepartFormatPlaceName",
+      "target_path": "orig/target/_code/map/mapDepart/mapDepartFormatPlaceName.o"
     },
     {
       "base_path": "build/obj/_code/0025/dataTable09Sub3GetRecord.o",
@@ -86394,13 +86394,13 @@
       "target_path": "orig/target/_code/0026/dataTableGetRecordFifty.o"
     },
     {
-      "base_path": "build/obj/_code/0026/FUN_002671f4.o",
+      "base_path": "build/obj/_code/0026/mapCollisionQueueBoxWalls.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002671f4",
+            "name": "mapCollisionQueueBoxWalls",
             "size": 2888,
             "vram": "0x2671f4"
           }
@@ -86408,10 +86408,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0026/FUN_002671f4.cpp"
+        "source_path": "src/_code/0026/mapCollisionQueueBoxWalls.cpp"
       },
-      "name": "_code/0026/FUN_002671f4",
-      "target_path": "orig/target/_code/0026/FUN_002671f4.o"
+      "name": "_code/0026/mapCollisionQueueBoxWalls",
+      "target_path": "orig/target/_code/0026/mapCollisionQueueBoxWalls.o"
     },
     {
       "base_path": "build/obj/_code/0026/btlUiPlaySceneFadeOutWhenReady.o",
@@ -96747,13 +96747,13 @@
       "target_path": "orig/target/_code/0028/itemCanUseOnParty.o"
     },
     {
-      "base_path": "build/obj/_code/0028/FUN_0028fe0c.o",
+      "base_path": "build/obj/_code/0028/uiQuestLoadDetailText.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0028fe0c",
+            "name": "uiQuestLoadDetailText",
             "size": 388,
             "vram": "0x28fe0c"
           }
@@ -96761,10 +96761,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0028/FUN_0028fe0c.cpp"
+        "source_path": "src/_code/0028/uiQuestLoadDetailText.cpp"
       },
-      "name": "_code/0028/FUN_0028fe0c",
-      "target_path": "orig/target/_code/0028/FUN_0028fe0c.o"
+      "name": "_code/0028/uiQuestLoadDetailText",
+      "target_path": "orig/target/_code/0028/uiQuestLoadDetailText.o"
     },
     {
       "base_path": "build/obj/_code/0028/uiQuestCountDetailPages.o",
@@ -122459,13 +122459,13 @@
       "target_path": "orig/target/_code/002c/mapDepartEnable.o"
     },
     {
-      "base_path": "build/obj/_code/map/mapDepart/FUN_002ca09c.o",
+      "base_path": "build/obj/_code/map/mapDepart/mapDepartSearch2dUpdate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002ca09c",
+            "name": "mapDepartSearch2dUpdate",
             "size": 1544,
             "vram": "0x2ca09c"
           }
@@ -122474,19 +122474,19 @@
           "_code",
           "map/mapDepart"
         ],
-        "source_path": "src/_code/map/mapDepart/FUN_002ca09c.cpp"
+        "source_path": "src/_code/map/mapDepart/mapDepartSearch2dUpdate.cpp"
       },
-      "name": "_code/map/mapDepart/FUN_002ca09c",
-      "target_path": "orig/target/_code/map/mapDepart/FUN_002ca09c.o"
+      "name": "_code/map/mapDepart/mapDepartSearch2dUpdate",
+      "target_path": "orig/target/_code/map/mapDepart/mapDepartSearch2dUpdate.o"
     },
     {
-      "base_path": "build/obj/_code/002c/scrCommWaitStateAction.o",
+      "base_path": "build/obj/_code/002c/mapDepartSearch3dUpdate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "scrCommWaitStateAction",
+            "name": "mapDepartSearch3dUpdate",
             "size": 52,
             "vram": "0x2ca6a4"
           }
@@ -122494,10 +122494,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002c/scrCommWaitStateAction.cpp"
+        "source_path": "src/_code/002c/mapDepartSearch3dUpdate.cpp"
       },
-      "name": "_code/002c/scrCommWaitStateAction",
-      "target_path": "orig/target/_code/002c/scrCommWaitStateAction.o"
+      "name": "_code/002c/mapDepartSearch3dUpdate",
+      "target_path": "orig/target/_code/002c/mapDepartSearch3dUpdate.o"
     },
     {
       "base_path": "build/obj/_code/002c/FUN_002ca6dc.o",
@@ -128658,13 +128658,13 @@
       "target_path": "orig/target/_code/002d/dataTableSortKeyCompare.o"
     },
     {
-      "base_path": "build/obj/_code/002d/FUN_002dcdd0.o",
+      "base_path": "build/obj/_code/002d/uiCompareEntryRanksAscending.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002dcdd0",
+            "name": "uiCompareEntryRanksAscending",
             "size": 236,
             "vram": "0x2dcdd0"
           }
@@ -128672,10 +128672,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002d/FUN_002dcdd0.cpp"
+        "source_path": "src/_code/002d/uiCompareEntryRanksAscending.cpp"
       },
-      "name": "_code/002d/FUN_002dcdd0",
-      "target_path": "orig/target/_code/002d/FUN_002dcdd0.o"
+      "name": "_code/002d/uiCompareEntryRanksAscending",
+      "target_path": "orig/target/_code/002d/uiCompareEntryRanksAscending.o"
     },
     {
       "base_path": "build/obj/_code/002d/dataTable08Sub2CompareBySortKeys.o",
@@ -134837,13 +134837,13 @@
       "target_path": "orig/target/_code/gamedata/SaveLoadProcess/saveLoadProcessSaveUpdate.o"
     },
     {
-      "base_path": "build/obj/_code/event/2dEvent/SmokeFade/FUN_002efd64.o",
+      "base_path": "build/obj/_code/event/2dEvent/SmokeFade/smokeFadeDestroy.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002efd64",
+            "name": "smokeFadeDestroy",
             "size": 196,
             "vram": "0x2efd64"
           }
@@ -134852,10 +134852,10 @@
           "_code",
           "event/2dEvent/SmokeFade"
         ],
-        "source_path": "src/_code/event/2dEvent/SmokeFade/FUN_002efd64.cpp"
+        "source_path": "src/_code/event/2dEvent/SmokeFade/smokeFadeDestroy.cpp"
       },
-      "name": "_code/event/2dEvent/SmokeFade/FUN_002efd64",
-      "target_path": "orig/target/_code/event/2dEvent/SmokeFade/FUN_002efd64.o"
+      "name": "_code/event/2dEvent/SmokeFade/smokeFadeDestroy",
+      "target_path": "orig/target/_code/event/2dEvent/SmokeFade/smokeFadeDestroy.o"
     },
     {
       "base_path": "build/obj/_code/002e/statusDownGetLastEntryIndex.o",
@@ -164649,13 +164649,13 @@
       "target_path": "orig/target/_code/0035/table46COwnerGet.o"
     },
     {
-      "base_path": "build/obj/_code/0035/FUN_00350ac4.o",
+      "base_path": "build/obj/_code/0035/movieSelectStream.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00350ac4",
+            "name": "movieSelectStream",
             "size": 264,
             "vram": "0x350ac4"
           }
@@ -164663,10 +164663,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0035/FUN_00350ac4.cpp"
+        "source_path": "src/_code/0035/movieSelectStream.cpp"
       },
-      "name": "_code/0035/FUN_00350ac4",
-      "target_path": "orig/target/_code/0035/FUN_00350ac4.o"
+      "name": "_code/0035/movieSelectStream",
+      "target_path": "orig/target/_code/0035/movieSelectStream.o"
     },
     {
       "base_path": "build/obj/_code/0035/FUN_00350bd0.o",
@@ -188204,13 +188204,13 @@
       "target_path": "orig/target/_code/0038/aocResourceStateValueKind16.o"
     },
     {
-      "base_path": "build/obj/_code/0038/FUN_00389ddc.o",
+      "base_path": "build/obj/_code/0038/fieldPlacementGroupSpawn.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00389ddc",
+            "name": "fieldPlacementGroupSpawn",
             "size": 252,
             "vram": "0x389ddc"
           }
@@ -188218,10 +188218,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0038/FUN_00389ddc.cpp"
+        "source_path": "src/_code/0038/fieldPlacementGroupSpawn.cpp"
       },
-      "name": "_code/0038/FUN_00389ddc",
-      "target_path": "orig/target/_code/0038/FUN_00389ddc.o"
+      "name": "_code/0038/fieldPlacementGroupSpawn",
+      "target_path": "orig/target/_code/0038/fieldPlacementGroupSpawn.o"
     },
     {
       "base_path": "build/obj/_code/0038/aocDisplayQueueFormattedEntry.o",
@@ -214748,13 +214748,13 @@
       "target_path": "orig/target/_code/003e/FUN_003eae34.o"
     },
     {
-      "base_path": "build/obj/_code/003e/FUN_003eae40.o",
+      "base_path": "build/obj/_code/003e/rangeOwnerResetIdsInRange.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003eae40",
+            "name": "rangeOwnerResetIdsInRange",
             "size": 160,
             "vram": "0x3eae40"
           }
@@ -214762,10 +214762,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003e/FUN_003eae40.cpp"
+        "source_path": "src/_code/003e/rangeOwnerResetIdsInRange.cpp"
       },
-      "name": "_code/003e/FUN_003eae40",
-      "target_path": "orig/target/_code/003e/FUN_003eae40.o"
+      "name": "_code/003e/rangeOwnerResetIdsInRange",
+      "target_path": "orig/target/_code/003e/rangeOwnerResetIdsInRange.o"
     },
     {
       "base_path": "build/obj/_code/003e/FUN_003eaee0.o",

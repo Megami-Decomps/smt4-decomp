@@ -8901,3 +8901,38 @@
 002e5a08 __aeabi_memcpy inferred exact twin of smt4 __aeabi_memcpy
 001b4030 __hardfp_fmodf inferred armlib's fmodf (__set_errno for an infinite or zero operand, frem): armcc 4.1 calls __hardfp_fmodf for fmodf() from <math.h>; nn::math's SinFIdx/CosFIdx wrap with it (phaseCosine, phaseSine; w79-o2)
 00416c90 _ZN20PartnerAttackEntriesD1Ev inferred PartnerAttackEntries' destructor: returns this, scriptObjDestroy calls it then asdOperatorDelete on the same pointer, clears the entries as the constructor does (w79-o4); source made a member by build/w79_members.py
+00275558 ambientSoundUpdateByDistance inferred starts each queued ambient sound inside its hearing radius, stops it 50 units beyond, releases it after 8 silent frames (w80-o1)
+005821a4 g_ambientSoundRadii inferred size:0x20 the eight ambient sounds' hearing radii, defined by ambientSoundUpdateByDistance right after g_soundActorQueue (reached from its pool word + 4)
+00610668 g_soundActorQueueStorage inferred the queue g_soundActorQueue is initialised to point at (w80-o1)
+00146808 fsInitializeAccessDelay inferred sets the file system's access delay to the configured count x10 ms and enables it (or in debug mode)
+0015493c cameraCreateDynamic inferred creates a camera through NintendoWare's dynamic builder with view and projection updaters (w80-o1)
+00371b74 smokeFadeDestroy inferred frees the smoke fade's file, releases its two images' texture nodes and entries, stops its job and frees the state
+004250dc movieSelectStream inferred waits for the packet worker, closes the current stream and selects another (w80-o3)
+00385a10 mapQueueActiveEngineRecordCollisionBoxes inferred queues a collision box (mapCollisionQueueBoxWalls) for each active engine record of two kinds (w80-s1)
+003d498c uiQuestLoadDetailText inferred loads a quest's detail page text: speaker title, description or directory entry, special page (w80-s1)
+0039bc58 scrCommGetFurinMoneyReward inferred publishes the battle view's money reward (the ms_furin_talk_money_01 message reads it) while flag 0x4D0 is set (w80-s1)
+0050d5c4 rangeOwnerResetIdsInRange inferred twin of smt4 rangeOwnerResetIdsInRange
+001f3f34 curveInterpolatePacked inferred interpolates from-to over a duration through mathInterpolatePackedTable (w80-s2)
+0053152c g_countedChoiceFlags inferred size:0x14 the five flag ids scrCommCountFlagsExceptIndex copies and counts (0x37c-0x37f, 0x308)
+00403b84 contentListRebuildAvailableEntries inferred rebuilds the content list's entries, bounded by the catalog count (w80-s2)
+00404974 contentEntryInitializeTexture inferred loads a content entry's table and subtexture and records the ownership (w80-s2)
+00480c28 gameFlagSumWeightedTiers inferred sums flag counters and applies five score weights (w80-s2)
+002941c8 mapDepartInit inferred twin of smt4 MapDepart_Init (asserts mapDepart.cpp line 331; the IV name collides with map/mapDepart.h's IV prototype)
+0029a794 mapDepartInitState inferred twin of smt4 MapDepart_InitState
+002991d4 mapDepartUpdate inferred the "DEPART C" process update mapDepartInit registers; twin of smt4 mapDepartUpdate
+00329d64 mapDepartSearch3dUpdate inferred the "SEARCH3D" task update mapDepartInit registers (unit added by build/w80_units.tsv)
+0037a074 mapDepartSearch3dTaskEnd inferred the "SEARCH3D" task's end callback; twin of smt4 mapDepartSearch3dTaskEnd
+0037a070 mapDepartSearch2dTaskEnd inferred the "SEARCH2D" task's end callback; twin of smt4 mapDepartSearch2dTaskEnd
+00329a90 mapDepartSearch2dUpdate inferred the "SEARCH2D" task update mapDepartInit registers
+00361c50 effAxisOrbitEmitterUpdate inferred updates the axis orbit emitter: particles circle the emitter's axis while rising or falling (w80-f1)
+00361418 effOrbitEmitterUpdate inferred updates the orbit emitter: particles circle the origin in tilted planes and fall (w80-f2)
+00469400 questCenterBuildTalkEntries inferred builds the quest center's talk entries (w80-f1)
+00281b94 mapCollisionQueueBoxWalls inferred queues the four upright walls of a box to the collision list (w80-f1)
+003d2b2c itemCuredAilments inferred the ailments a consumable cures (w80-f1)
+003e0164 playerGetMaxMp inferred the player's maximum MP (w80-f1)
+002b4e7c btlPlayerMaxHp inferred the player's maximum HP in battle (w80-f1)
+002b4dcc btlUnitMaxHp inferred a unit's maximum HP in battle (w80-f1)
+004dd800 btlAiChooseSkillOrAttack inferred chooses a skill for the AI unit or falls back to an attack (w80-f2)
+0033ad04 mapEnemyAssignSpawns inferred assigns spawns to the map's enemy slots (w80-f2)
+005147dc matrixSetRotationX inferred sets a matrix to a rotation about X (w80-f2)
+006471dc g_vectorScratch evidence size:0x1C0 sizeof(VectorScratch) asserted in gfx/VectorScratch.h; no symbol inside the range

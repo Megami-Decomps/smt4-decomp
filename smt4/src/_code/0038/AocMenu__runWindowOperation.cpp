@@ -24,7 +24,6 @@ s32 byteIsAtLeast100(RequestParameters *event);
 void jobStopAndClearFlags(u32 *job);
 void aocLoadingTaskStart(u32 *job, s32 mode);
 void aocMenuSetButtonHelp(u32 *job, s32 a, s32 b);
-void FUN_00234124(u32 *job, RequestParameters *event);
 s32 buttonHelpStateIsNot3(void);
 void ifTouchRegionClearAll(u32 *regions);
 void releaseEntriesA(u32 *entries); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "u32 *" is incompatible with parameter of type "Obj *")
@@ -69,7 +68,7 @@ void AocMenu::runWindowOperation()
                     break;
                 case 0x66: {
                     RequestParameters copy = event;
-                    FUN_00234124(job, &copy);
+                    FUN_00234124(this, &copy);
                     break;
                 }
                 default:

@@ -5,7 +5,6 @@
 #include "shard/W6_W6Match6_PhaseTrig.h"
 
 extern "C" {
-extern const PhaseTrigEntry g_sinCosTable[256];
 
 /* Builds Rz * Ry * Rx, with a full turn represented by 256 phase units. */
 void mathMatrixBuildRotationXyz(Matrix44 *matrix, f32 xAngle, f32 yAngle, f32 zAngle)

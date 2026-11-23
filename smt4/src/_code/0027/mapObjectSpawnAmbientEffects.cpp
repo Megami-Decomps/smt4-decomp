@@ -7,7 +7,7 @@
 
 extern "C" {
 extern MapObjectState *g_mapObj;
-void FUN_002671f4(s32 slot, MapVector position, f32 heading, f32 a, f32 b, f32 c);
+void mapCollisionQueueBoxWalls(MapVector position, f32 angle, f32 width, u16 tag, f32 height, f32 depth);
 }
 
 static __inline MapVector mapObjectPosition(const MapObjectSlot *object)
@@ -32,7 +32,7 @@ extern "C" void mapObjectSpawnAmbientEffects(void)
                 position.y -= 400.0f;
                 position.x += libm_sinf(object->unk1c * 0.017453292f) * 20.0f;
                 position.z += libm_cosf(object->unk1c * 0.017453292f) * 20.0f;
-                FUN_002671f4(0, position, object->unk1c, 80.0f, 350.0f, 50.0f);
+                mapCollisionQueueBoxWalls(position, object->unk1c, 80.0f, 0, 350.0f, 50.0f);
             }
             if (object->state == 10) {
                 MapVector position;
@@ -42,7 +42,7 @@ extern "C" void mapObjectSpawnAmbientEffects(void)
                 position.y -= 550.0f;
                 position.x += libm_sinf(object->unk1c * 0.017453292f) * 20.0f;
                 position.z += libm_cosf(object->unk1c * 0.017453292f) * 20.0f;
-                FUN_002671f4(0, position, object->unk1c, 80.0f, 500.0f, 50.0f);
+                mapCollisionQueueBoxWalls(position, object->unk1c, 80.0f, 0, 500.0f, 50.0f);
             }
         }
         if (object->state == 7) {
@@ -52,7 +52,7 @@ extern "C" void mapObjectSpawnAmbientEffects(void)
             position.z = object->unk0c;
             position.x += libm_sinf(object->unk1c * 0.017453292f) * -17.5f;
             position.z += libm_cosf(object->unk1c * 0.017453292f) * -17.5f;
-            FUN_002671f4(0, position, object->unk1c, 200.0f, 300.0f, 50.0f);
+            mapCollisionQueueBoxWalls(position, object->unk1c, 200.0f, 0, 300.0f, 50.0f);
         }
         if (object->state == 9) {
             MapVector position;
@@ -61,7 +61,7 @@ extern "C" void mapObjectSpawnAmbientEffects(void)
             position.z = object->unk0c;
             position.x += libm_sinf(object->unk1c * 0.017453292f) * -17.5f;
             position.z += libm_cosf(object->unk1c * 0.017453292f) * -17.5f;
-            FUN_002671f4(0, position, object->unk1c, 150.0f, 300.0f, 50.0f);
+            mapCollisionQueueBoxWalls(position, object->unk1c, 150.0f, 0, 300.0f, 50.0f);
         }
         if (object->state == 11) {
             MapVector position;
@@ -70,13 +70,13 @@ extern "C" void mapObjectSpawnAmbientEffects(void)
             position.z = object->unk0c;
             position.x += libm_sinf(object->unk1c * 0.017453292f) * -17.5f;
             position.z += libm_cosf(object->unk1c * 0.017453292f) * -17.5f;
-            FUN_002671f4(0, position, object->unk1c, 200.0f, 300.0f, 50.0f);
+            mapCollisionQueueBoxWalls(position, object->unk1c, 200.0f, 0, 300.0f, 50.0f);
         }
         if (object->state == 15)
-            FUN_002671f4(0, mapObjectPosition(object), object->unk1c, 50.0f, 50.0f, 50.0f);
+            mapCollisionQueueBoxWalls(mapObjectPosition(object), object->unk1c, 50.0f, 0, 50.0f, 50.0f);
         if (object->state == 16)
-            FUN_002671f4(0, mapObjectPosition(object), object->unk1c, 50.0f, 50.0f, 50.0f);
+            mapCollisionQueueBoxWalls(mapObjectPosition(object), object->unk1c, 50.0f, 0, 50.0f, 50.0f);
         if (object->state == 17)
-            FUN_002671f4(0, mapObjectPosition(object), object->unk1c, 100.0f, 50.0f, 60.0f);
+            mapCollisionQueueBoxWalls(mapObjectPosition(object), object->unk1c, 100.0f, 0, 50.0f, 60.0f);
     }
 }

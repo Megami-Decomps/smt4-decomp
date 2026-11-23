@@ -3,7 +3,6 @@
  * d8-d9 where retail saves r4-r9 only). */
 #include "gfx/EulerPhaseRotation.h"
 extern "C" {
-extern const PhaseTrigEntry g_sinCosTable[];
 void FUN_002929d8(Matrix34Data *matrix, s32 clearTranslation, f32 x, f32 y, f32 z)
 {
     buildEulerPhaseRotationBatched(matrix, g_sinCosTable, x, y, z);

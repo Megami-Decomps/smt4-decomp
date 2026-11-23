@@ -2,7 +2,6 @@
 #include "shard/W6_W6Match6_PhaseTrig.h"
 
 extern "C" {
-extern const PhaseTrigEntry g_sinCosTable[];
 void nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20(f32 *, const f32 *, const PhaseVector *);
 void FUN_001b4a00(f32 *, const PhaseVector *, const f32 *);
 

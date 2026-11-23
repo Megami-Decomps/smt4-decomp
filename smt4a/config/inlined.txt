@@ -86,3 +86,4 @@ flag0CGet = 0xe1d000dc; // 0x3717f8 (saveLoadProcessWriteStep: ldr r0, [r0] load
 resultGetGoldBonusPercent = 0xe3a00000; // 0x331808 (FUN_00331714) 0x31e728 (FUN_0031e6f4): mov r0, #0 where the call stood, then cmp r0, #0; beq over the gold bonus mul and umull by 1/100 (IV's resultApplySpoils at 0x2cdfe4); a constant 0 would fold the test
 effectEditorReadSticks = 0xe3a00000; // 0x2fe5b4 (FUN_002fe590: after add r0..r3, sp, #88..#100 and str r6 (0), [sp]; the result is unused; IV's FUN_00219908 at 0x21992c)
 btlEscapeChanceBonus = 0xe3a00000; // 0x3ef5b0 (FUN_003ef1e4: nop {0} call padding, then mov r0, #0 where the call stood and add r4, r4, r0 after the difficulty clamp to 70; a constant 0 would fold the add)
+asdMdlNodeGetCurrentMotion = 0xe5900038; // 0x2d8e8c (FUN_002d8cec): after ldr r0, [r0, #8] (the model's node), the compared slot field is loaded only after it, as after a call; twin of smt4 mapObjectVisibilityRestore

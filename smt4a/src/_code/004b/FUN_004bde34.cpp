@@ -27,7 +27,7 @@ typedef struct PartnerCardScreen {
     /* 0x378 */ s32 marker[12];         /* which owned marker each slot shows */
 } PartnerCardScreen;
 
-s32 FUN_002b4dcc(PartnerCardUnit *unit);
+s32 btlUnitMaxHp(PartnerCardUnit *unit);
 void efctSetSpeed(f32 speed);
 void numberFontDrawFormatted(u32 a, s32 x, s32 y, u32 b, u32 c, u32 tag, const char *format, s32 value);
 void FUN_00183788(s32 hp, s32 maxHp, u32 a, u32 b, u32 group, u32 id0, u32 id1, u32 id2, u32 id3, s32 x, s32 y, u32 tag,
@@ -46,7 +46,7 @@ void FUN_004bde34(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s3
     u16 portrait = unit->portrait;
     u32 level = unit->level;
     s32 hp = unit->hp;
-    s32 maxHp = FUN_002b4dcc(unit);
+    s32 maxHp = btlUnitMaxHp(unit);
     u16 flags = unit->flags;
 
     if (screen->mode == 2 && screen->active[slot] == 0) {

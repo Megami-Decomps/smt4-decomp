@@ -54,7 +54,7 @@ int FUN_002342b8(void);
 int FUN_00244ac8(void);
 int scrScriptProcessGetEntry(...);
 int lmapSceneMoveToWaypoint(...);
-int FUN_002941c8(...);
+int mapDepartInit(...);
 int FUN_002b79d8(void);
 int mapSetSceneState(...);
 int lmapInitializeArea(...);
@@ -459,7 +459,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern char *campGetState(void);
 /* Supplied declaration required: lmapSceneMoveToWaypoint. */
-/* Supplied declaration required: FUN_002941c8. */
+/* Supplied declaration required: mapDepartInit. */
 /* Supplied declaration required: FUN_00294854. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: popupTryStartDemonHint. */
@@ -3384,7 +3384,7 @@ LAB_0027a030:
     uStack_70 = DAT_005f16b4;
     fStack_6c = DAT_005f16b8;
     uStack_68 = DAT_005f16bc;
-    FUN_002941c8(&uStack_b0,0x84);
+    mapDepartInit(&uStack_b0,0x84);
     DAT_005f185b = 1;
     puVar2[3] = puVar2[3] + 1;
     puVar2[4] = 0;
