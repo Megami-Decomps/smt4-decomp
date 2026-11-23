@@ -1,5 +1,4 @@
 #include "gamedata/EncounterSelection.h"
-/* NON_MATCHING: register allocation: retail spills the slot pointer, spawn index and list pointer around the inlined spawn block (three more stack slots, extra live registers) */
 #include "common.h"
 #include "game/GameStateA.h"
 #include "gamedata/NkmEnemyLookup.h"
@@ -8,15 +7,15 @@
 #include "Model/MoriModelContent.h"
 #include "classes/Obj557b18.h"
 
-extern "C" {
-}
+/* Rebinding a slot first unregisters its model, then drops the resource. These are the same
+ * two lifetime steps that the spawn-table binder (FUN_00377acc) performs. */
 
-/* Drops the slot's resource: unregisters it (or marks it released), then deletes it if the slot owns it. */
-static __inline void enemySlotReleaseResource(MapEnemyEntryA *slot)
+/* Unregisters the slot's model: an owned model leaves the handle registry, a borrowed extra model is
+ * flagged released and its extra-model entry freed. */
+static __inline void mapEnemySlotUnregisterModel(MapEnemyEntryA *slot)
 {
-    MoriModelContent *resource = slot->model;
-    if (resource != NULL && slot->registered != 0) {
-        Obj557b18 *owner = resource->body;
+    if (slot->model != NULL && slot->registered != 0) {
+        Obj557b18 *owner = slot->model->body;
         if (slot->owned != 0) {
             if (owner != NULL) {
                 ptrListRemoveClearOwner(g_handleRegistry, owner);
@@ -28,6 +27,11 @@ static __inline void enemySlotReleaseResource(MapEnemyEntryA *slot)
             g_mapEnemy->extraModels[slot->kind].active = 0;
         }
     }
+}
+
+/* Deletes the slot's model if the slot owns it, then frees the slot. */
+static __inline void mapEnemySlotDropModel(MapEnemyEntryA *slot)
+{
     MapEnemyA *list = g_mapEnemy;
     if (slot->model != NULL) {
         if (slot->owned != 0) {
@@ -47,19 +51,19 @@ static __inline void enemySlotReleaseResource(MapEnemyEntryA *slot)
     }
 }
 
-/* Puts the slot in `state` and fills it from the current area's next spawn entry. */
-static __inline void enemySlotSpawn(MapEnemyEntryA *slot, s32 state, s32 *spawnCount)
+/* Drops the slot's model and fills the slot from entry `index` of the spawn group `area` owns
+ * (FUN_00377acc does the same from a spawn table). */
+static __inline void enemySlotSpawn(MapEnemyEntryA *slot, s32 area, u8 index)
 {
-    slot->state = state;
-    slot->elapsed = 0;
-    u32 index = *spawnCount & 0xff;
     for (s32 i = 0; i < 16; i++) {
         MapEnemySpawnGroup *group = &g_mapEnemy->spawnGroups[i];
-        if (group->owner == g_gameState.selectionArea) {
-            enemySlotReleaseResource(slot);
+        if (group->owner == area) {
+            mapEnemySlotUnregisterModel(slot);
+            mapEnemySlotDropModel(slot);
             slot->result = group->encounterIds[index];
             slot->enemyId = group->enemyIds[index];
-            slot->level = nkmEnemyFindById((u16)slot->enemyId)->level & 0x7fff;
+            NkmEnemyRecordA *unit = nkmEnemyFindById((u16)slot->enemyId);
+            slot->level = unit->level & 0x7fff;
             s32 variant = FUN_004bb870(slot->result);
             if (variant != 0) {
                 slot->variant = (u8)variant;
@@ -68,7 +72,6 @@ static __inline void enemySlotSpawn(MapEnemyEntryA *slot, s32 state, s32 *spawnC
             break;
         }
     }
-    ++*spawnCount;
 }
 
 /* Assigns every idle enemy slot its next spawn entry for the current area. */
@@ -85,10 +88,16 @@ extern "C" void FUN_0033ad04(void)
             case 0:
             case 4:
             case 5:
-                enemySlotSpawn(slot, 0x14, spawnCount);
+                slot->state = 0x14;
+                slot->elapsed = 0;
+                enemySlotSpawn(slot, g_gameState.selectionArea, *spawnCount & 0xff);
+                ++*spawnCount;
                 break;
             case 2:
-                enemySlotSpawn(slot, 0x16, spawnCount);
+                slot->state = 0x16;
+                slot->elapsed = 0;
+                enemySlotSpawn(slot, g_gameState.selectionArea, *spawnCount & 0xff);
+                ++*spawnCount;
                 break;
             }
         }
