@@ -4,7 +4,7 @@
 extern "C" {
 void FUN_0019afe4(u8** cursor, AsdMdlNode* node, u32 parameter, u32 flags);
 void asdModelBuildFlaggedAttributeRecords(AsdMdlNode* node, u8* data);
-void FUN_0019cbf8(AsdMdlNode* node);
+void asdMdlNodeBuildMotionTables(AsdMdlNode* node);
 
 // Rewinds the node's data cursor and builds its records from the beginning of the data.
 static __inline void asdMdlNodeBuildRecords(AsdMdlNode* node, u32 parameter)
@@ -20,6 +20,6 @@ void asdMdlNodeInit(AsdMdlNode* node, u32 drawMask)
 {
     asdMdlNodeBuildRecords(node, drawMask);
     asdModelBuildFlaggedAttributeRecords(node, node->file->data);
-    FUN_0019cbf8(node);
+    asdMdlNodeBuildMotionTables(node);
 }
 }

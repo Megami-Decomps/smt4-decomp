@@ -270,12 +270,12 @@ s32 campCecRecvDownloadState(CampCecRecv *recv)
                 }
             }
             CampCecReceivedRecord *record = receivedRecord(recv, i);
-            if (record->demonId == 0) {
+            if (record->demon.id == 0) {
                 slotNameDisplaySetEntry(record, 0);
             }
             if (!playerSummaryIsIncomplete(record)) {
                 accepted++;
-                record->selectedId = record->demonId;
+                record->selectedId = record->demon.id;
                 savedRecordInsertAtFront(record);
                 FUN_002a17d4(record);
                 gameDataAddMoneySaturating(1);

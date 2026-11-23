@@ -12,7 +12,7 @@ struct Obj422594Source {
 void Obj422594::initialize(const void *source)
 {
     const Obj422594Source *src = (const Obj422594Source *)source;
-    state = 0;
+    state.flags = 0;
     slots[3] = 0;
     slots[2] = 0;
     slots[1] = 0;

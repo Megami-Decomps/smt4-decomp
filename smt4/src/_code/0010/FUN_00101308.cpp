@@ -89,7 +89,7 @@ int FUN_00103fec(...);
 int FUN_0010421c(...);
 int gfxInitDefaultDrawColor(...);
 int asdPrimInit(...);
-int FUN_001049ac(...);
+int asdModelSystemStart(...);
 int asdTMTexTableLoadList(...);
 int FUN_00105254(...);
 int gfxSetupResGraphicsFile(...);
@@ -312,7 +312,7 @@ extern unsigned int asdModelGetStatic50(void);
 /* Supplied declaration required: gfxInitDefaultDrawColor. */
 /* Supplied declaration required: asdPrimInit. */
 /* Supplied declaration required: frameTexCreate. */
-/* Supplied declaration required: FUN_001049ac. */
+/* Supplied declaration required: asdModelSystemStart. */
 extern int FUN_00104e0c(void);
 /* Supplied declaration required: FUN_00104e28. */
 /* Supplied declaration required: FUN_00104e44. */
@@ -536,7 +536,7 @@ void FUN_00101308(void)
   *puVar6 = 0x3f000000;
   puVar6 = (unsigned int *)asdModelGetStatic54();
   *puVar6 = 0x3ecccccd;
-  FUN_001049ac(0x100,0x30000);
+  asdModelSystemStart(0x100,0x30000);
   FUN_0010421c();
   puVar6 = (unsigned int *)asdModelGetStatic38();
   *puVar6 = 0x447a0000;

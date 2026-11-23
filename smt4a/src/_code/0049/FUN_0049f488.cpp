@@ -6,7 +6,7 @@
 extern "C" {
 s32 renderCtxPackPassFlags(u32 first, u32 second);
 void FUN_0049d244(HowToScreenWork *screen, s32 x, s32 y, f32 progress);
-void FUN_0049e3f8(HowToScreenWork *screen);
+void listPanelDraw(HowToScreenWork *screen);
 void efctSetSpeed(f32 speed);
 void renderCtxResetColorScale(RenderCtxA *context);
 
@@ -21,7 +21,7 @@ static void howToScreenDrawStates(HowToScreenWork *work)
     case 6:
     case 8:
     case 9:
-        FUN_0049e3f8(work);
+        listPanelDraw(work);
         break;
     case 0:
     case 1:

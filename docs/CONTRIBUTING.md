@@ -86,8 +86,8 @@ review; the [matching guide](matching-guide.md) shows how to work inside them.
   stays `NON_MATCHING`. Prove a helper by putting it in the shared header and using it at its other
   sites (the twin, the siblings); if they match too, it was real.
 - **Compiler, flags and `multifile` partners are not levers.** Every unit is built by armcc 4.1
-  b1454; a unit's own `cflags` or `multifile` entry in `config/project.json` needs the retail
-  evidence described in [Compiler and flags](matching-guide.md#compiler-and-flags).
+  b1454; a unit's own `cflags`, `multifile` or `autoinline` entry in `config/project.json` needs
+  the retail evidence described in [Compiler and flags](matching-guide.md#compiler-and-flags).
 
 ### Near misses
 
@@ -241,6 +241,6 @@ images are available.
       `python -B tools/tu.py check`.
 - [ ] New names went through `tools/names.py`; the code meets the
       [readability standard](style-and-naming.md#readability-standard).
-- [ ] Every `cflags`, `multifile`, `inlined.txt`, `numbers.txt` or `size:` entry the change adds
-      carries its evidence. A match whose fix changed a shared contract, a header or the
+- [ ] Every `cflags`, `multifile`, `autoinline`, `inlined.txt`, `numbers.txt` or `size:` entry the
+      change adds carries its evidence. A match whose fix changed a shared contract, a header or the
       configuration can record that evidence in a [match note](notes/README.md).

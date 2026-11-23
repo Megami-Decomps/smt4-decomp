@@ -19,7 +19,7 @@ u32 taskCreateDraw(const char *name, s32 priority, u16 startDelay, u16 endDelay,
 void mapIfResetRecords(void);
 s32 FUN_00226538(u32 handle);
 void mapIfFree(u32 handle);
-s32 FUN_0029d760(u32 handle);
+s32 MAPIF_DrawUp(u32 handle);
 s32 FUN_00315d34(u32 handle);
 s32 mapIfDrawWorldIndicators(u32 handle);
 
@@ -60,7 +60,7 @@ void FUN_002019dc(u32 parent, u8 mode)
     mapIf->fadeStep = 0;
     mapIf->fadeTimer = 0;
     mapIf->job = taskCreateDraw("MAPIF C", 4, 0, 0, FUN_00226538, mapIfFree, NULL, parent);
-    mapIf->updateTask = taskCreateDraw("MAPIF U", 117, 0, 0, FUN_0029d760, NULL, NULL, mapIf->job);
+    mapIf->updateTask = taskCreateDraw("MAPIF U", 117, 0, 0, MAPIF_DrawUp, NULL, NULL, mapIf->job);
     taskCreateDraw("MAP FADE", 138, 0, 0, FUN_00315d34, NULL, NULL, mapIf->job);
     mapIf->indicatorTask = taskCreateDraw("MIF3DL", 113, 0, 0, mapIfDrawWorldIndicators, NULL, NULL, mapIf->job);
 

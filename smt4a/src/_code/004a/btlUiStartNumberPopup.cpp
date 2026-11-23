@@ -1,4 +1,3 @@
-/* NON_MATCHING: 32 lines (147 vs 147 rows): prologue, 4-arg cameraProjectToScreen, slot-field stores (u8 anchored), signed FUN_004aaff0 conversion, digitTimers/sprite setup, and outlined small-default digit arm match; retail loads pos[0]/pos[1] with vldmia and schedules the divisor update differently. */
 #include "common.h"
 #include "battle/BtlUiGlobal.h"
 #include "ui/UiSpriteApi.h"
@@ -14,8 +13,10 @@ void uiStoreTextureEntryCenter(void *sprite, u32 kind, u32 index);
 void FUN_00358e94(void *sprite, s16 x, s16 y);
 
 /* Starts a number popup in `slot`: places it at `(x, y, z)` (kept on screen when `anchored`), then
- * sets up one sprite per decimal digit of `number`, most significant first. */
-void btlUiStartNumberPopup(u32 handle, s32 slot, s32 number, u32 unused, f32 x, f32 y, f32 z, s32 small, s32 alt, u8 anchored)
+ * sets up one sprite per decimal digit of `number`, most significant first. The coordinates are declared after
+ * the integer parameters: the same registers and stack slots, and the order retail's schedule of the body needs
+ * (the caller reads small, alt and anchored before the three coordinates too). */
+void btlUiStartNumberPopup(u32 handle, s32 slot, s32 number, u32 unused, s32 small, s32 alt, u8 anchored, f32 x, f32 y, f32 z)
 {
     BtlUiA *ui = g_btlUi.ui;
     bool isLarge = false;

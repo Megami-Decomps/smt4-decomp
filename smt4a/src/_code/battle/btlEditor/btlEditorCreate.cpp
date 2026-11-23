@@ -1,4 +1,5 @@
-/* NON_MATCHING: the UI-block tail now matches; retail loads the roster-count offset into r2 and reloads r2 with &g_btlCamera after the ldrb (the build uses r3 for the offset and loads the camera early). */
+/* NON_MATCHING: the UI-block tail now matches; retail loads the roster-count offset into r2 and reloads r2 with &g_btlCamera after the ldrb (the build uses r3 for the offset and loads the camera early). IV's twin publishes the job first (`battle->editor.job = taskCreateDraw(...)`, read back for the draw task) and is
+ * IDENTICAL so; here that form scores 6 against this local's 4, so the twins differ there (wave 85). */
 #include "battle/btlMain.h"
 #include "battle/btlCamera.h"
 #include "battle/BattleEditorState.h"
@@ -16,7 +17,7 @@ void* asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 op
 void FUN_002984d4(void* work);
 void btlEditorDestroy(void* work);
 void btlEditorUpdate(void* work);
-s32 FUN_004f2708(BtlCameraA* camera, BtlMainStateA* battle, u32 option);
+s32 btlCameraCanAdvance(BtlCameraA* camera, BtlMainStateA* battle, u32 option);
 void FUN_004aa780(void* work, u32 enabled);
 extern BattleEditorGlobalsA g_btlEditor;
 
@@ -37,7 +38,7 @@ void btlEditorCreate(BtlMainStateA* battle)
     editor->member = -1;
     if (g_btlCamera) {
         if (g_btlCamera->orientation.editor.selection >= 0 &&
-            FUN_004f2708(g_btlCamera, battle, 1)) {
+            btlCameraCanAdvance(g_btlCamera, battle, 1)) {
             btlQueueDuplicateSuppressedAction(0, 0, 0);
         }
         FUN_004feecc(1, 0);

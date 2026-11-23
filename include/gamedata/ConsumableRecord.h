@@ -28,7 +28,8 @@ struct ConsumableRecord {
             u32 stackLimit : 24;        /* 0: the default */
         } sortBits;
     };
-    /* 0x74 */ u8 unk74[4];
+    /* 0x74 */ u8 unk74[2];
+    /* 0x76 */ u16 points;              /* the points the item awards */
     /* 0x78 */ s32 buyPrice;
     /* 0x7C */ s32 sellPrice;
 };

@@ -36,7 +36,7 @@ void resultReportIfFailed(S4ThreadStack *stack, void *memory, u32 size);
 void nn_os_CriticalSection_Initialize(void *lock);
 s32 svcCreateEvent(u32 *handle, u32 resetType); /* creates an event */
 s32 FUN_002fb0d4(u32 *thread, const S4ThreadHooks *hooks, void (*entry)(void *), void *argument, u32 stackTop, u32 alignment, s32 priority, s32 affinity);
-void FUN_00422534(void *reader);
+void s4FsReaderThreadMain(void *reader);
 void FUN_00514a74(void);
 void FUN_00514b20(void);
 void FUN_00514b88(void);
@@ -89,7 +89,7 @@ u32 FUN_0042230c(S4FsReader *reader, S4StreamSource *source, S4Allocator *alloca
 
     S4ThreadHooks hooks = { 4, (const void *)FUN_00514a74, (const void *)FUN_00514b88, (const void *)FUN_00514b20 };
     void *argument = reader;
-    s32 result = FUN_002fb0d4(&reader->threadHandle, &hooks, FUN_00422534, &argument,
+    s32 result = FUN_002fb0d4(&reader->threadHandle, &hooks, s4FsReaderThreadMain, &argument,
                               DAT_005880f8.stack->base + DAT_005880f8.stack->size, 4, -2, 0);
     bool failed = nnResultIsFailure(result);
     if (failed)

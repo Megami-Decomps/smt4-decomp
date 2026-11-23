@@ -1,7 +1,7 @@
 /* NON_MATCHING: 81 lines (366 vs 365 rows), complete. What differs: the number popup's `anchored` argument (retail
- * loads it signed and btlUiStartNumberPopup reads it as a word, so the parameter is 32 bits wide; that function is 14
- * lines worse with it, so the shared prototype stays), the order of the marker request's loads, r0/r1 in the marker's
- * `timer = 0; active = 0;`, and which arm keeps the loop's last cross-jumped store. */
+ * loads it signed; btlUiStartNumberPopup is IDENTICAL with the `u8` parameter declared before the coordinates and
+ * 54 lines off with a 32-bit one, so its prototype stays), the order of the marker request's loads, r0/r1 in the
+ * marker's `timer = 0; active = 0;`, and which arm keeps the loop's last cross-jumped store. */
 #include "common.h"
 #include "battle/BtlUiGlobal.h"
 #include "battle/BtlMainAccess.h"
@@ -14,7 +14,7 @@ extern "C" {
 void cameraProjectToScreen(f32 *screen, s32 display, u32 camera, const f32 *world);
 void uiStoreTextureEntryCenter(void *sprite, u32 kind, u32 index);
 void FUN_00358e94(void *sprite, s16 x, s16 y);
-void btlUiStartNumberPopup(u32 handle, s32 slot, s32 number, u32 unused, f32 x, f32 y, f32 z, s32 small, s32 alt, u8 anchored);
+void btlUiStartNumberPopup(u32 handle, s32 slot, s32 number, u32 unused, s32 small, s32 alt, u8 anchored, f32 x, f32 y, f32 z);
 
 enum {
     kMarkerFadeOutKey = 12,     /* the opacity key that fades a popup or marker out */
@@ -79,12 +79,12 @@ void btlUiStepNumberPopupsAndMarkers(BtlUiA *ui)
                     ui->objD.numberRequests.rows[i].entries[cursor].delay--;
                 } else {
                     btlUiStartNumberPopup((u32)ui, i, ui->objD.numberRequests.rows[i].entries[cursor].number, cursor,
-                                          ui->objD.numberRequests.rows[i].entries[cursor].x,
-                                          ui->objD.numberRequests.rows[i].entries[cursor].y,
-                                          ui->objD.numberRequests.rows[i].entries[cursor].z,
                                           ui->objD.numberRequests.rows[i].entries[cursor].small,
                                           ui->objD.numberRequests.rows[i].entries[cursor].alt,
-                                          ui->objD.numberRequests.rows[i].entries[cursor].anchored);
+                                          ui->objD.numberRequests.rows[i].entries[cursor].anchored,
+                                          ui->objD.numberRequests.rows[i].entries[cursor].x,
+                                          ui->objD.numberRequests.rows[i].entries[cursor].y,
+                                          ui->objD.numberRequests.rows[i].entries[cursor].z);
                     ui->objD.numberRequests.rows[i].entries[cursor].active = 0;
                     ui->requestCounts.cursors[i]++;
                 }

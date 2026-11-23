@@ -45,7 +45,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: btlGetCombatantDrawPosition. */
 /* Supplied declaration required: FUN_004f1b2c. */
 /* Supplied declaration required: FUN_004f22a4. */
-extern int FUN_004f2708(int, unsigned int, unsigned int);
+extern int btlCameraCanAdvance(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004f2938. */
 /* Supplied declaration required: cameraBeginScalarTransition. */
 /* Supplied declaration required: btlCameraStartFovShift. */
@@ -84,7 +84,7 @@ void FUN_0040d274(unsigned int param_1,int param_2)
   if ((temp_v2 == 1 || temp_v2 == 5) || temp_v2 == 6) {
     if (*(unsigned int *)(reinterpret_cast<int>(g_btlCamera) + 0x7cc) < 4) {
       temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
-      temp_v5 = FUN_004f2708(reinterpret_cast<int>(g_btlCamera),temp_v4,1);
+      temp_v5 = btlCameraCanAdvance(reinterpret_cast<int>(g_btlCamera),temp_v4,1);
       if ((temp_v5 != 0) && ((g_btlCamera->flags & 0x1000000) == 0)) {
         btlQueueDuplicateSuppressedAction(0,*(unsigned int *)(param_2 + 8));
       }

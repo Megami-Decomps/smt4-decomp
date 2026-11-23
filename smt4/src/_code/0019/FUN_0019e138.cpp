@@ -56,7 +56,7 @@ int FUN_0017fbc4(void);
 int FUN_0019a4f4(unsigned int);
 int spriteRowListUpdate(unsigned int);
 int objStartTimerIfIdle(unsigned int);
-int FUN_00205cc8(unsigned int);
+int btlUiStepNumberPopupsAndMarkers(unsigned int);
 int FUN_00206b80(unsigned int);
 int recordQueryStateThree(void);
 int playSceneTimerSubStartReverse(unsigned int);
@@ -100,7 +100,7 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: spriteRowListUpdate. */
 /* Supplied declaration required: objStartTimerIfIdle. */
 /* Supplied declaration required: messageMainApplyClose. */
-/* Supplied declaration required: FUN_00205cc8. */
+/* Supplied declaration required: btlUiStepNumberPopupsAndMarkers. */
 /* Supplied declaration required: FUN_00206b80. */
 /* Supplied declaration required: btlUiTargetListStep. */
 /* Supplied declaration required: FUN_00222b5c. */
@@ -236,7 +236,7 @@ int FUN_0019e138(unsigned int job)
   FUN_00206b80(temp_v0 + 0x2200);
   spriteRowListUpdate(temp_v0 + 8);
   FUN_0019a4f4(temp_v0 + 0x2460);
-  FUN_00205cc8(temp_v0);
+  btlUiStepNumberPopupsAndMarkers(temp_v0);
   if ((*(char *)(temp_v0 + 0xc9d8) != '\0') &&
      (temp_v12 = *(int *)(temp_v0 + 0xc9e0) + 1, *(int *)(temp_v0 + 0xc9e0) = temp_v12,
      *(int *)(temp_v0 + 0xc9dc) < temp_v12)) {

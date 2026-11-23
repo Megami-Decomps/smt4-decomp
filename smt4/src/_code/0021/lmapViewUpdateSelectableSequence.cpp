@@ -1,9 +1,8 @@
-/* NON_MATCHING: typed rewrite from its sibling lmapViewUpdateCloseUpSequence (580 raw / 514 shape rows, 496 rows on
- * both sides; with the register names blanked 14 rows differ). The phases, calls, constants and stores are retail's.
- * Retail keeps the move's address in r3 across the calls of vectorPairTransitionStep, as it does in
- * mapDepartAdvanceCameraSequence (a `--multifile` run with autoinline on, docs/matching-guide.md): compiled alone the
- * address takes r4, which renumbers every saved register and, through the smoothing/duration pair no longer being
- * adjacent registers, turns retail's `stm {r7, r8}` into `strd`. */
+/* NON_MATCHING: typed rewrite from its sibling lmapViewUpdateCloseUpSequence (532 raw lines; 580 compiled alone).
+ * The phases, calls, constants and stores are retail's. Retail keeps the move's address in r3 across the calls of
+ * vectorPairTransitionStep, as mapDepartAdvanceCameraSequence does, so the unit has the same `multifile` entry with
+ * `"autoinline": true`; compiled alone the address takes r4, which renumbers every saved register and, through the
+ * smoothing/duration pair no longer being adjacent registers, turns retail's `stm {r7, r8}` into `strd`. */
 #include "map/LmapViewGlobals.h"
 #include "map/LmapGlobals.h"
 #include "map/VectorPairTransition.h"

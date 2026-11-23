@@ -1,4 +1,5 @@
-/* NON_MATCHING: final renderCtxPopState becomes a tail call (retail keeps bl + shared epilogue); register choice for the last widget pointer/x also differs. */
+/* NON_MATCHING: 23 lines (9 by shape): the final renderCtxPopState becomes a tail call (retail keeps bl and the
+ * shared epilogue), and retail reloads the banner for the slide's y before it adds the slide's x. */
 #include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "camp/RenderCtx.h"
@@ -18,7 +19,7 @@ void uiDrawGroupedNumber(s32 value, s32 x, s32 y, s32 flag);
 s32 renderCtxPopState(RenderCtx *context, s32 stack);
 
 /* Draws the banner's title-style frame, optional second plate and optional third plate. */
-void FUN_00124d24(s32 wide)
+void messageBannerDrawCounterPlates(s32 wide)
 {
     if (gameFlagIsSet(0x402)) {
         s32 x = vec2GetXInt(&g_messageMain.banner->sprites[12]);
@@ -55,10 +56,10 @@ void FUN_00124d24(s32 wide)
         if (banner->unk0A1) {
             s32 bx = vec2GetXInt(&banner->sprites[12]);
             s32 by = vec2GetYInt(&banner->sprites[12]);
-            s32 px = static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f) + bx);
+            bx = static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f) + bx);
             part = asdTMTexTableEntryAt(14, 256);
-            texDrawCompositeSprite(2, 14, 22, part->x + px, part->y + by, 11);
-            uiDrawGroupedNumber(-banner->unk09C, part->x + px, part->y + by, 1);
+            texDrawCompositeSprite(2, 14, 22, part->x + bx, part->y + by, 11);
+            uiDrawGroupedNumber(-banner->unk09C, part->x + bx, part->y + by, 1);
         }
         efctSetSpeed(1.0f);
         gxResetColorQuadToWhite();

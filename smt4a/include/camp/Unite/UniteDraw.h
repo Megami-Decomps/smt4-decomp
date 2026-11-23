@@ -22,7 +22,7 @@ void uniteDrawValueListPanel(s32 x, s32 y, f32 opacity);
 void uniteDrawPanelRows(s32 x, s32 y, f32 opacity);
 void FUN_0034abe0(s32 x, s32 y, s32 panel, s32 opened, f32 opacity);
 void FUN_002a7bb8(s32 x, s32 y, s32 opened, f32 opacity);
-void FUN_002a968c(s32 x, s32 y, u32 mode, s32 preview, u32 opened, s32 detail, s32 alternate, f32 opacity);
+void uniteDrawSkillInheritancePanel(s32 x, s32 y, u32 mode, s32 preview, u32 opened, s32 detail, s32 alternate, f32 opacity);
 void uniteDrawDetailPanel(s32 x, s32 y, f32 opacity);
 /* Draws the strip of list button `button` at (x, y) with opacity `scale`: the frame at the screen's fade, the
  * plate and caption (the highlighted set for the button kinds 1, 2 and 6) and the sliding shine. The scale is

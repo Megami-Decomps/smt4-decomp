@@ -24,7 +24,7 @@ extern "C" {
 extern BattleActionEvent g_btlEvent;
 extern BattleActionCamera *g_btlCamera;
 extern void *g_btlAux;
-s32 FUN_004f2708(BattleActionCamera *camera, BtlMainStateA *battle, s32 flags);
+s32 btlCameraCanAdvance(BattleActionCamera *camera, BtlMainStateA *battle, s32 flags);
 void btlQueueDuplicateSuppressedAction(s32, s32, s32);
 s32 scrRunOpcodesStub(u32 process);
 void btlPlayMenuConfirmSe(s32 mode);
@@ -34,7 +34,7 @@ void btlStageResetAndClearCameraFlag(void *context);
 u32 btlActionStepFinishPendingChanges(BattleActionStep *step, BtlMainStateA *battle)
 {
     if ((battle->stateFlags64.bits & g_btlEvent.pendingMask) != 0 && (step->flags & 1) == 0) {
-        if (g_btlCamera->target >= 0 && FUN_004f2708(g_btlCamera, battle, 1)) {
+        if (g_btlCamera->target >= 0 && btlCameraCanAdvance(g_btlCamera, battle, 1)) {
             btlQueueDuplicateSuppressedAction(0, 0, 0);
         }
         FUN_004feecc(1, 0);

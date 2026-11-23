@@ -1343,6 +1343,7 @@
 0x00239a18 resourceDispatch between
 0x00239a54 FUN_00239a54 between
 0x00239a64 nn_gr_CTR_Texture_UnitBase_UnitBase_sub_object name
+0x00239ab8 fileGetHandleChecked between
 0x00239ae0 nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes name
 0x00239b94 FUN_00239b94 between
 0x00239c54 n_dbm_HierarchicalRomFileTableTemplate_nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_nn_fs_CTR_MPCore_detail_RomFsArchive_RomF between
@@ -2723,6 +2724,9 @@
 0x00381258 uiStateResetHook between
 0x0038125c FUN_0038125c between
 0x0038128c FUN_0038128c callers
+0x003df9e4 FUN_003df9e4 library
+0x003dfa0c fileGetSizeOut library
+0x003dfa2c FUN_003dfa2c between
 0x003dfea0 nn_gr_CTR_Texture_detail_MakeCommand name
 0x003e013c FUN_003e013c callers
 0x003e0304 nn_gr_CTR_Texture_MakeCommand name

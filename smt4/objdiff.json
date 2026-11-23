@@ -3504,13 +3504,13 @@
       "target_path": "orig/target/_code/frame_tex/FrameTex/frameTexCreate.o"
     },
     {
-      "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_001049ac.o",
+      "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdModelSystemStart.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001049ac",
+            "name": "asdModelSystemStart",
             "size": 936,
             "vram": "0x1049ac"
           }
@@ -3519,10 +3519,10 @@
           "_code",
           "AsdSDK/Source/Gfx/Model/AsdModel"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_001049ac.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdModelSystemStart.cpp"
       },
-      "name": "_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_001049ac",
-      "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_001049ac.o"
+      "name": "_code/AsdSDK/Source/Gfx/Model/AsdModel/asdModelSystemStart",
+      "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdModelSystemStart.o"
     },
     {
       "base_path": "build/obj/_code/0010/FUN_00104e0c.o",
@@ -14427,13 +14427,13 @@
       "target_path": "orig/target/_code/0012/FUN_00124c60.o"
     },
     {
-      "base_path": "build/obj/_code/0012/FUN_00124d24.o",
+      "base_path": "build/obj/_code/0012/messageBannerDrawCounterPlates.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00124d24",
+            "name": "messageBannerDrawCounterPlates",
             "size": 684,
             "vram": "0x124d24"
           }
@@ -14441,10 +14441,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0012/FUN_00124d24.cpp"
+        "source_path": "src/_code/0012/messageBannerDrawCounterPlates.cpp"
       },
-      "name": "_code/0012/FUN_00124d24",
-      "target_path": "orig/target/_code/0012/FUN_00124d24.o"
+      "name": "_code/0012/messageBannerDrawCounterPlates",
+      "target_path": "orig/target/_code/0012/messageBannerDrawCounterPlates.o"
     },
     {
       "base_path": "build/obj/_code/0012/buttonHelpIsButtonEnabled.o",
@@ -49407,13 +49407,13 @@
       "target_path": "orig/target/_code/001d/uiQuestDrawLower.o"
     },
     {
-      "base_path": "build/obj/_code/001d/FUN_001dddd8.o",
+      "base_path": "build/obj/_code/001d/uniteDrawListPanel.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001dddd8",
+            "name": "uniteDrawListPanel",
             "size": 1384,
             "vram": "0x1dddd8"
           }
@@ -49421,10 +49421,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001d/FUN_001dddd8.cpp"
+        "source_path": "src/_code/001d/uniteDrawListPanel.cpp"
       },
-      "name": "_code/001d/FUN_001dddd8",
-      "target_path": "orig/target/_code/001d/FUN_001dddd8.o"
+      "name": "_code/001d/uniteDrawListPanel",
+      "target_path": "orig/target/_code/001d/uniteDrawListPanel.o"
     },
     {
       "base_path": "build/obj/_code/camp/Unite/Unite/FUN_001de340.o",
@@ -51303,13 +51303,13 @@
       "target_path": "orig/target/_code/001e/thresholdGetPrimary.o"
     },
     {
-      "base_path": "build/obj/_code/sound/soundTest/FUN_001ea8fc.o",
+      "base_path": "build/obj/_code/sound/soundTest/soundTestCreate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001ea8fc",
+            "name": "soundTestCreate",
             "size": 176,
             "vram": "0x1ea8fc"
           }
@@ -51318,10 +51318,10 @@
           "_code",
           "sound/soundTest"
         ],
-        "source_path": "src/_code/sound/soundTest/FUN_001ea8fc.cpp"
+        "source_path": "src/_code/sound/soundTest/soundTestCreate.cpp"
       },
-      "name": "_code/sound/soundTest/FUN_001ea8fc",
-      "target_path": "orig/target/_code/sound/soundTest/FUN_001ea8fc.o"
+      "name": "_code/sound/soundTest/soundTestCreate",
+      "target_path": "orig/target/_code/sound/soundTest/soundTestCreate.o"
     },
     {
       "base_path": "build/obj/_code/001e/titleConfigUpdate.o",
@@ -56375,13 +56375,13 @@
       "target_path": "orig/target/_code/0020/scrCommTestChance.o"
     },
     {
-      "base_path": "build/obj/_code/0020/FUN_00205cc8.o",
+      "base_path": "build/obj/_code/0020/btlUiStepNumberPopupsAndMarkers.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00205cc8",
+            "name": "btlUiStepNumberPopupsAndMarkers",
             "size": 1332,
             "vram": "0x205cc8"
           }
@@ -56389,10 +56389,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0020/FUN_00205cc8.cpp"
+        "source_path": "src/_code/0020/btlUiStepNumberPopupsAndMarkers.cpp"
       },
-      "name": "_code/0020/FUN_00205cc8",
-      "target_path": "orig/target/_code/0020/FUN_00205cc8.o"
+      "name": "_code/0020/btlUiStepNumberPopupsAndMarkers",
+      "target_path": "orig/target/_code/0020/btlUiStepNumberPopupsAndMarkers.o"
     },
     {
       "base_path": "build/obj/_code/0020/mapAccessoryLoadTable.o",
@@ -97748,13 +97748,13 @@
       "target_path": "orig/target/_code/0029/bgmStop.o"
     },
     {
-      "base_path": "build/obj/_code/0029/FUN_0029212c.o",
+      "base_path": "build/obj/_code/0029/buttonHelpShowEntryDescription.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0029212c",
+            "name": "buttonHelpShowEntryDescription",
             "size": 1744,
             "vram": "0x29212c"
           }
@@ -97762,10 +97762,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0029/FUN_0029212c.cpp"
+        "source_path": "src/_code/0029/buttonHelpShowEntryDescription.cpp"
       },
-      "name": "_code/0029/FUN_0029212c",
-      "target_path": "orig/target/_code/0029/FUN_0029212c.o"
+      "name": "_code/0029/buttonHelpShowEntryDescription",
+      "target_path": "orig/target/_code/0029/buttonHelpShowEntryDescription.o"
     },
     {
       "base_path": "build/obj/_code/0029/FUN_00292844.o",
@@ -125604,13 +125604,13 @@
       "target_path": "orig/target/_code/002d/mapModelsPollDeferredDestroy.o"
     },
     {
-      "base_path": "build/obj/_code/002d/FUN_002d400c.o",
+      "base_path": "build/obj/_code/002d/lmapSceneModelSwapStep.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002d400c",
+            "name": "lmapSceneModelSwapStep",
             "size": 568,
             "vram": "0x2d400c"
           }
@@ -125618,10 +125618,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002d/FUN_002d400c.cpp"
+        "source_path": "src/_code/002d/lmapSceneModelSwapStep.cpp"
       },
-      "name": "_code/002d/FUN_002d400c",
-      "target_path": "orig/target/_code/002d/FUN_002d400c.o"
+      "name": "_code/002d/lmapSceneModelSwapStep",
+      "target_path": "orig/target/_code/002d/lmapSceneModelSwapStep.o"
     },
     {
       "base_path": "build/obj/_code/002d/FUN_002d424c.o",
@@ -163506,13 +163506,13 @@
       "target_path": "orig/target/_code/mobiclip_ctrl/helper_S4FsReader/FUN_0034dddc.o"
     },
     {
-      "base_path": "build/obj/_code/0034/FUN_0034e020.o",
+      "base_path": "build/obj/_code/0034/s4FsReaderThreadMain.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0034e020",
+            "name": "s4FsReaderThreadMain",
             "size": 276,
             "vram": "0x34e020"
           }
@@ -163520,10 +163520,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0034/FUN_0034e020.cpp"
+        "source_path": "src/_code/0034/s4FsReaderThreadMain.cpp"
       },
-      "name": "_code/0034/FUN_0034e020",
-      "target_path": "orig/target/_code/0034/FUN_0034e020.o"
+      "name": "_code/0034/s4FsReaderThreadMain",
+      "target_path": "orig/target/_code/0034/s4FsReaderThreadMain.o"
     },
     {
       "base_path": "build/obj/_code/0034/FUN_0034e134.o",

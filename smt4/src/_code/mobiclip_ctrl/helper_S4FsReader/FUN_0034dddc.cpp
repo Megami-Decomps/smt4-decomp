@@ -42,7 +42,7 @@ void resultReportIfFailed(void *stack, void *memory, u32 size);
 void *memAlloc(s32 heap, s32 alignment, s32 flags, s32 size, s32 stackAlignment, s32 clear);
 s32 FUN_002bcc60(u32 *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(void *),
                  const void *argument, u32 stackTop, s32 priority, s32 processor, u32 options);
-void FUN_0034e020(void *reader);
+void s4FsReaderThreadMain(void *reader);
 void FUN_003f6ed4(void);
 void FUN_003f6ff8(void);
 void FUN_003f6f8c(void);
@@ -94,7 +94,7 @@ u32 FUN_0034dddc(S4FsReader *reader, S4StreamSource *source, S4Allocator *alloca
     context.descriptor.callbacks[0] = FUN_003f6ed4;
     context.descriptor.callbacks[1] = FUN_003f6ff8;
     context.descriptor.callbacks[2] = FUN_003f6f8c;
-    result = FUN_002bcc60(&reader->threadHandle, &context.descriptor, FUN_0034e020, &context.reader,
+    result = FUN_002bcc60(&reader->threadHandle, &context.descriptor, s4FsReaderThreadMain, &context.reader,
                           DAT_0044d130.stack->address + DAT_0044d130.stack->size, 4, -2, 0);
     failed = nnResultIsFailure(result);
     if (failed) {

@@ -132,7 +132,7 @@ extern "C" s32 uniteDrawPanel(u32)
         s32 alternate = 0;
         if (work->history.previous == 0x1E)
             alternate = 1;
-        FUN_002a968c(x, y, mode, preview, opened, work->returnState.helpAvailable,
+        uniteDrawSkillInheritancePanel(x, y, mode, preview, opened, work->returnState.helpAvailable,
                      alternate, opacity);
         break;
     }

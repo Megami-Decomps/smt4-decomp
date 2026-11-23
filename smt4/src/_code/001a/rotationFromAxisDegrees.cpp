@@ -1,4 +1,3 @@
-/* NON_MATCHING: the normalisation now matches; retail keeps the shared 1.0 constant in s16 and the sine in s17, where this build swaps the two callee-saved registers. */
 #include "shard/S1Mover.h"
 #include <math.h>
 
@@ -7,6 +6,18 @@ extern "C" {
 f32 mathSinFixedAngle(f32 angle);
 f32 phaseCosInterpolate(f32 angle);
 void FUN_003219b0(void *out, const Vec3f *axis, u32 arg, f32 oneMinusCos, f32 sine);
+
+/* nn::math::SinRad and CosRad (SDK header inlines): the table lookups take the angle as a table index
+ * (65536 per turn). FUN_003041a0 has the same sine helper. */
+static __inline f32 sinRadians(f32 radians)
+{
+    return mathSinFixedAngle(radians * 40.743664f);
+}
+
+static __inline f32 cosRadians(f32 radians)
+{
+    return phaseCosInterpolate(radians * 40.743664f);
+}
 
 static __inline void vec3Normalize(Vec3f *out, const Vec3f *v)
 {
@@ -25,13 +36,11 @@ void *rotationFromAxisDegrees(void *out, const Vec3f *axis, u32 arg, f32 degrees
 {
     f32 radians = degrees * 0.017453292f;
     Vec3f unit;
-    f32 angle;
-    f32 sine;
 
     vec3Normalize(&unit, axis);
-    angle = radians * 40.743664f;
-    sine = mathSinFixedAngle(angle);
-    FUN_003219b0(out, &unit, arg, 1.0f - phaseCosInterpolate(angle), sine);
+    f32 sine = sinRadians(radians);
+    f32 cosine = cosRadians(radians);
+    FUN_003219b0(out, &unit, arg, 1.0f - cosine, sine);
     return out;
 }
 

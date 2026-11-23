@@ -70,7 +70,7 @@ void Obj4223c4::FUN_003a6e68()
     view->timer = 0;
     pointConvertToFloat(&view->position, 0, 0);
     view->window->initialize(&view->cursor);
-    view->window->state |= 0x1000;
+    view->window->state.flags |= 0x1000;
     s32 count = view->cursor.count < 10 ? view->cursor.count : 10;
     messageIdListInit(&view->messages, 0x1D, 0x40E, count);
     view->messages.unk10 = 1;

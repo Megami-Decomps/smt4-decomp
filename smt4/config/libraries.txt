@@ -147,3 +147,10 @@ arm 0x144f90 0x144fa8 CTR-SDK svcGetProcessId: push {r0}; svc 0x35; ldr r2, [sp]
 # (registered with __aeabi_atexit). nn_applet_CTR_detail_NotifyToWait uses the same handle and lock.
 arm 0x2ad4f8 0x2ad600 nn::err err:f port connection: CriticalSection Enter, svcConnectToPort, svcGetProcessId, nn_err_CTR_FatalErr_Throw, LightEvent wait; smt4a twin 0x189a80
 arm 0x3ec298 0x3ec2ec nn::err static initialiser: err:f handle state and its nn::os::CriticalSection (atexit-registered destructor); smt4a counterpart 0x50e4c4
+# nn::fs file classes' GetSize: slot 4 of two vtables whose other slots are nn::fs code (third-party). _ZTV9Obj420c98
+# (0x420c98) is nn::fs's RomFsArchive file (slots RomFsArchive_File_Close 0x3555d0 and the between-labelled 0x355620,
+# 0x3556b8, 0x35548c, 0x3554a8): its slot 4 is 0x3df9e4 (the size from the file's end and start offsets; smt4a's copy
+# 0x5008fc, slot of the twin vtable 0x558188, has no unit yet). _ZTV9Obj420d48 (0x420d48) is FileServerArchive's file
+# (slots FileServerArchive_File_TryRead/TryWrite, nn_fs_OpenLinkFile): its slot 4 is fileGetSizeOut (0x3dfa0c, size
+# through the file's IPC handle); smt4a's counterpart is 0x50094c, slot of the twin vtable 0x558234 (w85-o4).
+arm 0x3df9e4 0x3dfa2c nn::fs RomFsArchive/FileServerArchive file GetSize: slot 4 of vtables 0x420c98/0x420d48 whose other slots are nn::fs; smt4a 0x5008fc/0x50094c

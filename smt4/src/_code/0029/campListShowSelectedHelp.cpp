@@ -6,7 +6,7 @@
 extern "C" {
 u32 resourceRunOperationIfUnblocked(const GridNavigation *grid);
 void buttonHelpShowSkillDetails(u32 id);
-void FUN_0029212c(u32 id);
+void buttonHelpShowEntryDescription(u32 id);
 u32 table8Type5GetValue(void);
 void buttonHelpSetText(s32 mode, u32 color);
 
@@ -36,61 +36,61 @@ void campListShowSelectedHelp(u32 list)
     case 11: {
         s32 page = resourceRunOperationIfUnblocked(&camp->grids[0]);
         s32 row = listCursorGetRowIfUnblocked(&camp->grids[0]);
-        FUN_0029212c(camp->gridIds0[page + row]);
+        buttonHelpShowEntryDescription(camp->gridIds0[page + row]);
         break;
     }
     case 12: {
         s32 page = resourceRunOperationIfUnblocked(&camp->grids[1]);
         s32 row = listCursorGetRowIfUnblocked(&camp->grids[1]);
-        FUN_0029212c(camp->gridIds1[page + row]);
+        buttonHelpShowEntryDescription(camp->gridIds1[page + row]);
         break;
     }
     case 13: {
         s32 page = resourceRunOperationIfUnblocked(&camp->grids[2]);
         s32 row = listCursorGetRowIfUnblocked(&camp->grids[2]);
-        FUN_0029212c(camp->gridIds2[page + row]);
+        buttonHelpShowEntryDescription(camp->gridIds2[page + row]);
         break;
     }
     case 17: {
         s32 page = resourceRunOperationIfUnblocked(&camp->grids[5]);
         s32 row = listCursorGetRowIfUnblocked(&camp->grids[5]);
-        FUN_0029212c(camp->meleeIds[page + row]);
+        buttonHelpShowEntryDescription(camp->meleeIds[page + row]);
         break;
     }
     case 18: {
         s32 page = resourceRunOperationIfUnblocked(&camp->grids[6]);
         s32 row = listCursorGetRowIfUnblocked(&camp->grids[6]);
-        FUN_0029212c(camp->rangedIds[page + row]);
+        buttonHelpShowEntryDescription(camp->rangedIds[page + row]);
         break;
     }
     case 19: {
         s32 page = resourceRunOperationIfUnblocked(&camp->grids[7]);
         s32 row = listCursorGetRowIfUnblocked(&camp->grids[7]);
-        FUN_0029212c(camp->ammunitionIds[page + row]);
+        buttonHelpShowEntryDescription(camp->ammunitionIds[page + row]);
         break;
     }
     case 20: {
         s32 page = resourceRunOperationIfUnblocked(&camp->grids[8]);
         s32 row = listCursorGetRowIfUnblocked(&camp->grids[8]);
-        FUN_0029212c(camp->headIds[page + row]);
+        buttonHelpShowEntryDescription(camp->headIds[page + row]);
         break;
     }
     case 21: {
         s32 page = resourceRunOperationIfUnblocked(&camp->grids[9]);
         s32 row = listCursorGetRowIfUnblocked(&camp->grids[9]);
-        FUN_0029212c(camp->bodyIds[page + row]);
+        buttonHelpShowEntryDescription(camp->bodyIds[page + row]);
         break;
     }
     case 22: {
         s32 page = resourceRunOperationIfUnblocked(&camp->grids[10]);
         s32 row = listCursorGetRowIfUnblocked(&camp->grids[10]);
-        FUN_0029212c(camp->legsIds[page + row]);
+        buttonHelpShowEntryDescription(camp->legsIds[page + row]);
         break;
     }
     case 23: {
         s32 page = resourceRunOperationIfUnblocked(&camp->grids[11]);
         s32 row = listCursorGetRowIfUnblocked(&camp->grids[11]);
-        FUN_0029212c(camp->accessoryIds[page + row]);
+        buttonHelpShowEntryDescription(camp->accessoryIds[page + row]);
         break;
     }
     }

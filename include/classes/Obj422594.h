@@ -43,6 +43,13 @@ public:
     /* 0x0C */ Obj422594Pair pair;
 };
 
+/* The object's state flags (its owners set bit 0x1000 after initialize()). They clear themselves in their own
+ * constructor, which runs after the object's vptr store: retail's Obj422594() stores the vptr first. */
+struct Obj422594State {
+    Obj422594State() : flags(0) {}
+    /* 0x00 */ u16 flags;
+};
+
 /* A UI object that registers touch regions (vtable at 0x422594, named after it until its real name
  * is known); its destructor removes them all. ObjBase3c2ef0 and the windows derive from it. */
 class Obj422594 {
@@ -53,7 +60,7 @@ public:
     static void operator delete(void *block) { obj422594FreeBlock(block); }
 
     /* 0x00: vtable pointer */
-    /* 0x04 */ u16 state;
+    /* 0x04 */ Obj422594State state;
     /* 0x06 */ u8 unk06[2];
     /* 0x08 */ u32 slots[12];
     /* 0x38 */ u32 sourceWord1;
@@ -65,6 +72,7 @@ public:
 };
 
 typedef char Obj422594LayoutCheck[
-    sizeof(Obj422594) == 0x64 && offsetof(Obj422594, region) == 0x50 ? 1 : -1];
+    sizeof(Obj422594) == 0x64 && sizeof(Obj422594State) == 2 && offsetof(Obj422594, state) == 4 &&
+    offsetof(Obj422594, region) == 0x50 ? 1 : -1];
 
 #endif

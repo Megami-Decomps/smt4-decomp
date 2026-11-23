@@ -16,7 +16,8 @@ struct FusionCatalogCriteria {
     /* 0x0A */ u16 unk0A;
     /* 0x0C */ u16 unk0C;
     /* 0x0E */ s16 unk0E;
-    /* 0x10 */ u8 rowsUnlocked[3]; /* each nonzero step grows the source list: 3 rows, then 6, 12 and 14 */
+    /* 0x10 */ s8 rowsUnlocked[3]; /* each nonzero step grows the source list: 3 rows, then 6, 12 and 14;
+                                      also the saved switch of each option row, in row order */
     /* 0x13 */ u8 searchEnabled;
     /* 0x14 */ u8 unk14;
     /* 0x15 */ s8 unk15;

@@ -31603,12 +31603,12 @@
     },
     {
       "address": "0x164490",
-      "function": "FUN_00164490",
+      "function": "messageBannerDrawCounterPlates",
       "module": "_code",
-      "object": "build/obj/_code/0016/FUN_00164490.o",
+      "object": "build/obj/_code/0016/messageBannerDrawCounterPlates.o",
       "size": 1432,
-      "source": "src/_code/0016/FUN_00164490.cpp",
-      "target": "orig/target/_code/0016/FUN_00164490.o",
+      "source": "src/_code/0016/messageBannerDrawCounterPlates.cpp",
+      "target": "orig/target/_code/0016/messageBannerDrawCounterPlates.o",
       "thumb": false
     },
     {
@@ -41726,12 +41726,12 @@
     {
       "address": "0x19cbf8",
       "file": "AsdSDK/Source/Gfx/Model/AsdModel",
-      "function": "FUN_0019cbf8",
+      "function": "asdMdlNodeBuildMotionTables",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0019cbf8.o",
+      "object": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdMdlNodeBuildMotionTables.o",
       "size": 1504,
-      "source": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0019cbf8.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0019cbf8.o",
+      "source": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdMdlNodeBuildMotionTables.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdMdlNodeBuildMotionTables.o",
       "thumb": false
     },
     {
@@ -64689,12 +64689,12 @@
     },
     {
       "address": "0x29d760",
-      "function": "FUN_0029d760",
+      "function": "MAPIF_DrawUp",
       "module": "_code",
-      "object": "build/obj/_code/0029/FUN_0029d760.o",
+      "object": "build/obj/_code/0029/MAPIF_DrawUp.o",
       "size": 140,
-      "source": "src/_code/0029/FUN_0029d760.cpp",
-      "target": "orig/target/_code/0029/FUN_0029d760.o",
+      "source": "src/_code/0029/MAPIF_DrawUp.cpp",
+      "target": "orig/target/_code/0029/MAPIF_DrawUp.o",
       "thumb": false
     },
     {
@@ -66110,12 +66110,12 @@
     },
     {
       "address": "0x2a968c",
-      "function": "FUN_002a968c",
+      "function": "uniteDrawSkillInheritancePanel",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002a968c.o",
+      "object": "build/obj/_code/002a/uniteDrawSkillInheritancePanel.o",
       "size": 2456,
-      "source": "src/_code/002a/FUN_002a968c.cpp",
-      "target": "orig/target/_code/002a/FUN_002a968c.o",
+      "source": "src/_code/002a/uniteDrawSkillInheritancePanel.cpp",
+      "target": "orig/target/_code/002a/uniteDrawSkillInheritancePanel.o",
       "thumb": false
     },
     {
@@ -102129,7 +102129,7 @@
       "function": "FUN_00345098",
       "module": "_code",
       "object": "build/obj/_code/0034/FUN_00345098.o",
-      "size": 52,
+      "size": 60,
       "source": "src/_code/0034/FUN_00345098.cpp",
       "target": "orig/target/_code/0034/FUN_00345098.o",
       "thumb": false
@@ -113794,12 +113794,12 @@
     },
     {
       "address": "0x387bb8",
-      "function": "FUN_00387bb8",
+      "function": "campCecEditRefreshState",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_00387bb8.o",
+      "object": "build/obj/_code/0038/campCecEditRefreshState.o",
       "size": 384,
-      "source": "src/_code/0038/FUN_00387bb8.cpp",
-      "target": "orig/target/_code/0038/FUN_00387bb8.o",
+      "source": "src/_code/0038/campCecEditRefreshState.cpp",
+      "target": "orig/target/_code/0038/campCecEditRefreshState.o",
       "thumb": false
     },
     {
@@ -125315,12 +125315,12 @@
     },
     {
       "address": "0x3c9354",
-      "function": "FUN_003c9354",
+      "function": "uniteInheritanceUpdateSkillList",
       "module": "_code",
-      "object": "build/obj/_code/003c/FUN_003c9354.o",
+      "object": "build/obj/_code/003c/uniteInheritanceUpdateSkillList.o",
       "size": 1896,
-      "source": "src/_code/003c/FUN_003c9354.cpp",
-      "target": "orig/target/_code/003c/FUN_003c9354.o",
+      "source": "src/_code/003c/uniteInheritanceUpdateSkillList.cpp",
+      "target": "orig/target/_code/003c/uniteInheritanceUpdateSkillList.o",
       "thumb": false
     },
     {
@@ -137515,12 +137515,12 @@
     },
     {
       "address": "0x422534",
-      "function": "FUN_00422534",
+      "function": "s4FsReaderThreadMain",
       "module": "_code",
-      "object": "build/obj/_code/0042/FUN_00422534.o",
+      "object": "build/obj/_code/0042/s4FsReaderThreadMain.o",
       "size": 276,
-      "source": "src/_code/0042/FUN_00422534.cpp",
-      "target": "orig/target/_code/0042/FUN_00422534.o",
+      "source": "src/_code/0042/s4FsReaderThreadMain.cpp",
+      "target": "orig/target/_code/0042/s4FsReaderThreadMain.o",
       "thumb": false
     },
     {
@@ -159375,12 +159375,12 @@
     },
     {
       "address": "0x49e3f8",
-      "function": "FUN_0049e3f8",
+      "function": "listPanelDraw",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_0049e3f8.o",
+      "object": "build/obj/_code/0049/listPanelDraw.o",
       "size": 1004,
-      "source": "src/_code/0049/FUN_0049e3f8.cpp",
-      "target": "orig/target/_code/0049/FUN_0049e3f8.o",
+      "source": "src/_code/0049/listPanelDraw.cpp",
+      "target": "orig/target/_code/0049/listPanelDraw.o",
       "thumb": false
     },
     {
@@ -168613,12 +168613,12 @@
     },
     {
       "address": "0x4f2708",
-      "function": "FUN_004f2708",
+      "function": "btlCameraCanAdvance",
       "module": "_code",
-      "object": "build/obj/_code/004f/FUN_004f2708.o",
+      "object": "build/obj/_code/004f/btlCameraCanAdvance.o",
       "size": 284,
-      "source": "src/_code/004f/FUN_004f2708.cpp",
-      "target": "orig/target/_code/004f/FUN_004f2708.o",
+      "source": "src/_code/004f/btlCameraCanAdvance.cpp",
+      "target": "orig/target/_code/004f/btlCameraCanAdvance.o",
       "thumb": false
     },
     {

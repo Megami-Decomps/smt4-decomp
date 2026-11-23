@@ -265,6 +265,12 @@ struct UniteChainGroupA {
     u8 unk18[0x10];
 };
 
+/* The skill inheritance screen's eight result slots (Apocalypse), copied as one object when the
+ * screen closes the gaps between the chosen skills. */
+struct UniteSkillSlots {
+    /* 0x00 */ u16 ids[8];          /* 0 = empty */
+};
+
 /* The fusion screen's work (Apocalypse layout, 0x92C0 bytes, kept by g_unite). The first 0x438 bytes
  * are laid out as in Shin Megami Tensei IV. */
 struct UniteWorkA {
@@ -338,8 +344,13 @@ struct UniteWorkA {
         } selectionA;
         struct {
             /* 0x0438 */ u8 unk0438BeforePairs[0xf80];
-            /* 0x13B8 */ UnitePairEntryIV pairs[1];
-            /* 0x13C0 */ u8 unk13c0[0x5408];
+            /* 0x13B8 */ union {
+                UnitePairEntryIV pairs[1];
+                UnitePairEntryIV selected;     /* the pair picked for the result (uniteConfirmResultPair) */
+            };
+            /* 0x13C0 */ u8 unk13c0[0x3E78];
+            /* 0x5238 */ u16 previewIds[1];     /* the demons a preview shows, by pair kind */
+            /* 0x523A */ u8 unk523a[0x158E];
             /* 0x67C8 */ s32 unk67C8;
             /* 0x67CC */ ScrollSelection pairList;
             /* 0x6830 */ s8 pairKind;
@@ -450,7 +461,10 @@ struct UniteWorkA {
         /* the skill inheritance screen: the eight slots the result learns and the candidate list */
         struct {
             u8 prefix438[0x8728];
-            /* 0x8B60 */ u16 slots[8];             /* 0 = empty */
+            union {
+                /* 0x8B60 */ u16 slots[8];         /* 0 = empty */
+                /* 0x8B60 */ UniteSkillSlots slotSet; /* the same, as the object the screen copies whole */
+            };
             /* 0x8B70 */ u16 skills[0x60];         /* the candidate skills */
             /* 0x8C30 */ u16 extraSkills[0x60];    /* listed after the candidates; 0 ends the list */
             /* 0x8CF0 */ u16 mergedSkills[0x60];   /* scratch: the initial and candidate skills without repeats */
@@ -544,7 +558,7 @@ typedef char UniteWorkOptionListIVOffsets[
     offsetof(UniteWork, sprites.pulse) == 0x13C && offsetof(UniteWork, sprites.open) == 0x1C8 && offsetof(UniteWork, touchIV.scrollUpRegion) == 0x472 &&
     offsetof(UniteWork, touchIV.scrollThumbRegion) == 0x476 && offsetof(UniteWork, optionListIV.ids) == 0x9468 &&
     offsetof(UniteWork, optionListIV.list) == 0x9508 ? 1 : -1];
-typedef char UniteWorkPairSortOffsetCheck[offsetof(UniteWorkA, pairSort.pairs) == 0x13B8 && offsetof(UniteWorkA, pairSort.sortedPairs) == 0x6832 && offsetof(UniteWorkA, pairSort.sortedCount) == 0x73EC && offsetof(UniteWorkA, pairSort.pairScores) == 0x73F0 ? 1 : -1];
+typedef char UniteWorkPairSortOffsetCheck[offsetof(UniteWorkA, pairSort.pairs) == 0x13B8 && offsetof(UniteWorkA, pairSort.previewIds) == 0x5238 && offsetof(UniteWorkA, pairSort.sortedPairs) == 0x6832 && offsetof(UniteWorkA, pairSort.sortedCount) == 0x73EC && offsetof(UniteWorkA, pairSort.pairScores) == 0x73F0 ? 1 : -1];
 typedef char UniteWorkIVResultOffsetCheck[offsetof(UniteWork, resultSelectionIV.unit) == 0x6674 &&
     offsetof(UniteWork, resultIndex) == 0x9458 && offsetof(UniteWork, resultLevel) == 0x945C &&
     offsetof(UniteWork, unk9464) == 0x9464 ? 1 : -1];

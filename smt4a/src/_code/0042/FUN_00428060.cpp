@@ -1,4 +1,4 @@
-/* NON_MATCHING: the owner status is an nn::Result from a callee declared returning nn::Result (classes/WindowStatus.h), which fixes retail's lsrs-before-copy order; remaining: output/text saved registers (retail r7/r6, ours r6/r7). */
+/* NON_MATCHING: armcc saves the owner before the output and text arguments; retail saves it after them. */
 #include "classes/WindowStatus.h"
 #include "ui/FormattedNumericEntry.h"
 #include "nn/Result.h"

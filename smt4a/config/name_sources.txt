@@ -9040,3 +9040,17 @@
 003c2690 btlPartyDisplayDrawGauge inferred draws the party display's eight-segment gauge (w84-f2)
 002b67a0 mapEnemyPlaceFromRows inferred places the visible enemies from the map's placement rows (w84-f2)
 004ea634 btlAiCureSkillHasTarget inferred AI test for whether a cure-category skill has a target (w84-f2)
+00588fc8 DAT_00588fc8 inferred unnamed, to be renamed in the next row
+00588fc8 g_soundTestWork inferred the sound test's work block (SoundTestWork), IV's g_soundTestWork (w85-mg)
+0029d760 MAPIF_DrawUp inferred the map interface's upper-screen draw task, registered as "MAPIF U"; IV's MAPIF_DrawUp (w85-s1)
+00387bb8 campCecEditRefreshState inferred StreetPass edit screen's handler that waits for a refresh command and repopulates the character panel (w85-s1)
+004f2708 btlCameraCanAdvance inferred whether the battle camera may advance: battle masks, the script unit and the camera's flags (w85-s2)
+00422534 s4FsReaderThreadMain inferred twin of smt4 s4FsReaderThreadMain
+0019cbf8 asdMdlNodeBuildMotionTables inferred twin of smt4 asdMdlNodeBuildMotionTables (same rewrite)
+00164490 messageBannerDrawCounterPlates inferred draws the message banner's counter plates and popup value (w85-f1)
+002a968c uniteDrawSkillInheritancePanel inferred draws the fusion skill inheritance panel (w85-f1)
+003c9354 uniteInheritanceUpdateSkillList inferred updates the fusion skill inheritance list (w85-f2)
+0049e3f8 listPanelDraw inferred draws a list panel's rows by kind (w85-f2)
+00635e08 g_asdModelSlotBanks inferred twin of smt4 g_asdModelSlotBanks: the banks after g_asdModelBanks (w85-f2)
+00636310 g_asdModelBanks2 inferred twin of smt4 g_asdModelBanks2
+00636818 g_asdModelSlotBanks2 inferred twin of smt4 g_asdModelSlotBanks2

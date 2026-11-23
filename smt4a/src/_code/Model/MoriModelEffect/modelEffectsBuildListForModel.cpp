@@ -1,4 +1,4 @@
-/* NON_MATCHING: instruction scheduling of the first field copy (retail moves the new entry into r7 before loading the source id) */
+/* NON_MATCHING: retail copies the flags and the word at 0x08 through r1; the build uses r0. */
 #include "AsdSDK/AsdDebug.h"
 #include "shard/S1ModelEffect.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -46,10 +46,7 @@ void modelEffectsBuildListForModel(ModelEffects *effects, u32 modelId)
                 memory->unk0C = NULL;
             }
             ModelEffectEntry *copy = memory;
-            copy->id = source->id;
-            copy->flags = source->flags;
-            copy->unk08 = source->unk08;
-            copy->unk0C = effPartClone(source->unk0C);
+            modelEffectCopyEntry(copy, source);
             list->items[n++] = copy;
         }
     }

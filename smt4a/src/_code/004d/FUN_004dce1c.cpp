@@ -67,7 +67,7 @@ void btlQueueDuplicateSuppressedAction(s32 a, s32 b, s32 c);
 void FUN_004fbeac(s32 a, BtlAiAction *action, s32 b, s32 c, s32 d);
 void FUN_004fd508(s32 a, BtlAiAction *action, s32 kind, u32 uiIndex, s32 flag);
 void FUN_004feecc(s32 a, s32 b);
-s32 FUN_004f2708(BtlCamera *camera, BtlBattleData *data, s32 flag);
+s32 btlCameraCanAdvance(BtlCamera *camera, BtlBattleData *data, s32 flag);
 s32 isEntryUsable(s32 event);
 s32 gameProgressIsAdvanced(void);
 s32 lcgRandomRange(u32 limit);
@@ -84,7 +84,7 @@ void FUN_004dce1c(BtlUnitHandle *handle, BtlAiAction *action)
             return;
         }
     } else if ((action->flags & 0x2000) == 0) {
-        if (g_btlCamera->unk7cc >= 0 && FUN_004f2708(g_btlCamera, handle->data, 1) != 0) {
+        if (g_btlCamera->unk7cc >= 0 && btlCameraCanAdvance(g_btlCamera, handle->data, 1) != 0) {
             btlQueueDuplicateSuppressedAction(0, 0, 0);
         }
         FUN_004feecc(1, 0);

@@ -24,9 +24,10 @@ later rows; `--keep` still requires a strictly better raw score.
 
 `--flags` scores, instead of variants, the current source under other compiler flags (-O2/-O3,
 -Otime/-Ospace, --fpu=softvfp and their combinations) and in a `--multifile` run with each direct
-callee that has a unit, without editing config/project.json. These are diagnostics: a flag or a
-multifile partner that helps is a lead, and needs the evidence docs/matching-guide.md ("Compiler and
-flags") asks for before it goes into the config.
+callee that has a unit (all of them once more with autoinline on), and for a unit in a multifile run or
+a translation unit with the other `autoinline` setting, without editing config/project.json. These are
+diagnostics: a flag, a multifile partner or an autoinline setting that helps is a lead, and needs the
+evidence docs/matching-guide.md ("Compiler and flags") asks for before it goes into the config.
 """
 
 import argparse
@@ -155,7 +156,8 @@ def load_variants(spec, src):
 
 
 def flag_probes(trial, src):
-    """(label, unit copy) pairs: the -O2/-O3 x -Otime/-Ospace x VFP/softvfp grid, then multifile."""
+    """(label, unit copy) pairs: the -O2/-O3 x -Otime/-Ospace x VFP/softvfp grid, then multifile and
+    autoinline."""
     unit = trial.unit
     base = list(unit.get("cflags", trial.build.COMPILER["cflags"]))
     rest = [f for f in base if not OPTIMISE.match(f) and not f.startswith("--fpu=")]
@@ -167,11 +169,20 @@ def flag_probes(trial, src):
     together = list(unit.get("multifile", ()))
     if together:
         probes.append(("without multifile", {k: v for k, v in unit.items() if k != "multifile"}))
+    # The other autoinline setting (build.py's "autoinline") for a multifile run or a translation unit.
+    shared = sum(u["source"] == unit["source"] for u in trial.build.PROJECT["units"]) > 1
+    if together or shared:
+        autoinline = not unit.get("autoinline", not together)
+        probes.append((f"autoinline {'on' if autoinline else 'off'}", dict(unit, autoinline=autoinline)))
     callees = [c for c in trial.callees(src) if c not in together]
     for callee in callees:
         probes.append((f"multifile +{callee}", dict(unit, multifile=together + [callee])))
     if len(callees) > 1:
         probes.append(("multifile +all " + str(len(callees)), dict(unit, multifile=together + callees)))
+    # The widest run again with autoinline on: a caller can keep registers across inlined helpers.
+    if callees and unit.get("autoinline") is not True:
+        label = "multifile +all " + str(len(callees)) if len(callees) > 1 else f"multifile +{callees[0]}"
+        probes.append((label + " autoinline", dict(unit, multifile=together + callees, autoinline=True)))
     return probes
 
 
@@ -183,7 +194,7 @@ def main():
     parser.add_argument("--jobs", "-j", type=int, default=os.cpu_count() or 2)
     parser.add_argument("--show", type=int, default=0, metavar="K", help="print the diffs of the best K")
     parser.add_argument("--keep", action="store_true", help="write the best variant to the source if strictly better")
-    parser.add_argument("--flags", action="store_true", help="diagnostics: score the source under other cflags and multifile")
+    parser.add_argument("--flags", action="store_true", help="diagnostics: score the source under other cflags, multifile and autoinline")
     parser.add_argument("--shape", action="store_true", help="also score with branch targets/pc offsets ignored and rank by it")
     parser.add_argument("--root", type=Path, default=TOOLS.parent, help=argparse.SUPPRESS)  # another checkout
     args = parser.parse_args()
@@ -233,7 +244,7 @@ def main():
           f"{'probes' if args.flags else 'variants'} and the baseline, {len(results)} compiled"
           + ("; scores shown as shape/raw" if args.shape else ""))
     if args.flags:
-        print("DIAGNOSTICS ONLY: a flag or multifile partner that scores better is a lead, not evidence; see "
+        print("DIAGNOSTICS ONLY: a flag, multifile partner or autoinline setting that scores better is a lead, not evidence; see "
               "docs/matching-guide.md (\"Compiler and flags\") before changing config/project.json")
     width = max(len(label) for _i, label, _r in rows)
     for _index, label, result in order:

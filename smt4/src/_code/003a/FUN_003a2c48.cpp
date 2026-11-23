@@ -67,7 +67,7 @@ void sub10OwnerStart(const u8 *selection); // declcheck: local (the shared decla
 void releaseEntriesA(Obj55ca08 *selection); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: more than one instance of overloaded function "sub10OwnerStart" has "C" linkage)
 void ifTouchRegionClearAll(AppraisePanel *panel);
 s32 inputConfirmPressed(void);
-void FUN_0029212c(u32 id);
+void buttonHelpShowEntryDescription(u32 id);
 void messageMainFinishWindow(void);
 s32 messageMainTargetIsClear(void);
 u32 messageBannerSetCountdown(u32 value, u8 flag);
@@ -139,7 +139,7 @@ void FUN_003a2c48(AppraiseScene *scene)
         sub10OwnerStart(reinterpret_cast<const u8 *>(&scene->holder));
         uiAnimationAdvanceChannel(scene->animations, 2);
         uiAnimationAdvanceChannel(scene->animations, 3);
-        FUN_0029212c(scene->entries[flaggedValueHolderGetTotal(&scene->holder)].id);
+        buttonHelpShowEntryDescription(scene->entries[flaggedValueHolderGetTotal(&scene->holder)].id);
         if (inputConfirmPressed()) {
             FUN_002328b4();
             messageMainFinishWindow();

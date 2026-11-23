@@ -259,7 +259,7 @@ extern int animationIsReferencedClipComplete(unsigned int);
 /* Supplied declaration required: btlCameraSetFormationSlot. */
 /* Supplied declaration required: flags64CSetTarget. */
 /* Supplied declaration required: cameraResetTransitionVectors. */
-extern int FUN_004f2708(int, int, unsigned int);
+extern int btlCameraCanAdvance(int, int, unsigned int);
 extern int btlCameraHasDefaultParameters(int);
 /* Supplied declaration required: FUN_004f41b0. */
 /* Supplied declaration required: FUN_004f5238. */
@@ -912,7 +912,7 @@ joined_r0x0040ec14:
       temp_v6 = 1;
     }
     if (((-1 < *(int *)(g_btlCamera + 0x7cc)) &&
-        (temp_v9 = FUN_004f2708(g_btlCamera,temp_v3,0), temp_v9 != 0)) &&
+        (temp_v9 = btlCameraCanAdvance(g_btlCamera,temp_v3,0), temp_v9 != 0)) &&
        (((*(unsigned int *)(temp_v3 + 0x45a0) & DAT_00571370) == 0 &&
          (*(unsigned int *)(temp_v3 + 0x45a4) & DAT_00571374) == 0 ||
         (temp_v9 = btlCameraHasDefaultParameters(g_btlCamera), temp_v9 == 0)))) {

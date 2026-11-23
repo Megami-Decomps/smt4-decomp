@@ -149,7 +149,7 @@ void FUN_003a8fe0(BibleAnalyzeScreen *screen)
         Obj42242c *window = new (allocationOwner) Obj42242c;
         screen->controller = window;
         window->initialize(screen->rangeBase);
-        window->state |= 0x1000;
+        window->state.flags |= 0x1000;
         window->rectangle = screen->rectangle;
         limit = screen->devilCount >= BIBLE_LIST_LIMIT ? BIBLE_LIST_LIMIT : screen->devilCount;
         messageIdListInit(screen->listView, 0x1D, 0x40E, limit);

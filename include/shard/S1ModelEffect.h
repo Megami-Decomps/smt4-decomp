@@ -22,6 +22,15 @@ typedef char ModelEffectEntryLayoutCheck[
     offsetof(ModelEffectEntry, flags) == 4 && offsetof(ModelEffectEntry, unk08) == 8 &&
     offsetof(ModelEffectEntry, unk0C) == 0xC ? 1 : -1];
 
+/* Copy an entry's metadata and clone the owned effect parts. */
+static void modelEffectCopyEntry(ModelEffectEntry *entry, const ModelEffectEntry *source)
+{
+    entry->id = source->id;
+    entry->flags = source->flags;
+    entry->unk08 = source->unk08;
+    entry->unk0C = effPartClone(source->unk0C);
+}
+
 typedef UnitExtraData ModelEffectTable;
 typedef ModelUnitExtra ModelEffects;
 

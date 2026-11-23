@@ -15,7 +15,8 @@ Rules (`check`):
 - each unit of a TU has its own definition in the file, found by its name (a mangled name by its
   `Class::method`), except a member defined in its class's header and one function at most (the file's
   static initialiser, which armcc generates); each has its own `object` and `target`;
-- the units of a TU agree on `cflags`, `thumb` and `multifile`: the original compiled the file once;
+- the units of a TU agree on `cflags`, `thumb`, `multifile` and `autoinline`: the original compiled the
+  file once;
 - objdiff.json's entries name the unit's object as `base_path` and its source as `source_path` (`sync`
   rewrites the source paths).
 
@@ -38,7 +39,7 @@ from cxxnames import demangle  # noqa: E402
 
 ROOT = Path(os.path.abspath(__file__)).parent.parent
 GAMES = ("smt4", "smt4a")
-SAME = ("cflags", "thumb", "multifile")
+SAME = ("cflags", "thumb", "multifile", "autoinline")
 
 
 def load_project(game, root=ROOT):

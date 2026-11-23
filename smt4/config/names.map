@@ -6481,3 +6481,11 @@
 0022daac bibleDevilDrawName
 0022d9c8 bibleDevilDrawStat
 002ca7fc titleMainDrawLower
+001ea8fc soundTestCreate
+002d400c lmapSceneModelSwapStep
+0034e020 s4FsReaderThreadMain
+00205cc8 btlUiStepNumberPopupsAndMarkers
+00124d24 messageBannerDrawCounterPlates
+001049ac asdModelSystemStart
+0029212c buttonHelpShowEntryDescription
+001dddd8 uniteDrawListPanel

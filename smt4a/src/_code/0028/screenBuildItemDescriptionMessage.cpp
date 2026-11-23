@@ -1,330 +1,199 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `screenBuildItemDescriptionMessage` (_code @ 0x28a888, 0x7a0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "code/Code002e.h"
 #include <stdio.h>
-#include "romwright_types.h"
+#include "addon/AocEntryKind.h"
+#include "code/Code002e.h"
 #include "code/Code0035.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "gamedata/ConsumableRecordA.h"
+#include "gamedata/EquipmentRecordA.h"
+#include "gamedata/SkillDataLookup.h"
+#include "shard/W5_W5Match7_EntrySort.h"
 
 extern "C" {
 
-int itemTableGetItemRecord(void);
-int itemTableGetEquipmentRecord(void);
-int skillDataFindById(void);
-int battleAttributeFormatName(...);
-int skillFormatTargetLabel(...);
-int textFormatFullWidthNumber(...);
-int sysMemClear(...);
-int scrSetStringSlot(...);
-int equipmentGetCappedUpgradeBonuses(...);
+s32 itemGetStackLimit(u32 id);
+void textFormatFullWidthNumber(char *output, s32 value);
+s32 battleAttributeFormatName(char *out, s32 kind);
+void skillFormatTargetLabel(char *buffer, s32 target);
 
-/* stack frame of param_1: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int spA8; /* 0xa8: local_a8 */
-    unsigned int spAC; /* 0xac: local_ac */
-    unsigned int spB0; /* 0xb0: local_b0 */
-    unsigned int spB4; /* 0xb4: local_b4 */
-    unsigned int spB8; /* 0xb8: local_b8 */
-    unsigned int spBC; /* 0xbc: local_bc */
-    unsigned int spC0; /* 0xc0: local_c0 */
-    unsigned int sp144; /* 0x144: local_144 */
-    unsigned int sp148; /* 0x148: local_148 */
-} param_1_stack;
-
-extern unsigned char LAB_0028b028; /* 0x28b028 */
-extern unsigned char LAB_0028b030; /* 0x28b030 */
-extern unsigned char LAB_0028b038; /* 0x28b038 */
-extern unsigned char LAB_0028b03c; /* 0x28b03c */
-extern unsigned char LAB_0028b04c; /* 0x28b04c */
-extern unsigned char LAB_0028b05c; /* 0x28b05c */
-extern unsigned char LAB_0028b068; /* 0x28b068 */
-extern unsigned char LAB_0028b078; /* 0x28b078 */
-extern unsigned char LAB_0028b084; /* 0x28b084 */
-
-extern unsigned int aocIndexValueOrDefault(void);
-extern unsigned int itemGetStackLimit(int);
-/* Supplied declaration required: itemTableGetItemRecord. */
-/* Supplied declaration required: itemTableGetEquipmentRecord. */
-extern unsigned int aocEntryGetKind(int);
-/* Supplied declaration required: skillDataFindById. */
-/* Supplied declaration required: battleAttributeFormatName. */
-/* Supplied declaration required: skillFormatTargetLabel. */
-/* Supplied declaration required: textFormatFullWidthNumber. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: scrSetStringSlot. */
-/* Supplied declaration required: entryTableResetAndInit. */
-/* Supplied declaration required: equipmentGetCappedUpgradeBonuses. */
-
-
-/* WARNING: Type propagation algorithm not settling */
-
-void screenBuildItemDescriptionMessage(int param_1)
-
+/* Writes `value` in full-width digits with its sign: ±０, ＋n or －n. */
+static void textFormatSignedFullWidthNumber(char *output, s32 value)
 {
-/* irregular: 12 native warning(s); review required */
-  unsigned char temp_v0;
-  char temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned char *puVar8;
-  int temp_v7;
-  int temp_v8;
-  unsigned char *puVar11;
-  int temp_v9;
-  char temp_v10 [4];
-  unsigned int temp_v11;
-  unsigned char temp_v12 [128];
-  short temp_v13 [6];
-  int temp_v14;
-  unsigned int temp_v15;
-  unsigned int temp_v16;
-  unsigned int temp_v17;
-  char acStack_a4 [21];
-  char acStack_8f [21];
-  char acStack_7a [21];
-  char acStack_65 [21];
-  char acStack_50 [24];
-  unsigned char temp_v18 [20];
-  
-  sysMemClear(temp_v12,0x80);
-  temp_v3 = aocEntryGetKind(param_1);
-  switch(temp_v3) {
-  default:
-    return;
-  case 1:
-  case 0xc:
-    temp_v6 = param_1;
-    itemTableGetItemRecord();
-    if (*(short *)(temp_v6 + 0x4a) != 0) {
-      temp_v4 = gameSaveGetPoints();
-      entryTableResetAndInit(0x24,temp_v4,0xffffffff,0);
-      temp_v4 = (unsigned int)*(unsigned short *)(temp_v6 + 0x4a) + temp_v4;
-      if (temp_v4 >= 10000) {
-        temp_v4 = 9999;
-      }
-      entryTableResetAndInit(0x25,temp_v4,0xffffffff,0);
-      return;
+    char number[20];
+    s32 magnitude = value;
+
+    if (value < 0) {
+        magnitude = -value;
     }
-    temp_v5 = (unsigned int)*(unsigned short *)(temp_v6 + 0x32);
-    if (temp_v5 != 0) {
-      skillDataFindById();
-      skillFormatTargetLabel(temp_v12,(*(unsigned int *)(temp_v5 + 0x28) & 0x1ff) >> 5);
+
+    textFormatFullWidthNumber(number, magnitude);
+    if (value == 0) {
+        sprintf(output, "\x81\x7D\x82\x4F"); /* ±０ */
+    } else if (value > 0) {
+        sprintf(output, "\x81\x7B%s", number); /* ＋%s */
+    } else {
+        sprintf(output, "\x81\x7C%s", number); /* －%s */
     }
-    else if ((*(unsigned int *)(temp_v6 + 0x68) & 0x20) != 0) {
-      sprintf((char *)temp_v12,"\x82o\x82\x81\x82\x92\x82\x94\x82\x8e\x82\x85\x82\x92");
-    }
-    else if ((*(unsigned char *)(temp_v6 + 0x3a) & 0x80) != 0) {
-      sprintf((char *)temp_v12,"\x82`\x82\x8c\x82\x8c\x81@\x82\x81\x82\x8c\x82\x8c\x82\x89\x82\x85\x82\x93");
-    }
-    else {
-      sprintf((char *)temp_v12,"\x82P\x81@\x82\x81\x82\x8c\x82\x8c\x82\x99");
-    }
-    scrSetStringSlot(0x24,temp_v12);
-    temp_v3 = itemGetStackLimit(param_1);
-    entryTableResetAndInit(0x25,temp_v3,0xffffffff,0);
-    return;
-  case 2:
-  case 3:
-  case 8:
-    itemTableGetEquipmentRecord();
-    entryTableResetAndInit(0x24,*(unsigned int *)(param_1 + 0x24) & 0x3ff,0xffffffff,0);
-    temp_v0 = *(unsigned char *)(param_1 + 0x28);
-    if ((temp_v0 & 0xf) == temp_v0 >> 4) {
-      entryTableResetAndInit(0x25,temp_v0 & 0xf,0xffffffff,0);
-    }
-    else {
-      textFormatFullWidthNumber(temp_v10,temp_v0 & 0xf);
-      textFormatFullWidthNumber(temp_v13,*(unsigned char *)(param_1 + 0x28) >> 4);
-      sprintf((char *)temp_v12,"%s\x81`%s",temp_v10,temp_v13);
-      scrSetStringSlot(0x25,temp_v12);
-    }
-    battleAttributeFormatName(temp_v12,*(unsigned int *)(param_1 + 0x24) >> 0x14);
-    scrSetStringSlot(0x26,temp_v12);
-    skillFormatTargetLabel(temp_v12,*(unsigned char *)(param_1 + 0x29));
-    scrSetStringSlot(0x27,temp_v12);
-    if (*(char *)(param_1 + 0x2b) == '\0') {
-      sprintf((char *)temp_v12,"\x82m\x82\x8f\x82\x8e\x82\x85");
-    }
-    if (*(char *)(param_1 + 0x2b) == '\x01') {
-      sprintf((char *)temp_v12,"\x82h\x82\x8e\x82\x93\x82\x94\x82\x81\x82\x8e\x82\x94\x81@\x82j\x82\x89\x82\x8c\x82\x8c");
-    }
-    if (*(char *)(param_1 + 0x2b) == '\x05') {
-      sprintf((char *)temp_v12,"\x82o\x82\x8f\x82\x89\x82\x93\x82\x8f\x82\x8e");
-    }
-    if (*(char *)(param_1 + 0x2b) == '\x06') {
-      sprintf((char *)temp_v12,"\x82o\x82\x81\x82\x8e\x82\x89\x82\x83");
-    }
-    if (*(char *)(param_1 + 0x2b) == '\a') {
-      sprintf((char *)temp_v12,"\x82r\x82\x8c\x82\x85\x82\x85\x82\x90");
-    }
-    if (*(char *)(param_1 + 0x2b) == '\b') {
-      sprintf((char *)temp_v12,"\x82a\x82\x89\x82\x8e\x82\x84");
-    }
-    if (*(char *)(param_1 + 0x2b) == '\t') {
-      sprintf((char *)temp_v12,"\x82r\x82\x89\x82\x83\x82\x8b");
-    }
-    if (*(char *)(param_1 + 0x2b) == '\v') {
-      sprintf((char *)temp_v12,"\x82b\x82\x88\x82\x81\x82\x92\x82\x8d");
-    }
-    if (*(char *)(param_1 + 0x2b) == '\f') {
-      sprintf((char *)temp_v12,"\x82c\x82\x81\x82\x9a\x82\x85");
-    }
-    if (*(char *)(param_1 + 0x2b) == '\r') {
-      sprintf((char *)temp_v12,"\x82l\x82\x95\x82\x94\x82\x85");
-    }
-    temp_v3 = 0x28;
-    break;
-  case 4:
-  case 5:
-  case 6:
-  case 7:
-    temp_v6 = param_1;
-    itemTableGetEquipmentRecord();
-    temp_v16 = 0;
-    temp_v17 = 0;
-    temp_v14 = 0;
-    temp_v15 = 0;
-    temp_v13[0] = 0;
-    temp_v13[1] = 0;
-    temp_v13[2] = 0;
-    temp_v13[3] = 0;
-    temp_v13[4] = 0;
-    temp_v13[5] = 0;
-    equipmentGetCappedUpgradeBonuses(param_1,&temp_v14);
-    temp_v4 = 0;
-    temp_v13[1] = (*(unsigned short *)((unsigned char *)&temp_v15 + 2)) + *(char *)(temp_v6 + 0x32);
-    temp_v13[0] = (short)temp_v15 + *(char *)(temp_v6 + 0x31);
-    temp_v13[3] = (*(unsigned short *)((unsigned char *)&temp_v16 + 2)) + *(char *)(temp_v6 + 0x34);
-    temp_v13[2] = (short)temp_v16 + *(char *)(temp_v6 + 0x33);
-    temp_v13[4] = (short)temp_v17 + *(char *)(temp_v6 + 0x35);
-    do {
-      temp_v8 = (int)temp_v13[temp_v4];
-      temp_v9 = temp_v8;
-      if (temp_v8 < 0) {
-        temp_v9 = -temp_v8;
-      }
-      textFormatFullWidthNumber(temp_v18,temp_v9);
-      if (temp_v8 != 0) {
-        if (temp_v8 >= 1) {
-          sprintf((char *)temp_v12,"\x81{%s");
+}
+
+/* Fills the message string slots (0x24 up) the description of content entry `id` shows: an item's
+ * target and stack limit (or the points it awards), a weapon's power, hit range, attribute, target
+ * and ailment, or an armour's stat changes, affinities and modifier. */
+void screenBuildItemDescriptionMessage(s32 id)
+{
+    char text[128];
+
+    sysMemClear(text, sizeof(text));
+    switch (aocEntryGetKind(id)) {
+    case 1:
+    case 12: {
+        ConsumableRecordA *item = itemTableGetItemRecord(id);
+
+        if (item->points != 0) {
+            s32 points = gameSaveGetPoints();
+
+            entryTableResetAndInit(0x24, points, 0xFFFFFFFF, 0);
+            points += item->points;
+            points = points > 9999 ? 9999 : points;
+            entryTableResetAndInit(0x25, points, 0xFFFFFFFF, 0);
+            return;
         }
-        else {
-          sprintf((char *)temp_v12,(const char *)&LAB_0028b030);
+        if (item->skillId != 0) {
+            skillFormatTargetLabel(text, skillDataFindById(item->skillId)->effectProperties.targeting);
+        } else if (item->flags & 0x20) {
+            sprintf(text, "\x82\x6F\x82\x81\x82\x92\x82\x94\x82\x8E\x82\x85\x82\x92"); /* Ｐａｒｔｎｅｒ */
+        } else if (item->groupFlags & 0x80) {
+            sprintf(text, "\x82\x60\x82\x8C\x82\x8C\x81\x40\x82\x81\x82\x8C\x82\x8C\x82\x89\x82\x85\x82\x93"); /* Ａｌｌ　ａｌｌｉｅｓ */
+        } else {
+            sprintf(text, "\x82\x50\x81\x40\x82\x81\x82\x8C\x82\x8C\x82\x99"); /* １　ａｌｌｙ */
         }
-      }
-      else {
-        sprintf((char *)temp_v12,(const char *)&LAB_0028b028);
-      }
-      scrSetStringSlot(temp_v4 + 0x24,temp_v12);
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 5);
-    sysMemClear(acStack_a4,0x6c);
-    temp_v4 = 0;
-    temp_v10[0] = '\0';
-    temp_v10[1] = '\0';
-    temp_v10[2] = '\0';
-    temp_v10[3] = '\0';
-    temp_v11 = 0;
-    do {
-      temp_v9 = temp_v6 + temp_v4 * 2;
-      temp_v1 = (char)temp_v4;
-      if (*(short *)(temp_v9 + 0x44) >> 10 == 4) {
-        acStack_a4[temp_v10[0]] = temp_v1;
-        temp_v10[0] = temp_v10[0] + '\x01';
-      }
-      if (*(short *)(temp_v9 + 0x44) >> 10 == 3) {
-        acStack_8f[temp_v10[1]] = temp_v1;
-        temp_v10[1] = temp_v10[1] + '\x01';
-      }
-      if (*(short *)(temp_v9 + 0x44) >> 10 == 1) {
-        acStack_7a[temp_v10[2]] = temp_v1;
-        temp_v10[2] = temp_v10[2] + '\x01';
-      }
-      if (*(short *)(temp_v9 + 0x44) >> 10 == 5) {
-        acStack_65[temp_v10[3]] = temp_v1;
-        temp_v10[3] = temp_v10[3] + '\x01';
-      }
-      if (*(short *)(temp_v9 + 0x44) >> 10 == 2) {
-        acStack_50[(char)temp_v11] = temp_v1;
-        temp_v11 = (unsigned int)(unsigned char)((char)temp_v11 + 1);
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 0x15);
-    temp_v9 = 0;
-    puVar11 = (unsigned char *)0x0;
-    temp_v4 = 0;
-    do {
-      if ('\0' < temp_v10[temp_v4]) {
-        if (0 < temp_v9) {
-          puVar8 = temp_v12 + (int)puVar11;
-          sprintf((char *)puVar8,(const char *)&LAB_0028b038);
-          puVar11 = puVar11 + (int)puVar8;
+        scrSetStringSlot(0x24, text);
+        entryTableResetAndInit(0x25, itemGetStackLimit(id), 0xFFFFFFFF, 0);
+        return;
+    }
+    case 2:
+    case 3:
+    case 8: {
+        EquipmentRecordA *weapon = itemTableGetEquipmentRecord(id);
+
+        entryTableResetAndInit(0x24, weapon->traitBits.group, 0xFFFFFFFF, 0);
+        u32 range = weapon->hitRange;
+        if ((range & 0xF) == range >> 4) {
+            entryTableResetAndInit(0x25, range & 0xF, 0xFFFFFFFF, 0);
+        } else {
+            char minimum[8], maximum[8];
+            textFormatFullWidthNumber(minimum, range & 0xF);
+            textFormatFullWidthNumber(maximum, weapon->hitRange >> 4);
+            sprintf(text, "%s\x81\x60%s", minimum, maximum); /* "%s～%s" */
+            scrSetStringSlot(0x25, text);
         }
-        if (temp_v4 != 0) {
-          if (temp_v4 != 1) {
-            if (temp_v4 != 2) {
-              if (temp_v4 != 3) {
-                if (temp_v4 == 4) {
-                  puVar8 = temp_v12 + (int)puVar11;
-                  sprintf((char *)puVar8,(const char *)&LAB_0028b078);
-                  puVar11 = puVar11 + (int)puVar8;
+        battleAttributeFormatName(text, weapon->traits >> 20);
+        scrSetStringSlot(0x26, text);
+        skillFormatTargetLabel(text, weapon->target);
+        scrSetStringSlot(0x27, text);
+        if (weapon->element == 0)
+            sprintf(text, "\x82\x6D\x82\x8F\x82\x8E\x82\x85"); /* Ｎｏｎｅ */
+        if (weapon->element == 1)
+            sprintf(text, "\x82\x68\x82\x8E\x82\x93\x82\x94\x82\x81\x82\x8E\x82\x94\x81\x40\x82\x6A\x82\x89\x82\x8C\x82\x8C"); /* Ｉｎｓｔａｎｔ　Ｋｉｌｌ */
+        if (weapon->element == 5)
+            sprintf(text, "\x82\x6F\x82\x8F\x82\x89\x82\x93\x82\x8F\x82\x8E"); /* Ｐｏｉｓｏｎ */
+        if (weapon->element == 6)
+            sprintf(text, "\x82\x6F\x82\x81\x82\x8E\x82\x89\x82\x83"); /* Ｐａｎｉｃ */
+        if (weapon->element == 7)
+            sprintf(text, "\x82\x72\x82\x8C\x82\x85\x82\x85\x82\x90"); /* Ｓｌｅｅｐ */
+        if (weapon->element == 8)
+            sprintf(text, "\x82\x61\x82\x89\x82\x8E\x82\x84"); /* Ｂｉｎｄ */
+        if (weapon->element == 9)
+            sprintf(text, "\x82\x72\x82\x89\x82\x83\x82\x8B"); /* Ｓｉｃｋ */
+        if (weapon->element == 11)
+            sprintf(text, "\x82\x62\x82\x88\x82\x81\x82\x92\x82\x8D"); /* Ｃｈａｒｍ */
+        if (weapon->element == 12)
+            sprintf(text, "\x82\x63\x82\x81\x82\x9A\x82\x85"); /* Ｄａｚｅ */
+        if (weapon->element == 13)
+            sprintf(text, "\x82\x6C\x82\x95\x82\x94\x82\x85"); /* Ｍｕｔｅ */
+        scrSetStringSlot(0x28, text);
+        break;
+    }
+    case 4:
+    case 5:
+    case 6:
+    case 7: {
+        EquipmentRecordA *armor = itemTableGetEquipmentRecord(id);
+        s16 bonuses[7] = { 0 };
+        s16 totals[5] = { 0 };
+
+        /* the five stat changes, upgrades included */
+        equipmentGetCappedUpgradeBonuses(id, bonuses);
+        for (s32 i = 0; i < 5; i++) {
+            totals[i] = bonuses[2 + i] + armor->statBonus[i];
+        }
+        for (s32 i = 0; i < 5; i++) {
+            textFormatSignedFullWidthNumber(text, totals[i]);
+            scrSetStringSlot(0x24 + i, text);
+        }
+
+        /* the affinities, grouped by state */
+        s8 lists[5][21];
+
+        sysMemClear(lists, 108); /* the lists and their padding */
+        s8 counts[5] = { 0 };
+        for (s32 i = 0; i < 21; i++) {
+            if (armor->affinities[i].raw >> 10 == 4) {
+                lists[0][counts[0]++] = i;
+            }
+            if (armor->affinities[i].raw >> 10 == 3) {
+                lists[1][counts[1]++] = i;
+            }
+            if (armor->affinities[i].raw >> 10 == 1) {
+                lists[2][counts[2]++] = i;
+            }
+            if (armor->affinities[i].raw >> 10 == 5) {
+                lists[3][counts[3]++] = i;
+            }
+            if (armor->affinities[i].raw >> 10 == 2) {
+                lists[4][counts[4]++] = i;
+            }
+        }
+
+        s32 groups = 0;
+        s32 length = 0;
+        for (s32 list = 0; list < 5; list++) {
+            if (counts[list] > 0) {
+                if (groups > 0) {
+                    length += sprintf(text + length, ", ");
                 }
-              }
-              else {
-                puVar8 = temp_v12 + (int)puVar11;
-                sprintf((char *)puVar8,(const char *)&LAB_0028b068);
-                puVar11 = puVar11 + (int)puVar8;
-              }
+                if (list == 0) {
+                    length += sprintf(text + length, "\x82\x63\x82\x92\x82\x81\x82\x89\x82\x8E: "); /* Ｄｒａｉｎ */
+                } else if (list == 1) {
+                    length += sprintf(text + length, "\x82\x71\x82\x85\x82\x90\x82\x85\x82\x8C: "); /* Ｒｅｐｅｌ */
+                } else if (list == 2) {
+                    length += sprintf(text + length, "\x82\x6D\x82\x95\x82\x8C\x82\x8C: "); /* Ｎｕｌｌ */
+                } else if (list == 3) {
+                    length += sprintf(text + length, "\x82\x71\x82\x85\x82\x93\x82\x89\x82\x93\x82\x94: "); /* Ｒｅｓｉｓｔ */
+                } else if (list == 4) {
+                    length += sprintf(text + length, "\x82\x76\x82\x85\x82\x81\x82\x8B: "); /* Ｗｅａｋ */
+                }
+                for (s32 i = 0; i < counts[list]; i++) {
+                    length += battleAttributeFormatName(text + length, lists[list][i]);
+                    if (i < 20 && lists[list][i + 1] > 0) {
+                        length += sprintf(text + length, "\x81\x5E"); /* ／ */
+                    }
+                }
+                groups++;
             }
-            else {
-              puVar8 = temp_v12 + (int)puVar11;
-              sprintf((char *)puVar8,(const char *)&LAB_0028b05c);
-              puVar11 = puVar11 + (int)puVar8;
-            }
-          }
-          else {
-            puVar8 = temp_v12 + (int)puVar11;
-            sprintf((char *)puVar8,(const char *)&LAB_0028b04c);
-            puVar11 = puVar11 + (int)puVar8;
-          }
         }
-        else {
-          puVar8 = temp_v12 + (int)puVar11;
-          sprintf((char *)puVar8,(const char *)&LAB_0028b03c);
-          puVar11 = puVar11 + (int)puVar8;
+        scrSetStringSlot(0x29, text);
+
+        if (armor->modifierId == 0) {
+            sprintf(text, "\x82\x6D\x82\x8F\x82\x8E\x82\x85"); /* Ｎｏｎｅ */
+        } else {
+            sprintf(text, "%s", aocIndexValueOrDefault(armor->modifierId));
         }
-        temp_v8 = 0;
-        if ('\0' < temp_v10[temp_v4]) {
-          temp_v2 = temp_v4 * 0x15 - 0xa4;
-          do {
-            temp_v7 = battleAttributeFormatName(temp_v12 + (int)puVar11,(int)acStack_a4[temp_v8 + temp_v2 + 0xa4]);
-            puVar11 = puVar11 + temp_v7;
-            if ((temp_v8 < 0x14) && ('\0' < acStack_a4[temp_v8 + temp_v2 + 0xa5])) {
-              puVar8 = temp_v12 + (int)puVar11;
-              sprintf((char *)puVar8,(const char *)&LAB_0028b084);
-              puVar11 = puVar11 + (int)puVar8;
-            }
-            temp_v8 = temp_v8 + 1;
-          } while (temp_v8 < temp_v10[temp_v4]);
-        }
-        temp_v9 = temp_v9 + 1;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 5);
-    scrSetStringSlot(0x29,temp_v12);
-    if (*(short *)(temp_v6 + 0x3a) != 0) {
-      temp_v3 = aocIndexValueOrDefault();
-      sprintf((char *)temp_v12,"%s",temp_v3);
+        scrSetStringSlot(0x2A, text);
+        break;
     }
-    else {
-      sprintf((char *)temp_v12,"\x82m\x82\x8f\x82\x8e\x82\x85");
     }
-    temp_v3 = 0x2a;
-  }
-  scrSetStringSlot(temp_v3,temp_v12);
-  return;
 }
 
 } /* extern "C" */

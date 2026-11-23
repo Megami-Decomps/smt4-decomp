@@ -19,7 +19,7 @@ int SBORROW4(...);
 int CONCAT44(int, double);
 int renderCtxSelectDisplayAreaForStereoMode(...);
 int textDrawString(...);
-int FUN_00164490(int);
+int messageBannerDrawCounterPlates(int);
 int texDrawCompositeSprite(int, int);
 int vec2GetXInt(...);
 int vec2GetYInt(...);
@@ -59,7 +59,7 @@ extern int FUN_00162848(unsigned int);
 /* Supplied declaration required: FUN_00163ec4. */
 /* Supplied declaration required: FUN_00164034. */
 /* Supplied declaration required: textDrawRangeFaded. */
-/* Supplied declaration required: FUN_00164490. */
+/* Supplied declaration required: messageBannerDrawCounterPlates. */
 extern int jobGetWork(void);
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: vec2GetXInt. */
@@ -127,7 +127,7 @@ char FUN_0014f3f4(void)
       temp_v0 = *(char *)(DAT_0057f590 + 0x91);
     }
     if (temp_v13 && temp_v0 != '\0') {
-      FUN_00164490(1);
+      messageBannerDrawCounterPlates(1);
     }
     if (*(char *)(DAT_0057f590 + 0x90) != '\0') {
       messageDrawDemonNoticeList();

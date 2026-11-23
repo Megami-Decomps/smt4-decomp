@@ -54,7 +54,7 @@ void campCecDestroyOverlay(s32 leaving)
             cecProcessCall2();
             cecProcessForward(&g_campCec.instance->ownRecord);
             if (gameDataGetRecordValue() == 0) {
-                rt_aeabi_memclr(g_campCec.instance->ownRecord.demon, 0x14);
+                rt_aeabi_memclr(&g_campCec.instance->ownRecord.demon, sizeof(CecReceivedDemon));
             }
         }
         for (i = 0; i < 0x20; i++) {

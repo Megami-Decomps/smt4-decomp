@@ -1,10 +1,10 @@
-#include "common.h"
+#include "sound/SoundTestWork.h"
 #include "AsdSDK/AsdDebugHooks.h"
 
 extern "C" {
 
 /* Job callback that only reaches a debug hook the release build removed. */
-u32 soundTestDrawJobUpdate(u32 job)
+s32 soundTestDrawJobUpdate(u32)
 {
     asdDebugHookVoid();
     return 0;

@@ -130,6 +130,13 @@ struct BtlUiNumberRequest {
 struct BtlUiNumberRequestRow {
     BtlUiNumberRequest entries[32];
 };
+/* IV queues eight requests per slot where Apocalypse queues 32. */
+struct BtlUiNumberRequestRowIV {
+    BtlUiNumberRequest entries[8];
+};
+struct BtlUiPositionRequestRowIV {
+    BtlUiPositionRequest entries[8];
+};
 /* The marker a position request shows (0xA0 bytes, one per slot). */
 struct BtlUiPositionMarker {
     /* 0x00 */ UiSpriteState sprite;
@@ -199,6 +206,25 @@ typedef struct BtlUiObjD {
             u8 prefix[0x61EC];
             BattleUiActionSlot slots[12];
         } actionRequests;
+        /* The marker each slot's position request shows (0xBF4C in BtlUi). */
+        struct {
+            u8 prefix[0x408C];
+            BtlUiPositionMarker markers[16];
+        } positionMarkers;
+        /* The queued number popups, with each slot's next request and request count (0xC9EC in BtlUi). */
+        struct {
+            u8 prefix[0x4B2C];
+            /* 0x4B2C */ BtlUiNumberRequestRowIV rows[16];
+            /* 0x572C */ s8 cursors[16];
+            /* 0x573C */ s8 counts[16];
+        } numberRequests;
+        /* The queued position markers, likewise (0xD60C in BtlUi). */
+        struct {
+            u8 prefix[0x574C];
+            /* 0x574C */ BtlUiPositionRequestRowIV rows[16];
+            /* 0x614C */ s8 cursors[16];
+            /* 0x615C */ s8 counts[16];
+        } positionRequests;
         /* The battle command window (0xC9D8 in BtlUi). */
         struct {
             u8 prefix[0x4B18];
@@ -226,6 +252,12 @@ typedef char BtlUiObjDAnimationOffsetsCheck[
     offsetof(BtlUiObjD, animationCounts.counts) == 0x573C &&
     sizeof(BtlUiAnimationMarker) == 0x18 &&
     sizeof(BtlUiAnimationMarkerRow) == 0xC0 && sizeof(BtlUiObjD) == 0x7180 ? 1 : -1];
+typedef char BtlUiObjDRequestOffsetsCheck[
+    offsetof(BtlUiObjD, positionMarkers.markers) == 0x408C &&
+    offsetof(BtlUiObjD, numberRequests.rows) == 0x4B2C && offsetof(BtlUiObjD, numberRequests.cursors) == 0x572C &&
+    offsetof(BtlUiObjD, numberRequests.counts) == 0x573C && offsetof(BtlUiObjD, positionRequests.rows) == 0x574C &&
+    offsetof(BtlUiObjD, positionRequests.cursors) == 0x614C && offsetof(BtlUiObjD, positionRequests.counts) == 0x615C &&
+    sizeof(BtlUiObjD) == 0x7180 ? 1 : -1];
 typedef char BtlUiCommandWindowOffsetCheck[
     offsetof(BtlUiObjD, commandWindow.active) == 0x4B18 &&
     offsetof(BtlUiObjD, commandWindow.value) == 0x4B28 ? 1 : -1];

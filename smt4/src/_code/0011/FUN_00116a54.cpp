@@ -13,7 +13,7 @@ int effectRenderTransformedInstance(...);
 int asdTextSetBaseColor(...);
 int SBORROW4(...);
 
-int FUN_00124d24(int);
+int messageBannerDrawCounterPlates(int);
 int titleOverlayDraw(int);
 int renderCtxCalculateStereoParallax(...);
 int gxResetColorQuadToWhite(void);
@@ -42,7 +42,7 @@ extern signed char DAT_00493828; /* 0x493828 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int FUN_001247d0(unsigned int);
 /* Supplied declaration required: FUN_00124c60. */
-/* Supplied declaration required: FUN_00124d24. */
+/* Supplied declaration required: messageBannerDrawCounterPlates. */
 extern int ifTouchIsActive(void);
 /* Supplied declaration required: titleOverlayDraw. */
 extern int entryListCurrentIsUsable(unsigned int);
@@ -95,7 +95,7 @@ char FUN_00116a54(void)
   temp_v4 = jobGetWork();
   if (((temp_v4 == DAT_0043e190) && (*(char *)(DAT_0043e190 + 0x7d) != '\0')) &&
      (*(char *)(DAT_0043e190 + 0x7f) != '\0')) {
-    FUN_00124d24(1);
+    messageBannerDrawCounterPlates(1);
   }
   if (*(char *)(temp_v4 + 0x83) != '\0') {
     return '\0';

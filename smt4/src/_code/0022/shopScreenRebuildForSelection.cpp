@@ -9,7 +9,7 @@ extern "C" {
 int FUN_002302d8(...);
 int listCursorSetPage(...);
 int listScrollerInitialize(...);
-int FUN_0029212c(...);
+int buttonHelpShowEntryDescription(...);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: cellListAppend. */
 extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: listScrollerInitialize. */
-/* Supplied declaration required: FUN_0029212c. */
+/* Supplied declaration required: buttonHelpShowEntryDescription. */
 
 
 void shopScreenRebuildForSelection(int param_1,unsigned int param_2)
@@ -188,7 +188,7 @@ void shopScreenRebuildForSelection(int param_1,unsigned int param_2)
   FUN_002302d8(param_1,param_2);
   temp_v0 = *(int *)(param_1 + 0x860);
   temp_v1 = flaggedValueHolderGetTotal(param_1 + temp_v0 * 0x74 + 0x880);
-  FUN_0029212c(*(unsigned short *)(param_1 + temp_v0 * 0x1002 + 0xc94 + temp_v1 * 4));
+  buttonHelpShowEntryDescription(*(unsigned short *)(param_1 + temp_v0 * 0x1002 + 0xc94 + temp_v1 * 4));
   return;
 }
 

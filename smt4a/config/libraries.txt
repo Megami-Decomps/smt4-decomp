@@ -157,3 +157,7 @@ arm 0x50e4c4 0x50e500 nn::err static initialiser: err:f handle state and its nn:
 # Linked inside the nw_anim_res block (between nw_anim_res_CalcTranslateCurve and nw_anim_res_ResAnim_Cleanup) and
 # called by nw_anim_res_CalcVector3Curve and nw_anim_res_CalcTranslateCurve; exact twin of smt4 0x235744.
 arm 0x467840 0x467880 NintendoWare-anim res curve frame repeat adjustment inside the nw_anim_res block; twin of smt4 0x235744
+# nn::fs FileServerArchive's file GetSize: slot 4 of the vtable 0x558234 whose other slots are nn::fs
+# (FileServerArchive_File_TryRead 0x42b7e4, TryWrite 0x42b824, nn_fs_OpenLinkFile 0x42b754 and the between-labelled
+# 0x42b70c/0x42b734/0x42b774); smt4's counterpart fileGetSizeOut (0x3dfa0c) is the same slot of _ZTV9Obj420d48 (w85-o4).
+arm 0x50094c 0x50096c nn::fs FileServerArchive file GetSize: slot 4 of vtable 0x558234 whose other slots are nn::fs; smt4 counterpart 0x3dfa0c

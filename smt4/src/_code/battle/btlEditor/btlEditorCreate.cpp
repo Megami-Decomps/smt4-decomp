@@ -1,4 +1,3 @@
-/* NON_MATCHING: the literal pool order now matches (session read back from DAT_00435ce8); retail loads the DAT_00435ce8, 0x1E9D and g_btlMain pool words together after the allocation, the build sets r1 = -1 first and loads g_btlMain after the session stores. */
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/EnemyEditor.h"
@@ -37,9 +36,8 @@ void btlReflectQueueKind34(s32 mode, s32 index);
 
 void btlEditorCreate(BtlMainState *battle)
 {
-    u32 editorJob = taskCreateDraw("btlEditor Calc", 2, 0, 0, jobDispatchOptionalOwner, FUN_002c9edc, battle, battle->job);
-    battle->editor.job = editorJob;
-    taskCreateDraw("btlEditor DrawUp", 0x73, 0, 0, battleEditorRunForJob, 0, battle, editorJob);
+    battle->editor.job = taskCreateDraw("btlEditor Calc", 2, 0, 0, jobDispatchOptionalOwner, FUN_002c9edc, battle, battle->job);
+    taskCreateDraw("btlEditor DrawUp", 0x73, 0, 0, battleEditorRunForJob, 0, battle, battle->editor.job);
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlEditor.cpp", 972);
     DAT_00435ce8 = asdMemAlloc(0x100, 0x100, 0, sizeof(EditorSessionState), 1);
     EditorSessionState *session = static_cast<EditorSessionState *>(DAT_00435ce8);

@@ -215,13 +215,13 @@ void campCecCreate(s32 resumed)
     if (overlay->optionalProcess != 0 && gameDataTestFlags(0x20) != 0) {
         CampCecReceivedRecord card;
         cecOutboxReadCard(&card);
-        if (rt_memcmp(card.demon, g_campCec.instance->ownRecord.demon, 0x14) != 0) {
+        if (rt_memcmp(&card.demon, &g_campCec.instance->ownRecord.demon, sizeof(card.demon)) != 0) {
             cecProcessCall2();
             cecProcessForward(campCecGetOwnRecord());
         }
     }
     if (gameDataGetRecordValue() == 0) {
-        rt_aeabi_memclr(g_campCec.instance->ownRecord.demon, 0x14);
+        rt_aeabi_memclr(&g_campCec.instance->ownRecord.demon, sizeof(CecReceivedDemon));
     }
     overlay->labels = campCecDrawSetCreate();
     uiDrawExtendedRecordLabel(overlay->labels, campCecGetOwnRecord());

@@ -8,7 +8,7 @@ extern "C" {
 
 s32 uniteDrawPanel(u32 job);
 void uniteOptionListDraw(s32 x, s32 y);
-void FUN_001dddd8(s32 x, s32 y, s32 mode);
+void uniteDrawListPanel(s32 x, s32 y, s32 mode);
 void uniteFilterValueListDraw(s32 x, s32 y);
 void FUN_002d96d4(s32 x, s32 y, s32 panel, s32 opened);
 void FUN_001eef8c(s32 x, s32 y, s32 opened);

@@ -7092,6 +7092,15 @@
 0x004d9bc8 FUN_004d9bc8 between
 0x004d9bfc FUN_004d9bfc between
 0x004d9c00 nexUtilShutdown name
+0x0050094c FUN_0050094c library
+0x0050096c fileGetHandleChecked between
+0x00500cac FUN_00500cac between
+0x00500d38 gxEmitBlendCommands between
+0x00500df8 FUN_00500df8 between
+0x00500e74 FUN_00500e74 between
+0x00500ee4 FUN_00500ee4 between
+0x00500f3c gxEmitColorDepthMask between
+0x00501084 enemyGrRendererBuildCommands between
 0x00501800 nn_cec_CTR_MessageBox_GetMessageId name
 0x00501858 nn_cec_CTR_MessageBox_GetMessHeader name
 0x00501b90 nn_cec_CTR_MessageBox_ReadMessageBoxInfo name

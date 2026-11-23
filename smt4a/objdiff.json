@@ -62751,13 +62751,13 @@
       "target_path": "orig/target/_code/0016/ifTouchRegionAddRequested.o"
     },
     {
-      "base_path": "build/obj/_code/0016/FUN_00164490.o",
+      "base_path": "build/obj/_code/0016/messageBannerDrawCounterPlates.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00164490",
+            "name": "messageBannerDrawCounterPlates",
             "size": 1432,
             "vram": "0x164490"
           }
@@ -62765,10 +62765,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0016/FUN_00164490.cpp"
+        "source_path": "src/_code/0016/messageBannerDrawCounterPlates.cpp"
       },
-      "name": "_code/0016/FUN_00164490",
-      "target_path": "orig/target/_code/0016/FUN_00164490.o"
+      "name": "_code/0016/messageBannerDrawCounterPlates",
+      "target_path": "orig/target/_code/0016/messageBannerDrawCounterPlates.o"
     },
     {
       "base_path": "build/obj/_code/0016/lmapMainIsRunning.o",
@@ -82780,13 +82780,13 @@
       "target_path": "orig/target/_code/0019/asdMdlNodeInit.o"
     },
     {
-      "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0019cbf8.o",
+      "base_path": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdMdlNodeBuildMotionTables.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0019cbf8",
+            "name": "asdMdlNodeBuildMotionTables",
             "size": 1504,
             "vram": "0x19cbf8"
           }
@@ -82795,10 +82795,10 @@
           "_code",
           "AsdSDK/Source/Gfx/Model/AsdModel"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0019cbf8.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdMdlNodeBuildMotionTables.cpp"
       },
-      "name": "_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0019cbf8",
-      "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0019cbf8.o"
+      "name": "_code/AsdSDK/Source/Gfx/Model/AsdModel/asdMdlNodeBuildMotionTables",
+      "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdMdlNodeBuildMotionTables.o"
     },
     {
       "base_path": "build/obj/_code/AsdSDK/Source/Gfx/AsdTexManager/AsdTMSpr/asdTMSprDecompress.o",
@@ -128076,13 +128076,13 @@
       "target_path": "orig/target/_code/0029/FUN_0029d6f0.o"
     },
     {
-      "base_path": "build/obj/_code/0029/FUN_0029d760.o",
+      "base_path": "build/obj/_code/0029/MAPIF_DrawUp.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0029d760",
+            "name": "MAPIF_DrawUp",
             "size": 140,
             "vram": "0x29d760"
           }
@@ -128090,10 +128090,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0029/FUN_0029d760.cpp"
+        "source_path": "src/_code/0029/MAPIF_DrawUp.cpp"
       },
-      "name": "_code/0029/FUN_0029d760",
-      "target_path": "orig/target/_code/0029/FUN_0029d760.o"
+      "name": "_code/0029/MAPIF_DrawUp",
+      "target_path": "orig/target/_code/0029/MAPIF_DrawUp.o"
     },
     {
       "base_path": "build/obj/_code/0029/mapIfDrawWorldIndicators.o",
@@ -130813,13 +130813,13 @@
       "target_path": "orig/target/_code/002a/FUN_002a7bb8.o"
     },
     {
-      "base_path": "build/obj/_code/002a/FUN_002a968c.o",
+      "base_path": "build/obj/_code/002a/uniteDrawSkillInheritancePanel.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002a968c",
+            "name": "uniteDrawSkillInheritancePanel",
             "size": 2456,
             "vram": "0x2a968c"
           }
@@ -130827,10 +130827,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002a/FUN_002a968c.cpp"
+        "source_path": "src/_code/002a/uniteDrawSkillInheritancePanel.cpp"
       },
-      "name": "_code/002a/FUN_002a968c",
-      "target_path": "orig/target/_code/002a/FUN_002a968c.o"
+      "name": "_code/002a/uniteDrawSkillInheritancePanel",
+      "target_path": "orig/target/_code/002a/uniteDrawSkillInheritancePanel.o"
     },
     {
       "base_path": "build/obj/_code/002a/uniteDrawValueListPanel.o",
@@ -222735,13 +222735,13 @@
       "target_path": "orig/target/_code/0038/slideFadeWindowStep.o"
     },
     {
-      "base_path": "build/obj/_code/0038/FUN_00387bb8.o",
+      "base_path": "build/obj/_code/0038/campCecEditRefreshState.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00387bb8",
+            "name": "campCecEditRefreshState",
             "size": 384,
             "vram": "0x387bb8"
           }
@@ -222749,10 +222749,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0038/FUN_00387bb8.cpp"
+        "source_path": "src/_code/0038/campCecEditRefreshState.cpp"
       },
-      "name": "_code/0038/FUN_00387bb8",
-      "target_path": "orig/target/_code/0038/FUN_00387bb8.o"
+      "name": "_code/0038/campCecEditRefreshState",
+      "target_path": "orig/target/_code/0038/campCecEditRefreshState.o"
     },
     {
       "base_path": "build/obj/_code/0038/FUN_00387d38.o",
@@ -245466,13 +245466,13 @@
       "target_path": "orig/target/_code/003c/FUN_003c91ec.o"
     },
     {
-      "base_path": "build/obj/_code/003c/FUN_003c9354.o",
+      "base_path": "build/obj/_code/003c/uniteInheritanceUpdateSkillList.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003c9354",
+            "name": "uniteInheritanceUpdateSkillList",
             "size": 1896,
             "vram": "0x3c9354"
           }
@@ -245480,10 +245480,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003c/FUN_003c9354.cpp"
+        "source_path": "src/_code/003c/uniteInheritanceUpdateSkillList.cpp"
       },
-      "name": "_code/003c/FUN_003c9354",
-      "target_path": "orig/target/_code/003c/FUN_003c9354.o"
+      "name": "_code/003c/uniteInheritanceUpdateSkillList",
+      "target_path": "orig/target/_code/003c/uniteInheritanceUpdateSkillList.o"
     },
     {
       "base_path": "build/obj/_code/003c/FUN_003c9adc.o",
@@ -269480,13 +269480,13 @@
       "target_path": "orig/target/_code/mobiclip_ctrl/helper_S4FsReader/FUN_0042230c.o"
     },
     {
-      "base_path": "build/obj/_code/0042/FUN_00422534.o",
+      "base_path": "build/obj/_code/0042/s4FsReaderThreadMain.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00422534",
+            "name": "s4FsReaderThreadMain",
             "size": 276,
             "vram": "0x422534"
           }
@@ -269494,10 +269494,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0042/FUN_00422534.cpp"
+        "source_path": "src/_code/0042/s4FsReaderThreadMain.cpp"
       },
-      "name": "_code/0042/FUN_00422534",
-      "target_path": "orig/target/_code/0042/FUN_00422534.o"
+      "name": "_code/0042/s4FsReaderThreadMain",
+      "target_path": "orig/target/_code/0042/s4FsReaderThreadMain.o"
     },
     {
       "base_path": "build/obj/_code/0042/FUN_00422648.o",
@@ -312377,13 +312377,13 @@
       "target_path": "orig/target/_code/0049/updateNineRowListInput.o"
     },
     {
-      "base_path": "build/obj/_code/0049/FUN_0049e3f8.o",
+      "base_path": "build/obj/_code/0049/listPanelDraw.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0049e3f8",
+            "name": "listPanelDraw",
             "size": 1004,
             "vram": "0x49e3f8"
           }
@@ -312391,10 +312391,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0049/FUN_0049e3f8.cpp"
+        "source_path": "src/_code/0049/listPanelDraw.cpp"
       },
-      "name": "_code/0049/FUN_0049e3f8",
-      "target_path": "orig/target/_code/0049/FUN_0049e3f8.o"
+      "name": "_code/0049/listPanelDraw",
+      "target_path": "orig/target/_code/0049/listPanelDraw.o"
     },
     {
       "base_path": "build/obj/_code/0049/FUN_0049e7e4.o",
@@ -330605,13 +330605,13 @@
       "target_path": "orig/target/_code/004f/cameraResetTransitionVectors.o"
     },
     {
-      "base_path": "build/obj/_code/004f/FUN_004f2708.o",
+      "base_path": "build/obj/_code/004f/btlCameraCanAdvance.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004f2708",
+            "name": "btlCameraCanAdvance",
             "size": 284,
             "vram": "0x4f2708"
           }
@@ -330619,10 +330619,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004f/FUN_004f2708.cpp"
+        "source_path": "src/_code/004f/btlCameraCanAdvance.cpp"
       },
-      "name": "_code/004f/FUN_004f2708",
-      "target_path": "orig/target/_code/004f/FUN_004f2708.o"
+      "name": "_code/004f/btlCameraCanAdvance",
+      "target_path": "orig/target/_code/004f/btlCameraCanAdvance.o"
     },
     {
       "base_path": "build/obj/_code/004f/words10CopyHighToLow.o",

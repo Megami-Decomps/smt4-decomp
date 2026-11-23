@@ -28,7 +28,7 @@ static __inline void battleVectorClear(BattleVector3 *v)
 extern "C" {
 extern BattleFormationMasks g_btlCamera; /* declcheck: local (BtlGlobals.h types g_btlCamera as BtlCameraA *, whereas retail addresses the masks directly at 0x571508) */
 extern BattleVector3 DAT_005e1554;
-s32 FUN_004f2708(BattleActionCamera *, BtlMainStateA *, s32);
+s32 btlCameraCanAdvance(BattleActionCamera *, BtlMainStateA *, s32);
 
 /* Selects a battle formation camera slot and adjusts its vertical offset for the target combatant. */
 void btlCameraSetFormationSlot(BattleFormationCamera *formation, BtlMainStateA *battle, s32 slot)
@@ -38,7 +38,7 @@ void btlCameraSetFormationSlot(BattleFormationCamera *formation, BtlMainStateA *
     formation->offset.z = 0.0f;
     formation->offset.y = 0.0f;
     formation->offset.x = 0.0f;
-    if (!FUN_004f2708(&formation->camera, battle, 1)) {
+    if (!btlCameraCanAdvance(&formation->camera, battle, 1)) {
         return;
     }
     formation->camera.formation.previousTarget = formation->camera.target;

@@ -12,11 +12,11 @@ so a header that a new one shadows or a deleted one used to provide counts too. 
 several units counts for each. `--all-units` checks every unit (slow; for sanity).
 
 Each affected unit is compiled twice, as `tools/fdiff.py` compiles it (the unit's command, cflags,
-multifile partners, carving and armlink's NOPs) and scored as `tools/trial.py` scores it (the number
-of `-`/`+` lines of fdiff's diff, 0 = IDENTICAL): once from the working tree, once from BASE's files
-written into a private tree under `build/` (BASE's headers, config and the sources it needs, with
-`orig/` and `build/tools/` linked as `tools/worktrees.py` links them). Objects go to that private
-tree, which is removed afterwards: nothing in `src/`, `include/` or `build/obj/` is written, so
+multifile partners and autoinline, carving and armlink's NOPs) and scored as `tools/trial.py` scores it
+(the number of `-`/`+` lines of fdiff's diff, 0 = IDENTICAL): once from the working tree, once from
+BASE's files written into a private tree under `build/` (BASE's headers, config and the sources it
+needs, with `orig/` and `build/tools/` linked as `tools/worktrees.py` links them). Objects go to that
+private tree, which is removed afterwards: nothing in `src/`, `include/` or `build/obj/` is written, so
 several checks, fdiffs and builds can run at once. Both sides are compared with this checkout's retail
 objects (`orig/target/`): a function renamed since BASE differs at BASE.
 

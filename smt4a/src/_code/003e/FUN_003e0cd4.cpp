@@ -50,7 +50,7 @@ extern BtlEncount g_btlEncount;
 
 s32 chainCountIdUnflagged(u32 chain, u32* action);
 s32 recordAreAllCountsNonpositive(u32 record);
-s32 FUN_004f2708(s32 camera, BattleState* state, u32 arg);
+s32 btlCameraCanAdvance(s32 camera, BattleState* state, u32 arg);
 s32 eventCommandRangeCheck(s32 camera);
 void stateFinishIfPresent(BattleState* state);
 void eventCommandClearPending(void);
@@ -83,7 +83,7 @@ u32 FUN_003e0cd4(u32* action, BattleState* state)
             }
         }
         action[3] |= 4;
-        if (FUN_004f2708(reinterpret_cast<s32>(g_btlCamera), state, 1) != 0) {
+        if (btlCameraCanAdvance(reinterpret_cast<s32>(g_btlCamera), state, 1) != 0) {
             u32 mode = 0xffffffff;
             if (state->phase == 0) mode = 1;
             else if (state->phase == 1) mode = 2;

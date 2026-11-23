@@ -12,6 +12,8 @@
 #include <stddef.h>
 
 struct ModelOwner;
+class GfxShadowModel;
+struct ShadowModelFile;
 
 typedef struct GfxSettings {
     /* 0x00 */ u8 lightingEnabled;
@@ -39,12 +41,14 @@ typedef struct GfxSettings {
     /* 0x48 */ u8 unk48[4];
     /* 0x4C */ f32 fadeNear;
     /* 0x50 */ f32 fadeFar;
-    /* 0x54 */ u8 unk54[4];
+    /* 0x54 */ GfxShadowModel *shadowModel;       /* the scene object built from ShadowModel.bcmdl */
     /* 0x58 */ u32 fadeColor;       /* the colour, or the model the fade applies to */
     /* 0x5C */ f32 fadeAmount;
     /* 0x60 */ f32 shadowOff;
     /* 0x64 */ f32 shadowOn;
-    /* 0x68 */ u8 unk68[0x14];
+    /* 0x68 */ u8 unk68[4];
+    /* 0x6C */ ShadowModelFile *shadowModelFile;  /* ShadowModel.bcmdl as loaded */
+    /* 0x70 */ u8 unk70[0xC];
     /* 0x7C */ u32 resGraphicsFile;  /* the ResGraphicsFile set up in gfxSetupResGraphicsFile */
     /* 0x80 */ u32 modelData;       /* handle of the loaded graphics model */
     /* 0x84 */ u32 slotFlags[2];
@@ -60,7 +64,8 @@ typedef struct GfxSettings {
 typedef char GfxSettingsOffsets[offsetof(GfxSettings, flags) == 0x08 &&
     offsetof(GfxSettings, node0) == 0x20 && offsetof(GfxSettings, loadedModelCount) == 0x38 &&
     offsetof(GfxSettings, sharedModels) == 0x40 && offsetof(GfxSettings, fadeNear) == 0x4C &&
-    offsetof(GfxSettings, shadowOff) == 0x60 && offsetof(GfxSettings, modelData) == 0x80 &&
+    offsetof(GfxSettings, shadowModel) == 0x54 &&
+    offsetof(GfxSettings, shadowOff) == 0x60 && offsetof(GfxSettings, shadowModelFile) == 0x6C && offsetof(GfxSettings, modelData) == 0x80 &&
     offsetof(GfxSettings, slotFlags) == 0x84 && offsetof(GfxSettings, transformBuilder) == 0x94 &&
     offsetof(GfxSettings, sceneNode) == 0xAC && offsetof(GfxSettings, owner) == 0xC4 &&
     sizeof(GfxSettings) == 0xD4 ? 1 : -1];

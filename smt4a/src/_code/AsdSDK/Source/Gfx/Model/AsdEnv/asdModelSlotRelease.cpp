@@ -1,26 +1,39 @@
-/* NON_MATCHING: readable rewrite of the model slot teardown; retail keeps the four bank bases (g_asdModelBanks and DAT_00635e08, each plus four banks) in registers, the constant 1 of the environment-slot loops in r4 with begin/end loaded by ldm, and spills nothing but the slot. */
+/* NON_MATCHING: 342 lines (295 vs 279 rows). Retail loads g_asdModelBanks and g_asdModelSlotBanks from the pool and derives
+ * the other two bank arrays from them (`add r2, ip, #2576`), which armcc only does for objects its own unit defines:
+ * the four arrays belong to this function's translation unit (defining them here reproduces those instructions).
+ * Retail also keeps the constant 1 of the environment-slot loops in r4 (computing the limit twice, with begin/end
+ * loaded by ldm), keeps each object's slot address in its own variable (spilled for the named objects) and spills
+ * nothing but the slot. */
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "classes/AsdAllocatorObject.h"
 
-/* An engine object that is destroyed in place and then handed back to its allocator. */
+/* unit-local: an engine object that is destroyed in place and then handed back to its allocator (the release
+ * sequence of gfx/AsdSceneRoot.h's AsdSceneObject, whose destroy() compiles to other code here) */
 class ModelObject {
 public:
     virtual void destroy();
     AsdAllocatorObject *allocator;
 };
 
+/* unit-local: the environment slot lists exist only in the units that reset them */
 struct EnvironmentSlot {
     u8 unk00[0xc];
     u32 state;
 };
-struct EnvironmentSlotArray {
-    u8 unk00[0x18];
+/* unit-local: a [begin, end) run of slot pointers */
+struct EnvironmentSlotRange {
     EnvironmentSlot **begin;
     EnvironmentSlot **end;
 };
+/* unit-local: a slot list */
+struct EnvironmentSlotArray {
+    u8 unk00[0x18];
+    EnvironmentSlotRange range; // 0x18
+};
 
-/* One named model of a bank. */
+/* unit-local: one named model of a bank, as this function frees it (AsdModel.h's AsdModelNameEntry is the same
+ * 0x4C bytes seen four bytes earlier) */
 struct ModelBankName {
     char text[0x40];
     ModelObject *object; // 0x40
@@ -28,19 +41,20 @@ struct ModelBankName {
     void *buffer; // 0x48
 };
 
-/* A model bank (0x284 bytes). */
+/* unit-local: a model bank (0x284 bytes), with the records above */
 struct ModelBank {
     u32 unk000;
     ModelBankName names[8]; // 0x004
     ModelObject *model[8]; // 0x264
 };
 
+/* unit-local: the four objects a slot's environment owns */
 struct EnvironmentBankState {
     u32 unk00;
     ModelObject *object[4]; // 0x04
 };
 
-/* The pending material updates of a slot (0x40 bytes). */
+/* unit-local: the pending material updates of a slot (0x40 bytes) */
 struct ModelUpdateSlot {
     u32 unk00;
     void **begin;
@@ -49,8 +63,10 @@ struct ModelUpdateSlot {
 };
 
 extern "C" {
-extern ModelBank g_asdModelBanks[];
-extern ModelBank DAT_00635e08[];
+extern ModelBank g_asdModelBanks[2];
+extern ModelBank g_asdModelSlotBanks[2];
+extern ModelBank g_asdModelBanks2[2];
+extern ModelBank g_asdModelSlotBanks2[2];
 extern EnvironmentBankState DAT_00636d20[];
 extern ModelUpdateSlot DAT_00636d60[];
 extern void *DAT_005b3bd8[];
@@ -66,19 +82,23 @@ void asdMemFree(void *memory);
 void asdModelSlotClearActive(s32 slot);
 }
 
+/* Marks every slot of the list free and empties the list. */
 static __inline void resetEnvironmentSlots(EnvironmentSlotArray *slots)
 {
-    EnvironmentSlot **begin = slots->begin;
-    s32 count = slots->end - begin;
-    for (s32 index = 1; index <= count; ++index) {
-        EnvironmentSlot *slot = *begin++;
+    EnvironmentSlotRange range = slots->range;
+    EnvironmentSlot **cursor = range.begin;
+    s32 count = range.end - range.begin;
+    for (s32 index = 1; index < count + 1; ++index, ++cursor) {
+        EnvironmentSlot *slot = *cursor;
+
         if (slot != NULL) {
             slot->state = 0;
         }
     }
-    slots->end = slots->begin;
+    slots->range.end = slots->range.begin;
 }
 
+/* Destroys the object `slot` owns, if any, and clears the slot. */
 static __inline void releaseObject(ModelObject **slot)
 {
     ModelObject *object = *slot;
@@ -89,16 +109,19 @@ static __inline void releaseObject(ModelObject **slot)
     }
 }
 
-static __inline void releaseBankSlot(ModelBank *bank, s32 index)
+/* Frees model `index` of a bank: its named object, its buffer and the model itself. */
+static void releaseBankSlot(ModelBank *bank, s32 index)
 {
-    releaseObject(&bank->names[index].object);
-    if (bank->names[index].buffer != NULL) {
-        asdMemFree(bank->names[index].buffer);
+    ModelBankName *name = &bank->names[index];
+
+    releaseObject(&name->object);
+    if (name->buffer != NULL) {
+        asdMemFree(name->buffer);
     }
     releaseObject(&bank->model[index]);
 }
 
-// Release everything a model slot owns: environment slots, resource file, models and cached objects.
+/* Releases everything a model slot owns: environment slots, resource file, models and cached objects. */
 extern "C" void asdModelSlotRelease(s32 slot)
 {
     resetEnvironmentSlots(asdModelGetSlotArray1(slot));
@@ -118,9 +141,9 @@ extern "C" void asdModelSlotRelease(s32 slot)
     asdModelSlotClearActive(slot);
     for (s16 index = 0; index < 8; index++) {
         releaseBankSlot(&g_asdModelBanks[slot], index);
-        releaseBankSlot(&DAT_00635e08[slot], index);
-        releaseBankSlot(&g_asdModelBanks[slot + 4], index);
-        releaseBankSlot(&DAT_00635e08[slot + 4], index);
+        releaseBankSlot(&g_asdModelSlotBanks[slot], index);
+        releaseBankSlot(&g_asdModelBanks2[slot], index);
+        releaseBankSlot(&g_asdModelSlotBanks2[slot], index);
     }
     for (s16 index = 0; index < 4; index++) {
         releaseObject(&DAT_00636d20[slot].object[index]);

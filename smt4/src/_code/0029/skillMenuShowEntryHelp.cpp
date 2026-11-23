@@ -28,7 +28,7 @@ typedef struct SkillMenuView {
 s32 resourceRunOperationIfUnblocked(u32 list);
 s32 listCursorGetRowIfUnblocked(u32 list);
 s32 FUN_00297ca4(SkillMenuWork *work, s32 arg);
-void FUN_0029212c(u32 id);
+void buttonHelpShowEntryDescription(u32 id);
 u32 listGetU16OrZero(void *state, u32 index);
 u32 FUN_0028d24c(void);
 void buttonHelpShowSkillDetails(u32 id);
@@ -104,7 +104,7 @@ void skillMenuShowEntryHelp(SkillMenuWork *work)
             buttonHelpShowSkillDetails(index);
         }
     } else if (FUN_00297ca4(work, 0) == 7) {
-        FUN_0029212c(view->ids[index]);
+        buttonHelpShowEntryDescription(view->ids[index]);
     } else if (FUN_00297ca4(work, 0) == 3) {
         const s32 order[6] = { 0, 1, 2, 3, 4, 5 };
         s32 shown = 0;

@@ -16,7 +16,7 @@ extern "C" {
 
 void messageWindowDrawSprites(MessageWindowA *message);
 void FUN_00151e4c(MessageWindowA *message);
-void FUN_00164490(s32 index);
+void messageBannerDrawCounterPlates(s32 index);
 const char *dataFindKindRecordWithAocOverrides(s32 value, s32 option);
 void uiDrawGroupedNumber(s32 value, s32 x, s32 y, s32 signedDisplay);
 void numberFontDrawFormatted(s32 font, s32 x, s32 y, s32 align, s32 digits, s32 layer, const char *format, ...);
@@ -99,7 +99,7 @@ u32 messageBannerDraw(void)
     }
 
     if (g_messageMain.banner->wideValue != 0 && g_messageMain.banner->alternateAnimation == 0)
-        FUN_00164490(0);
+        messageBannerDrawCounterPlates(0);
 
     if (g_messageMain.banner->smallValue != 0) {
         f32 alpha;

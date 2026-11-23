@@ -181,9 +181,10 @@ def literal_pools(entry, code, thumb, sized=0):
     label): data up to its NUL, rounded up to the word. `end` is where the bytes end once every
     pool they read and every string they address is counted (past `code` when one lies behind it;
     a string not ended inside `code` asks for one more word). `sized`: the size config/symbols.txt
-    gives the function. A constant addressed right after the last pool word a load reads that starts
-    with a zero byte, when that size reaches past it, is the function's trailing data up to that size
-    (a local aggregate's initializer), not an empty string."""
+    gives the function. A constant addressed right after the last pool word a load reads (or, when no
+    load reads a pool, right after an ARM function's closing `bx lr`) that starts with a zero byte, when
+    that size reaches past it, is the function's trailing data up to that size (a local aggregate's
+    initializer), not an empty string."""
     length = len(code)
     skew = entry % 4
     data, ranges, words, addressed = set(), [], [], []
@@ -266,7 +267,9 @@ def literal_pools(entry, code, thumb, sized=0):
     word_end = lambda offset: offset + (4 - (offset + skew) % 4) % 4   # up to the next word of the image
     pool_end = max((end for _start, end in ranges), default=None)  # past the last word a load reads
     for to in addressed:
-        if to == pool_end and to < min(sized, length) and not code[to]:
+        # with no pool load, only a constant right after the function's return (`bx lr`)
+        after_return = pool_end is None and not thumb and to >= 4 and code[to - 4:to] == bytes.fromhex("1eff2fe1")
+        if (to == pool_end or after_return) and to < min(sized, length) and not code[to]:
             ranges.append((to, min(sized, length)))
             continue
         if to >= length:

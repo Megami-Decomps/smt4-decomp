@@ -31,7 +31,7 @@ EmitterCloneModelBody *FUN_001b6d08(const ModelInstanceDescription *description,
     void *resource, AsdAllocatorObject *allocator);
 void FUN_00386548(EmitterCloneModelBody *instance);
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
-void FUN_0019cbf8(AsdMdlNode *model);
+void asdMdlNodeBuildMotionTables(AsdMdlNode *model);
 void asdModelBuildFlaggedAttributeRecords(AsdMdlNode *model, u8 *data);
 
 void asdMdlNodeCopyData(AsdMdlNode *destination, AsdMdlNode *source, s32 mode)
@@ -75,7 +75,7 @@ void asdMdlNodeCopyData(AsdMdlNode *destination, AsdMdlNode *source, s32 mode)
     result->instances = static_cast<EmitterCloneModelBody **>(asdMemoryAlloc(0x100, 0x100, 0, result->instanceCount * 4, 1));
     result->instances[0] = result->instance;
     if (mode == 0) {
-        FUN_0019cbf8(destination);
+        asdMdlNodeBuildMotionTables(destination);
     }
     asdModelBuildFlaggedAttributeRecords(destination, destination->file->data);
 }

@@ -69,7 +69,7 @@ int messageDismissNumericBanner(...);
 int uniteListRebuild(...);
 int uniteInheritanceBuildSkillList(...);
 int FUN_003c3f8c(...);
-int FUN_003c9354(void);
+int uniteInheritanceUpdateSkillList(void);
 int FUN_003cca18(...);
 int compendiumComputeSummonCost(...);
 int unitRecomputeDerivedStats(...);
@@ -358,7 +358,7 @@ extern int partyPanelIsStateTwentyFive(void);
 /* Supplied declaration required: partyPanelSetHidden. */
 /* Supplied declaration required: findSkillMetadataById. */
 /* Supplied declaration required: FUN_003c3f8c. */
-/* Supplied declaration required: FUN_003c9354. */
+/* Supplied declaration required: uniteInheritanceUpdateSkillList. */
 /* Supplied declaration required: FUN_003cca18. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
@@ -2530,7 +2530,7 @@ LAB_001f8d58:
     }
     piVar19 = piVar3;
     if (*(char *)((int)piVar3 + 0x8e8a) != '\0') {
-      FUN_003c9354();
+      uniteInheritanceUpdateSkillList();
     }
     else {
       FUN_003cca18(piVar3,(int)(char)temp_v39[0],temp_v47);

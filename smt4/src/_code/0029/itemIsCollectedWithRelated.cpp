@@ -17,11 +17,10 @@ u16 itemIsCollectedWithRelated(u16 id)
     }
     GameSaveData *save = g_gameDataBlocks.saveBlock;
     GameSavedItem *item = &save->body.items[id];
-    u32 index = item->registrationFlags & 2;
-    if (index != 0) {
+    if (item->registrationFlags & 2) {
         return 1;
     }
-    for (; index < 3; ++index) {
+    for (u32 index = 0; index < 3; ++index) {
         u32 linkedId = record->linkedIds[index];
         if (linkedId != 0) {
             GameSavedItem *linked = &save->body.items[linkedId];

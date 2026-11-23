@@ -1,11 +1,13 @@
-/* NON_MATCHING: ring-buffer logic and 64-bit position arithmetic match; armcc hoists the -1 timeout out of the loop (retail rebuilds it with mov r3/stm each pass) and uses ldrd [r4,#8] where retail uses add+ldrd (and the reverse for the produced reload). */
+/* NON_MATCHING: 6 lines: the wait (nn::os::WaitAny) matches; for the size left in the file retail loads the
+ * produced position into r2:r3 and the limit into r0 (`ldrd r2, [r4, #8]; ldr r0, [r4, #16]`), the build into
+ * r0:r1 and r1. */
 #include "mobiclip_ctrl/S4FsReader.h"
 #include "nn/Result.h"
+#include "nn/os/WaitObject.h"
 #include "shard/W6_W6Match2_LongDivision.h"
 #include "sys/ResultReport.h"
 
 extern "C" {
-u32 FUN_0042cd0c(s32 *signalled, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
 __value_in_regs LongDivisionResult ll_sdiv(s64 dividend, s64 divisor);
 void sysFatalBreak(void);
 void nn_os_CriticalSection_Enter(void *lock);
@@ -13,16 +15,10 @@ void nn_os_CriticalSection_Leave(void *lock);
 
 /* The reader thread: refills the ring buffer from the source whenever the player has drained at
  * least one chunk, until a handle signals the stop. */
-void FUN_00422534(S4FsReader *reader)
+void s4FsReaderThreadMain(S4FsReader *reader)
 {
     for (;;) {
-        s32 signalled;
-        u32 result = FUN_0042cd0c(&signalled, reader->wakeup, 2, 0, -1);
-        bool failed = nnResultIsFailure(result);
-        if (failed) {
-            resultHandleFailure(result, failed);
-        }
-        if (signalled != 0) {
+        if (nn::os::WaitAny(reader->wakeup, 2) != 0) {
             break;
         }
         nn_os_CriticalSection_Enter(reader->lock);

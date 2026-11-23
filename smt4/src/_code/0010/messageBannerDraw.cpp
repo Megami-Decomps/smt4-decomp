@@ -39,7 +39,7 @@ void texDrawCompositeSprite(s32 layer, s32 sheet, s32 part, s32 x, s32 y, s32 pr
 void uiDrawGroupedNumber(s32 value, s32 x, s32 y, s32 flag);
 void titleOverlayDraw(TitleOverlay *overlay);
 void FUN_001189a4(RowMenu *menu);
-void FUN_00124d24(s32 wide);
+void messageBannerDrawCounterPlates(s32 wide);
 void drawSetColorFromRGBA8(u32 packed);
 u8 *dataFindKindRecordWithAocOverrides(u32 id, s32 payload);
 void itemDrawCategoryBadge(u32 id, s32 x, s32 y, s32 priority, s32 markEquipped); // declcheck: local (the definition's own form; the shared header's BadgeWord last argument is how the forwarding wrappers pass it)
@@ -78,7 +78,7 @@ u32 messageBannerDraw(void)
 
     banner = g_messageMain.banner;
     if (banner->wideValue != 0 && banner->alternateAnimation == 0) {
-        FUN_00124d24(0);
+        messageBannerDrawCounterPlates(0);
     }
 
     if (g_messageMain.banner->smallValue != 0) {

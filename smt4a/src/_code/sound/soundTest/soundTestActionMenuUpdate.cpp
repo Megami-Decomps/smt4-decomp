@@ -30,7 +30,7 @@ void FUN_0021c118(s32 sound, s32 frames);
 /* The sound test's action menu: picks one of ten sound actions and runs it on A; B leaves. */
 u32 soundTestActionMenuUpdate()
 {
-    SoundTestWork *work = g_requestWork;
+    SoundTestWork *work = DAT_00588fc8;
     if (work->state != 99 && padButtonIsPressed(2)) {
         work->state = 99;
     }
@@ -83,7 +83,7 @@ u32 soundTestActionMenuUpdate()
         }
         break;
     case 99:
-        jobStop(g_requestWork->job, 0);
+        jobStop(DAT_00588fc8->job, 0);
         return 0xFFFFFFFF;
     }
     return 0;

@@ -4,9 +4,10 @@ extern "C" {
 
 int fileSlotGetBuffer(int id);
 
-void dataTableValue0f(void)
+/* Returns the buffer of file slot 15 (its callers use the result). */
+int dataTableValue0f(void)
 {
-    fileSlotGetBuffer(0xf);
+    return fileSlotGetBuffer(0xf);
 }
 
 } /* extern "C" */

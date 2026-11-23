@@ -3,7 +3,7 @@
 
 extern "C" {
 void buttonHelpShowSkillDetails(u16 skill);
-void FUN_0029212c(u16 item);
+void buttonHelpShowEntryDescription(u16 item);
 void FUN_001b0558();
 
 void buttonHelpSetText(const char *text, u32 color);
@@ -35,7 +35,7 @@ void partyPanelShowButtonHelp()
         buttonHelpShowSkillDetails(panel->previewItem);
         return;
     case 8: case 9:
-        FUN_0029212c(panel->previewItem);
+        buttonHelpShowEntryDescription(panel->previewItem);
         return;
     case 10:
         if (panel->fusionParentCount == 0) {

@@ -52,7 +52,7 @@ struct S4FsReader {
     /* 0x40 */ u8 lock[0xc];               /* nn::os::CriticalSection guarding the positions */
     /* 0x4C */ u32 dataEvent;              /* signaled to ask the thread for more data */
     /* 0x50 */ u32 stopEvent;              /* signaled to stop the thread */
-    /* 0x54 */ u32 wakeup[2];              /* handles the thread waits on (data requested / stop) */
+    /* 0x54 */ u32 wakeup[2];              /* the objects the thread waits on, by address: &dataEvent, &stopEvent */
 };
 
 #endif

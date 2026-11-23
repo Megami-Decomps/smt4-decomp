@@ -102,11 +102,16 @@ def command(compiler, unit, source, obj):
     # (--no_autoinline). Their unit sources are compiled alongside; carve keeps the unit's own
     # function. Needs evidence like "cflags": IDENTICAL with the list, not without.
     together = [ROOT / UNITS_BY_FUNCTION[name]["source"] for name in unit.get("multifile", ()) if name in UNITS_BY_FUNCTION]
+    # "autoinline" overrides that choice (same evidence rule): true drops --no_autoinline from a
+    # multifile run, false adds it to a unit or translation unit compiled without partners, where
+    # armcc's -O2/-O3 default inlines.
+    autoinline = unit.get("autoinline", not together)
     if FAMILY == "armcc":
         includes = system_include(compiler)
         # armcc --multifile checks declarations across the files it compiles together (#1171, which
         # cannot be downgraded): a unit's local callee declarations must agree with the callees' sources.
-        multifile = ["--multifile", "--no_autoinline", "--split_sections"] if together else []
+        noinline = [] if autoinline else ["--no_autoinline"]
+        multifile = ["--multifile"] + noinline + ["--split_sections"] if together else noinline
         return (
             launcher()
             + [compiler, "-c"]

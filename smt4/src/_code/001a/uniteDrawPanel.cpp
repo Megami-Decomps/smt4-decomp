@@ -51,7 +51,7 @@ extern "C" s32 uniteDrawPanel(u32)
             mode = 2;
         s32 x = vec2GetXInt(&work->sprites.open);
         s32 y = vec2GetYInt(&work->sprites.open);
-        FUN_001dddd8(x, y, mode);
+        uniteDrawListPanel(x, y, mode);
         x += vec2GetXInt(&work->sprites.listOffset);
         y += vec2GetYInt(&work->sprites.listOffset);
         uiDrawListScrollBar(&work->selectionListsIV.sourceList, x, y,
@@ -63,7 +63,7 @@ extern "C" s32 uniteDrawPanel(u32)
     case 6: {
         s32 x = vec2GetXInt(&work->sprites.open);
         s32 y = vec2GetYInt(&work->sprites.open);
-        FUN_001dddd8(x, y, 0);
+        uniteDrawListPanel(x, y, 0);
         uniteFilterValueListDraw(x, y);
         x += vec2GetXInt(&work->sprites.listOffset);
         y += vec2GetYInt(&work->sprites.listOffset);

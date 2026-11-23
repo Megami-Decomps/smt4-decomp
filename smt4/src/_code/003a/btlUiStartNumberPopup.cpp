@@ -1,4 +1,7 @@
-/* NON_MATCHING: 2 lines (229 vs 229 rows): only str r7, [r0, #836] (number) schedules above strb r4, [r0, #813] (anchored). */
+/* NON_MATCHING: 10 lines (229 vs 229 rows): str r7, [r0, #836] (number) schedules above strb r4, [r0, #813] (anchored),
+ * and the two vmov/sxth pairs before FUN_002963ec swap r0/r1. The parameter order (integers before the coordinates) is
+ * the one the Apocalypse twin is IDENTICAL with; declaring the coordinates first leaves only the first difference here
+ * (2 lines), but the order is one prototype in both games (wave 85). */
 #include "common.h"
 #include "battle/BtlUiGlobal.h"
 #include "ui/UiSpriteApi.h"
@@ -14,8 +17,8 @@ void FUN_002963ec(UiSpriteState *sprite, s16 x, s16 y);
 /* Sets up popup slot `slot`: shows `value` as five digit sprites (the sprite set depends on
  * `negative` and `kind`) and two label sprites, all placed at (x, y). `stereo` shifts the position
  * for the 3D depth. */
-void btlUiStartNumberPopup(u32 unused1, s32 slot, s32 value, u32 unused2, f32 x, f32 y, f32 z, s32 negative, s32 kind,
-                  s32 stereo)
+void btlUiStartNumberPopup(u32 unused1, s32 slot, s32 value, u32 unused2, s32 negative, s32 kind, s32 stereo,
+                  f32 x, f32 y, f32 z)
 {
     BtlUi *ui = g_btlUi.ui;
     bool isLarge = false;

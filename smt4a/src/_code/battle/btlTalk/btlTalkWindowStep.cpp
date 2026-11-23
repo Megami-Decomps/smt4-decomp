@@ -65,7 +65,7 @@ extern u32 g_btlActionReflect;
 SideRecord* btlFindEntryBlockByMemberId(BattleMain* battle, u32 id);
 void asdLoadFileAsyncSimple(const char* path, u32* out, s32 flag);
 void FUN_004f741c(u8* aux);
-s32 FUN_004f2708(s32 camera, BattleMain* battle, s32 flag);
+s32 btlCameraCanAdvance(s32 camera, BattleMain* battle, s32 flag);
 void btlQueueDuplicateSuppressedAction(s32 a, s32 b, s32 c);
 void FUN_004feecc(s32 a, s32 b);
 s32 btlAuxAreResourcesReady(u8* aux);
@@ -100,7 +100,7 @@ s32 btlTalkWindowStep(BtlTalkWindow* window, s32 unused)
         asdLoadFileAsyncSimple(s_talkFilePath, &window->talkFile, 1);
         FUN_004f741c(g_btlAux);
         window->state = 1;
-        if (*reinterpret_cast<s32*>(g_btlCamera + 0x7cc) >= 0 && FUN_004f2708(g_btlCamera, window->battle, 1) != 0) {
+        if (*reinterpret_cast<s32*>(g_btlCamera + 0x7cc) >= 0 && btlCameraCanAdvance(g_btlCamera, window->battle, 1) != 0) {
             btlQueueDuplicateSuppressedAction(0, 0, 0);
         }
         FUN_004feecc(1, 0);

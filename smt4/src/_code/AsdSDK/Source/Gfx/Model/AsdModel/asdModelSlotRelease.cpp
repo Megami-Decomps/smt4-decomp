@@ -1,196 +1,150 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdModelSlotRelease` (_code @ 0x2a72c0, 0x480 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "AsdSDK/AsdMemAlloc.h"
+/* NON_MATCHING: 377 lines (295 vs 266 rows); the same code as Apocalypse's asdModelSlotRelease. Retail loads
+ * g_asdModelBanks and g_asdModelSlotBanks from the pool and derives the two unnamed bank arrays after them
+ * (`add r2, ip, #2576`), which armcc only does for objects its own unit defines: the four arrays belong to this
+ * function's translation unit. Retail also keeps the constant 1 of the environment-slot loops in r4 (computing
+ * the limit twice, with begin/end loaded by ldm), keeps each object's slot address in its own variable and
+ * spills nothing but the slot. */
+#include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/asdModelGetSlotArray1.h"
+#include "classes/AsdAllocatorObject.h"
+#include "util/MemoryHelpers_VariantA.h"
+
+/* unit-local: an engine object that is destroyed in place and then handed back to its allocator (the release
+ * sequence of gfx/AsdSceneRoot.h's AsdSceneObject, whose destroy() compiles to other code here) */
+class ModelObject {
+public:
+    virtual void destroy();
+    AsdAllocatorObject *allocator;
+};
+
+/* unit-local: the environment slot lists exist only in the units that reset them */
+struct EnvironmentSlot {
+    u8 unk00[0xc];
+    u32 state;
+};
+/* unit-local: a [begin, end) run of slot pointers */
+struct EnvironmentSlotRange {
+    EnvironmentSlot **begin;
+    EnvironmentSlot **end;
+};
+/* unit-local: a slot list */
+struct EnvironmentSlotArray {
+    u8 unk00[0x18];
+    EnvironmentSlotRange range; // 0x18
+};
+
+/* unit-local: one named model of a bank, as this function frees it (AsdModel.h's AsdModelNameEntry is the same
+ * 0x4C bytes seen four bytes earlier) */
+struct ModelBankName {
+    char text[0x40];
+    ModelObject *object; // 0x40
+    u32 unk44;
+    void *buffer; // 0x48
+};
+
+/* unit-local: a model bank (0x284 bytes), with the records above */
+struct ModelBank {
+    u32 unk000;
+    ModelBankName names[8]; // 0x004
+    ModelObject *model[8]; // 0x264
+};
+
+/* unit-local: the four objects a slot's environment owns */
+struct EnvironmentBankState {
+    u32 unk00;
+    ModelObject *object[4]; // 0x04
+};
+
+/* unit-local: the pending material updates of a slot (0x40 bytes) */
+struct ModelUpdateSlot {
+    u32 unk00;
+    void **begin;
+    void **end;
+    u8 unk0c[0x34];
+};
 
 extern "C" {
-
-int asdModelSlotClearActive(int);
-int FUN_001569d8(unsigned int, unsigned int, unsigned char *);
-int asdMemFreeNonNull(unsigned int);
-int nw_gfx_res_ResGraphicsFile_Cleanup(unsigned int *[2]);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern unsigned char g_asdModelBanks; /* 0x4d9880 */
-extern unsigned char g_asdModelSlotBanks; /* 0x4d9d88 */
-extern unsigned char g_asdModelIdLists; /* 0x4daca0 */
-extern unsigned char DAT_004dace0; /* 0x4dace0 */
-
-extern unsigned int asdModelGetSlotArray3(int);
-/* Supplied declaration required: asdModelSlotClearActive. */
-/* Supplied declaration required: FUN_001569d8. */
-extern unsigned int asdModelGetSlotRecord(int);
-extern int asdModelGetSlotArray2(int);
-extern int asdModelGetSlotArray1(int);
-/* Supplied declaration required: asdMemFreeNonNull. */
-/* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Cleanup. */
-
-
-void asdModelSlotRelease(int param_1)
-
-{
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int *puVar9;
-  unsigned int *puVar10;
-  unsigned int *temp_v7 [2];
-  int temp_v8;
-  
-  temp_v8 = param_1;
-  temp_v1 = asdModelGetSlotArray1(param_1);
-  piVar3 = *(int **)(temp_v1 + 0x18);
-  temp_v5 = 1;
-  temp_v0 = (*(int *)(temp_v1 + 0x1c) - (int)piVar3) >> 2;
-  if (temp_v0 + 1 >= 2) {
-    do {
-      temp_v6 = *piVar3;
-      temp_v5 = temp_v5 + 1;
-      piVar3 = piVar3 + 1;
-      if (temp_v6 != 0) {
-        *(unsigned int *)(temp_v6 + 0xc) = 0;
-      }
-    } while (temp_v5 < temp_v0 + 1);
-  }
-  *(unsigned int *)(temp_v1 + 0x1c) = *(unsigned int *)(temp_v1 + 0x18);
-  temp_v1 = asdModelGetSlotArray2(temp_v8);
-  temp_v5 = 1;
-  piVar3 = *(int **)(temp_v1 + 0x18);
-  temp_v0 = (*(int *)(temp_v1 + 0x1c) - (int)piVar3) >> 2;
-  if (temp_v0 + 1 >= 2) {
-    do {
-      temp_v6 = *piVar3;
-      temp_v5 = temp_v5 + 1;
-      piVar3 = piVar3 + 1;
-      if (temp_v6 != 0) {
-        *(unsigned int *)(temp_v6 + 0xc) = 0;
-      }
-    } while (temp_v5 < temp_v0 + 1);
-  }
-  *(unsigned int *)(temp_v1 + 0x1c) = *(unsigned int *)(temp_v1 + 0x18);
-  temp_v2 = asdModelGetSlotArray3(temp_v8);
-  temp_v3 = asdModelGetSlotRecord(temp_v8);
-  temp_v0 = temp_v8 * 0x40;
-  FUN_001569d8(temp_v2,temp_v3,&DAT_004dace0 + temp_v0);
-  temp_v7[0] = (unsigned int *)**(unsigned int **)(temp_v8 * 4 + 0x464aa4);
-  if (temp_v7[0] != (unsigned int *)0x0) {
-    nw_gfx_res_ResGraphicsFile_Cleanup(temp_v7);
-  }
-  puVar10 = (unsigned int *)(temp_v8 * 4 + 0x464aac);
-  puVar9 = (unsigned int *)*puVar10;
-  if (puVar9 != (unsigned int *)0x0) {
-    (**(romwright_code **)*puVar9)(puVar9);
-    (**(romwright_code **)(*(int *)puVar9[1] + 0xc))((int *)puVar9[1],puVar9);
-    *puVar10 = 0;
-  }
-  *(unsigned int *)(temp_v0 + 0x4dace8) = *(unsigned int *)(temp_v0 + 0x4dace4);
-  asdMemFreeNonNull(*(unsigned int *)(temp_v8 * 4 + 0x464aa4));
-  asdMemFree((void *)(*(unsigned int *)(temp_v8 * 4 + 0x464a9c)));
-  *(unsigned int *)(temp_v8 * 4 + 0x464a9c) = 0;
-  asdModelSlotClearActive(temp_v8);
-  temp_v0 = temp_v8;
-  temp_v1 = 0;
-  temp_v5 = temp_v8 * 0x284 + 0x4da290;
-  temp_v6 = temp_v8 * 0x284 + 0x4da798;
-  do {
-    temp_v4 = temp_v1 * 0x4c + temp_v0 * 0x284;
-    puVar9 = *(unsigned int **)(&g_asdModelBanks + temp_v4 + 0x44);
-    if (puVar9 != (unsigned int *)0x0) {
-      temp_v7[0] = (unsigned int *)(&g_asdModelBanks + temp_v4 + 0x44);
-      (**(romwright_code **)*puVar9)(puVar9);
-      (**(romwright_code **)(*(int *)puVar9[1] + 0xc))((int *)puVar9[1],puVar9);
-      *temp_v7[0] = 0;
-    }
-    if (*(int *)(&g_asdModelBanks + temp_v4 + 0x4c) != 0) {
-      asdMemFree((void *)(*(int *)(&g_asdModelBanks + temp_v4 + 0x4c)));
-    }
-    temp_v4 = temp_v1 * 4 + temp_v0 * 0x284;
-    puVar9 = *(unsigned int **)(&g_asdModelBanks + temp_v4 + 0x264);
-    if (puVar9 != (unsigned int *)0x0) {
-      (**(romwright_code **)*puVar9)(puVar9);
-      (**(romwright_code **)(*(int *)puVar9[1] + 0xc))((int *)puVar9[1],puVar9);
-      *(unsigned int *)(&g_asdModelBanks + temp_v4 + 0x264) = 0;
-    }
-    temp_v4 = temp_v1 * 0x4c + temp_v0 * 0x284;
-    puVar9 = *(unsigned int **)(&g_asdModelSlotBanks + temp_v4 + 0x44);
-    if (puVar9 != (unsigned int *)0x0) {
-      temp_v7[0] = (unsigned int *)(&g_asdModelSlotBanks + temp_v4 + 0x44);
-      (**(romwright_code **)*puVar9)(puVar9);
-      (**(romwright_code **)(*(int *)puVar9[1] + 0xc))((int *)puVar9[1],puVar9);
-      *temp_v7[0] = 0;
-    }
-    if (*(int *)(&g_asdModelSlotBanks + temp_v4 + 0x4c) != 0) {
-      asdMemFree((void *)(*(int *)(&g_asdModelSlotBanks + temp_v4 + 0x4c)));
-    }
-    temp_v4 = temp_v1 * 4 + temp_v0 * 0x284;
-    puVar9 = *(unsigned int **)(&g_asdModelSlotBanks + temp_v4 + 0x264);
-    if (puVar9 != (unsigned int *)0x0) {
-      (**(romwright_code **)*puVar9)(puVar9);
-      (**(romwright_code **)(*(int *)puVar9[1] + 0xc))((int *)puVar9[1],puVar9);
-      *(unsigned int *)(&g_asdModelSlotBanks + temp_v4 + 0x264) = 0;
-    }
-    temp_v4 = temp_v5 + temp_v1 * 0x4c;
-    puVar9 = *(unsigned int **)(temp_v4 + 0x44);
-    if (puVar9 != (unsigned int *)0x0) {
-      temp_v7[0] = (unsigned int *)(temp_v4 + 0x44);
-      (**(romwright_code **)*puVar9)(puVar9);
-      (**(romwright_code **)(*(int *)puVar9[1] + 0xc))((int *)puVar9[1],puVar9);
-      *temp_v7[0] = 0;
-    }
-    if (*(int *)(temp_v4 + 0x4c) != 0) {
-      asdMemFree((void *)(*(int *)(temp_v4 + 0x4c)));
-    }
-    temp_v4 = temp_v5 + temp_v1 * 4;
-    puVar9 = *(unsigned int **)(temp_v4 + 0x264);
-    if (puVar9 != (unsigned int *)0x0) {
-      (**(romwright_code **)*puVar9)(puVar9);
-      (**(romwright_code **)(*(int *)puVar9[1] + 0xc))((int *)puVar9[1],puVar9);
-      *(unsigned int *)(temp_v4 + 0x264) = 0;
-    }
-    temp_v4 = temp_v6 + temp_v1 * 0x4c;
-    puVar9 = *(unsigned int **)(temp_v4 + 0x44);
-    if (puVar9 != (unsigned int *)0x0) {
-      (**(romwright_code **)*puVar9)(puVar9);
-      (**(romwright_code **)(*(int *)puVar9[1] + 0xc))((int *)puVar9[1],puVar9);
-      *(unsigned int *)(temp_v4 + 0x44) = 0;
-    }
-    if (*(int *)(temp_v4 + 0x4c) != 0) {
-      asdMemFree((void *)(*(int *)(temp_v4 + 0x4c)));
-    }
-    temp_v4 = temp_v6 + temp_v1 * 4;
-    puVar9 = *(unsigned int **)(temp_v4 + 0x264);
-    if (puVar9 != (unsigned int *)0x0) {
-      (**(romwright_code **)*puVar9)(puVar9);
-      (**(romwright_code **)(*(int *)puVar9[1] + 0xc))((int *)puVar9[1],puVar9);
-      *(unsigned int *)(temp_v4 + 0x264) = 0;
-    }
-    temp_v1 = (int)(short)((short)temp_v1 + 1);
-  } while (temp_v1 < 8);
-  temp_v1 = 0;
-  temp_v0 = temp_v8 * 0x14;
-  do {
-    temp_v5 = temp_v1 * 4 + temp_v0;
-    puVar9 = *(unsigned int **)(&g_asdModelIdLists + temp_v5 + 4);
-    if (puVar9 != (unsigned int *)0x0) {
-      (**(romwright_code **)*puVar9)(puVar9);
-      (**(romwright_code **)(*(int *)puVar9[1] + 0xc))((int *)puVar9[1],puVar9);
-      *(unsigned int *)(&g_asdModelIdLists + temp_v5 + 4) = 0;
-    }
-    temp_v1 = (int)(short)((short)temp_v1 + 1);
-  } while (temp_v1 < 4);
-  return;
+/* Four arrays of two banks each, one after the other; the third and fourth have no symbol of their own. */
+extern ModelBank g_asdModelBanks[];
+extern ModelBank g_asdModelSlotBanks[];
+extern EnvironmentBankState g_asdModelIdLists[];
+extern ModelUpdateSlot DAT_004dace0[];
+extern void *DAT_00464a9c[];
+extern void **DAT_00464aa4[];
+extern ModelObject *DAT_00464aac[];
+u32 asdModelGetSlotArray2(s32 slot);
+u32 asdModelGetSlotArray3(s32 slot);
+u32 asdModelGetSlotRecord(int index);
+void FUN_001569d8(u32 owner, u32 view, ModelUpdateSlot *updates);
+void nw_gfx_res_ResGraphicsFile_Cleanup(void **resource);
+void asdModelSlotClearActive(s32 slot);
 }
 
-} /* extern "C" */
+/* Marks every slot of the list free and empties the list. */
+static __inline void resetEnvironmentSlots(EnvironmentSlotArray *slots)
+{
+    EnvironmentSlotRange range = slots->range;
+    EnvironmentSlot **cursor = range.begin;
+    s32 count = range.end - range.begin;
+    for (s32 index = 1; index < count + 1; ++index, ++cursor) {
+        EnvironmentSlot *slot = *cursor;
+
+        if (slot != NULL) {
+            slot->state = 0;
+        }
+    }
+    slots->range.end = slots->range.begin;
+}
+
+/* Destroys the object `slot` owns, if any, and clears the slot. */
+static __inline void releaseObject(ModelObject **slot)
+{
+    ModelObject *object = *slot;
+    if (object != NULL) {
+        object->destroy();
+        object->allocator->release(object);
+        *slot = NULL;
+    }
+}
+
+/* Frees model `index` of a bank: its named object, its buffer and the model itself. */
+static void releaseBankSlot(ModelBank *bank, s32 index)
+{
+    ModelBankName *name = &bank->names[index];
+
+    releaseObject(&name->object);
+    if (name->buffer != NULL) {
+        asdMemFree(name->buffer);
+    }
+    releaseObject(&bank->model[index]);
+}
+
+/* Releases everything a model slot owns: environment slots, resource file, models and cached objects. */
+extern "C" void asdModelSlotRelease(s32 slot)
+{
+    resetEnvironmentSlots((EnvironmentSlotArray *)asdModelGetSlotArray1(slot));
+    resetEnvironmentSlots((EnvironmentSlotArray *)asdModelGetSlotArray2(slot));
+    u32 owner = asdModelGetSlotArray3(slot);
+    u32 view = asdModelGetSlotRecord(slot);
+    FUN_001569d8(owner, view, &DAT_004dace0[slot]);
+    void *resource = *DAT_00464aa4[slot];
+    if (resource != NULL) {
+        nw_gfx_res_ResGraphicsFile_Cleanup(&resource);
+    }
+    releaseObject(&DAT_00464aac[slot]);
+    DAT_004dace0[slot].end = DAT_004dace0[slot].begin;
+    asdMemFreeNonNull(DAT_00464aa4[slot]);
+    asdMemFree(DAT_00464a9c[slot]);
+    DAT_00464a9c[slot] = NULL;
+    asdModelSlotClearActive(slot);
+    for (s16 index = 0; index < 8; index++) {
+        releaseBankSlot(&g_asdModelBanks[slot], index);
+        releaseBankSlot(&g_asdModelSlotBanks[slot], index);
+        releaseBankSlot(&g_asdModelBanks[slot + 4], index);
+        releaseBankSlot(&g_asdModelSlotBanks[slot + 4], index);
+    }
+    for (s16 index = 0; index < 4; index++) {
+        releaseObject(&g_asdModelIdLists[slot].object[index]);
+    }
+}

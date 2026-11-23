@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the store of the cleared `flagged` byte is scheduled after the x/z conversions in retail (strbeq fp after vmov); retail also saves fp for a zero. */
+/* NON_MATCHING: retail writes the cleared flagged byte after transferring the converted x/z values to core registers. */
 #include "common.h"
 
 extern "C" {

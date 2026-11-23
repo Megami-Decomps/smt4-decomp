@@ -8286,3 +8286,12 @@
 003c2690 btlPartyDisplayDrawGauge
 002b67a0 mapEnemyPlaceFromRows
 004ea634 btlAiCureSkillHasTarget
+0029d760 MAPIF_DrawUp
+00387bb8 campCecEditRefreshState
+004f2708 btlCameraCanAdvance
+00422534 s4FsReaderThreadMain
+0019cbf8 asdMdlNodeBuildMotionTables
+00164490 messageBannerDrawCounterPlates
+002a968c uniteDrawSkillInheritancePanel
+003c9354 uniteInheritanceUpdateSkillList
+0049e3f8 listPanelDraw

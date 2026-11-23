@@ -18,8 +18,8 @@ cflags (other than the unit's own) of
   (b) the nearest units in address order, up to 3 on each side, in the same game.
 Units with no candidate are not compiled. The others are compiled with their own flags (the baseline,
 "default score") and with each candidate through tools/trial.py's Trial (the unit's real compile
-command: multifile partners, carving, armlink NOPs) and scored as fdiff scores them (raw `-`/`+` lines,
-0 = IDENTICAL; plus fdiff's --shape score).
+command: multifile partners and autoinline, carving, armlink NOPs) and scored as fdiff scores them
+(raw `-`/`+` lines, 0 = IDENTICAL; plus fdiff's --shape score).
 
 Each candidate gets an evidence class (only proven units count as carrying a flag set):
   twin      the twin carries exactly that flag set and is proven with it;

@@ -119,7 +119,7 @@ extern unsigned int mapCategoryToDestinationGroup(unsigned int);
 /* Supplied declaration required: FUN_004e8454. */
 /* Supplied declaration required: btlUnitMarkTargetCandidates. */
 /* Supplied declaration required: FUN_004eb838. */
-extern int FUN_004f2708(int, int, unsigned int);
+extern int btlCameraCanAdvance(int, int, unsigned int);
 /* Supplied declaration required: clearTwo200Buffers. */
 /* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
 /* Supplied declaration required: FUN_004fcffc. */
@@ -304,7 +304,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
   else {
     switch(param_2[0xc]) {
     default:
-      temp_v19 = FUN_004f2708(reinterpret_cast<int>(g_btlCamera),temp_v19,1);
+      temp_v19 = btlCameraCanAdvance(reinterpret_cast<int>(g_btlCamera),temp_v19,1);
       if (temp_v19 != 0) {
         temp_v15 = 0xffffffff;
         temp_v12 = *(short *)(*param_1 + 0x2004);
@@ -324,7 +324,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
       }
       if (((*(int *)(reinterpret_cast<int>(g_btlCamera) + 0x7cc) != (int)*(short *)(*param_1 + 0x2004)) &&
           (-1 < *(int *)(reinterpret_cast<int>(g_btlCamera) + 0x7cc))) &&
-         (temp_v19 = FUN_004f2708(reinterpret_cast<int>(g_btlCamera),*param_1,1), temp_v19 != 0)) {
+         (temp_v19 = btlCameraCanAdvance(reinterpret_cast<int>(g_btlCamera),*param_1,1), temp_v19 != 0)) {
         btlQueueDuplicateSuppressedAction(0,param_2);
       }
       temp_v27[0] = 1;

@@ -93,7 +93,7 @@ void campCecLoaderThread(CecThreadWork *work)
             slotNameDisplaySetEntry(campCecGetOwnRecord(), gameDataGetRecordValue());
             cecMessageSetWord27E8C(campCecGetOwnRecord(), gameDataBlocksGetWord27E8C());
             if (gameDataGetRecordValue() == 0) {
-                rt_aeabi_memclr(campCecGetOwnRecord()->demon, 0x14);
+                rt_aeabi_memclr(&campCecGetOwnRecord()->demon, sizeof(CecReceivedDemon));
             }
 
             if (work->source == 1) {
@@ -104,12 +104,12 @@ void campCecLoaderThread(CecThreadWork *work)
                 if (available != 0 && gameDataTestFlags(0x20) != 0) {
                     CampCecReceivedRecord card;
                     cecOutboxReadCard(&card);
-                    if (rt_memcmp(card.demon, campCecGetOwnRecord()->demon, 0x14) != 0) {
-                        if (campCecGetOwnRecord()->demonId == 0) {
+                    if (rt_memcmp(&card.demon, &campCecGetOwnRecord()->demon, sizeof(card.demon)) != 0) {
+                        if (campCecGetOwnRecord()->demon.id == 0) {
                             slotNameDisplaySetEntry(campCecGetOwnRecord(), 0);
                             cecProcessCall2();
                             cecProcessForward(campCecGetOwnRecord());
-                            rt_aeabi_memclr(campCecGetOwnRecord()->demon, 0x14);
+                            rt_aeabi_memclr(&campCecGetOwnRecord()->demon, sizeof(CecReceivedDemon));
                         } else {
                             cecProcessCall2();
                             cecProcessForward(campCecGetOwnRecord());

@@ -1,3 +1,6 @@
+/* The hero's growth file functions, one translation unit (0x3c1ab4-0x3c2024, the other growth functions between
+ * them). Built with `"autoinline": false` (one compile, so all three units): playerGetGrowthParameters is IDENTICAL
+ * only so (41 lines with armcc's autoinline), statMaximumsAtLevel either way. */
 #include "gamedata/PlayerInitialization.h"
 #include "gamedata/PlayerGrowthDefaults.h"
 #include "gamedata/GamePlayerData.h"
@@ -6,8 +9,6 @@
 extern "C" {
 void playerRecalcStatsFromEquipment(s32 mode);
 
-/* NON_MATCHING: 41 lines, scheduling only: retail interleaves the record's byte loads with the shifts and ors of the
- * three packed growth words (it loads byte 6 first); the build loads bytes 6, 7 and 12 first. */
 /* Copies the hero's growth parameters (PlayerGrow.tbb) into parameters. */
 void playerGetGrowthParameters(StatGrowthParametersIV *parameters)
 {
@@ -20,9 +21,11 @@ void statMaximumsAtLevel(s16 level, StatMaximumsIV *maximums, const StatGrowthPa
     statMaximumsAtLevelIV(level, maximums, parameters);
 }
 
-/* NON_MATCHING: 48 lines: the inlined growth parameters and HP/MP computation are scheduled differently (retail loads
- * the hpGrowth byte first and stores HP before computing MP). The u8 index gives retail's starting-stat copy (the
- * record stays in r0); Apocalypse's playerResetToStartingStats copies the same way but its frame changes with it. */
+/* NON_MATCHING: 67 lines (48 with armcc's autoinline, when it inlines the file's two functions here itself): retail
+ * inlines the growth parameters and the HP/MP computation (written as the header inlines those functions are), loads
+ * the hpGrowth byte first, stores HP before computing MP and keeps 0 in r6 for the clears. The u8 index gives retail's
+ * starting-stat copy (the record stays in r0); Apocalypse's playerResetToStartingStats copies the same way but its
+ * frame changes with it. */
 /* Resets player advancement and initial attributes, computes base HP/MP, then restores both. */
 void playerInitializeStats(void)
 {
@@ -41,9 +44,9 @@ void playerInitializeStats(void)
         player->baseStats.stats[index] = initial->initialStats[index];
     }
     StatGrowthParametersIV parameters;
-    playerGetGrowthParameters(&parameters);
+    playerGrowthParametersIV(&parameters);
     /* The base HP and MP words are the output pair. */
-    statMaximumsAtLevel(player->level, (StatMaximumsIV *)&player->baseStats.hp, &parameters);
+    statMaximumsAtLevelIV(player->level, (StatMaximumsIV *)&player->baseStats.hp, &parameters);
     playerRecalcStatsFromEquipment(0);
     player->hp = player->maxHp;
     player->mp = player->maxMp;

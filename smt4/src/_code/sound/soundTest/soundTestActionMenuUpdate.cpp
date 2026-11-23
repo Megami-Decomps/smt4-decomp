@@ -1,18 +1,6 @@
-#include "common.h"
-#include <stddef.h>
+#include "sound/SoundTestWork.h"
 
-struct SoundTestWork;
 namespace {
-struct SoundTestControlView {
-    u32 process;
-    u32 flags;
-    u32 state;
-    u32 counter;
-    s32 selection;
-};
-typedef char SoundTestControlViewOffsetsCheck[
-    offsetof(SoundTestControlView, state) == 8 &&
-    offsetof(SoundTestControlView, selection) == 0x10 ? 1 : -1];
 
 inline s32 stepSoundTestSelection(s32 selection, s32 step)
 {
@@ -28,7 +16,6 @@ inline s32 stepSoundTestSelection(s32 selection, s32 step)
 }
 
 extern "C" {
-extern SoundTestWork *g_soundTestWork;
 u32 padIsButtonPressed(u32 button);
 u32 padIsButtonRepeat(u32 button);
 void jobStop(u32 process, s32 flags);
@@ -39,16 +26,16 @@ void soundChannelStopAll(s32 frames);
 void bgmPlay(u32 sound, s32 channel, s32 frames);
 void bgmStopNoForce(u32 sound, s32 frames);
 
-u32 soundTestActionMenuUpdate()
+s32 soundTestActionMenuUpdate(u32)
 {
-    SoundTestControlView *work = reinterpret_cast<SoundTestControlView *>(g_soundTestWork);
+    SoundTestWork *work = g_soundTestWork;
     if (work->state != 99 && padIsButtonPressed(2)) {
         work->state = 99;
     }
     switch (work->state) {
     case 0:
         work->state = 1;
-        work->counter = 0;
+        work->frame = 0;
         break;
     case 1:
         if (padIsButtonRepeat(4)) {
@@ -94,8 +81,8 @@ u32 soundTestActionMenuUpdate()
         }
         break;
     case 99:
-        jobStop(reinterpret_cast<SoundTestControlView *>(g_soundTestWork)->process, 0);
-        return 0xFFFFFFFF;
+        jobStop(g_soundTestWork->job, 0);
+        return -1;
     }
     return 0;
 }

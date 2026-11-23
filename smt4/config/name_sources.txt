@@ -6360,3 +6360,13 @@
 0022daac bibleDevilDrawName inferred draws a devil list row's name (w84-f1)
 0022d9c8 bibleDevilDrawStat inferred draws a devil list row's stat value in its comparison colour (w84-f1)
 002ca7fc titleMainDrawLower inferred the title's lower-screen draw task (registered as "TITLE D" by titleMainInitialize) (w84-f2)
+001ea8fc soundTestCreate inferred allocates the sound-test work and starts its "ST C"/"ST D" jobs; soundTest.cpp line 49 trace, same body as Apocalypse's soundTestCreate (w85-s1)
+002d400c lmapSceneModelSwapStep inferred steps the field map's stage model swap: picks group and stage from the equipment, releases and reloads the model (w85-o3)
+0034e020 s4FsReaderThreadMain inferred the movie file reader's thread: waits on its data and stop events and reads ahead (w85-o3)
+00205cc8 btlUiStepNumberPopupsAndMarkers inferred twin of smt4a btlUiStepNumberPopupsAndMarkers (ported from it)
+00124d24 messageBannerDrawCounterPlates inferred twin of smt4a messageBannerDrawCounterPlates
+001049ac asdModelSystemStart inferred starts the model system: fade, shadow model and shader, the three shadow helpers (w85-f1)
+0029212c buttonHelpShowEntryDescription inferred fills the description slots of a content entry and draws the button help's text; IV's form of screenBuildItemDescriptionMessage (w85-f2)
+001dddd8 uniteDrawListPanel inferred twin of smt4a uniteDrawListPanel (ported from it)
+004da290 g_asdModelBanks2 inferred two more model banks (0x508 bytes) after g_asdModelSlotBanks, addressed as g_asdModelBanks + 0xa10 by asdModelSlotRelease (w85-f2)
+004da798 g_asdModelSlotBanks2 inferred two more model banks (0x508 bytes) after g_asdModelBanks2, addressed as g_asdModelSlotBanks + 0xa10 (w85-f2)

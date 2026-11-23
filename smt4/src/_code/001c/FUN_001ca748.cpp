@@ -11,7 +11,7 @@ extern "C" {
 unsigned short* dataTable0cSub1GetText(unsigned short id);
 int dataTable0cLookupById(...);
 int table8Type5GetValue(void);
-int FUN_0029212c(...);
+int buttonHelpShowEntryDescription(...);
 int FUN_0029bd4c(void);
 int buttonHelpShowSkillDetails(...);
 int nkmBaseGetRecord(...);
@@ -78,7 +78,7 @@ extern int uniteNotBusy(void);
 /* Supplied declaration required: FUN_0026adb4. */
 /* Supplied declaration required: statusDownRebuildTouchRegions. */
 /* Supplied declaration required: table8Type5GetValue. */
-/* Supplied declaration required: FUN_0029212c. */
+/* Supplied declaration required: buttonHelpShowEntryDescription. */
 extern int FUN_00293ac0(void);
 /* Supplied declaration required: devilCreateRaceEffect. */
 extern int asdSoundSlotBIsPlaying(unsigned int);
@@ -1298,7 +1298,7 @@ LAB_001cc6b4:
     else if (temp_v15 == 6) {
       temp_v13 = *(unsigned short *)(temp_v2 + 0x560);
     }
-    FUN_0029212c(temp_v13);
+    buttonHelpShowEntryDescription(temp_v13);
   }
   if (*(int *)(temp_v2 + 0x400) == 0x11) {
     if (temp_v17) {

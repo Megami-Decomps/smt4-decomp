@@ -73,7 +73,8 @@ tools/shared.py       pairs the functions both games share (exact, or with struc
                       unproven ones whose twin is proven
 tools/fdiff.py        compiles one function and diffs its disassembly and relocations against retail
 tools/trial.py        scores many source variants of one function in parallel, from temporary copies, as fdiff
-                      would; --flags probes other cflags and multifile partners (diagnostics, not evidence)
+                      would; --flags probes other cflags, multifile partners and autoinline (diagnostics,
+                      not evidence)
 tools/usercheck.py    re-scores, as fdiff does, every unit a change reaches (edited sources and every user of a changed,
                       new or deleted header) at BASE and now, and lists what moved; exit 1 on a regression
 tools/names.py        names a function or global in every file at once and records the evidence
@@ -100,6 +101,20 @@ whose retail code shows another build, such as `-O2`, `-Ospace` or `--fpu=softvf
 C++ (their asserts name 168 `.cpp` source files and 4 `.c`). Recovered classes have shared declarations
 in `include/classes/` and native member definitions outside `extern "C"`; functions not established
 as members retain C linkage so their symbols keep the names objdiff and relink pair them by.
+
+### Per-unit compile keys
+
+A unit's entry in `config/project.json` may change its compile command (`build.py`'s `command`, which
+the build, `--force`, carving, the up-to-date check, `fdiff`, `trial`, `usercheck`, `flag_audit` and
+`layout` all use). Each needs evidence (docs/matching-guide.md, *Compiler and flags*):
+
+- `cflags`: the unit's whole flag list instead of `compiler.cflags`.
+- `thumb`: `-mthumb` (true) or `-marm` (false), the mode the function was decoded in.
+- `multifile`: functions compiled in the same armcc run, `--multifile --no_autoinline --split_sections`
+  with their unit sources; carving keeps the unit's own function.
+- `autoinline`: overrides armcc's autoinline choice. Absent, a `multifile` run gets `--no_autoinline`
+  and any other compile (a translation unit too) has none, so armcc's `-O2`/`-O3` default inlines;
+  `true` drops `--no_autoinline` from a `multifile` run, `false` adds it to a compile without partners.
 
 ## Shared code
 
@@ -154,7 +169,9 @@ several functions is inlined late, one with a single call early, and the registe
   paths). Name the file after the original (`camp/PlayLog/PlayLog/PlayLog.cpp`), put the includes,
   declarations and file-local `static` helpers and data once at the top, then each function, with its own
   doc comment and `NON_MATCHING` note directly before its definition. The units of one file share
-  `cflags`, `thumb` and `multifile` (the file was compiled once).
+  `cflags`, `thumb`, `multifile` and `autoinline` (the file was compiled once). Without `multifile` a
+  TU compiles with armcc's autoinline on, so a plain function of the file may be inlined into its
+  callers where retail calls it; `"autoinline": false` compiles it with `--no_autoinline`.
 - **build.py** compiles the whole file for each of its units and carves the unit's own function out
   (`--split_sections`, as for a structor's extra variants): each object still holds one function, so
   objdiff, `fdiff` and relink work per function. A change to the file rebuilds all of its units.

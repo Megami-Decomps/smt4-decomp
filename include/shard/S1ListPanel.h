@@ -5,6 +5,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "camp/RenderCtx.h"
+#include "ui/UiSpriteState.h"
 
 /* Sprite description returned by asdTMTexTableEntryAt(group, id). */
 typedef struct SpriteInfo {
@@ -58,8 +59,7 @@ typedef struct ListPanel {
     /* 0x124 */ u8 scrollBar[0x64]; /* scroll bar state (gridNavigationGetItemCount and friends) */
     /* 0x188 */ s32 scroll;         /* first visible entry */
     /* 0x18C */ u8 unk18C[0x13C];
-    /* 0x2C8 */ u8 position[0x20];  /* a vec2 (x, y) */
-    /* 0x2E8 */ f32 speed;
+    /* 0x2C8 */ UiSpriteState sprite;   /* the panel's position and opacity */
 } ListPanel;
 
 #ifdef __cplusplus

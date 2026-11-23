@@ -42,10 +42,7 @@ void FUN_0041a270(ModelEffects *effects)
         if ((source->flags & 1) != 0) {
             void *memory = asdMemoryAllocTraced(sizeof(ModelEffectEntry), DAT_00526044, 0xC9);
             ModelEffectEntry *entry = memory != NULL ? initEntry(static_cast<ModelEffectEntry *>(memory)) : NULL;
-            entry->id = source->id;
-            entry->flags = source->flags;
-            entry->unk08 = source->unk08;
-            entry->unk0C = effPartClone(source->unk0C);
+            modelEffectCopyEntry(entry, source);
             filtered->items[copied++] = entry;
         }
     }

@@ -94,6 +94,7 @@ def split(game, function, offset, note, state):
         new[key] = (path.parent / f"{name}{path.suffix}").as_posix()
     new.pop("cflags", None)
     new.pop("multifile", None)
+    new.pop("autoinline", None)
     units.insert(index + 1, new)
     placeholder(game, new["source"], f"split off {function} at +{offset:#x} ({note or 'the analysis merged the two'})")
 

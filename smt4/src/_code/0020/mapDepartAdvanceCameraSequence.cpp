@@ -1,15 +1,11 @@
-/* NON_MATCHING: the code is retail's except for one register. Retail keeps the pointer to the running move in r3
- * across the six calls to vectorPairTransitionStep (so it saves r4-r7 only and the frame is 4 bytes larger: 116
- * against 112); the build keeps it in r4 and saves r8 too. armcc holds a value in r3 across a call only when it
- * knows what the callee clobbers, and retail's vectorPairTransitionStep uses r0-r2 and s0-s6 only: the two were
- * compiled in one --multifile run (they are 0x79ba0 bytes apart in the image, so not one file). Measured:
- * - `--multifile` with vectorPairTransitionStep's source and no `--no_autoinline`: retail's r3, prologue and
- *   frame; 84 raw lines left (the x and z registers of three points swapped);
- * - build.py's recipe for a `multifile` unit (`--multifile --no_autoinline --split_sections`): r4 and 278 lines,
- *   as long as vectorPairTransitionStep's source calls inline helpers (its VEC3 add/sub/scale, whatever their
- *   linkage); with a copy of that function written without helpers the same recipe keeps r3 too.
- * Apocalypse's twin, lmapViewUpdateOrbitSequence, keeps the pointer in r4 (its vectorPairTransitionStep uses r3)
- * and is IDENTICAL. */
+/* NON_MATCHING: 84 raw lines, the x and z registers of three points swapped. Retail keeps the pointer to the running
+ * move in r3 across the six calls to vectorPairTransitionStep (so it saves r4-r7 only and the frame is 116 bytes):
+ * armcc holds a value in r3 across a call only when it knows what the callee clobbers, and retail's
+ * vectorPairTransitionStep uses r0-r2 and s0-s6 only, so the two were compiled in one --multifile run (0x79ba0 bytes
+ * apart in the image, so not one file). The unit's `multifile` entry with `"autoinline": true` reproduces retail's
+ * r3, prologue and frame (304 lines alone; 278 with the recipe's `--no_autoinline`, as long as
+ * vectorPairTransitionStep's source calls inline helpers, its VEC3 add/sub/scale). Apocalypse's twin,
+ * lmapViewUpdateOrbitSequence, keeps the pointer in r4 (its vectorPairTransitionStep uses r3) and is IDENTICAL. */
 #include "map/LmapViewGlobals.h"
 #include "map/LmapGlobals.h"
 #include "map/VectorPairTransition.h"

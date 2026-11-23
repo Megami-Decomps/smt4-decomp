@@ -87,7 +87,7 @@ void FUN_003a8aa0(Obj42247c *screen)
     Obj4221a4 *window = reinterpret_cast<Obj4221a4 *>(screen->touchSelection.unk34);
     window->initialize(&screen->flags);
     window = reinterpret_cast<Obj4221a4 *>(screen->touchSelection.unk34);
-    window->state |= 0x1000;
+    window->state.flags |= 0x1000;
     s32 count = work->visibleCount;
     if (block->mode == 0) {
         count = count < 10 ? count : 10;

@@ -533,6 +533,9 @@ asks for.
   caller's arguments made seven queue functions IDENTICAL (smt4 `FUN_00246454`, `FUN_003de60c`, `FUN_003de9e4`,
   `FUN_0023c368`; smt4a `FUN_004fe618`, `FUN_004fe900`, `FUN_004fcde0`, wave 62). Keep each copy's body equal to
   its out-of-line function; the inlined copies show the source's store order where the out-of-line code does not.
+- smt4a `screenBuildItemDescriptionMessage` (2048 bytes) is IDENTICAL with its signed full-width number formatting
+  (`±０`/`＋n`/`－n`, its own number buffer; IV's twin does the same with the same formats) as a plain `static` helper
+  called once, 165 lines off with the same body `static __inline` and 84-157 written in the loop (wave 85).
 - A constant table id that retail moves into a callee-saved register once and copies into `r0` before each lookup
   (`mov r4, #28` … `mov r0, r4; bl asdTMTexTableEntryAt`, where an inline literal is `mov r0, #28` at each call) is
   the parameter of an inline helper called once per lookup: `asdTMTexTableEntryRect(file, index, &x, &y, &w, &h)`
@@ -692,6 +695,10 @@ asks for.
   tables: write them typed (`UiSpritePositionKey`, `UiSpriteScalarKey`, `SpriteAnimationCommand` from
   `ui/UiSpriteState.h`), named after the unit (`sPanelPositionKeys`), and pass `sizeof` each
   (smt4a `FUN_003f84e8`, `FUN_0049d3f0`).
+- A local `const` table armcc emits right after the function's `bx lr` and copies from with `add rX, pc` (no pool
+  load) is the function's trailing data: `config/symbols.txt`'s size covers it, and `build.py split` then takes it
+  whole into the target. smt4 `FUN_0028886c` and smt4a `FUN_00345098` (an eight-byte priority table, size 0x3c) were
+  IDENTICAL in `fdiff` but 92.9% in objdiff while the target held only its first word (wave 85).
 - Data another thread changes (a run flag, a polled state) is `volatile` under the
   [`volatile` rule](CONTRIBUTING.md#what-a-source-may-contain).
   `nn::os::CriticalSection::state` (`nn/os/CriticalSection.h`) is the SDK's interlocked lock counter: `volatile`, it
@@ -735,6 +742,9 @@ asks for.
   members whose own constructors zero them (`ModelEffectList() : count(0), items(NULL) {}`) pairs the
   stores into retail's `strd`; the same stores written in the body do not (smt4a
   `ModelUnitExtra::ModelUnitExtra`).
+- A constructor whose retail stores the vptr before a cleared member, where `: member(0)` puts the clear first, is a
+  member type that clears itself in its own constructor: `Obj422594State() : flags(0) {}` made both games'
+  `Obj422594::Obj422594()` IDENTICAL with an empty body (`classes/Obj422594.h`, wave 85).
 - A hand-rolled `begin`/`end`/`capacity` pointer triple released through `__rw::__rw_deallocate` is the
   library's `std::vector<T *>` (`<vector>`): declare the member as one and write the owner's destructor with
   iterators and an explicit `clear()` (smt4a `Obj557dcc::~Obj557dcc`, `Obj557b58::~Obj557b58`; their
@@ -876,6 +886,11 @@ scored as `fdiff` scores it.
   parameter back to the first that differs; what stays in the arms shows the order. smt4a `FUN_00493518` and
   `FUN_004935c8` take `(rect, id, dx, dy, last, speed)` (retail hoists the speed and leaves the id in each arm):
   with that order `Obj55c920::FUN_004a24a8` is IDENTICAL and both definitions stay so (wave 79).
+  `btlUiStartNumberPopup` takes its three integers before the coordinates `(handle, slot, number, unused, small,
+  alt, anchored, x, y, z)` in both games: the best order over its definitions and callers, smt4a's definition
+  IDENTICAL (IV's 2 -> 10 lines, unproven); a prototype's order is one fact for both twins (wave 85).
+  `stereoCameraSetPerspective` keeps its by-value `CameraPerspective`: the scalar orders that make three callers
+  IDENTICAL are not the best total, and the definition gets worse with them (wave 85).
 
 The sweep: the callee's definition fixes the order within each bank (which integer goes in `r0`, which
 float in `s0`), so only the interleaving of the two banks is free: 56 orders for three integers and
@@ -966,11 +981,21 @@ read `r2`/`r3` right after `bl uiClampScrollOffset` (`vmov s1, r2`), and the IDE
 no core register; as its `multifile` partner they went from 163 to 137 and 132 to 110 lines (wave 76). IV's
 `contentMenuRebuildGroup` got worse with the same partner (118 to 135) and has no entry.
 
-The recipe always adds `--no_autoinline`, which most multifile units need (without it their callees are
+The recipe adds `--no_autoinline`, which most multifile units need (without it their callees are
 inlined). Some need autoinline on: smt4 `mapDepartAdvanceCameraSequence` keeps retail's `r3` across six calls of
 `vectorPairTransitionStep`, its prologue and its 116-byte frame only in a `--multifile` run without
-`--no_autoinline` (the callee calls inline helpers; 84 lines left against 278 with the recipe), so it has no
-`multifile` entry yet: a per-unit switch for the flag is a tools follow-up (wave 71).
+`--no_autoinline` (the callee calls inline helpers; 84 lines left against 278 with the recipe and 304 alone;
+wave 71). A unit's `"autoinline"` key overrides the recipe ([per-unit compile keys](project.md#per-unit-compile-keys)):
+
+- `"autoinline": true` next to a `multifile` list drops `--no_autoinline`: use it when retail holds a
+  caller-saved register across a call into the run (`r3 = &view->move` across `bl vectorPairTransitionStep`)
+  and only the run with autoinline on reproduces it; `"autoinline": false` adds `--no_autoinline` to a
+  unit or translation unit without partners, whose file inlines a callee retail keeps out of line (the
+  ButtonHelp TU of wave 80, not retried). Same evidence rule as `cflags`; `trial.py --flags` probes both.
+  smt4 `mapDepartAdvanceCameraSequence` and `lmapViewUpdateSelectableSequence` (580 lines alone and with the
+  recipe, 532 so) have the entry `"multifile": ["vectorPairTransitionStep"], "autoinline": true`; the smt4
+  `playerInitializeStats` translation unit has `"autoinline": false` (`playerGetGrowthParameters` IDENTICAL, 41 lines
+  with autoinline; `playerInitializeStats` calls the header inlines retail inlined; wave 85).
 
 ### Finding the evidence
 

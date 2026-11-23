@@ -16,32 +16,20 @@ void effectRenderTransformedInstance(UiSpriteState *element, f32 value);
 s32 renderCtxPopState(RenderCtx *context, s32 stack);
 }
 
-static __inline void setTitleRenderState(RenderCtx *context, s32 state)
-{
-    RenderStateStack *stack = context->stacks + RENDER_STACK_B;
-    s32 previous = stack->entries[stack->count];
-    stack->entries[stack->count] = state;
-    if (stack->dirty || previous != state) {
-        stack->apply(state);
-        stack->dirty = 0;
-    }
-}
-
 // Draw the visible title overlay, using a separate render state for its special-mode element.
 extern "C" void titleOverlayDraw(TitleOverlay *overlay)
 {
     if (overlay->visible) {
-        u32 value = renderCtxPackPassFlags(1, 0);
-        renderStackPushIndexed(g_titleScene, 3, value);
+        renderStackPushIndexed(g_titleScene, 3, renderCtxPackPassFlags(1, 0));
         efctSetSpeed(1.0f);
         gxResetColorQuadToWhite();
         s32 frame = static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f));
         if (overlay->mode == 7 || overlay->mode == 8 || overlay->mode == 9) {
             RenderCtx *context = g_titleScene;
-            setTitleRenderState(context, packNibblesAndByte(6, 1, 0));
+            renderCtxSetB(context, packNibblesAndByte(6, 1, 0));
             effectRenderTransformedInstance(&overlay->elements[6], static_cast<f32>(frame));
             context = g_titleScene;
-            setTitleRenderState(context, packNibblesAndByte(6, 7, 0));
+            renderCtxSetB(context, packNibblesAndByte(6, 7, 0));
         }
         effectRenderTransformedInstance(&overlay->elements[0], static_cast<f32>(frame));
         effectRenderTransformedInstance(&overlay->elements[1], static_cast<f32>(frame));

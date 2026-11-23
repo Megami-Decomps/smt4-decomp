@@ -4,7 +4,7 @@
  *   it loads the minimum, so the stores stay in field order; this build holds the value in r1 and
  *   stores minimum/row first. (Naming the starting value in a local before the call gives retail's
  *   code; a temporary with one use, so it is not written.)
- * - the selected item's id before FUN_0029212c (substep 2) and in substep 10: retail loads the
+ * - the selected item's id before buttonHelpShowEntryDescription (substep 2) and in substep 10: retail loads the
  *   category into r1 and builds the two table addresses in r1-r3; this build uses r0-r2. */
 #include "shop/ShopScreen.h"
 #include "shop/shopMain.h"
@@ -32,7 +32,7 @@ void pageRegisterButtonTouchRegions(NumericStepper *stepper);
 s32 aocItemGetPrice(const ShopSlot *item);
 u32 messageTargetSetValue(u32 value, u8 flag);
 void FUN_002937c8(ShopCategoryList *list);
-void FUN_0029212c(int id);
+void buttonHelpShowEntryDescription(int id);
 s32 inputConfirmPressed(void);
 void messageMainFinishWindow(void);
 void messageMainSetEnabled(u8 value);
@@ -139,7 +139,7 @@ void shopQuantityStep(ShopScreen *screen)
         if (before == index) {
             FUN_002937c8(list);
         }
-        FUN_0029212c(shopSelectedItem(screen)->id);
+        buttonHelpShowEntryDescription(shopSelectedItem(screen)->id);
         shopShowPriceChange(screen);
         if (inputConfirmPressed() != 0 && screen->quantityIndex == index) {
             if (screen->quantity.value > 0) {

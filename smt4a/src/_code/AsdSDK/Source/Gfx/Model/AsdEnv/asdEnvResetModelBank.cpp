@@ -17,9 +17,9 @@ struct EnvironmentBankState {
 
 extern "C" {
 extern AsdModelBank g_asdModelBanks[];
-extern AsdModelBank DAT_00635e08[];
-extern AsdModelBank DAT_00636310[];
-extern AsdModelBank DAT_00636818[];
+extern AsdModelBank g_asdModelSlotBanks[];
+extern AsdModelBank g_asdModelBanks2[];
+extern AsdModelBank g_asdModelSlotBanks2[];
 extern EnvironmentBankState DAT_00636d20[];
 extern u32 DAT_005b3bd8[];
 extern u32 *DAT_005b3be0[];
@@ -47,9 +47,9 @@ static __inline void resetEnvironmentSlots(EnvironmentSlotArray *slots)
 extern "C" void asdEnvResetModelBank(u32 resource, u32 bank)
 {
     sysMemClear(&g_asdModelBanks[bank], sizeof(AsdModelBank));
-    sysMemClear(&DAT_00635e08[bank], sizeof(AsdModelBank));
-    sysMemClear(&DAT_00636310[bank], sizeof(AsdModelBank));
-    sysMemClear(&DAT_00636818[bank], sizeof(AsdModelBank));
+    sysMemClear(&g_asdModelSlotBanks[bank], sizeof(AsdModelBank));
+    sysMemClear(&g_asdModelBanks2[bank], sizeof(AsdModelBank));
+    sysMemClear(&g_asdModelSlotBanks2[bank], sizeof(AsdModelBank));
     EnvironmentBankState *state = &DAT_00636d20[bank];
     state->unk00 = 0;
     state->unk04 = 0;

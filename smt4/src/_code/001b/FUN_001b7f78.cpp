@@ -679,7 +679,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int aocDataTable23Section3GetEntry(void);
 extern int naviFlag404Active(void);
 /* Supplied declaration required: lmapCameraSetMapPresets. */
-extern int FUN_002d400c(void);
+extern int lmapSceneModelSwapStep(void);
 /* Supplied declaration required: mapBlockLoadTableRecord. */
 extern int FUN_002eb134(void);
 /* Supplied declaration required: naviMainStartStateTimer. */
@@ -3055,7 +3055,7 @@ LAB_001bb1d4:
     mapAmbientAudioUpdate();
     break;
   case 0x19:
-    temp_v9 = FUN_002d400c();
+    temp_v9 = lmapSceneModelSwapStep();
     if (temp_v9 == 0) {
       return 0;
     }
@@ -3093,7 +3093,7 @@ LAB_001bb1d4:
     DAT_0049f93c = 0;
     break;
   case 0x1b:
-    temp_v9 = FUN_002d400c();
+    temp_v9 = lmapSceneModelSwapStep();
     if (temp_v9 == 0) {
       return 0;
     }

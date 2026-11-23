@@ -10,7 +10,7 @@ u32 jobRefIsRunning(void)
     s32 found;
     SoundTestWork *work;
 
-    work = g_requestWork;
+    work = DAT_00588fc8;
     if ((work != NULL) && ((found = jobFind(work->job), found != 0 || (work->requested == 0)))) {
         return 1;
     }

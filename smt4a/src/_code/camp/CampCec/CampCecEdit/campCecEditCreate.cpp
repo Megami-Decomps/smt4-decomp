@@ -41,7 +41,7 @@ s32 statusScreenStartWhenLoaded(StateAtF4 *edit);
 s32 FUN_00342e24(StateAtF4 *edit);
 s32 campCecEditItemState(StateAtF4 *edit);
 s32 FUN_00387d38(StateAtF4 *edit);
-s32 FUN_00387bb8(StateAtF4 *edit);
+s32 campCecEditRefreshState(StateAtF4 *edit);
 s32 FUN_0036ce70(StateAtF4 *edit);
 s32 FUN_00318e7c(StateAtF4 *edit);
 s32 campCecEditChoiceListState(StateAtF4 *edit);
@@ -84,7 +84,7 @@ void campCecEditCreate(u8 openMode)
     edit->followingPhase = -1;
     edit->table.state = -1;
     edit->table.nextState = 0;
-    edit->unk112 = 1;
+    edit->panelReady = 1;
     edit->touchFrames = 0;
     edit->openMode = openMode;
     edit->listCancelled = 0;
@@ -113,7 +113,7 @@ void campCecEditCreate(u8 openMode)
     edit->table.handlers[2] = FUN_00342e24;
     edit->table.handlers[1] = campCecEditItemState;
     edit->table.handlers[3] = FUN_00387d38;
-    edit->table.handlers[4] = FUN_00387bb8;
+    edit->table.handlers[4] = campCecEditRefreshState;
     edit->table.handlers[5] = FUN_0036ce70;
     edit->table.handlers[9] = FUN_00318e7c;
     edit->table.handlers[6] = campCecEditChoiceListState;

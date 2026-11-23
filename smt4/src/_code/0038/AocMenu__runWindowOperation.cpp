@@ -98,7 +98,7 @@ void AocMenu::runWindowOperation()
                 asdDebugHookPtrInt(&selection, 1);
                 selection.active = 1;
                 panel.initialize(&selection);
-                panel.state |= 0x1000;
+                panel.state.flags |= 0x1000;
                 s32 limit = rangeLimitMin(job + 0x90);
                 messageIdListInit(job + 0xad, 0x3a, 0x88, limit);
                 touchRows.soundEnabled = 1;

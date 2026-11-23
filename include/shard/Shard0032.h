@@ -159,12 +159,15 @@ typedef struct CecEditSlide {
 } CecEditSlide;
 typedef char CecEditSlideSizeCheck[sizeof(CecEditSlide) == 0x14 ? 1 : -1];
 
+struct CampCecReceivedRecord;
+
 typedef struct StateAtF4 {
     /* 0x00 */ u32 job;
     /* 0x04 */ u32 unk04;
     union {
         /* 0x08 */ u16 *unk08;
-        /* 0x08 */ PlayerSummary *record; /* the StreetPass card being edited */
+        /* 0x08 */ PlayerSummary *record; /* the player portion of the StreetPass card */
+        /* 0x08 */ CampCecReceivedRecord *streetPassRecord;
         /* 0x08 */ struct PartySlotA *slot; /* the party slot a return state compares against */
     };
     /* 0x0C */ u32 *infoPanel;           /* the character info panel (characterInfoPanelPopulate) */
@@ -211,9 +214,9 @@ typedef struct StateAtF4 {
     /* 0x10D */ u8 unk10D;               /* the save block's byte at 0x27E0E */
     /* 0x10E */ u8 imageActive;
     /* 0x10F */ u8 unk10F;
-    /* 0x110 */ u8 unk110;
+    /* 0x110 */ s8 refreshPending;        /* repopulate the card and panel on the next refresh step */
     /* 0x111 */ s8 helpShown;            /* the first slide (the help panel) is on screen; the help button toggles it */
-    /* 0x112 */ u8 unk112;               /* 1 on creation */
+    /* 0x112 */ u8 panelReady;            /* set on creation and after repopulating the panel */
     /* 0x113 */ u8 openMode;             /* the argument the screen was created with */
     /* 0x114 */ u8 listCancelled;        /* the choice list was left without choosing */
     /* 0x115 */ u8 unk115[3];
@@ -258,7 +261,8 @@ typedef char StateAtF4DispatchOffsetCheck[
     offsetof(StateAtF4, frameCounter) == 0x150 &&
     offsetof(StateAtF4, cursor.x) == 0x3C && offsetof(StateAtF4, table.values) == 0x88 &&
     offsetof(StateAtF4, table.state) == 0xE8 && offsetof(StateAtF4, activeMemberCount) == 0x104 &&
-    offsetof(StateAtF4, openMode) == 0x113 && offsetof(StateAtF4, unk148) == 0x148 &&
+    offsetof(StateAtF4, streetPassRecord) == 0x08 && offsetof(StateAtF4, refreshPending) == 0x110 &&
+    offsetof(StateAtF4, panelReady) == 0x112 && offsetof(StateAtF4, openMode) == 0x113 && offsetof(StateAtF4, unk148) == 0x148 &&
     offsetof(StateAtF4, unk154) == 0x154 && offsetof(StateAtF4, unk18C) == 0x18C &&
     sizeof(StateAtF4) == 0x198 ? 1 : -1];
 typedef char StateAtF4OutfitSelectionOffsetCheck[
