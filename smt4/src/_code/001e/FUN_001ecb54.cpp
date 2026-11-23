@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_001ecb54(s32 value)
+void FUN_001ecb54(s16 value)
 {
     CommandWindow *obj = g_comWin;
 

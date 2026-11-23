@@ -782,7 +782,7 @@
 0x0014d5b4 nw_snd_internal_GroupFile_FileHeader_GetFileBlock name
 0x0014d61c nw_snd_internal_GroupFile_FileHeader_GetInfoBlock name
 0x0014d688 nw_snd_internal_GroupFile_FileHeader_GetInfoExBlock name
-0x0014d6f0 FUN_0014d6f0 callers
+0x0014d6f0 FUN_0014d6f0 twin
 0x0014d7cc FUN_0014d7cc between
 0x0014d9f0 FUN_0014d9f0 callers
 0x0014da38 FUN_0014da38 between
@@ -1325,6 +1325,7 @@
 0x00238ca8 nn_cec_CTR_MessageBox_WriteMessageBoxList name
 0x00238d3c FUN_00238d3c between
 0x00238f00 nn_cec_CTR_MessageBox_WriteMessageBoxInfo name
+0x00238f4c FUN_00238f4c twin
 0x00239148 nn_cec_CTR_MessageBox_ReadOutBoxIndex name
 0x002393a4 FUN_002393a4 between
 0x002393cc nn_cec_CTR_MessageBox_WriteBoxInfo name
@@ -1428,6 +1429,7 @@
 0x002a34e8 nn_math_ARMv6_MTX34AddTranslateAsm name
 0x002a3504 nn_math_ARMv6_MTX34MultTranslateAsm_2A3504 name
 0x002a3dfc nw_gfx_res_ResGraphicsFile_Cleanup name
+0x002a4288 _ZN9Obj420f70D1Ev twin
 0x002a42e8 FUN_002a42e8 callers
 0x002a4360 ARM_fpclassifyf between
 0x002a438c FUN_002a438c between
@@ -1698,7 +1700,7 @@
 0x002c5d5c __aeabi_vec_ctor_nocookie_nodtor name
 0x002c5dc0 nn_cfg_CTR_Initialize name
 0x002c5de8 FUN_002c5de8 between
-0x002c5df8 rt_memcpy name
+0x002c5df8 __aeabi_memcpy name
 0x002c5e80 FUN_002c5e80 between
 0x002c5ef0 FUN_002c5ef0 between
 0x002c5f60 __aeabi_idivmod name

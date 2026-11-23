@@ -25,4 +25,21 @@ struct AnimationVisualState {
     u32 state;                  // 0x2c
 };
 
+/* Shows the part the visual state selects (state 4: the second, 5: the third, else the first) and hides
+ * the other two: the body of FUN_0034d504, which the part selectors inline after setting the state. */
+static __inline void animationShowSelectedPart(AnimationVisualState *visual)
+{
+    u32 selected = 0;
+    if (visual->state == 4) {
+        selected = 1;
+    } else if (visual->state == 5) {
+        selected = 2;
+    }
+    if (visual->binding != NULL) {
+        visual->binding->model->parts[0]->enabled = selected == 0;
+        visual->binding->model->parts[1]->enabled = selected == 1;
+        visual->binding->model->parts[2]->enabled = selected == 2;
+    }
+}
+
 #endif

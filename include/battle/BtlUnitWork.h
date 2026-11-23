@@ -110,7 +110,9 @@ typedef struct BtlUnitA {
     /* 0x598 */ u8 unk598[4];
     /* 0x59C */ u8 unk59C;          /* cleared when an action starts */
     /* 0x59D */ s8 uiMode;          /* the command menu variant (dispatchBattleCommandUiVariant) */
-    /* 0x59E */ u8 unk59E[0x1A];
+    /* 0x59E */ u8 unk59E[0xA];
+    /* 0x5A8 */ s32 menuArgument;   /* the argument of the command menu's kind-7 choice (btlUnitStepCommandMenu) */
+    /* 0x5AC */ u8 unk5AC[0xC];
     /* 0x5B8 */ BtlUnitTargetPair pairs[BTL_UNIT_TARGET_PAIR_COUNT];
     /* 0x9E0 */ BtlUnitTargetStateA targetStates[BTL_UNIT_TARGET_STATE_COUNT]; /* indexed by a target's listed id */
 } BtlUnitA;

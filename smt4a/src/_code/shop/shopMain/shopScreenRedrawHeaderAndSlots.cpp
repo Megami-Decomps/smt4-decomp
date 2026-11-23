@@ -2,6 +2,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "code/Code002a.h"
+#include "code/Code0031_Smt4a.h"
 
 /* The panel object the shop screen owns; slot 4 refreshes it. */
 class ShopPanel {
@@ -68,7 +69,6 @@ void uiDrawCompositeSpriteAtRectCorner(void *header, u32 id, s32 dx, s32 dy, u32
 void FUN_0049368c(void *header, u32 id, s32 dx, s32 dy, u32 color, u32 flags);
 void FUN_00494d68(ShopScreen *screen, s32 index, s32 flag, ShopSlot *slot);
 void size40Set(ShopPanel *panel, s32 first, s32 second);
-s32 FUN_0031d174(ShopCategoryList *list);
 s32 rangeGetMinimumLimit(ShopCategoryList *list);
 s32 flaggedValueHolderGetTotal(ShopCategoryList *list);
 

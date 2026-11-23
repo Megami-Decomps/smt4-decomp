@@ -6,7 +6,7 @@ extern "C" {
 
 
 int asdTextDrawFormatted(void *textObject, int arg1, u32 arg2, int arg3, int arg4, void *text);
-void *rt_memcpy(void *dst, const void *src, u32 size);
+void *__aeabi_memcpy(void *dst, const void *src, u32 size); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Sets the dialog text (NUL-terminated, at most 0x5a bytes): copies it, sizes the window around it and starts the message. */
 void dialogSetText(const char *text)
@@ -22,7 +22,7 @@ void dialogSetText(const char *text)
     length = 0;
     do {
         if (text[length] == '\0') {
-            rt_memcpy(dialog->message, text, length + 1);
+            __aeabi_memcpy(dialog->message, text, length + 1);
             dialog->hasText = 1;
             if (length <= 0x5b) {
                 dialog->wideText = 0;

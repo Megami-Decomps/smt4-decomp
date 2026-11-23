@@ -15,7 +15,7 @@ typedef struct Dspsnd {
 } Dspsnd;
 
 extern s32 nn_snd_CTR_Dspsnd_IsInitialized(void);
-extern s32 rt_memcpy(void *dest, const void *src, s32 size);
+extern s32 __aeabi_memcpy(void *dest, const void *src, s32 size);
 
 u8 nn_snd_CTR_Dspsnd_SetChannelAdpcmParam(Dspsnd *dspsnd, u8 channel, const void *param)
 {
@@ -24,7 +24,7 @@ u8 nn_snd_CTR_Dspsnd_SetChannelAdpcmParam(Dspsnd *dspsnd, u8 channel, const void
     if (ready != 0) {
         u32 *flags = dspsnd->channelFlags[dspsnd->flagSlot & 1][channel];
 
-        rt_memcpy(dspsnd->adpcmParam[dspsnd->paramSlot][channel], param, 0x20);
+        __aeabi_memcpy(dspsnd->adpcmParam[dspsnd->paramSlot][channel], param, 0x20);
         *flags |= 4;
     }
     return ready != 0;

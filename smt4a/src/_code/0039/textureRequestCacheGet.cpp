@@ -1,21 +1,19 @@
-/* NON_MATCHING: cache and request occupy opposite r4/r5 saved registers; direct state accesses reproduce retail addressing. */
-#include "shard/Shard0039.h"
-#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/Shard003B.h"
+#include "saveLoadUI/SaveLoadUIBase.h"
 
 struct TextureNode;
 extern "C" {
-u32 requestIdToCode(u32 request);
 TextureNode *asdTMTexLoadMainHeap(u32 group, u32 code);
 
-/* Queue a texture only when it is neither loaded nor already pending. */
-void textureRequestCacheGet(TextureRequestCache *cache, u32 request)
+/* Starts loading portrait texture `request` of the set unless it is loaded or already loading. */
+void textureRequestCacheGet(ResSet *set, u32 request)
 {
-    if (cache == NULL)
+    if (set == NULL)
         return;
-    if (asdTMTexTableNodeIsLoaded(46, requestIdToCode(request)) == 0) {
-        if (cache->states[request] != 3 && cache->states[request] != 2) {
-            asdTMTexLoadMainHeap(46, requestIdToCode(request));
-            cache->states[request] = 2;
+    if (!requestTextureIsLoaded(request)) {
+        if (set->states[request] != RES_SET_TEXTURE_LOADED && set->states[request] != RES_SET_TEXTURE_LOADING) {
+            asdTMTexLoadMainHeap(RES_SET_TEXTURE_TABLE, requestIdToCode(request));
+            set->states[request] = RES_SET_TEXTURE_LOADING;
         }
     }
 }

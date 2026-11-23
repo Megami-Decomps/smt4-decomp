@@ -1,5 +1,3 @@
-/* NON_MATCHING: the first lock's address loads one instruction later, and both
- * CriticalSection constructors set the call argument before clearing the state. */
 #include "nn/cec/MessageBoxModule.h"
 #include "nn/os/CriticalSection.h"
 

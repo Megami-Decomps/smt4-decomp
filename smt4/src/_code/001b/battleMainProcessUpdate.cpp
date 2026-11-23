@@ -182,7 +182,7 @@ s32 screenFadesAllReady();
 void frameTexResetFlags();
 void soundChannelStopAll(u32 channels);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
-void *rt_memcpy(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy(void *destination, const void *source, u32 size); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void *saveGetUnlockFlagBlock();
 void FUN_00338790(BattleTaskContext *work);
 void sequenceRequestClearDeferred();
@@ -238,7 +238,7 @@ static inline void restoreBattleTaskData()
     if (g_btlMainState.savedSlots)
         __aeabi_memcpy4(gameGetSlotTable(), g_btlMainState.savedSlots, 0x97e8);
     if (g_btlMainState.savedData)
-        rt_memcpy(saveGetUnlockFlagBlock(), g_btlMainState.savedData, 0x104a);
+        __aeabi_memcpy(saveGetUnlockFlagBlock(), g_btlMainState.savedData, 0x104a);
 }
 
 static inline void resetBattleTaskRound(BattleTaskContext *work)

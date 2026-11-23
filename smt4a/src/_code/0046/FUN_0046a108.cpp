@@ -29,7 +29,7 @@ typedef char MessageDebugOverlayOffsets[
 extern "C" {
 extern const char DAT_00533528[];
 extern const char DAT_00533560[];
-const char *FUN_00156850(u16 id, u32 variant);
+const char *questDataGetTitle(u16 id, u32 variant);
 s32 FUN_0031d174(const void *queue);
 
 // Show the bounded message list and its trailing diagnostic line over a translucent background.
@@ -48,7 +48,7 @@ void FUN_0046a108(MessageDebugOverlayView *overlay)
         return;
     }
     for (s32 index = 0; index < count; ++index) {
-        const char *text = FUN_00156850(overlay->messages()[index].message, 0);
+        const char *text = questDataGetTitle(overlay->messages()[index].message, 0);
         textDrawString(24.0f, (f32)(index * 14 + 8), 0.0f, 2, 1.0f, color, 1.0f, text);
     }
     s32 nextLine = FUN_0031d174(&overlay->queueType);

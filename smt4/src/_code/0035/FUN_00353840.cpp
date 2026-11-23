@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int rt_memcpy(unsigned char *, unsigned int, int);
+int __aeabi_memcpy(unsigned char *, unsigned int, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int strncpy(unsigned char *, unsigned int, int);
 
 extern unsigned char DAT_004e62c0; /* 0x4e62c0 */
@@ -18,7 +18,7 @@ extern unsigned char DAT_004e6513; /* 0x4e6513 */
 extern unsigned char DAT_004e6514; /* 0x4e6514 */
 extern unsigned char DAT_004e6558; /* 0x4e6558 */
 
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int
@@ -36,7 +36,7 @@ FUN_00353840(int *param_1,int *param_2,unsigned int param_3,unsigned int param_4
   DAT_004e64d0 = param_4;
   strncpy(&DAT_004e64d4,param_5,0x40);
   DAT_004e6513 = 0;
-  rt_memcpy(&DAT_004e6514,param_6,0x44);
+  __aeabi_memcpy(&DAT_004e6514,param_6,0x44);
   *param_2 = *param_1;
   return 0;
 }

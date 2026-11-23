@@ -5,10 +5,10 @@
 extern "C" {
 
 int rt_memclr(int, int);
-int rt_memcpy(...);
+int __aeabi_memcpy(...);
 
 /* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int
@@ -46,7 +46,7 @@ FUN_0043c4cc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         if (param_4 < param_2 && param_2 < temp_v0) {
           temp_v3 = param_2 - param_4;
         }
-        rt_memcpy(param_2,param_4,temp_v3);
+        __aeabi_memcpy(param_2,param_4,temp_v3);
         *(unsigned int *)(param_1 + 0x120) = 0;
         temp_v0 = temp_v1;
       }
@@ -59,7 +59,7 @@ FUN_0043c4cc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         if (param_3 < temp_v6) {
           return 0;
         }
-        rt_memcpy(param_2 + temp_v5,param_5);
+        __aeabi_memcpy(param_2 + temp_v5,param_5);
         *(unsigned int *)(param_1 + 0x124) = temp_v5;
         temp_v0 = temp_v2;
       }
@@ -78,7 +78,7 @@ FUN_0043c4cc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         if (param_6 < temp_v5 && temp_v5 < temp_v0) {
           temp_v4 = temp_v5 - param_6;
         }
-        rt_memcpy(temp_v5,param_6,temp_v4);
+        __aeabi_memcpy(temp_v5,param_6,temp_v4);
         *(unsigned int *)(param_1 + 0x128) = temp_v6;
         temp_v6 = temp_v6 + 0x44;
       }
@@ -98,7 +98,7 @@ FUN_0043c4cc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         if (param_7 < param_2 && param_2 < temp_v5) {
           temp_v4 = param_2 - param_7;
         }
-        rt_memcpy(param_2,param_7,temp_v4);
+        __aeabi_memcpy(param_2,param_7,temp_v4);
         *(unsigned int *)(param_1 + 300) = temp_v6;
       }
       *(unsigned short *)(param_1 + 0x11e) = 0;

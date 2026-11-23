@@ -1,4 +1,5 @@
-/* NON_MATCHING: the count-state and array-base registers are swapped (r7/r8) and the loop test compares count,index instead of index,count; the flag sub-block address now matches. */
+/* NON_MATCHING: 4 lines: with the table indexed at each use only the loop test differs (retail compares index,count;
+ * the build count,index); the flag sub-block address matches. */
 #include "shard/W9_W9Match7_FlagGatedEntries.h"
 
 // The entry's flag block starts 0x100 bytes in (retail addresses requiredFlag/excludedFlag from entry + 0x100).
@@ -17,12 +18,11 @@ int gameFlagIsSet(s32 flag);
 void FUN_002b79d8(void)
 {
     for (s32 index = 0; index < DAT_00580c90.count; ++index) {
-        FlagGatedEntry *entry = &g_recordTable[index];
-        const FlagGate *gate = reinterpret_cast<const FlagGate *>(reinterpret_cast<u8 *>(entry) + 0x100);
-        if (!entry->disabled && entry->object &&
+        const FlagGate *gate = reinterpret_cast<const FlagGate *>(reinterpret_cast<u8 *>(&g_recordTable[index]) + 0x100);
+        if (!g_recordTable[index].disabled && g_recordTable[index].object &&
             ((gate->requiredFlag && !gameFlagIsSet(gate->requiredFlag)) ||
              (gate->excludedFlag && gameFlagIsSet(gate->excludedFlag)))) {
-            entry->disabled = 1;
+            g_recordTable[index].disabled = 1;
         }
     }
 }

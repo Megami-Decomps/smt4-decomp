@@ -11,7 +11,7 @@ extern "C" {
 void statusReplaceSkills(u16 *skills, u8 count);
 void statusDownSetSelectedIds(const u32 *result, s32 selection);
 StatusSkillMemberView *partyMemberFindById(u32 id);
-void rt_memcpy(void *destination, const void *source, u32 size);
+void __aeabi_memcpy(void *destination, const void *source, u32 size); // declcheck: local (the shared declaration does not compile here or changes this unit)
 s32 statusCollectUnlearnedSkillsAboveLevel(u16 memberId, u32 level, const u16 *skills, u32 *result, s32 skip);
 u32 countUnlockedSlots();
 u32 flagCountUnlockedSlots();
@@ -35,7 +35,7 @@ void statusReplaceSkillList(const u16 *skills)
         partyMemberFindById((u16)selection->memberId);
         count = flagCountUnlockedSlots();
     }
-    rt_memcpy(selection->skills, skills, count * sizeof(u16));
+    __aeabi_memcpy(selection->skills, skills, count * sizeof(u16));
     statusReplaceSkills(selection->skills, count);
     u32 result[4] = {0, 0, 0, 0};
     if (selection->memberId > 0 && data->unk1E66 != 6) {

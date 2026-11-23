@@ -48,7 +48,7 @@ int obj4FSlotsReset(...);
 int obj4FSlots28Reset(...);
 int FUN_004f8fa0(...);
 int FUN_004fa01c(...);
-int rt_memcpy(...);
+int __aeabi_memcpy(...);
 int __aeabi_memcpy4(...);
 
 int sysPlaySe(int);
@@ -270,7 +270,7 @@ extern int isEntryUsable(int);
 /* Supplied declaration required: FUN_0050d7ac. */
 /* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -979,7 +979,7 @@ LAB_0024d284:
       }
       if (DAT_00573928 != 0) {
         temp_v6 = flagValueGetStorage();
-        rt_memcpy(temp_v6,DAT_00573928,0x10b8);
+        __aeabi_memcpy(temp_v6,DAT_00573928,0x10b8);
       }
     }
     if (((DAT_00573aa4 & *(unsigned int *)(temp_v2 + 0x45a4)) != 0 || (*puVar16 & DAT_00573aa0) != 0) &&
@@ -990,7 +990,7 @@ LAB_0024d284:
       }
       if (DAT_00573928 != 0) {
         temp_v6 = flagValueGetStorage();
-        rt_memcpy(temp_v6,DAT_00573928,0x10b8);
+        __aeabi_memcpy(temp_v6,DAT_00573928,0x10b8);
       }
     }
     btlTurnEndApplyRegenSkills(temp_v2);
@@ -1111,7 +1111,7 @@ LAB_0024d284:
         }
         if (DAT_00573928 != 0) {
           temp_v6 = flagValueGetStorage();
-          rt_memcpy(temp_v6,DAT_00573928,0x10b8);
+          __aeabi_memcpy(temp_v6,DAT_00573928,0x10b8);
         }
       }
       titleSetSlotValueState2(0,10);

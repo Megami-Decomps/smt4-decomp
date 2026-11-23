@@ -1,5 +1,4 @@
-/* NON_MATCHING: stack slots now match (locals declared up front); only the 1.0f load is scheduled after `mov r6, r1` instead of before it. */
-#include "runtime/Stdio.h"
+#include <stdio.h>
 #include "gfx/NamedEffectAttachment.h"
 #include "gfx/QuaternionWorkspace.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
@@ -7,7 +6,7 @@
 #include "gamedata/GameDataAccess.h"
 
 extern "C" {
-extern const char DAT_0052607c[];
+static const char s_jointNameFormat[] = "h_eff%02d";
 void memClearWords(void *destination, u32 size);
 u32 FUN_0019f30c(AsdMdlNode *node, const char *name, RotationQuaternion *rotation);
 void skelNodePoseChain(void *effect, const EffectAttachmentPosition *position);
@@ -34,7 +33,7 @@ void FUN_001881e8(AsdMdlObject *model, NamedEffectAttachment *attachments)
             EffectJointEntry *entry = attachments->entries[index];
             void *effect = entry->effect;
             memClearWords(name, sizeof(name));
-            __2sprintf(name, DAT_0052607c, entry->index);
+            sprintf(name, s_jointNameFormat, entry->index);
             if (lookupNameEntry(node, reinterpret_cast<u32>(name), reinterpret_cast<u32 *>(&jointPosition))) {
                 position.x = jointPosition.x;
                 position.y = jointPosition.y;

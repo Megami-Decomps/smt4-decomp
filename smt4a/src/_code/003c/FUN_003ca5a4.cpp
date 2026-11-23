@@ -30,7 +30,7 @@ extern const u8 DAT_00531270[0xa0]; // default table (copied to a local that is 
 s32 dataTable2dSub5GetCount(void);
 VisibilityEntry *dataTable2DGetEntry(s32 index);
 s32 gameFlagIsSet(s32 flag);
-void rt_memcpy(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy(void *destination, const void *source, u32 bytes);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 void FUN_003b5c54(u32 index, s32 visible);
 
@@ -60,7 +60,7 @@ void FUN_003ca5a4(void)
         }
     }
     __aeabi_memcpy4(localTable, DAT_00531270, sizeof(localTable));
-    rt_memcpy(DAT_005f0c54, visible, sizeof(visible));
+    __aeabi_memcpy(DAT_005f0c54, visible, sizeof(visible));
 
     LmapMainStateA *state = g_lmapMainState;
     SlotSourceList *sources = reinterpret_cast<SlotSourceList *>(state->model);

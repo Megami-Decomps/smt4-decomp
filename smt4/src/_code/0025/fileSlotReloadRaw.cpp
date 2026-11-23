@@ -14,7 +14,7 @@ s32 jyoucyuGetTableEntry(u32 index);
 s32 asdLoadFileGetUseRawPaths(void);
 void asdLoadFileSetUseRawPaths(s32 enable);
 void *fileLoadSync(const char *path, u32 *size, u32 option);
-void *rt_memcpy(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy(void *destination, const void *source, u32 size); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void asdMemFree(void *memory);
 
 /* Reloads a loaded file slot from its raw path: in place when the size is unchanged, otherwise
@@ -34,7 +34,7 @@ void fileSlotReloadRaw(u32 id)
             asdLoadFileSetUseRawPaths(1);
             data = fileLoadSync(slot->path, &size, 0);
             if (slot->size == size) {
-                rt_memcpy(slot->data, data, size);
+                __aeabi_memcpy(slot->data, data, size);
                 asdMemFree(data);
             } else {
                 asdMemFree(slot->data);

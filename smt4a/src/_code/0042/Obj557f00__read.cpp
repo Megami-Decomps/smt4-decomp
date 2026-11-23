@@ -7,7 +7,7 @@ extern "C" {
 u64 resourceGetWideHandle(s32 index);
 u64 __aeabi_llsl(u64 value, u32 shift);
 u32 deferredTransferEnqueue(u32 index, void *data, u32 size);
-void *rt_memcpy(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy(void *destination, const void *source, u32 size);
 }
 
 /* Returns where `size` bytes fit in the stream's ring buffer, wrapping to its start when the tail is
@@ -44,6 +44,6 @@ bool Obj557f00::read(void *source, u32 size)
     u8 *destination = streamReserve(this, size);
     if (destination == NULL)
         return false;
-    rt_memcpy(destination, source, size);
+    __aeabi_memcpy(destination, source, size);
     return streamCommit(this, destination, size);
 }

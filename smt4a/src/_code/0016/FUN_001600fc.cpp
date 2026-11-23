@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysMemClear(int, int, unsigned int, unsigned int, unsigned int);
-int rt_memcpy(int, int, int);
+int __aeabi_memcpy(int, int, int);
 int __aeabi_memcpy4(int, int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -43,7 +43,7 @@ extern unsigned int DAT_006416a0; /* 0x6416a0 */
 extern unsigned int DAT_006416a4; /* 0x6416a4 */
 
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -323,7 +323,7 @@ LAB_0016069c:
             *(unsigned int *)(temp_v1 + 0x1450) = 0;
             *(unsigned char *)(temp_v1 + 0x1705) = 0xf;
             __aeabi_memcpy4(temp_v1 + 0x100c,temp_v1 + 0x1300,0x2f4);
-            rt_memcpy(DAT_005b40f4 + 0x15f4,DAT_005b40f4 + 0x16b1,0xbd);
+            __aeabi_memcpy(DAT_005b40f4 + 0x15f4,DAT_005b40f4 + 0x16b1,0xbd);
             temp_v0 = 0;
             DAT_00641660 = 0;
             DAT_00641664 = 0;

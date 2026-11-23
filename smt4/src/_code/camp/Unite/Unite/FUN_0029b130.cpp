@@ -17,7 +17,7 @@ int qsort(...);
 int nkmBaseGetRecord(...);
 int asdMemFree(...);
 int asdMemoryAlloc(...);
-int rt_memcpy(...);
+int __aeabi_memcpy(...);
 
 /* stack frame of param_4: 21 slot(s), 81 byte(s) */
 typedef struct {
@@ -63,7 +63,7 @@ extern int affinityShouldReplaceState(unsigned short, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_0029b130(int param_1,int param_2,int param_3,unsigned short *param_4)
@@ -291,7 +291,7 @@ LAB_0029b63c:
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < temp_v20);
   }
-  rt_memcpy(param_1,temp_v17,temp_v9);
+  __aeabi_memcpy(param_1,temp_v17,temp_v9);
   temp_v10 = &DAT_004207e8;
   if (temp_v11 != 0) {
     asdMemFree();

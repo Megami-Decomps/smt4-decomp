@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail contains a discarded queue traversal; omitted rather than retaining dead work. */
+/* NON_MATCHING: 16 lines. The queue walk whose result is unused is retail's (FUN_003ddbcc keeps the same walk); what
+ * differs is the value-3 arm, which retail places out of line after the return (padded with nop hints) and joins to
+ * the flag store, where the build tests it in line. The Apocalypse twin FUN_004fda78 differs the same way. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "battle/btlAction.h"
@@ -12,6 +14,11 @@ s32 btlScriptUnitIsIncapacitated(BtlMainState *battle);
 /* Queue a reflected action with the target's zero-based entry id. */
 ReflectAction *FUN_00246080(s32 actor, s32 secondary, u32 options, BtlActionRecord *target, s32 value)
 {
+    /* Walks the queue to its end; nothing uses the result. */
+    ReflectAction *node = g_btlActionReflect->head;
+    while (node != NULL) {
+        node = node->next;
+    }
     ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, (s16)secondary, options);
     action->kind = 7;
     action->value = value;

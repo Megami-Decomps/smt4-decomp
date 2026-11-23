@@ -1,7 +1,6 @@
 /* NON_MATCHING: slot address and the first two mask tests now match; only the last (alternate-state) test differs: retail ANDs into r1/r2 and ORs them, armcc here ANDs into r3/r1. */
 #include "battle/BattleUnitRecordState.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
-#include "battle/BattleActionScale.h"
 
 // The tested masks extend beyond BtlActionGlobals' published prefix.
 struct BattleUnitInitializationMasks {
@@ -19,7 +18,7 @@ void btlUnitClearRecordFields(BattleUnitRecordState* state, u32 slot);
 
 // Bind the selected unit slot to a combatant and derive its initial battle flags.
 void FUN_004dcb40(BattleUnitRecordState* state, BtlMainStateA* battle, u32 mode,
-                  s32 combatantIndex, BattleActionScale scale, u32 option)
+                  s32 combatantIndex, s32 scale, u32 option)
 {
     state->battle = battle;
     BattleUnitSlotState* slot = &state->slots[state->battle->unitRecord.currentSlot];
@@ -32,7 +31,7 @@ void FUN_004dcb40(BattleUnitRecordState* state, BtlMainStateA* battle, u32 mode,
     slot->parameters = &combatant->data;
     slot->combatantIndex = combatantIndex;
     slot->mode = mode;
-    slot->scale = scale.f;
+    slot->scale = scale;
     slot->option = option;
     slot->unk0010 = 0;
     slot->unk0018 = 0;

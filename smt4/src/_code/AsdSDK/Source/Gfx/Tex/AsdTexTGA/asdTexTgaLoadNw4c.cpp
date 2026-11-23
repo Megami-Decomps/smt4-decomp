@@ -12,7 +12,7 @@ extern const char DAT_00409580[];
 extern const char DAT_00409588[];
 s32 libc_strncmp(const char *first, const char *second, u32 count);
 void *asdMemoryAllocAligned(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 auxiliaryAlignment, u32 enabled);
-void rt_memcpy(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy(void *destination, const void *source, u32 bytes);
 
 /* Load the texture pixels and compression format embedded in a NW4C-tagged TGA. */
 void asdTexTgaLoadNw4c(AsdTexture *texture, const AsdTgaHeader *file, u32, u32 flags)
@@ -35,11 +35,11 @@ void asdTexTgaLoadNw4c(AsdTexture *texture, const AsdTgaHeader *file, u32, u32 f
             const void *pixels = chunk + 1;
             asdDebugTrace(DAT_0040952c, 73);
             texture->storage.pixels = asdMemoryAllocAligned(0x10000, 0x100, 0, texture->storage.bytes, 128, 1);
-            rt_memcpy(texture->storage.pixels, pixels, texture->storage.bytes);
+            __aeabi_memcpy(texture->storage.pixels, pixels, texture->storage.bytes);
         }
         if (libc_strncmp(chunk->identifier, DAT_0040956c, 8) == 0) {
             char format[8] = {};
-            rt_memcpy(format, chunk + 1, chunk->bytes - sizeof(AsdNw4cChunk));
+            __aeabi_memcpy(format, chunk + 1, chunk->bytes - sizeof(AsdNw4cChunk));
             if (libc_strncmp(format, DAT_00409578, 8) == 0) {
                 texture->image.type = 0x1401;
                 texture->image.format = 0x675B;

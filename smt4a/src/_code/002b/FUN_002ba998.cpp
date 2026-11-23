@@ -40,7 +40,7 @@ int FUN_004fed5c(...);
 
 int lcgRandomGetNormalizedFloat(void);
 int btlEventTaskCreate(...);
-void FUN_002b4f28(BtlMainStateA *, unsigned int mode, int combatantIndex, BattleActionScale scale, unsigned int option);
+void btlActionRingStartCalc(BtlMainStateA *, unsigned int mode, int combatantIndex, BattleActionScale scale, unsigned int option);
 int btlEncountInitialize(...);
 int FUN_00363990(...);
 int FUN_00385c44(...);
@@ -200,7 +200,7 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_002919b4. */
 /* Supplied declaration required: btlEventTaskCreate. */
 /* Supplied declaration required: FUN_00291ce8. */
-/* Supplied declaration required: FUN_002b4f28. */
+/* Supplied declaration required: btlActionRingStartCalc. */
 /* Supplied declaration required: btlCameraCreate. */
 /* Supplied declaration required: btlEditorCreate. */
 /* Supplied declaration required: btlEffectCreateTasks. */
@@ -756,7 +756,7 @@ LAB_002bb21c:
     btlPopFilteredCommand(temp_v7,temp_v22);
     if (temp_v6 != 0) {
       BattleActionScale scale = { (s32)temp_v22[2] };
-      FUN_002b4f28(reinterpret_cast<BtlMainStateA *>(temp_v7),temp_v22[0],temp_v22[1],scale,temp_v22[3]);
+      btlActionRingStartCalc(reinterpret_cast<BtlMainStateA *>(temp_v7),temp_v22[0],temp_v22[1],scale,temp_v22[3]);
       temp_v6 = jobIsValid(*(unsigned int *)(temp_v7 + 0x3c));
       if (temp_v6 != 0) {
         return;

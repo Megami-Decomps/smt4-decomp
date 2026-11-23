@@ -8,7 +8,7 @@ extern const char g_effPartsSourcePath[]; /* "c:\SMT4F\SMT4F\AsdSDK\Source\Gfx\E
 
 void *memAlloc(int heap, int alignClass, int unk08, int size, int align, int fromFront);
 void asdMemFree(void *block);
-void *rt_memcpy(void *dst, const void *src, u32 size);
+void *__aeabi_memcpy(void *dst, const void *src, u32 size);
 
 /* A heap copy of some data, as held by an effect part. */
 typedef struct PartData {
@@ -38,7 +38,7 @@ void effPartSetData(PartData *part, const void *src, s32 size, u16 id)
         part->block = block;
         part->data = block;
         part->size = size;
-        rt_memcpy(block, src, size);
+        __aeabi_memcpy(block, src, size);
     }
 }
 

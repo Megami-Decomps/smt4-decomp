@@ -9,7 +9,7 @@ extern "C" {
 
 int jobStop(...);
 int asdMemFree(void);
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int asdOperatorDelete(...);
 int partyReleasePreviewResources(...);
 
@@ -111,7 +111,7 @@ extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: nkmEnemyFindById. */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 extern int gameGetSlotRecord(int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: menuStateStartConfirm. */
@@ -944,7 +944,7 @@ LAB_00225ce8:
     temp_v12 = (float)VectorSignedToFloat(*(int *)(temp_v0 + 0x6a78) - temp_v8,
                                         (unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v12 = ((temp_v12 * 1.5707964f) / temp_v13) * 40.743664f;
-    FUN_001a1ee0();
+    phaseSine();
     *(float *)(temp_v0 + 0x6a6c) = (temp_v15 - temp_v12) * *(float *)(temp_v0 + 0x6a74);
     *puVar7 = *puVar7 - 1;
   }

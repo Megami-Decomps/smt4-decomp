@@ -21,7 +21,7 @@ extern unsigned int DAT_0064c080; /* 0x64c080 */
 
 extern unsigned int libc_strlen(int);
 extern int __cxa_guard_acquire(unsigned int *);
-extern int rt_memcpy(int, int, unsigned int);
+extern int __aeabi_memcpy(int, int, unsigned int);
 
 
 unsigned int * FUN_0018cb5c(int *param_1,int param_2)
@@ -66,7 +66,7 @@ unsigned int * FUN_0018cb5c(int *param_1,int param_2)
       temp_v8 = temp_v5;
     }
     temp_v7 = (**(romwright_code **)(*param_1 + 8))(param_1,temp_v8 + 1,4);
-    temp_v6 = rt_memcpy(temp_v7,param_2,temp_v8);
+    temp_v6 = __aeabi_memcpy(temp_v7,param_2,temp_v8);
     if (temp_v7 != 0) {
       temp_v6 = temp_v7 - (int)piVar14;
     }

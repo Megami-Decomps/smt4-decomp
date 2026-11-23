@@ -12,7 +12,7 @@ void messageVoiceFlagsGet(void);
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 maximum);
 const char *popupSelectWeightedMessage(u32 kind, u16 slot);
-void rt_memcpy(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy(void *destination, const void *source, u32 bytes);
 u32 dataTable01GetRecordWithAocOverride(u32 value);
 
 void partyTryOpenLevelLimitPopup(void)
@@ -41,7 +41,7 @@ void partyTryOpenLevelLimitPopup(void)
     g_popupState->message = message;
     g_popupState->speakerId = slot->id;
     char format[72];
-    rt_memcpy(format, message, sizeof(format));
+    __aeabi_memcpy(format, message, sizeof(format));
     u32 value = dataTable01GetRecordWithAocOverride((u16)unitId);
     sprintf(g_popupState->text, format, value);
     g_popupState->message = g_popupState->text;

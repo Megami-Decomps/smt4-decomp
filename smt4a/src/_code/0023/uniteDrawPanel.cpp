@@ -69,7 +69,7 @@ extern "C" s32 uniteDrawPanel(u32)
         s32 y = vec2GetYInt(&work->sprites.open);
         f32 opacity = vec2GetSpeed(&work->sprites.open);
         uniteDrawListPanel(x, y, 0, opacity);
-        FUN_002aa038(x, y, opacity);
+        uniteDrawValueListPanel(x, y, opacity);
         x += vec2GetXInt(&work->sprites.listOffset);
         y += vec2GetYInt(&work->sprites.listOffset);
         efctSetSpeed(opacity);

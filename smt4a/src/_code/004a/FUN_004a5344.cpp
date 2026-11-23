@@ -2,6 +2,7 @@
 #include "common.h"
 #include "code/Code002a.h"
 #include "ui/UiSpriteApi.h"
+#include "code/Code0031_Smt4a.h"
 
 extern "C" {
 
@@ -44,10 +45,9 @@ typedef struct PanelWorkView {
 void efctSetSpeed(f32 speed);
 void words2Copy(void *panel, PanelPair *out);
 void pairAt8Get(void *panel, PanelPair *out);
-void FUN_004935c8(void *panel, s32 id, s32 a, s32 b, u32 style, f32 scale);
-void FUN_00493518(void *panel, s32 id, s32 a, s32 b, u32 style, f32 scale);
+void screenRectDrawCompositeScaled(void *panel, s32 id, s32 a, s32 b, u32 style, f32 scale);
+void screenRectDrawPartScaled(void *panel, s32 id, s32 a, s32 b, u32 style, f32 scale);
 s32 rangeGetMinimumLimit(void *list);
-s32 FUN_0031d174(void *list);
 s32 flaggedValueHolderGetTotal(void *list);
 void FUN_004a5ea0(PanelWork *work, s32 index, s32 selected, s32 id, f32 scale);
 void owner4ASetSizeAndCall(PanelWork *work, u32 style);
@@ -77,13 +77,13 @@ void FUN_004a5344(PanelWork *work)
     const f32 resetSpeed = 1.0f; /* restored after the rows; retail keeps it in s17 throughout */
     u32 style = ((PanelWorkView *)work)->style;
 
-    FUN_004935c8(work->panel, 1, 0, 0, style, scale);
-    FUN_00493518(work->panel, 0x47C, 0, 0, style, scale);
-    FUN_00493518(work->panel, 0x47D, 0, 0, style, scale);
-    FUN_00493518(work->panel, 0x47E, 0, 0, style, scale);
-    FUN_00493518(work->panel, 0x47F, 0, 0, style, scale);
-    FUN_00493518(work->panel, 0x480, 0, 0, style, scale);
-    FUN_00493518(work->panel, 0x481, 0, 0, style, scale);
+    screenRectDrawCompositeScaled(work->panel, 1, 0, 0, style, scale);
+    screenRectDrawPartScaled(work->panel, 0x47C, 0, 0, style, scale);
+    screenRectDrawPartScaled(work->panel, 0x47D, 0, 0, style, scale);
+    screenRectDrawPartScaled(work->panel, 0x47E, 0, 0, style, scale);
+    screenRectDrawPartScaled(work->panel, 0x47F, 0, 0, style, scale);
+    screenRectDrawPartScaled(work->panel, 0x480, 0, 0, style, scale);
+    screenRectDrawPartScaled(work->panel, 0x481, 0, 0, style, scale);
     if (work->count == 0) {
         return;
     }

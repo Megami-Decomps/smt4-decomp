@@ -1,207 +1,160 @@
-/* NON_MATCHING: steps the battle summon effect load/spawn (state 0 finds or loads the effect resource, state 1 waits for it and creates the effect objects); written from the decompilation, the descending free-slot searches and branch layout not compared with retail */
-#include "shard/W6_W6Match1_BattleVersionResources.h"
+/* NON_MATCHING: control flow, calls, constants and the instruction sequence are retail's; 160 rows differ, all
+ * register names: retail keeps the battle in r6 and the load slot's flags and id addresses in r4/r5 (built: r4,
+ * r5/r6), holds the reset loop's 0 in r9 with -1 in ip (built: ip and r7), and numbers the three marker timings
+ * the other way round (flashDelay in r7, startDelay in r8). */
+#include "common.h"
+#include "battle/BattleEncounter.h"
+#include "battle/btlMain.h"
+#include "battle/btlAction.h"
+#include "battle/BtlEntry.h"
+#include "battle/BtlGlobals.h"
+#include "battle/BtlEffectLoad.h"
+#include "battle/BattleHelpers.h"
 #include "battle/BattleUnitSlot.h"
+#include "battle/btlScript.h"
+#include "code/Code0027.h"
+#include "code/Code0029_Smt4.h"
 #include "gamedata/NkmEnemyLookup.h"
+#include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "AsdSDK/Source/Gfx/Effect/effGeometry.h"
 
-#define SUMMON_CACHE_SLOTS 0x2A
-#define SUMMON_STATE_LOAD 0
-#define SUMMON_STATE_SPAWN 1
-#define SUMMON_NO_EFFECT -1
-#define SUMMON_RESOURCE_PARSED 1
-#define SUMMON_RESOURCE_READY 2
-#define SUMMON_OBJECT_STRIDE 0x288
-#define SUMMON_EFFECT_STRIDE 0x114
-#define SUMMON_FIRST_EFFECT 3
-#define SUMMON_LAST_SLOT 0x35
-
-struct SummonObject {
-    /* 0x000 */ u32 flags;
-    /* 0x004 */ u32 unk004;
-    /* 0x008 */ u16 effectId;
-    /* 0x00A */ u8 unk00A[0xCE];
-    /* 0x0D8 */ s32 summonId;
-    /* 0x0DC */ u8 unk0DC[0x1AC];
-};
-
-struct SummonEffect {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ u32 unk0C;
-    /* 0x10 */ u32 unk10;
-    /* 0x14 */ f32 height;
-    /* 0x18 */ u8 unk18[0x28];
-    /* 0x40 */ u32 unk40;
-    /* 0x44 */ u8 unk44[0xC];
-    /* 0x50 */ u32 flags;
-    /* 0x54 */ u8 unk54[4];
-    /* 0x58 */ u16 flags58;
-    /* 0x5A */ u16 unk5A;
-    /* 0x5C */ u8 unk5C[4];
-    /* 0x60 */ s16 objectIndex;
-    /* 0x62 */ u16 id;
-    /* 0x64 */ u32 scaleX;
-    /* 0x68 */ u32 scaleY;
-    /* 0x6C */ u32 scaleZ;
-    /* 0x70 */ u8 unk70[0xA4];
-};
-
-struct SummonResource {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ s32 id;
-};
-
-struct SummonRequest {
-    /* 0x00 */ u8 unk00[0x88];
-    /* 0x88 */ s16 summonId;
-};
-
-struct SummonSlot {
-    u32 flags;
-    s32 id;
-};
-
-struct BtlSummonState {
-    /* 0x0000 */ u8 unk0000[0x1E98];
-    /* 0x1E98 */ u8 *effects;
-    /* 0x1E9C */ u8 unk1E9C[0x124];
-    /* 0x1FC0 */ u8 *objects;
-    /* 0x1FC4 */ u8 unk1FC4[0x20];
-    /* 0x1FE4 */ SummonSlot slots[SUMMON_CACHE_SLOTS];   /* slots[0] also holds the current effect's flags and id */
-    /* 0x2134 */ SummonResource *cache[SUMMON_CACHE_SLOTS];
-    /* 0x21DC */ u8 unk21DC[0x2274];
-    /* 0x4450 */ s8 state;
-    /* 0x4451 */ u8 unk4451[3];
-    /* 0x4454 */ s32 spawned;
-    /* 0x4458 */ u32 resource;
-};
-
-struct BtlMainFlags {
-    /* 0x000 */ u8 unk000[0x634];
-    /* 0x634 */ u32 flags;
-};
-
-struct BtlMainEffectState {
-    /* 0x0000 */ u8 unk0000[0x1E98];
-    /* 0x1E98 */ u8 *effects;
+enum {
+    SUMMON_STEP_LOAD = 0,
+    SUMMON_STEP_SPAWN = 1,
+    SUMMON_LOAD_PARSED = 1,     /* BtlActionLoadSlot.flags: the resource's header is parsed */
+    SUMMON_LOAD_READY = 2,      /* its textures are loaded */
+    SUMMON_RESOURCE_COUNT = 42,
+    SUMMON_LAST_RECORD = BATTLE_ENCOUNTER_RECORD_COUNT - 1,
+    SUMMON_FIRST_RECORD = 3     /* the action records below belong to the party */
 };
 
 extern "C" {
-extern u32 g_btlScriptUnit;
-extern BtlMainFlags *g_btlMain;
-extern BattleVersionResources *g_btlAux;
-extern BtlMainEffectState *g_btlMainState;
-extern u32 DAT_00439a24, DAT_00439a28, DAT_00439a38, DAT_00439cf8;
+extern BtlEffectWork *g_btlAux;
+extern BattleMarkerTimings g_btlMarkerTimings;
+extern u32 DAT_00439cf8;
 
-u32 idSlotsFindEntryById(BtlSummonState *state, s32 id);
-s32 nkdwHeaderParse(u32 resource);
-void aocHandleButtons(u32 resource, s32 mode);
-s32 aocTextureEntryLoadOnce(u32 resource);
-void modelAnimationEnsureData(u32 resource);
-SummonResource *eventResourceCacheAcquire(s32 id, s32 flag);
-void FUN_0024057c(BtlSummonState *state, SummonEffect *effect, s32 flag);
-void btlReflectInitKind9(s32 a, u32 unit, SummonEffect *effect, u32 b, s32 c);
-void FUN_003c1964(s32 flag);
+s32 nkdwHeaderParse(BtlLoadedActionResource *resource);
+void aocHandleButtons(BtlLoadedActionResource *resource, s32 mode);
+void modelAnimationEnsureData(BtlLoadedActionResource *resource);
+BtlLoadedActionResource *eventResourceCacheAcquire(s32 id, s32 queueLoad);
+void FUN_0024057c(BtlMainState *battle, BtlActionRecord *record, s32 duration, u32 alpha);
+f32 FUN_003c1964(s32 layer);
 
-/* Returns 1 once the summon has been spawned. */
-u32 btlSummonLoadAndSpawn(BtlSummonState *state, u32 request)
+/* Whether one of the battle's loaded resources has the id: idSlotsFindEntryById's search, inlined. Retail
+ * shows the inlined function: its result 1 is set before the loop (r7, reused for the step) and the found
+ * arm stores a copy of the id. */
+static __inline bool summonResourceIsLoaded(BtlMainState *battle, s32 id)
 {
-    if (state->spawned != SUMMON_NO_EFFECT)
+    for (s32 i = 0; i < SUMMON_RESOURCE_COUNT; i++) {
+        BtlLoadedActionResource *resource = battle->actionLoad.resources[i];
+        if (resource != NULL && resource->id == id) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/* Steps the summon effect of the enemy `id`: step 0 finds its texture resource among the battle's loaded
+ * ones or requests it, step 1 waits for the resource, then takes a free battle entry and action record for
+ * the summoned unit and queues its marker and flash. Returns 1 once the unit is spawned. */
+s32 btlSummonLoadAndSpawn(BtlMainState *battle, u32 id)
+{
+    if (battle->actionLoad.selectedAction != -1) {
         return 1;
+    }
+    NkmEnemyRecord *enemy = nkmEnemyFindById((u16)id);
 
-    u32 summon = request & 0xFFFF;
-    nkmEnemyFindById(summon);
-    SummonRequest *source = reinterpret_cast<SummonRequest *>(request);
+    switch (battle->actionLoad.step) {
+    case SUMMON_STEP_LOAD: {
+        for (s32 i = 0; i < SUMMON_RESOURCE_COUNT; i++) {
+            battle->actionLoad.slots[i].flags = 0;
+            battle->actionLoad.slots[i].id = -1;
+        }
+        battle->actionLoad.selectedResource = NULL;
 
-    if (state->state == SUMMON_STATE_LOAD) {
-        for (s32 i = 0; i < SUMMON_CACHE_SLOTS; i++) {
-            state->slots[i].flags = 0;
-            state->slots[i].id = -1;
-        }
-        state->resource = 0;
-        s32 id = source->summonId;
-        s32 cached = 0;
-        for (s32 i = 0; i < SUMMON_CACHE_SLOTS; i++) {
-            SummonResource *held = state->cache[i];
-            if (held != NULL && held->id == id) {
-                cached = 1;
-                break;
-            }
-        }
-        if (cached != 0) {
-            state->slots[0].id = id;
-            state->slots[0].flags |= SUMMON_RESOURCE_PARSED | SUMMON_RESOURCE_READY;
+        s32 textureId = enemy->portraitId;
+        if (summonResourceIsLoaded(battle, textureId)) {
+            battle->actionLoad.slots[0].id = textureId;
+            battle->actionLoad.slots[0].flags |= SUMMON_LOAD_PARSED | SUMMON_LOAD_READY;
         } else {
-            SummonResource *loaded = eventResourceCacheAcquire(id, 1);
-            SummonResource **table = state->cache;
-            for (s32 i = 0; i < SUMMON_CACHE_SLOTS; i++) {
-                if (table[i] == NULL) {
-                    table[i] = loaded;
+            BtlLoadedActionResource *resource = eventResourceCacheAcquire(textureId, 1);
+            for (s32 i = 0; i < SUMMON_RESOURCE_COUNT; i++) {
+                if (battle->actionLoad.resources[i] == NULL) {
+                    battle->actionLoad.resources[i] = resource;
                     break;
                 }
             }
-            state->slots[0].id = source->summonId;
+            battle->actionLoad.slots[0].id = enemy->portraitId;
         }
-        g_btlMain->flags |= 0x4000;
-        if ((*reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(g_btlAux) + 0x3028) & 0x400) != 0)
-            nameEntriesRegisterVerNames(g_btlAux);
-        state->state = SUMMON_STATE_SPAWN;
-        return 0;
+        btlCameraSetFlags(g_btlMain, 0x4000);
+        if (g_btlAux->flags & 0x400) {
+            nameEntriesRegisterVerNames((BattleVersionResources *)g_btlAux);
+        }
+        battle->actionLoad.step = SUMMON_STEP_SPAWN;
+        break;
     }
-    if (state->state != SUMMON_STATE_SPAWN)
-        return 0;
+    case SUMMON_STEP_SPAWN: {
+        BtlLoadedActionResource *resource =
+            (BtlLoadedActionResource *)idSlotsFindEntryById(battle, battle->actionLoad.slots[0].id);
+        if (!(battle->actionLoad.slots[0].flags & SUMMON_LOAD_PARSED)) {
+            if (nkdwHeaderParse(resource) == 0) {
+                return 0;
+            }
+            battle->actionLoad.slots[0].flags |= SUMMON_LOAD_PARSED;
+            aocHandleButtons(resource, 7);
+        }
+        if (!(battle->actionLoad.slots[0].flags & SUMMON_LOAD_READY)) {
+            if (aocTextureEntryLoadOnce((Obj *)resource) == 0) {
+                return 0;
+            }
+            modelAnimationEnsureData(resource);
+            battle->actionLoad.slots[0].flags |= SUMMON_LOAD_READY;
+            battle->actionLoad.selectedResource = resource;
+        }
 
-    u32 resource = idSlotsFindEntryById(state, state->slots[0].id);
-    if ((state->slots[0].flags & SUMMON_RESOURCE_PARSED) == 0) {
-        if (nkdwHeaderParse(resource) == 0)
-            return 0;
-        state->slots[0].flags |= SUMMON_RESOURCE_PARSED;
-        aocHandleButtons(resource, 7);
+        /* The last free battle entry and the last free action record. */
+        s32 entryIndex = SUMMON_LAST_RECORD;
+        while (entryIndex > -1 && (battle->entries[entryIndex].flags & 1) != 0) {
+            entryIndex--;
+        }
+        battle->entries[entryIndex].flagMask = 0x200001;
+
+        s32 recordIndex = SUMMON_LAST_RECORD;
+        while (recordIndex > SUMMON_FIRST_RECORD && (battle->actions[recordIndex].status & 1) != 0) {
+            recordIndex--;
+        }
+        BtlActionRecord *record = &g_btlMainState.state->actions[recordIndex];
+        record->status = 0x20483;
+        record->participant.combatantIndex = entryIndex;
+        record->geometry.position[0] = 0.0f;
+        record->geometry.position[1] = 0.0f;
+        record->geometry.position[2] = 15.0f;
+        record->summon.unk5A = 0;
+        record->work[0] = DAT_00439cf8;
+        record->work[1] = DAT_00439cf8;
+        record->work[2] = DAT_00439cf8;
+        record->geometry.scale = FUN_003c1964(1);
+        record->presentationFlags |= 0x800;
+        battle->entries[entryIndex].data.parts[0] = enemy->portraitId;
+        battle->entries[entryIndex].ids[0] = record->memberId;
+        battle->actionLoad.selectedAction = recordIndex;
+        battle->actionLoad.step = SUMMON_STEP_LOAD;
+
+        s16 flashDelay = (s16)g_btlMarkerTimings.normal.flashDelay;
+        s16 startDelay = (s16)g_btlMarkerTimings.startDelay;
+        s16 flashFrames = (s16)g_btlMarkerTimings.normal.flashFrames;
+        FUN_0024057c(battle, record, 0, 0);
+        btlReflectCreateKind22(startDelay + flashDelay, (u32)btlUnitGet((BtlMainState *const *)g_btlScriptUnit), (u32)record,
+                               0xFF, flashFrames, 0);
+        u32 marker = 6;
+        if (record->status & 0x10) {
+            marker = 7;
+        }
+        btlReflectInitKind9(startDelay, (u32)btlUnitGet((BtlMainState *const *)g_btlScriptUnit), (u32)record, marker, 13);
+        return 1;
     }
-    if ((state->slots[0].flags & SUMMON_RESOURCE_READY) == 0) {
-        if (aocTextureEntryLoadOnce(resource) == 0)
-            return 0;
-        modelAnimationEnsureData(resource);
-        state->slots[0].flags |= SUMMON_RESOURCE_READY;
-        state->resource = resource;
     }
-
-    s32 objectIndex = SUMMON_LAST_SLOT;
-    while (objectIndex != -1 && (*reinterpret_cast<u32 *>(state->objects + objectIndex * SUMMON_OBJECT_STRIDE) & 1) != 0)
-        objectIndex--;
-    SummonObject *object = reinterpret_cast<SummonObject *>(state->objects + objectIndex * SUMMON_OBJECT_STRIDE);
-    object->flags = 0x200001;
-    object->unk004 = 0;
-
-    s32 effectIndex = SUMMON_LAST_SLOT;
-    while (effectIndex != SUMMON_FIRST_EFFECT
-           && (*reinterpret_cast<u32 *>(state->effects + effectIndex * SUMMON_EFFECT_STRIDE + 0x50) & 1) != 0)
-        effectIndex--;
-    SummonEffect *effect = reinterpret_cast<SummonEffect *>(g_btlMainState->effects + effectIndex * SUMMON_EFFECT_STRIDE);
-    effect->flags = 0x20483;
-    effect->objectIndex = (s16)objectIndex;
-    effect->unk0C = 0;
-    effect->unk10 = 0;
-    effect->height = 15.0f;
-    effect->unk5A = 0;
-    effect->scaleX = DAT_00439cf8;
-    effect->scaleY = DAT_00439cf8;
-    effect->scaleZ = DAT_00439cf8;
-    FUN_003c1964(1);
-    effect->unk40 = 0;
-    effect->flags58 |= 0x800;
-    object->summonId = source->summonId;
-    object->effectId = effect->id;
-    state->spawned = effectIndex;
-    state->state = SUMMON_STATE_LOAD;
-
-    s16 offsetA = (s16)DAT_00439a24;
-    s16 offsetB = (s16)DAT_00439a38;
-    s16 offsetC = (s16)DAT_00439a28;
-    FUN_0024057c(state, effect, 0);
-    btlReflectCreateKind22(offsetB + offsetA, reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit))), reinterpret_cast<u32>(effect), 0xFF, offsetC, 0);
-    u32 reflectKind = (effect->flags & 0x10) != 0 ? 7 : 6;
-    btlReflectInitKind9(offsetB, reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit))), effect, reflectKind, 0xD);
-    return 1;
+    return 0;
 }
 
 } /* extern "C" */

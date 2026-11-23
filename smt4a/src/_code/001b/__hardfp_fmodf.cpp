@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b4030` (_code @ 0x1b4030, 0xd4 bytes) from smt4a.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `__hardfp_fmodf` (_code @ 0x1b4030, 0xd4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
@@ -8,7 +8,7 @@ extern unsigned int __set_errno(unsigned int);
 extern unsigned int frem(void);
 
 
-unsigned int FUN_001b4030(void)
+unsigned int __hardfp_fmodf(void)
 
 {
 /* irregular: irregular input(s): in_s0, in_s1; 2 native warning(s); review required */

@@ -76,7 +76,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0023d078. */
-extern int FUN_0023d0d4(int, unsigned int);
+extern int gpuWriteUniformColor(int, unsigned int);
 /* Supplied declaration required: FUN_0023d158. */
 extern unsigned int resourceGetIndexedEntry(int, unsigned int);
 /* Supplied declaration required: matrixScaleColumns. */
@@ -249,7 +249,7 @@ void FUN_0034a28c(int param_1,unsigned int param_2)
             temp_v5 = temp_v27;
           }
           if (temp_v6 != temp_v1) {
-            temp_v23[0] = FUN_0023d0d4(temp_v23[0],temp_v1);
+            temp_v23[0] = gpuWriteUniformColor(temp_v23[0],temp_v1);
             temp_v6 = temp_v1;
           }
           temp_v0 = *(int *)(temp_v27 + 0x44);
@@ -338,7 +338,7 @@ void FUN_0034a28c(int param_1,unsigned int param_2)
             temp_v5 = temp_v3;
           }
           if (temp_v6 != temp_v1) {
-            temp_v23[0] = FUN_0023d0d4(temp_v23[0],temp_v1);
+            temp_v23[0] = gpuWriteUniformColor(temp_v23[0],temp_v1);
             temp_v6 = temp_v1;
           }
           if (temp_v7 != temp_v28) {
@@ -431,7 +431,7 @@ void FUN_0034a28c(int param_1,unsigned int param_2)
             temp_v5 = temp_v25;
           }
           if (temp_v6 != temp_v1) {
-            temp_v23[0] = FUN_0023d0d4(temp_v23[0],temp_v1);
+            temp_v23[0] = gpuWriteUniformColor(temp_v23[0],temp_v1);
             temp_v6 = temp_v1;
           }
           if (temp_v7 != temp_v24) {

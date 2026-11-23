@@ -1,4 +1,4 @@
-/* NON_MATCHING: control flow and constants now match; the saved registers are permuted (retail: zero r7, &g_aocSystem r8, g_statusBustUpResources r6, table 15 r9). */
+/* NON_MATCHING: the reference counts are decremented and reread as in the matched IV twin; only the saved registers are permuted (retail: g_statusBustUpResources r6, zero r7, &g_aocSystem r8, table 15 r9). */
 #include "status/StatusBustUp.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -40,8 +40,8 @@ void statusBustUpPortraitRelease(s32 id, s32 resolveRecord)
                 id = alternate->portrait;
                 if (id >= 154)
                     return;
-                s8 *references = (s8 *)g_statusBustUpResources.workB;
-                if (--references[id] > 0)
+                --((s8 *)g_statusBustUpResources.workB)[id];
+                if (((s8 *)g_statusBustUpResources.workB)[id] > 0)
                     return;
                 if (asdTMTexTableNodeIsLoaded(alternateTable, id)) {
                     asdTMTexTableReleaseNode(alternateTable, id);
@@ -52,8 +52,8 @@ void statusBustUpPortraitRelease(s32 id, s32 resolveRecord)
             }
         }
     }
-    s8 *references = (s8 *)g_statusBustUpResources.workA;
-    if (--references[id] > 0)
+    --((s8 *)g_statusBustUpResources.workA)[id];
+    if (((s8 *)g_statusBustUpResources.workA)[id] > 0)
         return;
     if (asdTMTexTableNodeIsLoaded(table, id)) {
         asdTMTexTableReleaseNode(table, id);

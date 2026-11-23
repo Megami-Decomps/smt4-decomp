@@ -1,5 +1,3 @@
-/* NON_MATCHING: register allocation only: retail loads a's info into r1 (reusing the parameter) and b's into r0 (swapped here) */
-/* Returns 1 if `a`'s class record sorts before `b`'s (or if `b` is NULL), else 0. */
 #include "common.h"
 
 extern "C" {
@@ -15,16 +13,13 @@ typedef struct Object {
     /* 0x08 */ ClassInfo *info;
 } Object;
 
+/* The object's class record, or NULL when it has one without both valid bits (0x40000001) set. */
 static __inline ClassInfo *validInfo(Object *obj)
 {
-    ClassInfo *info = obj->info;
-
-    if (info != NULL && (~info->flags & 0x40000001) != 0) {
-        info = NULL;
-    }
-    return info;
+    return (obj->info != NULL && (obj->info->flags & 0x40000001) != 0x40000001) ? NULL : obj->info;
 }
 
+/* Returns 1 if `a`'s class record sorts before `b`'s (or if `b` is NULL), else 0. */
 u32 _ZNK14SortObjectLessclEP10SortObjectS1_(u32 unused, Object *a, Object *b)
 {
     if (b == NULL) {

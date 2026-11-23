@@ -32,7 +32,7 @@ extern "C" {
 void *asdOperatorNewD(u32);
 void asdOperatorDeleteC(void *);
 void rt_memclr(void *, u32);
-void rt_memcpy(void *, const void *, u32);
+void __aeabi_memcpy(void *, const void *, u32);
 s32 entryCompareByRank(const void *, const void *);
 s32 gameFlagIsSet(u32);
 
@@ -43,7 +43,7 @@ void FUN_003f5bd8(RankedUnlockListWork *work, s32 count)
     u32 bytes = count * sizeof(RankedUnlockEntry);
     RankedUnlockEntry *sorted = static_cast<RankedUnlockEntry *>(asdOperatorNewD(bytes));
     rt_memclr(sorted, bytes);
-    rt_memcpy(sorted, work->entries, bytes);
+    __aeabi_memcpy(sorted, work->entries, bytes);
     qsort(sorted, count, sizeof(RankedUnlockEntry), entryCompareByRank);
     for (s32 index = 0; index < count; ++index) {
         if (index >= 100)

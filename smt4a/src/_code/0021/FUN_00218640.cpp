@@ -50,7 +50,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern unsigned int FUN_00156850(unsigned int, unsigned int);
+extern unsigned int questDataGetTitle(unsigned int, unsigned int);
 extern unsigned int dataTableGetNamePayload(unsigned int);
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: textDrawString. */
@@ -197,7 +197,7 @@ void FUN_00218640(void)
     temp_v12 = temp_v4 + (int)temp_v18;
     partyDrawCategorySelectionIcon(temp_v25,*(short *)(temp_v13 + 8) + temp_v12,*(short *)(temp_v13 + 10) + temp_v5,0x6a);
     temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0x12));
-    temp_v8 = FUN_00156850(temp_v25,0);
+    temp_v8 = questDataGetTitle(temp_v25,0);
     sprintf((char *)temp_v27,"%s",temp_v8);
     VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);

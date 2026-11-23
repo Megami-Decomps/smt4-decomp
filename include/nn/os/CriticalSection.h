@@ -16,7 +16,11 @@ public:
     CriticalSection() : state(0) { nn_os_CriticalSection_Initialize(this); }
     explicit CriticalSection(CriticalSectionDeferred) : state(0), owningThread(0), lockCount(-1) {}
     ~CriticalSection();
-    /* 0x00 */ u32 state;
+    /* 0x00 */ volatile u32 state;
+    /* `state` is the SDK's lock counter (an nn::fnd::InterlockedVariable, updated by other threads with
+     * ldrex/strex), hence volatile: retail keeps its zero store before the call to Initialize and before the
+     * deferred constructor's other stores (smt4 FUN_003ec728, FUN_003eb734, FUN_003f2028, FUN_003f2134, smt4a
+     * FUN_00511778 are IDENTICAL with it). */
     /* 0x04 */ u32 owningThread;
     /* 0x08 */ u32 lockCount;
 };

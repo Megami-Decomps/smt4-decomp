@@ -15,7 +15,7 @@ void sysMemClear(void *block, int size);
 PolyGeom *effGeomCreateRepeatedIndexList(u32 count, int w, int h, u8 *table, int tableSize);
 void *resourceResolveHeaderPointer(PolyTexDesc *desc);
 u32 *resourceResolveDataPointer(PolyTexDesc *desc);
-void rt_memcpy(void *dst, const void *src, int size);
+void __aeabi_memcpy(void *dst, const void *src, int size);
 void textureSlotReplace(PolyGeom *geom, u32 *resource);
 void *spriteGroupCreateFromFile(u32 *resource);
 u32 sysGetTableWord(int id);
@@ -44,7 +44,7 @@ PolyTexPivotObject *effPolyTexPivotCreate(PolyTexDesc *desc)
     if (desc != NULL) {
         obj->geom = effGeomCreateRepeatedIndexList(1, 2, 4, &g_effQuadIndexList, 0x4c);
         obj->kind = desc->kind;
-        rt_memcpy(obj->params, resourceResolveHeaderPointer(desc), 268);
+        __aeabi_memcpy(obj->params, resourceResolveHeaderPointer(desc), 268);
         resource = resourceResolveDataPointer(desc);
         if (resource != NULL) {
             switch (desc->resourceType) {

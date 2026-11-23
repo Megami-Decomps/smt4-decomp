@@ -1,4 +1,5 @@
-/* NON_MATCHING: libc wcstombs; needs unit cflags `--cpu=5TE -O2 -Ospace` (the `movs rd, rm` Thumb moves and the buffer/saved-state frame order only come out that way); with them four instruction pairs (argument setup around FUN_001009a2/rt_memcpy and the first moves) are still scheduled differently */
+/* NON_MATCHING: libc wcstombs; needs unit cflags `--cpu=5TE -O2 -Ospace` (the `movs rd, rm` Thumb moves and the buffer/saved-state frame order only come out that way); with them four instruction pairs (argument setup around FUN_001009a2/__aeabi_memcpy and the first moves) are still scheduled differently */
+#include "AsdSDK/AsdMemCopy.h"
 #include "common.h"
 
 extern "C" {
@@ -10,7 +11,6 @@ struct LocaleState {
 
 LocaleState *libcLocaleGetCategory(u32 locale, u32 category);
 s32 FUN_001009a2(u8 *out, u16 wide, LocaleState *state);
-void *rt_memcpy(void *dst, const void *src, u32 count);
 
 /* Converts the zero-terminated wide string `src` into multibyte characters in `dst` (at most `limit` bytes); returns the byte count excluding the terminator, or -1 on an unconvertible character. */
 s32 FUN_0026281c(u8 *dst, const u16 *src, u32 limit)
@@ -36,7 +36,7 @@ s32 FUN_0026281c(u8 *dst, const u16 *src, u32 limit)
                 }
                 break;
             }
-            rt_memcpy(dst + total, buffer, count);
+            __aeabi_memcpy(dst + total, buffer, count);
         }
         total += count;
         if (*src == 0) {

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00239e14(int, int);
 int FUN_00239ed0(unsigned int, unsigned char *);
 int _ZN18WindowStatusResultC1Ej(...);
-int rt_memcpy(unsigned char *, unsigned int, unsigned int);
+int __aeabi_memcpy(unsigned char *, unsigned int, unsigned int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int __aeabi_memcpy4(unsigned char *, int, int);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
@@ -30,7 +30,7 @@ extern unsigned int tokenTableGet(void);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern int FUN_002c55b4(void);
 extern int appletIsExitRequested(void);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -71,7 +71,7 @@ void FUN_00354168(unsigned int param_1,int *param_2,unsigned int *param_3,unsign
       }
       DAT_004c707c = DAT_004c707c | 0x40000;
       DAT_004c7078 = (unsigned int)*(unsigned char *)((int)param_3 + 5) | ((*param_3 & 0xff0fffff) << 8);
-      rt_memcpy(&DAT_004c7080,param_4,param_5 << 1);
+      __aeabi_memcpy(&DAT_004c7080,param_4,param_5 << 1);
       DAT_004c7100 = param_5;
       temp_v1 = FUN_00239f84(temp_v4,&DAT_004c7000,0);
       if (-1 < temp_v1) {

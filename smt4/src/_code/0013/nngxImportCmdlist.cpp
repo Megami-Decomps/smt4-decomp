@@ -14,7 +14,7 @@ extern u32 *g_commandBufferCursor;
 extern u32 *g_commandBufferEnd;
 
 void __aeabi_memcpy4(void *destination, const void *source, u32 size); // declcheck: local (the shared declaration does not compile here or changes this unit)
-void rt_memcpy(void *destination, const void *source, u32 size); // declcheck: local (the shared declaration does not compile here or changes this unit)
+void __aeabi_memcpy(void *destination, const void *source, u32 size); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void nngxLockEnter(void);
 void nngxLockLeave(void);
 void heapCloseOpenBlock(AsdCmdBuffer *buffer, AsdCmdRecord *records);
@@ -71,7 +71,7 @@ void nngxImportCmdlist(u32 handle, AsdCmdChunk *chunk)
             buffer->committedOffset += record->byteCount;
         }
     }
-    rt_memcpy(buffer->start + buffer->writeOffset, chunk->data, chunk->dataBytes);
+    __aeabi_memcpy(buffer->start + buffer->writeOffset, chunk->data, chunk->dataBytes);
     buffer->writeOffset += chunk->dataBytes;
     if (buffer->unk34 != 0 && chunk->recordCount != 0) {
         heapCloseOpenBlock(buffer, &buffer->entries[buffer->listCount]);

@@ -9,7 +9,7 @@ extern const char g_effPartsSourcePath[]; /* __FILE__ of effParts.cpp */
 
 void *memAlloc(int heap, int alignClass, int unk08, u32 size, int align, int fromFront);
 void asdMemFree(void *ptr);
-void rt_memcpy(void *dst, const void *src, u32 size);
+void __aeabi_memcpy(void *dst, const void *src, u32 size);
 
 void effBlockSetBlobB(EffBlock *block, const void *src, s32 size, u16 tag)
 {
@@ -25,7 +25,7 @@ void effBlockSetBlobB(EffBlock *block, const void *src, s32 size, u16 tag)
         block->tagB = tag;
         block->dataB = block->ownedB;
         block->sizeB = size;
-        rt_memcpy(block->ownedB, src, size);
+        __aeabi_memcpy(block->ownedB, src, size);
     }
 }
 

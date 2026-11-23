@@ -18,7 +18,7 @@ struct BattleUnitSlotState {
     /* 0x002C */ s16 combatantIndex;
     /* 0x002E */ u8 unk002E[2];
     /* 0x0030 */ u32 mode;
-    /* 0x0034 */ f32 scale;
+    /* 0x0034 */ s32 scale;
     union {
         /* 0x0038 */ u8 unk0038[0x548];
         struct {

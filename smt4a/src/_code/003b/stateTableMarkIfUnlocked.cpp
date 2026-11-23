@@ -1,28 +1,17 @@
-/* NON_MATCHING: table/index and state/address register allocation differs from retail. */
 #include "shard/Shard003B.h"
-#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "saveLoadUI/SaveLoadUIBase.h"
 
 extern "C" {
 
-typedef struct StateTable {
-    /* 0x00 */ u8 unk00[0x94];
-    /* 0x94 */ s32 states[9];
-} StateTable;
-
-
-/* Marks entry `index` of the state table at +0x94 as 1 unless it is 2 or 3 (only when asdTMTexTableNodeIsLoaded says it is not locked). */
-void stateTableMarkIfUnlocked(StateTable *table, s32 index)
+/* Requests portrait texture `index` of the set (state 1) unless it is loaded or already loading. */
+void stateTableMarkIfUnlocked(ResSet *set, u32 index)
 {
-    s32 state;
-
-    if (table == NULL) {
+    if (set == NULL) {
         return;
     }
-    if (asdTMTexTableNodeIsLoaded(0x2E, requestIdToCode(index)) == 0) {
-        state = table->states[index];
-        if (state != 3 && state != 2) {
-            table->states[index] = 1;
+    if (!requestTextureIsLoaded(index)) {
+        if (set->states[index] != RES_SET_TEXTURE_LOADED && set->states[index] != RES_SET_TEXTURE_LOADING) {
+            set->states[index] = RES_SET_TEXTURE_REQUESTED;
         }
     }
 }

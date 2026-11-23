@@ -6,7 +6,7 @@ extern "C" {
 extern const char g_effPartsSourcePath[];
 void asdMemFree(void *allocation);
 void *memAlloc(u32 heap, u32 alignment, u32 region, s32 size, u32 group, u32 mode);
-void *rt_memcpy(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy(void *destination, const void *source, u32 size);
 
 void effBlockCopyDataB(EffBlock *block, const void *data, s32 size, u16 tag)
 {
@@ -23,7 +23,7 @@ void effBlockCopyDataB(EffBlock *block, const void *data, s32 size, u16 tag)
         block->ownedB = copy;
         block->dataB = copy;
         block->sizeB = size;
-        rt_memcpy(copy, data, size);
+        __aeabi_memcpy(copy, data, size);
     }
 }
 }

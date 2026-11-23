@@ -72,7 +72,7 @@ extern "C" {
 
 extern BtlSaveCopies g_btlSaveCopies;
 
-void rt_memcpy(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy(void *destination, const void *source, u32 bytes);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 
 /* Restores the battle state from its snapshot: the save data copies go back and forth, the units and
@@ -85,7 +85,7 @@ void FUN_003eee9c(BtlRestoreState *state)
         __aeabi_memcpy4(g_btlSaveCopies.slotTableOut, gameGetSlotTable(), 0x2D30);
     }
     if (g_btlSaveCopies.flagStorageOut != NULL) {
-        rt_memcpy(g_btlSaveCopies.flagStorageOut, flagValueGetStorage(), 0x10B8);
+        __aeabi_memcpy(g_btlSaveCopies.flagStorageOut, flagValueGetStorage(), 0x10B8);
     }
     if (state->snapshot != NULL) {
         __aeabi_memcpy4(&state->snapshot->saved[0].unit, &state->units[0], sizeof(BtlUnitData));
@@ -101,7 +101,7 @@ void FUN_003eee9c(BtlRestoreState *state)
         __aeabi_memcpy4(gameGetSlotTable(), g_btlSaveCopies.slotTableIn, 0x2D30);
     }
     if (g_btlSaveCopies.flagStorageIn != NULL) {
-        rt_memcpy(flagValueGetStorage(), g_btlSaveCopies.flagStorageIn, 0x10B8);
+        __aeabi_memcpy(flagValueGetStorage(), g_btlSaveCopies.flagStorageIn, 0x10B8);
     }
     if (state->snapshot != NULL) {
         for (i = 0; i < BTL_SLOT_COUNT; i++) {

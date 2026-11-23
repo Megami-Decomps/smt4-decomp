@@ -9,17 +9,17 @@ struct Buffer {
     u8 gap[4];
     u32 end;
 };
-void *rt_memcpy(void *,const void *,u32);
+void *__aeabi_memcpy(void *,const void *,u32);
 void FUN_002fc056(Buffer *buffer,u8 *output,u32 size,u32 stride) {
     u32 available=buffer->end-buffer->start;
     const u8 *input=buffer->data+buffer->start;
     if(available<=size) {
-        rt_memcpy(output,input,available);
+        __aeabi_memcpy(output,input,available);
         size-=available;
         if(!size)return;
         input=buffer->data;
         output+=available;
     }
-    rt_memcpy(output,input,size);
+    __aeabi_memcpy(output,input,size);
 }
 }

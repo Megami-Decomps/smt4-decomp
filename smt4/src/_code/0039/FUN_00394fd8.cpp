@@ -17,7 +17,7 @@ typedef char ItemBoxCountsOffsets[offsetof(ItemBoxCounts, counts) == 0x168 &&
 
 extern "C" {
 
-void rt_memcpy(void *dst, const void *src, u32 bytes);
+void __aeabi_memcpy(void *dst, const void *src, u32 bytes); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Clears flag `id` (1-based) of the box's flag bits. */
 static __inline void itemBoxClearFlag(ItemBoxCounts *box, s32 id)
@@ -85,7 +85,7 @@ void FUN_00394fd8(ItemBoxCounts *dst, const ItemBoxCounts *src, s32 keepFlags)
             dst->counts[6][i] = limit;
         }
     }
-    rt_memcpy(dst->flags, src->flags, sizeof(dst->flags));
+    __aeabi_memcpy(dst->flags, src->flags, sizeof(dst->flags));
     if (keepFlags == 0) {
         s32 id = 0x79f;
         for (i = 100; i != 0; i--) {

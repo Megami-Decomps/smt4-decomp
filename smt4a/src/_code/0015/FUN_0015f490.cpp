@@ -37,7 +37,7 @@ struct LineOverride {
 };
 
 extern "C" {
-void rt_memcpy(void *destination, const void *source, s32 size);
+void __aeabi_memcpy(void *destination, const void *source, s32 size);
 void rt_aeabi_memclr(void *block, s32 size);
 void FUN_001628c0(const char *name, u32 value, s32 mode, u32 argument);
 
@@ -101,7 +101,7 @@ void FUN_0015f490(u32 id, s32 kind, f32 scale, u32 argument, u32 variant)
         }
     }
     LineRecord record;
-    rt_memcpy(&record, reinterpret_cast<u8 *>(records) + found * LINE_RECORD_SIZE, LINE_RECORD_SIZE);
+    __aeabi_memcpy(&record, reinterpret_cast<u8 *>(records) + found * LINE_RECORD_SIZE, LINE_RECORD_SIZE);
 
     char name[LINE_NAME_LENGTH];
     rt_aeabi_memclr(name, LINE_NAME_LENGTH);

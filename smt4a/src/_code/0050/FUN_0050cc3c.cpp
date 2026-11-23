@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e5f10(...);
-int rt_memcpy(...);
+int __aeabi_memcpy(...);
 
 typedef struct fn_0050cc3c_arg0 fn_0050cc3c_arg0;
 struct fn_0050cc3c_arg0 {
@@ -44,7 +44,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e5f10. */
 extern unsigned int containerGrowCapacity(unsigned int, unsigned int);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int FUN_0050cc3c(fn_0050cc3c_arg0 *param_1,int *param_2,unsigned int *param_3)
@@ -143,7 +143,7 @@ unsigned int FUN_0050cc3c(fn_0050cc3c_arg0 *param_1,int *param_2,unsigned int *p
             temp_v14 = temp_v4;
             temp_v6 = param_1->field_0x58;
             if (temp_v6 != temp_v6 + temp_v2) {
-              rt_memcpy(temp_v12,temp_v6,(temp_v6 + temp_v2) - temp_v6);
+              __aeabi_memcpy(temp_v12,temp_v6,(temp_v6 + temp_v2) - temp_v6);
             }
             temp_v7 = param_1->field_0x58;
             temp_v9 = param_1->field_0x60;
@@ -180,8 +180,8 @@ unsigned int FUN_0050cc3c(fn_0050cc3c_arg0 *param_1,int *param_2,unsigned int *p
         }
       }
       temp_v2 = (temp_v1 + temp_v10) - temp_v5;
-      rt_memcpy(param_1->field_0x58,temp_v5,temp_v2);
-      rt_memcpy(param_1->field_0x58 + temp_v2,temp_v1,temp_v8);
+      __aeabi_memcpy(param_1->field_0x58,temp_v5,temp_v2);
+      __aeabi_memcpy(param_1->field_0x58 + temp_v2,temp_v1,temp_v8);
       *param_2 = param_1->field_0x58;
       *param_3 = temp_v0;
       if (temp_v0 <= *(unsigned int *)(param_1 + 1)) {

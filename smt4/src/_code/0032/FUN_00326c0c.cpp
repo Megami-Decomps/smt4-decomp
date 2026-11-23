@@ -13,7 +13,7 @@ static __inline void flagsClearBits(u32 *flags, u32 mask)
 
 
 extern "C" {
-void rt_memcpy(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy(void *destination, const void *source, u32 bytes); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 }
 
@@ -60,7 +60,7 @@ extern "C" void FUN_00326c0c(StripOwnerView *owner, StripParameters *params)
         coords++;
     }
     for (u32 repeat = 1; repeat < repeatCount; repeat++) {
-        rt_memcpy(color, baseColors, vertexCount * sizeof(StripColor));
+        __aeabi_memcpy(color, baseColors, vertexCount * sizeof(StripColor));
         color += vertexCount;
         __aeabi_memcpy4(coords, baseCoords, vertexCount * sizeof(StripCoords));
         coords += vertexCount;

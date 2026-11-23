@@ -15,7 +15,7 @@ void efctSetSpeed(f32 speed);
 void texDrawCompositeSprite(s32 kind, u32 parameter, u32 id, s32 x, s32 y, u32 last);
 
 /* Plays effect `id` at the far corner of `rect` offset by (dx, dy), at speed `speed`, then resets the speed to 1. */
-void FUN_004935c8(f32 speed, const EffectRect *rect, u32 id, s32 dx, s32 dy, u32 last)
+void screenRectDrawCompositeScaled(const EffectRect *rect, u32 id, s32 dx, s32 dy, u32 last, f32 speed)
 {
     s32 x = (s32)(rect->x + rect->width + (f32)dx);
     s32 y = (s32)(rect->y + rect->height + (f32)dy);

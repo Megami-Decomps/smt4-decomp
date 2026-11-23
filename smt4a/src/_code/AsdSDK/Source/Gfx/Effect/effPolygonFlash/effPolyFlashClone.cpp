@@ -20,7 +20,7 @@ extern "C" {
 
 void *memAlloc(int, int, int, int size, int align, int);
 PolyObject *effPolyFlashCreate(u16 kind, void *params, s32 arg);
-void rt_memcpy(void *dst, const void *src, int size);
+void __aeabi_memcpy(void *dst, const void *src, int size);
 
 extern PolyFlashKind g_polyFlashKinds[];
 extern PolyVec4 g_polyDefaultColor;
@@ -48,7 +48,7 @@ PolyObject *effPolyFlashClone(PolyObject *src)
         polyVec4Copy(&g_polyDefaultColor, &obj->color);
         quaternionSetIdentity(&obj->rotation0);
         quaternionSetIdentity(&obj->rotation1);
-        rt_memcpy(obj->work, srcWork, workSize);
+        __aeabi_memcpy(obj->work, srcWork, workSize);
         obj->state = g_polyFlashKinds[src->kind].clone(src);
         g_polyFlashKinds[src->kind].start(obj);
     }

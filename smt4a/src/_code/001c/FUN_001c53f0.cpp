@@ -4,7 +4,7 @@
 extern "C" {
 void *FUN_001c53f0(void *destination, const void *source, u32 bytes)
 {
-    rt_memcpy(destination, source, bytes);
+    __aeabi_memcpy(destination, source, bytes);
     return destination;
 }
 }

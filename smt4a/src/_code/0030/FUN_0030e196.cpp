@@ -5,7 +5,7 @@
 extern "C" {
 
 int rt_memclr(unsigned int, unsigned int);
-int rt_memcpy(int, unsigned int, unsigned int);
+int __aeabi_memcpy(int, unsigned int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 extern int FUN_001289f6(int, int, int);
 /* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_0030e196(int *param_1)
@@ -34,7 +34,7 @@ void FUN_0030e196(int *param_1)
   while( 1 ) {
     temp_v5 = (param_1[0xf] - param_1[0x1d]) - param_1[0x1b];
     if (param_1[0xb] + (temp_v4 - 0x106) <= (unsigned int)param_1[0x1b]) {
-      rt_memcpy(param_1[0xe],param_1[0xe] + temp_v4,temp_v4);
+      __aeabi_memcpy(param_1[0xe],param_1[0xe] + temp_v4,temp_v4);
       temp_v0 = param_1[0x13];
       param_1[0x1b] = param_1[0x1b] - temp_v4;
       param_1[0x1c] = param_1[0x1c] - temp_v4;

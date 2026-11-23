@@ -21,7 +21,7 @@ extern "C" {
 u32 countUnlockedSlots();
 StatusSkillSlotView *slotRecordFindById(u32);
 u32 getUnlockedSlotCount();
-void *rt_memcpy(void *, const void *, u32);
+void *__aeabi_memcpy(void *, const void *, u32);
 void statusReplaceSkills(const u16 *, u8);
 s32 statusCollectUnlearnedSkillsAboveLevel(u16, u16, u16 *, StatusSkillComparison *, u8);
 void statusDownSetSelectedIds(StatusSkillComparison *, s32);
@@ -38,7 +38,7 @@ void statusCommitSelectedSkills(const u16 *skills)
         slotRecordFindById(static_cast<u16>(selection->selectedId));
         count = getUnlockedSlotCount();
     }
-    rt_memcpy(selection->skills, skills, count * sizeof(u16));
+    __aeabi_memcpy(selection->skills, skills, count * sizeof(u16));
     statusReplaceSkills(selection->skills, static_cast<u8>(count));
     StatusSkillComparison comparison = {0, 0, 0, 0};
     if (selection->selectedId > 0 && session->unk2017 != 7 && session->unk2017 != 0x10) {

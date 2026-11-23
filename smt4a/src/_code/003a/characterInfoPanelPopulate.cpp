@@ -1,8 +1,9 @@
-/* NON_MATCHING: 109 lines (71 by shape; raw counts the rows three missing moves shift). The flow, the frame and
+/* NON_MATCHING: 96 lines (58 by shape; raw counts the rows three missing moves shift). The flow, the frame and
  * the saved registers are retail's. What differs: the preview test keeps the panel's demon in r0 and the card's
  * in r1 (retail r2 and r0, with a `mov r0, r2` before each devilIsTextureLoaded); the two inlined portrait-state
  * helpers use the caller's registers where retail copies the index (`mov r5, r7`) and the set (`movs r5, r4`,
- * the index in r4), the same r4/r5 choice textureRequestCacheGet's own copy has and its source does not give; and
+ * the index in r4; requestTextureIsLoaded fixed the same choice in the out-of-line textureRequestCacheGet and
+ * stateTableMarkIfUnlocked, here it removed 11 lines but not the copies); and
  * the two-dash strcpy calls __ARM_common_memcpy4_5, which retail's symbols still name __ARM_common_memcpy4_5. */
 #include <string.h>
 #include "common.h"
@@ -15,6 +16,7 @@
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "shard/Shard003B.h"
+#include "saveLoadUI/SaveLoadUIBase.h"
 #include "cec/CecMessage.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
 
@@ -29,7 +31,6 @@ const char *demonGetRaceLabel(u32 demon, u32 flags);
 f32 fontMeasureTextWidth(const char *text, u32 font, f32 spacing);
 void statusBustUpPortraitRelease(s32 id, u32 kind);
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
-u32 requestIdToCode(u32 id);
 void asdTMTexTableReleaseNode(u32 table, u32 code);
 }
 
@@ -39,7 +40,7 @@ static __inline void resSetReleaseTexture(ResSet *set, u32 index)
     if (set == NULL) {
         return;
     }
-    if (asdTMTexTableNodeIsLoaded(RES_SET_TEXTURE_TABLE, requestIdToCode(index)) &&
+    if (requestTextureIsLoaded(index) &&
         set->states[index] != RES_SET_TEXTURE_LOADING) {
         asdTMTexTableReleaseNode(RES_SET_TEXTURE_TABLE, requestIdToCode(index));
         set->states[index] = RES_SET_TEXTURE_IDLE;
@@ -52,7 +53,7 @@ static __inline void resSetRequestTexture(ResSet *set, u32 index)
     if (set == NULL) {
         return;
     }
-    if (!asdTMTexTableNodeIsLoaded(RES_SET_TEXTURE_TABLE, requestIdToCode(index))) {
+    if (!requestTextureIsLoaded(index)) {
         if (set->states[index] != RES_SET_TEXTURE_LOADED && set->states[index] != RES_SET_TEXTURE_LOADING) {
             set->states[index] = RES_SET_TEXTURE_REQUESTED;
         }
@@ -198,12 +199,12 @@ extern "C" void characterInfoPanelPopulate(ResSet *panel, const CecProcessSlotA 
     /* The card's portrait replaces the first one loaded. */
     s32 loaded = 0;
     for (s32 index = 0; index < RES_SET_TEXTURE_COUNT; ++index) {
-        if (asdTMTexTableNodeIsLoaded(RES_SET_TEXTURE_TABLE, requestIdToCode(index))) {
+        if (requestTextureIsLoaded(index)) {
             loaded = index;
             break;
         }
     }
-    if (!asdTMTexTableNodeIsLoaded(RES_SET_TEXTURE_TABLE, requestIdToCode(card->portrait))) {
+    if (!requestTextureIsLoaded(card->portrait)) {
         resSetReleaseTexture(panel, loaded);
         resSetRequestTexture(panel, card->portrait);
     }

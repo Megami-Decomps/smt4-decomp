@@ -16,7 +16,7 @@ WindowStatusResult FUN_00353154(void* owner, void* destination)
     u8 block[64];
     s32 blockStatus = FUN_0035f7dc(block);
     if (!nnResultIsFailure(blockStatus)) {
-        rt_memcpy(destination, block, 32);
+        __aeabi_memcpy(destination, block, 32);
         blockStatus = 0;
     }
     WindowStatusResult translated(blockStatus);

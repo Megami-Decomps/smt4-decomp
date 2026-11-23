@@ -12,7 +12,7 @@ int FUN_001aa528(...);
 void sceneNodeAttachDeclaredChild(SceneChildSet *, SceneNodePrefix *);
 int nw_gfx_SceneBuilder_CreateObject(...);
 int nw_gfx_SceneNode_IsCircularReference(...);
-int rt_memcpy(short *, int, int);
+int __aeabi_memcpy(short *, int, int);
 
 typedef struct fn_003168b8_arg1 fn_003168b8_arg1;
 struct fn_003168b8_arg1 {
@@ -66,7 +66,7 @@ extern short libc_strlen(int);
 extern int asdModelGetSlotArray2(fn_003168b8_arg1 *);
 extern int asdModelGetSlotArray1(fn_003168b8_arg1 *);
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_003168b8(int *param_1,fn_003168b8_arg1 *param_2)
@@ -235,7 +235,7 @@ LAB_00316ab4:
         else {
           temp_v6 = 0;
         }
-        rt_memcpy(psVar22 + temp_v2 * 0x26 + 2,temp_v6,(int)temp_v1);
+        __aeabi_memcpy(psVar22 + temp_v2 * 0x26 + 2,temp_v6,(int)temp_v1);
         *psVar22 = temp_v2 + 1;
       }
       else if ((piVar20 != (int *)0x0) &&
@@ -273,7 +273,7 @@ LAB_00316b80:
         else {
           temp_v6 = 0;
         }
-        rt_memcpy(temp_v28 + temp_v1 * 0x26 + 2,temp_v6,(int)temp_v2);
+        __aeabi_memcpy(temp_v28 + temp_v1 * 0x26 + 2,temp_v6,(int)temp_v2);
         *temp_v28 = temp_v1 + 1;
       }
       else if ((piVar20 != (int *)0x0) &&
@@ -311,7 +311,7 @@ LAB_00316c58:
         else {
           temp_v6 = 0;
         }
-        rt_memcpy(temp_v27 + temp_v1 * 0x26 + 2,temp_v6,(int)temp_v2);
+        __aeabi_memcpy(temp_v27 + temp_v1 * 0x26 + 2,temp_v6,(int)temp_v2);
         psVar15 = temp_v27;
         *psVar15 = temp_v1 + 1;
       }
@@ -350,7 +350,7 @@ LAB_00316d2c:
         else {
           temp_v6 = 0;
         }
-        rt_memcpy(temp_v26 + temp_v1 * 0x26 + 2,temp_v6,(int)temp_v2);
+        __aeabi_memcpy(temp_v26 + temp_v1 * 0x26 + 2,temp_v6,(int)temp_v2);
         psVar15 = temp_v26;
         *psVar15 = temp_v1 + 1;
       }

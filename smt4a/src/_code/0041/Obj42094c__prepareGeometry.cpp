@@ -4,7 +4,7 @@
 extern "C" {
 s32 randBetween(s32 minimum, s32 maximum);
 u32 randRange(u32 limit);
-f32 FUN_001a1ee0(f32 phase);
+f32 phaseSine(f32 phase);
 f32 phaseCosine(f32 phase);
 }
 
@@ -21,7 +21,7 @@ void Obj42094c::prepareGeometry()
             f32 speed = minimum + (filter->config->maximumSpeed - minimum) * fraction;
             f32 phase = (f32)randRange(65535) * (1.0f / 65536.0f) * 256.0f;
             motion->x = phaseCosine(phase);
-            motion->y = FUN_001a1ee0(phase);
+            motion->y = phaseSine(phase);
             motion->z = 0;
             motion->x *= speed;
             motion->y *= speed;

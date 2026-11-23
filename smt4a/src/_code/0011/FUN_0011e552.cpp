@@ -9,7 +9,7 @@ int onlineInstanceCompleteWithChildren(int, int);
 int rangeIsEmpty(...);
 int byteVectorErase(int *, int, int);
 int FUN_00310d38(int, int, unsigned int);
-int rt_memcpy(unsigned int, unsigned int, unsigned int);
+int __aeabi_memcpy(unsigned int, unsigned int, unsigned int);
 
 typedef struct fn_0011e552_arg0 fn_0011e552_arg0;
 struct fn_0011e552_arg0 {
@@ -45,7 +45,7 @@ extern int *wordRefMin(unsigned int *, unsigned int *);
 /* Supplied declaration required: rangeIsEmpty. */
 /* Supplied declaration required: byteVectorErase. */
 /* Supplied declaration required: FUN_00310d38. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_0011e552(fn_0011e552_arg0 *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -105,7 +105,7 @@ void FUN_0011e552(fn_0011e552_arg0 *param_1,unsigned int param_2,unsigned int pa
         puVar3 = &temp_v5;
       }
       temp_v2 = *puVar3;
-      rt_memcpy(temp_v4,param_1->field_0x1c + param_1->field_0x28,temp_v2);
+      __aeabi_memcpy(temp_v4,param_1->field_0x1c + param_1->field_0x28,temp_v2);
       if (param_1->field_0x28 + temp_v2 == param_1->field_0x20) {
         param_1->field_0x44 = 1;
       }

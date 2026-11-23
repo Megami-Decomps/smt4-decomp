@@ -36,7 +36,7 @@ nn::Result FUN_00427e68(u32 token, u32 operation);
 void *tokenTableGet(void);
 s32 tokenResolveAddress(void *registry, AsyncTransferContext **context, u32 token);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-void rt_memcpy(void *destination, const void *source, u32 size);
+void __aeabi_memcpy(void *destination, const void *source, u32 size);
 void sysFatalBreak(void);
 s32 appletIsExitRequested(void);
 s32 FUN_0015a410(void);
@@ -76,7 +76,7 @@ WindowStatusResult FUN_00429210(const u32 *token, const AsyncTransferFormat *for
             DAT_0061b030.encoding = static_cast<u64>(low & 0x0FFFFFFF) |
                 static_cast<s64>(static_cast<s32>(mode << 28)) |
                 (static_cast<u64>(encoding | 0x40000) << 32);
-            rt_memcpy(DAT_0061b030.payload, payload, count * sizeof(u16));
+            __aeabi_memcpy(DAT_0061b030.payload, payload, count * sizeof(u16));
             DAT_0061b030.count = count;
             u32 operation;
             result = FUN_00427e28(&operation, DAT_0061b000, 0);

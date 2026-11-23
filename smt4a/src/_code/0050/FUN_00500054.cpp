@@ -14,7 +14,7 @@ struct NameHolder {
 extern "C" {
 
 char *strncpy(char *destination, const char *source, u32 count);
-void *rt_memcpy(void *destination, const void *source, u32 count);
+void *__aeabi_memcpy(void *destination, const void *source, u32 count);
 
 // Copy the holder's source name (up to 31 characters, NUL padded) into the 32-byte destination.
 void FUN_00500054(void *destination, NameHolder **holderRef)
@@ -25,7 +25,7 @@ void FUN_00500054(void *destination, NameHolder **holderRef)
         strncpy(name, holder->source->name, 32);
         name[31] = 0;
     }
-    rt_memcpy(destination, name, 32);
+    __aeabi_memcpy(destination, name, 32);
 }
 
 } /* extern "C" */

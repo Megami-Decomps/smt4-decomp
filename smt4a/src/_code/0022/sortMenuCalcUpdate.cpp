@@ -1,246 +1,196 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `sortMenuCalcUpdate` (_code @ 0x22a0a0, 0x530 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the switch, the calls, the block layout and the data accesses are retail's; two things differ.
+ * Retail holds the row limits 10 and 9 in r1/r2 for both selections of the clamp in state 1 (the build uses
+ * immediates, two instructions fewer): they were variables in the original. Two non-const locals give that
+ * (28 lines off) and so does an inline taking both limits (28 by shape), but nothing else shows either, so the
+ * macro stays. Retail also keeps &g_useCounter in fp and the help colour in r9; the build has them the other way
+ * round. */
+#include "ui/UiSpriteApi.h"
+#include "ui/UiControl.h"
+#include "shard/W6_W6Match6_SortMenu.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
 #include "event/2dEvent/2dEventTex.h"
+#include "code/Code002a_Smt4a.h"
+#include "code/Code002a_VariantA.h"
+#include "code/Code0029_VariantA.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+
+#define SORT_MENU_TEXTURES 21
+#define SORT_MENU_HELP_COLOR 0xF4F4F4FF
+/* The rows the list shows at once. */
+#define SORT_MENU_ROWS(work) ((work)->option == 2 ? 10 : 9)
 
 extern "C" {
 
-int padQueryLogicalKey(...);
-int uiSpriteAdvanceAnimation(...);
-int eventQueueAddUniqueIfValid(...);
-int ifTouchRegionRemove(void);
-int ifTouchRegionAddRequested(int, int);
-int buttonHelpSetText(...);
-int gridNavigationHandleConfirm(int, int);
-int gridNavigationGetItemCount(...);
-int buttonHelpSetHelpState(int);
-int uiScrollHandleActionsOrTouch(int, unsigned int, int, int, int, int, char [16], int, int);
-int buttonHelpSetTextVisible(...);
+extern SortMenuSingleton g_useCounter;
+const char *mapGetDisplayName(u32 id);
+void buttonHelpSetText(const s8 *text, u32 color);
+void buttonHelpSetHelpState(u8 value);
+void buttonHelpSetTextVisible(u8 value);
+s16 ifTouchRegionAddRequested(u32 file, s32 index);
+s32 uiSearchPrimary(GridNavigation *list);
+/* Moves the list's cursor from the scroll bar or a touched row; `decide` is set when a row is tapped. */
+u32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV *sprite, const s16 *rows,
+                                 u32 thumb, u32 previous, u32 next, s8 *decide, s32 alternateAxis, s32 notify);
+/* Moves the list's cursor from the pad. */
+u8 gridNavigationHandleConfirm(GridNavigation *list, s32 notify);
+s32 padQueryLogicalKey(s32 key, s32 mode);
 
-/* stack frame of void: 4 slot(s), 13 byte(s) */
-typedef struct {
-    unsigned char sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} void_stack;
-
-extern int DAT_0057f280; /* 0x57f280 */
-
-/* Supplied declaration required: padQueryLogicalKey. */
-/* Supplied declaration required: uiSpriteAdvanceAnimation. */
-/* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: ifTouchRegionAddRequested. */
-/* Supplied declaration required: buttonHelpSetText. */
-/* Supplied declaration required: gridNavigationHandleConfirm. */
-extern unsigned int mapGetDisplayName(unsigned char);
-extern int resourceRunOperationIfUnblocked(int);
-extern int listCursorGetRowIfUnblocked(int);
-/* Supplied declaration required: gridNavigationGetItemCount. */
-/* Supplied declaration required: buttonHelpSetHelpState. */
-/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
-extern int uiSearchPrimary(int);
-/* Supplied declaration required: buttonHelpSetTextVisible. */
-
-
-unsigned int sortMenuCalcUpdate(void)
-
+/* Advances the frame and, when the list scrolls, the scroll bar. */
+static __inline void sortMenuAdvanceFrame(SortMenuWork *work)
 {
-/* irregular: 11 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  unsigned short temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned char *pbVar11;
-  char temp_v10 [16];
-  
-  temp_v0 = DAT_0057f280;
-  temp_v10[0] = '\0';
-  switch(*(unsigned int *)(DAT_0057f280 + 0x744)) {
-  case 1:
-    temp_v8 = *(int *)(DAT_0057f280 + 0x754);
-    if (*(char *)(DAT_0057f280 + 0x74e) == '\x02') {
-      temp_v9 = 10;
+    uiSpriteAdvanceAnimation(&work->sprites[10], 1.0f);
+    uiSpriteAdvanceAnimation(&work->sprites[11], 1.0f);
+    if ((s32)gridNavigationGetItemCount(&work->list) > uiSearchPrimary(&work->list)) {
+        uiSpriteAdvanceAnimation(&work->sprites[12], 1.0f);
     }
-    else {
-      temp_v9 = 9;
+}
+
+/* The sort key of the row the cursor is on. */
+static __inline u8 sortMenuCursorKey(SortMenuWork *work)
+{
+    return work->keys[resourceRunOperationIfUnblocked((Object *)&work->list) + listCursorGetRowIfUnblocked(&work->list)];
+}
+
+/* Shows the help line of the sort key under the cursor. */
+static __inline void sortMenuShowCursorHelp(SortMenuWork *work)
+{
+    buttonHelpSetText((const s8 *)mapGetDisplayName(sortMenuCursorKey(work)), SORT_MENU_HELP_COLOR);
+}
+
+/* Closes the menu: frees its touch regions and puts the button help back. Retail inlines the body of
+   touchMenuClose (0x26xxxx), which reads the work from the global again. */
+static __inline void sortMenuClose(void)
+{
+    SortMenuWork *work = g_useCounter.work;
+
+    work->state = 4;
+    for (s32 i = 0; i < work->touchRegionCount; i++) {
+        work->ids[i] = -1;
+        ifTouchRegionRemove();
     }
-    if (temp_v9 < temp_v8) {
-      if (*(char *)(DAT_0057f280 + 0x74e) == '\x02') {
-        temp_v8 = 10;
-      }
-      else {
-        temp_v8 = 9;
-      }
+    if (work->option == 2 || work->option == 1) {
+        return;
     }
-    else if (temp_v8 < 1) break;
-    temp_v9 = 0;
-    temp_v5 = DAT_0057f280 + 0x788;
-    do {
-      if (temp_v9 <= *(int *)(temp_v0 + 0x748)) {
-        temp_v6 = temp_v0 + temp_v9 * 0x8c;
-        uiSpriteAdvanceAnimation(temp_v6 + 0x28);
-        if ((temp_v8 - 1 <= temp_v9) && (*(char *)(temp_v6 + 0xb2) != '\0')) {
-          *(unsigned int *)(temp_v0 + 0x744) = 2;
-          if (*(char *)(temp_v0 + 0x74e) != '\x02') {
-            temp_v6 = 0;
-            if (temp_v6 < temp_v8) {
-              do {
-                temp_v3 = ifTouchRegionAddRequested(0x15,temp_v6 + 7);
-                temp_v4 = temp_v6 * 2;
-                temp_v6 = temp_v6 + 1;
-                *(unsigned short *)(temp_v0 + temp_v4 + 0x772) = temp_v3;
-                *(short *)(temp_v0 + 0x786) = *(short *)(temp_v0 + 0x786) + 1;
-              } while (temp_v6 < temp_v8);
-            }
-          }
-          else {
-            temp_v6 = 0;
-            if (temp_v6 < temp_v8) {
-              do {
-                temp_v3 = ifTouchRegionAddRequested(0x15,temp_v6 + 0x2b);
-                temp_v4 = temp_v6 * 2;
-                temp_v6 = temp_v6 + 1;
-                *(unsigned short *)(temp_v0 + temp_v4 + 0x772) = temp_v3;
-                *(short *)(temp_v0 + 0x786) = *(short *)(temp_v0 + 0x786) + 1;
-              } while (temp_v6 < temp_v8);
-            }
-          }
-          temp_v6 = resourceRunOperationIfUnblocked(temp_v5);
-          temp_v4 = listCursorGetRowIfUnblocked(temp_v5);
-          temp_v7 = mapGetDisplayName(*(unsigned char *)(temp_v4 + temp_v6 + temp_v0 + 0x758));
-          buttonHelpSetText(temp_v7,0xf4f4f4ff);
-          temp_v6 = gridNavigationGetItemCount(temp_v5);
-          temp_v4 = uiSearchPrimary(temp_v5);
-          if (temp_v4 < temp_v6) {
-            temp_v3 = ifTouchRegionAddRequested(0x15,0x46);
-            *(unsigned short *)(temp_v0 + 0x76c) = temp_v3;
-            temp_v3 = ifTouchRegionAddRequested(0x15,0x47);
-            *(unsigned short *)(temp_v0 + 0x76e) = temp_v3;
-            temp_v3 = ifTouchRegionAddRequested(0x15,0x48);
-            *(unsigned short *)(temp_v0 + 0x770) = temp_v3;
-            *(short *)(temp_v0 + 0x786) = *(short *)(temp_v0 + 0x786) + 3;
-          }
+    if (work->helpSaved) {
+        if (work->helpIsDefault) {
+            buttonHelpSetHelpState(1);
+        } else {
+            buttonHelpSetText((const s8 *)work->helpText, SORT_MENU_HELP_COLOR);
         }
-      }
-      temp_v9 = temp_v9 + 1;
-    } while (temp_v9 < temp_v8);
-    break;
-  case 2:
-    uiSpriteAdvanceAnimation(DAT_0057f280 + 0x5a0);
-    uiSpriteAdvanceAnimation(temp_v0 + 0x62c);
-    temp_v8 = temp_v0 + 0x788;
-    temp_v9 = gridNavigationGetItemCount();
-    temp_v5 = uiSearchPrimary(temp_v8);
-    if (temp_v5 < temp_v9) {
-      uiSpriteAdvanceAnimation(temp_v0 + 0x6b8);
+        work->helpSaved = 0;
+    } else {
+        buttonHelpSetTextVisible(0);
     }
-    temp_v5 = resourceRunOperationIfUnblocked(temp_v8);
-    temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
-    temp_v7 = reinterpret_cast<unsigned int>(asdTMTexTableEntryAt(0x15,0x48));
-    temp_v9 = temp_v8;
-    uiScrollHandleActionsOrTouch(temp_v8,temp_v7,temp_v0 + 0x772,(int)*(short *)(temp_v0 + 0x770),
-                 (int)*(short *)(temp_v0 + 0x76c),(int)*(short *)(temp_v0 + 0x76e),temp_v10,0,1);
-    if (temp_v9 != 0) {
-      temp_v9 = listCursorGetRowIfUnblocked(temp_v8);
-      if (temp_v9 != temp_v5 + temp_v6) {
-        *(unsigned char *)(temp_v0 + 0x74d) = 1;
-      }
+}
+
+/* Goes back to choosing after a decision; the next decision on the same key flips the order. Retail inlines the
+   body of useCounterSelectMode2, which reads the work from the global again. */
+static __inline void sortMenuResume(void)
+{
+    SortMenuWork *work = g_useCounter.work;
+
+    work->decided = 0;
+    work->state = 2;
+    if (work->ascending) {
+        work->ascending = 0;
+    } else {
+        work->ascending = 1;
     }
-    else {
-      temp_v9 = temp_v8;
-      gridNavigationHandleConfirm(temp_v8,1);
-      if (temp_v9 == 0) {
-        temp_v9 = 0;
-        padQueryLogicalKey(0,1);
-        if (!(temp_v9 == 0 && temp_v10[0] == '\0')) {
-          *(unsigned char *)(temp_v0 + 0x74c) = 1;
-          *(unsigned int *)(temp_v0 + 0x744) = 3;
-          if (-1 < *(int *)(temp_v0 + 0x750)) {
-            temp_v9 = reinterpret_cast<int>(saveGetUserSettingsBlock());
-            pbVar11 = (unsigned char *)(temp_v9 + *(int *)(temp_v0 + 0x750));
-            temp_v9 = resourceRunOperationIfUnblocked(temp_v8);
-            temp_v8 = listCursorGetRowIfUnblocked(temp_v8);
-            temp_v2 = *(unsigned char *)(temp_v9 + temp_v8 + temp_v0 + 0x758) & 0x7f;
-            temp_v1 = temp_v2 | (*pbVar11 & 0x80);
-            *pbVar11 = temp_v1;
-            if (*(char *)(temp_v0 + 0x74d) == '\0') {
-              temp_v2 = temp_v1 | 0x80;
-            }
-            *pbVar11 = temp_v2;
-          }
-          temp_v7 = 0x100020e;
-        }
-        else {
-          temp_v9 = 1;
-          padQueryLogicalKey();
-          temp_v8 = DAT_0057f280;
-          if (temp_v9 == 0) break;
-          temp_v9 = 0;
-          *(unsigned int *)(DAT_0057f280 + 0x744) = 4;
-          if (0 < *(short *)(temp_v8 + 0x786)) {
-            do {
-              *(unsigned short *)(temp_v8 + temp_v9 * 2 + 0x76c) = 0xffff;
-              ifTouchRegionRemove();
-              temp_v9 = temp_v9 + 1;
-            } while (temp_v9 < *(short *)(temp_v8 + 0x786));
-          }
-          if (*(char *)(temp_v8 + 0x74e) != '\x02' && *(char *)(temp_v8 + 0x74e) != '\x01') {
-            if (*(char *)(temp_v8 + 0x7f4) != '\0') {
-              if (*(char *)(temp_v8 + 0x7f5) != '\0') {
-                buttonHelpSetHelpState(1);
-              }
-              else {
-                buttonHelpSetText(temp_v8 + 0x7f6,0xf4f4f4ff);
-              }
-              *(unsigned char *)(temp_v8 + 0x7f4) = 0;
-            }
-            else {
-              buttonHelpSetTextVisible(0);
-            }
-          }
-          temp_v7 = 0x100020f;
-        }
-        eventQueueAddUniqueIfValid(temp_v7);
+}
+
+/* The sort menu's update. */
+s32 sortMenuCalcUpdate(u32 job)
+{
+    SortMenuWork *work = g_useCounter.work;
+    s8 decide = 0;
+
+    switch (work->state) {
+    case 0:
+    case 4:
         break;
-      }
-      *(unsigned char *)(temp_v0 + 0x74d) = 1;
+    case 1: {
+        /* The rows slide in one frame apart; the menu opens when the last one has arrived. */
+        s32 rows = work->count;
+        if (rows > SORT_MENU_ROWS(work)) {
+            rows = SORT_MENU_ROWS(work);
+        }
+        for (s32 i = 0; i < rows; i++) {
+            if (work->frame < i) {
+                continue;
+            }
+            uiSpriteAdvanceAnimation(&work->sprites[i], 1.0f);
+            if (i < rows - 1 || !uiSpriteGetCompletionState(&work->sprites[i])) {
+                continue;
+            }
+            work->state = 2;
+            if (work->option == 2) {
+                for (s32 j = 0; j < rows; j++) {
+                    work->ids[3 + j] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, j + 43);
+                    work->touchRegionCount++;
+                }
+            } else {
+                for (s32 j = 0; j < rows; j++) {
+                    work->ids[3 + j] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, j + 7);
+                    work->touchRegionCount++;
+                }
+            }
+            sortMenuShowCursorHelp(work);
+            if ((s32)gridNavigationGetItemCount(&work->list) > uiSearchPrimary(&work->list)) {
+                work->ids[0] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, 70);
+                work->ids[1] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, 71);
+                work->ids[2] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, 72);
+                work->touchRegionCount += 3;
+            }
+        }
+        break;
     }
-    temp_v9 = resourceRunOperationIfUnblocked(temp_v8);
-    temp_v8 = listCursorGetRowIfUnblocked(temp_v8);
-    temp_v7 = mapGetDisplayName(*(unsigned char *)(temp_v8 + temp_v9 + temp_v0 + 0x758));
-    buttonHelpSetText(temp_v7,0xf4f4f4ff);
-    break;
-  case 3:
-    uiSpriteAdvanceAnimation(DAT_0057f280 + 0x5a0);
-    uiSpriteAdvanceAnimation(temp_v0 + 0x62c);
-    temp_v8 = gridNavigationGetItemCount();
-    temp_v9 = uiSearchPrimary(temp_v0 + 0x788);
-    if (temp_v9 < temp_v8) {
-      uiSpriteAdvanceAnimation(temp_v0 + 0x6b8);
+    case 2: {
+        sortMenuAdvanceFrame(work);
+        s32 row = resourceRunOperationIfUnblocked((Object *)&work->list) + listCursorGetRowIfUnblocked(&work->list);
+        if (uiScrollHandleActionsOrTouch(&work->list, asdTMTexTableEntryAt(SORT_MENU_TEXTURES, 72), &work->ids[3],
+                                         work->ids[2], work->ids[0], work->ids[1], &decide, 0, 1)) {
+            if (listCursorGetRowIfUnblocked(&work->list) != row) {
+                work->ascending = 1;
+            }
+            /* Both arms show the same help here (retail still loads the option); in IV, where the help lookup is
+               inlined, the two arms were compiled differently (smt4 sortMenuUpdate). */
+            if (work->option == 2) {
+                sortMenuShowCursorHelp(work);
+            } else {
+                sortMenuShowCursorHelp(work);
+            }
+        } else if (gridNavigationHandleConfirm(&work->list, 1)) {
+            work->ascending = 1;
+            if (work->option == 2) {
+                sortMenuShowCursorHelp(work);
+            } else {
+                sortMenuShowCursorHelp(work);
+            }
+        } else if (padQueryLogicalKey(0, 1) || decide) {
+            /* Decided: the preference takes the key and the order. */
+            work->decided = 1;
+            work->state = 3;
+            if (work->owner >= 0) {
+                SortPreference *preference = (SortPreference *)(saveGetUserSettingsBlock() + work->owner);
+                preference->key = sortMenuCursorKey(work);
+                preference->descending = !work->ascending;
+            }
+            eventQueueAddUniqueIfValid(0x100020E);
+        } else if (padQueryLogicalKey(1, 1)) {
+            sortMenuClose();
+            eventQueueAddUniqueIfValid(0x100020F);
+        }
+        break;
     }
-    temp_v8 = DAT_0057f280;
-    if (*(char *)(temp_v0 + 0x74e) != '\x02') {
-      *(unsigned char *)(DAT_0057f280 + 0x74c) = 0;
-      *(unsigned int *)(temp_v8 + 0x744) = 2;
-      if (*(char *)(temp_v8 + 0x74d) != '\0') {
-        *(unsigned char *)(temp_v8 + 0x74d) = 0;
-      }
-      else {
-        *(unsigned char *)(temp_v8 + 0x74d) = 1;
-      }
+    case 3:
+        sortMenuAdvanceFrame(work);
+        if (work->option != 2) {
+            sortMenuResume();
+        }
+        break;
     }
-  }
-  *(int *)(temp_v0 + 0x748) = *(int *)(temp_v0 + 0x748) + 1;
-  return 0;
+    work->frame++;
+    return 0;
 }
 
 } /* extern "C" */

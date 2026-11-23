@@ -3,7 +3,7 @@
 #include "net/ECardParameters.h"
 #include <string.h>
 
-extern "C" void rt_memcpy(void *, const void *, u32);
+extern "C" void __aeabi_memcpy(void *, const void *, u32);
 
 /* Copy the card-type code property, returning an empty fixed-size value if absent. */
 extern "C" void FUN_00429934(char *output, const ECardResponse *response)
@@ -13,5 +13,5 @@ extern "C" void FUN_00429934(char *output, const ECardResponse *response)
     if (source != NULL) {
         strncpy(value, source, sizeof(value));
     }
-    rt_memcpy(output, value, sizeof(value));
+    __aeabi_memcpy(output, value, sizeof(value));
 }

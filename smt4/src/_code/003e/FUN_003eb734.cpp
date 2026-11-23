@@ -1,4 +1,3 @@
-/* NON_MATCHING: native module constructors differ in lock-address and zero-store scheduling. */
 #include "nn/os/CriticalSection.h"
 
 struct ArchiveModuleState {

@@ -5,7 +5,7 @@
 extern "C" {
 
 int _ZN12OnlineResultC1ERKj(unsigned int, unsigned int *);
-int rt_memcpy(int, unsigned int, int);
+int __aeabi_memcpy(int, unsigned int, int);
 
 /* stack frame of param_5: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 } param_5_stack;
 
 /* Supplied declaration required: _ZN12OnlineResultC1ERKj. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_00103a74(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4,int param_5)
@@ -33,7 +33,7 @@ void FUN_00103a74(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     }
     else {
       temp_v1 = param_4;
-      rt_memcpy(param_2,param_4,param_5 * 2);
+      __aeabi_memcpy(param_2,param_4,param_5 * 2);
       *(unsigned short *)(param_2 + param_5 * 2) = 0;
       temp_v0 = 0x10001;
       puVar1 = &temp_v0;

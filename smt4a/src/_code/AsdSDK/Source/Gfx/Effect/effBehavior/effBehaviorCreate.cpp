@@ -7,7 +7,7 @@
 extern "C" {
 extern EffectBehaviorEntry g_effBehaviorTable[];
 void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 tag, u32 mode);
-void *rt_memcpy(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy(void *destination, const void *source, u32 size);
 
 /* Allocates one behavior, its value storage and two parameter copies, then resets the two positions. */
 EffectBehaviorBlock *effBehaviorCreate(s32 type, s32 count, const EffectBehaviorParameters *source)
@@ -33,8 +33,8 @@ EffectBehaviorBlock *effBehaviorCreate(s32 type, s32 count, const EffectBehavior
     behavior->state = 0;
     behavior->elapsed = 0.0f;
     behavior->owner = behavior;
-    rt_memcpy(parameters, source, parameterSize);
-    rt_memcpy(behavior->initialParameters, source, parameterSize);
+    __aeabi_memcpy(parameters, source, parameterSize);
+    __aeabi_memcpy(behavior->initialParameters, source, parameterSize);
     parameters = behavior->parameters;
     memset(&parameters->vectors[0], 0, sizeof(EffectBehaviorVector));
     parameters->vectors[0].w = 1.0f;

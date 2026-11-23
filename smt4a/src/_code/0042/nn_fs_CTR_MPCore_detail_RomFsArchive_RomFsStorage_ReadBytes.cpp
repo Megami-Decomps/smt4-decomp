@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int rt_memcpy(unsigned int, unsigned int);
+int __aeabi_memcpy(unsigned int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes
@@ -29,7 +29,7 @@ unsigned int nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_ReadBytes
   unsigned char temp_v4 [8];
   
   if (*param_1 != 0) {
-    rt_memcpy((unsigned int)param_2,*param_1 + param_4);
+    __aeabi_memcpy((unsigned int)param_2,*param_1 + param_4);
   }
   else {
     temp_v3 = param_1[2];

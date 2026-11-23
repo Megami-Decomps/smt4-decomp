@@ -15,7 +15,7 @@ extern const char DAT_005449b4[];
 
 void sysMemClear(void *block, s32 size);
 void *resourceResolveHeaderPointer(EffAsdLightDesc *desc);
-void rt_memcpy(void *dst, const void *src, s32 size);
+void __aeabi_memcpy(void *dst, const void *src, s32 size);
 void sceneTraverserVisit(s32 handle, u32 arg);
 
 extern s32 g_effAsdLightHandle;
@@ -37,7 +37,7 @@ EffAsdLight *effAsdLightCreateFromDesc(EffAsdLightDesc *desc)
     light->scale = 1.0f;
     if (desc != NULL) {
         light->kind = desc->kind;
-        rt_memcpy(light->params, resourceResolveHeaderPointer(desc), 0xb4);
+        __aeabi_memcpy(light->params, resourceResolveHeaderPointer(desc), 0xb4);
         if (g_effAsdLightHandle != 0) {
             sceneTraverserVisit(g_effAsdLightHandle, g_asdModelTransformBuilder);
         }

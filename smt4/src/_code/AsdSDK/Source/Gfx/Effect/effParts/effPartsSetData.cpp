@@ -18,7 +18,7 @@ typedef struct EffPartsData {
 
 void *memAlloc(int, int, int, int size, int align, int);
 void asdMemFree(void *block);
-void *rt_memcpy(void *dst, const void *src, int size);
+void *__aeabi_memcpy(void *dst, const void *src, int size);
 
 /* Replaces the part's data with a copy of `size` bytes from `src`. */
 void effPartsSetData(EffPartsData *part, const void *src, int size, u16 type)
@@ -38,7 +38,7 @@ void effPartsSetData(EffPartsData *part, const void *src, int size, u16 type)
         part->block = copy;
         part->data = copy;
         part->size = size;
-        rt_memcpy(copy, src, size);
+        __aeabi_memcpy(copy, src, size);
     }
 }
 

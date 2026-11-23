@@ -23,7 +23,7 @@ struct CardPanel {
 extern "C" {
 
 void efctSetSpeed(f32 speed);
-f32 FUN_001a1ee0(f32 angle);
+f32 phaseSine(f32 angle);
 void pairSetHalves(void* sprite, s16 first, s16 second);
 void effectRenderTransformedInstance(void* sprite, f32 offset);
 void uiStoreTextureEntryCenter(void* sprite, s32 a, s32 index);
@@ -57,7 +57,7 @@ void FUN_003b21a4(CardPanel* panel)
     s32 offsetY = 0;
     if (panel->mode == 7) {
         f32 angle = (f32)(10 - panel->slideStep) * 1.5707964f * 0.1f * 40.743664f;
-        f32 slide = (1.0f - FUN_001a1ee0(angle)) * 8.0f;
+        f32 slide = (1.0f - phaseSine(angle)) * 8.0f;
         slide = (panel->slideStep & 1) != 0 ? -slide : slide;
         if (((panel->slideStep / 4) & 1) != 0) {
             offsetY = (s32)slide;

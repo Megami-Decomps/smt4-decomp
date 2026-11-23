@@ -5,7 +5,7 @@
 extern "C" {
 
 
-void FUN_0026493c(LmapMainState *main);
+void lmapMainUpdateState(LmapMainState *main);
 void FUN_00265180(void);
 void mapUpdateFollowerModels(LmapMainState *main);
 void FUN_00265f50(LmapMainState *main);
@@ -21,7 +21,7 @@ void lmapMainStep(void)
         if (main->external != 0) {
             lmapRaiseSceneTransition();
         } else {
-            FUN_0026493c(main);
+            lmapMainUpdateState(main);
         }
     }
     FUN_00265f50(main);

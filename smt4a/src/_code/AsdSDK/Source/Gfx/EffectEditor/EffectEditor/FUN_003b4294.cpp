@@ -4,7 +4,7 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int phaseCosine(void);
 int gfxQuaternionWorkspaceBuildMatrix(void);
 int matrixGetTranslation(float *);
@@ -89,7 +89,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 extern int effGetFrameStep(void);
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
@@ -237,10 +237,10 @@ void FUN_003b4294(fn_003b4294_arg0 *param_1)
               shiftRandomNextFraction(0);
               temp_v22 = (temp_v8 * 0.9f + 0.100000024f) * temp_v10;
               temp_v8 = temp_v14 * temp_v21;
-              FUN_001a1ee0();
+              phaseSine();
               temp_v16 = CONCAT44(temp_v14 + temp_v37,temp_v8 * temp_v22);
               temp_v8 = (temp_v14 + temp_v37) * temp_v21;
-              FUN_001a1ee0();
+              phaseSine();
               temp_v18 = (unsigned long long)(unsigned int)(temp_v8 * temp_v22);
               temp_v14 = temp_v8 * temp_v22 - (float)temp_v16;
               temp_v14 = temp_v14 / romwright_sqrt_4(temp_v14 * temp_v14 + temp_v17 * temp_v17);
@@ -353,7 +353,7 @@ void FUN_003b4294(fn_003b4294_arg0 *param_1)
                   }
                   temp_v41 = (float)((unsigned long long)temp_v15 >> 0x20);
                   temp_v8 = temp_v41 * temp_v21;
-                  FUN_001a1ee0();
+                  phaseSine();
                   temp_v8 = temp_v8 * temp_v22;
                   temp_v12 = temp_v8 - temp_v12;
                   temp_v14 = romwright_sqrt_4(temp_v12 * temp_v12 + temp_v17 * temp_v17);
@@ -384,7 +384,7 @@ void FUN_003b4294(fn_003b4294_arg0 *param_1)
                        temp_v12 * (float)puVar10[0x53] + temp_v9 * (float)puVar10[0x57] +
                        temp_v11 * (float)puVar10[0x5b];
                   temp_v12 = temp_v41;
-                  FUN_001a1ee0();
+                  phaseSine();
                   phaseCosine();
                   temp_v24 = temp_v24 + temp_v25;
                   temp_v18 = (unsigned long long)(unsigned int)temp_v8;

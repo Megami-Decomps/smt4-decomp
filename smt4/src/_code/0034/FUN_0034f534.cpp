@@ -8,7 +8,7 @@ extern "C" {
 u64 resourceGetWideHandle(s32 index);
 u64 __aeabi_llsl(u64 value, u32 shift);
 u32 deferredTransferEnqueue(u32 index, void *data, u32 size);
-void rt_memcpy(void *destination, const void *source, u32 size);
+void __aeabi_memcpy(void *destination, const void *source, u32 size); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Returns where `size` bytes fit in the stream's ring buffer, wrapping to its start when the tail is
  * too short, or NULL when the unconsumed data leaves no room. */
@@ -44,7 +44,7 @@ u8 FUN_0034f534(Obj557f00 *stream, void *source, u32 size)
     u8 *destination = streamReserve(stream, size);
     if (destination == NULL)
         return 0;
-    rt_memcpy(destination, source, size);
+    __aeabi_memcpy(destination, source, size);
     return streamCommit(stream, destination, size);
 }
 }

@@ -5,13 +5,13 @@
 extern "C" {
 
 int __ARM_common_memcpy4_6(unsigned char *, int);
-int rt_memcpy(unsigned char *, int, int);
+int __aeabi_memcpy(unsigned char *, int, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Supplied declaration required: __ARM_common_memcpy4_6. */
 extern int offsetRefResolveCAlt(int);
 extern unsigned int offsetRefAddAtBase4(int, int);
 extern int nw_snd_internal_WaveFile_InfoBlockBody_GetChannelInfo(int, int);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int nw_snd_internal_WaveFileReader_ReadWaveInfo(int *param_1,unsigned char *param_2)
@@ -40,7 +40,7 @@ unsigned int nw_snd_internal_WaveFileReader_ReadWaveInfo(int *param_1,unsigned c
       temp_v1 = nw_snd_internal_WaveFile_InfoBlockBody_GetChannelInfo(*param_1,temp_v4);
       if (*(int *)(temp_v1 + 0xc) != 0) {
         temp_v2 = offsetRefResolveCAlt(temp_v1);
-        rt_memcpy(param_2 + temp_v4 * 0x30 + 0x18,temp_v2,0x26);
+        __aeabi_memcpy(param_2 + temp_v4 * 0x30 + 0x18,temp_v2,0x26);
         __ARM_common_memcpy4_6(param_2 + temp_v4 * 0x30 + 0x3e,temp_v2 + 0x26);
       }
       temp_v3 = offsetRefAddAtBase4(temp_v1,param_1[1]);

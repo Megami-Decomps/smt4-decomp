@@ -4,6 +4,7 @@
 #include "shard/Shard004A.h"
 #include "code/Code002a.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "code/Code0031_Smt4a.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ void FUN_0049368c(void *panel, s32 id, s32 a, s32 b, s32 slide, s32 c);
 u32 dataLookupDisplayName(u8 *out, u32 id);
 s32 textMeasureOnLayer(const char *text, s32 mode);
 void drawTextAtSnappedRectangle(void *panel, f32 x, f32 y, s32 a, s32 b, const char *text, f32 scale, f32 c, f32 d);
-s32 FUN_0031d174(void *list);
 void bibleAnalyzeDrawRow(Screen4A *screen, s32 index, s32 selected, s32 id);
 void owner4ASetSizeAndCall(Screen4A *screen, s32 step);
 

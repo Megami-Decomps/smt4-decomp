@@ -11,7 +11,7 @@ int renderCtxCalculateStereoParallax(...);
 int camSetMatrixA(...);
 int FUN_0019ac70(...);
 int FUN_0019f678(...);
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int phaseCosine(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -57,7 +57,7 @@ extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
 /* Supplied declaration required: camSetMatrixA. */
 /* Supplied declaration required: FUN_0019ac70. */
 /* Supplied declaration required: FUN_0019f678. */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 /* Supplied declaration required: phaseCosine. */
 extern int __cxa_guard_acquire(unsigned int *);
 
@@ -351,7 +351,7 @@ unsigned int FUN_0019b770(unsigned short *param_1,unsigned int *param_2,int para
       VectorSignedToFloat((int)temp_v16,(unsigned char)(temp_v6 >> 0x16) & 3);
     }
     if (!romwright_subpiece_4_1_0(temp_v6 >> 0x1e,0)) {
-      FUN_001a1ee0();
+      phaseSine();
       phaseCosine();
     }
   }

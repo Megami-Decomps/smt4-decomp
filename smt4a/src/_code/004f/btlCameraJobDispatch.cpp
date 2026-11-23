@@ -24,7 +24,7 @@ int words5Clear(...);
 int cameraAnimationSampleAndAdvance(...);
 int FUN_004f112c(...);
 
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int FUN_001aff14(...);
 int eventCommandGetPendingCleanup(void);
 int pairSourceGet(...);
@@ -128,7 +128,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: cameraMatrixCacheSetLookAt. */
 extern unsigned int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: mathSinCos. */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 /* Supplied declaration required: FUN_001aff14. */
 /* Supplied declaration required: eventCommandGetPendingCleanup. */
 extern float *FUN_00208bfc(void);
@@ -313,7 +313,7 @@ unsigned int btlCameraJobDispatch(float *param_1)
     if (((unsigned int)param_1[0x193] & 0x20) != 0) {
       temp_v2 = (float)VectorSignedToFloat(param_1[0x1c0],(unsigned char)(in_fpscr >> 0x16) & 3);
       in_s0 = temp_v2 * g_btlCameraDebugUpDown * 40.743664f;
-      FUN_001a1ee0();
+      phaseSine();
       in_s0 = in_s0 * g_btlCameraDebugOffset;
       param_1[0x1be] = in_s0;
       param_1[0x1c0] = (float)((int)param_1[0x1c0] + 1);

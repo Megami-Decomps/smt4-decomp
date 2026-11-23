@@ -1,10 +1,9 @@
-/* NON_MATCHING: Retail ldrh r1, [r1, #44] differs from recovered ldrh r2, [r1, #44]. */
 #include "common.h"
 #include "gamedata/HowToTable.h"
 
 extern "C" {
 
-// qsort comparison of two how-to row indices by their list order, treating zero or out-of-range indices as 99.
+/* qsort comparison of two how-to row indices by their list order, treating zero or out-of-range indices as 99. */
 s32 FUN_0049ebf0(const u16* leftIndex, const u16* rightIndex)
 {
     void *table = dataTableGet(0x46, 0);
@@ -14,13 +13,18 @@ s32 FUN_0049ebf0(const u16* leftIndex, const u16* rightIndex)
     }
 
     s32 count = dataTableGetCount(table);
-    s32 left = *leftIndex;
-    s32 leftValue = (count <= left || left == 0)
-        ? 99 : entries[left].order;
-
-    s32 right = *rightIndex;
-    s32 rightValue = (right >= count || right == 0)
-        ? 99 : entries[right].order;
+    s32 leftValue;
+    if (*leftIndex >= count || *leftIndex == 0) {
+        leftValue = 99;
+    } else {
+        leftValue = entries[*leftIndex].order;
+    }
+    s32 rightValue;
+    if (*rightIndex >= count || *rightIndex == 0) {
+        rightValue = 99;
+    } else {
+        rightValue = entries[*rightIndex].order;
+    }
 
     return leftValue - rightValue;
 }

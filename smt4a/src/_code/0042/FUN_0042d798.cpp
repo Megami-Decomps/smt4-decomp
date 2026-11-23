@@ -39,7 +39,7 @@ extern CecModuleFlags g_asdCecModuleFlags;
 extern CriticalSection g_asdCecMessageBoxCriticalSection, DAT_006426cc;
 u32 handlerRefForward(u32 size, u32 alignment);
 void FUN_00430e58(u32 buffer);
-void rt_memcpy(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy(void *destination, const void *source, u32 bytes);
 
 /* Reads the inbox (kind 0) or outbox (kind 1) index of an open message box into `header`, keeping
    the raw buffer allocated and listing each message record's address in `entries`. */
@@ -128,7 +128,7 @@ s32 FUN_0042d798(MessageBox *box, CecMessageIndexHeader *header, const void **en
                 buffer = view->inboxBuffer;
             }
             if (nnResultIsSuccess(status) && indexSize != 0) {
-                if (indexSize < 32 || (rt_memcpy(header, reinterpret_cast<void *>(buffer), 32), header->size != indexSize) ||
+                if (indexSize < 32 || (__aeabi_memcpy(header, reinterpret_cast<void *>(buffer), 32), header->size != indexSize) ||
                     indexSize < header->count * 0x70 + 32U) {
                     nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
                     return CEC_ERROR_BAD_INDEX;
@@ -136,7 +136,7 @@ s32 FUN_0042d798(MessageBox *box, CecMessageIndexHeader *header, const void **en
                 u32 record = buffer + 32;
                 for (u32 i = 0; i < header->count; i++) {
                     CecMessageRecord copy;
-                    rt_memcpy(&copy, reinterpret_cast<void *>(record), 0x70);
+                    __aeabi_memcpy(&copy, reinterpret_cast<void *>(record), 0x70);
                     if (copy.signature != 0x6060 || copy.boxId != box->id) {
                         nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
                         return CEC_ERROR_BAD_INDEX;

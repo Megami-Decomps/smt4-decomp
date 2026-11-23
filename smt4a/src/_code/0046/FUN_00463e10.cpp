@@ -10,7 +10,7 @@ int FUN_004638ac(int, int, int *);
 int FUN_004639e4(int);
 int __aeabi_uidivmod(unsigned int, unsigned int);
 int nw_snd_internal_driver_Voice_CalcOffsetAdpcmParam(unsigned short *, unsigned int, unsigned int, unsigned char *);
-int rt_memcpy(int, unsigned char *, int);
+int __aeabi_memcpy(int, unsigned char *, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_6: 18 slot(s), 72 byte(s) */
@@ -45,7 +45,7 @@ extern int FUN_004616ac(int, unsigned short *, int *, unsigned int, unsigned int
 /* Supplied declaration required: __aeabi_uidivmod. */
 extern int nw_snd_internal_Util_GetByteBySample(unsigned int, unsigned char);
 /* Supplied declaration required: nw_snd_internal_driver_Voice_CalcOffsetAdpcmParam. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int
@@ -189,7 +189,7 @@ FUN_00463e10(int param_1,int param_2,int param_3,unsigned int param_4,int param_
           do {
             pbVar13 = &DAT_00647d80 + temp_v10 * temp_v6;
             temp_v7 = *(int *)(temp_v19 + temp_v8 * 4) + temp_v24;
-            rt_memcpy(temp_v7,pbVar13 + temp_v1,temp_v0);
+            __aeabi_memcpy(temp_v7,pbVar13 + temp_v1,temp_v0);
             FUN_001bd53c(temp_v7,temp_v0);
             temp_v7 = temp_v23;
             if (temp_v25 != 0) {

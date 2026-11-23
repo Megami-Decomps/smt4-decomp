@@ -47,7 +47,7 @@ void sysMemClear(void *, u32);
 void FUN_00412b3c(PrimitiveSource *, PrimitiveBatchWork *);
 void vertexAttributeUploadStreams(PrimitiveSource *, PrimitiveBatchWork *);
 void *asdPrimAlloc(u32 size);
-void rt_memcpy(void *destination, const void *source, u32 size);
+void __aeabi_memcpy(void *destination, const void *source, u32 size);
 void FUN_00412678(PrimitiveSource *, PrimitiveBatchWork *, PrimitiveIndices *);
 
 // Build a temporary primitive batch, copying indices when the source is not directly usable.
@@ -77,7 +77,7 @@ void primitiveSourceBuildBatch(PrimitiveSource *source)
             vertexAttributeUploadStreams(source, &work);
             u32 count = source->indexCount;
             void *copy = asdPrimAlloc(count * sizeof(u16));
-            rt_memcpy(copy, source->indices, count * sizeof(u16));
+            __aeabi_memcpy(copy, source->indices, count * sizeof(u16));
             indices.address = asdGxGetPhysicalAddress(reinterpret_cast<u32>(copy));
             indices.count = count;
         }

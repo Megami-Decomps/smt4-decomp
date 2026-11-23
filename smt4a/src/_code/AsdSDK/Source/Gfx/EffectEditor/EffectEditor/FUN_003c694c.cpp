@@ -30,7 +30,7 @@ void FUN_002f8b30(void);                                           /* normalizes
 void matrixCopySelectedToGlobal(const PolyVec4 *axis, f32 angle); /* rotation matrix about an axis */
 f32 shiftRandomNextFraction(ShiftRandomState *state); // declcheck: local (the shared headers change this function's code (2224 -> 2359 diff lines))
 u32 randomAdvanceShiftRegister(ShiftRandomState *state); // declcheck: local (the shared headers change this function's code (2224 -> 2359 diff lines))
-f32 FUN_001a1ee0(f32 angle);
+f32 phaseSine(f32 angle);
 
 /* quaternion = (0, 0, 0, 1) (as effPolyThunderCreate writes it) */
 static void quaternionSetIdentity(PolyVec4 *quaternion)
@@ -204,13 +204,13 @@ void FUN_003c694c(PolyThunderObject *obj)
 
             f32 phase = shiftRandomNextFraction(NULL) * 6.2831855f;
             f32 wave = phase - 6.2831855f;
-            f32 offset = FUN_001a1ee0(phase * 40.743664f) * swing;
+            f32 offset = phaseSine(phase * 40.743664f) * swing;
             *VEC1 = side;
             vectorScale(VEC1, offset);
             PolyVec4 point = *VEC1;
 
             f32 previous = offset;
-            offset = FUN_001a1ee0(phase * 40.743664f) * swing;
+            offset = phaseSine(phase * 40.743664f) * swing;
             *VEC1 = axis;
             vectorScale(VEC1, step);
             *VEC3 = *VEC1;
@@ -243,7 +243,7 @@ void FUN_003c694c(PolyThunderObject *obj)
                     swing = amplitude * (1.0f - shiftRandomNextFraction(NULL) * 0.95f);
                 }
                 previous = offset;
-                offset = FUN_001a1ee0(phase * 40.743664f) * swing;
+                offset = phaseSine(phase * 40.743664f) * swing;
                 *VEC1 = axis;
                 vectorScale(VEC1, step);
                 *VEC3 = *VEC1;

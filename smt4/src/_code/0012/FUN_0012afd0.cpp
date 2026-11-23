@@ -21,7 +21,7 @@ extern unsigned int DAT_004efd98; /* 0x4efd98 */
 
 extern int __cxa_guard_acquire(unsigned int *);
 extern unsigned int libc_strlen(int);
-extern int rt_memcpy(int, int, unsigned int);
+extern int __aeabi_memcpy(int, int, unsigned int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 
 unsigned int * FUN_0012afd0(int *param_1,int param_2)
@@ -63,7 +63,7 @@ unsigned int * FUN_0012afd0(int *param_1,int param_2)
       temp_v8 = temp_v5;
     }
     temp_v7 = (**(romwright_code **)(*param_1 + 8))(param_1,temp_v8 + 1,4);
-    temp_v6 = rt_memcpy(temp_v7,param_2,temp_v8);
+    temp_v6 = __aeabi_memcpy(temp_v7,param_2,temp_v8);
     if (temp_v7 != 0) {
       temp_v6 = temp_v7 - (int)piVar11;
     }

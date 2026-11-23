@@ -28,7 +28,7 @@ s32 FUN_00126d1c(OnlineCompressionStreamPrefix *, s32);
 s32 rangeObjRemaining(RangeObject *);
 void FUN_002fa010(RangeObject *, u32);
 u8 *onlineBufferGetData(RangeObject *);
-void rt_memcpy(void *, const void *, u32);
+void __aeabi_memcpy(void *, const void *, u32);
 /* The length of a range object's payload (a one-instruction getter the linker inlines). */
 u32 objectGetLengthField(const RangeObject *);
 /* A one-instruction setter of the range object's payload length (the linker inlines it). */
@@ -59,7 +59,7 @@ u32 FUN_004327f8(OnlineCompressionOwner *owner, RangeObject *input, RangeObject 
         *destination++ = 0;
         u32 length = objectGetLengthField(input);
         u8 *source = onlineBufferGetData(input);
-        rt_memcpy(destination, source, length);
+        __aeabi_memcpy(destination, source, length);
     }
     return 0;
 }

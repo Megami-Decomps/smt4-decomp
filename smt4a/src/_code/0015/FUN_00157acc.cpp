@@ -30,7 +30,7 @@ static void shaderStageReset(ShaderStageState *stage, s32 mode)
 }
 
 /* Reset the five shader stage states of the owner of the given shader. */
-void FUN_00157acc(ShaderOwner *owner)
+ShaderOwner *FUN_00157acc(ShaderOwner *owner)
 {
     ShaderOwner *base = (ShaderOwner *)((u8 *)FUN_0016df14(owner->shader) - offsetof(ShaderOwner, shader));
 
@@ -39,6 +39,7 @@ void FUN_00157acc(ShaderOwner *owner)
     shaderStageReset(&base->stages[2], 1);
     shaderStageReset(&base->stages[3], 2);
     shaderStageReset(&base->stages[4], 2);
+    return base;
 }
 
 } /* extern "C" */

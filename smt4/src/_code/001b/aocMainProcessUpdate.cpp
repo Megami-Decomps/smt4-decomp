@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the readyToRelease store is scheduled before the resource load (retail: pending store, resource load, readyToRelease store, compare). */
 #include "addon/SceneResource.h"
 #include "ui/SceneWindowWork.h"
 #include "classes/AocMenu.h"
@@ -14,13 +13,12 @@ void FUN_00296fec();
 void aocMenuUpdate(SceneResource *);
 void titleSetSlotValueState2(u32, u32);
 void soundChannelStopAll(u32);
-void aocMainShutdown();
-void *_ZN7AocMenuD1Ev(SceneResource *);
 void buttonHelpRelease();
 void buttonHelpTexturesUnref();
 void uiFadeRelease();
 
-u32 FUN_001b4fe8()
+/* Opens the AOC menu (state 0), waits until it is up (1), then closes it (2); returns -1 once done (3). */
+u32 aocMainProcessUpdate()
 {
     SceneResourceWork *work = g_sceneResourceWork;
     switch (work->state.pending) {
@@ -52,14 +50,7 @@ u32 FUN_001b4fe8()
             asdSequenceRequest(1, &argument, sizeof(argument));
         }
         work->state.pending = 3;
-        work->readyToRelease = 1;
-        if (SceneResource *resource = work->resource) {
-            aocMainShutdown();
-            if (work->resource) {
-                asdMemFreeNonNull(_ZN7AocMenuD1Ev(work->resource));
-                work->resource = NULL;
-            }
-        }
+        sceneResourceRelease(work);
         buttonHelpRelease();
         buttonHelpTexturesUnref();
         uiFadeRelease();

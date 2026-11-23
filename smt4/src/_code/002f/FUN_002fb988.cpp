@@ -5,6 +5,8 @@
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "game/GameState.h"
 
+struct LmapMainState;
+
 extern "C" {
 
 
@@ -67,9 +69,10 @@ extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: fieldWalkRecoverMp. */
 
 
-void FUN_002fb988(int param_1)
+void FUN_002fb988(LmapMainState *state)
 
 {
+  int param_1 = reinterpret_cast<int>(state);
 /* irregular: irregular input(s): in_fpscr; 17 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;

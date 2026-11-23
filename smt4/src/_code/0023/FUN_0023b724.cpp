@@ -18,7 +18,7 @@ struct IndexedModelCommands {
 };
 extern "C" {
 void *asdPrimAlloc(u32);
-void rt_memcpy(void *, const void *, u32);
+void __aeabi_memcpy(void *, const void *, u32); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void modelShaderSubmitCommands(IndexedModelCommands *, u32 *, const ModelIndexDraw *);
 }
 
@@ -35,7 +35,7 @@ extern "C" void FUN_0023b724(IndexedModelCommands *model, u32 unused, s32 first,
     }
     ModelIndexDraw *draw = &model->indexDraw;
     void *indices = asdPrimAlloc(count * sizeof(u16));
-    rt_memcpy(indices, model->indices + first, count * sizeof(u16));
+    __aeabi_memcpy(indices, model->indices + first, count * sizeof(u16));
     draw->physicalAddress = osVirtToPhysAddress(reinterpret_cast<u32>(indices));
     draw->count = count;
     draw->wideIndices = 0;

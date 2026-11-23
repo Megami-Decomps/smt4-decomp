@@ -13,7 +13,7 @@ typedef struct ByteRing002fbfe8 {
     /* 0x1c */ u32 capacity;
 } ByteRing002fbfe8;
 
-void rt_memcpy(void *dst, const void *src, u32 size);
+void __aeabi_memcpy(void *dst, const void *src, u32 size);
 
 /* Appends size bytes at the ring's head, wrapping to the start when the end of the buffer is reached. */
 void byteRingWrite(ByteRing002fbfe8 *ring, const u8 *src, u32 size)
@@ -23,17 +23,17 @@ void byteRingWrite(ByteRing002fbfe8 *ring, const u8 *src, u32 size)
     u32 rest;
 
     if (room > size) {
-        rt_memcpy(dst, src, size);
+        __aeabi_memcpy(dst, src, size);
         ring->head = ring->head + size;
         ring->count = ring->count + size;
         return;
     } else {
-        rt_memcpy(dst, src, room);
+        __aeabi_memcpy(dst, src, room);
         ring->count = ring->count + room;
         ring->head = (ring->head + room) % ring->capacity;
         rest = size - room;
         if (rest != 0) {
-            rt_memcpy(ring->data, src + room, rest);
+            __aeabi_memcpy(ring->data, src + room, rest);
             ring->head = rest;
             ring->count = ring->count + rest;
         }

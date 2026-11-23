@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00238aac(int *, int);
 int FUN_0035c0e8(void);
-int rt_memcpy(int, unsigned int, unsigned int);
+int __aeabi_memcpy(int, unsigned int, unsigned int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern int rt_memcmp(int, unsigned int, unsigned int);
 extern int FUN_0035c050(int *, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0035c0e8. */
 extern int FUN_0035e090(unsigned int *, int **);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_0035d7e8(unsigned int *param_1,unsigned int *param_2,unsigned int param_3,int *param_4)
@@ -63,7 +63,7 @@ void FUN_0035d7e8(unsigned int *param_1,unsigned int *param_2,unsigned int param
   piVar3 = temp_v1;
   if ((temp_v1 != (int *)0x0) &&
      (temp_v0 = FUN_0035c050(temp_v1 + 2,*param_2,param_2[4],0), temp_v0 != 0)) {
-    rt_memcpy(piVar3[9],param_3,param_2[4]);
+    __aeabi_memcpy(piVar3[9],param_3,param_2[4]);
     temp_v1 = piVar3;
     temp_v0 = FUN_0035e090(param_2,&temp_v1);
     if (temp_v0 != 0) {

@@ -5,13 +5,13 @@
 extern "C" {
 
 int __ARM_common_memcpy4_6(unsigned char *, int);
-int rt_memcpy(unsigned char *, int, int);
+int __aeabi_memcpy(unsigned char *, int, int);
 
 /* Supplied declaration required: __ARM_common_memcpy4_6. */
 extern int getSectionAtC_af5c(int);
 extern unsigned int getSectionPlusOffset(int, int);
 extern int getTableSectionByIndex(int, int);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int FUN_005081b8(int *param_1,unsigned char *param_2)
@@ -51,7 +51,7 @@ unsigned int FUN_005081b8(int *param_1,unsigned char *param_2)
         temp_v2 = getTableSectionByIndex(param_1[1],temp_v4);
         if (*(int *)(temp_v2 + 0xc) != 0) {
           temp_v3 = getSectionAtC_af5c(temp_v2);
-          rt_memcpy(param_2 + temp_v4 * 0x30 + 0x1c,temp_v3,0x26);
+          __aeabi_memcpy(param_2 + temp_v4 * 0x30 + 0x1c,temp_v3,0x26);
           __ARM_common_memcpy4_6(param_2 + temp_v4 * 0x30 + 0x42,temp_v3 + 0x26);
         }
         temp_v1 = getSectionPlusOffset(temp_v2,param_1[2]);

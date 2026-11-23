@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int rt_memcpy(byte *, unsigned int, int);
+int __aeabi_memcpy(byte *, unsigned int, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 typedef struct fn_003ea320_arg0 fn_003ea320_arg0;
 struct fn_003ea320_arg0 {
@@ -36,7 +36,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned int containerGrowCapacity(unsigned int, unsigned int);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 /* WARNING: Removing unreachable block (ram,0x003ea4d0) */
@@ -279,7 +279,7 @@ LAB_003ea820:
     if (temp_v5 <= temp_v0) {
       temp_v0 = temp_v0 - temp_v5;
     }
-    rt_memcpy(param_1->field_0x60,param_1->field_0x8 + temp_v0,temp_v3);
+    __aeabi_memcpy(param_1->field_0x60,param_1->field_0x8 + temp_v0,temp_v3);
     temp_v0 = param_1->field_0x40;
     if (param_1->field_0x3c <= temp_v0) {
       temp_v0 = temp_v0 - param_1->field_0x3c;
@@ -288,7 +288,7 @@ LAB_003ea820:
     if (param_1->field_0x10 <= temp_v5) {
       temp_v5 = temp_v5 - param_1->field_0x10;
     }
-    rt_memcpy(param_1->field_0x60 + temp_v3,param_1->field_0x8 + temp_v5,
+    __aeabi_memcpy(param_1->field_0x60 + temp_v3,param_1->field_0x8 + temp_v5,
               *(int *)(*(int *)(param_1->field_0x34 + temp_v0 * 0x10 + 4) + 8) - temp_v3);
     *param_2 = (int)param_1->field_0x60;
   }

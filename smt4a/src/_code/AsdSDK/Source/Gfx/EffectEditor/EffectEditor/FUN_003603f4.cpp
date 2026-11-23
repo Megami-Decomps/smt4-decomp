@@ -4,7 +4,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int effGetFrameStep(void);
 int phaseCosine(void);
 int gfxQuaternionWorkspaceBuildMatrix(void);
@@ -89,7 +89,7 @@ static float romwright_sqrt_4(float value)
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 /* Supplied declaration required: effGetFrameStep. */
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
@@ -312,7 +312,7 @@ void FUN_003603f4(int param_1)
             phaseCosine();
             pfVar6[9] = temp_v2 * *(float *)(temp_v6 + 0x11c);
             pfVar6[10] = -*(float *)(temp_v6 + 0x120);
-            FUN_001a1ee0();
+            phaseSine();
             temp_v23 = temp_v23 * *(float *)(temp_v6 + 0x11c);
             pfVar6[0xb] = temp_v23;
             temp_v15 = *(float *)(temp_v6 + 0x108) + pfVar6[9];

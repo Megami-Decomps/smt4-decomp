@@ -11,7 +11,7 @@ int nw_gfx_SceneBuilder_CreateObject(...);
 int nw_gfx_SceneHelper_ResolveReferenceImpl(int, int);
 int nw_gfx_SceneNode_IsCircularReference(void);
 int nw_gfx_res_ResGraphicsFile_Setup(int *, unsigned int, int);
-int rt_memcpy(short *, int, int);
+int __aeabi_memcpy(short *, int, int);
 
 typedef struct fn_0021f6e4_arg1 fn_0021f6e4_arg1;
 struct fn_0021f6e4_arg1 {
@@ -68,7 +68,7 @@ extern short libc_strlen(int);
 /* Supplied declaration required: nw_gfx_SceneHelper_ResolveReferenceImpl. */
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Setup. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_0021f6e4(int *param_1,fn_0021f6e4_arg1 *param_2)
@@ -238,7 +238,7 @@ LAB_0021f8dc:
         else {
           temp_v6 = 0;
         }
-        rt_memcpy(psVar22 + temp_v2 * 0x26 + 2,temp_v6,(int)temp_v1);
+        __aeabi_memcpy(psVar22 + temp_v2 * 0x26 + 2,temp_v6,(int)temp_v1);
         *psVar22 = temp_v2 + 1;
       }
       else if ((piVar19 != (int *)0x0) &&
@@ -276,7 +276,7 @@ LAB_0021f9a8:
         else {
           temp_v6 = 0;
         }
-        rt_memcpy(temp_v29 + temp_v1 * 0x26 + 2,temp_v6,(int)temp_v2);
+        __aeabi_memcpy(temp_v29 + temp_v1 * 0x26 + 2,temp_v6,(int)temp_v2);
         *temp_v29 = temp_v1 + 1;
       }
       else if ((piVar19 != (int *)0x0) &&
@@ -314,7 +314,7 @@ LAB_0021fa84:
         else {
           temp_v6 = 0;
         }
-        rt_memcpy(temp_v28 + temp_v1 * 0x26 + 2,temp_v6,(int)temp_v2);
+        __aeabi_memcpy(temp_v28 + temp_v1 * 0x26 + 2,temp_v6,(int)temp_v2);
         psVar15 = temp_v28;
         *psVar15 = temp_v1 + 1;
       }
@@ -353,7 +353,7 @@ LAB_0021fb58:
         else {
           temp_v6 = 0;
         }
-        rt_memcpy(temp_v27 + temp_v1 * 0x26 + 2,temp_v6,(int)temp_v2);
+        __aeabi_memcpy(temp_v27 + temp_v1 * 0x26 + 2,temp_v6,(int)temp_v2);
         psVar15 = temp_v27;
         *psVar15 = temp_v1 + 1;
       }

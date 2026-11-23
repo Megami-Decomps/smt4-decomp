@@ -11,13 +11,13 @@ typedef struct {
 
 extern u8 DAT_005584d0;
 
-void *rt_memcpy(void *dst, const void *src, u32 size);
+void *__aeabi_memcpy(void *dst, const void *src, u32 size);
 
 PayloadObject *_ZN9Obj5584c8C1ERKS_(PayloadObject *self, const PayloadObject *other)
 {
     self->vtbl = &DAT_005584d0;
     self->id = other->id;
-    rt_memcpy(self->payload, other->payload, sizeof(self->payload));
+    __aeabi_memcpy(self->payload, other->payload, sizeof(self->payload));
     return self;
 }
 

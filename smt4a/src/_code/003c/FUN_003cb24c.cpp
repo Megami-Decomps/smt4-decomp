@@ -63,7 +63,7 @@ typedef struct StripParams {
     /* 0x90 */ f32 width;
 } StripParams;
 
-void *rt_memcpy(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy(void *destination, const void *source, u32 size);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 /* Builds the vertex strip of a ribbon effect: the first ring gets white colors fading in and out
@@ -115,7 +115,7 @@ void FUN_003cb24c(StripHost *host, StripParams *params)
         offsets++;
     }
     for (u32 ring = 1; ring < rings; ring++) {
-        rt_memcpy(colors, firstColors, vertices * sizeof(StripVertexColors));
+        __aeabi_memcpy(colors, firstColors, vertices * sizeof(StripVertexColors));
         colors += vertices;
         __aeabi_memcpy4(offsets, firstOffsets, vertices * sizeof(StripVertexOffsets));
         offsets += vertices;

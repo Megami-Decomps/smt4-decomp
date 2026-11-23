@@ -8,7 +8,7 @@ int FUN_001d0984(unsigned int, int, unsigned char [32]);
 int nw_snd_internal_driver_Voice_AppendWaveBuffer(...);
 int nw_snd_internal_driver_Voice_CalcOffsetAdpcmParam(unsigned short *, unsigned char [32], unsigned int, unsigned short *);
 int nw_snd_internal_driver_Voice_FrameToByte(unsigned int, int);
-int rt_memcpy(unsigned char [32], char *, int);
+int __aeabi_memcpy(unsigned char [32], char *, int);
 
 /* stack frame of param_3: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern void nn_snd_CTR_InitializeWaveBuffer(unsigned int);
 /* Supplied declaration required: nw_snd_internal_driver_Voice_AppendWaveBuffer. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_CalcOffsetAdpcmParam. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_FrameToByte. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void sndChannelQueueWaveBuffer(int param_1,char *param_2,unsigned int param_3)
@@ -66,7 +66,7 @@ void sndChannelQueueWaveBuffer(int param_1,char *param_2,unsigned int param_3)
       temp_v1 = param_1 + temp_v3 * 6;
       puVar7 = (unsigned short *)(temp_v1 + 0x60);
       if (*param_2 == '\x03') {
-        rt_memcpy(temp_v5,param_2 + temp_v3 * 0x30 + 0x1c,0x20);
+        __aeabi_memcpy(temp_v5,param_2 + temp_v3 * 0x30 + 0x1c,0x20);
         if (param_3 != 0) {
           *puVar7 = *temp_v4;
           *(unsigned short *)(temp_v1 + 0x62) = *(unsigned short *)(param_2 + temp_v3 * 0x30 + 0x3e);

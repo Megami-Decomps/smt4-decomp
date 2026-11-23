@@ -13,7 +13,7 @@ s32 FUN_0035f9e8(void *output)
     s32 result = nn::svc::SendSyncRequest(g_nimAocSession);
     if ((s32)(result & 0x80000000) >= 0) {
         u32 *source = &command->words[1];
-        rt_memcpy(output, source, 0x40);
+        __aeabi_memcpy(output, source, 0x40);
         result = command->words[0];
     }
     return result;

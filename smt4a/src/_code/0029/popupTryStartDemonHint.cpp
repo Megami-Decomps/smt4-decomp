@@ -46,7 +46,7 @@ s32 gameFlagIsSet(s32 flag);
 s32 randRange(u32 maximum);
 HintCandidates *dataTable02GetRecordWithAocPackage(u32 owner);
 const char *popupSelectWeightedMessage(s32 kind, u32 id);
-void rt_memcpy(void *destination, const void *source, u32 size);
+void __aeabi_memcpy(void *destination, const void *source, u32 size);
 const char *dataTable01GetRecordWithAocOverride(u32 id);
 
 /* Picks a hint popup for one of `owner`'s candidate demons (in the player's level window, not yet registered
@@ -115,7 +115,7 @@ void popupTryStartDemonHint(u32 owner)
         popup->message = message;
         popup->speakerId = slot->id;
         char format[0x48];
-        rt_memcpy(format, message, sizeof(format));
+        __aeabi_memcpy(format, message, sizeof(format));
         sprintf(g_popupState->text, format, dataTable01GetRecordWithAocOverride((u16)chosen));
 
         /* Put the demon first in the recent list unless it is already there. */

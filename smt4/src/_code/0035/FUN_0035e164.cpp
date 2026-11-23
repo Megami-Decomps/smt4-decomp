@@ -11,7 +11,7 @@ int FUN_00238aac(...);
 int FUN_0035d7e8(int *, int *, int);
 int FUN_003f7120(int *, int *, int);
 int FUN_003f7168(void);
-int rt_memcpy(int, unsigned int, int);
+int __aeabi_memcpy(int, unsigned int, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -28,7 +28,7 @@ extern int rt_memcmp(int, unsigned int, int);
 /* Supplied declaration required: FUN_0035d7e8. */
 /* Supplied declaration required: FUN_003f7120. */
 /* Supplied declaration required: FUN_003f7168. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int FUN_0035e164(int *param_1,int *param_2)
@@ -57,7 +57,7 @@ unsigned int FUN_0035e164(int *param_1,int *param_2)
     if (temp_v2 == 0) {
       return 0;
     }
-    rt_memcpy(temp_v2,*(unsigned int *)(*param_2 + 0x24),param_1[4]);
+    __aeabi_memcpy(temp_v2,*(unsigned int *)(*param_2 + 0x24),param_1[4]);
     *(unsigned char *)(temp_v2 + *(int *)(piVar7[2] + 0x14)) = 1;
     piVar5 = *(int **)(temp_v1 + 0x18);
     while (piVar5 != (int *)(temp_v1 + 0x14)) {

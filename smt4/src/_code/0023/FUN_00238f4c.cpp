@@ -1,4 +1,5 @@
-/* NON_MATCHING: frame and stores match; callee-saved registers are permuted (retail: preserveOpen r7, section r6, flags r8, zero r5, state section r9). */
+/* NON_MATCHING: frame and stores match; callee-saved registers are permuted (retail: preserveOpen r7, section r6, flags r8,
+ * zero r5, state section r9; retail loads the section's address into r6 and copies it to r0, this build the reverse). */
 #include "shard/CecMessageBox.h"
 #include "shard/W6_W6Match6_CecMessageBox.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
@@ -6,7 +7,7 @@
 
 extern "C" {
 extern CecModuleFlags g_asdCecModuleFlags;
-extern u32 g_asdCecMessageBoxCriticalSection, g_asdCecMessageBoxStateCriticalSection;
+extern CriticalSection g_asdCecMessageBoxCriticalSection, g_asdCecMessageBoxStateCriticalSection;
 u32 nn_cec_CTR_MessageBox_WriteBoxInfo(MessageBox *box, s32 kind, const void *header, const void *data);
 u32 nn_cec_CTR_MessageBox_WriteMessageBoxInfo(MessageBox *box);
 void FUN_002399ec(u32 handle);

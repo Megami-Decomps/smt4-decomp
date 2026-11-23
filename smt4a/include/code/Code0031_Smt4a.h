@@ -4,7 +4,6 @@
 /* Functions in the 0x00310000 code block whose subsystem is not known yet; each declaration matches its definition. */
 struct BinFile;
 struct DataEntry;
-struct ObjFUN_0031d174;
 extern "C" {
 
 void FUN_00319aec(u8 value);
@@ -15,6 +14,6 @@ s32 binFileGetValue(BinFile *file);
 
 struct Table2dSection4Record *FUN_00314638(u32 index);
 
-void FUN_0031d174(ObjFUN_0031d174 *obj);
+s32 FUN_0031d174(void *list);
 
 } /* extern "C" */

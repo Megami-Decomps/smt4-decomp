@@ -4,7 +4,7 @@
 extern "C" {
 
 void sysMemClear(void *block, s32 size);
-void rt_memcpy(void *dest, const u8 *source, s32 size);
+void __aeabi_memcpy(void *dest, const u8 *source, s32 size);
 
 extern PlaceWindow *g_placeWin;
 
@@ -30,7 +30,7 @@ void placeWinStartText(const u8 *name)
         }
         length = length + 2;
     } while (length < 0x80);
-    rt_memcpy(object->text, name, length);
+    __aeabi_memcpy(object->text, name, length);
 }
 
 } /* extern "C" */

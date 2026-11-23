@@ -250,7 +250,7 @@ extern "C" u32 effectEditorActivateSelection()
     EffectSelectionParts *parts = FUN_00246854(item);
     if (parts->type != 0x1b) {
         void *data = resourceResolveHeaderPointer(g_effectEditor.block);
-        rt_memcpy(parts->data, data, parts->size);
+        __aeabi_memcpy(parts->data, data, parts->size);
     }
     if (parts->data != NULL) {
         effPartsSetData(g_effectEditor.block, parts->data, parts->size, parts->id);

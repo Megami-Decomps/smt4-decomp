@@ -1,9 +1,7 @@
 #include "shard/Shard003C.h"
-#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "saveLoadUI/SaveLoadUIBase.h"
 
 extern "C" {
-
-extern u32 requestIdToCode(s32 index);
 
 /* True unless one of the nine entries is in state 2 while asdTMTexTableNodeIsLoaded says it is not set. */
 u32 resSetAllReady(ResSet *set)
@@ -14,7 +12,7 @@ u32 resSetAllReady(ResSet *set)
         return 0;
     }
     for (i = 0; i < 9; i++) {
-        if (set->states[i] == 2 && asdTMTexTableNodeIsLoaded(0x2E, requestIdToCode(i)) == 0) {
+        if (set->states[i] == 2 && !requestTextureIsLoaded(i)) {
             return 0;
         }
     }

@@ -6,7 +6,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int phaseCosine(void);
 int matrixGetTranslation(float *);
 int FUN_0037ee54(void);
@@ -101,7 +101,7 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 extern int effGetFrameStep(void);
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: matrixGetTranslation. */
@@ -235,11 +235,11 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
               temp_v15 = 40.743664f;
               temp_v42 = (temp_v7 * 0.95f + 0.050000012f) * temp_v28;
               temp_v5 = temp_v12 * 40.743664f;
-              FUN_001a1ee0();
+              phaseSine();
               temp_v5 = temp_v5 * temp_v42;
               temp_v12 = temp_v12 + temp_v32;
               temp_v6 = temp_v12 * temp_v15;
-              FUN_001a1ee0();
+              phaseSine();
               temp_v6 = temp_v6 * temp_v42;
               temp_v5 = temp_v6 - temp_v5;
               temp_v5 = temp_v5 / romwright_sqrt_4(temp_v5 * temp_v5 + temp_v20 * temp_v20);
@@ -260,7 +260,7 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
               phaseCosine();
               temp_v19 = 0.0f;
               temp_v12 = temp_v12 * temp_v41;
-              FUN_001a1ee0();
+              phaseSine();
               DAT_006472e4 = temp_v7 * temp_v41;
               DAT_006472dc = temp_v12;
               DAT_006472e0 = temp_v19;
@@ -408,7 +408,7 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
                     temp_v43 = (temp_v14 * 0.7f + 0.3f) * temp_v40;
                   }
                   temp_v14 = temp_v20 * 40.743664f;
-                  FUN_001a1ee0();
+                  phaseSine();
                   temp_v14 = temp_v14 * temp_v42;
                   temp_v6 = temp_v14 - temp_v6;
                   temp_v18 = temp_v6 / romwright_sqrt_4(temp_v6 * temp_v6 + (float)temp_v44 * (float)temp_v44);
@@ -538,7 +538,7 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
             temp_v7 = temp_v12;
             phaseCosine();
             temp_v12 = temp_v12 * temp_v41;
-            FUN_001a1ee0();
+            phaseSine();
             DAT_006472e4 = temp_v7 * temp_v41;
             DAT_006472e8 = temp_v24;
             DAT_006472dc = temp_v12;

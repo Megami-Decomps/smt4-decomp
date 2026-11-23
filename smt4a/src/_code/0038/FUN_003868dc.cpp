@@ -4,6 +4,8 @@
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 
+struct LmapMainStateA;
+
 extern "C" {
 
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
@@ -64,9 +66,10 @@ extern int gameDataFlagTestBit(unsigned int);
 extern int partyAnyMemberHasFlagBit(unsigned int, unsigned int);
 /* Supplied declaration required: __hardfp_atan2f. */
 
-void FUN_003868dc(int param_1)
+void FUN_003868dc(LmapMainStateA *state)
 
 {
+  int param_1 = reinterpret_cast<int>(state);
 /* irregular: irregular input(s): in_fpscr; 19 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;

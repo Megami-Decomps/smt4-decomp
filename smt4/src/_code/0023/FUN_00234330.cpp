@@ -5,7 +5,7 @@ extern "C" {
 const char *lookupTable5B47D0(u32 value);
 const char *lookupTable5B47A0(u32 value);
 s32 stringFormatUnbounded(char *dest, const char *format, ...);
-void rt_memcpy(void *dest, const void *src, u32 size);
+void __aeabi_memcpy(void *dest, const void *src, u32 size); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 static const char *naKeyFormat(u32 kind)
 {
@@ -32,7 +32,7 @@ void FUN_00234330(char *dest, u32 kind, u32 first, u32 second)
 {
     char key[0x44];
     stringFormatUnbounded(key, naKeyFormat(kind), lookupTable5B47D0(first), lookupTable5B47A0(second));
-    rt_memcpy(dest, key, 0x40);
+    __aeabi_memcpy(dest, key, 0x40);
 }
 
 } /* extern "C" */

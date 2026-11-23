@@ -668,7 +668,7 @@
 002c5220 nn_os_LightEvent_Initialize
 002c5454 nn_applet_CTR_detail_CloseApplication
 002c5dc0 nn_cfg_CTR_Initialize
-002c5df8 rt_memcpy
+002c5df8 __aeabi_memcpy
 002c5f60 __aeabi_idivmod
 002c6a20 __aeabi_uidivmod
 002cd804 scrComm_Message_ShowChoiceFromBattle
@@ -6408,3 +6408,10 @@
 0038a478 aocBoardDraw
 0019dde4 mapSingleModelInitialize
 002a7c80 __ARM_common_memcpy4_5
+001b4fe8 aocMainProcessUpdate
+001b0c04 aocMainStart
+0024f3d8 planeFromThreePoints
+0023d0d4 gpuWriteUniformColor
+003ddc70 btlQueueUniqueScalarAction
+0026493c lmapMainUpdateState
+00277b5c mapIfQueueNotice

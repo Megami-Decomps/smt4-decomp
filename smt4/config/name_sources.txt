@@ -6269,3 +6269,11 @@
 0038a478 aocBoardDraw inferred the AOC board's draw job ("Aoc board UP L"/"UP R", aocBoardCreateDrawJobs; w78-f1)
 0019dde4 mapSingleModelInitialize inferred sets up the single map model (MapSingleModelWork) from the game state's event block (w78-o1)
 002a7c80 __ARM_common_memcpy4_5 inferred exact twin of smt4a __ARM_common_memcpy4_5
+001b4fe8 aocMainProcessUpdate evidence registered by FUN_001b0c04 as the update of the process "AOCMainProc" (opens, runs and closes the AocMenu; w79-o1)
+001b0c04 aocMainStart inferred creates the "AOCMainProc" process with aocMainProcessUpdate and sceneResourceShutdownAoc (w79-o1)
+0024f3d8 planeFromThreePoints inferred the normalized plane through three points with its distance term (w79-o1)
+0023d0d4 gpuWriteUniformColor inferred unpacks an RGBA colour and writes it as a float uniform vector (w79-o1)
+003ddc70 btlQueueUniqueScalarAction inferred twin of smt4a btlQueueUniqueScalarAction
+0026493c lmapMainUpdateState inferred twin of smt4a lmapMainUpdateState
+00277b5c mapIfQueueNotice inferred near twin of smt4a mapIfQueueNotice
+002c5df8 __aeabi_memcpy inferred armlib's byte memcpy (0x88 bytes, exact twin of smt4a's): armcc 4.1 calls __aeabi_memcpy for memcpy() and struct copies of unknown alignment (smt4a FUN_00429934's struct return compiles to it at retail's call); beside __aeabi_memcpy4 (w79-o2)

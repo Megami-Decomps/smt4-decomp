@@ -6,7 +6,7 @@ extern "C" {
 s32 jyoucyuGetTableEntry(u32 index);
 s32 asdLoadFileGetUseRawPaths(void);
 void asdLoadFileSetUseRawPaths(s32 enable);
-void rt_memcpy(void *dst, const void *src, u32 size);
+void __aeabi_memcpy(void *dst, const void *src, u32 size);
 void asdMemFree(void *block);
 
 /* Reload a loaded data table from its file: copy over the old data when the size is unchanged, otherwise replace it. */
@@ -25,7 +25,7 @@ void dataTableReload(u32 index)
             asdLoadFileSetUseRawPaths(1);
             data = asdLoadFileWithSize(slot->path, &size, 0);
             if (slot->size == size) {
-                rt_memcpy(slot->data, data, size);
+                __aeabi_memcpy(slot->data, data, size);
                 asdMemFree(data);
             } else {
                 asdMemFree(slot->data);

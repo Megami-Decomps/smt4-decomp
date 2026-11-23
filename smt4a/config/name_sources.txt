@@ -8884,3 +8884,20 @@
 00467040 _ZN9Obj55c3ecC1Ev evidence the constructor stores _ZTV9Obj55c3ec+8 (retail relocation); Apocalypse's twin class of IV's Obj421f54 (classes/Obj55c3ec.h); source made a member by build/w78_members.py
 00514bd4 _ZN9Obj5583d0D1Ev evidence slot 0 of _ZTV9Obj5583d0 (word at 0x5583d8 = 0x514bd4), registered by the static initialiser FUN_005116f4; near twin of smt4 _ZN9Obj420eecD1Ev (C form, as IV's)
 00466cac _ZN13Obj55c3ecListC1Ev inferred exact twin of smt4 _ZN13Obj421f54ListC1Ev, called by _ZN9Obj55c3ecC1Ev for its list; source made a member by build/w78_members.py
+0024b5ac aocMainProcessUpdate evidence registered by FUN_00240a84 as the update of the process "AOCMainProc" (twin of smt4 aocMainProcessUpdate)
+00240a84 aocMainStart inferred twin of smt4 aocMainStart
+003d2df4 planeFromThreePoints inferred exact twin of smt4 planeFromThreePoints
+00421e18 gpuWriteUniformColor inferred exact twin of smt4 gpuWriteUniformColor
+001a1ee0 phaseSine inferred the sine of a 65536-per-turn phase from the sine/cosine table (nn::math SinFIdx), beside phaseCosine (w79-o2)
+00156850 questDataGetTitle inferred a quest record's title (both text kinds), NULL for an unknown quest (w79-o3)
+002b4f28 btlActionRingStartCalc inferred advances the battle action ring, sets up the unit slot and starts the "btlAction Calc" job (w79-o3)
+004fbfbc btlQueueUniqueScalarAction inferred queues a kind-17 reflect action with a scalar payload unless one for the target is queued (w79-o4)
+002aa038 uniteDrawValueListPanel inferred draws the fusion screen's value list panel (w79-f1)
+003401a4 lmapMainUpdateState inferred the field map's per-state update (walk, quake, event, ...; w79-f1)
+0033e014 mapIfQueueNotice inferred queues a map interface command unless the current state suppresses it (w79-f1)
+004dc72c btlUnitStepCommandMenu inferred drives the battle command menu of the acting unit (w79-f2)
+00493518 screenRectDrawPartScaled inferred draws a sprite part at a rectangle's far corner at an effect speed, then restores the speed (w79-f2)
+004935c8 screenRectDrawCompositeScaled inferred draws a composite sprite at a rectangle's far corner at an effect speed, then restores the speed (w79-f2)
+002e5a08 __aeabi_memcpy inferred exact twin of smt4 __aeabi_memcpy
+001b4030 __hardfp_fmodf inferred armlib's fmodf (__set_errno for an infinite or zero operand, frem): armcc 4.1 calls __hardfp_fmodf for fmodf() from <math.h>; nn::math's SinFIdx/CosFIdx wrap with it (phaseCosine, phaseSine; w79-o2)
+00416c90 _ZN20PartnerAttackEntriesD1Ev inferred PartnerAttackEntries' destructor: returns this, scriptObjDestroy calls it then asdOperatorDelete on the same pointer, clears the entries as the constructor does (w79-o4); source made a member by build/w79_members.py

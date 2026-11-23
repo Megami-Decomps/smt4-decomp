@@ -17,7 +17,7 @@ extern "C" {
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 max);
 const char *popupSelectWeightedMessage(u32 kind, u32 id);
-void *rt_memcpy(void *dest, const void *src, u32 size);
+void *__aeabi_memcpy(void *dest, const void *src, u32 size);
 
 /* Tick the poison/sickness counter and start the status popup when a matching event record fires. */
 u32 FUN_0020ecd4(void)
@@ -53,7 +53,7 @@ u32 FUN_0020ecd4(void)
                 g_popupState->timer = 0;
                 g_popupState->speakerId = slot->statusId;
                 g_popupState->message = popupSelectWeightedMessage(4, slot->statusId);
-                rt_memcpy(name, g_popupState->message, 0x40);
+                __aeabi_memcpy(name, g_popupState->message, 0x40);
                 if (playerHasFlagBit(5) != 0)
                     sprintf(g_popupState->text, name, "\x82\x6f\x82\x8f\x82\x89\x82\x93\x82\x8f\x82\x8e");
                 else if (playerHasFlagBit(9) != 0)

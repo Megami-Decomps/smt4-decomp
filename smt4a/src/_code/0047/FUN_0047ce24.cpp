@@ -13,7 +13,7 @@ int renderCtxCalculateStereoParallax(...);
 int FUN_0019ac70(int *, unsigned int);
 int FUN_0019b770(...);
 int jobGetScalarValue(void);
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int phaseCosine(void);
 int renderCtxCallB(void);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
@@ -79,7 +79,7 @@ extern unsigned int DAT_00630754; /* 0x630754 */
 /* Supplied declaration required: FUN_0019ac70. */
 /* Supplied declaration required: FUN_0019b770. */
 /* Supplied declaration required: jobGetScalarValue. */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: renderCtxCallB. */
 extern int asdSoundGetOption2(void);
@@ -392,7 +392,7 @@ LAB_0047cf80:
           if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
             temp_v12 = temp_v14 * 2.0f * -3.1415927f * temp_v13 * 40.743664f;
             temp_v11 = temp_v12;
-            FUN_001a1ee0();
+            phaseSine();
             temp_v13 = (float)VectorSignedToFloat(param_3[2],(unsigned char)(in_fpscr >> 0x16) & 3);
             param_3[2] = (int)(temp_v13 - temp_v12 * temp_v15);
             phaseCosine();

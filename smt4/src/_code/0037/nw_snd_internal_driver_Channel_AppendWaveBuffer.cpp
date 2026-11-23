@@ -8,7 +8,7 @@ int FUN_0015d240(unsigned int, int, unsigned char [32]);
 int nw_snd_internal_driver_Voice_AppendWaveBuffer(...);
 int nw_snd_internal_driver_Voice_CalcOffsetAdpcmParam(unsigned short *, unsigned char [32], unsigned int, unsigned short *);
 int nw_snd_internal_driver_Voice_FrameToByte(...);
-int rt_memcpy(unsigned char [32], char *, int);
+int __aeabi_memcpy(unsigned char [32], char *, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* stack frame of param_3: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern void nn_snd_CTR_InitializeWaveBuffer(unsigned int);
 /* Supplied declaration required: nw_snd_internal_driver_Voice_AppendWaveBuffer. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_CalcOffsetAdpcmParam. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_FrameToByte. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void nw_snd_internal_driver_Channel_AppendWaveBuffer(int param_1,char *param_2,unsigned int param_3)
@@ -69,7 +69,7 @@ void nw_snd_internal_driver_Channel_AppendWaveBuffer(int param_1,char *param_2,u
       temp_v3 = param_1 + temp_v4 * 6;
       puVar8 = (unsigned short *)(temp_v3 + 0x60);
       if (*param_2 == '\x03') {
-        rt_memcpy(temp_v7,param_2 + temp_v4 * 0x30 + 0x18,0x20);
+        __aeabi_memcpy(temp_v7,param_2 + temp_v4 * 0x30 + 0x18,0x20);
         if (temp_v5 != 0) {
           *puVar8 = *temp_v6;
           *(unsigned short *)(temp_v3 + 0x62) = *(unsigned short *)(param_2 + temp_v4 * 0x30 + 0x3a);

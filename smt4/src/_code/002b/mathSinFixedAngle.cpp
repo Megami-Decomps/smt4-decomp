@@ -1,20 +1,21 @@
-/* NON_MATCHING: 10 lines, same dataflow and literal pool; armcc moves the sign-compare vmrs earlier and loads the slope before the fraction subtract (other registers). */
 #include "shard/W6_W6Match6_PhaseTrig.h"
+#include "nn/math/MathArithmetic.h"
 
 extern "C" {
 extern const PhaseTrigEntry g_sinCosTable[256];
 
-/* The sine of a phase (65536 per turn, odd), interpolated from the 256-entry sine/cosine table. */
+/* The sine of a phase (65536 per turn, odd), interpolated from the 256-entry sine/cosine table
+ * (nn::math's SinFIdx). */
 f32 mathSinFixedAngle(f32 x)
 {
-    f32 magnitude = wrapPhase(fabsf(x));
-    u16 whole = (u32)magnitude;
-    const PhaseTrigEntry *table = g_sinCosTable;
-    const PhaseTrigEntry *entry = &table[(u8)whole];
-    f32 fraction = magnitude - (f32)whole;
-    if (x < 0.0f)
-        return -(entry->sine + fraction * entry->sineDelta);
-    return entry->sine + fraction * entry->sineDelta;
+    f32 magnitude = fabsf(x);
+    while (magnitude >= 65536.0f)
+        magnitude -= 65536.0f;
+    u16 index = nn::math::F32ToU16(magnitude);
+    f32 fraction = magnitude - nn::math::U16ToF32(index);
+    index &= 0xff;
+    f32 value = g_sinCosTable[index].sine + fraction * g_sinCosTable[index].sineDelta;
+    return x < 0.0f ? -value : value;
 }
 
 } /* extern "C" */

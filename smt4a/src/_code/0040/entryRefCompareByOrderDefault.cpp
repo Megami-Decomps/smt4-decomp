@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail keeps the default 999 in r2 and entry A order in r1; built has them swapped */
 #include "common.h"
 #include "addon/PackageSelection.h"
 
@@ -14,12 +13,20 @@ s32 entryRefCompareByOrderDefault(SortRef *a, SortRef *b)
 {
     PackageSelectableRecord *entryA = contentFindRecordById(a->id);
     PackageSelectableRecord *entryB = contentFindRecordById(b->id);
-    s32 orderB = 999;
-    s32 orderA = entryA != NULL ? entryA->id : orderB;
+    s32 orderA;
+    s32 orderB;
 
+    if (entryA != NULL) {
+        orderA = entryA->id;
+    } else {
+        orderA = 999;
+    }
     if (entryB != NULL) {
         orderB = entryB->id;
+    } else {
+        orderB = 999;
     }
+
     return orderA - orderB;
 }
 

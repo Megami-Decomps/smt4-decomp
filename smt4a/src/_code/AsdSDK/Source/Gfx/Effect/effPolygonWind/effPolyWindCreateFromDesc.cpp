@@ -44,7 +44,7 @@ PolyObject *effPolyWindCreateFromDesc(PolyWindDesc *desc)
     object->color = g_polyDefaultColor;
     quaternionSetIdentity(&object->rotation0);
     quaternionSetIdentity(&object->rotation1);
-    rt_memcpy(object->work, params, workSize);
+    __aeabi_memcpy(object->work, params, workSize);
     object->state = g_polyWindKinds[kind].create(params, (s32)resource);
     g_polyWindKinds[kind].start(object);
     return object;

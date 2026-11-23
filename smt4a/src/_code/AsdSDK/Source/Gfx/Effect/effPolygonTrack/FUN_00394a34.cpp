@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int phaseCosine(void);
 int sysMemClear(float *, int);
 int randomAdvanceShiftRegister(void);
@@ -63,7 +63,7 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 extern unsigned int effGetFrameStep(void);
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: sysMemClear. */
@@ -209,7 +209,7 @@ void FUN_00394a34(int param_1)
                     temp_v24 = temp_v26 + temp_v25;
                     temp_v19 = temp_v31;
                     phaseCosine();
-                    FUN_001a1ee0();
+                    phaseSine();
                     DAT_006472dc = temp_v31 * temp_v25;
                     DAT_006472e4 = temp_v19 * temp_v25;
                     DAT_00647304 = temp_v19 * temp_v24;

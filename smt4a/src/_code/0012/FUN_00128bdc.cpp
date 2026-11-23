@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int rt_memcpy(...);
+int __aeabi_memcpy(...);
 
 typedef struct fn_00128bdc_arg0 fn_00128bdc_arg0;
 typedef struct fn_00128bdc_arg0_p1c fn_00128bdc_arg0_p1c;
@@ -39,7 +39,7 @@ struct fn_00128bdc_arg0_p1c {
     undefined4 field_0x34; /* +0x34 */
 };
 
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int FUN_00128bdc(fn_00128bdc_arg0 *param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -69,7 +69,7 @@ unsigned int FUN_00128bdc(fn_00128bdc_arg0 *param_1,int param_2,unsigned int par
   temp_v1 = pfVar3->field_0x28;
   temp_v2 = param_2 - *(int *)&param_1->field_0x10;
   if (temp_v2 >= temp_v1) {
-    rt_memcpy(pfVar3->field_0x34,*(int *)&param_1->field_0xc - temp_v1);
+    __aeabi_memcpy(pfVar3->field_0x34,*(int *)&param_1->field_0xc - temp_v1);
     *(unsigned int *)&pfVar3->field_0x30 = 0;
   }
   else {
@@ -77,7 +77,7 @@ unsigned int FUN_00128bdc(fn_00128bdc_arg0 *param_1,int param_2,unsigned int par
     if (temp_v2 < temp_v1) {
       temp_v1 = temp_v2;
     }
-    rt_memcpy(pfVar3->field_0x34 + *(int *)&pfVar3->field_0x30,*(int *)&param_1->field_0xc - temp_v2,
+    __aeabi_memcpy(pfVar3->field_0x34 + *(int *)&pfVar3->field_0x30,*(int *)&param_1->field_0xc - temp_v2,
               temp_v1);
     temp_v0 = temp_v2 - temp_v1;
     if (temp_v0 == 0) {
@@ -93,7 +93,7 @@ unsigned int FUN_00128bdc(fn_00128bdc_arg0 *param_1,int param_2,unsigned int par
       *(int *)&pfVar3->field_0x2c = temp_v0;
       return 0;
     }
-    rt_memcpy(pfVar3->field_0x34,*(int *)&param_1->field_0xc - temp_v0,temp_v0);
+    __aeabi_memcpy(pfVar3->field_0x34,*(int *)&param_1->field_0xc - temp_v0,temp_v0);
     *(int *)&pfVar3->field_0x30 = temp_v0;
   }
   temp_v0 = pfVar3->field_0x28;

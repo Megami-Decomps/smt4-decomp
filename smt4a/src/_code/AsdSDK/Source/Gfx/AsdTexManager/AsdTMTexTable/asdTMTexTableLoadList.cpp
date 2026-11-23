@@ -6,7 +6,7 @@
 
 extern "C" {
 
-void rt_memcpy(void *dst, const void *src, s32 size);
+void __aeabi_memcpy(void *dst, const void *src, s32 size);
 void asdMemFree(void *block);
 
 extern const char DAT_0053d054[]; /* the source file path (__FILE__) */
@@ -26,7 +26,7 @@ u32 asdTMTexTableLoadList(const char *path)
     }
     asdDebugTrace(DAT_0053d054, 93);
     g_texTable.header = (TexTableHeader *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x104, 1);
-    rt_memcpy(g_texTable.header, file, 0x104);
+    __aeabi_memcpy(g_texTable.header, file, 0x104);
     asdDebugTrace(DAT_0053d054, 98);
     g_texTable.entries = (TexTableEntry *)asdMemoryAllocTracked(0x100, 0x100, 0, g_texTable.header->count * 0x18, 1);
     src = (u32 *)(file + 0x104);

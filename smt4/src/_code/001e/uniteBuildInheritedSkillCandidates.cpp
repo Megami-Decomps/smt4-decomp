@@ -1,4 +1,4 @@
-/* NON_MATCHING: 34 lines: only the sort key's bitfield packing differs (retail updates the two words separately with a
+/* NON_MATCHING: 10 lines (one loop index shared by the loops): only the sort key's bitfield packing differs (retail updates the two words separately with a
  * shared 0xFFFDFFFF mask and stores them with one strd; this build loads both words with ldm and shifts the first). */
 #include "camp/Unite/UniteGlobals.h"
 #include "gamedata/NkmBaseRecord.h"
@@ -15,18 +15,20 @@ void FUN_0029b130(u16 *, s32, const UnitePairEntryIV *, u32);
  * nor the result already has, then sorts it by the fusion pair. */
 extern "C" void uniteBuildInheritedSkillCandidates(u16 resultId, const StatBlock *first, const StatBlock *second)
 {
+    s32 i;
+
     UniteWork *work = g_unite;
     s32 count = 0;
     const NkmBaseRecord *result = nkmBaseGetRecord(resultId);
-    for (s32 i = 0; i < 24; ++i)
+    for (i = 0; i < 24; ++i)
         work->secondListIV.indices[i] = 0;
-    for (s32 i = 0; i < 8; ++i) {
+    for (i = 0; i < 8; ++i) {
         if (first->skills.ids[i] && (dataTable06Sub1GetRecord(first->skills.ids[i])->flags & 0x20) &&
             !arrayContainsU16(work->secondListIV.indices, 24, first->skills.ids[i]) &&
             !arrayContainsU16(result->skills, 8, first->skills.ids[i]))
             work->secondListIV.indices[count++] = first->skills.ids[i];
     }
-    for (s32 i = 0; i < 8; ++i) {
+    for (i = 0; i < 8; ++i) {
         if (second->skills.ids[i] && (dataTable06Sub1GetRecord(second->skills.ids[i])->flags & 0x20) &&
             !arrayContainsU16(work->secondListIV.indices, 24, second->skills.ids[i]) &&
             !arrayContainsU16(result->skills, 8, second->skills.ids[i]))

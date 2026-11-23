@@ -363,7 +363,12 @@ difference a register tie-break.
   `progress->remaining = progress->remaining > 0 ? progress->remaining : 0;`, not once after the switch: the quest
   requirement resolvers smt4 `FUN_00298e40` and smt4a `FUN_003df004` are IDENTICAL with it (wave 64).
 - Locals declared at the top of the function (C89 style), or one loop index reused by two loops,
-  change their registers.
+  change their registers. One `s32 i;` shared by every loop of a function made smt4a `FUN_003f707c`, `FUN_004ba1f4`,
+  `FUN_004f6e68` and smt4 `categoryListBuildUnique`, `campScriptCleanupRelease` IDENTICAL (wave 79). Hoist the
+  function's locals together, not one group chosen by score.
+- The same applies to a two-way default of a compare key: `if (entry != NULL) order = entry->id; else order = 999;`
+  for both keys made the comparators smt4a `entryRefCompareByOrderDefault`, `FUN_00404f00` and `FUN_0049ebf0`
+  IDENTICAL where the ternaries were 10-14 lines off (wave 79). Use one spelling for both keys.
 - Assigning a global and then reading it back into a local (`g = alloc(); T *p = g;`) gives retail's
   reload ([as a sweep](#publish-first-allocation)).
 - A status local (`s32 result = 1;`) after the argument read keeps a constant shared by a shift and
@@ -496,6 +501,11 @@ asks for.
   contentTransitionStep(state, phase)` in `shard/W6_W6Match6_ContentTransition.h`;
   `BtlUiPanelTimerA panelStartState(state)` with `{frame 0, state}` in `battle/btlUI.h`).
   `step = contentTransitionStep(2, 0);` keeps the `strd`, two field stores do not.
+- nn::math's table trig (`SinFIdx`, `CosFIdx`, `SinCosFIdx`) is written as the SDK has it: `fabsf`, a plain
+  `while (x >= 65536.0f) x -= 65536.0f;` wrap, `u16 index = nn::math::F32ToU16(x)`, the fraction through
+  `nn::math::U16ToF32(index)`, then `index &= 0xff` and the table indexed at each use, the sign applied with a ternary
+  (`nn/math/MathArithmetic.h`). smt4 `phaseCosInterpolate`, `mathSinFixedAngle`, `mathSinCos` and smt4a
+  `phaseCosine`, `FUN_001a1ee0` are IDENTICAL with it; plain casts in place schedule differently (wave 79).
 - nn::math's header inlines are helpers with evidence: `MTX44PerspectivePivotDeg` (`MTX44Perspective` of the angle
   in radians, then `MTX44PivotC`) written as a `static __inline` at both call sites gave retail's projection code in
   `stereoCameraSetPerspective` (both games), and `MTX44Transpose` returns its destination.
@@ -600,6 +610,10 @@ asks for.
   (smt4a `FUN_003f84e8`, `FUN_0049d3f0`).
 - Data another thread changes (a run flag, a polled state) is `volatile` under the
   [`volatile` rule](CONTRIBUTING.md#what-a-source-may-contain).
+  `nn::os::CriticalSection::state` (`nn/os/CriticalSection.h`) is the SDK's interlocked lock counter: `volatile`, it
+  keeps retail's zero store before the `Initialize` call and before the deferred constructor's other stores, which made
+  five static initialisers IDENTICAL (smt4 `FUN_003ec728`, `FUN_003eb734`, `FUN_003f2028`, `FUN_003f2134`, smt4a
+  `FUN_00511778`; wave 79). relink still keeps their retail bytes (their `.bss` objects cannot be placed).
 - Sleeps and timeouts take an `nn::fnd::TimeSpan` (`FromMicroSeconds`, `FromMilliSeconds`) by value,
   which rematerialises the constant at each call as retail does.
 
@@ -672,10 +686,18 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
   The same holds when the other user is far away in the image (no translation unit): `effMenuBrowserStep`'s prologue
   comes out right with unit-local `static const char` formats, but `formattedTextCopyLabel` names the same two words, so
   the review kept `__2sprintf` with the image's globals (wave 78).
+  Check before moving a format into a unit: `rg -l -a -uuu DAT_<address> <game>/orig/target` lists the retail objects
+  naming the word. Skip objects left behind by functions renamed since (smt4's `FUN_00335518.o` is today's
+  `btlAiScriptLoadFile`) and words that are numbers (smt4 `FUN_001124ac`'s run 0x400400-0x400464 is plain words in
+  its smt4a twin): smt4 `btlAiScriptLoadFile` owns its two AI-script formats (wave 79).
 - **`__2snprintf` is armlib's `snprintf`** (smt4 0x2522f8, smt4a 0x1028b8, 0x36-byte Thumb): write
   `snprintf(buf, sizeof(buf), fmt, ...)` with `<stdio.h>`, as for `sprintf`; a local prototype of the placeholder
   leaves the prologue and argument scheduling off (smt4 `effectTextureRequestsPump`, smt4a `FUN_0036f0a0` and three
   effect texture loaders per game, wave 59).
+- **`__aeabi_memcpy` is armlib's byte copy** (smt4 0x2c5df8, smt4a 0x2e5a08; once `rt_memcpy`): armcc calls it for
+  `memcpy` and struct copies of unknown alignment (smt4a `FUN_00429934`'s struct return), as it calls `__aeabi_memcpy4`
+  for aligned ones. **`__hardfp_fmodf` is armlib's `fmodf`** (smt4a 0x1b4030): write `fmodf(x, 65536.0f)` with
+  `<math.h>`; smt4a `phaseCosine` and `phaseSine` (nn::math's wrap) stay IDENTICAL with it (wave 79).
 - **`__aeabi_f2ulz` is armlib's float to `u64` conversion** (smt4 0x235804, smt4a 0x524fb4): armcc calls it for a
   `(u64)` cast of a float. Write the cast (`u64 key = (u64)(depth * 16777215.0f) & 0xFFFFFF;`), not a call through a
   placeholder prototype (the model sort-key builders smt4 `FUN_003f8608`/`FUN_003f86e4`/`FUN_003f854c` and their
@@ -744,6 +766,10 @@ scored as `fdiff` scores it.
   `FUN_00244e1c`/`FUN_0031ba34(selector, flag, x, y, z, scale, mode, option)`
   (`event/SpatialEffectTask.h`: the scalar position and scale before the two `u8`s). When a callee's
   callers all miss by a float literal loaded before or after the integer moves, score the orders.
+  When both arms of an `if` call the same function, armcc hoists the arguments the arms share, from the last
+  parameter back to the first that differs; what stays in the arms shows the order. smt4a `FUN_00493518` and
+  `FUN_004935c8` take `(rect, id, dx, dy, last, speed)` (retail hoists the speed and leaves the id in each arm):
+  with that order `Obj55c920::FUN_004a24a8` is IDENTICAL and both definitions stay so (wave 79).
 
 The sweep: the callee's definition fixes the order within each bank (which integer goes in `r0`, which
 float in `s0`), so only the interleaving of the two banks is free: 56 orders for three integers and

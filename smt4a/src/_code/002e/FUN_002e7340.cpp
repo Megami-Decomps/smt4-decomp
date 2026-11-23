@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002e9e60(...);
-int rt_memcpy(...);
+int __aeabi_memcpy(...);
 
 /* Supplied declaration required: FUN_002e9e60. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int FUN_002e7340(int param_1,unsigned int param_2,int param_3,int param_4)
@@ -20,7 +20,7 @@ unsigned int FUN_002e7340(int param_1,unsigned int param_2,int param_3,int param
                  0xdd,0xe0000019,0);
     return 0;
   }
-  rt_memcpy(param_2,*(int *)(param_1 + 0xc) + *(int *)(param_1 + 0x18) + param_4);
+  __aeabi_memcpy(param_2,*(int *)(param_1 + 0xc) + *(int *)(param_1 + 0x18) + param_4);
   return 1;
 }
 

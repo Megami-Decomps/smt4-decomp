@@ -21,7 +21,7 @@ extern "C" {
 
 s32 uiSearchPrimary(const void *controller);
 u32 uiQuestDrawRowPlate(u32 questId, s32 x, s32 y, s32 depth, s32 focused, s32 pressed);
-const char *FUN_00156850(u32 questId, u32 key);
+const char *questDataGetTitle(u32 questId, u32 key);
 void partyDrawCategorySelectionIcon(s32 id, u32 x, u32 y, u32 flags);
 void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 mode);
 u32 partyEntryBitsBit4(s32 index);
@@ -77,7 +77,7 @@ void uiQuestDrawList(void)
         TextureTableEntryIV *plate = asdTMTexTableEntryAt(0x1e, 0x9c);
         u32 color = uiQuestDrawRowPlate(id, entry->x + plate->x + x, entry->y + plate->y + y, 0x6f, 0, 0);
         TextureTableEntryIV *name = asdTMTexTableEntryAt(0x1e, 0x9b);
-        sprintf(text, "%s", FUN_00156850(id, 0));
+        sprintf(text, "%s", questDataGetTitle(id, 0));
         textDrawString((f32)(entry->x + name->x + x), (f32)(name->y + entry->y + y), 0.45f, 2, 0.0f, color, alpha, text);
         TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1e, 0x9a);
         partyDrawCategorySelectionIcon(id, icon->x + entry->x + x, entry->y + icon->y + y, 0x6f);
@@ -143,7 +143,7 @@ void uiQuestDrawList(void)
         TextureTableEntryIV *plate = asdTMTexTableEntryAt(0x1e, 0xb3);
         u32 color = uiQuestDrawRowPlate(id, plate->x + focus->x + x, focus->y + plate->y + y, 0xab, 1, pressed);
         TextureTableEntryIV *name = asdTMTexTableEntryAt(0x1e, 0xb2);
-        sprintf(text, "%s", FUN_00156850(id, 0));
+        sprintf(text, "%s", questDataGetTitle(id, 0));
         textDrawString((f32)(focus->x + name->x + x), (f32)(focus->y + name->y + y), 0.32f, 3, 0.0f, color, alpha, text);
         if (partyEntryFlagsBit3(id)) {
             texDrawTableEntryAtStoredOrigin(2, 0x1e, 0xb0, focus->x + x, focus->y + y, 0xab);

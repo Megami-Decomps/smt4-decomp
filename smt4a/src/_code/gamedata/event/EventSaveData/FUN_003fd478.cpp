@@ -6,7 +6,7 @@
 
 extern "C" {
 void *asdMemoryAlloc(s32, s32, s32, u32, s32);
-void *rt_memcpy(void *, const void *, u32);
+void *__aeabi_memcpy(void *, const void *, u32);
 
 // Allocate a snapshot of the event save-data block.
 EventSaveData *FUN_003fd478(void)
@@ -16,7 +16,7 @@ EventSaveData *FUN_003fd478(void)
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\event\\EventSaveData.cpp", 0x79);
     EventSaveData *snapshot = (EventSaveData *)asdMemoryAlloc(
         ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, size, 1);
-    rt_memcpy(snapshot, &save->event, size);
+    __aeabi_memcpy(snapshot, &save->event, size);
     return snapshot;
 }
 }

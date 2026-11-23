@@ -20,7 +20,7 @@ void asdMemFree(void *memory);
 void titleConfigStoreOptions(void);
 GameSaveData *gameDataBlocksGetSaveData(void);
 const void *gameDataBlocksGetTable(void);
-void rt_memcpy(void *destination, const void *source, u32 size);
+void __aeabi_memcpy(void *destination, const void *source, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void clockRecordStartSeconds(void);
 void saveLoadThreadRequestInit(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
@@ -37,7 +37,7 @@ s32 saveLoadProcessSaveUpdate(u32 process)
         work->buffer = asdMemAlloc(0x100, 0x100, 0, work->bufferSize, 1);
         titleConfigStoreOptions();
         gameDataBlocksGetSaveData()->metadata.option = work->option;
-        rt_memcpy(work->buffer, gameDataBlocksGetTable(), 0x80);
+        __aeabi_memcpy(work->buffer, gameDataBlocksGetTable(), 0x80);
         ((SaveFilePayloadIV *)work->buffer)->settings = *reinterpret_cast<const ConfigSettingsImage *>(configGetSettings());
         SaveWriteBodyPrefix *body = (SaveWriteBodyPrefix *)((SaveFilePayloadIV *)work->buffer)->save;
         __aeabi_memcpy4(body, gameDataBlocksGetSaveData(), 0x24D28);

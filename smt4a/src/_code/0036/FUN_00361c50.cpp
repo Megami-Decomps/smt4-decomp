@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(int, double);
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int effGetFrameStep(void);
 int phaseCosine(void);
 int gfxQuaternionWorkspaceBuildMatrix(void);
@@ -64,7 +64,7 @@ extern float DAT_00647348; /* 0x647348 */
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 /* Supplied declaration required: effGetFrameStep. */
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
@@ -190,7 +190,7 @@ void FUN_00361c50(int param_1)
             phaseCosine();
             temp_v15 = pfVar8[7];
             temp_v16 = temp_v16 * pfVar8[8];
-            FUN_001a1ee0();
+            phaseSine();
             temp_v12 = temp_v12 * pfVar8[8];
             if ((temp_v27 & 1) == 0) {
               DAT_006472dc = pfVar8[3];
@@ -246,7 +246,7 @@ void FUN_00361c50(int param_1)
             phaseCosine();
             temp_v14 = 0.0f;
             temp_v12 = pfVar8[10] * temp_v12;
-            FUN_001a1ee0();
+            phaseSine();
             temp_v4 = temp_v12;
             shiftRandomNextFraction(0);
             pfVar8[7] = temp_v12 * pfVar11[0x32];
@@ -343,7 +343,7 @@ void FUN_00361c50(int param_1)
               temp_v15 = pfVar8[7];
               temp_v16 = temp_v16 * pfVar8[8];
               temp_v4 = pfVar8[10] * temp_v4;
-              FUN_001a1ee0();
+              phaseSine();
               temp_v4 = temp_v4 * pfVar8[8];
               DAT_006472dc = temp_v16;
               DAT_006472e0 = temp_v15;

@@ -3,7 +3,7 @@
 
 extern "C" {
 u32 gfxTexFormatGetBitsPerPixel(u32 format, u32 type);
-void rt_memcpy(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy(void *destination, const void *source, u32 bytes); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 // Convert an eight-pixel-stride linear tile into recursively ordered quadrants.
 u32 textureConvertLinearTile(const u8 *source, u8 *destination, s32 size, const TextureTileFormat *format)
@@ -35,7 +35,7 @@ u32 textureConvertLinearTile(const u8 *source, u8 *destination, s32 size, const 
             }
         }
     } else {
-        rt_memcpy(destination, source, bits >> 3);
+        __aeabi_memcpy(destination, source, bits >> 3);
     }
     return 1;
 }

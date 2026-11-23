@@ -67,7 +67,7 @@ void recordTableLoadKind2Payloads(RecordLoader *table)
             table->errors |= 0x200;
             return;
         }
-        rt_memcpy(table->payloads[i].body, data, size);
+        __aeabi_memcpy(table->payloads[i].body, data, size);
         resourceQueryLoadStatus(*table->file, table->kind2Source[i]);
         for (s32 j = 0; j < table->kind0Count; j++) {
             if (table->kind2[i].word == table->kind0Source[j]) {

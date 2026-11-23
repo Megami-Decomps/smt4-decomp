@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00357a38` (_code @ 0x357a38, 0x5b8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "AsdSDK/AsdMemCopy.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -15,7 +16,6 @@ int recordCopy70(int, unsigned char [96]);
 int FUN_003e0bbc(unsigned char [8], int *);
 int nn_cec_CTR_Message_GetExHeader(int, int, unsigned char [4], int *);
 int nn_cec_CTR_Message_GetMessageId(int *, int, unsigned char [8]);
-int rt_memcpy(int *, unsigned char [96], int);
 
 typedef int romwright_code(...);
 /* stack frame of param_5: 14 slot(s), 56 byte(s) */
@@ -58,7 +58,7 @@ extern unsigned char nn_cec_CTR_MessageId_IsEmpty(unsigned int);
 extern unsigned int nn_cec_CTR_Message_MakeMessageBinary(unsigned int, unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 int * FUN_00357a38(int *param_1,int param_2,int param_3,unsigned int param_4,int param_5)
@@ -254,7 +254,7 @@ int * FUN_00357a38(int *param_1,int param_2,int param_3,unsigned int param_4,int
     return (int *)0xc8610bf3;
   }
   nn_cec_CTR_Message_MakeMessageBinary(param_2,(unsigned int)temp_v20);
-  rt_memcpy(temp_v20,temp_v10,0x70);
+  __aeabi_memcpy(temp_v20,temp_v10,0x70);
   temp_v13 = 0;
   temp_v14 = 0;
   temp_v0 = nn_cec_CTR_MessageId_IsEmpty((unsigned int)temp_v12);

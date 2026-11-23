@@ -7,7 +7,7 @@
 extern "C" {
 
 int renderCtxResetColorScale(int);
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int phaseCosine(void);
 int FUN_003fba4c(unsigned int, int, unsigned int, float *, int, int);
 int libm_tanf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
@@ -43,7 +43,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: asdCameraGetSavedRenderPairs. */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: FUN_003fba4c. */
 /* Supplied declaration required: libm_tanf. */
@@ -130,7 +130,7 @@ unsigned int FUN_003d26cc(void)
   temp_v11 = temp_v18 * 40.743664f;
   temp_v6 = temp_v11;
   temp_v7 = temp_v16[0];
-  FUN_001a1ee0();
+  phaseSine();
   temp_v12 = -10.0f;
   temp_v11 = temp_v11 * -10.0f;
   phaseCosine();

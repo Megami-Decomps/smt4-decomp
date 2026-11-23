@@ -4,7 +4,7 @@
 
 extern "C" {
 void FUN_00386720(void);
-void FUN_003401a4(LmapMainStateA *state);
+void lmapMainUpdateState(LmapMainStateA *state);
 void FUN_0036a434(LmapMainStateA *state);
 void followerDisplayUpdate(LmapMainStateA *state);
 void FUN_00297c3c(void);
@@ -21,7 +21,7 @@ void FUN_00387014(void)
         if (state->external != 0) {
             FUN_00386720();
         } else {
-            FUN_003401a4(state);
+            lmapMainUpdateState(state);
         }
     }
     FUN_0036a434(state);

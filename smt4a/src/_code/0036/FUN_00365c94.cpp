@@ -13,7 +13,7 @@ void naviMainSetRequestTriple(s32, s32, u32);
 void naviMainApplyRequestValue(s32);
 void naviMainSetPosition(const MapVector *position);
 void naviMainSetRequestValue(s32);
-void FUN_0033e014(s32, s32);
+void mapIfQueueNotice(s32, s32);
 
 void FUN_00365c94(s32 map, s32 area, u32 point)
 {
@@ -40,7 +40,7 @@ void FUN_00365c94(s32 map, s32 area, u32 point)
     naviMainApplyRequestValue(g_gameState.naviMapId);
     naviMainSetPosition(&g_lmapScene->pose.position);
     naviMainSetRequestValue(1);
-    FUN_0033e014(g_gameState.mapId, g_gameState.areaId);
+    mapIfQueueNotice(g_gameState.mapId, g_gameState.areaId);
     main->unk28 = 0x8A;
     main->unk2C = 0;
 }

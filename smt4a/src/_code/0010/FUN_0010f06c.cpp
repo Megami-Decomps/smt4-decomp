@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00127570(int, int);
 int FUN_002fa010(int, int);
 int FUN_002fa01c(unsigned int);
-int rt_memcpy(int, int, int);
+int __aeabi_memcpy(int, int, int);
 
 typedef struct fn_0010f06c_arg1 fn_0010f06c_arg1;
 struct fn_0010f06c_arg1 {
@@ -28,7 +28,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00127570. */
 /* Supplied declaration required: FUN_002fa010. */
 /* Supplied declaration required: FUN_002fa01c. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int FUN_0010f06c(int param_1,fn_0010f06c_arg1 *param_2,int param_3)
@@ -50,7 +50,7 @@ unsigned int FUN_0010f06c(int param_1,fn_0010f06c_arg1 *param_2,int param_3)
   temp_v2 = param_2->field_0x10;
   if (temp_v1 == 0) {
     *(int *)(param_3 + 0x10) = temp_v2 - 1;
-    rt_memcpy(*(int *)(param_3 + 0xc) + *(int *)(param_3 + 0x18),temp_v3 + temp_v4 + 1,
+    __aeabi_memcpy(*(int *)(param_3 + 0xc) + *(int *)(param_3 + 0x18),temp_v3 + temp_v4 + 1,
               param_2->field_0x10 - 1);
     return 0;
   }

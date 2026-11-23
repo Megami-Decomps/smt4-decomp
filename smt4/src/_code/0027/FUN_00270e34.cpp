@@ -1,5 +1,5 @@
-/* NON_MATCHING: the g_mapMain literal load is scheduled before the push, and the DLC branch keeps the message pointer in r1 (retail: r0, loading scriptData into r1); everything else matches. */
-#include "runtime/Stdio.h"
+/* NON_MATCHING: the DLC branch keeps the message pointer in r1 (retail: r0, loading scriptData into r1) and the ROM branch copies the message pointer before its store; everything else matches. */
+#include <stdio.h>
 #include "map/mapMain.h"
 #include "addon/aocMain.h"
 #include "script/scrScriptProcess.h"
@@ -9,8 +9,8 @@
 
 extern "C" {
 extern MapMain *g_mapMain;
-extern const char DAT_004044ec[];
-extern const char DAT_004044d4[];
+static const char s_eventScriptPathFormat[] = "event/e%03d/e%03d.bf";
+static const char s_eventMessagePathFormat[] = "event/e%03d/e%03d.mbm";
 void messageSetConfirmDisplayMode(void);
 s32 aocPackageGrantsItem(AocSystem *system, u32 event, u32 kind);
 void asdMemFree(void *memory);
@@ -36,8 +36,8 @@ u32 FUN_00270e34(void)
     char scriptPath[128];
     char messagePath[128];
     messageSetConfirmDisplayMode();
-    __2sprintf(scriptPath, DAT_004044ec, event->event, event->event);
-    __2sprintf(messagePath, DAT_004044d4, event->event, event->event);
+    sprintf(scriptPath, s_eventScriptPathFormat, event->event, event->event);
+    sprintf(messagePath, s_eventMessagePathFormat, event->event, event->event);
     void *messages;
     if (aocPackageGrantsItem(g_aocSystem, event->event, 0) != 0) {
         map->scriptData = aocDrawText7(g_aocSystem, event->event, 0);

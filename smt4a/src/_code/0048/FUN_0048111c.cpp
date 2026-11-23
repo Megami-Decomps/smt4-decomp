@@ -19,7 +19,7 @@ typedef char ItemBoxCountsOffsets[offsetof(ItemBoxCounts, counts) == 0x168 &&
 extern "C" {
 
 s32 itemGetStackLimit(s32 itemId);
-void rt_memcpy(void *dst, const void *src, u32 bytes);
+void __aeabi_memcpy(void *dst, const void *src, u32 bytes);
 
 /* Adds the item counts of one box into another, clamping each count to its stack limit. */
 void FUN_0048111c(ItemBoxCounts *dst, const ItemBoxCounts *src)
@@ -83,7 +83,7 @@ void FUN_0048111c(ItemBoxCounts *dst, const ItemBoxCounts *src)
             dst->counts[6][i] = limit;
         }
     }
-    rt_memcpy(dst->unkFBC, src->unkFBC, sizeof(dst->unkFBC));
+    __aeabi_memcpy(dst->unkFBC, src->unkFBC, sizeof(dst->unkFBC));
 }
 
 } /* extern "C" */

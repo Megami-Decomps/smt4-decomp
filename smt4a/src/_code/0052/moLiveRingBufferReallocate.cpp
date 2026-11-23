@@ -18,7 +18,7 @@ struct MoLiveRingBuffer {
 
 extern "C" {
 extern const char g_moLiveOutOfMemoryMessage[];
-void *rt_memcpy(void *, const void *, u32 bytes);
+void *__aeabi_memcpy(void *, const void *, u32 bytes);
 }
 
 static __inline u8 *allocateMoLiveBuffer(MoLiveAllocator *allocator, u32 bytes)
@@ -36,7 +36,7 @@ static __inline u8 *allocateMoLiveBuffer(MoLiveAllocator *allocator, u32 bytes)
 static __inline void copyMoLiveRange(u8 *destination, const u8 *begin, const u8 *end)
 {
     if (begin != end) {
-        rt_memcpy(destination, begin, end - begin);
+        __aeabi_memcpy(destination, begin, end - begin);
     }
 }
 

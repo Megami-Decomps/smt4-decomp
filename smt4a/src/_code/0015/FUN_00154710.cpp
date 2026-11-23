@@ -3,7 +3,7 @@
 #include <math.h>
 
 extern "C" {
-f32 FUN_001a1ee0(f32 angle);
+f32 phaseSine(f32 angle);
 f32 phaseCosine(f32 angle);
 void FUN_00173b2c(u8 *listener, const Matrix34Data *matrix);
 
@@ -21,7 +21,7 @@ void FUN_00154710(const AsdSndListener *position, f32 heading)
     f32 angle = heading * 0.7111111f;
     AsdSndListener up = state->listenerUp;
     AsdSndListener offset;
-    offset.x = -FUN_001a1ee0(angle);
+    offset.x = -phaseSine(angle);
     offset.y = 0.0f;
     offset.z = -phaseCosine(angle);
     AsdSndListener target = { x + offset.x, y + offset.y, z + offset.z };

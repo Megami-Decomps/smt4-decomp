@@ -1,9 +1,9 @@
 #include "shard/Shard003B.h"
+#include "saveLoadUI/SaveLoadUIBase.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
-u32 requestIdToCode(s32 request);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 
 void gfxAdvanceTextureRequestQueue(ResSet* resources, s32 activeRequest)
@@ -14,9 +14,9 @@ void gfxAdvanceTextureRequestQueue(ResSet* resources, s32 activeRequest)
             if (resources->states[index] == Requested) {
                 resources->states[index] = Idle;
             }
-            if (asdTMTexTableNodeIsLoaded(0x2E, requestIdToCode(index)) &&
+            if (requestTextureIsLoaded(index) &&
                 resources->states[index] == Loaded && resources) {
-                if (asdTMTexTableNodeIsLoaded(0x2E, requestIdToCode(index)) &&
+                if (requestTextureIsLoaded(index) &&
                     resources->states[index] != Loading) {
                     asdTMTexTableReleaseNode(0x2E, requestIdToCode(index));
                     resources->states[index] = Idle;
@@ -27,7 +27,7 @@ void gfxAdvanceTextureRequestQueue(ResSet* resources, s32 activeRequest)
     bool pending = false;
     for (s32 index = 0; index < 9; ++index) {
         if (resources->states[index] == Loading) {
-            if (!asdTMTexTableNodeIsLoaded(0x2E, requestIdToCode(index))) {
+            if (!requestTextureIsLoaded(index)) {
                 pending = true;
             } else {
                 resources->states[index] = Loaded;
@@ -37,7 +37,7 @@ void gfxAdvanceTextureRequestQueue(ResSet* resources, s32 activeRequest)
     if (!pending) {
         for (s32 index = 0; index < 9; ++index) {
             if (resources->states[index] == Requested) {
-                if (resources && !asdTMTexTableNodeIsLoaded(0x2E, requestIdToCode(index)) &&
+                if (resources && !requestTextureIsLoaded(index) &&
                     resources->states[index] != Loaded && resources->states[index] != Loading) {
                     asdTMTexLoadMainHeap(0x2E, requestIdToCode(index));
                     resources->states[index] = Loading;

@@ -21,7 +21,7 @@ struct SortMenuWork {
     u32 state; // 0x744: 1 opening, 2 choosing, 3 decided, 4 closing
     s32 frame; // 0x748
     u8 decided; // 0x74c
-    u8 ascending; // 0x74d: the order a decision applies; picking the same key again flips it
+    s8 ascending; // 0x74d: the order a decision applies; picking the same key again flips it
     u8 option; // 0x74e
     u8 unk74f;
     s32 owner; // 0x750: index of the sort preference the menu edits (< 0: none)
@@ -32,8 +32,8 @@ struct SortMenuWork {
     GridNavigation list; // 0x788
     s32 terminalMap; // 0x7ec: option 2: the id whose name (terminalGetCharacterDisplayName) heads the list
     u8 unk7f0[4];
-    u8 helpSaved; // 0x7f4: the button help to restore on closing was saved
-    u8 helpIsDefault; // 0x7f5
+    s8 helpSaved; // 0x7f4: the button help to restore on closing was saved
+    s8 helpIsDefault; // 0x7f5 (signed bytes, like ascending: retail tests them through the +0x700 base a signed load needs)
     char helpText[0x82]; // 0x7f6
 };
 struct SortMenuSingleton { s8 useCount; u8 unk01[3]; SortMenuWork *work; };
@@ -53,6 +53,13 @@ enum {
     SORT_PREFERENCE_KEY_MASK = 0x7F,
     SORT_PREFERENCE_DESCENDING = 0x80
 };
+
+/* The same byte as the bit-fields retail's inserts show (smt4a sortMenuCalcUpdate stores the key, then the order). */
+struct SortPreference {
+    u8 key : 7;
+    u8 descending : 1;
+};
+typedef char SortPreferenceSizeCheck[sizeof(SortPreference) == 1 ? 1 : -1];
 
 extern "C" {
 s32 recordCompareSignedValue(const void *left, const void *right);

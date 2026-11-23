@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail schedules the g_btlAiScript pool load before `sub sp, sp, #132`; rest identical. */
-#include "runtime/Stdio.h"
+#include <stdio.h>
+#include "common.h"
 #include "battle/BtlMainAccess.h"
 #include "gamedata/NkmEnemyLookup.h"
 #include "battle/btlAIScript.h"
@@ -14,8 +14,8 @@ s32 FUN_00240c34(const char *path);
 char *libc_strcpy(char *dst, const char *src);
 
 extern BtlAiScript *g_btlAiScript;
-extern const char DAT_00527f94[]; /* "battle/AI/%s.bf" */
-extern const char DAT_00527fa4[]; /* "battle/AI/tmp.bf" */
+static const char s_aiScriptPathFormat[] = "battle/AI/%s.bf";
+static const char s_aiScriptFallbackPath[] = "battle/AI/tmp.bf";
 
 /* Drops the loaded AI script and picks the script file for the actor's demon, falling back to
  * the placeholder script when the demon has none. */
@@ -39,9 +39,9 @@ void FUN_00222488(BtlAiScriptActor *actor)
         btlGetMainState();
         name = nkmEnemyFindById(actor->demon->id)->aiScriptName;
         sysMemClear(path, sizeof(path));
-        __2sprintf(path, DAT_00527f94, name);
+        sprintf(path, s_aiScriptPathFormat, name);
         if (FUN_00240c34(path) == 0) {
-            __2sprintf(path, DAT_00527fa4);
+            sprintf(path, s_aiScriptFallbackPath);
         }
         libc_strcpy(script->path, path);
         if (aocContentLookupSucceeds(g_aocSystem, actor->demon->id) != 0) {

@@ -24,7 +24,7 @@ s32 renderCtxPackPassFlags(s32 first, s32 second);
 void FUN_00186940(void);
 void effectSpawnPositionDefault(u32 color, f32 x, f32 y, f32 z);
 f32 phaseCosine(f32);
-f32 FUN_001a1ee0(f32);
+f32 phaseSine(f32);
 void FUN_002371b0(void);
 
 /* Angle of the i-th of the 19 points on the ring (a full turn in 18 steps, in the interpolation tables' units). */
@@ -57,7 +57,7 @@ void FUN_002b3178(const TitleRadialGradient *gradient)
     effectSpawnPositionDefault(centerColor.word, centerX, centerY, 0.0f);
     for (s32 i = 0; i < 19; ++i) {
         f32 x = centerX + radius * phaseCosine(titleRingPhase(i));
-        f32 y = centerY + radius * FUN_001a1ee0(titleRingPhase(i));
+        f32 y = centerY + radius * phaseSine(titleRingPhase(i));
         effectSpawnPositionDefault(edgeColor.word, x, y, 0.0f);
     }
     FUN_002371b0();

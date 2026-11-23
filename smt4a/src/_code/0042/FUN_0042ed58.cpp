@@ -10,7 +10,7 @@ int clockGetTicksAsMicroseconds(int *);
 int FUN_0042d5b4(int);
 int FUN_0042e870(int *, int);
 int nn_cec_CTR_MessageBox_GetMessageBoxNum(int *, int);
-int rt_memcpy(int *, int, int);
+int __aeabi_memcpy(int *, int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_13: 6 slot(s), 24 byte(s) */
@@ -39,7 +39,7 @@ extern unsigned int nn_cec_CTR_MessageBox_SetMessageBoxData(unsigned int, unsign
 extern unsigned int nn_cec_CTR_MessageBox_WriteBoxInfo(unsigned int, int, unsigned int, unsigned int *);
 extern unsigned int nn_cec_CTR_MessageBox_WriteMessageBoxInfo(unsigned int);
 extern unsigned int nn_cec_CTR_MessageBox_WriteMessageBoxList(unsigned int);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int FUN_0042ed58(int *param_1,unsigned int param_2,int param_3,int param_4,unsigned int param_5,unsigned int param_6,
@@ -145,7 +145,7 @@ unsigned int FUN_0042ed58(int *param_1,unsigned int param_2,int param_3,int para
             *(unsigned char *)((int)param_1 + 0x1a9) = 1;
             param_1[0x69] = temp_v9;
             *(unsigned char *)(param_1 + 0x6a) = 1;
-            rt_memcpy(param_1 + 0x6b,temp_v10,0x20);
+            __aeabi_memcpy(param_1 + 0x6b,temp_v10,0x20);
             clockGetTicksAsMicroseconds(&temp_v8);
             temp_v5 = temp_v8;
             uStack_4c = uStack_3c;

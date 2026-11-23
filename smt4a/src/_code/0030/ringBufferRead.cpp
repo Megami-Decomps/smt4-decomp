@@ -19,7 +19,7 @@ typedef struct Reader {
     /* 0x1C */ Ring *ring;
 } Reader;
 
-void *rt_memcpy(void *dst, const void *src, u32 size);
+void *__aeabi_memcpy(void *dst, const void *src, u32 size);
 
 /* Copies as many bytes as fit (min of the reader's remaining space and the ring's available data) out of the ring buffer, advancing both. */
 void ringBufferRead(Reader *reader)
@@ -30,7 +30,7 @@ void ringBufferRead(Reader *reader)
         count = reader->remaining;
     }
     if (count != 0) {
-        rt_memcpy(reader->dest, reader->ring->readPos, count);
+        __aeabi_memcpy(reader->dest, reader->ring->readPos, count);
         reader->dest += count;
         reader->ring->readPos += count;
         reader->total += count;

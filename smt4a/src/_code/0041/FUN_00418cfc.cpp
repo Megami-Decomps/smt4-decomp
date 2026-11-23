@@ -22,7 +22,7 @@ typedef void (*TexFormatHook)(TexTileState *state);
 
 extern TexFormatHook DAT_005c143c[4];
 
-void rt_memcpy(void *destination, const void *source, u32 size);
+void __aeabi_memcpy(void *destination, const void *source, u32 size);
 s32 textureConvertLinearTile(u8 tile[256], u32 destination, s32 rows, TexTileState *state);
 s32 textureConvertTiledTile(u8 tile[256], s32 destination, s32 rows, TexTileState *state);
 
@@ -77,12 +77,12 @@ u32 FUN_00418cfc(s32 mode, u32 format, u32 type, u32 width, u32 height, u8 *sour
                 u8 *out = tile;
 
                 for (s32 k = 0; k < 8; k++) {
-                    rt_memcpy(out, line, (bpp * 8) / 8);
+                    __aeabi_memcpy(out, line, (bpp * 8) / 8);
                     out += (bpp * 8) / 8;
                     line += (state.width * bpp) / 8;
                 }
             } else {
-                rt_memcpy(tile, state.source + (index * bpp * 64) / 8, (bpp * 64) / 8);
+                __aeabi_memcpy(tile, state.source + (index * bpp * 64) / 8, (bpp * 64) / 8);
             }
             index = y * state.tilesX + x;
             row = index / state.tilesX;

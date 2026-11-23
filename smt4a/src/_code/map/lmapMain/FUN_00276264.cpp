@@ -137,7 +137,7 @@ int scrScriptProcessStartEntry(...);
 int FUN_00311b74(void);
 int naviMainSetFlagsAndActivate(...);
 int scrSetStringSlot(...);
-int FUN_003401a4(...);
+int lmapMainUpdateState(...);
 int mapProbePositionDownward(...);
 int FUN_00387014(void);
 int aocSelectedRecordIsUnavailable(void);
@@ -185,7 +185,7 @@ int navigationSetArguments(...);
 int lmapUpdateMapBgm(void);
 int naviMainSetSelectionResetProgress(...);
 int lmapInitializeActorHandles(void);
-int FUN_0033e014(...);
+int mapIfQueueNotice(...);
 int FUN_00356674(void);
 int mapSetDepartureIndex(...); // declcheck: local (romwright prototype; including map/mapDepart.h does not compile here: it redeclares mapProbePositionDownward)
 int FUN_00379d58(void);
@@ -507,9 +507,9 @@ extern int FUN_0031d230(void);
 extern int gameFlagsGet(unsigned int);
 extern int FUN_0033bfac(void);
 extern int mapIfGetState(void);
-/* Supplied declaration required: FUN_0033e014. */
+/* Supplied declaration required: mapIfQueueNotice. */
 /* Supplied declaration required: FUN_0033f9f4. */
-/* Supplied declaration required: FUN_003401a4. */
+/* Supplied declaration required: lmapMainUpdateState. */
 /* Supplied declaration required: FUN_00341fa4. */
 /* Supplied declaration required: mapProjectPointHeightToCollision. */
 /* Supplied declaration required: mapProbePositionDownward. */
@@ -939,7 +939,7 @@ unsigned int FUN_00276264(void)
     naviMainSetSelectionResetProgress(puVar2[0x10]);
     navigationSetArguments(puVar2[0x10],puVar2[0x12],DAT_005f1604);
     if ((DAT_005f1634 != '\0') || (*(char *)(puVar2 + 0x278) != '\0')) {
-      FUN_0033e014(g_gameState.mapId,DAT_005f1600);
+      mapIfQueueNotice(g_gameState.mapId,DAT_005f1600);
     }
     temp_v8 = puVar2[3] + 1;
     puVar2[3] = temp_v8;
@@ -1585,7 +1585,7 @@ LAB_00276f5c:
                   }
                   else {
                     puVar19 = puVar2;
-                    FUN_003401a4();
+                    lmapMainUpdateState();
                     temp_v1 = (char)(int)puVar19;
                   }
                 }
@@ -2624,7 +2624,7 @@ LAB_00279834:
     DAT_005f1658 = 0;
     puVar2[3] = puVar2[3] + 1;
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     FUN_00297c3c();
     FUN_00234b30();
@@ -2632,7 +2632,7 @@ LAB_00279834:
     break;
   case 0x20:
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     FUN_00297c3c();
     FUN_00234b30();
@@ -2682,12 +2682,12 @@ LAB_0027a7a8:
     DAT_005f1658 = 0;
     puVar2[3] = puVar2[3] + 1;
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     break;
   case 0x22:
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     temp_v8 = scrRunOpcodesStub(puVar2[0x280]);
     if (temp_v8 != 2) {
@@ -2728,13 +2728,13 @@ LAB_0027a7a8:
     DAT_005f1658 = 0;
     puVar2[3] = puVar2[3] + 1;
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     mapPopupReset();
     return 0;
   case 0x24:
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     temp_v8 = scrRunOpcodesStub(puVar2[0x280]);
     if (temp_v8 != 2) {
@@ -2771,7 +2771,7 @@ LAB_0027a7a8:
     messageSetScriptDisplayMode();
     scrScriptProcessStartEntry(puVar2[0x280],DAT_005f165c);
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     FUN_00249dec();
     FUN_00297c3c();
@@ -2784,7 +2784,7 @@ LAB_0027a7a8:
     puVar2[3] = puVar2[3] + 1;
     break;
   case 0x26:
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     FUN_0036a434(puVar2);
     FUN_00249dec();
@@ -2808,7 +2808,7 @@ LAB_0027a7a8:
     break;
   case 0x27:
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     FUN_00249dec();
     FUN_00297c3c();
@@ -2832,7 +2832,7 @@ LAB_0027a7a8:
     puVar2[4] = 0;
     break;
   case 0x28:
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     FUN_0036a434(puVar2);
     FUN_00249dec();
@@ -2874,7 +2874,7 @@ LAB_0027a7a8:
     messageSetScriptDisplayMode();
     scrScriptProcessStartEntry(puVar2[0x27d],puVar2[0x279]);
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     mapPopupReset();
     puVar2[3] = puVar2[3] + 1;
@@ -2882,7 +2882,7 @@ LAB_0027a7a8:
     break;
   case 0x2a:
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     puVar2[4] = puVar2[4] + 1;
     temp_v8 = scrRunOpcodesStub(puVar2[0x27d]);
@@ -2910,7 +2910,7 @@ LAB_0027a030:
     break;
   case 0x2c:
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     puVar2[4] = puVar2[4] + 1;
     temp_v8 = scrRunOpcodesStub(puVar2[0x27d]);
@@ -2927,7 +2927,7 @@ LAB_0027a030:
     break;
   case 0x2e:
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     puVar2[4] = puVar2[4] + 1;
     temp_v8 = scrRunOpcodesStub(puVar2[0x27d]);
@@ -2965,7 +2965,7 @@ LAB_0027a030:
     messageSetScriptDisplayMode();
     scrScriptProcessStartEntry(puVar2[0x27d],puVar2[0x279]);
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     FUN_00297c3c();
     FUN_00234b30();
@@ -2976,7 +2976,7 @@ LAB_0027a030:
   case 0x30:
     puVar2[4] = puVar2[4] + 1;
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     FUN_00297c3c();
     FUN_00234b30();
@@ -3043,7 +3043,7 @@ LAB_0027a030:
       puVar19[0x35] = 0;
     }
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     temp_v8 = puVar2[4];
     puVar2[4] = temp_v8 + 1;
@@ -4054,7 +4054,7 @@ LAB_0027a030:
   case 0x5d:
     __2sprintf((char *)temp_v27,(const char *)(0x27bf80),puVar2[0x10] - 100);
     asdEnvResetModelBank(temp_v27,0);
-    FUN_0033e014(g_gameState.mapId,DAT_005f1600);
+    mapIfQueueNotice(g_gameState.mapId,DAT_005f1600);
     puVar2[3] = puVar2[3] + 1;
     puVar2[4] = 0;
     break;
@@ -4234,7 +4234,7 @@ LAB_0027ca0c:
         naviMainRequestProcessing(8,0);
       }
     }
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     temp_v8 = puVar2[4];
     puVar2[4] = temp_v8 + 1;
@@ -4346,7 +4346,7 @@ LAB_0027ca0c:
       puVar19[0x35] = 0;
     }
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     temp_v8 = puVar2[4];
     puVar2[4] = temp_v8 + 1;
@@ -4363,7 +4363,7 @@ LAB_0027ca0c:
       slotSetRequest(1,10,0xff);
     }
     FUN_0036a434(puVar2);
-    FUN_003401a4(puVar2);
+    lmapMainUpdateState(puVar2);
     followerDisplayUpdate(puVar2);
     puVar2[4] = puVar2[4] + 1;
     temp_v8 = pairedAvailabilityBothReady();

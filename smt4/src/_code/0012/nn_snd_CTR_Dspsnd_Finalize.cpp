@@ -9,7 +9,7 @@ int FUN_0013a1f4(int, unsigned short [2], int);
 int FUN_0013a294(int, int);
 int FUN_0013a4c0(int, short [2]);
 int threadSleepDuration(unsigned char *, int);
-int rt_memcpy(int *, int, int);
+int __aeabi_memcpy(int *, int, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int software_interrupt(int);
 
 /* stack frame of param_2: 3 slot(s), 5 byte(s) */
@@ -29,7 +29,7 @@ extern unsigned char DAT_004a95c0; /* 0x4a95c0 */
 /* Supplied declaration required: threadSleepDuration. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void nn_snd_CTR_Dspsnd_Finalize(int *param_1,unsigned char param_2)
@@ -57,7 +57,7 @@ void nn_snd_CTR_Dspsnd_Finalize(int *param_1,unsigned char param_2)
     threadSleepDuration(&DAT_004a95c0,0);
   }
   if (param_2) {
-    rt_memcpy(param_1 + 6,param_1[0x42a],0x1080);
+    __aeabi_memcpy(param_1 + 6,param_1[0x42a],0x1080);
   }
   nn_os_CriticalSection_Enter((unsigned int)(param_1 + 2));
   *(unsigned char *)(param_1 + 0x4c6) = 0;

@@ -74,7 +74,8 @@ extern "C" void FUN_003ab550(Obj422448 *screen)
     uiInitializeEightTimerSet(view->timers);
     FUN_00233240(view->timers, 0);
     FUN_00233240(view->timers, 1);
-    // The allocation owner is not initialized in the retail code.
+    /* Never set, as in filterCreateQuad: retail passes r5, which this function never assigns, as the allocation
+     * owner (no known value; giving it one costs 42 lines). */
     void *allocationOwner;
     Obj42242c *controller = new (allocationOwner) Obj42242c;
     view->controller = controller;

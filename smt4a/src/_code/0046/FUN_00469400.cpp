@@ -9,7 +9,7 @@ int qsort(int, unsigned int, int, unsigned char *);
 int gameFlagIsSet(...);
 int resourceObjectSetNamedFlag(...);
 int dataTable27Count(void);
-int rt_memcpy(int *, int);
+int __aeabi_memcpy(int *, int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -50,7 +50,7 @@ extern int FUN_003f86c0(int);
 extern int dataTable27GetEntry(int, unsigned int);
 /* Supplied declaration required: dataTable27Count. */
 extern int dataTable28IsLoaded(int);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_00469400(int param_1)
@@ -94,7 +94,7 @@ void FUN_00469400(int param_1)
     do {
       temp_v6 = temp_v5 + temp_v11 * 0x88;
       if ((((unsigned int)*(unsigned short *)(temp_v6 + 0x60) == (int)*(char *)(param_1 + 0x10)) &&
-          ((rt_memcpy(&temp_v14,temp_v6), *(short *)(temp_v6 + 0x66) == 0 ||
+          ((__aeabi_memcpy(&temp_v14,temp_v6), *(short *)(temp_v6 + 0x66) == 0 ||
            (temp_v7 = gameFlagIsSet(), temp_v7 != 0)))) &&
          ((*(short *)(temp_v6 + 0x68) == 0 || (temp_v7 = gameFlagIsSet(), temp_v7 == 0)))) {
         temp_v8 = *(int *)(param_1 + 0xab8);

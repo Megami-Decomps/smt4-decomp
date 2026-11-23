@@ -1,4 +1,6 @@
-/* NON_MATCHING: The count/table registers are reversed, with a later condition-field address calculation and reversed loop comparison operands. */
+/* NON_MATCHING: 6 lines: with the table indexed at each use the count and table registers match; retail forms the
+ * flag fields' base (entry + 0x100) before the first test, and compares index,count where the build compares
+ * count,index (the Apocalypse twin FUN_002b79d8 has the same loop test). */
 #include "common.h"
 
 namespace {
@@ -25,11 +27,10 @@ u32 gameFlagIsSet(s32 flag);
 void FUN_002644a8(void)
 {
     for (s32 i = 0; i < g_entryTableInfo.count; ++i) {
-        ConditionalMapEntry *entry = &g_namedEntryTable[i];
-        if (entry->disabled == 0 && entry->unk12C != 0 &&
-            ((entry->requiredFlag != 0 && !gameFlagIsSet(entry->requiredFlag)) ||
-             (entry->forbiddenFlag != 0 && gameFlagIsSet(entry->forbiddenFlag)))) {
-            entry->disabled = 1;
+        if (g_namedEntryTable[i].disabled == 0 && g_namedEntryTable[i].unk12C != 0 &&
+            ((g_namedEntryTable[i].requiredFlag != 0 && !gameFlagIsSet(g_namedEntryTable[i].requiredFlag)) ||
+             (g_namedEntryTable[i].forbiddenFlag != 0 && gameFlagIsSet(g_namedEntryTable[i].forbiddenFlag)))) {
+            g_namedEntryTable[i].disabled = 1;
         }
     }
 }

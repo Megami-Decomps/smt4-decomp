@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void rt_memcpy(void *dst, const void *src, u32 size);
+void __aeabi_memcpy(void *dst, const void *src, u32 size);
 void effBlockSetBlobB(EffBlock *block, const void *src, s32 size, u16 tag);
 
 /* effPartsSetData's body (blob A's counterpart of effBlockSetBlobB), inlined here as retail did: replace blob A with a heap copy of `data`. */
@@ -22,7 +22,7 @@ static __inline void effBlockSetBlobA(EffBlock *block, const void *data, s32 siz
         block->ownedA = copy;
         block->dataA = copy;
         block->sizeA = size;
-        rt_memcpy(block->dataA, data, size);
+        __aeabi_memcpy(block->dataA, data, size);
     }
 }
 

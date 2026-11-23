@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int rt_memcpy(void *dst, const u8 *src, int size);
+int __aeabi_memcpy(void *dst, const u8 *src, int size); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 extern PlaceWindow *g_placeWin;
 
@@ -27,7 +27,7 @@ void placeWinStartText(const u8 *text)
         }
         length = length + 2;
     } while (length < 0x80);
-    rt_memcpy(obj->text, text, length);
+    __aeabi_memcpy(obj->text, text, length);
 }
 
 } /* extern "C" */

@@ -7,7 +7,7 @@ extern "C" {
 extern AsdSequence g_asdSequence;
 extern const char g_asdSequenceSourcePath[]; /* __FILE__ of AsdSequence.cpp */
 
-void rt_memcpy(void *dst, const void *src, u32 size);
+void __aeabi_memcpy(void *dst, const void *src, u32 size);
 
 /* Requests a switch to `state`, with a copy of `size` bytes of `arg` (if any) for its enter
  * callback, and tells the current state to exit. */
@@ -23,7 +23,7 @@ void asdSequenceRequest(s32 state, const void *arg, u32 size)
         asdDebugTrace(g_asdSequenceSourcePath, 132);
         seq->nextArg = asdMemAlloc(0x100, 0x100, 0, size, 1);
         seq->nextArgSize = size;
-        rt_memcpy(seq->nextArg, arg, size);
+        __aeabi_memcpy(seq->nextArg, arg, size);
     } else {
         seq->nextArg = NULL;
         seq->nextArgSize = 0;

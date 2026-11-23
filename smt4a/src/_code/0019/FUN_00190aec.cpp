@@ -9,7 +9,7 @@ int slotTableReplace(...);
 int FUN_001a5e84(...);
 int FUN_001b1e88(...);
 int builtin_strncpy(...);
-int rt_memcpy(...);
+int __aeabi_memcpy(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 3 slot(s), 9 byte(s) */
@@ -26,7 +26,7 @@ extern int FUN_001a8930(int, unsigned int, unsigned int *);
 extern int asdWaveArchiveHasExpectedBlock(unsigned char *);
 /* Supplied declaration required: FUN_001b1e88. */
 extern int nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(unsigned int);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_00190aec(int *param_1,unsigned int param_2,int *param_3)
@@ -59,7 +59,7 @@ void FUN_00190aec(int *param_1,unsigned int param_2,int *param_3)
       temp_v1 = nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(temp_v2);
       temp_v3 = (**(romwright_code **)(*param_3 + 8))(param_3,temp_v1 + temp_v6 * 4 + 4);
       if (temp_v3 != 0) {
-        rt_memcpy(temp_v3,temp_v2,temp_v1);
+        __aeabi_memcpy(temp_v3,temp_v2,temp_v1);
         builtin_strncpy((char *)(temp_v3 + temp_v1),"CWAT",4);
         FUN_001a5e84(temp_v9,temp_v3,1);
         FUN_001b1e88(temp_v9);

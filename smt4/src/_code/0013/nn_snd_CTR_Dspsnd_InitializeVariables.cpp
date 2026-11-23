@@ -11,7 +11,7 @@ int FUN_00146894(int, int *);
 int svcWaitSynchronizationN(unsigned char *, int *, int, int, unsigned int, unsigned int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int resultHandleFailure(...);
 int coproc_moveto_Data_Synchronization(int);
-int rt_memcpy(int, int *, int);
+int __aeabi_memcpy(int, int *, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int software_interrupt(int);
 
 /* stack frame of param_2: 19 slot(s), 72 byte(s) */
@@ -47,7 +47,7 @@ typedef struct {
 /* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void nn_snd_CTR_Dspsnd_InitializeVariables(int *param_1,unsigned char param_2)
@@ -91,7 +91,7 @@ void nn_snd_CTR_Dspsnd_InitializeVariables(int *param_1,unsigned char param_2)
     }
     else {
       temp_v10[0] = 2;
-      rt_memcpy(param_1[0x42a],param_1 + 6,0x1080);
+      __aeabi_memcpy(param_1[0x42a],param_1 + 6,0x1080);
       coproc_moveto_Data_Synchronization(0);
     }
     FUN_0013a1f4(2,temp_v10,4);

@@ -64,7 +64,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0023d078. */
-extern int FUN_0023d0d4(int, unsigned int);
+extern int gpuWriteUniformColor(int, unsigned int);
 /* Supplied declaration required: FUN_0023d158. */
 extern unsigned int resourceGetIndexedEntry(int, unsigned int);
 /* Supplied declaration required: matrixScaleColumns. */
@@ -225,7 +225,7 @@ void FUN_00342250(int param_1,unsigned int param_2)
             temp_v8 = temp_v3;
           }
           if (temp_v9 != temp_v2) {
-            temp_v22 = FUN_0023d0d4(temp_v22,temp_v2);
+            temp_v22 = gpuWriteUniformColor(temp_v22,temp_v2);
             temp_v9 = temp_v2;
           }
           if (temp_v7 != temp_v23) {

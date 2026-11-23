@@ -7,7 +7,7 @@
 extern "C" {
 extern MenuState *g_menuState;
 void sysMemClear(void *destination, u32 size);
-void rt_memcpy(void *destination, const void *source, u32 size);
+void __aeabi_memcpy(void *destination, const void *source, u32 size);
 s32 padGetMappedValue(s32 id);
 s32 partyFindSlotById(u32 id);
 s32 FUN_004bd098(void *unit, s32 skillId);
@@ -45,7 +45,7 @@ void btlMenuSetMessageText(const char *text)
         sysMemClear(menu->tail.text, sizeof(menu->tail.text));
         for (s32 length = 0; length < 61; ++length) {
             if (text[length] == '\0') {
-                rt_memcpy(menu->tail.text, text, length + 1);
+                __aeabi_memcpy(menu->tail.text, text, length + 1);
                 menu->hasText = 1;
                 break;
             }

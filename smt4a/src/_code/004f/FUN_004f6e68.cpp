@@ -1,4 +1,3 @@
-/* NON_MATCHING: identical instruction count and flow; only the prologue differs: retail forms the addresses of the two request words as `base + 7168 + 852/856` with adds, armcc here loads the second offset from the literal pool (`ldr r1,[pc]; str sl,[r1,r4]`), which shifts every later branch by 4 bytes. */
 #include "battle/BtlEffectFiles.h"
 
 extern "C" {
@@ -20,25 +19,27 @@ static void clearEffectSlot(BtlEffectFileSlot *slot)
 /* Resets every effect file slot of the battle effect work. */
 void FUN_004f6e68(BtlEffectFiles *work)
 {
+    s32 i;
+
     work->requestA = 0;
     work->requestB = 0;
-    for (s32 i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++) {
         clearEffectSlot(&work->unitSlots[i]);
         clearEffectSlot(&work->secondSlots[i]);
         clearEffectSlot(&work->thirdSlots[i]);
         clearEffectSlot(&work->fourthSlots[i]);
     }
-    for (s32 i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++)
         clearEffectSlot(&work->fifthSlots[i]);
-    for (s32 i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++)
         clearEffectSlot(&work->eighthSlots[i]);
     clearEffectSlot(&work->singleSlot);
     clearEffectSlot(&work->lastSlot);
-    for (s32 i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++)
         clearEffectSlot(&work->sixthSlots[i]);
-    for (s32 i = 0; i < 2; i++)
+    for (i = 0; i < 2; i++)
         clearEffectSlot(&work->seventhSlots[i]);
-    for (s32 i = 0; i < 11; i++)
+    for (i = 0; i < 11; i++)
         work->markerSlots[i].handle = 0xFF;
 }
 

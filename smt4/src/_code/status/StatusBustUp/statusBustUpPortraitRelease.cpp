@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the reference decrements swap r0/r1 (retail keeps the counter array in r1 and the count in r0); constants and layout now match. */
 #include "status/StatusBustUp.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -35,26 +34,26 @@ void statusBustUpPortraitRelease(s32 portrait, s32 isDevil)
                 if (portrait >= 129) {
                     return;
                 }
-                s8 *references = static_cast<s8 *>(g_statusBustUpResources.workB);
-                if (--references[portrait] > 0) {
+                --((s8 *)g_statusBustUpResources.workB)[portrait];
+                if (((s8 *)g_statusBustUpResources.workB)[portrait] > 0) {
                     return;
                 }
                 if (asdTMTexTableNodeIsLoaded(specialTable, portrait)) {
                     asdTMTexTableReleaseNode(specialTable, portrait);
                 }
-                static_cast<s8 *>(g_statusBustUpResources.workB)[portrait] = 0;
+                ((s8 *)g_statusBustUpResources.workB)[portrait] = 0;
                 return;
             }
         }
     }
-    s8 *references = static_cast<s8 *>(g_statusBustUpResources.workA);
-    if (--references[portrait] > 0) {
+    --((s8 *)g_statusBustUpResources.workA)[portrait];
+    if (((s8 *)g_statusBustUpResources.workA)[portrait] > 0) {
         return;
     }
     if (asdTMTexTableNodeIsLoaded(table, portrait)) {
         asdTMTexTableReleaseNode(table, portrait);
         packageFileDisableByKindName(g_aocSystem, table, portrait);
     }
-    static_cast<s8 *>(g_statusBustUpResources.workA)[portrait] = 0;
+    ((s8 *)g_statusBustUpResources.workA)[portrait] = 0;
 }
 }

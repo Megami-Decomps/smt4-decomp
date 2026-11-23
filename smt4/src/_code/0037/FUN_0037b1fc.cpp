@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0037a3cc(...);
 int nw_io_FileStream_FilePosition_Seek(int *, int, int);
-int rt_memcpy(...);
+int __aeabi_memcpy(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0037a3cc. */
 /* Supplied declaration required: nw_io_FileStream_FilePosition_Seek. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 int * FUN_0037b1fc(int *param_1,unsigned int param_2,int *param_3,int param_4)
@@ -42,7 +42,7 @@ int * FUN_0037b1fc(int *param_1,unsigned int param_2,int *param_3,int param_4)
   }
   if ((-1 < temp_v1 && temp_v1 <= (int)piVar3) &&
      ((unsigned int)((int)piVar3 + (int)param_3) <= (unsigned int)(temp_v1 + param_4))) {
-    rt_memcpy(param_2,(int)piVar3 + (temp_v0 - temp_v1),param_3);
+    __aeabi_memcpy(param_2,(int)piVar3 + (temp_v0 - temp_v1),param_3);
     param_1[0x18] = param_1[0x18] + (int)param_3;
     return param_3;
   }
@@ -58,7 +58,7 @@ int * FUN_0037b1fc(int *param_1,unsigned int param_2,int *param_3,int param_4)
   if ((int *)param_1[0x16] >= param_3) {
     FUN_0037a3cc(param_1,param_1[0x15]);
     if (-1 < (int)piVar3) {
-      rt_memcpy(param_2,param_1[0x15],param_3);
+      __aeabi_memcpy(param_2,param_1[0x15],param_3);
       param_1[0x18] = param_1[0x18] + (int)param_3;
       return param_3;
     }
@@ -66,7 +66,7 @@ int * FUN_0037b1fc(int *param_1,unsigned int param_2,int *param_3,int param_4)
   else {
     FUN_0037a3cc(param_1,param_2,param_3);
     if (-1 < (int)piVar3) {
-      rt_memcpy(param_1[0x15],param_2,param_1[0x16]);
+      __aeabi_memcpy(param_1[0x15],param_2,param_1[0x16]);
       param_1[0x18] = param_1[0x18] + (int)param_3;
       return param_3;
     }

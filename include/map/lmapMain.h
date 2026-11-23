@@ -49,7 +49,7 @@ typedef struct LmapMainState {
     /* 0x08 */ u8 freeOnEnd;      /* 0 = keep the block after the job ends */
     /* 0x09 */ u8 unk09;
     /* 0x0A */ u8 unk0A;
-    /* 0x0B */ s8 external;      /* nonzero: lmapRaiseSceneTransition steps the map instead of FUN_0026493c */
+    /* 0x0B */ s8 external;      /* nonzero: lmapRaiseSceneTransition steps the map instead of lmapMainUpdateState */
     /* 0x0C */ u32 unk0C;
     /* 0x10 */ u32 unk10;
     /* 0x14 */ u8 unk14[0x2C];
@@ -84,10 +84,18 @@ typedef struct LmapMainState {
     /* 0x994 */ s32 unk994;
     /* 0x998 */ u8 unk998;
     /* 0x999 */ s8 bgmSuppressed;  /* nonzero: lmapUpdateMapBgm leaves the BGM alone */
-    /* 0x99A */ u8 unk99A[6];
+    /* 0x99A */ u8 unk99A[2];
+    /* 0x99C */ s32 eventEntry;    /* the entry of event.table that event.script runs */
     /* 0x9A0 */ u8 unk9A0;
     /* 0x9A1 */ u8 unk9A1[3];
-    /* 0x9A4 */ u32 unk9A4[6];
+    union {
+        /* 0x9A4 */ u32 unk9A4[6];
+        struct {
+            /* 0x9A4 */ struct TableGroupHeader *table; /* the map's event script: its entry table ... */
+            /* 0x9A8 */ u32 unk9A8;
+            /* 0x9AC */ struct ScriptProcess *script;   /* ... and its process */
+        } event;
+    };
     /* 0x9BC */ u8 unk9BC[0x28];
     /* 0x9E4 */ u32 unk9E4[4];
     /* 0x9F4 */ u8 unk9F4[0xC];
@@ -103,7 +111,15 @@ typedef struct LmapMainState {
     /* 0xAAC */ LmapMainSlot slots[128];
     /* 0x4EAC */ u32 unk4EAC;
     /* 0x4EB0 */ f32 unk4EB0[3];
-    /* 0x4EBC */ u8 unk4EBC[0x44];
+    /* 0x4EBC */ u8 unk4EBC[0xC];
+    /* 0x4EC8 */ MapVector moveEnd;       /* state 5: where the scripted move ends, ... */
+    /* 0x4ED4 */ MapVector moveDirection; /* ... its direction, ... */
+    /* 0x4EE0 */ f32 moveSpeed;           /* ... the distance covered per frame, ... */
+    /* 0x4EE4 */ s32 moveFrame;           /* ... the frames moved so far ... */
+    /* 0x4EE8 */ s32 moveFrames;          /* ... and how many the move lasts */
+    /* 0x4EEC */ s16 shakeFrames;         /* state 7: frames the amplitudes keep decaying */
+    /* 0x4EEE */ s16 shakeAmplitude[3];   /* per axis, in hundredths */
+    /* 0x4EF4 */ f32 shakeOffset[3];      /* added to the player's position */
     /* 0x4F00 */ u32 unk4F00;
 } LmapMainState;
 typedef char LmapMainStateLayoutCheck[sizeof(LmapMainState) == 0x4F04 && offsetof(LmapMainState, obj) == 0xEC &&
@@ -229,9 +245,14 @@ typedef struct LmapMainStateA {
     /* 0x0048 */ u32 areaId;
     /* 0x004C */ u16 unk04C;
     /* 0x004E */ u16 unk04E;
-    /* 0x0050 */ u8 unk050[0x74];
+    /* 0x0050 */ u8 unk050[0x44];
+    /* 0x0094 */ u8 unk094;         /* set when a scripted move starts */
+    /* 0x0095 */ u8 unk095[0x2F];
     /* 0x00C4 */ f32 scaleA;
-    /* 0x00C8 */ s32 unkC8;         /* float bits (1.0 at creation) */
+    union {
+        /* 0x00C8 */ s32 unkC8;     /* float bits (1.0 at creation) */
+        /* 0x00C8 */ f32 unkC8Float; /* states 2 to 4 run it down to 0.01 and back up to 1 */
+    };
     /* 0x00CC */ u32 state;         /* lmapMainStateSet */
     /* 0x00D0 */ u32 stateStep;     /* cleared when the state changes */
     /* 0x00D4 */ u32 stateTime;     /* cleared when the state changes */
@@ -251,10 +272,18 @@ typedef struct LmapMainStateA {
     /* 0x09DC */ u32 unk9DC;
     /* 0x09E0 */ u8 unk9E0;
     /* 0x09E1 */ s8 bgmBlocked;    /* nonzero: lmapUpdateMapBgm leaves the BGM alone */
-    /* 0x09E2 */ u8 unk9E2[6];
+    /* 0x09E2 */ u8 unk9E2[2];
+    /* 0x09E4 */ s32 eventEntry;         /* the entry of eventTable that eventScript runs */
     /* 0x09E8 */ u8 unk9E8;
     /* 0x09E9 */ u8 unk9E9[3];
-    /* 0x09EC */ u32 unk9EC[6];
+    union {
+        /* 0x09EC */ u32 unk9EC[6];
+        struct {
+            /* 0x09EC */ struct TableGroupHeader *table; /* the map's event script: its entry table ... */
+            /* 0x09F0 */ u32 unk9F0;
+            /* 0x09F4 */ struct ScriptProcess *script;   /* ... and its process */
+        } event;
+    };
     /* 0x0A04 */ u8 unkA04[0x28];
     /* 0x0A2C */ void *scriptCode;        /* the map script's code, strings and process (FUN_002dfa18) */
     /* 0x0A30 */ void *scriptStrings;
@@ -277,7 +306,15 @@ typedef struct LmapMainStateA {
     /* 0x4F00 */ LmapMainSlot modelSlots[128];
     /* 0x9300 */ u32 unk9300;
     /* 0x9304 */ f32 unk9304[3];
-    /* 0x9310 */ u8 unk9310[0x44];
+    /* 0x9310 */ u8 unk9310[0xC];
+    /* 0x931C */ MapVector moveEnd;       /* state 5: where the scripted move ends, ... */
+    /* 0x9328 */ MapVector moveDirection; /* ... its direction, ... */
+    /* 0x9334 */ f32 moveSpeed;           /* ... the distance covered per frame, ... */
+    /* 0x9338 */ s32 moveFrame;           /* ... the frames moved so far ... */
+    /* 0x933C */ s32 moveFrames;          /* ... and how many the move lasts */
+    /* 0x9340 */ s16 shakeFrames;         /* state 7: frames the amplitudes keep decaying */
+    /* 0x9342 */ s16 shakeAmplitude[3];   /* per axis, in hundredths */
+    /* 0x9348 */ f32 shakeOffset[3];      /* added to the player's position */
     /* 0x9354 */ s32 scriptState;
     /* 0x9358 */ u32 unk9358;
     /* 0x935C */ u32 unk935C;

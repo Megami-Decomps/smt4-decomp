@@ -6,7 +6,7 @@ int jobStop(unsigned int, int);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int asdOperatorDelete(void);
-int FUN_00416c90(void);
+int _ZN20PartnerAttackEntriesD1Ev(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: FUN_00416c90. */
+/* Supplied declaration required: _ZN20PartnerAttackEntriesD1Ev. */
 
 
 void scriptObjDestroy(void)
@@ -38,7 +38,7 @@ void scriptObjDestroy(void)
       *(unsigned int *)(temp_v0 + 0x184) = 0;
     }
     if (*(int *)(temp_v0 + 0x30) != 0) {
-      FUN_00416c90();
+      _ZN20PartnerAttackEntriesD1Ev();
       asdOperatorDelete();
       *(unsigned int *)(temp_v0 + 0x30) = 0;
     }

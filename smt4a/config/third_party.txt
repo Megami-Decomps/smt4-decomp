@@ -3220,6 +3220,7 @@
 0x001af4dc FUN_001af4dc between
 0x001af618 nn_fnd_detail_GetNextListObject name
 0x001af630 FUN_001af630 callers
+0x001af814 FUN_001af814 library
 0x001af88c FUN_001af88c callers
 0x001af958 FUN_001af958 callers
 0x001af968 FUN_001af968 callers
@@ -3307,7 +3308,7 @@
 0x001b3ea4 nw_snd_internal_Util_BitFlag_GetValue name
 0x001b3f20 nw_snd_internal_driver_VoiceManager_GetVoiceCount name
 0x001b3f7c _ZN9Obj42259410initializeEPKv between
-0x001b4030 FUN_001b4030 between
+0x001b4030 __hardfp_fmodf name
 0x001b410c FUN_001b410c callers
 0x001b4110 FUN_001b4110 callers
 0x001b4120 gpuSubmitCommandBlock between
@@ -3316,7 +3317,7 @@
 0x001b4790 FUN_001b4790 between
 0x001b4874 __aeabi_ul2f name
 0x001b487c ll_sto_f twin
-0x001b48d4 frem between
+0x001b48d4 frem callers
 0x001b49fc FUN_001b49fc callers
 0x001b4a00 FUN_001b4a00 between
 0x001b4a20 nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20 name
@@ -3959,7 +3960,7 @@
 0x002e58c4 FUN_002e58c4 between
 0x002e58d8 FUN_002e58d8 between
 0x002e5900 FUN_002e5900 between
-0x002e5a08 rt_memcpy name
+0x002e5a08 __aeabi_memcpy name
 0x002e5ac0 __aeabi_llsl name
 0x002e5fa6 FUN_002e5fa6 library
 0x002e5fcc cursorPushU16 library
@@ -6016,6 +6017,8 @@
 0x0042dbb8 nn_cec_CTR_MessageBox_ReadMessage_35791C name
 0x0042dc70 nn_cec_CTR_MessageBox_ReadMessage_3579D4 name
 0x0042dcc0 nn_cec_CTR_MessageBox_WriteBoxInfo name
+0x0042e870 FUN_0042e870 library
+0x0042ea6c FUN_0042ea6c between
 0x0042eafc nn_cec_CTR_MessageBox_ReadOutBoxIndex name
 0x0042ed58 FUN_0042ed58 between
 0x0042f1cc FUN_0042f1cc between

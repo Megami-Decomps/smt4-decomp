@@ -4,7 +4,7 @@
 
 extern "C" {
 
-f32 FUN_001a1ee0(f32 angle);
+f32 phaseSine(f32 angle);
 f32 phaseCosine(f32 angle);
 void FUN_003bfb50(void *out, const Vec3f *axis, u32 arg, f32 oneMinusCos, f32 sine);
 
@@ -30,7 +30,7 @@ void *rotationFromAxisDegrees(void *out, const Vec3f *axis, u32 arg, f32 degrees
 
     vec3Normalize(&unit, axis);
     angle = radians * 40.743664f;
-    sine = FUN_001a1ee0(angle);
+    sine = phaseSine(angle);
     FUN_003bfb50(out, &unit, arg, 1.0f - phaseCosine(angle), sine);
     return out;
 }

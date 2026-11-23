@@ -3,7 +3,7 @@
 #include "romwright_types.h"
 extern "C" {
 
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int phaseCosine(void);
 int asdGxSetEffectColorFromRGBA8(unsigned int);
 int randomAdvanceShiftRegister(...);
@@ -62,7 +62,7 @@ extern float DAT_00647308; /* 0x647308 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SUB41 (SUBPIECE). */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 extern unsigned int effGetFrameStep(void);
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: asdGxSetEffectColorFromRGBA8. */
@@ -240,7 +240,7 @@ void FUN_003b32fc(int param_1)
                 temp_v19 = pfVar17[2] * temp_v37;
                 temp_v16 = temp_v19;
                 phaseCosine();
-                FUN_001a1ee0();
+                phaseSine();
                 temp_v17 = pfVar17[3];
                 DAT_006472fc = temp_v19 * temp_v28;
                 DAT_00647300 = temp_v31 * temp_v28;

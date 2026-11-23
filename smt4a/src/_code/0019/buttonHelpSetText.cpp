@@ -3,7 +3,7 @@
 #include <string.h>
 
 extern "C" {
-void *rt_memcpy(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy(void *destination, const void *source, u32 size);
 
 // Set the button-help text color and split at most two newline-delimited display lines.
 void buttonHelpSetText(const s8 *text, u32 color)
@@ -23,11 +23,11 @@ void buttonHelpSetText(const s8 *text, u32 color)
     s32 offset = line = 0;
     do {
         if (text[offset] == '\0') {
-            rt_memcpy(work->text.lines[line].text, text + start, offset - start);
+            __aeabi_memcpy(work->text.lines[line].text, text + start, offset - start);
             break;
         }
         if (text[offset] == '\n') {
-            rt_memcpy(work->text.lines[line].text, text + start, offset - start);
+            __aeabi_memcpy(work->text.lines[line].text, text + start, offset - start);
             start = offset + 1;
             ++line;
         }

@@ -15,7 +15,7 @@ u32 asdCecMessageBoxGetMessageSize(AsdCecMessageBox *box, s32 kind, u32 index);
 s32 nn_cec_CTR_MessageBox_GetMessageId(AsdCecMessageBox *box, AsdCecMessageId *id, s32 kind, u32 index);
 s32 nn_cec_CTR_MessageBox_ReadMessage_3579D4(AsdCecMessageBox *box, AsdCecMessage *message, void *buffer, u32 bufferSize, s32 unk, AsdCecMessageId *id);
 void nn_cec_CTR_Message_Message_sub_object(AsdCecMessage *message);
-void rt_memcpy(void *dst, const void *src, u32 size);
+void __aeabi_memcpy(void *dst, const void *src, u32 size);
 
 /* Reads message `index` of the inbox into `out`; returns nonzero when the message was read. */
 u8 asdCecReadInboxMessage(u32 index, void *out)
@@ -49,7 +49,7 @@ u8 asdCecReadInboxMessage(u32 index, void *out)
                 void *body;
                 u32 bodySize;
                 asdCecMessageGetBody(&message, &body, &bodySize);
-                rt_memcpy(out, body, bodySize);
+                __aeabi_memcpy(out, body, bodySize);
                 ok = 1;
             }
             asdMemFree(buffer);

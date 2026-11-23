@@ -14,7 +14,7 @@ extern "C" {
 extern EffectBehaviorType g_effBehaviorTable[];
 extern const char DAT_004148c8[];
 void *memAlloc(u32, u32, u32, u32, u32, u32);
-void *rt_memcpy(void *, const void *, u32);
+void *__aeabi_memcpy(void *, const void *, u32);
 
 EffectBehaviorBlock *effBehaviorCreate(s32 type, s32 count, const EffectBehaviorParameters *parameters)
 {
@@ -38,8 +38,8 @@ EffectBehaviorBlock *effBehaviorCreate(s32 type, s32 count, const EffectBehavior
     block->state = 0;
     block->elapsed = 0.0f;
     block->owner = block;
-    rt_memcpy(copy, parameters, parameterSize);
-    rt_memcpy(block->initialParameters, parameters, parameterSize);
+    __aeabi_memcpy(copy, parameters, parameterSize);
+    __aeabi_memcpy(block->initialParameters, parameters, parameterSize);
     EffectBehaviorParameters *current = block->parameters;
     behaviorVectorSetIdentity(&current->vectors[0]);
     behaviorVectorSetIdentity(&current->vectors[1]);

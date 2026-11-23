@@ -31,7 +31,7 @@ s32 btlMotionFindSequence(BtlMainStateA *battle, s32 kind, u32 action); // declc
 void FUN_003f2638(BtlMainStateA *battle, u32 action, BattleRosterRecordA *record, u32 flags);
 void btlRosterMotionStepSequence(BtlMainStateA *battle, BattleRosterRecordA *record);
 f32 randomGetNormalizedFloat(void);
-f32 FUN_001a1ee0(f32 angle);
+f32 phaseSine(f32 angle);
 void halfRecClear(BtlMainStateA *battle, BtlUnitDataA *subject);
 void flagSelectionRebuild(void *selection, u32 flags);
 void FUN_004cb64c(BtlMainStateA *battle, BattleRosterRecordA *record);
@@ -123,7 +123,7 @@ u32 battleRosterMotionUpdate(u32 job)
                 if (motion.motionDuration > motion.stateFrame) {
                     f32 angle = (((f32)motion.stateFrame * 1.5707964f) /
                                  (f32)motion.motionDuration) * 40.743664f;
-                    motion.amount = (1.0f - FUN_001a1ee0(angle)) * motion.amplitude;
+                    motion.amount = (1.0f - phaseSine(angle)) * motion.amplitude;
                     if (motion.amount < 0.05f) {
                         motion.amount = 0.0f;
                     }

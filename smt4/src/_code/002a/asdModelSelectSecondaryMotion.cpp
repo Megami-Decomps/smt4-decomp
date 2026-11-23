@@ -1,4 +1,4 @@
-/* NON_MATCHING: direct previous-value update recovers channel lookup; virtual clip-select load registers and dirty-store scheduling differ. */
+/* NON_MATCHING: as in the Apocalypse twin: the virtual clip-select loads take other registers (retail loads the vtable into r1, the clip table into r0) and retail loads the callback after the range and stores the dirty byte last. */
 #include "shard/Shard0034.h"
 #include <stddef.h>
 
@@ -36,8 +36,9 @@ extern "C" void asdModelSelectSecondaryMotion(ModelPropertyController *controlle
         if (time > end)
             time = end;
         f32 value = channel->interpolate(channel->range, time, channel->work);
-        channel->previous = channel->current;
+        f32 previous = channel->current;
         channel->current = value;
+        channel->previous = previous;
         channel->dirty = 1;
     }
 }

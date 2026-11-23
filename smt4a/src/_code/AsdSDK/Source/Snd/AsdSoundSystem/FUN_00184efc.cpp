@@ -13,7 +13,7 @@ int camSetMatrixA(...);
 int FUN_0019ac70(unsigned char [92], unsigned int);
 int FUN_0019b770(...);
 int FUN_0019f678(...);
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int phaseCosine(void);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 int VectorSignedToFloat(...);
@@ -81,7 +81,7 @@ extern unsigned int DAT_0063098c; /* 0x63098c */
 /* Supplied declaration required: FUN_0019ac70. */
 /* Supplied declaration required: FUN_0019b770. */
 /* Supplied declaration required: FUN_0019f678. */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
@@ -399,7 +399,7 @@ LAB_00185068:
           if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
             temp_v16 = temp_v18 * 2.0f * -3.1415927f * temp_v16 * 40.743664f;
             temp_v11 = temp_v16;
-            FUN_001a1ee0();
+            phaseSine();
             temp_v18 = (float)VectorSignedToFloat(param_3[2],(unsigned char)(in_fpscr >> 0x16) & 3);
             param_3[2] = (int)(temp_v18 - temp_v16 * temp_v17);
             phaseCosine();

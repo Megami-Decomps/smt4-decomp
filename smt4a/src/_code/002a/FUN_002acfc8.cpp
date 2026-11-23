@@ -13,16 +13,16 @@ extern "C" void FUN_002acfc8(const char *text, s32 x, s32 y)
     char segment[64];
     if (work->text.highlightStart != 0) {
         u32 length = work->text.highlightStart;
-        rt_memcpy(segment, text, length);
+        __aeabi_memcpy(segment, text, length);
         segment[length] = '\0';
         textDrawString((f32)x, (f32)y, 0.93f, 2, 0.0f, work->text.style, 1.0f, segment);
         prefixWidth = fontMeasureLineAdvance(segment, 2);
     }
     u32 length = work->text.highlightLength;
-    rt_memcpy(segment, text + work->text.highlightStart, length);
+    __aeabi_memcpy(segment, text + work->text.highlightStart, length);
     segment[length] = '\0';
     textDrawString((f32)(x + prefixWidth), (f32)y, 0.93f, 2, 0.0f, work->text.highlightStyle, 1.0f, segment);
     s32 highlightWidth = fontMeasureLineAdvance(segment, 2);
-    rt_memcpy(segment, text + work->text.highlightStart + work->text.highlightLength, 64 - work->text.highlightStart - work->text.highlightLength);
+    __aeabi_memcpy(segment, text + work->text.highlightStart + work->text.highlightLength, 64 - work->text.highlightStart - work->text.highlightLength);
     textDrawString((f32)(x + highlightWidth), (f32)y, 0.93f, 2, 0.0f, work->text.style, 1.0f, segment);
 }

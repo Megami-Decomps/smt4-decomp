@@ -5,6 +5,7 @@
 #include "shard/W5_W5Match2_ScalarGetters.h"
 #include "code/Code002a.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "code/Code0031_Smt4a.h"
 
 namespace {
 struct SlotMenu {
@@ -32,7 +33,6 @@ extern f32 jobGetScalarValue(void);
 extern void texDrawCompositeSprite(s32, s32, u32, s32, s32, s32);
 extern void buttonHelpSetText(s32, u32);
 extern s32 rangeGetMinimumLimit(SlotMenu *);
-extern s32 FUN_0031d174(SlotMenu *);
 extern void FUN_004ba354(SlotMenu *, s32, s32, s32, s32);
 extern s32 flaggedValueHolderGetTotal(SlotMenu *);
 

@@ -1,23 +1,23 @@
-/* NON_MATCHING: Control flow now matches; list/index/entry/global saved registers, kind loads and one secondary-list index register differ. */
+/* NON_MATCHING: Control flow now matches; the list/index/entry/global saved registers and one secondary-list index register differ. */
 #include "ui/TransientSpriteList.h"
 #include "map/mapDepart.h"
 #include "gamedata/FlagBitTests.h"
 #include "game/GameState.h"
 
 extern "C" {
-s32 saveTestFlagRow(u8 row);
+s32 saveTestFlagRow(u32 row, u32 index);
 s32 gameFlagIsSet(s32 flag);
 }
 
 static __inline bool transientSpriteIsUnlocked(const TransientSpriteEntry *entry, bool allowAlternate)
 {
-    if (entry->condition.kind == 0xFF) {
+    if (entry->condition.saveFlagBit == 0xFF) {
         return mapBlockBitTest(entry->condition.id) != 0;
     }
-    if (allowAlternate && entry->condition.kind == 0xFE) {
+    if (allowAlternate && entry->condition.saveFlagBit == 0xFE) {
         return FUN_002fb094(entry->condition.id) != 0;
     }
-    return saveTestFlagRow(entry->condition.saveFlagRow) != 0 &&
+    return saveTestFlagRow(entry->condition.saveFlagRow, entry->condition.saveFlagBit) != 0 &&
         (entry->condition.requiredFlag == 0 || gameFlagIsSet(entry->condition.requiredFlag) != 0) &&
         (entry->condition.excludedFlag == 0 || gameFlagIsSet(entry->condition.excludedFlag) == 0);
 }

@@ -156,21 +156,21 @@ void btlMainSetupFixedParty(BtlMainStateExtA *state)
     }
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlMain.cpp", 13354);
     u8 *playerFlags = static_cast<u8 *>(asdMemoryAllocTracked(0x100, 0x100, 0, FLAG_VALUES_SIZE, 1));
-    rt_memcpy(playerFlags, flagValueGetStorage(), FLAG_VALUES_SIZE);
+    __aeabi_memcpy(playerFlags, flagValueGetStorage(), FLAG_VALUES_SIZE);
     if (g_btlMain.playerFlags == NULL) {
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlMain.cpp", 13360);
         g_btlMain.playerFlags = static_cast<u8 *>(asdMemoryAllocTracked(0x100, 0x100, 0, FLAG_VALUES_SIZE, 1));
-        rt_memcpy(g_btlMain.playerFlags, playerFlags, FLAG_VALUES_SIZE);
+        __aeabi_memcpy(g_btlMain.playerFlags, playerFlags, FLAG_VALUES_SIZE);
     }
-    rt_memcpy(flagValueGetStorage(), g_btlMain.partyFlags, FLAG_VALUES_SIZE);
+    __aeabi_memcpy(flagValueGetStorage(), g_btlMain.partyFlags, FLAG_VALUES_SIZE);
     if (!kept) {
         for (s32 i = 0; i < flagCount; i++) {
             flagValueAdd(flagRow->id, flagRow->amount);
             flagRow++;
         }
     }
-    rt_memcpy(g_btlMain.partyFlags, flagValueGetStorage(), FLAG_VALUES_SIZE);
-    rt_memcpy(flagValueGetStorage(), playerFlags, FLAG_VALUES_SIZE);
+    __aeabi_memcpy(g_btlMain.partyFlags, flagValueGetStorage(), FLAG_VALUES_SIZE);
+    __aeabi_memcpy(flagValueGetStorage(), playerFlags, FLAG_VALUES_SIZE);
     if (playerFlags != NULL) {
         asdMemFree(playerFlags);
     }

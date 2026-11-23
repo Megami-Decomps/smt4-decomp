@@ -7,7 +7,7 @@ extern "C" {
 int FUN_004ac83c(int);
 int bitReaderRead(...);
 int _ZN6MoLive10RingBufferINS_12ObjectHandleEE6insertERKPKS1_S6_(...);
-int rt_memcpy(...);
+int __aeabi_memcpy(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 16 slot(s), 64 byte(s) */
@@ -40,7 +40,7 @@ typedef struct {
 extern int containerGrowCapacity(unsigned int, unsigned int);
 /* Supplied declaration required: _ZN6MoLive10RingBufferINS_12ObjectHandleEE6insertERKPKS1_S6_. */
 extern int moLiveRingBufferReallocate(int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int FUN_004af3b4(long long *param_1,int param_2,unsigned int *param_3,unsigned int param_4)
@@ -230,18 +230,18 @@ unsigned int FUN_004af3b4(long long *param_1,int param_2,unsigned int *param_3,u
             if (temp_v0 >= temp_v2 + temp_v4) {
               temp_v1 = *(int *)(temp_v5 + 8) + temp_v2;
               temp_v7 = param_2;
-              rt_memcpy(temp_v1,temp_v7,temp_v4);
+              __aeabi_memcpy(temp_v1,temp_v7,temp_v4);
             }
             else {
               temp_v7 = param_2 + (temp_v0 - temp_v2);
               if (param_2 != temp_v7) {
-                rt_memcpy(*(int *)(temp_v5 + 8) + temp_v2,param_2,temp_v7 - param_2);
+                __aeabi_memcpy(*(int *)(temp_v5 + 8) + temp_v2,param_2,temp_v7 - param_2);
               }
               temp_v7 = param_2 + (temp_v0 - temp_v2);
               if (temp_v7 != param_2 + temp_v4) {
                 temp_v1 = *(int *)(temp_v5 + 8);
                 temp_v4 = (param_2 + temp_v4) - temp_v7;
-                rt_memcpy(temp_v1,temp_v7,temp_v4);
+                __aeabi_memcpy(temp_v1,temp_v7,temp_v4);
               }
             }
           }
@@ -252,7 +252,7 @@ unsigned int FUN_004af3b4(long long *param_1,int param_2,unsigned int *param_3,u
             temp_v4 = moLiveRingBufferReallocate(temp_v5 + 4,temp_v12,(temp_v4 + temp_v2) & ~temp_v2,0);
             if (temp_v4 != 0) {
               if (param_2 != temp_v7) {
-                rt_memcpy(*(int *)(temp_v5 + 0x10) + *(int *)(temp_v5 + 8),param_2,temp_v7 - param_2);
+                __aeabi_memcpy(*(int *)(temp_v5 + 0x10) + *(int *)(temp_v5 + 8),param_2,temp_v7 - param_2);
               }
               *(unsigned int *)(temp_v5 + 0x14) = 0;
             }

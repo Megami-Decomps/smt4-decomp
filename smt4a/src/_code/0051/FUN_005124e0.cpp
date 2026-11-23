@@ -1,4 +1,4 @@
-/* NON_MATCHING: native constructors; armcc hoists the -1 constant and the module-handle literal above the deferred lock's first store */
+/* NON_MATCHING: native constructors; only the deferred lock's -1 is materialised before its (volatile) zero store, retail after it. */
 #include "classes/Obj2fd02a.h"
 #include "nn/os/CriticalSection.h"
 

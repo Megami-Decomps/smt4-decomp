@@ -206,7 +206,7 @@ int mapCollisionAllocBuffers(void);
 int FUN_0022373c(void);
 int mapDepartSetTarget(...);
 int FUN_00276a3c(void);
-int FUN_00277b5c(...);
+int mapIfQueueNotice(...);
 int mapSpawnActiveSignboardEffects(void);
 int FUN_00277d2c(...);
 int mapGimicUpdateVisualBounds(void);
@@ -565,7 +565,7 @@ extern int FUN_00276348(int);
 /* Supplied declaration required: naviMainApplySetting. */
 /* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_00276a3c. */
-/* Supplied declaration required: FUN_00277b5c. */
+/* Supplied declaration required: mapIfQueueNotice. */
 /* Supplied declaration required: mapSpawnActiveSignboardEffects. */
 /* Supplied declaration required: FUN_00277d2c. */
 /* Supplied declaration required: mapGimicUpdateVisualBounds. */
@@ -1408,7 +1408,7 @@ LAB_001b8e80:
       temp_v0 = *(char *)(puVar14 + 0x11);
     }
     if (DAT_0049f950 != '\0' || temp_v0 != '\0') {
-      FUN_00277b5c(g_gameState.mapId,DAT_0049f920);
+      mapIfQueueNotice(g_gameState.mapId,DAT_0049f920);
     }
     FUN_0021be00();
     lmapCameraSetMapPresets(g_gameState.mapId,DAT_0049f920);
@@ -4393,7 +4393,7 @@ LAB_001bd824:
           navigationSetFieldValue(DAT_0049f928);
           naviMainSetPosition(g_lmapScene + 0x1c);
           navigationApplyOptionalValue(1);
-          FUN_00277b5c(g_gameState.mapId,DAT_0049f920);
+          mapIfQueueNotice(g_gameState.mapId,DAT_0049f920);
           temp_v9 = 0x54;
         }
       }
@@ -5118,7 +5118,7 @@ LAB_001bec78:
           DAT_0049f934 = 1;
           DAT_0049f93c = 1;
           puVar14[9] = 0x54;
-          FUN_00277b5c(g_gameState.mapId,DAT_0049f920);
+          mapIfQueueNotice(g_gameState.mapId,DAT_0049f920);
         }
         if (puVar14[9] == 0x15) {
           buttonHelpSelectMapPreset();

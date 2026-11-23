@@ -16,7 +16,7 @@ void FUN_002551ac(s32 channel, ScriptUnit *unit, BtlActionRecord *record, s32 ki
                   s32 a23, s32 a24, s32 a25);
 void btlQueueReflectEntryAction(s32 action, ScriptUnit *unit, BtlActionRecord *record, s32 flags);
 void objectFlagSetBit(BtlEquip *record, u32 bit);
-void FUN_003ddc70(s32 channel, ScriptUnit *unit, s32 action, f32 duration);
+void btlQueueUniqueScalarAction(s32 channel, ScriptUnit *unit, s32 action, f32 duration);
 void btlQueueKeyedScalarReflectAction(s32 channel, ScriptUnit *unit, u32 resource, s32 a4, s32 a5, s32 a6, s32 a7);
 void FUN_003ddbcc(s32 channel, ScriptUnit *unit, s32 a3, s32 a4, s32 a5, s32 frames, s32 a7);
 
@@ -36,7 +36,7 @@ u32 FUN_002177e8(void)
         BtlEquip *record = reinterpret_cast<BtlEquip *>(gameGetUnitRecord(id - BTL_ENTRY_COUNT));  /* battle code views unit records as BtlEquip */
         record->hp = 0;
         objectFlagSetBit(record, 1);
-        FUN_003ddc70(0, unit, 15, 8.0f);
+        btlQueueUniqueScalarAction(0, unit, 15, 8.0f);
     }
     btlQueueKeyedScalarReflectAction(0, unit, 0x1000178, 0, 0, 0, 0);
     FUN_003ddbcc(0, unit, 0, 1, 2, 180, 3);

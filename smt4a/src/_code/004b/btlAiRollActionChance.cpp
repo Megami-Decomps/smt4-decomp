@@ -1,5 +1,5 @@
-/* NON_MATCHING: 26 lines; only the register choice of the two battle-state mask tests (the blocked test
- * at entry, the forced test after the roll) differs. Mode tests are a switch (retail's cmp #1; beq; cmp #2; bne). */
+/* NON_MATCHING: 8 lines; only the register choice of the forced-mask test after the roll differs (retail loads the
+ * mask's low word into r1 before the state's pair; writing the test as state & mask moves an earlier test instead). Mode tests are a switch (retail's cmp #1; beq; cmp #2; bne). */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/BattleSkillResponseMasks.h"
@@ -125,7 +125,11 @@ u32 btlAiRollActionChance(void *actor, s32 mode, s32 flag)
     }
     roll = lcgRandomRange(99);
     if ((g_btlSkillResponseMasks.alwaysProc & state->forced) != 0) {
-        chance = state->forcedResult != 0 ? 100 : 0;
+        if (state->forcedResult != 0) {
+            chance = 100;
+        } else {
+            chance = 0;
+        }
     }
     return roll < chance;
 }

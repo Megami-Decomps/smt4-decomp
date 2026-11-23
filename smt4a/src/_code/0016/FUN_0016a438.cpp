@@ -11,7 +11,7 @@ int FUN_00193ee0(...);
 int FUN_001940b0(...);
 int FUN_001986c4(unsigned int, float *);
 int FUN_00198848(unsigned int, float *);
-int FUN_001b4030(void);
+int __hardfp_fmodf(void);
 int hardfp_floorf(void);
 int __aeabi_memcpy4(...);
 
@@ -54,7 +54,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00198848. */
 extern unsigned int FUN_001988bc(unsigned int, unsigned char *);
 extern int nameTableLookupEntry(int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001b4030. */
+/* Supplied declaration required: __hardfp_fmodf. */
 extern unsigned int libc_strlen(unsigned int);
 /* Supplied declaration required: strcmp. */
 /* Supplied declaration required: hardfp_floorf. */
@@ -211,7 +211,7 @@ void FUN_0016a438(int param_1,int param_2)
                       temp_v14 = temp_v14 & 0xffffffff;
                       hardfp_floorf();
                     }
-                    FUN_001b4030();
+                    __hardfp_fmodf();
                   }
                   if (*(unsigned char *)(temp_v1 + 0x19) != 0xff) {
                     temp_v16 = *(float *)(pcVar11 + 0xc);

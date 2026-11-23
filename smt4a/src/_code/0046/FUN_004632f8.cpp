@@ -9,7 +9,7 @@ int FUN_004639e4(int);
 int FUN_00463c28(int, int *);
 int FUN_00508490(void);
 int __aeabi_uidivmod(...);
-int rt_memcpy(int, unsigned char [32], int);
+int __aeabi_memcpy(int, unsigned char [32], int);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 20 slot(s), 62 byte(s) */
@@ -50,7 +50,7 @@ extern int FUN_00508fac(int *, unsigned char *, unsigned short *, unsigned int);
 /* Supplied declaration required: __aeabi_uidivmod. */
 extern unsigned int *nw_snd_internal_StreamSoundFile_InfoBlockBody_GetChannelInfoTable(unsigned int);
 extern int nw_snd_internal_StreamSoundFile_InfoBlockBody_GetStreamSoundInfo(unsigned int);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_004632f8(int param_1,int param_2)
@@ -142,7 +142,7 @@ void FUN_004632f8(int param_1,int param_2)
                 return;
               }
               temp_v2 = param_1 + temp_v3 * 0x2c;
-              rt_memcpy(temp_v2 + 0xb96,temp_v26,0x20);
+              __aeabi_memcpy(temp_v2 + 0xb96,temp_v26,0x20);
               *(unsigned short *)(temp_v2 + 0xbb6) = temp_v27;
               *(unsigned short *)(temp_v2 + 3000) = temp_v28;
               *(unsigned short *)(temp_v2 + 0xbba) = temp_v29;

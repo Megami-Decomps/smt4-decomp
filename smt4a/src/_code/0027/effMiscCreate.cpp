@@ -7,7 +7,7 @@ extern "C" {
 extern const char g_effMiscHeaderSourceFileName[]; /* __FILE__ */
 
 void rt_memclr(void *block, s32 size);
-void rt_memcpy(void *dest, const void *src, u32 size);
+void __aeabi_memcpy(void *dest, const void *src, u32 size);
 
 extern EffMiscKind g_effMiscKinds[];
 
@@ -28,7 +28,7 @@ EffMiscObject *effMiscCreate(u32 kind, void *params)
     obj->rotation = identity;
     obj->rotation.w = 1.0f;
     obj->work = obj->workData;
-    rt_memcpy(obj->work, params, workSize);
+    __aeabi_memcpy(obj->work, params, workSize);
     if (g_effMiscKinds[kind].create != NULL) {
         obj->state = g_effMiscKinds[kind].create(params);
     }

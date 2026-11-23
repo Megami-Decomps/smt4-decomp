@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int effGetFrameStep(void);
 int phaseCosine(void);
 int gfxQuaternionWorkspaceBuildMatrix(void);
@@ -58,7 +58,7 @@ extern float DAT_00647348; /* 0x647348 */
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 /* Supplied declaration required: effGetFrameStep. */
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
@@ -189,7 +189,7 @@ void FUN_0039f7cc(int param_1)
             phaseCosine();
             temp_v20 = temp_v20 * (float)temp_v13;
             temp_v8 = pfVar7[4];
-            FUN_001a1ee0();
+            phaseSine();
             DAT_006472e4 = temp_v10 * (float)temp_v13;
             DAT_006472e8 = (float)temp_v16;
             DAT_006472dc = temp_v20;
@@ -234,7 +234,7 @@ void FUN_0039f7cc(int param_1)
                      (temp_v8 - (float)puVar8[0x38]) * 3.1415927f * (float)((unsigned long long)temp_v19 >> 0x20)
                      ) * temp_v21;
             temp_v15 = CONCAT44(temp_v14,temp_v21);
-            FUN_001a1ee0();
+            phaseSine();
             temp_v10 = (float)puVar8[0x32];
             temp_v2 = (float)puVar8[0x33];
             temp_v14 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -269,7 +269,7 @@ void FUN_0039f7cc(int param_1)
             temp_v10 = temp_v10 * (float)temp_v13;
             temp_v20 = pfVar7[4];
             temp_v2 = pfVar7[3] * temp_v21;
-            FUN_001a1ee0();
+            phaseSine();
             DAT_006472e4 = temp_v2 * (float)temp_v13;
             DAT_006472e8 = (float)temp_v16;
             DAT_006472dc = temp_v10;
@@ -339,7 +339,7 @@ void FUN_0039f7cc(int param_1)
               temp_v10 = temp_v10 * temp_v20;
               temp_v8 = pfVar7[4];
               temp_v2 = pfVar7[3] * temp_v21;
-              FUN_001a1ee0();
+              phaseSine();
               DAT_006472e4 = temp_v2 * temp_v20;
               DAT_006472e8 = (float)temp_v16;
               DAT_006472dc = temp_v10;

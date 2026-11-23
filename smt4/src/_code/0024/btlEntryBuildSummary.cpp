@@ -229,6 +229,6 @@ void btlEntryBuildSummary(BattleEntrySummary *result, BtlMainState *state, const
             summary.unk08 = nkmBaseGetRecord(entry->data.guest->id)->unk10;
         }
     }
-    rt_memcpy(result, &summary, sizeof(summary));
+    __aeabi_memcpy(result, &summary, sizeof(summary));
 }
 }

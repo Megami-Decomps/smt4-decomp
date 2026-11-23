@@ -14,7 +14,7 @@ void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 EffectSelectionParts *FUN_00246854(EffectSelectionItem *item);
 char *libc_strcpy(char *destination, const char *source);
 void *resourceResolveHeaderPointer(EffectSelectionBlock *block);
-void rt_memcpy(void *destination, const void *source, u32 size);
+void __aeabi_memcpy(void *destination, const void *source, u32 size);
 void effPartsSetData(EffectSelectionBlock *block, void *data, u32 size, u16 id);
 void *effBlockCreateFromBlock(EffectSelectionBlock *block);
 void effectEditorApplyHandlerState(void *instance);
@@ -57,7 +57,7 @@ extern "C" u32 FUN_00324714()
     EffectSelectionParts *parts = FUN_00246854(copy);
     libc_strcpy(reinterpret_cast<ItemView *>(copy)->name, reinterpret_cast<const char *>(parts->unk00));
     if (parts->type != 0x1B)
-        rt_memcpy(parts->data, resourceResolveHeaderPointer(g_effectEditor.block), parts->size);
+        __aeabi_memcpy(parts->data, resourceResolveHeaderPointer(g_effectEditor.block), parts->size);
     if (parts->data != NULL)
         effPartsSetData(g_effectEditor.block, parts->data, parts->size, parts->id);
     void *instance = effBlockCreateFromBlock(g_effectEditor.block);

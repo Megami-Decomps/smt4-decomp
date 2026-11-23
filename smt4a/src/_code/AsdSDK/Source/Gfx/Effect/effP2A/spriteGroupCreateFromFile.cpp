@@ -7,7 +7,7 @@
 
 extern "C" {
 void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, s32 kind);
-void *rt_memcpy(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy(void *destination, const void *source, u32 size);
 s32 texIsStexFile(const void *image);
 void spriteGroupPlayerSelect(SpriteGroupPlayer *player, s32 group);
 
@@ -25,7 +25,7 @@ SpriteGroupPlayer *spriteGroupCreateFromFile(const SpriteGroupFileHeader *file)
         resource = static_cast<SpriteTextureResource *>(
             memAlloc(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, size, 16, 1));
         resource->allocation = resource;
-        rt_memcpy(resource + 1, file, file->dataSize);
+        __aeabi_memcpy(resource + 1, file, file->dataSize);
         resource->textureCount = textureCount;
         SpriteGroupFileHeader *header = reinterpret_cast<SpriteGroupFileHeader *>(resource + 1);
         resource->group.data = reinterpret_cast<u8 *>(header);

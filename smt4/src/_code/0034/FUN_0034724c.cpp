@@ -1,3 +1,4 @@
+#include "AsdSDK/AsdMemCopy.h"
 #include "common.h"
 
 struct CommandRange {
@@ -21,7 +22,6 @@ extern "C" {
 
 void vertexAttributeUploadStreams(ModelBuffers *model);
 void *asdPrimAlloc(u32 size);
-void rt_memcpy(void *destination, const void *source, u32 size);
 u32 osVirtToPhysAddress(void *address);
 void modelShaderSubmitCommands(ModelBuffers *model, void *commands, CommandRange *range);
 
@@ -37,7 +37,7 @@ void FUN_0034724c(ModelBuffers *model)
             u32 bytes = count << 1;
             void *copy = asdPrimAlloc(bytes);
 
-            rt_memcpy(copy, model->indices, bytes);
+            __aeabi_memcpy(copy, model->indices, bytes);
             range->physicalAddress = osVirtToPhysAddress(copy);
             range->size = count;
             range->valid = 0;

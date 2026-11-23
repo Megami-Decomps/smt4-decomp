@@ -4,7 +4,7 @@ extern "C" {
 
 void memcpySrcFirst(const void *source, void *destination, u32 bytes)
 {
-    rt_memcpy(destination, source, bytes);
+    __aeabi_memcpy(destination, source, bytes);
 }
 
 } /* extern "C" */

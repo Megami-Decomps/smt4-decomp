@@ -7,7 +7,7 @@
 
 extern "C" {
 void* asdPrimAlloc(u32 size);
-void* rt_memcpy(void* destination, const void* source, u32 size);
+void* __aeabi_memcpy(void* destination, const void* source, u32 size); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_0023b9d0(VertexAttributeState*, const VertexAttributeDescription*, u32 address, u32 format);
 
 void vertexAttributeUploadStreams(PolyGeomBuf* geometry)
@@ -44,25 +44,25 @@ void vertexAttributeUploadStreams(PolyGeomBuf* geometry)
     VertexAttributeDescription texcoord;
     if (upload->streams.flags & 1) {
         void* data = asdPrimAlloc(upload->streamBytes(1, 12));
-        rt_memcpy(data, upload->streams.positions, upload->streamBytes(1, 12));
+        __aeabi_memcpy(data, upload->streams.positions, upload->streamBytes(1, 12));
         position.index = 0;
         FUN_0023b9d0(attributes, &position, osVirtToPhysAddress(reinterpret_cast<u32>(data)), 11);
     }
     if (upload->streams.flags & 2) {
         void* data = asdPrimAlloc(upload->streamBytes(2, 16));
-        rt_memcpy(data, upload->streams.floatColors, upload->streamBytes(2, 16));
+        __aeabi_memcpy(data, upload->streams.floatColors, upload->streamBytes(2, 16));
         color.index = 1;
         FUN_0023b9d0(attributes, &color, osVirtToPhysAddress(reinterpret_cast<u32>(data)), 15);
     }
     if (upload->streams.flags & 0x20) {
         void* data = asdPrimAlloc(upload->streamBytes(0x20, 4));
-        rt_memcpy(data, upload->streams.packedColors, upload->streamBytes(0x20, 4));
+        __aeabi_memcpy(data, upload->streams.packedColors, upload->streamBytes(0x20, 4));
         color.index = 1;
         FUN_0023b9d0(attributes, &color, osVirtToPhysAddress(reinterpret_cast<u32>(data)), 13);
     }
     if (upload->streams.flags & 4) {
         void* data = asdPrimAlloc(upload->streamBytes(4, 8));
-        rt_memcpy(data, upload->streams.texcoords, upload->streamBytes(4, 8));
+        __aeabi_memcpy(data, upload->streams.texcoords, upload->streamBytes(4, 8));
         texcoord.index = 2;
         FUN_0023b9d0(attributes, &texcoord, osVirtToPhysAddress(reinterpret_cast<u32>(data)), 7);
     }

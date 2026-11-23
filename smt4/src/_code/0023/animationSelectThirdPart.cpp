@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler hoists the binding load before the state write and changes temporary registers/constant scheduling. Candidate O2. */
+/* NON_MATCHING: with FUN_0034d504's body inlined, retail loads each part pointer chain before materialising its value; the build materialises the zero first and keeps it in r1 (the same order FUN_0034d504 misses). */
 #include "shard/W6_W6Match2_AnimationVisualState.h"
 
 extern "C" void animationResetTracks(AnimationVisualState* state, s32 track, s32 mode);
@@ -7,10 +7,6 @@ extern "C" void animationResetTracks(AnimationVisualState* state, s32 track, s32
 extern "C" void animationSelectThirdPart(AnimationVisualState* state)
 {
     state->state = 5;
-    if (state->binding != NULL) {
-        state->binding->model->parts[0]->enabled = 0;
-        state->binding->model->parts[1]->enabled = 0;
-        state->binding->model->parts[2]->enabled = 1;
-    }
+    animationShowSelectedPart(state);
     animationResetTracks(state, 2, 0);
 }

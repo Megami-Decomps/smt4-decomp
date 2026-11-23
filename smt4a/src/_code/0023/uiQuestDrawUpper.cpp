@@ -33,7 +33,7 @@ f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void efctSetSpeed(f32 speed);
 void uiFadeDraw(u32 id);
 void partyDrawCategorySelectionIcon(u16 category, s32 x, s32 y, u32 tag);
-u32 FUN_00156850(u16 category, s32 arg);
+u32 questDataGetTitle(u16 category, s32 arg);
 void effectRenderTransformedInstance(void *panel, f32 offset);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
 void skinObjectUpdateMatrices(RenderCtxA *context);
@@ -110,7 +110,7 @@ u32 uiQuestDrawUpper(void)
         TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1E, 0x55);
         char text[64];
 
-        sprintf(text, "%s", FUN_00156850(category, 0));
+        sprintf(text, "%s", questDataGetTitle(category, 0));
         textDrawString((f32)(label->x + x), (f32)(label->y + y), 0.375f, 3, 0.0f, -1, speed, text);
         effectRenderTransformedInstance(ui->panel, (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.28f));
         efctSetSpeed(1.0f);

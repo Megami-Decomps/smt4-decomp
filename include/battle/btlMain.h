@@ -40,6 +40,12 @@ struct BtlLoadedActionResource {
     s32 id; /* 0x04 */
 };
 
+/* A pending resource load of the battle's action effects. */
+struct BtlActionLoadSlot {
+    /* 0x00 */ u32 flags;   /* 1: header parsed, 2: textures loaded */
+    /* 0x04 */ s32 id;      /* the resource's id, -1 when free */
+};
+
 /* The battle's state block, kept by a module global (Shin Megami Tensei IV layout). Its allocation is
  * 0x4A58 bytes (FUN_001b0db4 allocates it with the size of this block). */
 typedef struct BtlMainState {
@@ -155,6 +161,18 @@ typedef struct BtlMainState {
             /* 0x4454 */ s32 selectedAction;
             /* 0x4458 */ BtlLoadedActionResource *selectedResource;
         } actionCleanup;
+        /* The summon effect's load (btlSummonLoadAndSpawn): the same block as actionCleanup, with the load
+         * slots before the resources and the load's step. */
+        struct {
+            u8 unk1FD8[0xC];
+            /* 0x1FE4 */ BtlActionLoadSlot slots[42]; /* slots[0] tracks the summon's resource */
+            /* 0x2134 */ BtlLoadedActionResource *resources[42];
+            u8 unk21DC[0x2274];
+            /* 0x4450 */ u8 step;              /* 0: find or request the resource, 1: wait for it and spawn */
+            /* 0x4451 */ u8 unk4451[3];
+            /* 0x4454 */ s32 selectedAction;   /* the action record spawned, -1 while none */
+            /* 0x4458 */ BtlLoadedActionResource *selectedResource;
+        } actionLoad;
         struct {
             u8 prefix1FD8[0x258];
             void *commonMessages;
@@ -288,6 +306,9 @@ typedef char BtlMainStateResidentOffsets[
     offsetof(BtlMainState,residentLoad.flags)==0x49FC &&
     offsetof(BtlMainState,residentLoad.step)==0x49FE &&
     offsetof(BtlMainState,residentLoad.lock)==0x4A00 ? 1 : -1];
+typedef char BtlMainStateActionLoadOffsetCheck[offsetof(BtlMainState, actionLoad.slots) == 0x1FE4 &&
+    offsetof(BtlMainState, actionLoad.resources) == 0x2134 && offsetof(BtlMainState, actionLoad.step) == 0x4450 &&
+    offsetof(BtlMainState, actionLoad.selectedAction) == 0x4454 ? 1 : -1];
 typedef char BtlMainStateLayoutCheck[
     sizeof(BtlMainState) == 0x4A58 && offsetof(BtlMainState, core.selectionIndex) == 0xC4 &&
     offsetof(BtlMainState, core.jobB) == 0x2C && offsetof(BtlMainState, core.freeOnEnd) == 0x60 &&

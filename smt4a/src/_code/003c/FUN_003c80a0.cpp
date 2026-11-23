@@ -4,7 +4,7 @@
 #include "effect/FadeStrip.h"
 
 extern "C" {
-void rt_memcpy(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy(void *destination, const void *source, u32 bytes);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 }
 
@@ -52,7 +52,7 @@ extern "C" void FUN_003c80a0(StripOwnerView *owner, StripParameters *params)
     }
     u32 vertices = rings * 4;
     for (u32 repeat = 1; repeat < repeatCount; repeat++) {
-        rt_memcpy(color, baseColors, vertices * sizeof(u32));
+        __aeabi_memcpy(color, baseColors, vertices * sizeof(u32));
         color += rings;
         __aeabi_memcpy4(coords, baseCoords, vertices * 8);
         coords += rings;

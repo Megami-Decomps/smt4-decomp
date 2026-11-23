@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler retains the game-state base in R5 across formatting instead of reloading it. */
 #include "runtime/Stdio.h"
 #include "map/mapMain.h"
 #include "map/mapDepart.h"

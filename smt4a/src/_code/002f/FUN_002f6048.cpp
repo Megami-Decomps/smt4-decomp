@@ -34,7 +34,7 @@ extern unsigned char LAB_002f64c4; /* 0x2f64c4 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int FUN_00156850(unsigned int, unsigned int);
+extern unsigned int questDataGetTitle(unsigned int, unsigned int);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: vec2GetXInt. */
@@ -103,7 +103,7 @@ void FUN_002f6048(int param_1)
   temp_v8 = *(unsigned short *)(temp_v3 + 4) & 0xffff7fff;
   temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0x56));
   temp_v0 = **(short **)(temp_v3 + 0xc);
-  temp_v4 = FUN_00156850(temp_v13,0);
+  temp_v4 = questDataGetTitle(temp_v13,0);
   sprintf((char *)temp_v12,(const char *)&LAB_002f64c4,temp_v4);
   puVar6 = temp_v12;
   fontMeasureLineAdvance(puVar6,3);

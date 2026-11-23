@@ -23,7 +23,7 @@ int objectRegistryInsert(...);
 int asdEffectQueueRelease(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
-int rt_memcpy(unsigned int, unsigned int, unsigned int);
+int __aeabi_memcpy(unsigned int, unsigned int, unsigned int);
 int __aeabi_memcpy4(...);
 
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
@@ -87,7 +87,7 @@ extern unsigned int nodeChainCount(unsigned int);
 /* Supplied declaration required: effectEditorApplyHandlerState. */
 /* Supplied declaration required: objectRegistryInsert. */
 /* Supplied declaration required: asdEffectQueueRelease. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -183,7 +183,7 @@ LAB_0039ab4c:
     if (piVar3[2] != 0) {
       temp_v1 = effBlockLoadClone();
       temp_v2 = resourceResolveHeaderPointer();
-      rt_memcpy(*(unsigned int *)(temp_v6 + 0xc),temp_v2,*(unsigned int *)(temp_v6 + 0x10));
+      __aeabi_memcpy(*(unsigned int *)(temp_v6 + 0xc),temp_v2,*(unsigned int *)(temp_v6 + 0x10));
     }
     else {
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v6 + 4);

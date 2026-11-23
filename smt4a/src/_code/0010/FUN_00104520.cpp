@@ -11,7 +11,7 @@ int onlineJobSetStateDone(int);
 int FUN_002ea4d2(void);
 int FUN_002ea5b8(void);
 int FUN_004422bc(int);
-int rt_memcpy(unsigned int, int, int);
+int __aeabi_memcpy(unsigned int, int, int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -34,7 +34,7 @@ extern unsigned long long onlineInstantiationContextGetCurrent(void);
 extern unsigned int FUN_002ea594(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ea5b8. */
 /* Supplied declaration required: FUN_004422bc. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_00104520(int param_1)
@@ -86,7 +86,7 @@ void FUN_00104520(int param_1)
         *(unsigned int *)(*(int *)(param_1 + 0xe8) + 300) = *(unsigned int *)(param_1 + 0x124);
         *(unsigned int *)(*(int *)(param_1 + 0xe8) + 0x128) = *(unsigned int *)(param_1 + 0x120);
         if ((*(int *)(param_1 + 0x124) == 200) && (*(int *)(param_1 + 0x120) == 7)) {
-          rt_memcpy(*(unsigned int *)(param_1 + 0xf4),param_1 + 0x1a8,0x100);
+          __aeabi_memcpy(*(unsigned int *)(param_1 + 0xf4),param_1 + 0x1a8,0x100);
           *(unsigned char *)(*(int *)(param_1 + 0xf4) + 0xff) = 0;
           temp_v2 = FUN_002ea3c0(temp_v5,0x10406d,0,&LAB_00104630);
           FUN_002ea3d0(param_1,temp_v2);

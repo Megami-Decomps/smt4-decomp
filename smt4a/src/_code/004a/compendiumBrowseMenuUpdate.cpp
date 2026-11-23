@@ -7,6 +7,7 @@
 #include "shard/Shard004A.h"
 #include "sys/RuntimeObjects_EntryDispatch.h"
 #include "ui/UiSpriteApi.h"
+#include "code/Code0031_Smt4a.h"
 
 /* Selection state of the animated page UI. */
 struct AnimatedPageSelection {
@@ -61,7 +62,6 @@ void messageBannerInitCounter(s32 a, s32 b);
 s32 compendiumEntryIsRegistered(u16 id);
 void panelSetTarget(s32 target, s32 arg);
 void messageSetActiveMode(s32 mode);
-s32 FUN_0031d174(void *list); /* declcheck: local (Code0031_Smt4a.h declares void return) */
 s32 statusDownGetMode(void);
 s32 inputIsQuestConfirmPressed(void);
 void sendEvent100020D(void);

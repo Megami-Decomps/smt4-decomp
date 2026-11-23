@@ -9,7 +9,7 @@ int rt_memclr(int, int);
 int FUN_002ea668(int [22]);
 int lazyStaticInitOnce(int [22], unsigned char *, int);
 int lazyMemberInitOnce(int [22]);
-int rt_memcpy(int, unsigned char *, int);
+int __aeabi_memcpy(int, unsigned char *, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: lazyStaticInitOnce. */
 /* Supplied declaration required: lazyMemberInitOnce. */
 extern unsigned char *FUN_002ec674(int);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_00105824(int param_1)
@@ -47,8 +47,8 @@ void FUN_00105824(int param_1)
   temp_v2[0] = param_1 + 0x2c;
   sysMemClear(temp_v2[0],0x41);
   rt_memclr(param_1 + 0x6d,0x41);
-  rt_memcpy(temp_v2[0],puVar1,temp_v1);
-  rt_memcpy(param_1 + 0x6d,puVar1,temp_v1);
+  __aeabi_memcpy(temp_v2[0],puVar1,temp_v1);
+  __aeabi_memcpy(param_1 + 0x6d,puVar1,temp_v1);
   temp_v1 = 0;
   do {
     temp_v0 = param_1 + temp_v1;

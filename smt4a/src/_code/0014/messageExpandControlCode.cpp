@@ -22,7 +22,7 @@ s32 FUN_0014f2a8(u16 *buffer, s32 *position, const u16 *text, s32 measureOnly);
 const char *uiGetTableEntry(u32 index);
 const char *dataFindKindRecordWithAocOverrides(u32 id, s32 alternate);
 const char *demonGetRaceLabel(u16 id, s32 alternate);
-const char *FUN_00156850(u32 questId, u32 key);
+const char *questDataGetTitle(u32 questId, u32 key);
 u8 *dataTableGetNamePayload(u32 questId);
 s32 bustupCutAnimSelectSlotsByWorkId(s32 workId);
 s32 eventTexSelectJobsById(s32 id);
@@ -178,7 +178,7 @@ u32 messageExpandControlCode(s32 code, const u16 *text, u16 *out, s32 *index, s3
             textExpandGlyphsToBuffer((const char *)dataTableGetNamePayload(quest), name, 0);
             FUN_0014f2a8(out, position, (const u16 *)name, measureOnly);
         } else {
-            libc_strcpy(name, FUN_00156850(quest, 1));
+            libc_strcpy(name, questDataGetTitle(quest, 1));
             FUN_001654f0(name, wide);
             FUN_0014f2a8(out, position, wide, measureOnly);
         }

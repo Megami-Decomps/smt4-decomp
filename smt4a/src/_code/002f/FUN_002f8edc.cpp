@@ -11,7 +11,7 @@ int bitsAt60Set(...);
 int btlQueueActionMessage(...);
 int btlQueueKeyedScalarReflectAction(...);
 int btlReflectCreateKind10(...);
-int FUN_004fbfbc(...);
+int btlQueueUniqueScalarAction(...);
 int btlAdjustPropertyAndQueueAction(int, unsigned int, int, int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
 
 /* stack frame of void: 18 slot(s), 72 byte(s) */
@@ -47,7 +47,7 @@ extern int scrGetArg(unsigned int);
 /* Supplied declaration required: btlQueueActionMessage. */
 /* Supplied declaration required: btlQueueKeyedScalarReflectAction. */
 /* Supplied declaration required: btlReflectCreateKind10. */
-/* Supplied declaration required: FUN_004fbfbc. */
+/* Supplied declaration required: btlQueueUniqueScalarAction. */
 /* Supplied declaration required: btlAdjustPropertyAndQueueAction. */
 
 
@@ -78,7 +78,7 @@ unsigned int FUN_002f8edc(void)
     temp_v0 = gameGetSlotRecord(temp_v0 - 0x6d);
     *(unsigned short *)(temp_v0 + 0x2a) = 0;
     bitsAt60Set(temp_v0,1);
-    FUN_004fbfbc(0,temp_v1,0xf);
+    btlQueueUniqueScalarAction(0,temp_v1,0xf);
   }
   btlQueueActionMessage(0,temp_v1,0x10000cd,1,0,0,0);
   btlReflectCreateKind10(0,temp_v1,0,1,2,0xb4,3);

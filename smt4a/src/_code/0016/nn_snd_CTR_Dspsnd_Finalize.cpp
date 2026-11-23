@@ -9,7 +9,7 @@ int FUN_001897bc(int, unsigned short [2], int);
 int FUN_0018985c(int, int);
 int FUN_00189a04(int, short [2]);
 int svcSleepThread(unsigned char *, int);
-int rt_memcpy(int *, int, int);
+int __aeabi_memcpy(int *, int, int);
 int software_interrupt(int);
 
 /* stack frame of param_2: 3 slot(s), 5 byte(s) */
@@ -29,7 +29,7 @@ extern unsigned char LAB_004a95c0; /* 0x4a95c0 */
 /* Supplied declaration required: svcSleepThread. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void nn_snd_CTR_Dspsnd_Finalize(int *param_1,unsigned char param_2)
@@ -57,7 +57,7 @@ void nn_snd_CTR_Dspsnd_Finalize(int *param_1,unsigned char param_2)
     svcSleepThread(&LAB_004a95c0,0);
   }
   if (param_2) {
-    rt_memcpy(param_1 + 6,param_1[0x42a],0x1080);
+    __aeabi_memcpy(param_1 + 6,param_1[0x42a],0x1080);
   }
   nn_os_CriticalSection_Enter((unsigned int)(param_1 + 2));
   *(unsigned char *)(param_1 + 0x4c6) = 0;

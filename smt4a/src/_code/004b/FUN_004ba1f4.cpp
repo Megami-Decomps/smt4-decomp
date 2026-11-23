@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the prologue differs: retail materialises the -1 at entry and clears the three flag bytes through r0 before forming the 0x1000 base; the build keeps the menu in r5 for them and loads -1 late. */
 #include "shard/Shard004B.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
@@ -24,15 +23,17 @@ void paramsClearPacket(UiResourceParameters *packet);
 void spritePresetBankInitialize(SpritePresetBank *bank);
 void uiSpriteBankApplyPreset(SpritePresetBank *bank, s32 preset);
 
-// Reset row-selection state and bind the menu's row and extra sprites to their shared preset packet.
+/* Reset row-selection state and bind the menu's row and extra sprites to their shared preset packet. */
 void FUN_004ba1f4(Menu4C *menu)
 {
+    s32 index;
+
     menu->inputLocked = 0;
     menu->unk9ED = 0;
     menu->unk9EE = 0;
     menu->unk1014 = 0;
     menu->unk1018 = 0;
-    for (s32 index = 0; index < 16; ++index)
+    for (index = 0; index < 16; ++index)
         menu->resetFlags[index] = 0;
     menu->unk101C = -1;
     menu->unk1020 = -1;
@@ -43,7 +44,7 @@ void FUN_004ba1f4(Menu4C *menu)
     paramsClearPacket(&menu->rowParameters);
     paramsInit(&menu->rowParameters, sRowPositionKeys, sizeof(sRowPositionKeys), sRowAlphaKeys, sizeof(sRowAlphaKeys),
                NULL, 0, NULL, 0, sRowCommands, sizeof(sRowCommands));
-    for (s32 index = 0; index < 10; ++index) {
+    for (index = 0; index < 10; ++index) {
         uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(menu->rowsA10[index]), 0x1f, 0, &menu->rowParameters, 0x15, 1.0f);
         uiSpriteSetImageKeyframe(reinterpret_cast<UiSpriteState *>(menu->rowsA10[index]), 0, 0);
     }

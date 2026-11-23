@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int rt_memcpy(int, unsigned char [8], int);
+int __aeabi_memcpy(int, unsigned char [8], int);
 
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 
 extern unsigned int *libcLocaleGetCategory(unsigned int, unsigned int);
 extern int FUN_002e3f88(unsigned char *, short, unsigned int *);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 int FUN_00102bbc(int param_1,short *param_2,unsigned int param_3)
@@ -56,7 +56,7 @@ int FUN_00102bbc(int param_1,short *param_2,unsigned int param_3)
         puVar1[1] = temp_v4;
         return temp_v1;
       }
-      rt_memcpy(temp_v5 + temp_v1,temp_v2,temp_v0);
+      __aeabi_memcpy(temp_v5 + temp_v1,temp_v2,temp_v0);
     }
     temp_v1 = temp_v1 + temp_v0;
     if (*param_2 == 0) break;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: CriticalSection init store/move scheduling and NngxCmdState base register choice differ (-O2 candidate). */
+/* NON_MATCHING: the CriticalSection stores match; only the NngxCmdState copy's base register choice and load order differ (-O2 candidate). */
 #include "nn/os/CriticalSection.h"
 
 extern const u32 g_nngxDefaultCommandState[2];

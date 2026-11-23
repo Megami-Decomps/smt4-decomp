@@ -1,7 +1,7 @@
 /* NON_MATCHING: only the pair search differs: retail keeps the not-found -1 in a saved register and the matching slot
    index in the loop counter's register (returned directly), the build keeps one result register (r7/r8 swap). */
+#include <stdio.h>
 #include "common.h"
-#include "runtime/Stdio.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "script/scrScriptProcess.h"
 
@@ -51,7 +51,7 @@ void statusPanelClose(void);
 void buttonHelpSetText(u32 a, u32 color);
 void sysPlaySe(u32 id);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode); /* a one-instruction setter armlink inlines (inlined.txt) */
-extern const char DAT_0052c7c0[];
+static const char s_devilMessagePathFormat[] = "battle/DevilMsg/%s.mbm";
 
 /* devilGetVoiceCategory's body (inlined.txt: ldrb r0, [r0, #56]): the demon's talk tone. */
 static __inline u8 devilGetTalkTone(const NkmBaseRecordA *record)
@@ -100,7 +100,7 @@ void FUN_004cbb38(TalkScene *scene)
     SavedPair *pair = saveGetSelectedRecordSlot(scene->pairIndex);
     SlotRecordId *record = gameGetSlotRecord(scene->slot);
     char path[64];
-    __2sprintf(path, DAT_0052c7c0, dataTable25Section0FindById(devilGetTalkTone(nkmBaseGetRecord(record->id))) + 1);
+    sprintf(path, s_devilMessagePathFormat, dataTable25Section0FindById(devilGetTalkTone(nkmBaseGetRecord(record->id))) + 1);
     scene->portraitFile = asdLoadFileSyncDefault(path);
     scene->portrait = scrScriptProcessCreate(scene->portraitData, scene->portraitFile);
     btlTalkBustUpCreate();

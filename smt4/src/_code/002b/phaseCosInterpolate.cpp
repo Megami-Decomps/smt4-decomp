@@ -1,17 +1,19 @@
-/* NON_MATCHING: table-base load now in place; the wrapped magnitude stays in s1 (retail keeps it in s0) and the index/conversion registers differ. */
 #include "shard/W6_W6Match6_PhaseTrig.h"
+#include "nn/math/MathArithmetic.h"
 
 extern "C" {
 extern const PhaseTrigEntry g_sinCosTable[256];
 
-// Sample the cosine component of the linearly interpolated phase table.
+/* The cosine of a phase (65536 per turn), interpolated from the 256-entry sine/cosine table
+ * (nn::math's CosFIdx). */
 f32 phaseCosInterpolate(f32 angle)
 {
-    f32 magnitude = wrapPhase(fabsf(angle));
-    u16 whole = (u32)magnitude;
-    const PhaseTrigEntry *table = g_sinCosTable;
-    const PhaseTrigEntry *entry = &table[(u8)whole];
-    f32 fraction = magnitude - (f32)whole;
-    return entry->cosine + fraction * entry->cosineDelta;
+    f32 magnitude = fabsf(angle);
+    while (magnitude >= 65536.0f)
+        magnitude -= 65536.0f;
+    u16 index = nn::math::F32ToU16(magnitude);
+    f32 fraction = magnitude - nn::math::U16ToF32(index);
+    index &= 0xff;
+    return g_sinCosTable[index].cosine + fraction * g_sinCosTable[index].cosineDelta;
 }
 }

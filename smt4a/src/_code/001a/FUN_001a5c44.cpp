@@ -10,7 +10,7 @@ int FUN_001a5e84(unsigned char [12], int *, int);
 int FUN_001b1ab8(int *, unsigned int, int *, unsigned int);
 int FUN_001b1c40(int *, unsigned int, int, int *, unsigned int, unsigned int);
 int FUN_001bd53c(int, int *);
-int rt_memcpy(unsigned int, int *, int);
+int __aeabi_memcpy(unsigned int, int *, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_5: 4 slot(s), 13 byte(s) */
@@ -31,7 +31,7 @@ extern unsigned int soundArchiveFileEntryIsLoaded(int);
 extern int *FUN_001b3c90(unsigned char *, unsigned int);
 extern unsigned int FUN_001b3cb8(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_001bd53c. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int
@@ -68,7 +68,7 @@ FUN_001a5c44(int *param_1,unsigned int param_2,unsigned int param_3,int *param_4
         temp_v7 = 0x56574943;
         uStack_44 = temp_v0;
         temp_v8 = param_3;
-        rt_memcpy(temp_v2,&temp_v7,0x20);
+        __aeabi_memcpy(temp_v2,&temp_v7,0x20);
         temp_v1 = temp_v2 + 0x20;
         temp_v4 = FUN_001b3cb8(temp_v5,param_3);
         FUN_001b1c40(param_1,temp_v0,temp_v1,piVar2,temp_v4,param_5);

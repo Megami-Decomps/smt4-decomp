@@ -1,5 +1,6 @@
-/* NON_MATCHING: 46 lines: the skill search (pair-unrolled as retail) gets the slot count and the record base in
- * other registers (r1/r3 in retail); the rebuild, the stat and the name comparisons match. */
+/* NON_MATCHING: 6 lines: with one loop index for the three loops the skill search allocates as retail; what remains is
+ * the name comparison's operand order (cmp r2, r1 in retail; swapping the source operands breaks the search) and
+ * retail popping the frame after setting the result. */
 #include "common.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "map/lmapMain.h"
@@ -132,6 +133,8 @@ static void rebuildSavedRecord(u16 id, RebuiltRecord *record)
  * Returns 1 when they do (or when the entry cannot be read), else 0. */
 s32 FUN_0032fbd0(LiveUnit *unit)
 {
+    s32 i;
+
     u16 id = unit->id;
     s32 matches = 1;
     u8 saved[0x50];
@@ -167,7 +170,7 @@ s32 FUN_0032fbd0(LiveUnit *unit)
     }
     s32 count = getUnlockedSlotCount(unit);
 
-    for (s32 i = 0; i < count; i++) {
+    for (i = 0; i < count; i++) {
         if (unit->skills[i] != 0) {
             s32 k;
             for (k = 0; k < count; k++) {
@@ -181,7 +184,7 @@ s32 FUN_0032fbd0(LiveUnit *unit)
             }
         }
     }
-    for (s32 i = 0; i < 18; i++) {
+    for (i = 0; i < 18; i++) {
         if (record.name[i] != unit->name[i]) {
             matches = 0;
             break;

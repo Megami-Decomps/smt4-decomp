@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the saved registers of the stacked arguments differ (retail pairs them as r7/r9 with the hidden-row count in r8; the build uses r8/r9 and r7). */
 #include "gfx/UiControlDraw.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
@@ -22,7 +21,12 @@ void FUN_00309ec8(UiControlDrawPosition *position, s32 x, s32 y,
     indicatorDraw(position, x, y, firstActive ? 0xf3 : 0xf1, 0x6f);
     indicatorDraw(position, x, y, secondActive ? 0xf4 : 0xf2, 0x6f);
 
-    u32 trackSprite = trackActive ? 0xf7 : 0xf6;
+    u32 trackSprite;
+    if (trackActive) {
+        trackSprite = 0xf7;
+    } else {
+        trackSprite = 0xf6;
+    }
     TextureTableEntryIV *track = asdTMTexTableEntryAt(0x39, trackSprite);
     s32 height = track->placement->height;
     s32 rowHeight = height / 16;

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int rt_memcpy(void *dst, s16 *src, int size);
+int __aeabi_memcpy(void *dst, s16 *src, int size); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 typedef struct OutputCapture {
     /* 0x0 */ u8 *buffer;
@@ -16,7 +16,7 @@ void nn_snd_CTR_OutputCapture_Write(OutputCapture *capture, s16 *frames, s32 cou
 {
     s32 position;
 
-    rt_memcpy(capture->buffer + capture->position * 4, frames, count << 2);
+    __aeabi_memcpy(capture->buffer + capture->position * 4, frames, count << 2);
     position = capture->position;
     capture->position = position + count;
     if (position + count >= capture->capacity) {

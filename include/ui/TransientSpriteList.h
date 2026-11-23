@@ -11,7 +11,7 @@ struct TransientSpriteEntry {
         /* 0x04 */ u8 unk04[0x30];
         struct {
             /* 0x04 */ u8 saveFlagRow;
-            /* 0x05 */ u8 kind;
+            /* 0x05 */ u8 saveFlagBit;   /* the bit in that row; 0xFF: a map-block bit (id), 0xFE: FUN_002fb094(id) */
             /* 0x06 */ s16 map;
             u8 unk08[0x26];
             /* 0x2E */ s16 id;
@@ -50,7 +50,7 @@ typedef char TransientSpriteListLayout[
     offsetof(TransientSpriteList, count) == 0x5A88 ? 1 : -1];
 typedef char TransientSpriteConditionOffsetsCheck[
     offsetof(TransientSpriteEntry, condition.saveFlagRow) == 4 &&
-    offsetof(TransientSpriteEntry, condition.kind) == 5 &&
+    offsetof(TransientSpriteEntry, condition.saveFlagBit) == 5 &&
     offsetof(TransientSpriteEntry, condition.map) == 6 &&
     offsetof(TransientSpriteEntry, condition.id) == 0x2E &&
     offsetof(TransientSpriteEntry, condition.requiredFlag) == 0x30 &&

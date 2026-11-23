@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00521984(void);
 int FUN_00521d14(...);
-int rt_memcpy(int, int, int);
+int __aeabi_memcpy(int, int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
@@ -19,7 +19,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00521984. */
 /* Supplied declaration required: FUN_00521d14. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int FUN_004ac1fc(int *param_1,unsigned int param_2,unsigned int *param_3)
@@ -79,20 +79,20 @@ unsigned int FUN_004ac1fc(int *param_1,unsigned int param_2,unsigned int *param_
           if (temp_v3 != temp_v5 + temp_v3) {
             temp_v5 = (temp_v5 + temp_v3) - temp_v3;
             temp_v1 = temp_v6;
-            rt_memcpy(temp_v1,temp_v3,temp_v5);
+            __aeabi_memcpy(temp_v1,temp_v3,temp_v5);
           }
         }
         else {
           temp_v4 = temp_v7 + param_1[2];
           if (temp_v3 != temp_v4) {
-            rt_memcpy(temp_v6,temp_v3,temp_v4 - temp_v3);
+            __aeabi_memcpy(temp_v6,temp_v3,temp_v4 - temp_v3);
           }
           temp_v3 = param_1[2];
           temp_v5 = temp_v3 + (temp_v5 - (temp_v7 - temp_v1));
           if (temp_v3 != temp_v5) {
             temp_v1 = temp_v6 + (temp_v7 - temp_v1);
             temp_v5 = temp_v5 - temp_v3;
-            rt_memcpy(temp_v1,temp_v3,temp_v5);
+            __aeabi_memcpy(temp_v1,temp_v3,temp_v5);
           }
         }
       }
@@ -303,7 +303,7 @@ LAB_004ac5b8:
   }
   temp_v5 = param_1[0x16];
   if (temp_v5 != temp_v5 + param_1[0x18]) {
-    rt_memcpy(temp_v6,temp_v5,(temp_v5 + param_1[0x18]) - temp_v5);
+    __aeabi_memcpy(temp_v6,temp_v5,(temp_v5 + param_1[0x18]) - temp_v5);
   }
   temp_v5 = param_1[0x16];
   param_1[0x16] = temp_v6;

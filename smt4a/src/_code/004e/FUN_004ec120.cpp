@@ -62,7 +62,7 @@ extern int FUN_004abac8(unsigned int);
 extern int btlUiGetActiveState(unsigned int);
 extern int FUN_004c8a9c(void);
 extern int isEntryUsable(unsigned int);
-extern int *FUN_004dc72c(int *, unsigned int *, int, unsigned int);
+extern int *btlUnitStepCommandMenu(int *, unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_004ddd10. */
 /* Supplied declaration required: btlUnitTargetPanelStep. */
 /* Supplied declaration required: btlUnitSetParam. */
@@ -108,7 +108,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     FUN_004ed5b4(param_1,puVar9,temp_v6,param_4);
     return param_1;
   case 1:
-    piVar3 = (int *)FUN_004dc72c(param_1,puVar9,temp_v6,param_4);
+    piVar3 = (int *)btlUnitStepCommandMenu(param_1,puVar9,temp_v6,param_4);
     return piVar3;
   case 2:
     FUN_004ec950(param_1,puVar9,temp_v6,param_4);

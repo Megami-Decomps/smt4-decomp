@@ -7,7 +7,7 @@
 
 extern "C" {
 s32 gameFlagIsSet(s32 flag);
-void rt_memcpy(void *destination, const void *source, u32 size);
+void __aeabi_memcpy(void *destination, const void *source, u32 size);
 void textFormatFullWidthTwoDigits(s32 value, u8 *output);
 const char *dataFindKindRecordWithAocOverrides(s32 value, s32 option);
 const char *dataTable01GetRecordWithAocOverride(s32 value);
@@ -33,7 +33,7 @@ void mapIfShowContextPopup(s32 context, s32 value, s32 count)
             popup->timer = 0;
             char format[72];
             u8 number[12];
-            rt_memcpy(format, message->text, 64);
+            __aeabi_memcpy(format, message->text, 64);
             if (context == 4) {
                 return;
             }

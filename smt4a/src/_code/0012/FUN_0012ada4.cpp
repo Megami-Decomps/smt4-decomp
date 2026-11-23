@@ -8,7 +8,7 @@ int onlineInstanceTableFind(int, unsigned int);
 int onlineJobSetStateTimed(int, int);
 int FUN_002f4c9c(...);
 int FUN_0030ca30(int, unsigned int);
-int rt_memcpy(unsigned int, unsigned int, unsigned int);
+int __aeabi_memcpy(unsigned int, unsigned int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 11 slot(s), 44 byte(s) */
@@ -33,7 +33,7 @@ extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: FUN_002f4c9c. */
 /* Supplied declaration required: FUN_0030ca30. */
 extern int FUN_0030cad0(void);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_0012ada4(int param_1)
@@ -139,7 +139,7 @@ LAB_0012ae6e:
       if (temp_v2 <= *(unsigned int *)(param_1 + 0x1bc)) {
         temp_v2 = temp_v10;
         FUN_002f4c9c(temp_v10);
-        rt_memcpy(*(unsigned int *)(param_1 + 0x1b8),*temp_v13,temp_v2);
+        __aeabi_memcpy(*(unsigned int *)(param_1 + 0x1b8),*temp_v13,temp_v2);
         temp_v2 = temp_v10;
         FUN_002f4c9c();
         *(unsigned int *)(param_1 + 0x1c8) = temp_v2 + *(int *)(param_1 + 0x1c8);

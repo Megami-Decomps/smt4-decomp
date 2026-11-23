@@ -12,7 +12,7 @@ struct PrimitiveIndexBuffer {
 
 extern "C" {
 void* asdPrimAlloc(u32 size);
-void rt_memcpy(void* destination, const void* source, u32 size);
+void __aeabi_memcpy(void* destination, const void* source, u32 size);
 u32 asdGxGetPhysicalAddress(const void* allocation);
 
 // Copies a range of halfword indices into primitive memory and records its mapped address.
@@ -20,7 +20,7 @@ void asdPrimCopyIndexRange(const IndexSource* source, PrimitiveIndexBuffer* outp
 {
     u32 size = count * sizeof(u16);
     void* data = asdPrimAlloc(size);
-    rt_memcpy(data, &source->indices[first], size);
+    __aeabi_memcpy(data, &source->indices[first], size);
     output->address = asdGxGetPhysicalAddress(data);
     output->count = count;
     output->flag = 0;

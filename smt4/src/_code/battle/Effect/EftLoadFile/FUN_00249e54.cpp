@@ -17,7 +17,7 @@ int effectAllocateSavedRenderRecords(...);
 int effectAllocateSavedEntries(...);
 int SBORROW4(int, int);
 int VectorSignedToFloat(...);
-int rt_memcpy(...);
+int __aeabi_memcpy(...);
 int __aeabi_memcpy4(...);
 
 /* stack frame of param_2: 32 slot(s), 116 byte(s) */
@@ -74,7 +74,7 @@ extern int libc_strlen(int);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: effectAllocateSavedRenderRecords. */
 /* Supplied declaration required: effectAllocateSavedEntries. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -218,11 +218,11 @@ unsigned int FUN_00249e54(unsigned int param_1,char *param_2)
           pcVar6 = pcVar6 + 0x228;
         } while (temp_v5 < temp_v4);
       }
-      rt_memcpy(temp_v47,param_2 + temp_v4 * 0x228 + 0x1e4);
+      __aeabi_memcpy(temp_v47,param_2 + temp_v4 * 0x228 + 0x1e4);
       if (temp_v0) {
-        rt_memcpy(&temp_v23,param_2 + temp_v4 * 0x228 + 0x1ec,0x20);
-        rt_memcpy(&temp_v31,param_2 + temp_v4 * 0x228 + 500,0x20);
-        rt_memcpy(&temp_v39,param_2 + temp_v4 * 0x228 + 0x1fc);
+        __aeabi_memcpy(&temp_v23,param_2 + temp_v4 * 0x228 + 0x1ec,0x20);
+        __aeabi_memcpy(&temp_v31,param_2 + temp_v4 * 0x228 + 500,0x20);
+        __aeabi_memcpy(&temp_v39,param_2 + temp_v4 * 0x228 + 0x1fc);
       }
       else {
 LAB_0024a078:
@@ -253,13 +253,13 @@ LAB_0024a078:
       }
       goto LAB_0024a104;
     }
-    rt_memcpy(temp_v3,param_2 + 0x1e4,*(int *)(param_2 + 0x10) * 0x348);
+    __aeabi_memcpy(temp_v3,param_2 + 0x1e4,*(int *)(param_2 + 0x10) * 0x348);
     temp_v4 = *(int *)(param_2 + 0x10);
-    rt_memcpy(temp_v47,param_2 + temp_v4 * 0x348 + 0x1e4);
+    __aeabi_memcpy(temp_v47,param_2 + temp_v4 * 0x348 + 0x1e4);
     if (!temp_v0) goto LAB_0024a078;
-    rt_memcpy(&temp_v23,param_2 + temp_v4 * 0x348 + 0x1ec,0x20);
-    rt_memcpy(&temp_v31,param_2 + temp_v4 * 0x348 + 500,0x20);
-    rt_memcpy(&temp_v39,param_2 + temp_v4 * 0x348 + 0x1fc);
+    __aeabi_memcpy(&temp_v23,param_2 + temp_v4 * 0x348 + 0x1ec,0x20);
+    __aeabi_memcpy(&temp_v31,param_2 + temp_v4 * 0x348 + 500,0x20);
+    __aeabi_memcpy(&temp_v39,param_2 + temp_v4 * 0x348 + 0x1fc);
   }
   else {
     if (!temp_v0) goto LAB_0024a078;

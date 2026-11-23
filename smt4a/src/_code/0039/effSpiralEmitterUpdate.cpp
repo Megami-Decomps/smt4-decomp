@@ -10,7 +10,7 @@
 
 extern "C" {
 void gfxQuaternionWorkspaceBuildMatrix(void);
-f32 FUN_001a1ee0(f32 angle);
+f32 phaseSine(f32 angle);
 s32 FUN_0037a844(void);
 void FUN_00375c74(ParticleEmissionState *state, const ParticleEmissionDefinition *definition, u8 *burst, s32 *count,
                   f32 timeStep);
@@ -90,7 +90,7 @@ extern "C" void effSpiralEmitterUpdate(ParticleEmissionState *emitter)
             motion->radiusStep = (endRadius - radius) / (f32)lifetime;
             motion->phaseStep = EFF_RANDOM_VARIANCE(definition->phaseStepVariance) * definition->phaseStep;
             motion->phase = shiftRandomNextFraction(NULL) * 6.2831855f;
-            motion->wave = FUN_001a1ee0(motion->phase * 40.743664f);
+            motion->wave = phaseSine(motion->phase * 40.743664f);
 
             // The start position: a random distance along the swing axis, from the emitter's origin.
             f32 spread = randomSigned() * definition->spread;
@@ -129,7 +129,7 @@ extern "C" void effSpiralEmitterUpdate(ParticleEmissionState *emitter)
                 particle->position.z += motion->direction[2] * travel;
                 motion->phase += motion->phaseStep * age;
                 motion->radius += motion->radiusStep * age;
-                f32 wave = FUN_001a1ee0(motion->phase * 40.743664f);
+                f32 wave = phaseSine(motion->phase * 40.743664f);
                 f32 swing = motion->radius * wave;
                 particle->position.x += motion->axis[0] * swing;
                 particle->position.y += motion->axis[1] * swing;
@@ -154,7 +154,7 @@ extern "C" void effSpiralEmitterUpdate(ParticleEmissionState *emitter)
             emitCount--;
         } else {
             previous = particle->position;
-            f32 wave = FUN_001a1ee0(motion->phase * 40.743664f);
+            f32 wave = phaseSine(motion->phase * 40.743664f);
             f32 swing = motion->radius * (wave - motion->wave);
             particle->position.x += motion->axis[0] * swing;
             particle->position.y += motion->axis[1] * swing;

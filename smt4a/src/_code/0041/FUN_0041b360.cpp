@@ -21,7 +21,7 @@ int FUN_0041b060(int *, int *, int *, unsigned int, int);
 int FUN_0041b204(...);
 int FUN_0041b8e0(...);
 int VectorSignedToFloat(...);
-int rt_memcpy(...);
+int __aeabi_memcpy(...);
 
 /* stack frame of param_6: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -53,7 +53,7 @@ extern unsigned int configValueName(unsigned char);
 /* Supplied declaration required: FUN_0041b060. */
 /* Supplied declaration required: FUN_0041b204. */
 /* Supplied declaration required: FUN_0041b8e0. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int param_5,int param_6)
@@ -164,7 +164,7 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
                  0);
   }
   temp_v2 = configValueName(*(unsigned char *)(param_2 + 99));
-  rt_memcpy(temp_v9,temp_v2,0x40);
+  __aeabi_memcpy(temp_v9,temp_v2,0x40);
   puVar3 = temp_v9;
   fontMeasureLineAdvance(puVar3,2);
   temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2b,0x25));

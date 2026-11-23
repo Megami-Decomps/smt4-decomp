@@ -56,7 +56,7 @@ extern "C" u32 FUN_003c597c()
     EffectSelectionParts *parts = FUN_002b30e4(copy);
     libc_strcpy(reinterpret_cast<ItemView *>(copy)->name, reinterpret_cast<const char *>(parts->unk00));
     if (parts->type != 0x1B)
-        rt_memcpy(parts->data, resourceResolveHeaderPointer(g_effectEditor.block), parts->size);
+        __aeabi_memcpy(parts->data, resourceResolveHeaderPointer(g_effectEditor.block), parts->size);
     if (parts->data != NULL)
         effPartSetData(g_effectEditor.block, parts->data, parts->size, parts->id);
     void *instance = effBlockCreateFromBlock(g_effectEditor.block);

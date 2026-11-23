@@ -31,6 +31,7 @@ public:
 class PartnerAttackEntries {
 public:
     PartnerAttackEntries();
+    ~PartnerAttackEntries();
     static void *operator new(u32 bytes, void *owner) throw() { return asdOperatorNew(bytes, owner); }
 
     /* 0x000 */ PartnerAttackEntry entries[PARTNER_ATTACK_ENTRY_COUNT];

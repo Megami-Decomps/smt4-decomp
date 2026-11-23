@@ -1,7 +1,5 @@
-/* NON_MATCHING: action parameter contract recovered; task argument-address temporary allocation still differs. */
 #include "battle/BattleUnitRecordState.h"
 #include "battle/btlAction.h"
-#include "battle/BattleActionScale.h"
 #include "battle/BtlGlobals.h"
 
 // A local view of the battle's action job slots and signed ring cursor.
@@ -18,15 +16,15 @@ typedef char BattleActionRingOffsets[offsetof(BattleActionRingView, jobs) == 0xC
 extern "C" {
 s32 jobIsValid(u32 job);
 void FUN_004dcb40(BattleUnitRecordState *state, BtlMainStateA *battle,
-                  u32 mode, s32 combatantIndex, BattleActionScale scale, u32 option);
+                  u32 mode, s32 combatantIndex, s32 scale, u32 option);
 u32 taskCreateDraw(const char *name, s32 priority, s32 startDelay, s32 endDelay,
                    void (*update)(u32), void (*destroy)(u32), void *owner, u32 parent);
 void FUN_00298354(u32 job);
 void jobPoolStopCurrent(u32 job);
 
 // Advance the action ring, initialize its unit state and start the calculation job.
-void FUN_002b4f28(BtlMainStateA *battle, u32 mode, s32 combatantIndex,
-                  BattleActionScale scale, u32 option)
+void btlActionRingStartCalc(BtlMainStateA *battle, u32 mode, s32 combatantIndex,
+                  s32 scale, u32 option)
 {
     BattleActionRingView *ring = reinterpret_cast<BattleActionRingView *>(battle);
     ring->current = (ring->current + 1) % 12;

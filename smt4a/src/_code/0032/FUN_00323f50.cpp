@@ -8,7 +8,7 @@ int CONCAT44(...);
 int renderCtxSelectTexture(...);
 int debugQuadVertex(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int camSetMatrixA(...);
-int FUN_001a1ee0(...);
+int phaseSine(...);
 int FUN_001b4a00(...);
 int nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20(...);
 int phaseCosine(...);
@@ -115,7 +115,7 @@ extern float DAT_00647358; /* 0x647358 */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: debugQuadVertex. */
 /* Supplied declaration required: camSetMatrixA. */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 /* Supplied declaration required: FUN_001b4a00. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20. */
 /* Supplied declaration required: phaseCosine. */
@@ -314,7 +314,7 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
               gfxResolveTimedTextureFrame(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
               renderCtxSelectTexture(g_renderCtx,temp_v29);
               phaseCosine();
-              FUN_001a1ee0();
+              phaseSine();
               temp_v18 = (unsigned long long)(unsigned int)temp_v12 << 0x20;
               FUN_0032c808();
               debugQuadVertex(temp_v37);
@@ -361,7 +361,7 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
               gfxResolveTimedTextureFrame(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
               renderCtxSelectTexture(g_renderCtx,temp_v29);
               phaseCosine();
-              FUN_001a1ee0();
+              phaseSine();
               temp_v18 = (unsigned long long)(unsigned int)temp_v19 << 0x20;
               FUN_0032c808();
               debugQuadVertex(temp_v37);

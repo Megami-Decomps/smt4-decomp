@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int phaseCosine(void);
 int sysMemClear(float *, int);
 int mathEvaluateWeightedCurve(void);
@@ -66,7 +66,7 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 extern unsigned int effGetFrameStep(void);
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: sysMemClear. */
@@ -197,7 +197,7 @@ void FUN_003acac0(int param_1)
                 temp_v29 = (pfVar18[7] + (pfVar18[6] + temp_v18 * temp_v21 * 0.5f) * temp_v21) * 40.743664f;
                 temp_v10 = temp_v29;
                 phaseCosine();
-                FUN_001a1ee0();
+                phaseSine();
                 temp_v31 = CONCAT44(temp_v29,temp_v10);
                 DAT_006472ec = temp_v29 * temp_v28;
                 DAT_006472f4 = temp_v10 * temp_v28;

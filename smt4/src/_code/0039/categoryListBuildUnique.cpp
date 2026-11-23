@@ -1,4 +1,3 @@
-/* NON_MATCHING: selection-sort register allocation, the empty-table branch target and the entry-copy registers differ. */
 #include "common.h"
 #include "shard/W6_W6Match3_BattleQueue.h"
 #include "game/GameState.h"
@@ -23,10 +22,12 @@ s32 saveTestFlagRow(u8, u8);
 
 void categoryListBuildUnique(CategoryList *list, s32 kind)
 {
+    s32 i;
+
     s16 categories[32] = {0};
     s32 count = 0;
     CategoryTable table;
-    for (s32 i = 0; i < dataTable2bSub1GetCount(&table); ++i) {
+    for (i = 0; i < dataTable2bSub1GetCount(&table); ++i) {
         const CategoryRecord *record = dataTable2bSub1GetRecord(&table, i);
         if (record->kind != kind)
             continue;
@@ -47,7 +48,7 @@ void categoryListBuildUnique(CategoryList *list, s32 kind)
             categories[count++] = record->category;
     }
     /* Select the largest category in each remaining suffix. */
-    for (s32 i = 0; i < count - 1; ++i) {
+    for (i = 0; i < count - 1; ++i) {
         for (s32 j = 1; j < count - i; ++j) {
             if (categories[i + j] > categories[i]) {
                 s16 category = categories[i];
@@ -56,7 +57,7 @@ void categoryListBuildUnique(CategoryList *list, s32 kind)
             }
         }
     }
-    for (s32 i = 0; i < count; ++i) {
+    for (i = 0; i < count; ++i) {
         list->entries[i].enabled = 1;
         list->entries[i].category = categories[i];
     }

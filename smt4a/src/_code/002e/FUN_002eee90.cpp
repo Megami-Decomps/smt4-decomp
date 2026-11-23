@@ -12,7 +12,7 @@ int destroyObj0055ae64(unsigned char [12]);
 int FUN_002ecb04(unsigned int, unsigned char [12]);
 int FUN_002ecdec(unsigned char [12], int);
 int FUN_002ece58(int, int);
-int rt_memcpy(unsigned int, unsigned int, int);
+int __aeabi_memcpy(unsigned int, unsigned int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 6 slot(s), 18 byte(s) */
@@ -37,7 +37,7 @@ extern int FUN_002eb6ae(int, unsigned int);
 /* Supplied declaration required: FUN_002ecdec. */
 extern int FUN_002ece14(int, unsigned int);
 /* Supplied declaration required: FUN_002ece58. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_002eee90(int param_1,int param_2,unsigned int param_3,int param_4)
@@ -97,7 +97,7 @@ void FUN_002eee90(int param_1,int param_2,unsigned int param_3,int param_4)
       }
       temp_v3 = FUN_002ec674(temp_v2);
       temp_v4 = FUN_002ec674(temp_v9);
-      rt_memcpy(temp_v4,temp_v3,0x20);
+      __aeabi_memcpy(temp_v4,temp_v3,0x20);
       FUN_002eb164(temp_v7,param_2);
       writeU16Le(temp_v8 & 0xffff);
       pcVar7 = (char *)FUN_002ec674(temp_v9);

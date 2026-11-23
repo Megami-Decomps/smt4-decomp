@@ -3,7 +3,7 @@
 #include "status/StatusDown.h"
 
 extern "C" {
-void rt_memcpy(void *destination, const void *source, u32 size);
+void __aeabi_memcpy(void *destination, const void *source, u32 size); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void gridNavigationConfigure(ScrollSelection *selection, u32 count, u32 visible, u32 option, u32 first, u32 second);
 }
 
@@ -16,7 +16,7 @@ static void replaceSkills(const u16 *ids, u8 count)
     StatusDownState *work = g_statusDown;
     memset(work->scratch, 0, sizeof(work->scratch));
     memset(work->ids, 0, 16);
-    rt_memcpy(work->ids, ids, count * sizeof(u16));
+    __aeabi_memcpy(work->ids, ids, count * sizeof(u16));
     s32 used;
     for (used = 0; used < count; ++used) {
         if (work->ids[used] == 0)

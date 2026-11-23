@@ -19,7 +19,7 @@ u8 DAT_006426e4[0x200];
 DiagnosticRequest DAT_006428e4;
 }
 extern "C" char *strncpy(char *destination, const char *source, u32 size);
-extern "C" void *rt_memcpy(void *destination, const void *source, u32 size);
+extern "C" void *__aeabi_memcpy(void *destination, const void *source, u32 size);
 
 // Publish a diagnostic request and return its new serial number to the caller.
 extern "C" s32 FUN_00428730(u32 *serial, u32 *resultSerial, u32 type, u32 code,
@@ -35,7 +35,7 @@ extern "C" s32 FUN_00428730(u32 *serial, u32 *resultSerial, u32 type, u32 code,
     request->code = code;
     strncpy(request->name, name, sizeof(request->name));
     request->name[0x3f] = '\0';
-    rt_memcpy(request->detail, detail, sizeof(request->detail));
+    __aeabi_memcpy(request->detail, detail, sizeof(request->detail));
     *resultSerial = *serial;
     return 0;
 }

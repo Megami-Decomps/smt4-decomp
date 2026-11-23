@@ -17,7 +17,7 @@ static __inline ByteColor byteColorUnpack(u32 packed)
     return color;
 }
 
-extern "C" void *rt_memcpy(void *destination, const void *source, u32 size);
+extern "C" void *__aeabi_memcpy(void *destination, const void *source, u32 size);
 
 struct GradientImageData {
     /* 0x00 */ u8 unk00[0x38];
@@ -94,7 +94,7 @@ void FUN_003932d0(GradientWork *work, const u32 *colors)
         group = end;
     }
     for (s32 row = 1; row < rows; row++) {
-        rt_memcpy(end, pixels, pixelsPerRow << 2);
+        __aeabi_memcpy(end, pixels, pixelsPerRow << 2);
         end += pixelsPerRow;
     }
 
@@ -107,7 +107,7 @@ void FUN_003932d0(GradientWork *work, const u32 *colors)
         swatchPixels[i] = swatchPixels[1];
     }
     for (s32 row = 1; row < rows; row++) {
-        rt_memcpy(swatchPixels + row * 8, swatchPixels, 0x20);
+        __aeabi_memcpy(swatchPixels + row * 8, swatchPixels, 0x20);
     }
 }
 }

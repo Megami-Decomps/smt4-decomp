@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int phaseCosine(void);
 int asdGxSetEffectColorFromRGBA8(unsigned int);
 int randomAdvanceShiftRegister(void);
@@ -96,7 +96,7 @@ extern float DAT_00647308; /* 0x647308 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 extern unsigned int effGetFrameStep(void);
 /* Supplied declaration required: phaseCosine. */
 extern unsigned int FUN_00221cb0(void);
@@ -272,7 +272,7 @@ void FUN_003bd3d8(fn_003bd3d8_arg0 *param_1)
                 temp_v29 = DAT_006472dc;
                 temp_v27 = DAT_006472e0;
                 phaseCosine();
-                FUN_001a1ee0();
+                phaseSine();
                 temp_v29 = temp_v29 * temp_v26;
                 temp_v27 = temp_v27 * temp_v38;
                 temp_v35 = temp_v35 * -temp_v24;

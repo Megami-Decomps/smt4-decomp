@@ -10,7 +10,7 @@ typedef struct NetState {
 extern NetState DAT_005949d8;
 extern u8 DAT_006302d0[0x20];
 
-void *rt_memcpy(void *dst, const void *src, u32 size);
+void *__aeabi_memcpy(void *dst, const void *src, u32 size);
 
 /* Stores `size` (8..0x20) bytes of `data` in DAT_006302d0, or clears the stored data when `size` is 0. */
 void netSetPayload(const void *data, u32 size)
@@ -21,7 +21,7 @@ void netSetPayload(const void *data, u32 size)
     }
     if (data != NULL && size >= 8 && size <= 0x20) {
         DAT_005949d8.dataSize = size;
-        rt_memcpy(DAT_006302d0, data, size);
+        __aeabi_memcpy(DAT_006302d0, data, size);
     }
 }
 

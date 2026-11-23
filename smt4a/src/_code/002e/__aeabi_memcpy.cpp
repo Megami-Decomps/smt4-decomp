@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `rt_memcpy` (_code @ 0x2e5a08, 0x88 bytes) from smt4a.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `__aeabi_memcpy` (_code @ 0x2e5a08, 0x88 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "util/MemoryHelpers.h"
@@ -14,7 +14,7 @@ int HintPreloadData(unsigned int *);
 #endif
 
 
-unsigned long long rt_memcpy(unsigned int *param_1,unsigned int *param_2,unsigned int param_3,unsigned char param_4)
+unsigned long long __aeabi_memcpy(unsigned int *param_1,unsigned int *param_2,unsigned int param_3,unsigned char param_4)
 
 {
 /* irregular: irregular input(s): in_r12; 1 native warning(s); review required */

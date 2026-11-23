@@ -49,7 +49,7 @@ struct RingVertexOwner {
 extern "C" {
 extern EffectColor g_polyDefaultColor;
 extern EffectColor g_effectRingScratchColor;
-f32 FUN_001a1ee0(f32 angle);
+f32 phaseSine(f32 angle);
 f32 phaseCosine(f32 angle);
 
 /* Builds the segments of the ring polygon (rim point plus three tinted rows per segment) for the current frame: the ring radius follows the
@@ -111,7 +111,7 @@ void FUN_003919d4(EffectPrimitiveWork *work)
         for (s32 i = 0; i < segments; i++) {
             f32 phase = angle * 40.743664f;
             f32 cosine = phaseCosine(phase);
-            f32 sine = FUN_001a1ee0(phase);
+            f32 sine = phaseSine(phase);
             angle += step;
             direction->red = cosine;
             direction->green = 0.0f;

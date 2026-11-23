@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void rt_memcpy(u8 *dest, const s16 *source, s32 size);
+void __aeabi_memcpy(u8 *dest, const s16 *source, s32 size);
 
 typedef struct OutputCapture {
     /* 0x00 */ u8 *buffer;
@@ -16,7 +16,7 @@ void nn_snd_CTR_OutputCapture_Write(OutputCapture *capture, const s16 *frames, s
 {
     s32 position;
 
-    rt_memcpy(capture->buffer + capture->position * 4, frames, count << 2);
+    __aeabi_memcpy(capture->buffer + capture->position * 4, frames, count << 2);
     position = capture->position;
     capture->position = position + count;
     if (position + count >= capture->capacity) {

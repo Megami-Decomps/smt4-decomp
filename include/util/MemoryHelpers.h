@@ -12,6 +12,6 @@ unsigned long long nnnstdMemCpy(u8 *destination, const u8 *source, u32 size);
 
 void objectBufferFree(void *object);
 
-unsigned long long rt_memcpy(unsigned int *param_1,unsigned int *param_2,unsigned int param_3,unsigned char param_4);
+unsigned long long __aeabi_memcpy(unsigned int *param_1,unsigned int *param_2,unsigned int param_3,unsigned char param_4);
 
 } /* extern "C" */

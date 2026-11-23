@@ -5,10 +5,10 @@
 extern "C" {
 
 int __ARM_common_memcpy4_8(int, int);
-int rt_memcpy(...);
+int __aeabi_memcpy(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Supplied declaration required: __ARM_common_memcpy4_8. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int nn_cec_CTR_Message_MakeMessageBinary(int param_1,int param_2)
@@ -19,7 +19,7 @@ unsigned int nn_cec_CTR_Message_MakeMessageBinary(int param_1,int param_2)
   unsigned int temp_v1;
   int temp_v2;
   
-  rt_memcpy(param_2,param_1,0x70);
+  __aeabi_memcpy(param_2,param_1,0x70);
   param_2 = param_2 + 0x70;
   temp_v0 = *(char *)(param_1 + 0x130);
   temp_v1 = 0;
@@ -27,17 +27,17 @@ unsigned int nn_cec_CTR_Message_MakeMessageBinary(int param_1,int param_2)
     do {
       temp_v2 = param_1 + temp_v1 * 0xc;
       __ARM_common_memcpy4_8(param_2,temp_v2 + 0x70);
-      rt_memcpy(param_2 + 8,*(unsigned int *)(temp_v2 + 0x78),*(unsigned int *)(temp_v2 + 0x74));
+      __aeabi_memcpy(param_2 + 8,*(unsigned int *)(temp_v2 + 0x78),*(unsigned int *)(temp_v2 + 0x74));
       temp_v1 = temp_v1 + 1;
       param_2 = param_2 + 8 + ((*(int *)(temp_v2 + 0x74) + 3U) & 0xfffffffc);
     } while (temp_v1 < (unsigned int)(int)temp_v0);
   }
   if (*(int *)(param_1 + 0x138) != 0) {
-    rt_memcpy(param_2,*(int *)(param_1 + 0x138),*(unsigned int *)(param_1 + 0x134));
+    __aeabi_memcpy(param_2,*(int *)(param_1 + 0x138),*(unsigned int *)(param_1 + 0x134));
     param_2 = param_2 + *(int *)(param_1 + 0x134);
   }
   if (*(int *)(param_1 + 0x13c) != 0) {
-    rt_memcpy(param_2,*(int *)(param_1 + 0x13c),0x20);
+    __aeabi_memcpy(param_2,*(int *)(param_1 + 0x13c),0x20);
   }
   return *(unsigned int *)(param_1 + 4);
 }

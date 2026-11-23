@@ -12,7 +12,7 @@ static __inline void quaternionSetIdentity(PolyVec4 *quaternion)
 extern "C" {
 
 void *memAlloc(int, int, int, int size, int align, int);
-void rt_memcpy(void *dst, const void *src, int size);
+void __aeabi_memcpy(void *dst, const void *src, int size);
 
 extern PolyRingKind g_polyRingKinds[];
 extern PolyVec4 g_polyDefaultColor;
@@ -32,7 +32,7 @@ PolyObject *effPolyRingCreate(u32 kind, void *params)
     obj->color = g_polyDefaultColor;
     quaternionSetIdentity(&obj->rotation0);
     quaternionSetIdentity(&obj->rotation1);
-    rt_memcpy(obj->work, params, workSize);
+    __aeabi_memcpy(obj->work, params, workSize);
     obj->state = g_polyRingKinds[kind].create(params);
     g_polyRingKinds[kind].start(obj);
     return obj;

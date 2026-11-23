@@ -28,7 +28,7 @@ u8 byte1IsZero(void);
 }
 
 extern "C" {
-void FUN_001ecb54(s32 value);
+void FUN_001ecb54(s16 value);
 }
 
 extern "C" {

@@ -6,7 +6,7 @@ extern "C" {
 
 int asdOperatorDeleteArray(int);
 int bufAllocateStorage(...);
-int rt_memcpy(int, int, unsigned int);
+int __aeabi_memcpy(int, int, unsigned int);
 
 typedef struct fn_0031011e_arg0 fn_0031011e_arg0;
 struct fn_0031011e_arg0 {
@@ -20,7 +20,7 @@ struct fn_0031011e_arg0 {
 
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: bufAllocateStorage. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void bufReallocate(fn_0031011e_arg0 *param_1,unsigned int param_2)
@@ -40,7 +40,7 @@ void bufReallocate(fn_0031011e_arg0 *param_1,unsigned int param_2)
     if (param_2 <= param_1->field_0x14) {
       temp_v1 = param_2;
     }
-    rt_memcpy(temp_v0,param_1->field_0xc,temp_v1);
+    __aeabi_memcpy(temp_v0,param_1->field_0xc,temp_v1);
     asdOperatorDeleteArray(param_1->field_0xc);
     param_1->field_0x14 = param_2;
     param_1->field_0xc = temp_v0;

@@ -21,7 +21,7 @@ s32 soundArchiveReadWaveArchiveInfo(void *, u32, WaveArchiveLoadInfo *);
 void FUN_002a7ac4(WaveArchiveReader *, const void *, s32);
 bool asdWaveArchiveHasExpectedBlock(const WaveArchiveReader *);
 u32 nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(const void *);
-void *rt_memcpy(void *, const void *, u32);
+void *__aeabi_memcpy(void *, const void *, u32);
 void FUN_00150f34(WaveArchiveReader *);
 void slotTableReplace(WaveArchiveReader *, u32, const u8 *);
 extern const char DAT_004148c4[4];
@@ -47,7 +47,7 @@ void FUN_002ac4a0(SoundArchiveLoader *loader, u32 archiveId, WaveArchiveBufferAl
     if (converted == NULL)
         return;
 
-    rt_memcpy(converted, file, headerBytes);
+    __aeabi_memcpy(converted, file, headerBytes);
     u8 *signature = converted + headerBytes;
     memcpy(signature, DAT_004148c4, 4);
     WaveArchiveReader destination;

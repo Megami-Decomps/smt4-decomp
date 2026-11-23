@@ -5,7 +5,7 @@ extern "C" {
 
 
 
-void *rt_memcpy(void *dest, const void *src, u32 size);
+void *__aeabi_memcpy(void *dest, const void *src, u32 size); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 void statusDownCopyValues(const u16 *values, s32 count)
 {
@@ -14,7 +14,7 @@ void statusDownCopyValues(const u16 *values, s32 count)
         for (s32 i = 0; i < 8; i++) {
             status->pending[i] = 0;
         }
-        rt_memcpy(status->pending, values, count * sizeof(u16));
+        __aeabi_memcpy(status->pending, values, count * sizeof(u16));
     }
 }
 

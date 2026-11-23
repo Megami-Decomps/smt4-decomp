@@ -4,7 +4,7 @@
 
 extern "C" {
 void efctSetSpeed(f32 speed);
-void FUN_00493518(TextLayoutContextA *context, s32 sprite, s32 x, s32 y, u32 flags, f32 scale);
+void screenRectDrawPartScaled(TextLayoutContextA *context, s32 sprite, s32 x, s32 y, u32 flags, f32 scale);
 
 /* Draws the panel decoration sprites at the layout position of `row`: the first group runs at the first
  * animated member's speed, the last sprite at the last member's; `alternate` picks the second sprite set. */
@@ -34,21 +34,21 @@ void FUN_004a80d8(PanelTextOwnerPrefixA *owner, s32 row, u32 flags, s32 alternat
     s32 y = position->y;
     const AnimatedMember *first = &panel->first;
     efctSetSpeed(vec2GetSpeed((const UiSpriteState *)first) * scale);
-    FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x426, x, y, flags, scale);
-    FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x426, x, y, flags, scale);
-    FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x428, x, y, flags, scale);
+    screenRectDrawPartScaled(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x426, x, y, flags, scale);
+    screenRectDrawPartScaled(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x426, x, y, flags, scale);
+    screenRectDrawPartScaled(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x428, x, y, flags, scale);
     efctSetSpeed(scale);
-    FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x429, x, y, flags, scale);
+    screenRectDrawPartScaled(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x429, x, y, flags, scale);
     if (alternate) {
-        FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x5CF, x, y, flags, scale);
-        FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x5D0, x, y, flags, scale);
-        FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x5D2, x, y, flags, scale);
-        FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x5D1, x, y, flags, vec2GetSpeed((const UiSpriteState *)&panel->last) * scale);
+        screenRectDrawPartScaled(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x5CF, x, y, flags, scale);
+        screenRectDrawPartScaled(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x5D0, x, y, flags, scale);
+        screenRectDrawPartScaled(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x5D2, x, y, flags, scale);
+        screenRectDrawPartScaled(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x5D1, x, y, flags, vec2GetSpeed((const UiSpriteState *)&panel->last) * scale);
     } else {
-        FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x42A, x, y, flags, scale);
-        FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x42B, x, y, flags, scale);
-        FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x5C9, x, y, flags, scale);
-        FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x42C, x, y, flags, vec2GetSpeed((const UiSpriteState *)&panel->last) * scale);
+        screenRectDrawPartScaled(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x42A, x, y, flags, scale);
+        screenRectDrawPartScaled(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x42B, x, y, flags, scale);
+        screenRectDrawPartScaled(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x5C9, x, y, flags, scale);
+        screenRectDrawPartScaled(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x42C, x, y, flags, vec2GetSpeed((const UiSpriteState *)&panel->last) * scale);
     }
 }
 }

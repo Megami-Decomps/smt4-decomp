@@ -6,7 +6,7 @@
 extern "C" {
 extern SceneResourceWork *g_sceneResourceWork;
 void titleRestartSlotState3(s32 channel, s32 value);
-void FUN_001b4fe8(u32 job);
+void aocMainProcessUpdate(u32 job);
 s32 sceneResourceShutdownAoc(u32 job);
 s32 sceneUpdateOptionalResource(u32 job);
 s32 FUN_0020ed2c(u32 job);
@@ -14,7 +14,7 @@ u32 taskCreateDraw(const char *name, s32 priority, s32 group, u32 flags,
     AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
 
 // Start the optional scene-resource process and its upper/lower screen draw tasks.
-void FUN_001b0c04(s32 preserveChannels)
+void aocMainStart(s32 preserveChannels)
 {
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\addon\\aocMain.cpp", 149);
     SceneResourceWork *work = static_cast<SceneResourceWork *>(asdMemAlloc(0x100, 0x100, 0, sizeof(SceneResourceWork), 1));
@@ -28,7 +28,7 @@ void FUN_001b0c04(s32 preserveChannels)
         titleRestartSlotState3(0, 0xFF);
         titleRestartSlotState3(1, 0xFF);
     }
-    work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("AOCMainProc"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001b4fe8), reinterpret_cast<AsdProcFunc>(sceneResourceShutdownAoc), reinterpret_cast<u32>(g_sceneResourceWork));
+    work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("AOCMainProc"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(aocMainProcessUpdate), reinterpret_cast<AsdProcFunc>(sceneResourceShutdownAoc), reinterpret_cast<u32>(g_sceneResourceWork));
     taskCreateDraw("AOCDrawUp L", 0x7D, 1, 0, sceneUpdateOptionalResource, NULL, g_sceneResourceWork, work->job);
     taskCreateDraw("AOCDrawUp R", 0xDB, 1, 0, sceneUpdateOptionalResource, NULL, g_sceneResourceWork, work->job);
     work->tasks.drawJob = taskCreateDraw("AOCDrawDown", 0xE7, 1, 0, FUN_0020ed2c, NULL, g_sceneResourceWork, work->job);

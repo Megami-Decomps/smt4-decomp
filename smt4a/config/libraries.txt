@@ -99,3 +99,14 @@ arm 0x15ef04 0x15f0bc NintendoWare-font ResFont SetResource: Rebuild's block wal
 # nw_snd_internal_SoundArchiveLoader_LoadSequenceSound and LoadSoundGroup; smt4's counterpart
 # nw_snd_internal_SoundArchiveLoader_Load (0x2af3b4) is already third-party.
 arm 0x1753d4 0x17561c NintendoWare-snd SoundArchiveLoader item load: calls LoadSequenceSound, LoadSoundGroup and LoadImpl; smt4 counterpart nw_snd_internal_SoundArchiveLoader_Load
+# nn::fnd: the heap base's destructor (panics when blocks are still outstanding or child heaps still linked, then
+# unlinks the child list). Every caller is a third-party nn::fnd heap destructor (_ZN9Obj5583d0D1Ev,
+# expHeapBaseDestroyB, FUN_001aa330, FUN_0042bb70) and it is linked right after nn_fnd_detail_GetNextListObject and
+# FUN_001af630 inside the nn::fnd block; smt4's exact twin is _ZN9Obj420f70D1Ev (0x2a4288).
+arm 0x1af814 0x1af874 nn::fnd HeapBase destructor: callers are all nn::fnd heap destructors; linked after nn_fnd_detail_GetNextListObject
+# nn::cec: MessageBox::CloseMessageBox(bool bWithoutCommit). Unless told not to commit, it writes the inbox and
+# outbox box info (nn_cec_CTR_MessageBox_WriteBoxInfo) and the message box info (WriteMessageBoxInfo), closes the box
+# through the cec IPC session, then clears the box state and restores the box-info magics 'bb' (0x6262) and 'gg'
+# (0x6767). It is linked inside the nn_cec_CTR_MessageBox block (before ReadOutBoxIndex) and called by nn::cec
+# functions (FUN_0042ed58, FUN_0042f1cc, FUN_0042fa08); smt4's exact twin is FUN_00238f4c.
+arm 0x42e870 0x42ea6c nn::cec MessageBox::CloseMessageBox: WriteBoxInfo/WriteMessageBoxInfo, closes the box, box-info magics 0x6262/0x6767

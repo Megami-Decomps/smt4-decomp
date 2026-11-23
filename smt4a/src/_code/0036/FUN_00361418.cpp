@@ -6,7 +6,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int effGetFrameStep(void);
 int phaseCosine(void);
 int FUN_0027134c(int, float *);
@@ -61,7 +61,7 @@ extern float DAT_00647348; /* 0x647348 */
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 /* Supplied declaration required: effGetFrameStep. */
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: FUN_0027134c. */
@@ -181,7 +181,7 @@ void FUN_00361418(int param_1)
             phaseCosine();
             temp_v17 = CONCAT44(temp_v10,temp_v15 * temp_v12);
             temp_v15 = temp_v20;
-            FUN_001a1ee0();
+            phaseSine();
             temp_v11 = temp_v11 * temp_v12;
             temp_v10 = (float)temp_v17;
             DAT_006472dc = temp_v10 * DAT_0064731c + temp_v15 * DAT_0064732c + temp_v11 * DAT_0064733c;
@@ -245,7 +245,7 @@ void FUN_00361418(int param_1)
             phaseCosine();
             temp_v17 = CONCAT44(temp_v10,temp_v3 * temp_v13);
             temp_v3 = pfVar7[8] * (float)temp_v21;
-            FUN_001a1ee0();
+            phaseSine();
             temp_v3 = temp_v3 * temp_v13;
             temp_v10 = (float)temp_v17;
             DAT_006472dc = temp_v10 * DAT_0064731c + temp_v15 * DAT_0064732c + temp_v3 * DAT_0064733c;
@@ -321,7 +321,7 @@ void FUN_00361418(int param_1)
               phaseCosine();
               temp_v3 = temp_v3 * (float)temp_v17;
               temp_v10 = pfVar7[8] * (float)temp_v21;
-              FUN_001a1ee0();
+              phaseSine();
               temp_v10 = temp_v10 * (float)temp_v17;
               temp_v11 = temp_v3 * DAT_0064731c + temp_v15 * DAT_0064732c + temp_v10 * DAT_0064733c;
               temp_v12 = temp_v3 * DAT_00647320 + temp_v15 * DAT_00647330 + temp_v10 * DAT_00647340;

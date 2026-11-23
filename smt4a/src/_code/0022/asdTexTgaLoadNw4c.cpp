@@ -26,7 +26,7 @@ extern const char DAT_0053d27c[];
 extern const char DAT_0053d284[];
 s32 libc_strncmp(const char *first, const char *second, u32 count);
 void *asdMemoryAllocAligned(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 auxiliaryAlignment, u32 enabled);
-void rt_memcpy(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy(void *destination, const void *source, u32 bytes);
 }
 
 // Load Nintendo's embedded texture-data and format chunks from a NW4C-tagged TGA.
@@ -48,11 +48,11 @@ extern "C" void asdTexTgaLoadNw4c(AsdTexture *texture, const Nw4cTgaHeader *file
             const void *pixels = chunk + 1;
             asdDebugTrace(DAT_0053d234, 73);
             texture->storage.pixels = asdMemoryAllocAligned(0x10000, 0x100, 0, texture->storage.bytes, 128, 1);
-            rt_memcpy(texture->storage.pixels, pixels, texture->storage.bytes);
+            __aeabi_memcpy(texture->storage.pixels, pixels, texture->storage.bytes);
         }
         if (libc_strncmp(chunk->identifier, DAT_0053d268, 8) == 0) {
             char format[8] = {};
-            rt_memcpy(format, chunk + 1, chunk->bytes - sizeof(Nw4cChunkHeader));
+            __aeabi_memcpy(format, chunk + 1, chunk->bytes - sizeof(Nw4cChunkHeader));
             if (libc_strncmp(format, DAT_0053d274, 8) == 0) {
                 texture->image.type = 0x1401;
                 texture->image.format = 0x675b;

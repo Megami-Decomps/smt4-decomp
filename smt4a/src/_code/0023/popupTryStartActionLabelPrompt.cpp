@@ -9,7 +9,7 @@ extern PopupSubstitutionNames DAT_00531a98;
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(u32 maximum);
 const char *popupSelectWeightedMessage(s32 category, s32 id);
-void rt_memcpy(void *destination, const void *source, u32 size);
+void __aeabi_memcpy(void *destination, const void *source, u32 size);
 
 /* Request a context popup for the selected unit, substituting the action's label. */
 u32 popupTryStartActionLabelPrompt(s32 action, s32 count)
@@ -39,7 +39,7 @@ u32 popupTryStartActionLabelPrompt(s32 action, s32 count)
     work = g_popupState;
     work->message = message;
     work->speakerId = unit->id;
-    rt_memcpy(format, message, sizeof(format));
+    __aeabi_memcpy(format, message, sizeof(format));
     sprintf(work->text, format, labels.names[action]);
     work = g_popupState;
     work->message = work->text;

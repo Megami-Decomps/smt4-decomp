@@ -1,13 +1,15 @@
-/* NON_MATCHING: the control flow, calls, constants and most data accesses match; what differs is
- * the inlined three-axis sin/cos sampling (retail serialises the three float->u16 conversions through
- * one VFP register and needs only s0-s15 there, this build converts all three at once and spills into
- * s23/s27/s28, so it saves r4-fp and d8-d14 instead of r4-sl and d8-d13) and, following from that, the
- * stack layout (retail frame 0x108 with the matrix at sp+0, outputs at sp+0x30.., inputs at 0x80, 0x8c,
- * 0xa4, 0xc8, 0xec; this build 0xec). The same rotation inline is unmatched in FUN_0024bfb8 (0x218
- * bytes), the best test bed for it. */
+/* NON_MATCHING: the control flow, calls, constants and most data accesses match, and with the index
+ * conversions going through nn::math's F32ToU16/U16ToF32 inlines the build saves retail's registers (r4-sl,
+ * d8-d13) and serialises the three float->u16 conversions through one VFP register as retail does. What still
+ * differs is the inlined three-axis sin/cos sampling: retail takes |y| into a new register (s4) and uses the
+ * 0.0 in s3 as the x magnitude where the build converts in place and copies the zero, it loads the table
+ * samples and deltas in another order, and from that the frame is 8 bytes smaller (0x108 against 0x110; retail has
+ * the matrix at sp+0, outputs at sp+0x30.., inputs at 0x80, 0x8c, 0xa4, 0xc8, 0xec). The same rotation inline is
+ * unmatched in its out-of-line copies (smt4 FUN_002929d8, smt4a FUN_001aff14: 0x1f4 bytes), the best test bed. */
 #include "common.h"
 #include <math.h>
 #include "nw/math/MTX33.h"
+#include "nn/math/MathArithmetic.h"
 #include "shard/W6_W6Match6_CollisionQuad.h"
 #include "shard/W6_W6Match6_PhaseTrig.h"
 
@@ -40,15 +42,18 @@ static __forceinline void mtx34RotXYZFIdx(nw::math::MTX34 *out, f32 fIdxX, f32 f
     while (absZ >= 65536.0f) {
         absZ -= 65536.0f;
     }
-    u16 idxX = (u16)absX;
-    u16 idxY = (u16)absY;
-    u16 idxZ = (u16)absZ;
-    f32 rX = absX - (f32)idxX;
-    f32 rY = absY - (f32)idxY;
-    f32 rZ = absZ - (f32)idxZ;
-    const PhaseTrigEntry *entryX = &g_sinCosTable[idxX & 0xff];
-    const PhaseTrigEntry *entryY = &g_sinCosTable[idxY & 0xff];
-    const PhaseTrigEntry *entryZ = &g_sinCosTable[idxZ & 0xff];
+    u16 idxX = nn::math::F32ToU16(absX);
+    u16 idxY = nn::math::F32ToU16(absY);
+    u16 idxZ = nn::math::F32ToU16(absZ);
+    f32 rX = absX - nn::math::U16ToF32(idxX);
+    f32 rY = absY - nn::math::U16ToF32(idxY);
+    f32 rZ = absZ - nn::math::U16ToF32(idxZ);
+    idxX &= 0xff;
+    idxY &= 0xff;
+    idxZ &= 0xff;
+    const PhaseTrigEntry *entryX = &g_sinCosTable[idxX];
+    const PhaseTrigEntry *entryY = &g_sinCosTable[idxY];
+    const PhaseTrigEntry *entryZ = &g_sinCosTable[idxZ];
     f32 sinx = entryX->sine + rX * entryX->sineDelta;
     f32 cosx = entryX->cosine + rX * entryX->cosineDelta;
     f32 siny = entryY->sine + rY * entryY->sineDelta;

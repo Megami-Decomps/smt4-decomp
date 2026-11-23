@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the two `movge` of the palette/magnitude selection are swapped (retail sets the palette first). */
 #include "common.h"
 #include <stdio.h>
 
@@ -15,9 +14,12 @@ void FUN_00186008(s32 x, s32 y, s32 depth, s32 value)
         s32 magnitude;
         if (value < 0) {
             palette = 7;
-            magnitude = -value;
         } else {
             palette = 8;
+        }
+        if (value < 0) {
+            magnitude = -value;
+        } else {
             magnitude = value;
         }
         if (value < 0) {

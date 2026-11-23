@@ -2,16 +2,16 @@
 
 extern "C" {
 
-int rt_memcpy(void);
+int __aeabi_memcpy(void);
 
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int FUN_002e40ec(unsigned int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  rt_memcpy();
+  __aeabi_memcpy();
   return param_1;
 }
 

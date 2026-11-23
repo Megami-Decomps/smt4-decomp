@@ -23,7 +23,7 @@ int gxResetColorQuadToWhite(void);
 int pairSetHalves(...);
 int jobGetScalarValue(void);
 int markerKindGetColor(...);
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int FUN_001f3e80(...);
 int fadeObjectResetIfActive(...);
 int efctCallRoutineWithSpeedOverride(...);
@@ -125,7 +125,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: markerKindGetColor. */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: FUN_001f3e80. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
@@ -661,7 +661,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
         temp_v24 = (float)VectorSignedToFloat(0xf - temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v24 = temp_v24 * 1.5707964f * 0.06666667f * 40.743664f;
         temp_v8 = temp_v13;
-        FUN_001a1ee0();
+        phaseSine();
         *(float *)(temp_v7 + 0x418c) = ((float)temp_v26 - temp_v24) * 8.0f;
       }
       else {
@@ -909,7 +909,7 @@ LAB_002afb00:
               jobGetScalarValue();
               if ((temp_v11 == 4) && (0 < *(short *)(temp_v8 + 0x44))) {
                 VectorSignedToFloat((int)*(short *)(temp_v8 + 0x44),(unsigned char)(in_fpscr >> 0x16) & 3);
-                FUN_001a1ee0();
+                phaseSine();
               }
               temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,temp_v18 * 2 + 0x28));
               efctCallRoutineWithSpeedOverride(*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,0x24);
@@ -922,7 +922,7 @@ LAB_002afb00:
             jobGetScalarValue();
             if ((temp_v11 == 4) && (0 < *(short *)(temp_v8 + 0x44))) {
               VectorSignedToFloat((int)*(short *)(temp_v8 + 0x44),(unsigned char)(in_fpscr >> 0x16) & 3);
-              FUN_001a1ee0();
+              phaseSine();
             }
             temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,temp_v18 * 2 + 0x28));
             efctCallRoutineWithSpeedOverride(*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,0x24);
@@ -1028,7 +1028,7 @@ LAB_002afb00:
         temp_v4 = (int)temp_v20;
         temp_v20 = (float)VectorSignedToFloat(0xf - temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v20 = temp_v20 * 1.5707964f * 0.06666667f * 40.743664f;
-        FUN_001a1ee0();
+        phaseSine();
         *(float *)(temp_v38 + 0x19c) = (temp_v24 - temp_v20) * 8.0f;
       }
       if (((*temp_v37 == 0x1f) && (*(int *)(*piVar6 + 0x4d68) != 0)) &&

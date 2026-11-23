@@ -9,7 +9,7 @@ int FUN_0030d824(...);
 int FUN_0030db5c(...);
 int crc32Dispatch(...);
 int __aeabi_uidivmod(unsigned int, int);
-int rt_memcpy(...);
+int __aeabi_memcpy(...);
 
 /* stack frame of param_3: 19 slot(s), 64 byte(s) */
 typedef struct {
@@ -44,7 +44,7 @@ extern int FUN_00128bdc(int *, unsigned char *);
 /* Supplied declaration required: FUN_0030db5c. */
 /* Supplied declaration required: crc32Dispatch. */
 /* Supplied declaration required: __aeabi_uidivmod. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 int FUN_00127570(int *param_1,unsigned char *param_2,unsigned char *param_3)
@@ -304,7 +304,7 @@ LAB_0012782c:
                 if (*(unsigned char **)(temp_v3 + 0x18) < temp_v23 + temp_v13) {
                   pbVar2 = *(unsigned char **)(temp_v3 + 0x18) + -temp_v13;
                 }
-                rt_memcpy(*(int *)(temp_v3 + 0x10) + temp_v13,temp_v24,pbVar2);
+                __aeabi_memcpy(*(int *)(temp_v3 + 0x10) + temp_v13,temp_v24,pbVar2);
               }
               if (*(int *)(pbVar15 + 0x10) << 0x16 < 0) {
                 temp_v0 = *(unsigned int *)(pbVar15 + 0x18);
@@ -594,7 +594,7 @@ LAB_00127bc6:
         temp_v23 = temp_v25;
       }
       if (temp_v23 == (unsigned char *)0x0) goto LAB_0012840c;
-      rt_memcpy(temp_v29,temp_v24,temp_v23);
+      __aeabi_memcpy(temp_v29,temp_v24,temp_v23);
       pbVar17 = pbVar17 + -(int)temp_v23;
       temp_v24 = temp_v24 + (int)temp_v23;
       temp_v25 = temp_v25 + -(int)temp_v23;

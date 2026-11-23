@@ -3,7 +3,7 @@
 #include "nn/Result.h"
 extern "C" {
 u32 FUN_00439664(void*);
-void rt_memcpy(void*, const void*, u32);
+void __aeabi_memcpy(void*, const void*, u32);
 
 // Retrieves a status block, copies its public half, and records the translated result.
 WindowStatusResult FUN_00427f6c(void* owner, void* destination)
@@ -15,7 +15,7 @@ WindowStatusResult FUN_00427f6c(void* owner, void* destination)
     u8 block[64];
     s32 blockStatus = FUN_00439664(block);
     if (!nnResultIsFailure(blockStatus)) {
-        rt_memcpy(destination, block, 32);
+        __aeabi_memcpy(destination, block, 32);
         blockStatus = 0;
     }
     WindowStatusResult result(blockStatus);

@@ -1,11 +1,10 @@
 #include "shard/Shard003B.h"
-#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "saveLoadUI/SaveLoadUIBase.h"
 
 extern "C" {
 
 extern void asdMemFreeSlot(void *object); // declcheck: local (frees the text object itself; the shared declaration takes a slot pointer)
 extern void statusBustUpPortraitRelease(s32 a, s32 b);
-extern u32 requestIdToCode(s32 index);
 extern void asdTMTexTableReleaseNode(s32 a, u32 b);
 extern void asdMemFree(void *ptr);
 
@@ -32,7 +31,7 @@ void resSetFree(ResSet *set)
     statusBustUpPortraitRelease(set->previewId, 1);
     if (set != NULL) {
         for (i = 0; i < 9; i++) {
-            if (asdTMTexTableNodeIsLoaded(0x2E, requestIdToCode(i)) != 0) {
+            if (requestTextureIsLoaded(i)) {
                 asdTMTexTableReleaseNode(0x2E, requestIdToCode(i));
                 set->states[i] = 0;
             }

@@ -11,7 +11,7 @@ struct StatusDownFilterView {
     u8 enabled;       // 0x650
 };
 
-extern "C" void* rt_memcpy(void* destination, const void* source, u32 size);
+extern "C" void* __aeabi_memcpy(void* destination, const void* source, u32 size);
 
 // Replace the eight-entry status filter, or disable it for a negative count.
 extern "C" void statusDownSetSelectedIds(const u16* entries, s32 count)
@@ -25,7 +25,7 @@ extern "C" void statusDownSetSelectedIds(const u16* entries, s32 count)
     }
     if (count >= 0) {
         filter->enabled = 1;
-        rt_memcpy(filter->entries, entries, count * sizeof(u16));
+        __aeabi_memcpy(filter->entries, entries, count * sizeof(u16));
     } else {
         filter->enabled = 0;
     }

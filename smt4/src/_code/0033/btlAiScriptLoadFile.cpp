@@ -1,5 +1,5 @@
-/* NON_MATCHING: stack reservation and initial zero register are scheduled before the process load/test. */
-#include "runtime/Stdio.h"
+#include <stdio.h>
+#include "common.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAIScript.h"
 #include "battle/btlMain.h"
@@ -11,8 +11,8 @@
 #include "script/scrScriptProcess.h"
 
 extern "C" {
-extern const char DAT_00400444[]; /* battle/AI/%s.bf */
-extern const char DAT_00400454[]; /* battle/AI/tmp.bf */
+static const char s_aiScriptPathFormat[] = "battle/AI/%s.bf";
+static const char s_aiScriptFallbackPath[] = "battle/AI/tmp.bf";
 void asdMemFree(void *);
 SupportUnitRecord *supportUnitGetEntry(s32, s32);
 void memClear(void *, u32);
@@ -45,16 +45,16 @@ void btlAiScriptLoadFile(BtlAiScript *script, BtlAiScriptActor *actor)
         DemonSourceView *source = (DemonSourceView *)actor->demon;
         const char *name = supportUnitGetEntry(source->support, source->variant)->aiScript.name;
         memClear(path, sizeof(path));
-        __2sprintf(path, DAT_00400444, name);
+        sprintf(path, s_aiScriptPathFormat, name);
         if (!fileExistsPatchOrRom(btlGetMainState(), path))
-            __2sprintf(path, DAT_00400454);
+            sprintf(path, s_aiScriptFallbackPath);
         libc_strcpy(script->path, path);
     } else {
         const char *name = nkmEnemyFindById(actor->demon->id)->aiScriptName;
         memClear(path, sizeof(path));
-        __2sprintf(path, DAT_00400444, name);
+        sprintf(path, s_aiScriptPathFormat, name);
         if (!fileExistsPatchOrRom(btlGetMainState(), path))
-            __2sprintf(path, DAT_00400454);
+            sprintf(path, s_aiScriptFallbackPath);
         libc_strcpy(script->path, path);
         if (aocContentLookupSucceeds(g_aocSystem, actor->demon->id))
             g_aocSystem->aiDemonId = actor->demon->id;

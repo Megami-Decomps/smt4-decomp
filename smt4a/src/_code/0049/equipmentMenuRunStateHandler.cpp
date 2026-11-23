@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the order of the item-table address arithmetic and its saved register (r4/r6) differ. */
 #include "shard/Shard0049.h"
 #include "addon/AocEntryKind.h"
 #include "event/2dEvent/SmokeFade.h"
@@ -14,6 +13,15 @@ void gameGlobalsSetSceneState(void);
 void gameGlobalsReleaseReference(void);
 }
 
+/* Gets the item under the active page's cursor: the body of Obj536044::selectedItem
+ * (shop/ShopSelectedItem.h) over this view of the shop. */
+static __inline const EquipmentMenuItem *equipmentMenuSelectedItem(EquipmentMenuState *menu)
+{
+    EquipmentMenuCursor *list = &menu->cursors[menu->page];
+    const EquipmentMenuItem *items = menu->pages[menu->page].items;
+    return &items[flaggedValueHolderGetTotal(&list->holder)];
+}
+
 /* Finish equipment selection or tear down the menu's active child resource. */
 extern "C" void equipmentMenuRunStateHandler(EquipmentMenuState *menu)
 {
@@ -25,10 +33,7 @@ extern "C" void equipmentMenuRunStateHandler(EquipmentMenuState *menu)
         if (gameStateIsNotTransitioning()) {
             FUN_0031f718(-1, 0, 0);
             statusPanelSetOpen(1);
-            s32 page = menu->page;
-            const EquipmentMenuItem *items = menu->pages[page].items;
-            u32 index = flaggedValueHolderGetTotal(&menu->cursors[page].holder);
-            u32 item = items[index].id;
+            u32 item = equipmentMenuSelectedItem(menu)->id;
             if (item != 0) {
                 if (aocEntryGetKindForward(item) == 4) {
                     objBSetWordByIndex(0, item);

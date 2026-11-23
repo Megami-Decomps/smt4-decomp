@@ -10,7 +10,7 @@ int FUN_001a0f60(...);
 int FUN_001a0fb4(int, int *);
 int resultHandleFailure(void);
 int coproc_moveto_Data_Synchronization(int);
-int rt_memcpy(int, int *, int);
+int __aeabi_memcpy(int, int *, int);
 int software_interrupt(int);
 
 /* stack frame of param_2: 17 slot(s), 64 byte(s) */
@@ -43,7 +43,7 @@ typedef struct {
 /* Supplied declaration required: resultHandleFailure. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_0018a520(int *param_1,int param_2)
@@ -84,7 +84,7 @@ void FUN_0018a520(int *param_1,int param_2)
     }
     else {
       temp_v10[0] = 2;
-      rt_memcpy(param_1[0x42a],param_1 + 6,0x1080);
+      __aeabi_memcpy(param_1[0x42a],param_1 + 6,0x1080);
       coproc_moveto_Data_Synchronization(0);
     }
     FUN_001897bc(2,temp_v10,4);

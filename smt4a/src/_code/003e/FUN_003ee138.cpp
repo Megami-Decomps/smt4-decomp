@@ -7,7 +7,7 @@ extern "C" {
 int sysMemClear(...);
 int btlInitializeDemonUnitState(...);
 int FUN_004ca63c(...);
-int rt_memcpy(...);
+int __aeabi_memcpy(...);
 int __aeabi_memcpy4(...);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -34,7 +34,7 @@ extern unsigned int gameGetSaveSlotData(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: btlInitializeDemonUnitState. */
 /* Supplied declaration required: FUN_004ca63c. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -69,7 +69,7 @@ void FUN_003ee138(int param_1)
   }
   if (DAT_0057393c != 0) {
     temp_v3 = flagValueGetStorage();
-    rt_memcpy(DAT_0057393c,temp_v3,0x10b8);
+    __aeabi_memcpy(DAT_0057393c,temp_v3,0x10b8);
   }
   piVar14 = (int *)(temp_v12 + 0x4e48);
   piVar12 = (int *)(temp_v12 + 0x1ed4);
@@ -92,7 +92,7 @@ void FUN_003ee138(int param_1)
   }
   if (DAT_00573930 != 0) {
     temp_v3 = flagValueGetStorage();
-    rt_memcpy(temp_v3,DAT_00573930,0x10b8);
+    __aeabi_memcpy(temp_v3,DAT_00573930,0x10b8);
   }
   temp_v4 = *piVar14;
   if (temp_v4 != 0) {

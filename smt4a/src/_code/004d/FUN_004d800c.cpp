@@ -1,6 +1,6 @@
-/* NON_MATCHING: 18 lines. Retail reads the state before `sub sp` in the prologue (this build after), and in
-   BTL_EVENT_A_START_SCRIPT's two 64-bit mask operations it holds the mask's low word in r2 and r3 where this
-   build uses r3 and r2. */
+/* NON_MATCHING: 16 lines. In BTL_EVENT_A_START_SCRIPT's two 64-bit mask operations retail holds the mask's low word
+   in r2 and r3 where this build uses r3 and r2. */
+#include <stdio.h>
 #include "battle/BattleEventStatesA.h"
 #include "gamedata/DataTable.h"
 #include "battle/BtlMainAccess.h"
@@ -13,7 +13,7 @@ struct BattleEventPendingMask {
 
 extern "C" {
 extern BattleEventPendingMask g_btlEvent;
-extern const char DAT_005285b8[];
+static const char s_proTablePathFormat[] = "battle/event/%s/ProTable_%s.tbb";
 void *dataTableFileGetTable(void *file, s32 index);
 u32 FUN_004d7ec0(BattleEventAssetLoadState *event, BtlMainStateA *battle);
 u32 btlActionStepFinishPendingChanges(BattleEventAssetLoadState *event, BtlMainStateA *battle);
@@ -40,7 +40,7 @@ extern "C" u32 FUN_004d800c(BattleEventAssetLoadState *event, const BattleEventA
     case BTL_EVENT_A_LOAD_TABLE: {
         char path[128];
         sysMemClear(path, sizeof(path));
-        __2sprintf(path, DAT_005285b8, source->name, source->name);
+        sprintf(path, s_proTablePathFormat, source->name, source->name);
         if (FUN_0046c4b4((u32)g_aocSystem, source->archiveId))
             aocQueueType1e(g_aocSystem, source->archiveId, &event->table, path);
         else

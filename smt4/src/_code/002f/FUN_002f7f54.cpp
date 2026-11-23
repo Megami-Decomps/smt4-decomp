@@ -1,4 +1,4 @@
-/* NON_MATCHING: percentage-division constant lifetime, clamp conditional execution and action-call argument scheduling differ. */
+/* NON_MATCHING: only the HP percentage block differs: retail reloads the spilled percentage into ip, loads the status flags before the multiply and tests the flag in r1 (the build multiplies first and tests in r7). */
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
@@ -33,10 +33,9 @@ u32 FUN_002f7f54()
             else if (mp == 0)
                 mp = -1;
             BtlActionRecord *target = &btlGetMainState()->actions[unit->ids[0]];
-            s32 delay = count * 5;
             btlQueueSkillReflectActions(0, actor, target, 0,
-                         hp, mp, ~0u, effect, delay, delay, 9, 0, 0);
-            btlQueueKeyedScalarReflectAction(delay, actor, 0x10001C1, 0, 0, 0, 0);
+                         hp, mp, ~0u, effect, count * 5, count * 5, 9, 0, 0);
+            btlQueueKeyedScalarReflectAction(count * 5, actor, 0x10001C1, 0, 0, 0, 0);
             ++count;
         }
     }

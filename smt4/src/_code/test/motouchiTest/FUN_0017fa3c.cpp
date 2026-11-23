@@ -4,7 +4,7 @@
 
 extern "C" {
 void *memAlloc(u32, u32, u32, u32, u32, u32);
-void rt_memcpy(void *, const void *, u32);
+void __aeabi_memcpy(void *, const void *, u32);
 
 // Find a TXOB resource in the buffer and copy its image into owned storage.
 void FUN_0017fa3c(MotouchiTexture *texture, const u32 *data, u32 size)
@@ -28,7 +28,7 @@ void FUN_0017fa3c(MotouchiTexture *texture, const u32 *data, u32 size)
             return;
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\test\\motouchiTest.cpp", 887);
         texture->data = memAlloc(0x10000, 0x100, 0, texture->dataSize, 0x80, 1);
-        rt_memcpy(texture->data, image, texture->dataSize);
+        __aeabi_memcpy(texture->data, image, texture->dataSize);
         return;
     }
 }

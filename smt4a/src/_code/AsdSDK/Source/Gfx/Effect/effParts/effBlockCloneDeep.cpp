@@ -20,7 +20,7 @@ static __inline void effBlockCopyDataA(EffBlock *block, const void *data, s32 si
         block->ownedA = copy;
         block->dataA = copy;
         block->sizeA = size;
-        rt_memcpy(block->dataA, data, size);
+        __aeabi_memcpy(block->dataA, data, size);
     }
 }
 

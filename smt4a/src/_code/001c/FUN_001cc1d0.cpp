@@ -8,7 +8,7 @@ int FUN_001d0984(unsigned int, int, int);
 int FUN_001d0b98(...);
 int FUN_001d13e8(...);
 int __aeabi_uidivmod(...);
-int rt_memcpy(...);
+int __aeabi_memcpy(...);
 
 /* stack frame of param_2: 22 slot(s), 74 byte(s) */
 typedef struct {
@@ -40,7 +40,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001d0b98. */
 /* Supplied declaration required: FUN_001d13e8. */
 /* Supplied declaration required: __aeabi_uidivmod. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int FUN_001cc1d0(int param_1,unsigned int param_2)
@@ -134,7 +134,7 @@ unsigned int FUN_001cc1d0(int param_1,unsigned int param_2)
                     return 0;
                   }
                   temp_v4 = param_1 + 0x110 + temp_v1 * 0x20;
-                  rt_memcpy(temp_v4,temp_v29,0x20);
+                  __aeabi_memcpy(temp_v4,temp_v29,0x20);
                   FUN_001d0984(*(unsigned int *)(param_1 + temp_v1 * 0x3c8 + 0x22c),0,temp_v4);
                   temp_v5 = temp_v1 + 1;
                   temp_v18[temp_v1 * 3] = (unsigned short)temp_v9;
@@ -172,7 +172,7 @@ unsigned int FUN_001cc1d0(int param_1,unsigned int param_2)
                   return 0;
                 }
                 temp_v4 = param_1 + 0x110 + temp_v1 * 0x20;
-                rt_memcpy(temp_v4,temp_v23,0x20);
+                __aeabi_memcpy(temp_v4,temp_v23,0x20);
                 FUN_001d0984(*(unsigned int *)(param_1 + temp_v1 * 0x3c8 + 0x22c),0,temp_v4);
                 temp_v5 = temp_v1 + 1;
                 temp_v18[temp_v1 * 3] = temp_v25;

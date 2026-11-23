@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0037bd00(int);
 int __aeabi_uidivmod(...);
-int rt_memcpy(int, unsigned char [32], int);
+int __aeabi_memcpy(int, unsigned char [32], int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 21 slot(s), 54 byte(s) */
@@ -46,7 +46,7 @@ extern int nw_snd_internal_StreamSoundFileLoader_ReadDspAdpcmChannelInfo(int, un
 extern int nw_snd_internal_StreamSoundFileLoader_ReadStreamInfo(int, unsigned char *);
 extern int nw_snd_internal_StreamSoundFileLoader_ReadStreamTrackInfo(int, unsigned char *, unsigned int);
 extern int nw_snd_internal_StreamSoundFile_FileHeader_GetDataBlockOffset(void);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int FUN_0037c2d8(int param_1,int param_2)
@@ -168,7 +168,7 @@ unsigned int FUN_0037c2d8(int param_1,int param_2)
               return 0;
             }
             temp_v7 = param_1 + temp_v5 * 0x2c;
-            rt_memcpy(temp_v7 + 0xa92,temp_v28,0x20);
+            __aeabi_memcpy(temp_v7 + 0xa92,temp_v28,0x20);
             temp_v3 = temp_v5 * 4;
             temp_v5 = temp_v5 + 1;
             *(unsigned short *)(temp_v7 + 0xab2) = temp_v29;

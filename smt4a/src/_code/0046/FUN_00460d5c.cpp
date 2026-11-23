@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int rt_memcpy(void);
+int __aeabi_memcpy(void);
 
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int FUN_00460d5c(unsigned int param_1,int *param_2,unsigned int param_3)
@@ -19,7 +19,7 @@ unsigned int FUN_00460d5c(unsigned int param_1,int *param_2,unsigned int param_3
   if (param_3 <= (unsigned int)(*param_2 - param_2[1])) {
     temp_v0 = param_3;
   }
-  rt_memcpy();
+  __aeabi_memcpy();
   return temp_v0;
 }
 

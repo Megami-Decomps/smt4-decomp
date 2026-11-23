@@ -1,189 +1,128 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a24a8` (_code @ 0x4a24a8, 0x588 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "classes/Obj55c920.h"
+#include "shard/Shard004A.h"
+#include "code/Code002a.h"
+#include "code/Code0049_Smt4a.h"
+#include "ui/AnimatedMessage.h"
+#include "ui/UiSpriteApi.h"
+#include "code/Code0031_Smt4a.h"
 
 extern "C" {
+extern u32 g_entryWindowColors[10];
 
-int efctSetSpeed(void);
-int gxResetColorQuadToWhite(void);
-int drawSetColorFromRGBA8(...);
-int FUN_0031d174(...);
-int FUN_00493518(...);
-int words2Copy(int, float [2]);
-int FUN_004935c8(int, int, int);
-int pairAt8Get(int, float [5]);
-void FUN_004a2a30(void *, int entry, int alternate, unsigned int textId, float scale);
-void FUN_004a3238(int, int, unsigned int, int, unsigned int textId, float scale);
-int owner4ASetSizeAndCall(int, double);
-int FUN_004a7950(int, int, double);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_1_stack;
-
-extern unsigned int g_entryWindowColors; /* 0x5e1e88 */
-
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: gxResetColorQuadToWhite. */
-/* Supplied declaration required: drawSetColorFromRGBA8. */
-extern int resourceDispatchTaggedOperation(int);
-/* Supplied declaration required: FUN_0031d174. */
-/* Supplied declaration required: FUN_00493518. */
-/* Supplied declaration required: words2Copy. */
-/* Supplied declaration required: FUN_004935c8. */
-/* Supplied declaration required: pairAt8Get. */
-/* Supplied declaration required: FUN_004a2a30. */
-/* Supplied declaration required: FUN_004a3238. */
-/* Supplied declaration required: owner4ASetSizeAndCall. */
-/* Supplied declaration required: FUN_004a7950. */
-extern int flaggedValueHolderGetTotal(int);
-extern int rangeGetMinimumLimit(int);
-
-
+void pairAt8Get(const ScreenRect *rect, UiFloatPosition *size);
+void screenRectDrawCompositeScaled(const EffectRect *rect, u32 id, s32 dx, s32 dy, u32 last, f32 speed);
+void drawSetColorFromRGBA8(u32 color);
+s32 rangeGetMinimumLimit(void *list);
+void FUN_004a7950(Screen4A *window, s32 value, u32 alpha);
+void FUN_004a2a30(Screen4A *window, s32 entry, s32 alternate, u32 textId, f32 scale);
+void FUN_004a3238(Screen4A *window, s32 index, u32 mode, s32 enabled, u32 text, f32 scale);
+void owner4ASetSizeAndCall(Screen4A *screen, s32 step);
 }
 
-extern "C" void _ZN9Obj55c92012FUN_004a24a8Ev(int param_1)
+/* Whether the window's rectangle reaches into the 320-pixel wide screen. The same test as FUN_004a5344's
+ * panelIntersectsHorizontalView; retail's frame shows it was a scope of its own: the position's slot at [sp]
+ * is reused for the frame parts' outgoing stack argument. */
+static __inline bool screenIntersectsHorizontalView(Screen4A *screen)
 {
-/* irregular: 12 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  float temp_v8;
-  unsigned int *unaff_r11;
-  float temp_v9 [2];
-  float temp_v10 [5];
-  
-  words2Copy(param_1 + 200,temp_v9);
-  pairAt8Get(param_1 + 200,temp_v10);
-  if (((int)(temp_v9[0] + temp_v10[0]) < 0x43a00000) &&
-     ((unsigned int)(temp_v9[0] + temp_v10[0]) < 0xc3a00000)) {
-    temp_v8 = *(float *)(param_1 + 0x850);
-    temp_v9[0] = temp_v8;
-    FUN_004935c8(param_1 + 200,2,0);
-    temp_v9[0] = temp_v8;
-    FUN_00493518(param_1 + 200,0x4a4,0);
-    temp_v9[0] = temp_v8;
-    FUN_00493518(param_1 + 200,0x4a5,0);
-    temp_v9[0] = temp_v8;
-    FUN_00493518(param_1 + 200,0x4a6,0);
-    temp_v9[0] = temp_v8;
-    FUN_00493518(param_1 + 200,0x4a7,0);
-    if (*(char *)(param_1 + 0x860) != '\0') {
-      temp_v9[0] = temp_v8;
-      FUN_00493518(param_1 + 200,0x4a3,0);
+    UiFloatPosition position;
+    UiFloatPosition size;
+    words2Copy((const UiFloatPosition *)&screen->layout.rect, &position);
+    pairAt8Get(&screen->layout.rect, &size);
+    return position.x + size.x < 320.0f && position.x + size.x > -320.0f;
+}
+
+/* Draws the Bible menu's list window when it is on screen: the frame parts for the menu's mode, the
+ * registration percentage and the visible rows, layer by layer, with the selected row last. */
+void Obj55c920::FUN_004a24a8()
+{
+    Screen4A *screen = (Screen4A *)this;
+
+    if (!screenIntersectsHorizontalView(screen)) {
+        return;
     }
-    else {
-      temp_v9[0] = temp_v8;
-      FUN_00493518(param_1 + 200,0x4a2,0);
+    s32 slide;
+    f32 scale;
+    f32 fullSpeed = 1.0f; /* the effect speed restored after each part drawn at the window's own */
+    s32 first;
+    s32 visible;
+    BibleAnalyzeListEntry *rows;
+    s32 layer;
+
+    scale = vec2GetSpeed(&screen->bank.sprites[screen->bankPreset.preset]);
+    slide = screen->transition.slide;
+
+    screenRectDrawCompositeScaled((const EffectRect *)&screen->layout.rect, 2, 0, 0, slide, scale);
+    screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x4a4, 0, 0, slide, scale);
+    screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x4a5, 0, 0, slide, scale);
+    screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x4a6, 0, 0, slide, scale);
+    screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x4a7, 0, 0, slide, scale);
+    if (screen->unk0860 == 0) {
+        screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x4a2, 0, 0, slide, scale);
+    } else {
+        screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x4a3, 0, 0, slide, scale);
     }
-    if (*(char *)(param_1 + 0x860) != '\x01') {
-      if (*(char *)(param_1 + 0xa876) != '\0') {
-        temp_v9[0] = temp_v8;
-        FUN_00493518(param_1 + 200,0x5b3,0);
-        temp_v9[0] = temp_v8;
-        FUN_00493518(param_1 + 200,0x5b4,0);
-        temp_v9[0] = temp_v8;
-        FUN_00493518(param_1 + 200,0x5b5,0);
-        temp_v9[0] = temp_v8;
-        FUN_00493518(param_1 + 200,0x5b6,0);
-        temp_v9[0] = temp_v8;
-        FUN_00493518(param_1 + 200,0x5bf,0);
-        temp_v9[0] = temp_v8;
-        FUN_00493518(param_1 + 200,0x5c0,0);
-        temp_v9[0] = temp_v8;
-        FUN_00493518(param_1 + 200,0x5c1,0);
-        temp_v9[0] = temp_v8;
-        FUN_00493518(param_1 + 200,0x5c2,0);
-      }
-      else {
-        temp_v9[0] = temp_v8;
-        FUN_00493518(param_1 + 200,0x5b7,0);
-        temp_v9[0] = temp_v8;
-        FUN_00493518(param_1 + 200,0x5b8,0);
-        temp_v9[0] = temp_v8;
-        FUN_00493518(param_1 + 200,0x5b9,0);
-        temp_v9[0] = temp_v8;
-        FUN_00493518(param_1 + 200,0x5ba,0);
-        temp_v9[0] = temp_v8;
-        FUN_00493518(param_1 + 200,0x5bb,0);
-        temp_v9[0] = temp_v8;
-        FUN_00493518(param_1 + 200,0x5bc,0);
-        temp_v9[0] = temp_v8;
-        FUN_00493518(param_1 + 200,0x5bd,0);
-        temp_v9[0] = temp_v8;
-        FUN_00493518(param_1 + 200,0x5be,0);
-      }
-    }
-    efctSetSpeed();
-    FUN_004a7950(param_1,(int)*(char *)(param_1 + 0x94),temp_v8);
-    efctSetSpeed();
-    if (*(int *)(param_1 + 0x28) != 0) {
-      temp_v1 = resourceDispatchTaggedOperation(param_1 + 0x20);
-      temp_v2 = rangeGetMinimumLimit(param_1 + 0x20);
-      temp_v7 = 1;
-      temp_v6 = param_1 + 0x864;
-      do {
-        temp_v5 = 0;
-        if (temp_v5 < temp_v2) {
-          do {
-            if ((*(int *)(param_1 + 0x14) != 2) ||
-               (temp_v3 = FUN_0031d174(param_1 + 0x20), temp_v3 != temp_v5)) {
-              temp_v9[0] = (float)(int)*(short *)(temp_v6 + (temp_v1 + temp_v5) * 0x20 + 4);
-              FUN_004a3238(param_1,temp_v5,temp_v7,0,
-                  (int)*(short *)(temp_v6 + (temp_v1 + temp_v5) * 0x20 + 4),temp_v8);
-            }
-            temp_v5 = temp_v5 + 1;
-          } while (temp_v5 < temp_v2);
+    if (screen->unk0860 != 1) {
+        if (screen->bankPreset.alternateFrame != 0) {
+            screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x5b3, 0, 0, slide, scale);
+            screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x5b4, 0, 0, slide, scale);
+            screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x5b5, 0, 0, slide, scale);
+            screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x5b6, 0, 0, slide, scale);
+            screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x5bf, 0, 0, slide, scale);
+            screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x5c0, 0, 0, slide, scale);
+            screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x5c1, 0, 0, slide, scale);
+            screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x5c2, 0, 0, slide, scale);
+        } else {
+            screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x5b7, 0, 0, slide, scale);
+            screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x5b8, 0, 0, slide, scale);
+            screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x5b9, 0, 0, slide, scale);
+            screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x5ba, 0, 0, slide, scale);
+            screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x5bb, 0, 0, slide, scale);
+            screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x5bc, 0, 0, slide, scale);
+            screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x5bd, 0, 0, slide, scale);
+            screenRectDrawPartScaled((const EffectRect *)&screen->layout.rect, 0x5be, 0, 0, slide, scale);
         }
-        temp_v7 = temp_v7 + 1;
-      } while (temp_v7 < 5);
-      if (0 < temp_v2) {
-        unaff_r11 = &g_entryWindowColors;
-      }
-      temp_v7 = 0;
-      if (temp_v7 < temp_v2) {
-        do {
-          if ((*(int *)(param_1 + 0x14) == 2) &&
-             (temp_v5 = FUN_0031d174(param_1 + 0x20), temp_v5 == temp_v7)) {
-            if (temp_v7 != 0) {
-              if (unaff_r11[temp_v7 - 1] != unaff_r11[temp_v7]) {
-                drawSetColorFromRGBA8();
-              }
-            }
-            else {
-              drawSetColorFromRGBA8(*unaff_r11);
-            }
-          }
-          else {
-            temp_v9[0] = (float)(int)*(short *)(temp_v6 + (temp_v1 + temp_v7) * 0x20 + 4);
-            FUN_004a3238(param_1,temp_v7,5,0,
-                (int)*(short *)(temp_v6 + (temp_v1 + temp_v7) * 0x20 + 4),temp_v8);
-          }
-          temp_v7 = temp_v7 + 1;
-        } while (temp_v7 < temp_v2);
-      }
-      gxResetColorQuadToWhite();
-      temp_v1 = *(int *)(param_1 + 0x14);
-      if ((((temp_v1 == 2 || temp_v1 == 3) || (temp_v1 == 8 || temp_v1 == 4)) || (temp_v1 == 5 || temp_v1 == 6))
-         || (temp_v1 == 10 || temp_v1 == 9)) {
-        temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
-        temp_v0 = *(short *)(temp_v6 + temp_v1 * 0x20 + 4);
-        temp_v4 = FUN_0031d174(param_1 + 0x20);
-        FUN_004a2a30(reinterpret_cast<void *>(param_1),temp_v4,1,(int)temp_v0,temp_v8);
-      }
-      efctSetSpeed();
-      owner4ASetSizeAndCall(param_1,temp_v8);
-      efctSetSpeed();
-      return;
     }
-  }
-  return;
+    efctSetSpeed(scale);
+    FUN_004a7950(screen, screen->gauge.percent, slide);
+    efctSetSpeed(fullSpeed);
+    if (screen->listCount.count == 0) {
+        return;
+    }
+
+    first = resourceDispatchTaggedOperation(&screen->selection.holder);
+    visible = rangeGetMinimumLimit(&screen->selection.holder);
+    rows = screen->rows;
+    /* The rows' four lower layers, then their top layer, where the selected row only sets its colour. Retail
+     * sets the layer to 5 again (mov r9, #5) although the loop leaves it there. */
+    for (layer = 1; layer <= 4; layer++) {
+        for (s32 row = 0; row < visible; row++) {
+            if (screen->state != 2 || FUN_0031d174(&screen->selection.holder) != row) {
+                FUN_004a3238(screen, row, layer, 0, rows[first + row].id, scale);
+            }
+        }
+    }
+    layer = 5;
+    for (s32 row = 0; row < visible; row++) {
+        if (screen->state == 2 && FUN_0031d174(&screen->selection.holder) == row) {
+            if (row != 0) {
+                if (g_entryWindowColors[row - 1] != g_entryWindowColors[row]) {
+                    drawSetColorFromRGBA8(g_entryWindowColors[row]);
+                }
+            } else {
+                drawSetColorFromRGBA8(g_entryWindowColors[0]);
+            }
+        } else {
+            FUN_004a3238(screen, row, layer, 0, rows[first + row].id, scale);
+        }
+    }
+    gxResetColorQuadToWhite();
+    if (screen->state == 2 || screen->state == 3 || screen->state == 8 || screen->state == 4 || screen->state == 5 ||
+        screen->state == 6 || screen->state == 10 || screen->state == 9) {
+        s16 id = rows[flaggedValueHolderGetTotal(&screen->selection.holder)].id;
+        FUN_004a2a30(screen, FUN_0031d174(&screen->selection.holder), 1, id, scale);
+    }
+    efctSetSpeed(scale);
+    owner4ASetSizeAndCall(screen, slide);
+    efctSetSpeed(fullSpeed);
 }

@@ -1,6 +1,6 @@
-/* NON_MATCHING: allocation only (13 rows). Retail copies x and y to r7/r6 after reserving the frame, converts the
- * first name's coordinates in s1/s0 (built: through s0/s2, as both do for the cursor row's name), loads the row
- * mark's y offsets into r2/r1 and loads the cursor name's depth after the layer. */
+/* NON_MATCHING: allocation only (7 rows). Retail holds the row mark's y in r2 and the slot's in r1 (built: r1 and
+ * r2), converts the cursor row's name coordinates through s0/s2 (built: in s1/s0, as both do for the other rows'
+ * names) and loads the cursor row's mark x after the slot's. */
 #include <stdio.h>
 #include "camp/Unite/UniteWork.h"
 #include "camp/CampStateQueries.h"
@@ -62,7 +62,7 @@ void uniteOptionListDraw(s32 x, s32 y)
         textDrawString(slot->x + label->x + x, slot->y + label->y + y, 0.5859375f, 2, 0.0f, 0xff, 1.0f, name);
         if (FUN_00200574(work->optionListIV.ids[top + row]) != 0) {
             TextureTableEntryIV *mark = asdTMTexTableEntryAt(UNITE_SPRITES, 0x1d4);
-            texDrawCompositeSprite(2, UNITE_SPRITES, 7, slot->x + mark->x + x, slot->y + mark->y + y, 0x6a);
+            texDrawCompositeSprite(2, UNITE_SPRITES, 7, slot->x + mark->x + x, mark->y + slot->y + y, 0x6a);
         }
     }
 
@@ -101,7 +101,7 @@ void uniteOptionListDraw(s32 x, s32 y)
         textDrawString(slot->x + label->x + x, slot->y + label->y + y, 0.48828125f, 3, 0.0f, 0xffffffff, 1.0f, name);
         if (FUN_00200574(work->optionListIV.ids[selected]) != 0) {
             TextureTableEntryIV *mark = asdTMTexTableEntryAt(UNITE_SPRITES, 0x1d7);
-            texDrawCompositeSprite(2, UNITE_SPRITES, 7, slot->x + mark->x + x, mark->y + slot->y + y, 0x83);
+            texDrawCompositeSprite(2, UNITE_SPRITES, 7, mark->x + slot->x + x, slot->y + mark->y + y, 0x83);
         }
     }
     uiDrawListScrollBar(&work->optionListIV.list, x, y, UNITE_SPRITES, 0x23, 0x24, 0x25, 0x1f, 0x21, 0x20, 0x22,

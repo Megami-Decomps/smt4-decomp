@@ -1,4 +1,6 @@
-/* NON_MATCHING: first indicator state spills; retail retains it in fp, changing the remaining register allocation. */
+/* NON_MATCHING: 29 lines: with the track sprite chosen by an if/else (as IV's FUN_00309ec8) the indicator states
+ * allocate as retail; what remains is the track's registers (sprite r7, placement r9 in retail) and the row offset,
+ * which retail multiplies and adds separately (mul; add) where the build fuses it into mla. */
 #include "gfx/UiControlDraw.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -18,7 +20,12 @@ void FUN_0039a1b8(UiControlDrawPosition *position, s32 x, s32 y,
     texDrawTableEntryAtStoredOrigin(2, 0x2e, firstArrow, position->x + x, y, 101);
     s32 secondArrow = secondActive != 0 ? 0xf4 : 0xf2;
     texDrawTableEntryAtStoredOrigin(2, 0x2e, secondArrow, position->x + x, y, 101);
-    u32 thumb = trackActive != 0 ? 0xf7 : 0xf6;
+    u32 thumb;
+    if (trackActive != 0) {
+        thumb = 0xf7;
+    } else {
+        thumb = 0xf6;
+    }
     TexturePlacementPrefixIV *size = asdTMTexTableEntryAt(0x2e, thumb)->placement;
     s32 height = size->height;
     s32 step = height / subdivisions;

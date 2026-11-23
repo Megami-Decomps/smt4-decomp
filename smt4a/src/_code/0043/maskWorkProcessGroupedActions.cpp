@@ -13,7 +13,7 @@ void FUN_005153cc(Variant *);
 void variantSetByteA(Variant *, u32 *, u8);
 void FUN_00436d04(MaskProcessor *, u8 *);
 void FUN_00436c10(u32 *, MaskProcessor *, u8 *);
-void *rt_memcpy(void *, const void *, u32);
+void *__aeabi_memcpy(void *, const void *, u32);
 s32 rt_memcmp(const void *, const void *, u32);
 
 static inline void unlinkNode(MaskWorkNode *node)
@@ -32,7 +32,7 @@ u32 maskWorkProcessGroupedActions(MaskProcessor *processor, MaskWorkState **work
         u8 *mask = (u8 *)FUN_004387f0(processor->allocator, units);
         if (!mask)
             return 0;
-        rt_memcpy(mask, (*work)->baseline, processor->byteCount);
+        __aeabi_memcpy(mask, (*work)->baseline, processor->byteCount);
         mask[((MaskAction *)current->payload.value)->byteIndex] = 1;
         MaskWorkNode *node = pending->next;
         while (node != sentinel) {

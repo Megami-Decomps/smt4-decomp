@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0024f3d8(...);
+int planeFromThreePoints(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(...);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
@@ -52,7 +52,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_0024f3d8. */
+/* Supplied declaration required: planeFromThreePoints. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 
@@ -243,7 +243,7 @@ int FUN_0021c694(int param_1)
       nn_math_ARMv6_VEC3TransformAsm_2AD44C(temp_v0 + 0x4a12d0,&temp_v39,&temp_v32);
       temp_v19 = *(unsigned long long *)pfVar9;
       temp_v9 = *(float *)(temp_v0 + 0x4a126c);
-      FUN_0024f3d8(&temp_v35,&temp_v36,&temp_v37,temp_v38);
+      planeFromThreePoints(&temp_v35,&temp_v36,&temp_v37,temp_v38);
       *(float *)(temp_v0 + 0x4a12e0) = -temp_v35;
       *(float *)(temp_v0 + 0x4a12e4) = -temp_v36;
       *(float *)(temp_v0 + 0x4a12e8) = -temp_v37;
@@ -263,7 +263,7 @@ int FUN_0021c694(int param_1)
             *(float *)(temp_v0 + 0x4a1284) + *(float *)(temp_v0 + 0x4a1290)) * 0.25f;
       temp_v19 = *(unsigned long long *)(temp_v0 + 0x4a1270);
       temp_v9 = *(float *)(temp_v0 + 0x4a1278);
-      FUN_0024f3d8(&temp_v35,&temp_v36,&temp_v37,temp_v38);
+      planeFromThreePoints(&temp_v35,&temp_v36,&temp_v37,temp_v38);
       *(float *)(temp_v0 + 0x4a12ec) = -temp_v35;
       *(float *)(temp_v0 + 0x4a12f0) = -temp_v36;
       *(float *)(temp_v0 + 0x4a12f4) = -temp_v37;
@@ -284,7 +284,7 @@ int FUN_0021c694(int param_1)
       temp_v28 = *pfVar9;
       temp_v9 = *(float *)(temp_v0 + 0x4a1268);
       temp_v26 = *(float *)(temp_v0 + 0x4a126c);
-      FUN_0024f3d8(&temp_v35,&temp_v36,&temp_v37,temp_v38);
+      planeFromThreePoints(&temp_v35,&temp_v36,&temp_v37,temp_v38);
       *(float *)(temp_v0 + 0x4a12f8) = -temp_v35;
       *(float *)(temp_v0 + 0x4a12fc) = -temp_v36;
       *(float *)(temp_v0 + 0x4a1300) = -temp_v37;
@@ -304,7 +304,7 @@ int FUN_0021c694(int param_1)
             *(float *)(temp_v0 + 0x4a129c) + *(float *)(temp_v0 + 0x4a12b4)) * temp_v8;
       temp_v19 = *(unsigned long long *)(temp_v0 + 0x4a1288);
       temp_v9 = *(float *)(temp_v0 + 0x4a1290);
-      FUN_0024f3d8(&temp_v35,&temp_v36,&temp_v37,temp_v38);
+      planeFromThreePoints(&temp_v35,&temp_v36,&temp_v37,temp_v38);
       *(float *)(temp_v0 + 0x4a1304) = -temp_v35;
       *(float *)(temp_v0 + 0x4a1308) = -temp_v36;
       *(float *)(temp_v0 + 0x4a130c) = -temp_v37;
@@ -323,7 +323,7 @@ int FUN_0021c694(int param_1)
             *(float *)(temp_v0 + 0x4a12a8) + *(float *)(temp_v0 + 0x4a12c0)) * temp_v8;
       temp_v19 = *(unsigned long long *)(temp_v0 + 0x4a127c);
       temp_v9 = *(float *)(temp_v0 + 0x4a1284);
-      FUN_0024f3d8(&temp_v35,&temp_v36,&temp_v37,temp_v38);
+      planeFromThreePoints(&temp_v35,&temp_v36,&temp_v37,temp_v38);
       *(float *)(temp_v0 + 0x4a1310) = -temp_v35;
       *(float *)(temp_v0 + 0x4a1314) = -temp_v36;
       *(float *)(temp_v0 + 0x4a1318) = -temp_v37;
@@ -343,7 +343,7 @@ int FUN_0021c694(int param_1)
             *(float *)(temp_v0 + 0x4a12b4) + *(float *)(temp_v0 + 0x4a12c0)) * temp_v8;
       temp_v19 = *(unsigned long long *)(temp_v0 + 0x4a12ac);
       temp_v9 = *(float *)(temp_v0 + 0x4a12b4);
-      FUN_0024f3d8(&temp_v35,&temp_v36,&temp_v37,temp_v38);
+      planeFromThreePoints(&temp_v35,&temp_v36,&temp_v37,temp_v38);
       *(float *)(temp_v0 + 0x4a131c) = -temp_v35;
       *(float *)(temp_v0 + 0x4a1320) = -temp_v36;
       *(float *)(temp_v0 + 0x4a1324) = -temp_v37;
@@ -458,7 +458,7 @@ int FUN_0021c694(int param_1)
     temp_v17 = *(float *)(temp_v0 + 0x4a1284);
     temp_v19 = *(unsigned long long *)(temp_v0 + 0x4a128c);
     temp_v31 = *(float *)(temp_v0 + 0x4a1288);
-    FUN_0024f3d8(&temp_v35,&temp_v36,&temp_v37,temp_v38);
+    planeFromThreePoints(&temp_v35,&temp_v36,&temp_v37,temp_v38);
     *(float *)(temp_v0 + 0x4a12e0) = temp_v35;
     *(float *)(temp_v0 + 0x4a12e4) = temp_v36;
     *(float *)(temp_v0 + 0x4a12e8) = temp_v37;
@@ -492,7 +492,7 @@ int FUN_0021c694(int param_1)
       *(unsigned short *)(temp_v0 + 0x4a13d8) = 0;
       temp_v26 = (temp_v21 + temp_v25 + temp_v16 + temp_v23) * 0.25f;
       temp_v24 = (temp_v30 + temp_v14 + temp_v17 + (float)((unsigned long long)temp_v19 >> 0x20)) * 0.25f;
-      FUN_0024f3d8(&temp_v35,&temp_v36,&temp_v37,temp_v38);
+      planeFromThreePoints(&temp_v35,&temp_v36,&temp_v37,temp_v38);
       *(float *)(temp_v0 + 0x4a12ec) = temp_v35;
       *(float *)(temp_v0 + 0x4a12f0) = temp_v36;
       *(float *)(temp_v0 + 0x4a12f4) = temp_v37;
@@ -512,7 +512,7 @@ int FUN_0021c694(int param_1)
       *(float *)(temp_v0 + 0x4a1354) =
            (*(float *)(temp_v0 + 0x4a126c) + *(float *)(temp_v0 + 0x4a1278)) * 0.5f;
       temp_v28 = temp_v9;
-      FUN_0024f3d8(&temp_v35,&temp_v36,&temp_v37,temp_v38);
+      planeFromThreePoints(&temp_v35,&temp_v36,&temp_v37,temp_v38);
       *(float *)(temp_v0 + 0x4a12f8) = temp_v35;
       *(float *)(temp_v0 + 0x4a12fc) = temp_v36;
       *(float *)(temp_v0 + 0x4a1300) = temp_v37;
@@ -531,7 +531,7 @@ int FUN_0021c694(int param_1)
            (*(float *)(temp_v0 + 0x4a1268) + *(float *)(temp_v0 + 0x4a1280)) * temp_v25;
       *(float *)(temp_v0 + 0x4a1360) =
            (*(float *)(temp_v0 + 0x4a126c) + *(float *)(temp_v0 + 0x4a1284)) * temp_v25;
-      FUN_0024f3d8(&temp_v35,&temp_v36,&temp_v37,temp_v38);
+      planeFromThreePoints(&temp_v35,&temp_v36,&temp_v37,temp_v38);
       *(float *)(temp_v0 + 0x4a1304) = temp_v35;
       *(float *)(temp_v0 + 0x4a1308) = temp_v36;
       *(float *)(temp_v0 + 0x4a130c) = temp_v37;
@@ -552,7 +552,7 @@ int FUN_0021c694(int param_1)
            (*(float *)(temp_v0 + 0x4a1274) + *(float *)(temp_v0 + 0x4a128c)) * temp_v25;
       *(float *)(temp_v0 + 0x4a136c) =
            (*(float *)(temp_v0 + 0x4a1278) + *(float *)(temp_v0 + 0x4a1290)) * temp_v25;
-      FUN_0024f3d8(&temp_v35,&temp_v36,&temp_v37,temp_v38);
+      planeFromThreePoints(&temp_v35,&temp_v36,&temp_v37,temp_v38);
       *(float *)(temp_v0 + 0x4a1310) = temp_v35;
       *(float *)(temp_v0 + 0x4a1314) = temp_v36;
       *(float *)(temp_v0 + 0x4a1318) = temp_v37;
@@ -590,7 +590,7 @@ int FUN_0021c694(int param_1)
         *(unsigned short *)(temp_v0 + 0x4a13d8) = 2;
         temp_v26 = (temp_v27 + temp_v22 + temp_v15 + temp_v31) * 0.25f;
         temp_v24 = (temp_v21 + temp_v25 + temp_v16 + temp_v23) * 0.25f;
-        FUN_0024f3d8(&temp_v35,&temp_v36,&temp_v37,temp_v38);
+        planeFromThreePoints(&temp_v35,&temp_v36,&temp_v37,temp_v38);
         *(float *)(temp_v0 + 0x4a12ec) = temp_v35;
         *(float *)(temp_v0 + 0x4a12f0) = temp_v36;
         *(float *)(temp_v0 + 0x4a12f4) = temp_v37;
@@ -611,7 +611,7 @@ int FUN_0021c694(int param_1)
         *(float *)(temp_v0 + 0x4a1354) =
              (*(float *)(temp_v0 + 0x4a126c) + *(float *)(temp_v0 + 0x4a1278)) * 0.5f;
         temp_v28 = temp_v9;
-        FUN_0024f3d8(&temp_v35,&temp_v36,&temp_v37,temp_v38);
+        planeFromThreePoints(&temp_v35,&temp_v36,&temp_v37,temp_v38);
         *(float *)(temp_v0 + 0x4a12f8) = temp_v35;
         *(float *)(temp_v0 + 0x4a12fc) = temp_v36;
         *(float *)(temp_v0 + 0x4a1300) = temp_v37;
@@ -630,7 +630,7 @@ int FUN_0021c694(int param_1)
              (*(float *)(temp_v0 + 0x4a1268) + *(float *)(temp_v0 + 0x4a1280)) * temp_v25;
         *(float *)(temp_v0 + 0x4a1360) =
              (*(float *)(temp_v0 + 0x4a126c) + *(float *)(temp_v0 + 0x4a1284)) * temp_v25;
-        FUN_0024f3d8(&temp_v35,&temp_v36,&temp_v37,temp_v38);
+        planeFromThreePoints(&temp_v35,&temp_v36,&temp_v37,temp_v38);
         *(float *)(temp_v0 + 0x4a1304) = temp_v35;
         *(float *)(temp_v0 + 0x4a1308) = temp_v36;
         *(float *)(temp_v0 + 0x4a130c) = temp_v37;
@@ -650,7 +650,7 @@ int FUN_0021c694(int param_1)
              (*(float *)(temp_v0 + 0x4a1274) + *(float *)(temp_v0 + 0x4a128c)) * temp_v25;
         *(float *)(temp_v0 + 0x4a136c) =
              (*(float *)(temp_v0 + 0x4a1278) + *(float *)(temp_v0 + 0x4a1290)) * temp_v25;
-        FUN_0024f3d8(&temp_v35,&temp_v36,&temp_v37,temp_v38);
+        planeFromThreePoints(&temp_v35,&temp_v36,&temp_v37,temp_v38);
         *(float *)(temp_v0 + 0x4a1310) = temp_v35;
         *(float *)(temp_v0 + 0x4a1314) = temp_v36;
         *(float *)(temp_v0 + 0x4a1318) = temp_v37;

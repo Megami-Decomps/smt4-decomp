@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002a4b0c(int, int);
 int __aeabi_uidivmod(...);
 int nw_snd_internal_driver_Voice_CalcOffsetAdpcmParam(unsigned short *, unsigned int, unsigned int, unsigned char *);
-int rt_memcpy(int, unsigned char *, int);
+int __aeabi_memcpy(int, unsigned char *, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 typedef int romwright_code(...);
 /* stack frame of param_5: 14 slot(s), 56 byte(s) */
@@ -35,7 +35,7 @@ extern int FUN_0037bbe4(int, unsigned short *, unsigned short *, unsigned int, u
 /* Supplied declaration required: __aeabi_uidivmod. */
 extern int nw_snd_internal_Util_GetByteBySample(unsigned int, unsigned char);
 /* Supplied declaration required: nw_snd_internal_driver_Voice_CalcOffsetAdpcmParam. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int FUN_0037ca00(int param_1,int param_2,int param_3,unsigned int param_4,unsigned int param_5)
@@ -200,7 +200,7 @@ unsigned int FUN_0037ca00(int param_1,int param_2,int param_3,unsigned int param
           do {
             pbVar12 = &DAT_004eb380 + temp_v9 * temp_v8;
             temp_v13 = *(int *)(temp_v24 + temp_v2 * 4) + temp_v0;
-            rt_memcpy(temp_v13,pbVar12 + temp_v6,temp_v4);
+            __aeabi_memcpy(temp_v13,pbVar12 + temp_v6,temp_v4);
             FUN_002a4b0c(temp_v13,temp_v4);
             if (temp_v20 != 0) {
               puVar3 = (unsigned short *)(param_1 + temp_v2 * 6 + 0xbf2);

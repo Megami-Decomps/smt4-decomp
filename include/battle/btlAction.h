@@ -41,6 +41,10 @@ struct BtlActionRecord {
     union {
         /* 0x58 */ u8 unk58[4];
         /* 0x58 */ u16 presentationFlags;
+        struct {
+            u8 unk58BeforeDelay[2];
+            /* 0x5A */ u16 unk5A;      /* cleared when a summoned unit's record is set up */
+        } summon;
     };
     /* 0x5C */ u32 pendingValue;        /* cleared with the record when its combatant leaves the battle */
     struct {
@@ -148,7 +152,9 @@ typedef struct BtlActionGlobalsA {
     /* 0xE8 */ u8 unkE8[8];
     /* 0xF0 */ u64 cameraExcludedMaskB; /* more battle state bits that suppress it */
     /* 0xF8 */ u64 helpModeMask;    /* battle state bits that pick the targetable-combatant help subject (FUN_004ecd7c) */
-    /* 0x100 */ u8 unk100[0x28];
+    /* 0x100 */ u8 unk100[0x18];
+    /* 0x118 */ u64 menuCloseMask;  /* battle state bits that close the command menu (btlUnitStepCommandMenu) */
+    /* 0x120 */ u8 unk120[8];
     /* 0x128 */ u64 interruptMask; /* actor flag bits that block the skill start */
     /* 0x130 */ u8 unk130[0x50];
     /* 0x180 */ u64 aiMenuMask;     /* battle state bits that make the AI open a menu command */

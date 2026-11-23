@@ -322,7 +322,9 @@ struct UniteWorkA {
     /* 0x0438 */ union {
         /* 0x0438 */ u8 unk0438[0x8E88];
         struct {
-            /* 0x0438 */ u8 unk0438[0x3A];
+            /* 0x0438 */ u8 unk0438[0x14];
+            /* 0x044C */ s16 valueRowRegions[8]; /* touch regions of the value list's rows */
+            /* 0x045C */ u8 unk045C[0x16];
             /* 0x0472 */ s16 scrollUpRegion;
             /* 0x0474 */ s16 scrollDownRegion;
             /* 0x0476 */ s16 scrollThumbRegion;
@@ -438,6 +440,13 @@ struct UniteWorkA {
             u8 prefix438[0x8C40];
             /* 0x9078 */ UnitePairEntry pairs[1];
         } resultPairsA;
+        /* the option list (uniteDrawPanelRows), as IV's optionListIV */
+        struct {
+            /* 0x0438 */ u8 unk0438[0x8C70];
+            /* 0x90A8 */ u16 ids[76];           /* table 0x24 records the option list shows */
+            /* 0x9140 */ u8 unk9140[8];
+            /* 0x9148 */ ScrollSelection list;
+        } optionListA;
         /* the skill inheritance screen: the eight slots the result learns and the candidate list */
         struct {
             u8 prefix438[0x8728];
@@ -486,6 +495,8 @@ struct UniteWorkA {
         } catalogThreadA;
     };
 };
+typedef char UniteWorkAOptionListOffsets[offsetof(UniteWorkA, optionListA.ids) == 0x90A8 &&
+    offsetof(UniteWorkA, optionListA.list) == 0x9148 ? 1 : -1];
 typedef char UniteWorkAChainOffsets[offsetof(UniteWorkA, chains.groups) == 0x523A &&
     sizeof(UniteChainGroupA) == 0x28 ? 1 : -1];
 

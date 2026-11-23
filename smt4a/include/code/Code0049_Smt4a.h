@@ -18,6 +18,6 @@ void uiDrawTableTextureAtRectCorner(ScreenRect *rect, u32 id, s32 dx, s32 dy, u3
 
 u32 FUN_004954e8(SubmenuWork *work);
 
-void FUN_00493518(f32 speed, const EffectRect *rect, u32 id, s32 dx, s32 dy, u32 last);
+void screenRectDrawPartScaled(const EffectRect *rect, u32 id, s32 dx, s32 dy, u32 last, f32 speed);
 
 } /* extern "C" */

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int rt_memcpy(int, unsigned int, unsigned int);
+int __aeabi_memcpy(int, unsigned int, unsigned int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 typedef int romwright_code(...);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void nw_snd_internal_BasicSound_SetAmbientInfo(int param_1,unsigned int *param_2)
@@ -21,7 +21,7 @@ void nw_snd_internal_BasicSound_SetAmbientInfo(int param_1,unsigned int *param_2
   
   temp_v0 = (**(romwright_code **)(*(int *)param_2[2] + 8))((int *)param_2[2],param_2[4]);
   if (temp_v0 != 0) {
-    rt_memcpy(temp_v0,param_2[3],param_2[4]);
+    __aeabi_memcpy(temp_v0,param_2[3],param_2[4]);
     temp_v1 = *param_2;
     temp_v2 = param_2[1];
     temp_v3 = param_2[2];

@@ -1,12 +1,8 @@
-/* NON_MATCHING: the switch, the calls, the frame's shared search key and the data accesses follow retail; the
- * register allocation does not. Retail keeps 0 in fp and 1 in r7 (the build: r8 and fp), spills the list pointer in
- * state 2 as well (sp+20, which makes its frame 8 bytes larger), holds 10 and 9 in r1/r2 for both row-limit
- * selections and skips the empty-list test after clamping, and so merges the four help lookups of state 2
- * differently. The empty-list test is threaded as in retail once state 1 has no `list` local between the clamp and
- * the loop (the list address then moves into the loop's preheader, as retail has it), but that form is 460 lines
- * off against 405 because the register allocation shifts again, so it is not written. Retail's 10 and 9 in r1/r2
- * come back when the clamp is an inline taking both row counts as parameters (402 lines); nothing else shows such
- * a helper, so that is not written either. */
+/* NON_MATCHING: the switch, the calls, the frame's shared search key, the spilled list address and the data
+ * accesses follow retail; the register allocation does not. Retail keeps 0 in fp and 1 in r7 (the build: r8 and
+ * r9), holds 10 and 9 in r1/r2 for both row-limit selections (they were variables in the original; the smt4a twin
+ * sortMenuCalcUpdate shows the same and is otherwise 40 lines off by shape), stores state 2 from an immediate in
+ * state 1, and allocates the four help lookups of state 2 differently, so cross-jumping merges other copies. */
 #include "ui/UiSpriteApi.h"
 #include "ui/UiControl.h"
 #include "shard/W6_W6Match6_SortMenu.h"
@@ -43,8 +39,7 @@ static __inline void sortMenuAdvanceFrame(SortMenuWork *work)
 {
     uiSpriteAdvanceAnimation(&work->sprites[10]);
     uiSpriteAdvanceAnimation(&work->sprites[11]);
-    GridNavigation *list = &work->list;
-    if (static_cast<s32>(gridNavigationGetItemCount(list)) > static_cast<s32>(uiListGetVisibleCount(list))) {
+    if (static_cast<s32>(gridNavigationGetItemCount(&work->list)) > static_cast<s32>(uiListGetVisibleCount(&work->list))) {
         uiSpriteAdvanceAnimation(&work->sprites[12]);
     }
 }
@@ -112,7 +107,6 @@ s32 sortMenuUpdate(u32 job)
         if (rows > SORT_MENU_ROWS(work)) {
             rows = SORT_MENU_ROWS(work);
         }
-        GridNavigation *list = &work->list;
         for (s32 i = 0; i < rows; i++) {
             if (work->frame < i) {
                 continue;
@@ -124,23 +118,23 @@ s32 sortMenuUpdate(u32 job)
             work->state = 2;
             const char *help;
             u8 key;
-            if (work->option != 2) {
-                for (s32 j = 0; j < rows; j++) {
-                    work->ids[3 + j] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, j + 7);
-                    work->touchRegionCount++;
-                }
-                key = sortMenuCursorKey(work, list);
-                help = key >= SORT_MENU_KEY_COUNT ? NULL : sortMenuFindKey(key)->help;
-            } else {
+            if (work->option == 2) {
                 for (s32 j = 0; j < rows; j++) {
                     work->ids[3 + j] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, j + 43);
                     work->touchRegionCount++;
                 }
-                key = sortMenuCursorKey(work, list);
+                key = sortMenuCursorKey(work, &work->list);
+                help = key >= SORT_MENU_KEY_COUNT ? NULL : sortMenuFindKey(key)->help;
+            } else {
+                for (s32 j = 0; j < rows; j++) {
+                    work->ids[3 + j] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, j + 7);
+                    work->touchRegionCount++;
+                }
+                key = sortMenuCursorKey(work, &work->list);
                 help = key >= SORT_MENU_KEY_COUNT ? NULL : sortMenuFindKey(key)->help;
             }
             buttonHelpSetText(help, SORT_MENU_HELP_COLOR);
-            if (static_cast<s32>(gridNavigationGetItemCount(list)) > static_cast<s32>(uiListGetVisibleCount(list))) {
+            if (static_cast<s32>(gridNavigationGetItemCount(&work->list)) > static_cast<s32>(uiListGetVisibleCount(&work->list))) {
                 work->ids[0] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, 70);
                 work->ids[1] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, 71);
                 work->ids[2] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, 72);
@@ -151,49 +145,44 @@ s32 sortMenuUpdate(u32 job)
     }
     case 2: {
         sortMenuAdvanceFrame(work);
-        GridNavigation *list = &work->list;
-        s32 row = resourceRunOperationIfUnblocked(list) + listCursorGetRowIfUnblocked(list);
+        s32 row = resourceRunOperationIfUnblocked(&work->list) + listCursorGetRowIfUnblocked(&work->list);
         const char *help = NULL;
         u8 key;
-        if (uiScrollHandleActionsOrTouch(list, asdTMTexTableEntryAt(SORT_MENU_TEXTURES, 72), &work->ids[3],
+        if (uiScrollHandleActionsOrTouch(&work->list, asdTMTexTableEntryAt(SORT_MENU_TEXTURES, 72), &work->ids[3],
                                          work->ids[2], work->ids[0], work->ids[1], &decide, 0, 1)) {
-            if (listCursorGetRowIfUnblocked(list) != row) {
+            if (listCursorGetRowIfUnblocked(&work->list) != row) {
                 work->ascending = 1;
             }
             if (work->option == 2) {
-                key = sortMenuCursorKey(work, list);
+                key = sortMenuCursorKey(work, &work->list);
                 if (key < SORT_MENU_KEY_COUNT) {
                     help = sortMenuFindKey(key)->help;
                 }
                 buttonHelpSetText(help, SORT_MENU_HELP_COLOR);
             } else {
-                key = sortMenuCursorKey(work, list);
+                key = sortMenuCursorKey(work, &work->list);
                 buttonHelpSetText(key >= SORT_MENU_KEY_COUNT ? NULL : sortMenuFindKey(key)->help, SORT_MENU_HELP_COLOR);
             }
-        } else if (gridNavigationHandleConfirm(list, 1)) {
+        } else if (gridNavigationHandleConfirm(&work->list, 1)) {
             work->ascending = 1;
             if (work->option == 2) {
-                key = sortMenuCursorKey(work, list);
+                key = sortMenuCursorKey(work, &work->list);
                 if (key < SORT_MENU_KEY_COUNT) {
                     help = sortMenuFindKey(key)->help;
                 }
                 buttonHelpSetText(help, SORT_MENU_HELP_COLOR);
             } else {
-                key = sortMenuCursorKey(work, list);
+                key = sortMenuCursorKey(work, &work->list);
                 buttonHelpSetText(key >= SORT_MENU_KEY_COUNT ? NULL : sortMenuFindKey(key)->help, SORT_MENU_HELP_COLOR);
             }
         } else if (inputQueryButtonState(0, 1) || decide) {
-            /* Decided: the preference keeps the key in its low seven bits and "descending" in bit 7. */
+            /* Decided: the preference takes the key and the order. */
             work->decided = 1;
             work->state = 3;
             if (work->owner >= 0) {
-                u8 *preference = gameDataGetSortPreferences() + work->owner;
-                *preference = (*preference & ~0x7F) | (sortMenuCursorKey(work, list) & 0x7F);
-                if (work->ascending) {
-                    *preference &= ~0x80;
-                } else {
-                    *preference |= 0x80;
-                }
+                SortPreference *preference = (SortPreference *)(gameDataGetSortPreferences() + work->owner);
+                preference->key = sortMenuCursorKey(work, &work->list);
+                preference->descending = !work->ascending;
             }
             eventQueueAddUniqueIfValid(0x100016D);
         } else if (inputQueryButtonState(1, 1)) {

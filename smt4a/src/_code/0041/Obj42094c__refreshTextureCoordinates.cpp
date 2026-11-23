@@ -38,7 +38,7 @@ extern "C" {
 s32 randBetween(s32 minimum, s32 maximum);
 u32 randRange(u32 limit);
 f32 phaseCosine(f32 phase);
-f32 FUN_001a1ee0(f32 phase);
+f32 phaseSine(f32 phase);
 }
 
 // Initialize the filter rectangle and give each particle a staggered radial velocity.
@@ -62,7 +62,7 @@ extern "C" void _ZN9Obj42094c25refreshTextureCoordinatesEv(Filter4PolyView *self
         f32 phase = (f32)randRange(65535) * (1.0f / 65536.0f) * 256.0f;
         f32 *velocity = self->particles[index].velocity;
         f32 x = phaseCosine(phase);
-        f32 y = FUN_001a1ee0(phase);
+        f32 y = phaseSine(phase);
         velocity[0] = x;
         velocity[1] = y;
         velocity[2] = 0;

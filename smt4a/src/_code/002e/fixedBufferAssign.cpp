@@ -8,12 +8,12 @@ typedef struct {
     u32 length;         /* 0x10 */
 } Buffer;
 
-void *rt_memcpy(void *dest, const void *source, u32 length);
+void *__aeabi_memcpy(void *dest, const void *source, u32 length);
 
 /* Copies `length` bytes into the buffer and records the length. */
 void fixedBufferAssign(Buffer *buffer, const void *source, u32 length)
 {
-    rt_memcpy(buffer, source, length);
+    __aeabi_memcpy(buffer, source, length);
     buffer->length = length;
 }
 

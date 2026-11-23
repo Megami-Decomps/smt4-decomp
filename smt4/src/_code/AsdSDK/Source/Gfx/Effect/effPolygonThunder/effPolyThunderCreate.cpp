@@ -14,7 +14,7 @@ static __inline void quaternionSetIdentity(PolyVec4 *quaternion)
 extern "C" {
 
 extern const char g_effPolygonThunderSourceFileName[]; /* effect source file name (__FILE__) */
-void rt_memcpy(void *dst, const void *src, int size);
+void __aeabi_memcpy(void *dst, const void *src, int size);
 
 extern PolyThunderKind g_polyThunderKinds[];
 
@@ -34,7 +34,7 @@ PolyThunderObject *effPolyThunderCreate(u32 kind, void *parameters)
     obj->scale = 1.0f;
     quaternionSetIdentity(&obj->rotation0);
     quaternionSetIdentity(&obj->rotation1);
-    rt_memcpy(obj->work, parameters, workSize);
+    __aeabi_memcpy(obj->work, parameters, workSize);
     obj->state = g_polyThunderKinds[kind].create(parameters);
     g_polyThunderKinds[kind].start(obj);
     return obj;

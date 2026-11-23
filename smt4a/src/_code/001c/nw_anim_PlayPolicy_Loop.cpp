@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001b4030(void);
+int __hardfp_fmodf(void);
 int hardfp_floorf(void);
 
-/* Supplied declaration required: FUN_001b4030. */
+/* Supplied declaration required: __hardfp_fmodf. */
 /* Supplied declaration required: hardfp_floorf. */
 
 
@@ -23,7 +23,7 @@ void nw_anim_PlayPolicy_Loop(void)
     if (in_s2 - in_s0 < 0.0f) {
       hardfp_floorf();
     }
-    FUN_001b4030();
+    __hardfp_fmodf();
   }
   return;
 }

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int rt_memcpy(...);
+int __aeabi_memcpy(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_0014d8c8(int param_1,int param_2,int param_3,int param_4,int param_5,unsigned int *param_6)
@@ -37,8 +37,8 @@ void FUN_0014d8c8(int param_1,int param_2,int param_3,int param_4,int param_5,un
     param_6[1] = 0x10000;
     param_6[2] = param_3;
     temp_v0 = 1;
-    rt_memcpy(param_6 + 4,*(int *)(param_1 + 4) + param_2,param_3);
-    rt_memcpy((int)param_6 + param_3 + 0x10,*(int *)(param_1 + 0x18) + param_4 * 0x1c,param_5 * 0x1c
+    __aeabi_memcpy(param_6 + 4,*(int *)(param_1 + 4) + param_2,param_3);
+    __aeabi_memcpy((int)param_6 + param_3 + 0x10,*(int *)(param_1 + 0x18) + param_4 * 0x1c,param_5 * 0x1c
              );
     pcVar2 = (char *)((int)param_6 + param_3 + 0x10);
     temp_v1 = 0;

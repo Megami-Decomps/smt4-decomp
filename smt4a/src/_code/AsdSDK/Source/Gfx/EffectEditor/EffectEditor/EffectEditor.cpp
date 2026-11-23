@@ -46,7 +46,7 @@ extern EffectSelectionCatalogEntry *DAT_0059e624[13];
 void __aeabi_memcpy4(void *, const void *, u32);
 char *libc_strcpy(char *, const char *);
 EffectSelectionItem *linkedFindItemByIndex(void *, s32);
-void *rt_memcpy(void *, const void *, u32);
+void *__aeabi_memcpy(void *, const void *, u32);
 EffectSelectionParts *FUN_002b30e4(EffectSelectionItem *);
 void *resourceResolveHeaderPointer(EffectSelectionBlock *);
 void effPartSetData(EffectSelectionBlock *, void *, u32, u16);
@@ -254,7 +254,7 @@ extern "C" u32 effectEditorActivateSelection()
     EffectSelectionParts *parts = FUN_002b30e4(item);
     if (parts->type != 0x1b) {
         void *data = resourceResolveHeaderPointer(g_effectEditor.block);
-        rt_memcpy(parts->data, data, parts->size);
+        __aeabi_memcpy(parts->data, data, parts->size);
     }
     if (parts->data != NULL) {
         effPartSetData(g_effectEditor.block, parts->data, parts->size, parts->id);

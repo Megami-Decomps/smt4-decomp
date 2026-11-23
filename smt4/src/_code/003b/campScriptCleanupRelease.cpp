@@ -1,5 +1,3 @@
-/* NON_MATCHING: one instruction is scheduled differently: retail sets the NULL register (mov r7, #0) between the two adds that form &work->firstProcess.
- * A copy of the parameter into a local gives IDENTICAL; not kept (a meaningless temporary; the twin takes its work directly). */
 #include "camp/CampScriptCleanup.h"
 #include "map/mapDepart.h"
 #include "camp/Camp.h"
@@ -15,6 +13,8 @@ void placeWindowStartClose(void);
 // Release both script resource sets and any list buffers not retained across the camp transition.
 void campScriptCleanupRelease(CampScriptCleanup *work)
 {
+    s32 index;
+
     if (work->firstProcess != NULL) {
         scrScriptProcessDestroy(work->firstProcess);
         work->firstProcess = NULL;
@@ -44,7 +44,7 @@ void campScriptCleanupRelease(CampScriptCleanup *work)
     if (work->ownsList != 0 && g_gameState.retainCampResources == 0) {
         work->ownsList = 0;
         FUN_002a4bac(work->list);
-        for (s32 index = 0; index < 10; ++index) {
+        for (index = 0; index < 10; ++index) {
             if (work->buffers[index] != NULL) {
                 asdMemFree(work->buffers[index]);
                 work->buffers[index] = NULL;

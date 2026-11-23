@@ -44,6 +44,10 @@ typedef struct Screen4A {
             u8 unk001CBeforeCount[0x0C];
             /* 0x0028 */ s32 count;
         } listCount;
+        struct {
+            u8 unk001CBeforePercent[0x78];
+            /* 0x0094 */ s8 percent;        /* the value FUN_004a7950 draws as a percentage */
+        } gauge;
     };
     /* 0x00DC */ u8 block0DC[4];
     union {
@@ -53,6 +57,10 @@ typedef struct Screen4A {
             /* 0x055C */ u8 selection[0x8A];
             /* 0x05E6 */ s8 confirmed;
         } input;
+        struct {
+            u8 unk00E0BeforeBank[0x1C];
+            /* 0x00FC */ UiSpriteState sprites[13]; /* the sprite bank of block0DC, indexed by `bankPreset.preset` */
+        } bank;
         struct {
             u8 unk00E0BeforeSprites[0x134];
             /* 0x0214 */ UiSpriteState sprites[7]; /* 0: the selected row's frame, 1: its bar, 6: `animation.selection` */
@@ -82,9 +90,15 @@ typedef struct Screen4A {
     union {
         /* 0xA874 */ u16 unkA874;
         /* 0xA874 */ u32 displayNameId;
+        struct {
+            /* 0xA874 */ s16 preset;        /* the sprite bank preset applied (FUN_004d0680) */
+            /* 0xA876 */ s8 alternateFrame; /* the list window draws its second set of frame parts */
+        } bankPreset;
     };
 } Screen4A;
 typedef char Screen4ASizeCheck[sizeof(Screen4A) == 0xA878 ? 1 : -1];
+typedef char Screen4ABankOffsetCheck[offsetof(Screen4A, gauge.percent) == 0x94 &&
+    offsetof(Screen4A, bank.sprites) == 0xFC && offsetof(Screen4A, bankPreset.alternateFrame) == 0xA876 ? 1 : -1];
 typedef char Screen4ACursorOffsetCheck[offsetof(Screen4A, cursor.position) == 0xC8 &&
     offsetof(Screen4A, layout.rect) == 0xC8 && offsetof(Screen4A, parts.sprites) == 0x214 &&
     offsetof(Screen4A, parts.sprites[6]) == 0x55C && offsetof(Screen4A, transition.slide) == 0x850 &&

@@ -52,7 +52,7 @@ s8 flag0CGet(const SaveConfigView *runner); /* armlink inlined; flag0CSet sets t
 void titleConfigWriteToSave(void);
 s32 campCecGet(void);
 s32 lazyScriptTaskStep(void);
-void rt_memcpy(void *destination, const void *source, u32 size);
+void __aeabi_memcpy(void *destination, const void *source, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 /* Advances the activity icon while the save thread works: a new phase (0-2) every eight frames. */
@@ -102,7 +102,7 @@ u32 saveLoadProcessWriteStep(u32 job)
                 }
             }
         }
-        rt_memcpy(work->buffer, gameDataGetExtraBlock(), SAVE_EXTRA_SIZE);
+        __aeabi_memcpy(work->buffer, gameDataGetExtraBlock(), SAVE_EXTRA_SIZE);
         saveLoadThreadRequestInit(2, 0, 0x62, work->buffer, work->bufferSize);
         work->state = SAVE_STAGE_WAIT_EXTRA;
         break;
@@ -133,7 +133,7 @@ u32 saveLoadProcessWriteStep(u32 job)
         if (work->mode == 1)
             option = work->slot;
         gameDataBlocksGetSaveData()[3] = option;
-        rt_memcpy(work->buffer, reinterpret_cast<void *>(gameDataBlocksGetTable()), SAVE_TABLE_SIZE);
+        __aeabi_memcpy(work->buffer, reinterpret_cast<void *>(gameDataBlocksGetTable()), SAVE_TABLE_SIZE);
         *(SaveSettingsImageA *)((GameSaveDataA *)work->buffer)->settings = *(const SaveSettingsImageA *)configGetSettings();
         u8 *body = (u8 *)work->buffer + SAVE_BODY_OFFSET;
         __aeabi_memcpy4(body, gameDataBlocksGetSaveData(), SAVE_FULL_BODY_SIZE);

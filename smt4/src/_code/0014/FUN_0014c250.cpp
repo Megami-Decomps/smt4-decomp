@@ -10,7 +10,7 @@ int FUN_00150d2c(int *, unsigned int, int *, unsigned int);
 int FUN_002a4b0c(int, int *);
 int soundArchiveLoaderReadFile(int *, unsigned int, int, int *, unsigned int, unsigned int);
 int FUN_002a7ac4(unsigned char [12], int *, int);
-int rt_memcpy(unsigned int, int *, int);
+int __aeabi_memcpy(unsigned int, int *, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 typedef int romwright_code(...);
 /* stack frame of param_5: 4 slot(s), 13 byte(s) */
@@ -31,7 +31,7 @@ extern unsigned int FUN_001522d4(unsigned char *, unsigned int);
 extern unsigned int soundArchiveFileEntryIsLoaded(int);
 extern int nnosGetHeapSize(void);
 extern unsigned int nnosGetHeapBase(void);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 unsigned int
@@ -77,7 +77,7 @@ FUN_0014c250(int *param_1,unsigned int param_2,unsigned int param_3,int *param_4
       temp_v10 = 0x56574943;
       uStack_44 = temp_v0;
       temp_v11 = param_3;
-      rt_memcpy(temp_v2,&temp_v10,0x20);
+      __aeabi_memcpy(temp_v2,&temp_v10,0x20);
       temp_v1 = temp_v2 + 0x20;
       temp_v5 = FUN_001522d4(temp_v8,param_3);
       soundArchiveLoaderReadFile(param_1,temp_v0,temp_v1,piVar2,temp_v5,param_5);

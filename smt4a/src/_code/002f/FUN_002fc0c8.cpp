@@ -99,7 +99,7 @@ extern unsigned int resourceGetIndexedEntry(int, unsigned int);
 /* Supplied declaration required: FUN_00419c34. */
 /* Supplied declaration required: FUN_00419ce0. */
 /* Supplied declaration required: FUN_00419d8c. */
-extern unsigned int FUN_00421e18(unsigned int, unsigned int);
+extern unsigned int gpuWriteUniformColor(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00421e9c. */
 /* Supplied declaration required: FUN_00421f34. */
 /* Supplied declaration required: commandProfileWriteDefault. */
@@ -294,7 +294,7 @@ void FUN_002fc0c8(unsigned int param_1)
               temp_v2 = param_1;
             }
             if (temp_v4 != temp_v43) {
-              temp_v2 = FUN_00421e18(temp_v2,temp_v43);
+              temp_v2 = gpuWriteUniformColor(temp_v2,temp_v43);
               *puVar8 = temp_v2;
               temp_v4 = temp_v43;
             }
@@ -392,7 +392,7 @@ void FUN_002fc0c8(unsigned int param_1)
               temp_v2 = param_1;
             }
             if (temp_v4 != temp_v43) {
-              temp_v2 = FUN_00421e18(temp_v2,temp_v43);
+              temp_v2 = gpuWriteUniformColor(temp_v2,temp_v43);
               *puVar8 = temp_v2;
               temp_v4 = temp_v43;
             }
@@ -494,7 +494,7 @@ void FUN_002fc0c8(unsigned int param_1)
               temp_v2 = param_1;
             }
             if (temp_v4 != temp_v7) {
-              temp_v2 = FUN_00421e18(temp_v2,temp_v7);
+              temp_v2 = gpuWriteUniformColor(temp_v2,temp_v7);
               *puVar8 = temp_v2;
               temp_v4 = temp_v7;
             }
@@ -597,7 +597,7 @@ void FUN_002fc0c8(unsigned int param_1)
               temp_v2 = param_1;
             }
             if (temp_v4 != temp_v40) {
-              temp_v2 = FUN_00421e18(temp_v2,temp_v40);
+              temp_v2 = gpuWriteUniformColor(temp_v2,temp_v40);
               *puVar8 = temp_v2;
               temp_v4 = temp_v40;
             }

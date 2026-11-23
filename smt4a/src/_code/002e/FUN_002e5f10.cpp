@@ -2,7 +2,7 @@
 #include "common.h"
 
 extern "C" {
-void rt_memcpy(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy(void *destination, const void *source, u32 bytes);
 
 void FUN_002e5f10(void *destination, const void *source, u32 bytes)
 {
@@ -11,7 +11,7 @@ void FUN_002e5f10(void *destination, const void *source, u32 bytes)
     u32 distance = reinterpret_cast<u32>(write) - reinterpret_cast<u32>(read);
     if (reinterpret_cast<u32>(write) < reinterpret_cast<u32>(read) ||
         bytes <= distance) {
-        rt_memcpy(destination, source, bytes);
+        __aeabi_memcpy(destination, source, bytes);
         return;
     }
     write += bytes;

@@ -10,7 +10,7 @@ int FUN_002ec674(...);
 int destroyObj0055ae64(...);
 int FUN_002ecb04(...);
 int FUN_002ecdec(...);
-int rt_memcpy(...);
+int __aeabi_memcpy(...);
 
 typedef struct fn_00105e84_arg1 fn_00105e84_arg1;
 struct fn_00105e84_arg1 {
@@ -46,7 +46,7 @@ extern int FUN_002eb6ae(fn_00105e84_arg1 *, unsigned int);
 /* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ecb04. */
 /* Supplied declaration required: FUN_002ecdec. */
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_00105e84(int param_1,fn_00105e84_arg1 *param_2)
@@ -88,7 +88,7 @@ void FUN_00105e84(int param_1,fn_00105e84_arg1 *param_2)
         }
         temp_v3 = FUN_002ec674(temp_v1);
         temp_v4 = FUN_002ec674(temp_v8);
-        rt_memcpy(temp_v4,temp_v3,0x20);
+        __aeabi_memcpy(temp_v4,temp_v3,0x20);
         FUN_002eb164(temp_v6,param_2);
         writeU16Le(temp_v7);
         pcVar7 = (char *)FUN_002ec674(temp_v8);

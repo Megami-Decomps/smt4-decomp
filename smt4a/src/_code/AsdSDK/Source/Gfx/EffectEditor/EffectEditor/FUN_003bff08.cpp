@@ -7,7 +7,7 @@ int CONCAT44(double, double);
 int padButtonRepeat(...);
 int padButtonIsPressed(...);
 int memAlloc(int, int, int, int, int, int);
-int FUN_001a1ee0(void);
+int phaseSine(void);
 int phaseCosine(void);
 int mathAtan2Angle256(void);
 int libm_acosf(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
@@ -97,7 +97,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: padButtonRepeat. */
 /* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_001a1ee0. */
+/* Supplied declaration required: phaseSine. */
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: mathAtan2Angle256. */
 /* Supplied declaration required: libm_acosf. */
@@ -307,7 +307,7 @@ LAB_003c01a8:
     temp_v16 = (float)in_d9;
     temp_v17 = temp_v14 * temp_v19 * temp_v18;
     temp_v14 = temp_v17;
-    FUN_001a1ee0();
+    phaseSine();
     temp_v29 = temp_v15 + temp_v17 * temp_v20;
     phaseCosine();
     if (DAT_0059dbe2 == temp_v9) {
@@ -423,14 +423,14 @@ LAB_003c01a8:
   temp_v28 = temp_v25 - temp_v18 * temp_v23;
   temp_v29 = temp_v26;
   temp_v18 = temp_v19;
-  FUN_001a1ee0();
+  phaseSine();
   temp_v30 = temp_v27 - temp_v19 * temp_v23;
   FUN_002b3ed8(&temp_v28,&temp_v25,0xff00c0c0,0);
   temp_v19 = temp_v18;
   phaseCosine();
   temp_v28 = temp_v20 + temp_v18 * temp_v23;
   temp_v29 = (float)((unsigned long long)in_d10 >> 0x20);
-  FUN_001a1ee0();
+  phaseSine();
   temp_v30 = (float)in_d10 + temp_v19 * temp_v23;
   DAT_006472ec = (float)((unsigned long long)temp_v22 >> 0x20);
   DAT_006472f4 = (float)temp_v22;

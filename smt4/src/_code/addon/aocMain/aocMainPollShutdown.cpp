@@ -1,10 +1,7 @@
 #include "addon/SceneResource.h"
 
 extern "C" {
-SceneResource *_ZN7AocMenuD1Ev(SceneResource *resource);
-void asdMemFreeNonNull(void *allocation);
 void asdMemFree(void *allocation);
-void aocMainShutdown(void);
 void *jobFind(u32 job);
 extern SceneResourceWork *g_sceneResourceWork;
 
@@ -20,14 +17,7 @@ u32 aocMainPollShutdown(void)
         }
         work = g_sceneResourceWork;
         if (work != NULL) {
-            work->readyToRelease = 1;
-            if (work->resource != NULL) {
-                aocMainShutdown();
-                if (work->resource != NULL) {
-                    asdMemFreeNonNull(_ZN7AocMenuD1Ev(work->resource));
-                    work->resource = NULL;
-                }
-            }
+            sceneResourceRelease(work);
             asdMemFree(g_sceneResourceWork);
             g_sceneResourceWork = NULL;
         }

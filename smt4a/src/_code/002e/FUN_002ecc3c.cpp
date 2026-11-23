@@ -8,14 +8,14 @@ int FUN_002ea668(unsigned char [88]);
 int lazyStaticInitOnce(unsigned char [88], unsigned int, int);
 int lazyMemberInitOnce(unsigned char [88]);
 int FUN_002ec674(unsigned int);
-int rt_memcpy(...);
+int __aeabi_memcpy(...);
 
 /* Supplied declaration required: FUN_002ea668. */
 /* Supplied declaration required: lazyStaticInitOnce. */
 /* Supplied declaration required: lazyMemberInitOnce. */
 /* Supplied declaration required: FUN_002ec674. */
 extern unsigned int FUN_002ecaee(int);
-/* Supplied declaration required: rt_memcpy. */
+/* Supplied declaration required: __aeabi_memcpy. */
 
 
 void FUN_002ecc3c(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4,
@@ -46,9 +46,9 @@ void FUN_002ecc3c(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   lazyMemberInitOnce(temp_v3);
   lazyMemberInitOnce(temp_v5);
   temp_v1 = FUN_002ec674(param_5);
-  rt_memcpy(temp_v1,temp_v4,0x10);
+  __aeabi_memcpy(temp_v1,temp_v4,0x10);
   temp_v0 = FUN_002ec674(param_5);
-  rt_memcpy(temp_v0 + 0x10,temp_v6,0x10);
+  __aeabi_memcpy(temp_v0 + 0x10,temp_v6,0x10);
   return;
 }
 

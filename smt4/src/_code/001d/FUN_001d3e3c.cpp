@@ -129,7 +129,7 @@ int FUN_00396370(void);
 
 int questShowRequirementProgress(void);
 int FUN_002648e8(...);
-int FUN_0026493c(...);
+int lmapMainUpdateState(...);
 int FUN_00265180(void);
 int lmapSlotSetVisible(...);
 int mapUpdateFollowerModels(...);
@@ -155,7 +155,7 @@ int __aeabi_memcpy4(...);
 
 int questClassifyCompletionNotification(void);
 int mapMarkVisitedAndUpdateRegionFlags(unsigned int, unsigned int);
-int FUN_00277b5c(...);
+int mapIfQueueNotice(...);
 int navigationSetArguments(...);
 int actorApplyAlpha(void);
 int dataTableGetRecord23(void);
@@ -361,7 +361,7 @@ extern int lmapMainUpdateScriptTransition(void);
 /* Supplied declaration required: FUN_00264794. */
 /* Supplied declaration required: mapTriggerMarkTable23Matches. */
 /* Supplied declaration required: FUN_002648e8. */
-/* Supplied declaration required: FUN_0026493c. */
+/* Supplied declaration required: lmapMainUpdateState. */
 /* Supplied declaration required: lmapMainStep. */
 /* Supplied declaration required: FUN_00265180. */
 /* Supplied declaration required: lmapSlotSetVisible. */
@@ -424,7 +424,7 @@ extern int FUN_00276348(unsigned int);
 /* Supplied declaration required: mapIfSetMode1. */
 /* Supplied declaration required: naviMainApplySetting. */
 /* Supplied declaration required: mapDepartSetTarget. */
-/* Supplied declaration required: FUN_00277b5c. */
+/* Supplied declaration required: mapIfQueueNotice. */
 /* Supplied declaration required: FUN_00277d2c. */
 /* Supplied declaration required: mapCollisionLoad. */
 /* Supplied declaration required: FUN_0027c3d0. */
@@ -766,7 +766,7 @@ unsigned int FUN_001d3e3c(void)
     NaviMain_SetCurrentMap(puVar7[0x10]);
     navigationSetArguments(puVar7[0x10],puVar7[0x12],DAT_0049f924);
     if ((DAT_0049f950 != '\0') || (*(char *)(puVar7 + 0x266) != '\0')) {
-      FUN_00277b5c(g_gameState.mapId,DAT_0049f920);
+      mapIfQueueNotice(g_gameState.mapId,DAT_0049f920);
     }
     temp_v6 = puVar7[3] + 1;
     puVar7[3] = temp_v6;
@@ -1021,7 +1021,7 @@ unsigned int FUN_001d3e3c(void)
           }
           else {
             puVar17 = puVar7;
-            FUN_0026493c();
+            lmapMainUpdateState();
             temp_v0 = (char)(int)puVar17;
           }
         }
@@ -1760,12 +1760,12 @@ joined_r0x001d6448:
     DAT_0049f970 = 0;
     puVar7[3] = puVar7[3] + 1;
     FUN_00265f50(puVar7);
-    FUN_0026493c(puVar7);
+    lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     break;
   case 0x1e:
     FUN_00265f50(puVar7);
-    FUN_0026493c(puVar7);
+    lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     temp_v6 = lmapMainUpdateScriptTransition();
     if (temp_v6 == 0) {
@@ -1812,12 +1812,12 @@ LAB_001d6bd0:
     DAT_0049f970 = 0;
     puVar7[3] = puVar7[3] + 1;
     FUN_00265f50(puVar7);
-    FUN_0026493c(puVar7);
+    lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     break;
   case 0x20:
     FUN_00265f50(puVar7);
-    FUN_0026493c(puVar7);
+    lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     temp_v6 = scrRunOpcodesStub(puVar7[0x26e]);
     if (temp_v6 != 2) {
@@ -1857,13 +1857,13 @@ LAB_001d6bd0:
     DAT_0049f970 = 0;
     puVar7[3] = puVar7[3] + 1;
     FUN_00265f50(puVar7);
-    FUN_0026493c(puVar7);
+    lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     navigationResetTimer();
     break;
   case 0x22:
     FUN_00265f50(puVar7);
-    FUN_0026493c(puVar7);
+    lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     temp_v6 = scrRunOpcodesStub(puVar7[0x26e]);
     if (temp_v6 != 2) {
@@ -1898,7 +1898,7 @@ LAB_001d6bd0:
     messageSetConfirmDisplayMode();
     scrScriptProcessStartEntry(puVar7[0x26e],DAT_0049f974);
     FUN_00265f50(puVar7);
-    FUN_0026493c(puVar7);
+    lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     FUN_0027052c();
     FUN_00275364();
@@ -1910,7 +1910,7 @@ LAB_001d6bd0:
     puVar7[3] = puVar7[3] + 1;
     break;
   case 0x24:
-    FUN_0026493c(puVar7);
+    lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     FUN_00265f50(puVar7);
     FUN_0027052c();
@@ -1940,7 +1940,7 @@ LAB_001d6bd0:
     messageSetConfirmDisplayMode();
     scrScriptProcessStartEntry(puVar7[0x26b],puVar7[0x267]);
     FUN_00265f50(puVar7);
-    FUN_0026493c(puVar7);
+    lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     puVar7[3] = puVar7[3] + 1;
     puVar7[4] = 0;
@@ -1948,7 +1948,7 @@ LAB_001d6bd0:
   case 0x26:
     puVar7[4] = puVar7[4] + 1;
     FUN_00265f50(puVar7);
-    FUN_0026493c(puVar7);
+    lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     temp_v6 = scrRunOpcodesStub(puVar7[0x26b]);
     if (temp_v6 != 2) {
@@ -2870,7 +2870,7 @@ LAB_001d6bd0:
   case 0x4d:
     sprintf((char *)temp_v29,(const char *)&LAB_001d47f4,puVar7[0x10] - 100);
     FUN_002a09b4(temp_v29,0);
-    FUN_00277b5c(g_gameState.mapId,DAT_0049f920);
+    mapIfQueueNotice(g_gameState.mapId,DAT_0049f920);
     temp_v6 = puVar7[3] + 1;
     temp_v4 = 0;
     puVar7[3] = temp_v6;
@@ -3055,7 +3055,7 @@ LAB_001d884c:
         navigationRequestFieldMode(8,0);
       }
     }
-    FUN_0026493c(puVar7);
+    lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     temp_v6 = puVar7[4];
     puVar7[4] = temp_v6 + 1;
@@ -3155,7 +3155,7 @@ LAB_001d884c:
       puVar17[0x35] = 0;
     }
     FUN_00265f50(puVar7);
-    FUN_0026493c(puVar7);
+    lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     temp_v6 = puVar7[4];
     puVar7[4] = temp_v6 + 1;
@@ -3172,7 +3172,7 @@ LAB_001d884c:
       slotSetRequest(1,10,0xff);
     }
     FUN_00265f50(puVar7);
-    FUN_0026493c(puVar7);
+    lmapMainUpdateState(puVar7);
     mapUpdateFollowerModels(puVar7);
     puVar7[4] = puVar7[4] + 1;
     temp_v6 = screenFadesAllReady();

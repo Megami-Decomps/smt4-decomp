@@ -6,7 +6,7 @@
 extern "C" {
 
 void *fileLoadSync(u32 handle, u32 *size, u32 flags);
-void rt_memcpy(void *dst, const void *src, s32 size);
+void __aeabi_memcpy(void *dst, const void *src, s32 size);
 void asdMemFree(void *block);
 
 extern TexTable g_texTable;
@@ -26,7 +26,7 @@ u32 asdTMTexTableLoadList(u32 handle)
     }
     asdDebugTrace(DAT_00409270, 93);
     g_texTable.header = (TexTableHeader *)asdMemAlloc(0x100, 0x100, 0, 0x104, 1);
-    rt_memcpy(g_texTable.header, file, 0x104);
+    __aeabi_memcpy(g_texTable.header, file, 0x104);
     asdDebugTrace(DAT_00409270, 98);
     g_texTable.entries = (TexTableEntry *)asdMemAlloc(0x100, 0x100, 0, g_texTable.header->count * 0x18, 1);
     src = (u32 *)(file + 0x104);

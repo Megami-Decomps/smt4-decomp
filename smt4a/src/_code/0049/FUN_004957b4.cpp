@@ -1,5 +1,5 @@
 /* NON_MATCHING: the show flags are s8 (retail's +0xB00 base) and the label position is summed before the format; armcc still precomputes &work->category into r7 for the second category test (retail reads [r4, #0xB40] there) and schedules the selection address after the category compares. */
-#include "runtime/Stdio.h"
+#include <stdio.h>
 #include "shop/shopMain.h"
 #include "shard/S1ListPanel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -10,7 +10,7 @@ void uiDrawCompositeSpriteAtRectCorner(void *group, u32 sprite, s32 x, s32 y, s3
 void FUN_0049368c(void *group, u32 sprite, s32 x, s32 y, s32 depth, s32 enabled);
 void drawTextAtRelativePosition(void *group, u32 font, s32 x, s32 y, s32 mode,
     s32 alignment, u32 color, s32 depth, const char *text);
-extern const char DAT_0053617c[];
+static const char s_quantityFormat[] = "%2d";
 
 void FUN_004957b4(ShopWork *base)
 {
@@ -59,7 +59,7 @@ void FUN_004957b4(ShopWork *base)
         color = 0x57D8FFFF;
     s32 textX = label->x + x, textY = label->y + y;
     char text[32];
-    __2sprintf(text, DAT_0053617c, quantity);
+    sprintf(text, s_quantityFormat, quantity);
     drawTextAtRelativePosition(work->sprites, 0, textX, textY, 0, 7, color, depth, text);
 }
 }
