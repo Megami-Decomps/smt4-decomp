@@ -32,6 +32,6 @@ s32 FUN_0028299c(Owner *owner);
 
 void FUN_00287188(CampScreen *screen);
 
-s32 FUN_0028dbe0(Selector *selector);
+s32 ailmentSelectorGetColor(Selector *selector);
 
 } /* extern "C" */

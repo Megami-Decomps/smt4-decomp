@@ -3,7 +3,9 @@
  * the unit index into r0 while testing its sign (`subs r0, fp, #0`) ahead of both record getters and addresses
  * the selection through r1, where the build tests fp and moves it in the unit arm only; and in the level column
  * retail stores the formatted value on its own (`str r1, [sp, #12]`, then `stm sp, {r2, r3, ip}`) where the
- * build uses one four-register `stm`. */
+ * build uses one four-register `stm`. The ailment column comes out as retail's through a `static __inline`
+ * unitAilmentColor(unit, index) (31 lines), but the same block in statusStripDraw goes from 26 to 336 lines with
+ * it and its out-of-line copy ailmentSelectorGetColor from IDENTICAL to 23, so it is written in place (wave 91 review). */
 #include "common.h"
 #include "code/Code003b_Smt4.h"
 #include "result/Result.h"
@@ -20,7 +22,7 @@ void drawSetColorFromRGBA8(u32 packed);
 /* Draws a demon's icon at (x, y). */
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 /* Draws a formatted number at (x, y): `align` 1 right-aligns it in a field of `digits` digits. */
-void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *format, ...);
+void textDrawFormattedAligned(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *format, ...);
 
 /* Draws texture `texture` of `table` at (x, y) with the given size (its definition takes y as a one-word
  * int/float union: the same argument slot). */
@@ -90,7 +92,7 @@ void resultDrawRowColumn(ResultWork *work, u32 column, s32 unit, s32 row, s32 x,
     case 4: {
         setRowColor(gain > 0 || record->level > limit ? 0xFF : 0xFFFFFFFF);
         TextureTableEntryIV *column = g_resultRowDrawState.column;
-        FUN_002bdf94(6, entry->x + column->x + x, column->y + entry->y + y, 1, 2, 0x7E, "%d", record->level + gain);
+        textDrawFormattedAligned(6, entry->x + column->x + x, column->y + entry->y + y, 1, 2, 0x7E, "%d", record->level + gain);
         break;
     }
     case 5:

@@ -9,6 +9,10 @@ extern "C" {
 #endif
 /* Returns the slot table inside the saved game block (the block plus 0x8C). */
 SaveSlotTableIV *gameGetSlotTable(void);
+/* Resolves an active-party slot; empty slots return NULL. */
+StatBlock *saveResolvePartySlot(u32 slot);
+/* Finds a unit by identity or its saved slot number; returns -1 if absent. */
+s32 gameSlotFindByCategory(const StatBlock *record);
 #ifdef __cplusplus
 }
 #endif

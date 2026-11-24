@@ -20,7 +20,7 @@ int mapEaseSceneHeading(void);
 int FUN_002e364c(...);
 int lmapCameraSetMode(...);
 int mapIfReleaseSlot3(void);
-int FUN_00324e38(unsigned int);
+int mapDepartSpawnPlayerEffect(unsigned int);
 int FUN_00327ee8(void);
 int FUN_0033abd4(void);
 int mathPositionHeadingDegrees(void);
@@ -53,7 +53,7 @@ extern int pairedAvailabilityBothReady(void);
 /* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: mapIfReleaseSlot3. */
 /* Supplied declaration required: mapSetSceneState. */
-/* Supplied declaration required: FUN_00324e38. */
+/* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: FUN_0033abd4. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
@@ -186,7 +186,7 @@ void FUN_0036785c(void)
         default:
         }
 LAB_00367d2c:
-        FUN_00324e38(0xffffffff);
+        mapDepartSpawnPlayerEffect(0xffffffff);
         libm_sinf();
         libm_cosf();
         messageVoiceBankGet();

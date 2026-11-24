@@ -1,4 +1,4 @@
-#include "common.h"
+#include "AsdSDK/Source/Gfx/Effect/EffectBehaviorBlock.h"
 
 struct ResourceDesc {
     /* 0x00 */ u8 unk00[0xC];
@@ -20,7 +20,6 @@ void *resourceResolveDataPointer(ResourceDesc *resource);
 TrackObject *effEmitterCreateSmall(void *header);
 void polygonTrackRebuildResources(TrackObject *track, u32 count, void *header);
 void objectBufferFree(void *buffer);
-void *effBehaviorCreate(u32 count, u32 first, void *header);
 void effHolderSetParams(TrackObject *track, u32 count, void *data);
 
 static inline void replaceTrackBuffer(TrackObject *track, u32 count, void *header)

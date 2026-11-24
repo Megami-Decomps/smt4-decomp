@@ -9,7 +9,7 @@ int FUN_002b64b8(void);
 int FUN_002b659c(int, int, int, int);
 int renderCtxCalculateStereoParallax(unsigned int);
 int gxResetUniformQuadColorsAndScale(void);
-int FUN_002bdf94(...);
+int textDrawFormattedAligned(...);
 int textDrawString(...);
 int efctSetSpeed(void);
 int FUN_0032b4f8(int, int, int);
@@ -36,7 +36,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002b659c. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: gxResetUniformQuadColorsAndScale. */
-/* Supplied declaration required: FUN_002bdf94. */
+/* Supplied declaration required: textDrawFormattedAligned. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0032b4f8. */
@@ -132,7 +132,7 @@ void btlTargetSelectDrawPanel(int param_1)
   texDrawTableEntryAtStoredOrigin(2,0x14,0x36,(int)(temp_v9 + temp_v10),(int)temp_v6,0x41);
   efctSetSpeed();
   temp_v10 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002bdf94(0,(int)(*(float *)(param_1 + 0x80) + temp_v9 + temp_v10),
+  textDrawFormattedAligned(0,(int)(*(float *)(param_1 + 0x80) + temp_v9 + temp_v10),
                (int)(*(float *)(param_1 + 0x84) + temp_v6),1,2,0x42,"%d",
                *(unsigned int *)(param_1 + 0x28));
   temp_v10 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);

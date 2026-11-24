@@ -15,7 +15,7 @@ int effectRenderTransformedInstance(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
 int pairSetHalves(...);
-int FUN_003799d0(...);
+int msSearchGetRecordAt(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 int __aeabi_memcpy4(...);
@@ -56,7 +56,7 @@ extern short DAT_005f1e1a; /* 0x5f1e1a */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: pairSetHalves. */
-/* Supplied declaration required: FUN_003799d0. */
+/* Supplied declaration required: msSearchGetRecordAt. */
 extern int panelInitBlockB00(void);
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -117,7 +117,7 @@ void FUN_00355428(void)
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < 0x10b);
       temp_v4 = DAT_005f16d4;
-      FUN_003799d0(DAT_005f16d4);
+      msSearchGetRecordAt(DAT_005f16d4);
       sprintf((char *)temp_v18,"%s",temp_v4);
       VectorSignedToFloat((int)*(short *)(temp_v3 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);

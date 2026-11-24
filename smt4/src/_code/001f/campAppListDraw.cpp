@@ -24,7 +24,7 @@ u16 table8Type5GetValue(u16 id);
 void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide);
 s32 FUN_00298848(u32 skill, s32 unit);
 void FUN_002b6c34(s32 skill, s32 x, s32 y, s32 depth, s32 player, s32 highlight);
-void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *text);
+void textDrawFormattedAligned(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *text);
 
 enum {
     APP_LIST_SPRITES = 0x1d,    /* the camp list sprite file */
@@ -69,7 +69,7 @@ void campAppListDraw(s32 x, s32 y, s32 drawCursor)
 
                 part = asdTMTexTableEntryAt(APP_LIST_SPRITES, 0x45c);
                 sprintf(text, "---");
-                FUN_002bdf94(0, row->x + part->x + x, part->y + row->y + y, 1, 8, 0x6f, text);
+                textDrawFormattedAligned(0, row->x + part->x + x, part->y + row->y + y, 1, 8, 0x6f, text);
             } else {
                 part = asdTMTexTableEntryAt(APP_LIST_SPRITES, 0x454);
                 const char *name = (const char *)aocIndexValueOrDefault(skill);
@@ -87,7 +87,7 @@ void campAppListDraw(s32 x, s32 y, s32 drawCursor)
 
                 part = asdTMTexTableEntryAt(APP_LIST_SPRITES, 0x45c);
                 sprintf(text, "%d", FUN_0028d1f4(skill));
-                FUN_002bdf94(0, row->x + part->x + x, row->y + part->y + y, 1, 8, 0x6f, text);
+                textDrawFormattedAligned(0, row->x + part->x + x, row->y + part->y + y, 1, 8, 0x6f, text);
 
                 part = asdTMTexTableEntryAt(APP_LIST_SPRITES, 0x453);
                 FUN_002b6c34((s16)skill, part->x + row->x + x, row->y + part->y + y, 0x6f, 0, 0);
@@ -116,7 +116,7 @@ void campAppListDraw(s32 x, s32 y, s32 drawCursor)
 
             part = asdTMTexTableEntryAt(APP_LIST_SPRITES, 0x468);
             sprintf(text, "---");
-            FUN_002bdf94(0, row->x + part->x + x, row->y + part->y + y, 1, 8, 0x83, text);
+            textDrawFormattedAligned(0, row->x + part->x + x, row->y + part->y + y, 1, 8, 0x83, text);
         } else {
             part = asdTMTexTableEntryAt(APP_LIST_SPRITES, 0x460);
             const char *name = (const char *)aocIndexValueOrDefault(skill);
@@ -135,7 +135,7 @@ void campAppListDraw(s32 x, s32 y, s32 drawCursor)
 
             part = asdTMTexTableEntryAt(APP_LIST_SPRITES, 0x468);
             sprintf(text, "%d", FUN_0028d1f4(skill));
-            FUN_002bdf94(0, row->x + part->x + x, part->y + row->y + y, 1, 8, 0x83, text);
+            textDrawFormattedAligned(0, row->x + part->x + x, part->y + row->y + y, 1, 8, 0x83, text);
             texDrawTableEntryAtStoredOrigin(2, APP_LIST_SPRITES, 0x45d, row->x + x, row->y + y, 0x83);
 
             part = asdTMTexTableEntryAt(APP_LIST_SPRITES, 0x45f);

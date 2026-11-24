@@ -66,6 +66,8 @@ void qcNpcSelectStep(Obj5333c0 *scene);
 void FUN_0046ba10(Obj5333c0 *scene);
 void FUN_004688c8(Obj5333c0 *scene);
 void questCenterBuildTalkEntries(Obj5333c0 *scene);
+void questCenterBeginConversation(Obj5333c0 *scene);
+void questInteractionChooseEntry(Obj5333c0 *scene);
 u16 idOwnerGetRecordHalf(Obj5333c0 *scene);
 s32 pickObjStart(Obj5333c0 *scene, const char *entry);
 void qcCtrlStart(Obj5333c0 *scene, s32 kind, s32 mode, s32 frozen);
@@ -94,6 +96,8 @@ public:
     friend void FUN_0046ba10(Obj5333c0 *scene);
     friend void FUN_004688c8(Obj5333c0 *scene);
     friend void questCenterBuildTalkEntries(Obj5333c0 *scene);
+    friend void questCenterBeginConversation(Obj5333c0 *scene);
+    friend void questInteractionChooseEntry(Obj5333c0 *scene);
     friend u16 idOwnerGetRecordHalf(Obj5333c0 *scene);
     friend s32 pickObjStart(Obj5333c0 *scene, const char *entry);
     friend void qcCtrlStart(Obj5333c0 *scene, s32 kind, s32 mode, s32 frozen);
@@ -131,7 +135,8 @@ protected:
     /* 0x18 */ u8 location;                    /* which region's quests are handled here */
     /* 0x19 */ u8 talkTable;                    /* passed (by address) as data table 0x27's unused first argument */
     /* 0x1A */ u8 frozen;                       /* nonzero: the camera transform and the NPC placement are held */
-    /* 0x1B */ u8 unk1B[0x269];
+    /* 0x1B */ u8 scriptActive;                 /* restart the initialized quest script rather than starting it */
+    /* 0x1C */ u8 unk1C[0x268];
     /* 0x284 */ void *primaryData;
     /* 0x288 */ void *primaryInfo;
     /* 0x28C */ ScriptProcess *primary;

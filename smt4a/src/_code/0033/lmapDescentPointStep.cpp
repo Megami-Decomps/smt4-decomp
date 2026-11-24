@@ -118,7 +118,7 @@ void lmapDescentPointStep(void)
         if (++g_lmapScene->stateTime == 1) {
             if (g_gameState.mapId != 38 && g_gameState.mapId != 26)
                 soundActorStartOnFreeChannel(0x10002bb, *(const SoundActorQueuePosition *)&g_lmapScene->pose.position);
-            FUN_00324e38(-1);
+            mapDepartSpawnPlayerEffect(-1);
             libm_sinf(g_lmapScene->pose.heading * 0.017453292f);
             libm_cosf(g_lmapScene->pose.heading * 0.017453292f);
             soundVolumeSettingSet(messageVoiceBankGet());
@@ -147,10 +147,10 @@ void lmapDescentPointStep(void)
             if (time == 11 || time == 28 || time == 41) {
                 soundActorStartOnFreeChannel((time & 3) + 0x10002bb,
                                              *(const SoundActorQueuePosition *)&g_lmapScene->pose.position);
-                FUN_00324e38(-1);
+                mapDepartSpawnPlayerEffect(-1);
             }
         } else if (time == 11 || time == 28 || time == 41) {
-            FUN_00324e38(-1);
+            mapDepartSpawnPlayerEffect(-1);
         }
         if (g_lmapScene->stateTime == 30)
             FUN_002342b8();

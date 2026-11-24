@@ -10,7 +10,7 @@
 extern "C" {
 
 void texDrawCompositeSprite(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
-void FUN_002bdf94(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
+void textDrawFormattedAligned(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
 void FUN_002b6c34(s16 id, s32 x, s32 y, s32 size, s32 a, s32 b);
 
 /* Draws one registration entry: its frame, name, icon and number, or the empty-entry labels when
@@ -29,7 +29,7 @@ void FUN_00204ed0(s32 x, s32 y, s32 id, u32 frame, u32 color)
         FUN_002b6c34(id, iconPos->x + base->x + x, base->y + iconPos->y + y, 0xb5, 0, 0);
         const TextureTableEntryIV *numberPos = asdTMTexTableEntryAt(0x1a, 0x521);
         sprintf(text, "%d", FUN_0028d1f4(id));
-        FUN_002bdf94(0, base->x + numberPos->x + x, base->y + numberPos->y + y, 1, 8, 0xb5, text);
+        textDrawFormattedAligned(0, base->x + numberPos->x + x, base->y + numberPos->y + y, 1, 8, 0xb5, text);
         return;
     }
     const TextureTableEntryIV *namePos = asdTMTexTableEntryAt(0x1a, 0x40f);
@@ -37,7 +37,7 @@ void FUN_00204ed0(s32 x, s32 y, s32 id, u32 frame, u32 color)
     textDrawString(namePos->x + base->x + x, base->y + namePos->y + y, 0.29296875f, 2, 0.0f, 0x5a5a5aff, 1.0f, text);
     const TextureTableEntryIV *numberPos = asdTMTexTableEntryAt(0x1a, 0x521);
     sprintf(text, "---");
-    FUN_002bdf94(0, base->x + numberPos->x + x, base->y + numberPos->y + y, 1, 8, 0xb5, text);
+    textDrawFormattedAligned(0, base->x + numberPos->x + x, base->y + numberPos->y + y, 1, 8, 0xb5, text);
 }
 
 }

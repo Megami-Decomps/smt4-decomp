@@ -13,7 +13,7 @@ int FUN_0027134c(int, float *);
 int FUN_002fe2e8(int, float *);
 int FUN_00321d7c(...);
 int FUN_00321e98(...);
-int FUN_00375c74(int, unsigned int *, char [4], int *);
+int effComputeParticleEmission(int, unsigned int *, char [4], int *);
 int randomAdvanceShiftRegister(...);
 int shiftRandomNextFraction(...);
 int VectorSignedToFloat(...);
@@ -66,7 +66,7 @@ extern float DAT_00647348; /* 0x647348 */
 /* Supplied declaration required: FUN_002fe2e8. */
 /* Supplied declaration required: FUN_00321d7c. */
 /* Supplied declaration required: FUN_00321e98. */
-/* Supplied declaration required: FUN_00375c74. */
+/* Supplied declaration required: effComputeParticleEmission. */
 extern int FUN_0037a844(void);
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: shiftRandomNextFraction. */
@@ -136,7 +136,7 @@ void FUN_0039f7cc(int param_1)
     temp_v17 = (float)puVar8[3];
     gfxQuaternionWorkspaceBuildMatrix();
     temp_v10 = (float)((unsigned long long)temp_v13 >> 0x20);
-    FUN_00375c74(param_1,puVar8,temp_v25,&temp_v23);
+    effComputeParticleEmission(param_1,puVar8,temp_v25,&temp_v23);
     temp_v11 = 0;
     if (temp_v7 != 0) {
       temp_v22 = 0x40c90fdb3f800000;

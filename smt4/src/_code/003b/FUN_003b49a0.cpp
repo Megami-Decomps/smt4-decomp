@@ -12,7 +12,7 @@ int contentEntryFlagTest(void);
 int gxSetMirroredClippedScissor(...);
 int arrayContainsU16(...);
 int FUN_002b6c34(...);
-int FUN_002bdf94(...);
+int textDrawFormattedAligned(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
@@ -62,7 +62,7 @@ extern int playerGetSkillRank(unsigned short);
 extern unsigned int aocIndexValueOrDefault(unsigned short);
 extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: FUN_002bdf94. */
+/* Supplied declaration required: textDrawFormattedAligned. */
 /* Supplied declaration required: textDrawString. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
@@ -226,7 +226,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
           temp_v5 = playerGetSkillRank(*(unsigned short *)(temp_v27 + 0x14));
           temp_v2 = FUN_00333ea8(*(unsigned short *)(temp_v27 + 0x14),temp_v5 + temp_v17);
           temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(temp_v11,0xe3));
-          FUN_002bdf94(1,(int)(short)piVar5[2] + (int)*(short *)(temp_v5 + 8) + temp_v1,
+          textDrawFormattedAligned(1,(int)(short)piVar5[2] + (int)*(short *)(temp_v5 + 8) + temp_v1,
                        (int)*(short *)((int)piVar5 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,1,4,
                        0x79,"%d",temp_v2);
         }
@@ -342,7 +342,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
       temp_v5 = playerGetSkillRank(*(unsigned short *)(temp_v3 + 0xd114));
       temp_v2 = FUN_00333ea8(*(unsigned short *)(temp_v3 + 0xd114),temp_v5 + temp_v8);
       temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(temp_v11,0x102));
-      FUN_002bdf94(1,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v1 + 8) + param_2,
+      textDrawFormattedAligned(1,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v1 + 8) + param_2,
                    (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v3 + 10) + param_3,1,4,0xc9,
                    "%d",temp_v2);
     }
@@ -411,7 +411,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
           textDrawString(2,temp_v2,temp_v10,(int)*(short *)(temp_v3 + 8));
           temp_v2 = appGetRemainingCapacity(*(unsigned short *)(temp_v22 + 0x34));
           temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(temp_v11,0xe3));
-          FUN_002bdf94(1,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v5 + 8) + param_2,
+          textDrawFormattedAligned(1,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v5 + 8) + param_2,
                        (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,1,4,0xab,
                        "%d",temp_v2);
         }
@@ -527,7 +527,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
                  (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v3 + 10) + param_3,0xc9,0,0);
     temp_v2 = appGetRemainingCapacity(*(unsigned short *)(temp_v1 + 0x34));
     temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(temp_v11,0x102));
-    FUN_002bdf94(1,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v1 + 8) + param_2,
+    textDrawFormattedAligned(1,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v1 + 8) + param_2,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v1 + 10) + param_3,1,4,0xc9,
                  "%d",temp_v2);
   }

@@ -57,7 +57,7 @@ int blockResetAxis(...);
 int mapSetSceneState(...);
 int gameFlagsWriteBlockBit(int, int);
 int relicSearchDraw(int, unsigned char *, unsigned char *, unsigned int *);
-int FUN_003799d0(void);
+int msSearchGetRecordAt(void);
 int messageBannerInitCounter(...);
 int mapIfStartNavigation(...);
 int FUN_003a6b10(...);
@@ -163,7 +163,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_003689d0. */
 /* Supplied declaration required: FUN_00377158. */
 /* Supplied declaration required: relicSearchDraw. */
-/* Supplied declaration required: FUN_003799d0. */
+/* Supplied declaration required: msSearchGetRecordAt. */
 extern int panelStateIs0(void);
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: messageBannerInitCounter. */
@@ -382,7 +382,7 @@ unsigned int mapDepartUpdate(void)
       }
       else {
         temp_v11 = DAT_005f16d4;
-        FUN_003799d0();
+        msSearchGetRecordAt();
         FUN_002b5e08((int)*(short *)(temp_v11 + 0x24),&DAT_005f1cbc,&DAT_005f1cfc,&DAT_005f1d0c);
         temp_v11 = g_mapDepart;
         temp_v17[0] = 0;
@@ -730,7 +730,7 @@ LAB_0029a094:
         }
         if (DAT_005f16d0 != 0) {
           temp_v11 = DAT_005f16d4;
-          FUN_003799d0();
+          msSearchGetRecordAt();
           FUN_00377158((int)*(short *)(temp_v11 + 0x24),0);
         }
         *(unsigned int *)(temp_v4 + 0x48) = 6;

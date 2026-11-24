@@ -418,7 +418,7 @@ extern int dataTable2fSub0GetRecord(int);
 /* Supplied declaration required: navigationResetTimer. */
 extern int FUN_00276264(void);
 /* Supplied declaration required: navigationFinishReadyField. */
-extern int FUN_00276348(unsigned int);
+extern int msSearchFindIndexById(unsigned int);
 /* Supplied declaration required: aocSelectedRecordIsUnavailable. */
 /* Supplied declaration required: mapIfClose. */
 /* Supplied declaration required: mapIfSetMode1. */
@@ -1259,7 +1259,7 @@ LAB_001d58a0:
                   if (DAT_0049f9dc == -1) {
                     puVar7[3] = 0x34;
                     puVar7[4] = 0;
-                    temp_v6 = FUN_00276348(DAT_0049f958);
+                    temp_v6 = msSearchFindIndexById(DAT_0049f958);
                     if (temp_v6 != -1) {
                       FUN_00316de4(temp_v6,1);
                       navigationFinishReadyField();

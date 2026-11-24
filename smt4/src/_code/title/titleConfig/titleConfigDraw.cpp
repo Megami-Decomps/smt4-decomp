@@ -4,7 +4,15 @@
  * the previous state take r2/r1 (built: r1/r2); for the label position retail loads the row entry's halfwords
  * before the label entry's (built: the label's first; written `entry->x + labelEntry->x` the sums go through
  * s0/s2 instead of straight into s1/s0). The knob's touch test is the negative one (untouched knob first): written
- * the other way round armcc shares the untouched knob's draw with the unselected row's. */
+ * the other way round armcc shares the untouched knob's draw with the unselected row's.
+ * Wave 91: armcc sorts the label sum's operands, so only the order of the two entries matters, not where the
+ * window's x/y stands (`a + b + x`, `x + a + b`, `a + (b + x)` compile alike), and here only in the x sum (the y
+ * sum compiles the same either way). Entry first gives the halfwords retail's registers (entry y, x in r0, r1,
+ * label y, x in r2, r3) but loads the label's y first and crosses the sums (y in r1 through s0, x in r0 through
+ * s2: 73 by shape, 125 raw). Also no better: the row frame written in place (110 with rowX/rowY locals, 614 with the
+ * sums repeated), its two table ids as one ternary argument (170), the scene pointer in a local (229), the
+ * selection flag as s32 (28 when every use is s32, 259 for the frame's parameter alone), an integer-position
+ * text wrapper (146). textDrawString's parameter order was rescored over all 129 callers: the current one wins. */
 #include "ui/UiSpriteApi.h"
 #include "title/titleConfig.h"
 #include "camp/RenderCtxTitle.h"

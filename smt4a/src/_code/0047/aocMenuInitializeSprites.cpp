@@ -3,6 +3,7 @@
 #include "shard/W4_Match3_AocMainA.h"
 #include "text/TextDraw.h"
 #include "addon/AocSystem_Smt4a.h"
+#include "AsdSDK/Source/Gfx/Text/AsdTextA.h"
 
 
 struct AocSpriteLayout {
@@ -28,8 +29,6 @@ void paramsClearPacket(UiResourceParameters *);
 
 void uiStoreTextureEntryCenter(UiSpriteState *, s32 group, s32 image);
 void FUN_0015f258(void *panel);
-u32 spriteHandleCreate(s32 flags);
-void positionStateSet(u32 handle, s32 slot, u32 color, f32 duration);
 void spritePresetBankInitialize(void *control);
 
 // Initialize the AOC menu's common sprite resources, entry frames and background.
@@ -53,9 +52,9 @@ void aocMenuInitializeSprites(AocMenuSprites *menu)
     FUN_0015f258(menu->panel);
     menu->ready = 0;
     aocMenuSetReadyFlag(g_aocMain, 0);
-    menu->background = spriteHandleCreate(0);
+    menu->background = (u32)spriteHandleCreate(0);
     uiObjectSetColorRgb(menu->background, 0xffffffff);
-    positionStateSet(menu->background, 0, 0x646464ff, 0.0f);
+    positionStateSet((AsdText *)menu->background, 0, 0x646464ff, 0.0f);
     spritePresetBankInitialize(menu->control);
 }
 }

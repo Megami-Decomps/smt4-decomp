@@ -1,4 +1,3 @@
-/* NON_MATCHING: 12 lines: retail keeps the random index in r3 across btlUnitGet (same multifile partner as sibling btlActionMarkRandomStatusTarget) and schedules 1u << status after loading g_btlTargetableMask. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/BattleUnitSlot.h"
@@ -14,8 +13,9 @@ void FUN_004e6880(BtlMainStateA **context, u32 status)
 {
     s32 candidates[109];
     s32 count = 0;
+    u64 targetableMask = g_btlTargetableMask;
     for (s32 index = 0; index < 109; ++index) {
-        if (((*context)->entries[index].flags & g_btlTargetableMask) != 0) {
+        if (((*context)->entries[index].flags & targetableMask) != 0) {
             switch (status) {
             case 22:
                 if (((*context)->entries[index].data.statusFlags & 0x3BE0) != 0)

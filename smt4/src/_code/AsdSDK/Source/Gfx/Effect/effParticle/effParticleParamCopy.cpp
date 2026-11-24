@@ -38,7 +38,7 @@ void effParticleParamCopy(EffParticleParam *dst, EffParticleParam *src)
         dst->object44 = handleBlockRefCreate(src->object44);
         break;
     case 5:
-        count = src->source->count;
+        count = src->source->elementCount;
         if (count == 0) {
             return;
         }
@@ -62,7 +62,7 @@ void effParticleParamCopy(EffParticleParam *dst, EffParticleParam *src)
         }
         break;
     case 6:
-        count = src->source->count;
+        count = src->source->elementCount;
         if (count == 0) {
             return;
         }

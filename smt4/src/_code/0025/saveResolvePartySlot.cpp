@@ -1,5 +1,5 @@
 #include "gamedata/GameSaveBlocks.h"
-#include "gamedata/UnitStats.h"
+#include "gamedata/SaveSlotTableIV.h"
 extern "C" {
 
 /* Resolve a saved party slot to its unit record, or null for an empty slot. */

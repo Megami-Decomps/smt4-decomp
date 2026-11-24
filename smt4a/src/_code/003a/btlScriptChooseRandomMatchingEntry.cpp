@@ -1,4 +1,7 @@
-/* NON_MATCHING: registers of the entries base and index*0x408 are swapped in the entry address computation (retail base in r1, product in r0); everything else matches. */
+/* NON_MATCHING: registers of the entries base and index*0x408 are swapped in the entry address computation (retail base in r1, product in r0); everything else matches.
+ * Wave 91: a single-use `BtlCombatantEntryA *entries = btlGetMainState()->entries;` copy inside the loop gives
+ * IDENTICAL, but its sibling btlScriptAnyCandidateHasNegativeCounter matches only with the direct `&btlGetMainState()->entries[i]` (6 lines
+ * with the copy): a temporary chosen per function by score, not kept. */
 #include "battle/BtlMainAccess.h"
 #include "util/Random.h"
 #include "battle/BattleHelpers.h"

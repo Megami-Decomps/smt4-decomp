@@ -6667,12 +6667,12 @@
     },
     {
       "address": "0x123254",
-      "function": "FUN_00123254",
+      "function": "gfxCmdBufferHandlesRelease",
       "module": "_code",
-      "object": "build/obj/_code/0012/FUN_00123254.o",
+      "object": "build/obj/_code/0012/gfxCmdBufferHandlesRelease.o",
       "size": 304,
-      "source": "src/_code/0012/FUN_00123254.cpp",
-      "target": "orig/target/_code/0012/FUN_00123254.o",
+      "source": "src/_code/0012/gfxCmdBufferHandlesRelease.cpp",
+      "target": "orig/target/_code/0012/gfxCmdBufferHandlesRelease.o",
       "thumb": false
     },
     {
@@ -26564,12 +26564,12 @@
     },
     {
       "address": "0x1f40fc",
-      "function": "FUN_001f40fc",
+      "function": "buttonHelpDrawHighlightedLine",
       "module": "_code",
-      "object": "build/obj/_code/001f/FUN_001f40fc.o",
+      "object": "build/obj/_code/001f/buttonHelpDrawHighlightedLine.o",
       "size": 344,
-      "source": "src/_code/001f/FUN_001f40fc.cpp",
-      "target": "orig/target/_code/001f/FUN_001f40fc.o",
+      "source": "src/_code/001f/buttonHelpDrawHighlightedLine.cpp",
+      "target": "orig/target/_code/001f/buttonHelpDrawHighlightedLine.o",
       "thumb": false
     },
     {
@@ -37314,12 +37314,12 @@
     },
     {
       "address": "0x23c9e8",
-      "function": "FUN_0023c9e8",
+      "function": "btlUiAddPositionedMarker",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_0023c9e8.o",
+      "object": "build/obj/_code/0023/btlUiAddPositionedMarker.o",
       "size": 364,
-      "source": "src/_code/0023/FUN_0023c9e8.cpp",
-      "target": "orig/target/_code/0023/FUN_0023c9e8.o",
+      "source": "src/_code/0023/btlUiAddPositionedMarker.cpp",
+      "target": "orig/target/_code/0023/btlUiAddPositionedMarker.o",
       "thumb": false
     },
     {
@@ -40682,12 +40682,12 @@
     },
     {
       "address": "0x25043c",
-      "function": "FUN_0025043c",
+      "function": "btlClassifyItemUse",
       "module": "_code",
-      "object": "build/obj/_code/0025/FUN_0025043c.o",
+      "object": "build/obj/_code/0025/btlClassifyItemUse.o",
       "size": 388,
-      "source": "src/_code/0025/FUN_0025043c.cpp",
-      "target": "orig/target/_code/0025/FUN_0025043c.o",
+      "source": "src/_code/0025/btlClassifyItemUse.cpp",
+      "target": "orig/target/_code/0025/btlClassifyItemUse.o",
       "thumb": false
     },
     {
@@ -42483,12 +42483,12 @@
     },
     {
       "address": "0x25b670",
-      "function": "FUN_0025b670",
+      "function": "msSearchGetRecordAt",
       "module": "_code",
-      "object": "build/obj/_code/0025/FUN_0025b670.o",
+      "object": "build/obj/_code/0025/msSearchGetRecordAt.o",
       "size": 116,
-      "source": "src/_code/0025/FUN_0025b670.cpp",
-      "target": "orig/target/_code/0025/FUN_0025b670.o",
+      "source": "src/_code/0025/msSearchGetRecordAt.cpp",
+      "target": "orig/target/_code/0025/msSearchGetRecordAt.o",
       "thumb": false
     },
     {
@@ -45124,12 +45124,12 @@
     },
     {
       "address": "0x270e34",
-      "function": "FUN_00270e34",
+      "function": "mapStartEventScript",
       "module": "_code",
-      "object": "build/obj/_code/0027/FUN_00270e34.o",
+      "object": "build/obj/_code/0027/mapStartEventScript.o",
       "size": 300,
-      "source": "src/_code/0027/FUN_00270e34.cpp",
-      "target": "orig/target/_code/0027/FUN_00270e34.o",
+      "source": "src/_code/0027/mapStartEventScript.cpp",
+      "target": "orig/target/_code/0027/mapStartEventScript.o",
       "thumb": false
     },
     {
@@ -45685,12 +45685,12 @@
     },
     {
       "address": "0x276348",
-      "function": "FUN_00276348",
+      "function": "msSearchFindIndexById",
       "module": "_code",
-      "object": "build/obj/_code/0027/FUN_00276348.o",
+      "object": "build/obj/_code/0027/msSearchFindIndexById.o",
       "size": 272,
-      "source": "src/_code/0027/FUN_00276348.cpp",
-      "target": "orig/target/_code/0027/FUN_00276348.o",
+      "source": "src/_code/0027/msSearchFindIndexById.cpp",
+      "target": "orig/target/_code/0027/msSearchFindIndexById.o",
       "thumb": false
     },
     {
@@ -48249,12 +48249,12 @@
     },
     {
       "address": "0x289fa8",
-      "function": "FUN_00289fa8",
+      "function": "btlUiPositionRequestAdd",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_00289fa8.o",
+      "object": "build/obj/_code/0028/btlUiPositionRequestAdd.o",
       "size": 288,
-      "source": "src/_code/0028/FUN_00289fa8.cpp",
-      "target": "orig/target/_code/0028/FUN_00289fa8.o",
+      "source": "src/_code/0028/btlUiPositionRequestAdd.cpp",
+      "target": "orig/target/_code/0028/btlUiPositionRequestAdd.o",
       "thumb": false
     },
     {
@@ -48765,12 +48765,12 @@
     },
     {
       "address": "0x28dbe0",
-      "function": "FUN_0028dbe0",
+      "function": "ailmentSelectorGetColor",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_0028dbe0.o",
+      "object": "build/obj/_code/0028/ailmentSelectorGetColor.o",
       "size": 136,
-      "source": "src/_code/0028/FUN_0028dbe0.cpp",
-      "target": "orig/target/_code/0028/FUN_0028dbe0.o",
+      "source": "src/_code/0028/ailmentSelectorGetColor.cpp",
+      "target": "orig/target/_code/0028/ailmentSelectorGetColor.o",
       "thumb": false
     },
     {
@@ -49095,12 +49095,12 @@
     },
     {
       "address": "0x2902a0",
-      "function": "FUN_002902a0",
+      "function": "uiQuestOpenDetail",
       "module": "_code",
-      "object": "build/obj/_code/0029/FUN_002902a0.o",
+      "object": "build/obj/_code/0029/uiQuestOpenDetail.o",
       "size": 280,
-      "source": "src/_code/0029/FUN_002902a0.cpp",
-      "target": "orig/target/_code/0029/FUN_002902a0.o",
+      "source": "src/_code/0029/uiQuestOpenDetail.cpp",
+      "target": "orig/target/_code/0029/uiQuestOpenDetail.o",
       "thumb": false
     },
     {
@@ -58839,12 +58839,12 @@
     },
     {
       "address": "0x2bdf94",
-      "function": "FUN_002bdf94",
+      "function": "textDrawFormattedAligned",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002bdf94.o",
+      "object": "build/obj/_code/002b/textDrawFormattedAligned.o",
       "size": 840,
-      "source": "src/_code/002b/FUN_002bdf94.cpp",
-      "target": "orig/target/_code/002b/FUN_002bdf94.o",
+      "source": "src/_code/002b/textDrawFormattedAligned.cpp",
+      "target": "orig/target/_code/002b/textDrawFormattedAligned.o",
       "thumb": false
     },
     {
@@ -67407,12 +67407,12 @@
     },
     {
       "address": "0x2e7134",
-      "function": "FUN_002e7134",
+      "function": "asdLightSetRelease",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002e7134.o",
+      "object": "build/obj/_code/002e/asdLightSetRelease.o",
       "size": 316,
-      "source": "src/_code/002e/FUN_002e7134.cpp",
-      "target": "orig/target/_code/002e/FUN_002e7134.o",
+      "source": "src/_code/002e/asdLightSetRelease.cpp",
+      "target": "orig/target/_code/002e/asdLightSetRelease.o",
       "thumb": false
     },
     {
@@ -78287,12 +78287,12 @@
     },
     {
       "address": "0x328b1c",
-      "function": "FUN_00328b1c",
+      "function": "dataTable23FindAvailableRule",
       "module": "_code",
-      "object": "build/obj/_code/0032/FUN_00328b1c.o",
+      "object": "build/obj/_code/0032/dataTable23FindAvailableRule.o",
       "size": 316,
-      "source": "src/_code/0032/FUN_00328b1c.cpp",
-      "target": "orig/target/_code/0032/FUN_00328b1c.o",
+      "source": "src/_code/0032/dataTable23FindAvailableRule.cpp",
+      "target": "orig/target/_code/0032/dataTable23FindAvailableRule.o",
       "thumb": false
     },
     {
@@ -81573,12 +81573,12 @@
     {
       "address": "0x344158",
       "file": "battle/btlUnit",
-      "function": "FUN_00344158",
+      "function": "btlNumberPopupStep",
       "module": "_code",
-      "object": "build/obj/_code/battle/btlUnit/FUN_00344158.o",
+      "object": "build/obj/_code/battle/btlUnit/btlNumberPopupStep.o",
       "size": 1184,
-      "source": "src/_code/battle/btlUnit/FUN_00344158.cpp",
-      "target": "orig/target/_code/battle/btlUnit/FUN_00344158.o",
+      "source": "src/_code/battle/btlUnit/btlNumberPopupStep.cpp",
+      "target": "orig/target/_code/battle/btlUnit/btlNumberPopupStep.o",
       "thumb": false
     },
     {
@@ -94859,12 +94859,12 @@
     },
     {
       "address": "0x3844a0",
-      "function": "FUN_003844a0",
+      "function": "titleDrawSceneOverlay",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_003844a0.o",
+      "object": "build/obj/_code/0038/titleDrawSceneOverlay.o",
       "size": 568,
-      "source": "src/_code/0038/FUN_003844a0.cpp",
-      "target": "orig/target/_code/0038/FUN_003844a0.o",
+      "source": "src/_code/0038/titleDrawSceneOverlay.cpp",
+      "target": "orig/target/_code/0038/titleDrawSceneOverlay.o",
       "thumb": false
     },
     {
@@ -95279,12 +95279,12 @@
     },
     {
       "address": "0x387eb4",
-      "function": "FUN_00387eb4",
+      "function": "msSearchGetAddonRecordAt",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_00387eb4.o",
+      "object": "build/obj/_code/0038/msSearchGetAddonRecordAt.o",
       "size": 212,
-      "source": "src/_code/0038/FUN_00387eb4.cpp",
-      "target": "orig/target/_code/0038/FUN_00387eb4.o",
+      "source": "src/_code/0038/msSearchGetAddonRecordAt.cpp",
+      "target": "orig/target/_code/0038/msSearchGetAddonRecordAt.o",
       "thumb": false
     },
     {
@@ -99142,12 +99142,12 @@
     {
       "address": "0x3a72a4",
       "file": "bible/bibleDevil",
-      "function": "FUN_003a72a4",
+      "function": "bibleDevilUpdatePreviewInput",
       "module": "_code",
-      "object": "build/obj/_code/bible/bibleDevil/FUN_003a72a4.o",
+      "object": "build/obj/_code/bible/bibleDevil/bibleDevilUpdatePreviewInput.o",
       "size": 648,
-      "source": "src/_code/bible/bibleDevil/FUN_003a72a4.cpp",
-      "target": "orig/target/_code/bible/bibleDevil/FUN_003a72a4.o",
+      "source": "src/_code/bible/bibleDevil/bibleDevilUpdatePreviewInput.cpp",
+      "target": "orig/target/_code/bible/bibleDevil/bibleDevilUpdatePreviewInput.o",
       "thumb": false
     },
     {
@@ -103443,12 +103443,12 @@
     {
       "address": "0x3c5ffc",
       "file": "battle/btlUnit",
-      "function": "FUN_003c5ffc",
+      "function": "btlDebugApplyAttackCameraMenuEdit",
       "module": "_code",
-      "object": "build/obj/_code/battle/btlUnit/FUN_003c5ffc.o",
+      "object": "build/obj/_code/battle/btlUnit/btlDebugApplyAttackCameraMenuEdit.o",
       "size": 940,
-      "source": "src/_code/battle/btlUnit/FUN_003c5ffc.cpp",
-      "target": "orig/target/_code/battle/btlUnit/FUN_003c5ffc.o",
+      "source": "src/_code/battle/btlUnit/btlDebugApplyAttackCameraMenuEdit.cpp",
+      "target": "orig/target/_code/battle/btlUnit/btlDebugApplyAttackCameraMenuEdit.o",
       "thumb": false
     },
     {
@@ -104166,12 +104166,12 @@
     },
     {
       "address": "0x3cfb60",
-      "function": "FUN_003cfb60",
+      "function": "btlStartSkillAction",
       "module": "_code",
-      "object": "build/obj/_code/003c/FUN_003cfb60.o",
+      "object": "build/obj/_code/003c/btlStartSkillAction.o",
       "size": 268,
-      "source": "src/_code/003c/FUN_003cfb60.cpp",
-      "target": "orig/target/_code/003c/FUN_003cfb60.o",
+      "source": "src/_code/003c/btlStartSkillAction.cpp",
+      "target": "orig/target/_code/003c/btlStartSkillAction.o",
       "thumb": false
     },
     {
@@ -110875,12 +110875,12 @@
     },
     {
       "address": "0x3f887c",
-      "function": "FUN_003f887c",
+      "function": "animCurveFindQuantizedKey",
       "module": "_code",
-      "object": "build/obj/_code/003f/FUN_003f887c.o",
+      "object": "build/obj/_code/003f/animCurveFindQuantizedKey.o",
       "size": 188,
-      "source": "src/_code/003f/FUN_003f887c.cpp",
-      "target": "orig/target/_code/003f/FUN_003f887c.o",
+      "source": "src/_code/003f/animCurveFindQuantizedKey.cpp",
+      "target": "orig/target/_code/003f/animCurveFindQuantizedKey.o",
       "thumb": false
     },
     {
@@ -111025,12 +111025,12 @@
     },
     {
       "address": "0x3f91b0",
-      "function": "FUN_003f91b0",
+      "function": "curveSampleLinear8",
       "module": "_code",
-      "object": "build/obj/_code/003f/FUN_003f91b0.o",
+      "object": "build/obj/_code/003f/curveSampleLinear8.o",
       "size": 240,
-      "source": "src/_code/003f/FUN_003f91b0.cpp",
-      "target": "orig/target/_code/003f/FUN_003f91b0.o",
+      "source": "src/_code/003f/curveSampleLinear8.cpp",
+      "target": "orig/target/_code/003f/curveSampleLinear8.o",
       "thumb": false
     },
     {

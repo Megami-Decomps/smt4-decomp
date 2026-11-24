@@ -1,0 +1,35 @@
+#include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
+#include "shard/TextureDrawCall.h"
+#include "shard/W6_W6Match3_NameFormStateA.h"
+#include "ui/UiSpriteApi.h"
+#include "util/BitsAndBytes.h"
+extern "C" {
+void efctSetSpeed(f32 speed);
+
+// Draw layered form decorations, fading the foreground separately and restoring effect speed.
+void nameFormDrawFocusedDecorationRow(NameFormStateA *form, s32 x, s32 y, f32 speed)
+{
+    union DecorationView {
+        NameFormStateA base;
+        struct { u8 unk000[0x294]; UiSpriteState sprite; } decoration;
+    };
+    DecorationView *work = reinterpret_cast<DecorationView *>(form);
+    efctSetSpeed(speed);
+    texDrawTableEntryAtStoredOrigin(2, 0x23, 0x153, x, y, 0x1f);
+    texDrawTableEntryAtStoredOrigin(2, 0x23, 0x154, x, y, 0x1f);
+    texDrawTableEntryAtStoredOrigin(2, 0x23, 0x150, x, y, 0x24);
+    efctSetSpeed(vec2GetSpeed(&work->decoration.sprite) * speed);
+    RenderCtxA *context = g_renderCtx;
+    s32 blend = packNibblesAndByte(6, 1, 0);
+    renderStackSet(context->stacks + RENDER_STACK_B, blend);
+    for (s32 index = 0; index < 4; ++index)
+        texDrawTableEntryAtStoredOrigin(2, 0x23, index + 0x155, x, y, 0x29);
+    context = g_renderCtx;
+    blend = packNibblesAndByte(6, 7, 0);
+    renderStackSet(context->stacks + RENDER_STACK_B, blend);
+    if (form->countdown > 0)
+        texDrawTableEntryAtStoredOrigin(2, 0x23, 0x159, x, y, 0x29);
+    efctSetSpeed(speed);
+}
+}

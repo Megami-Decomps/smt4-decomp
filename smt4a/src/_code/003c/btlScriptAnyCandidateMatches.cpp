@@ -1,4 +1,5 @@
 #include "battle/BtlMainAccess.h"
+#include "battle/BattleHelpers_Smt4a.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
@@ -6,7 +7,6 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
-s32 btlCombatantHasSkillAction(BtlCombatantEntryA *entry, s32 kind);
 void scrSetResult(s32 value);
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 

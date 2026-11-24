@@ -1,4 +1,6 @@
-/* NON_MATCHING: 34 lines (153 vs 153 rows); frame, registers, 4-arg FUN_004a9308, and switch match, remaining: prologue loads repeatCount via mov r3, #820 instead of add+ldrsh, and case 6 shares case 15's call instead of vice versa. */
+/* NON_MATCHING: 8 lines, registers only: in the confirm-mask test retail loads confirmAlt's low word into ip and
+ * confirm's high word into r9 (swapped here). The cases are in retail's block order (15, 17, 20, 6, 19: case 15's
+ * call branches into case 6's copy) and the unit is read through command->unit at each use. */
 #include "common.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
@@ -57,11 +59,10 @@ void FUN_0047f4cc(u32 value, f32 x, f32 y, f32 z);
  * UI kind picks the effect, then the animation window is extended. */
 void FUN_004ecee8(BtlActorRef *ref, BtlCommand *command)
 {
-    BtlInputUnit *unit = command->unit;
     s32 delay = (command->flags & 0x1080) == 0 ? 50 : 0;
 
-    if (unit->repeatCount > 0) {
-        if ((unit->input & (g_btlAction.buttons.cancel | g_btlAction.buttons.cancelAlt)) == 0) {
+    if (command->unit->repeatCount > 0) {
+        if ((command->unit->input & (g_btlAction.buttons.cancel | g_btlAction.buttons.cancelAlt)) == 0) {
             FUN_004a9308(g_btlUiBlock, command->uiEntry, 0, 0);
         }
         FUN_004fd508(delay, command, 0, command->skill, 1);
@@ -69,16 +70,13 @@ void FUN_004ecee8(BtlActorRef *ref, BtlCommand *command)
         btlCommandExtendAnimationWindow((BtlActorRef *)ref, (BtlCommand *)command, command->skill->animation, 0, 5, 5);
         return;
     }
-    if ((unit->input & (g_btlAction.buttons.confirm | g_btlAction.buttons.confirmAlt)) != 0 && FUN_003e7adc(ref->unit) == 0 &&
+    if ((command->unit->input & (g_btlAction.buttons.confirm | g_btlAction.buttons.confirmAlt)) != 0 && FUN_003e7adc(ref->unit) == 0 &&
         (command->flags & 0x200000) != 0 &&
         (command->target->kind == 9 || command->target->kind == 10 || command->target->kind == 13)) {
         FUN_004fbeac(delay, command, 0, 0x47, 0);
         return;
     }
     switch (command->target->kind) {
-    case 6:
-        FUN_004fd508(0, command, 1, command->skill, 1);
-        break;
     case 15:
         FUN_004fd508(delay, command, 0, command->skill, 1);
         break;
@@ -86,6 +84,9 @@ void FUN_004ecee8(BtlActorRef *ref, BtlCommand *command)
         return;
     case 20:
         FUN_004c9160(0x2E, command->unit, 0, 1);
+        break;
+    case 6:
+        FUN_004fd508(0, command, 1, command->skill, 1);
         break;
     case 19: {
         BtlModelOwner *owner;

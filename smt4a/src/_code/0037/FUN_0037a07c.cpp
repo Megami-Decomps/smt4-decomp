@@ -12,7 +12,7 @@ void FUN_00395904(void);
 u8 FUN_00246bd4(void);
 u8 FUN_00249dec(void);
 void FUN_002332f4(void);
-void FUN_002242a0(void);
+void mapTrapUpdate(void);
 void FUN_002237a0(void);
 void FUN_00234b30(void);
 void FUN_0023534c(void);
@@ -41,7 +41,7 @@ void FUN_0037a07c(void)
     u8 status = FUN_00249dec();
     map->unkBC = status;
     FUN_002332f4();
-    FUN_002242a0();
+    mapTrapUpdate();
     FUN_002237a0();
     mapTargetUpdateNearest(g_lmapScene->pose.targetPosition, g_lmapScene->pose.targetHeading);
     FUN_00234b30();

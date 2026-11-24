@@ -3,7 +3,7 @@
 extern "C" {
 extern BtlGameOverSequence *g_gameOverJobRecord;
 s32 jobIsValid(u32 job);
-s32 FUN_004cef24(BtlGameOverSequence *sequence);
+s32 btlGameOverRunScriptSequence(BtlGameOverSequence *sequence);
 u32 btlGameOverRunEyeSequence(BtlGameOverSequence *sequence);
 
 /* Dispatches the game-over sequence and reports completion after its owner job stops. */
@@ -22,7 +22,7 @@ s32 btlGameOverPollSequence(u32 job)
         sequence->state = 3;
         return 0;
     case 1:
-        return FUN_004cef24(sequence);
+        return btlGameOverRunScriptSequence(sequence);
     case 2:
         return btlGameOverRunEyeSequence(sequence);
     case 3:

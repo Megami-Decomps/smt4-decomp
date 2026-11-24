@@ -8,7 +8,7 @@
 
 extern "C" {
 
-int FUN_0025b670(unsigned int);
+int msSearchGetRecordAt(unsigned int);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
 int dataFindKindRecordWithAocOverrides(...);
@@ -33,7 +33,7 @@ extern int g_mapDepart; /* 0x4475b8 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0025b670. */
+/* Supplied declaration required: msSearchGetRecordAt. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
@@ -104,7 +104,7 @@ unsigned int mapDepartSearch2dUpdate(void)
             temp_v9 = temp_v9 + 1;
           } while (temp_v9 < 0x10b);
           temp_v3 = g_gameState.recordId;
-          FUN_0025b670(g_gameState.recordId);
+          msSearchGetRecordAt(g_gameState.recordId);
           sprintf((char *)temp_v13,"%s",temp_v3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);

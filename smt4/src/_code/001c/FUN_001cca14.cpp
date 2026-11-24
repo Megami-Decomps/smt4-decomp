@@ -25,7 +25,7 @@ int FUN_0029ab54(...);
 int listCursorGetRowIfUnblocked(...);
 int resourceRunOperationIfUnblocked(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
-int FUN_002bdf94(...);
+int textDrawFormattedAligned(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
 int dataFindKindRecordWithAocOverrides(...);
@@ -79,7 +79,7 @@ extern int itemIsCollectedWithRelated(unsigned short);
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: textDrawRangeFaded. */
 /* Supplied declaration required: nkmBaseGetRecord. */
-/* Supplied declaration required: FUN_002bdf94. */
+/* Supplied declaration required: textDrawFormattedAligned. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
@@ -365,7 +365,7 @@ LAB_001ccb9c:
           temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4ad));
           temp_v18 = (unsigned int)*(unsigned short *)(temp_v7 + 0xe32);
           temp_v17 = &LAB_001cd3d0;
-          FUN_002bdf94(2,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
+          textDrawFormattedAligned(2,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                        (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v6 + 10) + temp_v2,1,6,0xba);
         }
         else {
@@ -375,7 +375,7 @@ LAB_001ccb9c:
                        0xba);
           temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4ad));
           temp_v17 = &LAB_001cd808;
-          FUN_002bdf94(2,(int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
+          textDrawFormattedAligned(2,(int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                        (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v7 + 10) + temp_v2,1,6,0xba);
         }
         temp_v13 = temp_v13 + 1;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: written as IV's IDENTICAL buttonHelpSetSlot; only the kinds/values base registers (r6/r7) are swapped. */
 #include "ui/UiSpriteApi.h"
 #include "ui/ButtonHelpGlobal.h"
 
@@ -17,8 +16,7 @@ void buttonHelpSelectSlot(u8 slot, u8 kind, u16 value, s32 defer)
     if (!work)
         return;
     if (defer) {
-        s32 queuedKind = g_buttonHelpQueuedKinds[slot];
-        if (queuedKind < 0) {
+        if (g_buttonHelpQueuedKinds[slot] < 0) {
             for (s32 index = 0; index < 6; ++index) {
                 if (work->touchPressed[index]) {
                     g_buttonHelpQueuedKinds[slot] = kind;
@@ -27,7 +25,7 @@ void buttonHelpSelectSlot(u8 slot, u8 kind, u16 value, s32 defer)
                 }
             }
         }
-        if (queuedKind == kind && g_buttonHelpQueuedValues[slot] == value) {
+        if (g_buttonHelpQueuedKinds[slot] == kind && g_buttonHelpQueuedValues[slot] == value) {
             g_buttonHelpQueuedKinds[slot] = -1;
             g_buttonHelpQueuedValues[slot] = -1;
         }
@@ -49,4 +47,4 @@ void buttonHelpSelectSlot(u8 slot, u8 kind, u16 value, s32 defer)
         work->slotSprites[slot].secondaryImage = -1;
     }
 }
-}
+} /* extern "C" */

@@ -15,11 +15,11 @@
 #include "shard/W6_W6Match2_FormattedTextSource.h"
 #include "game/GameGlobalsRef.h"
 #include "ui/FloatTableLookup.h"
+#include "AsdSDK/Source/Gfx/Text/AsdTextA.h"
 
 extern "C" {
 
 
-void positionStateSet(u32 object, u32 first, u32 second, f32 scale);
 int statusDownCreateScreen(...);
 
 
@@ -109,7 +109,6 @@ static const SpriteAnimationCommand sCommands[] = {
 
 
 
-extern unsigned int spriteHandleCreate(unsigned int);
 
 
 void statusAcquireSharedResources(void)
@@ -163,10 +162,10 @@ void statusAcquireSharedResources(void)
       asdLoadFileAsyncSimple("camp/partnerDescriptionMsg.mbm",resourceWords + 0x82e,0);
     }
     resourceWords = reinterpret_cast<u32 *>(g_gameGlobals.instance);
-    handle = spriteHandleCreate(0);
+    handle = (unsigned int)spriteHandleCreate(0);
     resourceWords[0x82d] = handle;
     uiObjectSetColorRgb(handle,0xffffffff);
-    positionStateSet(resourceWords[0x82d],0,0x646464ff,0.0f);
+    positionStateSet((AsdText *)resourceWords[0x82d],0,0x646464ff,0.0f);
     paramsClearPacket(reinterpret_cast<UiResourceParameters *>(workWords + 9));
     paramsInit(reinterpret_cast<UiResourceParameters *>(workWords + 9), sPositionKeys,sizeof(sPositionKeys),sAlphaKeys,sizeof(sAlphaKeys),0,0,0,0,sCommands,sizeof(sCommands));
     uiSpriteStateInitFromSource((UiSpriteState *)(workWords + 0x106),0xf,0, (UiResourceParameters *)(workWords + 9),1, 1.0f);

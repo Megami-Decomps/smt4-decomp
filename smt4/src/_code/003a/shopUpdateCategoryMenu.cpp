@@ -1,6 +1,11 @@
 /* NON_MATCHING: 38 lines, the same rows, branches and pool as retail; one register pair is swapped
  * throughout: retail keeps the constant 1 in r7 and the help colour (later the address of
- * menu.rows[0]) in r9, this build the colour in r7 and the 1 in r9. */
+ * menu.rows[0]) in r9, this build the colour in r7 and the 1 in r9.
+ * Wave 91: the pair does not move (38) with a signed `choice`, plain `static` shopMenuOpenCategory or
+ * shopStartScript, an s32 colour parameter, the colour as a #define or a static const, the row help as a shared
+ * inline helper, the open substep as a case of the switch, or the cursor declared where it is set. Worse: the
+ * back-to-top cursor as a ternary or `!=` (49), shopMenuAdvance inline (64), one `scratch` for both menus (58
+ * by shape, 122 raw). */
 #include "shop/ShopScreen.h"
 #include "shop/shopMain.h"
 #include "ui/UiSpriteApi.h"

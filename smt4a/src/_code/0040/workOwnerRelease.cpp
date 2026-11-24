@@ -1,13 +1,7 @@
 #include "shard/Shard0040.h"
+#include "AsdSDK/Source/Gfx/Model/WorkOwner.h"
 
 extern "C" {
-
-typedef struct WorkOwner {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ Work20Ref *work;
-    /* 0x0C */ u32 block0C[1];
-    /* 0x10 */ void *buffers[3];
-} WorkOwner;
 
 extern void work20RefFree(Work20Ref *work);
 extern void FUN_004511d8(u32 *block);

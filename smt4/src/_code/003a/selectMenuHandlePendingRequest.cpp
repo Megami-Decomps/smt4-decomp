@@ -11,7 +11,7 @@ void shopDrawAppraisalRow(SelectMenu *menu, s32 index, s32 marked, s32 value);
 void shopDrawEquippedItemPage(SelectMenu *menu);
 void FUN_003a1d04(SelectMenu *menu);
 void shopScreenRedraw(SelectMenu *menu);
-void shopDrawQuantityPanel(SelectMenu *menu);
+void shopDrawQuantityPanel(SelectMenu *menu); // declcheck: local (IV's select menu view; classes/Obj536044.h declares Apocalypse's twin on Obj536044)
 
 /* Handle the menu's pending request: refresh the list entries, or run the cancel, confirm or scroll
  * handler; then close the menu when asked to. */

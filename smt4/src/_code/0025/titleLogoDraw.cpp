@@ -1,8 +1,19 @@
-/* NON_MATCHING: 44 lines (raw and by shape). The projection is nn::math's inlined MTX44Ortho and now schedules as
+/* NON_MATCHING: 44 lines (raw and by shape). The projection is nn::math's inlined MTX44Ortho and schedules as
  * retail's (constants, the zero stores, then the six computed elements), but the frame is 8 bytes larger with the
  * logo position below the matrix (retail: the matrix at sp+8, the position at sp+72, 84 bytes), which moves every
  * sp offset; two vnmul results take other registers, and the centring offset is added as centre + x where retail
- * adds x + centre. */
+ * adds x + centre.
+ * The frame: this build always puts the position under the matrix. Declaring the position first, at the top or in
+ * its own block, as a struct or a class with a constructor, writing the matrix through the parameter, a reference
+ * or two inline layers, nw::math::MTX44, and `x = x + c` / `c + x` change nothing; a block around the matrix only
+ * drops the padding. Retail's layout (84 bytes, matrix at sp+8) does appear when the matrix gets one more
+ * address-taken use (a second call passed `&projection`) or when a 1.0f is stored into it ahead of the ortho call
+ * (a 0.0f or 2.0f store does not; nor does a second inline use that compiles away), and also with a dead 1.0f
+ * local ahead of the call: the frame order follows the order armcc numbers its values in, not the declarations.
+ * Retail's pool lists the float constants in this build's order (0, -1, 1, 2, -0), which the 1.0f probes change,
+ * so they are not what its source has; -g, --exceptions, the fpmode and the optimisation levels do not give the
+ * frame either. With retail's frame the vnmul registers and the add's operand order
+ * still differ. */
 #include "camp/RenderCtx.h"
 #include "code/Code0028.h"
 #include "gfx/RenderTransformState.h"

@@ -4,6 +4,7 @@
  * predicated before the branch and the action list at the else loop's head (this build selects one address and
  * loads once), and in phase 19 it keeps the reflect chance in r0 and the selection kind in r1 (this build ip and
  * r0). */
+#include "gamedata/SaveSlotTableIV.h"
 #include "battle/BattleCommandController.h"
 #include "battle/BtlUnitTarget.h"
 #include "battle/BtlMainAccess.h"
@@ -21,7 +22,6 @@
 
 extern "C" {
 StatBlock *saveResolvePartySlot(u32 partySlot);
-s32 gameSlotFindByCategory(const StatBlock *record);
 extern void *g_btlEvent;
 extern VersionedTextureOwner *g_btlAux;
 

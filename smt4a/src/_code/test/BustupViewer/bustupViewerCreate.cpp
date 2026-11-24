@@ -3,14 +3,14 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "test/BustupViewerState.h"
+#include "AsdSDK/Source/Gfx/Text/AsdTextA.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
 void *asdLoadFileSyncDefault(const char *path);
 void taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                     AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
-u32 spriteHandleCreate(u32 arg);
 void bustupViewerResetState(void);
 void bustupViewerActivate(u32 handle);
 s32 FUN_003150f4(u32 handle);
@@ -35,7 +35,7 @@ void bustupViewerCreate(void)
     viewer->positionCount3d = 26;
     viewer->positionCount3d2 = 30;
     viewer->fileData = asdLoadFileSyncDefault("test/bustup_viewer.bf");
-    viewer->text = spriteHandleCreate(0);
+    viewer->text = (u32)spriteHandleCreate(0);
     viewer->done = 0;
     u32 process = asdProcessCreateSimple("BUSTUP VIEWER C", 4, 0, 0, FUN_003150f4, bustupViewerActivate, 0);
     viewer->process = process;

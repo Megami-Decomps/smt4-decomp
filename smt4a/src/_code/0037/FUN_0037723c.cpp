@@ -44,7 +44,7 @@ extern "C" void FUN_0037723c(s32 immediate)
         }
         timers->timers[entry->timerSlot] = entry->cooldown * 1800;
         for (s32 j = 0; j < dataTableGetRecordFortyEight(); ++j) {
-            const MsSearchRecord *record = FUN_003799d0(j);
+            const MsSearchRecord *record = msSearchGetRecordAt(j);
             if (record->id != -1 && record->areaId == area) {
                 s32 flag = record->markBit;
                 MapSaveBlockA *flags = gameFlagsGetBlock();

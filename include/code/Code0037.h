@@ -8,7 +8,7 @@ struct GuestParamRecord;
 GuestParamRecord *FUN_00370ecc(u16 id);
 
 struct MsSearchRecord;
-MsSearchRecord *FUN_003799d0(u32 index);
+MsSearchRecord *msSearchGetRecordAt(u32 index);
 
 void FUN_0037d6e4(u8 value);
 

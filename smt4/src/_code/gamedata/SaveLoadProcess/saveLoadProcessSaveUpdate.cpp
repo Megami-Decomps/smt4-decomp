@@ -36,7 +36,7 @@ s32 saveLoadProcessSaveUpdate(u32 process)
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\gamedata\\SaveLoadProcess.cpp", 124);
         work->buffer = asdMemAlloc(0x100, 0x100, 0, work->bufferSize, 1);
         titleConfigStoreOptions();
-        gameDataBlocksGetSaveData()->metadata.option = work->option;
+        saveLoadWriteMetadataOption(gameDataBlocksGetSaveData(), work->option);
         __aeabi_memcpy(work->buffer, gameDataBlocksGetTable(), 0x80);
         ((SaveFilePayloadIV *)work->buffer)->settings = *reinterpret_cast<const ConfigSettingsImage *>(configGetSettings());
         SaveWriteBodyPrefix *body = (SaveWriteBodyPrefix *)((SaveFilePayloadIV *)work->buffer)->save;

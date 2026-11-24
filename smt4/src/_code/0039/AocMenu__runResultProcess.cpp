@@ -1,7 +1,7 @@
-/* NON_MATCHING: written like _ZN7AocMenu15runQueryProcessEv; step 4's error store differs: retail loads the failed
- * result (ldrd) before storing the error kind, where this build stores the kind first (4 rows), and retail hoists the
- * constant 3 before the step number (4 rows; writing `counter = 3;` before `step = N;` gives that order, but the two
- * are independent stores and the order is only score evidence). */
+/* NON_MATCHING: 4 lines; written like _ZN7AocMenu15runQueryProcessEv. Retail hoists the constant 3 before the step
+ * number (writing `counter = 3;` before `step = N;` gives that order, but the two are independent stores and the
+ * order is only score evidence; a (step, counter) setter keeps this build's order). Step 4's error store matches
+ * through failRequestOperation, whose value parameter makes armcc read the failed pair before it stores the kind. */
 #include "code/Code0023.h"
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
@@ -125,8 +125,7 @@ void AocMenu::runResultProcess()
         WindowStatusResult status = FUN_002341d4(aocMain);
         if (nnResultIsFailure(legacyResourceIdRemap(&status))) {
             menu->step = 9999;
-            menu->result.kind = 100;
-            menu->result.result = status;
+            failRequestOperation(&menu->result, status);
             break;
         }
         menu->step = 5;

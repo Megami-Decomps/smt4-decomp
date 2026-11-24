@@ -6473,3 +6473,24 @@
 0033f2b8 npcPackageLoad inferred loads an NPC package from add-on content or ROM and slices its NKDW sections
 002ec0fc campCecViewDrawScrollTrack inferred draws CampCecView's segmented scroll track (called by its draw callbacks)
 00309ec8 campCecEditDrawScrollTrack inferred draws CampCecEdit's scroll track
+0025043c btlClassifyItemUse inferred classifies how a battle item is used (w91-f1)
+002bdf94 textDrawFormattedAligned inferred formats a text and draws it aligned through textDrawString (w91-f1; the sixth parameter is a float in the callee)
+0028dbe0 ailmentSelectorGetColor inferred the colour of the selector's index-th ailment of the player or a party unit, -1 when disabled (w91-f2)
+003f91b0 curveSampleLinear8 inferred curveSampleLinear over 8-byte (time, value) keys; curveSampleLinear has 12-byte keys and curveSampleLinear16 16-byte ones (gfx/LinearCurve.h)
+00344158 btlNumberPopupStep inferred starts the battle number popups for a member and waits for the UI to retire them (port of smt4a FUN_0040cd6c)
+002e7134 asdLightSetRelease inferred removes a light from the light set's vector and releases it (twin of smt4a FUN_003627bc)
+0023c9e8 btlUiAddPositionedMarker inferred counterpart of smt4a FUN_004aace8 (places a marker with the layout of the requested style)
+003c5ffc btlDebugApplyAttackCameraMenuEdit inferred twin of smt4a FUN_004d5be4
+003a72a4 bibleDevilUpdatePreviewInput inferred the devil list preview's cursor, page and confirm input (w91-s4)
+003844a0 titleDrawSceneOverlay inferred draws the title overlay past state 2, with its optional full-screen fade (twin of smt4a FUN_0046a868)
+00276348 msSearchFindIndexById inferred finds the index of a nonempty map search mark by id (base table, then add-on records)
+0025b670 msSearchGetRecordAt inferred the map search record at an index across the base table and the add-on records (gamedata/MsSearchTableIV.h msSearchGetRecord is its body)
+00387eb4 msSearchGetAddonRecordAt inferred the add-on map search record (kind 0x27) at an index
+002902a0 uiQuestOpenDetail inferred selects a quest, optionally restores its list cursor and enters quest state 20 (called by uiQuestCalc)
+00270e34 mapStartEventScript inferred twin of smt4a mapStartEventScript (same loader and mode)
+00289fa8 btlUiPositionRequestAdd inferred twin of smt4a btlUiPositionRequestAdd (appends the position marker)
+003f887c animCurveFindQuantizedKey inferred finds the previous key of a quantized animation curve (used by the step, linear and Hermite samplers)
+00328b1c dataTable23FindAvailableRule inferred the first base or add-on row of data table 0x23 section 6 whose flags and unit requirements hold
+001f40fc buttonHelpDrawHighlightedLine inferred draws a button-help line with its highlighted segment (selected by highlightLine)
+00123254 gfxCmdBufferHandlesRelease inferred removes the requested handles from the sorted bucket chain and releases them (mirrors gfxCmdBufferHandlesAllocate)
+003cfb60 btlStartSkillAction inferred twin of smt4a FUN_004e7418

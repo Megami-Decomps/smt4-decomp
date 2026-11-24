@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "saveLoadUI/SaveSlotRow.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 namespace {
 typedef SaveSlotRecord MenuRowRecord;
@@ -20,12 +21,11 @@ struct MenuRowRefreshView {
     s32 selectedRow; // 0x308
     u8 unk30c[0x358];
     MenuRowWidget rows[2]; // 0x664
-    u8 selection[1]; // 0x6ec
+    /* 0x6EC */ SaveLoadTransitionValues selection;
 };
 typedef char MenuRowRefreshLayoutCheck[offsetof(MenuRowRefreshView, records) == 0x6c && offsetof(MenuRowRefreshView, occupied) == 0x2ec && offsetof(MenuRowRefreshView, rows) == 0x664 && offsetof(MenuRowRefreshView, selection) == 0x6ec ? 1 : -1];
 }
 extern "C" {
-void FUN_0041c45c(void *, const TextureTableEntryIV *);
 
 // Refresh the visible record rows and their selection indicator.
 void FUN_0041f9e4(MenuRowRefreshView *menu)
@@ -49,6 +49,6 @@ void FUN_0041f9e4(MenuRowRefreshView *menu)
         }
     }
     const TextureTableEntryIV *layout = asdTMTexTableEntryAt(0x2b, menu->selectedRow + baseIndex);
-    FUN_0041c45c(menu->selection, layout);
+    saveSlotDrawSelectionMarker(&menu->selection, layout);
 }
 }

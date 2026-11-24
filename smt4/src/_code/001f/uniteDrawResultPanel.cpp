@@ -28,7 +28,7 @@
 extern "C" {
 
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
-void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *format, ...);
+void textDrawFormattedAligned(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *format, ...);
 void drawSetColorFromRGBA8(u32 packed);
 void gxSetMirroredClippedScissor(s32 x, s32 y, u32 width, s32 height, s32 useNarrowScreen);
 u8 ifTouchGetSelectionModeForRegion(int id);
@@ -70,7 +70,7 @@ void uniteDrawResultPanel(s32 x, s32 y, u32 selected, s32 cursorSlot, s32 region
     sprintf(text, "\202\145\202\225\202\223\202\211\202\217\202\216\201\100\202\157\202\217\202\223\202\223\202\211\202\202\202\214\202\205\201\106");
     textDrawString(part->x + x, part->y + y, 0.0f, 2, 0.0f, TEXT_WHITE, 1.0f, text);
     part = asdTMTexTableEntryAt(UNITE_TEXTURES, 76);
-    FUN_002bdf94(0, part->x + x, part->y + y, 1, 2, 201, "%d", fusionPlayerLevelCapGet());
+    textDrawFormattedAligned(0, part->x + x, part->y + y, 1, 2, 201, "%d", fusionPlayerLevelCapGet());
     if (work->blocked) {
         return;
     }
@@ -109,7 +109,7 @@ void uniteDrawResultPanel(s32 x, s32 y, u32 selected, s32 cursorSlot, s32 region
                            0.0f, TEXT_BROWN, 1.0f, text);
             drawSetColorFromRGBA8(TEXT_BLACK);
             label = asdTMTexTableEntryAt(UNITE_TEXTURES, 113);
-            FUN_002bdf94(0, row->x + label->x + x, row->y + label->y + y, 1, 2, 206, "%d", demon->level);
+            textDrawFormattedAligned(0, row->x + label->x + x, row->y + label->y + y, 1, 2, 206, "%d", demon->level);
             gxResetColorQuadToWhite();
             if (!itemGetFlagBit1(demon->id)) {
                 label = asdTMTexTableEntryAt(UNITE_TEXTURES, 109);
@@ -175,7 +175,7 @@ void uniteDrawResultPanel(s32 x, s32 y, u32 selected, s32 cursorSlot, s32 region
         textDrawString(part->x + panel->x + (centre + x), part->y + panel->y + y, 0.2f, 3,
                        0.0f, TEXT_WHITE, 1.0f, text);
         part = asdTMTexTableEntryAt(UNITE_TEXTURES, 134);
-        FUN_002bdf94(0, panel->x + part->x + x, panel->y + part->y + y, 1, 2, 206, "%d", demon->level);
+        textDrawFormattedAligned(0, panel->x + part->x + x, panel->y + part->y + y, 1, 2, 206, "%d", demon->level);
         if (!itemGetFlagBit1(demon->id)) {
             part = asdTMTexTableEntryAt(UNITE_TEXTURES, 130);
             texDrawCompositeSprite(2, UNITE_TEXTURES, 8, panel->x + part->x + x, part->y + panel->y + y, 211);

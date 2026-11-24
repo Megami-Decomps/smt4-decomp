@@ -1,11 +1,12 @@
-/* NON_MATCHING: only the translation copy differs: retail loads y,x,z and stores with a str + strd pair, armcc here uses stm + str. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "gfx/ModelBoneLookup.h"
+#include "nw/math/MTX44Transform.h"
+#include <string.h>
 extern "C" {
 u32 libc_strlen(const char *name);
 ResDicPatriciaNode *nw_ut_ResDicPatricia_Get(ResDicPatricia **dictionary, const char *name, u32 length);
 
-// The index of the named bone in the dictionary, or -1.
+/* Finds a bone by name in the resource dictionary, returning -1 when absent. */
 static __inline s32 findBone(ResDicPatricia **dictionary, const char *name)
 {
     if (*dictionary != NULL && name != NULL) {
@@ -16,7 +17,7 @@ static __inline s32 findBone(ResDicPatricia **dictionary, const char *name)
     return -1;
 }
 
-// Find a named skeleton bone and copy the translation from its current matrix.
+/* Finds a named skeleton bone and copies the translation from its current matrix. */
 u32 modelGetBoneTranslationByName(AsdMdlNode *model, const char *name, SkeletonVector3 *position)
 {
     ModelBoneResource *resource = ModelBoneResource::cast(model->sceneNode->boneResource);
@@ -31,8 +32,8 @@ u32 modelGetBoneTranslationByName(AsdMdlNode *model, const char *name, SkeletonV
     }
     ModelBoneMatrixProvider *provider = model->sceneNode->skeleton;
     SkeletonMatrix34 *matrix = &provider->vtable->getMatrices(provider)->matrices[bone];
-    SkeletonVector3 translation = {{matrix->values[3], matrix->values[7], matrix->values[11]}};
-    *position = translation;
+    nw::math::VEC3Value translation(matrix->values[3], matrix->values[7], matrix->values[11]);
+    memcpy(position, &translation, sizeof(*position));
     return 1;
 }
-}
+} /* extern "C" */

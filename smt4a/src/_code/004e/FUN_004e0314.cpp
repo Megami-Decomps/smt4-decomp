@@ -1,5 +1,5 @@
-/* NON_MATCHING: btlEntryRemove takes four arguments (its definition; retail passes three zeros from r3); remaining: the entry flags load as ldm/ldrd instead of two ldr, the entry's unit pointer is formed as entry+0x400 and row+15 is computed before the effect lookup in retail, and the final command store folds the field offset into the slot index (retail adds it after). */
-#include "battle/btlMain.h"
+/* NON_MATCHING: the entry mask, unit pointer, row-plus-15 arithmetic and final action-slot lookup are scheduled differently. */
+#include "battle/BtlActionSlots.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "battle/BtlMainAccess.h"
@@ -113,7 +113,7 @@ u32 FUN_004e0314(BattleMenuOwner *owner, CommandMenu *menu)
         FUN_0047f7ac(0, sound);
         btlReflectCreateKind44(row + 15, menu, view->unit->unitId, effect);
     }
-    g_btlAction.slots[owner->state->unitRecord.currentSlot].unit.command = 0x20;
+    btlActionGetSlot(owner->state->unitRecord.currentSlot)->unit.command = 0x20;
     return 1;
 }
 }

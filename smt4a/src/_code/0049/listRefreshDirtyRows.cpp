@@ -42,7 +42,6 @@ void size40Set(ListRangeRenderer *, u32 start, u32 selection);
 void FUN_004986b0(ListRefreshState *);
 void shopDrawEquipmentList(ListRefreshState *);
 void shopScreenRedrawHeaderAndSlots(ListRefreshState *);
-void FUN_004957b4(ListRefreshState *);
 
 // Refresh visible list rows and the selected renderer, then handle other dirty-state modes.
 void listRefreshDirtyRows(ListRefreshState *state)
@@ -79,7 +78,7 @@ void listRefreshDirtyRows(ListRefreshState *state)
         shopScreenRedrawHeaderAndSlots(state);
     }
     if (state->flags & 0x1000) {
-        FUN_004957b4(state);
+        shopDrawQuantityPanel((Obj536044 *)state);
     }
 }
 }

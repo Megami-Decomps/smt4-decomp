@@ -2,15 +2,9 @@
 #ifndef ASDSDK_SOURCE_GFX_EFFECT_EFFPARTICLE_H
 #define ASDSDK_SOURCE_GFX_EFFECT_EFFPARTICLE_H
 
-#include "common.h"
+#include "AsdSDK/Source/Gfx/Effect/EffectBehaviorBlock.h"
 #include "shard/S1Mover.h"
 #include <stddef.h>
-
-/* The block a particle parameter block takes its array size from. */
-typedef struct EffParticleSource {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u32 count;
-} EffParticleSource;
 
 struct AsdTexture;
 
@@ -41,7 +35,7 @@ typedef struct EffParticleParam {
     /* 0x40 */ void *buffer40;     /* allocation holding handles3c */
     /* 0x44 */ void *object44;
     /* 0x48 */ void *object48;
-    /* 0x4C */ EffParticleSource *source; /* when set, its count sizes the arrays */
+    /* 0x4C */ EffectBehaviorBlock *source; /* when set, its element count sizes the arrays */
     union {
         /* 0x50 */ u8 unk50[4];
         /* 0x50 */ void *auxiliary;
@@ -82,7 +76,7 @@ struct EffObjectParticle {
             /* 0x34 */ s32 faceMode;
         } initialMotion;
     };
-    /* 0x9C */ EffParticleSource *source;
+    /* 0x9C */ EffectBehaviorBlock *source;
     /* 0xA0 */ EffObjectParticleState *states;
     /* 0xA4 */ void *allocation;
 };

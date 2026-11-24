@@ -18,7 +18,7 @@ u16 dataTable0BGetValueById(u32 id);
 u8 appCheckPurchaseRequirements(u32 id);
 s32 resourceRunOperationIfUnblocked(void *widget);
 void drawSetColorFromRGBA8(u32 color);
-void FUN_002bdf94(u32 kind, s32 x, s32 y, u32 align, u32 digits, u32 slot, const char *format, ...);
+void textDrawFormattedAligned(u32 kind, s32 x, s32 y, u32 align, u32 digits, u32 slot, const char *format, ...);
 void fadeObjectResetIfActive(UiSpriteState *sprite);
 u8 ifTouchGetSelectionModeForRegion(s32 region);
 void gxSetMirroredClippedScissor(s32 x, s32 y, u32 width, s32 height, s32 useNarrowScreen);
@@ -56,7 +56,7 @@ extern "C" void gauntletAppMenuDrawScreen(GauntletAppMenuWork *menu)
     texDrawTableEntryAtStoredOrigin(2, GAUNTLET_TEXTURES, 0x57F, x, y, 0x6A);
     const TextureTableEntryIV *balance = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x583);
     __2sprintf(number, "%u", gameSaveGetPoints());
-    FUN_002bdf94(0, balance->x + x, balance->y + y, 1, 4, 0x6A, number);
+    textDrawFormattedAligned(0, balance->x + x, balance->y + y, 1, 4, 0x6A, number);
     for (s32 row = 0; row < (s32)uiListGetVisibleCount(menu->list.controller); ++row) {
         if ((menu->list.mode == GAUNTLET_APP_HIGHLIGHT || menu->list.mode == GAUNTLET_APP_PREVIEW) &&
             listCursorGetRowIfUnblocked(menu->list.controller) == row) {
@@ -94,7 +94,7 @@ extern "C" void gauntletAppMenuDrawScreen(GauntletAppMenuWork *menu)
             }
             const TextureTableEntryIV *cost = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x594);
             drawSetColorFromRGBA8(priceColor);
-            FUN_002bdf94(0, position->x + cost->x + x, position->y + cost->y + y, 1, 4, 0x6F, number);
+            textDrawFormattedAligned(0, position->x + cost->x + x, position->y + cost->y + y, 1, 4, 0x6F, number);
             gxResetColorQuadToWhite();
         }
         const TextureTableEntryIV *label = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x590);
@@ -156,7 +156,7 @@ extern "C" void gauntletAppMenuDrawScreen(GauntletAppMenuWork *menu)
             }
             const TextureTableEntryIV *cost = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x59D);
             drawSetColorFromRGBA8(priceColor);
-            FUN_002bdf94(0, position->x + cost->x + x, position->y + cost->y + y, 1, 4, 0x97, number);
+            textDrawFormattedAligned(0, position->x + cost->x + x, position->y + cost->y + y, 1, 4, 0x97, number);
             gxResetColorQuadToWhite();
         }
         const TextureTableEntryIV *label = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x599);

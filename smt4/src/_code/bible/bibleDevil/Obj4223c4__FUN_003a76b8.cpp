@@ -1,5 +1,5 @@
-/* NON_MATCHING: the source-flag store and entry address are scheduled differently around the branch, and the step/phase stm uses another base register (retail r2, built r1). */
-#include "classes/Obj42247c.h"
+/* NON_MATCHING: the step/phase stm uses r1 instead of retail's r2. */
+#include "bible/BibleDevilList.h"
 #include "classes/Obj4223c4.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "gamedata/UnitStats.h"
@@ -19,13 +19,12 @@ void FUN_00233240(void *timers, s32 index);
 void devilListUpdatePreview(Obj42247c *view);
 extern s32 g_bibleDevilCallbackContext[2];
 
-}
+} /* extern "C" */
 
+/* Opens the compendium's confirmation preview for a new summon or a demon in the party. */
 void Obj4223c4::FUN_003a76b8()
 {
-    Obj42247c * view = reinterpret_cast<Obj42247c *>(this);
-    // The concrete compendium view's source flag and entry array extend past the shared base.
-    struct DetailEntry { u32 unk00; u16 id; u8 unk06[0x1a]; };
+    /* The concrete compendium view's source flag and entry array extend past the shared base. */
     struct DetailView {
         u8 prefix[0x14];
         u32 phase, timer;
@@ -39,37 +38,38 @@ void Obj4223c4::FUN_003a76b8()
         ScriptProcess *preview;
         u8 fromParty, source;
         u8 unk5A6[2];
-        DetailEntry entries[1];
+        BibleDevilEntry entries[1];
     };
     typedef char LayoutCheck[__INTADDR__(&((DetailView *)0)->input) == 0x96 &&
         __INTADDR__(&((DetailView *)0)->entries) == 0x5a8 ? 1 : -1];
-    DetailView *state = reinterpret_cast<DetailView *>(view);
-    if (view->isScreenReady() != 0 && utilityReturnSuccess(state->input) == 0) {
+    DetailView *state = (DetailView *)this;
+    if (isScreenReady() != 0 && utilityReturnSuccess(state->input) == 0) {
         ScriptProcess *preview = scrScriptProcessCreate(state->handleA, state->handleB);
         state->preview = preview;
         scriptProcessSetMode(preview, 2);
-        view->step = 1;
-        view->phase = 0;
-        state->source = 1;
-        DetailEntry *entries = state->entries;
+        step = 1;
+        phase = 0;
+        BibleDevilEntry *entries = state->entries;
         if (mode == 0) {
-            u16 rawId = entries[flaggedValueHolderGetTotal(&state->selection)].id;
+            state->source = 1;
+            u16 rawId = entries[flaggedValueHolderGetTotal(&state->selection)].devilId;
             s16 id = rawId;
-            s32 cost = compendiumComputeSummonCost(static_cast<u16>(id), state->source, 0, state->sortMode >= 100, 0);
+            s32 cost = compendiumComputeSummonCost((u16)id, state->source, 0, state->sortMode >= 100, 0);
             messageBannerInitSelection(1, 0);
             messageTargetSetValue(-cost, 0);
             buttonHelpSetPreset(0x2d);
             StatBlock unit;
-            unitInitializeFromSavedRecord(static_cast<u16>(id), &unit);
-            FUN_0029da34(0, 1, static_cast<u16>(id), &unit);
+            unitInitializeFromSavedRecord((u16)id, &unit);
+            FUN_0029da34(0, 1, (u16)id, &unit);
         } else {
-            s16 id = entries[flaggedValueHolderGetTotal(&state->selection)].id;
+            state->source = 1;
+            s16 id = entries[flaggedValueHolderGetTotal(&state->selection)].devilId;
             buttonHelpSetPreset(0x4c);
-            FUN_0029da34(0, 1, static_cast<u16>(id), partyMemberFindById(static_cast<u16>(id)));
+            FUN_0029da34(0, 1, (u16)id, partyMemberFindById((u16)id));
         }
         FUN_00233240(state->timers, 0);
         FUN_00233240(state->timers, 1);
         g_bibleDevilCallbackContext[1] = -1;
-        devilListUpdatePreview(view);
+        devilListUpdatePreview(this);
     }
 }

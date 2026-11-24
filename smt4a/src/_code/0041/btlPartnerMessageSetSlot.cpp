@@ -1,6 +1,5 @@
-/* NON_MATCHING: text-pointer load precedes slot resets, and projected-coordinate updates reuse the X sum instead of
- * retail's store/reload sequence (27 lines). It matches only with single-use zero() and x/y-only operator+= members
- * on the position type (wave 52), which have no evidence; message-debug hooks are restored. */
+/* NON_MATCHING: the projected-coordinate updates reuse the X sum instead of retail's store/reload sequence.
+ * The previously matching single-use position operators lacked evidence. */
 #include "ui/UiSpriteApi.h"
 #include "battle/BtlMainAccess.h"
 #include "ui/AnimatedMessageSlots.h"
@@ -9,6 +8,7 @@
 #include "shard/W6_W6Match6_ProjectionCamera.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "code/Code0015.h"
+#include "AsdSDK/Source/Gfx/Text/AsdTextA.h"
 
 struct PartnerMessageOwnerView {
     AnimatedMessageSlot slots[12];
@@ -33,9 +33,7 @@ void uiSpriteSetScaleKeyframe(UiSpriteState *sprite, s32 mode, s32 state);
 void cameraProjectToScreen(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
 PartnerMessageOffset FUN_00416388(PartnerMessageOwnerView *owner, s32 index, UiSpriteState *sprite);
 void pairSetHalves(UiSpriteState *sprite, s32 x, s32 y);
-TextMeasureState *spriteHandleCreate(u32 kind);
 void uiObjectSetColorRgb(TextMeasureState *text, u32 color);
-void positionStateSet(TextMeasureState *text, u32 first, u32 second, f32 scale);
 void objFlagsSetBits(TextMeasureState *text, u32 flags);
 void asdTextDrawDirectoryEntry(TextMeasureState *text, s32 type, u32 color, s32 first, s32 second, void *directory, u32 entry);
 s32 textMeasureLineWidth(TextMeasureState *text, s32 line);
@@ -50,8 +48,8 @@ void btlPartnerMessageSetSlot(PartnerMessageOwnerView *owner, s32 index, u32 mes
     slot->position.y = 0.0f;
     slot->position.x = 0.0f;
     slot->position.z = 0.0f;
-    if (slot->text != NULL) {
-        asdMemFreeSlot(reinterpret_cast<void **>(slot->text));
+    if (TextMeasureState *text = slot->text) {
+        asdMemFreeSlot((void **)text);
         slot->text = NULL;
     }
     slot->width = 0;
@@ -70,9 +68,9 @@ void btlPartnerMessageSetSlot(PartnerMessageOwnerView *owner, s32 index, u32 mes
     pairSetHalves(&slot->sprite, (s16)(s32)slot->position.x, (s16)(s32)slot->position.y);
     PartnerMessageBattleView *battle = (PartnerMessageBattleView *)btlGetMainState();
     if (slot->text == NULL)
-        slot->text = spriteHandleCreate(0);
+        slot->text = (TextMeasureState *)spriteHandleCreate(0);
     uiObjectSetColorRgb(slot->text, 0x320202FF);
-    positionStateSet(slot->text, 0, 0x646464FF, 0.0f);
+    positionStateSet((AsdText *)slot->text, 0, 0x646464FF, 0.0f);
     objFlagsSetBits(slot->text, 8);
     objFlagsSetBits(slot->text, 0x100);
     asdDebugHookPtr("btlPartnerMessage");

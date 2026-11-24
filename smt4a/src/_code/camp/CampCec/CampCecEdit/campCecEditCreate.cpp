@@ -24,9 +24,9 @@
 #include "shard/W6_W6Match3_FormatBuffer.h"
 #include "util/BitsAndBytes_VariantF_Shard004B.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/Text/AsdTextA.h"
 
 struct StatusScene;
-struct SpriteHandle;
 
 extern "C" {
 
@@ -51,8 +51,6 @@ s32 stepObjBStart(StateAtF4 *edit);
 StatusScene *overlayGetStatusScene(void);
 void characterInfoPanelPopulate(u32 *panel, u16 *record, void *messages);
 void textureRequestCacheGet(u32 *cache, u32 request);
-SpriteHandle *spriteHandleCreate(u32 type);
-void positionStateSet(u32 object, u32 first, u32 second, f32 scale);
 void sysPlaySe(u32 id);
 void rt_aeabi_memclr(void *destination, u32 size);
 
@@ -165,7 +163,7 @@ void campCecEditCreate(u8 openMode)
 
     edit->unk5C = (u32)spriteHandleCreate(0);
     uiObjectSetColorRgb(edit->unk5C, 0xffffffff);
-    positionStateSet(edit->unk5C, 0, 0x646464ff, 0.0f);
+    positionStateSet((AsdText *)edit->unk5C, 0, 0x646464ff, 0.0f);
     sysPlaySe(0xb3);
 
     for (s32 i = 0; i < 2; i++) {

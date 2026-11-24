@@ -23,7 +23,7 @@ void FUN_002b659c(s32 x, s32 y, s32 width, s32 height);
 void textureLoadOptionalDemonModel(s32 portrait, s32 x, s32 y, s32 depth, s32 mode);
 void FUN_002b64b8(void);
 void drawSetColorFromRGBA8(u32 color);
-void FUN_002bdf94(s32 layer, s32 x, s32 y, s32 z, s32 scale, s32 depth, const char *format, ...);
+void textDrawFormattedAligned(s32 layer, s32 x, s32 y, s32 z, s32 scale, s32 depth, const char *format, ...);
 void asdTextSetBaseColor(void *text, u32 color);
 void itemDrawCategoryBadge(s32 skill, s32 x, s32 y, s32 depth, s32 mode);
 
@@ -81,7 +81,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
         sprintf(text, " %d", profile->level);
     }
     drawSetColorFromRGBA8(0);
-    FUN_002bdf94(0, position->x + x + offset, position->y + y, 0, 5, 0x73, text);
+    textDrawFormattedAligned(0, position->x + x + offset, position->y + y, 0, 5, 0x73, text);
     gxResetColorQuadToWhite();
     offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.32f);
     for (s32 index = 0; index < 8; ++index) {
@@ -164,7 +164,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
         sprintf(text, "%d", stats->specialValue);
     }
     drawSetColorFromRGBA8(valueColor);
-    FUN_002bdf94(0, x + offset + position->x, position->y + y, 0, 5, 0x74, text);
+    textDrawFormattedAligned(0, x + offset + position->x, position->y + y, 0, 5, 0x74, text);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderStackPop(g_titleScene->stacks + RENDER_STACK_A);

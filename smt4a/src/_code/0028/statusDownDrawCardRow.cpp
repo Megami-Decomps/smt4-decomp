@@ -15,7 +15,7 @@ extern "C" {
 
 s32 listCursorGetRowIfUnblocked(GridNavigation *cursor);
 s32 recordGetModeForId(s32 id);
-void FUN_00334c6c(s32 x, s32 y, s32 flag);
+void statusDownDrawPanelSkin(s32 x, s32 y, s32 flag);
 void efctSetSpeed(f32 alpha);
 s32 fontMeasureLineAdvance(u8 *text, s32 font);
 void statusDownDrawEndBanner(s32 x, s32 y, f32 alpha);
@@ -43,7 +43,7 @@ void statusDownDrawCardRow(s32 x, s32 y, f32 alpha)
             special = 1;
             color = 0xF5FF9FFF;
         }
-        FUN_00334c6c(banner->x + x, banner->y + y, special);
+        statusDownDrawPanelSkin(banner->x + x, banner->y + y, special);
         efctSetSpeed(alpha);
         char text[36];
         __2sprintf(text, g_statusDownEndBannerText);

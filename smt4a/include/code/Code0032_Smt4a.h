@@ -6,6 +6,6 @@
 extern "C" {
 
 /* The twin of IV's mapDepartSpawnPlayerEffect. */
-void FUN_00324e38(s32 variant);
+void mapDepartSpawnPlayerEffect(s32 variant);
 
 } /* extern "C" */

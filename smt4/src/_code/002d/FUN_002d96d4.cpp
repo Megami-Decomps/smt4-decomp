@@ -22,7 +22,7 @@ void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int fontMeasureLineAdvance(...);
 int nkmBaseGetRecord(void);
 int demonGetRaceLabel(...);
-int FUN_002bdf94(...);
+int textDrawFormattedAligned(...);
 int drawSetColorFromRGBA8(...);
 int textDrawString(...);
 int gxResetColorQuadToWhite(void);
@@ -91,7 +91,7 @@ extern int listCursorGetRowIfUnblocked(unsigned int *);
 /* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: demonGetRaceLabel. */
 /* Supplied declaration required: FUN_002bd068. */
-/* Supplied declaration required: FUN_002bdf94. */
+/* Supplied declaration required: textDrawFormattedAligned. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
@@ -176,7 +176,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
     textDrawString(2,0xffffffff,temp_v20);
     temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x4c));
     temp_v5 = fusionPlayerLevelCapGet();
-    FUN_002bdf94(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v4 + 8),
+    textDrawFormattedAligned(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v4 + 8),
                  *(short *)(temp_v4 + 10) + param_2,1,2,0x65,"%d",temp_v5);
     if (*(char *)(temp_v3 + 0x34) != '\0') {
       temp_v22 = (unsigned int *)resourceRunOperationIfUnblocked(temp_v21);
@@ -249,7 +249,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             textDrawString(2,temp_v24,temp_v20,(int)*(short *)(temp_v13 + 8));
             temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0xf7));
             drawSetColorFromRGBA8(temp_v5);
-            FUN_002bdf94(0,(int)&param_1->field_0x0 +
+            textDrawFormattedAligned(0,(int)&param_1->field_0x0 +
                            (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v13 + 8),
                          (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v13 + 10) + param_2,1,2,
                          0x6f,"%d",*(unsigned char *)((int)psVar8 + 3));
@@ -399,7 +399,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
         textDrawString(3,temp_v9,temp_v20,(int)*(short *)(temp_v4 + 8));
         temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0xfd));
         drawSetColorFromRGBA8(temp_v5);
-        FUN_002bdf94(0,(int)&param_1->field_0x0 +
+        textDrawFormattedAligned(0,(int)&param_1->field_0x0 +
                        (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8),
                      (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,1,2,0x83,
                      "%d",*(unsigned char *)((int)psVar8 + 3));
@@ -582,7 +582,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           textDrawString(2,0xffffffff,temp_v20,(int)*(short *)(temp_v7 + 8));
           temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0xdf));
           drawSetColorFromRGBA8(temp_v9);
-          FUN_002bdf94(0,(int)&param_1->field_0x0 +
+          textDrawFormattedAligned(0,(int)&param_1->field_0x0 +
                          (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v7 + 8),
                        (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,1,2,0x6f
                        ,"%d",*(unsigned char *)((int)puVar10 + 3));

@@ -1,21 +1,25 @@
-/* NON_MATCHING: native sound vector argument matches retail call setup, but initial coordinate loads and float-add operands differ. */
+/* NON_MATCHING: the initial x/y loads are exchanged; all other instructions match. */
 #include "common.h"
 #include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 #include "shard/W5_W5Match7_SceneState.h"
-#include "shard/W5_W5Match4_BattleVectorTransition.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
 extern "C" {
 s32 randBetween(s32 minimum, s32 maximum);
-s32 soundActorStartOnFreeChannel(u32 sound, BattleVector3 position);
 
-// Scatter one of four event-kind sounds around the current map position.
+/* Scatters one of four event-kind sounds around the current map position. */
 void mapSpawnRandomEventKindEffect()
 {
-    BattleVector3 position = { g_lmapScene->pose.position.x, g_lmapScene->pose.position.y, g_lmapScene->pose.position.z };
-    position.x += randBetween(-20, 20);
-    position.z += randBetween(-20, 20);
-    u32 variant = randBetween(0, 100) & 3;
+    SoundActorQueuePosition position = {
+        g_lmapScene->pose.position.x, g_lmapScene->pose.position.y, g_lmapScene->pose.position.z
+    };
+    s32 displacement = randBetween(-20, 20);
+    position.x += displacement;
+    displacement = randBetween(-20, 20);
+    position.z += displacement;
+    s32 randomSlot = randBetween(0, 100);
+    u32 variant = randomSlot & 3;
     switch (g_gameState.selectedKind) {
     case 0:
         soundActorStartOnFreeChannel(variant + 0x10002ac, position);
@@ -37,4 +41,4 @@ void mapSpawnRandomEventKindEffect()
         return;
     }
 }
-}
+} /* extern "C" */

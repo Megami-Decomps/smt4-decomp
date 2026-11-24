@@ -112,7 +112,7 @@ void FUN_003c4ac4(DebugMenu *menu, DebugBattle *battle);
 void FUN_003c4f38(DebugMenu *menu);
 void FUN_003c56d8(DebugMenu *menu, DebugBattle *battle);
 void FUN_003c5eb0(DebugMenu *menu, DebugBattle *battle);
-void FUN_003c5ffc(DebugMenu *menu, DebugBattle *battle, u32 item);
+void btlDebugApplyAttackCameraMenuEdit(DebugMenu *menu, DebugBattle *battle, u32 item);
 void btlCameraDebugApplyMenuItem(DebugMenu *menu, DebugBattle *battle, u32 item);
 void btlDebugCreateUnitMenu(DebugMenu *menu, DebugBattle *battle);
 void btlDebugCreateStageMenu(DebugMenu *menu, DebugBattle *battle);
@@ -376,7 +376,7 @@ u32 btlDebugMenuUpdate(DebugMenu *menu, DebugBattle *battle)
             if (menu->cameraKind == 1)
                 btlCameraDebugApplyMenuItem(menu, battle, item);
         } else {
-            FUN_003c5ffc(menu, battle, item);
+            btlDebugApplyAttackCameraMenuEdit(menu, battle, item);
         }
         if (padIsButtonPressed(0) == 0) {
             if (padIsButtonPressed(1) == 0)

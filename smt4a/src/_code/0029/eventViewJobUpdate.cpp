@@ -2,6 +2,7 @@
  * for the in-range result, as the macro does. */
 #include <stdio.h>
 #include "event/EventScriptJob.h"
+#include "event/EventCompletion.h"
 #include "addon/aocMain.h"
 #include "addon/AocSystemA.h"
 #include "addon/AocDrawText.h"
@@ -43,7 +44,6 @@ void eventTexReleaseJobs(void);
 void eventCommandStop(void);
 void eventOpeningResetValidJob(void);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
-u32 eventScriptFindCompletionFlag(u32 eventId, const ScriptVmLabel *entry);
 u32 padButtonIsPressed(u32 button);
 s32 flagBrowserStep(void);
 u32 asdLoadFileExists(const char *path);

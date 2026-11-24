@@ -1,5 +1,6 @@
 #include "shard/W6_W6Match2_EmitterResources.h"
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
+#include "AsdSDK/Source/Gfx/Effect/EffectBehaviorBlock.h"
 #include "util/MemoryHelpers.h"
 
 struct EmitterHeader {
@@ -18,7 +19,6 @@ extern "C" {
 s32 resourceResolveDataPointer(EmitterResource *resource);
 EmitterHeader *resourceResolveHeaderPointer(EmitterResource *resource);
 void polygonTrackRebuildResources(ResourceEmitter *emitter, u32 id, const EmitterArguments *arguments);
-void *effBehaviorCreate(u16 id, u32 key, void *data);
 void effEmitterReplaceResourceByKind(ResourceEmitter *owner, u32 kind, const u32 *resource);
 
 static inline void replaceEmitterBuffer(ResourceEmitter *emitter, u32 kind, void *data)

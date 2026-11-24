@@ -1,11 +1,11 @@
 #include "battle/BtlMainAccess.h"
+#include "battle/BattleHelpers_Smt4a.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
-s32 btlCombatantMatchesCategory(BtlCombatantEntryA *entry, u32 value);
 
 /* Script check: report whether a candidate battle entry with demon id argument 0 passes btlCombatantMatchesCategory with argument 1. */
 u32 FUN_003b0d84(void)

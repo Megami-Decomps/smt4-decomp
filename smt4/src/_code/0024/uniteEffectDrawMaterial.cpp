@@ -13,7 +13,7 @@ void textureLoadOptionalDemonModel(s32 id, s32 x, s32 y, u32 layer, s32 mapped);
 int gxSetMirroredClippedScissor(...);
 int fontMeasureLineAdvance(...);
 int nkmBaseGetRecord(void);
-int FUN_002bdf94(...);
+int textDrawFormattedAligned(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
@@ -40,7 +40,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: nkmBaseGetRecord. */
 extern unsigned int demonGetRaceLabel(short, unsigned int);
-/* Supplied declaration required: FUN_002bdf94. */
+/* Supplied declaration required: textDrawFormattedAligned. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -177,7 +177,7 @@ void uniteEffectDrawMaterial(int param_1,int param_2,int param_3)
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xffffffff,temp_v12,(int)*(short *)(temp_v3 + 8));
     temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0xdf));
-    FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
+    textDrawFormattedAligned(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,1,2,0x6f,
                  "%d",*(unsigned short *)(temp_v14 + 0x16));
     if (temp_v15 != 0) {

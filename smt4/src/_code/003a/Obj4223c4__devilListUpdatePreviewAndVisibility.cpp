@@ -34,7 +34,7 @@ void uiOwnerUpdateAnimationChannels(DevilListWork *work);
 void unitInitializeFromSavedRecord(u16 id, void *record);
 void FUN_0029da34(s32 screen, s32 mode, u16 id, const void *record);
 void *partyMemberFindById(u16 id);
-void FUN_003a72a4(DevilListWork *work);
+void bibleDevilUpdatePreviewInput(DevilListWork *work);
 void FUN_003a6f80(DevilListWork *work);
 void FUN_003a8450(DevilListWork *work);
 void devilListUpdatePreview(DevilListWork *work);
@@ -51,7 +51,7 @@ void Obj4223c4::devilListUpdatePreviewAndVisibility()
     DevilListWork *work = reinterpret_cast<DevilListWork *>(this);
     DevilListEntry *entries = work->entries;
     if (step == 9) {
-        FUN_003a72a4(work);
+        bibleDevilUpdatePreviewInput(work);
     } else if (step == 2) {
 
         u16 rawPrevious = entries[flaggedValueHolderGetTotal(work->cursor)].id;

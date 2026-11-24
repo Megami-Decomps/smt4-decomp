@@ -1,7 +1,5 @@
-/* NON_MATCHING: only the -1 store / context test block differs: retail materialises -1 in r1 and loads the context into
- * r0 after the store (the build loads it first into r1). A memset of unkc0 to 0xFF matches, but unkc0's type is unknown
- * (one word as far as any user shows), so the bytewise clear would be chosen for the schedule alone (rejected in the
- * wave 76 review, with btlStageDestroy, whose teardown is the same). */
+/* NON_MATCHING: only the -1 store differs: retail uses r1, this build r0. The field is written as a word;
+ * there is no evidence for a bytewise clear (which would match). */
 #include "nn/os/WaitObject.h"
 #include "shard/W6_W6Match1_BattleStageModel.h"
 #include "battle/BtlStageStackRegion.h"
@@ -38,7 +36,7 @@ void btlStageModelRelease(BattleStageModel *stage)
         stage->threadStack = NULL;
     }
     stage->unkc0 = -1;
-    if (stage->context != NULL) {
+    if (void *context = stage->context) {
         stage->context = NULL;
     }
     FUN_002759bc();

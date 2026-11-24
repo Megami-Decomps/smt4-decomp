@@ -1,4 +1,4 @@
-/* NON_MATCHING: all resource/texture releases match; only the memorySlot store computes r4 = work + 0x5d8 (two adds) instead of retail's `mov r4, r5; str r6, [r4, #1496]`. */
+/* NON_MATCHING: all resource/texture releases match; only the text pointer store computes r4 = work + 0x5d8 (two adds) instead of retail's `mov r4, r5; str r6, [r4, #1496]`. */
 #include "AsdSDK/AsdMemUtil.h"
 #include "gfx/SecondaryResourceWork.h"
 #include "shard/W5_W5Match7_ResourceHandles.h"
@@ -27,8 +27,8 @@ void newHighwayInfoDestroy(void)
     for (s32 i = 0; i < work->touchRegionCount; i++) {
         ifTouchRegionRemove();
     }
-    asdMemFreeSlot(reinterpret_cast<void **>(work->memorySlot));
-    work->memorySlot = 0;
+    asdMemFreeSlot((void **)work->text);
+    work->text = NULL;
     for (s32 i = 0; i < 2; i++) {
         asdTMTexTableReleaseNode(0x31, i);
     }

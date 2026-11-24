@@ -1,52 +1,50 @@
-/* NON_MATCHING: allocation arithmetic, store order and the vector reset match retail; only registers differ around the block pointer stores (retail reuses r1 for the initial-parameters pointer and delays `mov fp, #0`). */
-#include "AsdSDK/Source/Gfx/Effect/EffectBehaviorBlock.h"
+#include <string.h>
 #include "AsdSDK/AsdDebug.h"
-
-/* Resets a vector to (0, 0, 0, 1). */
-static __inline void behaviorVectorSetIdentity(EffectBehaviorVector *vector)
-{
-    EffectBehaviorVector zero = {0, 0, 0, 0};
-    *vector = zero;
-    vector->w = 1.0f;
-}
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Gfx/Effect/EffectBehaviorBlock.h"
 
 extern "C" {
 extern EffectBehaviorType g_effBehaviorTable[];
 extern const char DAT_004148c8[];
-void *memAlloc(u32, u32, u32, u32, u32, u32);
-void *__aeabi_memcpy(void *, const void *, u32);
 
-EffectBehaviorBlock *effBehaviorCreate(s32 type, s32 count, const EffectBehaviorParameters *parameters)
+/* Allocates one behavior and lays out its elements, parameter copies and workspace. */
+EffectBehaviorBlock *effBehaviorCreate(u16 type, s32 count, const void *resource)
 {
-    u32 parameterSize = g_effBehaviorTable[type].parameterSize;
-    s32 elementCount = count * (parameters->rows * parameters->columns) + count;
-    u32 elementsSize = elementCount * 0x28;
-    u32 elementsBytes = g_effBehaviorTable[type].elementSize * count;
-    u32 allocationSize = elementsBytes + elementsSize + parameterSize * 2 + sizeof(EffectBehaviorBlock);
+    const EffectBehaviorParameters *header = (const EffectBehaviorParameters *)resource;
+    s32 parameterSize = g_effBehaviorTable[type].parameterSize;
+    s32 valueCount = count * (header->rows * header->columns) + count;
+    s32 valueBytes = valueCount * 0x28;
+    s32 elementBytes = g_effBehaviorTable[type].elementSize * count;
+    s32 size = elementBytes + valueBytes + parameterSize * 2 + sizeof(EffectBehaviorBlock);
     asdDebugTrace(DAT_004148c8, 4032);
-    EffectBehaviorBlock *block = static_cast<EffectBehaviorBlock *>(memAlloc(0x10000, 0x100, 0, allocationSize, 16, 1));
-    u8 *storage = reinterpret_cast<u8 *>(block + 1);
-    EffectBehaviorParameters *copy = reinterpret_cast<EffectBehaviorParameters *>(storage + elementsSize);
-    block->elements = storage;
-    block->initialParameters = reinterpret_cast<EffectBehaviorParameters *>(reinterpret_cast<u8 *>(copy) + parameterSize);
-    block->parameters = copy;
-    block->workspace = reinterpret_cast<u8 *>(block->initialParameters) + parameterSize;
-    block->type = type;
-    block->count = count;
-    block->elementCount = elementCount;
-    block->flags = 0;
-    block->state = 0;
-    block->elapsed = 0.0f;
-    block->owner = block;
-    __aeabi_memcpy(copy, parameters, parameterSize);
-    __aeabi_memcpy(block->initialParameters, parameters, parameterSize);
-    EffectBehaviorParameters *current = block->parameters;
-    behaviorVectorSetIdentity(&current->vectors[0]);
-    behaviorVectorSetIdentity(&current->vectors[1]);
-    if (current->enabled)
-        block->flags |= 1;
-    if (type == 12 || type == 13)
-        block->flags |= 2;
-    return block;
+    EffectBehaviorBlock *behavior = (EffectBehaviorBlock *)memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
+    u8 *storage = (u8 *)(behavior + 1);
+    behavior->elements = storage;
+    storage += valueBytes;
+    EffectBehaviorParameters *parameters = (EffectBehaviorParameters *)storage;
+    behavior->parameters = parameters;
+    storage += parameterSize;
+    behavior->initialParameters = (EffectBehaviorParameters *)storage;
+    storage += parameterSize;
+    behavior->workspace = storage;
+    behavior->type = type;
+    behavior->count = count;
+    behavior->elementCount = valueCount;
+    behavior->flags = 0;
+    behavior->state = 0;
+    behavior->elapsed = 0.0f;
+    behavior->owner = behavior;
+    memcpy(parameters, resource, parameterSize);
+    memcpy(behavior->initialParameters, resource, parameterSize);
+    parameters = behavior->parameters;
+    behaviorVectorSetIdentity(&parameters->vectors[0]);
+    behaviorVectorSetIdentity(&parameters->vectors[1]);
+    if (parameters->enabled != 0) {
+        behavior->flags |= 1;
+    }
+    if (type == 12 || type == 13) {
+        behavior->flags |= 2;
+    }
+    return behavior;
 }
-}
+} /* extern "C" */

@@ -21,7 +21,7 @@ struct FusionRaceSelection {
     /* 0x148 */ s8 hasDevil;
     /* 0x149 */ u8 unk149;
     /* 0x14A */ u16 devilId;
-    /* 0x14C */ u8 hasRace;
+    /* 0x14C */ s8 hasRace;
     /* 0x14D */ u8 unk14d;
     /* 0x14E */ u16 race;
     /* 0x150 */ u8 mode;
@@ -38,7 +38,7 @@ struct FusionRaceSelection {
     /* 0x170 */ s16 firstSelection;
     /* 0x172 */ s16 secondSelection;
     /* 0x174 */ u8 unk174[6];
-    /* 0x17A */ u8 includeSameRace;
+    /* 0x17A */ s8 includeSameRace;
     /* 0x17B */ u8 unk17b;
     /* 0x17C */ u8 unk17c[0x38];
     /* 0x1B4 */ u8 unk1b4;

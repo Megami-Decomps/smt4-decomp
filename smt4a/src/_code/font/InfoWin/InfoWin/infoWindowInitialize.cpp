@@ -4,6 +4,8 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "code/Code0015_Smt4a.h"
+#include "AsdSDK/Source/Gfx/Text/AsdTextA.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct InfoWindowParameterDefaults {
     u32 primary[18];
@@ -20,14 +22,11 @@ static const InfoWindowParameterDefaults g_infoWindowParameterDefaults = {
     {0, 0x3F800000, 8, 0x3F333333, 0, 8}
 };
 extern "C" {
-void* asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 void sysMemClear(void* memory, u32 size);
 void FUN_00156478(void);
 void paramsClearPacket(UiResourceParameters* parameters);
 
-void* spriteHandleCreate(u32 flags);
 void uiObjectSetColorRgb(void* sprite, s32 value);
-void positionStateSet(void* sprite, u32 first, u32 second, f32 scale);
 
 void infoWindowInitialize(void)
 {
@@ -53,7 +52,7 @@ void infoWindowInitialize(void)
     uiSpriteSetImageKeyframe(&window->content, 0, 0);
     window->text = spriteHandleCreate(0);
     uiObjectSetColorRgb(window->text, -1);
-    positionStateSet(window->text, 0, 0x646464FF, 0.0f);
+    positionStateSet((AsdText *)window->text, 0, 0x646464FF, 0.0f);
     window->timer = 30;
     window->active = 0;
     window->argA = 0;

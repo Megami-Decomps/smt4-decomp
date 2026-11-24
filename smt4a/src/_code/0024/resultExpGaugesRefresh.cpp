@@ -2,7 +2,14 @@
  * loop retail moves `needed` before it loads `maxed` and shifts the experience through r2 (this build: the load
  * first, r3), and in the stock-slot loop it loads the experience with two `ldr` where this build uses `ldrd`.
  * The u64-to-gauge conversion is the IV twin's `expWholePart(u64)`, a plain `static` there; here the plain form
- * scores 50 and `static __inline` 37. Open-coding it at two of the four sites scores 10 but has no reason. */
+ * scores 50 and `static __inline` 37. Open-coding it at two of the four sites scores 10 but has no reason.
+ * Wave 91: all fifteen open-coded subsets were scored as a diagnostic and show no per-site rule (reserve[] and
+ * stock: 10, reserve[] and party[]: 14, reserve[] alone: 26, all four: 50, the same as the plain `static`; the
+ * rest 34-59); the best one still has the party[] loop's `needed` move. The helper taking `const u64 &`, a
+ * pointer or the entry scores 39 by shape inline and 40 plain; returning the shifted u64 28 inline and 58 plain;
+ * a ratio helper `(f32)(exp >> 12) / (f32)needed` 77 here and breaks the IV twin (IDENTICAL -> 39); a u32
+ * `needed` 175; an entry pointer in the stock loop 93. Separate icon variables for the party[] and stock loops
+ * change nothing. */
 #include "common.h"
 #include "sys/RuntimeObjects.h"
 #include "gamedata/GamePlayerData.h"

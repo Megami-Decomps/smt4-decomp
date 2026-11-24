@@ -1,7 +1,6 @@
-/* NON_MATCHING: the cleared flags word takes r1 and the state constant r0 is set before the flag store; retail clears the flags in r0 and loads 17 after storing it (w86 review: flagsSetBits/flagsClearBits match it too, but no twin of the pair agrees, so the plain operator stays). */
 #include "shard/Shard0046.h"
 #include "gamedata/GameFlags.h"
-#include "shard/W6_W6Match7_QuestInteraction.h"
+#include "classes/Obj5333c0.h"
 #include "code/Code0037.h"
 #include "code/Code003a.h"
 #include "code/Code002c_Smt4a.h"
@@ -12,14 +11,13 @@ void messageSetMode(s32 mode);
 void placeWinStartText(const u8 *name);
 void messageBannerRestartOrClear(void);
 
-s32 pickObjStart(QuestInteraction *object, const char *entry);
 Entry40 *dataTable28Type0GetEntry(u32 unused, u32 index);
 u8 gameFlagIsSet(u32 flag);
 u32 messageWindowIsState1(void);
 
 /* Starts the interaction's next script: the quest announcement, the active quest's talk or the entry's confirmation;
  * a non-interactive entry ends in state 17. */
-void questInteractionChooseEntry(QuestInteraction *object)
+void questInteractionChooseEntry(Obj5333c0 *object)
 {
     FUN_003a7630(1);
     s32 activeQuest = 0;
@@ -31,45 +29,41 @@ void questInteractionChooseEntry(QuestInteraction *object)
     }
     u32 specialAvailable = 0;
     u32 announced = gameFlagIsSet(0x586);
-    if (activeQuest == 6 && object->interactive != 0) {
+    if (activeQuest == 6 && object->location != 0) {
         if (object->kind != 14) {
             specialAvailable = 1;
         }
         gameFlagSetValue(0x586, 1, 1);
     }
-    if ((specialAvailable & ~announced) != 0 && object->interactive != 0) {
+    if ((specialAvailable & ~announced) != 0 && object->location != 0) {
         messageMainClearBannerRequest();
         messageSetMode(1);
         pickObjStart(object, "qc_total_quest_ann");
         object->scriptActive = 1;
-        object->state = 14;
-        object->counter = 0;
+        object->startState(14);
         return;
     }
-    if (activeQuest > 0 && specialAvailable == 0 && object->interactive != 0) {
+    if (activeQuest > 0 && specialAvailable == 0 && object->location != 0) {
         messageMainClearBannerRequest();
         messageSetMode(1);
         pickObjStart(object, "qc_total_quest");
         object->scriptActive = 1;
-        object->state = 14;
-        object->counter = 0;
+        object->startState(14);
         return;
     }
-    Entry40 *entry = dataTable28Type0GetEntry(reinterpret_cast<u32>(&object->entryToken), object->kind);
+    Entry40 *entry = dataTable28Type0GetEntry((u32)&object->talkTable, object->kind);
     placeWinStartText(entry->data);
-    if (object->interactive != 0) {
+    if (object->location != 0) {
         messageMainRequestBanner();
         pickObjStart(object, "qc_confirm");
-        object->state = 6;
-        object->counter = 0;
+        object->startState(6);
         return;
     }
     FUN_0037d6e4(0);
-    object->flags &= ~0x200u;
-    object->counter = 0;
-    object->state = 17;
+    object->clearFlags(0x200);
+    object->startState(17);
     if (messageWindowIsState1() != 0) {
         messageBannerRestartOrClear();
     }
 }
-}
+} /* extern "C" */

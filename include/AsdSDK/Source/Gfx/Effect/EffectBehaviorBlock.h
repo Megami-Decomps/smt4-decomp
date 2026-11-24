@@ -4,6 +4,14 @@
 #include <stddef.h>
 
 struct EffectBehaviorVector { f32 x, y, z, w; };
+
+/* Resets a homogeneous position to the origin. */
+static __inline void behaviorVectorSetIdentity(EffectBehaviorVector *vector)
+{
+    EffectBehaviorVector zero = {0, 0, 0, 0};
+    *vector = zero;
+    vector->w = 1.0f;
+}
 /* The parameters every behavior type's block starts with (0xC8 bytes); each type's own parameters
  * follow (parameterSize in its EffectBehaviorType). The unkNN floats are lengths every type's scale
  * callback multiplies by the effect's scale. */
@@ -49,6 +57,10 @@ struct EffectBehaviorBlock {
     EffectBehaviorBlock *owner;
     u32 unk2C;
 };
+
+/* Creates a behavior from its variable-size parameter record in the effect resource. */
+extern "C" EffectBehaviorBlock *effBehaviorCreate(u16 type, s32 count, const void *resource);
+
 /* Behavior type 3's parameters (parameterSize 0xF4). */
 struct EffectBehaviorParameters3 {
     /* 0x00 */ EffectBehaviorParameters common;

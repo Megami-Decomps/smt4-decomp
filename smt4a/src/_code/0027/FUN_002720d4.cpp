@@ -1,6 +1,7 @@
 /* NON_MATCHING: Particle allocation argument scheduling, saved registers, and resource-ID zero extension differ. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/Effect/EffectBehaviorBlock.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
@@ -9,8 +10,6 @@ void *memAlloc(u32 pool, u32 category, u32 options, u32 size,
                u32 alignment, u32 count);
 void rt_memclr(void *destination, u32 size);
 void objectBufferFree(void *buffer);
-void *effBehaviorCreate(u16 kind, u32 count,
-                    ParticleCapacityPrefixA *definition);
 void *effGeomCloneHandle(void *source);
 void effParticleParamCopy(ParticleInstanceA *destination,
                           ParticleSourcePrefixA *source);

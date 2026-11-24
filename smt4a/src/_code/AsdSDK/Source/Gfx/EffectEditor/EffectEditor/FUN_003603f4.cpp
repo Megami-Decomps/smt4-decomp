@@ -12,7 +12,7 @@ int FUN_0027134c(int, float *);
 int FUN_002fe2e8(int, float *);
 int FUN_00321d7c(...);
 int FUN_00321e98(...);
-int FUN_00375c74(int, int, char [4], int *);
+int effComputeParticleEmission(int, int, char [4], int *);
 int randomAdvanceShiftRegister(...);
 int shiftRandomNextFraction(...);
 int matrixCopySelectedToGlobal(...);
@@ -97,7 +97,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_002fe2e8. */
 /* Supplied declaration required: FUN_00321d7c. */
 /* Supplied declaration required: FUN_00321e98. */
-/* Supplied declaration required: FUN_00375c74. */
+/* Supplied declaration required: effComputeParticleEmission. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: shiftRandomNextFraction. */
 /* Supplied declaration required: matrixCopySelectedToGlobal. */
@@ -182,7 +182,7 @@ void FUN_003603f4(int param_1)
     temp_v24 = *(float *)(temp_v6 + 0xfc);
     temp_v25 = *(unsigned long long *)(temp_v6 + 0x100);
     gfxQuaternionWorkspaceBuildMatrix();
-    FUN_00375c74(temp_v43,temp_v6,temp_v40,&temp_v39);
+    effComputeParticleEmission(temp_v43,temp_v6,temp_v40,&temp_v39);
     if (temp_v8 != 0) {
       in_d15 = romwright_piece_4_4(0x3f800000,(int)in_d15);
     }

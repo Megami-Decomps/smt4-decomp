@@ -16,7 +16,7 @@ int FUN_004e05d4(...);
 int FUN_004e1354(...);
 int FUN_004e15fc(int *, unsigned int *, int, unsigned int);
 int btlAiChooseRandomSkill(...);
-int FUN_004e7418(...);
+int btlStartSkillAction(...);
 int FUN_004e7e08(...);
 int FUN_004eb740(...);
 int FUN_004eb838(...);
@@ -72,7 +72,7 @@ extern int *battleActionSnapshotCommand(int *, unsigned int *, int, unsigned int
 /* Supplied declaration required: FUN_004e1354. */
 /* Supplied declaration required: FUN_004e15fc. */
 /* Supplied declaration required: btlAiChooseRandomSkill. */
-/* Supplied declaration required: FUN_004e7418. */
+/* Supplied declaration required: btlStartSkillAction. */
 /* Supplied declaration required: FUN_004e7e08. */
 /* Supplied declaration required: FUN_004eb740. */
 /* Supplied declaration required: FUN_004eb838. */
@@ -257,7 +257,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     piVar3 = (int *)battleActionSnapshotCommand(param_1,puVar9,temp_v6,param_4);
     return piVar3;
   case 0x1e:
-    FUN_004e7418(param_1,puVar9,temp_v6,param_4);
+    btlStartSkillAction(param_1,puVar9,temp_v6,param_4);
     return param_1;
   case 0x1f:
     FUN_004e0314(param_1,puVar9,temp_v6,param_4);

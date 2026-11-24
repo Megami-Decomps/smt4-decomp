@@ -12,7 +12,7 @@ void menuStateStartSelect(u8 selection)
     MenuState *menu = g_menuState;
 
     menu->unk12 = selection;
-    menu->unk2bc = 0;
+    menu->animationPhase = 0;
     if (menu->type != 6) {
         menu->mode = 1;
         uiSpriteSelectAnim(&menu->primarySprites[0], 0);
@@ -21,7 +21,7 @@ void menuStateStartSelect(u8 selection)
     menu->mode = 5;
     uiSpriteSelectAnim(&menu->primarySprites[0], 0);
     uiSpriteSelectAnim(&menu->secondarySprites[0], 3);
-    menu->unk2c8 = menu->unk2c0;
+    menu->currentPanelValue = menu->unk2c0;
 }
 
 } /* extern "C" */

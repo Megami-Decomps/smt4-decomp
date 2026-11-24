@@ -1,7 +1,17 @@
 /* NON_MATCHING: 40 rows, all in three calls of the weapon and gun cases (the attack value at 0x518, the gun's
  * attack value at 0x535 and its target text at 0x536): retail loads and sums the row and part coordinates in
  * another order and through other scratch registers. Every site is written `row + part + x` (no per-site order
- * picked by score). Everything else agrees, including the item id's spill to the parameter save area. */
+ * picked by score). Everything else agrees, including the item id's spill to the parameter save area.
+ * Wave 91: the sum has only two distinct forms: armcc sorts its operands, so the twelve orders and groupings of
+ * row, part and x give 40 lines (row before part) or 100 (part before row) wherever x stands; inline x/y getters
+ * compile like the fields. Named px/py locals per call score 253 or more, a non-const `layer` 105. At the two
+ * attack values the stack arguments leave a constant in r0 (the layer, the column count) and retail's first
+ * halfword avoids r0 where this build's takes it; at the gun's target text retail loads the part's x into ip and
+ * finishes the y sum before the x sum. Scoring all 64 per-site orders of the three sites (a diagnostic, not a
+ * candidate) gives 40 at best: the order is not the cause.
+ * The layer as a by-value int/float word (textDrawFormattedAligned keeps that argument in s16) scores 113 or more.
+ * Retail's weapon attribute text and gun target text are the same instructions; this build matches the first
+ * and not the second from the same source line, so the cause is allocation state, not that line. */
 #include <stdio.h>
 #include "camp/CampEquipment.h"
 #include "gamedata/GamePlayerData.h"
@@ -14,7 +24,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTableEntry.h"
 
 extern "C" {
-void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 columns, u32 layer, const char *format, ...);
+void textDrawFormattedAligned(u32 font, s32 x, s32 y, u32 align, u32 columns, u32 layer, const char *format, ...);
 void drawSetColorFromRGBA8(u32 packed);
 u8 *dataFindKindRecordWithAocOverrides(u32 id, s32 payload);
 u32 recordAcceptsStickDirection(s32 id);
@@ -59,7 +69,7 @@ extern "C" void equipListDrawRowDetails(s32 category, s32 row, u32 itemId, s32 x
     part = asdTMTexTableEntryAt(texture, 0x520);
     sprintf(text, "%d", flagValueRead(itemId));
     drawSetColorFromRGBA8(0xFF);
-    FUN_002bdf94(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 2, layer, text);
+    textDrawFormattedAligned(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 2, layer, text);
     gxResetColorQuadToWhite();
     part = asdTMTexTableEntryAt(texture, 0x513);
     BadgeWord equippedFlag;
@@ -82,7 +92,7 @@ extern "C" void equipListDrawRowDetails(s32 category, s32 row, u32 itemId, s32 x
         setStatComparisonColor(item->traitBits.group, equippedAttack);
         part = asdTMTexTableEntryAt(texture, 0x518);
         sprintf(text, "%d", item->traitBits.group);
-        FUN_002bdf94(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 4, layer, text);
+        textDrawFormattedAligned(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 4, layer, text);
         gxResetColorQuadToWhite();
 
         // These Shift-JIS strings are the weapon's attack attributes.
@@ -123,7 +133,7 @@ extern "C" void equipListDrawRowDetails(s32 category, s32 row, u32 itemId, s32 x
         setStatComparisonColor(item->traitBits.group, equippedAttack);
         part = asdTMTexTableEntryAt(texture, 0x535);
         sprintf(text, "%d", item->traitBits.group);
-        FUN_002bdf94(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 4, layer, text);
+        textDrawFormattedAligned(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 4, layer, text);
         gxResetColorQuadToWhite();
 
         // The gun's target range.
@@ -142,7 +152,7 @@ extern "C" void equipListDrawRowDetails(s32 category, s32 row, u32 itemId, s32 x
             sprintf(text, "%d-%d", hitRange & 15, hitRange >> 4);
         drawSetColorFromRGBA8(0xFF);
         part = asdTMTexTableEntryAt(texture, 0x539);
-        FUN_002bdf94(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 3, layer, text);
+        textDrawFormattedAligned(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 3, layer, text);
         gxResetColorQuadToWhite();
         break;
     }
@@ -171,13 +181,13 @@ extern "C" void equipListDrawRowDetails(s32 category, s32 row, u32 itemId, s32 x
         setStatComparisonColor(item->hpBonus, equippedHp);
         part = asdTMTexTableEntryAt(texture, 0x54F);
         sprintf(text, "%d", item->hpBonus);
-        FUN_002bdf94(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 5, layer, text);
+        textDrawFormattedAligned(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 5, layer, text);
         gxResetColorQuadToWhite();
         drawSetColorFromRGBA8(0xFF);
         setStatComparisonColor(item->mpBonus, equippedMp);
         part = asdTMTexTableEntryAt(texture, 0x554);
         sprintf(text, "%d", item->mpBonus);
-        FUN_002bdf94(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 5, layer, text);
+        textDrawFormattedAligned(0, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 1, 5, layer, text);
         gxResetColorQuadToWhite();
         break;
     }

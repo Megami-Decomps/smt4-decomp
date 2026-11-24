@@ -44,7 +44,11 @@ typedef char SaveSlotRowLayoutCheck[sizeof(SaveSlotRecord) == 0x80 && offsetof(S
     offsetof(SaveSlotRecord, owned) == 0x6B && offsetof(SaveSlotRecord, placeLevel) == 0x6C &&
     sizeof(SaveSlotRow) == 0x44 && offsetof(SaveSlotRow, frame) == 0x3C ? 1 : -1];
 
+struct SaveLoadTransitionValues;
+
 extern "C" {
+/* Draws the selected row's marker at an offset from the layout entry. */
+void saveSlotDrawSelectionMarker(const SaveLoadTransitionValues *marker, const TextureTableEntryIV *sprite);
 /* Draws the row's slot number badge. */
 void saveSlotRowDrawNumber(const SaveSlotRow *row, s32 value, const UiScaledDrawPosition *position, u32 color);
 /* Draws an empty slot's row. `selected` is passed and not used. */

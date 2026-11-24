@@ -15,6 +15,8 @@
 #include "status/StatusDownA.h"
 #include "ui/UiSpriteState.h"
 #include "ui/FloatTableLookup.h"
+#include "AsdSDK/Source/Gfx/Text/AsdTextA.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 /* Animation tables for paramsInit; the original file defined them statically. */
 static const UiSpritePositionKey sPositionKeys[] = {
@@ -71,14 +73,11 @@ static const SpriteAnimationCommand sCommands[] = {
 
 extern "C" {
 
-void *asdMemoryAllocTracked(u32 size, u32 alignment, u32 a, u32 b, u32 c);
 void sysMemClear(void *block, u32 size);
 u32 taskCreateDraw(const char *name, u32 priority, u32 a, u32 b, void (*draw)(void *), u32 c, u32 d, void *process);
 void paramsClearPacket(void *packet);
 
 void statusDownSetSpriteMode(s32 mode, s32 imageKey, s32 flag);
-AsdText *spriteHandleCreate(u32 kind);
-void positionStateSet(AsdText *text, u32 a, u32 color, f32 value);
 void FUN_00268770(void *process);
 void FUN_0026b0e4(void *process);
 

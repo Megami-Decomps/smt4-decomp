@@ -1,5 +1,6 @@
 /* NON_MATCHING: the list loop now matches retail's compact form; remaining: the mask tests' register choice (retail
    reads the flags with ldm into r4/ip and the second mask as two word loads, the build uses ldrd). */
+#include "battle/BattleHelpers_Smt4a.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 

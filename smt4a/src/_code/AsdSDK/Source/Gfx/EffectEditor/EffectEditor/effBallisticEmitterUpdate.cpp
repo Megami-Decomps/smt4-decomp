@@ -7,7 +7,7 @@ void gfxQuaternionWorkspaceBuildMatrix(void);
 f32 phaseCosine(f32 index);
 f32 phaseSine(f32 index);
 s32 FUN_0037a844(void);
-void FUN_00375c74(ParticleEmissionState *state, const ParticleEmissionDefinition *definition, u8 *burst, s32 *count,
+void effComputeParticleEmission(ParticleEmissionState *state, const ParticleEmissionDefinition *definition, u8 *burst, s32 *count,
                   f32 timeStep);
 void FUN_002fe2e8(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_0027134c(ParticleEmissionState *emitter, SpiralParticle *particle);
@@ -39,7 +39,7 @@ void effBallisticEmitterUpdate(ParticleEmissionState *emitter)
     u8 burst;
     s32 emitCount;
     Vector4 previous;
-    FUN_00375c74(emitter, (const ParticleEmissionDefinition *)definition, &burst, &emitCount, step);
+    effComputeParticleEmission(emitter, (const ParticleEmissionDefinition *)definition, &burst, &emitCount, step);
     if (count == 0) {
         return;
     }

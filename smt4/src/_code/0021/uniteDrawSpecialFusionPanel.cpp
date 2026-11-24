@@ -34,7 +34,7 @@
 extern "C" {
 
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
-void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *format, ...);
+void textDrawFormattedAligned(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *format, ...);
 void drawSetColorFromRGBA8(u32 packed);
 void gxSetMirroredClippedScissor(s32 x, s32 y, u32 width, s32 height, s32 useNarrowScreen);
 u8 ifTouchGetSelectionModeForRegion(int id);
@@ -119,7 +119,7 @@ void uniteDrawSpecialFusionPanel(s32 x, s32 y)
     textDrawString(part->x + x, part->y + y, 0.0f, 2, 0.0f, TEXT_ORANGE, 1.0f, text);
     part = asdTMTexTableEntryAt(UNITE_TEXTURES, 81);
     drawSetColorFromRGBA8(levelColor);
-    FUN_002bdf94(0, part->x + x, part->y + y, 1, 2, 111, "%d", demon->level);
+    textDrawFormattedAligned(0, part->x + x, part->y + y, 1, 2, 111, "%d", demon->level);
     gxResetColorQuadToWhite();
 
     /* the cursor on the result */
@@ -164,7 +164,7 @@ void uniteDrawSpecialFusionPanel(s32 x, s32 y)
     } else {
         drawSetColorFromRGBA8(TEXT_WHITE);
     }
-    FUN_002bdf94(0, part->x + x, part->y + y, 1, 8, 141, "%d", FUN_001ce224(&work->specialFusionIV.recipe));
+    textDrawFormattedAligned(0, part->x + x, part->y + y, 1, 8, 141, "%d", FUN_001ce224(&work->specialFusionIV.recipe));
     gxResetColorQuadToWhite();
 
     /* the ingredients */
@@ -200,7 +200,7 @@ void uniteDrawSpecialFusionPanel(s32 x, s32 y)
         /* the level: the owned or registered demon's, else the base level */
         part = asdTMTexTableEntryAt(UNITE_TEXTURES, 312);
         if (work->specialFusionIV.recipe.kinds[i] == 0) {
-            FUN_002bdf94(0, part->x + row->x + x, row->y + part->y + y, 1, 2, 141, "%d", ingredient->level);
+            textDrawFormattedAligned(0, part->x + row->x + x, row->y + part->y + y, 1, 2, 141, "%d", ingredient->level);
         } else {
             u16 level;
 
@@ -210,7 +210,7 @@ void uniteDrawSpecialFusionPanel(s32 x, s32 y)
             } else {
                 level = ((const StatBlock *)partyMemberFindById(ingredient->id))->level;
             }
-            FUN_002bdf94(0, row->x + part->x + x, row->y + part->y + y, 1, 2, 141, "%d", level);
+            textDrawFormattedAligned(0, row->x + part->x + x, row->y + part->y + y, 1, 2, 141, "%d", level);
         }
 
         part = asdTMTexTableEntryAt(UNITE_TEXTURES, 310);

@@ -142,7 +142,7 @@ s32 mapDepartUpdate(u32 job)
     case DEPART_STATE_RESULT:
         if (++work->counter == 1) {
             if (work->mode == 0) {
-                rewardDrawFromRecord(FUN_0025b670(g_gameState.recordId)->markBit, g_mapDepartState.depart.foundIds, g_mapDepartState.depart.foundIsNew,
+                rewardDrawFromRecord(msSearchGetRecordAt(g_gameState.recordId)->markBit, g_mapDepartState.depart.foundIds, g_mapDepartState.depart.foundIsNew,
                              &g_mapDepartState.depart.foundCount);
             } else {
                 g_mapDepartState.depart.foundIds[0] = work->entry;
@@ -240,7 +240,7 @@ s32 mapDepartUpdate(u32 job)
                     entrySetParams(work->map, 5, 0);
                     gameCounterAddSaturating(19, 1);
                 }
-                FUN_002f364c(FUN_0025b670(g_gameState.recordId)->markBit, 0);
+                FUN_002f364c(msSearchGetRecordAt(g_gameState.recordId)->markBit, 0);
                 mapDepartEnterState(work, DEPART_STATE_RESULT_END);
             }
         }

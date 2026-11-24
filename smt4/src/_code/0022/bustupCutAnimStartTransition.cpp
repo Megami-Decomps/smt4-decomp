@@ -1,4 +1,5 @@
-/* NON_MATCHING: 65 lines: retail reads the new id back before the side stores, hoists the camera block address
+/* NON_MATCHING: 59 lines: the split side and index are set together in each arm (as retail reads the new id back
+ * before the side stores). Left: retail hoists the camera block address
  * into fp before the dirty test, loads the two float constants in the other order, gives the new ref and node
  * lookups the other registers and stores the previous side and id with one stm; the flags are s8 (retail's split
  * +1280 base for the dirty flag), the ease switch, offsets, node refreshes and the out-of-line first start follow
@@ -108,11 +109,13 @@ void bustupCutAnimStartTransition(s32 id, s32 easeKind, s32 frames)
     anim->previousId = anim->id;
     anim->id = id;
     if (id != CUT_ID_SPECIAL) {
-        if (id < CUT_ID_SPLIT)
+        if (id < CUT_ID_SPLIT) {
             anim->side = 0;
-        else
+            anim->index = anim->id;
+        } else {
             anim->side = 1;
-        anim->index = id < CUT_ID_SPLIT ? anim->id : anim->id - CUT_ID_SPLIT;
+            anim->index = anim->id - CUT_ID_SPLIT;
+        }
     } else {
         anim->index = CUT_SPECIAL_INDEX;
         anim->side = 1;

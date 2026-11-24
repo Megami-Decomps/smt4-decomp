@@ -57,7 +57,7 @@ void rt_memclr(void* block, u32 size);
 void __aeabi_memset4(void* block, u32 size, s32 value);
 void playerUnitRecordInit(s32 kind, char* name, u16* look);
 void FUN_00334058(u32 id);
-u8 gameSlotFindByCategory(StatBlock* record);
+s32 gameSlotFindByCategory(StatBlock* record); // declcheck: local (gamedata/SaveSlotTableIV.h redefines this unit's slot structs)
 SlotTable* gameGetSlotTable(void);
 void *dataTableFileGetTable(void *file, s32 arg);
 const char* gameGetPlayerName(void);

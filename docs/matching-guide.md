@@ -718,6 +718,28 @@ asks for.
 - Two pop spellings in one function (`renderCtxPopCounted` for the inner pop, `renderStackPop` for the outer, both on
   `RENDER_STACK_A`) are the same operation chosen per site by score: rejected for smt4 `FUN_003844a0` and smt4a
   `btlGameOverDrawOverlay`/`FUN_004cf58c` (wave 83).
+  A third spelling of the same pop, `renderStackPopCounted(renderCtxStackAt(ctx, RENDER_STACK_A))` through a stack
+  accessor, makes those three and smt4a `FUN_0046a868` IDENTICAL, but written as `renderCtxPopCounted`'s body it
+  loses `guestWinDraw` (both games) and `runWinDraw`: rejected as a spelling chosen per unit (wave 91).
+- Not evidence (wave 91 review): a plain `static` helper whose only support is that it beats `static __inline` and
+  in-place code, without an out-of-line function with its body in retail. Apocalypse's `topicCreateProcess(name)`
+  (`asdProcessCreateSimple(name, 4, 0, 0, FUN_0035d080, NULL, 0)`) gives `partnerTopicCreate` IDENTICAL and
+  `newHighwayInfoCreate` 10 lines, `static __inline` 25/29, in place 8/29; no function in the image has that body,
+  so both creators call it in place.
+- Evidence (wave 91): retail copying the getter's result into another register before the store (`bl getSaveData;
+  mov r1, r0; ldr r0, [r4, #16]; strb r0, [r1, #3]`) is a plain `static` setter inlined late: IV's
+  `saveLoadWriteMetadataOption(GameSaveData *, u8)` (`gamedata/SaveLoadProcess.h`) at both writes of
+  `metadata.option` made `saveLoadProcessLoadUpdate` IDENTICAL and keeps `saveLoadProcessSaveUpdate` so (`static
+  __inline`: 21 lines; a `u32` parameter regresses the save). The Apocalypse steps compute the option from the slot
+  and keep the direct store.
+- Not evidence (wave 91 review): a per-sibling zero-initialisation chosen by score. The ascending equipment
+  comparators (`uiCompareEntryRanksAscending`, both games) match with `s32 scores[2] = {}` or with a chained
+  `left = right = 0;` plus an inline copy of `dataTableSortKeyCompare`'s body, the descending ones
+  (`dataTable08CompareStrongestAffinity`, `uiCompareEntryRanksDescending`) only with two initialised locals and the
+  order compare in place (12-24 lines otherwise): the family keeps one form, the ascending pair stays 10 lines.
+  Likewise a block of one sibling only: an inline `unitAilmentColor(unit, index)` takes `resultDrawRowColumn` from
+  43 to 31 lines but the same block in `statusStripDraw` from 26 to 336 and its out-of-line copy `FUN_0028dbe0`
+  from IDENTICAL to 23.
 - nn::os's `WaitObject::WaitOne` and `Thread::Join` are per-game header inlines (`nn/os/WaitObject.h`: IV waits through
   `WaitSynchronizationN`, Apocalypse through `WaitSynchronization1`); `nn::os::ThreadJoin` made smt4 `FUN_002ecfe4`
   IDENTICAL and moved two smt4a thread teardowns from 12/14 to 2/4 lines (wave 82).
@@ -727,6 +749,11 @@ asks for.
 - Read the bound from the structure (`i < table->count`, `index < first + count`) instead of caching
   it; a `u32` index gives retail's count-down loop; an `entry = &entries[i]` local can stop armcc
   unrolling a search.
+- A single-use copy of the entry table inside a candidate loop (`BtlCombatantEntryA *entries =
+  btlGetMainState()->entries; entry = &entries[index];`) swaps the address registers into retail's order in smt4a
+  `FUN_0039d87c` and `btlScriptChooseRandomMatchingEntry`, while their sibling `FUN_003b1100` matches only with
+  `&btlGetMainState()->entries[i]`: a temporary chosen per function, rejected (wave 91). So were two single-use
+  count locals before a guarded `do`/`while` in smt4a `FUN_003cd5f4` (the same guard without them is 15 lines).
 - armcc rerolls consecutive copies from an indexed source array into a loop: name the entries as
   struct members (smt4 `FUN_003852c8`'s sixteen step-function copies from its constant table, one member per
   state, wave 67).
@@ -918,6 +945,9 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
 - `mov r0, #0; cmp r0, #0` (or `mov r0, #100; rsb r0, r0, #0`) is such a getter too: armcc folds a test or a negation of
   a constant, so the value came from a call (`resultGetGoldBonusPercent`, `-questCenterGetHealingFee()` in smt4
   `FUN_00382f4c`, wave 73). Argument moves before the lone `mov r0, #0` are the stub's real arguments: pass them.
+- `vstr s0, [r0, #20]` right after `add r0, r7, r4, lsl #5` (the tile's address) and `vmov.f32 s0, s16`, with the call
+  padding `nop {0}` twice after it, is the linker-inlined tile rotation setter `asdTextureTileSetRotation`
+  (`inlined.txt` in both games): smt4 `FUN_0034f0fc` and smt4a `FUN_00423700` 8 -> 4 lines (wave 91).
 - Record setters and getters are linker-inlined too: a widget reloaded into `r0` and the value rematerialised before
   each `strb r1, [r0, #N]` (or a lone `ldr r0, [r0, #N]` followed by the call's `nop` padding) is a call to a
   one-instruction accessor. Write the calls and add the rows after checking each call site's word in the image
@@ -1089,6 +1119,9 @@ no core register; as its `multifile` partner they went from 163 to 137 and 132 t
 `contentMenuRebuildGroup` got worse with the same partner (118 to 135) and has no entry.
 Both `recordPrepareLinkedOwner`s keep `r2`/`r3` across `bl packageKindToRecordKind`, the partner their proven sibling
 `packageFileDisableByKindName` already has: with it they went from 14 to 2 lines (wave 87).
+smt4a `FUN_004e6880` keeps its random index in `r3` across `bl btlUnitGet`, the partner its neighbour
+`btlUnitClearMatchingPairs` (and `btlActionMarkRandomStatusTarget`) already has: `"multifile": ["btlUnitGet"]` made
+it IDENTICAL (4 lines without; wave 91).
 
 The recipe adds `--no_autoinline`, which most multifile units need (without it their callees are
 inlined). Some need autoinline on: smt4 `mapDepartAdvanceCameraSequence` keeps retail's `r3` across six calls of

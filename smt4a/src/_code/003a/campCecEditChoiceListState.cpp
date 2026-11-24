@@ -1,7 +1,15 @@
 /* NON_MATCHING: same instructions, frame and control flow as retail; 40 lines differ, all register names in two
  * places. The tap test: retail loads edit->touchY into r0 and the lifted stylus's y into r1 (this build the other
  * way round). The stylus's step down: retail keeps the item count in r2 and the last index in r1, loading the
- * fields it compares into r0 (this build: count r1, last index r0, fields r2). */
+ * fields it compares into r0 (this build: count r1, last index r0, fields r2).
+ * Wave 91: the step down without the two locals scores 51 by shape (203 raw), with a `count` local 54/144, with
+ * `last` alone 56/242; the tap distance through abs() 56/242, as an if 62/248, folded into the test 73/259.
+ * The raw scores come from one instruction more: the tap variants lose the entry's `strd` of the starting row
+ * and top (listRow moves from r0 to r1), and they and the step-down variants make the scroll bar's
+ * `barY - entry->y` take r0 and copy the entry pointer. With abs() (or the press position in a local) the tap
+ * test itself is retail's; no spelling of startIndex or of the step down then brings the `strd` back.
+ * `edit->touchY - touchY` gives the two loads retail's registers (38) but subtracts the other way round, so it
+ * is not written. */
 #include "shard/Shard0032.h"
 #include "shard/W6_W6Match3_FormatBuffer.h"
 #include "shard/W6_W6Match5_EntryCollection.h"

@@ -20,7 +20,7 @@ int messageKindForward(...);
 int gameGetUnitRecord(...);
 int fontMeasureLineAdvance(...);
 int renderCtxCalculateStereoParallax(...);
-int FUN_002bdf94(...);
+int textDrawFormattedAligned(...);
 int drawSetColorFromRGBA8(...);
 int textDrawString(...);
 int gxResetColorQuadToWhite(void);
@@ -77,7 +77,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: FUN_002bdf94. */
+/* Supplied declaration required: textDrawFormattedAligned. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
@@ -406,7 +406,7 @@ LAB_003b35ac:
         temp_v0 = *(unsigned char *)(temp_v5 + 0x76);
       }
       param_3 = aiStack_d0[temp_v21];
-      FUN_002bdf94(6,aiStack_e0[temp_v21] + (int)*(short *)(temp_v14 + 8) + aiStack_108[temp_v21],
+      textDrawFormattedAligned(6,aiStack_e0[temp_v21] + (int)*(short *)(temp_v14 + 8) + aiStack_108[temp_v21],
                    aiStack_f8[temp_v21] + (int)*(short *)(temp_v14 + 10) + param_3,1,2,0x79,
                    &LAB_003b4078,(unsigned int)temp_v0 + (int)*(short *)(param_1 + temp_v8 * 2 + 0xd49a));
     }
@@ -445,7 +445,7 @@ LAB_003b35ac:
         }
       }
       param_3 = aiStack_d0[temp_v21];
-      FUN_002bdf94(0,aiStack_e0[temp_v21] + aiStack_108[temp_v21] + (int)*(short *)(temp_v14 + 8),
+      textDrawFormattedAligned(0,aiStack_e0[temp_v21] + aiStack_108[temp_v21] + (int)*(short *)(temp_v14 + 8),
                    aiStack_f8[temp_v21] + (int)*(short *)(temp_v14 + 10) + param_3,1,7,0x79,
                    &LAB_003b4078,temp_v5);
     }
@@ -632,7 +632,7 @@ LAB_003b4444:
                      (int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v6 + 8) + temp_v5,
                      (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v6 + 10) + param_3,0x6f,0);
         temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,0x46));
-        FUN_002bdf94(0,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v5,
+        textDrawFormattedAligned(0,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v5,
                      (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v6 + 10) + param_3,1,3,0x6f,
                      &LAB_003b4820,*(unsigned int *)(temp_v28 + 0x3630));
         temp_v8 = unlockFlagTest(*piVar13);

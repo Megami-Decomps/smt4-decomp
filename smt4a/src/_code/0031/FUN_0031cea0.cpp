@@ -1,6 +1,6 @@
 #include "common.h"
 extern "C" {
-void FUN_00231464();
+void btlGameOverCreateJobs();
 extern struct {
     u8 pad[8];
     u8 kind;
@@ -11,7 +11,7 @@ extern struct {
 } *g_gameOverJobRecord;
 /* Stores the kind byte, clears the pending flag and the counter, and selects mode 2 for kind 2, else 1. */
 void FUN_0031cea0(u32 input) {
-    FUN_00231464();
+    btlGameOverCreateJobs();
     g_gameOverJobRecord->kind = (u8)input;
     g_gameOverJobRecord->pending = 0;
     g_gameOverJobRecord->mode = (u8)input == 2 ? 2 : 1;

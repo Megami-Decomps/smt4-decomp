@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail tests the devil flag first (second flag load predicated) and anchors every field on selection+0x100, and counts the rule loop with ne (the build reads the race flag first and uses gt). Row counts and the control flow match. */
+/* NON_MATCHING: the initial rule-count check uses gt/le instead of ne/eq. The signed filter flags,
+ * as in IV's fusionCollectAvailableRacePartners, give retail's shared selection base and predicated load. */
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match8_FusionSelection.h"
@@ -24,7 +25,7 @@ s32 fusionCollectEligibleDemonsByRace(const FusionRaceSelection *selection, s16 
 {
     s32 count = 0;
     s8 hasDevil = selection->hasDevil;
-    if (selection->hasRace || hasDevil) {
+    if (selection->hasDevil || selection->hasRace) {
         u8 allowedRaces[0x44];
         sysMemClear(allowedRaces, sizeof(allowedRaces));
         u32 race;

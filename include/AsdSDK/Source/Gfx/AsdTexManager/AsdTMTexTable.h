@@ -167,7 +167,7 @@ static __inline void asdTMTexTableEntryRect(u32 file, s32 index, s32 *x, s32 *y,
 /* The centre of texture `index` in table `file`: its layout position plus half its drawn size (the
  * placement's size when it has one, otherwise the entry's own size without the flag bit). The body of
  * smt4 uiStoreTextureEntryCenter, inlined by the battle UI's item-cursor placement of both games
- * (smt4 FUN_0023c9e8, smt4a FUN_004aace8). */
+ * (smt4 btlUiAddPositionedMarker, smt4a btlUiAddPositionedMarker). */
 static __inline void asdTMTexTableEntryCenter(u32 file, s32 index, s32 *x, s32 *y)
 {
     const TextureTableEntryIV *entry = asdTMTexTableEntryAt(file, index);

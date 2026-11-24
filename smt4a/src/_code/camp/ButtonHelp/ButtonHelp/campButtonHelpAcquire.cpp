@@ -6,6 +6,8 @@
 #include "ui/ButtonHelpGlobal.h"
 #include "script/scrScriptProcess.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/Text/AsdTextA.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 namespace {
 /* Animation keys handed to paramsInit. */
@@ -37,7 +39,6 @@ static const s32 sKeysFifth[42] = {
 }
 
 extern "C" {
-void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void sysMemClear(void *data, u32 size);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, void *work, u32 owner);
@@ -48,8 +49,6 @@ void paramsClearPacket(UiResourceParameters *packet);
 
 void uiGetLayoutPointDifference(UiSpriteState *sprite, u32 group, u32 image, s32 kind);
 void uiStoreTextureEntryCenter(UiSpriteState *sprite, u32 group, s32 arg);
-u32 spriteHandleCreate(u32 arg);
-void positionStateSet(u32 handle, s32 arg, u32 color, f32 value);
 
 /* buttonHelpSetPanelMode's body: stores the help mode, resetting the four panel sprites for modes 0 and 2 or hiding them. */
 static __inline void buttonHelpSetPanelMode(u8 mode)
@@ -104,9 +103,9 @@ void campButtonHelpAcquire(void)
         panel->drawEnabled = 1;
         panel->touchSuspended = 0;
         panel->touchCount = 0;
-        work->text.directoryText = spriteHandleCreate(0);
+        work->text.directoryText = (u32)spriteHandleCreate(0);
         uiObjectSetColorRgb(work->text.directoryText, 0xf4f4f4ff);
-        positionStateSet(work->text.directoryText, 0, 0x646464ff, 0.0f);
+        positionStateSet((AsdText *)work->text.directoryText, 0, 0x646464ff, 0.0f);
         work->scriptProcess = scrScriptProcessCreate(g_buttonHelp.bf, g_buttonHelp.mbm);
     }
     g_buttonHelp.references++;

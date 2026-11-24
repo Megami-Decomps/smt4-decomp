@@ -104,7 +104,7 @@ int FUN_002b621c(...);
 int mapEaseSceneHeading(...);
 int FUN_003135bc(...);
 int mapSpawnRandomEventKindEffect(...);
-int FUN_00324e38(...);
+int mapDepartSpawnPlayerEffect(...);
 int mapEnemyAssignSpawns(...);
 int sysPlayVoice(...);
 int soundActorStartOnFreeChannel(...);
@@ -369,7 +369,7 @@ extern int mapJobIsDone(void);
 /* Supplied declaration required: lmapSceneRestoreEntryPosition. */
 /* Supplied declaration required: mathVec3Dot. */
 /* Supplied declaration required: mapSpawnRandomEventKindEffect. */
-/* Supplied declaration required: FUN_00324e38. */
+/* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: vec3DirectionBetween. */
 /* Supplied declaration required: FUN_00325998. */
 /* Supplied declaration required: mapObjFindNearestPointByCategory. */
@@ -1310,7 +1310,7 @@ LAB_002b82a8:
           if (DAT_005f1848 != 0) {
             if (DAT_005f1848 == 1) {
               if (g_lmapScene[2] == 5) {
-                FUN_00324e38(0xffffffff);
+                mapDepartSpawnPlayerEffect(0xffffffff);
                 mapSpawnRandomEventKindEffect();
                 FUN_003135bc();
               }
@@ -1324,7 +1324,7 @@ joined_r0x00326e7c:
             }
             if (DAT_005f1848 == 2) {
               if (g_lmapScene[2] == 5) {
-                FUN_00324e38(0xffffffff);
+                mapDepartSpawnPlayerEffect(0xffffffff);
                 mapSpawnRandomEventKindEffect();
                 FUN_003135bc();
               }
@@ -1333,7 +1333,7 @@ joined_r0x00326e7c:
             }
             if (DAT_005f1848 == 3) {
               if (g_lmapScene[2] == 5) {
-                FUN_00324e38(0xffffffff);
+                mapDepartSpawnPlayerEffect(0xffffffff);
                 mapSpawnRandomEventKindEffect();
                 FUN_003135bc();
               }
@@ -1343,7 +1343,7 @@ joined_r0x00326e7c:
           }
           else {
             if (g_lmapScene[2] == 5) {
-              FUN_00324e38(0xffffffff);
+              mapDepartSpawnPlayerEffect(0xffffffff);
               mapSpawnRandomEventKindEffect();
               FUN_003135bc();
             }
@@ -1635,7 +1635,7 @@ LAB_00326fcc:
                 libm_sinf();
                 libm_cosf();
                 soundActorStartOnFreeChannel(0x100029e);
-                FUN_00324e38(0xffffffff);
+                mapDepartSpawnPlayerEffect(0xffffffff);
               }
               if ((g_lmapScene[2] == 6) && (mapSpawnRandomEventKindEffect(), g_lmapScene[2] == 6)) {
                 temp_v3 = 0x14;
@@ -1654,7 +1654,7 @@ LAB_00326870:
                 libm_sinf();
                 libm_cosf();
                 soundActorStartOnFreeChannel(0x100029d);
-                FUN_00324e38(0xffffffff);
+                mapDepartSpawnPlayerEffect(0xffffffff);
               }
               if (g_lmapScene[2] != 4) goto LAB_00326a10;
               goto LAB_003268e4;
@@ -1697,7 +1697,7 @@ LAB_003267fc:
                 soundVolumeSettingSet(temp_v17);
               }
             }
-            FUN_00324e38(0xffffffff);
+            mapDepartSpawnPlayerEffect(0xffffffff);
           }
           if (g_lmapScene[2] == 6) {
 LAB_003268e4:
@@ -1728,7 +1728,7 @@ LAB_003268e4:
               soundVolumeSettingSet(temp_v17);
             }
           }
-          FUN_00324e38(0xffffffff);
+          mapDepartSpawnPlayerEffect(0xffffffff);
         }
         if ((g_lmapScene[2] == 6) && (mapSpawnRandomEventKindEffect(), g_lmapScene[2] == 6)) {
           temp_v3 = 8;
@@ -1993,7 +1993,7 @@ LAB_003270bc:
     piVar18[9] = (int)((float)piVar18[9] + ((float)piVar18[0xc] - (float)piVar18[9]) * 0.083333336f);
     temp_v32 = piVar18[1];
     if (temp_v32 == 0) {
-      FUN_00324e38(1);
+      mapDepartSpawnPlayerEffect(1);
       piVar18 = g_lmapScene;
       if (g_gameState != (unsigned int *)0x16) {
         g_lmapScene[0x15] = 8;
@@ -2090,7 +2090,7 @@ LAB_003270bc:
               break;
             default:
             }
-            FUN_00324e38(0xffffffff);
+            mapDepartSpawnPlayerEffect(0xffffffff);
             libm_sinf();
             libm_cosf();
             messageVoiceBankGet();
@@ -2135,7 +2135,7 @@ LAB_003270bc:
             break;
           default:
           }
-          FUN_00324e38(0xffffffff);
+          mapDepartSpawnPlayerEffect(0xffffffff);
           libm_sinf();
           libm_cosf();
           messageVoiceBankGet();
@@ -2469,7 +2469,7 @@ LAB_003270bc:
             DAT_005f185a = 0;
             piVar18[0x15] = 8;
             piVar18[0x16] = 0x40a00000;
-            FUN_00324e38(1);
+            mapDepartSpawnPlayerEffect(1);
             temp_v32 = g_lmapScene[1];
             piVar18 = g_lmapScene;
             piVar18[1] = temp_v32 + 1;
@@ -2875,7 +2875,7 @@ LAB_003270bc:
         default:
         }
 LAB_00366704:
-        FUN_00324e38(0xffffffff);
+        mapDepartSpawnPlayerEffect(0xffffffff);
         libm_sinf();
         libm_cosf();
         messageVoiceBankGet();
@@ -2987,7 +2987,7 @@ LAB_00366704:
             break;
           default:
           }
-          FUN_00324e38(0xffffffff);
+          mapDepartSpawnPlayerEffect(0xffffffff);
           libm_sinf();
           libm_cosf();
           messageVoiceBankGet();
@@ -3077,7 +3077,7 @@ LAB_00366704:
                   {
                     soundActorStartOnFreeChannel(0x10002bb);
                   }
-                  FUN_00324e38(0xffffffff);
+                  mapDepartSpawnPlayerEffect(0xffffffff);
                   libm_sinf();
                   libm_cosf();
                   messageVoiceBankGet();
@@ -3246,11 +3246,11 @@ LAB_00366704:
       if ((g_gameState != (unsigned int *)0x26) && (g_gameState != (unsigned int *)0x1a)) {
         if ((temp_v5 == 1 || temp_v5 == 0xb) || (temp_v5 == 0x1c || temp_v5 == 0x29)) {
           soundActorStartOnFreeChannel((temp_v5 & 3) + 0x10002bb);
-          FUN_00324e38(0xffffffff);
+          mapDepartSpawnPlayerEffect(0xffffffff);
         }
       }
       else if ((temp_v5 == 1 || temp_v5 == 0xb) || (temp_v5 == 0x1c || temp_v5 == 0x29)) {
-        FUN_00324e38(0xffffffff);
+        mapDepartSpawnPlayerEffect(0xffffffff);
       }
       if (g_lmapScene[2] == 0x1e) {
         FUN_002342b8();
@@ -3294,7 +3294,7 @@ LAB_00366704:
                 DAT_005f185a = 0;
                 piVar18[0x15] = 8;
                 piVar18[0x16] = 0x40a00000;
-                FUN_00324e38(1);
+                mapDepartSpawnPlayerEffect(1);
                 temp_v32 = g_lmapScene[1];
                 piVar18 = g_lmapScene;
                 piVar18[1] = temp_v32 + 1;
@@ -3398,7 +3398,7 @@ LAB_00366704:
       }
       else if (!(temp_v32 == 0x5a || temp_v32 == 0x5b)) {
         if ((temp_v32 == 0x5c) && (temp_v32 = piVar18[2], piVar18[2] = temp_v32 + 1, temp_v32 + 1 >= 4)) {
-          FUN_00324e38(0);
+          mapDepartSpawnPlayerEffect(0);
           temp_v17 = 1;
           mapSetSceneState(temp_v17);
         }
@@ -3579,7 +3579,7 @@ LAB_00366704:
             break;
           default:
           }
-          FUN_00324e38(0xffffffff);
+          mapDepartSpawnPlayerEffect(0xffffffff);
           libm_sinf();
           libm_cosf();
           messageVoiceBankGet();
@@ -3825,7 +3825,7 @@ LAB_00367f20:
               break;
             default:
             }
-            FUN_00324e38(0xffffffff);
+            mapDepartSpawnPlayerEffect(0xffffffff);
             libm_sinf();
             libm_cosf();
             messageVoiceBankGet();
@@ -3959,7 +3959,7 @@ LAB_0033eae8:
                   {
                     soundActorStartOnFreeChannel(0x10002bb);
                   }
-                  FUN_00324e38(0xffffffff);
+                  mapDepartSpawnPlayerEffect(0xffffffff);
                   libm_sinf();
                   libm_cosf();
                   messageVoiceBankGet();
@@ -4127,11 +4127,11 @@ LAB_0033eae8:
       if ((g_gameState != (unsigned int *)0x26) && (g_gameState != (unsigned int *)0x1a)) {
         if ((temp_v5 == 0xb || temp_v5 == 0x1c) || temp_v5 == 0x29) {
           soundActorStartOnFreeChannel((temp_v5 & 3) + 0x10002bb);
-          FUN_00324e38(0xffffffff);
+          mapDepartSpawnPlayerEffect(0xffffffff);
         }
       }
       else if ((temp_v5 == 0xb || temp_v5 == 0x1c) || temp_v5 == 0x29) {
-        FUN_00324e38(0xffffffff);
+        mapDepartSpawnPlayerEffect(0xffffffff);
       }
       if (g_lmapScene[2] == 0x1e) {
         FUN_002342b8();
@@ -4200,7 +4200,7 @@ LAB_0033eae8:
             break;
           default:
           }
-          FUN_00324e38(0xffffffff);
+          mapDepartSpawnPlayerEffect(0xffffffff);
           libm_sinf();
           libm_cosf();
           messageVoiceBankGet();
@@ -4274,7 +4274,7 @@ LAB_0033eae8:
             break;
           default:
           }
-          FUN_00324e38(0xffffffff);
+          mapDepartSpawnPlayerEffect(0xffffffff);
           libm_sinf();
           libm_cosf();
           messageVoiceBankGet();
@@ -4329,7 +4329,7 @@ LAB_0033eae8:
       piVar18[0x16] = 0;
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
-      FUN_00324e38(0);
+      mapDepartSpawnPlayerEffect(0);
       piVar18 = g_lmapScene;
       g_lmapScene[1] = g_lmapScene[1] + 1;
       piVar18[2] = 0;
@@ -4390,7 +4390,7 @@ LAB_0033eae8:
         break;
       default:
       }
-      FUN_00324e38(0xffffffff);
+      mapDepartSpawnPlayerEffect(0xffffffff);
       libm_sinf();
       libm_cosf();
       messageVoiceBankGet();
@@ -4436,7 +4436,7 @@ LAB_0033eae8:
         else {
           g_lmapScene[0x15] = 0x13;
           piVar18[0x16] = 0x40a00000;
-          FUN_00324e38(0);
+          mapDepartSpawnPlayerEffect(0);
           piVar18 = g_lmapScene;
           temp_v6 = 0;
           *(unsigned char *)(g_lmapScene + 0x1b) = 0;
@@ -4582,7 +4582,7 @@ joined_r0x00248750:
           temp_v6 = g_lmapScene[2];
           g_lmapScene[2] = temp_v6 + 1;
           if (temp_v6 + 1 == 6) {
-            FUN_00324e38(0);
+            mapDepartSpawnPlayerEffect(0);
           }
           piVar18 = g_lmapScene;
           if (g_lmapScene[2] >= 0x15) {
@@ -4656,7 +4656,7 @@ joined_r0x00248750:
                   libm_sinf();
                   libm_cosf();
                   soundActorStartOnFreeChannel(0x100029e);
-                  FUN_00324e38(0xffffffff);
+                  mapDepartSpawnPlayerEffect(0xffffffff);
                 }
                 if ((g_lmapScene[0x9c] == 6) && (mapSpawnRandomEventKindEffect(), g_lmapScene[0x9c] == 6)) {
                   FUN_00297f00(8,10);
@@ -4671,7 +4671,7 @@ LAB_002da1e4:
                   libm_sinf();
                   libm_cosf();
                   soundActorStartOnFreeChannel(0x100029d);
-                  FUN_00324e38(0xffffffff);
+                  mapDepartSpawnPlayerEffect(0xffffffff);
                 }
                 if (g_lmapScene[0x9c] == 4) {
                   FUN_00297f00(8,10);
@@ -4714,7 +4714,7 @@ LAB_002da2b0:
                   sysPlayVoice(uStack_60 + 0x10002de);
                   soundVolumeSettingSet((unsigned int)uStack_54);
                 }
-                FUN_00324e38(0xffffffff);
+                mapDepartSpawnPlayerEffect(0xffffffff);
               }
               if (g_lmapScene[0x9c] == 6) {
                 FUN_00297f00(8,10);
@@ -4762,7 +4762,7 @@ LAB_002da3cc:
                 sysPlayVoice(uStack_60 + 0x10002dc);
                 soundVolumeSettingSet((unsigned int)uStack_54);
               }
-              FUN_00324e38(0xffffffff);
+              mapDepartSpawnPlayerEffect(0xffffffff);
             }
             if ((g_lmapScene[0x9c] == 6) && (mapSpawnRandomEventKindEffect(), g_lmapScene[0x9c] == 6)) {
               FUN_00297f00(8,10);
@@ -4777,7 +4777,7 @@ LAB_002da3cc:
               popupStateClose();
               soundApplyValueOrStop(g_lmapScene[0x99],0);
               FUN_002de104();
-              FUN_00324e38(0);
+              mapDepartSpawnPlayerEffect(0);
               piVar18 = g_lmapScene;
               g_lmapScene[0x15] = 0;
               piVar18[0x16] = 0x40a00000;
@@ -4790,7 +4790,7 @@ LAB_002da3cc:
               popupStateClose();
               soundApplyValueOrStop(g_lmapScene[0x99],0);
               mapTrapEnable();
-              FUN_00324e38(0);
+              mapDepartSpawnPlayerEffect(0);
               piVar18 = g_lmapScene;
               g_lmapScene[0x15] = 3;
               piVar18[0x16] = temp_v32;
@@ -5196,7 +5196,7 @@ LAB_002dad8c:
       piVar10[0xc] = piVar10[9];
       *(unsigned char *)(piVar10 + 0x1b) = 0;
       lmapRequestTimedEffect(10,0x14,0);
-      FUN_00324e38(0);
+      mapDepartSpawnPlayerEffect(0);
       soundActorStartOnFreeChannel(0x1000224);
       libm_sinf();
       libm_cosf();
@@ -5439,7 +5439,7 @@ code_r0x00313648:
           if (g_lmapScene[2] == 4) {
             fStack_20 = temp_v35;
             fStack_1c = temp_v37;
-            FUN_00324e38(0);
+            mapDepartSpawnPlayerEffect(0);
             libm_sinf();
             libm_cosf();
             temp_v17 = messageVoiceFlagsGet();
@@ -5696,7 +5696,7 @@ code_r0x00313648:
     else {
       g_lmapScene[0x15] = 0x13;
       piVar18[0x16] = 0;
-      FUN_00324e38(0);
+      mapDepartSpawnPlayerEffect(0);
       piVar18 = g_lmapScene;
       *(unsigned char *)(g_lmapScene + 0x1b) = 0;
       piVar18[1] = piVar18[1] + 1;
@@ -5755,7 +5755,7 @@ code_r0x00313648:
     }
     temp_v32 = piVar18[1];
     if (temp_v32 == 0) {
-      FUN_00324e38(1);
+      mapDepartSpawnPlayerEffect(1);
       piVar18 = g_lmapScene;
       if (g_gameState != (unsigned int *)0x16) {
         g_lmapScene[0x15] = 0x1f;
@@ -6314,7 +6314,7 @@ code_r0x00313648:
     piVar18[8] = (int)((float)piVar18[8] + ((float)piVar18[0xb] - (float)piVar18[8]) * 0.16666667f);
     piVar18[9] = (int)((float)piVar18[9] + ((float)piVar18[0xc] - (float)piVar18[9]) * 0.33333334f);
     if (piVar18[1] == 0) {
-      FUN_00324e38(1);
+      mapDepartSpawnPlayerEffect(1);
       lmapCameraSetMode(0x1d);
       piVar18 = g_lmapScene;
       g_lmapScene[0x15] = 0x29;
@@ -6328,7 +6328,7 @@ code_r0x00313648:
     if (g_lmapScene[1] == 0) {
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
-      FUN_00324e38(1);
+      mapDepartSpawnPlayerEffect(1);
       piVar18 = g_lmapScene;
       g_lmapScene[0x15] = 0x2a;
       piVar18[0x16] = 0x40a00000;

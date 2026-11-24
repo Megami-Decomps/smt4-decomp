@@ -73,7 +73,7 @@ void FUN_002f3694(void)
 
                 block->timers[event->timerSlot] = event->cooldown * 0x708;
                 for (j = 0; j < dataTableGetRecordFortyEight(); j++) {
-                    MsSearchRecord *mark = FUN_0025b670(j);
+                    MsSearchRecord *mark = msSearchGetRecordAt(j);
 
                     if (mark->id != -1 && mark->areaId == areaId) {
                         markBitWrite(mark->markBit, 1);

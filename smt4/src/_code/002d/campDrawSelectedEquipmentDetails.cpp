@@ -21,7 +21,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTableEntry.h"
 
 extern "C" {
-void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 columns, u32 layer, const char *format, ...);
+void textDrawFormattedAligned(u32 font, s32 x, s32 y, u32 align, u32 columns, u32 layer, const char *format, ...);
 void drawSetColorFromRGBA8(u32 packed);
 u8 *dataFindKindRecordWithAocOverrides(u32 id, s32 payload);
 u32 recordAcceptsStickDirection(s32 id);
@@ -69,7 +69,7 @@ extern "C" void campDrawSelectedEquipmentDetails(s32 category, s32 row, u32 item
     const TextureTableEntryIV *countEntry = asdTMTexTableEntryAt(texture, 0x52F);
     sprintf(text, "%d", flagValueRead(itemId));
     drawSetColorFromRGBA8(0xFFFFFFFF);
-    FUN_002bdf94(0, rowEntry->x + countEntry->x + x, rowEntry->y + countEntry->y + y, 1, 2, layer, text);
+    textDrawFormattedAligned(0, rowEntry->x + countEntry->x + x, rowEntry->y + countEntry->y + y, 1, 2, layer, text);
     gxResetColorQuadToWhite();
     texDrawTableEntryAtStoredOrigin(2, texture, 0x521, rowEntry->x + x, rowEntry->y + y, layer);
     const TextureTableEntryIV *badgeEntry = asdTMTexTableEntryAt(texture, 0x522);
@@ -89,7 +89,7 @@ extern "C" void campDrawSelectedEquipmentDetails(s32 category, s32 row, u32 item
         setStatComparisonColor(item->traitBits.group, equippedAttack);
         const TextureTableEntryIV *attackEntry = asdTMTexTableEntryAt(texture, 0x527);
         sprintf(text, "%d", item->traitBits.group);
-        FUN_002bdf94(0, rowEntry->x + attackEntry->x + x, rowEntry->y + attackEntry->y + y, 1, 4, layer, text);
+        textDrawFormattedAligned(0, rowEntry->x + attackEntry->x + x, rowEntry->y + attackEntry->y + y, 1, 4, layer, text);
         gxResetColorQuadToWhite();
 
         // These Shift-JIS strings are the weapon's attack attributes.
@@ -126,7 +126,7 @@ extern "C" void campDrawSelectedEquipmentDetails(s32 category, s32 row, u32 item
         setStatComparisonColor(item->traitBits.group, equippedAttack);
         const TextureTableEntryIV *gunAttackEntry = asdTMTexTableEntryAt(texture, 0x542);
         sprintf(text, "%d", item->traitBits.group);
-        FUN_002bdf94(0, rowEntry->x + gunAttackEntry->x + x, rowEntry->y + gunAttackEntry->y + y, 1, 4, layer, text);
+        textDrawFormattedAligned(0, rowEntry->x + gunAttackEntry->x + x, rowEntry->y + gunAttackEntry->y + y, 1, 4, layer, text);
         gxResetColorQuadToWhite();
 
         if (item->target == 0)
@@ -144,7 +144,7 @@ extern "C" void campDrawSelectedEquipmentDetails(s32 category, s32 row, u32 item
             sprintf(text, "%d-%d", hitRange & 15, hitRange >> 4);
         drawSetColorFromRGBA8(0xFFFFFFFF);
         const TextureTableEntryIV *rangeEntry = asdTMTexTableEntryAt(texture, 0x546);
-        FUN_002bdf94(0, rowEntry->x + rangeEntry->x + x, rowEntry->y + rangeEntry->y + y, 1, 3, layer, text);
+        textDrawFormattedAligned(0, rowEntry->x + rangeEntry->x + x, rowEntry->y + rangeEntry->y + y, 1, 3, layer, text);
         gxResetColorQuadToWhite();
         break;
     }
@@ -173,13 +173,13 @@ extern "C" void campDrawSelectedEquipmentDetails(s32 category, s32 row, u32 item
         setStatComparisonColor(item->hpBonus, equippedHp);
         const TextureTableEntryIV *hpEntry = asdTMTexTableEntryAt(texture, 0x55E);
         sprintf(text, "%d", item->hpBonus);
-        FUN_002bdf94(0, rowEntry->x + hpEntry->x + x, rowEntry->y + hpEntry->y + y, 1, 5, layer, text);
+        textDrawFormattedAligned(0, rowEntry->x + hpEntry->x + x, rowEntry->y + hpEntry->y + y, 1, 5, layer, text);
         gxResetColorQuadToWhite();
         drawSetColorFromRGBA8(0xFFFFFFFF);
         setStatComparisonColor(item->mpBonus, equippedMp);
         const TextureTableEntryIV *mpEntry = asdTMTexTableEntryAt(texture, 0x563);
         sprintf(text, "%d", item->mpBonus);
-        FUN_002bdf94(0, rowEntry->x + mpEntry->x + x, rowEntry->y + mpEntry->y + y, 1, 5, layer, text);
+        textDrawFormattedAligned(0, rowEntry->x + mpEntry->x + x, rowEntry->y + mpEntry->y + y, 1, 5, layer, text);
         gxResetColorQuadToWhite();
         break;
     }

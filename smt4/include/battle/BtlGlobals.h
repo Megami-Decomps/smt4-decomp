@@ -19,7 +19,7 @@ extern BtlMainGlobals g_btlMainState; /* 0x435d90: the battle state and resident
 
 }
 
-/* The action module's unit slot `index` (inlined by FUN_003cfb60, FUN_003cae6c and
+/* The action module's unit slot `index` (inlined by btlStartSkillAction, FUN_003cae6c and
  * btlChooseAlternateSkillOrFallback). */
 static __inline BtlActionSlot *btlActionGetSlot(s32 index)
 {

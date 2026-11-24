@@ -1,8 +1,9 @@
-/* NON_MATCHING: 40 lines. Both wait states test the write result as `if (failed) { free; state 5 } else { free;
- * next state }`, which gives retail's shared failure block and layout. Left: the constants 4, 1 and 0 sit in
- * r7/r8/r6 in retail (built: r6/r7/r8), so state 3's success stores pair into an `stm`, and retail lays out
- * state 5's result block before state 4's. The runner's flag is read through flag0CGet, a one-instruction getter
- * armlink inlined (retail's lone `ldrsb r0, [r0, #12]` before the call padding; the field read gave `ldrb`). */
+/* NON_MATCHING: 40 lines, registers only: the hoisted constants 4, 1 and 0 sit in r7/r8/r6 in retail (built:
+ * r6/r7/r8), so state 3's success stores pair into an `stm` here. The block layout is retail's: both wait states
+ * animate and leave early until the write returns, then test the result as `if (failed) { free; state 5 } else
+ * { free; next state }` (retail shares the failure block), and the failed state's result block comes before the
+ * done state's (retail's order of the two blocks). The runner's flag is read through flag0CGet, a
+ * one-instruction getter armlink inlined (retail's lone `ldrsb r0, [r0, #12]` before the call padding). */
 #include "common.h"
 #include "gamedata/SaveLoadProcess.h"
 #include "gamedata/SaveLoadProcessState.h"
@@ -109,19 +110,19 @@ u32 saveLoadProcessWriteStep(u32 job)
     }
 
     case SAVE_STAGE_WAIT_EXTRA:
-        if (lazyScriptTaskStep() == 1) {
-            if (byte1IsZero() != 0) {
-                asdMemFree(work->buffer);
-                work->state = SAVE_STAGE_FAILED;
-                work->buffer = NULL;
-            } else {
-                asdMemFree(work->buffer);
-                work->state = SAVE_STAGE_WRITE_FULL;
-                work->buffer = NULL;
-            }
+        if (lazyScriptTaskStep() != 1) {
+            saveAdvanceWaitAnimation();
             break;
         }
-        saveAdvanceWaitAnimation();
+        if (byte1IsZero() != 0) {
+            asdMemFree(work->buffer);
+            work->state = SAVE_STAGE_FAILED;
+            work->buffer = NULL;
+        } else {
+            asdMemFree(work->buffer);
+            work->state = SAVE_STAGE_WRITE_FULL;
+            work->buffer = NULL;
+        }
         break;
 
     case SAVE_STAGE_WRITE_FULL: {
@@ -146,29 +147,29 @@ u32 saveLoadProcessWriteStep(u32 job)
     }
 
     case SAVE_STAGE_WAIT_FULL:
-        if (lazyScriptTaskStep() == 1) {
-            if (byte1IsZero() != 0) {
-                asdMemFree(work->buffer);
-                work->state = SAVE_STAGE_FAILED;
-                work->buffer = NULL;
-            } else {
-                asdMemFree(work->buffer);
-                work->state = SAVE_STAGE_DONE;
-                work->buffer = NULL;
-            }
+        if (lazyScriptTaskStep() != 1) {
+            saveAdvanceWaitAnimation();
             break;
         }
-        saveAdvanceWaitAnimation();
+        if (byte1IsZero() != 0) {
+            asdMemFree(work->buffer);
+            work->state = SAVE_STAGE_FAILED;
+            work->buffer = NULL;
+        } else {
+            asdMemFree(work->buffer);
+            work->state = SAVE_STAGE_DONE;
+            work->buffer = NULL;
+        }
         break;
-
-    case SAVE_STAGE_DONE:
-        g_saveLoadProcess.first = 1;
-        g_saveLoadProcess.fourth = 1;
-        return SAVE_RESULT_FAILED;
 
     case SAVE_STAGE_FAILED:
         g_saveLoadProcess.first = 1;
         g_saveLoadProcess.fourth = 0;
+        return SAVE_RESULT_FAILED;
+
+    case SAVE_STAGE_DONE:
+        g_saveLoadProcess.first = 1;
+        g_saveLoadProcess.fourth = 1;
         return SAVE_RESULT_FAILED;
     }
     return 0;

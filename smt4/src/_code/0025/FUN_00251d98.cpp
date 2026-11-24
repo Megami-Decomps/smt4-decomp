@@ -10,7 +10,7 @@ int gameGetUnitRecord(...);
 int gameGetPlayerData(void);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int fontMeasureLineAdvance(int [2], int);
-int FUN_002bdf94(int, int, int, int);
+int textDrawFormattedAligned(int, int, int, int);
 int drawSetColorFromRGBA8(unsigned int);
 int textDrawString(int, unsigned int, int [2]);
 int texDrawTableEntryAtStoredOrigin(...);
@@ -53,7 +53,7 @@ extern unsigned int categoryGetColor(int);
 /* Supplied declaration required: fontMeasureLineAdvance. */
 extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: FUN_002bdf94. */
+/* Supplied declaration required: textDrawFormattedAligned. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
@@ -147,7 +147,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
           puStack_48 = temp_v11;
           temp_v10[0] = 2;
           temp_v10[1] = 0x79;
-          FUN_002bdf94(0,*(short *)(temp_v3 + 8) + param_3,*(short *)(temp_v3 + 10) + param_4,1);
+          textDrawFormattedAligned(0,*(short *)(temp_v3 + 8) + param_3,*(short *)(temp_v3 + 10) + param_4,1);
           return;
         }
         temp_v3 = 0;

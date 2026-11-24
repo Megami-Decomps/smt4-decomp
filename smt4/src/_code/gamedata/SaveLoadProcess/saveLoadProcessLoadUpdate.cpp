@@ -1,4 +1,3 @@
-/* NON_MATCHING: the option store loads work->option straight into r1; retail moves the save-data pointer to r1 and loads the option into r0 (one instruction). */
 #include "gamedata/SaveLoadProcessState.h"
 #include "shard/JobWork.h"
 #include "shard/GameDataBlocks.h"
@@ -16,9 +15,10 @@ void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void clockRecordStartSeconds();
 extern SaveByteSettings g_byteSettings;
 
+/* Loads the selected save asynchronously, then installs its data and settings. */
 s32 saveLoadProcessLoadUpdate(u32 job)
 {
-    SaveLoadProcessWork24 *work = reinterpret_cast<SaveLoadProcessWork24 *>(jobGetWork(job));
+    SaveLoadProcessWork24 *work = (SaveLoadProcessWork24 *)jobGetWork(job);
     switch (work->state) {
     case 4:
         work->bufferSize = sizeof(SaveFilePayloadIV);
@@ -30,14 +30,14 @@ s32 saveLoadProcessLoadUpdate(u32 job)
     case 5:
         if (saveLoadRequestUpdate() == 1) {
             if (byte1IsZero() == 0) {
-                const SaveFilePayloadIV *payload = static_cast<const SaveFilePayloadIV *>(work->buffer);
+                const SaveFilePayloadIV *payload = (const SaveFilePayloadIV *)work->buffer;
                 const u32 *table = payload->table;
                 const ConfigSettingsImage *settings = &payload->settings;
                 const u32 *save = payload->save;
                 __aeabi_memcpy4(gameDataBlocksGetTable(), table, sizeof(payload->table));
-                *reinterpret_cast<ConfigSettingsImage *>(configGetSettings()) = *settings;
+                *(ConfigSettingsImage *)configGetSettings() = *settings;
                 __aeabi_memcpy4(gameDataBlocksGetSaveData(), save, sizeof(payload->save));
-                gameDataBlocksGetSaveData()->metadata.option = work->option;
+                saveLoadWriteMetadataOption(gameDataBlocksGetSaveData(), work->option);
                 clockRecordStartSeconds();
                 work->state = 6;
             } else {
@@ -48,14 +48,14 @@ s32 saveLoadProcessLoadUpdate(u32 job)
     case 6:
         g_byteSettings.third = 1;
         g_byteSettings.selected = 1;
-        return 0xffffffff;
+        return -1;
     case 7:
         g_byteSettings.third = 0;
         g_byteSettings.selected = 1;
-        return 0xffffffff;
+        return -1;
     default:
         break;
     }
     return 0;
 }
-}
+} /* extern "C" */

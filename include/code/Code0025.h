@@ -7,6 +7,6 @@ extern "C" {
 s32 FUN_00256540(void);
 
 struct MsSearchRecord;
-MsSearchRecord *FUN_0025b670(u32 index);
+MsSearchRecord *msSearchGetRecordAt(u32 index);
 
 } /* extern "C" */

@@ -1,9 +1,8 @@
 #include "common.h"
 #include "game/GameStateA.h"
-#include "gfx/ObjectRegistry.h"
+#include "gfx/ControllerModel.h"
 #include "gamedata/GamePlayerData.h"
-#include "Model/MoriModelManager.h"
-#include "Model/MoriModelContent.h"
+#include "Model/MoriModelRegistration.h"
 
 /* The scene's model slots. */
 struct SceneModels {
@@ -32,17 +31,7 @@ s32 dataTable2EType0Count(void);
 s32 dataTable2EType1Count(void);
 DataTableEntry *dataTable2EType0GetEntry(s32 index);
 DataTableEntry *dataTable2EType1GetEntry(s32 index);
-void controllerSetPosition(RegisteredObject *owner, f32 x, f32 y, f32 z);
-}
-
-/* Registers the model's object with the handle registry and marks it active (bits 0 and 1). */
-static __inline RegisteredObject *registerModel(MoriModelContent *model)
-{
-    RegisteredObject *object = reinterpret_cast<RegisteredObject *>(model->body);
-    handleRegistryRegisterObject(g_handleRegistry, object);
-    object->flags |= 3;
-    return object;
-}
+} /* extern "C" */
 
 static __inline void resetSceneAreaSelection(SceneModels *scene)
 {
@@ -79,20 +68,20 @@ extern "C" void FUN_002d8ef8(void)
         g_lmapScene->area = g_gameState.areaModels[3];
         break;
     }
-    registerModel(g_lmapScene->area);
+    moriModelRegisterSceneContent(g_lmapScene->area);
     g_lmapScene->model184 = g_gameState.model530;
-    registerModel(g_lmapScene->model184);
+    moriModelRegisterSceneContent(g_lmapScene->model184);
     resetSceneAreaSelection(g_lmapScene);
     g_lmapScene->model178 = g_gameState.model528;
-    registerModel(g_lmapScene->model178);
+    moriModelRegisterSceneContent(g_lmapScene->model178);
     g_lmapScene->model17C = g_gameState.model52C;
-    registerModel(g_lmapScene->model17C);
+    moriModelRegisterSceneContent(g_lmapScene->model17C);
     g_lmapScene->model188 = g_gameState.model564;
-    registerModel(g_lmapScene->model188);
+    moriModelRegisterSceneContent(g_lmapScene->model188);
     g_lmapScene->model180 = g_gameState.model550;
-    controllerSetPosition(registerModel(g_lmapScene->model180), 1.0f, 1.0f, 1.0f);
+    controllerSetPosition(moriModelRegisterSceneContent(g_lmapScene->model180), 1.0f, 1.0f, 1.0f);
     g_lmapScene->model18C = g_gameState.model570;
-    controllerSetPosition(registerModel(g_lmapScene->model18C), 1.0f, 1.0f, 1.0f);
+    controllerSetPosition(moriModelRegisterSceneContent(g_lmapScene->model18C), 1.0f, 1.0f, 1.0f);
     for (s32 i = 0; i < dataTable2EType1Count(); i++) {
         DataTableEntry *entry = dataTable2EType1GetEntry(i);
         if (entry->key == player->equipped.body) {

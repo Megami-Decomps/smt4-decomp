@@ -3,7 +3,7 @@
 #include "common.h"
 #include <stddef.h>
 
-/* An effect emitter: the state FUN_00375c74 advances, then the particle arrays and the definition
+/* An effect emitter: the state effComputeParticleEmission advances, then the particle arrays and the definition
  * each emitter type lays out for itself. */
 struct ParticleEmissionState {
     /* 0x00 */ u32 unk00;

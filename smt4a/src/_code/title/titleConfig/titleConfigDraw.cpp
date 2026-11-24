@@ -1,7 +1,10 @@
 /* NON_MATCHING: 36 rows in three places, registers only (same instructions, frame and block layout as retail).
  * Entering the row frame retail copies the entry to r4 before reading its x through r0 (built: both halfwords
  * first, x in r2); in the cursor's first blend-state change the stack slot address and the previous state take
- * r2/r1 (built: r1/r2); the label position's y and x sums end in r1/r0 (built: r0/r1). */
+ * r2/r1 (built: r1/r2); the label position's y and x sums end in r1/r0 (built: r0/r1).
+ * Wave 91: retail spills the frame's x to sp+76 from r0, reuses r0 for g_titleConfig's address and reloads the x
+ * into r3 for the first draw; this build keeps it in r1 and copies it. The label sum's operand order has only two
+ * distinct forms (armcc sorts the operands; where the window's x/y stands does not matter), see smt4's twin. */
 #include "ui/UiSpriteApi.h"
 #include "title/titleConfig.h"
 #include "camp/RenderCtxA.h"

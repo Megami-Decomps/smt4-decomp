@@ -1,4 +1,5 @@
 #include "battle/btlEffect.h"
+#include "battle/BtlEffectFiles.h"
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
@@ -7,7 +8,6 @@ u32 taskCreateDraw(const char *name, u32 priority, u32, u32, s32 (*start)(u32), 
 u32 effectProcessCreate(u32 kind);
 void jobSetParent(u32 parent, u32 child);
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 clear);
-void FUN_004f55c8(void *data, BtlEffectJobA *owner);
 s32 btlEffectDispatchCurrentJob(u32 job);
 void btlEffectDestroy(u32 job);
 s32 btlEffectOverlayDraw(u32 job);
@@ -20,8 +20,8 @@ void btlEffectCreateTasks(BtlEffectJobA *owner)
     jobSetParent(owner->owner.parentJob, owner->jobB);
     owner->jobC = taskCreateDraw("Filter DrawUp", 0x73, 0, 0, btlEffectOverlayDraw, NULL, owner, owner->owner.parentJob);
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlEffect.cpp", 5329);
-    void *data = asdMemoryAllocTracked(0x100, 0x100, 0, 0x9c74, 1);
+    BtlEffectFiles *data = (BtlEffectFiles *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(BtlEffectFiles), 1);
     g_btlEffect.data = data;
-    FUN_004f55c8(data, owner);
+    btlEffectInitializeWork(data, owner);
 }
 }

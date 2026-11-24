@@ -10,7 +10,7 @@
 
 extern "C" {
 void FUN_00190e48(void);
-void FUN_001f40fc(void *icon, s32 x, s32 y);
+void buttonHelpDrawHighlightedLine(void *icon, s32 x, s32 y);
 void fadeObjectResetIfActive(void *object);
 void textDrawRangeFaded(const void *text, s32 x, s32 y, s32 fade, u32 start, s32 length, f32 scale);
 void renderCtxResetColorScale(RenderCtx *scene);
@@ -40,14 +40,14 @@ u8 FUN_002109cc(void)
                 if (help->text.useDirectoryText)
                     textDrawRangeFaded((const void *)help->text.directoryText, first->x, first->y, 0x15, 6, 0, 1.0f);
                 else if (help->text.highlightLine == 0)
-                    FUN_001f40fc(help->text.lines[0].text, first->x, first->y);
+                    buttonHelpDrawHighlightedLine(help->text.lines[0].text, first->x, first->y);
                 else
                     textDrawString((f32)first->x, (f32)first->y, 0.93f, 3, 0.0f, help->text.style, 1.0f, help->text.lines[0].text);
                 TextureTableEntryIV *second = asdTMTexTableEntryAt(0x12, 0x1E);
                 if (help->text.useDirectoryText)
                     textDrawRangeFaded((const void *)help->text.directoryText, second->x, second->y, 0x15, 6, 1, 1.0f);
                 else if (help->text.highlightLine == 1)
-                    FUN_001f40fc(help->text.lines[1].text, second->x, second->y);
+                    buttonHelpDrawHighlightedLine(help->text.lines[1].text, second->x, second->y);
                 else
                     textDrawString((f32)second->x, (f32)second->y, 0.93f, 3, 0.0f, help->text.style, 1.0f, help->text.lines[1].text);
             }

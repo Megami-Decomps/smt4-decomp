@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the process call's argument setup differs, as in FUN_0020e5f0 and FUN_00231464: retail loads the update callback before storing the global and forms the stack-argument pointer in r6 (the build in r0, loading the end callback early). */
+/* NON_MATCHING: only the process call's argument setup differs, as in FUN_0020e5f0 and btlGameOverCreateJobs: retail loads the update callback before storing the global and forms the stack-argument pointer in r6 (the build in r0, loading the end callback early). */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 

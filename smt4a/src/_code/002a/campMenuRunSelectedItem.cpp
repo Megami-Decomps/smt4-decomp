@@ -47,7 +47,7 @@ void playLogCreate(void);
 u32 uniteHasPendingIdle(void);
 void uniteSetMode(u8 mode);
 void campReleaseSlotTouchRegions(void);
-s32 FUN_0032fbd0(void *slot);
+s32 compendiumRecordMatchesSaved(void *slot);
 void fusionReleaseRegisteredHandle(void);
 void FUN_002c39dc(u32 first, u32 second, u32 third);
 void FUN_00284ee4(s32 start);
@@ -298,7 +298,7 @@ void campMenuRunSelectedItem(void)
             SaveSlotTableA *table = gameGetSlotTable();
             for (u16 i = 0; i < table->count; i++) {
                 s32 entry = table->party[i];
-                if (entry >= 0 && FUN_0032fbd0(&table->entries[entry]) == 0) {
+                if (entry >= 0 && compendiumRecordMatchesSaved(&table->entries[entry]) == 0) {
                     campSetSpriteAnimationPreset(2, 3, -1, 0);
                     bibleOpenMode1(0);
                     campChangeState(0x24);

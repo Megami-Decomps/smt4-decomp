@@ -46,4 +46,15 @@ static __inline void resetRequestOperation(RequestParameters *operation)
     operation->result = WindowStatusResult(operation->word3);
 }
 
+/* The kind of a request that failed with the result it carries. */
+enum { REQUEST_KIND_FAILED = 100 };
+
+/* Fails a request with `result`. The result is a value parameter: the menu's steps read the failed pair before
+ * they store the kind (AocMenu::runMainProcess, runResultProcess and pollContentStatus, both games). */
+static __inline void failRequestOperation(RequestParameters *operation, WindowStatusResult result)
+{
+    operation->kind = REQUEST_KIND_FAILED;
+    operation->result = result;
+}
+
 #endif

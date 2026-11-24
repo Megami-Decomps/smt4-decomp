@@ -1,5 +1,6 @@
 /* NON_MATCHING: the two action-mode mask tests use different scratch registers; the action scan matches. */
 #include "battle/BtlEntryA.h"
+#include "battle/BattleHelpers_Smt4a.h"
 #include "gamedata/ConsumableRecordA.h"
 #include "gamedata/EquipmentRecordA.h"
 #include "gamedata/GameSaveDataA.h"

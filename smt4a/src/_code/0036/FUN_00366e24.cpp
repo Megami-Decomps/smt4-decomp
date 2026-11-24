@@ -20,7 +20,7 @@ int mapEaseSceneHeading(void);
 int FUN_002e364c(int);
 int lmapCameraSetMode(int);
 int mapIfReleaseSlot3(void);
-int FUN_00324e38(unsigned int);
+int mapDepartSpawnPlayerEffect(unsigned int);
 int mapObjFindNearestPointByCategory(int, int, int, int *, float [7], unsigned int);
 int FUN_00327ee8(void);
 int sysPlayVoice(int);
@@ -60,7 +60,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: lmapCameraSetMode. */
 /* Supplied declaration required: mapIfReleaseSlot3. */
 /* Supplied declaration required: mapSetSceneState. */
-/* Supplied declaration required: FUN_00324e38. */
+/* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: mapObjFindNearestPointByCategory. */
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: sysPlayVoice. */
@@ -119,7 +119,7 @@ void FUN_00366e24(void)
                 if ((g_gameState.mapId != 0x26) && (g_gameState.mapId != 0x1a)) {
                   soundActorStartOnFreeChannel(0x10002bb);
                 }
-                FUN_00324e38(0xffffffff);
+                mapDepartSpawnPlayerEffect(0xffffffff);
                 libm_sinf();
                 libm_cosf();
                 messageVoiceBankGet();
@@ -288,11 +288,11 @@ void FUN_00366e24(void)
     if ((g_gameState.mapId != 0x26) && (g_gameState.mapId != 0x1a)) {
       if ((temp_v3 == 1 || temp_v3 == 0xb) || (temp_v3 == 0x1c || temp_v3 == 0x29)) {
         soundActorStartOnFreeChannel((temp_v3 & 3) + 0x10002bb);
-        FUN_00324e38(0xffffffff);
+        mapDepartSpawnPlayerEffect(0xffffffff);
       }
     }
     else if ((temp_v3 == 1 || temp_v3 == 0xb) || (temp_v3 == 0x1c || temp_v3 == 0x29)) {
-      FUN_00324e38(0xffffffff);
+      mapDepartSpawnPlayerEffect(0xffffffff);
     }
     if (*(int *)(g_lmapScene + 8) == 0x1e) {
       FUN_002342b8();

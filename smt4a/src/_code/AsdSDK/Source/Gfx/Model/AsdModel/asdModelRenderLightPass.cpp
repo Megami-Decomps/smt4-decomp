@@ -27,7 +27,6 @@ struct ModelLightPassState {
 extern "C" {
 extern ModelLightPassState g_asdLightCount;
 void FUN_0017712c(void*, void*, u32, u32);
-void FUN_00197eb0(void*, u32);
 void sceneTraverserVisit(void*, void*);
 void FUN_00176800(void*, void*, u32);
 void nw_gfx_SceneNode_AttachChild(void*, u32);
@@ -57,7 +56,7 @@ void asdModelRenderLightPass(void)
     void* savedContext = passOwner(settings)->renderContext;
     FUN_0017712c(passOwner(settings), settings->attachInfo[0], settings->node0, settings->slotState[0]);
     if (g_asdLightCount.visitEnabled && !g_asdLightCount.visitSuppressed) {
-        FUN_00197eb0(passVisitor(settings)->parameters, settings->sceneGroupRoot[0]);
+        FUN_00197eb0((ModelSlotVectorA *)passVisitor(settings)->parameters, (s32)settings->sceneGroupRoot[0]);
         sceneTraverserVisit(settings->attachInfo[0], passVisitor(settings));
     }
     if (!g_asdLightCount.skipPass) {

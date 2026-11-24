@@ -1,59 +1,22 @@
-/* NON_MATCHING: the process callback load and argument setup are interleaved differently with publication of the topic. */
+/* NON_MATCHING: retail loads the process name and FUN_0035d080 after the topic is published (8 lines). A plain
+ * `static` topicCreateProcess(name) helper shared with newHighwayInfoCreate gives IDENTICAL here (and 10 lines
+ * there), but no out-of-line function with that body exists in retail and `static __inline` gives 25/29: the
+ * plain-static form was chosen by score (wave 91 review), so both creators call asdProcessCreateSimple in place. */
+#include "ui/PartnerTopic.h"
 #include "shard/W5_W5Match7_ResourceHandles.h"
-#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
-
-/* The partner topic window's state. */
-class PartnerTopic {
-public:
-    PartnerTopic()
-    {
-        unk020 = 0;
-        unk024 = 0;
-        unk028 = 0;
-        unk02C = 0;
-        unk030 = 0;
-        unk5E0 = 0;
-        unk010 = 0;
-    }
-    static void *operator new(u32 bytes) throw();
-
-    /* 0x000 */ u32 process;
-    /* 0x004 */ u8 unk004[0xC];
-    /* 0x010 */ u32 unk010;
-    /* 0x014 */ u8 unk014[0xC];
-    /* 0x020 */ u32 unk020;
-    /* 0x024 */ u32 unk024;
-    /* 0x028 */ u32 unk028;
-    /* 0x02C */ u32 unk02C;
-    /* 0x030 */ u32 unk030;
-    /* 0x034 */ u8 unk034[0x5AC];
-    /* 0x5E0 */ u32 unk5E0;
-    /* 0x5E4 */ u8 unk5E4[0xF4];
-};
-
-typedef char PartnerTopicSize[sizeof(PartnerTopic) == 0x6D8 ? 1 : -1];
-
-typedef void (*TopicCallback)(void *);
-void *PartnerTopic::operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
+#include "code/Code0015_Smt4a.h"
 
 extern "C" {
-void FUN_0035d080(void *);
-void engineResourceSetSecondaryValue(void *);
-void FUN_0037d994(void *);
-void taskCreateDraw(const char *name, s32 group, s32 startDelay, s32 endDelay, TopicCallback onUpdate, void *onEnd,
-                    void *work, u32 owner);
-void FUN_003f5598(PartnerTopic *topic);
 
 /* Creates the partner topic window: its state, the update process and the three draw tasks. */
 void partnerTopicCreate(void)
 {
-    g_engineResourceHandles.secondary = new PartnerTopic;
-    PartnerTopic *topic = static_cast<PartnerTopic *>(g_engineResourceHandles.secondary);
-    topic->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("PartnerTopic PROC"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0035d080), NULL, NULL);
-    taskCreateDraw("PartnerTopic UL", 0x81, 0, 0, engineResourceSetSecondaryValue, NULL, NULL, topic->process);
-    taskCreateDraw("PartnerTopic UR", 0xdd, 0, 0, engineResourceSetSecondaryValue, NULL, NULL, topic->process);
-    taskCreateDraw("PartnerTopic DD", 0xeb, 0, 0, FUN_0037d994, NULL, NULL, topic->process);
-    FUN_003f5598(topic);
+    g_engineResourceHandles.secondary = new SecondaryResourceWork;
+    SecondaryResourceWork *topic = (SecondaryResourceWork *)g_engineResourceHandles.secondary;
+    topic->job = asdProcessCreateSimple((const s8 *)"PartnerTopic PROC", 4, 0, 0, FUN_0035d080, NULL, 0);
+    taskCreateDraw((const s8 *)"PartnerTopic UL", 0x81, 0, 0, engineResourceSetSecondaryValue, NULL, 0, (void *)topic->job);
+    taskCreateDraw((const s8 *)"PartnerTopic UR", 0xdd, 0, 0, engineResourceSetSecondaryValue, NULL, 0, (void *)topic->job);
+    taskCreateDraw((const s8 *)"PartnerTopic DD", 0xeb, 0, 0, FUN_0037d994, NULL, 0, (void *)topic->job);
+    partnerTopicLoadResources(topic);
 }
-}
+} /* extern "C" */

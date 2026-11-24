@@ -17,7 +17,7 @@ int uiFadeRequestHalf(void);
 int resourceRunOperationIfUnblocked(...);
 int listCursorGetRowIfUnblocked(...);
 int rt_aeabi_memclr(...);
-int FUN_002f15f8(...);
+int uiQuestOpenDetail(...);
 int sysPlayVoice(...);
 int uiQuestLoadDetailText(...);
 void uiQuestRefreshDetailPages(int);
@@ -76,7 +76,7 @@ extern int messageGetChoiceResult(void);
 extern int gridNavigationGetItemCount(int);
 extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: rt_aeabi_memclr. */
-/* Supplied declaration required: FUN_002f15f8. */
+/* Supplied declaration required: uiQuestOpenDetail. */
 /* Supplied declaration required: questUiPlaySelectionSound. */
 extern int uiQuestStepIntro(int);
 /* Supplied declaration required: buttonHelpGetValue. */
@@ -369,7 +369,7 @@ unsigned int uiQuestCalc(void)
       temp_v3 = rosterGetLeaderId();
       *(unsigned short *)(temp_v1 + 0xccc) = temp_v3;
       temp_v7 = rosterGetLeaderId();
-      FUN_002f15f8(temp_v7,0);
+      uiQuestOpenDetail(temp_v7,0);
       *(unsigned char *)(temp_v1 + 0x93f) = 1;
       temp_v2 = partyEntryIsAvailable(*(unsigned short *)(temp_v1 + 0xccc));
       *(unsigned char *)(temp_v1 + 0x940) = temp_v2;
@@ -404,7 +404,7 @@ unsigned int uiQuestCalc(void)
       temp_v3 = rosterGetLeaderId();
       *(unsigned short *)(temp_v1 + 0xccc) = temp_v3;
       temp_v7 = rosterGetLeaderId();
-      FUN_002f15f8(temp_v7,0);
+      uiQuestOpenDetail(temp_v7,0);
       *(unsigned char *)(temp_v1 + 0x93f) = 1;
       temp_v2 = partyEntryIsAvailable(*(unsigned short *)(temp_v1 + 0xccc));
       *(unsigned char *)(temp_v1 + 0x940) = temp_v2;
@@ -437,7 +437,7 @@ unsigned int uiQuestCalc(void)
     temp_v3 = rosterGetLeaderId();
     *(unsigned short *)(temp_v1 + 0xccc) = temp_v3;
     temp_v7 = rosterGetLeaderId();
-    FUN_002f15f8(temp_v7,0);
+    uiQuestOpenDetail(temp_v7,0);
     temp_v2 = 1;
     *(unsigned char *)(temp_v1 + 0x93f) = 1;
     *(unsigned char *)(temp_v1 + 0x941) = 1;
@@ -617,7 +617,7 @@ joined_r0x002167bc:
       temp_v3 = rosterGetLeaderId();
       *(unsigned short *)(temp_v1 + 0xccc) = temp_v3;
       temp_v7 = rosterGetLeaderId();
-      FUN_002f15f8(temp_v7,0);
+      uiQuestOpenDetail(temp_v7,0);
       *(unsigned char *)(temp_v1 + 0x93f) = 1;
       *(unsigned char *)(temp_v1 + 0x941) = 1;
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;

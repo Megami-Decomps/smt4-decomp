@@ -1,3 +1,4 @@
+#include "battle/BtlUiItemDescriptions.h"
 #include "shard/S1ListPanel.h"
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
@@ -7,8 +8,8 @@ extern "C" {
 void efctSetSpeed(f32 speed);
 void uiDrawItemOrStatusIcon(u32 value, s32 x, s32 y, s32 priority, s32 flags);
 
-// Draw the layered HUD ornament with additive and normal-alpha blend sections.
-void btlDrawLayeredHud(u32 context, s32 x, s32 y, u32 value, f32 speed)
+/* Draws the layered HUD ornament with additive and normal-alpha blend sections. */
+void btlDrawLayeredHud(BtlUiA *context, s32 x, s32 y, u32 value, f32 speed)
 {
     efctSetSpeed(speed);
     texDrawTableEntryAtStoredOrigin(2, 12, 131, x, y, 11);
@@ -25,4 +26,4 @@ void btlDrawLayeredHud(u32 context, s32 x, s32 y, u32 value, f32 speed)
     uiDrawItemOrStatusIcon(value, layout->x + x, layout->y + y, 26, 0);
     efctSetSpeed(1.0f);
 }
-}
+} /* extern "C" */

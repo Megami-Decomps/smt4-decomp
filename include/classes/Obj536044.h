@@ -22,6 +22,7 @@ extern "C" void shopTrackSelectedItemPreview(Obj536044 *scene);
 extern "C" void shopDrawSelectedItem(Obj536044 *shop);
 extern "C" void FUN_00494d68(Obj536044 *shop, s32 row, s32 selected, const EquipmentMenuItem *entry);
 extern "C" void shopDrawAppraisalRow(Obj536044 *shop, s32 row, s32 selected, s32 index);
+extern "C" void shopDrawQuantityPanel(Obj536044 *shop);
 
 /* A scene whose step functions are listed in the table at 0x536044 (named after it until its real
  * name is known): the table holds member-function pointers, not a vtable. */
@@ -153,6 +154,7 @@ protected:
     friend void shopDrawSelectedItem(Obj536044 *shop);
     friend void FUN_00494d68(Obj536044 *shop, s32 row, s32 selected, const EquipmentMenuItem *entry);
     friend void shopDrawAppraisalRow(Obj536044 *shop, s32 row, s32 selected, s32 index);
+    friend void shopDrawQuantityPanel(Obj536044 *shop);
     friend struct Obj536044LayoutCheck;
 };
 

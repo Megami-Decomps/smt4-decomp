@@ -21,21 +21,31 @@ typedef struct ModelSlot {
     /* 0x40 */ ModelSlotNodes nodes;
 } ModelSlot;
 
-/* Pointer vector embedded in each registered slot-list object. */
-struct ModelSlotVector {
+/* The range embedded in each registered slot-list object. */
+template <class Slot>
+struct ModelSlotVectorOf {
     /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ ModelSlot **begin;
-    /* 0x0C */ ModelSlot **end;
-    /* 0x10 */ ModelSlot **capacity;
+    /* 0x08 */ Slot *begin;
+    /* 0x0C */ Slot *end;
+    /* 0x10 */ Slot *capacity;
 };
 
-typedef struct ModelSlotList {
+template <class Slot>
+struct ModelSlotListOf {
     /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ ModelSlotVector slots;
-} ModelSlotList;
+    /* 0x10 */ ModelSlotVectorOf<Slot> slots;
+};
 
-typedef char ModelSlotListSizeCheck[sizeof(ModelSlotList) == 0x24 ? 1 : -1];
-typedef char ModelSlotVectorOffsetCheck[offsetof(ModelSlotList, slots) == 0x10 ? 1 : -1];
+typedef ModelSlotVectorOf<ModelSlot *> ModelSlotVector;
+typedef ModelSlotListOf<ModelSlot *> ModelSlotList;
+
+/* Apocalypse's out-of-line remove_copy uses signed word handles for the same slots. */
+typedef ModelSlotVectorOf<s32> ModelSlotVectorA;
+typedef ModelSlotListOf<s32> ModelSlotListA;
+
+typedef char ModelSlotListSizeCheck[sizeof(ModelSlotList) == 0x24 && sizeof(ModelSlotListA) == 0x24 ? 1 : -1];
+typedef char ModelSlotVectorOffsetCheck[offsetof(ModelSlotList, slots) == 0x10 &&
+    offsetof(ModelSlotListA, slots) == 0x10 ? 1 : -1];
 
 /* Selects a slot by index. */
 typedef struct ModelSelector {
@@ -55,6 +65,7 @@ extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
 void runtimeDispatchObjectRelease(u32 **ref);
+bool FUN_00197eb0(ModelSlotVectorA *slots, s32 handle);
 #ifdef __cplusplus
 }
 #endif

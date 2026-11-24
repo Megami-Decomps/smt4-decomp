@@ -5,7 +5,7 @@
 extern "C" {
 void FUN_0033c468(PartyPanelWidget* widget);
 u16* FUN_0029acb0();
-s32 FUN_0028dbe0(PartyPanelWidget* widget);
+s32 ailmentSelectorGetColor(PartyPanelWidget* widget);
 }
 
 /* Polls every party row and stock cell and returns the status colour of the last one that shows the selected
@@ -18,22 +18,22 @@ extern "C" u32 partyPanelPollSelectedStatusColor()
         FUN_0033c468(panel->characters[i]);
         const s16 *selectedId = (const s16 *)FUN_0029acb0();
         if (partyWidgetGetUnitId(panel->characters[i]) < 0) {
-            if (*selectedId < 0 && FUN_0028dbe0(panel->characters[i]) != -1) {
-                color = FUN_0028dbe0(panel->characters[i]);
+            if (*selectedId < 0 && ailmentSelectorGetColor(panel->characters[i]) != -1) {
+                color = ailmentSelectorGetColor(panel->characters[i]);
             }
-        } else if (gameGetUnitRecord(partyWidgetGetUnitId(panel->characters[i]))->id == *selectedId && FUN_0028dbe0(panel->characters[i]) != -1) {
-            color = FUN_0028dbe0(panel->characters[i]);
+        } else if (gameGetUnitRecord(partyWidgetGetUnitId(panel->characters[i]))->id == *selectedId && ailmentSelectorGetColor(panel->characters[i]) != -1) {
+            color = ailmentSelectorGetColor(panel->characters[i]);
         }
     }
     for (s32 i = 0; i < 24; ++i) {
         FUN_0033c468(panel->demons[i]);
         const s16 *selectedId = (const s16 *)FUN_0029acb0();
         if (partyWidgetGetUnitId(panel->demons[i]) < 0) {
-            if (*selectedId < 0 && FUN_0028dbe0(panel->demons[i]) != -1) {
-                color = FUN_0028dbe0(panel->demons[i]);
+            if (*selectedId < 0 && ailmentSelectorGetColor(panel->demons[i]) != -1) {
+                color = ailmentSelectorGetColor(panel->demons[i]);
             }
-        } else if (gameGetUnitRecord(partyWidgetGetUnitId(panel->demons[i]))->id == *selectedId && FUN_0028dbe0(panel->demons[i]) != -1) {
-            color = FUN_0028dbe0(panel->demons[i]);
+        } else if (gameGetUnitRecord(partyWidgetGetUnitId(panel->demons[i]))->id == *selectedId && ailmentSelectorGetColor(panel->demons[i]) != -1) {
+            color = ailmentSelectorGetColor(panel->demons[i]);
         }
     }
     return color;

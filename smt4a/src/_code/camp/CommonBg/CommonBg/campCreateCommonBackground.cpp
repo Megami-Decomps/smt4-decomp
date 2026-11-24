@@ -2,11 +2,11 @@
 #include "AsdSDK/AsdDebug.h"
 #include <string.h>
 #include "event/bustupEvent/BustupTex.h"
+#include "AsdSDK/Source/Gfx/Text/AsdTextA.h"
 
 extern "C" {
 extern CommonBgGlobals g_commonBg;
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
-u32 spriteHandleCreate(u32);
 void asdTextFormatStream(u32, s32, u32, s32, s32, const char *);
 void asdTMTexTableLoadSprites(u32);
 s32 FUN_0031a5e4(u32 process);
@@ -21,10 +21,10 @@ void campCreateCommonBackground(void)
     CommonBgState *work = static_cast<CommonBgState *>(asdMemoryAlloc(0x100, 0x100, 0, 0x24, 1));
     memset(work, 0, sizeof(*work));
     g_commonBg.work = work;
-    work->titleSprite = spriteHandleCreate(0);
+    work->titleSprite = (u32)spriteHandleCreate(0);
     asdTextFormatStream(work->titleSprite, 2, 0xFFFFFFFF, 0, 0,
         "\x82\x64\x82\x8e\x82\x87\x82\x81\x82\x87\x82\x85");
-    work->promptSprite = spriteHandleCreate(0);
+    work->promptSprite = (u32)spriteHandleCreate(0);
     asdTextFormatStream(work->promptSprite, 2, 0xFFFFFFFF, 0, 0,
         "\x82\x6f\x82\x8c\x82\x85\x82\x81\x82\x93\x82\x85\x81\x40\x82\x94\x82\x8f\x82\x95\x82\x83\x82\x88\x81\x40\x82\x94\x82\x88\x82\x85\x81\x40\x82\x89\x82\x83\x82\x8f\x82\x8e\x81\x44");
     asdTMTexTableLoadSprites(34);

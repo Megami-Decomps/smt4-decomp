@@ -1,4 +1,5 @@
 #include "battle/BtlMainAccess.h"
+#include "battle/BattleHelpers_Smt4a.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -6,7 +7,6 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-s32 btlCombatantMatchesCategory(BtlCombatantEntryA *entry, s32 arg);
 
 /* Script query: reports whether any marked, required, non-excluded battle entry passes
  * btlCombatantMatchesCategory with argument 0. */

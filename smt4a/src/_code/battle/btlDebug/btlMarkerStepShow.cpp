@@ -43,7 +43,7 @@ extern const Vec3 DAT_005e1c2c;
 BtlSide* btlMainFindEntryByListedId(void* main, s32 index);
 Vec3 btlGetCombatantDrawPosition(void* main, s32 index, s32 arg);
 s16 btlUiPositionRequestAdd(BtlUiA *ui, s32 a, s32 b, f32 x, f32 y, f32 z);
-s16 FUN_004aace8(BtlUiA *ui, s32 id, s32 a, s32 x, s32 y);
+s16 btlUiAddPositionedMarker(BtlUiA *ui, s32 id, s32 a, s32 x, s32 y);
 s32 FUN_004aa1e8(BtlUiA *ui, s32 handle);
 
 #define MASK64(offset) (*reinterpret_cast<u64*>(g_btlActionReflect + (offset)))
@@ -107,21 +107,21 @@ void btlMarkerStepShow(u32 unused, MarkerStep* step)
             s16 y = (s16)(s32)step->actor->position.y;
             switch (step->kind) {
             case 1:
-                step->handle = FUN_004aace8(g_btlUiBlock, id, 1, x, y);
+                step->handle = btlUiAddPositionedMarker(g_btlUiBlock, id, 1, x, y);
                 break;
             case 2:
                 if (step->doubled != 0) {
-                    step->handle = FUN_004aace8(g_btlUiBlock, id, 0, x, y);
-                    FUN_004aace8(g_btlUiBlock, id, 1, (s16)(x - 22), (s16)(y - 13));
+                    step->handle = btlUiAddPositionedMarker(g_btlUiBlock, id, 0, x, y);
+                    btlUiAddPositionedMarker(g_btlUiBlock, id, 1, (s16)(x - 22), (s16)(y - 13));
                 } else {
-                    step->handle = FUN_004aace8(g_btlUiBlock, id, 0, x, y);
+                    step->handle = btlUiAddPositionedMarker(g_btlUiBlock, id, 0, x, y);
                 }
                 break;
             case 3:
-                step->handle = FUN_004aace8(g_btlUiBlock, id, 3, x, y);
+                step->handle = btlUiAddPositionedMarker(g_btlUiBlock, id, 3, x, y);
                 break;
             case 4:
-                step->handle = FUN_004aace8(g_btlUiBlock, id, 2, x, y);
+                step->handle = btlUiAddPositionedMarker(g_btlUiBlock, id, 2, x, y);
                 break;
             default:
                 step->done = 0;

@@ -1,4 +1,7 @@
-/* NON_MATCHING: retail materialises the zero (archivePathDeviceCreateFile's high size word, later the cleared file fields) once in r6 before fileSystemRequireReady, and schedules `mov r0, r5` before each failure branch; the rest matches. */
+/* NON_MATCHING: 17 lines: retail materialises the create call's zero high size word once before fileSystemRequireReady
+ * and loads the write mode before the output handle address. A `const u64 fileSize = size;` widened before
+ * fileSystemRequireReady gives 2 lines, but it is a single-use temporary (wave 91 review); the open-coded
+ * field clears (14 lines) are the shared romOpenFileOpen, as in romFileCreateSized. */
 #include "sys/ProcessResult.h"
 #include "shard/RomFileOpenState.h"
 #include "nn/fs/ArchiveCreateFile.h"
@@ -30,36 +33,32 @@ static __inline void romFileClose(RomOpenFile *file)
     }
 }
 
-// Create a file of the requested size, then open it for writing.
+/* Creates a file of the requested size, then opens it for writing. */
 nn::Result FUN_00220330(RomFileOpenState *state, const void *path, u32 size)
 {
-    u8 normalized[496];
+    s16 normalized[248];
     nn::Result result;
-    if (!pathBuildWide(static_cast<const char *>(path), reinterpret_cast<s16 *>(normalized), 1)) {
-        result = 0xe0e046bc;
+    if (!pathBuildWide((const char *)path, normalized, 1)) {
+        result = FILE_RESULT_PATH_TOO_LONG;
         processResultSetValue(result);
         return result;
     }
     fileSystemRequireReady();
-    result = archivePathDeviceCreateFile(reinterpret_cast<const u16 *>(normalized), size);
+    result = archivePathDeviceCreateFile((const u16 *)normalized, size);
     processResultSetValue(result);
     u32 failed = result & 0x80000000;
     if ((s32)failed < 0) {
         FUN_00254824(result, failed);
         return result;
     }
-    state->file.unk0c = 0;
-    state->file.unk10 = 0;
-    state->file.unk04 = 0;
-    state->file.unk08 = 0;
-    result = archivePathDeviceOpen(&state->file.handle, reinterpret_cast<const u16 *>(normalized), 2);
-    processResultSetValue(result);
-    failed = result & 0x80000000;
+    s32 openCode = romOpenFileOpen(&state->file, normalized, ROM_FILE_OPEN_WRITE);
+    processResultSetValue(openCode);
+    failed = openCode & 0x80000000;
     if ((s32)failed < 0) {
-        FUN_00254824(result, failed);
+        FUN_00254824(openCode, failed);
         romFileClose(&state->file);
-        return result;
+        return openCode;
     }
     return fileRecordResult(0);
 }
-}
+} /* extern "C" */

@@ -2,16 +2,9 @@
 #include "shard/AnimCurve.h"
 
 extern "C" {
-const AnimKey *FUN_003f887c(const QuantizedAnimCurve *, f32);
-
 static f32 animKeyTime(const QuantizedAnimCurve *curve, const AnimKey *key)
 {
     return curve->timeScale * (static_cast<f32>(key->frame) * 0.03125f);
-}
-
-static __inline f32 animKeyRawValue(const AnimKey *key)
-{
-    return key->data.value;
 }
 
 static f32 animKeyValue(const QuantizedAnimCurve *curve, const AnimKey *key)
@@ -22,7 +15,7 @@ static f32 animKeyValue(const QuantizedAnimCurve *curve, const AnimKey *key)
 // Linearly interpolate the unsigned key values and apply the curve's scale and bias.
 f32 FUN_003f938c(const QuantizedAnimCurve *curve, f32 time)
 {
-    const AnimKey *key = FUN_003f887c(curve, time);
+    const AnimKey *key = animCurveFindQuantizedKey(curve, time);
     f32 keyTime = animKeyTime(curve, key);
     const AnimKey *last = &curve->keys[curve->keyCount - 1];
     if (keyTime == time || key == last)

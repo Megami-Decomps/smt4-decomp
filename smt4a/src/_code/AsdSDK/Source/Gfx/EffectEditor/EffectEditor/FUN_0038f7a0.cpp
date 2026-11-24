@@ -10,7 +10,7 @@ int FUN_0027134c(int, float *);
 int FUN_002fe2e8(int, float *);
 int FUN_00321d7c(...);
 int FUN_00321e98(...);
-int FUN_00375c74(int, float *, char [4], int *);
+int effComputeParticleEmission(int, float *, char [4], int *);
 int randomAdvanceShiftRegister(...);
 int shiftRandomNextFraction(...);
 int VectorSignedToFloat(...);
@@ -77,7 +77,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_002fe2e8. */
 /* Supplied declaration required: FUN_00321d7c. */
 /* Supplied declaration required: FUN_00321e98. */
-/* Supplied declaration required: FUN_00375c74. */
+/* Supplied declaration required: effComputeParticleEmission. */
 extern int FUN_0037a844(void);
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: shiftRandomNextFraction. */
@@ -148,7 +148,7 @@ void FUN_0038f7a0(int param_1)
     temp_v16 = pfVar10[0x38];
     temp_v2 = temp_v19;
     gfxQuaternionWorkspaceBuildMatrix();
-    FUN_00375c74(param_1,pfVar10,temp_v28,&temp_v25);
+    effComputeParticleEmission(param_1,pfVar10,temp_v28,&temp_v25);
     temp_v6 = 0;
     if (temp_v7 != 0) {
       temp_v21 = 0.5f;

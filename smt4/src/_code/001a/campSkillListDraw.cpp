@@ -28,7 +28,7 @@ void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide);
 s32 FUN_002987d8(s32 unit, s32 skill);
 s32 FUN_00298848(u32 skill, s32 unit);
 void FUN_002b6c34(s32 skill, s32 x, s32 y, s32 depth, s32 player, s32 highlight);
-void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *text);
+void textDrawFormattedAligned(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *text);
 void drawSetColorFromRGBA8(u32 packed);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 void gxResetColorQuadToWhite(void); // declcheck: local (ui/AnimatedMessage.h redeclares texDrawCompositeSprite)
@@ -74,7 +74,7 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
         } else {
             sprintf(text, "%d", appGetRemainingCapacity(skill));
         }
-        FUN_002bdf94(0, row->x + part->x + x, part->y + row->y + y, 1, 4, 0x6f, text);
+        textDrawFormattedAligned(0, row->x + part->x + x, part->y + row->y + y, 1, 4, 0x6f, text);
 
         part = asdTMTexTableEntryAt(0x1d, 0x43f);
         FUN_002b6c34((s16)skill, part->x + row->x + x, row->y + part->y + y, 0x6f, player, 0);
@@ -121,7 +121,7 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
         } else {
             sprintf(text, "%d", appGetRemainingCapacity(skill));
         }
-        FUN_002bdf94(0, row->x + part->x + x, part->y + row->y + y, 1, 4, 0x83, text);
+        textDrawFormattedAligned(0, row->x + part->x + x, part->y + row->y + y, 1, 4, 0x83, text);
         texDrawTableEntryAtStoredOrigin(2, 0x1d, 0x445, row->x + x, row->y + y, 0x83);
 
         part = asdTMTexTableEntryAt(0x1d, 0x448);

@@ -1,7 +1,7 @@
-/* NON_MATCHING: instruction count and control flow match (105 rows, one shared return); the action-slot address scheduling and the history-index register assignment differ. */
+/* NON_MATCHING: action-slot address scheduling and history-copy scratch register allocation differ. */
 #include "battle/btlAction.h"
 #include "battle/btlUnit.h"
-#include "battle/BtlGlobals.h"
+#include "battle/BtlActionSlots.h"
 
 struct UnitCommandRecord {
     u16 command, argument0, argument1, argument2;
@@ -32,12 +32,6 @@ struct BattleCommandOwner {
     BattleCommandState *battle;
 };
 
-struct BattleActionSlot {
-    u8 unk00[9];
-    u8 phase;
-    u8 unk0a[0x124a];
-};
-
 static inline UnitCommandState *unitCommandState(BtlUnitA *source)
 {
     return reinterpret_cast<UnitCommandState *>(source->data);
@@ -49,10 +43,8 @@ void FUN_003e7ef0(BattleCommandState *battle);
 u32 battleActionSnapshotCommand(BattleCommandOwner *owner, BtlUnitA *source)
 {
     FUN_003e7ef0(owner->battle);
-    // The action block uses 0x495-word per-actor slots.
-    BattleActionSlot *action = reinterpret_cast<BattleActionSlot *>(
-        reinterpret_cast<u32 *>(g_btlAction.slots) + owner->battle->actionIndex * 0x495);
-    action->phase = 0x1f;
+    enum { BTL_COMMAND_SNAPSHOT = 0x1F };
+    btlActionGetSlot(owner->battle->actionIndex)->unit.command = BTL_COMMAND_SNAPSHOT;
     if (source->data == NULL) {
         owner->battle->pending.unit = 0;
         owner->battle->pending.command = 0;

@@ -551,7 +551,7 @@ extern char FUN_00386720(void);
 extern int dataTable2FType0GetEntry(int);
 /* Supplied declaration required: uiPlayGatedActionFeedback. */
 /* Supplied declaration required: mapFlagSetNormalizedId. */
-extern int FUN_003ae4d0(unsigned int);
+extern int msSearchFindIndexById(unsigned int);
 /* Supplied declaration required: naviMainFinishRequest. */
 /* Supplied declaration required: sysClearCachedFlag. */
 /* Supplied declaration required: mapRestoreSavedSelection. */
@@ -559,7 +559,7 @@ extern int FUN_003ae4d0(unsigned int);
 /* Supplied declaration required: FUN_003b5c54. */
 /* Supplied declaration required: FUN_003c91e8. */
 /* Supplied declaration required: messageStartIntroAnimation. */
-extern int FUN_003cd4b4(unsigned int);
+extern int dataTable23FindAvailableRule(unsigned int);
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d502c. */
@@ -1957,7 +1957,7 @@ LAB_00278b38:
                             if (DAT_005f16ec == -1) {
                               puVar2[3] = 0x43;
                               puVar2[4] = 0;
-                              temp_v8 = FUN_003ae4d0(DAT_005f163c);
+                              temp_v8 = msSearchFindIndexById(DAT_005f163c);
                               if (temp_v8 == -1) {
                                 return 0;
                               }
@@ -2013,7 +2013,7 @@ LAB_00278b38:
                           fireEntriesMatchingPair(DAT_005f1725,DAT_005f1726);
                           fireEntriesMatchingPair(DAT_005f1727,DAT_005f1728);
                           fireEntriesMatchingPair(DAT_005f1729,DAT_005f172a);
-                          temp_v8 = FUN_003cd4b4(DAT_005f163c);
+                          temp_v8 = dataTable23FindAvailableRule(DAT_005f163c);
                           if (temp_v8 != 0) {
                             mapPopupReset();
                             DAT_005f1614 = 1;
@@ -2050,7 +2050,7 @@ LAB_00278b38:
                         fireEntriesMatchingPair(DAT_005f1725,DAT_005f1726);
                         fireEntriesMatchingPair(DAT_005f1727,DAT_005f1728);
                         fireEntriesMatchingPair(DAT_005f1729,DAT_005f172a);
-                        temp_v8 = FUN_003cd4b4(DAT_005f163c);
+                        temp_v8 = dataTable23FindAvailableRule(DAT_005f163c);
                         if (temp_v8 != 0) {
                           mapPopupReset();
                           DAT_005f1614 = 1;
@@ -2089,7 +2089,7 @@ LAB_00278b38:
                       fireEntriesMatchingPair(DAT_005f1725,DAT_005f1726);
                       fireEntriesMatchingPair(DAT_005f1727,DAT_005f1728);
                       fireEntriesMatchingPair(DAT_005f1729,DAT_005f172a);
-                      temp_v8 = FUN_003cd4b4(DAT_005f163c);
+                      temp_v8 = dataTable23FindAvailableRule(DAT_005f163c);
                       if (temp_v8 != 0) {
                         mapPopupReset();
                         DAT_005f1614 = 1;

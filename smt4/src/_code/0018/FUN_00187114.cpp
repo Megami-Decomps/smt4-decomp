@@ -23,7 +23,7 @@ int gridNavigationGetItemCount(...); // declcheck: local (the shared declaration
 int skillDataFindById(void);
 int FUN_002b6c34(...);
 int aocIndexValueOrDefault(...);
-int FUN_002bdf94(...);
+int textDrawFormattedAligned(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
@@ -72,7 +72,7 @@ extern int partyMemberFindById(unsigned short);
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: aocIndexValueOrDefault. */
-/* Supplied declaration required: FUN_002bdf94. */
+/* Supplied declaration required: textDrawFormattedAligned. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -253,7 +253,7 @@ LAB_0018733c:
         }
         texDrawCompositeSprite(2,0x1a,7,*(short *)(temp_v5 + 8) + temp_v9,*(short *)(temp_v5 + 10) + param_2,0xb5);
         temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x413));
-        FUN_002bdf94(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v9,
+        textDrawFormattedAligned(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v9,
                      (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,1,4,0xba,
                      "%d",temp_v20);
       }
@@ -426,7 +426,7 @@ LAB_001876ec:
                              0xc9,temp_v17,0);
                 temp_v10 = appGetRemainingCapacity(*(unsigned short *)(temp_v19 + 0xa2));
                 temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x508));
-                FUN_002bdf94(0,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v9 + 8) + param_1,
+                textDrawFormattedAligned(0,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v9 + 8) + param_1,
                              (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,1
                              ,4,0xc9,"%d",temp_v10);
               }
@@ -464,7 +464,7 @@ LAB_001876ec:
                 textDrawString(2,0xff,temp_v16);
                 temp_v10 = appGetRemainingCapacity(*(unsigned short *)(temp_v19 + 0xa2));
                 temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4fb));
-                FUN_002bdf94(0,*(short *)(temp_v8 + 8) + temp_v5,*(short *)(temp_v8 + 10) + param_2,1,4,
+                textDrawFormattedAligned(0,*(short *)(temp_v8 + 8) + temp_v5,*(short *)(temp_v8 + 10) + param_2,1,4,
                              0xc9,"%d",temp_v10);
                 temp_v8 = g_titleScene;
                 if (-1 < temp_v4) {
@@ -563,7 +563,7 @@ LAB_001876e0:
     temp_v10 = appGetRemainingCapacity(*(unsigned int *)(temp_v2 + 0x540));
     texDrawCompositeSprite(2,0x1a,7,*(short *)(temp_v3 + 8) + temp_v8,*(short *)(temp_v3 + 10) + param_2,0xb5);
     temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x413));
-    FUN_002bdf94(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v8,
+    textDrawFormattedAligned(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v8,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,1,4,0xba,
                  "%d",temp_v10);
   }

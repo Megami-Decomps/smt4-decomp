@@ -503,7 +503,7 @@ extern int FUN_0021e4bc(void);
 /* Supplied declaration required: mapInitializeSavedAndTargetState. */
 /* Supplied declaration required: navigationRequestFieldMode. */
 /* Supplied declaration required: FUN_0027052c. */
-extern int FUN_00270e34(void);
+extern int mapStartEventScript(void);
 /* Supplied declaration required: mapAdjustPositionToGround. */
 /* Supplied declaration required: FUN_00271010. */
 /* Supplied declaration required: FUN_002712dc. */
@@ -554,7 +554,7 @@ extern int dataTable2fSub0GetRecord(int);
 extern int FUN_00276264(void);
 extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: navigationFinishReadyField. */
-extern int FUN_00276348(int);
+extern int msSearchFindIndexById(int);
 /* Supplied declaration required: navigationApplyOptionalValue. */
 /* Supplied declaration required: navigationApplyArguments. */
 /* Supplied declaration required: aocSelectedRecordIsUnavailable. */
@@ -693,7 +693,7 @@ extern unsigned short gameFlagsGetWorkValue(void);
 extern int dataTableFindFirstPermittedRecordIndex(int);
 /* Supplied declaration required: FUN_00316de4. */
 /* Supplied declaration required: mapMainResumeField. */
-extern int FUN_00328b1c(int);
+extern int dataTable23FindAvailableRule(int);
 /* Supplied declaration required: NaviMain_Destroy. */
 /* Supplied declaration required: bgmStopWithoutEntry. */
 /* Supplied declaration required: mapIfDestroy. */
@@ -1891,7 +1891,7 @@ LAB_001b9210:
           DAT_0049f93c = 1;
           puVar14[9] = 0x22;
           puVar14[10] = 0;
-          temp_v9 = FUN_00276348(DAT_0049f958);
+          temp_v9 = msSearchFindIndexById(DAT_0049f958);
           if (temp_v9 != -1) {
             FUN_00316de4(temp_v9,1);
             navigationFinishReadyField();
@@ -2603,7 +2603,7 @@ LAB_001bab90:
                     goto joined_r0x001ba508;
                   }
                   if (DAT_0049f9d4 == '\0') {
-                    temp_v9 = FUN_00328b1c(DAT_0049f958);
+                    temp_v9 = dataTable23FindAvailableRule(DAT_0049f958);
                     if (temp_v9 == 0) {
                       lmapSetSceneId(0x26);
                       puVar14[9] = 0x52;
@@ -2659,7 +2659,7 @@ joined_r0x001ba508:
                   return 0;
                 }
                 if (DAT_0049f9d4 == '\0') {
-                  temp_v9 = FUN_00328b1c(DAT_0049f958);
+                  temp_v9 = dataTable23FindAvailableRule(DAT_0049f958);
                   if (temp_v9 == 0) {
                     lmapSetSceneId(0x26);
                     puVar14[9] = 0x3c;
@@ -3831,7 +3831,7 @@ joined_r0x001bce40:
     mapPerFrameUpdate();
     mapDepartSetTarget(0xffffffff,0xffffffff);
     DAT_0049f964 = (int)DAT_0049fb44;
-    temp_v9 = FUN_00270e34();
+    temp_v9 = mapStartEventScript();
     if (temp_v9 == 0) {
       DAT_0049f934 = 1;
       DAT_0049f93c = 1;
@@ -3874,7 +3874,7 @@ joined_r0x001bce40:
     lmapUpdateSceneModels();
     gameCopyPersistentSave();
     mapDepartSetTarget(0xffffffff,0xffffffff);
-    temp_v9 = FUN_00270e34();
+    temp_v9 = mapStartEventScript();
     temp_v10 = 0;
     if (temp_v9 == 0) {
       lmapCameraSetMode();
@@ -4518,7 +4518,7 @@ LAB_001bd824:
         libc_strcpy(puVar14 + 0x1a,&DAT_0049f978);
       }
     }
-    temp_v9 = FUN_00270e34();
+    temp_v9 = mapStartEventScript();
     if (temp_v9 == 0) {
       DAT_0049f934 = 1;
       DAT_0049f93c = 1;

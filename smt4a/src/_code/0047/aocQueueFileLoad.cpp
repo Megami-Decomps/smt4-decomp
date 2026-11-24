@@ -1,4 +1,5 @@
 #include "shard/FileQueueRequest.h"
+#include "util/BitsAndBytes.h"
 #include "addon/AocSystem_Smt4a.h"
 
 struct AocDisplay;
@@ -21,11 +22,11 @@ void aocQueueFileLoad(AocDisplay *display, const char *path, u32 *completion,
     request.bytes = bytes;
     request.completion = completion;
     request.context = context;
-    request.flags |= 1;
+    flagsSetBits(&request.flags, 1);
     if (completion != 0) {
         *completion = 0;
     }
     FUN_001ba0c8(display, &request);
     FUN_001b9fe4(display);
 }
-}
+} /* extern "C" */

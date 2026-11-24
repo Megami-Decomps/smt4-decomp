@@ -5,6 +5,8 @@
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "ui/UiSpriteState.h"
+#include "AsdSDK/Source/Gfx/Text/AsdTextA.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 /* Animation key tables passed to paramsInit; the original file defined them statically. */
 static const UiSpritePositionKey sMessagePositionKeys[] = {
@@ -181,12 +183,9 @@ typedef struct MessageWindow {
 } MessageWindow;
 
 
-void *asdMemoryAllocTracked(u32 heap, u32 alignClass, u32 flags, u32 size, u32 fromFront);
 void sysMemClear(void *block, u32 size);
 void gxResetUniformQuadColorsAndScale(void);
-u32 spriteHandleCreate(u32 kind);
 void asdTextSetValueFlagsAndScalar(u32 sprite, u32 flags, u32 value, f32 scalar);
-void positionStateSet(u32 sprite, s32 a, s32 b, f32 value);
 void *taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*draw)(void *), s32 c, void *work, void *owner);
 void FUN_0014c01c(void *work);
 void FUN_0014f3f4(void *work);
@@ -204,10 +203,10 @@ MessageWindow *FUN_00145280(void)
     sysMemClear(raw, 0x1A28);
     raw[0x19C5] = 0x15;
     gxResetUniformQuadColorsAndScale();
-    window->sprite = spriteHandleCreate(0);
+    window->sprite = (u32)spriteHandleCreate(0);
     uiObjectSetColorRgb(window->sprite, -1);
     asdTextSetValueFlagsAndScalar(window->sprite, 3, 255, 0.0f);
-    positionStateSet(window->sprite, 0, -1, 0.0f);
+    positionStateSet((AsdText *)window->sprite, 0, -1, 0.0f);
     window->unk08 = 0;
     window->unk34 = 0;
     window->unk35 = 0;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024e31c` (_code @ 0x24e31c, 0x8c0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BtlUiItemDescriptions.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtx.h"
@@ -25,7 +26,6 @@ int btlDrawFloatingNumbers(int, int);
 int FUN_003217d0(int);
 int FUN_003a9f7c(int);
 int FUN_003f931c(unsigned int);
-int uiDrawAnimatedItemDescriptionRow(...);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -65,7 +65,6 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003217d0. */
 /* Supplied declaration required: FUN_003a9f7c. */
 /* Supplied declaration required: FUN_003f931c. */
-/* Supplied declaration required: uiDrawAnimatedItemDescriptionRow. */
 
 
 unsigned int FUN_0024e31c(void)
@@ -280,10 +279,12 @@ unsigned int FUN_0024e31c(void)
       }
       else {
         temp_v6 = 0;
-        temp_v5 = *(int *)(temp_v1 + 0x128a8);
+        BtlUiA *ui = (BtlUiA *)temp_v1;
+        BtlUiItemDescriptions &descriptions = btlUiItemDescriptions(ui);
+        temp_v5 = descriptions.count;
         if (0 < temp_v5) {
           do {
-            uiDrawAnimatedItemDescriptionRow(temp_v1,temp_v6,temp_v1 + temp_v6 * 0xc + 0x12f3c,temp_v5);
+            uiDrawAnimatedItemDescriptionRow(ui, temp_v6, &descriptions.rows[temp_v6], temp_v5);
             temp_v6 = temp_v6 + 1;
           } while (temp_v6 < temp_v5);
         }

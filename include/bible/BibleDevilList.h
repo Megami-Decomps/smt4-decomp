@@ -10,7 +10,8 @@
 
 /* One listed devil (0x20 bytes). */
 struct BibleDevilEntry {
-    /* 0x00 */ u32 unk00;
+    /* 0x00 */ u16 present; /* zero in the first row when the list is empty */
+    /* 0x02 */ u16 unk02;
     /* 0x04 */ u16 devilId;
     /* 0x06 */ u8 unk06[6];
     /* 0x0C */ u8 statA;
@@ -38,13 +39,17 @@ struct BibleDevilWork {
     /* 0x598 */ u8 unk598[0xC];
     /* 0x5A4 */ s8 mode;            /* 0: per-devil columns, 1: compare two devils, other: detail */
     /* 0x5A5 */ s8 column;
-    /* 0x5A6 */ u8 unk5A6[2];
-    /* 0x5A8 */ BibleDevilEntry entries[1];
+    /* 0x5A6 */ u8 unk5A6;
+    /* 0x5A7 */ s8 viewing;
+    /* 0x5A8 */ BibleDevilEntry entries[0x500];
+    /* 0xA5A8 */ u8 unkA5A8[0xA];
+    /* 0xA5B2 */ u16 lastId;         /* the devil the panel shows */
 };
 
 typedef char BibleDevilWorkLayoutCheck[sizeof(BibleDevilEntry) == 0x20 && offsetof(BibleDevilWork, list.count) == 0x28 && offsetof(BibleDevilWork, layout) == 0xC8 &&
     offsetof(BibleDevilWork, touchSelection) == 0x55C && offsetof(BibleDevilWork, touchSelection.drawLayer) == 0x594 &&
-    offsetof(BibleDevilWork, mode) == 0x5A4 && offsetof(BibleDevilWork, entries) == 0x5A8 ? 1 : -1];
+    offsetof(BibleDevilWork, mode) == 0x5A4 && offsetof(BibleDevilWork, entries) == 0x5A8 &&
+    offsetof(BibleDevilWork, lastId) == 0xA5B2 ? 1 : -1];
 
 /* The stat rows the list draws beside its entries, filled by FUN_0022d1a8: the stat and its comparison colour,
  * then the position, digits and colour of the summon cost. Six adjacent arrays (0x49357c-0x493784): the list's
@@ -57,6 +62,7 @@ extern s32 g_bibleDevilRowCostX[BIBLE_STAT_ROWS];
 extern s32 g_bibleDevilRowCostY[BIBLE_STAT_ROWS];
 extern char g_bibleDevilRowCostText[BIBLE_STAT_ROWS][0x20];
 extern u32 g_bibleDevilRowCostColor[BIBLE_STAT_ROWS];
+void FUN_0022d1a8(BibleDevilWork *work);
 }
 
 #endif

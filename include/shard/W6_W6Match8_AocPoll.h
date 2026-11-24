@@ -5,9 +5,24 @@
 #include "addon/aocMain.h"
 #include "classes/WindowStatus.h"
 
+enum AocPendingPhase {
+    AOC_PENDING_POLL,
+    AOC_PENDING_START_WORKER,
+    AOC_PENDING_WAIT_WORKER,
+    AOC_PENDING_DONE
+};
+
+enum AocPendingStatus {
+    AOC_PENDING_COMPLETE = 0,
+    AOC_PENDING_BUSY = 1,
+    AOC_PENDING_LOOKUP_FAILED = 100,
+    AOC_PENDING_QUERY_FAILED = 102,
+    AOC_PENDING_QUERY_FAILED_WITH_DETAIL = 103
+};
+
 struct AocPollStep {
     u32 unk00;
-    u32 phase;
+    u32 phase;            /* AocPendingPhase */
     u32 unk08;
     WindowStatusResult result; /* 0x0c */
     u32 unk14;

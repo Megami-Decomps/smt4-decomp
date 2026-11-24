@@ -1,4 +1,3 @@
-/* NON_MATCHING: the early `return 1` is built as `moveq r0, #1; beq` to its own epilogue; retail branches straight to the shared `mov r0, #1; pop` at the end. */
 #include "common.h"
 #include "camp/ButtonHelp/ButtonHelp.h"
 
@@ -40,8 +39,8 @@ u32 scrComm_Message_ConfirmAndApplySimple(void)
             FUN_0029016c(object, 0);
             FUN_00290248(object);
             FUN_002900d0();
-            return 1;
         }
+        return result == 1 ? 1 : 0;
     }
     return 0;
 }

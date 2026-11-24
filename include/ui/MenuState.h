@@ -14,7 +14,7 @@ typedef struct MenuState {
         /* 0x000 */ u32 process;
     };
     /* 0x008 */ u32 mode;                /* 0 = hidden; 2 = shown with the second panel's opacity */
-    /* 0x00C */ u8 unk0c[4];
+    /* 0x00C */ s32 animationTimer;
     /* 0x010 */ u8 captionShown;         /* the caption is drawn inside the window */
     /* 0x011 */ u8 unk11;
     union {
@@ -39,11 +39,19 @@ typedef struct MenuState {
     /* 0x2B2 */ u8 unk2b2[2];
     /* 0x2B4 */ s32 amount;
     /* 0x2B8 */ u8 unk2b8[4];
-    /* 0x2BC */ u32 unk2bc;
+    /* 0x2BC */ u32 animationPhase;      /* ComWinAnimationPhase */
     /* 0x2C0 */ u32 unk2c0;
-    /* 0x2C4 */ u32 unk2c4;
-    /* 0x2C8 */ u32 unk2c8;
+    /* 0x2C4 */ u32 pendingPanelValue;
+    /* 0x2C8 */ u32 currentPanelValue;
 } MenuState;
+
+enum ComWinAnimationPhase {
+    COM_WIN_OPENING_PANELS = 0,
+    COM_WIN_WAITING_FOR_PANEL = 2,
+    COM_WIN_REVEALING_PANEL = 3,
+    COM_WIN_PANEL_REVEALED = 4
+};
+
 /* MenuState.type: what the window shows. */
 enum {
     COM_WIN_TYPE_BUTTONS = 1,   /* the caption after a two-part button mark */
@@ -58,7 +66,8 @@ typedef char MenuStateCaptionOffsets[
     offsetof(MenuState, captionShown) == 0x10 && offsetof(MenuState, frameSide) == 0x12 &&
     offsetof(MenuState, iconId) == 0x18 && offsetof(MenuState, caption) == 0x26C &&
     offsetof(MenuState, showSign) == 0x2B1 && offsetof(MenuState, amount) == 0x2B4 &&
-    offsetof(MenuState, unk2bc) == 0x2BC ? 1 : -1];
+    offsetof(MenuState, animationTimer) == 0x0C && offsetof(MenuState, animationPhase) == 0x2BC &&
+    offsetof(MenuState, pendingPanelValue) == 0x2C4 && offsetof(MenuState, currentPanelValue) == 0x2C8 ? 1 : -1];
 typedef char MenuStateInitializationOffsets[
     offsetof(MenuState, process) == 0 &&
     offsetof(MenuState, resources.parameters) == 0x1C &&

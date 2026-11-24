@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "game/GameStateA.h"
 #include "gfx/TransformInterpolation.h"
 #include "script/scrScriptProcess.h"
 
@@ -9,17 +10,9 @@ struct EventScriptLaunchWorkView {
     void *messages; /* 0x1174 */
     ScriptProcess *script; /* 0x1178 */
 };
-struct EventScriptLaunchGlobalsView {
-    u8 unk00[0x98];
-    u16 result;
-    s16 eventId;
-    char entryName[1];
-};
-typedef char EventScriptLaunchWorkOffsets[offsetof(EventScriptLaunchWorkView, bytecode) == 0x1170 &&
-    offsetof(EventScriptLaunchGlobalsView, entryName) == 0x9c ? 1 : -1];
+typedef char EventScriptLaunchWorkOffsets[offsetof(EventScriptLaunchWorkView, bytecode) == 0x1170 ? 1 : -1];
 
 extern "C" {
-extern EventScriptLaunchGlobalsView DAT_005f16fc;
 void transformInterpolationStep(TransformInterpolation *);
 void asdMemFree(void *);
 void messageSetScriptDisplayMode();
@@ -45,17 +38,16 @@ void eventUpdateScriptLaunch(EventScriptLaunchWorkView *work)
         }
         return;
     }
-    EventScriptLaunchGlobalsView *event = &DAT_005f16fc;
-    event->result = 0;
+    g_gameState.eventResult = 0;
     messageSetScriptDisplayMode();
-    sprintf(path, "event/e%03d/e%03d.bf", event->eventId, event->eventId);
+    sprintf(path, "event/e%03d/e%03d.bf", g_gameState.eventId, g_gameState.eventId);
     work->bytecode = asdLoadFileSyncDefault(path);
-    sprintf(path, "event/e%03d/e%03d.mbm", event->eventId, event->eventId);
+    sprintf(path, "event/e%03d/e%03d.mbm", g_gameState.eventId, g_gameState.eventId);
     work->messages = asdLoadFileSyncDefault(path);
     work->script = scrScriptProcessCreate(work->bytecode, work->messages);
     scriptProcessSetMode(work->script, 2);
-    u32 entry = tableGroupFindEntryIndex(work->bytecode, event->entryName);
+    u32 entry = tableGroupFindEntryIndex(work->bytecode, g_gameState.eventEntryName);
     scrScriptProcessStartEntry(work->script, entry);
     ++work->transform.runtime.phase;
 }
-}
+} /* extern "C" */

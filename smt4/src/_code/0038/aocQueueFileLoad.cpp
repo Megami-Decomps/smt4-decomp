@@ -1,4 +1,5 @@
 #include "shard/FileQueueRequest.h"
+#include "util/BitsAndBytes.h"
 
 struct AocDisplay;
 
@@ -20,11 +21,11 @@ void aocQueueFileLoad(AocDisplay *display, const char *path, u32 *completion,
     request.bytes = bytes;
     request.completion = completion;
     request.context = context;
-    request.flags |= 1;
+    flagsSetBits(&request.flags, 1);
     if (completion != 0) {
         *completion = 0;
     }
     fileQueuePush(display, &request);
     fileWorkerQueueRestartIfIdle(display);
 }
-}
+} /* extern "C" */

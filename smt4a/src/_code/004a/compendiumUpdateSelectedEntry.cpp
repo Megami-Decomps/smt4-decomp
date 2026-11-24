@@ -3,6 +3,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 #include "code/Code002a_Smt4a.h"
+#include "status/CompendiumBrowse.h"
 
 // Selection state of the animated page UI.
 struct AnimatedPageSelection {
@@ -42,7 +43,6 @@ extern "C" {
 
 extern AnimatedPageSelection g_animatedPageSelection;
 
-s32 flaggedValueHolderGetTotal(void* holder);
 s32 compendiumComputeSummonCost(u32 id, u32 page, s32 arg, s32 flag, s32 more);
 void panelSetTarget(s32 target, s32 arg);
 void messageSetActiveMode(s32 mode);
@@ -63,7 +63,6 @@ void sendEvent100020F(void);
 void sendEvent100020E(void);
 void sysPlaySe(s32 id);
 void messageMainSetTargetFlags(s32 flags);
-void gameGlobalsSetMenuOpenFlag(s32 arg);
 void screen4AEnter(StatusScreen* screen);
 void uniteCreatePreviewModel(void);
 void sortMenuAcquire(s32 a, s32 b);
@@ -73,20 +72,13 @@ void buttonHelpSetText(s32 a, u32 color);
 #define SCREEN_BYTE(screen, offset) (*(reinterpret_cast<u8*>(screen) + (offset)))
 #define SCREEN_HALF(screen, offset) (*reinterpret_cast<s16*>(reinterpret_cast<u8*>(screen) + (offset)))
 
-// Id of the highlighted entry.
-static s16 currentId(StatusScreen* screen)
-{
-    ListEntry* entries = screen->entries;
-    return entries[flaggedValueHolderGetTotal(screen->list)].getId();
-}
-
 // Per-frame handler of the quest/status list: shows the highlighted entry and reacts to
 // confirm, menu and cancel.
 void compendiumUpdateSelectedEntry(StatusScreen* screen)
 {
     s32 select = 0;
     s32 cancel = 0;
-    s16 id = currentId(screen);
+    s16 id = (s16)compendiumSelectedId((const CompendiumBrowseWorkA *)screen);
     s32 price = compendiumComputeSummonCost((u16)id, screen->page, 0, (s8)SCREEN_BYTE(screen, 0x94) >= 100, 0);
     if (compendiumEntryIsRegistered((u16)id) != 0) {
         panelSetTarget(-price, 0);
@@ -105,7 +97,7 @@ void compendiumUpdateSelectedEntry(StatusScreen* screen)
         return;
     }
     if (select != 0) {
-        id = currentId(screen);
+        id = (s16)compendiumSelectedId((const CompendiumBrowseWorkA *)screen);
         entryTableResetAndInit(0x18, compendiumComputeSummonCost((u16)id, screen->page, 0, (s8)SCREEN_BYTE(screen, 0x94) >= 100, 0), -1, 0);
         if (demonPurchaseValidate(screen, (u16)id) != 0) {
             char text[128];

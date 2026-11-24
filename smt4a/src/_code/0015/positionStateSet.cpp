@@ -1,19 +1,10 @@
-#include "common.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "AsdSDK/Source/Gfx/Text/AsdTextA.h"
 
-namespace {
-struct PositionState {
-    /* 0x00 */ u8 unk00[0x9c];
-    /* 0x9c */ u32 first;
-    /* 0xa0 */ u32 second;
-    /* 0xa4 */ u8 unkA4[4];
-    /* 0xa8 */ f32 scale;
-};
-}
-
-/* Updates the position parameters and scale. */
-extern "C" void positionStateSet(PositionState *object, u32 first, u32 second, f32 scale)
+/* Sets the sprite's position mode, color and scale. */
+extern "C" void positionStateSet(AsdText *object, s32 mode, u32 color, f32 scale)
 {
-    object->first = first;
-    object->second = second;
-    object->scale = scale;
+    object->positionMode = mode;
+    object->positionColor = color;
+    object->positionScale = scale;
 }

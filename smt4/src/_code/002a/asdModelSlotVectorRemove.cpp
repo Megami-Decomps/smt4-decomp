@@ -1,27 +1,11 @@
-/* NON_MATCHING: retail materializes the removed flag (movne/moveq r3, then cmp r3, #0) before the detach store; this
- * build folds the test into the compare. Statement order (old end read, end stored, then compared) now matches.
- * Lead: computing the flag before an erase written with std::copy (slots->end = std::copy(last, slots->end, first))
- * reproduces the materialized tail, but moves the find loop's registers and hoists the detach zero (18 lines).
- * A MoveArray-style erase instead (an inline copy loop from `last` to the end, then `slots->end = dest`) after a bool
- * flag gives retail's whole tail; only the find loop then loses retail's copy of the end (mov r2, ip; element in r4),
- * 19 lines with the shifted branches. `slots->end -= last - first` keeps the find loop but not the direct end store. */
-#include <algorithm>
-#include "shard/S1GfxModel.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModelSlot.h"
 
-extern "C" {
-
-/* Removes `slot` from the slot vector and detaches it; returns whether it was registered. */
-bool asdModelSlotVectorRemove(ModelSlotVector *slots, ModelSlot *slot)
+/* Removes a slot from the registration list and detaches it if it was registered. */
+extern "C" bool asdModelSlotVectorRemove(ModelSlotVector *slots, ModelSlot *slot)
 {
-    ModelSlot **newEnd = std::remove(slots->begin, slots->end, slot);
-    ModelSlot **oldEnd = slots->end;
-
-    slots->end = newEnd;
-    s32 removed = oldEnd != newEnd;
+    bool removed = asdModelSlotErase(slots, slot);
     if (removed) {
         slot->attached = 0;
     }
     return removed;
 }
-
-} /* extern "C" */

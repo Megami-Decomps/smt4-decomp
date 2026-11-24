@@ -1,5 +1,5 @@
 #include "gfx/StereoParallax.h"
-/* NON_MATCHING: scissor helper folds state reloads/conditions and uses different base addressing. */
+/* NON_MATCHING: the scissor stack's base and depth registers are swapped (retail r1/r2, build r2/r1). */
 #include "ui/ClippedSprite.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"

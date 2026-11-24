@@ -2,7 +2,11 @@
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 /* NON_MATCHING: 12 lines. The pops now go through renderStackPopChecked as in retail; what remains: retail converts the
- * stereo parallax through s1 (the build reuses s0), and loads g_renderCtx into r0 before building the stack address in r4. */
+ * stereo parallax through s1 (the build reuses s0), and loads g_renderCtx into r0 before building the stack address in r4.
+ * Wave 91: an extra accessor, renderStackPopCounted(renderCtxStackAt(g_renderCtx, RENDER_STACK_A)) at both pops (with the
+ * parallax cast in a renderCtxStereoPixelOffset inline) is IDENTICAL here and in its siblings, but it is a third spelling
+ * of renderCtxPopCounted chosen by score: renderCtxPopCounted written through it loses guestWinDraw (both games) and
+ * runWinDraw, so it is not kept. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"

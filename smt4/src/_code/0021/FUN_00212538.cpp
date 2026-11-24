@@ -10,7 +10,7 @@ extern "C" {
 
 int FUN_002512c4(...);
 int fadeObjectResetIfActive(...);
-int FUN_002bdf94(...);
+int textDrawFormattedAligned(...);
 int drawSetColorFromRGBA8(...);
 int gxSubmitDrawZeroExtraParams(...);
 int renderCtxResetColorScale(...);
@@ -65,7 +65,7 @@ extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: objectPartRunUnlessLocked. */
 extern int listCursorGetRowIfUnblocked(int);
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002bdf94. */
+/* Supplied declaration required: textDrawFormattedAligned. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: vec2GetYInt. */
@@ -584,11 +584,11 @@ unsigned int FUN_00212538(void)
     temp_v10 = gameGetSlotTable();
     sprintf((char *)temp_v19,(const char *)&LAB_00213184,*(unsigned char *)(temp_v10 + 0x910b));
     temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x19,0x2a));
-    FUN_002bdf94(2,*(short *)(temp_v10 + 8) + temp_v6,*(short *)(temp_v10 + 10) + temp_v7,0,2,0x9c,
+    textDrawFormattedAligned(2,*(short *)(temp_v10 + 8) + temp_v6,*(short *)(temp_v10 + 10) + temp_v7,0,2,0x9c,
                  temp_v19);
     sprintf((char *)temp_v19,(const char *)&LAB_00213184,*(unsigned int *)(temp_v1 + 0x28));
     temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x19,0x2c));
-    FUN_002bdf94(2,*(short *)(temp_v10 + 8) + temp_v6,*(short *)(temp_v10 + 10) + temp_v7,1,2,0x9c,
+    textDrawFormattedAligned(2,*(short *)(temp_v10 + 8) + temp_v6,*(short *)(temp_v10 + 10) + temp_v7,1,2,0x9c,
                  temp_v19);
     gxResetColorQuadToWhite();
     if (*(int *)(temp_v1 + 0x30) >= 2) {

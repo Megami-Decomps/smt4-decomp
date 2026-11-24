@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BattleHelpers_Smt4a.h"
 #include "util/SlotRangeSelect.h"
 
 extern "C" {
@@ -9,7 +10,6 @@ s32 scrGetArg(s32 index);
 void scrSetResult(s32 value);
 s32 btlResolveEntryChoice(s32 selector);
 BtlCombatantEntryA* btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA*);
-u32 btlCombatantMatchesCategory(BtlCombatantEntryA* entry, u32 condition);
 
 u32 scrAnyEligibleUnitIdMatchesCondition()
 {

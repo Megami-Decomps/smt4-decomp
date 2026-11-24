@@ -1,5 +1,5 @@
-/* NON_MATCHING: O3 hoists the final interactive byte load before the state/counter STM and consumes r4 instead of a temporary base (123/123). */
-#include "shard/W6_W6Match7_QuestInteraction.h"
+/* NON_MATCHING: the final location-byte load is hoisted before the state/substate STM and the STM uses r4 instead of a scratch register. */
+#include "classes/Obj5333c0.h"
 #include "gamedata/GameFlags.h"
 #include "shard/Shard0046.h"
 #include "ui/UiControl.h"
@@ -11,13 +11,12 @@ extern "C" {
 void sysPlaySe(s32 id);
 void placeWinStartText(const u8 *name);
 
-s32 pickObjStart(QuestInteraction *object, const char *entry);
 Entry40 *dataTable28Type0GetEntry(u32 unused, u32 index);
 u8 gameFlagIsSet(u32 flag);
 }
 
-// Run pending quest announcements before starting or resuming the conversation.
-extern "C" void questCenterBeginConversation(QuestInteraction *object)
+/* Runs pending quest announcements before starting or resuming the conversation. */
+extern "C" void questCenterBeginConversation(Obj5333c0 *object)
 {
     s32 activeQuest = 0;
     for (u16 index = 0; index < 32; ++index) {
@@ -28,29 +27,27 @@ extern "C" void questCenterBeginConversation(QuestInteraction *object)
     }
     u32 specialAvailable = 0;
     u32 announced = gameFlagIsSet(0x586);
-    if (activeQuest == 6 && object->interactive != 0) {
+    if (activeQuest == 6 && object->location != 0) {
         if (object->kind != 14)
             specialAvailable = 1;
         gameFlagSetValue(0x586, 1, 1);
     }
-    if ((specialAvailable & ~announced) != 0 && object->interactive != 0) {
+    if ((specialAvailable & ~announced) != 0 && object->location != 0) {
         messageMainClearBannerRequest();
         messageSetMode(1);
         sysPlaySe(0x92);
         pickObjStart(object, "qc_total_quest_ann");
         object->scriptActive = 1;
-        object->state = 14;
-        object->counter = 0;
+        object->startState(14);
         return;
     }
-    if (activeQuest > 0 && specialAvailable == 0 && object->interactive != 0) {
+    if (activeQuest > 0 && specialAvailable == 0 && object->location != 0) {
         messageMainClearBannerRequest();
         messageSetMode(1);
         sysPlaySe(0x92);
         pickObjStart(object, "qc_total_quest");
         object->scriptActive = 1;
-        object->state = 14;
-        object->counter = 0;
+        object->startState(14);
         return;
     }
     FUN_003a7630(1);
@@ -59,11 +56,10 @@ extern "C" void questCenterBeginConversation(QuestInteraction *object)
         pickObjStart(object, "qc_restart");
     else
         pickObjStart(object, "qc_start");
-    Entry40 *entry = dataTable28Type0GetEntry(reinterpret_cast<u32>(&object->entryToken), object->kind);
+    Entry40 *entry = dataTable28Type0GetEntry((u32)&object->talkTable, object->kind);
     placeWinStartText(entry->data);
-    object->state = 6;
-    object->counter = 0;
-    if (object->interactive != 0)
+    object->startState(6);
+    if (object->location != 0)
         return;
     sysPlaySe(0xa0);
 }

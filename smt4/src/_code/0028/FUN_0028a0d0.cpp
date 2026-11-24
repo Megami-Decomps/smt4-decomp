@@ -1,10 +1,12 @@
-/* NON_MATCHING: typed queue records fold position/attribute addresses differently and shorten the saved-register set. */
+/* NON_MATCHING: word-sized selectors agree with the callers and narrow only when stored. The queue
+ * address arithmetic, saved registers and failure-return placement still differ. */
 #include "battle/BtlUiGlobal.h"
+#include "battle/BtlPositionedRequests.h"
 #include "map/mapDepart.h"
 
 extern "C" {
 
-u32 FUN_0028a0d0(u32 flags, u32 value, f32 x, f32 y, f32 z, u8 first, u8 second, s32 enabled, u32 mode)
+u32 FUN_0028a0d0(BtlUi *, u32 value, f32 x, f32 y, f32 z, u32 first, u32 second, s32 enabled, u32 mode)
 {
     struct Request {
         MapVector position;

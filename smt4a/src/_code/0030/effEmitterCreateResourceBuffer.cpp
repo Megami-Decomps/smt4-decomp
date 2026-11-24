@@ -1,10 +1,10 @@
 #include "shard/W6_W6Match2_EmitterResources.h"
+#include "AsdSDK/Source/Gfx/Effect/EffectBehaviorBlock.h"
 
 extern "C" {
 ResourceEmitter* effEmitterCreateSmall(void* data);
 void polygonTrackRebuildResources(ResourceEmitter* emitter, u32 id, const EmitterArguments* arguments);
 void objectBufferFree(void* buffer);
-void* effBehaviorCreate(u16 id, u32 key, void* data);
 
 // Create the emitter and replace its resource buffer using the current source ID.
 ResourceEmitter* effEmitterCreateResourceBuffer(EmitterResourceRequest* request)

@@ -17,7 +17,7 @@
 
 extern "C" {
 
-void FUN_002bdf94(s32 layer, s32 x, s32 y, s32 align, s32 digits, s32 depth, const char *format, ...);
+void textDrawFormattedAligned(s32 layer, s32 x, s32 y, s32 align, s32 digits, s32 depth, const char *format, ...);
 void drawSetColorFromRGBA8(u32 color);
 void gxResetColorQuadToWhite(void); // declcheck: local (the only shared declaration is in Apocalypse's ui/AnimatedMessage.h)
 
@@ -35,12 +35,12 @@ void resultDrawLevelUpPanel(ResultWork *work, s32 x, s32 y)
     entry = asdTMTexTableEntryAt(table, 135);
     drawSetColorFromRGBA8(0x7a4c00ff);
     s32 gained = (gameGetPlayerData()->level - work->startLevel) * 5;
-    FUN_002bdf94(0, entry->x + x, entry->y + y, 0, 0, 106, "%d", gained);
+    textDrawFormattedAligned(0, entry->x + x, entry->y + y, 0, 0, 106, "%d", gained);
     entry = asdTMTexTableEntryAt(table, 136);
-    FUN_002bdf94(0, entry->x + x, entry->y + y, 0, 0, 106, "/");
+    textDrawFormattedAligned(0, entry->x + x, entry->y + y, 0, 0, 106, "/");
     entry = asdTMTexTableEntryAt(table, 138);
     drawSetColorFromRGBA8(0x000000ff);
-    FUN_002bdf94(0, entry->x + x, entry->y + y, 0, 0, 106, "%d", work->remainingPoints);
+    textDrawFormattedAligned(0, entry->x + x, entry->y + y, 0, 0, 106, "%d", work->remainingPoints);
     gxResetColorQuadToWhite();
 
     after = gameGetPlayerData()->maxHp;
@@ -50,10 +50,10 @@ void resultDrawLevelUpPanel(ResultWork *work, s32 x, s32 y)
     texDrawTableEntryAtStoredOrigin(2, table, 143, entry->x + x, entry->y + y, 106);
     texDrawTableEntryAtStoredOrigin(2, table, 145, entry->x + x, entry->y + y, 106);
     offset = asdTMTexTableEntryAt(table, 149);
-    FUN_002bdf94(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 4, 106, "%d", before);
+    textDrawFormattedAligned(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 4, 106, "%d", before);
     offset = asdTMTexTableEntryAt(table, 153);
     drawSetColorFromRGBA8(0x72e027ff);
-    FUN_002bdf94(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 4, 106, "%d", after);
+    textDrawFormattedAligned(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 4, 106, "%d", after);
     gxResetColorQuadToWhite();
 
     after = gameGetPlayerData()->maxMp;
@@ -63,10 +63,10 @@ void resultDrawLevelUpPanel(ResultWork *work, s32 x, s32 y)
     texDrawTableEntryAtStoredOrigin(2, table, 144, entry->x + x, entry->y + y, 106);
     texDrawTableEntryAtStoredOrigin(2, table, 145, entry->x + x, entry->y + y, 106);
     offset = asdTMTexTableEntryAt(table, 149);
-    FUN_002bdf94(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 4, 106, "%d", before);
+    textDrawFormattedAligned(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 4, 106, "%d", before);
     offset = asdTMTexTableEntryAt(table, 153);
     drawSetColorFromRGBA8(0x72e027ff);
-    FUN_002bdf94(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 4, 106, "%d", after);
+    textDrawFormattedAligned(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 4, 106, "%d", after);
     gxResetColorQuadToWhite();
 
     for (s32 i = 0; i < 5; ++i) {
@@ -99,7 +99,7 @@ void resultDrawLevelUpPanel(ResultWork *work, s32 x, s32 y)
         texDrawTableEntryAtStoredOrigin(2, table, i + 158, entry->x + x, entry->y + y, 106);
         offset = asdTMTexTableEntryAt(table, 182);
         drawSetColorFromRGBA8(0x5a5a5aff);
-        FUN_002bdf94(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 3, 106, "%d", before);
+        textDrawFormattedAligned(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 3, 106, "%d", before);
         gxResetColorQuadToWhite();
         offset = asdTMTexTableEntryAt(table, 185);
         if (after > before) {
@@ -109,7 +109,7 @@ void resultDrawLevelUpPanel(ResultWork *work, s32 x, s32 y)
             texDrawTableEntryAtStoredOrigin(2, table, 163, entry->x + x, entry->y + y, 106);
             drawSetColorFromRGBA8(0x5a5a5aff);
         }
-        FUN_002bdf94(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 3, 106, "%d", after);
+        textDrawFormattedAligned(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 3, 106, "%d", after);
         gxResetColorQuadToWhite();
         texDrawTableEntryAtStoredOrigin(2, table, 165, entry->x + x, entry->y + y, 106);
         texDrawTableEntryAtStoredOrigin(2, table, 166, entry->x + x, entry->y + y, 106);
@@ -145,10 +145,10 @@ void resultDrawLevelUpPanel(ResultWork *work, s32 x, s32 y)
     texDrawTableEntryAtStoredOrigin(2, table, 169, entry->x + x, entry->y + y, 106);
     texDrawTableEntryAtStoredOrigin(2, table, row + 170, entry->x + x, entry->y + y, 106);
     offset = asdTMTexTableEntryAt(table, 182);
-    FUN_002bdf94(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 3, 111, "%d", before);
+    textDrawFormattedAligned(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 3, 111, "%d", before);
     offset = asdTMTexTableEntryAt(table, 185);
     drawSetColorFromRGBA8(after > before ? 0x72e027ff : 0xffffffff);
-    FUN_002bdf94(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 3, 111, "%d", after);
+    textDrawFormattedAligned(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 3, 111, "%d", after);
     gxResetColorQuadToWhite();
     texDrawTableEntryAtStoredOrigin(2, table, 175, entry->x + x, entry->y + y, 111);
     texDrawTableEntryAtStoredOrigin(2, table, 178, entry->x + x, entry->y + y, 111);

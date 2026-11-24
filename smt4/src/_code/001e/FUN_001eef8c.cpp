@@ -23,7 +23,7 @@ void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int fontMeasureLineAdvance(...);
 int nkmBaseGetRecord(void);
 int demonGetRaceLabel(...);
-int FUN_002bdf94(...);
+int textDrawFormattedAligned(...);
 int drawSetColorFromRGBA8(...);
 int textDrawString(...);
 int gxResetColorQuadToWhite(void);
@@ -68,7 +68,7 @@ extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: demonGetRaceLabel. */
 /* Supplied declaration required: FUN_002bd068. */
-/* Supplied declaration required: FUN_002bdf94. */
+/* Supplied declaration required: textDrawFormattedAligned. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
@@ -154,7 +154,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
     textDrawString(2,0xf49800ff,temp_v19);
     temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x51));
     drawSetColorFromRGBA8(temp_v15);
-    FUN_002bdf94(0,*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v8,1,2,0x6f,
+    textDrawFormattedAligned(0,*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v8,1,2,0x6f,
                  "%d",*(unsigned char *)((int)puVar5 + 3));
     gxResetColorQuadToWhite();
     if (*(char *)(temp_v3 + 0xe0) == '\0') {
@@ -237,7 +237,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
           temp_v5 = (unsigned int)*(unsigned char *)(temp_v14 + 0x48);
         }
         drawSetColorFromRGBA8(0xff);
-        FUN_002bdf94(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v8,
+        textDrawFormattedAligned(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v8,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,1,2,0x79,
                      "%d",temp_v5);
         gxResetColorQuadToWhite();
@@ -286,7 +286,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
           temp_v1 = (unsigned short)*(unsigned char *)(temp_v10 + 0x48);
         }
         drawSetColorFromRGBA8(0xff);
-        FUN_002bdf94(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v8,
+        textDrawFormattedAligned(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v8,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,1,2,0x79,
                      "%d",temp_v1);
         gxResetColorQuadToWhite();
@@ -307,7 +307,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
           temp_v15 = 0xff;
         }
         drawSetColorFromRGBA8(temp_v15);
-        FUN_002bdf94(0,*(short *)(temp_v10 + 8) + temp_v8,*(short *)(temp_v10 + 10) + temp_v6,1,8,0x79,
+        textDrawFormattedAligned(0,*(short *)(temp_v10 + 8) + temp_v8,*(short *)(temp_v10 + 10) + temp_v6,1,8,0x79,
                      "%d",temp_v13);
         gxResetColorQuadToWhite();
         temp_v4 = temp_v4 + 1;
@@ -408,7 +408,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         temp_v11 = partyMemberFindById(*psVar13);
         temp_v1 = (unsigned short)*(unsigned char *)(temp_v11 + 0x48);
       }
-      FUN_002bdf94(0,(int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v9,
+      textDrawFormattedAligned(0,(int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v9,
                    (int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,1,2,0x8d,
                    "%d",temp_v1);
       temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x136));
@@ -480,7 +480,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         temp_v6 = partyMemberFindById(*psVar13);
         temp_v17[0] = (unsigned short)*(unsigned char *)(temp_v6 + 0x48);
       }
-      FUN_002bdf94(0,(int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v9,
+      textDrawFormattedAligned(0,(int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v9,
                    (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v13 + 10) + temp_v8,1,2,0x8d,
                    "%d",temp_v17[0]);
       temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x136));
@@ -525,7 +525,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       }
       drawSetColorFromRGBA8(temp_v15);
       temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x144));
-      FUN_002bdf94(0,*(short *)(temp_v3 + 8) + temp_v9,*(short *)(temp_v3 + 10) + temp_v8,1,8,0x8d,
+      textDrawFormattedAligned(0,*(short *)(temp_v3 + 8) + temp_v9,*(short *)(temp_v3 + 10) + temp_v8,1,8,0x8d,
                    "%d",temp_v4);
       gxResetColorQuadToWhite();
     }

@@ -4,7 +4,7 @@
 
 extern "C" {
 extern const char DAT_00402894[];
-void FUN_002bdf94(s32, u32, u32, s32, s32, u32, const char *);
+void textDrawFormattedAligned(s32, u32, u32, s32, s32, u32, const char *);
 }
 
 /* A missing leading digit is represented by 10, outside the decimal range. */
@@ -42,6 +42,6 @@ void uiDrawSevenDigitNumber(u32 number, u32 x, u32 y, u32 style)
         ++length;
     }
     buffer[length] = 0;
-    FUN_002bdf94(0, x, y, 0, 5, style, buffer);
+    textDrawFormattedAligned(0, x, y, 0, 5, style, buffer);
 }
 }

@@ -76,25 +76,25 @@ void FUN_001eb874(unsigned int *param_1,int param_2,float *param_3,int param_4,i
   FUN_002be304(unaff_r10);
   FUN_002be624(auStack_40,0x1ebc78,*(unsigned char *)(param_2 + 0x36));
   iVar1 = asdTMTexTableEntryAt(0x39,0x74);
-  FUN_002bdf94(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x74,
+  textDrawFormattedAligned(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x74,
                auStack_40);
   uVar2 = *(unsigned int *)(param_2 + 0x28) / 0xe10;
   uVar3 = *(unsigned int *)(param_2 + 0x28) % 0xe10;
   FUN_002be624(auStack_58,0x1ebc84,uVar3 % 0x3c);
   iVar1 = asdTMTexTableEntryAt(0x39,0x7c);
-  FUN_002bdf94(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x71,
+  textDrawFormattedAligned(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x71,
                auStack_58);
   FUN_002be624(auStack_58,0x1ebc8c,0x3a);
   iVar1 = asdTMTexTableEntryAt(0x39,0x79);
-  FUN_002bdf94(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x71,
+  textDrawFormattedAligned(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x71,
                auStack_58);
   FUN_002be624(auStack_58,0x1ebc84,uVar3 / 0x3c);
   iVar1 = asdTMTexTableEntryAt(0x39,0x7e);
-  FUN_002bdf94(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x71,
+  textDrawFormattedAligned(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x71,
                auStack_58);
   FUN_002be624(auStack_58,0x1ebc8c,0x3a);
   iVar1 = asdTMTexTableEntryAt(0x39,0x7a);
-  FUN_002bdf94(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x71,
+  textDrawFormattedAligned(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x71,
                auStack_58);
   iVar1 = 0;
   uVar3 = 4;
@@ -138,7 +138,7 @@ LAB_001ebcbc:
     if ((int)uVar3 < 1) {
       auStack_58[iVar1] = 0;
       iVar1 = asdTMTexTableEntryAt(0x39,0x82);
-      FUN_002bdf94(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x71,
+      textDrawFormattedAligned(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x71,
                    auStack_58);
       iVar1 = asdTMTexTableEntryAt(0x39,0x89);
       uiDrawSevenDigitNumber(*(unsigned int *)(param_2 + 0x30),*(short *)(iVar1 + 8) + param_4,

@@ -26,9 +26,9 @@
 #include "text/TextDraw.h"
 #include "ui/ParamsClearPacket.h"
 #include "ui/UiSpriteApi.h"
+#include "AsdSDK/Source/Gfx/Text/AsdTextA.h"
 
 extern "C" {
-u32 spriteHandleCreate(u32 argument);
 s32 FUN_002c0240();
 void rt_aeabi_memclr(void *memory, u32 size);
 }
@@ -228,10 +228,10 @@ void campCecRankingCreate(void)
                sizeof(sRankingCommands));
     uiSpriteStateInitFromSource(&ranking->sprite, 0x2E, 1000, &ranking->parameters, 101, 1.0f);
     for (s32 i = 0; i < RANK_PLAYERS; i++) {
-        ranking->playerText[i] = spriteHandleCreate(0);
+        ranking->playerText[i] = (u32)spriteHandleCreate(0);
     }
     for (s32 i = 0; i < RANK_CATEGORIES; i++) {
-        ranking->categoryText[i] = spriteHandleCreate(0);
+        ranking->categoryText[i] = (u32)spriteHandleCreate(0);
     }
     asdLoadFileAsyncSimple("camp/CecMain_scr.bf", (u32 *)&ranking->heapA, 0);
     asdLoadFileAsyncSimple("camp/CecMain_msg.mbm", (u32 *)&ranking->heapB, 0);

@@ -27,7 +27,7 @@ enum {
 
 extern "C" {
 s32 resourceRunOperationIfUnblocked(const ScrollSelection *selection);
-void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *format, ...);
+void textDrawFormattedAligned(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *format, ...);
 u32 fusionPlayerLevelCapGet(void);
 void uiSlotEntryDraw(f32 speed, void *panel, u32 id, s32 x, s32 y, s32 selected);
 void FUN_001a7810(void *owner, u32 id, s32 x, s32 y, s32 highlighted, s32 alternate, f32 speed);
@@ -65,7 +65,7 @@ void uniteDrawListPanel(s32 x, s32 y, s32 mode)
     __2sprintf(text, "\x82\x65\x82\x95\x82\x93\x82\x89\x82\x8f\x82\x8e\x81\x40\x82\x6f\x82\x8f\x82\x93\x82\x93\x82\x89\x82\x82\x82\x8c\x82\x85\x81\x46"); /* "Fusion Possible:" (full width) */
     textDrawString((f32)(anchor->x + x), (f32)(anchor->y + y), 0.55f, 2, 0.0f, 0xFFFFFFFF, fade, text);
     anchor = asdTMTexTableEntryAt(UNITE_TEX_TABLE, 76);
-    FUN_002bdf94(0, anchor->x + x, anchor->y + y, 1, 2, 101, "%d", fusionPlayerLevelCapGet());
+    textDrawFormattedAligned(0, anchor->x + x, anchor->y + y, 1, 2, 101, "%d", fusionPlayerLevelCapGet());
 
     s32 top = resourceRunOperationIfUnblocked(&work->selectionListsIV.sourceList);
     s32 visible = uiListGetVisibleCount(&work->selectionListsIV.sourceList);

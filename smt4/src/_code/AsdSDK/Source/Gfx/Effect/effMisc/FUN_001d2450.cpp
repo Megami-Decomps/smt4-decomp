@@ -11,8 +11,6 @@ void *memAlloc(u32 pool, u32 category, u32 options, u32 size,
                u32 alignment, u32 count);
 void rt_memclr(void *destination, u32 size);
 void objectBufferFree(void *buffer);
-void *effBehaviorCreate(u16 kind, u32 count,
-                    ParticleDefinitionPrefixIV *definition);
 void *effGeomCloneHandle(void *source);
 
 static ParticleInstanceIV *allocateParticleInstance(u32 size)

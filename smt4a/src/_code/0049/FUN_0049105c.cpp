@@ -27,7 +27,7 @@ typedef struct {
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_002e1208. */
 extern unsigned int *dataTable23Sub0GetEntry(int);
-extern unsigned short FUN_003ae4d0(unsigned int);
+extern unsigned short msSearchFindIndexById(unsigned int);
 extern int dataTable23Type0CountWithAoc(void);
 extern char *dataTable2BType1GetEntry(unsigned char *, int);
 /* Supplied declaration required: dataTable2BType1Count. */
@@ -229,7 +229,7 @@ void FUN_0049105c(int param_1,unsigned int param_2)
                                                              (temp_v14 - (float)temp_v12)),
                                             (unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v8 = (float)temp_v16;
-        temp_v1 = FUN_003ae4d0(*puVar6);
+        temp_v1 = msSearchFindIndexById(*puVar6);
         *(unsigned short *)(temp_v2 + 0x17ba) = temp_v1;
         temp_v9 = VectorSignedToFloat((int)(short)(int)(temp_v14 - temp_v8),(unsigned char)(in_fpscr >> 0x16) & 3
                                     );

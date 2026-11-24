@@ -1,6 +1,15 @@
-/* NON_MATCHING: every branch and call matches; retail keeps the archive result at sp+8, the text pointer at
- * sp+16 and the previous slot at sp+24 (built: sp+16, sp+12, sp+4), reads the failed result before storing the
- * error kind, and so schedules the first description call's stack arguments differently (22 rows). */
+/* NON_MATCHING: 24 lines, all of them the offsets of four stack slots; every instruction and register matches.
+ * Retail keeps the failed result's copy at sp+0 and the archive call's returned result at sp+8, the text pointer at
+ * sp+16, the previous slot at sp+24 and the touched list at sp+4, leaving sp+20 unused (built: copy sp+0, returned
+ * result sp+16, text sp+12, previous sp+4, list sp+0). This build places spilled values in the lowest free words
+ * (text just above the 12 bytes of outgoing arguments it lives across; previous and the list inside them) and the
+ * returned result above those; retail has the two results first and the scalars after them in declaration order.
+ * Tried without effect on the layout: `previous` declared at the top, as u32 or volatile; the list as a local or a
+ * reference; touchRowsUpdate's and failOnArchiveError's parameters swapped; the text pointer after `main`. A
+ * result declared in the case and tested in place puts the returned result at sp+0 and the named one at sp+16.
+ * One clue: a previous slot that is still read after the description is redrawn (live across that call's stack
+ * arguments) leaves the low words and goes above the text pointer, as retail's does; nothing in retail's code
+ * reads it there. */
 #include <stdio.h>
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
@@ -50,8 +59,7 @@ void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 enum {
     AOC_MENU_BGM = 0x1000041,
     AOC_MENU_DECIDE_SOUND = 0x100020e,
-    AOC_MENU_LOADING = 0x10000,
-    AOC_RESULT_ERROR = 100
+    AOC_MENU_LOADING = 0x10000
 };
 
 /* The list the cursor moves in. */
@@ -77,8 +85,7 @@ static __inline bool failOnArchiveError(AocMenu *menu, WindowStatusResult result
 {
     if (nnResultIsFailure(legacyResourceIdRemap(&result))) {
         menu->substep = 9999;
-        menu->request.kind = AOC_RESULT_ERROR;
-        menu->request.result = result;
+        failRequestOperation(&menu->request, result);
         return true;
     }
     return false;

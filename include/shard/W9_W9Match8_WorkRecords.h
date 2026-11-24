@@ -847,9 +847,15 @@ typedef char TextureDrawRequestPrefixIVLayoutCheck[
 
 /* The reset-able values of a save/load screen transition. */
 struct SaveLoadTransitionValues {
-    /* 0x0 */ __packed u64 values; /* one 64-bit value: every reset clears it with one 64-bit store (stm of two zero
-                                    * registers); packed because the record puts it at 0x6ec, only 4-aligned */
-    /* 0x8 */ f32 progress;
+    union {
+        /* 0x0 */ __packed u64 values; /* one 64-bit value: every reset clears it with one 64-bit store (stm of two
+                                        * zero registers); packed because the record puts it at 0x6ec, only 4-aligned */
+        struct {
+            /* 0x0 */ s32 x;
+            /* 0x4 */ s32 y;
+        } offset; /* the selection marker's offset from its layout entry (saveSlotDrawSelectionMarker draws it there) */
+    };
+    /* 0x8 */ f32 progress; /* the marker's effect speed while it is drawn */
 };
 
 // Observed prefixes, not recovered allocation sizes or sprite-array bounds.

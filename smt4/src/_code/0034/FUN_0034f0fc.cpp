@@ -1,5 +1,7 @@
-/* NON_MATCHING: 38 lines: the rotation arms for 180 and 270 degrees are separate blocks here where retail predicates
- * their constant moves into the compare chain and shares one store; the width and height loads use r5 (retail r1). */
+/* NON_MATCHING: 4 lines: retail loads width and height through the incoming r1 (here the r5 copy); declaring
+ * width and height before count gives that, but only as a declaration order. The rotation setter is a
+ * one-instruction call armlink inlined (config/inlined.txt: retail keeps its `nop {0}` call padding after the
+ * 90-degree store and shares one store for the 180/270 arms). */
 #include "classes/Obj420a2c.h"
 
 extern "C" {
@@ -7,11 +9,8 @@ void rt_memclr(void *memory, u32 size);
 void asdTextureTileCreate(Obj420a2cEntry *tile, s32 width, s32 height, s32 x, s32 y, s32 sourceWidth,
                           s32 sourceHeight, u32 format, u32 type, u32 pixels, u32 flags);
 
-/* Sets the rotation, in degrees, a tile is drawn with. */
-static void tileSetRotation(Obj420a2cEntry *tile, f32 degrees)
-{
-    tile->rotation = degrees;
-}
+/* Sets the rotation, in degrees, a tile is drawn with (a one-instruction setter armlink inlines). */
+void asdTextureTileSetRotation(Obj420a2cEntry *tile, f32 degrees);
 
 /* Allocates the pixel buffers of a source (one, or two for a split source) and builds a texture tile over
  * each; a split source's second tile shares the first buffer. Returns 0 when an allocation fails. */
@@ -56,11 +55,11 @@ int FUN_0034f0fc(Obj420a2c *self, Obj420a2cSource *source, u32 *buffers, Obj420a
                                  0);
         }
         if (source->rotation == 1)
-            tileSetRotation(&tiles[i], 90.0f);
+            asdTextureTileSetRotation(&tiles[i], 90.0f);
         else if (source->rotation == 2)
-            tileSetRotation(&tiles[i], 180.0f);
+            asdTextureTileSetRotation(&tiles[i], 180.0f);
         else if (source->rotation == 3)
-            tileSetRotation(&tiles[i], 270.0f);
+            asdTextureTileSetRotation(&tiles[i], 270.0f);
     }
     s32 type = source->type;
     if (type == 1 || type == 3 || type == 5) {

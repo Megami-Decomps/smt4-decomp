@@ -68,7 +68,7 @@ void releaseEntriesB(void *panel);
 void slotPoolResetTrackedState(EntryList *list);
 SlotTable *gameGetSlotTable(void);
 NkmBaseRecordA *dataTable0ProbeEntryById(u16 index);
-s32 FUN_0032fbd0(DemonSlotData *slot);
+s32 compendiumRecordMatchesSaved(DemonSlotData *slot);
 s32 compendiumEntryIsRegistered(u16 id);
 u32 compendiumComputeSummonCost(u16 id, u8 category, s32 flag, s32 full, s32 extra);
 void inventoryListAppend(EntryList *list, const CampUnitComparison *entry);
@@ -95,7 +95,7 @@ void demonScreenRebuildEntryList(EntryScreen *screen)
             if (member >= 0) {
                 DemonSlotData *slot = &((PartySlot *)((u8 *)table + member * 300))->demon;
 
-                if (FUN_0032fbd0(slot) == 0) {
+                if (compendiumRecordMatchesSaved(slot) == 0) {
                     NkmBaseRecordA *record = nkmBaseGetRecord(slot->entryId);
                     CampUnitComparison entry;
 

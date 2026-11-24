@@ -4,7 +4,15 @@
  * address in the item-skill preview's loop. Writing the two plain-item previews as inline functions too (the item forms
  * of btlCommandResolveSelectedTarget) gives retail's whole frame layout and store order, but then the
  * cursor panel's btlItemComputeValues arguments and the first preview's fallback registers differ
- * (79 raw / 41 shape), so they are written in place. */
+ * (79 raw / 41 shape), so they are written in place.
+ * Wave 91, with both item previews inline (`selection == 0` first, as here: 77 raw / 39 shape): what differs is the
+ * first skill preview's fallback store (unk305C and the fallback swap r0/r1), the item-skill loop above, and the
+ * cursor preview's btlItemComputeValues: retail loads the target through ip with the pooled 0x9107 before the
+ * hp/mp addresses and moves it to r0 last; inlined, armcc forms the addresses first and loads straight into r0.
+ * A `s32 target` local as in btlCommandResolveSelectedTarget changes nothing; `selection != 0` first or a u32
+ * result like the skill form's score 114 raw / 78 shape; only the group preview inline 38/38 (first preview's kind
+ * at sp+44, the item kinds at sp+28/24); only the cursor preview inline 89/51. Retail's two previewSkillOnParty loops are the
+ * same code; this build's second one differs, so the difference is allocation, not the loop's source. */
 #include <string.h>
 #include "shard/PlayScene.h"
 #include "code/Code0026.h"
@@ -22,7 +30,7 @@ void btlCommandMenuResolveLayout(PlayScene *scene, u16 *kind, s16 *id);
 u32 btlCommandResolveSelectedTarget(PlayScene *scene);
 void playSceneSetState(PlayScene *scene, s32 state, s32 flag);
 u32 btlClassifySkillUse(s32 unit, u32 skillId);
-u32 FUN_0025043c(s32 side, u32 actionId);
+u32 btlClassifyItemUse(s32 side, u32 actionId);
 }
 
 /* The target cursor, as the flagged list entry it is driven as. */
@@ -123,11 +131,11 @@ void btlCommandBeginTargetSelection(PlayScene *scene)
                 scene->state = SCENE_STATE_TARGET_SELF;
                 flaggedEntrySetValueB(targetSelector(scene), scene->unk305C);
             }
-            if (FUN_0025043c(-1, id) != 0) {
+            if (btlClassifyItemUse(-1, id) != 0) {
                 scene->party.targetEnabled[0] = 0;
             }
             for (s32 i = 0; i < 3; i++) {
-                if (gameGetSlotTable()->active[i] < 0 || FUN_0025043c(i, id) != 0) {
+                if (gameGetSlotTable()->active[i] < 0 || btlClassifyItemUse(i, id) != 0) {
                     scene->party.targetEnabled[i + 1] = 0;
                 }
             }
@@ -171,11 +179,11 @@ void btlCommandBeginTargetSelection(PlayScene *scene)
                     }
                 }
             }
-            if (FUN_0025043c(-1, id) != 0) {
+            if (btlClassifyItemUse(-1, id) != 0) {
                 scene->party.targetEnabled[0] = 0;
             }
             for (s32 i = 0; i < 3; i++) {
-                if (gameGetSlotTable()->active[i] < 0 || FUN_0025043c(i, id) != 0) {
+                if (gameGetSlotTable()->active[i] < 0 || btlClassifyItemUse(i, id) != 0) {
                     scene->party.targetEnabled[i + 1] = 0;
                 }
             }

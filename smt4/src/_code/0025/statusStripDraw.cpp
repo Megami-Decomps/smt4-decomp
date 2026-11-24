@@ -49,7 +49,7 @@ void FUN_002be90c(s32 value, s32 max, s32 change, u32 base, u32 table, u32 frame
 void FUN_002888a8(s32 value, s32 max, s32 change, u32 base, u32 table, u32 fill, u32 gain, u32 loss,
                   s32 x, s32 y, u32 layer, u32 flags);
 /* Draws a number string with digit sprites (`digits` wide). */
-void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 layer, const char *text);
+void textDrawFormattedAligned(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 layer, const char *text);
 void statusStripDrawAilments(StatusStrip *strip, s32 x, s32 y);
 
 /* Draws one party member's status panel (large or small layout): frame, icon, level, HP/MP gauges and numbers,
@@ -147,7 +147,7 @@ void statusStripDraw(StatusStrip *panel, s32 x, s32 y, f32 opacity)
                 drawSetColorFromRGBA8(0x292929ff);
                 sprintf(text, "%d", level);
                 entry = asdTMTexTableEntryAt(0x19, 0x53);
-                FUN_002bdf94(1, entry->x + x, entry->y + y, 1, 2, 0x79, text);
+                textDrawFormattedAligned(1, entry->x + x, entry->y + y, 1, 2, 0x79, text);
                 gxResetColorQuadToWhite();
                 texDrawCompositeSprite(2, 0x19, 2, x, y, 0x6f);
                 FUN_002be90c(hp, maxHp, panel->hpChange, 0, 0x19, 0x44, 0x47, 0x45, 0x46, x, y, 0x74, 0);
@@ -182,11 +182,11 @@ void statusStripDraw(StatusStrip *panel, s32 x, s32 y, f32 opacity)
             }
             sprintf(text, "%d", hp);
             entry = asdTMTexTableEntryAt(0x19, 0x19);
-            FUN_002bdf94(2, entry->x + x, entry->y + y, 1, 4, 0x79, text);
+            textDrawFormattedAligned(2, entry->x + x, entry->y + y, 1, 4, 0x79, text);
             gxResetColorQuadToWhite();
             sprintf(text, "%d", mp);
             entry = asdTMTexTableEntryAt(0x19, 0x1d);
-            FUN_002bdf94(2, entry->x + x, entry->y + y, 1, 4, 0x79, text);
+            textDrawFormattedAligned(2, entry->x + x, entry->y + y, 1, 4, 0x79, text);
             statusStripDrawAilments(panel, x, y);
             if (panel->tinted) {
                 renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));

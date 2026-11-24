@@ -2,11 +2,11 @@
 #include "common.h"
 #include "camp/CampCec/CampCecDraw.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/Text/AsdTextA.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-void *asdMemoryAllocTracked(int heap, int align, int arg2, int size, int arg4);
-extern u32 spriteHandleCreate(u32 type);
 
 CampCecDrawList *campCecDrawListCreate(void)
 {
@@ -15,7 +15,7 @@ CampCecDrawList *campCecDrawListCreate(void)
     int i;
 
     for (i = 0; i < 10; i++) {
-        list->handle[i] = spriteHandleCreate(0);
+        list->handle[i] = (u32)spriteHandleCreate(0);
         list->count[i] = 0;
         list->state[i] = 0;
     }

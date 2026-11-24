@@ -1,6 +1,6 @@
-/* NON_MATCHING: 13 lines: retail keeps the two-path `flags |= 2; flags |= 1` as two orr (armcc folds them into
- * orr #3) and builds the mode/bytes address in r2 where this build uses r0. */
+/* NON_MATCHING: eight lines. Both paths build the mode/bytes address in r0, where retail uses r2. */
 #include "shard/FileQueueRequest.h"
+#include "util/BitsAndBytes.h"
 
 struct AocDisplay;
 
@@ -24,7 +24,7 @@ static __inline void queueFileLoad(AocDisplay *display, const char *path, u32 *c
     request.bytes = bytes;
     request.completion = completion;
     request.context = context;
-    request.flags |= 1;
+    flagsSetBits(&request.flags, 1);
     if (completion != 0) {
         *completion = 0;
     }
@@ -47,8 +47,8 @@ void aocDisplayQueueRecord(AocDisplay *display, const char *path, const char *se
         request.bytes = bytes;
         request.completion = completion;
         request.context = context;
-        request.flags |= 2;
-        request.flags |= 1;
+        flagsSetBits(&request.flags, 2);
+        flagsSetBits(&request.flags, 1);
         if (completion != 0) {
             *completion = 0;
         }
@@ -58,4 +58,4 @@ void aocDisplayQueueRecord(AocDisplay *display, const char *path, const char *se
     }
     queueFileLoad(display, path, completion, mode, bytes, NULL);
 }
-}
+} /* extern "C" */

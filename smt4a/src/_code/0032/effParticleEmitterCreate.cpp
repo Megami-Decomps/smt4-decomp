@@ -7,7 +7,6 @@ EffEmitter *effEmitterCreateSmall(EffEmitterDesc *descriptor);
 EffEmitter *effEmitterCreate(u32 count);
 void polygonTrackRebuildResources(ResourceEmitter *emitter, u32 id, const EmitterArguments *arguments);
 void objectBufferFree(void *buffer);
-void *effBehaviorCreate(u16 kind, u32 count, EffEmitterDesc *descriptor);
 void *effGeomCloneHandle(void *auxiliary);
 void effParticleParamCopy(EffParticleParam *destination, const EffParticleParam *source);
 
@@ -30,7 +29,7 @@ EffEmitter *effParticleEmitterCreate(EmitterResourceRequest *request)
     particleCreateBuffer(emitter, request->source->id, descriptor);
     if (emitter->particle.parameter == NULL) {
         emitter->particle.parameter = (EffParticleParam *)effEmitterCreate(emitter->maxCount);
-        emitter->particle.parameter->source = (EffParticleSource *)emitter->particle.buffer;
+        emitter->particle.parameter->source = (EffectBehaviorBlock *)emitter->particle.buffer;
     }
     if (request->particle.parameter->auxiliary != NULL) {
         emitter->particle.parameter->auxiliary = effGeomCloneHandle(request->particle.parameter->auxiliary);

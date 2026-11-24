@@ -74,7 +74,7 @@ EffObjectParticle *effObjectParticleCreate(ObjectParticleResourceView *resource)
     particle->creation.scale = 1.0f;
     __aeabi_memcpy4(particle->creation.initialization, header, 0x44);
     effObjectParticleSetSource(&particle->object, resource->description.kind, &header->emission);
-    if (particle->object.source->count) {
+    if (particle->object.source->elementCount) {
         const u8 *data = resourceResolveDataPointer(resource);
         if (data) {
             if (resource->description.resourceType == 3 && resource) {

@@ -48,7 +48,7 @@ extern unsigned char LAB_00103001; /* 0x103001 */
 extern unsigned int *dataTable23Sub0GetEntry(int);
 extern int dataTable23Type0CountWithAoc(void);
 /* Supplied declaration required: uiGetEntrySize. */
-extern unsigned short FUN_00276348(unsigned int);
+extern unsigned short msSearchFindIndexById(unsigned int);
 /* Supplied declaration required: gameFlagIsSet. */
 extern unsigned short FUN_003218e0(unsigned int);
 extern short *dataTable2bSub3GetRecord(unsigned char *, int);
@@ -277,7 +277,7 @@ LAB_0039d774:
         *(char *)(temp_v12 + 0xe8c) = pcVar17[1];
         *(unsigned short *)(temp_v12 + 0xeb4) = 2;
         *(unsigned char *)(temp_v12 + 0xe8d) = 0xff;
-        temp_v5 = FUN_00276348(*puVar9);
+        temp_v5 = msSearchFindIndexById(*puVar9);
         temp_v20 = VectorSignedToFloat((int)(short)(int)(temp_v25 - temp_v26),(unsigned char)(in_fpscr >> 0x16) & 3
                                     );
         temp_v30 = VectorSignedToFloat((int)(short)(int)(temp_v16 - temp_v26),(unsigned char)(in_fpscr >> 0x16) & 3

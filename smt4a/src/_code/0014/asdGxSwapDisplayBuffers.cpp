@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the entry differs: retail loads g_asdGxPresets into r0 and copies it to r4 (primary), reading the first index through r0; the build loads it into r4 and copies it to r0. */
 #include "gfx/AsdGxPresetRing.h"
 
 extern "C" {
@@ -8,7 +7,7 @@ void asdGxCmdBufferFinalizeBlock(void);
 void renderBindDisplay(AsdGxDisplayBuffers* ring, s32 enabled);
 void FUN_00161694(s32 mode);
 
-// Submit the previous presets, optionally refresh them, then advance each ring.
+/* Submits the previous presets, optionally refreshes them, then advances each ring. */
 void asdGxSwapDisplayBuffers(s32 refresh, s32 secondaryEnabled)
 {
     AsdGxDisplayBuffers* primary = &g_asdGxPresets.displays[0];

@@ -3,7 +3,10 @@
  * loads it with the loop's other constants), sets the row index after the work pointer's address, computes the
  * label's x into r1 and y into r0 (this build the reverse), and loads the value's two y halves between the
  * steps of its x sum (this build after it). A function-level 1.0f local reproduces the pool and the prologue but
- * not the rest, so it is not written. */
+ * not the rest, so it is not written.
+ * Wave 91: `f32 alpha = 1.0f;` declared at the top and assigned in the loop scores 97 by shape (117 raw). The
+ * label's x sum has two forms only (armcc sorts the operands: `name + row + x`, `x + name + row` and
+ * `name + (row + x)` compile alike; row before name scores 33 by shape, 57 raw). */
 #include "runtime/Stdio.h"
 #include "camp/PlayLog/PlayLog.h"
 #include "gamedata/PlayLogTable.h"

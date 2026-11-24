@@ -14,7 +14,7 @@ extern "C" {
 void FUN_0020bd54(void);
 void fadeObjectResetIfActive(void* fade);
 void textDrawRangeFaded(u32 iconSet, s32 x, s32 y, s32 a, f32 scale, s32 b, s32 c);
-void FUN_002acfc8(void* label, s32 x, s32 y);
+void buttonHelpDrawHighlightedLine(void* label, s32 x, s32 y);
 void skinObjectUpdateMatrices(RenderCtxA* ctx);
 void renderCtxResetColorScale(RenderCtxA* ctx);
 
@@ -48,7 +48,7 @@ s32 FUN_002e169c(u32 job)
                 if (help->text.useDirectoryText != 0) {
                     textDrawRangeFaded(help->text.directoryText, rect->x, rect->y, 21, 1.0f, 6, 0);
                 } else if (help->text.highlightLine == 0) {
-                    FUN_002acfc8(help->text.lines[0].text, rect->x, rect->y);
+                    buttonHelpDrawHighlightedLine(help->text.lines[0].text, rect->x, rect->y);
                 } else {
                     textDrawString((f32)rect->x, (f32)rect->y, 0.93f, 2, 0.0f, help->text.style, 1.0f, help->text.lines[0].text);
                 }
@@ -58,7 +58,7 @@ s32 FUN_002e169c(u32 job)
                 } else if (help->text.highlightLine != 1) {
                     textDrawString((f32)rect->x, (f32)rect->y, 0.93f, 2, 0.0f, help->text.style, 1.0f, help->text.lines[1].text);
                 } else {
-                    FUN_002acfc8(help->text.lines[1].text, rect->x, rect->y);
+                    buttonHelpDrawHighlightedLine(help->text.lines[1].text, rect->x, rect->y);
                 }
             }
         }

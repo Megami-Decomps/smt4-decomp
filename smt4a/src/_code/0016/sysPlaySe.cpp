@@ -21,7 +21,7 @@ extern "C" {
 SoundSceneEntry *dataTableGetEntry0e(u32 id);
 void buttonHelpBeginExit(s32 mode);
 void buttonHelpTeardownSlots(void);
-void FUN_00183c0c(void);
+void buttonHelpRebuildTouchRegions(void);
 void buttonHelpPrepareSlots(void);
 
 /* Selects the ButtonHelp entry `id` (a dataTable0e record): pushes its six per-slot values, links paired slots
@@ -98,7 +98,7 @@ void sysPlaySe(u32 id)
     } else {
         g_buttonHelp.work->panelState = 1;
     }
-    FUN_00183c0c();
+    buttonHelpRebuildTouchRegions();
 }
 
 } /* extern "C" */

@@ -17,20 +17,6 @@ struct QuestInteraction {
     /* 0x1b */ u8 scriptActive;
 };
 
-extern "C" {
-void questInteractionChooseEntry(QuestInteraction *object);
-void questCenterBeginConversation(QuestInteraction *object);
-}
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-
-#ifdef __cplusplus
-}
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif

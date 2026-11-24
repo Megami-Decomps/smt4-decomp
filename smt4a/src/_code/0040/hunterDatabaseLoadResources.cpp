@@ -1,6 +1,7 @@
 #include "ui/HunterDatabaseWork.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "AsdSDK/Source/Gfx/Text/AsdTextA.h"
 
 extern "C" {
 void asdTMTexTableLoadTmx(u32, u32);
@@ -11,7 +12,6 @@ void FUN_00471d94(u32);
 extern u32 g_aocSystem;
 extern const char DAT_0052d10c[];
 extern const char DAT_0052d0e0[];
-u32 spriteHandleCreate(u32);
 void *textureGetIndexedResource(u32);
 
 // Load the hunter database text and textures, acquire shared tables, and create six sprites.
@@ -45,7 +45,7 @@ void hunterDatabaseLoadResources(HunterDatabaseWork *work)
         }
     }
     for (s32 index = 0; index < 6; ++index) {
-        u32 sprite = spriteHandleCreate(0);
+        u32 sprite = (u32)spriteHandleCreate(0);
         work->sprites[index] = sprite;
         uiObjectSetColorRgb(sprite, ~0u);
     }

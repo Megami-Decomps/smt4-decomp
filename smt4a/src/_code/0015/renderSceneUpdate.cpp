@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail uses a separate model-slot address point; the fixed-zero debug-dispatch test is the call to the
  * mov r0,#0 stub sceneQueryFalse armlink inlined (the smt4 twin FUN_0011891c calls it). */
+#include "shard/S1GfxModel.h"
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "camp/RenderCtxA.h"
@@ -25,7 +26,6 @@ struct RenderSceneLightState {
 extern "C" {
 extern RenderSceneLightState g_asdLightCount;
 void FUN_0017712c(ModelOwner *owner, void *traverser, u32 mask, s32 enabled);
-void FUN_00197eb0(void *builderState, u32 tree);
 void FUN_00176800(ModelOwner *owner, void *traverser, s32 enabled);
 void nw_gfx_SceneNode_AttachChild(void *builder, u32 tree);
 void FUN_00176e84(ModelOwner *owner, u32 mask, s32 mode, s32 flags);
@@ -44,7 +44,8 @@ extern "C" void renderSceneUpdate(void)
     void *context = reinterpret_cast<RenderSceneOwner *>(g_gfxSettings.owner[1])->context;
     FUN_0017712c(g_gfxSettings.owner[1], g_gfxSettings.attachInfo[1], g_gfxSettings.node1, 1);
     if (g_asdLightCount.visit && !g_asdLightCount.skipVisit) {
-        FUN_00197eb0(static_cast<RenderSceneBuilder *>(g_gfxSettings.transformBuilder[1])->state, g_gfxSettings.sceneGroupRoot[1]);
+        FUN_00197eb0((ModelSlotVectorA *)((RenderSceneBuilder *)g_gfxSettings.transformBuilder[1])->state,
+                      (s32)g_gfxSettings.sceneGroupRoot[1]);
         sceneTraverserVisit(g_gfxSettings.attachInfo[1], g_gfxSettings.transformBuilder[1]);
     }
     if (!g_asdLightCount.skipOwner)

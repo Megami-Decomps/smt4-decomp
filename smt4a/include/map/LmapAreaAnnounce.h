@@ -43,7 +43,7 @@ static __forceinline void lmapAnnounceArea(s32 part, u8 volume)
         soundActorStartOnFreeChannel(0x10002d9 + part, soundActorPositionFromArray(&g_lmapScene->pose.position.x));
         break;
     }
-    FUN_00324e38(-1);
+    mapDepartSpawnPlayerEffect(-1);
     libm_sinf(g_lmapScene->pose.heading * 0.017453292f);
     libm_cosf(g_lmapScene->pose.heading * 0.017453292f);
     soundVolumeSettingSet(messageVoiceBankGet());

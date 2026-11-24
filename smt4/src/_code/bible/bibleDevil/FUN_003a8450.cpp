@@ -51,7 +51,7 @@ struct DevilView {
 typedef char DevilViewLayoutCheck[__INTADDR__(&((DevilView *)0)->entries) == 0x5A8 &&
     __INTADDR__(&((DevilView *)0)->purchaseState) == 0xA5B0 && __INTADDR__(&((DevilView *)0)->timer) == 0xA5B4 ? 1 : -1];
 
-/* The row's devil id (a getter armlink inlined and removed; FUN_003a72a4 reads rows the same way). */
+/* The row's devil id (a getter armlink inlined and removed; bibleDevilUpdatePreviewInput reads rows the same way). */
 static __inline u16 shopListItemGetId(const DevilEntry *row)
 {
     return row->devil;

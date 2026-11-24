@@ -1,31 +1,32 @@
-/* NON_MATCHING: only scheduling differs: the initial-parameters pointer add lands in r2 instead of r1 and `mov fp, #0` is hoisted above the pointer stores. */
 #include <string.h>
 #include "shard/W5_W5Match2_EffectBehaviorQuery.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Gfx/Effect/EffectBehaviorBlock.h"
 
 extern "C" {
 extern EffectBehaviorEntry g_effBehaviorTable[];
-void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 tag, u32 mode);
-void *__aeabi_memcpy(void *destination, const void *source, u32 size);
 
-/* Allocates one behavior, its value storage and two parameter copies, then resets the two positions. */
-EffectBehaviorBlock *effBehaviorCreate(s32 type, s32 count, const EffectBehaviorParameters *source)
+/* Allocates one behavior and lays out its elements, parameter copies and workspace. */
+EffectBehaviorBlock *effBehaviorCreate(u16 type, s32 count, const void *resource)
 {
+    const EffectBehaviorParameters *header = (const EffectBehaviorParameters *)resource;
     s32 parameterSize = g_effBehaviorTable[type].storage.parameterSize;
-    s32 valueCount = count * (source->rows * source->columns) + count;
+    s32 valueCount = count * (header->rows * header->columns) + count;
     s32 valueBytes = valueCount * 0x28;
     s32 elementBytes = g_effBehaviorTable[type].storage.elementSize * count;
-    s32 size = elementBytes + valueBytes + parameterSize * 2 + 0x30;
+    s32 size = elementBytes + valueBytes + parameterSize * 2 + sizeof(EffectBehaviorBlock);
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Effect\\effBehavior.cpp", 0x1093);
     EffectBehaviorBlock *behavior = (EffectBehaviorBlock *)memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
-    u8 *values = (u8 *)(behavior + 1);
-    EffectBehaviorParameters *parameters = (EffectBehaviorParameters *)(values + valueBytes);
-    EffectBehaviorParameters *initialParameters = (EffectBehaviorParameters *)((u8 *)parameters + parameterSize);
-    behavior->elements = values;
-    behavior->initialParameters = initialParameters;
-    behavior->workspace = (u8 *)initialParameters + parameterSize;
+    u8 *storage = (u8 *)(behavior + 1);
+    behavior->elements = storage;
+    storage += valueBytes;
+    EffectBehaviorParameters *parameters = (EffectBehaviorParameters *)storage;
     behavior->parameters = parameters;
+    storage += parameterSize;
+    behavior->initialParameters = (EffectBehaviorParameters *)storage;
+    storage += parameterSize;
+    behavior->workspace = storage;
     behavior->type = type;
     behavior->count = count;
     behavior->elementCount = valueCount;
@@ -33,13 +34,11 @@ EffectBehaviorBlock *effBehaviorCreate(s32 type, s32 count, const EffectBehavior
     behavior->state = 0;
     behavior->elapsed = 0.0f;
     behavior->owner = behavior;
-    __aeabi_memcpy(parameters, source, parameterSize);
-    __aeabi_memcpy(behavior->initialParameters, source, parameterSize);
+    memcpy(parameters, resource, parameterSize);
+    memcpy(behavior->initialParameters, resource, parameterSize);
     parameters = behavior->parameters;
-    memset(&parameters->vectors[0], 0, sizeof(EffectBehaviorVector));
-    parameters->vectors[0].w = 1.0f;
-    memset(&parameters->vectors[1], 0, sizeof(EffectBehaviorVector));
-    parameters->vectors[1].w = 1.0f;
+    behaviorVectorSetIdentity(&parameters->vectors[0]);
+    behaviorVectorSetIdentity(&parameters->vectors[1]);
     if (parameters->enabled != 0) {
         behavior->flags |= 1;
     }
@@ -48,4 +47,4 @@ EffectBehaviorBlock *effBehaviorCreate(s32 type, s32 count, const EffectBehavior
     }
     return behavior;
 }
-}
+} /* extern "C" */

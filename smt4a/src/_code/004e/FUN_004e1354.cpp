@@ -1,7 +1,7 @@
 /* NON_MATCHING: register allocation/scheduling only: retail loads the actor's 64-bit flags with one ldm and orders the script-record address computation differently */
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
-#include "battle/BtlGlobals.h"
+#include "battle/BtlActionSlots.h"
 
 extern "C" {
 
@@ -36,12 +36,6 @@ struct BtlCommand {
     /* 0x1230 */ u32 phase;
 };
 
-/* The per-actor script record stride is 0x495 words; state is its tag byte. */
-struct BtlScriptRecord {
-    /* 0x00 */ u8 unk00[9];
-    /* 0x09 */ u8 state;
-};
-
 extern u32 g_btlAux;   /* 0x573808 */
 extern u32 g_btlEvent; /* 0x573898 */
 extern u32 g_btlActionReflect; /* 0x5712f0 */
@@ -54,11 +48,6 @@ void btlStageResetAndClearCameraFlag(u32 block);
 void FUN_004fbeac(s32, BtlCommand *, s32, s32, s32);
 void FUN_004fe764(s32, BtlCommand *, u32, s32, s32);
 
-static __inline BtlScriptRecord *btlScriptRecordGet(BtlActorRef *ref)
-{
-    return (BtlScriptRecord *)(reinterpret_cast<u32 *>(g_btlAction.slots) + ref->actor->slot * 0x495);
-}
-
 /* Steps the actor's skill start: runs the pre/post handlers and marks the actor's script record state. */
 u32 FUN_004e1354(BtlActorRef *ref, BtlCommand *command)
 {
@@ -69,7 +58,7 @@ u32 FUN_004e1354(BtlActorRef *ref, BtlCommand *command)
         if (chainCountIdUnflagged(g_btlActionReflect, command) != 0) {
             return 0;
         }
-        btlScriptRecordGet(ref)->state = 1;
+        btlActionGetSlot(ref->actor->slot)->unit.command = 1;
         btlStageResetAndClearCameraFlag(g_btlAux);
         return 1;
     }
@@ -88,7 +77,7 @@ u32 FUN_004e1354(BtlActorRef *ref, BtlCommand *command)
         }
         if (handled != 0) {
             command->phase = 0;
-            btlScriptRecordGet(ref)->state = 0x1d;
+            btlActionGetSlot(ref->actor->slot)->unit.command = 0x1d;
             command->flags &= ~0x2000;
             return 1;
         }
@@ -103,7 +92,7 @@ u32 FUN_004e1354(BtlActorRef *ref, BtlCommand *command)
         if (chainCountIdUnflagged(g_btlActionReflect, command) <= 0 && handled != 0) {
             command->phase = 0x1e;
             btlCommandExtendAnimationWindow(ref, command, command->skill->animation, 0, 0x11, 0x11);
-            btlScriptRecordGet(ref)->state = 0x1d;
+            btlActionGetSlot(ref->actor->slot)->unit.command = 0x1d;
             command->flags &= ~0x2000;
             return 1;
         }

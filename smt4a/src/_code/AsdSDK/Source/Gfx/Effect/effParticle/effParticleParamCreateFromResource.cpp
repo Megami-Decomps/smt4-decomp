@@ -3,7 +3,16 @@
  * image and table textures (types 1 and 4) take other VFP registers: retail keeps the width in s0 and the
  * height in s2 and stores both with one vstmia. The per-type setters below are the bodies of the file's own
  * functions, which retail inlines here (they also exist out of line): the unit belongs in one translation
- * unit with them. */
+ * unit with them.
+ * The two differences are one problem: the VFP registers of the three texture setters follow the values created
+ * ahead of them. An inline around the flag store (a marker, or a (param, u8 flags) setter) gives retail's store
+ * before the count read, but as `orr r0, r0, #1`, and moves the registers of all three setters (52 lines). With
+ * the flag store left as a call (a bool setter armcc does not inline) types 1 and 4 come out exactly as retail's
+ * and type 9 as their vldmia/vstmia form; a `u8` copy of the flags gives type 4 and loses types 1 and 9 (32
+ * lines; a temporary, not kept). So retail creates fewer values before the switch than this source and as many
+ * before type 9. No effect: the setters as static, extern or plain functions, a struct, array, pointer or setter
+ * form of the half size, getters for the count and the handle count, an early return, `flags = flags | 1`, an s8
+ * or volatile view of the flags (a one-bit bitfield writes the whole byte). */
 #include "AsdSDK/Source/Gfx/Effect/effParticle.h"
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
@@ -23,7 +32,6 @@ extern const char g_effParticleSourceFileName[];             /* __FILE__ of effP
 void rt_memclr(void *block, s32 size);
 void *resourceResolveHeaderPointer(const RelativeDataB *record);
 void *resourceResolveDataPointer(const RelativeDataA *record);
-EffParticleSource *effBehaviorCreate(u16 kind, u32 count, EffEmitterDesc *descriptor);
 AsdTexture *sysGetTableWord(u16 id); // declcheck: local (returns the texture; sys/RuntimeObjects.h's u32 view also redeclares refCountIncrement)
 void handleBlockRefDrop(void *handle);
 void handleBlockUnref(void *handle);
@@ -116,7 +124,7 @@ static __inline void particleSetTlp(EffParticleParam *param, const void *data)
 /* effParticleRebuildHandles' body. */
 static __inline void particleRebuildBlocks(EffParticleParam *param, const void *init)
 {
-    u32 count = param->source != NULL ? param->source->count : param->count;
+    u32 count = param->source != NULL ? (u32)param->source->elementCount : param->count;
     u32 i;
     u32 size;
 
@@ -142,7 +150,7 @@ static __inline void particleRebuildBlocks(EffParticleParam *param, const void *
 /* effParticleParamRebuildHandles3c's body. */
 static __inline void particleRebuildParts(EffParticleParam *param, const void *source)
 {
-    u32 count = param->source != NULL ? param->source->count : param->count;
+    u32 count = param->source != NULL ? (u32)param->source->elementCount : param->count;
     u32 i;
     u32 size;
 
@@ -189,15 +197,15 @@ EffParticleParam *effParticleParamCreateFromResource(EffMiscDesc *resource)
         if (data != NULL) {
             switch (resource->resourceType) {
             case 1:
-                geometryOwnerSetGeometry((GeometryOwner *)param, param->source->count, 1);
+                geometryOwnerSetGeometry((GeometryOwner *)param, param->source->elementCount, 1);
                 particleSetImageTexture(param, data);
                 break;
             case 2:
-                geometryOwnerSetGeometry((GeometryOwner *)param, param->source->count, 2);
+                geometryOwnerSetGeometry((GeometryOwner *)param, param->source->elementCount, 2);
                 particleSetSpriteGroup(param, data);
                 break;
             case 4:
-                geometryOwnerSetGeometry((GeometryOwner *)param, param->source->count, 4);
+                geometryOwnerSetGeometry((GeometryOwner *)param, param->source->elementCount, 4);
                 particleSetTableTexture(param, *data);
                 break;
             case 5:
@@ -207,11 +215,11 @@ EffParticleParam *effParticleParamCreateFromResource(EffMiscDesc *resource)
                 particleRebuildParts(param, data);
                 break;
             case 7:
-                geometryOwnerSetGeometry((GeometryOwner *)param, param->source->count, 7);
+                geometryOwnerSetGeometry((GeometryOwner *)param, param->source->elementCount, 7);
                 particleSetTlp(param, data);
                 break;
             case 9:
-                geometryOwnerSetGeometry((GeometryOwner *)param, param->source->count, 9);
+                geometryOwnerSetGeometry((GeometryOwner *)param, param->source->elementCount, 9);
                 particleSetEffectTexture(param, data);
                 break;
             }

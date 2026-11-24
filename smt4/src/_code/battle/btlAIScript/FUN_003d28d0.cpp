@@ -46,7 +46,7 @@ u32 FUN_003cbce4(BtlMainState **block, CommandState *work);
 u32 FUN_003cb244(BtlMainState **block, CommandState *work);
 u32 btlCommandTurnEnd(BtlMainState **block, CommandState *work);
 u32 btlAiWaitUiAndUpdatePartyGroup4Latch(BtlMainState **block, CommandState *work);
-u32 FUN_003cfb60(BtlMainState **block, CommandState *work);
+u32 btlStartSkillAction(BtlMainState **block, CommandState *work);
 void FUN_00229b10(BtlMainState **block, CommandState *work);
 void FUN_00229754(BtlMainState **block, CommandState *work);
 u8 btlAiScriptIsFinished(u32 script);
@@ -177,7 +177,7 @@ u32 FUN_003d28d0(BtlMainState **block, u32 phase)
     case 27:
         return FUN_003cb244(block, work);
     case 28:
-        return FUN_003cfb60(block, work);
+        return btlStartSkillAction(block, work);
     case 29:
         return btlCommandTurnEnd(block, work);
     case 30:

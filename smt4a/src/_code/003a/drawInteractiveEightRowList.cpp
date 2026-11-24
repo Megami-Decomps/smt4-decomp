@@ -1,4 +1,3 @@
-/* NON_MATCHING: 10 lines; retail loads the 1.0f opacity constant into s17 at entry, the build only before the row loop */
 #include "camp/Unite/UniteWork.h"
 #include "code/Code002a_VariantA.h"
 #include "code/Code002a_Smt4a.h"
@@ -16,6 +15,7 @@ void skillScreenDrawCandidateRow(UniteWorkA *work, struct SlotRecordA *record, s
 void drawInteractiveEightRowList(UniteWorkA *work, struct SlotRecordA *record, s32 interactive, s32 x, s32 y,
                                  f32 effect)
 {
+    const f32 normalSpeed = 1.0f;
     resourceRunOperationIfUnblocked((Object *)&work->inheritanceA.skillList);
     s32 cursor = resourceRunOperationIfUnblocked((Object *)&work->inheritanceA.skillList) +
                  listCursorGetRowIfUnblocked(&work->inheritanceA.skillList);
@@ -38,7 +38,7 @@ void drawInteractiveEightRowList(UniteWorkA *work, struct SlotRecordA *record, s
                 interactive)
                 highlighted = 1;
             skillScreenDrawCandidateListRow(work, row, record, valid, x, y, highlighted, effect);
-            efctSetSpeed(1.0f);
+            efctSetSpeed(normalSpeed);
         }
     }
     if (!stripShown && work->inheritanceA.accepted && interactive)

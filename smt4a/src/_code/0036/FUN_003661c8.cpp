@@ -14,7 +14,7 @@ int mapIfApplyEntryRequest(...);
 int mapIfSpawnDownAction(void);
 int lmapRequestTimedEffect(...);
 int padGetNormalizedAnalogStick(...);
-int FUN_00324e38(...);
+int mapDepartSpawnPlayerEffect(...);
 int FUN_00352308(void);
 int table23FindRecordByKey(unsigned int, unsigned int, unsigned int);
 int sysPlayVoice(...);
@@ -61,7 +61,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapIfReleaseSlot3. */
 /* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
-/* Supplied declaration required: FUN_00324e38. */
+/* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: FUN_0033abd4. */
 /* Supplied declaration required: FUN_00352308. */
@@ -405,7 +405,7 @@ void FUN_003661c8(void)
       default:
       }
 LAB_00366704:
-      FUN_00324e38(0xffffffff);
+      mapDepartSpawnPlayerEffect(0xffffffff);
       libm_sinf();
       libm_cosf();
       messageVoiceBankGet();
@@ -518,7 +518,7 @@ LAB_00366704:
         default:
         }
 LAB_00366a74:
-        FUN_00324e38(0xffffffff);
+        mapDepartSpawnPlayerEffect(0xffffffff);
         libm_sinf();
         libm_cosf();
         messageVoiceBankGet();

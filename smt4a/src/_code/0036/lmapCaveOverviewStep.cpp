@@ -91,7 +91,7 @@ void lmapCaveOverviewStep(void)
         g_gameState.transitionCompleted = 0;
         scene->moveMode = 8;
         scene->moveSpeed = 5.0f;
-        FUN_00324e38(1);
+        mapDepartSpawnPlayerEffect(1);
         g_lmapScene->state = g_lmapScene->state + 1;
         g_lmapScene->stateTime = 0;
         break;

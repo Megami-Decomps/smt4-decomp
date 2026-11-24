@@ -1,4 +1,6 @@
-/* NON_MATCHING: 32 lines; retail has a 36-byte frame (the halo sprite address spills to [sp, #28]; 20 bytes and [sp, #12] here) and adds the title x before the parallax (add r9, r8, r0) where the build swaps the operands */
+/* NON_MATCHING: 8 lines, the frame only: retail reserves 36 bytes (the halo sprite address spills to [sp, #28]),
+ * this build 20 ([sp, #12]). The stereo parallax is one local recomputed before each draw, as retail adds it
+ * after the base position. */
 #include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "camp/RenderCtxA.h"
@@ -27,12 +29,13 @@ void FUN_0037e8a4(SaveSlotHud *hud, f32 alpha)
 {
     s32 baseX = vec2GetXInt(&hud->titleSprite);
     s32 baseY = vec2GetYInt(&hud->titleSprite);
-    s32 x = baseX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    s32 x = baseX + parallax;
     efctSetSpeed(vec2GetSpeed(&hud->titleSprite) * alpha);
     for (s32 i = 0; i < 3; i++)
         texDrawTableEntryAtStoredOrigin(2, 0x14, 0xc08 + i, x, baseY, 0xbf);
-    texDrawTableEntryAtStoredOrigin(2, 0x14, 0xbe1, baseX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f),
-                                    baseY, 0xc4);
+    parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    texDrawTableEntryAtStoredOrigin(2, 0x14, 0xbe1, baseX + parallax, baseY, 0xc4);
 
     UiSpriteState *card = &hud->cardSprite;
     if (uiSpriteGetCompletionState(card) == 0 || saveSlotFindSelected() == NULL)
@@ -41,7 +44,8 @@ void FUN_0037e8a4(SaveSlotHud *hud, f32 alpha)
     s32 cardX = vec2GetXInt(card);
     s32 cardY = vec2GetYInt(card);
     TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x14, 0xbd9);
-    s32 frameX = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f) + cardX + frame->x;
+    parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    s32 frameX = parallax + cardX + frame->x;
     s32 frameY = frame->y + cardY;
     /* both opacities are read and not used (retail keeps the two loads) */
     vec2GetSpeed(&hud->haloSprite);
@@ -51,7 +55,8 @@ void FUN_0037e8a4(SaveSlotHud *hud, f32 alpha)
         texDrawTableEntryAtStoredOrigin(2, 0x14, 0xbe2 + i, frameX, frameY, 0xbf);
 
     TextureTableEntryIV *marker = asdTMTexTableEntryAt(0x14, 0xc16);
-    s32 markerX = marker->x + ((s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f) + cardX);
+    parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    s32 markerX = marker->x + (parallax + cardX);
     s32 markerY = marker->y + cardY;
     efctSetSpeed(vec2GetSpeed(&hud->haloSprite) * alpha);
     for (s32 i = 0; i < 3; i++)

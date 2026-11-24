@@ -75,7 +75,7 @@ void FUN_002be90c(s32 value, s32 max, s32 change, u32 base, u32 table, u32 frame
 void FUN_002888a8(s32 value, s32 max, s32 change, u32 base, u32 table, u32 fill, u32 gain, u32 loss,
                   ScreenPoint position, u32 layer, u32 flags);
 /* Draws a number string with digit sprites (`digits` wide). */
-void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 layer, const char *text);
+void textDrawFormattedAligned(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 layer, const char *text);
 
 /* Switches scissoring (3: on, 0: off). */
 static __inline void hudSetScissor(s32 state)
@@ -355,10 +355,10 @@ void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimG
             }
             efctSetSpeed(alpha);
             entry = asdTMTexTableEntryAt(21, 32);
-            FUN_002bdf94(0, entry->x + x, entry->y + y, 1, 4, 16, hpText);
+            textDrawFormattedAligned(0, entry->x + x, entry->y + y, 1, 4, 16, hpText);
             gxResetColorQuadToWhite();
             entry = asdTMTexTableEntryAt(21, 36);
-            FUN_002bdf94(0, entry->x + x, entry->y + y, 1, 4, 16, mpText);
+            textDrawFormattedAligned(0, entry->x + x, entry->y + y, 1, 4, 16, mpText);
 
             TextureTableEntryIV *gauge;
             if (expanded != 0) {
@@ -481,11 +481,11 @@ void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimG
             if (expanded != 0) {
                 texDrawTableEntryAtStoredOrigin(2, 21, 0x3F, x, y - shift, 31);
                 entry = asdTMTexTableEntryAt(21, 0x42);
-                FUN_002bdf94(0, entry->x + x, entry->y + y - shift, 1, 2, 36, levelText);
+                textDrawFormattedAligned(0, entry->x + x, entry->y + y - shift, 1, 2, 36, levelText);
             } else {
                 texDrawTableEntryAtStoredOrigin(2, 21, 5, x, y, 31);
                 entry = asdTMTexTableEntryAt(21, 0x26);
-                FUN_002bdf94(0, entry->x + x, entry->y + y, 1, 2, 36, levelText);
+                textDrawFormattedAligned(0, entry->x + x, entry->y + y, 1, 2, 36, levelText);
             }
 
             /* the icons of up to six ailments */

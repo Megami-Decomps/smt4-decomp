@@ -26,7 +26,7 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor);
 void campAppListDraw(s32 x, s32 y, s32 drawCursor);
 u32 resourceRunOperationIfUnblocked(const GridNavigation *grid);
 void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide);
-void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *text);
+void textDrawFormattedAligned(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *text);
 u8 *dataFindKindRecordWithAocOverrides(u32 id, s32 payload);
 u32 itemCanUseOnParty(s32 id);
 
@@ -99,10 +99,10 @@ static void campItemListDraw(s32 kind, s32 x, s32 y, s32 drawCursor)
 
         part = asdTMTexTableEntryAt(CAMP_TEXTURE, 0x473);
         __2sprintf(text, "%d", flagValueRead(id));
-        FUN_002bdf94(0, row->x + part->x + x, row->y + part->y + y, 1, 3, 0x6f, text);
+        textDrawFormattedAligned(0, row->x + part->x + x, row->y + part->y + y, 1, 3, 0x6f, text);
 
         part = asdTMTexTableEntryAt(CAMP_TEXTURE, 0x474);
-        FUN_002bdf94(0, row->x + part->x + x, row->y + part->y + y, 1, 1, 0x6f, "*");
+        textDrawFormattedAligned(0, row->x + part->x + x, row->y + part->y + y, 1, 1, 0x6f, "*");
 
         part = asdTMTexTableEntryAt(CAMP_TEXTURE, 0x46f);
         BadgeWord notEquipped;
@@ -129,10 +129,10 @@ static void campItemListDraw(s32 kind, s32 x, s32 y, s32 drawCursor)
 
         part = asdTMTexTableEntryAt(CAMP_TEXTURE, 0x47a);
         __2sprintf(text, "%d", flagValueRead(id));
-        FUN_002bdf94(0, row->x + part->x + x, row->y + part->y + y, 1, 3, 0x83, text);
+        textDrawFormattedAligned(0, row->x + part->x + x, row->y + part->y + y, 1, 3, 0x83, text);
 
         part = asdTMTexTableEntryAt(CAMP_TEXTURE, 0x47b);
-        FUN_002bdf94(0, row->x + part->x + x, row->y + part->y + y, 1, 1, 0x83, "*");
+        textDrawFormattedAligned(0, row->x + part->x + x, row->y + part->y + y, 1, 1, 0x83, "*");
 
         texDrawTableEntryAtStoredOrigin(2, CAMP_TEXTURE, 0x475, row->x + x, row->y + y, 0x83);
 

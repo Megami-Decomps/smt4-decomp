@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail addresses the second cleared record through a base at DAT_005f1cbc+0xb8 and keeps the fourth key table's address in ip (stack-argument stm grouping differs); stores and calls otherwise identical. */
 #include "ui/UiSpriteApi.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include "game/GameStateA.h"
@@ -7,6 +6,7 @@
 #include "ui/ParamsClearPacket.h"
 #include "map/MapDepartJobWorkA.h"
 #include "gamedata/GameDataAccess.h"
+#include "map/MapDepartItems.h"
 
 /* A 0x8C-byte UI sprite; only the data the initializers below pass around. */
 
@@ -15,27 +15,6 @@ struct SceneScaleKey {
     f32 first;
     f32 last;
     s32 mode;
-};
-
-/* Two blocks of cleared globals at the start of the scene state. */
-struct SceneRecordA {
-    /* 0x00 */ u8 unk00[0x50];
-    /* 0x50 */ s32 unk50;
-    /* 0x54 */ u8 unk54[0x60];
-    /* 0xb4 */ s16 unkb4;
-    /* 0xb6 */ s16 unkb6;
-};
-struct SceneRecordB {
-    /* 0x00 */ u8 unk00[0x50];
-    /* 0x50 */ s32 unk50;
-    /* 0x54 */ u8 unk54[0x50];
-    /* 0xa4 */ s16 unka4;
-    /* 0xa6 */ s16 unka6;
-    /* 0xa8 */ u8 unka8[0x10];
-};
-struct SceneRecords {
-    SceneRecordA first;
-    SceneRecordB second;
 };
 
 /* Key tables for paramsInit; the original file defined them statically. */
@@ -47,7 +26,10 @@ static const s32 sKeysFifth[21] = {
     -3, 0, -3, 0, 0, 0, 0, -3, 0, -3, 1, 0, 1, 0, -1, 0, -1, -1, 0, -1, 0};
 
 extern "C" {
-extern SceneRecords DAT_005f1cbc;
+/* Defined here, in this order: retail reaches the second record from the first one's pool word (+0xb8), which
+ * armcc does only for data its own file defines. */
+DepartureFoundItems DAT_005f1cbc;
+DepartureCollectedItems DAT_005f1d74;
 void FUN_00352eec(void);
 
 /* Clear the scene's work areas; when `savePoint` is set, record the current map point into the flags block first. */
@@ -118,14 +100,12 @@ void mapDepartInitState(MapDepartJobWorkA *work, s32 savePoint)
         flags->savePoint.tableId = g_gameState.table2FId;
     }
     FUN_00352eec();
-    SceneRecordA *first = &DAT_005f1cbc.first;
-    SceneRecordB *second = &DAT_005f1cbc.second;
-    first->unk50 = 0;
-    first->unkb4 = 0;
-    first->unkb6 = 0;
-    second->unk50 = 0;
-    second->unka4 = 0;
-    second->unka6 = 0;
+    DAT_005f1cbc.sourceCount = 0;
+    DAT_005f1cbc.unkB4 = 0;
+    DAT_005f1cbc.unkB6 = 0;
+    DAT_005f1d74.sourceCount = 0;
+    DAT_005f1d74.count = 0;
+    DAT_005f1d74.unkA6 = 0;
     paramsClearPacket(&work->packet);
     paramsInit(&work->packet, sKeysFirst, sizeof(sKeysFirst), sKeysSecond, sizeof(sKeysSecond),
                sKeysThird, sizeof(sKeysThird), sKeysFourth, sizeof(sKeysFourth),

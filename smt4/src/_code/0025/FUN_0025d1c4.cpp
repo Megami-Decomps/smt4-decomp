@@ -21,7 +21,7 @@ int itemHealingIsUseful(void);
 int listGetU16OrZero(...);
 int FUN_002b6c34(...);
 int aocIndexValueOrDefault(...);
-int FUN_002bdf94(...);
+int textDrawFormattedAligned(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
 int dataFindKindRecordWithAocOverrides(...);
@@ -82,7 +82,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b6db0. */
 /* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: aocIndexValueOrDefault. */
-/* Supplied declaration required: FUN_002bdf94. */
+/* Supplied declaration required: textDrawFormattedAligned. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
@@ -264,11 +264,11 @@ void FUN_0025d1c4(int param_1)
                            (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v7,0x49,
                            0);
               temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x8a));
-              FUN_002bdf94(2,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v6,
+              textDrawFormattedAligned(2,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v6,
                            (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v7,1,1,
                            0x74,"*");
               temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x8a));
-              FUN_002bdf94(2,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v6,
+              textDrawFormattedAligned(2,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v6,
                            (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v7,1,4,
                            0x49,"%d",temp_v13);
             }
@@ -305,7 +305,7 @@ void FUN_0025d1c4(int param_1)
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             textDrawString(2,0xff,temp_v19,(int)*(short *)(temp_v9 + 8));
             temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x86));
-            FUN_002bdf94(2,(int)*(short *)(temp_v9 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v6,
+            textDrawFormattedAligned(2,(int)*(short *)(temp_v9 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v6,
                          (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v7,1,4,
                          0x49,"%d",0);
           }
@@ -440,7 +440,7 @@ void FUN_0025d1c4(int param_1)
             textDrawString(2,0x787878ff,temp_v19,temp_v14);
           }
           temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x86));
-          FUN_002bdf94(2,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v6,
+          textDrawFormattedAligned(2,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v6,
                        (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v7,1,4,0x49,
                        "%d",temp_v13);
         }
@@ -604,11 +604,11 @@ void FUN_0025d1c4(int param_1)
         itemDrawCategoryBadge(temp_v5,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v6,
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v7,0x74,0);
         temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0xa7));
-        FUN_002bdf94(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v6,
+        textDrawFormattedAligned(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v6,
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v7,1,1,0x74,
                      &LAB_0025ee5c);
         temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0xa7));
-        FUN_002bdf94(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v6,
+        textDrawFormattedAligned(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v6,
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v7,1,4,0x74,
                      "%d",temp_v13);
       }
@@ -646,7 +646,7 @@ void FUN_0025d1c4(int param_1)
       FUN_002b6c34((int)temp_v1,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v6,
                    (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v7,0x74,0,0);
       temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0xa3));
-      FUN_002bdf94(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v6,
+      textDrawFormattedAligned(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v6,
                    (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v7,1,4,0x74,
                    "%d",0);
     }
@@ -773,7 +773,7 @@ void FUN_0025d1c4(int param_1)
       }
     }
     temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0xa3));
-    FUN_002bdf94(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v6,
+    textDrawFormattedAligned(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v6,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v7,1,4,0x74,
                  "%d",temp_v12);
   }

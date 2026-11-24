@@ -2,6 +2,7 @@
  * parameter and the found part swap r6/r7, the member id and entry swap r1/r2 in the search, and armcc returns the
  * final z straight from s2 where retail stores it and reloads all three components. */
 #include "battle/btlAction.h"
+#include "battle/BtlPositionedRequests.h"
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_EnemyDrawOffset.h"

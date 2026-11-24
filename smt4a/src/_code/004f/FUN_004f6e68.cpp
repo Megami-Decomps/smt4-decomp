@@ -1,20 +1,6 @@
-#include "battle/BtlEffectFiles.h"
+#include "battle/BtlEffectReset.h"
 
 extern "C" {
-void asdMemFree(void *block);
-void sysMemClear(void *block, s32 bytes);
-
-/* Empties one effect slot: no handle, no name, no loaded file, no flags. */
-static void clearEffectSlot(BtlEffectFileSlot *slot)
-{
-    slot->handle = 0xFF;
-    sysMemClear(slot->name, 0x80);
-    if (slot->file != NULL) {
-        asdMemFree(slot->file);
-        slot->file = NULL;
-    }
-    slot->flags = 0;
-}
 
 /* Resets every effect file slot of the battle effect work. */
 void FUN_004f6e68(BtlEffectFiles *work)

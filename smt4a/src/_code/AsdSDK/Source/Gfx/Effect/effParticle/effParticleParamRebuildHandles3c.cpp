@@ -14,7 +14,7 @@ void *effPartClone(void *handle);
  * rest are clones of it. */
 void effParticleParamRebuildHandles3c(EffParticleParam *param, void *source)
 {
-    u32 count = param->source != NULL ? param->source->count : param->count;
+    u32 count = param->source != NULL ? (u32)param->source->elementCount : param->count;
     u32 i;
     u32 size;
 

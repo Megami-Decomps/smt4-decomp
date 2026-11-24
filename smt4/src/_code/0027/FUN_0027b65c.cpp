@@ -9,7 +9,7 @@ int __ARM_common_memcpy4_5(...);
 int aocDataTable23GetEntry(...);
 int FUN_0024f24c(...);
 int dataTable2fSub0GetCount(void);
-int FUN_0025b670(void);
+int msSearchGetRecordAt(void);
 int mapEffectReserveAndSpawn(...);
 int questHasNewMark(int);
 int libc_strcpy(...);
@@ -67,7 +67,7 @@ extern unsigned int *dataTable23Sub0GetEntry(unsigned int);
 extern int dataTable23Type0CountWithAoc(void);
 /* Supplied declaration required: FUN_0024f24c. */
 /* Supplied declaration required: dataTable2fSub0GetCount. */
-/* Supplied declaration required: FUN_0025b670. */
+/* Supplied declaration required: msSearchGetRecordAt. */
 /* Supplied declaration required: mapEffectReserveAndSpawn. */
 extern unsigned int FUN_00276060(int);
 extern unsigned int *dataTable2fSub0GetRecord(int);
@@ -364,7 +364,7 @@ LAB_0027bbcc:
               if (0 < temp_v1) {
                 do {
                   temp_v1 = temp_v10;
-                  FUN_0025b670();
+                  msSearchGetRecordAt();
                   if ((*(unsigned int *)(temp_v1 + 0x20) != 0xffffffff) && (*(unsigned int *)(temp_v1 + 0x20) == temp_v4))
                   {
                     temp_v1 = mapFlagTest((int)*(short *)(temp_v1 + 0x24));

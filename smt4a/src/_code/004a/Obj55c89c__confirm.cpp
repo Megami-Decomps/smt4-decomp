@@ -1,4 +1,4 @@
-/* NON_MATCHING: prologue scheduling only: retail stores the state/substate pair before loading `owned`; the entry's script mode is set through scriptProcessSetMode (inlined leaf). */
+/* NON_MATCHING: the state/phase stm uses r1 instead of retail's r2. */
 #include "bible/bibleMain.h"
 #include "classes/Obj55c89c.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
@@ -52,26 +52,26 @@ void FUN_0032d0c8(s32 a, s32 b, u16 id, const void *record);
 void unitRecordBuildFromSave(u16 id, u8 *out);
 void panelSetTarget(s32 target, s32 arg);
 void messageBannerInitCounter(s32 a, s32 b);
-void FUN_004a3b48(BibleItemMenu *menu);
+void compendiumRefreshStatusPreview(BibleItemMenu *menu);
 s32 compendiumComputeSummonCost(u16 id, u8 flag, s32 a, s32 b, s32 c);
 s32 utilityReturnSuccess(u8 *object);
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *holder);
-}
+} /* extern "C" */
 
 /* Applies the highlighted entry: plays its sound, opens its detail and resets the sprites. */
 void Obj55c89c::confirm()
 {
-    BibleItemMenu *menu = reinterpret_cast<BibleItemMenu *>(this);
-    if (menu->isScreenReady() == 0 || utilityReturnSuccess(&menu->successArg) != 0) {
+    BibleItemMenu *menu = (BibleItemMenu *)this;
+    if (isScreenReady() == 0 || utilityReturnSuccess(&menu->successArg) != 0) {
         return;
     }
     menu->entry = scrScriptProcessCreate(menu->resourceA, menu->resourceB);
     scriptProcessSetMode(menu->entry, 2);
-    menu->state = 1;
-    menu->substate = 0;
-    menu->confirmed = 1;
+    state = 1;
+    phase = 0;
     BibleItemEntry *list = menu->entries;
-    if (menu->owned == 0) {
+    if (mode == 0) {
+        menu->confirmed = 1;
         s16 id = list[flaggedValueHolderGetTotal(menu->holder())].getItemId();
         s32 target = compendiumComputeSummonCost((u16)id, menu->confirmed, 0, menu->level >= 100, 0);
         messageBannerInitCounter(1, 0);
@@ -89,6 +89,7 @@ void Obj55c89c::confirm()
             FUN_0032d0c8(0, 2, (u16)id, detail);
         }
     } else {
+        menu->confirmed = 1;
         s16 id = (s16)list[flaggedValueHolderGetTotal(menu->holder())].itemId;
         sysPlaySe(0x4E);
         FUN_0032d0c8(0, 1, id, (const void *)slotRecordFindById(id));
@@ -96,5 +97,5 @@ void Obj55c89c::confirm()
     uiSpriteBankApplyPreset(menu->sprites(), 8);
     uiSpriteBankApplyPreset(menu->sprites(), 9);
     g_animatedPageSelection.selected = -1;
-    FUN_004a3b48(menu);
+    compendiumRefreshStatusPreview(menu);
 }

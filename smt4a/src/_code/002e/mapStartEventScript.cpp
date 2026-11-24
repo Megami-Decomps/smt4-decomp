@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail retains discarded event-ID argument moves and different start-entry tail placement; resource-loading body matches. */
 #include "common.h"
 #include <stdio.h>
 #include "game/GameStateA.h"
@@ -8,6 +7,8 @@
 #include "shard/W6_W6Match8_MapMain.h"
 #include "addon/AocSystemA.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntryLookup.h"
+#include "event/EventCompletion.h"
 
 extern "C" {
 extern MapMainState *g_mapMain;
@@ -15,11 +16,10 @@ void messageSetScriptDisplayMode();
 s32 aocPackageGrantsItem(AocSystemA *system, u32 id, s32 flags);
 void asdMemFree(void *memory);
 void *asdLoadFileSyncDefault(const char *path);
-s32 scrScriptProcessGetEntry(ScriptProcess *process, s32 entry);
 s32 tableGroupFindEntryIndex(void *script, const char *name);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 
-// Load map-event script/message resources and start the requested override or named entry.
+/* Loads a map event's script and messages and starts its named or overridden entry. */
 u32 mapStartEventScript()
 {
     MapMainState *map = g_mapMain;
@@ -48,16 +48,16 @@ u32 mapStartEventScript()
     }
     map->process = scrScriptProcessCreate(map->script, map->messages);
     map->process->mode = 2;
-    if (g_gameState.scriptOverride) {
-        g_gameState.scriptOverride = 0;
-        scrScriptProcessGetEntry(map->process, g_gameState.scriptEntry);
-        map->scriptState = 0;
-        scrScriptProcessStartEntry(map->process, g_gameState.scriptEntry);
-    } else {
-        map->scriptState = 0;
+    if (g_gameState.scriptOverride == 0) {
+        map->scriptState = eventScriptFindCompletionFlag(map->eventId, map->entryName);
         s32 entry = tableGroupFindEntryIndex(map->script, map->entryName);
         scrScriptProcessStartEntry(map->process, entry);
+    } else {
+        g_gameState.scriptOverride = 0;
+        map->scriptState = eventScriptFindCompletionFlag(map->eventId,
+            scrScriptProcessGetEntry(map->process, g_gameState.scriptEntry));
+        scrScriptProcessStartEntry(map->process, g_gameState.scriptEntry);
     }
     return 1;
 }
-}
+} /* extern "C" */

@@ -15,7 +15,7 @@ int sceneRegisterBoxEffect(...);
 int FUN_0035363c(...);
 int sceneLoadParameterPreset(int, unsigned char [8]);
 int aocDataTable23GetEntry(...);
-int FUN_003799d0(void);
+int msSearchGetRecordAt(void);
 int contentEntryGet(...);
 int dataTable2FType0Count(void);
 int dataTable2FType1Count(void);
@@ -86,7 +86,7 @@ extern unsigned int FUN_00368868(unsigned int);
 extern int gameOwnedBitTest(int);
 /* Supplied declaration required: aocDataTable23GetEntry. */
 extern unsigned int *dataTable23Sub0GetEntry(unsigned int);
-/* Supplied declaration required: FUN_003799d0. */
+/* Supplied declaration required: msSearchGetRecordAt. */
 /* Supplied declaration required: contentEntryGet. */
 extern int dataTable23Section5CountWithExtras(void);
 extern unsigned int *dataTable2FType0GetEntry(unsigned char *);
@@ -398,7 +398,7 @@ LAB_00364d28:
                             if (0 < temp_v3) {
                               do {
                                 puVar10 = puVar14;
-                                FUN_003799d0();
+                                msSearchGetRecordAt();
                                 if ((*(unsigned int *)(puVar10 + 0x20) != 0xffffffff) &&
                                    (*(unsigned int *)(puVar10 + 0x20) == temp_v8)) {
                                   temp_v3 = gameOwnedBitTest((int)*(short *)(puVar10 + 0x24));

@@ -1,7 +1,8 @@
-/* NON_MATCHING: 46 lines, written as its smt4 twin bustupCutAnimStartTransition (s8 started/dirty flags, the
- * ease switch, the fader and animation calls taking 0.0f). Left: retail reads the new id back before the side
- * store, converts the frame count through s1, gives the new ref and node lookups the other registers, and in the
- * first-start path loads the id before storing the previous side; the previous side and id are stored after both are loaded. */
+/* NON_MATCHING: 44 lines, written as its smt4 twin bustupCutAnimStartTransition (s8 started/dirty flags, the
+ * ease switch, the fader and animation calls taking 0.0f); the split side and index are set together in each arm
+ * (retail reads the new id back before the side stores). Left: retail pools 0.0 before 75.0, converts the frame
+ * count through s1, gives the new ref and node lookups the other registers, and loads the id (switch) and the side
+ * (first start) only after storing the state. */
 #include "common.h"
 #include "event/bustupEvent/BustupSlotControl_Smt4a.h"
 
@@ -107,11 +108,13 @@ void bustupCutAnimStartTransition(s32 id, s32 easeKind, s32 frames)
     anim->previousId = anim->id;
     anim->id = id;
     if (id != CUT_ID_SPECIAL) {
-        if (id < CUT_ID_SPLIT)
+        if (id < CUT_ID_SPLIT) {
             anim->side = 0;
-        else
+            anim->index = anim->id;
+        } else {
             anim->side = 1;
-        anim->index = id < CUT_ID_SPLIT ? anim->id : anim->id - CUT_ID_SPLIT;
+            anim->index = anim->id - CUT_ID_SPLIT;
+        }
     } else {
         anim->index = CUT_SPECIAL_INDEX;
         anim->side = 1;

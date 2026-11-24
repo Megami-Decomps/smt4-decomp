@@ -5,6 +5,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/CommonBg/CommonBg.h"
 #include "status/StatusCamera.h"
+#include "battle/BtlPositionedRequests.h"
 
 extern "C" {
 
@@ -19,8 +20,6 @@ int FUN_00222b5c(...);
 int playSceneResumeState(...);
 int FUN_00287188(...);
 int btlUiSlotMeterStart(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
-int FUN_00289fa8(...);
-int FUN_0028a0d0(...);
 int partyPanelReleaseResources(void);
 int playSceneTimerSubStart(...);
 int uiFadeRelease(void);
@@ -111,7 +110,7 @@ extern int battleTalkGetBustState(void);
 /* Supplied declaration required: recordQueryStateThree. */
 /* Supplied declaration required: FUN_00287188. */
 /* Supplied declaration required: btlUiSlotMeterStart. */
-/* Supplied declaration required: FUN_00289fa8. */
+/* Supplied declaration required: btlUiPositionRequestAdd. */
 /* Supplied declaration required: FUN_0028a0d0. */
 /* Supplied declaration required: partyPanelReleaseResources. */
 /* Supplied declaration required: FUN_0028a368. */
@@ -667,8 +666,8 @@ LAB_0019e7b8:
         temp_v12 = randNextInRange(0xf);
         temp_v17 = 1;
         temp_v18 = 1;
-        FUN_0028a0d0(temp_v0,temp_v12 + 0x14,0);
-        FUN_00289fa8(temp_v0,2,1);
+        FUN_0028a0d0((BtlUi *)temp_v0, temp_v12 + 0x14, 0.0f, 0.0f, 0.0f, 0, 0, 1, 1);
+        btlUiPositionRequestAdd((BtlUi *)temp_v0, 2, 1, 0.0f, 0.0f, 0.0f);
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 8);
 LAB_0019ef1c:
@@ -718,15 +717,14 @@ LAB_0019ef1c:
           else if (temp_v4 == 4) {
             temp_v7 = 0x41f;
           }
-          temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v7));
+          const TextureTableEntryIV *rect = asdTMTexTableEntryAt(0x15, temp_v7);
           temp_v12 = (short)(temp_v3 - 0x14) + 0x11;
           temp_v17 = temp_v20;
           temp_v18 = 0;
           temp_v21 = (short)(temp_v2 - 0x14) + 0x27;
-          VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
-          VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v21,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v20 = temp_v12;
-          FUN_0028a0d0(temp_v9,temp_v19,0,temp_v13);
+          FUN_0028a0d0((BtlUi *)temp_v9, temp_v19, (f32)((s16)rect->x + temp_v21),
+                        (f32)((s16)rect->y + temp_v12), 0.0f, 0, temp_v13, 1, 0);
           temp_v4 = iRam00439ca4;
           temp_v17 = 2;
           temp_v18 = g_btlUiBlock;
@@ -748,10 +746,9 @@ LAB_0019ef1c:
           }
           temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v7));
           if (temp_v4 != 4) {
-            VectorSignedToFloat((int)*(short *)(temp_v12 + 10) + temp_v20,
-                                (unsigned char)(in_fpscr >> 0x16) & 3);
-            VectorSignedToFloat(temp_v21 + *(short *)(temp_v12 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_00289fa8(temp_v18,temp_v17,0);
+            btlUiPositionRequestAdd((BtlUi *)temp_v18, temp_v17, 0,
+                         (f32)(temp_v21 + *(short *)(temp_v12 + 8)),
+                         (f32)((s32)*(short *)(temp_v12 + 10) + (s32)temp_v20), 0.0f);
           }
           else {
             temp_v19 = (int)*(short *)(temp_v12 + 8);
@@ -772,12 +769,11 @@ LAB_0019ef1c:
               temp_v4 = (int)*(short *)(temp_v4 + 10) + (temp_v10 >> 1);
             }
             temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x71));
-            VectorSignedToFloat((temp_v20 - temp_v4) +
-                                (int)*(short *)(temp_v11 + 10) + (int)(short)(temp_v3 - 0x14),
-                                (unsigned char)(in_fpscr >> 0x16) & 3);
-            VectorSignedToFloat((int)*(short *)(temp_v11 + 8) + (int)(short)(temp_v2 - 0x14) +
-                                (temp_v19 - temp_v12),(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_00289fa8(temp_v18,temp_v17,0,temp_v19 - temp_v12);
+            btlUiPositionRequestAdd((BtlUi *)temp_v18, temp_v17, 0,
+                         (f32)((s32)*(short *)(temp_v11 + 8) + (s16)(temp_v2 - 0x14) +
+                               (temp_v19 - temp_v12)),
+                         (f32)(((s32)temp_v20 - temp_v4) + (s32)*(short *)(temp_v11 + 10) +
+                               (s16)(temp_v3 - 0x14)), 0.0f);
           }
           if (temp_v8 == iRam00439c9c - 1U) {
             iRam00439c9c = 0;

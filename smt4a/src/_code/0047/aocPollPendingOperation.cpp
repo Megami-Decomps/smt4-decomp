@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail and the build interchange the registers for the hoisted status/phase constants. */
 #include "shard/W6_W6Match8_AocPoll.h"
 #include "classes/ResourceLookup.h"
 #include "nn/Result.h"
@@ -10,54 +9,58 @@ WindowStatusResult FUN_00473acc(ResourceLookup *lookup);
 s32 FUN_00473da0(AocMain *main);
 s32 block88OwnerCheck(AocMain *main);
 
-// Poll an addon request and translate failures into the operation's result/status output.
+/* Polls an add-on request and translates failures into the operation's result. */
 WindowStatusOperationResult aocPollPendingOperation(AocPollStep *step)
 {
-    WindowStatusOperationResult output(1);
+    WindowStatusOperationResult output(AOC_PENDING_BUSY);
     AocMain *main = g_aocMain;
+    bool finished = false;
     switch (step->phase) {
-    case 0: {
+    case AOC_PENDING_POLL: {
         nn::Result queryCode;
         u32 queryDetail;
         if (asyncOperationStartOrPollNonBlocking(step->request, &queryCode, &queryDetail)) {
             if (nnResultIsFailure(queryResultFailureOnly(&main->queryResult))) {
-                WindowStatusResult failure = FUN_00473acc(reinterpret_cast<ResourceLookup *>(main));
+                WindowStatusResult failure = FUN_00473acc((ResourceLookup *)main);
                 step->result = failure;
                 if (nnResultIsFailure(legacyResourceIdRemap(&step->result))) {
                     output.result = step->result;
-                    output.status = 100;
+                    output.status = AOC_PENDING_LOOKUP_FAILED;
                     return output;
                 }
             }
-            step->phase = 1;
+            step->phase = AOC_PENDING_START_WORKER;
             return output;
         }
         if (!nnResultIsSuccess(queryCode)) {
             output.result = WindowStatusResult(queryCode);
             if (queryDetail == 0) {
-                output.status = 102;
+                output.status = AOC_PENDING_QUERY_FAILED;
             } else {
                 FUN_001764dc(main, queryDetail);
-                output.status = 103;
+                output.status = AOC_PENDING_QUERY_FAILED_WITH_DETAIL;
             }
         }
         break;
     }
-    case 1:
+    case AOC_PENDING_START_WORKER:
         if (FUN_00473da0(main)) {
-            step->phase = 2;
+            step->phase = AOC_PENDING_WAIT_WORKER;
         } else {
-            step->phase = 3;
-            output.status = 0;
+            step->phase = AOC_PENDING_DONE;
+            finished = true;
         }
         break;
-    case 2:
+    case AOC_PENDING_WAIT_WORKER:
         if (block88OwnerCheck(main)) {
-            step->phase = 3;
-            output.status = 0;
+            step->phase = AOC_PENDING_DONE;
+            finished = true;
         }
         break;
     }
+    if (finished) {
+        output.status = AOC_PENDING_COMPLETE;
+    }
     return output;
 }
-}
+} /* extern "C" */

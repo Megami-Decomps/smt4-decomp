@@ -1,4 +1,5 @@
 #include "battle/BtlUiGlobal.h"
+#include "battle/BtlPositionedRequests.h"
 
 extern "C" {
 /* Reports an active number popup in an enabled battle UI slot or one of its markers. */

@@ -52,7 +52,7 @@ void sysMemClear(void *data, u32 size);
 void asdCameraInitializeDefaults(CameraMatrixCache *camera, s32 mode);
 void cameraMatrixCacheSetLookAt(CameraMatrixCache *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
 void stereoCameraSetPerspective(CameraMatrixCache *camera, s32 mode, f32 fieldOfView, f32 nearClip, f32 farClip, f32 aspect);
-s32 FUN_002caea0(u32 handle);
+s32 ocEventJobUpdate(u32 handle);
 void event3dOpeningDestroy(u32 handle);
 s32 eventIsSkipping(void);
 void asdEnvResetModelBank(const char *path, u32 flags);
@@ -85,7 +85,7 @@ u32 event3dOpeningCreate(void)
         stereoCameraSetPerspective(&work->camera.cache, 1, work->projection.fieldOfView,
             work->projection.nearClip, work->projection.farClip, work->projection.aspect);
         FUN_0036b824(reinterpret_cast<u32>(&work->camera.cache));
-        work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("3dEventOpening Calc"), 4, 0, 0, FUN_002caea0, event3dOpeningDestroy, reinterpret_cast<u32>(work));
+        work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("3dEventOpening Calc"), 4, 0, 0, ocEventJobUpdate, event3dOpeningDestroy, reinterpret_cast<u32>(work));
         eventIsSkipping();
         work->state = 1;
         work->substate = 0;

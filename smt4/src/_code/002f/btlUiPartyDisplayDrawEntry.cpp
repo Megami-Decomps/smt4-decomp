@@ -18,7 +18,7 @@ int nkmEnemyFindById(void);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6940(...);
 int FUN_002b6c34(...);
-int FUN_002bdf94(...);
+int textDrawFormattedAligned(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
 int dataFindKindRecordWithAocOverrides(...);
@@ -73,7 +73,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: nkmBaseGetRecord. */
 extern unsigned int aocIndexValueOrDefault(int);
-/* Supplied declaration required: FUN_002bdf94. */
+/* Supplied declaration required: textDrawFormattedAligned. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
@@ -309,7 +309,7 @@ void btlUiPartyDisplayDrawEntry(int param_1)
       FUN_002b6c34((int)temp_v1,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + temp_v2,0xc9,0,0)
       ;
       temp_v3 = asdTMTexTableEntryAt(0x15,0x129);
-      FUN_002bdf94(2,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + temp_v2,1,4,0xc9,
+      textDrawFormattedAligned(2,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + temp_v2,1,4,0xc9,
                    &LAB_002f2470,0);
       return;
     }
@@ -328,10 +328,10 @@ void btlUiPartyDisplayDrawEntry(int param_1)
       temp_v3 = asdTMTexTableEntryAt(0x15,0x12f);
       itemDrawCategoryBadge(temp_v13,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + temp_v2,0xc9,0);
       temp_v3 = asdTMTexTableEntryAt(0x15,0x12d);
-      FUN_002bdf94(2,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + temp_v2,1,1,0xc9,
+      textDrawFormattedAligned(2,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + temp_v2,1,1,0xc9,
                    &LAB_002f2478);
       temp_v3 = asdTMTexTableEntryAt(0x15,0x12d);
-      FUN_002bdf94(2,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + temp_v2,1,4,0xc9,
+      textDrawFormattedAligned(2,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + temp_v2,1,4,0xc9,
                    &LAB_002f2470,temp_v10);
       return;
     }
@@ -481,7 +481,7 @@ void btlUiPartyDisplayDrawEntry(int param_1)
     FUN_002b6db0(temp_v6,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + temp_v2,0xc9);
   }
   temp_v3 = asdTMTexTableEntryAt(0x15,0x129);
-  FUN_002bdf94(2,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + temp_v2,1,4,0xc9,&LAB_002f2470
+  textDrawFormattedAligned(2,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + temp_v2,1,4,0xc9,&LAB_002f2470
                ,temp_v9);
   return;
 }

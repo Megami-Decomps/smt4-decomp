@@ -1,5 +1,4 @@
-/* NON_MATCHING: the flag clear's base registers and the request-id store are scheduled differently, and retail keeps
- * the path base in its own register across the string lookup and the asynchronous load. */
+/* NON_MATCHING: the request-id store uses a different register and the basename lookup's two arguments are prepared in reverse order. */
 #include "runtime/Stdio.h"
 #include "shard/Shard004F.h"
 #include <stddef.h>
@@ -56,9 +55,10 @@ u32 effectRequestByName(EffectFileView *view, const char *name)
     sysMemClear(formattedPath, 0x80);
     __2sprintf(formattedPath, DAT_005284c0, name);
     libc_strcpy(path, formattedPath);
-    libc_strcpy(state->fileName, fileNameFromPath(path));
+    char *fullPath = path;
+    libc_strcpy(state->fileName, fileNameFromPath(fullPath));
     if (findRecordByKey(state->fileName) == 0xff) {
-        asdLoadFileAsyncSimple(path, (u32 *)&state->file, 1);
+        asdLoadFileAsyncSimple(fullPath, (u32 *)&state->file, 1);
         state->flags |= 1;
     }
     return 1;

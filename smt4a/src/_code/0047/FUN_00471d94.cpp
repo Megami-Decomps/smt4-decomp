@@ -11,7 +11,7 @@ s32 asdFsIsSdCardDetected();
 u32 objGetFlagBit16(AocMain *main);
 void entryStateClear(EntryState *entry);
 void *__aeabi_vec_ctor_nocookie_nodtor(void *array, void (*construct)(void *), u32 size, u32 count);
-void FUN_00471468(AocSystemA *system, s32 kind, s32 capacity, AocPackageFile *output);
+void aocQueuePackageFilesByKind(AocSystemA *system, s32 kind, s32 capacity, AocPackageFile *output);
 
 // Rebuild the package file list of one kind when the SD card and add-on system are available.
 static __inline void rebuildFileList(AocSystemA *system, s32 kind)
@@ -31,7 +31,7 @@ static __inline void rebuildFileList(AocSystemA *system, s32 kind)
                 if (items != NULL)
                     items = __aeabi_vec_ctor_nocookie_nodtor(items, reinterpret_cast<void (*)(void *)>(entryStateClear), sizeof(AocPackageFile), *itemCount);
                 system->items = static_cast<AocPackageFile *>(items);
-                FUN_00471468(system, kind, system->itemCount, system->items);
+                aocQueuePackageFilesByKind(system, kind, system->itemCount, system->items);
             }
         }
     } else {

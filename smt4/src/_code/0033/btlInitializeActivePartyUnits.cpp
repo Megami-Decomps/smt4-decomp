@@ -1,5 +1,3 @@
-/* NON_MATCHING: only the unit header stores differ: retail loads the saved id into r0 and the -1 selections into r1,
- * the build the other way round. */
 #include "battle/UnitInitialization.h"
 #include "battle/btlUnit.h"
 #include "gamedata/PlayerInitialization.h"
@@ -9,14 +7,11 @@
 
 struct SlotWorld;
 struct UnitRecordIn;
-struct SavedUnitRecord;
 
 extern "C" {
 void FUN_0033adf8(BtlPartyInitializationStateIV *world, u32 row);
 void btlInitializePlayerUnitData(u32 world, BtlUnitData *data, const PlayerDataIV *player);
 void FUN_00255e38(SlotWorld *world, UnitRecordIn *record, s32 kind, s32 index, s32 extra);
-SavedUnitRecord *saveResolvePartySlot(u32 slot);
-s16 gameSlotFindByCategory(const SavedUnitRecord *record);
 u32 randomGetLowerTenBits(u32 record, u32 index);
 u32 randomGetUpperSixBits(u32 record, u32 index);
 
@@ -29,31 +24,31 @@ void btlInitializeActivePartyUnits(BtlPartyInitializationStateIV *world)
     SaveSlotTableIV *slots = gameGetSlotTable();
     const PlayerDataIV *player = gameGetPlayerData();
     BtlEntryInitializationIV entry;
-    btlInitializePlayerUnitData((u32)world, reinterpret_cast<BtlUnitData *>(&entry.unit), player);
-    FUN_00255e38(reinterpret_cast<SlotWorld *>(world), reinterpret_cast<UnitRecordIn *>(&entry.unit), 0, 0, 0);
+    btlInitializePlayerUnitData((u32)world, (BtlUnitData *)&entry.unit, player);
+    FUN_00255e38((SlotWorld *)world, (UnitRecordIn *)&entry.unit, 0, 0, 0);
     for (u16 slot = 0; slot < 3; ++slot) {
         if (slots->active[slot] >= 0) {
             BtlUnitInitializationIV *unit = &entry.unit;
-            const SavedBattleInitialViewIV *saved = reinterpret_cast<const SavedBattleInitialViewIV *>(saveResolvePartySlot(slot));
+            const StatBlock *saved = saveResolvePartySlot(slot);
             unit->active = 2;
-            unit->selection[2] = gameSlotFindByCategory(reinterpret_cast<const SavedUnitRecord *>(saved));
+            unit->selection[2] = gameSlotFindByCategory(saved);
             unit->status = saved->id;
             unit->selection[0] = -1;
             unit->selection[1] = -1;
             unit->statMode = 0;
             BtlInitialStatSetIV *current = &unit->current;
             current->hp = saved->hp;
-            current->maximumHp = saved->maximumHp;
+            current->maximumHp = saved->maxHp;
             current->mp = saved->mp;
-            current->maximumMp = saved->maximumMp;
+            current->maximumMp = saved->maxMp;
             for (s32 index = 0; index < 5; ++index) {
-                current->stats[index] = saved->stats[index];
+                current->stats[index] = saved->effectiveStats[index];
             }
             unit->initial = *current;
-            unit->points = saved->points;
+            unit->points = saved->ailments;
             unit->pending[0] = 0;
             unit->pending[1] = 0;
-            unit->enabled = saved->enabled;
+            unit->enabled = saved->level;
             unit->counter = 0;
             for (s32 index = 0; index < 14; ++index) {
                 unit->effects[index] = 0;
@@ -64,7 +59,7 @@ void btlInitializeActivePartyUnits(BtlPartyInitializationStateIV *world)
                 unit->initialEncoded[index].value = randomGetLowerTenBits((u32)saved, (u8)index);
                 unit->initialEncoded[index].kind = randomGetUpperSixBits((u32)saved, (u8)index);
             }
-            const DevilBattleInitialInfoIV *info = reinterpret_cast<const DevilBattleInitialInfoIV *>(nkmBaseGetRecord(unit->status));
+            const DevilBattleInitialInfoIV *info = (const DevilBattleInitialInfoIV *)nkmBaseGetRecord(unit->status);
             unit->percentage = info->percentage;
             if (info->direction == 1) {
                 unit->direction = 1;
@@ -73,8 +68,8 @@ void btlInitializeActivePartyUnits(BtlPartyInitializationStateIV *world)
             } else if (info->direction == 5) {
                 unit->direction = 2;
             }
-            FUN_00255e38(reinterpret_cast<SlotWorld *>(world), reinterpret_cast<UnitRecordIn *>(&entry.unit), 0, slot + 1, 0);
+            FUN_00255e38((SlotWorld *)world, (UnitRecordIn *)&entry.unit, 0, slot + 1, 0);
         }
     }
 }
-}
+} /* extern "C" */

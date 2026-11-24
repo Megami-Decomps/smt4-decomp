@@ -1,81 +1,92 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `btlTalkBustUpApplyTexturePlacement` (_code @ 0x32c3fc, 0x294 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail stores the three pose floats through the incoming r0, while the build uses r4. */
+#include "battle/Talk/btlTalkBustUp.h"
+#include "ui/UiSpriteApi.h"
+#include "ui/UiTexturePlacement.h"
+#include "camp/UIQuest/UIQuest.h"
+#include "sys/RuntimeObjects.h"
+#include <string.h>
 
 extern "C" {
 
-int uiGetLayoutPointDifference(...); // declcheck: local (romwright prototype; the shared declaration in camp/UIQuest/UIQuest.h does not compile here: argument of type "int" is incompatible with parameter of type "PointDeltaWork *")
-int uiStoreTextureEntryCenter(int, int, int); // declcheck: local (romwright prototype; its types do not fit ui/UiTexturePlacement.h: including it fails to compile)
-int pairSetFirstResetSecond(...);
-int uiSpriteStateInitFromSource(int, int, unsigned int, int, int);
-int spriteStartAnimationByIndex(...);
+void FUN_002eb764(UiSpriteState *sprite, u8 value);
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+enum {
+    TALK_BUSTUP_TEXTURE_TABLE = 24,
+    TALK_BUSTUP_IMAGES_PER_TEXTURE = 1000,
+};
 
-/* Supplied declaration required: uiGetLayoutPointDifference. */
-/* Supplied declaration required: uiStoreTextureEntryCenter. */
-/* Supplied declaration required: pairSetFirstResetSecond. */
-/* Supplied declaration required: uiSpriteStateInitFromSource. */
-/* Supplied declaration required: spriteStartAnimationByIndex. */
-
-
-void btlTalkBustUpApplyTexturePlacement(int param_1)
-
+/* Animation image for a pose within the portrait's texture. */
+static __inline s32 portraitAnimationId(const BtlTalkBustUp *portrait, s32 pose)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  *(unsigned int *)(param_1 + 0x2fc) = 0x3f800000;
-  *(unsigned int *)(param_1 + 0x300) = 0x3f800000;
-  *(unsigned int *)(param_1 + 0x304) = 0;
-  *(unsigned int *)(param_1 + 0x2dc) = 0;
-  *(unsigned char *)(param_1 + 0x2e0) = 0;
-  do {
-    uiSpriteStateInitFromSource(param_1 + temp_v0 * 0x8c + 0x20,0x18,0xffffffff,param_1,0x97);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 5);
-  pairSetFirstResetSecond(param_1 + 0x20,*(int *)(param_1 + 0x2f8) * 1000);
-  spriteStartAnimationByIndex(param_1 + 0x20,0);
-  switch(*(unsigned int *)(param_1 + 0x2f0)) {
-  default:
-    return;
-  case 2:
-  case 0x11:
-    pairSetFirstResetSecond(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000 + 1);
-    spriteStartAnimationByIndex(param_1 + 0xac,0);
-    uiStoreTextureEntryCenter(param_1 + 0xac,0x18,*(int *)(param_1 + 0x2f8) * 1000 + 2);
-    return;
-  case 3:
-    uiStoreTextureEntryCenter(param_1 + 0x20,0x18,*(int *)(param_1 + 0x2f8) * 1000);
-    *(unsigned char *)(param_1 + 0x5c) = 1;
-    pairSetFirstResetSecond(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000);
-    spriteStartAnimationByIndex(param_1 + 0xac,0);
-    uiStoreTextureEntryCenter(param_1 + 0xac,0x18,*(int *)(param_1 + 0x2f8) * 1000);
-    *(unsigned char *)(param_1 + 0xe8) = 1;
-    return;
-  case 8:
-    pairSetFirstResetSecond(param_1 + 0x20,0x13881);
-    uiGetLayoutPointDifference(param_1 + 0x20,0x18,80000,0x13881);
-    return;
-  case 0xc:
-  case 0x10:
-    pairSetFirstResetSecond(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000 + 1);
-    pairSetFirstResetSecond(param_1 + 0x138,*(int *)(param_1 + 0x2f8) * 1000 + 2);
-    spriteStartAnimationByIndex(param_1 + 0xac,0);
-    spriteStartAnimationByIndex(param_1 + 0x138,0);
-    return;
-  case 0xd:
-    break;
-  case 0x13:
-    pairSetFirstResetSecond(param_1 + 0x20,*(int *)(param_1 + 0x2f8) * 1000);
-  }
-  pairSetFirstResetSecond(param_1 + 0xac,*(int *)(param_1 + 0x2f8) * 1000 + 1);
-  return;
+    return portrait->textureNode * TALK_BUSTUP_IMAGES_PER_TEXTURE + pose;
+}
+
+/* Initializes the portrait and the overlays used by its animation category. */
+void btlTalkBustUpApplyTexturePlacement(BtlTalkBustUp *portrait)
+{
+    s32 i;
+
+    portrait->scaleX = 1.0f;
+    portrait->scaleY = 1.0f;
+    portrait->progress = 0.0f;
+    BtlTalkBustUpPlacement *placement = &portrait->placement;
+    memset(placement->playing, 0, sizeof(placement->playing));
+    placement->unk04 = 0;
+    for (i = 0; i < 5; i++) {
+        uiSpriteStateInitFromSource(&portrait->sprites[i], TALK_BUSTUP_TEXTURE_TABLE, -1, &portrait->resources, 0x97, 1.0f);
+    }
+    pairSetFirstResetSecond(&portrait->sprites[0], portrait->textureNode * TALK_BUSTUP_IMAGES_PER_TEXTURE);
+    spriteStartAnimationByIndex(&portrait->sprites[0], 0);
+    switch (portrait->category) {
+    case 0:
+    case 1:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 9:
+    case 10:
+    case 11:
+    case 14:
+    case 15:
+    case 18:
+        return;
+    case 2:
+    case 0x11:
+        pairSetFirstResetSecond(&portrait->sprites[1], portraitAnimationId(portrait, 1));
+        spriteStartAnimationByIndex(&portrait->sprites[1], 0);
+        uiStoreTextureEntryCenter((PointDeltaWork *)&portrait->sprites[1], TALK_BUSTUP_TEXTURE_TABLE,
+            portrait->textureNode * TALK_BUSTUP_IMAGES_PER_TEXTURE + 2);
+        return;
+    case 3:
+        uiStoreTextureEntryCenter((PointDeltaWork *)&portrait->sprites[0], TALK_BUSTUP_TEXTURE_TABLE,
+            portrait->textureNode * TALK_BUSTUP_IMAGES_PER_TEXTURE);
+        FUN_002eb764(&portrait->sprites[0], 1);
+        pairSetFirstResetSecond(&portrait->sprites[1], portrait->textureNode * TALK_BUSTUP_IMAGES_PER_TEXTURE);
+        spriteStartAnimationByIndex(&portrait->sprites[1], 0);
+        uiStoreTextureEntryCenter((PointDeltaWork *)&portrait->sprites[1], TALK_BUSTUP_TEXTURE_TABLE,
+            portrait->textureNode * TALK_BUSTUP_IMAGES_PER_TEXTURE);
+        FUN_002eb764(&portrait->sprites[1], 1);
+        return;
+    case 8:
+        pairSetFirstResetSecond(&portrait->sprites[0], 0x13881);
+        uiGetLayoutPointDifference((PointDeltaWork *)&portrait->sprites[0], TALK_BUSTUP_TEXTURE_TABLE, 80000, 0x13881);
+        return;
+    case 0xd:
+        pairSetFirstResetSecond(&portrait->sprites[1], portraitAnimationId(portrait, 1));
+        return;
+    case 0xc:
+    case 0x10:
+        pairSetFirstResetSecond(&portrait->sprites[1], portraitAnimationId(portrait, 1));
+        pairSetFirstResetSecond(&portrait->sprites[2], portraitAnimationId(portrait, 2));
+        spriteStartAnimationByIndex(&portrait->sprites[1], 0);
+        spriteStartAnimationByIndex(&portrait->sprites[2], 0);
+        return;
+    case 0x13:
+        pairSetFirstResetSecond(&portrait->sprites[0], portrait->textureNode * TALK_BUSTUP_IMAGES_PER_TEXTURE);
+        pairSetFirstResetSecond(&portrait->sprites[1], portraitAnimationId(portrait, 1));
+        return;
+    }
 }
 
 } /* extern "C" */

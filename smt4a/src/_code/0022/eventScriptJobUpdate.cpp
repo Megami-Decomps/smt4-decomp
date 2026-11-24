@@ -1,6 +1,7 @@
 /* Retail's `mov r0, #0` at 0x22600c is the inlined eventScriptFindCompletionFlag stub (config/inlined.txt). */
 #include <stdio.h>
 #include "event/EventScriptJob.h"
+#include "event/EventCompletion.h"
 #include "addon/aocMain.h"
 #include "addon/AocSystemA.h"
 #include "addon/AocDrawText.h"
@@ -51,7 +52,6 @@ u32 tableGroupFindEntryIndex(void *commands, const char *name);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 /* The game flag an event entry raises when it ends. Apocalypse's is a stub returning 0 that armlink
  * inlined at its only call and removed. */
-u32 eventScriptFindCompletionFlag(u32 eventId, const ScriptVmLabel *entry);
 void aocBootResetAndReleaseBuffers(AocScriptHolder *holder, u8 showButtonHelp);
 s32 scriptHolderUpdateForward(AocScriptHolder *holder);
 void scriptHolderFree2(AocScriptHolder *holder);

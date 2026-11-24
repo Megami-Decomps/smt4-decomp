@@ -11,7 +11,7 @@ void menuStateStartConfirm(void)
 {
     MenuState *menu = g_menuState;
 
-    menu->unk2bc = 0;
+    menu->animationPhase = 0;
     if (menu->type != 6) {
         menu->mode = 4;
         uiSpriteSelectAnim(&menu->primarySprites[0], 1);

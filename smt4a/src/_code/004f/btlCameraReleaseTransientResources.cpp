@@ -1,80 +1,43 @@
 #include "battle/btlCamera.h"
-#include "AsdSDK/AsdMemUtil.h"
+#include "battle/BtlEffectReset.h"
 #include "battle/BtlGlobals.h"
+#include "code/Code004f_Smt4a.h"
 
-// Clears the given camera flag bits.
+/* Clears the given camera flag bits. */
 static __inline void btlCameraClearFlags(BtlCameraA *camera, u32 mask)
 {
     camera->flags &= ~mask;
 }
 
 extern "C" {
-void asdMemFree(void *allocation);
 void textureCacheReleaseAll();
 void keyedRecordsFreeAll();
-void workOwnerRelease(void *owner);
 void btlCameraFinishTransition(void *controller);
-void FUN_004f6e68(void *controller);
-void obj4FSlots28Reset(void *controller);
+void FUN_004f6e68(BtlEffectFiles *work);
 void panelReset(void *controller);
 void FUN_004f8fa0(void *controller);
 
-// Release transient camera panels and resources and clear the active transition state.
+/* Releases transient camera panels and resources and clears the active transition state. */
 void btlCameraReleaseTransientResources(void *controller)
 {
-    struct ResourceSlot { s32 id; u32 state; u8 owner[0x30]; u32 pending; };
-    struct PanelSlot {
-        u8 kind;
-        u8 unk01[3];
-        void *allocation;
-        u8 data[0x80];
-        u8 active;
-        u8 unk89[3];
-    };
-    // The controller's resource arrays extend well beyond the shared camera prefix.
-    struct CleanupView {
-        u8 unk0000[0x1398];
-        ResourceSlot resources[50];
-        CameraBackend *backend;
-        u8 unk1F54[0x8C8];
-        PanelSlot panels[11];
-        u8 unk2E20[0x230];
-        u32 animation;
-        u8 unk3054[0x368];
-        u32 pending;
-    };
-    CleanupView *state = static_cast<CleanupView *>(controller);
-    state->pending = 0;
+    BtlEffectFiles *work = (BtlEffectFiles *)controller;
+    work->roster = NULL;
     panelReset(controller);
-    FUN_004f6e68(controller);
-    for (s32 index = 0; index < 11; ++index) {
-        PanelSlot *panel = &state->panels[index];
-        panel->kind = 0xff;
-        sysMemClear(panel->data, sizeof(panel->data));
-        if (panel->allocation != NULL) {
-            asdMemFree(panel->allocation);
-            panel->allocation = NULL;
-        }
-        panel->active = 0;
-    }
-    if (state->backend != NULL) {
-        state->backend->release();
-        state->backend = NULL;
+    FUN_004f6e68(work);
+    clearMarkerSlots(work);
+    if (work->backend != NULL) {
+        work->backend->release();
+        work->backend = NULL;
     }
     btlCameraFinishTransition(controller);
-    state->animation = 0;
+    work->animation = 0;
     keyedRecordsFreeAll();
     textureCacheReleaseAll();
     if (g_btlCamera != NULL) {
         btlCameraClearFlags(g_btlCamera, 0x08000000);
     }
     FUN_004f8fa0(controller);
-    obj4FSlots28Reset(controller);
-    for (s32 index = 0; index < 50; ++index) {
-        state->resources[index].id = -1;
-        state->resources[index].state = 0;
-        workOwnerRelease(state->resources[index].owner);
-        state->resources[index].pending = 0;
-    }
+    obj4FSlots28Reset((Obj4FSlots28 *)controller);
+    resetEffectPlacements(work);
 }
-}
+} /* extern "C" */

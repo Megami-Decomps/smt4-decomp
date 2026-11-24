@@ -72,13 +72,13 @@ extern int gameFlagIsSet(void);
 extern int conditionalTableFindIndex(unsigned int);
 extern unsigned int *dataTable23Sub0GetEntry(int);
 extern int dataTableCountWithAoc(void);
-extern unsigned short FUN_003ae4d0(unsigned int);
+extern unsigned short msSearchFindIndexById(unsigned int);
 extern int dataTable23Type0CountWithAoc(void);
 extern unsigned short FUN_003bf894(unsigned int);
 extern int mapEntryGetKind(unsigned int);
 extern unsigned short mapEntryGetStatus(unsigned int);
 /* Supplied declaration required: mapEntryGetOrigin. */
-extern unsigned int FUN_003cd5f4(unsigned int);
+extern unsigned int msSearchFindMarkBitById(unsigned int);
 extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 extern short *dataTable2BType3GetEntry(unsigned char *, int);
 extern char *dataTable2BType1GetEntry(unsigned char *, int);
@@ -702,11 +702,11 @@ LAB_0048f224:
         temp_v43 = (int)(short)(int)(temp_v20 - temp_v24);
         temp_v56 = (int)(short)(int)(temp_v22 - temp_v28);
         temp_v57 = (int)(short)(int)(temp_v18 - temp_v28);
-        temp_v5 = FUN_003ae4d0(*puVar12);
+        temp_v5 = msSearchFindIndexById(*puVar12);
         *(unsigned short *)(temp_v12 + 0x17ba) = temp_v5;
         temp_v7 = conditionalTableFindIndex(*puVar12);
         if (temp_v7 != -2) {
-          temp_v17 = FUN_003cd5f4(*puVar12);
+          temp_v17 = msSearchFindMarkBitById(*puVar12);
           *(unsigned int *)(temp_v12 + 0x17e8) = temp_v17;
           *(short *)(temp_v12 + 0x1792) = (short)temp_v58;
           temp_v19 = VectorSignedToFloat((int)(short)(int)(temp_v23 - temp_v24),

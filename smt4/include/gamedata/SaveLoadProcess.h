@@ -1,5 +1,6 @@
 #pragma once
 #include "common.h"
+#include "gamedata/GameSaveData.h"
 #include <stddef.h>
 
 /* The eight setting bytes configGetSettings returns, copied into and out of a save image as one record. */
@@ -16,6 +17,12 @@ struct SaveFilePayloadIV {
 typedef char SaveFilePayloadIVLayoutCheck[
     offsetof(SaveFilePayloadIV, settings) == 0x80 && offsetof(SaveFilePayloadIV, save) == 0x88 &&
     sizeof(SaveFilePayloadIV) == 0x24DB0 ? 1 : -1];
+
+/* Records the active option in the save header on both the read and write paths. */
+static void saveLoadWriteMetadataOption(GameSaveData *save, u8 option)
+{
+    save->metadata.option = option;
+}
 
 extern "C" {
 

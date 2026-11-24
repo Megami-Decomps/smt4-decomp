@@ -21,7 +21,7 @@ extern "C" {
 
 void gxSetMirroredClippedScissor(s32 x, s32 y, u32 width, s32 height, s32 useNarrowScreen);
 void FUN_002b6c34(s32 skill, s32 x, s32 y, s32 depth, s32 player, s32 highlight);
-void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *format, ...);
+void textDrawFormattedAligned(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *format, ...);
 
 enum {
     STATUS_SPRITES = 0x1A,       /* the status screen's sprite table */
@@ -109,10 +109,10 @@ void statusDownDrawSkillRow(s32 x, s32 y, u32 skill, s32 rowId, s32 player, s32 
         texDrawTableEntryAtStoredOrigin(2, STATUS_SPRITES, 0x522, row->x + x, row->y + y, 0xC4);
         part = asdTMTexTableEntryAt(STATUS_SPRITES, 0x52A);
         if (skill != 0) {
-            FUN_002bdf94(0, row->x + part->x + x, row->y + part->y + y, 1, 8, 0xC9, "%d", FUN_0028d1f4(skill));
+            textDrawFormattedAligned(0, row->x + part->x + x, row->y + part->y + y, 1, 8, 0xC9, "%d", FUN_0028d1f4(skill));
         } else {
             sprintf(text, "---");
-            FUN_002bdf94(0, row->x + part->x + x, row->y + part->y + y, 1, 8, 0xC9, text);
+            textDrawFormattedAligned(0, row->x + part->x + x, row->y + part->y + y, 1, 8, 0xC9, text);
         }
     } else {
         texDrawTableEntryAtStoredOrigin(2, STATUS_SPRITES, 0x423, row->x + x, row->y + y, 0xC4);
@@ -127,7 +127,7 @@ void statusDownDrawSkillRow(s32 x, s32 y, u32 skill, s32 rowId, s32 player, s32 
             }
         }
         part = asdTMTexTableEntryAt(STATUS_SPRITES, 0x429);
-        FUN_002bdf94(0, part->x + row->x + x, row->y + part->y + y, 1, 4, 0xC9, "%d", cost);
+        textDrawFormattedAligned(0, part->x + row->x + x, row->y + part->y + y, 1, 4, 0xC9, "%d", cost);
     }
 }
 

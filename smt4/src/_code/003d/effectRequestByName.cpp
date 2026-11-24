@@ -1,5 +1,4 @@
-/* NON_MATCHING: the flag clear's base registers and the request-id store are scheduled differently, and retail keeps
- * the path base in its own register across the string lookup and the asynchronous load. */
+/* NON_MATCHING: the request-id store uses a different register and the basename lookup's two arguments are prepared in reverse order. */
 #include "runtime/Stdio.h"
 #include "gfx/VersionedTextureRequest.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
@@ -37,9 +36,10 @@ u32 effectRequestByName(VersionedTextureOwner *owner, const char *effect)
     memClear(formatted, 0x80);
     __2sprintf(formatted, DAT_004008c4, effect);
     libc_strcpy(path, formatted);
-    libc_strcpy(request->name, fileNameFromPath(path));
+    char *fullPath = path;
+    libc_strcpy(request->name, fileNameFromPath(fullPath));
     if (keyedRecordFindByName(request->name) == 0xff) {
-        asdLoadFileAsyncSimple(path, (u32 *)&request->format, 0);
+        asdLoadFileAsyncSimple(fullPath, (u32 *)&request->format, 0);
         request->flags |= 1;
     }
     return 1;

@@ -6,6 +6,9 @@
 #include "bible/bibleMain.h"
 #include "classes/Obj55ca08.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "gamedata/PartySlots.h"
+
+struct FlaggedValueHolder;
 
 extern "C" void asdOperatorDelete(void *block);
 
@@ -38,8 +41,13 @@ public:
     /* 0x01D */ u8 visible;
     /* 0x01E */ u8 selected;
     /* 0x01F */ u8 unk01f;
+    /* In roster mode the flagged list's range begins at the selection flags. */
+    FlaggedValueHolder *rosterRange() { return (FlaggedValueHolder *)&flags; }
+
     /* 0x020 */ SelectionFlags flags;
-    /* 0x02F */ u8 unk02f[0x99];
+    /* 0x02F */ u8 unk02f[0x67];
+    /* 0x096 */ PartySlots visibleSlots;
+    /* 0x0C6 */ u8 unk0C6[2];
     /* 0x0C8 */ SelectionRectangle rectangle;
     union {
         /* 0x0DC */ u8 unk0dc[0x73c];
@@ -55,6 +63,7 @@ public:
 };
 
 typedef char Obj55c920PageOffsets[offsetof(Obj55c920, phase) == 0x18 &&
+    offsetof(Obj55c920, flags) == 0x20 && offsetof(Obj55c920, visibleSlots) == 0x96 &&
     offsetof(Obj55c920, bank.tracks) == 0xFC && sizeof(Obj55c920) == 0x860 ? 1 : -1];
 
 #endif

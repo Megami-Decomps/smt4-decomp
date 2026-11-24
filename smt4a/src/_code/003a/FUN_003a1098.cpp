@@ -19,7 +19,7 @@ void gfxDrawOffsetTwoColorRect(int, int, int, int, unsigned int, unsigned int);
 int effectDrawProjectedCircleFan(...);
 int FUN_0032c808(void);
 int FUN_0032c810(...);
-int FUN_003762c0(...);
+int menuDrawRectangle(...); // declcheck: local (draft calls with three or four arguments; shard/W6_W6Match7_MenuRectangle.h's signature does not fit them)
 int VectorSignedToFloat(...);
 int nn_math_ARMv6_MTX44TransposeAsm(...);
 
@@ -64,7 +64,7 @@ extern unsigned int asdCameraValueGet(unsigned int);
 /* Supplied declaration required: effectDrawProjectedCircleFan. */
 /* Supplied declaration required: FUN_0032c808. */
 /* Supplied declaration required: FUN_0032c810. */
-/* Supplied declaration required: FUN_003762c0. */
+/* Supplied declaration required: menuDrawRectangle. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
 
 
@@ -193,7 +193,7 @@ joined_r0x003a122c:
     case 5:
       temp_v15 = param_2[6];
       temp_v16 = param_2[7];
-      FUN_003762c0(param_2[2],param_2[3],param_2[4],param_2[5]);
+      menuDrawRectangle(param_2[2],param_2[3],param_2[4],param_2[5]);
       break;
     case 6:
       temp_v10 = (float)VectorSignedToFloat(param_2[2],(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -311,10 +311,10 @@ joined_r0x003a122c:
       renderCtxSelectTexture(g_renderCtx,0);
       temp_v15 = 0xffffffff;
       temp_v16 = 0xff64646;
-      FUN_003762c0((int)(float)temp_v12,(int)(float)((unsigned long long)temp_v12 >> 0x20),0x80);
+      menuDrawRectangle((int)(float)temp_v12,(int)(float)((unsigned long long)temp_v12 >> 0x20),0x80);
       temp_v15 = 0xffffff00;
       temp_v16 = 0xff000000;
-      FUN_003762c0((int)((float)temp_v12 + 48.0f),(int)((float)((unsigned long long)temp_v12 >> 0x20) + 48.0f),0x20
+      menuDrawRectangle((int)((float)temp_v12 + 48.0f),(int)((float)((unsigned long long)temp_v12 >> 0x20) + 48.0f),0x20
                   );
       renderCtxSelectTexture(g_renderCtx,temp_v7);
       effectSubmitDefaultVectors();

@@ -43,7 +43,7 @@ void messageBannerDrawCounterPlates(s32 wide);
 void drawSetColorFromRGBA8(u32 packed);
 u8 *dataFindKindRecordWithAocOverrides(u32 id, s32 payload);
 void itemDrawCategoryBadge(u32 id, s32 x, s32 y, s32 priority, s32 markEquipped); // declcheck: local (the definition's own form; the shared header's BadgeWord last argument is how the forwarding wrappers pass it)
-void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 layer, const char *format, ...);
+void textDrawFormattedAligned(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 layer, const char *format, ...);
 
 /* The banner window's draw task ("MESS_D"): the backdrop and sprites of a kind-11 or kind-19 message, the
  * counter banner, the item banner (icon, name and count) and the counter panel. Returns 0. */
@@ -101,10 +101,10 @@ u32 messageBannerDraw(void)
 
         drawSetColorFromRGBA8(0xFF);
         part = asdTMTexTableEntryAt(MESSAGE_TABLE, MESSAGE_ITEM_COUNT);
-        FUN_002bdf94(0, part->x + frame->x + x, part->y + frame->y + y, 1, 4, 16, "%d",
+        textDrawFormattedAligned(0, part->x + frame->x + x, part->y + frame->y + y, 1, 4, 16, "%d",
                      g_messageMain.banner->counterValue);
         part = asdTMTexTableEntryAt(MESSAGE_TABLE, MESSAGE_ITEM_TIMES);
-        FUN_002bdf94(0, part->x + frame->x + x, frame->y + part->y + y, 0, 1, 16, "*");
+        textDrawFormattedAligned(0, part->x + frame->x + x, frame->y + part->y + y, 0, 1, 16, "*");
         gxResetColorQuadToWhite();
         renderCtxPopState(g_titleScene, 3);
     }
@@ -136,7 +136,7 @@ u32 messageBannerDraw(void)
             sign = asdTMTexTableEntryAt(MESSAGE_TABLE, MESSAGE_PANEL_SIGN_NO_DIGITS);
         }
         drawSetColorFromRGBA8(0xFF);
-        FUN_002bdf94(0, frame->x + sign->x + x, frame->y + sign->y + y, 0, 15, 16, "*");
+        textDrawFormattedAligned(0, frame->x + sign->x + x, frame->y + sign->y + y, 0, 15, 16, "*");
         gxResetColorQuadToWhite();
         renderCtxPopState(g_titleScene, 3);
     }

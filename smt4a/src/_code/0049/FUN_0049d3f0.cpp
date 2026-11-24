@@ -4,12 +4,12 @@
 #include "text/TextDraw.h"
 #include "ui/UiSpriteApi.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "AsdSDK/Source/Gfx/Text/AsdTextA.h"
 
 extern "C" {
 extern const char DAT_0052cf04[]; // event/HowTo/HowTo.mbm
 extern const char DAT_0052cee8[]; // event/HowTo/HowToHelp.mbm
 void sysMemClear(void *memory, u32 size);
-u32 spriteHandleCreate(u32 argument);
 void FUN_0049dd74(HowToScreenWork *work);
 void asdLoadFileAsyncSimple(const char *path, void **result, u32 flags);
 void asdTMTexTableLoadTmx(u32 table, u32 mode);
@@ -58,7 +58,7 @@ void FUN_0049d3f0(HowToScreenWork *work)
     sysMemClear(work->resetState, sizeof(work->resetState));
     work->display.selection = 0;
     for (s32 i = 0; i < 3; ++i) {
-        u32 handle = spriteHandleCreate(0);
+        u32 handle = (u32)spriteHandleCreate(0);
         work->display.handles[i] = handle;
         uiObjectSetColorRgb(handle, ~0u);
     }

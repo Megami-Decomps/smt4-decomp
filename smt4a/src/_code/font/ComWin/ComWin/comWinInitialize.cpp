@@ -32,7 +32,7 @@ const s32 DAT_0052f84c[] = {
     -1, 0, -3, 0, -3, -3, 0, 4, 0, -3, 0, -3,
     -3, 0, 5, 0, -1, 0, -1, -1, 0, -1, 0
 };
-u32 FUN_00156230();
+u32 comWinAdvanceAnimation();
 u32 comWinDraw();
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void sysMemClear(void *memory, u32 size);
@@ -49,7 +49,7 @@ void comWinInitialize()
     }
     MenuState *menu = g_menuState;
     sysMemClear(menu, sizeof(MenuState));
-    menu->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ComWin Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00156230), NULL, NULL);
+    menu->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ComWin Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(comWinAdvanceAnimation), NULL, NULL);
     taskCreateDraw("ComWin DrawUpLeft", 0x86, 0, 0, comWinDraw, NULL, NULL, menu->process);
     taskCreateDraw("ComWin DrawUpRight", 0xE2, 0, 0, comWinDraw, NULL, NULL, menu->process);
     menu = g_menuState;

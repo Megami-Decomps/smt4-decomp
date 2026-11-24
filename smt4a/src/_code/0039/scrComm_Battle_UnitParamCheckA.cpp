@@ -2,11 +2,12 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/BtlGlobals.h"
 
+#include "battle/BattleHelpers_Smt4a.h"
+
 extern "C" {
 
 void scrSetResult(s32 result);
 u32 scrGetArg(u32 index);
-s32 btlCombatantMatchesCategory(BtlCombatantEntryA *entry, u32 value);
 
 extern u32 g_btlScriptUnit;
 

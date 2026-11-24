@@ -80,7 +80,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int saveSlotSelectedIsId175(void);
 /* Supplied declaration required: FUN_003135bc. */
 /* Supplied declaration required: mapSpawnRandomEventKindEffect. */
-/* Supplied declaration required: FUN_00324e38. */
+/* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: FUN_003541c0. */
 /* Supplied declaration required: lmapUpdateIdleVoice. */
 /* Supplied declaration required: linkHolderCallFirst. */
@@ -273,14 +273,14 @@ void FUN_00296530(void)
           ((temp_v3 < 0x42500000 && ((int)piVar12 >= 0x42500000)))))) {
         FUN_003135bc();
         mapSpawnRandomEventKindEffect();
-        FUN_00324e38(0xffffffff);
+        mapDepartSpawnPlayerEffect(0xffffffff);
       }
     }
     else if (((g_lmapScene[0x19] < 0x40000000) && ((int)piVar12 >= 0x40000000)) ||
             ((g_lmapScene[0x19] < 0x41300000 && ((int)piVar12 >= 0x41300000)))) {
       FUN_003135bc();
       mapSpawnRandomEventKindEffect();
-      FUN_00324e38(0xffffffff);
+      mapDepartSpawnPlayerEffect(0xffffffff);
     }
     g_lmapScene[0x19] = (int)piVar12;
   }

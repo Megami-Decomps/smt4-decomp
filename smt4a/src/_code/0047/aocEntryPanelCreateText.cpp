@@ -3,12 +3,11 @@
 #include "addon/aocApplication.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/Text/AsdTextA.h"
 
 extern "C" {
-u32 spriteHandleCreate(u32 kind);
 void asdMemFreeSlot(u32 handle);
 u32 FUN_0023b4a4(u32 index);
-void positionStateSet(u32 handle, s32 state, u32 color, f32 value);
 void asdTextDrawDirectoryEntry(u32 handle, s32 mode, u32 entry,
                                s32 option, s32 style, u32 directory,
                                u32 selection);
@@ -24,10 +23,10 @@ void aocEntryPanelCreateText(DirectoryDisplayStateA *state, u32 selection,
         state->spriteHandle = 0;
     }
 
-    state->spriteHandle = spriteHandleCreate(0);
+    state->spriteHandle = (u32)spriteHandleCreate(0);
     const u32 resource = FUN_0023b4a4(5);
     uiObjectSetColorRgb(state->spriteHandle, resource);
-    positionStateSet(state->spriteHandle, 0, 0x646464ffu, 0.0f);
+    positionStateSet((AsdText *)state->spriteHandle, 0, 0x646464ffu, 0.0f);
 
     const u32 directory = FUN_00473910(g_aocMain, 0xffffffffu);
     asdTextDrawDirectoryEntry(state->spriteHandle, 3, 0xffffffffu,

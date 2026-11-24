@@ -51,7 +51,7 @@ int FUN_003024a0(...);
 int mapMainStartEntry(...);
 int mapTrapGetUnk38(...);
 int mapSpawnRandomEventKindEffect(...);
-int FUN_00324e38(...);
+int mapDepartSpawnPlayerEffect(...);
 int sysPlayVoice(...);
 int soundActorStartOnFreeChannel(...);
 int slotTargetApplyActiveValue(...);
@@ -115,7 +115,7 @@ extern int mapJobIsDone(void);
 /* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: lmapSceneRestoreEntryPosition. */
 /* Supplied declaration required: mapSpawnRandomEventKindEffect. */
-/* Supplied declaration required: FUN_00324e38. */
+/* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: mapTrapEnable. */
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: naviMainApplyRequestValue. */
@@ -208,7 +208,7 @@ void FUN_002d9b50(void)
         temp_v6 = *(int *)(g_lmapScene + 8) + 1;
         *(int *)(g_lmapScene + 8) = temp_v6;
         if (temp_v6 == 6) {
-          FUN_00324e38(0);
+          mapDepartSpawnPlayerEffect(0);
         }
         temp_v6 = g_lmapScene;
         if (*(int *)(g_lmapScene + 8) >= 0x15) {
@@ -286,7 +286,7 @@ void FUN_002d9b50(void)
                 sysPlayVoice(temp_v6 + 0x10002de);
                 soundVolumeSettingSet(temp_v1);
               }
-              FUN_00324e38(0xffffffff);
+              mapDepartSpawnPlayerEffect(0xffffffff);
             }
             if (*(int *)(g_lmapScene + 0x270) == 6) {
               FUN_00297f00(8,10);
@@ -314,7 +314,7 @@ void FUN_002d9b50(void)
               libm_sinf();
               libm_cosf();
               soundActorStartOnFreeChannel(0x100029e);
-              FUN_00324e38(0xffffffff);
+              mapDepartSpawnPlayerEffect(0xffffffff);
             }
             if ((*(int *)(g_lmapScene + 0x270) == 6) &&
                (mapSpawnRandomEventKindEffect(), *(int *)(g_lmapScene + 0x270) == 6)) {
@@ -346,7 +346,7 @@ LAB_002da1e4:
               libm_sinf();
               libm_cosf();
               soundActorStartOnFreeChannel(0x100029d);
-              FUN_00324e38(0xffffffff);
+              mapDepartSpawnPlayerEffect(0xffffffff);
             }
             if (*(int *)(g_lmapScene + 0x270) == 4) {
               FUN_00297f00(8,10);
@@ -394,7 +394,7 @@ LAB_002da3cc:
               sysPlayVoice(temp_v6 + 0x10002dc);
               soundVolumeSettingSet(temp_v1);
             }
-            FUN_00324e38(0xffffffff);
+            mapDepartSpawnPlayerEffect(0xffffffff);
           }
           if ((*(int *)(g_lmapScene + 0x270) == 6) &&
              (mapSpawnRandomEventKindEffect(), *(int *)(g_lmapScene + 0x270) == 6)) {
@@ -410,7 +410,7 @@ LAB_002da3cc:
             popupStateClose();
             soundApplyValueOrStop(*(unsigned int *)(g_lmapScene + 0x264),0);
             FUN_002de104();
-            FUN_00324e38(0);
+            mapDepartSpawnPlayerEffect(0);
             temp_v6 = g_lmapScene;
             *(unsigned int *)(g_lmapScene + 0x54) = 0;
             *(unsigned int *)(temp_v6 + 0x58) = 0x40a00000;
@@ -423,7 +423,7 @@ LAB_002da3cc:
             popupStateClose();
             soundApplyValueOrStop(*(unsigned int *)(g_lmapScene + 0x264),0);
             mapTrapEnable();
-            FUN_00324e38(0);
+            mapDepartSpawnPlayerEffect(0);
             temp_v6 = g_lmapScene;
             *(unsigned int *)(g_lmapScene + 0x54) = 3;
             *(unsigned int *)(temp_v6 + 0x58) = temp_v11;

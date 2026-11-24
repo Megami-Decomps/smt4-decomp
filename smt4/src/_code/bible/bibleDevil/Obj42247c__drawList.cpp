@@ -1,6 +1,7 @@
-/* NON_MATCHING: 232 raw / 78 shape lines. Retail sets the layer pass's `work` and `raised` arguments once ahead of
+/* NON_MATCHING: 212 raw / 80 shape lines (the selected devil through compendiumSelectedId). Retail sets the layer pass's `work` and `raised` arguments once ahead of
  * the switch (here each case sets r0 itself) and builds the icon pass's owned flag in r0 before moving it to r1.
  * (`raised` is s32, as its callees take it; a u32 parameter, chosen from a type grid, scored 57 shape.) */
+#include "status/CompendiumBrowse.h"
 #include "classes/Obj42247c.h"
 #include "bible/BibleDevilList.h"
 #include "code/Code0029.h"
@@ -186,7 +187,7 @@ void Obj42247c::drawList()
 
     if (work->step == 2 || work->step == 3 || work->step == 7 || work->step == 4 || work->step == 5 ||
         work->step == 8) {
-        s32 devil = (s16)entries[flaggedValueHolderGetTotal(&work->list)].devilId;
+        s32 devil = (s16)compendiumSelectedId(work);
 
         bibleDevilDrawEntry(work, flaggedEntryGetValueByState(&work->list), 1, devil);
     }

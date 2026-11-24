@@ -1,4 +1,15 @@
-/* NON_MATCHING: 40 lines, same size, frame and block layout as retail; registers only. The two blend restores (6, 7, 0) form the stack slot's address in r2 and read the previous state into r1 (r1/r2 here, as retail does at the two (6, 1, 0) sets), the kind list's row composite loads the slide offset before the entry's x, and the focused row keeps g_renderCtx's address in r7 and the glow's depth in r8 (swapped here). */
+/* NON_MATCHING: 40 lines, same size, frame and block layout as retail; registers only. Retail's four blend-state
+ * sets all form the stack slot's address in r2 and read the previous state into r1; this build does so at the
+ * second and third and has r1/r2 the other way round at the first (the key glow's (6, 1, 0)) and the fourth (the
+ * focused row's (6, 7, 0)). The kind list's row composite loads the slide offset before the entry's x (this build
+ * loads the entry's x first with either operand order), and the focused row keeps g_renderCtx's address in r7 and
+ * the glow's depth in r8 (swapped here).
+ * Tried: renderCtxSetB (renderStackSet) for the four sets (54 by shape) and the stack named at the call (350);
+ * `sideOffset + entry->x` in the row composite (42: the add's operands turn, the loads do not); an unsigned loop
+ * index or row and an s32 key code (no change); `countdown != 0` (52); the decoration row tested with `!=` (73)
+ * or returned early (48). The key loop inlines textDrawEncodedGlyph, which is itself unmatched (16 lines: retail
+ * holds dim, x and y in r6, r7 and r8, the build x, y and dim); these choices follow the order armcc numbers its
+ * values in, so that function's real shape is the next thing to try here. */
 #include "shard/W6_W6Match3_NameFormStateA.h"
 #include "shard/W6_W6Match7_FontResource.h"
 #include "shard/W6_W6Match2_HelpResources.h"
@@ -42,7 +53,7 @@ extern const s16 g_nameFormKeyCodes[NAME_FORM_KEY_ROWS][NAME_FORM_KEY_COLUMNS];
 
 s32 uiSearchSecondary(void *list);
 void textDrawEncodedGlyph(void *form, u32 code, s32 x, s32 y, s32 dim, s32 highlighted, f32 alpha);
-void FUN_00485108(NameFormStateA *form, s32 x, s32 y, f32 alpha);
+void nameFormDrawFocusedDecorationRow(NameFormStateA *form, s32 x, s32 y, f32 alpha);
 
 /* textDrawEncodedGlyph's body (the same file's glyph draw), as the key loop inlines it: a plain static copy,
  * which armcc inlines as it does the real function (the glyph buffer shares the outgoing arguments' slot and
@@ -148,7 +159,7 @@ void nameFormDrawKeys(NameFormStateA *form, u8 page, f32 alpha)
     s32 row = listCursorGetRowOfChildIfUnblocked(form->kindList);
     TextureTableEntryIV *entry = asdTMTexTableEntryAt(NAME_FORM_TABLE, row + NAME_FORM_KIND_POINT_FIRST);
     if (row == NAME_FORM_KIND_DECORATION_ROW) {
-        FUN_00485108(form, form->keyboard.sideOffset + entry->x, entry->y, alpha);
+        nameFormDrawFocusedDecorationRow(form, form->keyboard.sideOffset + entry->x, entry->y, alpha);
     } else {
         texDrawCompositeSprite(2, NAME_FORM_TABLE, NAME_FORM_KIND_SELECTED, form->keyboard.sideOffset + entry->x, entry->y,
                                31);

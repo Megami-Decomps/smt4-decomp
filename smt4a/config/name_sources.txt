@@ -9183,3 +9183,48 @@
 00385578 lmapUpdateIdleVoice inferred the map's idle-voice timer (delay table, then the voice)
 0036c91c campCecViewDrawScrollTrack inferred twin of smt4 FUN_002ec0fc
 0039a1b8 campCecEditDrawScrollTrack inferred twin of smt4 FUN_00309ec8
+002caea0 ocEventJobUpdate inferred twin of smt4 ocEventJobUpdate (w91-o1 port of its body; the same oc event job states)
+00485108 nameFormDrawFocusedDecorationRow inferred draws the focused decoration row of the name-entry form (w91-f2)
+00335af4 scrBattleQueueStaggeredPartyActions inferred queues staggered actions for every active, nonexcluded party combatant (w91-s1)
+0051dfa8 curveSampleLinear8 inferred twin of smt4 FUN_003f91b0 (8-byte linear curve keys)
+0040cd6c btlNumberPopupStep inferred twin of smt4 FUN_00344158
+0028809c skillApplyRestoreToMember inferred twin of smt4 skillApplyRestoreToMember (w91-s1 port, IDENTICAL)
+003762c0 menuDrawRectangle inferred twin of smt4 menuDrawRectangle (w91-s2)
+001f4e7c mobiclipInitializeHeaps inferred twin of smt4 mobiclipInitializeHeaps (same trace path and heap setup)
+00183c0c buttonHelpRebuildTouchRegions inferred counterpart of smt4 buttonHelpRebuildTouchRegions (the same registration loops)
+00156230 comWinAdvanceAnimation inferred advances the ComWin panel animation (registered by the ComWin Calc process)
+00471468 aocQueuePackageFilesByKind inferred queues the add-on package files of one kind (%s/%s paths)
+00375c74 effComputeParticleEmission inferred computes an emitter's particle emission (called from seven emitter updates)
+003627bc asdLightSetRelease inferred twin of smt4 FUN_002e7134
+004aace8 btlUiAddPositionedMarker inferred stores a marker's kind and position offsets, then queues its position request
+004a3b48 compendiumRefreshStatusPreview inferred changes the compendium's displayed demon and refreshes its status panel (w91-s3)
+004d5be4 btlDebugApplyAttackCameraMenuEdit inferred applies an edit of the battle debug "Attack Camera Menu" (its initializer labels the menu)
+0032fbd0 compendiumRecordMatchesSaved inferred whether a compendium record equals the saved one (its callers filter entries on it)
+0046a868 titleDrawSceneOverlay inferred twin of smt4 FUN_003844a0
+004cf58c drawStereoTwoPassOverlay inferred draws two stereo-shifted sprites in separate render passes (as btlGameOverDrawOverlay)
+003f5598 partnerTopicLoadResources inferred loads event/PartnerTopic's messages and script, sets up the text object and enters dialog state 1
+003f84e8 topicPanelInitAnimations inferred sets up the topic windows' timed keyframe tables and eight sprites (partner topic and highway info)
+0039d87c btlScriptChooseRandomMatchingCategory inferred chooses a random eligible member whose action matches the requested category (sibling of btlScriptChooseRandomMatchingEntry)
+003b1100 btlScriptAnyCandidateHasNegativeCounter inferred whether any eligible combatant has a negative value in the selected property column
+003c6294 btlScriptAllEligibleCopiesHavePositiveCounter inferred whether every eligible copy of a unit has a positive value in the selected property column
+003c9c44 btlScriptAllEligibleCopiesHaveNegativeCounter inferred whether every eligible copy of a unit has a negative value in the selected property column
+004957b4 shopDrawQuantityPanel inferred twin of smt4 shopDrawQuantityPanel (w91-s7)
+0041c45c saveSlotDrawSelectionMarker inferred draws the save slot list's selection marker at its offset from the layout entry
+00324e38 mapDepartSpawnPlayerEffect inferred twin of smt4 mapDepartSpawnPlayerEffect (w91-s7 port, IDENTICAL)
+003cd5f4 msSearchFindMarkBitById inferred finds a map search mark (map/all/ms_search_Table.tbb, table 0x30) by id and returns its bit
+003ae4d0 msSearchFindIndexById inferred twin of smt4 FUN_00276348
+003799d0 msSearchGetRecordAt inferred twin of smt4 FUN_0025b670
+0046ea50 msSearchGetAddonRecordAt inferred twin of smt4 FUN_00387eb4
+002f15f8 uiQuestOpenDetail inferred twin of smt4 FUN_002902a0
+004f55c8 btlEffectInitializeWork inferred initializes the battle effect work block (0x9C74 bytes) its task creator allocates
+0051d7e0 animCurveFindQuantizedKey inferred twin of smt4 FUN_003f887c
+003cd4b4 dataTable23FindAvailableRule inferred twin of smt4 FUN_00328b1c
+003bb910 btlScriptAnyPropertyBelow inferred whether any eligible entry's selected property is below the value (signed properties[] test)
+003c1730 btlScriptAnyPropertyAbove inferred whether any eligible entry's selected property is above the value (sibling of FUN_003bb910)
+002acfc8 buttonHelpDrawHighlightedLine inferred twin of smt4 FUN_001f40fc
+001612f4 gfxCmdBufferHandlesRelease inferred twin of smt4 FUN_00123254
+004e7418 btlStartSkillAction inferred prepares the actor state and animation window, then sets its follow-up command
+00231464 btlGameOverCreateJobs inferred creates the game-over jobs (four GAME_OVER name strings and the game-over callbacks)
+004cef24 btlGameOverRunScriptSequence inferred runs the game-over script sequence (gameover.bf/.mbm)
+00334c6c statusDownDrawPanelSkin inferred draws the status panel's two layered sprite sets
+002242a0 mapTrapUpdate inferred updates a map trap's animation and effect states

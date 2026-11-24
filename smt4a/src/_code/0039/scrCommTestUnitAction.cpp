@@ -2,10 +2,11 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/BtlGlobals.h"
 
+#include "battle/BattleHelpers_Smt4a.h"
+
 extern "C" {
 extern u32 g_btlScriptUnit;
 u32 scrGetArg(u32 index);
-s32 btlCombatantHasSkillAction(BtlCombatantEntryA *, u32);
 void scrSetResult(s32);
 
 // Test the requested action against the script-selected unit's parameter block.

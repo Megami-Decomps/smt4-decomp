@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match3_EmitterRecord.h"
+#include "AsdSDK/Source/Gfx/Effect/EffectBehaviorBlock.h"
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 
 extern "C" {
@@ -6,7 +7,6 @@ extern "C" {
 void *resourceResolveHeaderPointer(const RelativeDataB *record);
 void polygonTrackRebuildResources(ResourceEmitter *emitter, u32 kind, const EmitterArguments *arguments);
 void objectBufferFree(void *buffer);
-void *effBehaviorCreate(u16 kind, u32 count, void *data);
 
 static inline void replaceEmitterBuffer(ResourceEmitter *emitter, u32 kind, void *data)
 {

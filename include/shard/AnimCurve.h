@@ -38,6 +38,12 @@ struct AnimCurve {
     };
 };
 
+/* Reads a quantized key value before applying the curve's scale and bias. */
+static __inline f32 animKeyRawValue(const AnimKey *key)
+{
+    return key->data.value;
+}
+
 typedef char AnimKeySizeCheck[sizeof(AnimKey) == 6 ? 1 : -1];
 typedef char AnimCurveKeysOffsetCheck[offsetof(AnimCurve, keys) == 0x20 ? 1 : -1];
 typedef char AnimCurveValueOffsetsCheck[offsetof(AnimKey, data.value) == 2 &&
@@ -49,17 +55,23 @@ typedef char AnimCurvePackedScalarKeysOffsetCheck[
 
 /* Packed unsigned keys follow this curve header directly. */
 struct QuantizedAnimCurve {
-    u16 keyCount; // 0x00
-    u8 unk02[6];
-    f32 valueScale; // 0x08
-    f32 valueBase; // 0x0c
-    f32 timeScale; // 0x10
-    AnimKey keys[1]; // 0x14: variable length
+    /* 0x00 */ u16 keyCount;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ f32 keyRate; /* estimated key index per (time * (keyCount - 1)) */
+    /* 0x08 */ f32 valueScale;
+    /* 0x0C */ f32 valueBase;
+    /* 0x10 */ f32 timeScale;
+    /* 0x14 */ AnimKey keys[1]; /* variable length */
 };
 typedef char QuantizedAnimCurveKeysOffsetCheck[
-    offsetof(QuantizedAnimCurve, valueScale) == 8 &&
+    offsetof(QuantizedAnimCurve, keyRate) == 4 && offsetof(QuantizedAnimCurve, valueScale) == 8 &&
     offsetof(QuantizedAnimCurve, timeScale) == 0x10 &&
     offsetof(QuantizedAnimCurve, keys) == 0x14 ? 1 : -1];
+
+extern "C" {
+const AnimKey *animCurveFindQuantizedKey(const QuantizedAnimCurve *curve, f32 time);
+const AnimKey *animCurveFindQuantizedKey(const QuantizedAnimCurve *curve, f32 time);
+} /* extern "C" */
 
 struct PackedAnimKeyWide {
     u32 frame : 12;

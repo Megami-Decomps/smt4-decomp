@@ -19,7 +19,7 @@ int FUN_002b659c(...);
 int FUN_002b6c34(...);
 int nkmBaseGetRecord(void);
 int renderCtxCalculateStereoParallax(...);
-int FUN_002bdf94(...);
+int textDrawFormattedAligned(...);
 int itemDrawCategoryBadge(...);
 int dataFindKindRecordWithAocOverrides(...);
 int FUN_002be90c(...);
@@ -135,7 +135,7 @@ extern unsigned int aocIndexValueOrDefault(unsigned int);
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: FUN_002bdf94. */
+/* Supplied declaration required: textDrawFormattedAligned. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
@@ -536,7 +536,7 @@ LAB_001a3ea8:
           }
           temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x21));
           temp_v22 = psVar24;
-          FUN_002bdf94(6,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v10 + 8)),
+          textDrawFormattedAligned(6,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v10 + 8)),
                        (int)temp_v30 + (int)*(short *)(temp_v10 + 10),1,2,0xdd,&LAB_001a43f4);
           gxResetColorQuadToWhite();
           unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xf);
@@ -557,7 +557,7 @@ LAB_001a3ea8:
             }
             temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x2c));
             temp_v22 = psVar24;
-            FUN_002bdf94(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v10 + 8)),
+            textDrawFormattedAligned(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v10 + 8)),
                          (int)temp_v30 + (int)*(short *)(temp_v10 + 10),1,8,0xdd,&LAB_001a43f4);
             gxResetColorQuadToWhite();
           }
@@ -616,16 +616,16 @@ LAB_001a3ea8:
             }
             if (!(temp_v15 && temp_v0 == '\x06')) {
               temp_v22 = psVar12;
-              FUN_002bdf94(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v36 + 8)),
+              textDrawFormattedAligned(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v36 + 8)),
                            (int)temp_v30 + (int)*(short *)(temp_v36 + 10),1,4,0xdd,&LAB_001a43f4);
             }
             else {
-              FUN_002bdf94(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v36 + 8)),
+              textDrawFormattedAligned(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v36 + 8)),
                            (int)temp_v30 + (int)*(short *)(temp_v36 + 10),1,4,0xdd,&LAB_001a48a0);
             }
           }
           else {
-            FUN_002bdf94(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v36 + 8)),
+            textDrawFormattedAligned(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v36 + 8)),
                          (int)temp_v30 + (int)*(short *)(temp_v36 + 10),1,4,0xdd,&LAB_001a48a0);
           }
           gxResetColorQuadToWhite();
@@ -652,16 +652,16 @@ LAB_001a3ea8:
           if ((*pcVar21 != '\r') &&
              ((*pcVar21 != '\x06' || (temp_v10 = itemIsCollectedWithRelated(*puVar22), temp_v10 != 0)))) {
             temp_v22 = psVar24;
-            FUN_002bdf94(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v36 + 8)),
+            textDrawFormattedAligned(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v36 + 8)),
                          (int)temp_v30 + (int)*(short *)(temp_v36 + 10),1,4,0xdd,&LAB_001a43f4);
           }
           else {
-            FUN_002bdf94(0,(unsigned char *)((int)*(short *)(temp_v36 + 8) + (int)temp_v28),
+            textDrawFormattedAligned(0,(unsigned char *)((int)*(short *)(temp_v36 + 8) + (int)temp_v28),
                          (int)temp_v30 + (int)*(short *)(temp_v36 + 10),1,4,0xdd,&LAB_001a48a0);
           }
           gxResetColorQuadToWhite();
           temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x33));
-          FUN_002bdf94(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v10 + 8)),
+          textDrawFormattedAligned(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v10 + 8)),
                        (int)temp_v30 + (int)*(short *)(temp_v10 + 10),0,1,0xdd,&LAB_001a48a4);
           temp_v27 = 0;
           temp_v24 = temp_v28;
@@ -704,14 +704,14 @@ LAB_001a3ea8:
               drawSetColorFromRGBA8(0xfa282d00);
               temp_v22 = (short *)&LAB_001a48ac;
               temp_v23 = (short *)temp_v11;
-              FUN_002bdf94(2,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v12 + 8)),
+              textDrawFormattedAligned(2,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v12 + 8)),
                            (int)temp_v30 + (int)*(short *)(temp_v12 + 10),0,3,0xdd,&LAB_001a48b0);
             }
             else {
               drawSetColorFromRGBA8(0x72e02700);
               temp_v22 = (short *)&LAB_001a4c74;
               temp_v23 = (short *)temp_v11;
-              FUN_002bdf94(2,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v12 + 8)),
+              textDrawFormattedAligned(2,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v12 + 8)),
                            (int)temp_v30 + (int)*(short *)(temp_v12 + 10),0,3,0xdd,&LAB_001a48b0);
             }
           }
@@ -754,32 +754,32 @@ LAB_001a3ea8:
             }
             if (!(temp_v15 && temp_v0 == '\x06')) {
               temp_v22 = temp_v33;
-              FUN_002bdf94(0,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
+              textDrawFormattedAligned(0,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
                            (int)temp_v30 + (int)*(short *)(temp_v10 + 10),1,4,0xdd,&LAB_001a4c78);
             }
             else {
-              FUN_002bdf94(0,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
+              textDrawFormattedAligned(0,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
                            (int)temp_v30 + (int)*(short *)(temp_v10 + 10),1,4,0xdd,&LAB_001a48a0);
             }
           }
           else {
-            FUN_002bdf94(0,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
+            textDrawFormattedAligned(0,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
                          (int)temp_v30 + (int)*(short *)(temp_v10 + 10),1,4,0xdd,&LAB_001a48a0);
           }
           temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x3d));
           if ((*pcVar21 != '\r') &&
              ((*pcVar21 != '\x06' || (temp_v11 = itemIsCollectedWithRelated(*puVar22), temp_v11 != 0)))) {
             temp_v22 = temp_v29;
-            FUN_002bdf94(0,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
+            textDrawFormattedAligned(0,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
                          (int)temp_v30 + (int)*(short *)(temp_v10 + 10),1,4,0xdd,&LAB_001a4c78);
           }
           else {
-            FUN_002bdf94(0,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
+            textDrawFormattedAligned(0,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
                          (int)temp_v30 + (int)*(short *)(temp_v10 + 10),1,4,0xdd,&LAB_001a48a0);
           }
           gxResetColorQuadToWhite();
           temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x3e));
-          FUN_002bdf94(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v10 + 8)),
+          textDrawFormattedAligned(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v10 + 8)),
                        (int)temp_v30 + (int)*(short *)(temp_v10 + 10),0,1,0xdd,&LAB_001a48a4);
           temp_v26 = 0;
           temp_v24 = (short *)romwright_f2u((float)(temp_v30));
@@ -819,14 +819,14 @@ LAB_001a3ea8:
               drawSetColorFromRGBA8(0xfa282d00);
               temp_v22 = (short *)&LAB_001a500c;
               temp_v23 = psVar12;
-              FUN_002bdf94(2,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
+              textDrawFormattedAligned(2,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
                            (int)temp_v30 + (int)*(short *)(temp_v10 + 10),0,3,0xdd,&LAB_001a5010);
             }
             else {
               drawSetColorFromRGBA8(0x72e02700);
               temp_v22 = (short *)&LAB_001a4c74;
               temp_v23 = psVar12;
-              FUN_002bdf94(2,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
+              textDrawFormattedAligned(2,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
                            (int)temp_v30 + (int)*(short *)(temp_v10 + 10),0,3,0xdd,&LAB_001a5010);
             }
           }
@@ -1022,13 +1022,13 @@ LAB_001a3ea8:
             if ((*pcVar21 != '\r') &&
                ((*pcVar21 != '\x06' || (temp_v10 = itemIsCollectedWithRelated(*puVar22), temp_v10 != 0)))) {
               temp_v22 = psVar24;
-              FUN_002bdf94(0,(unsigned char *)((int)*(short *)((int)temp_v23 + 8) + (int)temp_v28),
+              textDrawFormattedAligned(0,(unsigned char *)((int)*(short *)((int)temp_v23 + 8) + (int)temp_v28),
                            (int)temp_v30 +
                            (int)*(short *)((int)temp_v23 + 10) + (int)*(short *)(temp_v36 + 10),1,3,
                            0xdd,&LAB_001a5514);
             }
             else {
-              FUN_002bdf94(0,(unsigned char *)((int)*(short *)((int)temp_v23 + 8) + (int)temp_v28),
+              textDrawFormattedAligned(0,(unsigned char *)((int)*(short *)((int)temp_v23 + 8) + (int)temp_v28),
                            (int)*(short *)(temp_v36 + 10) + (int)*(short *)((int)temp_v23 + 10) +
                            (int)temp_v30,1,3,0xdd,&LAB_001a551c);
             }
@@ -1036,7 +1036,7 @@ LAB_001a3ea8:
               temp_v36 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v13 + 0x85));
               temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x84));
               if ((int)psVar12 >= 1) {
-                FUN_002bdf94(0,(unsigned char *)
+                textDrawFormattedAligned(0,(unsigned char *)
                                ((int)temp_v28 +
                                (int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v36 + 8)),
                              (int)temp_v30 +
@@ -1044,7 +1044,7 @@ LAB_001a3ea8:
                              &LAB_001a5518);
               }
               else if ((int)psVar12 < 0) {
-                FUN_002bdf94(0,(unsigned char *)
+                textDrawFormattedAligned(0,(unsigned char *)
                                ((int)temp_v28 +
                                (int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v36 + 8)),
                              (int)temp_v30 +
@@ -1054,7 +1054,7 @@ LAB_001a3ea8:
               temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x83));
               if ((int)psVar12 >= 1) {
                 temp_v22 = psVar12;
-                FUN_002bdf94(0,(unsigned char *)
+                textDrawFormattedAligned(0,(unsigned char *)
                                ((int)*(short *)(temp_v36 + 8) + (int)*(short *)(temp_v10 + 8) +
                                (int)temp_v28),
                              (int)temp_v30 +
@@ -1063,7 +1063,7 @@ LAB_001a3ea8:
               }
               else if ((int)psVar12 < 0) {
                 temp_v22 = (short *)-(int)psVar12;
-                FUN_002bdf94(0,(unsigned char *)
+                textDrawFormattedAligned(0,(unsigned char *)
                                ((int)*(short *)(temp_v36 + 8) + (int)*(short *)(temp_v10 + 8) +
                                (int)temp_v28),
                              (int)temp_v30 +
@@ -1380,14 +1380,14 @@ LAB_001a3ea8:
                   drawSetColorFromRGBA8(0xfa282d00);
                   temp_v22 = (short *)&LAB_001a6434;
                   temp_v23 = psVar24;
-                  FUN_002bdf94(2,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
+                  textDrawFormattedAligned(2,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
                                (int)temp_v30 + (int)*(short *)(temp_v13 + 10),0,3,0xdd,&LAB_001a6438);
                 }
                 else {
                   drawSetColorFromRGBA8(0x72e02700);
                   temp_v22 = (short *)&LAB_001a6444;
                   temp_v23 = psVar24;
-                  FUN_002bdf94(2,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
+                  textDrawFormattedAligned(2,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
                                (int)temp_v30 + (int)*(short *)(temp_v13 + 10),0,3,0xdd,&LAB_001a6438);
                 }
               }
@@ -1410,7 +1410,7 @@ LAB_001a3ea8:
             }
             temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x8d));
             temp_v22 = psVar24;
-            FUN_002bdf94(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
+            textDrawFormattedAligned(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
                          (int)temp_v30 + (int)*(short *)(temp_v13 + 10),1,3,0xdd,&LAB_001a6450);
             if (*temp_v38 != '\t') {
               temp_v13 = gameFlagIsSet(0x410);
@@ -1438,7 +1438,7 @@ LAB_001a3ea8:
                       drawSetColorFromRGBA8(0xfa282d00);
                       temp_v22 = (short *)&LAB_001a6434;
                       temp_v23 = psVar24;
-                      FUN_002bdf94(2,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
+                      textDrawFormattedAligned(2,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
                                    (int)temp_v30 + (int)*(short *)(temp_v13 + 10),0,3,0xdd,
                                    &LAB_001a6438);
                     }
@@ -1446,7 +1446,7 @@ LAB_001a3ea8:
                       drawSetColorFromRGBA8(0x72e02700);
                       temp_v22 = (short *)&LAB_001a6444;
                       temp_v23 = psVar24;
-                      FUN_002bdf94(2,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
+                      textDrawFormattedAligned(2,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
                                    (int)temp_v30 + (int)*(short *)(temp_v13 + 10),0,3,0xdd,
                                    &LAB_001a6438);
                     }
@@ -1470,7 +1470,7 @@ LAB_001a3ea8:
                 }
                 temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x91));
                 temp_v22 = psVar24;
-                FUN_002bdf94(0,(unsigned char *)((int)*(short *)(temp_v13 + 8) + (int)temp_v28),
+                textDrawFormattedAligned(0,(unsigned char *)((int)*(short *)(temp_v13 + 8) + (int)temp_v28),
                              (int)*(short *)(temp_v13 + 10) + (int)temp_v30,1,3,0xdd,&LAB_001a6450);
               }
             }
@@ -1498,7 +1498,7 @@ LAB_001a3ea8:
                     drawSetColorFromRGBA8(0xfa282d00);
                     temp_v22 = (short *)&LAB_001a6434;
                     temp_v23 = psVar24;
-                    FUN_002bdf94(2,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
+                    textDrawFormattedAligned(2,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
                                  (int)temp_v30 + (int)*(short *)(temp_v13 + 10),0,3,0xdd,&LAB_001a6438
                                 );
                   }
@@ -1506,7 +1506,7 @@ LAB_001a3ea8:
                     drawSetColorFromRGBA8(0x72e02700);
                     temp_v22 = (short *)&LAB_001a6444;
                     temp_v23 = psVar24;
-                    FUN_002bdf94(2,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
+                    textDrawFormattedAligned(2,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
                                  (int)temp_v30 + (int)*(short *)(temp_v13 + 10),0,3,0xdd,&LAB_001a6438
                                 );
                   }
@@ -1530,7 +1530,7 @@ LAB_001a3ea8:
               }
               temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x91));
               temp_v22 = psVar24;
-              FUN_002bdf94(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
+              textDrawFormattedAligned(0,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
                            (int)temp_v30 + (int)*(short *)(temp_v13 + 10),1,3,0xdd,&LAB_001a6450);
             }
           }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: the early `return 1` is built as `moveq r0, #1; beq` to its own epilogue; retail branches straight to the shared `mov r0, #1; pop` at the end. */
 #include "common.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "shard/Shard0047.h"
@@ -15,7 +14,7 @@ s32 messageForwardDefaultMode(s32 message, s32 mode, u32 frame, s32 style, s32 f
 void partyEntryIsAvailable(u32 member);
 void optionsClearFlag1();
 
-// Poll the confirmation message and apply the selected member once the message completes.
+/* Polls the confirmation message and applies the selected member once the message completes. */
 u32 scrComm_Message_ConfirmAndApplySimple()
 {
     if (scrGetCommandFrame() == 0) {
@@ -36,9 +35,9 @@ u32 scrComm_Message_ConfirmAndApplySimple()
             FUN_00418070(member, 0);
             partyEntryIsAvailable(member);
             optionsClearFlag1();
-            return 1;
         }
+        return result == 1 ? 1 : 0;
     }
     return 0;
 }
-}
+} /* extern "C" */

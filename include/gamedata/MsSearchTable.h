@@ -1,11 +1,14 @@
 /* The map search marks: data table 0x30, map/all/ms_search_Table.tbb, in both games (the table ids
  * follow the game's data-file list, NKMBaseTable.tbb = 0). Add-on content appends records of the
- * same layout (kind 0x27), reached by index after the base table's (FUN_0025b670 / FUN_003799d0). */
+ * same layout (kind 0x27), reached by index after the base table's (msSearchGetRecordAt / msSearchGetRecordAt). */
 #ifndef GAMEDATA_MSSEARCHTABLE_H
 #define GAMEDATA_MSSEARCHTABLE_H
 
 #include "gamedata/DataTable.h"
 #include <stddef.h>
+
+/* The search table's data table id and the add-on record kind that extends it. */
+enum { MS_SEARCH_TABLE = 0x30, MS_SEARCH_ADDON_KIND = 0x27 };
 
 /* One 0x28-byte row of ms_search_Table.tbb table 0 (data table 0x30, section 0). */
 struct MsSearchRecord {

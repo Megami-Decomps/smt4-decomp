@@ -1,4 +1,5 @@
 /* NON_MATCHING: the records are drawn through the same inline as FUN_001326b4 (one ldrd for the list and state words) and the dump format is the image's DAT_00544d24 string; remaining: retail loads the record range with ldm into r0 and moves begin to r1 at each draw, tests the dumped range with subs/bls where the build divides the byte difference, and lays out the pass-0 record start differently. The pass-state array is labelled g_asdLightCount in the symbol table. */
+#include "shard/S1GfxModel.h"
 #include "gfx/DrawCallbackRecord.h"
 
 /* The two words the draw dispatch functor carries (context, state). */
@@ -64,7 +65,6 @@ extern const char DAT_00544d24[]; /* "0x%08x, " */
 DrawDispatchArgs _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(DrawCallbackRecord *first,
                                                                                     DrawCallbackRecord *last,
                                                                                     DrawDispatchArgs functor);
-void FUN_00197eb0(void *builder, u32 root);
 void nw_gfx_SceneTraverser_Begin(u32 node, u32 other);
 void nw_gfx_SceneTraverser_End(u32 node);
 void asdGxCommandListBegin(u32 list);
@@ -95,7 +95,7 @@ void FUN_00176e84(SceneDrawJob *job, u32 stateA, s32 which, s32 dumpCommands)
     GfxPassState *state = &g_asdLightCount[pass];
 
     if (state->enabled != 0 && state->sceneBuilt == 0) {
-        FUN_00197eb0((u8 *)g_asdModelTransformBuilder[pass] + 16, DAT_005b3c90[pass]);
+        FUN_00197eb0(&((ModelSlotListA *)g_asdModelTransformBuilder[pass])->slots, (s32)DAT_005b3c90[pass]);
         TransformBuilder *builder = g_asdModelTransformBuilder[pass];
         SceneRootPair *roots = g_effAsdLightHandle[pass];
         nw_gfx_SceneTraverser_Begin(roots->second, roots->first);
@@ -105,7 +105,7 @@ void FUN_00176e84(SceneDrawJob *job, u32 stateA, s32 which, s32 dumpCommands)
         sceneDrawJobRecords(job, renderer);
         asdGxCommandListEnd(state->commandList, 0);
         nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder[pass], DAT_005b3c90[pass]);
-        FUN_00197eb0((u8 *)g_asdModelTransformBuilder[pass] + 16, DAT_005b3c98[pass]);
+        FUN_00197eb0(&((ModelSlotListA *)g_asdModelTransformBuilder[pass])->slots, (s32)DAT_005b3c98[pass]);
         builder = g_asdModelTransformBuilder[pass];
         roots = g_effAsdLightHandle[pass];
         nw_gfx_SceneTraverser_Begin(roots->second, roots->first);

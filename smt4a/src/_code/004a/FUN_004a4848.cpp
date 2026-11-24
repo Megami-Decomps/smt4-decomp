@@ -1,4 +1,5 @@
-/* NON_MATCHING: the entry-list address and the constant 1 swap callee-saved registers (retail: list in sl, 1 in fp), and the widget flag update addresses the halfword directly where retail uses a writeback load (ldrh [r0, #4]!). */
+/* NON_MATCHING: the entry-list and owner subblock bases use different saved registers;
+ * the widget flag update uses a direct offset where retail uses a halfword load with writeback. */
 #include "AsdSDK/AsdDebugHooks.h"
 #include "shard/Shard004A.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
@@ -50,15 +51,16 @@ void *jyoucyuGetTableEntry(u32 index);
 void FUN_004a5b20(Screen4A *work);
 void messageIdListSetRange(InventoryHelpList *help, u32 group, u32 image, s32 count);
 
-// Rebuild the available demon list, connect its selection widget and refresh the help rows.
+/* Rebuilds the available demons, initializes the selection widget, and refreshes the help rows. */
 void FUN_004a4848(Screen4A *owner)
 {
-    // Local views preserve the owner's odd-start byte padding and its existing alignment.
+    /* The prefix view preserves the owner's odd-start byte padding and existing alignment. */
     struct InventoryTotalView { u8 prefix[0xA86A]; s16 total; };
-    InventoryOwnerView *work = reinterpret_cast<InventoryOwnerView *>(owner);
+    InventoryOwnerView *work = (InventoryOwnerView *)owner;
     releaseEntriesB(work->widget);
     releaseEntriesA(&work->help);
-    slotPoolResetTrackedState(&work->list);
+    InventoryListView *list = &work->list;
+    slotPoolResetTrackedState(list);
     if (work->alternate == 0) {
         s32 total = 0;
         for (s32 id = 1; id < 0x500; ++id) {
@@ -70,16 +72,16 @@ void FUN_004a4848(Screen4A *owner)
                     CampUnitComparison entry;
                     campFillUnitComparison(&entry, candidate->id, 0);
                     entry.unk18[0] = 1;
-                    inventoryListAppend(&work->list, &entry);
+                    inventoryListAppend(list, &entry);
                 }
             }
         }
-        reinterpret_cast<InventoryTotalView *>(owner)->total = total;
-        itemListSelectVariant(reinterpret_cast<ItemListSelectionOwner *>(owner), 1, 1);
-        listScrollerInitialize(&work->cursor, 10, work->list.count, 0, 1, 1);
+        ((InventoryTotalView *)owner)->total = total;
+        itemListSelectVariant((ItemListSelectionOwner *)owner, 1, 1);
+        listScrollerInitialize(&work->cursor, 10, list->count, 0, 1, 1);
         asdDebugHookPtrInt(&work->cursor, 1);
         work->cursor.enabled = 1;
-        work->percentage = gaugePercent(&work->list);
+        work->percentage = gaugePercent(list);
         jyoucyuGetTableEntry(0);
         jyoucyuGetTableEntry(0);
     } else {
@@ -97,4 +99,4 @@ void FUN_004a4848(Screen4A *owner)
     }
     work->help.active = 1;
 }
-}
+} /* extern "C" */

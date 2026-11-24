@@ -12,7 +12,7 @@ static inline bool gameOverMaskMatches(u64 flags, const u32 mask[2])
 
 extern "C" {
 extern BtlGameOverGlobalsA g_gameOverJobRecord;
-void FUN_00231464();
+void btlGameOverCreateJobs();
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 flag);
 
@@ -57,7 +57,7 @@ static __inline bool gameOverBegin(BtlMainStateA *state, GameOverSequenceView *w
  * otherwise the sequence goes to state 3. */
 void FUN_0031cd00(BtlMainStateA *state)
 {
-    FUN_00231464();
+    btlGameOverCreateJobs();
     GameOverSequenceView *work = reinterpret_cast<GameOverSequenceView *>(g_gameOverJobRecord.state);
     if (state->commandFilter.mode == 2) {
         if (gameOverMaskMatches(state->markerMasks.bits, g_gameOverJobRecord.forcedStates)) {

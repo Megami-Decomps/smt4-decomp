@@ -19,7 +19,7 @@ int questDataGetRecord(void);
 int textDrawRangeFaded(...);
 int effectRenderTransformedInstance(...);
 int renderCtxCalculateStereoParallax(...);
-int FUN_002bdf94(...);
+int textDrawFormattedAligned(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
 int dataFindKindRecordWithAocOverrides(...);
@@ -67,7 +67,7 @@ extern int gameGetFlagBlock(void);
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_002bd068(unsigned int);
-/* Supplied declaration required: FUN_002bdf94. */
+/* Supplied declaration required: textDrawFormattedAligned. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
@@ -259,7 +259,7 @@ void FUN_00197e34(void)
       textDrawString(2,0xffffffff,temp_v24);
       temp_v16 = fontMeasureTextWidth(reinterpret_cast<const char *>(temp_v24), 2, 0.0f);
       temp_v11 = (int)(temp_v16 + 3.0f) + (int)temp_v17;
-      FUN_002bdf94(0,*(short *)(temp_v13 + 8) + temp_v4 + temp_v11,*(short *)(temp_v13 + 10) + temp_v5,0,7,
+      textDrawFormattedAligned(0,*(short *)(temp_v13 + 8) + temp_v4 + temp_v11,*(short *)(temp_v13 + 10) + temp_v5,0,7,
                    0x6a);
       textFormatFullWidthNumber(temp_v26,psVar14[2]);
       VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);

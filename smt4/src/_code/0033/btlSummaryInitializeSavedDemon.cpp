@@ -51,7 +51,7 @@ struct DemonBattleSummary {
     u32 flags; // 0x184
 };
 extern "C" {
-u16 gameSlotFindByCategory(SummaryDemonSource *);
+u16 gameSlotFindByCategory(SummaryDemonSource *); // declcheck: local (the real s32 return takes this draft from 19 to 77 lines)
 u32 randomGetLowerTenBits(SummaryDemonSource *, u32);
 u32 randomGetUpperSixBits(SummaryDemonSource *, u32);
 

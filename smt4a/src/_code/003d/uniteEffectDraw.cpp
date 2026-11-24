@@ -1,7 +1,15 @@
 /* NON_MATCHING: 42 lines (12 by shape); a port of smt4 uniteEffectDraw with Apocalypse's text captions. Retail loads
  * the captions' 0.0f letter spacing (s17) before the frame is drawn, this build with the caption depth after the
  * panel; and in the "Fusing..." caption of the opening states retail holds the entry's y in r2 and x in r1, this
- * build the reverse (the other four captions agree). */
+ * build the reverse (the other four captions agree).
+ * The spacing's position is not scheduling: armcc loads a shared float constant right before its first use in the
+ * block that dominates every use (an extra 0.0f use after the frame, in the loop or before the panel moves the load
+ * there), and retail's sits between `y = vec2GetYInt(..)` and the frame's composite sprite, where this source names
+ * no 0.0f (retail's pool has the 0.0f word between the sacrifice picture's and the frame's ids, this build's after
+ * the loading caption's). A `const f32` local or a dead float declared at that point gives retail's load (20
+ * lines) but turns the first blend set's slot address and previous state around (r1/r2), and has no evidence
+ * besides the diff, so it is not kept; a non-const local, renderCtxSetStackTop, renderCtxPushACountedDirect/PushA
+ * and renderCtxPopCounted all score worse. */
 #include "camp/Unite/UniteEffectState.h"
 #include "camp/RenderCtxA.h"
 #include "ui/UiSpriteApi.h"

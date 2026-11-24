@@ -17,7 +17,7 @@ int unitRecordBuild(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6c34(...);
 int nkmBaseGetRecord(void);
-int FUN_002bdf94(...);
+int textDrawFormattedAligned(...);
 int textDrawString(...);
 int texDrawCompositeSprite(int, int, int, int, int, int);
 int efctSetSpeed(...);
@@ -82,7 +82,7 @@ extern int resourceRunOperationIfUnblocked(int);
 extern unsigned int aocIndexValueOrDefault(unsigned short);
 extern unsigned int demonGetRaceLabel(short, unsigned int);
 extern unsigned int FUN_002bd068(short);
-/* Supplied declaration required: FUN_002bdf94. */
+/* Supplied declaration required: textDrawFormattedAligned. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -189,7 +189,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
     VectorSignedToFloat(*(short *)(temp_v2 + 8) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xf49800ff,temp_v18);
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x51));
-    FUN_002bdf94(0,*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v13,1,2,0x8d,
+    textDrawFormattedAligned(0,*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v13,1,2,0x8d,
                  &LAB_001f0c5c,*(unsigned char *)((int)psVar4 + 3));
     temp_v15 = 0;
     temp_v2 = uiListGetVisibleCount(temp_v1 + 0x91a0);
@@ -326,7 +326,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
                        (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v2,0x74,0,0);
           temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x17c));
           temp_v3 = appGetRemainingCapacity(*(unsigned short *)(temp_v14 + 0x9010));
-          FUN_002bdf94(1,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v13,
+          textDrawFormattedAligned(1,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v13,
                        (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v2,1,4,0x79,
                        &LAB_001f0c5c,temp_v3);
         }
@@ -465,7 +465,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
                        (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v2,0x74,0,0);
           temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x17c));
           temp_v3 = appGetRemainingCapacity(*(unsigned short *)(temp_v8 + 0x9020));
-          FUN_002bdf94(1,(int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v13,
+          textDrawFormattedAligned(1,(int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v13,
                        (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v2,1,4,0x79,
                        &LAB_001f1a6c,temp_v3);
         }
@@ -546,7 +546,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
                    (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v2,0x8d,0,0);
       temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x1a6));
       temp_v3 = appGetRemainingCapacity(*(unsigned short *)(temp_v5 + 0x9020));
-      FUN_002bdf94(1,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v13,
+      textDrawFormattedAligned(1,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v13,
                    (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v2,1,4,0x8d,
                    &LAB_001f1a6c,temp_v3);
     }

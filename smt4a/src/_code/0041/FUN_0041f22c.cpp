@@ -1,10 +1,14 @@
-/* NON_MATCHING: 0x6EC is one 64-bit field (retail clears it with mov r2, r1; stm at a 4-aligned offset); retail folds the pulse copy at 0x6F4 into the same stm (loading the pulse first), ours stores it after, which also moves the pulse timer's 30 into r0. The screen is SaveLoadControllerA (FUN_0041e9d4 takes it), whose shared layout stops at 0x450. */
+/* NON_MATCHING: 4 lines: the pulse timer's reset to 30 goes through r1 in retail, r0 here. 0x6EC is the screen's
+ * SaveLoadTransitionValues, set through saveLoadUiSetTransitionValues as the other save/load screens do (one stm
+ * of both zero words and the pulse). The screen is SaveLoadControllerA (FUN_0041e9d4 takes it), whose shared
+ * layout stops at 0x450. */
 #include "common.h"
 #include "network/DataStore/DataStoreMain.h"
 #include "code/Code002c.h"
 #include "shard/Shard004A.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/SavedUnitSelection.h"
+#include "shard/SaveSlotHeaderWork.h"
 
 /* The selection screen work (accessed fields). */
 struct SelectScreen {
@@ -43,8 +47,7 @@ struct SelectScreen {
     s32 pulseTimer;         // 0x618
     f32 pulse;              // 0x61C
     u8 unk620[0xCC];
-    __packed u64 reserved6EC; // 0x6EC: cleared as one 64-bit store (mov r2, r1; stm)
-    f32 pulseCopy;          // 0x6F4
+    SaveLoadTransitionValues transition; // 0x6EC: its values cleared, its progress following the pulse
 };
 
 extern "C" {
@@ -103,8 +106,7 @@ extern "C" void FUN_0041f22c(SelectScreen *screen)
         screen->pulse = screen->pulse - 0.06666667f;
     if (screen->pulseTimer < 15)
         screen->pulse = screen->pulse + 0.06666667f;
-    screen->reserved6EC = 0;
-    screen->pulseCopy = screen->pulse;
+    saveLoadUiSetTransitionValues(&screen->transition, 0, screen->pulse);
     FUN_0041e450(screen);
     FUN_0041e7c0(screen);
     saveLoadRefreshHighlightedPlayerPreview((SavedUnitSelection *)screen);

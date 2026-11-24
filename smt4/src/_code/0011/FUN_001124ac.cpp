@@ -8,7 +8,7 @@
 extern "C" {
 
 int FUN_00122224(void);
-int FUN_00123254(...);
+int gfxCmdBufferHandlesRelease(...);
 int FUN_00129b00(void);
 int FUN_00129d00(...);
 int FUN_00129d4c(...);
@@ -100,7 +100,7 @@ extern int gfxBlockListStart(int);
 /* Supplied declaration required: FUN_00122224. */
 extern int FUN_00122a6c(void);
 extern int blockOpen(int);
-/* Supplied declaration required: FUN_00123254. */
+/* Supplied declaration required: gfxCmdBufferHandlesRelease. */
 extern unsigned long long FUN_0012419c(void);
 /* Supplied declaration required: FUN_001299f8. */
 /* Supplied declaration required: FUN_00129b00. */
@@ -365,7 +365,7 @@ unsigned int FUN_001124ac(romwright_code *param_1,romwright_code *param_2)
           *(int *)(puVar7 + 4) = temp_v4 - 0x7fff;
           if ((g_gfxAllocateCallback == (romwright_code *)0x0) ||
              (in_r12 = g_gfxAllocateCallback, temp_v3 = (*g_gfxAllocateCallback)(0x10000,0x100,0,0x8010), temp_v3 == 0)) {
-            FUN_00123254(1,temp_v9 + 2);
+            gfxCmdBufferHandlesRelease(1,temp_v9 + 2);
             return 0;
           }
           *(unsigned int *)(puVar7 + 8) = temp_v3;
@@ -418,7 +418,7 @@ LAB_00113098:
               nngxLockLeave();
             }
             nngxBindCmdlist(0);
-            FUN_00123254(1,temp_v9 + 2);
+            gfxCmdBufferHandlesRelease(1,temp_v9 + 2);
             DAT_004c62a0 = 1;
             return 1;
           }
@@ -440,7 +440,7 @@ LAB_00113098:
       }
     }
   }
-  FUN_00123254(1,temp_v9 + 2);
+  gfxCmdBufferHandlesRelease(1,temp_v9 + 2);
   return 0;
 }
 

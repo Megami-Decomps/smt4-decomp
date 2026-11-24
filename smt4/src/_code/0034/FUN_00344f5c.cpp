@@ -74,7 +74,7 @@ int btlGetMainState(...);
 int FUN_002b6b00(...);
 int asdMemFree(...);
 int asdModelBankGetModelUnk08(...);
-int FUN_00344158(...);
+int btlNumberPopupStep(...);
 int FUN_00344cf4(...);
 int resourcePairApply(...);
 int FUN_003adc64(...);
@@ -159,7 +159,7 @@ extern unsigned int btlGetTurnEntryAfterPicker(int);
 /* Supplied declaration required: FUN_00338060. */
 /* Supplied declaration required: btlScriptQueueRequestIfIdle. */
 /* Supplied declaration required: FUN_00343f44. */
-/* Supplied declaration required: FUN_00344158. */
+/* Supplied declaration required: btlNumberPopupStep. */
 /* Supplied declaration required: FUN_003445f8. */
 /* Supplied declaration required: FUN_00344cf4. */
 extern unsigned int FUN_0039471c(unsigned int);
@@ -287,7 +287,7 @@ LAB_00344fc0:
     psVar2[1] = temp_v1;
     break;
   case '\x01':
-    FUN_00344158(param_1,psVar2);
+    btlNumberPopupStep(param_1,psVar2);
     break;
   case '\x02':
     puVar9 = (unsigned int *)btlGetMainState();

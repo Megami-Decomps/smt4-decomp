@@ -116,7 +116,7 @@ void FUN_0036749c(void)
         g_gameState.transitionCompleted = 0;
         scene->moveMode = 8;
         scene->moveSpeed = 5.0f;
-        FUN_00324e38(1);
+        mapDepartSpawnPlayerEffect(1);
         scene = g_lmapScene;
         scene->state++;
         scene->stateTime = 0;
@@ -137,7 +137,7 @@ void FUN_0036749c(void)
     case LMAP_STATE_EXIT_WAIT:
         scene->stateTime++;
         if (scene->stateTime > LMAP_EXIT_FRAMES) {
-            FUN_00324e38(0);
+            mapDepartSpawnPlayerEffect(0);
             mapSetSceneState(LMAP_SCENE_MAP);
         }
         break;

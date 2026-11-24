@@ -9,7 +9,7 @@ extern "C" {
 int FUN_001386f8(void);
 int skillDataFindById(void);
 
-int FUN_002bdf94(...);
+int textDrawFormattedAligned(...);
 int drawSetColorFromRGBA8(void);
 int gxResetColorQuadToWhite(void);
 
@@ -29,7 +29,7 @@ extern int playerGetSkillRank(unsigned int);
 extern int idIsAbove400(void);
 extern unsigned int categoryIdFromIndex(unsigned int);
 /* Supplied declaration required: texTableRecordCallWithParams. */
-/* Supplied declaration required: FUN_002bdf94. */
+/* Supplied declaration required: textDrawFormattedAligned. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 
@@ -78,10 +78,10 @@ void FUN_002b6c34(unsigned int param_1,int param_2,int param_3,int param_4,int p
     if (temp_v2 >= 2) {
       drawSetColorFromRGBA8();
       temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x402));
-      FUN_002bdf94(2,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,0,1,
+      textDrawFormattedAligned(2,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,0,1,
                    param_4 + 1,&LAB_002b6da8);
       temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0x401));
-      FUN_002bdf94(2,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,0,1,
+      textDrawFormattedAligned(2,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,0,1,
                    param_4 + 1,&LAB_002b6dac,temp_v2 - 1);
       gxResetColorQuadToWhite();
       return;

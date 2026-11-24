@@ -3,6 +3,7 @@
 #define ASDSDK_SOURCE_GFX_TEXT_ASDTEXT_H
 
 #include "common.h"
+#include <stddef.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* A laid-out character's metrics. */
@@ -27,7 +28,7 @@ enum {
     ASD_TEXT_CODE_NONE = 0xFFFF
 };
 
-/* A text object (0xB4 bytes; smt4a appends an 8-entry table at 0xB4). */
+/* A text object (0xB4 bytes in SMT IV; Apocalypse adds eight bytes). */
 typedef struct AsdText {
     /* 0x00 */ AsdTextCell *cells;
     /* 0x04 */ u8 unk04[8];
@@ -44,15 +45,20 @@ typedef struct AsdText {
     /* 0x54 */ u32 unk54;       /* nonzero once the text can be drawn */
     /* 0x58 */ f32 scale;
     /* 0x5C */ char text[0x40];
-    /* 0x9C */ s32 unk9c;       /* -1 when created */
-    /* 0xA0 */ u8 unkA0[0xC];
+    /* 0x9C */ s32 positionMode; /* -1 when created */
+    /* 0xA0 */ u32 positionColor;
+    /* 0xA4 */ u8 unkA4[4];
+    /* 0xA8 */ f32 positionScale;
     /* 0xAC */ u8 unkAC;
     /* 0xAD */ u8 unkAD[3];
     /* 0xB0 */ u32 unkB0;
     /* 0xB4 */ u8 unkB4[8];
+
+    void initialize();
 } AsdText;
 
-typedef char AsdTextTextOffsetCheck[sizeof(AsdTextCell) == 0x20 && sizeof(AsdText) == 0xBC ? 1 : -1];
+typedef char AsdTextTextOffsetCheck[sizeof(AsdTextCell) == 0x20 && sizeof(AsdText) == 0xBC &&
+    offsetof(AsdText, positionMode) == 0x9C && offsetof(AsdText, positionScale) == 0xA8 ? 1 : -1];
 
 extern "C" {
 unsigned int qcGetCenterSlotGroups(int param_1);

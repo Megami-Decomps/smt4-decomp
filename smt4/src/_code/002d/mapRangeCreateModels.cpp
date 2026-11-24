@@ -1,4 +1,4 @@
-/* NON_MATCHING: 6 lines: in the counting pass retail loads the definition's map into r1 and the work's into r0; the build swaps the two registers (the same inlined test in the instance pass matches). */
+/* NON_MATCHING: 4 lines: both area comparisons have their register operands reversed; the surrounding map checks match. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "game/GameState.h"
 
@@ -61,10 +61,14 @@ s32 gameFlagsTestFirstBank(s16 index);
 void mapRangeUpdateModelVisibilityAndTransforms();
 }
 
-static inline bool mapRangeIsAvailable(const MapRangeDefinition *definition, s32 index)
+static __inline bool mapRangeIsAvailable(const MapRangeDefinition *definition, s32 index)
 {
-    return definition->area != -1 && definition->area == g_mapRangeWork->area &&
-           definition->map == g_mapRangeWork->map && !gameFlagsTestFirstBank(static_cast<s16>(index));
+    s16 area = definition->area;
+    if (area == -1) {
+        return false;
+    }
+    const MapRangeWork *work = g_mapRangeWork;
+    return area == work->area && definition->map == work->map && !gameFlagsTestFirstBank((s16)index);
 }
 
 /* Count matching map ranges, then create a base model and clones for their instances. */
@@ -75,7 +79,8 @@ extern "C" s32 mapRangeCreateModels()
         s32 rangeCount = 0;
         s32 modelCount = 0;
         for (s32 i = 0; i < aocSystemGetTotalCount(); ++i) {
-            if (mapRangeIsAvailable(dataTable2dGetEntryWithAoc(i), i)) {
+            const MapRangeDefinition *definition = dataTable2dGetEntryWithAoc(i);
+            if (mapRangeIsAvailable(definition, i)) {
                 ++modelCount;
                 ++rangeCount;
             }
