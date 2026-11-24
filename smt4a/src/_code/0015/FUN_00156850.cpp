@@ -1,21 +1,16 @@
-/* NON_MATCHING: retail copies the key argument into r4 (mov r4, r1) before the call and never reads it; not reproducible (inline wrapper tried). */
 #include "common.h"
+#include "quest_center/QuestRecordA.h"
 
-struct LookupEntry {
-    u32 unk00;      // 0x00
-    u32 unk04;      // 0x04
-    u8 payload[1]; // 0x08
-};
-
-extern "C" LookupEntry* questDataGetRecord(void* context, u32 key);
-
-static __inline LookupEntry* findEntry(void* context, u32 key)
+/* The quest's title, NULL for an unknown quest. Both text kinds (0 from the quest lists, 1 from the message
+ * expander) give the title: armcc merges the two arms and drops their test, keeping only retail's dead copy of
+ * `kind` (mov r4, r1). */
+extern "C" const char *FUN_00156850(u32 id, u32 kind)
 {
-    return questDataGetRecord(context, key);
-}
-
-extern "C" u8* FUN_00156850(void* context, u32 key)
-{
-    LookupEntry* entry = findEntry(context, key);
-    return entry != NULL ? entry->payload : NULL;
+    QuestRecordA *record = questDataGetRecord(id);
+    if (record == NULL)
+        return NULL;
+    if (kind == 0)
+        return record->title;
+    else
+        return record->title;
 }
