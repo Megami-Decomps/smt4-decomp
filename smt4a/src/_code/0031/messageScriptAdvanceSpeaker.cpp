@@ -1,3 +1,4 @@
+#include "gamedata/RosterUnlock.h"
 #include "common.h"
 #include "quest_center/QuestRecordA.h"
 
@@ -6,7 +7,6 @@ u32 scrGetArg(u32 index);
 s32 scrGetCommandFrame(void);
 void scrWorkSetValue(s32 index, s32 value);
 s32 scrWorkGetValue(s32 index);
-void rosterAddUnit(u16 id);
 s32 dataTableValueOrZero(u32 index);
 void scrMessageSetSpeakerTitle(u16 id, s32 mode, s32 enabled);
 void messageSetScriptDisplayMode(void);

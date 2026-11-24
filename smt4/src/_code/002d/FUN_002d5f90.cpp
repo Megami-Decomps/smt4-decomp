@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail computes the failure flag into r1 and moves the result to r0 before the branch (the arguments of a result-report call that armlink removed, an empty callee); the build has no such call. */
+/* NON_MATCHING: retail tests the failure bit in r1 with the result already in r0, then restores it only
+ * on the failure path. The build restores the result once in the shared epilogue. */
 #include "nn/Result.h"
 #include "sys/ProcessResult.h"
 #include "common.h"

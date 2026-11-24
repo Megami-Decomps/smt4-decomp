@@ -1,5 +1,5 @@
 /* NON_MATCHING: navi map marker placement (147 lines). NaviMain_GetPosX is passed the player handle, as
- * FUN_0039c09c and naviApplyCategorySelection pass theirs. Remaining: the float registers of the world position, map
+ * mapNaviDisplayAdvanceOpening and naviApplyCategorySelection pass theirs. Remaining: the float registers of the world position, map
  * position and cursor (retail s16/s17, s22/s18, s20-s21), and the marker block's schedule (retail loads the offset and
  * size with four vldr, the origin with one vldmia, and stores width and height with two vstr). */
 #include "gamedata/MapSaveBlock.h"

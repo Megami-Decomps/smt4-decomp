@@ -100,8 +100,8 @@ void pairCopy(const AsdTextureRegion *source, NaviPanelOrigin *destination); // 
 void gxResetColorQuadToWhite(void); // declcheck: local (the only shared declaration is in Apocalypse's ui/AnimatedMessage.h)
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 state); // declcheck: local (the shared declaration takes Apocalypse's RenderCtxA)
 void renderCtxPopState(RenderCtx *context, s32 stack); // declcheck: local (the shared declaration takes Apocalypse's RenderCtxA)
-void FUN_00231bcc(const AsdTextureRegion *region, u32 image, s32 offsetX, s32 offsetY, u32 color, u32 flags);
-void FUN_0039fb38(u32 id, u32 x, u32 y, u32 depth, u32 mode);
+void uiDrawSizedTextureAtRegionEnd(const AsdTextureRegion *region, u32 image, s32 offsetX, s32 offsetY, u32 color, u32 flags);
+void uiDrawNativeSizeTableSprite(u32 id, u32 x, u32 y, u32 depth, u32 mode);
 void drawEffectResourceWithColors(u32 id, u32 x, u32 y, u32 depth, u32 alpha, u32 mode);
 
 /* Draws the navigation screen's panel: its frame, the name of the place, the panel's parts and, unless the
@@ -161,16 +161,16 @@ void naviPanelDraw(NaviPanelDrawView *screen)
     }
 
     renderStackPushIndexed(g_titleScene, 6, packNibblesAndByte(6, 1, 0));
-    FUN_00231bcc(&screen->region, 0xFA0, 0, 0, DAT_0044cdc8.unk10, 1);
-    FUN_00231bcc(&screen->region, 0xFA1, 0, 0, DAT_0044cdc8.unk10, 1);
-    FUN_00231bcc(&screen->region, 0xFA2, 0, 0, DAT_0044cdc8.unk10, 1);
-    FUN_00231bcc(&screen->region, 0xFA3, 0, 0, DAT_0044cdc8.unk10, 1);
+    uiDrawSizedTextureAtRegionEnd(&screen->region, 0xFA0, 0, 0, DAT_0044cdc8.unk10, 1);
+    uiDrawSizedTextureAtRegionEnd(&screen->region, 0xFA1, 0, 0, DAT_0044cdc8.unk10, 1);
+    uiDrawSizedTextureAtRegionEnd(&screen->region, 0xFA2, 0, 0, DAT_0044cdc8.unk10, 1);
+    uiDrawSizedTextureAtRegionEnd(&screen->region, 0xFA3, 0, 0, DAT_0044cdc8.unk10, 1);
     renderCtxPopState(g_titleScene, 6);
     for (s32 image = 0xFA5; image <= 0xFA8; image++) {
-        FUN_00231bcc(&screen->region, image, 0, 0, DAT_0044cdc8.unk10, 1);
+        uiDrawSizedTextureAtRegionEnd(&screen->region, image, 0, 0, DAT_0044cdc8.unk10, 1);
     }
     for (s32 image = 0xFA9; image <= 0xFAC; image++) {
-        FUN_00231bcc(&screen->region, image, 0, 0, DAT_0044cdc8.unk10, 1);
+        uiDrawSizedTextureAtRegionEnd(&screen->region, image, 0, 0, DAT_0044cdc8.unk10, 1);
     }
 
     if (!(g_gameState.mapId == 0x13 &&
@@ -187,7 +187,7 @@ void naviPanelDraw(NaviPanelDrawView *screen)
                     s32 x = (s32)(vec2GetXInt(button) + origin.x);
                     s32 y = (s32)(vec2GetYInt(button) + origin.y);
 
-                    FUN_0039fb38(image, x, y, DAT_0044cdc8.unk10, 1);
+                    uiDrawNativeSizeTableSprite(image, x, y, DAT_0044cdc8.unk10, 1);
                 }
             }
         } else {
@@ -252,7 +252,7 @@ void naviPanelDraw(NaviPanelDrawView *screen)
                         }
                     }
                     if (screen->buttonEnabled[i]) {
-                        FUN_0039fb38(image, x, y, DAT_0044cdc8.unk10, 1);
+                        uiDrawNativeSizeTableSprite(image, x, y, DAT_0044cdc8.unk10, 1);
                     } else {
                         drawEffectResourceWithColors(image, x, y, DAT_0044cdc8.unk10, 0x80, 1);
                     }

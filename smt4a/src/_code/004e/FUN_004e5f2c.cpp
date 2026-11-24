@@ -1,51 +1,32 @@
-/* NON_MATCHING: the mask test swaps r2/r3 for the halves of the word pair at +400 (retail loads the low word into r3), and retail reaches the slot value without ldr/str writeback (built `ldr [r6,#2532]!`); slot stride, minimum clamp and result match. */
-#include "battle/btlMain.h"
+/* NON_MATCHING: the state-mask test swaps the word-pair registers, and the target HP uses load writeback. */
+#include "battle/BtlGlobals.h"
+#include "gamedata/GameDataAccess_VariantG.h"
 
 extern "C" {
-void *btlMainFindEntryByListedId(BtlMainStateA *, s32);
-s32 gameFlagIsSet(u32);
 
-u8 FUN_004e5f2c(BtlMainStateA **owner, void *values, s32 index, s32 change)
+/* Applies an HP change to the action's target record and reports depletion. */
+u8 FUN_004e5f2c(BtlMainStateA **owner, BtlUnitA *unit, s32 index, s32 change)
 {
-    // The mask at 0x190 extends beyond the shared action-global prefix.
-    struct ActionValueMasksView {
-        u8 unk000[0x30];
-        u64 protectedUnit;
-        u8 unk038[0x158];
-        u64 disabledState;
-    };
-    // A word at 0x15c cannot be added to the shared combatant's halfword-aligned union.
-    struct MinimumValueEntryView {
-        u64 flags;
-        u8 unk008[0x154];
-        s32 minimumPercent;
-        u8 unk160[0xFC];
-        s32 maximum;
-    };
-    struct ValueSlotsView {
-        s32 words[1];
-    };
-    extern ActionValueMasksView g_btlAction;
     BtlMainStateA *state = *owner;
-    if ((state->markerMasks.bits & g_btlAction.disabledState) != 0)
+    if (state->markerMasks.bits & g_btlAction.targetHpUpdateBlockedMask)
         return 0;
-    s32 *slotValue = &static_cast<ValueSlotsView *>(values)->words[index * 4 + 0x279];
-    s32 value = *slotValue + change;
-    MinimumValueEntryView *entry = static_cast<MinimumValueEntryView *>(btlMainFindEntryByListedId(state, index));
-    if (entry != NULL && entry->minimumPercent > 0) {
-        s32 minimum = (entry->maximum * entry->minimumPercent) / 100;
+    s32 *hp = &unit->targetStates[index].hp;
+    s32 value = *hp + change;
+    BtlCombatantEntryA *entry = btlMainFindEntryByListedId(state, index);
+    if (entry != NULL && entry->minimumHpPercent > 0) {
+        s32 minimum = (entry->data.maxHp * entry->minimumHpPercent) / 100;
         minimum = minimum <= 0 ? 1 : minimum;
         if (value < minimum)
             value = minimum;
     }
     if (gameFlagIsSet(0x591) && entry != NULL &&
-        (entry->flags & g_btlAction.protectedUnit) == 0 && change < 0)
+        (entry->flags & g_btlAction.interaction.requiredMask) == 0 && change < 0)
         return 0;
     if (value >= 0) {
-        *slotValue = value;
+        *hp = value;
         return 0;
     }
-    *slotValue = 0;
+    *hp = 0;
     return 1;
 }
-}
+} /* extern "C" */

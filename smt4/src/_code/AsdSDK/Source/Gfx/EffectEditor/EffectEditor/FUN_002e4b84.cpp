@@ -7,7 +7,7 @@ int CONCAT44(...);
 int matrixCopySelectedToGlobal(...);
 int FUN_0024add8(int, float *);
 int FUN_0024b5f0(...);
-int FUN_0024b660(...);
+int effSampleParticleTransform(...);
 int randomAdvanceShiftRegister(...);
 int FUN_0024b7bc(int, float *);
 int shiftRandomNextFraction(...);
@@ -90,7 +90,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: matrixCopySelectedToGlobal. */
 /* Supplied declaration required: FUN_0024add8. */
 /* Supplied declaration required: FUN_0024b5f0. */
-/* Supplied declaration required: FUN_0024b660. */
+/* Supplied declaration required: effSampleParticleTransform. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b7bc. */
 /* Supplied declaration required: shiftRandomNextFraction. */
@@ -333,7 +333,7 @@ void FUN_002e4b84(int param_1)
             *pfVar6 = temp_v14;
             pfVar6[1] = temp_v12;
             pfVar6[2] = temp_v9;
-            FUN_0024b660(pfVar6,temp_v5,temp_v1,&temp_v32);
+            effSampleParticleTransform(pfVar6,temp_v5,temp_v1,&temp_v32);
             pfVar6[6] = pfVar6[6] * pfVar5[0x10];
             temp_v14 = pfVar6[7];
             temp_v12 = pfVar5[0x12];
@@ -579,7 +579,7 @@ void FUN_002e4b84(int param_1)
               pfVar6[2] = temp_v9;
               pfVar6[4] = (float)(int)temp_v14;
             }
-            FUN_0024b660(pfVar6,temp_v5,pfVar6[4],&temp_v32);
+            effSampleParticleTransform(pfVar6,temp_v5,pfVar6[4],&temp_v32);
             pfVar6[6] = pfVar6[6] * pfVar5[0x10];
             temp_v1 = pfVar6[7];
             temp_v14 = pfVar5[0x12];

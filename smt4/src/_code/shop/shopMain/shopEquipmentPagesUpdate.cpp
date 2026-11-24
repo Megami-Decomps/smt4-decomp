@@ -24,7 +24,7 @@ void FUN_002992e0(s32 mode);
 void statusCameraRestore(s32 usePreset);
 void shopPlaySelectionChangeSound(void);
 void FUN_002302d8(Scene3a *scene, s32 refreshHelp);
-void FUN_00233240(Scene3aSprites *animation, u32 index);
+void uiSceneApplySpritePreset(Scene3aSprites *animation, u32 index);
 void beginStatusPanelClose(void);
 void messageWindowStartTimer(s32 open);
 void shopMenuHandleCancel(Scene3a *scene); // declcheck: local (the shared declaration takes its definition's own Scene view)
@@ -131,7 +131,7 @@ void shopEquipmentPagesUpdate(Scene3a *scene)
         if (scene->slot == 5) {
             FUN_002992e0(2);
         }
-        FUN_00233240(&scene->animation, 1);
+        uiSceneApplySpritePreset(&scene->animation, 1);
         FUN_00232848();
         scene->pageTransition.phase = 17;
         scene->pageTransition.substep = 0;

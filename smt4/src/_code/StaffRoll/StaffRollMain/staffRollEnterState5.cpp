@@ -8,15 +8,10 @@ extern StaffRollWork *g_staffRoll;
 
 extern int screenFadesAllReady(void);
 
-static __inline void staffRollSetState(StaffRollWork *work, s32 state)
-{
-    work->state = state;
-}
-
 void staffRollEnterState5(void)
 {
     if (screenFadesAllReady() != 0) {
-        staffRollSetState(g_staffRoll, 5);
+        staffRollSetState(g_staffRoll, STAFF_ROLL_STATE_COMPLETE);
     }
 }
 

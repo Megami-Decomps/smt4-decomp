@@ -18,7 +18,7 @@ void FUN_0031416c(s32 r0, s32 g0, s32 b0, s32 r1, s32 g1, s32 b1, s32 r2, s32 g2
 void playerModelStartBaseMotion(Obj557c58 *model, s32 mode);
 u8 FUN_0040af60(void *registry);
 void resourceOwnerLoadNamed(void *registry, const char *name);
-void FUN_0040ae70(void *registry, s32 flag);
+void moriModelManagerEnsureScene(void *registry, s32 flag);
 
 /* Creates the status screen's model and, outside the lmap, loads its resource. */
 void campStatusSceneCreateModel(CampStatusScene *scene)
@@ -35,7 +35,7 @@ void campStatusSceneCreateModel(CampStatusScene *scene)
         void *registry = g_handleRegistry;
         if (FUN_0040af60(registry) == 0) {
             resourceOwnerLoadNamed(registry, "status/status.bch");
-            FUN_0040ae70(registry, 1);
+            moriModelManagerEnsureScene(registry, 1);
         }
     }
 }

@@ -72,7 +72,7 @@ typedef struct StatusDownState {
     /* 0x230C */ u8 selector[0x64];
     union {
         /* 0x2370 */ u16 skillIds[8];
-        /* 0x2370 */ u32 skillWords[4];      /* how statusOpenSkillSelection clears them */
+        /* 0x2370 */ u32 skillWords[4];      /* the same ids, as words */
     };
     /* 0x2380 */ u16 selectedId;
     /* 0x2382 */ u8 unk2382[2];
@@ -89,6 +89,14 @@ extern "C" StatusDownState *g_statusDown;
 extern "C" {
 void ifTouchRegionRemove(void);
 void __aeabi_memset4(void *destination, u32 size, s32 value); // declcheck: local (the AEABI word fill has no shared declaration yet)
+}
+
+/* Restarts the status screen's timer and records the state it is leaving. */
+static __inline void statusDownEnterState(StatusDownState *screen, s32 next)
+{
+    screen->stateTimer = 0;
+    screen->track.previous = screen->track.state;
+    screen->track.state = next;
 }
 
 /* Takes back the screen's touch regions and empties the slots: the three statements the status screen's

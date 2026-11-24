@@ -26,7 +26,7 @@ typedef struct AnalyzeFlagView {
 extern u32 g_btlDevilListCallbackContext[];
 
 void uiRectDrawAtBottomRight(void *panel, s32 id, s32 a, s32 b, s32 slide, f32 offset);
-void FUN_00231bcc(void *panel, s32 id, s32 a, s32 b, s32 slide, s32 c);
+void uiDrawSizedTextureAtRegionEnd(void *panel, s32 id, s32 a, s32 b, s32 slide, s32 c);
 u32 dataLookupDisplayName(u8 *out, u32 id);
 AnalyzeTextBox *layoutFindTableEntry(void *panel, u32 id);
 s32 textMeasureOnLayer(const char *text, s32 mode);
@@ -46,11 +46,11 @@ void bibleAnalyzeDrawMenu(AnalyzeWork *work)
 
     uiRectDrawAtBottomRight(work->panel, 13, 0, 0, slide, offset);
     s32 tab = ((AnalyzeFlagView *)work)->secondTab == 0 ? 0x1025 : 0x1023;
-    FUN_00231bcc(work->panel, tab - 4, 0, 0, slide, 1);
-    FUN_00231bcc(work->panel, tab, 0, 0, slide, 1);
+    uiDrawSizedTextureAtRegionEnd(work->panel, tab - 4, 0, 0, slide, 1);
+    uiDrawSizedTextureAtRegionEnd(work->panel, tab, 0, 0, slide, 1);
     tab = ((AnalyzeFlagView *)work)->secondTab == 1 ? 0x1026 : 0x1024;
-    FUN_00231bcc(work->panel, tab - 4, 0, 0, slide, 1);
-    FUN_00231bcc(work->panel, tab, 0, 0, slide, 1);
+    uiDrawSizedTextureAtRegionEnd(work->panel, tab - 4, 0, 0, slide, 1);
+    uiDrawSizedTextureAtRegionEnd(work->panel, tab, 0, 0, slide, 1);
 
     u8 nameBuffer[4];
     char text[64];

@@ -14,7 +14,7 @@ int mathSinFixedAngle(void);
 int asdMemFree(void);
 int jobStop(...);
 
-int FUN_001f4f14(...);
+int partySelectionExpandMask(...);
 int btlUiTargetListStep(void);
 int FUN_00222b5c(...);
 int playSceneResumeState(...);
@@ -95,7 +95,7 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_0017fbc4. */
 /* Supplied declaration required: FUN_0019a4f4. */
 /* Supplied declaration required: FUN_001ed64c. */
-/* Supplied declaration required: FUN_001f4f14. */
+/* Supplied declaration required: partySelectionExpandMask. */
 /* Supplied declaration required: spriteRowListUpdate. */
 /* Supplied declaration required: objStartTimerIfIdle. */
 /* Supplied declaration required: messageMainApplyClose. */
@@ -541,7 +541,7 @@ LAB_0019e7b8:
       temp_v12 = temp_v0 + 0x2460;
       temp_v4 = FUN_002f25c4();
       if (temp_v4 != 0) {
-        FUN_001f4f14(temp_v12,temp_v0 + 0x7e28,temp_v0 + 0x7e30);
+        partySelectionExpandMask(temp_v12,temp_v0 + 0x7e28,temp_v0 + 0x7e30);
         if (temp_v12 != 0) {
           *(unsigned char *)(temp_v0 + 0x7e49) = 1;
         }

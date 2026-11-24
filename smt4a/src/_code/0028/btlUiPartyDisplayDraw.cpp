@@ -30,7 +30,7 @@ void btlUiPartyDisplayDraw(ActorCardAnimationsA *scene)
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     gxResetColorQuadToWhite();
     /* Nothing is drawn once the display has slid out. */
-    if ((scene->state == 6 && scene->unk4AD8 == 3 && uiSpriteGetCompletionState(&scene->slide)) ||
+    if ((scene->state == 6 && scene->panelVisibility.selectorPhase == 3 && uiSpriteGetCompletionState(&scene->slide)) ||
         ((scene->state == 0x2B || scene->state == 0x2C) && uiSpriteGetCompletionState(&scene->slide))) {
         return;
     }

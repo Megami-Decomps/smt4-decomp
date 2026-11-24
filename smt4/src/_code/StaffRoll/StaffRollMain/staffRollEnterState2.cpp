@@ -16,7 +16,7 @@ void staffRollEnterState2(void)
         soundChannelRequestIfEnabled(0x1000000, 0, 0x3c);
         StaffRollWork *work = g_staffRoll;
 
-        work->state = 2;
+        staffRollSetState(work, STAFF_ROLL_STATE_SCROLL);
     }
 }
 

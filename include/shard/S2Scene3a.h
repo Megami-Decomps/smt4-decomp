@@ -27,7 +27,7 @@ enum {
     SCENE3A_STATE_IDLE, SCENE3A_STATE_START, SCENE3A_STATE_RUNNING,
     SCENE3A_STATE_STOP, SCENE3A_STATE_FINISH
 };
-/* The screen's eight animated sprites (uiAnimationAdvanceChannel, FUN_00233240). */
+/* The screen's eight animated sprites (uiAnimationAdvanceChannel, uiSceneApplySpritePreset). */
 struct Scene3aSprites {
     /* 0x000 */ u8 unk00[0x20];
     /* 0x020 */ UiSpriteState sprites[8];   /* 6 slides the quantity panel in, 7 out */

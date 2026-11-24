@@ -96,15 +96,21 @@ static __inline void btlHelpListAppend(BtlHelpListA *list, BtlHelpEntryA *entry)
 /* The help module's global state and the battle states which suppress new messages. */
 struct BtlHelpGlobalsA {
     /* 0x00 */ BtlHelpListA *list;
-    /* 0x04 */ u8 unk04[0x1c];
+    /* 0x04 */ u8 unk04[0x0c];
+    /* 0x10 */ u64 specialEntry;
+    /* 0x18 */ u64 restrictedEntry;
     /* 0x20 */ u64 blockedStates;      /* battle state bits that suppress new messages */
     /* 0x28 */ u64 blockedTransitions;
+    /* 0x30 */ u64 blockedMessages;
 };
 
 typedef char BtlHelpGlobalsAMasksOffsetCheck[
+    offsetof(BtlHelpGlobalsA, specialEntry) == 0x10 &&
+    offsetof(BtlHelpGlobalsA, restrictedEntry) == 0x18 &&
     offsetof(BtlHelpGlobalsA, blockedStates) == 0x20 &&
     offsetof(BtlHelpGlobalsA, blockedTransitions) == 0x28 &&
-    sizeof(BtlHelpGlobalsA) == 0x30 ? 1 : -1];
+    offsetof(BtlHelpGlobalsA, blockedMessages) == 0x30 &&
+    sizeof(BtlHelpGlobalsA) == 0x38 ? 1 : -1];
 
 /* Creates a help entry (Apocalypse's btlHelp.cpp creator; IV's is btlHelpEntryCreate), snapshotting its combatant,
  * and appends it to the help list. */

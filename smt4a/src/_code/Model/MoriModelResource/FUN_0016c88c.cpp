@@ -1,6 +1,7 @@
-/* NON_MATCHING: 117 lines: retail loads spec->handle separately in each arm of the resource choice, re-tests
+/* NON_MATCHING: 117 lines: retail loads the target separately in each arm of the resource choice, re-tests
  * g_handleRegistry after an empty texture bind, and reuses the tested registry pointer for the shared model;
  * armcc here threads those tests and the counters land in other registers. */
+#include "Model/MoriModelResource.h"
 #include "shard/W6_W6Match7_MaterialTextures.h"
 #include "classes/Obj557dcc.h"
 
@@ -46,17 +47,6 @@ struct MoriUnit {
     /* 0x88 */ Obj557dcc *extra;
 };
 
-/* What the unit is made from. */
-struct MoriUnitSpec {
-    /* 0x00 */ u32 handle;
-    /* 0x04 */ u8 isResource;       /* the handle already names the resource */
-    /* 0x05 */ u8 unk05[3];
-    /* 0x08 */ u32 first;
-    /* 0x0C */ u32 second;
-    /* 0x10 */ u32 third;
-    /* 0x14 */ u8 mode;
-};
-
 extern "C" {
 extern HandleRegistryView *g_handleRegistry;
 
@@ -73,18 +63,19 @@ static inline void *operator new(u32 bytes, const char *file, s32 line) throw()
     return asdMemoryAllocTraced(bytes, file, line);
 }
 
-extern "C" void FUN_0016c88c(const MoriUnitSpec *spec, MoriUnit *unit)
+extern "C" void FUN_0016c88c(const MoriModelRequest *spec, Obj557d00 *object)
 {
+    MoriUnit *unit = (MoriUnit *)object;
     u32 resource;
     if (spec->isResource == 0) {
         u32 size;
-        resource = FUN_00186118(spec->handle, &size);
+        resource = FUN_00186118((u32)spec->target, &size);
     } else {
-        resource = spec->handle;
+        resource = (u32)spec->target;
     }
-    moriCameraAnimLoad(unit, resource, spec->first, spec->second, spec->third);
+    moriCameraAnimLoad(unit, resource, spec->commandHeap, spec->keyHeap, spec->curveHeap);
     unit->flags = spec->mode;
-    unit->handle = spec->handle;
+    unit->handle = (u32)spec->target;
     unit->flag = spec->isResource;
     u32 modelCount = unit->tables->modelCount;
     for (u32 i = 0; i < modelCount; i++)
@@ -120,5 +111,5 @@ extern "C" void FUN_0016c88c(const MoriUnitSpec *spec, MoriUnit *unit)
             }
         }
     }
-    unit->extra = new ("c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelResource.cpp", 100) Obj557dcc(spec->handle);
+    unit->extra = new ("c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelResource.cpp", 100) Obj557dcc((u32)spec->target);
 }

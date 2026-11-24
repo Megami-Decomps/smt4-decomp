@@ -14,7 +14,7 @@ int panelSetMode3(...);
 int messageBannerInitCounter(...);
 int messageDismissNumericBanner(...);
 int partyAdjustCounterIfEnoughActive(...);
-int FUN_003edfd4(...);
+int btlRefreshSpecialCombatantVoice(...);
 int FUN_003f2498(...);
 int btlApplyDirectionBucket(...);
 int FUN_004112b0(...);
@@ -191,6 +191,7 @@ extern int FUN_003e48bc(void);
 /* Supplied declaration required: partyAdjustCounterIfEnoughActive. */
 extern unsigned int FUN_003e53ec(void);
 /* Supplied declaration required: btlAppendPendingCommand. */
+void btlAppendPendingCommand(BtlMainStateA *state, u32 kind, s32 unitIndex, s32 first, BattleCommandValue second); // declcheck: local (romwright draft: passes the BtlPendingCommand words separately)
 /* Supplied declaration required: FUN_003e7840. */
 extern int btlIsExtendedState(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003e7ef0. */
@@ -201,7 +202,7 @@ extern int btlSlotStateIsNot456(unsigned int, unsigned int);
 /* Supplied declaration required: stateFinishIfPresent. */
 extern int btlStateIsDefeatSuppressed(int);
 extern int FUN_003ec7b0(int);
-/* Supplied declaration required: FUN_003edfd4. */
+/* Supplied declaration required: btlRefreshSpecialCombatantVoice. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlResetSlot. */
 /* Supplied declaration required: FUN_003f2280. */
@@ -1378,7 +1379,7 @@ LAB_0040fb78:
         temp_v7 = puVar6[1];
         if ((DAT_005712f8 & temp_v5) != 0 || (DAT_005712fc & temp_v7) != 0) {
           if (!((DAT_00571320 & temp_v5) == 0 && (DAT_00571324 & temp_v7) == 0)) {
-            FUN_003edfd4(*param_1);
+            btlRefreshSpecialCombatantVoice(*param_1);
           }
           else if (((DAT_00571318 & temp_v5) != 0 || (DAT_0057131c & temp_v7) != 0) ||
                   ((temp_v5 & DAT_00571310) != 0 || (temp_v7 & DAT_00571314) != 0)) {

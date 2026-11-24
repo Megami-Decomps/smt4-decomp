@@ -1,4 +1,4 @@
-/* NON_MATCHING: the packed pair is read/written as one ldrd/strd u64 in retail (separate word accesses here) and the table-entries pointer is copied to r1 before the id compare; lookup, rounded level and saved registers match. */
+/* NON_MATCHING: the build moves the level-bias pointer to r1 and schedules the id check and recipe/level loads differently. The rounded level and packed result stores match. */
 #include "common.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "camp/Unite/UniteWork.h"

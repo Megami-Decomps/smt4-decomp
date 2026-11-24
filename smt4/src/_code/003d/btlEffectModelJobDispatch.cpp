@@ -139,7 +139,7 @@ static __inline const char *fileNameFromPath(const char *path)
 }
 
 /* Names an effect file slot after `path` and requests the file unless a record already provides it: the tail
- * FUN_003dadd8, FUN_003dba3c, FUN_003dbb40 and effectRequestByName end with (retail copies `path` into r8). */
+ * btlEffectLoadTransitionFiles, btlEffectLoadFlashFiles, FUN_003dbb40 and effectRequestByName end with (retail copies `path` into r8). */
 static __inline void effectFileSlotRequest(BtlEffectFileSlot *slot, const char *path)
 {
     libc_strcpy(slot->name, fileNameFromPath(path));
@@ -149,7 +149,7 @@ static __inline void effectFileSlotRequest(BtlEffectFileSlot *slot, const char *
     }
 }
 
-/* Requests the eleven reference effects (FUN_003dadd8 and FUN_003dba3c are the same loop over other slots). */
+/* Requests the eleven reference effects (btlEffectLoadTransitionFiles and btlEffectLoadFlashFiles are the same loop over other slots). */
 static __inline void referenceEffectsRequest(BtlEffectWork *work)
 {
     for (s32 i = 0; i < 11; i++) {

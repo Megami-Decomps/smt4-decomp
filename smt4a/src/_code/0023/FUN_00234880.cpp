@@ -1,37 +1,30 @@
-/* NON_MATCHING: table-row, count and loop-index registers differ, as do the order of the threshold loads and the scratch register used for the out-of-range NULL. */
+/* NON_MATCHING: table-row, count and loop-index register allocation differ, and retail reuses its zero
+ * register in the row lookup. */
 #include "common.h"
 #include "util/Random.h"
 #include "game/GameStateA.h"
 #include "gamedata/PartnerInfoTable.h"
 #include "code/Code0015.h"
 #include "gamedata/SaveSlotTable.h"
+#include "gamedata/SaveSlotRecord.h"
+#include "gamedata/GameDataAccess_Shard004B.h"
 #include "map/PopupStateA.h"
 
-
-struct SaveSlot {
-    u8 unk00[0x12c];
-    u16 id;         // 0x12c
-};
-
-
 extern "C" {
-
 
 s32 gameFlagIsSet(s32 flag);
 s32 FUN_003e0024(void);
 s32 FUN_003e0154(void);
 s32 gameSlotTableFindFree(void);
-s32 gameGetSlotRecord(s32 slot);
-s32 recordGetScaledMaximum(s32 record);
 
 const char *popupSelectWeightedMessage(s32 kind, s32 id);
 
-// Opens the popup for the first ratio message matching the selected slot.
+/* Opens the popup for the first HP-ratio trigger matching the selected slot. */
 void FUN_00234880(void)
 {
     messageVoiceFlagsGet();
     if (g_popupState->state != 0) return;
-    SaveSlot* slot = reinterpret_cast<SaveSlot*>(saveSlotFindSelected());
+    const PartySlotA *slot = saveSlotFindSelected();
     if (slot == NULL) return;
 
     bool special = false;
@@ -47,8 +40,8 @@ void FUN_00234880(void)
     s8 *status = gameGetSlotTable()->party;
     for (s32 i = 0; i < slotCount; i++) {
         if (status[i] >= 0) {
-            s32 record = gameGetSlotRecord(status[i]);
-            current += *(s16*)(record + 0x2a);
+            SlotRecordA *record = gameGetSlotRecord(status[i]);
+            current += record->hp;
             maximum += recordGetScaledMaximum(record);
         }
     }
@@ -58,18 +51,17 @@ void FUN_00234880(void)
     dataTableGetEntries(table);
     s32 count = dataTableGetCount(table);
     for (u32 i = 0; (s32)i < count; i++) {
-        /* the loop reuses the count's table handle; partnerInfoRecordAt allocates registers differently */
+        /* This section is immutable during the scan, so i < count guarantees a row. */
         table = dataTableGet(0x43, 0);
-        PartnerInfoRecord *row = static_cast<PartnerInfoRecord *>(dataTableGetEntries(table));
+        PartnerInfoRecord *row = (PartnerInfoRecord *)dataTableGetEntries(table);
         u32 rowCount = dataTableGetCount(table);
         if (i >= rowCount) row = NULL; else row += i;
         if (row->kind != 8 && row->kind != 9) continue;
         if (row->partnerId != slot->id) continue;
         if (row->requiredFlag != 0 && !gameFlagIsSet(row->requiredFlag)) continue;
         if (row->excludedFlag != 0 && gameFlagIsSet(row->excludedFlag)) continue;
-        f32 threshold = (f32)row->argument;
         if (row->kind == 8) {
-            if (threshold <= percent) {
+            if ((f32)row->argument <= percent) {
                 g_popupState->state = 5;
                 g_popupState->timer = 0;
                 if (special) {
@@ -79,7 +71,7 @@ void FUN_00234880(void)
                 g_popupState->message = popupSelectWeightedMessage(8, slot->id);
                 return;
             }
-        } else if (percent <= threshold) {
+        } else if (percent <= (f32)row->argument) {
             g_popupState->state = 5;
             g_popupState->timer = 0;
             if (special) {

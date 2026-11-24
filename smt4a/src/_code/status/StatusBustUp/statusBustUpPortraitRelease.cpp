@@ -10,7 +10,7 @@ s32 gameFlagIsSet(u32 flag);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 void packageFileDisableByKindName(void *system, u32 table, u32 node);
 
-// Release one portrait reference and unload its texture when the last user leaves.
+/* Releases one portrait reference and unloads its texture when the last user leaves. */
 void statusBustUpPortraitRelease(s32 id, s32 resolveRecord)
 {
     s32 table = 15;
@@ -22,22 +22,14 @@ void statusBustUpPortraitRelease(s32 id, s32 resolveRecord)
             NkmBaseRecordA *record = (NkmBaseRecordA *)nkmBaseGetRecord((u16)id);
             if (record == NULL)
                 return;
-            // The alternate portrait metadata extends the shared table-zero view.
-            struct AlternatePortraitView {
-                u16 id;
-                u16 flags;
-                u8 prefix[0x88];
-                s16 portrait;
-            };
-            typedef char AlternatePortraitOffsets[offsetof(AlternatePortraitView, portrait) == 0x8C ? 1 : -1];
-            AlternatePortraitView *alternate = (AlternatePortraitView *)nkmEnemyFindById((u16)id);
-            if (!(alternate->flags & 0x8000)) {
+            NkmEnemyRecordA *alternate = nkmEnemyFindById((u16)id);
+            if (!(alternate->level & 0x8000)) {
                 id = record->model + 1;
                 if (id >= 631)
                     return;
             } else {
                 s32 alternateTable = 25;
-                id = alternate->portrait;
+                id = alternate->battleTextureId;
                 if (id >= 154)
                     return;
                 --((s8 *)g_statusBustUpResources.workB)[id];

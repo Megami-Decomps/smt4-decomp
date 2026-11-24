@@ -163,11 +163,13 @@ typedef struct BtlActionGlobalsA {
     /* 0x130 */ u8 unk130[0x50];
     /* 0x180 */ u64 aiMenuMask;     /* battle state bits that make the AI open a menu command */
     /* 0x188 */ u64 aiTargetMask;   /* battle state bits that make the AI pick a target command */
-    /* 0x190 */ u8 unk190[0x28];
+    /* 0x190 */ u64 targetHpUpdateBlockedMask; /* battle states that suppress action HP changes */
+    /* 0x198 */ u8 unk198[0x20];
 } BtlActionGlobalsA;
 
 typedef char BtlActionGlobalsALayoutCheck[offsetof(BtlActionGlobalsA, targetableMask) == 0x10 &&
-    offsetof(BtlActionGlobalsA, untargetableMask) == 0x78 && sizeof(BtlActionGlobalsA) == 0x1B8 ? 1 : -1];
+    offsetof(BtlActionGlobalsA, untargetableMask) == 0x78 &&
+    offsetof(BtlActionGlobalsA, targetHpUpdateBlockedMask) == 0x190 && sizeof(BtlActionGlobalsA) == 0x1B8 ? 1 : -1];
 typedef char BtlActionClearedFlagsOffsetCheck[
     offsetof(BtlActionGlobalsA, roster.excluded) == 0x48 &&
     offsetof(BtlActionGlobalsA, clearedFlags.mask) == 0x58 &&

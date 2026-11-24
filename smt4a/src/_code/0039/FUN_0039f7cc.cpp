@@ -11,7 +11,7 @@ int phaseCosine(void);
 int gfxQuaternionWorkspaceBuildMatrix(void);
 int FUN_0027134c(int, float *);
 int FUN_002fe2e8(int, float *);
-int FUN_00321d7c(...);
+int effSampleParticleTransform(...);
 int FUN_00321e98(...);
 int effComputeParticleEmission(int, unsigned int *, char [4], int *);
 int randomAdvanceShiftRegister(...);
@@ -64,7 +64,7 @@ extern float DAT_00647348; /* 0x647348 */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: FUN_0027134c. */
 /* Supplied declaration required: FUN_002fe2e8. */
-/* Supplied declaration required: FUN_00321d7c. */
+/* Supplied declaration required: effSampleParticleTransform. */
 /* Supplied declaration required: FUN_00321e98. */
 /* Supplied declaration required: effComputeParticleEmission. */
 extern int FUN_0037a844(void);
@@ -215,7 +215,7 @@ void FUN_0039f7cc(int param_1)
             pfVar6[1] = temp_v10;
             pfVar6[2] = temp_v20;
             pfVar6[3] = temp_v8;
-            FUN_00321d7c(pfVar6,puVar8,temp_v2,&temp_v24);
+            effSampleParticleTransform(pfVar6,puVar8,temp_v2,&temp_v24);
             pfVar6[6] = pfVar6[6] * pfVar7[6];
             temp_v20 = pfVar6[7];
             temp_v10 = pfVar7[8];
@@ -367,7 +367,7 @@ void FUN_0039f7cc(int param_1)
               pfVar6[2] = temp_v2;
               pfVar6[3] = temp_v20;
             }
-            FUN_00321d7c(pfVar6,puVar8,pfVar6[4],&temp_v24);
+            effSampleParticleTransform(pfVar6,puVar8,pfVar6[4],&temp_v24);
             pfVar6[6] = pfVar6[6] * pfVar7[6];
             temp_v2 = pfVar6[7];
             temp_v10 = pfVar7[8];

@@ -1,4 +1,5 @@
-/* NON_MATCHING: table search and literal-address scheduling still differ. */
+/* NON_MATCHING: only the comparator literal and fifth argument store in the table search are
+ * scheduled differently. IDENTICAL with -O2 -Otime; no same-module flag run established. */
 #include "gamedata/NameLabelTable.h"
 
 extern "C" {
@@ -43,6 +44,6 @@ u8* textGetNameToken(u32 id)
     if (id == 0x67) return g_fractionTextFourQuarters;
     if (id == 0x68) return g_fractionTextFourSixths;
 
-    return reinterpret_cast<u8 *>(nameLabelTableFindA(id)->token);
+    return (u8 *)nameLabelTableFindA(id)->token;
 }
-} // extern "C"
+} /* extern "C" */

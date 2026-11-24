@@ -1,17 +1,11 @@
-#include "shard/W5_W5Match7_ScriptUnit.h"
 #include "battle/BattleHelpers_VariantB.h"
+#include "battle/BtlScriptUnitFlags.h"
 
 extern "C" {
 
-u32 hasFlag80Or1000(u32 id, u32 *flags);
-
 s32 btlScriptUnitHasFlags(const BtlMainStateA *)
 {
-    ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
-    if (unit == NULL) {
-        return 0;
-    }
-    return hasFlag80Or1000(g_btlScriptUnit, reinterpret_cast<u32 *>(unit)) != 0;
+    return btlScriptUnitHasFlagsInline();
 }
 
 } /* extern "C" */

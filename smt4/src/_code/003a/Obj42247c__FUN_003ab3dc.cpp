@@ -29,7 +29,7 @@ typedef char SkillListRenderOffsets[offsetof(SkillListRenderView, cursor) == 0x2
 }
 extern "C" {
 void uiRectDrawAtBottomRight(void *render, s32 kind, s32 x, s32 y, s32 depth);
-void FUN_00231bcc(void *render, s32 sprite, s32 x, s32 y, s32 depth, s32 flags);
+void uiDrawSizedTextureAtRegionEnd(void *render, s32 sprite, s32 x, s32 y, s32 depth, s32 flags);
 s32 rangeLimitMin(void *cursor);
 u32 flaggedEntryGetValueByState(void *cursor);
 s32 flaggedValueHolderGetTotal(void *cursor);
@@ -69,8 +69,8 @@ void Obj42247c::FUN_003ab3dc()
     SkillListRenderView * view = reinterpret_cast<SkillListRenderView *>(this);
     s32 depth = 0x1F;
     uiRectDrawAtBottomRight(view->render, 3, 0, 0, depth);
-    FUN_00231bcc(view->render, 0x4C7, 0, 0, depth, 1);
-    FUN_00231bcc(view->render, 0x4C8, 0, 0, depth, 1);
-    FUN_00231bcc(view->render, 0x4CA, 0, 0, depth, 1);
+    uiDrawSizedTextureAtRegionEnd(view->render, 0x4C7, 0, 0, depth, 1);
+    uiDrawSizedTextureAtRegionEnd(view->render, 0x4C8, 0, 0, depth, 1);
+    uiDrawSizedTextureAtRegionEnd(view->render, 0x4CA, 0, 0, depth, 1);
     drawSkillListContents(view, depth);
 }

@@ -1,10 +1,9 @@
+#include "gfx/ModelTransform.h"
 /* NON_MATCHING: multifile frame/r3 now match; the arithmetic uses retail's non-contracted products (shared x/y/z*sine, (1-v*v)*k), but the VFP register numbering and instruction schedule of the matrix build differ (retail loads the axis with one vldmia {s4-s6}). */
 #include "shard/W5_W5Match2_PlainData.h"
 #include "shard/S1Mover.h"
 
 extern "C" {
-void matrix43Multiply(Matrix44 *destination, const Matrix44 *first, const Matrix44 *second);
-void matrixCopyFull(Matrix44 *destination, const Matrix44 *source);
 
 // Set, pre-multiply, or post-multiply an axis-angle rotation given 1-cosine and sine.
 Matrix44 *FUN_003219b0(Matrix44 *destination, const Vec3f *axis, s32 mode, f32 oneMinusCosine, f32 sine)

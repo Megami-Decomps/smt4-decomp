@@ -66,7 +66,7 @@ int buttonHelpSetPreset(...);
 int inputQueryButtonState(...);
 int screenFadeStartIn(...);
 int obj7ECSetPair(...);
-int FUN_002fc008(...);
+int tmnlCollectDestinations(...);
 
 int placeWinCreate(void);
 int FUN_00263988(...);
@@ -219,7 +219,7 @@ extern int effectTimelineChildrenFit(unsigned int);
 /* Supplied declaration required: useCounterSelectMode2. */
 /* Supplied declaration required: obj7ECSetPair. */
 /* Supplied declaration required: FUN_002e2948. */
-/* Supplied declaration required: FUN_002fc008. */
+/* Supplied declaration required: tmnlCollectDestinations. */
 extern int FUN_00335118(unsigned int); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
 
 
@@ -477,7 +477,7 @@ unsigned int FUN_001d99c0(void)
           if (temp_v6 == 3) {
             screenFadeStartIn(1,10,0xff);
           }
-          FUN_002fc008(puVar2);
+          tmnlCollectDestinations(puVar2);
           if (*(unsigned char *)((int)g_tmnl + 9) != 0) {
             pcVar10 = s_Mikado_00432cfe + (unsigned int)*(unsigned char *)((int)g_tmnl + 9) * 0x24;
           }
@@ -956,7 +956,7 @@ LAB_001da638:
         }
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 0x14);
-      FUN_002fc008(puVar2);
+      tmnlCollectDestinations(puVar2);
       asdMdlManagerDestroy(puVar2[puVar2[0x158] + 0xd]);
       puVar2[puVar2[0x158] + 0xd] = 0;
       puVar2[0x158] = (int)*(char *)((unsigned int)*(unsigned char *)((int)puVar2 + 9) * 0x24 + 0x432cfd);

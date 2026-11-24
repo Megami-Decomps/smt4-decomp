@@ -13,8 +13,6 @@
 
 extern "C" {
 
-extern MapRndMazeA g_mapRndMaze;
-
 void FUN_0035d1e0(f32 x, f32 z, f32 heading);
 f32 cameraGetHeadingDegrees(void);
 s32 FUN_00355418(u32 index);
@@ -22,7 +20,6 @@ s32 FUN_00355418(u32 index);
 enum {
     MAZE_PIECE_SETS = 5,       /* model sets 0-4 hold the maze pieces; a piece code is `set << 4 | turn` */
     MAZE_MARKER_SET = 5,       /* set 5: the two marker models, then one model per special cell */
-    MAZE_MODEL_SETS = 6,
     SPAWN_INDEX_SCRIPTED = 100 /* spawn indices from here on take their markers from the scene's table entry */
 };
 
@@ -38,45 +35,45 @@ void mapRndMazeUpdateModelVisibility(void)
     s32 index;
 
     if (g_gameState.loading != 0) {
-        for (set = 0; set < MAZE_MODEL_SETS; ++set) {
+        for (set = 0; set < MAZE_MODEL_SET_COUNT; ++set) {
             for (index = 0; index < g_mapRndMaze.modelCounts[set]; ++index) {
                 Obj557b18 *body = g_mapRndMaze.models[set][index]->body;
             body->flags |= 3;
             }
         }
-        if (g_mapRndMaze.unk9D0 != NULL) {
-            g_mapRndMaze.unk9D0->body->flags |= 3;
+        if (g_mapRndMaze.scriptedFirstMarkerA != NULL) {
+            g_mapRndMaze.scriptedFirstMarkerA->body->flags |= 3;
         }
-        if (g_mapRndMaze.unk9CC != NULL) {
-            g_mapRndMaze.unk9CC->body->flags |= 3;
+        if (g_mapRndMaze.scriptedSecondMarker != NULL) {
+            g_mapRndMaze.scriptedSecondMarker->body->flags |= 3;
         }
         if (g_mapRndMaze.marker != NULL) {
             g_mapRndMaze.marker->body->flags |= 3;
         }
-        if (g_mapRndMaze.unk9D8 != NULL) {
-            g_mapRndMaze.unk9D8->body->flags |= 3;
+        if (g_mapRndMaze.scriptedFirstMarkerB != NULL) {
+            g_mapRndMaze.scriptedFirstMarkerB->body->flags |= 3;
         }
         g_mapRndMaze.hidden = 1;
         return;
     }
 
-    for (set = 0; set < MAZE_MODEL_SETS; ++set) {
+    for (set = 0; set < MAZE_MODEL_SET_COUNT; ++set) {
         for (index = 0; index < g_mapRndMaze.modelCounts[set]; ++index) {
             Obj557b18 *body = g_mapRndMaze.models[set][index]->body;
             body->flags &= ~3;
         }
     }
-    if (g_mapRndMaze.unk9D0 != NULL) {
-        g_mapRndMaze.unk9D0->body->flags &= ~3;
+    if (g_mapRndMaze.scriptedFirstMarkerA != NULL) {
+        g_mapRndMaze.scriptedFirstMarkerA->body->flags &= ~3;
     }
-    if (g_mapRndMaze.unk9CC != NULL) {
-        g_mapRndMaze.unk9CC->body->flags &= ~3;
+    if (g_mapRndMaze.scriptedSecondMarker != NULL) {
+        g_mapRndMaze.scriptedSecondMarker->body->flags &= ~3;
     }
     if (g_mapRndMaze.marker != NULL) {
         g_mapRndMaze.marker->body->flags &= ~3;
     }
-    if (g_mapRndMaze.unk9D8 != NULL) {
-        g_mapRndMaze.unk9D8->body->flags &= ~3;
+    if (g_mapRndMaze.scriptedFirstMarkerB != NULL) {
+        g_mapRndMaze.scriptedFirstMarkerB->body->flags &= ~3;
     }
     if (g_mapRndMaze.hidden == 0) {
         return;
@@ -84,7 +81,7 @@ void mapRndMazeUpdateModelVisibility(void)
 
     FUN_0035d1e0(g_lmapView->savedEye.x, g_lmapView->savedEye.z, cameraGetHeadingDegrees());
 
-    s32 used[MAZE_MODEL_SETS] = { 0, 0, 0, 0, 0, 0 };
+    s32 used[MAZE_MODEL_SET_COUNT] = { 0, 0, 0, 0, 0, 0 };
     for (s32 row = 0; row < saved->maze.height; ++row) {
         for (s32 column = 0; column < saved->maze.width; ++column) {
             if (saved->grid.cells[row][column].marked != 1) {
@@ -171,9 +168,9 @@ void mapRndMazeUpdateModelVisibility(void)
             if (saved->grid.cells[row][column].markers.first == 1) {
                 if (lmapGetSpawnIndex() >= SPAWN_INDEX_SCRIPTED) {
                     if (FUN_00355418((s32)saved->unk15C4) == 0) {
-                        model = g_mapRndMaze.unk9D0;
+                        model = g_mapRndMaze.scriptedFirstMarkerA;
                     } else if (FUN_00355418((s32)saved->unk15C4) == 1) {
-                        model = g_mapRndMaze.unk9D8;
+                        model = g_mapRndMaze.scriptedFirstMarkerB;
                     } else if (FUN_00355418((s32)saved->unk15C4) == 2) {
                         model = g_mapRndMaze.models[MAZE_MARKER_SET][0];
                     }
@@ -208,7 +205,7 @@ void mapRndMazeUpdateModelVisibility(void)
             if (saved->grid.cells[row][column].markers.second == 1) {
                 MoriModelContent *second;
                 if (lmapGetSpawnIndex() >= SPAWN_INDEX_SCRIPTED && FUN_00297008((s32)saved->unk15C4) != 0) {
-                    second = g_mapRndMaze.unk9CC;
+                    second = g_mapRndMaze.scriptedSecondMarker;
                 } else {
                     second = g_mapRndMaze.models[MAZE_MARKER_SET][1];
                 }

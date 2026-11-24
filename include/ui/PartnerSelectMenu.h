@@ -6,6 +6,7 @@
 #include "common.h"
 #include <stddef.h>
 
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "ui/GridNavigation.h"
 #include "ui/UiSpriteState.h"
 #include "gamedata/SaveSlotTable.h"
@@ -17,6 +18,7 @@ struct ScriptProcess;
 struct RelativeDirectory;
 
 enum {
+    PARTNER_MENU_MODE_NONVISUAL = 1, /* starts the process without draw tasks */
     PARTNER_MENU_MODE_ITEM = 2,     /* PartnerSelectMenu::mode: picks the target of a healing item */
     PARTNER_MENU_COLUMNS = 4,
     PARTNER_MENU_SLOTS = 12
@@ -31,7 +33,10 @@ enum {
 };
 
 struct PartnerSelectMenu {
-    /* 0x000 */ u8 unk000[4];
+    PartnerSelectMenu() : helpFile(NULL) {}
+    static void *operator new(u32 size) throw() { return asdOperatorNew(size); }
+
+    /* 0x000 */ u32 process;
     /* 0x004 */ u8 mode;                    /* PARTNER_MENU_MODE_ITEM, else the plain partner change */
     /* 0x005 */ u8 unk005[3];
     /* 0x008 */ s32 state;
@@ -55,14 +60,18 @@ struct PartnerSelectMenu {
     /* 0x334 */ u32 itemId;                 /* item mode: the healing item being used */
     /* 0x338 */ u8 usable[PARTNER_MENU_SLOTS];          /* item mode: whether the item still works on each partner */
     /* 0x344 */ s32 slideDirection;
+    /* 0x348 */ u8 unk348[0x60];
 };
 typedef char PartnerSelectMenuLayoutCheck[offsetof(PartnerSelectMenu, list) == 0x260 &&
     offsetof(PartnerSelectMenu, panel) == 0x30 &&
     offsetof(PartnerSelectMenu, slots) == 0x2C4 && offsetof(PartnerSelectMenu, touchRegions) == 0x2F8 &&
     offsetof(PartnerSelectMenu, helpFile) == 0x314 && offsetof(PartnerSelectMenu, count) == 0x324 &&
-    offsetof(PartnerSelectMenu, itemId) == 0x334 && offsetof(PartnerSelectMenu, slideDirection) == 0x344 ? 1 : -1];
+    offsetof(PartnerSelectMenu, itemId) == 0x334 && offsetof(PartnerSelectMenu, slideDirection) == 0x344 &&
+    sizeof(PartnerSelectMenu) == 0x3A8 ? 1 : -1];
 
 extern "C" {
+/* Initializes the partner list and starts the menu in the selected mode. */
+void partnerMenuHandleSelectionInput(PartnerSelectMenu *menu, u32 mode);
 /* Starts the panel sprite's slide for direction `keyframe` (0-3: position keys 4-7 and the matching image key). */
 void partnerMenuStartPanelSlide(PartnerSelectMenu *menu, s32 keyframe, s32 image, u32 frame);
 /* Item mode: uses one of the item on the selected partner, then moves the cursor to another partner it works on. */

@@ -14,4 +14,7 @@ static __inline bool btlCommandPassesFilter(const BtlMainStateA *state, s32 inde
         !(state->entries[state->pendingCommands.commands[index].unitIndex].data.statusFlags & 0x11c0);
 }
 
+/* Appends a command to the pending commands (IV: FUN_0023c154). */
+extern "C" void btlAppendPendingCommand(BtlMainStateA *state, BtlPendingCommand command);
+
 #endif

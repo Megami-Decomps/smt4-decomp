@@ -164,7 +164,7 @@ void uiQuestCreate(void)
         if (questDataGetRecord(id) == NULL) {
             RosterFlags *flags = &reinterpret_cast<RosterView *>(gameFlagBlockGet())->flags[id];
             if (flags != NULL)
-                flags->known = 0;
+                flags->status.known = 0;
         }
     }
     uiQuestRebuildLists();

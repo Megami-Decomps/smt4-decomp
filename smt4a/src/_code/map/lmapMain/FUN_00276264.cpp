@@ -217,7 +217,7 @@ int sysClearCachedFlag(void);
 int table23FindRecordByKey(...);
 int gameFlagSetEligibleEntryFlagsAtThreshold(int);
 int countersAddSaturating(int, int);
-int FUN_0040ae70(...);
+int moriModelManagerEnsureScene(...);
 int resourceOwnerLoadNamed(...);
 int itemResetOverLimitStates(int);
 int FUN_004bc95c(...);
@@ -577,7 +577,7 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: moriModelContentIsLoaded. */
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
-/* Supplied declaration required: FUN_0040ae70. */
+/* Supplied declaration required: moriModelManagerEnsureScene. */
 extern int FUN_0040af60(unsigned int);
 /* Supplied declaration required: resourceOwnerLoadNamed. */
 extern int rosterGetLeaderId(void);
@@ -928,7 +928,7 @@ unsigned int FUN_00276264(void)
     resourceOwnerLoadNamed(puVar2[0x24db],temp_v27);
     temp_v8 = FUN_0040af60(puVar2[0x24db]);
     if (temp_v8 != 0) {
-      FUN_0040ae70(puVar2[0x24db],1);
+      moriModelManagerEnsureScene(puVar2[0x24db],1);
     }
     DAT_005f1623 = 0;
     mapSetDepartureIndex();

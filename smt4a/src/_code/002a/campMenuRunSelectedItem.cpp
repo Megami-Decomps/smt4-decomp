@@ -20,7 +20,7 @@ extern "C" {
 
 void campChangeState(s32 newState);
 void FUN_002a5cf4(void);
-void FUN_002e738c(s32 mode);
+void partnerMenuStart(s32 mode);
 void bgmRestart(u32 value);
 void campSetSpriteAnimationPreset(s32 mode, s32 animation, s32 imageKey, u32 restart);
 void FUN_0021b274(s32 mode, s32 image, u32 frame);
@@ -470,7 +470,7 @@ void campMenuRunSelectedItem(void)
         campChangeState(0x48);
         FUN_002a5cf4();
         hideNumericBanner();
-        FUN_002e738c(0);
+        partnerMenuStart(0);
         break;
     case 0x11:
         campSetSpriteAnimationPreset(2, 3, -1, 0);

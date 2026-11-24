@@ -47,7 +47,7 @@ s32 panelUpdateAnimatedScale(u32 job);
 s32 FUN_00108b0c(u32 job);
 s32 titleBackdropRender(u32 job);
 s32 titleCaptureHalfSizeSurfaceOnce(u32 job);
-s32 FUN_0010a03c(u32 job);
+s32 frameTexAdvanceEncounterFade(u32 job);
 s32 FUN_0010a110(u32 job);
 s32 titleCaptureReadySurfaceOnce(u32 job);
 s32 FUN_0010b2d0(u32 job);
@@ -114,7 +114,7 @@ void frameTexCreate(void)
     taskCreateDraw((const s8 *)"CAMPDR", 0xcc, 0, 0, FUN_00108b0c, NULL, (u32)g_frameTex, (void *)work->job);
     taskCreateDraw((const s8 *)"ENCEFFCL", 0x77, 0, 0, titleBackdropRender, NULL, (u32)g_frameTex, (void *)work->job);
     taskCreateDraw((const s8 *)"ENCEFFCR", 0xd5, 0, 0, titleCaptureHalfSizeSurfaceOnce, NULL, (u32)g_frameTex, (void *)work->job);
-    taskCreateDraw((const s8 *)"ENCEFFDL", 0x82, 0, 0, FUN_0010a03c, NULL, (u32)g_frameTex, (void *)work->job);
+    taskCreateDraw((const s8 *)"ENCEFFDL", 0x82, 0, 0, frameTexAdvanceEncounterFade, NULL, (u32)g_frameTex, (void *)work->job);
     taskCreateDraw((const s8 *)"ENCEFFDR", 0xe0, 0, 0, FUN_0010a110, NULL, (u32)g_frameTex, (void *)work->job);
     taskCreateDraw((const s8 *)"ENCEFFCL", 0x7e, 0, 0, titleCaptureReadySurfaceOnce, NULL, (u32)g_frameTex, (void *)work->job);
     taskCreateDraw((const s8 *)"ENCEFFCR", 0xdc, 0, 0, FUN_0010b2d0, NULL, (u32)g_frameTex, (void *)work->job);

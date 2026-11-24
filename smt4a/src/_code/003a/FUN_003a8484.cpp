@@ -1,4 +1,4 @@
-/* NON_MATCHING: candidate mask load grouping, value comparison, and saved registers differ. */
+/* NON_MATCHING: the second mask test swaps AND operands and the exclusion mask loads as a pair. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -7,15 +7,10 @@
 
 extern "C" {
 
-// Test whether an eligible combatant has a positive value in the selected candidate column.
+/* Tests whether an eligible combatant has a positive value in the selected property. */
 u32 FUN_003a8484(void)
 {
-    // These words occupy a halfword-aligned union in the shared entry layout.
-    struct CandidateValuesView {
-        u8 unk000[0x74];
-        s32 values[12];
-    };
-    u32 selector = scrGetArg(0);
+    s32 selector = scrGetArg(0);
     s32 column = 0;
     if (selector == 0) {
         column = 7;
@@ -28,10 +23,10 @@ u32 FUN_003a8484(void)
     }
     for (s32 index = 0; index < 109; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-        if ((entry->flags & g_btlCandidateMasks.unavailable) &&
+        if ((g_btlCandidateMasks.unavailable & entry->flags) &&
             (g_btlCandidateMasks.required & entry->flags) &&
             !(g_btlCandidateMasks.excluded & entry->flags) &&
-            ((CandidateValuesView *)entry)->values[column] >= 1) {
+            entry->properties[column] >= 1) {
             scrSetResult(1);
             return 1;
         }
@@ -39,4 +34,4 @@ u32 FUN_003a8484(void)
     scrSetResult(0);
     return 1;
 }
-}
+} /* extern "C" */

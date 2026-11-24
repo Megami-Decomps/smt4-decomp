@@ -6,17 +6,20 @@
 
 namespace nn {
 namespace applet {
+/* The per-screen record in a display capture request. Keep the existing constructor symbol
+ * until it can be renamed along with the retail object. */
 class SleepCallback {
 public:
     SleepCallback();
-    /* 0x00 */ SleepCallback* previous;
-    /* 0x04 */ SleepCallback* next;
-    /* 0x08 */ void (*notify)();
+    /* 0x00 */ u32 leftBufferOffset;
+    /* 0x04 */ u32 rightBufferOffset;
+    /* 0x08 */ u32 pixelFormat;
 };
-typedef char SleepCallbackLayoutCheck[
-    sizeof(SleepCallback) == 0x0c && offsetof(SleepCallback, previous) == 0 &&
-    offsetof(SleepCallback, next) == 4 && offsetof(SleepCallback, notify) == 8 ? 1 : -1];
-}
-}
+typedef SleepCallback DisplayCaptureScreen;
+typedef char DisplayCaptureScreenLayoutCheck[
+    sizeof(DisplayCaptureScreen) == 0x0c && offsetof(DisplayCaptureScreen, rightBufferOffset) == 4 &&
+    offsetof(DisplayCaptureScreen, pixelFormat) == 8 ? 1 : -1];
+} /* namespace applet */
+} /* namespace nn */
 
 #endif

@@ -1,4 +1,3 @@
-/* NON_MATCHING: registers, range tests and unlock duplication match; retail has a `nop {0}` between the unlock failure test (`lsrs r1, r0, #31`) and its branch in both arms, with no source construct found that yields it. */
 #include "classes/AllocatorState.h"
 #include "nn/Result.h"
 #include "nn/svc.h"
@@ -15,7 +14,7 @@ void asdMemoryFreeRegion(void *memory);
 /* Releases the allocator lock (a kernel mutex), reporting a failed release. */
 static __inline void allocatorUnlock(AllocatorStateA &state)
 {
-    s32 result = nn::svc::ReleaseMutex(*state.mutex);
+    s32 result = svcReleaseMutex(*state.mutex);
     bool failed = nnResultIsFailure(result);
     if (failed) {
         resultHandleFailure(result, failed);

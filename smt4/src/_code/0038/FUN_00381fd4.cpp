@@ -1,4 +1,4 @@
-/* NON_MATCHING: the anchor loop keeps the table entry in r1 in retail, the first offset loop adds y with its operands in other registers, and retail predicates the state (moveq 14/movne 3) ahead of one shared state/frame store. */
+/* NON_MATCHING: retail predicates the atlas lookup argument, saves the table entry in r1, and places the y-add operands in different VFP registers. */
 #include "ui/SpriteAnchorGroup.h"
 #include "script/scrScriptProcess.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -37,16 +37,19 @@ void FUN_00381fd4(SpriteAnchorGroupWork *work)
         scriptProcessSetMode(work->firstProcess, 2);
         work->secondProcess = scrScriptProcessCreate(work->secondBuffer, work->secondArguments);
         scriptProcessSetMode(work->secondProcess, 2);
-        if (work->mode != 1 && work->mode != 2) {
+        bool alternateMode = work->mode == 1 || work->mode == 2;
+        if (alternateMode) {
+            work->state = 14;
+            work->frame = 0;
+        } else {
             work->state = 3;
             work->frame = 0;
+        }
+        if (!alternateMode) {
             if (pairedAvailabilityGetState(0) == 3)
                 titleSetSlotValueState2(0, 10);
             if (pairedAvailabilityGetState(1) == 3)
                 titleSetSlotValueState2(1, 10);
-        } else {
-            work->state = 14;
-            work->frame = 0;
         }
     }
 }

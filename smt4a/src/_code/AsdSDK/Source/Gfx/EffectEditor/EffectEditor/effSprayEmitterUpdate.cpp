@@ -48,7 +48,7 @@ void effComputeParticleEmission(ParticleEmissionState *state, const ParticleEmis
 void FUN_002fe2e8(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_0027134c(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_00321e98(ParticleEmissionState *emitter, SpiralParticle *particle);
-void FUN_00321d7c(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous);
+void effSampleParticleTransform(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous);
 }
 
 /* Updates a spray emitter: emits new particles from a random point of the sphere around its origin, moving out
@@ -144,7 +144,7 @@ extern "C" void effSprayEmitterUpdate(ParticleEmissionState *emitter)
                 particle->position = g_vectorScratch.first.vector;
                 particle->frame = (s32)age;
             }
-            FUN_00321d7c(reinterpret_cast<ParticleTransformSample *>(particle),
+            effSampleParticleTransform(reinterpret_cast<ParticleTransformSample *>(particle),
                          reinterpret_cast<ParticleTransformCurves *>(definition), particle->frame,
                          reinterpret_cast<const EffectColor *>(&previous));
             particle->scale *= motion->scale;
@@ -175,7 +175,7 @@ extern "C" void effSprayEmitterUpdate(ParticleEmissionState *emitter)
                     motion->direction[2] * travel, zero);
             vec4Add(&g_vectorScratch.first.vector, &g_vectorScratch.first.vector, &g_vectorScratch.second.vector);
             particle->position = g_vectorScratch.first.vector;
-            FUN_00321d7c(reinterpret_cast<ParticleTransformSample *>(particle),
+            effSampleParticleTransform(reinterpret_cast<ParticleTransformSample *>(particle),
                          reinterpret_cast<ParticleTransformCurves *>(definition), frame,
                          reinterpret_cast<const EffectColor *>(&previous));
             particle->scale *= motion->scale;

@@ -22,7 +22,7 @@ typedef struct {
 
 extern unsigned char LAB_001a2a68; /* 0x1a2a68 */
 extern unsigned int DAT_005891bc; /* 0x5891bc */
-extern unsigned int DAT_0061a60c; /* 0x61a60c */
+extern unsigned int g_appletDisplayCaptureRequest; /* 0x61a60c */
 extern unsigned char DAT_0061a610; /* 0x61a610 */
 extern unsigned int DAT_0061a61c; /* 0x61a61c */
 extern unsigned int DAT_0061a628; /* 0x61a628 */
@@ -51,10 +51,10 @@ unsigned int FUN_0015a964(unsigned int param_1)
   DAT_0061a61c = temp_v1;
   DAT_0061a628 = temp_v2;
   DAT_0061a610 = temp_v0 != iStack_2c;
-  FUN_001a30ec(&DAT_0061a60c);
-  FUN_001a3338(param_1,0x10,&DAT_0061a60c,0x20,DAT_005891bc);
+  FUN_001a30ec(&g_appletDisplayCaptureRequest);
+  FUN_001a3338(param_1,0x10,&g_appletDisplayCaptureRequest,0x20,DAT_005891bc);
   FUN_001a2e74(param_1,0);
-  FUN_001a3220(&DAT_0061a60c,0x20);
+  FUN_001a3220(&g_appletDisplayCaptureRequest,0x20);
   return 0;
 }
 

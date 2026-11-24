@@ -44,7 +44,7 @@ BtlSide* btlMainFindEntryByListedId(void* main, s32 index);
 Vec3 btlGetCombatantDrawPosition(void* main, s32 index, s32 arg);
 s16 btlUiPositionRequestAdd(BtlUiA *ui, s32 a, s32 b, f32 x, f32 y, f32 z);
 s16 btlUiAddPositionedMarker(BtlUiA *ui, s32 id, s32 a, s32 x, s32 y);
-s32 FUN_004aa1e8(BtlUiA *ui, s32 handle);
+s32 btlUiPositionMarkerIsBusy(BtlUiA *ui, s32 handle);
 
 #define MASK64(offset) (*reinterpret_cast<u64*>(g_btlActionReflect + (offset)))
 
@@ -131,7 +131,7 @@ void btlMarkerStepShow(u32 unused, MarkerStep* step)
         step->phase = 1;
         break;
     case 1:
-        if (FUN_004aa1e8(g_btlUiBlock, step->handle) == 0) {
+        if (btlUiPositionMarkerIsBusy(g_btlUiBlock, step->handle) == 0) {
             step->done = 0;
             return;
         }

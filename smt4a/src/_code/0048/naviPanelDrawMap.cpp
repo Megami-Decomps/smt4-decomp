@@ -32,9 +32,9 @@ int listGetAdjacentEntryId(...);
 int uiDrawSpriteWithOptionalVertexColors(...);
 int lmapSceneGetObj(unsigned char *);
 int naviMainGetRequestedMap(...);
-int FUN_0049325c(...);
+int uiDrawNativeSizeTableSprite(...);
 int words2Copy(int, float *);
-int FUN_0049368c(...);
+int uiDrawSizedTextureAtRegionEnd(...);
 int NaviMain_GetCurrentMap(...);
 int VectorSignedToFloat(...);
 
@@ -80,9 +80,9 @@ extern unsigned int naviGetActiveStateValue(void);
 extern unsigned int naviMainSelectPair(unsigned char *);
 /* Supplied declaration required: naviMainGetRequestedMap. */
 extern unsigned int naviMainGetRequestedSection(unsigned char *);
-/* Supplied declaration required: FUN_0049325c. */
+/* Supplied declaration required: uiDrawNativeSizeTableSprite. */
 /* Supplied declaration required: words2Copy. */
-/* Supplied declaration required: FUN_0049368c. */
+/* Supplied declaration required: uiDrawSizedTextureAtRegionEnd. */
 extern unsigned int textMeasureOnLayer(int, unsigned int);
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
 
@@ -207,19 +207,19 @@ void naviPanelDrawMap(int param_1)
   }
   temp_v2 = packNibblesAndByte(6, 1, 0);
   renderStackPushIndexed(g_renderCtx,6,temp_v2);
-  FUN_0049368c(param_1 + 0x4d0,4000,0,0,DAT_00587f20,1);
-  FUN_0049368c(param_1 + 0x4d0,0xfa1,0,0,DAT_00587f20,1);
-  FUN_0049368c(param_1 + 0x4d0,0xfa2,0,0,DAT_00587f20,1);
-  FUN_0049368c(param_1 + 0x4d0,0xfa3,0,0,DAT_00587f20,1);
+  uiDrawSizedTextureAtRegionEnd(param_1 + 0x4d0,4000,0,0,DAT_00587f20,1);
+  uiDrawSizedTextureAtRegionEnd(param_1 + 0x4d0,0xfa1,0,0,DAT_00587f20,1);
+  uiDrawSizedTextureAtRegionEnd(param_1 + 0x4d0,0xfa2,0,0,DAT_00587f20,1);
+  uiDrawSizedTextureAtRegionEnd(param_1 + 0x4d0,0xfa3,0,0,DAT_00587f20,1);
   renderCtxPopState(g_renderCtx,6);
   temp_v9 = 0xfa5;
   do {
-    FUN_0049368c(param_1 + 0x4d0,temp_v9,0,0,DAT_00587f20,1);
+    uiDrawSizedTextureAtRegionEnd(param_1 + 0x4d0,temp_v9,0,0,DAT_00587f20,1);
     temp_v9 = temp_v9 + 1;
   } while (temp_v9 < 0xfa9);
   temp_v9 = 0xfa9;
   do {
-    FUN_0049368c(param_1 + 0x4d0,temp_v9,0,0,DAT_00587f20,1);
+    uiDrawSizedTextureAtRegionEnd(param_1 + 0x4d0,temp_v9,0,0,DAT_00587f20,1);
     temp_v9 = temp_v9 + 1;
   } while (temp_v9 < 0xfad);
   if ((*(unsigned int *)(param_1 + 0x10) & 0x1000) != 0) {
@@ -328,13 +328,13 @@ LAB_0048ae60:
           *(unsigned char *)(temp_v9 + 0x2062c) = 0;
         }
         if (*(char *)(temp_v9 + 0x2062c) != '\0') {
-          FUN_0049325c(temp_v5,temp_v12,temp_v10,DAT_00587f20,1);
+          uiDrawNativeSizeTableSprite(temp_v5,temp_v12,temp_v10,DAT_00587f20,1);
         }
         else {
           uiDrawSpriteWithOptionalVertexColors(temp_v5,temp_v12,temp_v10,DAT_00587f20,0x80,1);
         }
         if (*(int *)(temp_v1 + 0x15b8) != 0) {
-          FUN_0049325c(0x1244,temp_v12,temp_v10,DAT_00587f20,1);
+          uiDrawNativeSizeTableSprite(0x1244,temp_v12,temp_v10,DAT_00587f20,1);
         }
         temp_v8 = temp_v8 + 1;
       } while ((int)temp_v8 < 6);
@@ -365,7 +365,7 @@ LAB_0048ae60:
       temp_v13 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v13 = temp_v13 + temp_v16;
       if ((g_gameState.f005f1a5e == '\0') || (temp_v5 = FUN_00384cf4(), temp_v5 != 0)) {
-        FUN_0049325c(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,1);
+        uiDrawNativeSizeTableSprite(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,1);
       }
       else {
         uiDrawSpriteWithOptionalVertexColors(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,0x80,1);
@@ -398,7 +398,7 @@ LAB_0048ae60:
     temp_v13 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v13 = temp_v13 + temp_v16;
     if ((g_gameState.f005f1a5e == '\0') || (temp_v5 = FUN_00384cf4(), temp_v5 != 0)) {
-      FUN_0049325c(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,1);
+      uiDrawNativeSizeTableSprite(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,1);
     }
     else {
       uiDrawSpriteWithOptionalVertexColors(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,0x80,1);
@@ -413,7 +413,7 @@ LAB_0048ae60:
     temp_v11 = temp_v11 + temp_v15;
     temp_v3 = vec2GetYInt(param_1 + 0xd58);
     temp_v13 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_0049325c(temp_v2,(int)temp_v11,(int)(temp_v13 + temp_v16),DAT_00587f20,1);
+    uiDrawNativeSizeTableSprite(temp_v2,(int)temp_v11,(int)(temp_v13 + temp_v16),DAT_00587f20,1);
     temp_v9 = FUN_00325064();
     if (temp_v9 == 0) {
       temp_v9 = 0x1235;
@@ -431,9 +431,9 @@ LAB_0048ae60:
     temp_v2 = vec2GetYInt(param_1 + 0xefc);
     temp_v13 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v13 = temp_v13 + temp_v16;
-    FUN_0049325c(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,1);
+    uiDrawNativeSizeTableSprite(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,1);
     if (*(int *)(temp_v1 + 0x15b8) != 0) {
-      FUN_0049325c(0x1244,(int)temp_v11,(int)temp_v13,DAT_00587f20,1);
+      uiDrawNativeSizeTableSprite(0x1244,(int)temp_v11,(int)temp_v13,DAT_00587f20,1);
     }
   }
   renderCtxPopState(g_renderCtx,3);

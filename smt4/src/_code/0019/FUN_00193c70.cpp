@@ -28,7 +28,7 @@ void wordTripleClear(u8 *state);
 void effCopyTransformColorKeys(EffectKeyTrack *destination, const EffectTransformCopyState *source);
 f32 effRandomSignedValue(s32 mode, s32 range, s32 positive);
 void colorKeyTrackAdvanceRgb(EffectKeyTrack *effect, const EffectTransformCopyState *source);
-void FUN_001dd974(EffectKeyTrack *effect, const EffectTransformCopyState *source);
+void effectAlphaTrackAdvance(EffectKeyTrack *effect, const EffectTransformCopyState *source);
 void effScalarKeyLegacyAdvance(EffectKeyTrack *effect, const EffectTransformCopyState *source);
 void effScalarTrackAdvance(EffectKeyTrack *effect, const EffectTransformCopyState *source);
 void effScalarStateAdvance(EffectKeyTrack *effect, const EffectTransformCopyState *source);
@@ -110,7 +110,7 @@ void FUN_00193c70(EffectKeyTrack *effect, const EffectTransformCopyState *source
         }
     }
     colorKeyTrackAdvanceRgb(effect, source);
-    FUN_001dd974(effect, source);
+    effectAlphaTrackAdvance(effect, source);
     effScalarKeyLegacyAdvance(effect, source);
     effScalarTrackAdvance(effect, source);
     effScalarStateAdvance(effect, source);

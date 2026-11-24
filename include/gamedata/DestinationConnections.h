@@ -10,15 +10,15 @@ struct DestinationConnection {
     /* 0x08 */ s32 count;
 };
 struct DestinationConnectionGroups {
-    DestinationConnection single;
-    DestinationConnection multiple[59];
+    /* The body record, followed by the 59 leg records. */
+    DestinationConnection records[60];
 };
 typedef char DestinationConnectionLayout[sizeof(DestinationConnection) == 12 &&
     offsetof(DestinationConnection, sources) == 4 ? 1 : -1];
 typedef char DestinationConnectionGroupsLayout[
     offsetof(DestinationConnection, destination) == 0 &&
     offsetof(DestinationConnection, count) == 8 &&
-    offsetof(DestinationConnectionGroups, single) == 0 &&
-    offsetof(DestinationConnectionGroups, multiple) == 12 &&
+    offsetof(DestinationConnectionGroups, records[0]) == 0 &&
+    offsetof(DestinationConnectionGroups, records[1]) == 12 &&
     sizeof(DestinationConnectionGroups) == 0x2D0 ? 1 : -1];
 #endif

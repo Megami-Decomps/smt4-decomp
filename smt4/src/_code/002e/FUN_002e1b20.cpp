@@ -2,13 +2,11 @@
 
 extern "C" {
 
-int FUN_002e1a00(void);
-
-
+/* Starts the inbox worker if a process exists. */
 void FUN_002e1b20(void)
 {
     if (g_cecProcess != NULL) {
-        FUN_002e1a00();
+        cecProcessInitializeAndStart(g_cecProcess);
         return;
     }
 }

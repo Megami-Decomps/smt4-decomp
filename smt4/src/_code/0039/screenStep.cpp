@@ -16,10 +16,10 @@ typedef struct Screen0039bc28 {
     /* 0x960 */ u8 timer[1];
 } Screen0039bc28;
 
-void FUN_00233240(u8 *panel, s32 value);
+void uiSceneApplySpritePreset(u8 *panel, s32 value);
 void uiSpriteSetImageKeyframe(u8 *sprite, s32 keyframe, s32 flag);
 void uiSpriteSetKeyframe(u8 *timer, s32 a, s32 b); // declcheck: local (the shared declaration does not compile here or changes this unit)
-void FUN_0039c3fc(Screen0039bc28 *screen);
+void mapNaviDisplayAdvanceTransition(Screen0039bc28 *screen);
 
 /* Screen step: step 0 sets up its panel, sprite and timer and moves to step 1; step 1 updates until flag 8 is set, then moves to step 2. */
 void screenStep(Screen0039bc28 *screen)
@@ -29,8 +29,8 @@ void screenStep(Screen0039bc28 *screen)
     if (screen->step == 0) {
         screen->unk05b = 0;
         flagsSetBits(&screen->flags, 0x1008);
-        FUN_00233240(screen->panel, 0);
-        FUN_00233240(screen->panel, 1);
+        uiSceneApplySpritePreset(screen->panel, 0);
+        uiSceneApplySpritePreset(screen->panel, 1);
         uiSpriteSetImageKeyframe(screen->sprite, 1, 0);
         uiSpriteSetKeyframe(screen->timer, 1, 0);
         next = 1;
@@ -38,7 +38,7 @@ void screenStep(Screen0039bc28 *screen)
         if (screen->step != 1) {
             return;
         }
-        FUN_0039c3fc(screen);
+        mapNaviDisplayAdvanceTransition(screen);
         if ((screen->flags & 8) != 0) {
             return;
         }

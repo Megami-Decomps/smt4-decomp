@@ -45,8 +45,7 @@ public:
         while (i < slotCount) {
             tableA[i] = 0;
             tableB[i] = 0;
-            pairs[i].first = 0;
-            pairs[i].second = 0;
+            pairs[i] = Obj55be80Pair();
             tableC[i] = 0;
             i++;
         }

@@ -19,7 +19,7 @@ extern "C" u32 fsUnmountByName(const char *path)
     };
     struct TitleFileSystemView { u8 unk00[8]; FileSystem *current; };
     extern MountRecord DAT_0062d410[32];
-    extern TitleFileSystemView DAT_00589398;
+    extern TitleFileSystemView g_titleContentFileSystem;
     u64 key = mountKeyFromName(reinterpret_cast<const s8 *>(path));
     for (u32 index = 0; index < 32; ++index) {
         MountRecord *mount = &DAT_0062d410[index];
@@ -32,8 +32,8 @@ extern "C" u32 fsUnmountByName(const char *path)
                 return 0xc8804465;
             if (!borrowed) {
                 fileSystem->vtable->release(fileSystem);
-                if (fileSystem == DAT_00589398.current)
-                    DAT_00589398.current = NULL;
+                if (fileSystem == g_titleContentFileSystem.current)
+                    g_titleContentFileSystem.current = NULL;
             }
             return 0;
         }

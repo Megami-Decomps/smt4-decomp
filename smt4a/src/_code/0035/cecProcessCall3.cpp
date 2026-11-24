@@ -2,8 +2,6 @@
 
 extern "C" {
 
-extern void cecProcessInitializeAndStart(CecProcessA *process);
-
 void cecProcessCall3(void)
 {
     if (g_cecProcess != NULL) {

@@ -15,11 +15,11 @@ int modelPlayClip(...);
 int moriModelContentSetRequestFirst(...);
 int moriModelContentSetRequestSecond(...);
 int moriModelContentCreateBody(...);
-int FUN_0040a9fc(...);
+int moriModelContentLoadResourceFromFile(...);
 int moriModelContentLoadBody(...);
 int FUN_0040ab7c(...);
 int moriModelContentIsLoaded(...);
-int FUN_0040ab9c(...);
+int moriModelContentBuildFromLoadedData(...);
 int handleRegistryRegisterObject(...);
 int FUN_00416168(...);
 
@@ -51,11 +51,11 @@ extern int mapTableGetValue(int);
 /* Supplied declaration required: moriModelContentSetRequestFirst. */
 /* Supplied declaration required: moriModelContentSetRequestSecond. */
 /* Supplied declaration required: moriModelContentCreateBody. */
-/* Supplied declaration required: FUN_0040a9fc. */
+/* Supplied declaration required: moriModelContentLoadResourceFromFile. */
 /* Supplied declaration required: moriModelContentLoadBody. */
 /* Supplied declaration required: FUN_0040ab7c. */
 /* Supplied declaration required: moriModelContentIsLoaded. */
-/* Supplied declaration required: FUN_0040ab9c. */
+/* Supplied declaration required: moriModelContentBuildFromLoadedData. */
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_00416168. */
@@ -99,8 +99,8 @@ unsigned int FUN_002d06f8(void)
         return 0;
       }
       FUN_0040ab7c(*(unsigned int *)(g_mapDepartWork + 0xc),2);
-      FUN_0040a9fc(*(unsigned int *)(g_mapDepartWork + 0xc));
-      FUN_0040ab9c(*(unsigned int *)(g_mapDepartWork + 0x14),
+      moriModelContentLoadResourceFromFile(*(unsigned int *)(g_mapDepartWork + 0xc));
+      moriModelContentBuildFromLoadedData(*(unsigned int *)(g_mapDepartWork + 0x14),
                    *(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 0xc));
       FUN_00416168(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 0xc),
                    *(unsigned int *)(*(int *)(g_mapDepartWork + 0x14) + 0xc));
@@ -314,8 +314,8 @@ LAB_002d0a48:
     FUN_0040ab7c(*(unsigned int *)(g_mapDepartWork + 0xc),2);
     moriModelContentSetRequestFirst(*(unsigned int *)(g_mapDepartWork + 0xc),0x10000);
     moriModelContentSetRequestSecond(*(unsigned int *)(g_mapDepartWork + 0xc),0x20000);
-    FUN_0040a9fc(*(unsigned int *)(g_mapDepartWork + 0xc));
-    FUN_0040ab9c(*(unsigned int *)(g_mapDepartWork + 0x14),
+    moriModelContentLoadResourceFromFile(*(unsigned int *)(g_mapDepartWork + 0xc));
+    moriModelContentBuildFromLoadedData(*(unsigned int *)(g_mapDepartWork + 0x14),
                  *(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 0xc));
     FUN_00416168(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 0xc),
                  *(unsigned int *)(*(int *)(g_mapDepartWork + 0x14) + 0xc));

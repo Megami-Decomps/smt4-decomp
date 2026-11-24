@@ -14,7 +14,7 @@ int btlEffectFindSlotId(...);
 int FUN_00227fac(void);
 int FUN_002280b0(...);
 int FUN_0023c0d0(...);
-int FUN_0023c154(...);
+int btlAppendPendingCommand(...);
 int btlUnitClearMatchingPairs(...);
 int FUN_002551ac(...);
 int btlQueueSkillReflectActions(...);
@@ -34,7 +34,7 @@ int frameRangeExtend(...);
 int FUN_00229a3c(...);
 int btlTargetSetFlag10(...);
 int btlReflectInitKind9(...);
-int FUN_00246080(...);
+int btlReflectQueueTargetEntryAction(...);
 int btlEntryBuildSummary(...);
 int btlQueueKeyedScalarReflectAction(...);
 int btlAdjustPropertyClamped(...);
@@ -145,13 +145,13 @@ extern int FUN_00228808(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00229a3c. */
 /* Supplied declaration required: btlTargetSetFlag10. */
 /* Supplied declaration required: FUN_0023c0d0. */
-/* Supplied declaration required: FUN_0023c154. */
+/* Supplied declaration required: btlAppendPendingCommand. */
 /* Supplied declaration required: btlUnitClearMatchingPairs. */
 extern int FUN_0023c684(unsigned int);
 extern int btlQueueParamLimitForKind(void);
 /* Supplied declaration required: btlReflectInitKind9. */
 extern int mapCategoryToDestinationGroup(void);
-/* Supplied declaration required: FUN_00246080. */
+/* Supplied declaration required: btlReflectQueueTargetEntryAction. */
 /* Supplied declaration required: btlEntryBuildSummary. */
 extern int btlMainFindActiveEntry(int, int);
 /* Supplied declaration required: btlQueueKeyedScalarReflectAction. */
@@ -576,7 +576,7 @@ LAB_003cd124:
         btlAdjustPropertyClamped(temp_v40,1,1,0);
         temp_v5 = 4;
         temp_v7 = temp_v7 + temp_v8;
-        FUN_00246080(temp_v7,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v63 * 4,4);
+        btlReflectQueueTargetEntryAction(temp_v7,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v63 * 4,4);
         temp_v8 = btlScriptUnitIsIncapacitated(*param_1);
         if (temp_v8 != 0) {
           temp_v25 = 0x10001ea;
@@ -624,7 +624,7 @@ LAB_003cd124:
       btlAdjustPropertyClamped(param_8,1,1,0);
       temp_v5 = 4;
       temp_v8 = temp_v8 + temp_v7 * temp_v14;
-      FUN_00246080(temp_v8,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v43 * 4,4);
+      btlReflectQueueTargetEntryAction(temp_v8,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v43 * 4,4);
       temp_v7 = btlScriptUnitIsIncapacitated(*param_1);
       if (temp_v7 != 0) {
         temp_v5 = 1;
@@ -942,7 +942,7 @@ LAB_003cd944:
                 }
                 temp_v7 = FUN_0028299c(g_btlAux);
                 temp_v4 = temp_v5 + temp_v7 * (param_11 + temp_v35);
-                FUN_00246080(temp_v4,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v43 * 4,3);
+                btlReflectQueueTargetEntryAction(temp_v4,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v43 * 4,3);
                 if ((int)temp_v4 <= (int)param_2[7]) {
                   temp_v4 = param_2[7];
                 }
@@ -1208,7 +1208,7 @@ LAB_003ce96c:
           (((*puVar11 & 2) == 0 || (temp_v5 = questCurrentIsFlagged(), temp_v5 == 0)))) &&
          (temp_v5 = param_8, btlRollPassiveSkill(), temp_v5 != 0)) {
         temp_v7 = *(int *)(*param_1 + 0x1e98);
-        FUN_0023c154(*param_1,4,(int)*(short *)(temp_v7 + param_8 * 0x114 + 0x60),
+        btlAppendPendingCommand(*param_1,4,(int)*(short *)(temp_v7 + param_8 * 0x114 + 0x60),
                      (int)*(short *)(temp_v7 + temp_v8),temp_v5);
       }
     }

@@ -74,7 +74,7 @@ void naviDrawLocationMarkers(NaviMapDrawView *screen);
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 state); // declcheck: local (the shared declaration takes Apocalypse's RenderCtxA)
 void renderCtxPopState(RenderCtx *context, s32 stack); // declcheck: local (the shared declaration takes Apocalypse's RenderCtxA)
 u8 mathHeadingToDirectionCode(NaviMapDrawView *screen, f32 angle);
-void FUN_00231bcc(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth, u32 mode);
+void uiDrawSizedTextureAtRegionEnd(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth, u32 mode);
 
 /* Draws the navigation map: rescrolls it and refreshes its layers when the player has moved or something is
  * marked dirty, draws the events and location markers, then the player's marker (the facing of the view and of
@@ -182,15 +182,15 @@ void naviMapDraw(NaviMapDrawView *screen)
 
         u8 direction = mathHeadingToDirectionCode(screen, screen->playerHeading);
         if (block->layout == NAVI_LAYOUT_FULL) {
-            FUN_00231bcc(&screen->region, direction + 0xBC1, (s32)markerX, (s32)markerY, NAVI_DRAW_LAYER, 1);
+            uiDrawSizedTextureAtRegionEnd(&screen->region, direction + 0xBC1, (s32)markerX, (s32)markerY, NAVI_DRAW_LAYER, 1);
         } else {
-            FUN_00231bcc(&screen->region, direction + 0xBD5, (s32)markerX, (s32)markerY, NAVI_DRAW_LAYER, 1);
+            uiDrawSizedTextureAtRegionEnd(&screen->region, direction + 0xBD5, (s32)markerX, (s32)markerY, NAVI_DRAW_LAYER, 1);
         }
         direction = mathHeadingToDirectionCode(screen, screen->viewHeading);
         if (block->layout == NAVI_LAYOUT_FULL) {
-            FUN_00231bcc(&screen->region, direction + 0xBB9, (s32)markerX, (s32)markerY, NAVI_DRAW_LAYER, 1);
+            uiDrawSizedTextureAtRegionEnd(&screen->region, direction + 0xBB9, (s32)markerX, (s32)markerY, NAVI_DRAW_LAYER, 1);
         } else {
-            FUN_00231bcc(&screen->region, direction + 0xBCD, (s32)markerX, (s32)markerY, NAVI_DRAW_LAYER, 1);
+            uiDrawSizedTextureAtRegionEnd(&screen->region, direction + 0xBCD, (s32)markerX, (s32)markerY, NAVI_DRAW_LAYER, 1);
         }
         renderCtxPopState(g_titleScene, 3);
     }

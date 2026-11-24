@@ -106,7 +106,7 @@ void qcCtrlStart(Obj5333c0 *scene, s32 kind, s32 mode, s32 frozen)
         Obj557c48 *registry = g_handleRegistry;
         resourceOwnerLoadNamed(registry, path);
         if (FUN_0040af60((LockedObj *)registry)) {
-            FUN_0040ae70(registry, 1);
+            moriModelManagerEnsureScene(registry, 1);
         }
     }
 

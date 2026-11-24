@@ -7,7 +7,7 @@ extern "C" {
 int qsort(...);
 int asdMemoryAlloc(...);
 int FUN_001653a0(...);
-int FUN_001655fc(...);
+int asdFontDrawFormattedAt(...);
 int asdMemFree(void);
 int sysMemClear(...);
 int rt_memclr(void);
@@ -40,7 +40,7 @@ extern int DAT_005b4040; /* 0x5b4040 */
 extern int slotIsActive(unsigned int);
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: FUN_001653a0. */
-/* Supplied declaration required: FUN_001655fc. */
+/* Supplied declaration required: asdFontDrawFormattedAt. */
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: sysMemClear. */
@@ -370,10 +370,10 @@ LAB_0014ed64:
                     (temp_v18 + 0x100,temp_v5,temp_v18 + 0x205,temp_v19 + 1,0xff);
           temp_v1 = VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v14 = VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001655fc(temp_v14,temp_v1,"%08x",DAT_005b4030[9] + DAT_005b4030[8]);
+          asdFontDrawFormattedAt(temp_v14,temp_v1,"%08x",DAT_005b4030[9] + DAT_005b4030[8]);
           temp_v1 = VectorSignedToFloat(temp_v10 - 0x2f,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v14 = VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001655fc(temp_v14,temp_v1,"x%08x",temp_v0);
+          asdFontDrawFormattedAt(temp_v14,temp_v1,"x%08x",temp_v0);
           temp_v0 = 0;
           temp_v8 = *DAT_005b4030;
           while (temp_v8 != 0) {
@@ -388,20 +388,20 @@ LAB_0014ed64:
           temp_v15 = (double)(temp_v13 * 0.0009765625f * 0.0009765625f);
           temp_v1 = VectorSignedToFloat(temp_v10 - 0x23,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v14 = VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001655fc(temp_v14,temp_v1,"%.4fMB",temp_v0,temp_v15);
+          asdFontDrawFormattedAt(temp_v14,temp_v1,"%.4fMB",temp_v0,temp_v15);
           temp_v1 = VectorSignedToFloat(temp_v10 - 0x17,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v14 = VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001655fc(temp_v14,temp_v1,"%08d",DAT_005b4030[6]);
+          asdFontDrawFormattedAt(temp_v14,temp_v1,"%08d",DAT_005b4030[6]);
           if (temp_v6 != 0) {
             temp_v2 = *(unsigned short *)(temp_v6 - 0x10) - 1;
             temp_v1 = VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v14 = VectorSignedToFloat(temp_v9 + 0x155,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_001655fc(temp_v14,temp_v1,"A x%08x",
+            asdFontDrawFormattedAt(temp_v14,temp_v1,"A x%08x",
                          (((unsigned int)*(unsigned short *)(temp_v6 - 0x10) - ((temp_v6 + 0x2cU) & temp_v2)) & temp_v2) +
                          temp_v6 + 0x2c,temp_v15);
             temp_v1 = VectorSignedToFloat(temp_v10 - 0x2f,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v14 = VectorSignedToFloat(temp_v9 + 0x155,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_001655fc(temp_v14,temp_v1,"S x%08x",*(unsigned int *)(temp_v6 - 0x14));
+            asdFontDrawFormattedAt(temp_v14,temp_v1,"S x%08x",*(unsigned int *)(temp_v6 - 0x14));
           }
           if (temp_v20 != 0) {
             asdMemFree();

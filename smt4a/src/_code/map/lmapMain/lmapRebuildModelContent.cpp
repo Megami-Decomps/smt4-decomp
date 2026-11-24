@@ -12,7 +12,7 @@ void FUN_003ca5a4(void);
 
 static inline void linkModelContent(MoriModelContent *base, MoriModelContent *content)
 {
-    FUN_0040ab9c(base, content->resource);
+    moriModelContentBuildFromLoadedData(base, content->resource);
 }
 
 // Rebuilds the map's model content from the pending request and links it to the base content.
@@ -28,7 +28,7 @@ void lmapRebuildModelContent(void)
         state->model = static_cast<MoriModelContent *>(mem);
         moriModelContentSetRequestFirst(state->model, 0x10000);
         moriModelContentSetRequestSecond(state->model, 0x20000);
-        FUN_0040a9a0(state->model, pending);
+        moriModelContentLoadResourceById(state->model, pending);
         linkModelContent(state->baseModel, state->model);
         FUN_00416168(state->model->resource, state->baseModel->resource);
         moriModelContentCreateBinding(state->model);

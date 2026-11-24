@@ -15,7 +15,7 @@ struct GameOverBattleWorkA {
 extern "C" {
 extern BtlGameOverGlobalsA g_btlGameOver;
 s32 asdProcessGetFrames(u32 job);
-s32 FUN_003e6f50(BtlGameOverA *state);
+s32 btlGameOverStep(BtlGameOverA *state);
 
 // Advance the saturated game-over timer and dispatch once battle flags permit it.
 s32 btlGameOverJobStep(u32 job)
@@ -29,12 +29,12 @@ s32 btlGameOverJobStep(u32 job)
     if (work->mode == 2) {
         if ((work->transitions[1] & g_btlGameOver.forcedStates[1]) |
             (work->transitions[0] & g_btlGameOver.forcedStates[0]))
-            return FUN_003e6f50(state);
+            return btlGameOverStep(state);
         if (((work->states[1] & g_btlGameOver.blockedStates[1]) |
              (work->states[0] & g_btlGameOver.blockedStates[0])) == 0 &&
             ((work->states[1] & g_btlGameOver.blockedTransitions[1]) |
              (work->states[0] & g_btlGameOver.blockedTransitions[0])) == 0)
-            return FUN_003e6f50(state);
+            return btlGameOverStep(state);
     }
     return asdProcessGetFrames(work->job) ? -1 : 0;
 }

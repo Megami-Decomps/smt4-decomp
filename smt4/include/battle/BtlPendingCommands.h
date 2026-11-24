@@ -17,4 +17,7 @@ static __inline bool btlCommandPassesFilter(const BtlMainState *state, s32 index
         !(state->entries[state->listedActions.actions[index].unitIndex].data.statusFlags & 0x1c0);
 }
 
+/* Appends a command to the listed actions (Apocalypse: btlAppendPendingCommand). */
+extern "C" void btlAppendPendingCommand(BtlMainState *state, BtlPendingCommand command);
+
 #endif

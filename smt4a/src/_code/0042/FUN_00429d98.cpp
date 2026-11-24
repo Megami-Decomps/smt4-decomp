@@ -25,14 +25,14 @@ struct SessionRoot {
 
 extern "C" {
 
-extern SessionRoot DAT_00589398;
+extern SessionRoot g_titleContentFileSystem;
 s32 FUN_0042bbf4(SessionObject **object, s32 size);
 s32 fsMountRegister(u32 owner, SessionObject *object, u32 a, u32 b);
 
 /* Registers a session object once: fails with 0xC92044E7 if one exists, releases the object on failure. */
 s32 FUN_00429d98(u32 owner)
 {
-    SessionRoot *root = &DAT_00589398;
+    SessionRoot *root = &g_titleContentFileSystem;
     SessionObject *object;
 
     if (root->session != NULL) {

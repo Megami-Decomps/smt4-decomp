@@ -8,7 +8,7 @@ struct TitleContentFileSystemView {
 };
 
 extern "C" {
-extern TitleContentFileSystemView DAT_00589398;
+extern TitleContentFileSystemView g_titleContentFileSystem;
 extern u8 DAT_0056d940[0x1300];
 extern u8 DAT_0062d400[];   /* the heap module's critical section */
 void nn_os_CriticalSection_Enter(void *section);
@@ -20,7 +20,7 @@ void *FUN_001a007c(void)
 {
     nn_os_CriticalSection_Enter(DAT_0062d400);
     static Obj420f4c heap(0x130, DAT_0056d940, 0x1300);
-    DAT_00589398.heap = &heap;
+    g_titleContentFileSystem.heap = &heap;
     void *block = nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(&heap);
     nn_os_CriticalSection_Leave(DAT_0062d400);
     return block;

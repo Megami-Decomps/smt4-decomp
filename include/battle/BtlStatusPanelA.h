@@ -35,6 +35,7 @@ enum {
     STATUS_PANEL_NAME = 30,
     STATUS_PANEL_MP = 40,
     STATUS_PANEL_HP = 50,
+    STATUS_PANEL_FRAME = 60,
     STATUS_PANEL_HEADER = 61,
     STATUS_PANEL_TABS = 62      /* four, the first rows only */
 };
@@ -45,6 +46,13 @@ void statusPanelResetRows(StatusPanel *panel, s32 variant, s32 rowCount, s32 sel
 /* Starts a row change: `rowDelta` rows added or removed, `gaugeCount` gauges refreshed with it. */
 void statusPanelStartRowChange(StatusPanel *panel, s32 rowDelta, s32 gaugeCount);
 } /* extern "C" */
+
+/* Enters a new animation phase and restarts the panel's frame counter. */
+static __inline void statusPanelStartPhase(StatusPanel *panel, s32 phase)
+{
+    panel->timer.state = phase;
+    panel->timer.frame = 0;
+}
 
 /* Sets the header and the row's tab image of the first four rows; each tab shows the image before the previous one.
  * Plain `static`: armcc inlines it after its own optimisation, which is what retail's callers show. */

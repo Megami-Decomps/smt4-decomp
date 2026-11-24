@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
+#include "shard/W6_W6Match7_WaveBuffer.h"
 
 extern "C" {
 extern const char DAT_00409724[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Snd\\AsdSoundSystem.cpp": __FILE__ */
@@ -18,7 +19,6 @@ void nn_snd_CTR_Voice_SetMixParam(u32 voice, const f32 *mix);
 void nn_snd_CTR_Voice_SetPitch(u32 voice, f32 pitch);
 void soundVoiceSetVolume(u32 voice, f32 volume);
 void nn_snd_CTR_InitializeWaveBuffer(void *waveBuffer);
-void soundQueueArchiveWaveBuffers(u32 voice, void *data, void *waveBuffer0, void *waveBuffer1, s32 unk);
 
 
 /* Starts a sound whose samples are `size` bytes at `data`: copies them to the extra heap, takes a
@@ -51,7 +51,8 @@ AsdSndWaveVoice *asdSoundWaveVoiceCreate(const u8 *data, u32 size, u32 unk8c)
     for (i = 0; i < 2; i++) {
         nn_snd_CTR_InitializeWaveBuffer(sound->waveBuffers[i]);
     }
-    soundQueueArchiveWaveBuffers(sound->voice, sound->data, sound->waveBuffers[0], sound->waveBuffers[1], 0);
+    soundQueueArchiveWaveBuffers((WavePlayer *)sound->voice, (u32)sound->data,
+        (WaveBuffer *)sound->waveBuffers[0], (WaveBuffer *)sound->waveBuffers[1], 0);
     return sound;
 }
 

@@ -2662,6 +2662,7 @@
 0x001886dc nn_fs_detail_FileBase_TrySeek name
 0x0018878c FUN_0018878c between
 0x00188a40 FUN_00188a40 between
+0x00188b30 FUN_00188b30 between
 0x00188b40 nn_snd_CTR_VoiceManager_Initialize name
 0x00188b60 nn_os_CriticalSection_Initialize name
 0x00188b7c nn_os_SharedMemoryBlock_AttachAndMap name
@@ -2883,10 +2884,10 @@
 0x001940b0 FUN_001940b0 between
 0x001942a8 FUN_001942a8 between
 0x0019430c FUN_0019430c between
-0x001946d4 FUN_001946d4 between
-0x0019472c FUN_0019472c between
-0x00194784 soundInfoOwnerReadInfo between
-0x001947dc soundGroupUpdate between
+0x001946d4 soundArchiveReadBankInfoWithExtension between
+0x0019472c soundArchiveReadSequenceSoundInfoWithExtension between
+0x00194784 soundArchiveReadWaveSoundInfoWithExtension between
+0x001947dc soundArchiveReadSoundGroupInfoWithExtension between
 0x00194850 optionalNestedValueGet callers
 0x00194860 nw_snd_internal_GroupFileReader_ReadGroupItemInfoEx name
 0x001948a0 nw_snd_internal_GroupFileReader_ReadGroupItemLocationInfo name
@@ -3148,7 +3149,7 @@
 0x001a8558 FUN_001a8558 between
 0x001a86b4 FUN_001a86b4 between
 0x001a8810 FUN_001a8810 between
-0x001a8930 FUN_001a8930 between
+0x001a8930 soundArchiveReadWaveArchiveInfoWithExtension between
 0x001a8988 FUN_001a8988 callers
 0x001a89e4 nw_snd_internal_WaveSoundFile_FileHeader_GetInfoBlock name
 0x001a8a50 FUN_001a8a50 callers
@@ -3559,6 +3560,11 @@
 0x001c5464 FUN_001c5464 twin
 0x001c57ac FUN_001c57ac twin
 0x001c58e8 FUN_001c58e8 twin
+0x001c6b34 FUN_001c6b34 library
+0x001c6c24 FUN_001c6c24 between
+0x001c6da0 FUN_001c6da0 between
+0x001c6df4 FUN_001c6df4 between
+0x001c6e04 FUN_001c6e04 between
 0x001c6e20 nn_snd_CTR_Dspsnd_IsInitialized name
 0x001c6e30 FUN_001c6e30 callers
 0x001c6ec0 FUN_001c6ec0 callers
@@ -3879,6 +3885,7 @@
 0x001f3e64 FUN_001f3e64 between
 0x001f4120 FUN_001f4120 between
 0x001f4270 outStoreOneTwoZero callers
+0x001f4e7c mobiclipInitializeHeaps name
 0x001f51ac mobiclipShutdown name
 0x001fc338 callGlobalHook callers
 0x00202028 engineSetStateFlag callers
@@ -5876,7 +5883,7 @@
 0x00425aa0 mobiclipYieldPlaybackThread name
 0x00425cd8 mobiclipS4PlayerDestroy name
 0x00425f18 moviePlayerDestroy between
-0x00425f68 FUN_00425f68 twin
+0x00425f68 FUN_00425f68 callers
 0x00425fb4 movieY2rConfigureAndStart between
 0x00426124 FUN_00426124 between
 0x00426134 movieY2rGetTransferEventStorage between
@@ -7420,6 +7427,7 @@
 0x00512e38 FUN_00512e38 callers
 0x00512e50 FUN_00512e50 between
 0x00512e58 FUN_00512e58 between
+0x00512e84 FUN_00512e84 callers
 0x00512eb0 FUN_00512eb0 between
 0x00512eb8 FUN_00512eb8 between
 0x00512ebc recordFree between
@@ -7427,6 +7435,7 @@
 0x005130f4 FUN_005130f4 between
 0x00513210 valuePairClear callers
 0x00513228 FUN_00513228 between
+0x00513250 FUN_00513250 callers
 0x0051327c _ZN9Obj557fa87vfunc18Ev between
 0x00513284 FUN_00513284 between
 0x00513288 handleObjectRelease between
@@ -7461,6 +7470,7 @@
 0x00514018 FUN_00514018 between
 0x00514088 FUN_00514088 between
 0x0051415c FUN_0051415c between
+0x00514258 pairSlotSet callers
 0x00514284 resourceQueryLoadStatus between
 0x005142c4 FUN_005142c4 between
 0x005143ac mobiclipCtrlReleaseResource name

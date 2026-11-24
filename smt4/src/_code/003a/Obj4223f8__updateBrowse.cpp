@@ -49,7 +49,7 @@ s32 flaggedEntryGetValueByState(void *list);
 void listCursorStepBack(void *list);
 void listCursorStepForward(void *list);
 void FUN_00233404(void);
-void FUN_00233240(void *animation, s32 channel);
+void uiSceneApplySpritePreset(void *animation, s32 channel);
 s32 gameGetFlagByte12e8(void);
 s32 flaggedValueHolderGetTotal(void *holder);
 s32 FUN_0029e0f8(void);
@@ -91,7 +91,7 @@ void Obj4223f8::updateBrowse()
             ui->mode = 5;
             ui->modeTimer = 0;
             ui->slotIndex = (gameGetFlagByte12e8() == 1) ? 0 : 4;
-            FUN_00233240(ui->animation, ui->slotIndex);
+            uiSceneApplySpritePreset(ui->animation, ui->slotIndex);
         }
     } else {
         FUN_003a98b8(ui);

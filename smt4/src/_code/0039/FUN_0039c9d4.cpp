@@ -19,7 +19,7 @@ typedef struct Widget {
 
 extern s32 buttonHelpStateIsNot3(void);
 extern void pointConvertToFloat(void *sprite, s32 x, s32 y);
-extern void FUN_00233240(void *shadow, s32 value);
+extern void uiSceneApplySpritePreset(void *shadow, s32 value);
 
 /* Per-frame update of the widget: shows it, then moves its sprite with the position once that settles. */
 void FUN_0039c9d4(Widget *widget)
@@ -27,7 +27,7 @@ void FUN_0039c9d4(Widget *widget)
     s32 *position;
 
     if (widget->state == 0) {
-        FUN_00233240(widget->shadow, 1);
+        uiSceneApplySpritePreset(widget->shadow, 1);
         widget->flags |= WIDGET_FLAG_SHOWN;
         widget->state = 1;
     } else if (widget->state == 1) {

@@ -15,7 +15,7 @@ void FUN_0029da34(s32 screen, s32 enabled, u16 id, void *unit);
 s32 compendiumComputeSummonCost(u16 id, u32 source, s32 a, s32 specialMode, s32 b);
 void messageTargetSetValue(s32 target, s32 mode);
 void unitInitializeFromSavedRecord(u16 id, StatBlock *unit);
-void FUN_00233240(void *timers, s32 index);
+void uiSceneApplySpritePreset(void *timers, s32 index);
 void devilListUpdatePreview(Obj42247c *view);
 extern s32 g_bibleDevilCallbackContext[2];
 
@@ -67,8 +67,8 @@ void Obj4223c4::FUN_003a76b8()
             buttonHelpSetPreset(0x4c);
             FUN_0029da34(0, 1, (u16)id, partyMemberFindById((u16)id));
         }
-        FUN_00233240(state->timers, 0);
-        FUN_00233240(state->timers, 1);
+        uiSceneApplySpritePreset(state->timers, 0);
+        uiSceneApplySpritePreset(state->timers, 1);
         g_bibleDevilCallbackContext[1] = -1;
         devilListUpdatePreview(this);
     }

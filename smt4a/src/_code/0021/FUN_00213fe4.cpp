@@ -23,7 +23,7 @@ struct ColorKeyEffect {
 extern "C" {
 
 void colorKeyTrackAdvanceRgb(ColorKeyTrack *effect, const ColorKey *timing);
-void FUN_00285320(ColorKeyEffect *effect, u32 arg);
+void effectAlphaTrackAdvance(ColorKeyEffect *effect, u32 arg);
 void effScalarKeyLegacyAdvance(ColorKeyEffect *effect, u32 arg);
 void effScalarTrackAdvance(ColorKeyEffect *effect, u32 arg);
 void effScalarStateAdvance(ColorKeyEffect *effect, u32 arg);
@@ -76,7 +76,7 @@ extern "C" {
 void FUN_00213fe4(ColorKeyEffect *effect, u32 arg)
 {
     advanceColorKeyRgbChannel(effect, arg);
-    advanceColorKeyChannel<1, 3, FUN_00285320>(effect, arg);
+    advanceColorKeyChannel<1, 3, effectAlphaTrackAdvance>(effect, arg);
     advanceColorKeyChannel<2, 4, effScalarKeyLegacyAdvance>(effect, arg);
     advanceColorKeyChannel<3, 5, effScalarTrackAdvance>(effect, arg);
     advanceColorKeyChannel<4, 6, effScalarStateAdvance>(effect, arg);

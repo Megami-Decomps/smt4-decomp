@@ -61,7 +61,7 @@ u32 scrRunOpcodesStub(ScriptProcess *state);
 u32 tableGroupFindEntryIndex(ScriptTable *table, const char *name);
 void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
-void FUN_00233240(void *animations, s32 value);
+void uiSceneApplySpritePreset(void *animations, s32 value);
 s32 uiAnimationAdvanceChannel(void *animations, s32 channel);
 void sub10OwnerStart(const u8 *selection); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: more than one instance of overloaded function "releaseEntriesA" has "C" linkage)
 void releaseEntriesA(Obj55ca08 *selection); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: more than one instance of overloaded function "sub10OwnerStart" has "C" linkage)
@@ -115,7 +115,7 @@ void FUN_003a2c48(AppraiseScene *scene)
         if (sys43e188GetState()) {
             scrScriptProcessStartEntry(scene->script, tableGroupFindEntryIndex(scene->table, "shop_Kantei2"));
             scrRunOpcodesStub(scene->script);
-            FUN_00233240(scene->animations, 0);
+            uiSceneApplySpritePreset(scene->animations, 0);
             buttonHelpSetPreset(0x77);
             scene->state = 3;
         }

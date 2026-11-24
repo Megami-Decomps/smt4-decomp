@@ -34,7 +34,7 @@ extern "C" {
 void pairCopy(const ComparisonMenuAnchor *, ComparisonMenuPoint *);
 void uiMenuAnchorGetOffset(const ComparisonMenuAnchor *, ComparisonMenuPoint *);
 void uiRectDrawAtBottomRight(const ComparisonMenuAnchor *, u32, s32, s32, u32);
-void FUN_00231bcc(const ComparisonMenuAnchor *, u32, s32, s32, u32, u32);
+void uiDrawSizedTextureAtRegionEnd(const ComparisonMenuAnchor *, u32, s32, s32, u32, u32);
 s32 rangeLimitMin(ComparisonMenuSelection *);
 s32 flaggedValueHolderGetTotal(ComparisonMenuSelection *);
 u32 flaggedEntryGetValueByState(ComparisonMenuSelection *);
@@ -59,12 +59,12 @@ void scrollMenuDrawVisibleEntries(ComparisonMenuScene *scene)
 
     u32 layer = scene->layer;
     uiRectDrawAtBottomRight(&scene->anchor, 1, 0, 0, layer);
-    FUN_00231bcc(&scene->anchor, 0x47c, 0, 0, layer, 1);
-    FUN_00231bcc(&scene->anchor, 0x47d, 0, 0, layer, 1);
-    FUN_00231bcc(&scene->anchor, 0x47e, 0, 0, layer, 1);
-    FUN_00231bcc(&scene->anchor, 0x47f, 0, 0, layer, 1);
-    FUN_00231bcc(&scene->anchor, 0x480, 0, 0, layer, 1);
-    FUN_00231bcc(&scene->anchor, 0x481, 0, 0, layer, 1);
+    uiDrawSizedTextureAtRegionEnd(&scene->anchor, 0x47c, 0, 0, layer, 1);
+    uiDrawSizedTextureAtRegionEnd(&scene->anchor, 0x47d, 0, 0, layer, 1);
+    uiDrawSizedTextureAtRegionEnd(&scene->anchor, 0x47e, 0, 0, layer, 1);
+    uiDrawSizedTextureAtRegionEnd(&scene->anchor, 0x47f, 0, 0, layer, 1);
+    uiDrawSizedTextureAtRegionEnd(&scene->anchor, 0x480, 0, 0, layer, 1);
+    uiDrawSizedTextureAtRegionEnd(&scene->anchor, 0x481, 0, 0, layer, 1);
     if (scene->selection.count == 0)
         return;
 

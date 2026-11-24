@@ -1,24 +1,19 @@
-/* NON_MATCHING: retail moves the roll to r1 before the mask test and loads the battle flag pair with ldrd (the build uses two ldr and keeps the roll in r0) */
+/* NON_MATCHING: the battle flag and always-proc mask loads and their AND registers differ from retail. */
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlEntryLookup.h"
 #include "battle/btlMain.h"
 #include "gamedata/SkillDataRecord.h"
 #include "battle/BattleSkillResponseMasks.h"
-
-struct ChanceBattleFlags {
-    u8 unk0000[0x45a0];
-    u64 flags; /* 0x45a0 */
-};
+#include "util/Random.h"
 
 extern "C" {
 void source4CCopyHalves(BtlCombatantEntryA *unit, u16 *skills);
-s32 lcgRandomRange(u32 range);
 
 /* Rolls each of the unit's chance skills in order and returns the first that procs, or 0. */
 u16 FUN_004c5ec0(u32 unitId)
 {
-    ChanceBattleFlags *battle = (ChanceBattleFlags *)btlGetMainState();
-    BtlCombatantEntryA *unit = btlMainFindEntryByListedId((BtlMainStateA *)battle, unitId);
+    BtlMainStateA *battle = btlGetMainState();
+    BtlCombatantEntryA *unit = btlMainFindEntryByListedId(battle, unitId);
     u16 skills[10] = {0};
     s32 i;
 
@@ -32,9 +27,8 @@ u16 FUN_004c5ec0(u32 unitId)
             if (chance != 0) {
                 s32 roll = lcgRandomRange(99);
 
-                if (battle->flags & g_btlSkillResponseMasks.alwaysProc) {
-                    roll = 0;
-                }
+                u64 stateFlags = battle->stateFlags64.bits;
+                roll = (stateFlags & g_btlSkillResponseMasks.alwaysProc) ? 0 : roll;
                 if ((s32)chance > roll) {
                     procced = skills[i];
                     break;
@@ -44,4 +38,4 @@ u16 FUN_004c5ec0(u32 unitId)
     }
     return procced;
 }
-}
+} /* extern "C" */

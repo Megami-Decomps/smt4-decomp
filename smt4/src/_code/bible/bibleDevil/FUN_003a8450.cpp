@@ -68,7 +68,7 @@ s32 inputIsQuestCancelPressed(void);
 s32 inputConfirmPressed(void);
 s32 gameGetNavigationState(void);
 s32 gameGetFlagByte12e8(void);
-void FUN_00233240(void *status, s32 mode);
+void uiSceneApplySpritePreset(void *status, s32 mode);
 void messageDismissNumericBanner(s32 flag);
 void ifTouchRegionClearAll(u32 region);
 void releaseEntriesA(SelectedRow *row); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "SelectedRow *" is incompatible with parameter of type "Obj *")
@@ -113,7 +113,7 @@ void FUN_003a8450(DevilView *view)
         } else {
             view->timer = 5;
         }
-        FUN_00233240(view->status, view->timer);
+        uiSceneApplySpritePreset(view->status, view->timer);
         if (view->hideHelp == 0)
             messageDismissNumericBanner(1);
         ifTouchRegionClearAll(view->touchRegion);
@@ -182,7 +182,7 @@ void FUN_003a8450(DevilView *view)
         messageDismissNumericBanner(1);
     buttonHelpSetText(0, 0x323232FF);
     beginStatusPanelClose();
-    FUN_00233240(view->status, 1);
+    uiSceneApplySpritePreset(view->status, 1);
     gameGlobalsSetSubScreenActive(1);
     view->state = 11;
     view->subState = 0;

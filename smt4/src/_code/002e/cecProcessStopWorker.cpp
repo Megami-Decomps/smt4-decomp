@@ -15,7 +15,7 @@ void cecProcessStopWorker(void)
         /* Joined above: finalize the thread, then close its handle through the handle's destructor. */
         process->thread.finalize();
         process->thread.NnOsHandle::~NnOsHandle();
-        addressSpaceRegionFree(process->queue);
+        addressSpaceRegionFree(&process->stack);
         if (process->buffer != NULL) {
             asdMemFree(process->buffer);
             process->buffer = NULL;

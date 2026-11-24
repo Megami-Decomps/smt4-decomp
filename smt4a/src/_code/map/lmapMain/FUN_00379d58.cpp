@@ -11,8 +11,8 @@ int ptrVectorAt(unsigned int, int);
 int moriModelContentSetRequestFirst(void);
 int moriModelContentSetRequestSecond(int, int);
 int moriModelContentCreateBinding(int);
-int FUN_0040a9a0(int, unsigned int);
-int FUN_0040ab9c(unsigned int, unsigned int);
+int moriModelContentLoadResourceById(int, unsigned int);
+int moriModelContentBuildFromLoadedData(unsigned int, unsigned int);
 int FUN_00416168(unsigned int, unsigned int);
 int VectorSignedToFloat(int, int);
 int nn_math_ARMv6_MTX33CopyAsm(int *, unsigned int *);
@@ -56,8 +56,8 @@ extern int FUN_003fdadc(void);
 /* Supplied declaration required: moriModelContentSetRequestFirst. */
 /* Supplied declaration required: moriModelContentSetRequestSecond. */
 /* Supplied declaration required: moriModelContentCreateBinding. */
-/* Supplied declaration required: FUN_0040a9a0. */
-/* Supplied declaration required: FUN_0040ab9c. */
+/* Supplied declaration required: moriModelContentLoadResourceById. */
+/* Supplied declaration required: moriModelContentBuildFromLoadedData. */
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: FUN_00416168. */
 /* Supplied declaration required: nn_math_ARMv6_MTX33CopyAsm. */
@@ -117,8 +117,8 @@ void FUN_00379d58(void)
     *(unsigned int *)(temp_v0 + 0xae4) = temp_v2;
     moriModelContentSetRequestFirst();
     moriModelContentSetRequestSecond(*piVar6,0x10000);
-    FUN_0040a9a0(*piVar6,temp_v5);
-    FUN_0040ab9c(*(unsigned int *)(temp_v0 + 0xae0),*(unsigned int *)(*piVar6 + 0xc));
+    moriModelContentLoadResourceById(*piVar6,temp_v5);
+    moriModelContentBuildFromLoadedData(*(unsigned int *)(temp_v0 + 0xae0),*(unsigned int *)(*piVar6 + 0xc));
     FUN_00416168(*(unsigned int *)(*piVar6 + 0xc),*(unsigned int *)(*(int *)(temp_v0 + 0xae0) + 0xc));
     moriModelContentCreateBinding(*piVar6);
     *(unsigned int *)(temp_v0 + 0xad8) = 0;

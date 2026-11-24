@@ -88,7 +88,7 @@ Table25Record *dataTable25Section0FindById(s32 id);
 void slotNameDisplaySetEntry(CampCecReceivedRecord *record, s32 entryId);
 u32 playerSummaryIsIncomplete(CampCecReceivedRecord *record);
 void savedRecordInsertAtFront(const CampCecReceivedRecord *record);
-void FUN_002a17d4(const CampCecReceivedRecord *record);
+void cecRecordCountEncounteredDemons(const CampCecReceivedRecord *record);
 void playerSummaryFill(PlayerSummary *summary);
 u32 dataTable4ACount(void);
 u32 dataTable4AType1Count(void);
@@ -276,7 +276,7 @@ s32 campCecRecvDownloadState(CampCecRecv *recv)
                 accepted++;
                 record->selectedId = record->demon.id;
                 savedRecordInsertAtFront(record);
-                FUN_002a17d4(record);
+                cecRecordCountEncounteredDemons(record);
                 gameDataAddMoneySaturating(1);
                 s32 total = gameDataBlocksGetWord27E90();
                 if (total % 100 == 0 && total > 0) {

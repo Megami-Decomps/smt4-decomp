@@ -1,4 +1,3 @@
-/* NON_MATCHING: the predicated clear of the job slot (`streq r0, [r6, #8]; beq`) now matches; the movie and seen-flag registers are reversed (retail computes the flag in r0 and copies it to r4, the build adds into r5 and copies to r0) */
 #include "event/eventCommand.h"
 #include "gamedata/GameFlags.h"
 
@@ -21,7 +20,7 @@ u32 FUN_002a3e10(void)
         }
         FUN_00342334(0);
         commonBgStopAndResetFade();
-        s32 seenFlag = movie + 0x800;
+        s32 seenFlag = eventFlagForScene(movie);
         u32 alreadySeen = gameFlagIsSet(seenFlag);
         g_eventCommand.movieJob = mobiclipProcessCreate(movie, alreadySeen);
         gameFlagSetValue(seenFlag, 1, 1);

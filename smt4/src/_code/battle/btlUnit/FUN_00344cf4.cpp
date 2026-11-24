@@ -7,7 +7,7 @@
 extern "C" {
 extern BattleVector3 DAT_00493560;
 
-s32 FUN_003ae638(BtlUi *block, s32 handle);
+s32 btlUiPositionMarkerIsBusy(BtlUi *block, s32 handle);
 
 static inline BattleVector3 vectorAdd(BattleVector3 left, BattleVector3 right)
 {
@@ -81,7 +81,7 @@ void FUN_00344cf4(void *unused, BtlMarkerStep *request)
         }
         request->phase = 1;
     } else if (request->phase == 1) {
-        if (FUN_003ae638(g_btlUiBlock, request->handle) == 0) {
+        if (btlUiPositionMarkerIsBusy(g_btlUiBlock, request->handle) == 0) {
             request->result = 0;
             return;
         }

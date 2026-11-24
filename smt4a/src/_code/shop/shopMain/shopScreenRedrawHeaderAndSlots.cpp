@@ -66,7 +66,7 @@ extern "C" {
 extern const ShopMainIconTables g_equipMenuStateHandlerInit;
 extern ShopTabIcons g_shopItemTabNeighbors[];
 void uiDrawCompositeSpriteAtRectCorner(void *header, u32 id, s32 dx, s32 dy, u32 flags);
-void FUN_0049368c(void *header, u32 id, s32 dx, s32 dy, u32 color, u32 flags);
+void uiDrawSizedTextureAtRegionEnd(void *header, u32 id, s32 dx, s32 dy, u32 color, u32 flags);
 void FUN_00494d68(ShopScreen *screen, s32 index, s32 flag, ShopSlot *slot);
 void size40Set(ShopPanel *panel, s32 first, s32 second);
 s32 rangeGetMinimumLimit(ShopCategoryList *list);
@@ -102,15 +102,15 @@ void shopScreenRedrawHeaderAndSlots(ShopScreen *screen)
         break;
     }
     uiDrawCompositeSpriteAtRectCorner(screen->detail.header, sprite, 0, 0, color);
-    FUN_0049368c(screen->detail.header, screen->detail.tab + 0x61, 0, 0, color, 1);
-    FUN_0049368c(screen->detail.header, 0x65, 0, 0, color, 1);
-    FUN_0049368c(screen->detail.header, 0x66, 0, 0, color, 1);
+    uiDrawSizedTextureAtRegionEnd(screen->detail.header, screen->detail.tab + 0x61, 0, 0, color, 1);
+    uiDrawSizedTextureAtRegionEnd(screen->detail.header, 0x65, 0, 0, color, 1);
+    uiDrawSizedTextureAtRegionEnd(screen->detail.header, 0x66, 0, 0, color, 1);
     s32 firstIndex = g_shopItemTabNeighbors[screen->detail.tab].first;
     s32 secondIndex = g_shopItemTabNeighbors[screen->detail.tab].second;
     ShopIconGroup firstIcons = g_equipMenuStateHandlerInit.firstIcons;
     ShopIconGroup secondIcons = g_equipMenuStateHandlerInit.secondIcons;
-    FUN_0049368c(screen->detail.header, firstIcons.ids[firstIndex], 0, 0, color, 1);
-    FUN_0049368c(screen->detail.header, secondIcons.ids[secondIndex], 0, 0, color, 1);
+    uiDrawSizedTextureAtRegionEnd(screen->detail.header, firstIcons.ids[firstIndex], 0, 0, color, 1);
+    uiDrawSizedTextureAtRegionEnd(screen->detail.header, secondIcons.ids[secondIndex], 0, 0, color, 1);
 
     s32 compact = ((screen->mode) == 7 || (screen->mode) == 11) || ((screen->mode) == 8 || (screen->mode) == 12) || ((screen->mode) == 9 || (screen->mode) == 13) ||
                   ((screen->mode) == 17 || (screen->mode) == 18);

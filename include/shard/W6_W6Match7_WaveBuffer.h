@@ -29,4 +29,7 @@ struct WavePlayer {
     /* 0x00 */ u8 unk00[0x68];
     /* 0x68 */ void *voice;
 };
+
+extern "C" u32 soundQueueArchiveWaveBuffers(WavePlayer *player, u32 archive, WaveBuffer *initial,
+    WaveBuffer *loop, s32 index);
 #endif

@@ -40,7 +40,7 @@ void spriteTable22Acquire(void);
 u32 taskCreateDraw(const char *name, s32 priority, u32 first, u32 second, void *update, void *end, void *work, u32 parent);
 void rectangleInitializeSelection(void *rectangle, s32 width, s32 a, s32 b);
 void uiInitializeEightTimerSet(void *timers);
-void FUN_00233240(void *timers, s32 index);
+void uiSceneApplySpritePreset(void *timers, s32 index);
 void messageIdListInit(void *list, s32 a, s32 b, s32 count);
 void buttonHelpSetText(s32 a, u32 color);
 void FUN_003ace14(void);
@@ -72,8 +72,8 @@ extern "C" void FUN_003ab550(Obj422448 *screen)
     view->fadeTask = taskCreateDraw("BIBLE LEGIONSKILL DOWN", 0xE6, 1, 0, (void *)uiCallbackFinishDraw, NULL, g_uiCallbackContext, view->job);
     rectangleInitializeSelection(view->rectangle, 0x140, 0, 0x1D);
     uiInitializeEightTimerSet(view->timers);
-    FUN_00233240(view->timers, 0);
-    FUN_00233240(view->timers, 1);
+    uiSceneApplySpritePreset(view->timers, 0);
+    uiSceneApplySpritePreset(view->timers, 1);
     /* Never set, as in filterCreateQuad: retail passes r5, which this function never assigns, as the allocation
      * owner (no known value; giving it one costs 42 lines). */
     void *allocationOwner;

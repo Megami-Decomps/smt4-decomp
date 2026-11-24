@@ -17,7 +17,7 @@ struct EquipmentListIndicator {
 }
 extern "C" {
 void uiDrawCompositeSpriteAtRectCorner(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color);
-void FUN_0049368c(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color, u32 flags);
+void uiDrawSizedTextureAtRegionEnd(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color, u32 flags);
 void FUN_00494574(EquipmentMenuState *work, s32 page);
 s32 rangeGetMinimumLimit(EquipmentMenuCursor *cursor);
 s32 FUN_0031d174(EquipmentMenuCursor *cursor);
@@ -37,7 +37,7 @@ void shopDrawEquipmentList(EquipmentMenuState *work, u32 background)
     case 8: background = 4; break;
     }
     uiDrawCompositeSpriteAtRectCorner(&work->detail.region, background, 0, 0, color);
-    FUN_0049368c(&work->detail.region, 100, 0, 0, color, 1);
+    uiDrawSizedTextureAtRegionEnd(&work->detail.region, 100, 0, 0, color, 1);
     FUN_00494574(work, work->page);
     u32 state = work->transition.state;
     bool highlight;

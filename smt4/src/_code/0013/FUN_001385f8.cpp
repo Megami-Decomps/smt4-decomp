@@ -1,4 +1,5 @@
-/* NON_MATCHING: only the halfword clear at 0x4BC differs: retail addresses it from work + 0x400 (shared with the 0x4BE argument), the build pools the 0x4BC offset. */
+/* NON_MATCHING: only the final two bytes of the touchPressed clear: retail forms a separate
+ * work + 0x400 base and clears them after setting up the touchSelected argument. */
 #include "ui/UiSpriteApi.h"
 #include "ui/ButtonHelpGlobal.h"
 #include <string.h>

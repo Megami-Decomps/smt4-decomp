@@ -3,7 +3,7 @@
 
 extern "C" {
 void pointConvertToFloat(f32 *position, s32 x, s32 y);
-void FUN_00233240(void *transition, s32 mode);
+void uiSceneApplySpritePreset(void *transition, s32 mode);
 void lmapPlayerModelDestroy(void *script);
 void buttonHelpSetText(s32 mode, u32 color);
 void *lmapSceneGetScript(void);
@@ -17,7 +17,7 @@ void sceneExitTransitionUpdate(SceneExitTransition *work)
 
     switch (work->phase) {
     case 0:
-        FUN_00233240(work->transition, 1);
+        uiSceneApplySpritePreset(work->transition, 1);
         work->phase = 1;
         buttonHelpSetText(0, 0x323232ff);
         return;

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002fb4b8(BtlUiObjAA *obj);
+void statusPanelStartClosingRows(BtlUiObjAA *obj);
 
 
 void btlUiEnterStateEntryStartup(void)
@@ -10,7 +10,7 @@ void btlUiEnterStateEntryStartup(void)
     BtlUiA *ui = g_btlUi.ui;
 
     ui->state = 8;
-    FUN_002fb4b8(&ui->objA);
+    statusPanelStartClosingRows(&ui->objA);
 }
 
 } /* extern "C" */

@@ -7,7 +7,7 @@
 #include "script/scrScriptProcess.h"
 
 extern "C" {
-void FUN_00233240(Scene3aSprites *animation, u32 index);
+void uiSceneApplySpritePreset(Scene3aSprites *animation, u32 index);
 void pointConvertToFloat(FloatPoint *point, s32 x, s32 y);
 s32 tableGroupFindEntryIndex(TableGroupHeader *resource, const char *name);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
@@ -73,7 +73,7 @@ extern "C" void shopUpdatePageOpening(Scene3a *scene)
     switch (scene->pageTransition.substep) {
     case SHOP_OPENING_BEGIN:
         FUN_00230df0(1);
-        FUN_00233240(&scene->animation, 0);
+        uiSceneApplySpritePreset(&scene->animation, 0);
         scene->pageTransition.substep = SHOP_OPENING_ANIMATE;
         break;
     case SHOP_OPENING_ANIMATE: {

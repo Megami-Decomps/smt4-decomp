@@ -154,3 +154,7 @@ arm 0x3ec298 0x3ec2ec nn::err static initialiser: err:f handle state and its nn:
 # (slots FileServerArchive_File_TryRead/TryWrite, nn_fs_OpenLinkFile): its slot 4 is fileGetSizeOut (0x3dfa0c, size
 # through the file's IPC handle); smt4a's counterpart is 0x50094c, slot of the twin vtable 0x558234 (w85-o4).
 arm 0x3df9e4 0x3dfa2c nn::fs RomFsArchive/FileServerArchive file GetSize: slot 4 of vtables 0x420c98/0x420d48 whose other slots are nn::fs; smt4a 0x5008fc/0x50094c
+# nn::gr: a GPU command builder that only stores PICA register command words through the cursor (0x0002025e,
+# 0x00900251, 0xead0fead, ...); byte-identical, pool words included, to smt4a's third-party FUN_00188a40 and to its
+# second smt4a copy FUN_001c6b34 (w92-s13).
+arm 0x1394d4 0x1395ac nn::gr CTR command builder: PICA register command words only; byte-identical to smt4a's third-party FUN_00188a40

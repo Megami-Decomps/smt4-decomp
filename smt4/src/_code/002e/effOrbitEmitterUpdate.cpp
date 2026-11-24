@@ -9,7 +9,7 @@ f32 phaseCosInterpolate(f32 angle);
 void FUN_0024b7bc(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_0024add8(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_0024b5f0(ParticleEmissionState *emitter, SpiralParticle *particle);
-void FUN_0024b660(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous);
+void effSampleParticleTransform(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous);
 /* Replaces the shared transform with an X-axis rotation. */
 void matrixSetRotationX(f32 angle);
 /* Applies the pending rotation to the scratch matrix. */
@@ -101,7 +101,7 @@ extern "C" void effOrbitEmitterUpdate(ParticleEmissionState *emitter)
             particle->position.x = px;
             particle->position.y = py + motion->height;
             particle->position.z = pz;
-            FUN_0024b660((ParticleTransformSample *)particle,
+            effSampleParticleTransform((ParticleTransformSample *)particle,
                          (ParticleTransformCurves *)definition, frame,
                          (const EffectColor *)&previous);
             particle->scale *= motion->scale;
@@ -167,7 +167,7 @@ extern "C" void effOrbitEmitterUpdate(ParticleEmissionState *emitter)
                 particle->position.y += motion->height;
                 particle->frame = (s32)age;
             }
-            FUN_0024b660((ParticleTransformSample *)particle,
+            effSampleParticleTransform((ParticleTransformSample *)particle,
                          (ParticleTransformCurves *)definition, particle->frame,
                          (const EffectColor *)&previous);
             particle->scale *= motion->scale;

@@ -1,25 +1,17 @@
-/* NON_MATCHING: native animation-alpha getters restored; frame-glyph lifetime and base-coordinate saved registers still differ. */
+/* NON_MATCHING: the stereo frame matches retail, but the two base-coordinate registers are swapped. */
+#include "ui/MenuStereoFrame.h"
 #include "ui/UiSpriteApi.h"
 #include "ui/AnimatedDigitPanel.h"
-#include "camp/RenderCtxA.h"
-#include "shard/TextureDrawCall.h"
-#include "gfx/StereoParallax.h"
 #include "code/Code003f.h"
-#include "camp/RenderCtx.h"
 
 extern "C" {
-void efctSetSpeed(f32 alpha);
 void FUN_003f54c4(DigitPanelDisplay *display, s32 x, s32 y, f32 alpha);
 void FUN_003f61b4(DigitPanelDisplay *display, s32 x, s32 y, f32 alpha);
 
-// Draw the panel frame and animated digit content using combined position-channel alpha.
-void FUN_003f5d94(DigitPanelDisplay *display, s32 x, u32 color, f32 alpha)
+/* Draws the stereo frame and animates the digit content with combined position-channel opacity. */
+void FUN_003f5d94(DigitPanelDisplay *display, s32 x, s32 y, f32 alpha)
 {
-    x += (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
-    efctSetSpeed(alpha);
-    texDrawTableEntryAtStoredOrigin(2, 0x31, 0, x, color, 0x8D);
-    texDrawTableEntryAtStoredOrigin(2, 0x31, 1, x, color, 0x8D);
-    texDrawTableEntryAtStoredOrigin(2, 0x31, 9, x, color, 0x8D);
+    menuDrawStereoFrame(x, y, alpha);
     s32 baseX = vec2GetXInt(&display->position);
     s32 baseY = vec2GetYInt(&display->position);
     f32 baseAlpha = vec2GetSpeed(&display->position);

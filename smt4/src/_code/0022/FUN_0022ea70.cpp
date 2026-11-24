@@ -12,7 +12,7 @@ void FUN_00230d2c(const OffsetPosition2D*, u32, s32, s32, s32, s32);
 int uiDrawBottomRightOffset(int, int, int, int, int);
 int contentGetKindValue(...);
 void gxSetClippedBottomScreenScissor(int, int, int, int);
-int FUN_00231bcc(...);
+int uiDrawSizedTextureAtRegionEnd(...);
 int gameGetPlayerData(...);
 int drawTextAtSnappedRectangle(...);
 int layoutFindTableEntry(...); // declcheck: local (romwright prototype; the shared declaration in AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h does not compile here: argument of type "int" is incompatible with parameter of type "void *")
@@ -48,7 +48,7 @@ extern unsigned int itemGetNameOrFallback(unsigned int, unsigned int);
 /* Supplied declaration required: uiDrawBottomRightOffset. */
 extern unsigned int shopSlotGetPrice(unsigned short *);
 /* Supplied declaration required: contentGetKindValue. */
-/* Supplied declaration required: FUN_00231bcc. */
+/* Supplied declaration required: uiDrawSizedTextureAtRegionEnd. */
 extern unsigned int itemGetOwnedCount(unsigned int);
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
@@ -112,12 +112,12 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
     uiDrawBottomRightOffset(param_1 + 0x380,0x48,temp_v13,temp_v4,temp_v12);
     uiDrawBottomRightOffset(param_1 + 0x380,0x49,temp_v13,temp_v4,temp_v12);
     efctSetSpeed();
-    FUN_00231bcc(param_1 + 0x380,0x4a,temp_v13,temp_v4,temp_v12,1);
+    uiDrawSizedTextureAtRegionEnd(param_1 + 0x380,0x4a,temp_v13,temp_v4,temp_v12,1);
     if (*(char *)(param_1 + 0x839) != '\0') {
-      FUN_00231bcc(param_1 + 0x380,0x4c,temp_v13,temp_v4,temp_v12,1);
+      uiDrawSizedTextureAtRegionEnd(param_1 + 0x380,0x4c,temp_v13,temp_v4,temp_v12,1);
     }
     else {
-      FUN_00231bcc(param_1 + 0x380,0x4b,temp_v13,temp_v4,temp_v12,1);
+      uiDrawSizedTextureAtRegionEnd(param_1 + 0x380,0x4b,temp_v13,temp_v4,temp_v12,1);
     }
     temp_v5 = layoutFindTableEntry(param_1 + 0x380,0x4e);
     gxSetClippedBottomScreenScissor(*(short *)(temp_v5 + 8) + temp_v13,*(short *)(temp_v5 + 10) + temp_v4,
@@ -127,7 +127,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
     temp_v7 = vec2GetXInt();
     temp_v5 = (temp_v7 + temp_v13) - (*(unsigned short *)(temp_v5 + 4) & 0xffff7fff);
     temp_v6 = vec2GetYInt(temp_v6);
-    FUN_00231bcc(param_1 + 0x380,0x4d,temp_v5,temp_v6 + temp_v4,temp_v12,1);
+    uiDrawSizedTextureAtRegionEnd(param_1 + 0x380,0x4d,temp_v5,temp_v6 + temp_v4,temp_v12,1);
     temp_v5 = g_titleScene;
     piVar16 = (int *)(g_titleScene + 0x130c);
     temp_v6 = piVar16[*piVar16 + 2];
@@ -144,7 +144,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   temp_v0 = *(short *)(temp_v5 + 8);
   temp_v5 = *(short *)(temp_v5 + 10) + temp_v4;
   if (param_3 != 0) {
-    FUN_00231bcc(param_1 + 0x380,0xaa,temp_v13,temp_v4,temp_v12,1);
+    uiDrawSizedTextureAtRegionEnd(param_1 + 0x380,0xaa,temp_v13,temp_v4,temp_v12,1);
   }
   FUN_00230d2c((const OffsetPosition2D*)(param_1 + 0x380),(int)(short)temp_v22,temp_v0 + temp_v13,temp_v5,temp_v12,param_2 != 0);
   if (param_2 != 0) {

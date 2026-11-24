@@ -7,7 +7,7 @@
 extern "C" {
 void efctSetSpeed(f32 opacity);
 void uiDrawTableTextureAtRectCorner(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color);
-void FUN_0049368c(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color, u32 flags);
+void uiDrawSizedTextureAtRegionEnd(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color, u32 flags);
 
 /* The two animated scalars the draw reads: their speeds are the f32 at +0x20 of each object (opacity at 0x234, secondaryElapsed at 0x7AC). */
 struct TransitionSpeedView {
@@ -29,7 +29,7 @@ void FUN_004a7dc8(BattleTransitionState *work, s32 anchor, u32 color, s32 altern
     uiDrawTableTextureAtRectCorner(&work->frameDraw.region, 0x427, x, y, color);
     uiDrawTableTextureAtRectCorner(&work->frameDraw.region, 0x428, x, y, color);
     efctSetSpeed(1.0f);
-    FUN_0049368c(&work->frameDraw.region, 0x429, x, y, color, 1);
+    uiDrawSizedTextureAtRegionEnd(&work->frameDraw.region, 0x429, x, y, color, 1);
     if (alternate) {
         uiDrawTableTextureAtRectCorner(&work->frameDraw.region, 0x5CF, x, y, color);
         uiDrawTableTextureAtRectCorner(&work->frameDraw.region, 0x5D0, x, y, color);

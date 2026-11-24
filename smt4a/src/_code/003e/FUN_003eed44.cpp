@@ -1,12 +1,11 @@
-/* NON_MATCHING: 86 vs 86 rows, final 64-bit store now uses strd; retail hoists constant 0 into r8 right after btlUnitGet and uses ldrd on the final OR. */
+/* NON_MATCHING: the 64-bit voice-mask tests and attempted-bit update allocate different registers. */
 #include "battle/btlMain.h"
-#include "shard/W5_W5Match7_ScriptUnit.h"
+#include "battle/BtlScriptUnitFlags.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "code/Code0019.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {
-u32 hasFlag80Or1000(u32 unit, u32 *flags);
 s32 btlFindSelectionIndexByOrdinal(const BtlMainStateA *battle, s32 ordinal);
 bool FUN_0047f78c();
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
@@ -17,12 +16,7 @@ u32 FUN_0047f4cc(u32 sound, f32 volume, f32 gain, f32 pitch);
 void FUN_003eed44(BtlMainStateA *battle)
 {
     if (battle->voiceGate.blocked == 0 && battle->encounterGate.disabled == 0) {
-        ScriptUnit *unit = (ScriptUnit *)btlUnitGet((BtlMainStateA *const *)g_btlScriptUnit);
-        u32 hasFlag = 0;
-        if (unit != NULL) {
-            hasFlag = hasFlag80Or1000(g_btlScriptUnit, (u32 *)unit);
-        }
-        if (hasFlag == 0 && btlFindSelectionIndexByOrdinal(battle, 1) < 0) {
+        if (!btlScriptUnitHasFlagsInline() && btlFindSelectionIndexByOrdinal(battle, 1) < 0) {
             if ((battle->stateFlags64.bits & g_btlMain.voiceBlocking.blocked) == 0 &&
                 (battle->stateFlags64.bits & g_btlMain.voiceState.attempted) == 0) {
                 if (FUN_0047f78c()) {

@@ -4,10 +4,11 @@
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "network/CecControl.h"
 
-/* The card's message-box description: the box id, reserved words, then the NUL-terminated program id. */
+/* The card's message-box context. The startup initializer at 0x3EBD60 sets words at +8 and +0xC
+ * to -1 and clears +0x10 and +0x14. The program id follows this context in retail data. */
 struct CecCardBox {
     u32 id;
-    u32 reserved[5];
+    u32 state[5];
 };
 
 extern "C" {
@@ -52,7 +53,8 @@ u32 cecSendCardData(CecCardOwner *owner, u32 argument)
 }
 
 /* NON_MATCHING: retail derives the application-name address from the title literal, not the saved card-box
- * base, and schedules the card-box and payload loads differently at both calls. */
+ * base, and schedules the card-box and payload loads differently at both calls. Treating the tag as a
+ * separate scalar fixes the schedule but loses the intervening 20 bytes of card-box state. */
 /* Initializes the card's StreetPass message box and translates errors into menu status bits. */
 u32 cecCardMessageBoxInit(CecMessageBoxRequestPrefixIV *request)
 {

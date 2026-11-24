@@ -15,7 +15,7 @@ int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int libc_strcpy(...);
 int scrSetStringSlot(...);
-int FUN_0034a240(int);
+int saveMarkSpecialRecipeNoticeShown(int);
 int contentEntryFindById(void);
 int dataTableFindRecordWord(...);
 int dataTable5Type9Count(void);
@@ -38,8 +38,8 @@ extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: scrSetStringSlot. */
-extern int FUN_00330bb4(unsigned short);
-/* Supplied declaration required: FUN_0034a240. */
+extern int saveHasShownSpecialRecipeNotice(unsigned short);
+/* Supplied declaration required: saveMarkSpecialRecipeNoticeShown. */
 /* Supplied declaration required: contentEntryFindById. */
 /* Supplied declaration required: dataTableFindRecordWord. */
 /* Supplied declaration required: dataTable5Type9Count. */
@@ -88,14 +88,14 @@ unsigned int FUN_003a7d74(void)
           contentEntryFindById();
           temp_v6 = temp_v3;
           if (((temp_v4 != 0) &&
-              (temp_v7 = FUN_00330bb4(*(unsigned short *)((int)piVar3 + temp_v9 * 2 + 0x8f7c)),
+              (temp_v7 = saveHasShownSpecialRecipeNotice(*(unsigned short *)((int)piVar3 + temp_v9 * 2 + 0x8f7c)),
               temp_v7 == 0)) &&
              (temp_v7 = fusionClassifyRecipeAvailability(*piVar3,*(unsigned short *)((int)piVar3 + temp_v9 * 2 + 0x8f7c),
                                     temp_v10), temp_v7 != 0)) {
             temp_v6 = temp_v3 + 1;
             *(char *)((int)piVar3 + temp_v3 + 0x901c) =
                  (char)*(unsigned short *)((int)piVar3 + temp_v9 * 2 + 0x8f7c);
-            FUN_0034a240(*(unsigned short *)((int)piVar3 + temp_v9 * 2 + 0x8f7c));
+            saveMarkSpecialRecipeNoticeShown(*(unsigned short *)((int)piVar3 + temp_v9 * 2 + 0x8f7c));
           }
           temp_v9 = temp_v9 + 1;
           temp_v3 = temp_v6;

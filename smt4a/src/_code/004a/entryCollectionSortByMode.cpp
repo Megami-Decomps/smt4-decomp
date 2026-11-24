@@ -1,20 +1,18 @@
-/* NON_MATCHING: mode is s8 (callers sign-extend it); retail still keeps mode in r1 until the guard passes, this build copies it to r5 at entry. */
 #include "shard/W6_W6Match5_EntryCollection.h"
+#include <stdlib.h>
+#include <string.h>
 
 extern "C" {
-extern const EntryComparator DAT_0052b5d4[34];
-void qsort(void *, u32, u32, EntryComparator);
-
+extern const EntryComparator g_entryCollectionComparators[34];
+/* Sorts a nontrivial collection when its requested sort mode changes. */
 void entryCollectionSortByMode(EntryCollection *collection, s8 mode)
 {
-    if (collection->sortMode == mode)
-        return;
-    s32 count = collection->count;
-    if (count <= 1)
-        return;
-    collection->sortMode = mode;
-    EntryComparator comparators[34];
-    __aeabi_memcpy4(comparators, DAT_0052b5d4, sizeof(comparators));
-    qsort(collection->entries, count, sizeof(CollectionEntry), comparators[mode]);
+    if (collection->sortMode != mode && collection->count > 1) {
+        s32 count = collection->count;
+        collection->sortMode = mode;
+        EntryComparator comparators[34];
+        memcpy(comparators, g_entryCollectionComparators, sizeof(comparators));
+        qsort(collection->entries, count, sizeof(CollectionEntry), comparators[collection->sortMode]);
+    }
 }
-}
+} /* extern "C" */

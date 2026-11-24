@@ -1,4 +1,4 @@
-/* NON_MATCHING: zero/one setup order, predicated owned-child keepAlive test, and literal-pool order differ; saved global/zero registers now match. */
+/* NON_MATCHING: the zero/one setup order and final counter-update scheduling differ. */
 #include "shard/W6_W6Match5_CommonBackground.h"
 #include "map/mapRndMaze.h"
 
@@ -7,12 +7,10 @@ s32 gameFlagIsSet(u32 flag);
 void jobStop(u32 job, s32 reason);
 void asdMemFree(void *memory);
 
-static __inline bool commonBackgroundChildIsKeptAlive(const CommonBackgroundChild *child)
+static __inline void tickBackground(CommonBackgroundState *background)
 {
-    if (child == NULL) {
-        return false;
-    }
-    return child->keepAlive != 0;
+    ++background->counters.frame;
+    ++background->signedTimer;
 }
 
 s32 commonBackgroundUpdateFade(u32 handle)
@@ -59,21 +57,23 @@ s32 commonBackgroundUpdateFade(u32 handle)
         }
         break;
     }
-    if (!mapRndMazeTaskIsActive()) {
-        if (!commonBackgroundChildIsKeptAlive(g_commonBg.owned)) {
-            if (gameFlagIsSet(0x11)) {
-                CommonBackgroundChild *owned = g_commonBg.owned;
-                if (owned != NULL && --g_commonBg.referenceBytes[2] <= 0) {
-                    jobStop(owned->job, 0);
-                    asdMemFree(owned);
-                    g_commonBg.owned = NULL;
-                    g_commonBg.referenceBytes[2] = 0;
-                }
+    if (mapRndMazeTaskIsActive()) {
+        tickBackground(background);
+        return 0;
+    }
+    CommonBackgroundChild *child = g_commonBg.owned;
+    if (!(child != NULL && child->keepAlive != 0)) {
+        if (gameFlagIsSet(0x11)) {
+            CommonBackgroundChild *owned = g_commonBg.owned;
+            if (owned != NULL && --g_commonBg.referenceBytes[2] <= 0) {
+                jobStop(owned->job, 0);
+                asdMemFree(owned);
+                g_commonBg.owned = NULL;
+                g_commonBg.referenceBytes[2] = 0;
             }
         }
     }
-    ++background->counters.frame;
-    ++background->signedTimer;
+    tickBackground(background);
     return 0;
 }
-}
+} /* extern "C" */

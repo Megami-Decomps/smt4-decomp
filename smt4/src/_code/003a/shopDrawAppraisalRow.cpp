@@ -19,7 +19,7 @@
 
 extern "C" {
 void uiDrawBottomRightOffset(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth);
-void FUN_00231bcc(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth, u32 mode);
+void uiDrawSizedTextureAtRegionEnd(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth, u32 mode);
 void FUN_00230d2c(const AsdTextureRegion *region, u32 id, s32 x, s32 y, s32 depth, s32 showEquipped);
 void gxSetClippedBottomScreenScissor(s32 x, s32 y, s32 width, s32 height);
 f32 drawTextAtSnappedRectangle(const AsdTextureRegion *region, f32 x, f32 y, f32 depth, f32 spacing,
@@ -59,11 +59,11 @@ void shopDrawAppraisalRow(Scene3a *scene, s32 row, s32 selected, s32 index)
         uiDrawBottomRightOffset(&scene->region, 0x48, x, y, depth);
         uiDrawBottomRightOffset(&scene->region, 0x49, x, y, depth);
         efctSetSpeed(1.0f);
-        FUN_00231bcc(&scene->region, 0x4A, x, y, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&scene->region, 0x4A, x, y, depth, 1);
         if (touchSelectionGetSelected((Obj55ca08 *)scene->touchSelection) != 0) {
-            FUN_00231bcc(&scene->region, 0x4C, x, y, depth, 1);
+            uiDrawSizedTextureAtRegionEnd(&scene->region, 0x4C, x, y, depth, 1);
         } else {
-            FUN_00231bcc(&scene->region, 0x4B, x, y, depth, 1);
+            uiDrawSizedTextureAtRegionEnd(&scene->region, 0x4B, x, y, depth, 1);
         }
         const TextureTableEntryIV *clip = layoutFindTableEntry(&scene->region, 0x4E);
         s32 clipX = clip->x + x;
@@ -75,7 +75,7 @@ void shopDrawAppraisalRow(Scene3a *scene, s32 row, s32 selected, s32 index)
         UiSpriteState *scroll = &scene->animation.sprites[3];
         s32 contentX = vec2GetXInt(scroll) + x - (content->width & 0x7FFF);
         s32 contentY = vec2GetYInt(scroll) + y;
-        FUN_00231bcc(&scene->region, 0x4D, contentX, contentY, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&scene->region, 0x4D, contentX, contentY, depth, 1);
         renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
     }
 
@@ -92,7 +92,7 @@ void shopDrawAppraisalRow(Scene3a *scene, s32 row, s32 selected, s32 index)
     s32 badgeX = badge->x + x;
     s32 badgeY = badge->y + y;
     if (selected) {
-        FUN_00231bcc(&scene->region, 0xE4, x, y, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&scene->region, 0xE4, x, y, depth, 1);
     }
     FUN_00230d2c(&scene->region, (s16)shown, badgeX, badgeY, depth, 0);
 
@@ -124,7 +124,7 @@ void shopDrawAppraisalRow(Scene3a *scene, s32 row, s32 selected, s32 index)
         s32 secondX = secondBadge->x + x;
         s32 secondY = secondBadge->y + y;
         if (selected) {
-            FUN_00231bcc(&scene->region, 0xE5, x, y, depth, 1);
+            uiDrawSizedTextureAtRegionEnd(&scene->region, 0xE5, x, y, depth, 1);
         }
         FUN_00230d2c(&scene->region, (s16)second, secondX, secondY, depth, 0);
         const char *secondName = itemGetNameOrFallback(second, 0);
@@ -150,7 +150,7 @@ void shopDrawAppraisalRow(Scene3a *scene, s32 row, s32 selected, s32 index)
         item.percent = 0;
         item.id = second;
         s32 price = aocItemGetPrice(&item);
-        FUN_00231bcc(&scene->region, !selected ? 0xD1 : 0xE3, x, y, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&scene->region, !selected ? 0xD1 : 0xE3, x, y, depth, 1);
         const TextureTableEntryIV *priceOrigin;
         u32 priceColor;
         if (!selected) {
@@ -192,6 +192,6 @@ void shopDrawAppraisalRow(Scene3a *scene, s32 row, s32 selected, s32 index)
     } else {
         frame = !selected ? 0xCF : 0xE1;
     }
-    FUN_00231bcc(&scene->region, frame, x, y, depth, 1);
+    uiDrawSizedTextureAtRegionEnd(&scene->region, frame, x, y, depth, 1);
 }
 }

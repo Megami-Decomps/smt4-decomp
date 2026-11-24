@@ -18,7 +18,7 @@
 
 extern "C" {
 
-void FUN_00233240(Scene3aSprites *animation, u32 index);
+void uiSceneApplySpritePreset(Scene3aSprites *animation, u32 index);
 void pointConvertToFloat(FloatPoint *point, s32 x, s32 y);
 s32 tableGroupFindEntryIndex(TableGroupHeader *table, const char *name);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
@@ -112,7 +112,7 @@ extern "C" void shopUpdateCategoryMenu(ShopScreen *screen)
         screen->flags |= 4;
         equipmentMenuBuildVisibleCategories(screen, SHOP_ROWS_TOP);
         shopSelectEntryStart(screen, 0);
-        FUN_00233240(&screen->animation, 1);
+        uiSceneApplySpritePreset(&screen->animation, 1);
         screen->pageTransition.substep = SHOP_MENU_TOP;
         return;
     }

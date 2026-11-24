@@ -11,7 +11,7 @@
 
 extern "C" {
 void uiDrawBottomRightOffset(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth);
-void FUN_00231bcc(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth, u32 mode);
+void uiDrawSizedTextureAtRegionEnd(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth, u32 mode);
 void gxSetClippedBottomScreenScissor(s32 x, s32 y, s32 width, s32 height);
 void devilDrawIconRelative(AsdTextureRegion *region, s32 demon, s32 x, s32 y, u32 depth);
 s32 textMeasureOnLayer(const char *text, s32 layer);
@@ -42,8 +42,8 @@ void bibleAnalyzeDrawRow(AnalyzeWork *work, s32 index, s32 selected, s32 id)
         uiDrawBottomRightOffset(&work->region, 0x103B, x, y, depth);
         uiDrawBottomRightOffset(&work->region, 0x103C, x, y, depth);
         efctSetSpeed(1.0f);
-        FUN_00231bcc(&work->region, 0x103D, x, y, depth, 1);
-        FUN_00231bcc(&work->region, 0x103E, x, y, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&work->region, 0x103D, x, y, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&work->region, 0x103E, x, y, depth, 1);
         const TextureTableEntryIV *clip = layoutFindTableEntry(&work->region, 0x1041);
         s32 clipX = clip->x + x;
         s32 clipY = clip->y + y;
@@ -54,7 +54,7 @@ void bibleAnalyzeDrawRow(AnalyzeWork *work, s32 index, s32 selected, s32 id)
         UiSpriteState *scroll = &work->scroll;
         s32 bandX = vec2GetXInt(scroll) + x - (band->width & 0x7FFF);
         s32 bandY = vec2GetYInt(scroll) + y;
-        FUN_00231bcc(&work->region, 0x1040, bandX, bandY, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&work->region, 0x1040, bandX, bandY, depth, 1);
         renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
     }
     if (id != 0) {

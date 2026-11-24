@@ -24,19 +24,19 @@ void FUN_00319b10(void)
     taskCreateDraw("CAMPTALK UR", 0xDD, 0, 0, FUN_0032fab8, 0, NULL, work->job);
     taskCreateDraw("CAMPTALK DD", 0xEB, 0, 0, FUN_0032fab0, 0, NULL, work->job);
     work->firstSelection = -1;
-    work->secondSelection = -1;
+    work->selectedSlot = -1;
     loadSlotRequestAsync(0x14, 0);
     loadSlotRequestAsync(0x25, 0);
     loadSlotRequestAsync(0x3E, 0);
     work->resultScript = NULL;
     work->resultMessages = NULL;
     work->levelUpScript = NULL;
-    work->levelUpProcess = 0;
-    work->scriptProcess = 0;
+    work->levelUpProcess = NULL;
+    work->scriptProcess = NULL;
     asdLoadFileAsyncSimple(DAT_0052c7ac, &work->resultScript, 0);
     asdLoadFileAsyncSimple(DAT_0052c794, &work->resultMessages, 0);
     asdLoadFileAsyncSimple(DAT_0052c780, &work->levelUpScript, 0);
-    work->state = 0;
-    work->enabled = 1;
+    work->step = 0;
+    work->workflowState = 1;
 }
 }

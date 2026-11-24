@@ -1,41 +1,42 @@
-/* NON_MATCHING: IDENTICAL with unit cflags `--fpu=softvfp` (default flags otherwise); under the default VFP build retail keeps byteCount in r6 and commands in r8 (ours r5/r6) and builds the queued entry address without write-back. */
-#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include <string.h>
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
+#include "shard/W6_W6Match8_LightUniforms.h"
 
 extern "C" {
-extern u8 *g_commandBufferCursor;
+void asdGxCommandBufferTerminateAndSubmit(void);
 void nngxLockEnter(void);
 void nngxLockLeave(void);
-void asdGxCommandBufferTerminateAndSubmit(u32 committedOffset, u32 writeOffset);
 void gfxReplayRecordedCommands(void);
-void *__aeabi_memcpy4(void *destination, const void *source, u32 byteCount);
 
-// Append copied GPU words or enqueue an external command block for submission.
+/* Copies command words into the current buffer, or queues the caller's aligned block directly. */
 void gpuSubmitCommandBlock(const void *commands, u32 byteCount, s32 copyCommands)
 {
-    AsdCmdBuffer *list = g_asdGfxContext.cmdBuffer;
-    list->writeOffset = g_commandBufferCursor - list->start;
+    enum { COMMAND_LIST = 1, COMMANDS_BORROWED = 2 };
+    AsdGfxContext *context = &g_asdGfxContext;
+    AsdCmdBuffer *list = context->cmdBuffer;
+    list->writeOffset = (u8 *)g_commandBufferCursor - list->start;
     if (copyCommands != 0) {
-        __aeabi_memcpy4(g_commandBufferCursor, commands, byteCount);
-        g_commandBufferCursor += byteCount & ~3u;
+        memcpy(g_commandBufferCursor, (const u32 *)commands, byteCount);
+        g_commandBufferCursor += byteCount / sizeof(*g_commandBufferCursor);
     } else {
         if (list->committedOffset != list->writeOffset) {
-            asdGxCommandBufferTerminateAndSubmit(list->committedOffset, list->writeOffset);
+            asdGxCommandBufferTerminateAndSubmit();
         }
         if (list->committedOffset == list->writeOffset) {
             AsdCmdRecord *entry = &list->entries[list->listCount];
-            entry->kind = 1;
+            entry->kind = COMMAND_LIST;
             entry->byteCount = byteCount;
             entry->commands = commands;
-            entry->flags |= 2;
+            entry->flags |= COMMANDS_BORROWED;
             nngxLockEnter();
             ++list->listCount;
-            if (g_asdGfxContext.activeBuffer == list &&
-                g_asdGfxContext.submitEnabled && !g_asdGfxContext.submitPending) {
-                g_asdGfxContext.submitPending = 1;
+            if (context->activeBuffer == list && context->submitEnabled && !context->submitPending) {
+                context->submitPending = 1;
                 gfxReplayRecordedCommands();
             }
             nngxLockLeave();
         }
     }
 }
-}
+
+} /* extern "C" */

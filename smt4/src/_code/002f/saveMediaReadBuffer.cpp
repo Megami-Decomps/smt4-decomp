@@ -1,4 +1,4 @@
-/* NON_MATCHING: all 143 instructions match retail (LocalStream RAII + open/readAt/close methods); only block placement of the read-failure close cases (C/B/A) vs the success-close dispatch header differs. */
+/* NON_MATCHING: the status check after reading uses LSRS/BEQ instead of retail's ANDS/BPL. */
 #include "common.h"
 #include "nn/Result.h"
 #include "shard/W6_W6Match1_PositionedStream.h"
@@ -119,17 +119,18 @@ struct LocalStream {
 extern "C" u32 saveMediaReadBuffer(s32 kind, u32 name, u32 buffer, u32 size)
 {
     LocalStream stream;
-    s32 result = stream.open(kind, name, 2);
-    if ((result & (s32)0x80000000) < 0) {
+    s32 openResult = stream.open(kind, name, 2);
+    if ((openResult & (s32)0x80000000) < 0) {
         return 0;
     }
-    result = stream.readAt(kind, 0, buffer, size);
-    if ((result & (s32)0x80000000) < 0) {
+    s32 readResult = stream.readAt(kind, 0, buffer, size);
+    bool readSucceeded = !nnResultIsFailure(readResult);
+    if (!readSucceeded) {
         stream.close(kind);
         return 0;
     }
-    result = stream.close(kind);
-    if ((result & (s32)0x80000000) < 0) {
+    s32 closeResult = stream.close(kind);
+    if ((closeResult & (s32)0x80000000) < 0) {
         return 0;
     }
     return 1;

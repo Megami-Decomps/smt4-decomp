@@ -63,7 +63,7 @@ void bibleDevilListRefresh(PartyRefresh *);
 void messageDismissNumericBanner(s32);
 void buttonHelpSetText(s32, u32);
 void beginStatusPanelClose();
-void FUN_00233240(void *, s32);
+void uiSceneApplySpritePreset(void *, s32);
 void FUN_00232848();
 void uniteLoadPreviewRoomModel();
 
@@ -110,7 +110,7 @@ void Obj4223c4::partyRefreshCompleteAndUpdateSummaries()
             messageDismissNumericBanner(1);
         buttonHelpSetText(0, 0x323232ff);
         beginStatusPanelClose();
-        FUN_00233240(work->control, 1);
+        uiSceneApplySpritePreset(work->control, 1);
         gameGlobalsSetSubScreenActive(1);
         step = 11;
         phase = 0;

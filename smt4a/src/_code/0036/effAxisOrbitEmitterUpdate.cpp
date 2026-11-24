@@ -20,7 +20,7 @@ void effComputeParticleEmission(ParticleEmissionState *state, const ParticleEmis
 void FUN_002fe2e8(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_0027134c(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_00321e98(ParticleEmissionState *emitter, SpiralParticle *particle);
-void FUN_00321d7c(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous);
+void effSampleParticleTransform(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous);
 }
 
 /* Turns the point in the first scratch slot by `rotation` and moves it to `origin`. */
@@ -129,7 +129,7 @@ extern "C" void effAxisOrbitEmitterUpdate(ParticleEmissionState *emitter)
                 particle->position = g_vectorScratch.first.vector;
                 particle->frame = (s32)age;
             }
-            FUN_00321d7c(reinterpret_cast<ParticleTransformSample *>(particle),
+            effSampleParticleTransform(reinterpret_cast<ParticleTransformSample *>(particle),
                          reinterpret_cast<ParticleTransformCurves *>(definition), particle->frame,
                          reinterpret_cast<const EffectColor *>(&previous));
             particle->scale *= motion->scale;
@@ -169,7 +169,7 @@ extern "C" void effAxisOrbitEmitterUpdate(ParticleEmissionState *emitter)
             particle->position.x = x;
             particle->position.y = y;
             particle->position.z = z;
-            FUN_00321d7c(reinterpret_cast<ParticleTransformSample *>(particle),
+            effSampleParticleTransform(reinterpret_cast<ParticleTransformSample *>(particle),
                          reinterpret_cast<ParticleTransformCurves *>(definition), frame,
                          reinterpret_cast<const EffectColor *>(&previous));
             particle->scale *= motion->scale;

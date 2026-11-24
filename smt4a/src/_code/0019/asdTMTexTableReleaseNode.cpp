@@ -1,4 +1,5 @@
 /* NON_MATCHING: compiler reuses the saved zero for both final stores instead of retail's writeback and fresh zero. */
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexResource.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {

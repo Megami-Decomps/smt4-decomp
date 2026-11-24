@@ -110,7 +110,8 @@ struct BtlCombatantEntryA {
     /* 0x150 */ u32 modifierFlags;
     /* 0x154 */ s32 weakSlot;     /* a 1-based slot btlGetAffinity compares the attack's slot with, 0 for none */
     /* 0x158 */ s32 targetDelay;    /* positive: not selectable yet */
-    /* 0x15C */ u8 unk15C[8];
+    /* 0x15C */ s32 minimumHpPercent; /* floor for the target HP recorded during an action */
+    /* 0x160 */ u8 unk160[4];
     /* 0x164 */ BtlUnitDataA data;
 }; /* 0x408 bytes */
 
@@ -127,7 +128,7 @@ typedef char BtlUnitDataALayoutCheck[
 typedef char BtlCombatantEntryALayoutCheck[
     offsetof(BtlCombatantEntryA, ids) == 8 && offsetof(BtlCombatantEntryA, selectionIndex) == 0x6E &&
     offsetof(BtlCombatantEntryA, properties) == 0x74 && offsetof(BtlCombatantEntryA, modifiers) == 0x13C &&
-    offsetof(BtlCombatantEntryA, targetDelay) == 0x158 &&
+    offsetof(BtlCombatantEntryA, targetDelay) == 0x158 && offsetof(BtlCombatantEntryA, minimumHpPercent) == 0x15C &&
     offsetof(BtlCombatantEntryA, data) == 0x164 && offsetof(BtlCombatantEntryA, data.hp) == 0x258 &&
     offsetof(BtlCombatantEntryA, data.record) == 0x3F8 && sizeof(BtlCombatantEntryA) == 0x408 &&
     offsetof(BtlCombatantEntryA, listedSlot) == 0x6C && offsetof(BtlCombatantEntryA, modifierFlags) == 0x150 &&

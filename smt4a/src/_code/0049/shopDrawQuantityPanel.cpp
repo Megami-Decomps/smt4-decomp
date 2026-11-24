@@ -6,7 +6,7 @@
 
 extern "C" {
 void uiDrawCompositeSpriteAtRectCorner(void *group, u32 sprite, s32 x, s32 y, s32 depth);
-void FUN_0049368c(void *group, u32 sprite, s32 x, s32 y, s32 depth, s32 enabled);
+void uiDrawSizedTextureAtRegionEnd(void *group, u32 sprite, s32 x, s32 y, s32 depth, s32 enabled);
 void drawTextAtRelativePosition(void *group, u32 font, s32 x, s32 y, s32 mode,
     s32 alignment, u32 color, s32 depth, const char *text);
 static const char s_quantityFormat[] = "%2d";
@@ -34,13 +34,13 @@ void shopDrawQuantityPanel(Obj536044 *shop)
     } else {
         uiDrawCompositeSpriteAtRectCorner(&shop->quantityPanel.rect, 8, x, y, depth);
     }
-    FUN_0049368c(&shop->quantityPanel.rect, 0xC2, x, y, depth, 1);
-    FUN_0049368c(&shop->quantityPanel.rect, 0xC3, x, y, depth, 1);
+    uiDrawSizedTextureAtRegionEnd(&shop->quantityPanel.rect, 0xC2, x, y, depth, 1);
+    uiDrawSizedTextureAtRegionEnd(&shop->quantityPanel.rect, 0xC3, x, y, depth, 1);
     if (shop->quantity.incrementActive) {
-        FUN_0049368c(&shop->quantityPanel.rect, 0xC4, x, y, depth + 1, 1);
+        uiDrawSizedTextureAtRegionEnd(&shop->quantityPanel.rect, 0xC4, x, y, depth + 1, 1);
     }
     if (shop->quantity.decrementActive) {
-        FUN_0049368c(&shop->quantityPanel.rect, 0xC5, x, y, depth + 1, 1);
+        uiDrawSizedTextureAtRegionEnd(&shop->quantityPanel.rect, 0xC5, x, y, depth + 1, 1);
     }
     s32 quantity = shop->quantity.value;
     const TextureTableEntryIV *label = layoutFindTableEntry(&shop->quantityPanel.rect, 199);

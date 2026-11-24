@@ -48,18 +48,18 @@ void resourceOwnerLoadFileSync(MoriModelContent *content, const char *name);
  * for a model of its own); nothing when no file is loaded. */
 void moriModelContentLoadBody(MoriModelContent *content, Obj557b18 *parent);
 /* Creates the resource for `id` and the binding object. */
-void FUN_0040a884(MoriModelContent *content, u32 id);
+void moriModelContentLoadBindingById(MoriModelContent *content, u32 id);
 /* Creates the body from the already created resource. */
 void moriModelContentCreateBody(MoriModelContent *content, Obj557b18 *parent);
 /* Creates the binding object over the resource. */
 void moriModelContentCreateBinding(MoriModelContent *content);
 /* Creates the resource for `id`. */
-void FUN_0040a9a0(MoriModelContent *content, u32 id);
+void moriModelContentLoadResourceById(MoriModelContent *content, u32 id);
 /* Creates the resource from the file, if one is loaded. */
-void FUN_0040a9fc(MoriModelContent *content);
+void moriModelContentLoadResourceFromFile(MoriModelContent *content);
 /* Creates the resource from the file, sharing it. Callers pass a second resource (the content's
  * resource being linked) that the recovered body does not read. */
-void FUN_0040ab9c(MoriModelContent *content, Obj557d00 *linked);
+void moriModelContentBuildFromLoadedData(MoriModelContent *content, Obj557d00 *linked);
 /* Creates the body over another content's resource. */
 void moriModelContentCopyBody(MoriModelContent *content, MoriModelContent *source, Obj557b18 *parent);
 

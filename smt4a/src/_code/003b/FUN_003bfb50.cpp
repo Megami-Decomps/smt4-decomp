@@ -1,10 +1,9 @@
+#include "gfx/ModelTransform.h"
 /* NON_MATCHING: matrix expressions contract to VMLA/VMLS and destination preservation uses r4 instead of retail r3. */
 #include "shard/W5_W5Match2_PlainData.h"
 #include "shard/S1Mover.h"
 
 extern "C" {
-void matrix43Multiply(Matrix44 *destination, const Matrix44 *first, const Matrix44 *second);
-void matrixCopyFull(Matrix44 *destination, const Matrix44 *source);
 
 // Set, pre-multiply, or post-multiply an axis-angle rotation given 1-cosine and sine.
 Matrix44 *FUN_003bfb50(Matrix44 *destination, const Vec3f *axis, s32 mode, f32 oneMinusCosine, f32 sine)

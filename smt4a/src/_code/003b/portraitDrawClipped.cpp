@@ -11,7 +11,7 @@ extern u32 g_aocSystem;
 bool gameFlagIsSet(u32 flag);
 s32 recordPrepareLinkedOwner(u32 package, u32 table, s32 image);
 void FUN_001849bc(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority, const void *crop);
-void FUN_00471a04(u32 package, s32 id, u32 flags, s32 image, s32 x, s32 y, s32 z,
+void portraitDrawPackageClip(u32 package, s32 id, u32 flags, s32 image, s32 x, s32 y, s32 z,
                   s32 clipX, s32 clipY, s32 clipWidth, s32 clipHeight);
 
 /* Draws a clipped demon portrait from its add-on resource or the built-in portrait atlas. */
@@ -43,7 +43,7 @@ void portraitDrawClipped(s32 id, s32 x, s32 y, s32 z, s32 resolve,
     }
     if (devilIsTextureLoaded(id, resolve)) {
         if (recordPrepareLinkedOwner(g_aocSystem, table, image)) {
-            FUN_00471a04(g_aocSystem, id, 2, image, x, y, z, clipX, clipY, clipWidth, clipHeight);
+            portraitDrawPackageClip(g_aocSystem, id, 2, image, x, y, z, clipX, clipY, clipWidth, clipHeight);
         } else {
             s32 sprite = image * 1000 + 1;
             const TextureTableEntryIV *origin = asdTMTexTableEntryAt(table, sprite);

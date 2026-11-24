@@ -26,7 +26,7 @@ void *asdFileAllocZeroedBuffer(u32 a, u32 b, u32 c, u32 size, u32 alignment, u32
     void *block = asdMemoryAllocImpl(a, b, c, paddedSize, extra);
     void *memory = asdMemInitAllocationHeader(block, paddedSize, alignment, 0);
     rt_memclr(memory, size);
-    u32 result = nn::svc::ReleaseMutex(*g_asdMemState.mutex);
+    u32 result = svcReleaseMutex(*g_asdMemState.mutex);
     bool failed = nnResultIsFailure(result);
     if (failed) {
         resultHandleFailure(result, failed);

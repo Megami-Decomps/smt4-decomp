@@ -102,6 +102,15 @@ struct ActorCardAnimations {
     /* 0x5950 */ ActorCardAnimationState animation;
     /* 0x59BC */ u32 messageFile;                  /* the loaded battle/BattleUI.mbm */
 };
+/* Visibility state of the command panels in Apocalypse (relative to actor-card work + 0x4A00). */
+struct ActorCardPanelVisibilityA {
+    /* 0x00 */ u8 unk00[0xD8];
+    /* 0xD8 */ s32 selectorPhase;
+    /* 0xDC */ u8 unkDC[9];
+    /* 0xE5 */ u8 hidden[5];
+    /* 0xEA */ u8 unkEA[2];
+};
+
 /* Apocalypse: the battle UI's party display and party menu (0x4BC4 bytes). */
 struct ActorCardAnimationsA {
     /* 0x0000 */ UiResourceParameters resources;  /* every sprite's animation tables */
@@ -172,9 +181,9 @@ struct ActorCardAnimationsA {
     /* 0x4210 */ s16 unitIndices[5];               /* slot table index of a panel's unit (< 0: none) */
     /* 0x421A */ u8 unk421A[6];
     /* 0x4220 */ s32 memberModelIds[3];            /* the demon shown in a party member's panel, 0: none */
-    /* 0x422C */ u8 unk422C[0x8AC];
-    /* 0x4AD8 */ s32 unk4AD8;
-    /* 0x4ADC */ u8 unk4ADC[0x33];
+    /* 0x422C */ u8 unk422C[0x7D4];
+    /* 0x4A00 */ ActorCardPanelVisibilityA panelVisibility;
+    /* 0x4AEC */ u8 unk4AEC[0x23];
     /* 0x4B0F */ u8 unk4B0F;
     /* 0x4B10 */ u32 unk4B10;
     /* 0x4B14 */ u16 unk4B14;
@@ -228,7 +237,8 @@ typedef char ActorCardAnimationOffsetsCheck[
     offsetof(ActorCardAnimationsA, unitIndices) == 0x4210 &&
     offsetof(ActorCardAnimationsA, memberModelIds) == 0x4220 &&
     offsetof(ActorCardAnimationsA, unk38B5) == 0x38B5 &&
-    offsetof(ActorCardAnimationsA, unk4AD8) == 0x4AD8 &&
+    offsetof(ActorCardAnimationsA, panelVisibility.selectorPhase) == 0x4AD8 &&
+    offsetof(ActorCardAnimationsA, panelVisibility.hidden) == 0x4AE5 &&
     offsetof(ActorCardAnimationsA, unk4B0F) == 0x4B0F &&
     offsetof(ActorCardAnimationsA, messageFile) == 0x4B98 &&
     offsetof(ActorCardAnimationsA, portraitIds) == 0x4BB0 &&

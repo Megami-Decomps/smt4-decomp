@@ -62,7 +62,7 @@ extern "C" {
 u16 shopListItemGetId(const BibleBrowseEntry *entry);
 s32 FUN_00232848(void);
 s32 FUN_002328b4(void);
-void FUN_00233240(void *animation, s32 slot);
+void uiSceneApplySpritePreset(void *animation, s32 slot);
 s32 uiOwnerUpdateAnimationChannels(BibleBrowseView *view);
 u32 flaggedValueHolderGetTotal(void *list);
 void releaseEntriesA(void *selection); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "u8 *" is incompatible with parameter of type "Obj *")
@@ -129,7 +129,7 @@ void FUN_003a98b8(BibleBrowseView *view)
         view->mode = 4;
         slotsOf(view)->slotIndex = gameGetFlagByte12e8() == 1 ? 1 : 5;
         view->modeTimer = 0;
-        FUN_00233240(view->animation, slotsOf(view)->slotIndex);
+        uiSceneApplySpritePreset(view->animation, slotsOf(view)->slotIndex);
         ifTouchRegionClearAll(view->touchOwner);
         releaseEntriesA(view->selection);
         return;
@@ -153,7 +153,7 @@ void FUN_003a98b8(BibleBrowseView *view)
     }
     beginStatusPanelClose();
     buttonHelpSetText(0, 0x323232FF);
-    FUN_00233240(view->animation, 1);
+    uiSceneApplySpritePreset(view->animation, 1);
     gameGlobalsSetSubScreenActive(1);
     view->mode = 6;
     view->modeTimer = 0;

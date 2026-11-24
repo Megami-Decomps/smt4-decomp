@@ -62,17 +62,16 @@ static inline u32 partnerInfoCount(void)
     return dataTableGetCount(table);
 }
 
-/* The trigger at `index`, or NULL past the end. */
-static inline PartnerInfoRecord *partnerInfoRecordAt(u32 index)
+/* The trigger at `index`, or NULL past the end. Like conditionalMessageFind's record lookup,
+ * this is inlined late: the caller keeps the out-of-range NULL across iterations. */
+static PartnerInfoRecord *partnerInfoRecordAt(u32 index)
 {
     void *table = dataTableGet(0x43, 0);
-    PartnerInfoRecord *record = static_cast<PartnerInfoRecord *>(dataTableGetEntries(table));
+    PartnerInfoRecord *records = (PartnerInfoRecord *)dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
     if (index >= count)
-        record = NULL;
-    else
-        record += index;
-    return record;
+        return NULL;
+    return records + index;
 }
 #endif
 

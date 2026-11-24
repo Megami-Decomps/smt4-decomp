@@ -1,7 +1,7 @@
 /* NON_MATCHING: same structure and row count as retail (single `destination` result, VFP + core copy of the packet); retail hoists the defaults literal above the push and keeps `destination` in r4 (four-register frame112, six-register ldm for the tail words), armcc uses three registers (frame116). */
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
-extern "C" void FUN_001b4128(const void*, u32, u32);
+extern "C" void gpuSubmitCommandBlockInternal(const void*, u32, u32);
 
 namespace {
 struct TextureCommandPacket {
@@ -45,7 +45,7 @@ extern "C" u32* gfxAppendTextureUnitPacket(void*, u32* destination, const AsdTex
             *reinterpret_cast<TextureCommandPacket*>(destination) = packet;
             destination += sizeof(packet) / sizeof(u32);
         } else {
-            FUN_001b4128(&packet, sizeof(packet), 1);
+            gpuSubmitCommandBlockInternal(&packet, sizeof(packet), 1);
         }
     } else {
         packet = TextureCommandPacket();
@@ -53,7 +53,7 @@ extern "C" u32* gfxAppendTextureUnitPacket(void*, u32* destination, const AsdTex
             *reinterpret_cast<TextureCommandPacket*>(destination) = packet;
             destination += sizeof(packet) / sizeof(u32);
         } else {
-            FUN_001b4128(&packet, sizeof(packet), 1);
+            gpuSubmitCommandBlockInternal(&packet, sizeof(packet), 1);
         }
     }
     return destination;

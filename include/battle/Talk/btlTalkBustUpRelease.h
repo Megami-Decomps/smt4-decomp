@@ -2,12 +2,12 @@
 #ifndef BATTLE_TALK_BTLTALKBUSTUPRELEASE_H
 #define BATTLE_TALK_BTLTALKBUSTUPRELEASE_H
 
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexResource.h"
 #include "battle/Talk/btlTalkBustUp.h"
 #include "addon/aocMain.h"
 #include "addon/AocSystemA.h"
 
 extern "C" {
-void asdTMTexTableReleaseNode(s32 table, s32 node);
 void packageFileDisableByKindName(AocSystemA *system, s32 table, u32 node);
 }
 

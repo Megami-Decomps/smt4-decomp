@@ -11,7 +11,7 @@ struct AlternateShopDecorations {
 extern "C" {
 extern const ShopIconIndices DAT_0044df98[7];
 extern const AlternateShopDecorations g_shopTabNeighbors;
-void FUN_00231bcc(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color, u32 flags);
+void uiDrawSizedTextureAtRegionEnd(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color, u32 flags);
 s32 gameFlagIsSet(u32 flag);
 
 void FUN_003a07a0(ShopWork *shop, s32 state)
@@ -43,8 +43,8 @@ void FUN_003a07a0(ShopWork *shop, s32 state)
         (!work->restricted && work->result != 8 && gameFlagIsSet(0x410)) ||
         work->mode == 1) {
         u32 color = work->color;
-        FUN_00231bcc(&work->region, 0x65, 0, 0, color, 1);
-        FUN_00231bcc(&work->region, 0x66, 0, 0, color, 1);
+        uiDrawSizedTextureAtRegionEnd(&work->region, 0x65, 0, 0, color, 1);
+        uiDrawSizedTextureAtRegionEnd(&work->region, 0x66, 0, 0, color, 1);
         s32 firstIndex;
         s32 secondIndex;
         if (work->mode == 1) {
@@ -65,8 +65,8 @@ void FUN_003a07a0(ShopWork *shop, s32 state)
         }
         ShopDecorationImageGroup first = DAT_004074a4.firstDecoration;
         ShopDecorationImageGroup second = DAT_004074a4.secondDecoration;
-        FUN_00231bcc(&work->region, first.images[firstIndex], 0, 0, color, 1);
-        FUN_00231bcc(&work->region, second.images[secondIndex], 0, 0, color, 1);
+        uiDrawSizedTextureAtRegionEnd(&work->region, first.images[firstIndex], 0, 0, color, 1);
+        uiDrawSizedTextureAtRegionEnd(&work->region, second.images[secondIndex], 0, 0, color, 1);
     }
 }
 }

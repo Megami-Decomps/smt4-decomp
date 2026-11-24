@@ -22,7 +22,7 @@ int FUN_002f9418(void);
 int FUN_0031db84(...);
 int menu32PlayCursorSeAndSelect(...);
 int FUN_00321338(...);
-int FUN_00321500(...);
+int statusPanelStartIdleFrameAnimation(...);
 int gameGlobalsReleaseReference(void);
 int gameGlobalsSetMenuOpenFlag(...);
 int btlUiSlotTrackerEnableSlot(...);
@@ -62,7 +62,7 @@ int gameGlobalsSetSceneState(int);
 int btlUiStepNumberPopupsAndMarkers(int);
 int FUN_002cdd18(int);
 int sysMemClear(unsigned int *, int);
-int uiWorkEndState1(int);
+int statusPanelEndPhaseOne(int);
 int FUN_0034efe0(void);
 int owner2DCInitSub(int);
 int menu32State387CIs7(...);
@@ -141,14 +141,14 @@ extern int FUN_002fc0a4(int);
 /* Supplied declaration required: menu32PlayCursorSeAndSelect. */
 /* Supplied declaration required: FUN_00321338. */
 extern int menu32ModeIsNot2(int);
-/* Supplied declaration required: FUN_00321500. */
+/* Supplied declaration required: statusPanelStartIdleFrameAnimation. */
 extern unsigned int partyPanelValueGet(void);
 /* Supplied declaration required: gameGlobalsReleaseReference. */
 /* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 extern int menu32State387CIs6(int);
 /* Supplied declaration required: btlUiSlotTrackerEnableSlot. */
 extern int menu32ModeIsNot4(int);
-/* Supplied declaration required: uiWorkEndState1. */
+/* Supplied declaration required: statusPanelEndPhaseOne. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 extern int partyPanelGetFlag(void);
 extern unsigned int partyPanelGetState(void);
@@ -404,7 +404,7 @@ unsigned int btlUiDrawJobUpdate(void)
         temp_v9 = temp_v10 + 0x24bc;
         btlUiPanelOperationIsAllowed();
         if (temp_v9 != 0) {
-          uiWorkEndState1(temp_v10 + 8);
+          statusPanelEndPhaseOne(temp_v10 + 8);
           owner2DCInitSub(temp_v10 + 0x24bc);
         }
       }
@@ -421,7 +421,7 @@ unsigned int btlUiDrawJobUpdate(void)
           temp_v9 = temp_v10 + 0x24bc;
           btlUiPanelOperationIsAllowed();
           if (temp_v9 != 0) {
-            uiWorkEndState1(temp_v10 + 8);
+            statusPanelEndPhaseOne(temp_v10 + 8);
             owner2DCInitSub(temp_v10 + 0x24bc);
           }
         }
@@ -437,7 +437,7 @@ unsigned int btlUiDrawJobUpdate(void)
             temp_v9 = temp_v10 + 0x24bc;
             btlUiPanelOperationIsAllowed();
             if (temp_v9 != 0) {
-              uiWorkEndState1(temp_v10 + 8);
+              statusPanelEndPhaseOne(temp_v10 + 8);
               owner2DCInitSub(temp_v10 + 0x24bc);
             }
           }
@@ -563,7 +563,7 @@ LAB_00225054:
       temp_v10 = temp_v4 + 0x24bc;
       spriteOperationGetModeThreeCompletion();
       if (temp_v10 != 0) {
-        FUN_00321500(temp_v4 + 8);
+        statusPanelStartIdleFrameAnimation(temp_v4 + 8);
         uiSpriteSetKeyframeThree(temp_v4 + 0x24bc);
       }
     }
@@ -634,7 +634,7 @@ LAB_00225054:
           temp_v10 = temp_v4 + 0x24bc;
           spriteOperationGetModeThreeCompletion();
           if (temp_v10 != 0) {
-            FUN_00321500(temp_v4 + 8);
+            statusPanelStartIdleFrameAnimation(temp_v4 + 8);
             uiSpriteSetKeyframeThree(temp_v4 + 0x24bc);
           }
         }

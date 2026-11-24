@@ -1,4 +1,4 @@
-/* NON_MATCHING: built --multifile with treeSkew/treeSplit (config: retail pushes {r4-r7, lr} with no alignment pad); only `add nil, r0, #4` is scheduled before `mov tree, r0` in retail, after it (from the copy) in the build. */
+/* NON_MATCHING: built --multifile with treeSkew/treeSplit (config: retail pushes {r4-r7, lr} with no alignment pad); retail forms the sentinel at `tree + 8` before copying the tree pointer; the build forms it from the copy. */
 #include "shard/W6_W6Match3_AATreeNode.h"
 
 extern "C" {

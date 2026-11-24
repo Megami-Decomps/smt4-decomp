@@ -15,7 +15,7 @@ extern int FUN_0020e7bc(...); /* 0x20e7bc */
 extern unsigned char LAB_0020e83c; /* 0x20e83c */
 extern int FUN_0020e8d0(...); /* 0x20e8d0 */
 extern unsigned char LAB_00232044; /* 0x232044 */
-extern int FUN_00232104(...); /* 0x232104 */
+extern int partyPanelCompareByCategoryRaceAndRank(...); /* 0x232104 */
 extern int FUN_00241874(...); /* 0x241874 */
 extern int FUN_00290978(...); /* 0x290978 */
 extern unsigned char LAB_002909f8; /* 0x2909f8 */
@@ -74,7 +74,7 @@ void partyPanelSortByMode(void)
   }
   if ((*pbVar2 & 0x7f) == 0x1f) {
     if (temp_v1 != 0) {
-      qsort(temp_v0 + 0xa80,0x18,8,FUN_00232104);
+      qsort(temp_v0 + 0xa80,0x18,8,partyPanelCompareByCategoryRaceAndRank);
     }
     else {
       qsort(temp_v0 + 0xa80,0x18,8,FUN_002ce730);

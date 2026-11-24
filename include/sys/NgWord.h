@@ -1,13 +1,16 @@
 #ifndef SYS_NGWORD_H
 #define SYS_NGWORD_H
 
-#include "common.h"
+#include "classes/Obj420fa4.h"
+#include "nn/Result.h"
 
-struct NgWordState {
-    /* 0x00 */ u8 unk00[0x19];
-    /* 0x19 */ u8 loaded;
-    /* 0x1A */ u8 unk1A[0xE];
-    /* 0x28 */ void *buffer;
-};
+extern "C" {
+/* Partitions the working buffer and mounts the archive. */
+s32 asdNgcSetWorkBuffer(Obj420fa4 *scanner, u8 *buffer);
+
+/* Mounts the NG-word archive using the workspace already assigned to the scanner. */
+nn::Result ngwordMountArchive(Obj420fa4 *state, const char *file);
+nn::Result ngwordMountArchive(Obj420fa4 *state, const char *file);
+} /* extern "C" */
 
 #endif

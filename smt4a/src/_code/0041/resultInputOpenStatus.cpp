@@ -1,4 +1,4 @@
-/* NON_MATCHING: the final state reset stores next-state's zero from the shared r6 where retail materializes a fresh zero (one instruction). */
+/* NON_MATCHING: retail materializes a fresh zero for clearing nextState; this shares its zero with the phase reset. */
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
 #include <stddef.h>
 #include "result/ResultInput.h"

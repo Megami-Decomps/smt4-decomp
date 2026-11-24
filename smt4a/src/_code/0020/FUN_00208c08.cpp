@@ -24,7 +24,7 @@ int FUN_003e5558(...);
 int FUN_003e5858(...);
 int modelApplyNonzeroGroupRotation(...);
 int aocHandleButtons(...);
-int FUN_0040ae70(...);
+int moriModelManagerEnsureScene(...);
 int VectorSignedToFloat(...);
 
 int asdOperatorNew(void);
@@ -123,7 +123,7 @@ extern unsigned int _ZN9Obj557ae8C1Ev(void);
 extern int nkdwLoaderParse(unsigned int);
 extern unsigned int resourceCacheGetOrLoadModel(int, unsigned int);
 /* Supplied declaration required: resourceReleaseReference. */
-/* Supplied declaration required: FUN_0040ae70. */
+/* Supplied declaration required: moriModelManagerEnsureScene. */
 extern int FUN_0040af60(int);
 /* Supplied declaration required: resourceOwnerLoadNamed. */
 /* Supplied declaration required: FUN_0040b27c. */
@@ -404,7 +404,7 @@ unsigned int FUN_00208c08(void)
       temp_v3 = lmapMainIsRunning();
       if (((temp_v3 == 0) && (temp_v3 = FUN_0040af60(g_handleRegistry), temp_v3 != 0)) &&
          (*(int *)(g_handleRegistry + 4) == 0)) {
-        FUN_0040ae70(g_handleRegistry,1);
+        moriModelManagerEnsureScene(g_handleRegistry,1);
         temp_v3 = g_handleRegistry;
         temp_v0 = *(char *)(*(int *)(g_handleRegistry + 0x14) + 0xc4);
         *(char *)(temp_v2 + 0x20e6) = temp_v0;

@@ -6,7 +6,7 @@
 extern "C" {
 s32 utilityReturnSuccess(const void *state);
 s32 stageAssetsLoaded();
-void FUN_00233240(void *panel, s32 mode);
+void uiSceneApplySpritePreset(void *panel, s32 mode);
 void buttonHelpSetPreset(u32 preset);
 s32 flaggedValueHolderGetTotal(const SelectionFlags *selection);
 void gameLoadUnitSnapshot(s32 id, s32 mode);
@@ -58,8 +58,8 @@ void Obj4223f8::enterList()
         return;
     view->state = 1;
     view->timer = 0;
-    FUN_00233240(view->panel, 0);
-    FUN_00233240(view->panel, 1);
+    uiSceneApplySpritePreset(view->panel, 0);
+    uiSceneApplySpritePreset(view->panel, 1);
     if (block->mode == 0)
         buttonHelpSetPreset(0x2e);
     else if (block->mode == 1)

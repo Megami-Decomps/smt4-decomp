@@ -17,9 +17,6 @@ struct ShopDescriptionState {
     u32 mode;
     s32 state;
     u32 previousMode;
-
-    ShopDescriptionState(u32 nextMode, s32 nextState, u32 oldMode)
-        : mode(nextMode), state(nextState), previousMode(oldMode) {}
 };
 struct ShopItemDescription {
     u32 unk00;
@@ -54,6 +51,14 @@ typedef char ShopItemVoiceOffsetsCheck[
     offsetof(ShopDescriptionEntry, voice.sound) == 6 &&
     offsetof(ShopItemDescription, initialVoice.sound) == 0x26 &&
     sizeof(ShopItemDescription) == 0x50 ? 1 : -1];
+/* Restarts the shop's step machine in another mode, retaining the previous mode. */
+static __inline void npcShopChangeDescriptionMode(ShopItemDescription *work, u32 mode)
+{
+    work->selectionState.previousMode = work->selectionState.mode;
+    work->selectionState.mode = mode;
+    work->selectionState.state = 0;
+}
+
 #ifdef __cplusplus
 extern "C" {
 #endif

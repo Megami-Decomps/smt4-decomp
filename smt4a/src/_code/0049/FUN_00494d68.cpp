@@ -1,5 +1,5 @@
 /* NON_MATCHING: 230 lines (146 by shape); same calls, branches and 84-byte frame as retail. What differs:
- * - the build keeps the constant 1 (FUN_0049368c's flags) in r6 and spills the highlight sprite's address and the
+ * - the build keeps the constant 1 (uiDrawSizedTextureAtRegionEnd's flags) in r6 and spills the highlight sprite's address and the
  *   badge's y; retail writes `mov r0, #1` at each call and keeps those two in r6;
  * - `row != 0` is `mov #1; moveq #0` in retail (`movne #1` here), as in IV's shopDrawListRow;
  * - retail moves the shop into r0 (`moveq r0, r4`) before each branch to the selling list's test, the build after it;
@@ -20,7 +20,7 @@
 
 extern "C" {
 void uiDrawCompositeSpriteAtRectCorner(ScreenRect *rect, u32 id, s32 dx, s32 dy, u32 extra);
-void FUN_0049368c(const AsdTextureRegion *region, u32 image, s32 offsetX, s32 offsetY, u32 color, u32 flags);
+void uiDrawSizedTextureAtRegionEnd(const AsdTextureRegion *region, u32 image, s32 offsetX, s32 offsetY, u32 color, u32 flags);
 f32 drawTextAtSnappedRectangle(const AsdTextureRegion *region, f32 x, f32 y, f32 depth, f32 spacing,
                                u32 layer, u32 color, f32 opacity, const char *text);
 const char *itemGetNameOrFallback(u32 id, s32 payload);
@@ -68,7 +68,7 @@ void FUN_00494d68(Obj536044 *shop, s32 row, s32 selected, const EquipmentMenuIte
         uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x48, x, y, depth);
         uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x49, x, y, depth);
         efctSetSpeed(1.0f);
-        FUN_0049368c(&shop->region, 0x4A, x, y, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&shop->region, 0x4A, x, y, depth, 1);
         if (touchSelectionGetSelected((Obj55ca08 *)shop->touchSelection) != 0) {
             uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x108, x, y, depth);
             uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x109, x, y, depth);
@@ -94,7 +94,7 @@ void FUN_00494d68(Obj536044 *shop, s32 row, s32 selected, const EquipmentMenuIte
     s32 badgeX = badge->x + x;
     s32 badgeY = badge->y + y;
     if (selected) {
-        FUN_0049368c(&shop->region, 0xAA, x, y, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&shop->region, 0xAA, x, y, depth, 1);
     }
     FUN_00493344((const OffsetPosition2D *)&shop->region, (s16)id, badgeX, badgeY, depth, row != 0);
 

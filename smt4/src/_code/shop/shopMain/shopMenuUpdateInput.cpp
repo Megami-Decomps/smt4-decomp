@@ -12,7 +12,7 @@ void shopDrawSelectedItem(ShopScreen *screen);
 void shopScreenRebuildForSelection(ShopScreen *screen, s32 flag);
 void shopPlaySelectionChangeSound(void);
 void shopMenuHandleCancel(ShopScreen *screen); // declcheck: local (the shared declaration takes its definition's own Scene view)
-void FUN_00233240(Scene3aSprites *animation, s32 flag);
+void uiSceneApplySpritePreset(Scene3aSprites *animation, s32 flag);
 s32 inputIsQuestRepeatLeft(void);
 s32 inputIsQuestRepeatRight(void);
 s32 inputIsQuestMenuPressed(void);
@@ -37,7 +37,7 @@ void shopMenuUpdateInput(ShopScreen *screen)
         return;
     }
     if (inputIsQuestMenuPressed()) {
-        FUN_00233240(&screen->animation, 1);
+        uiSceneApplySpritePreset(&screen->animation, 1);
         FUN_00232848();
         screen->pageTransition.phase = 0x11;
         screen->pageTransition.substep = 0;

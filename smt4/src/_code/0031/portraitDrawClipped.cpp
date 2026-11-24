@@ -12,7 +12,7 @@ extern void *g_aocSystem;
 s32 recordPrepareLinkedOwner(void *, u32, s32);
 
 void FUN_002b04e8(s32, u32, s32, s32, s32, u32, const PortraitClipBounds *);
-void FUN_00389f74(void *, s32, s32, s32, s32, s32, u32, s32, s32, s32, s32);
+void portraitDrawPackageClip(void *, s32, s32, s32, s32, s32, u32, s32, s32, s32, s32);
 } /* extern "C" */
 
 /* Draws the portrait of `unit` clipped to a width x height window at (x, y), through the add-on system when it owns
@@ -44,7 +44,7 @@ extern "C" void portraitDrawClipped(s32 unit, s32 sourceX, s32 sourceY, u32 colo
     }
     if (devilIsTextureLoaded(unit, lookup)) {
         if (recordPrepareLinkedOwner(g_aocSystem, bank, image)) {
-            FUN_00389f74(g_aocSystem, unit, 2, image, sourceX, sourceY, color, x, y, width, height);
+            portraitDrawPackageClip(g_aocSystem, unit, 2, image, sourceX, sourceY, color, x, y, width, height);
         } else {
             s32 sprite = image * 1000 + 1;
             const TextureTableEntryIV *dimensions = asdTMTexTableEntryAt(bank, sprite);

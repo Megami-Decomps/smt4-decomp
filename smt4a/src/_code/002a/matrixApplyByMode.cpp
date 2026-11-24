@@ -1,8 +1,7 @@
+#include "gfx/ModelTransform.h"
 #include "shard/W5_W5Match2_PlainData.h"
 
 extern "C" {
-void matrix43Multiply(Matrix44 *destination, const Matrix44 *first, const Matrix44 *second);
-void matrixCopyFull(Matrix44 *destination, const Matrix44 *source);
 
 Matrix44 *matrixApplyByMode(Matrix44 *destination, const Matrix44 *source, s32 mode)
 {

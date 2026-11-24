@@ -36,7 +36,7 @@ extern unsigned char LAB_001a2a68; /* 0x1a2a68 */
 extern unsigned int DAT_005891bc; /* 0x5891bc */
 extern unsigned int DAT_005891c8; /* 0x5891c8 */
 extern unsigned int DAT_005891cc; /* 0x5891cc */
-extern unsigned int DAT_0061a60c; /* 0x61a60c */
+extern unsigned int g_appletDisplayCaptureRequest; /* 0x61a60c */
 extern unsigned char DAT_0061a610; /* 0x61a610 */
 extern unsigned int DAT_0061a61c; /* 0x61a61c */
 extern unsigned int DAT_0061a628; /* 0x61a628 */
@@ -79,7 +79,7 @@ unsigned int FUN_001b02a8(unsigned int param_1)
   DAT_0061a61c = temp_v10;
   DAT_0061a628 = temp_v11;
   DAT_0061a610 = temp_v9 != iStack_34;
-  FUN_001a30ec(&DAT_0061a60c);
+  FUN_001a30ec(&g_appletDisplayCaptureRequest);
   temp_v2 = 0;
   temp_v3 = 0;
   temp_v4 = 0;
@@ -89,13 +89,13 @@ unsigned int FUN_001b02a8(unsigned int param_1)
   temp_v8 = 0;
   temp_v1 = DAT_005891c8;
   uStack_5c = DAT_005891cc;
-  FUN_001a3338(param_1,2,&DAT_0061a60c,0x20,DAT_005891bc);
+  FUN_001a3338(param_1,2,&g_appletDisplayCaptureRequest,0x20,DAT_005891bc);
   temp_v0 = 0;
   FUN_001a2e74(param_1,&temp_v0);
-  FUN_001b6598(&temp_v2,temp_v0,DAT_0061a60c,3);
-  nn_applet_CTR_detail_CaptureDisplayBuffer(temp_v4,&temp_v9,&DAT_0061a60c);
+  FUN_001b6598(&temp_v2,temp_v0,g_appletDisplayCaptureRequest,3);
+  nn_applet_CTR_detail_CaptureDisplayBuffer(temp_v4,&temp_v9,&g_appletDisplayCaptureRequest);
   nn_os_TransferMemoryBlock_Finalize(&temp_v2);
-  FUN_001a3220(&DAT_0061a60c,0x20);
+  FUN_001a3220(&g_appletDisplayCaptureRequest,0x20);
   nn_os_TransferMemoryBlock_Finalize(&temp_v2);
   if (temp_v7 != 0) {
     software_interrupt(0x23);

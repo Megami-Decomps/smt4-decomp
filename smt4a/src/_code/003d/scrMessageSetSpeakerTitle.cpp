@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only (121 vs 121 rows, 4 diff lines): in case 8 retail loads descriptor->counter into r1 and requirement.id into r2 (cmp r1, r2), where the build loads requirement.id into r2 and descriptor->counter into r1 (cmp r2, r1). */
 #include "common.h"
 #include "gamedata/PlayLogTable.h"
 #include "quest_center/QuestRecordA.h"
@@ -28,6 +27,12 @@ void scrMessageSetSpeakerTitle(u16 definitionId, s32 includeArguments, s32 conve
 {
     char text[128];
     char converted[128];
+    QuestRecordA *definition;
+    s32 index;
+    s32 count;
+    s32 descriptorIndex;
+    PlayLogRecord *found;
+    PlayLogRecord *descriptor;
 
     if (!convertTitle) {
         scrSetStringSlot(40, questGetTitle(definitionId));
@@ -37,9 +42,9 @@ void scrMessageSetSpeakerTitle(u16 definitionId, s32 includeArguments, s32 conve
         scrSetStringSlot(40, converted);
     }
     if (includeArguments) {
-        QuestRecordA *definition = questDataGetRecord(definitionId);
+        definition = questDataGetRecord(definitionId);
         if (definition != NULL) {
-            for (s32 index = 0; index < 4; ++index) {
+            for (index = 0; index < 4; ++index) {
                 switch (definition->requirements[index].kind) {
                 case 1:
                 case 7:
@@ -58,12 +63,12 @@ void scrMessageSetSpeakerTitle(u16 definitionId, s32 includeArguments, s32 conve
                 case 6:
                     entryTableResetAndInit(index + 24, definition->requirements[index].count, -1, 0);
                     break;
-                case 8: {
-                    s32 count = FUN_002ebda8();
-                    PlayLogRecord *found = NULL;
-                    for (s32 descriptorIndex = 0; descriptorIndex < count; ++descriptorIndex) {
-                        PlayLogRecord *descriptor = dataTableGetEntry37(descriptorIndex);
-                        if ((s16)definition->requirements[index].id == descriptor->counter) {
+                case 8:
+                    count = FUN_002ebda8();
+                    found = NULL;
+                    for (descriptorIndex = 0; descriptorIndex < count; ++descriptorIndex) {
+                        descriptor = dataTableGetEntry37(descriptorIndex);
+                        if (descriptor->counter == (s16)definition->requirements[index].id) {
                             found = descriptor;
                             break;
                         }
@@ -78,7 +83,6 @@ void scrMessageSetSpeakerTitle(u16 definitionId, s32 includeArguments, s32 conve
                         }
                     }
                     break;
-                }
                 }
             }
         }

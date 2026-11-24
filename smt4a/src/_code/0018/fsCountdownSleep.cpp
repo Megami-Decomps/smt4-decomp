@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern signed char DAT_00589398; /* 0x589398 */
+extern signed char g_titleContentFileSystem; /* 0x589398 */
 extern unsigned char DAT_00589399; /* 0x589399 */
 extern int DAT_005893b0; /* 0x5893b0 */
 
@@ -37,7 +37,7 @@ void fsCountdownSleep(int param_1)
     temp_v3 = 100;
   }
   temp_v2 = 0;
-  if (DAT_00589398 != '\0') {
+  if (g_titleContentFileSystem != '\0') {
     if ((DAT_00589399 != 0) && (software_interrupt(0x28), (DAT_00589399 & 0x10) != 0)) {
       temp_v2 = __aeabi_uidivmod(temp_v3,(DAT_00589399 & 0xf) + 1);
     }

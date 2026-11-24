@@ -9,7 +9,7 @@ void *dataTableFileGetTable(void *file, u32 index);
 s32 FUN_003c7760(BtlEvent *event, BtlMainState *state);
 void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void buttonHelpSetPreset(s32 preset);
-void FUN_003dadd8(void *state);
+void btlEffectLoadTransitionFiles(void *state);
 s32 btlEventAreResourcesReady(void *state);
 void FUN_003dbe68(void *state);
 s32 FUN_003dcc34(void *state);
@@ -78,7 +78,7 @@ extern "C" u32 battleEventProcessUpdate(BtlEvent *event, BtlMainState *state)
         /* Bring the battle's auxiliary resources up in three stages. */
         switch (event->stage) {
         case 0:
-            FUN_003dadd8(g_btlAux);
+            btlEffectLoadTransitionFiles(g_btlAux);
             event->stage = 1;
             /* fall through */
         case 1:

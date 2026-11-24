@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail does not predicate the name test (`cmp r0,#1; bhi` skips the ldrb); armcc emits ldrbls/cmpls for every && / nested / early-return form tried (smt4a twin predicates). A `(s8)` cast of token[0] gives IDENTICAL, `length < 2` 4 lines; the token is a char string, so neither is applied. */
+/* NON_MATCHING: only the equivalent length test differs (retail compares against 1 and branches on >; the build compares against 2 and branches on >=). */
 #include "common.h"
 #include "quest_center/QuestRecord.h"
 
@@ -20,7 +20,7 @@ u32 FUN_00290248(u32 id)
 
     u32 result;
 
-    if (length <= 1) {
+    if (length < 2) {
         if (record->token[0] == '0') {
             return 0;
         }

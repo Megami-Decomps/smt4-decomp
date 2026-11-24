@@ -1,37 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f934c` (_code @ 0x2f934c, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the two groups of panel flags and their tests match; armcc folds the initial pointer copy into the address calculation. */
+#include "battle/ActorCardAnimations.h"
+#include "battle/BtlUiObjCQuery.h"
 
-extern "C" {
-
-
-unsigned int FUN_002f934c(int param_1)
-
+/* Reports whether all five command panels are visible. */
+extern "C" u32 FUN_002f934c(BtlUiObjCA *obj)
 {
-  char temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v0 = *(char *)(param_1 + 0x4ae5);
-  temp_v1 = temp_v0 == '\0';
-  if (temp_v1) {
-    temp_v0 = *(char *)(param_1 + 0x4ae6);
-  }
-  if (temp_v1 && temp_v0 == '\0') {
-    temp_v0 = *(char *)(param_1 + 0x4ae7);
-    temp_v1 = temp_v0 == '\0';
-    if (temp_v1) {
-      temp_v0 = *(char *)(param_1 + 0x4ae8);
+    /* BtlUiA describes the end of objC separately; the actor-card view spans the whole display. */
+    const ActorCardAnimationsA *card = (const ActorCardAnimationsA *)obj;
+    const ActorCardPanelVisibilityA *visibility = &card->panelVisibility;
+    u32 visible = 1;
+    if (visibility->hidden[0] || visibility->hidden[1]) {
+        visible = 0;
+    } else if (visibility->hidden[2] || visibility->hidden[3] || visibility->hidden[4]) {
+        visible = 0;
     }
-    temp_v2 = temp_v1 && temp_v0 == '\0';
-    if (temp_v1 && temp_v0 == '\0') {
-      temp_v2 = *(char *)(param_1 + 0x4ae9) == '\0';
-    }
-    if (temp_v2) {
-      return 1;
-    }
-  }
-  return 0;
+    return visible;
 }
-
-} /* extern "C" */

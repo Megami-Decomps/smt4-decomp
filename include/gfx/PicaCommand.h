@@ -15,4 +15,16 @@ enum {
     PICA_REG_BLEND_COLOR = 0x103 /* constant colour of the blend unit, RGBA8 */
 };
 
+/* Emits the optional texture reset prefix before the register commands. */
+static __inline u32 *gpuEmitTextureResetPrefix(u32 *commands, u32 reset)
+{
+    if (reset != 0) {
+        *commands++ = 0;
+        *commands++ = 0x200080;
+        *commands++ = 0;
+        *commands++ = 0;
+    }
+    return commands;
+}
+
 #endif

@@ -36,7 +36,7 @@ int FUN_00228930(...);
 int frameRangeExtend(...);
 int FUN_00229a3c(...);
 int btlTargetSetFlag10(...);
-int FUN_00246080(...);
+int btlReflectQueueTargetEntryAction(...);
 int btlReflectQueueSelectionMarks(...);
 int btlEntryBuildSummary(short *, unsigned int, unsigned int);
 int FUN_00255180(...);
@@ -130,7 +130,7 @@ extern int FUN_002281a4(int);
 extern int FUN_0023c684(unsigned int);
 extern unsigned int btlQueueParamLimitForKind(unsigned int);
 /* Supplied declaration required: FUN_0023f27c. */
-/* Supplied declaration required: FUN_00246080. */
+/* Supplied declaration required: btlReflectQueueTargetEntryAction. */
 /* Supplied declaration required: btlReflectQueueSelectionMarks. */
 /* Supplied declaration required: btlEntryBuildSummary. */
 extern int FUN_002485b8(void);
@@ -302,7 +302,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
         temp_v6 = temp_v6 + *(int *)(*(int *)(*param_1 + 0x1e98) + temp_v7 * 0x114 + 0x5c);
       }
       temp_v12 = temp_v3 + temp_v5 + temp_v6;
-      FUN_00246080(temp_v12,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v7 * 0x114,3);
+      btlReflectQueueTargetEntryAction(temp_v12,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v7 * 0x114,3);
       btlTargetSetFlag10(*param_1,temp_v4,0);
       frameRangeExtend(param_1,param_2,temp_v7,temp_v3 + temp_v5,10,0x14);
       FUN_00228930(param_1,temp_v7,1);
@@ -343,7 +343,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
         }
       }
       else {
-        FUN_00246080(temp_v4 + temp_v21,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v5 * 0x114,3);
+        btlReflectQueueTargetEntryAction(temp_v4 + temp_v21,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v5 * 0x114,3);
         FUN_00228930(param_1,temp_v5,1);
         temp_v3 = param_2[4];
         if ((int)temp_v3 < 5) {

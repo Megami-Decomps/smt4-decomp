@@ -19,7 +19,7 @@
 
 extern "C" {
 void uiDrawBottomRightOffset(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth);
-void FUN_00231bcc(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth, u32 mode);
+void uiDrawSizedTextureAtRegionEnd(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth, u32 mode);
 void FUN_00230d2c(const AsdTextureRegion *region, u32 id, s32 x, s32 y, s32 depth, s32 showEquipped);
 void uiRectDrawAtBottomRight(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 depth);
 void gxSetClippedBottomScreenScissor(s32 x, s32 y, s32 width, s32 height);
@@ -67,11 +67,11 @@ void shopDrawListRow(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *
         uiDrawBottomRightOffset(&scene->region, 0x48, x, y, depth);
         uiDrawBottomRightOffset(&scene->region, 0x49, x, y, depth);
         efctSetSpeed(1.0f);
-        FUN_00231bcc(&scene->region, 0x4A, x, y, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&scene->region, 0x4A, x, y, depth, 1);
         if (touchSelectionGetSelected((Obj55ca08 *)scene->touchSelection) != 0) {
-            FUN_00231bcc(&scene->region, 0x4C, x, y, depth, 1);
+            uiDrawSizedTextureAtRegionEnd(&scene->region, 0x4C, x, y, depth, 1);
         } else {
-            FUN_00231bcc(&scene->region, 0x4B, x, y, depth, 1);
+            uiDrawSizedTextureAtRegionEnd(&scene->region, 0x4B, x, y, depth, 1);
         }
         const TextureTableEntryIV *clip = layoutFindTableEntry(&scene->region, 0x4E);
         s32 clipX = clip->x + x;
@@ -83,7 +83,7 @@ void shopDrawListRow(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *
         UiSpriteState *scroll = &scene->animation.sprites[3];
         s32 contentX = vec2GetXInt(scroll) + x - (content->width & 0x7FFF);
         s32 contentY = vec2GetYInt(scroll) + y;
-        FUN_00231bcc(&scene->region, 0x4D, contentX, contentY, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&scene->region, 0x4D, contentX, contentY, depth, 1);
         renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
     }
     const TextureTableEntryIV *badge;
@@ -95,7 +95,7 @@ void shopDrawListRow(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *
     s32 badgeX = badge->x + x;
     s32 badgeY = badge->y + y;
     if (selected) {
-        FUN_00231bcc(&scene->region, 0xAA, x, y, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&scene->region, 0xAA, x, y, depth, 1);
     }
     FUN_00230d2c(&scene->region, (s16)id, badgeX, badgeY, depth, row != 0);
 

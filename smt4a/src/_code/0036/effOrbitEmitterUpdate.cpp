@@ -18,7 +18,7 @@ void effComputeParticleEmission(ParticleEmissionState *state, const ParticleEmis
 void FUN_002fe2e8(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_0027134c(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_00321e98(ParticleEmissionState *emitter, SpiralParticle *particle);
-void FUN_00321d7c(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous);
+void effSampleParticleTransform(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous);
 /* Replaces the shared transform with an X-axis rotation. */
 void matrixSetRotationX(f32 angle);
 /* Applies the pending rotation to the scratch matrix. */
@@ -122,7 +122,7 @@ extern "C" void effOrbitEmitterUpdate(ParticleEmissionState *emitter)
                 particle->position.y += motion->height;
                 particle->frame = (s32)age;
             }
-            FUN_00321d7c(reinterpret_cast<ParticleTransformSample *>(particle),
+            effSampleParticleTransform(reinterpret_cast<ParticleTransformSample *>(particle),
                          reinterpret_cast<ParticleTransformCurves *>(definition), particle->frame,
                          reinterpret_cast<const EffectColor *>(&previous));
             particle->scale *= motion->scale;
@@ -162,7 +162,7 @@ extern "C" void effOrbitEmitterUpdate(ParticleEmissionState *emitter)
             particle->position.x = px;
             particle->position.y = py + motion->height;
             particle->position.z = pz;
-            FUN_00321d7c(reinterpret_cast<ParticleTransformSample *>(particle),
+            effSampleParticleTransform(reinterpret_cast<ParticleTransformSample *>(particle),
                          reinterpret_cast<ParticleTransformCurves *>(definition), frame,
                          reinterpret_cast<const EffectColor *>(&previous));
             particle->scale *= motion->scale;

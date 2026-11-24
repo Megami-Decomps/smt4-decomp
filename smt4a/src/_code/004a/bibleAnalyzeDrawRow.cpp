@@ -11,7 +11,7 @@
 #include "addon/LookupRecord.h"
 
 extern "C" {
-void FUN_0049368c(const ScreenRect *rect, u32 image, s32 offsetX, s32 offsetY, u32 color, u32 flags);
+void uiDrawSizedTextureAtRegionEnd(const ScreenRect *rect, u32 image, s32 offsetX, s32 offsetY, u32 color, u32 flags);
 void renderSetClippedScissor(s32 x, s32 y, s32 width, s32 height);
 void devilDrawIconRelative(const ScreenRect *rect, u32 demon, s32 x, s32 y, u32 style);
 s32 textMeasureOnLayer(const char *text, u32 layer);
@@ -42,8 +42,8 @@ void bibleAnalyzeDrawRow(Screen4A *screen, s32 index, s32 selected, s32 id)
         uiDrawTableTextureAtRectCorner(&screen->layout.rect, 0x103B, x, y, depth);
         uiDrawTableTextureAtRectCorner(&screen->layout.rect, 0x103C, x, y, depth);
         efctSetSpeed(1.0f);
-        FUN_0049368c(&screen->layout.rect, 0x103D, x, y, depth, 1);
-        FUN_0049368c(&screen->layout.rect, 0x103E, x, y, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&screen->layout.rect, 0x103D, x, y, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&screen->layout.rect, 0x103E, x, y, depth, 1);
         const TextureTableEntryIV *clip = layoutFindTableEntry(&screen->layout.rect, 0x1041);
         s32 clipX = clip->x + x;
         s32 clipY = clip->y + y;
@@ -54,7 +54,7 @@ void bibleAnalyzeDrawRow(Screen4A *screen, s32 index, s32 selected, s32 id)
         UiSpriteState *scroll = &screen->parts.sprites[1];
         s32 bandX = vec2GetXInt(scroll) + x - (band->width & 0x7FFF);
         s32 bandY = vec2GetYInt(scroll) + y;
-        FUN_0049368c(&screen->layout.rect, 0x1040, bandX, bandY, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&screen->layout.rect, 0x1040, bandX, bandY, depth, 1);
         renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR, 0);
     }
     if (id != 0) {

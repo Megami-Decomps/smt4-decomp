@@ -25,7 +25,7 @@
 extern "C" {
 
 s32 uiAnimationAdvanceChannel(Scene3aSprites *sprites, s32 index);
-void FUN_00233240(Scene3aSprites *sprites, u32 index);
+void uiSceneApplySpritePreset(Scene3aSprites *sprites, u32 index);
 void rectangleInitializeSelection(EmptyRange *range, s32 x, s32 y, s32 selection);
 void pointConvertToFloat(FloatPoint *point, s32 x, s32 y);
 void pageRegisterButtonTouchRegions(NumericStepper *stepper);
@@ -103,8 +103,8 @@ void shopQuantityStep(ShopScreen *screen)
     switch (screen->pageTransition.substep) {
     case 0:
         flagWordSet(&screen->flags, 0x1000);
-        FUN_00233240(&screen->animation, 6);
-        FUN_00233240(&screen->animation, 7);
+        uiSceneApplySpritePreset(&screen->animation, 6);
+        uiSceneApplySpritePreset(&screen->animation, 7);
         rectangleInitializeSelection(&screen->panel.rect, 320, 0, 43);
         screen->pageTransition.substep = 1;
         buttonHelpSetPreset(0x85);

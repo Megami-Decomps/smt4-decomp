@@ -52,7 +52,7 @@ void uiAnimationAdvanceChannel(BibleDevilWidget *, s32);
 void pointConvertToFloat(void *, u32, u32);
 s32 gameGetNavigationState(void);
 s32 gameGetFlagByte12e8(void);
-void FUN_00233240(BibleDevilWidget *, s32);
+void uiSceneApplySpritePreset(BibleDevilWidget *, s32);
 s32 flaggedValueHolderGetTotal(void *);
 s32 compendiumComputeSummonCost(u16, s32, s32, s32, s32);
 void messageBannerInitSelection(s32, s32);
@@ -85,7 +85,7 @@ void bibleDevilUpdatePreviewInput(BibleDevilScreen *screen)
         } else {
             screen->selected = 4;
         }
-        FUN_00233240(&screen->widget, screen->selected);
+        uiSceneApplySpritePreset(&screen->widget, screen->selected);
         if (screen->mode == 0) {
             BibleDevilRow *rows = screen->rows;
             s16 id = shopListItemGetId(&rows[flaggedValueHolderGetTotal(screen->cursor)]);

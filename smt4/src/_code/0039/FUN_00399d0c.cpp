@@ -13,7 +13,7 @@ int naviPanelDraw(...);
 int CONCAT44(double, double);
 int mapExplorationCellMark(...);
 int pairCopy(int, float *);
-int FUN_00231bcc(...);
+int uiDrawSizedTextureAtRegionEnd(...);
 float cameraViewHeadingDegrees(int);
 int titleScissorApplyOrClearRequests(...);
 int FUN_002b04e8(...);
@@ -58,7 +58,7 @@ extern unsigned int DAT_0044cdd8; /* 0x44cdd8 */
 extern unsigned int mapExplorationCellIsMarked(unsigned int, int, int);
 /* Supplied declaration required: mapExplorationCellMark. */
 /* Supplied declaration required: pairCopy. */
-/* Supplied declaration required: FUN_00231bcc. */
+/* Supplied declaration required: uiDrawSizedTextureAtRegionEnd. */
 extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 /* Supplied declaration required: naviPanelDraw. */
 /* Supplied declaration required: titleScissorApplyOrClearRequests. */
@@ -872,9 +872,9 @@ LAB_0039aba4:
     temp_v3 = mathHeadingToDirectionCode(temp_v44,cameraViewHeadingDegrees(temp_v37));
     temp_v18 = (int)temp_v23;
     temp_v4 = (int)temp_v15;
-    FUN_00231bcc(temp_v44 + 0x164,temp_v3 + 0xbc1,temp_v4,temp_v18,0xb,1);
+    uiDrawSizedTextureAtRegionEnd(temp_v44 + 0x164,temp_v3 + 0xbc1,temp_v4,temp_v18,0xb,1);
     temp_v3 = mathHeadingToDirectionCode(temp_v44,NaviMain_GetState());
-    FUN_00231bcc(temp_v44 + 0x164,temp_v3 + 0xbb9,temp_v4,temp_v18,0xb,1);
+    uiDrawSizedTextureAtRegionEnd(temp_v44 + 0x164,temp_v3 + 0xbb9,temp_v4,temp_v18,0xb,1);
   }
   titleScissorApplyOrClearRequests(temp_v44,0);
   DAT_0044cdd8 = 0xf1;

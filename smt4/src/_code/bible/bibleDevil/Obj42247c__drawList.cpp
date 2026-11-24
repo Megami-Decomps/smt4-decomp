@@ -36,7 +36,7 @@ extern "C" {
 
 void uiMenuAnchorGetOffset(const u8 *layout, BibleDevilPoint *offset);
 void uiRectDrawAtBottomRight(const u8 *layout, u32 id, s32 dx, s32 dy, u32 layer);
-void FUN_00231bcc(const u8 *layout, u32 image, s32 x, s32 y, u32 layer, u32 flags);
+void uiDrawSizedTextureAtRegionEnd(const u8 *layout, u32 image, s32 x, s32 y, u32 layer, u32 flags);
 s32 rangeLimitMin(void *list);
 u32 flaggedEntryGetValueByState(void *list);
 s8 touchSelectionGetSelected(const BibleDevilTouchSelection *selection);
@@ -149,14 +149,14 @@ void Obj42247c::drawList()
     }
     u32 layer = work->touchSelection.drawLayer;
     uiRectDrawAtBottomRight(work->layout, 2, 0, 0, layer);
-    FUN_00231bcc(work->layout, BIBLE_DEVIL_IMAGE_FRAME, 0, 0, layer, 1);
-    FUN_00231bcc(work->layout, BIBLE_DEVIL_IMAGE_FRAME + 1, 0, 0, layer, 1);
-    FUN_00231bcc(work->layout, BIBLE_DEVIL_IMAGE_FRAME + 2, 0, 0, layer, 1);
-    FUN_00231bcc(work->layout, BIBLE_DEVIL_IMAGE_FRAME + 3, 0, 0, layer, 1);
+    uiDrawSizedTextureAtRegionEnd(work->layout, BIBLE_DEVIL_IMAGE_FRAME, 0, 0, layer, 1);
+    uiDrawSizedTextureAtRegionEnd(work->layout, BIBLE_DEVIL_IMAGE_FRAME + 1, 0, 0, layer, 1);
+    uiDrawSizedTextureAtRegionEnd(work->layout, BIBLE_DEVIL_IMAGE_FRAME + 2, 0, 0, layer, 1);
+    uiDrawSizedTextureAtRegionEnd(work->layout, BIBLE_DEVIL_IMAGE_FRAME + 3, 0, 0, layer, 1);
     if (work->mode == 0) {
-        FUN_00231bcc(work->layout, BIBLE_DEVIL_IMAGE_HEADER, 0, 0, layer, 1);
+        uiDrawSizedTextureAtRegionEnd(work->layout, BIBLE_DEVIL_IMAGE_HEADER, 0, 0, layer, 1);
     } else {
-        FUN_00231bcc(work->layout, BIBLE_DEVIL_IMAGE_COMPARE_HEADER, 0, 0, layer, 1);
+        uiDrawSizedTextureAtRegionEnd(work->layout, BIBLE_DEVIL_IMAGE_COMPARE_HEADER, 0, 0, layer, 1);
     }
     if (work->list.count == 0) {
         return;

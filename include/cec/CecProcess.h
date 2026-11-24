@@ -7,6 +7,7 @@
 
 #include "common.h"
 #include "nn/os/Thread.h"
+#include "nn/os/ThreadLaunch.h"
 #include "cec/CecMessage.h"
 #include <stddef.h>
 
@@ -28,8 +29,7 @@ struct CecProcess {
     /* 0x420 */ u8 lock[8];              /* critical section over the batch counters */
     /* 0x428 */ s32 state;               /* -1 once the worker is shut down */
     /* 0x42C */ NnOsThread thread;       /* the inbox worker */
-    /* 0x434 */ u8 queue[0x14];
-    /* 0x448 */ u8 unk448[4];
+    /* 0x434 */ ThreadStackStorage stack;
     /* 0x44C */ void *buffer;            /* the worker's stack */
     /* 0x450 */ u8 unk450[0x10];
 };
@@ -37,7 +37,8 @@ struct CecProcess {
 typedef char CecProcessOffsetCheck[offsetof(CecProcess, producedBatches) == 0x78 &&
     offsetof(CecProcess, nextMessageIndex) == 0x6C && offsetof(CecProcess, messageCount) == 0x70 &&
     offsetof(CecProcess, slots) == 0x80 && offsetof(CecProcess, lock) == 0x420 &&
-    offsetof(CecProcess, thread) == 0x42C && offsetof(CecProcess, buffer) == 0x44C &&
+    offsetof(CecProcess, thread) == 0x42C && offsetof(CecProcess, stack) == 0x434 &&
+    offsetof(CecProcess, buffer) == 0x44C &&
     sizeof(CecProcess) == 0x460 ? 1 : -1];
 
 /* One inbox batch the worker reads (Apocalypse). */
@@ -60,7 +61,10 @@ struct CecProcessA {
     /* 0xD28 */ u8 lock[8];              /* critical section over the batch counters */
     /* 0xD30 */ s32 state;               /* -1 once the worker is shut down */
     /* 0xD34 */ NnOsThread thread;       /* the inbox worker */
-    /* 0xD3C */ u8 stack[0x18];          /* the worker's stack memory block */
+    union {
+        /* 0xD3C */ ThreadStackStorage workerStack;
+        /* 0xD3C */ u8 stack[0x18]; /* legacy address-only view used by teardown */
+    };
     /* 0xD54 */ void *buffer;            /* the worker's stack */
     /* 0xD58 */ u8 unkD58[0x10];
 };
@@ -69,5 +73,12 @@ typedef char CecProcessAOffsetCheck[offsetof(CecProcessA, receivedCount) == 0x84
     offsetof(CecProcessA, batches) == 0x98 && offsetof(CecProcessA, lock) == 0xD28 &&
     offsetof(CecProcessA, thread) == 0xD34 && offsetof(CecProcessA, stack) == 0xD3C &&
     offsetof(CecProcessA, buffer) == 0xD54 && sizeof(CecProcessA) == 0xD68 ? 1 : -1];
+
+/* The launcher's argument description and the process pointer copied onto the worker stack. */
+template <typename Process>
+struct CecThreadBinding {
+    ThreadArgumentDescriptor descriptor;
+    Process *argument;
+};
 
 #endif

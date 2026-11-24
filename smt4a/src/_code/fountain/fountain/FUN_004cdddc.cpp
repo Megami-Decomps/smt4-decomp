@@ -41,7 +41,7 @@ extern LockedObj *g_handleRegistry;
 void *asdMemoryAllocTraced(u32 bytes, const char *file, u32 line);
 void resourceOwnerLoadNamed(LockedObj *owner, const char *name);
 u8 FUN_0040af60(LockedObj *owner);
-void FUN_0040ae70(LockedObj *owner, u32 enabled);
+void moriModelManagerEnsureScene(LockedObj *owner, u32 enabled);
 void mapLoadSkyTable(u32 number);
 void mapEnvironmentApplyPreset(s32 preset, s32 mode);
 void asdCameraInitializeDefaults(CameraMatrixCache *camera, u32 mode);
@@ -79,7 +79,7 @@ void FUN_004cdddc(FountainInitializationView *work)
     work->resources = resources;
     resourceOwnerLoadNamed(resources, "fountain/fountain.bch");
     if (FUN_0040af60(work->resources) != 0)
-        FUN_0040ae70(work->resources, 1);
+        moriModelManagerEnsureScene(work->resources, 1);
     mapLoadSkyTable(200);
     mapEnvironmentApplyPreset(4, 0);
     CameraParameterOwner *parameters = static_cast<CameraParameterOwner *>(asdCameraLoadFromFile("fountain/fountain.bccam"));

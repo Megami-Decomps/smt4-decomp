@@ -13,7 +13,7 @@ extern void *g_btlAux;
 extern const char DAT_00400468[]; // battle/army_summon/army_summon.bccam
 void FUN_003d6fd4(BtlCamera *battle, const char *path);
 s32 cameraCreateFromStateResource(BtlCamera *battle);
-void FUN_003dba3c(void *auxiliary);
+void btlEffectLoadFlashFiles(void *auxiliary);
 s32 btlAuxAreResourcesReady(void *auxiliary);
 void nameEntriesRegisterVerNamesThenContinue(void *auxiliary);
 void FUN_00339eec(ActionStateChannelOwner *owner);
@@ -40,7 +40,7 @@ u32 FUN_003d1c1c(ActionStateChannelOwner **owner, ActionKindSelection *work)
     case 1:
         if (!cameraCreateFromStateResource(g_btlMain))
             return 0;
-        FUN_003dba3c(g_btlAux);
+        btlEffectLoadFlashFiles(g_btlAux);
         work->sequence.phase = 2;
         break;
     case 2:

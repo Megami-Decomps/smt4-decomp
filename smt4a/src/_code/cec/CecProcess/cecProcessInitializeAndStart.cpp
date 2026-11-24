@@ -1,62 +1,50 @@
-/* NON_MATCHING: the build reserves 8 more bytes of frame (argument slot at 20 instead of 32, descriptor at 24 instead of 16) and orders the descriptor stores differently. */
-#include "nn/Result.h"
-#include "nn/os/ThreadLaunch.h"
-#include "AsdSDK/Source/Net/Cec/AsdCecProcess.h"
+/* NON_MATCHING: armcc forms the descriptor address before the bound argument address; retail forms the argument first. */
+#include "cec/CecProcess.h"
 #include "AsdSDK/AsdDebug.h"
-#include "shard/W6_W6Match3_OnlineValueCompletion.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "nn/Result.h"
+#include "nn/os/CriticalSection.h"
 #include "sys/ResultReport.h"
+#include "shard/W6_W6Match3_OnlineValueCompletion.h"
 
 extern "C" {
 extern const char DAT_0052f4b0[];
-void nn_os_CriticalSection_Initialize(void* section);
-void* memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 option, u32 mode);
-void resultReportIfFailed(void* object, void* buffer, u32 size);
+void resultReportIfFailed(ThreadStackStorage *stack, void *memory, u32 size);
 void FUN_00514a44(void);
 void FUN_00514b7c(void);
 void FUN_00514afc(void);
-void FUN_0028196c(void *process);
+void FUN_0028196c(CecProcessA *process);
 s32 FUN_002fb0d4(ThreadHandleState *thread, const ThreadArgumentDescriptor *descriptor,
-    ThreadEntryPoint entry, const void *argument, u32 stackTop, u32 priority, s32 cpu, bool owned);
+                 ThreadEntryPoint entry, const void *argument, u32 stackTop, u32 priority, s32 cpu, bool owned);
+} /* extern "C" */
 
-// Initialize inbox accounting, allocate its worker stack, and start the CEC thread.
-void cecProcessInitializeAndStart(CecProcessA* process)
+/* Starts the inbox worker with a copy of the process pointer on its stack. */
+static __inline void cecStartThread(NnOsThread *thread, void (*entry)(CecProcessA *), CecProcessA *argument,
+                                    ThreadStackStorage &stack, u32 priority, s32 processor)
 {
-    // The stack-memory object overlaps the older partial thread view; do not reshape it.
-    struct StackMemoryView {
-        u32 unk00;
-        u32 handle;
-        u32 base;
-        u32 size;
-    };
-    struct ThreadView {
-        u8 unk000[0xD34];
-        ThreadHandleState thread;
-        StackMemoryView stack;
-    };
-    typedef char ThreadOffsets[offsetof(ThreadView, thread) == 0xD34 &&
-        offsetof(ThreadView, stack) == 0xD3C &&
-        offsetof(ThreadView, stack.base) == 0xD44 &&
-        offsetof(ThreadView, stack.size) == 0xD48 ? 1 : -1];
-    CecProcessA* work = process;
-    ThreadView* worker = reinterpret_cast<ThreadView*>(process);
-    nn_os_CriticalSection_Initialize(work->lock);
-    work->receivedCount = 0;
-    work->requestedCount = asdCecInboxGetMessageCount();
-    work->producedBatches = 0;
-    work->consumedBatches = 0;
-    asdDebugTrace(DAT_0052f4b0, 215);
-    work->buffer = memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
-    resultReportIfFailed(&worker->stack, work->buffer, 0x1000);
-    CecProcessA* argument = process;
-    ThreadArgumentDescriptor descriptor;
-    descriptor.argumentSize = sizeof(CecProcessA*);
-    descriptor.callbacks[0] = FUN_00514a44;
-    descriptor.callbacks[1] = FUN_00514b7c;
-    descriptor.callbacks[2] = FUN_00514afc;
-    s32 result = FUN_002fb0d4(&worker->thread, &descriptor, FUN_0028196c, &argument,
-                             worker->stack.base + worker->stack.size, 17, -2, 0);
-    if ((u32(result) & 0x07E00000) != 0x00600000 && nnResultIsFailure(result)) {
+    CecThreadBinding<CecProcessA> bound;
+    bound.argument = argument;
+    bound.descriptor.argumentSize = sizeof(argument);
+    bound.descriptor.callbacks[0] = FUN_00514a44;
+    bound.descriptor.callbacks[1] = FUN_00514b7c;
+    bound.descriptor.callbacks[2] = FUN_00514afc;
+    s32 result = FUN_002fb0d4((ThreadHandleState *)thread, &bound.descriptor, (ThreadEntryPoint)entry, &bound.argument,
+                             stack.info.address + stack.info.size, priority, processor, false);
+    if (nnResultIsFailureExceptSummary(result, 3)) {
         resultHandleFailure(result);
     }
 }
+
+/* Sets up the CEC inbox reader and starts its worker thread on a fresh 4 KB stack. */
+extern "C" void cecProcessInitializeAndStart(CecProcessA *process)
+{
+    nn_os_CriticalSection_Initialize(process->lock);
+    process->receivedCount = 0;
+    process->requestedCount = asdCecInboxGetMessageCount();
+    process->producedBatches = 0;
+    process->consumedBatches = 0;
+    asdDebugTrace(DAT_0052f4b0, 215);
+    process->buffer = memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
+    resultReportIfFailed(&process->workerStack, process->buffer, 0x1000);
+    cecStartThread(&process->thread, FUN_0028196c, process, process->workerStack, 17, -2);
 }

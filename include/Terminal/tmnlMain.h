@@ -5,13 +5,22 @@
 #include "common.h"
 #include <stddef.h>
 
+/* One entry in IV's terminal destination table. */
+struct TmnlEntry {
+    /* 0x00 */ s16 id;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ s8 group;
+    /* 0x05 */ u8 unk05;
+    /* 0x06 */ char name[0x1E];
+};
+
 /* Terminal work area, Shin Megami Tensei IV. */
 typedef struct TmnlWork {
     /* 0x00 */ u32 task;                   /* the terminal task's handle */
     /* 0x04 */ u8 done;                    /* the task has finished; the work area may be freed */
-    /* 0x05 */ u8 unk05;
+    /* 0x05 */ u8 showLocked;             /* include destinations not unlocked yet */
     /* 0x06 */ u8 unk06[3];
-    /* 0x09 */ u8 unk09;
+    /* 0x09 */ u8 destination;            /* index in g_tmnlEntries */
     /* 0x0A */ u8 unk0A[2];
     /* 0x0C */ u32 unk0C;
     /* 0x10 */ u32 unk10;
@@ -36,20 +45,34 @@ typedef struct TmnlWork {
     /* 0x588 */ u32 unk588;
     /* 0x58C */ u32 unk58C;
     /* 0x590 */ u8 unk590[4];
-    /* 0x594 */ s32 items[2];               /* entry values, indexed by tmnlFindSlotForItem */
+    union {
+        /* 0x594 */ TmnlEntry *destinations[20];
+        /* 0x594 */ s32 items[2];          /* entry values, indexed by tmnlFindSlotForItem */
+    };
+    /* 0x5E4 */ s32 destinationCount;
 } TmnlWork;
-typedef char TmnlWorkLayoutCheck[sizeof(TmnlWork) == 0x59C ? 1 : -1];
+typedef char TmnlEntryLayoutCheck[sizeof(TmnlEntry) == 0x24 &&
+    offsetof(TmnlEntry, group) == 4 && offsetof(TmnlEntry, name) == 6 ? 1 : -1];
+typedef char TmnlWorkLayoutCheck[sizeof(TmnlWork) == 0x5E8 &&
+    offsetof(TmnlWork, destinations) == 0x594 && offsetof(TmnlWork, destinationCount) == 0x5E4 ? 1 : -1];
+
+struct TmnlEntryA;
 
 /* Terminal work area, Shin Megami Tensei IV: Apocalypse. */
 typedef struct TmnlWorkA {
     /* 0x00 */ u32 task;                   /* the terminal task's handle */
     /* 0x04 */ u8 done;                    /* the task has finished; the work area may be freed */
-    /* 0x05 */ u8 unk05[4];
+    /* 0x05 */ u8 showLocked;             /* include destinations not unlocked yet */
+    /* 0x06 */ u8 unk06[3];
     /* 0x09 */ u8 destination;             /* index in g_tmnlEntries */
     /* 0x0A */ u8 unk0A[6];
     /* 0x10 */ u32 openingMode;
     /* 0x14 */ u8 unk14[0x594];
-    /* 0x5A8 */ s32 items[2];               /* entry values, indexed by tmnlFindSlotForItem */
+    union {
+        /* 0x5A8 */ TmnlEntryA *destinations[22];
+        /* 0x5A8 */ s32 items[2];          /* entry values, indexed by tmnlFindSlotForItem */
+    };
+    /* 0x600 */ s32 destinationCount;
 } TmnlWorkA;
 
 /* Apocalypse: the terminal's globals. */
@@ -69,11 +92,11 @@ struct TmnlEntryA {
 
 typedef char TmnlEntryALayoutCheck[sizeof(TmnlEntryA) == 0x3C &&
     offsetof(TmnlEntryA, group) == 4 && offsetof(TmnlEntryA, name) == 7 ? 1 : -1];
-typedef char TmnlWorkALayoutCheck[sizeof(TmnlWorkA) == 0x5B0 &&
+typedef char TmnlWorkALayoutCheck[sizeof(TmnlWorkA) == 0x604 &&
     offsetof(TmnlWorkA, destination) == 9 && offsetof(TmnlWorkA, openingMode) == 0x10 &&
-    offsetof(TmnlWorkA, items) == 0x5A8 ? 1 : -1];
+    offsetof(TmnlWorkA, destinations) == 0x5A8 && offsetof(TmnlWorkA, destinationCount) == 0x600 ? 1 : -1];
 
-extern "C" TmnlEntryA g_tmnlEntries[22];
+#include "Terminal/TmnlDestinationTable.h"
 extern "C" s32 tmnlDrawDestinationName(u32 task);
 
 #endif

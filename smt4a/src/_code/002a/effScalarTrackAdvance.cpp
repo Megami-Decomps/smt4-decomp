@@ -1,4 +1,4 @@
-/* NON_MATCHING (b1454): the step division's registers differ (retail subtracts into s2, converts the frame count into s1 and divides into s0; the build converts in place) and the second key's frame loads into r4 before the first key's value. */
+/* NON_MATCHING: the segment frame and value loads are scheduled differently, and the step's subtract/convert/divide use different VFP registers. */
 #include "AsdSDK/Source/Gfx/Effect/EffectScalarKeys.h"
 
 extern "C" {

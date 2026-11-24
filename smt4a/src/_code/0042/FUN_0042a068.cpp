@@ -17,7 +17,7 @@ struct FileSystemStateView {
 };
 
 extern "C" {
-extern FileSystemStateView DAT_00589398;
+extern FileSystemStateView g_titleContentFileSystem;
 
 s32 nn_fs_ExtSaveDataSpecifier_Make(ExtSaveDataInfoView* info, s32 kind, u64 identifier);
 u32 nn_fs_ipc_FileSystem_CreateExtSaveData(
@@ -34,7 +34,7 @@ u32 FUN_0042a068(u64 identifier,
     nn_fs_ExtSaveDataSpecifier_Make(&info, 1, identifier);
 
     FileSystemHandleView handle;
-    handle.unk00 = DAT_00589398.unk10;
+    handle.unk00 = g_titleContentFileSystem.unk10;
     u32 result = nn_fs_ipc_FileSystem_CreateExtSaveData(
         &handle, &info, creationOption0, creationOption1,
         ~0ULL, extraOption0, extraOption1);

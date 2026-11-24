@@ -7,7 +7,7 @@ extern "C" {
 extern const char DAT_005271fc[];
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 ModelResourceList *modelListInit(ModelResourceList *models);
-void FUN_0040a884(ModelResourceList *models, void *source, u32 flags);
+void moriModelContentLoadBindingById(ModelResourceList *models, void *source, u32 flags);
 u32 ownerSlotSetText(ModelResourceItem *item, const void *name);
 void motionPlayerStartBlended(ModelResourceItem *item, u32 index, u32 mode, f32 first, f32 second);
 u32 FUN_001a79e8(ModelResourceItem *item, const void *name);
@@ -28,7 +28,7 @@ void modelResourceOwnerInitialize(ModelResourceOwner *owner)
             models = modelListInit(models);
         }
         owner->models = models;
-        FUN_0040a884(owner->models, owner->source, 0);
+        moriModelContentLoadBindingById(owner->models, owner->source, 0);
         s32 count = owner->models->items->count;
         for (s32 index = 0; index < count; ++index) {
             ModelResourceItem *item = reinterpret_cast<ModelResourceItem *>(ptrVectorAt(owner->models->items, index));

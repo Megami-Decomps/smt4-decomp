@@ -1,3 +1,4 @@
+#include "gamedata/RosterUnlock.h"
 #include "common.h"
 #include <stdio.h>
 #include <string.h>
@@ -30,8 +31,6 @@ void playerResetToStartingStats(s32 arg);
 void FUN_003df7c4(s32 arg);
 void appRefundAllPoints(void);
 void gameDataBlocksClearSlots(void);
-void gameFlagUnlockEntryById(s32 arg);
-void rosterAddUnit(s32 arg);
 void saveNameBlockReset(void);
 
 void appTryPurchase(s32 a, s32 b, s32 c);

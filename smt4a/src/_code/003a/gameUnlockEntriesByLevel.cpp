@@ -1,3 +1,4 @@
+#include "gamedata/RosterUnlock.h"
 #include "common.h"
 #include "quest_center/QuestRecordA.h"
 #include "quest_center/QuestUnlock.h"
@@ -9,7 +10,6 @@ extern "C" {
 s32 gameFlagEntryGetBit(u16 id, u32 bit);
 u32 itemDataGetValue(u16 id);
 
-void gameFlagUnlockEntryById(u16 id);
 
 /* Unlocks every entry 100..399 whose required level the player has reached. */
 s32 gameUnlockEntriesByLevel(void)

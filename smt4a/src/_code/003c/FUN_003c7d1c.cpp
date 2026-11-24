@@ -1,3 +1,4 @@
+#include "gfx/ModelTransform.h"
 /* NON_MATCHING: same maths, frame (68 bytes) and addressing as retail (shared EffectColor state, effectColorCopy vector copies, colour bytes through byte-channel bitfields set from a byte swap); VFP register numbering differs (retail: s16 scale, s17-s20 saved product, s21 255.0) and the unpack/multiply scheduling. */
 typedef unsigned char u8;
 typedef unsigned short u16;
@@ -13,7 +14,7 @@ extern "C" {
 struct TintObject {
     u16 flags;        /* 0x00: bit 0x100 = tinted */
     u8 pad02[0x0E];
-    u8 transform[0x40]; /* 0x10 */
+    Matrix44 transform; /* 0x10 */
     u32 color;        /* 0x50: packed colour, high byte first */
 };
 
@@ -41,7 +42,8 @@ struct TintBlock {
 };
 
 struct TintEffect {
-    u8 pad00[0x20];
+    TransformVec3 position;
+    u8 pad0C[0x14];
     f32 scale;            /* 0x20 */
     u32 tint;             /* 0x24 */
     s32 frame;            /* 0x28 */
@@ -51,8 +53,6 @@ struct TintEffect {
 };
 
 u32 colorRampBlendWithFade(TintBlock *block, u32 *colorSource);
-void matrixInitializeWithScaleAndOffset(u8 *matrix, TintEffect *effect, s32 offset, f32 scale);
-void matrixApplyByMode(u8 *transform, u8 *matrix, s32 flag);
 void renderSubmissionDrawPacket(TintObject *object, u32 frame);
 
 /* A packed colour word addressed by its byte channels. */
@@ -95,19 +95,19 @@ void FUN_003c7d1c(TintEffect *effect)
         u32 blockColor = colorRampBlendWithFade(block, block->colorSource);
         EffectColor saved;
         TintColor color;
-        u8 matrix[0x40];
+        Matrix44 matrix;
 
         unpackColor(effect->tint, &g_vectorScratch.second.color);
         unpackColor(blockColor, &g_vectorScratch.first.color);
         multiplyColor(&g_vectorScratch.first.color, &g_vectorScratch.second.color);
         effectColorCopy(&g_vectorScratch.first.color, &saved);
-        matrixInitializeWithScaleAndOffset(matrix, effect, 0, effect->scale);
+        matrixInitializeWithScaleAndOffset(&matrix, &effect->position, NULL, effect->scale);
 
         for (s32 n = 0; n < partCount; n++) {
             TintPart *part = &list->part[n];
             if (part->ready > 0) {
                 TintObject *object = part->object;
-                matrixApplyByMode(object->transform, matrix, 0);
+                matrixApplyByMode(&object->transform, &matrix, MODEL_MATRIX_REPLACE);
                 unpackColor(part->color, &g_vectorScratch.first.color);
                 effectColorCopy(&saved, &g_vectorScratch.second.color);
                 multiplyColor(&g_vectorScratch.first.color, &g_vectorScratch.second.color);

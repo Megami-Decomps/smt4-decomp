@@ -16,7 +16,7 @@ typedef struct PopupTask {
 } PopupTask;
 
 extern int pointConvertToFloat(void *panel, u32 x, u32 y);
-extern int FUN_00233240(void *intro, int arg);
+extern int uiSceneApplySpritePreset(void *intro, int arg);
 extern int FUN_0029e0f8(void);
 
 /* Per-frame update: step 0 starts the intro, step 1 follows the cursor and, once confirmed, picks the next state from the choice. */
@@ -27,7 +27,7 @@ void FUN_003a0b78(PopupTask *task)
     u32 x;
 
     if (task->step == 0) {
-        FUN_00233240(task->intro, 0);
+        uiSceneApplySpritePreset(task->intro, 0);
         task->step = 1;
         return;
     }

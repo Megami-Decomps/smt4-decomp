@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the load/subtract scheduling of the four signed extent bytes differs (the cell accumulation is firstCell + width * height). */
+/* NON_MATCHING: the cell accumulation uses ip rather than r1 for the product-plus-offset. */
 #include "gamedata/MapNaviCategories.h"
 #include "shard/MapNaviTable_GetCategoryCount.h"
 
@@ -23,11 +23,13 @@ void mapNaviCategoryGridBuild(void)
             return;
         }
         DAT_004c3228[record->category].firstCell = firstCell;
-        s16 width = static_cast<s16>((record->endX - record->startX + 1) / 2);
-        s16 height = static_cast<s16>((record->endY - record->startY + 1) / 2);
+        s32 spanX = record->endX - record->startX;
+        s32 spanY = record->endY - record->startY;
+        s16 width = (spanX + 1) / 2;
+        s16 height = (spanY + 1) / 2;
         DAT_004c3228[record->category].width = width;
         DAT_004c3228[record->category].pitch = width;
-        firstCell = static_cast<u16>(firstCell + width * height);
+        firstCell += width * height;
         DAT_004c3228[record->category].height = height;
     }
 }

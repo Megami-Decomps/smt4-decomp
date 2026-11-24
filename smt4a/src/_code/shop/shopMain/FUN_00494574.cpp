@@ -18,7 +18,7 @@ extern const EquipmentDetailPair g_shopListSlotNeighbors[];
 extern const AlternateEquipmentDetails g_shopTabNeighbors;
 extern const EquipmentDetailImages g_equipMenuStateHandlerInit;
 s32 gameFlagIsSet(u32);
-void FUN_0049368c(const AsdTextureRegion *, u32, s32, s32, u32, u32);
+void uiDrawSizedTextureAtRegionEnd(const AsdTextureRegion *, u32, s32, s32, u32, u32);
 
 /* Draws the equipment detail decorations of the current page, unless the page is locked. */
 void FUN_00494574(EquipmentMenuState *work, s32 selection)
@@ -34,8 +34,8 @@ void FUN_00494574(EquipmentMenuState *work, s32 selection)
     }
     if (work->page != 0 || (!work->sound.restricted && gameFlagIsSet(0x410)) || work->sound.mode == 1) {
         u32 color = work->detail.color;
-        FUN_0049368c(&work->detail.region, 0x65, 0, 0, color, 1);
-        FUN_0049368c(&work->detail.region, 0x66, 0, 0, color, 1);
+        uiDrawSizedTextureAtRegionEnd(&work->detail.region, 0x65, 0, 0, color, 1);
+        uiDrawSizedTextureAtRegionEnd(&work->detail.region, 0x66, 0, 0, color, 1);
         s32 firstIndex;
         s32 secondIndex;
         if (work->sound.mode == 1) {
@@ -56,8 +56,8 @@ void FUN_00494574(EquipmentMenuState *work, s32 selection)
         }
         EquipmentImageGroup first = g_equipMenuStateHandlerInit.first;
         EquipmentImageGroup second = g_equipMenuStateHandlerInit.second;
-        FUN_0049368c(&work->detail.region, first.images[firstIndex], 0, 0, color, 1);
-        FUN_0049368c(&work->detail.region, second.images[secondIndex], 0, 0, color, 1);
+        uiDrawSizedTextureAtRegionEnd(&work->detail.region, first.images[firstIndex], 0, 0, color, 1);
+        uiDrawSizedTextureAtRegionEnd(&work->detail.region, second.images[secondIndex], 0, 0, color, 1);
     }
 }
 }

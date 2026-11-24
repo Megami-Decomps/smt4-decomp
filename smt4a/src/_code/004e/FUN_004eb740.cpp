@@ -1,8 +1,12 @@
-/* NON_MATCHING: battle owner load is hoisted and the uninitialized float command payload is stored earlier than retail. */
+/* NON_MATCHING: 24 lines. Retail passes the command's float payload from s16, which the function never sets (the
+ * original read an uninitialised float local); with the payload left unset and the command passed by value
+ * (btlAppendPendingCommand's real signature) the function is IDENTICAL, but that is undefined behaviour, so the
+ * payload is 0.0f here. */
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "battle/BattleUnit.h"
 #include "battle/BattleCommandValue.h"
+#include "battle/BtlPendingCommandsA.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "Model/MoriModelManager.h"
@@ -44,11 +48,14 @@ void FUN_004eb740(BtlMainStateA **reference, const BattleEventCandidate *candida
     if (battleTryRecruitEnemy(*reference)) {
         BtlCombatantEntryA *entry = FUN_003e81bc(*reference);
         BtlMainStateA *state = *reference;
-        f32 value; // Never set before use, as in the original.
         BattleCommandValue payload;
-        payload.real = value;
-        btlAppendPendingCommand(state, 1, state->roster->combatant.combatantIndex,
-                     entry->selectionIndex, payload);
+        payload.real = 0.0f;
+        BtlPendingCommand command;
+        command.kind = 1;
+        command.unitIndex = state->roster->combatant.combatantIndex;
+        command.first = entry->selectionIndex;
+        command.second = payload.word;
+        btlAppendPendingCommand(state, command);
         reinterpret_cast<BattleCommandSaveView *>(gameDataBlocksGetSaveData())->pending = 0;
     }
     reinterpret_cast<BattleCommandSlot *>(g_btlAction.slots)[(*reference)->unitRecord.currentSlot].setCommand(0x26);

@@ -23,7 +23,7 @@ void menu32EnterState27(Menu32 *menu);
 s32 menu32ModeIsNot5(BtlUiObjAA *menu);
 s32 btlUiPanelOperationIsAllowed(BtlUiObjBA *owner);
 BtlUiObjBA *FUN_00502754(u8 *subobject); /* returns the subobject's sprite (+0xBC) */
-void uiWorkEndState1(BtlUiObjAA *menu);
+void statusPanelEndPhaseOne(BtlUiObjAA *menu);
 void owner2DCInitSub(BtlUiObjBA *owner);
 
 void btlUiSelectCommandTargetState()
@@ -67,7 +67,7 @@ void btlUiSelectCommandTargetState()
         BtlUiA *current = g_btlUi.ui;
         if (menu32ModeIsNot5(&current->objA) != 0 &&
             btlUiPanelOperationIsAllowed(FUN_00502754(current->objA.tail.subobject)) != 0) {
-            uiWorkEndState1(&current->objA);
+            statusPanelEndPhaseOne(&current->objA);
             owner2DCInitSub(&current->objB);
         }
     }

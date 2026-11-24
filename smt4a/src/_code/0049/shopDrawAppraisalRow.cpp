@@ -19,7 +19,7 @@
 #include "addon/AocSystem_Smt4a.h"
 
 extern "C" {
-void FUN_0049368c(const AsdTextureRegion *region, u32 image, s32 offsetX, s32 offsetY, u32 color, u32 flags);
+void uiDrawSizedTextureAtRegionEnd(const AsdTextureRegion *region, u32 image, s32 offsetX, s32 offsetY, u32 color, u32 flags);
 f32 drawTextAtSnappedRectangle(const AsdTextureRegion *region, f32 x, f32 y, f32 depth, f32 spacing,
                                u32 layer, u32 color, f32 opacity, const char *text);
 const char *itemGetNameOrFallback(u32 id, s32 payload);
@@ -57,7 +57,7 @@ void shopDrawAppraisalRow(Obj536044 *shop, s32 row, s32 selected, s32 index)
         uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x48, x, y, depth);
         uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x49, x, y, depth);
         efctSetSpeed(1.0f);
-        FUN_0049368c(&shop->region, 0x4A, x, y, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&shop->region, 0x4A, x, y, depth, 1);
         if (touchSelectionGetSelected((Obj55ca08 *)shop->touchSelection) != 0) {
             uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x108, x, y, depth);
             uiDrawTableTextureAtRectCorner((ScreenRect *)&shop->region, 0x109, x, y, depth);
@@ -88,7 +88,7 @@ void shopDrawAppraisalRow(Obj536044 *shop, s32 row, s32 selected, s32 index)
     s32 badgeX = badge->x + x;
     s32 badgeY = badge->y + y;
     if (selected) {
-        FUN_0049368c(&shop->region, 0xE4, x, y, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&shop->region, 0xE4, x, y, depth, 1);
     }
     FUN_00493344((const OffsetPosition2D *)&shop->region, (s16)shown, badgeX, badgeY, depth, 0);
 
@@ -124,7 +124,7 @@ void shopDrawAppraisalRow(Obj536044 *shop, s32 row, s32 selected, s32 index)
         s32 secondX = secondBadge->x + x;
         s32 secondY = secondBadge->y + y;
         if (selected) {
-            FUN_0049368c(&shop->region, 0xE5, x, y, depth, 1);
+            uiDrawSizedTextureAtRegionEnd(&shop->region, 0xE5, x, y, depth, 1);
         }
         FUN_00493344((const OffsetPosition2D *)&shop->region, (s16)second, secondX, secondY, depth, 0);
         const char *secondName = itemGetNameOrFallback(second, 0);
@@ -150,7 +150,7 @@ void shopDrawAppraisalRow(Obj536044 *shop, s32 row, s32 selected, s32 index)
         item.percent = 0;
         item.id = second;
         s32 price = aocItemGetPrice((AocPricedItem *)&item);
-        FUN_0049368c(&shop->region, !selected ? 0xD1 : 0xE3, x, y, depth, 1);
+        uiDrawSizedTextureAtRegionEnd(&shop->region, !selected ? 0xD1 : 0xE3, x, y, depth, 1);
         const TextureTableEntryIV *priceOrigin;
         u32 priceColor;
         if (!selected) {
@@ -192,6 +192,6 @@ void shopDrawAppraisalRow(Obj536044 *shop, s32 row, s32 selected, s32 index)
     } else {
         frame = !selected ? 0xCF : 0xE1;
     }
-    FUN_0049368c(&shop->region, frame, x, y, depth, 1);
+    uiDrawSizedTextureAtRegionEnd(&shop->region, frame, x, y, depth, 1);
 }
 }

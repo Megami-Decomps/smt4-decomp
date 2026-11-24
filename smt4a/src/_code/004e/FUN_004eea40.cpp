@@ -168,7 +168,7 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
       }
       uVar20 = iVar9 + iVar10;
       iVar9 = iVar13;
-      FUN_004fda78(uVar20,0,param_2,*(int *)(*piVar14 + 0x1ed4) + iVar13 * 0x1d0,3,0);
+      btlReflectQueueTargetEntryAction(uVar20,0,param_2,*(int *)(*piVar14 + 0x1ed4) + iVar13 * 0x1d0,3,0);
       iVar11 = FUN_003e8430(*piVar14);
       if (iVar11 == 0) {
         func_0x004fb5a8(uVar20 + 1,param_2,*(int *)(*piVar14 + 0x1ed4) + iVar13 * 0x1d0);
@@ -218,7 +218,7 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
       btlMainFindEntryByListedId(puVar18,iVar12);
       iVar9 = FUN_004f6478(DAT_00573808);
       if ((DAT_00571160 & *puVar18) == 0 && (DAT_00571164 & puVar18[1]) == 0) {
-        FUN_004fda78(iVar9 + iVar13,0,param_2,*(int *)(*piVar14 + 0x1ed4) + iVar12 * 0x1d0,3,0);
+        btlReflectQueueTargetEntryAction(iVar9 + iVar13,0,param_2,*(int *)(*piVar14 + 0x1ed4) + iVar12 * 0x1d0,3,0);
         FUN_004e5a40(piVar14,iVar12,1);
         uVar17 = param_2[4];
         if ((int)uVar17 < 5) {

@@ -1,3 +1,4 @@
+#include "gamedata/RosterUnlock.h"
 #include "common.h"
 #include "quest_center/QuestRecordA.h"
 

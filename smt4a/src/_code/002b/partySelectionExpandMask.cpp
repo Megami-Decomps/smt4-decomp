@@ -1,5 +1,4 @@
-/* NON_MATCHING: the middle mask load is combined into LDM with different carry registers, and the final slot-byte load has a separate low-offset address addition. */
-#include "common.h"
+#include "battle/PartySelection.h"
 #include "gamedata/SaveSlotTable.h"
 
 struct PartyMaskSelection {
@@ -10,15 +9,10 @@ struct PartyMaskSelection {
 };
 
 
-static __inline u64 partySelectionBit(u8 slot)
-{
-    return static_cast<s64>(1 << (slot + 1));
-}
-
 extern "C" {
 void btlMenuResolveHighlightedCommand(PartyMaskSelection *, u16 *value, s16 *count);
 
-// Expand the chosen party entry (or checked entries) to a mask and signed count.
+/* Expands the selected party entry or the checked entries to a target mask. */
 u32 partySelectionExpandMask(PartyMaskSelection *selection, u64 *mask, s64 *count)
 {
     if (selection->selection < 0) {
@@ -27,7 +21,7 @@ u32 partySelectionExpandMask(PartyMaskSelection *selection, u64 *mask, s64 *coun
     *mask = 0;
     *count = 0;
     SaveSlotTableA *slots = gameGetSlotTable();
-    if (selection->selection == 9999) {
+    if (selection->selection == PARTY_SELECT_CHECKED) {
         if (selection->selected[0]) {
             *mask += 1;
         }

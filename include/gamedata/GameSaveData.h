@@ -137,7 +137,7 @@ typedef struct GameSaveBody {
     /* 0x1EAF8 */ u8 indexedFlags[0x98];
     /* 0x1EB90 */ u8 sortPreferences[0x80];
     union {
-        /* 0x1EC10 */ u8 flagsA[0x40];       /* flag bytes of ids 0..0x3F */
+        /* 0x1EC10 */ u8 specialRecipeFlags[0x40]; /* special fusion recipe ids 0..63 */
         /* 0x1EC10 */ GameFlagWords flagWordsA[2];  /* the same bytes, as the two blocks a new game carries over */
     };
     /* 0x1EC50 */ u8 unk1EC50;
@@ -182,12 +182,11 @@ typedef struct GameSaveBody {
     union {
         /* 0x24B3C */ u8 savedFlags[0x3F];  /* bits of ids 1..500 */
         struct {
-            u8 prefix[0x20];
-            /* 0x24B5C */ u8 flagsB[0x48];  /* flag bytes of ids 0x40..0x47, indexed by id */
-        } extendedFlags;
-        struct {
             u8 prefix[0x60];
-            /* 0x24B9C */ GameFlagTailWords words;  /* flagsB[0x40..0x47], as the block a new game carries over */
+            union {
+                /* 0x24B9C */ u8 specialRecipeFlags[8]; /* special fusion recipe ids 64..71 */
+                /* 0x24B9C */ GameFlagTailWords words;  /* the same bytes, as the block a new game carries over */
+            };
         } extendedFlagWords;
     };
     /* 0x24BA4 */ u8 unk24BA4[0x184];
@@ -219,13 +218,13 @@ typedef char GameSaveDataOffsets[offsetof(GameSaveData, count) == 0x66 && offset
     offsetof(GameSaveBody, supportUnits) == 0x9110 && offsetof(GameSaveBody, points) == 0x97E8 &&
     offsetof(GameSaveBody, mapBlock) == 0xA838 && offsetof(GameSaveBody, items) == 0xC170 ? 1 : -1];
 typedef char GameSaveDataUpperOffsets[offsetof(GameSaveBody, flagRows) == 0x1C5A4 &&
-    offsetof(GameSaveBody, flagsA) == 0x1EC10 && offsetof(GameSaveBody, entryValues) == 0x1EC54 &&
+    offsetof(GameSaveBody, specialRecipeFlags) == 0x1EC10 && offsetof(GameSaveBody, entryValues) == 0x1EC54 &&
     offsetof(GameSaveBody, playSeconds) == 0x1F458 &&
     offsetof(GameSaveBody, questSnapshot.value) == 0x1F85C && offsetof(GameSaveBody, playerName.name) == 0x1F860 &&
     offsetof(GameSaveBody, summary.records) == 0x2478C && offsetof(GameSaveBody, gameOverContinueEnabled) == 0x24B29 &&
     offsetof(GameSaveBody, config.hasConfig) == 0x24AF8 &&
     offsetof(GameSaveBody, config.selection.state.money) == 0x24B20 && offsetof(GameSaveBody, config.selection.state.modeFlags) == 0x24B27 &&
-    offsetof(GameSaveBody, linkSlots) == 0x24B2C && offsetof(GameSaveBody, extendedFlags.flagsB) == 0x24B5C &&
+    offsetof(GameSaveBody, linkSlots) == 0x24B2C && offsetof(GameSaveBody, extendedFlagWords.specialRecipeFlags) == 0x24B9C &&
     offsetof(GameSaveBody, flagWordsA) == 0x1EC10 && offsetof(GameSaveBody, extendedFlagWords.words) == 0x24B9C &&
     sizeof(GameSaveBody) == 0x24D28 && sizeof(GameSaveData) == 0x24DB0 ? 1 : -1];
 

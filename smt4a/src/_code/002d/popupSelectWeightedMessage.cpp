@@ -1,16 +1,23 @@
-/* NON_MATCHING: entry argument scheduling, table bounds comparison and null-result allocation differ. */
 #include "gamedata/PartnerInfoTable.h"
 #include "util/Random.h"
 #include "map/PopupStateA.h"
+
+namespace {
+enum {
+    PARTNER_POPUP_SCRIPTED = 7,
+    PARTNER_POPUP_KIND_COUNT = 26,
+};
+}
+
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
 
 /* Select a weighted popup matching its category, ID and required/excluded game flags. */
 const char *popupSelectWeightedMessage(s32 category, s32 id)
 {
-    if (category < 26 && category != 7) {
+    if (category < PARTNER_POPUP_KIND_COUNT && category != PARTNER_POPUP_SCRIPTED) {
         s32 count = partnerInfoCount();
-        for (u32 index = 0; static_cast<s32>(index) < count; ++index) {
+        for (u32 index = 0; (s32)index < count; ++index) {
             PartnerInfoRecord *record = partnerInfoRecordAt(index);
             if (record->kind == category && record->partnerId == id &&
                 (record->requiredFlag == 0 || gameFlagIsSet(record->requiredFlag)) &&
@@ -32,4 +39,5 @@ const char *popupSelectWeightedMessage(s32 category, s32 id)
     }
     return NULL;
 }
-}
+
+} /* extern "C" */

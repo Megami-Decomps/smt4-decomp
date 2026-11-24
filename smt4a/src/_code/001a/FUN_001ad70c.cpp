@@ -1,5 +1,4 @@
-/* NON_MATCHING: uninitialized failure return and invariant-count loop recovered; retail retains a second saved container pointer. */
-/* Finds an indexed EPL block payload in an ATBC or ABCH model container. */
+/* NON_MATCHING: returns NULL on early failure rather than leaving the result unset; retail saves a second copy of the container pointer. */
 #include "shard/S3AsdModelAttr.h"
 #include "AsdSDK/AsdMemCopy.h"
 
@@ -8,9 +7,11 @@ extern const char g_asdModelContainerAtbcMagic[];
 extern const char g_asdModelContainerAbchMagic[];
 extern const char DAT_0053d1a0[];
 s32 rt_memcmp(const void *left, const void *right, u32 bytes);
+
+/* Finds an indexed EPL block payload in an ATBC or ABCH model container. */
 void *FUN_001ad70c(const AsdAtbcHeader *container, s32 index)
 {
-    void *payload; // Retail leaves the failure result uninitialized.
+    void *payload = NULL;
     if (rt_memcmp(container, g_asdModelContainerAtbcMagic, 4) == 0 ||
         rt_memcmp(container, g_asdModelContainerAbchMagic, 4) == 0) {
         s32 count = container->count;
@@ -33,4 +34,4 @@ void *FUN_001ad70c(const AsdAtbcHeader *container, s32 index)
     }
     return payload;
 }
-}
+} /* extern "C" */

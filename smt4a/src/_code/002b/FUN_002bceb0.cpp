@@ -14,8 +14,8 @@ extern "C" {
 extern const char DAT_00531b14[], DAT_00531af8[], DAT_00531b50[], DAT_00531b34[];
 void resourceOwnerLoadNamed(ResourceOwner *, const char *);
 s32 FUN_0040af60(ResourceOwner *);
-void FUN_0040afe0(ResourceOwner *, s32, s32);
-void FUN_0040ae70(ResourceOwner *, s32);
+void moriModelManagerEnsureSceneWithLayer(ResourceOwner *, s32, s32);
+void moriModelManagerEnsureScene(ResourceOwner *, s32);
 
 /* Builds the scene's environment and model paths (the dark-zone, progress or map/area variant) and loads its model. */
 void FUN_002bceb0(MapSceneResourceView *scene)
@@ -36,10 +36,10 @@ void FUN_002bceb0(MapSceneResourceView *scene)
     resourceOwnerLoadNamed(scene->owner, modelPath);
     if (FUN_0040af60(scene->owner)) {
         if (scene->mapId == 32 && scene->areaId == 2) {
-            FUN_0040afe0(scene->owner, 3, 0);
+            moriModelManagerEnsureSceneWithLayer(scene->owner, 3, 0);
             return;
         }
-        FUN_0040ae70(scene->owner, 1);
+        moriModelManagerEnsureScene(scene->owner, 1);
     }
 }
 }

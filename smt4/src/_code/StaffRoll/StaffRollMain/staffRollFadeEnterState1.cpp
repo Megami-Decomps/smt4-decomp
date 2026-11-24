@@ -6,11 +6,6 @@ extern "C" {
 
 extern StaffRollWork *g_staffRoll;
 
-static __inline void staffRollSetState(StaffRollWork *work, s32 state)
-{
-    work->state = state;
-}
-
 /* Starts fading both screens in over 60 frames and waits for the fades. */
 void staffRollFadeEnterState1(void)
 {

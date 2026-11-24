@@ -20,7 +20,7 @@ int FUN_003bf5a8(...);
 int workAdoptGlobalHandle(...);
 
 int FUN_0020ffd8(...);
-int FUN_0023c154(...);
+int btlAppendPendingCommand(...);
 int FUN_0023c1bc(...);
 int FUN_0023c24c(...);
 int btlReflectQueueTransitionPair(...);
@@ -108,7 +108,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0020ffd8. */
 /* Supplied declaration required: FUN_0023c0d0. */
 /* Supplied declaration required: actionCreateKindSeventeen. */
-/* Supplied declaration required: FUN_0023c154. */
+/* Supplied declaration required: btlAppendPendingCommand. */
 /* Supplied declaration required: FUN_0023c1bc. */
 /* Supplied declaration required: FUN_0023c24c. */
 /* Supplied declaration required: btlReflectQueueTransitionPair. */
@@ -986,7 +986,7 @@ LAB_00346258:
   case '(':
     temp_v1 = *(short *)(*(int *)(psVar2 + 10) + 0x60);
     temp_v4 = btlGetMainState();
-    FUN_0023c154(temp_v4,5,(int)temp_v1,0,unaff_r5);
+    btlAppendPendingCommand(temp_v4,5,(int)temp_v1,0,unaff_r5);
     puVar9 = (unsigned int *)btlGetMainState();
     btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar9), (int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
     if (puVar9 != (unsigned int *)0x0) {

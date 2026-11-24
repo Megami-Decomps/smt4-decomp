@@ -20,14 +20,14 @@ struct PositionedTransition {
     /* 0x198 */ UiSpriteState motion;
 };
 extern "C" {
-void FUN_00233240(void *transition, s32 value);
+void uiSceneApplySpritePreset(void *transition, s32 value);
 void pointConvertToFloat(FloatPoint *point, s32 x, s32 y);
 
 /* Starts a transition, follows its integer position, then clears the active flag. */
 void FUN_002311a4(PositionedTransition *work)
 {
     if (work->state == 0) {
-        FUN_00233240(work->transition, 0);
+        uiSceneApplySpritePreset(work->transition, 0);
         work->hidden = 0;
         work->animating = 1;
         work->state = 1;

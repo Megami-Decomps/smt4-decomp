@@ -7,9 +7,9 @@ extern u32 DAT_00433e80, DAT_00433ec0, DAT_00433f0c, DAT_00433f4c, DAT_00433f8c,
     DAT_00434028, DAT_00434068, DAT_004340a8, DAT_004340e8, DAT_00434128;
 
 u32 *filterCreateQuad(u32 *table, u32 arg1, u32 arg2);
-u32 *FUN_003481ec(u32 *table, u32 arg1, u32 arg2);
+u32 *filterCreateXPoly(u32 *table, u32 arg1, u32 arg2);
 u32 *filterCreate4Poly(u32 *table, u32 arg1, u32 arg2);
-u32 *FUN_0034c24c(u32 *table, u32 arg1, u32 arg2);
+u32 *filterCreateDoubleQuad(u32 *table, u32 arg1, u32 arg2);
 
 // Initializes the table of the given kind (0-10) and returns it; NULL for an unknown kind.
 u32 *filterCreateByKind(u32 kind, u32 arg1, u32 arg2)
@@ -20,7 +20,7 @@ u32 *filterCreateByKind(u32 kind, u32 arg1, u32 arg2)
         table = filterCreateQuad(&DAT_00433e80, arg1, arg2);
         break;
     case 1:
-        table = FUN_003481ec(&DAT_00433ec0, arg1, arg2);
+        table = filterCreateXPoly(&DAT_00433ec0, arg1, arg2);
         break;
     case 2:
         table = filterCreate4Poly(&DAT_00433f0c, arg1, arg2);
@@ -29,7 +29,7 @@ u32 *filterCreateByKind(u32 kind, u32 arg1, u32 arg2)
         table = filterCreateQuad(&DAT_00433f4c, arg1, arg2);
         break;
     case 4:
-        table = FUN_0034c24c(&DAT_00433f8c, arg1, arg2);
+        table = filterCreateDoubleQuad(&DAT_00433f8c, arg1, arg2);
         break;
     case 5:
         table = filterCreateQuad(&DAT_00433fe8, arg1, arg2);

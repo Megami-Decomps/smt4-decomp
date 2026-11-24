@@ -36,6 +36,9 @@ extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
 void FUN_00342334(u8 value);
+/* The game flag that marks scene `scene` as seen (0x800 + scene): a one-instruction function armlink inlined
+ * (inlined.txt in both games). */
+s32 eventFlagForScene(s32 scene);
 #ifdef __cplusplus
 }
 #endif

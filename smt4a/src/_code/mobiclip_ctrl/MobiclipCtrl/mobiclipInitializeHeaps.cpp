@@ -31,7 +31,7 @@ void FUN_00512e84(MovieAllocate allocate, MovieFree release);
 void FUN_00513250(MovieAllocate allocate, MovieFree release);
 void pairSlotSet(MovieAllocate allocate, MovieFree release);
 void FUN_00425f68(void);
-void FUN_00422940(void *event, bool manualReset, bool initiallySignaled);
+void movieAudioDeviceInitialize(void *event, bool manualReset, bool initiallySignaled);
 
 void mobiclipInitializeHeaps(void)
 {
@@ -55,6 +55,6 @@ void mobiclipInitializeHeaps(void)
     FUN_00513250(mobiclipHeapAllocC, FUN_0028120c);
     pairSlotSet(mobiclipHeapAllocA, FUN_00203950);
     FUN_00425f68();
-    FUN_00422940(DAT_00617e58, true, true);
+    movieAudioDeviceInitialize(DAT_00617e58, true, true);
 }
 }

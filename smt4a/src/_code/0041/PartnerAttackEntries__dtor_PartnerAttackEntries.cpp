@@ -1,4 +1,4 @@
-/* NON_MATCHING: only scheduling differs (retail loads the buffer pointer after the float stores; built hoists the load above them). */
+/* NON_MATCHING: the entry offset is computed in r0 instead of retail's r1; the rest matches. */
 #include "battle/PartnerAttackEntries.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -14,8 +14,8 @@ PartnerAttackEntries::~PartnerAttackEntries()
         entry->unk10 = 0.0f;
         entry->unk0c = 0.0f;
         entry->unk08 = 0.0f;
-        if (entry->slot != NULL) {
-            asdMemFreeSlot(entry->slot);
+        if (void **slot = entry->slot) {
+            asdMemFreeSlot(slot);
             entry->slot = NULL;
         }
         entry->unkAC = 0;

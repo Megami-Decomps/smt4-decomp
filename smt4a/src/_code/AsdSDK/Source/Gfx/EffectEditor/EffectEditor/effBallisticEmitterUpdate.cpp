@@ -12,7 +12,7 @@ void effComputeParticleEmission(ParticleEmissionState *state, const ParticleEmis
 void FUN_002fe2e8(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_0027134c(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_00321e98(ParticleEmissionState *emitter, SpiralParticle *particle);
-void FUN_00321d7c(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous);
+void effSampleParticleTransform(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous);
 
 /* Emits and advances particles that travel along randomized directions, with acceleration and gravity. */
 void effBallisticEmitterUpdate(ParticleEmissionState *emitter)
@@ -74,7 +74,7 @@ void effBallisticEmitterUpdate(ParticleEmissionState *emitter)
                     motion->direction[1] * distance - fall, motion->direction[2] * distance, displacementW);
             vec4Add(&g_vectorScratch.first.vector, &g_vectorScratch.first.vector, &g_vectorScratch.second.vector);
             particle->position = g_vectorScratch.first.vector;
-            FUN_00321d7c((ParticleTransformSample *)particle, (ParticleTransformCurves *)definition, frame,
+            effSampleParticleTransform((ParticleTransformSample *)particle, (ParticleTransformCurves *)definition, frame,
                          (const EffectColor *)&previous);
             particle->scale *= motion->scale;
             particle->angle *= motion->angleScale;
@@ -143,7 +143,7 @@ void effBallisticEmitterUpdate(ParticleEmissionState *emitter)
                 particle->position = g_vectorScratch.first.vector;
                 particle->frame = (s32)age;
             }
-            FUN_00321d7c((ParticleTransformSample *)particle, (ParticleTransformCurves *)definition, particle->frame,
+            effSampleParticleTransform((ParticleTransformSample *)particle, (ParticleTransformCurves *)definition, particle->frame,
                          (const EffectColor *)&previous);
             particle->scale *= motion->scale;
             particle->angle *= motion->angleScale;

@@ -5,7 +5,7 @@ extern "C" {
 SpriteInfo *layoutFindTableEntry(AsdTextureRegion *region, u32 image); // declcheck: local (the shared declaration in AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h does not compile here: a value of type "TextureTableEntryIV *" cannot be assigned to an entity of type "SpriteInfo *")
 void devilDrawIconRelative(AsdTextureRegion *region, s32 demon, s32 x, s32 y, u32 color);
 s32 partyHasStoredDemon(u16 demon);
-void FUN_00231bcc(AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color, u32 flags);
+void uiDrawSizedTextureAtRegionEnd(AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color, u32 flags);
 
 // Draw a row's demon icon and, when requested, its stored-demon badge.
 void demonIconPanelDrawRow(DemonIconPanel *panel, s32 showOwned, s32 demon,
@@ -28,10 +28,10 @@ void demonIconPanelDrawRow(DemonIconPanel *panel, s32 showOwned, s32 demon,
     devilDrawIconRelative(&panel->region, (s16)demon, drawX, drawY, color);
     if (showOwned && partyHasStoredDemon(demon)) {
         if (!alternate) {
-            FUN_00231bcc(&panel->region, 0x486, x, y, color, 1);
+            uiDrawSizedTextureAtRegionEnd(&panel->region, 0x486, x, y, color, 1);
             return;
         }
-        FUN_00231bcc(&panel->region, 0x494, x, y, color, 1);
+        uiDrawSizedTextureAtRegionEnd(&panel->region, 0x494, x, y, color, 1);
     }
 }
 }

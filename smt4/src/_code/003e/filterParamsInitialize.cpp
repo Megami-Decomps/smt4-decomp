@@ -21,7 +21,7 @@ typedef struct FadeQuadParams {
     /* 0x28 */ u8 unk28[0x18];
 } FadeQuadParams;
 
-/* A two-curve filter's parameters (0x5C bytes: FUN_0034c24c). */
+/* A two-curve filter's parameters (0x5C bytes: filterCreateDoubleQuad). */
 typedef struct FadeDoubleParams {
     /* 0x00 */ FadeParams first;
     /* 0x28 */ FadeParams second;
@@ -34,7 +34,7 @@ typedef struct FadeQuadHeader {
     /* 0x08 */ FadeQuadParams quad;
 } FadeQuadHeader;
 
-/* FUN_003481ec's filter parameters (0x4C bytes): its curve sits behind a 0x10-byte header. */
+/* filterCreateXPoly's filter parameters (0x4C bytes): its curve sits behind a 0x10-byte header. */
 typedef struct FadeOffsetParams {
     /* 0x00 */ u8 unk00[0x10];
     /* 0x10 */ FadeParams curve;
@@ -45,7 +45,7 @@ typedef struct FadeOffsetParams {
 typedef struct FadeParamTable {
     /* 0x000 */ FadeQuadParams poly;      /* filterCreate4Poly */
     /* 0x040 */ FadeQuadParams quadA;
-    /* 0x080 */ FadeDoubleParams pair;    /* FUN_0034c24c */
+    /* 0x080 */ FadeDoubleParams pair;    /* filterCreateDoubleQuad */
     /* 0x0DC */ FadeQuadParams quadB;
     /* 0x11C */ FadeQuadParams quadC;
     /* 0x15C */ FadeQuadParams quadD;

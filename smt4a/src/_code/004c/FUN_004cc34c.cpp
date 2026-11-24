@@ -22,7 +22,7 @@ struct CallbackWorkflow {
 
 extern "C" {
 s32 loadSlotIsLoaded(u32 slot);
-void FUN_004cbb38(CallbackWorkflow *work);
+void campTalkOpenPairStatus(CallbackWorkflow *work);
 void FUN_004cbd70(CallbackWorkflow *work);
 u16 *saveGetSelectedRecordSlot(u32 region);
 void statusPanelClose();
@@ -78,7 +78,7 @@ extern "C" s32 FUN_004cc34c(CallbackWorkflow *work)
         workflowEnterState(work, 2);
         break;
     case 3:
-        FUN_004cbb38(work);
+        campTalkOpenPairStatus(work);
         break;
     case 5:
         FUN_004cbd70(work);

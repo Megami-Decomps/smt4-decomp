@@ -8,18 +8,31 @@
 /* The effect names the battle recognises (g_btlEffect). */
 struct BtlEffectNames {
     /* 0x00 */ const char *numberedPrefix; /* "<prefix>NN" selects a numbered effect */
-    /* 0x04 */ u32 unk04;
-    /* 0x08 */ u32 unk08;
+    /* 0x04 */ const char *deadName;        /* DEAD, used as the fallback */
+    /* 0x08 */ const char *deadLegionName;  /* DEAD_LEGION, preferred when requested */
     /* 0x0C */ const char *ignoredPrefix;
     /* 0x10 */ const char *ignoredName;
     /* 0x14 */ const char *ignoredNameB;
 };
 
-/* The effect names a battle unit asks for: eight 0x16-byte names from +0x58 (four per loader). */
-struct BtlEffectRequest {
-    /* 0x00 */ u8 unk00[0x58];
-    /* 0x58 */ char names[8][0x16];
+/* A named death-effect entry: the two IDs are used to start the effect in Apocalypse. */
+struct BtlDeathEffectEntry {
+    /* 0x00 */ char name[0x10];
+    /* 0x10 */ s16 value;
+    /* 0x12 */ u16 primaryId;
+    /* 0x14 */ u16 secondaryId;
 };
+
+/* Names a battle unit requests: eight ordinary names (four per loader), then the death effects. */
+struct BtlEffectRequest {
+    /* 0x000 */ u8 unk000[0x58];
+    /* 0x058 */ char names[8][0x16];
+    /* 0x108 */ BtlDeathEffectEntry deathEffects[4];
+};
+
+typedef char BtlEffectRequestLayoutCheck[sizeof(BtlDeathEffectEntry) == 0x16 &&
+    offsetof(BtlDeathEffectEntry, primaryId) == 0x12 &&
+    offsetof(BtlEffectRequest, deathEffects) == 0x108 ? 1 : -1];
 
 /* A loaded effect file of the battle's effect work. */
 struct BtlEffectFileSlot {
@@ -94,7 +107,10 @@ struct BtlEffectWork {
     /* 0x1F30 */ BtlEffectFileSlot slots[8];
     /* 0x2390 */ u8 unk2390[0x230];
     /* 0x25C0 */ BtlEffectFileSlot referenceSlots[11]; /* the "ef_e_ref" effects */
-    /* 0x2BC4 */ u8 unk2BC4[0x464];
+    /* 0x2BC4 */ BtlEffectFileSlot flashSlots[2]; /* G_flash and G_hatu */
+    /* 0x2CDC */ BtlEffectFileSlot transitionSlots[5]; /* party moves, joins and talk effects */
+    /* 0x2F98 */ u8 unk2F98[4];
+    /* 0x2F9C */ BtlEffectFileSlot niyariSlot; /* ef_d_niyari */
     /* 0x3028 */ u32 flags;          /* BTL_EFFECT_JOB_* */
     /* 0x302C */ s32 effectKind;     /* the kind the model stages work on (0 and 22 have no models) */
     /* 0x3030 */ u32 frames;         /* frames since the kind was requested, up to 0xFFFF */
@@ -109,7 +125,9 @@ typedef char BtlEffectFileSlotLayoutCheck[sizeof(BtlEffectFileSlot) == 0x8C && o
 typedef char BtlEffectWorkLayoutCheck[sizeof(BtlEffectModelSlot) == 0x28 &&
     offsetof(BtlEffectWork, models) == 0x190 && offsetof(BtlEffectWork, selections) == 0x1030 &&
     offsetof(BtlEffectWork, request) == 0x1CFC && offsetof(BtlEffectWork, slots) == 0x1F30 &&
-    offsetof(BtlEffectWork, referenceSlots) == 0x25C0 && offsetof(BtlEffectWork, flags) == 0x3028 &&
+    offsetof(BtlEffectWork, referenceSlots) == 0x25C0 && offsetof(BtlEffectWork, flashSlots) == 0x2BC4 &&
+    offsetof(BtlEffectWork, transitionSlots) == 0x2CDC && offsetof(BtlEffectWork, niyariSlot) == 0x2F9C &&
+    offsetof(BtlEffectWork, flags) == 0x3028 &&
     offsetof(BtlEffectWork, numberedEffect) == 0x3034 && offsetof(BtlEffectWork, numberedIndex) == 0x3038 &&
     offsetof(BtlEffectWork, wait) == 0x3214 ? 1 : -1];
 

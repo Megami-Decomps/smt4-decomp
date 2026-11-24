@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(...);
 int FUN_0024add8(int, float *);
-int FUN_0024b660(...);
+int effSampleParticleTransform(...);
 int randomAdvanceShiftRegister(void);
 int FUN_0024b7bc(int, float *);
 int shiftRandomNextFraction(...);
@@ -72,7 +72,7 @@ static float romwright_sqrt_4(float value)
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: FUN_0024add8. */
-/* Supplied declaration required: FUN_0024b660. */
+/* Supplied declaration required: effSampleParticleTransform. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b7bc. */
 /* Supplied declaration required: shiftRandomNextFraction. */
@@ -237,7 +237,7 @@ void FUN_00301464(int param_1)
               pfVar8[1] = pfVar8[1] * temp_v11;
               pfVar7[1] = temp_v9 + (pfVar7[1] - temp_v9) * temp_v11;
             }
-            FUN_0024b660(pfVar7,pfVar9,temp_v10,&temp_v22);
+            effSampleParticleTransform(pfVar7,pfVar9,temp_v10,&temp_v22);
             pfVar7[6] = pfVar7[6] * pfVar8[5];
             temp_v9 = pfVar7[7];
             temp_v11 = pfVar8[7];
@@ -375,7 +375,7 @@ void FUN_00301464(int param_1)
               }
             }
             pfVar7[4] = 0.0f;
-            FUN_0024b660(pfVar7,pfVar9);
+            effSampleParticleTransform(pfVar7,pfVar9);
             temp_v7 = (float)((int)temp_v7 - 1);
             pfVar7[6] = pfVar7[6] * pfVar8[5];
             temp_v10 = pfVar7[7];

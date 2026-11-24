@@ -32,7 +32,7 @@ void FUN_003f5810(MovieAllocate, MovieFree);
 void FUN_003f5bdc(MovieAllocate, MovieFree);
 void FUN_003f6a14(MovieAllocate, MovieFree);
 void FUN_0035196c();
-void FUN_0034e43c(MovieHeapOwner *, s32, s32, s32);
+void movieAudioDeviceInitialize(MovieHeapOwner *, s32, s32, s32);
 
 // Reserve movie playback heaps and install the allocator callbacks.
 void mobiclipInitializeHeaps()
@@ -57,6 +57,6 @@ void mobiclipInitializeHeaps()
     FUN_003f5bdc(mobiclipHeapAllocC, FUN_001dbc3c);
     FUN_003f6a14(mobiclipHeapAllocA, FUN_0018c034);
     FUN_0035196c();
-    FUN_0034e43c(&DAT_004c3a38, 1, 0, 0);
+    movieAudioDeviceInitialize(&DAT_004c3a38, 1, 0, 0);
 }
 }

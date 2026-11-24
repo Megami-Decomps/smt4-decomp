@@ -1,4 +1,4 @@
-/* NON_MATCHING: the trigger lookup's null path uses a different register, and the popup stores are grouped differently. */
+/* NON_MATCHING: the popup state, timer and message stores are grouped differently. */
 #include "gamedata/PartnerInfoTable.h"
 #include "gamedata/GameFlags.h"
 #include "map/PopupStateA.h"

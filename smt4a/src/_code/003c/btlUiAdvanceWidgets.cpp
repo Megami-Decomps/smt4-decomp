@@ -9,7 +9,7 @@ extern int FUN_004abac8(BtlUiA *ui);
 extern int FUN_004abb30(BtlUiA *ui);
 extern int FUN_004aaf94(BtlUiA *ui);
 extern int objValueIsSet(BtlUiObjAA *obj);
-extern int uiWorkEndState1(BtlUiObjAA *obj);
+extern int statusPanelEndPhaseOne(BtlUiObjAA *obj);
 extern int FUN_0034efe0(BtlUiObjBA *obj);
 extern int FUN_002b24dc(BtlUiObjBA *obj);
 
@@ -18,7 +18,7 @@ u32 btlUiAdvanceWidgets(void)
 {
     if (FUN_004aaa4c(g_btlUiBlock) != 0 && FUN_004abac8(g_btlUiBlock) != 0 && FUN_004abb30(g_btlUiBlock) != 0) {
         if (FUN_004aaf94(g_btlUiBlock) != 0 && objValueIsSet(&g_btlUiBlock->objA) != 0) {
-            uiWorkEndState1(&g_btlUiBlock->objA);
+            statusPanelEndPhaseOne(&g_btlUiBlock->objA);
         }
         if (FUN_0034efe0(&g_btlUiBlock->objB) != 0) {
             FUN_002b24dc(&g_btlUiBlock->objB);

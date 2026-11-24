@@ -17,7 +17,7 @@ public:
 extern "C" {
 s32 FUN_0031d174(void *list);
 void uiDrawCompositeSpriteAtRectCorner(void *rect, u32 style, s32 a, s32 b, u32 context);
-void FUN_0049368c(void *rect, s32 sprite, s32 a, s32 b, u32 context, s32 c);
+void uiDrawSizedTextureAtRegionEnd(void *rect, s32 sprite, s32 a, s32 b, u32 context, s32 c);
 void FUN_00494574(void *panel, u32 tab);
 void FUN_00495b04(void *panel, s32 row, s32 selected, const void *value);
 void size40Set(void *object, s32 first, s32 second);
@@ -70,7 +70,7 @@ extern "C" void FUN_004986b0(EquipmentMenuState *panel, u32 frameStyle)
         break;
     }
     uiDrawCompositeSpriteAtRectCorner(&panel->detail.region, frameStyle, 0, 0, context);
-    FUN_0049368c(&panel->detail.region, panel->page + 0x5A, 0, 0, context, 1);
+    uiDrawSizedTextureAtRegionEnd(&panel->detail.region, panel->page + 0x5A, 0, 0, context, 1);
     FUN_00494574(panel, panel->page);
     AocItemRef headerValue;
     headerValue.id = 0;

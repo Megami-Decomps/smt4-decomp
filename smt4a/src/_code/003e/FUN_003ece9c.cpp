@@ -5,17 +5,16 @@
 #include "battle/BattleHelpers.h"
 #include "battle/BtlGlobals.h"
 #include "battle/BtlUiGlobal.h"
+#include "battle/BtlScriptUnitFlags.h"
 
 extern "C" {
-s32 hasFlag80Or1000(u32 id, const ScriptCategoryUnit *unit);
 UnitCategoryState *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 void FUN_0047f780(s32 category, s32 first, s32 second);
 
 /* Request the scripted unit's category effect unless the current battle selection blocks it. */
 void FUN_003ece9c(BtlMainStateA *state)
 {
-    ScriptCategoryUnit *unit = reinterpret_cast<ScriptCategoryUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
-    if (unit != NULL && hasFlag80Or1000(g_btlScriptUnit, unit)) {
+    if (btlScriptUnitHasFlagsInline()) {
         return;
     }
     if (btlFindFirstEntryMatchingCategoryAndRequiredMask(state) == NULL) {

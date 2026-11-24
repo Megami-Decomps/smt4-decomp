@@ -47,8 +47,8 @@ u32 dataTableGetCount(u32 table);
 s32 FUN_00240c34(const char* name);
 void resourceOwnerLoadNamed(ResourceOwner* owner, const char* name);
 s32 FUN_0040af60(ResourceOwner* owner);
-void FUN_0040ae70(ResourceOwner* owner, s32 arg);
-void FUN_0040afe0(ResourceOwner* owner, s32 a, s32 b);
+void moriModelManagerEnsureScene(ResourceOwner* owner, s32 arg);
+void moriModelManagerEnsureSceneWithLayer(ResourceOwner* owner, s32 a, s32 b);
 void* asdMemoryAllocTraced(u32 size, const char* file, u32 line);
 void* modelListInit(void* memory);
 
@@ -89,9 +89,9 @@ void btlStageModelLoad(BtlStageModel* model, u32 stage, u32 substage)
     resourceOwnerLoadNamed(owner, name);
     if (FUN_0040af60(owner) != 0) {
         if (stage == 8 && (substage == 6 || substage == 7)) {
-            FUN_0040afe0(owner, 3, 0);
+            moriModelManagerEnsureSceneWithLayer(owner, 3, 0);
         } else {
-            FUN_0040ae70(owner, 0);
+            moriModelManagerEnsureScene(owner, 0);
         }
         owner->state[0xc4] = 0;
         owner->flags[1] |= 2;

@@ -14,7 +14,7 @@ int equipmentIsFullyUpgraded(void);
 int uiDrawCompositeSpriteAtRectCorner(...);
 int drawTextAtRelativePosition(...);
 int uiDrawTableTextureAtRectCorner(...);
-int FUN_0049368c(...);
+int uiDrawSizedTextureAtRegionEnd(...);
 int contentGetUpgradedKindValue(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
@@ -44,7 +44,7 @@ extern int equipmentHasPositiveUpgrade(unsigned int);
 /* Supplied declaration required: uiDrawCompositeSpriteAtRectCorner. */
 /* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: uiDrawTableTextureAtRectCorner. */
-/* Supplied declaration required: FUN_0049368c. */
+/* Supplied declaration required: uiDrawSizedTextureAtRegionEnd. */
 extern unsigned int itemGetNameOrFallback(unsigned int, unsigned int);
 /* Supplied declaration required: contentGetUpgradedKindValue. */
 extern unsigned int shopGetEntryPrice(unsigned short *);
@@ -105,7 +105,7 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
     uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x48,temp_v16,temp_v7,temp_v14);
     uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x49,temp_v16,temp_v7,temp_v14);
     efctSetSpeed();
-    FUN_0049368c(param_1 + 0x3a4,0x4a,temp_v16,temp_v7,temp_v14,1);
+    uiDrawSizedTextureAtRegionEnd(param_1 + 0x3a4,0x4a,temp_v16,temp_v7,temp_v14,1);
     if (*(char *)(param_1 + 0xb19) != '\0') {
       uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x108,temp_v16,temp_v7,temp_v14);
       uiDrawTableTextureAtRectCorner(param_1 + 0x3a4,0x109,temp_v16,temp_v7,temp_v14);
@@ -130,7 +130,7 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
   temp_v2 = *(short *)(temp_v8 + 10);
   temp_v8 = *(short *)(temp_v8 + 8) + temp_v16;
   if (param_3 != 0) {
-    FUN_0049368c(param_1 + 0x3a4,0xaa,temp_v16,temp_v7,temp_v14,1);
+    uiDrawSizedTextureAtRegionEnd(param_1 + 0x3a4,0xaa,temp_v16,temp_v7,temp_v14,1);
   }
   FUN_00493344((const OffsetPosition2D *)(param_1 + 0x3a4),(int)(short)temp_v1,temp_v8,temp_v2 + temp_v7,temp_v14,param_2 != 0);
   if (param_2 != 0) {

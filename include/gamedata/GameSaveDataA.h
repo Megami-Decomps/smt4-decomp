@@ -209,7 +209,13 @@ typedef struct GameSaveBodyA {
     /* 0x1EED4 */ u8 flagRows[0x2380];
     /* 0x21254 */ u8 questCenter[0x1D4];   /* gameDataBlocksGetStats */
     /* 0x21428 */ u8 block21428[0xA0];
-    /* 0x214C8 */ u8 block214C8[0xC0];
+    union {
+        /* 0x214C8 */ u8 block214C8[0xC0];
+        struct {
+            u8 prefix[0x80];
+            /* 0x21548 */ u8 flags[64]; /* special fusion recipe ids 0..63 */
+        } specialRecipeFlags;
+    };
     /* 0x21588 */ u8 unk21588;
     /* 0x21589 */ u8 unk21589[0x3];
     union {
@@ -235,11 +241,16 @@ typedef struct GameSaveBodyA {
     /* 0x27E32 */ u8 unk27E32;
     /* 0x27E33 */ u8 unk27E33[9];
     /* 0x27E3C */ u8 tableFlag;
-    /* 0x27E3D */ u8 unk27E3D[0x13];
+    /* 0x27E3D */ u8 gameOverCount;
+    /* 0x27E3E */ u8 unk27E3E[0x12];
     /* 0x27E50 */ u8 entryFlags[0x3F];
     /* 0x27E8F */ u8 unk27E8F;
     union {
         /* 0x27E90 */ u8 unk27E90[0x288C];
+        struct {
+            u8 prefix[0x20];
+            /* 0x27EB0 */ u8 flags[8]; /* special fusion recipe ids 64..71 */
+        } specialRecipeTail;
         struct {
             /* 0x27E90 */ s8 values[4];    /* the title configuration's saved setting bytes */
             /* 0x27E94 */ u8 saved;        /* nonzero once the settings were saved */
@@ -292,10 +303,12 @@ typedef char GameSaveBodyAOffsetCheck[offsetof(GameSaveBodyA, slots) == 0x4 && o
     offsetof(GameSaveBodyA, record.tail.unk04) == 0x27E04 && offsetof(GameSaveBodyA, halves.halves) == 0x2803C &&
     offsetof(GameSaveBodyA, area.area282C8) == 0x282C8 && offsetof(GameSaveBodyA, pointsTotal) == 0x2D2C && offsetof(GameSaveBodyA, points) == 0x2D30 && offsetof(GameSaveBodyA, mapBlock) == 0x3DEC && offsetof(GameSaveBodyA, flagBlock) == 0x54D0 &&
     offsetof(GameSaveBodyA, items) == 0x5E84 && offsetof(GameSaveBodyA, flagRows) == 0x1EED4 && offsetof(GameSaveBodyA, questCenter) == 0x21254 && offsetof(GameSaveBodyA, runtime.playerName) == 0x22198 && offsetof(GameSaveBodyA, tableFlag) == 0x27E3C && offsetof(GameSaveBodyA, status.flags) == 0x27FB8 &&
-    offsetof(GameSaveBodyA, block214C8) == 0x214C8 && offsetof(GameSaveBodyA, runtime.unk21D8C) == 0x21D8C &&
+    offsetof(GameSaveBodyA, block214C8) == 0x214C8 && offsetof(GameSaveBodyA, specialRecipeFlags.flags) == 0x21548 &&
+    offsetof(GameSaveBodyA, specialRecipeTail.flags) == 0x27EB0 && offsetof(GameSaveBodyA, runtime.unk21D8C) == 0x21D8C &&
     offsetof(GameSaveBodyA, pairs.selectedUnit) == 0x27044 && offsetof(GameSaveBodyA, pairs.entries) == 0x270C4 &&
     offsetof(GameSaveBodyA, record.tail.value) == 0x27E0C &&
-    offsetof(GameSaveBodyA, saveState) == 0x27E1E && offsetof(GameSaveBodyA, entryFlags) == 0x27E50 &&
+    offsetof(GameSaveBodyA, saveState) == 0x27E1E && offsetof(GameSaveBodyA, gameOverCount) == 0x27E3D &&
+    offsetof(GameSaveBodyA, entryFlags) == 0x27E50 &&
     offsetof(GameSaveBodyA, titleConfig) == 0x27E90 && offsetof(GameSaveBodyA, titleConfig.saved) == 0x27E94 &&
     sizeof(((GameSaveBodyA *)0)->titleConfig) == 8 && offsetof(GameSaveBodyA, work.savedFlags) == 0x27EB8 && offsetof(GameSaveBodyA, tail.block28390) == 0x28390 &&
     offsetof(GameSaveBodyA, cecRanking.players) == 0x28310 && offsetof(GameSaveBodyA, cecRanking.categories) == 0x28360 &&

@@ -69,7 +69,7 @@ void moveCameraCtrlSetup(MoveCameraCtrlWork *ctrl, const char *cameraName, const
     Obj557c48 *registry = g_handleRegistry;
     resourceOwnerLoadNamed(registry, path);
     if (FUN_0040af60((LockedObj *)registry) != 0) {
-        FUN_0040ae70(registry, 1);
+        moriModelManagerEnsureScene(registry, 1);
     }
 
     const MoveCameraTrackKey *key = ctrl->resource->track->keys[0];

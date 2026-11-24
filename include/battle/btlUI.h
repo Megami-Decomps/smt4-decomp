@@ -109,7 +109,7 @@ typedef struct BtlUiAvailabilityCellRowA {
 } BtlUiAvailabilityCellRowA;
 struct BtlUiPositionRequest {
     f32 x, y, z;
-    u8 active; /* 0x0c */
+    s8 active; /* 0x0c */
     u8 mode; /* 0x0d */
     u8 flags; /* 0x0e */
     u8 unk0f[5];

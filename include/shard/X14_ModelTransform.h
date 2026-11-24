@@ -14,17 +14,6 @@ typedef struct TransformMtx44 {
     /* 0x00 */ f32 m[4][4];
 } TransformMtx44;
 
-/* A rotation built from a rotation source: 0x4C bytes. */
-typedef struct TransformRotation {
-    /* 0x00 */ f32 m[19];
-} TransformRotation;
-
-/* The object whose transform is set; the transform lives at 0x18. */
-typedef struct TransformOwner {
-    /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ u8 transform[4];
-} TransformOwner;
-
-typedef char TransformTypeSizes[sizeof(TransformMtx44) == 0x40 && sizeof(TransformRotation) == 0x4C ? 1 : -1];
+typedef char TransformMtx44Size[sizeof(TransformMtx44) == 0x40 ? 1 : -1];
 
 #endif

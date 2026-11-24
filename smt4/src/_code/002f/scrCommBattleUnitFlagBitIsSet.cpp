@@ -1,40 +1,37 @@
-/* NON_MATCHING: the bit tests and the shared set/clear blocks now match; retail places the shared `bl scrSetResult; b <return>` block right after the entry test (the build puts it at the end with its own return). */
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlEntryLookup.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/btlScript.h"
 #include "gamedata/FlagBitTests.h"
 #include "script/ScriptArgs.h"
 #include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
-
-extern u32 g_btlScriptUnit; /* 0x43427c */
-
-/* Script command: tests flag bit arg1 of the battle entry with listed id arg0 (ids from 0x6d on are game unit records). */
+/* Tests an indexed bit of a battle entry's flag halfword, or of a saved unit record. */
 s32 scrCommBattleUnitFlagBitIsSet(void)
 {
     s32 id = scrGetArg(0);
     u32 bit = (u16)scrGetArg(1);
-    bool set;
 
-    btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit));
-    if (id < 0x6d) {
+    btlUnitGet((BtlMainState *const *)g_btlScriptUnit);
+    if (id < BTL_ENTRY_COUNT) {
         BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
-
         if (entry != NULL) {
-            set = entry->data.statusFlags & (1 << bit);
-        } else {
-            scrSetResult(0);
+            if (entry->data.statusFlags & (1u << bit)) {
+                scrSetResult(1);
+            } else {
+                scrSetResult(0);
+            }
             return 1;
         }
-    } else {
-        set = flagWordTestBit(gameGetUnitRecord(id - 0x6d), bit);
-    }
-    if (!set) {
         scrSetResult(0);
     } else {
-        scrSetResult(1);
+        if (flagWordTestBit(gameGetUnitRecord(id - BTL_ENTRY_COUNT), bit)) {
+            scrSetResult(1);
+        } else {
+            scrSetResult(0);
+        }
     }
     return 1;
 }

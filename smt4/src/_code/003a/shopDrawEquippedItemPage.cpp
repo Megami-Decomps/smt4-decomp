@@ -10,7 +10,7 @@
 extern "C" {
 s32 flaggedEntryGetValueByState(const FlaggedValueHolder *holder);
 void uiRectDrawAtBottomRight(const AsdTextureRegion *, u32 image, s32 x, s32 y, u32 color);
-void FUN_00231bcc(const AsdTextureRegion *, u32 image, s32 x, s32 y, u32 color, u32 flags);
+void uiDrawSizedTextureAtRegionEnd(const AsdTextureRegion *, u32 image, s32 x, s32 y, u32 color, u32 flags);
 void FUN_003a07a0(Scene3a *scene, s32 category);
 void FUN_0022ea70(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *entry);
 s32 rangeLimitMin(const FlaggedValueHolder *holder);
@@ -31,7 +31,7 @@ void shopDrawEquippedItemPage(Scene3a *scene)
     }
     uiRectDrawAtBottomRight(&scene->region, image, 0, 0, frameColor);
     u32 color = scene->listId;
-    FUN_00231bcc(&scene->region, scene->slot + 90, 0, 0, color, 1);
+    uiDrawSizedTextureAtRegionEnd(&scene->region, scene->slot + 90, 0, 0, color, 1);
     FUN_003a07a0(scene, scene->slot);
     Scene3aEntry header;
     header.id = 0;

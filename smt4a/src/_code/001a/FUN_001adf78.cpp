@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b4128(unsigned int *, int, int);
+int gpuSubmitCommandBlockInternal(unsigned int *, int, int);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 
@@ -80,7 +80,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_001b4128. */
+/* Supplied declaration required: gpuSubmitCommandBlockInternal. */
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 
@@ -329,7 +329,7 @@ unsigned int * FUN_001adf78(unsigned int param_1,unsigned int *param_2,unsigned 
     param_2[0xb] = temp_v30;
   }
   else {
-    FUN_001b4128(&temp_v20,0x30,1);
+    gpuSubmitCommandBlockInternal(&temp_v20,0x30,1);
     puVar13 = (unsigned int *)0x0;
   }
   if (romwright_fabs_4(temp_v31[2]) == 0.0f) {
@@ -407,7 +407,7 @@ unsigned int * FUN_001adf78(unsigned int param_1,unsigned int *param_2,unsigned 
     puVar13[0xb] = temp_v42;
   }
   else {
-    FUN_001b4128(&temp_v32,0x30,1);
+    gpuSubmitCommandBlockInternal(&temp_v32,0x30,1);
     puVar14 = (unsigned int *)0x0;
   }
   if (romwright_fabs_4(temp_v31[4]) == 0.0f) {
@@ -484,7 +484,7 @@ unsigned int * FUN_001adf78(unsigned int param_1,unsigned int *param_2,unsigned 
     puVar14[0xb] = temp_v51;
   }
   else {
-    FUN_001b4128(&temp_v43,0x30,1);
+    gpuSubmitCommandBlockInternal(&temp_v43,0x30,1);
     puVar13 = (unsigned int *)0x0;
   }
   if (romwright_fabs_4(temp_v31[6]) == 0.0f) {
@@ -561,7 +561,7 @@ unsigned int * FUN_001adf78(unsigned int param_1,unsigned int *param_2,unsigned 
   else {
     temp_v52 = temp_v11;
     temp_v60 = temp_v2;
-    FUN_001b4128(&temp_v52,0x30,1);
+    gpuSubmitCommandBlockInternal(&temp_v52,0x30,1);
     puVar14 = (unsigned int *)0x0;
   }
   return puVar14;

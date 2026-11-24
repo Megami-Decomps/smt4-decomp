@@ -8,7 +8,7 @@
 extern "C" {
 
 int renderCtxPopState(...);
-int FUN_0049368c(...);
+int uiDrawSizedTextureAtRegionEnd(...);
 
 int renderStackPushIndexed(...);
 int distSpatial(void);
@@ -76,7 +76,7 @@ extern int naviGetActiveStateValue(int);
 extern int naviMainSelectPair(int);
 extern unsigned int naviMainGetRequestedMap(int);
 extern int naviMainGetRequestedSection(int); // declcheck: local (the shared declaration does not compile here or changes this unit)
-/* Supplied declaration required: FUN_0049368c. */
+/* Supplied declaration required: uiDrawSizedTextureAtRegionEnd. */
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
 
 
@@ -326,17 +326,17 @@ LAB_004866c8:
     }
     temp_v4 = mathHeadingToDirectionCode(param_1,*(float*)(param_1 + 0x20518));
     if (*(char *)(temp_v2 + 0xd8e) != '\f') {
-      FUN_0049368c(param_1 + 0x4d0,temp_v4 + 0xbd5,(int)temp_v15,(int)temp_v14,0xb,1);
+      uiDrawSizedTextureAtRegionEnd(param_1 + 0x4d0,temp_v4 + 0xbd5,(int)temp_v15,(int)temp_v14,0xb,1);
     }
     else {
-      FUN_0049368c(param_1 + 0x4d0,temp_v4 + 0xbc1,(int)temp_v15,(int)temp_v14,0xb,1);
+      uiDrawSizedTextureAtRegionEnd(param_1 + 0x4d0,temp_v4 + 0xbc1,(int)temp_v15,(int)temp_v14,0xb,1);
     }
     temp_v4 = mathHeadingToDirectionCode(param_1,*(float*)(param_1 + 0x20514));
     if (*(char *)(temp_v2 + 0xd8e) != '\f') {
-      FUN_0049368c(param_1 + 0x4d0,temp_v4 + 0xbcd,(int)temp_v15,(int)temp_v14,0xb,1);
+      uiDrawSizedTextureAtRegionEnd(param_1 + 0x4d0,temp_v4 + 0xbcd,(int)temp_v15,(int)temp_v14,0xb,1);
     }
     else {
-      FUN_0049368c(param_1 + 0x4d0,temp_v4 + 0xbb9,(int)temp_v15,(int)temp_v14,0xb,1);
+      uiDrawSizedTextureAtRegionEnd(param_1 + 0x4d0,temp_v4 + 0xbb9,(int)temp_v15,(int)temp_v14,0xb,1);
     }
     renderCtxPopState(g_renderCtx,3);
     cameraViewHeadingDegrees(temp_v3);

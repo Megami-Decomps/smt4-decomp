@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_00233240(...);
+int uiSceneApplySpritePreset(...);
 int aocMenuSetButtonHelp(...);
 int jobStopAndClearFlags(...);
 int aocLoadingTaskStart(...);
@@ -34,7 +34,7 @@ extern unsigned char messageWindowDrawJob; /* 0x3910b8 */
 extern unsigned char LAB_003928a4; /* 0x3928a4 */
 extern int g_aocMain; /* 0x432fc8 */
 
-/* Supplied declaration required: FUN_00233240. */
+/* Supplied declaration required: uiSceneApplySpritePreset. */
 /* Supplied declaration required: aocMenuSetButtonHelp. */
 /* Supplied declaration required: jobStopAndClearFlags. */
 /* Supplied declaration required: aocLoadingTaskStart. */
@@ -95,8 +95,8 @@ void AocMenu::runConnectedProcess()
               *puVar2 = 0xffffffff;
               *puVar7 = 0;
               *param_1 = *param_1 | 0x1000;
-              FUN_00233240(param_1 + 0x5ec,0);
-              FUN_00233240(param_1 + 0x5ec,1);
+              uiSceneApplySpritePreset(param_1 + 0x5ec,0);
+              uiSceneApplySpritePreset(param_1 + 0x5ec,1);
               pcVar5 = "Aoc guide CALC";
               asdProcessCreateSimple("Aoc guide CALC",2,0,0,FUN_00391000,0,param_1);
               *puVar8 = (unsigned int)pcVar5;

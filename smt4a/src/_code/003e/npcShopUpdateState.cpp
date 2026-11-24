@@ -21,7 +21,7 @@ void FUN_003e600c(NpcShopUpdateState *shop);
 void npcShopUpdateSelectionScript(NpcShopUpdateState *shop);
 void npcShopExchangeStep(NpcShopUpdateState *shop);
 void FUN_003e647c(NpcShopUpdateState *shop);
-void FUN_003e65a4(NpcShopUpdateState *shop);
+void npcShopUpdateItemDescription(NpcShopUpdateState *shop);
 s32 tableGroupFindEntryIndex(void *table, const char *name);
 void scrScriptProcessStartEntry(void *process, s32 index);
 s32 scrRunOpcodesStub(void *process);
@@ -67,7 +67,7 @@ extern "C" s32 npcShopUpdateState(NpcShopUpdateState *shop)
         FUN_003e647c(shop);
         break;
     case 6:
-        FUN_003e65a4(shop);
+        npcShopUpdateItemDescription(shop);
         break;
     case 7:
         switch (shop->step) {

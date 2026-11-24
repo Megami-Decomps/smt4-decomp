@@ -23,7 +23,7 @@ void shopPlaySelectionChangeSound(void);
 s32 inputIsQuestMenuPressed(void);
 void FUN_00230df0(u32);
 void FUN_00232848(void);
-void FUN_00233240(void *, u32);
+void uiSceneApplySpritePreset(void *, u32);
 void messageMainFinishWindow(void);
 void ifTouchRegionClearAll(MenuView *);
 void releaseEntriesA(Obj55ca08 *); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: more than one instance of overloaded function "playerSlotHoldsEntry" has "C" linkage)
@@ -81,7 +81,7 @@ void shopSellListUpdate(SelectMenu *menu)
     if (inputIsQuestMenuPressed()) {
         FUN_00230df0(0);
         FUN_00232848();
-        FUN_00233240(&menu->animation, 1);
+        uiSceneApplySpritePreset(&menu->animation, 1);
         messageMainFinishWindow();
         if (menu->help.forceOverride == 1) {
             menu->menuCursors[2] = 1;

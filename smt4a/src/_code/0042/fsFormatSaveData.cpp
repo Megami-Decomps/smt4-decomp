@@ -15,7 +15,7 @@ struct FileSystemRoot {
     /* 0x10 */ u32 archiveId;
 };
 
-extern FileSystemRoot DAT_00589398;
+extern FileSystemRoot g_titleContentFileSystem;
 u32 FUN_0043c32c(u32 value);
 s32 nn_fs_ipc_FileSystem_FormatSaveData(u32 *session, u32 archiveId, u32 pathType, const void *pathPtr,
                                         u32 pathSize, u32 blocks, u32 directories, u32 files,
@@ -30,7 +30,7 @@ static void formatArchive(u32 blocks, u32 files, u32 directories, u32 duplicateD
     path.type = 1;
     path.ptr = &path.ptr;
     path.size = 1;
-    u32 session = DAT_00589398.archiveId;
+    u32 session = g_titleContentFileSystem.archiveId;
     nn_fs_ipc_FileSystem_FormatSaveData(&session, 4, path.type, path.ptr, path.size, blocks,
                                         directories, files, dirBuckets, fileBuckets, duplicateData);
 }

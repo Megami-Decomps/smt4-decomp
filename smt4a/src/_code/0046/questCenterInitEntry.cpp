@@ -1,3 +1,4 @@
+#include "gamedata/RosterUnlock.h"
 #include "shard/W6_W6Match7_QuestInteraction.h"
 #include "quest_center/QuestRecordA.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
@@ -49,7 +50,6 @@ void placeWinCreate();
 void messageSetMode(s32 mode);
 void qcMainSetMode(s32 mode);
 s32 gameFlagEntryGetBit(u32 id, u32 bit);
-void rosterAddUnit(u32 id);
 void rt_memclr(void* data, u32 size);
 
 void questCenterInitEntry(void* context)

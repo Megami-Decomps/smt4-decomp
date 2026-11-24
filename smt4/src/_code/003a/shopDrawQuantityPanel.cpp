@@ -10,7 +10,7 @@ extern "C" {
 
 s32 flaggedEntryGetValueByState(ShopCategoryList *list);
 void uiRectDrawAtBottomRight(void *header, u32 id, s32 dx, s32 dy, u32 flags);
-void FUN_00231bcc(void *header, u32 id, s32 dx, s32 dy, u32 color, u32 flags);
+void uiDrawSizedTextureAtRegionEnd(void *header, u32 id, s32 dx, s32 dy, u32 color, u32 flags);
 
 /* Draws the quantity panel: its frame at the selected row, the stepper's active arrows and the quantity. */
 void shopDrawQuantityPanel(ShopScreen *screen)
@@ -35,14 +35,14 @@ void shopDrawQuantityPanel(ShopScreen *screen)
     } else {
         uiRectDrawAtBottomRight(&screen->panel.rect, 8, x, y, depth);
     }
-    FUN_00231bcc(&screen->panel.rect, 0xc2, x, y, depth, 1);
-    FUN_00231bcc(&screen->panel.rect, 0xc3, x, y, depth, 1);
+    uiDrawSizedTextureAtRegionEnd(&screen->panel.rect, 0xc2, x, y, depth, 1);
+    uiDrawSizedTextureAtRegionEnd(&screen->panel.rect, 0xc3, x, y, depth, 1);
     renderCtxPushB(g_titleScene, packNibblesAndByte(6, 1, 0));
     if (screen->quantity.incrementActive != 0) {
-        FUN_00231bcc(&screen->panel.rect, 0xc4, x, y, depth + 1, 1);
+        uiDrawSizedTextureAtRegionEnd(&screen->panel.rect, 0xc4, x, y, depth + 1, 1);
     }
     if (screen->quantity.decrementActive != 0) {
-        FUN_00231bcc(&screen->panel.rect, 0xc5, x, y, depth + 1, 1);
+        uiDrawSizedTextureAtRegionEnd(&screen->panel.rect, 0xc5, x, y, depth + 1, 1);
     }
     renderCtxPopCounted(g_titleScene, RENDER_STACK_B);
     s32 quantity = screen->quantity.value;

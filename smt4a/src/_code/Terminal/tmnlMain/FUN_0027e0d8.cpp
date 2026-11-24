@@ -80,11 +80,11 @@ int campCommonBgAcquire(void);
 int placeWinCreate(void);
 int campButtonHelpAcquire(void);
 int FUN_0036b824(...);
-int FUN_003870a8(...);
+int tmnlCollectDestinations(...);
 int soundChannelRequestIfEnabled(...);
 int controllerTargetNodeStart(...);
 int linkedTargetSetFloat(...);
-int FUN_0040ae70(...);
+int moriModelManagerEnsureScene(...);
 int modelSetDrawMode(...);
 
 int asdLoadFileWithSize(...);
@@ -228,7 +228,7 @@ extern int effectTimelineChildrenFit(unsigned int);
 /* Supplied declaration required: useCounterRelease. */
 /* Supplied declaration required: FUN_0036b824. */
 /* Supplied declaration required: campButtonHelpRelease. */
-/* Supplied declaration required: FUN_003870a8. */
+/* Supplied declaration required: tmnlCollectDestinations. */
 /* Supplied declaration required: FUN_003a2278. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: soundApplyValueOrStop. */
@@ -261,7 +261,7 @@ extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 extern int moriModelContentIsLoaded(unsigned int);
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
-/* Supplied declaration required: FUN_0040ae70. */
+/* Supplied declaration required: moriModelManagerEnsureScene. */
 extern int FUN_0040af60(int);
 /* Supplied declaration required: resourceOwnerLoadNamed. */
 /* Supplied declaration required: playerLoadOutfitPartModel. */
@@ -426,7 +426,7 @@ unsigned int FUN_0027e0d8(void)
     resourceOwnerLoadNamed(g_handleRegistry,&LAB_0027e564);
     temp_v3 = FUN_0040af60(temp_v7);
     if (temp_v3 != 0) {
-      FUN_0040ae70(temp_v7,1);
+      moriModelManagerEnsureScene(temp_v7,1);
     }
     modelSetDrawMode(puVar8,2);
     asdCameraInitializeDefaults(puVar8 + 0x16,1);
@@ -580,7 +580,7 @@ unsigned int FUN_0027e0d8(void)
           gameFlagSetValue(*(unsigned int *)((unsigned int)*(unsigned char *)((int)puVar3 + 9) * 0x3c + 0x56fd70), 1, 1);
           break;
         }
-        FUN_003870a8(puVar3);
+        tmnlCollectDestinations(puVar3);
         sprintf((char *)temp_v12,(const char *)&DAT_00526210,
                      s_________0056fd3d + (unsigned int)*(unsigned char *)((int)g_tmnl + 9) * 0x3c + 2);
         placeWinStartText(temp_v12);
@@ -786,7 +786,7 @@ LAB_0027edcc:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x16);
-    FUN_003870a8(puVar3);
+    tmnlCollectDestinations(puVar3);
     if (*(char *)(puVar3 + 0x15c) == '\0') {
       if (puVar3[puVar3[0x15d] + 0x10] != 0) {
         ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(puVar3[puVar3[0x15d] + 0x10] + 4));
@@ -1116,7 +1116,7 @@ LAB_0027edcc:
   case 0x13:
     temp_v7 = scrRunOpcodesStub(puVar3[10]);
     if (temp_v7 != 2) break;
-    FUN_003870a8(puVar3);
+    tmnlCollectDestinations(puVar3);
     sprintf((char *)temp_v12,(const char *)&DAT_00526210,
                  s_________0056fd3d + (unsigned int)*(unsigned char *)((int)g_tmnl + 9) * 0x3c + 2);
     placeWinStartText(temp_v12);

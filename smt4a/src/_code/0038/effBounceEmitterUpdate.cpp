@@ -17,7 +17,7 @@ void effComputeParticleEmission(ParticleEmissionState *state, const ParticleEmis
 void FUN_002fe2e8(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_0027134c(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_00321e98(ParticleEmissionState *emitter, SpiralParticle *particle);
-void FUN_00321d7c(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous);
+void effSampleParticleTransform(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous);
 }
 
 /* Updates a bouncing emitter, the swing emitter with a floor: emits new particles, and moves each live one
@@ -119,7 +119,7 @@ extern "C" void effBounceEmitterUpdate(ParticleEmissionState *emitter)
 
             particle->frame = 0;
             previous = particle->position;
-            FUN_00321d7c((ParticleTransformSample *)particle,
+            effSampleParticleTransform((ParticleTransformSample *)particle,
                          (ParticleTransformCurves *)definition, particle->frame,
                          (const EffectColor *)&previous);
             particle->scale *= motion->scale;
@@ -161,7 +161,7 @@ extern "C" void effBounceEmitterUpdate(ParticleEmissionState *emitter)
                 motion->speed *= motion->bounce;
                 particle->position.y = floorY + (particle->position.y - floorY) * motion->bounce;
             }
-            FUN_00321d7c((ParticleTransformSample *)particle,
+            effSampleParticleTransform((ParticleTransformSample *)particle,
                          (ParticleTransformCurves *)definition, frame,
                          (const EffectColor *)&previous);
             particle->scale *= motion->scale;

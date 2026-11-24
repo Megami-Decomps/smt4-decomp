@@ -1,6 +1,6 @@
 /* NON_MATCHING: block layout: retail places the shared money-threshold reset block after the 0xC2 flag test instead of after
  * the threshold arms, and keeps the constant 1 (giftCounter) in fp across the loop, spilling the table handle to the stack
- * and reusing the zero register for the out-of-range NULL. */
+ * while reusing the zero register for the out-of-range NULL as the build now does. */
 /* Starts the party-gift popup when the player's money has reached its level threshold: a table entry of kind 0x12 for the selected slot whose two flags allow it. */
 #include "common.h"
 #include "game/GameStateA.h"

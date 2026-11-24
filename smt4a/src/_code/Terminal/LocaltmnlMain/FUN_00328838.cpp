@@ -80,7 +80,7 @@ int resourceOwnerLoadFileSync(void);
 int moriModelContentLoadBody(unsigned int, int);
 int FUN_0040ab7c(unsigned int, int);
 int handleRegistryRegisterObject(int, unsigned int);
-int FUN_0040ae70(...);
+int moriModelManagerEnsureScene(...);
 int resourceOwnerLoadNamed(...);
 int playerLoadOutfitPartModel(unsigned int, unsigned int, int);
 int playerModelStartBaseMotion(void);
@@ -203,7 +203,7 @@ extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: FUN_0040ab7c. */
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
-/* Supplied declaration required: FUN_0040ae70. */
+/* Supplied declaration required: moriModelManagerEnsureScene. */
 extern int FUN_0040af60(int);
 /* Supplied declaration required: resourceOwnerLoadNamed. */
 /* Supplied declaration required: playerLoadOutfitPartModel. */
@@ -350,7 +350,7 @@ unsigned int FUN_00328838(void)
     resourceOwnerLoadNamed(g_handleRegistry,&LAB_00328ccc);
     temp_v2 = FUN_0040af60(temp_v6);
     if (temp_v2 != 0) {
-      FUN_0040ae70(temp_v6,1);
+      moriModelManagerEnsureScene(temp_v6,1);
     }
     controllerSelectionSetMode(temp_v4,2);
     asdCameraInitializeDefaults(temp_v4 + 0x40,1);

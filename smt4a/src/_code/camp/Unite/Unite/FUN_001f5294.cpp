@@ -44,7 +44,7 @@ int FUN_0031f688(void);
 int pairLogAppend(...);
 int FUN_00333dc8(...);
 int pairLogSetValue(...);
-int FUN_00359a08(...);
+int uniteInheritanceUndoLastAssignedSkill(...);
 int uniteStartEffectProcesses(void);
 int FUN_0035dd60(...);
 int uniteCreatePreviewModel(void);
@@ -170,7 +170,7 @@ int moriModelContentSetRequestSecond(...);
 int moriModelContentLoadBody(...);
 int FUN_0040ab7c(...);
 int handleRegistryRegisterObject(...);
-int FUN_0040ae70(int, int);
+int moriModelManagerEnsureScene(int, int);
 int resourceOwnerLoadNamed(int, unsigned char *);
 
 typedef int romwright_code(...);
@@ -333,7 +333,7 @@ u32 uiListGetVisibleCount(const void *object); // declcheck: local (Code0029.h d
 extern int uiQuestIsCreated(void);
 /* Supplied declaration required: FUN_0034c340. */
 /* Supplied declaration required: entryTableResetAndInit. */
-/* Supplied declaration required: FUN_00359a08. */
+/* Supplied declaration required: uniteInheritanceUndoLastAssignedSkill. */
 /* Supplied declaration required: skillHelpUpdateAttributeAndTarget. */
 /* Supplied declaration required: unitRecordBuildFromSave. */
 /* Supplied declaration required: useCounterRelease. */
@@ -376,7 +376,7 @@ extern int partyPanelIsStateTwentyFive(void);
 extern int moriModelContentIsLoaded(int);
 extern int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
-/* Supplied declaration required: FUN_0040ae70. */
+/* Supplied declaration required: moriModelManagerEnsureScene. */
 extern int FUN_0040af60(int);
 /* Supplied declaration required: resourceOwnerLoadNamed. */
 /* Supplied declaration required: flagValueSub. */
@@ -545,7 +545,7 @@ s32 FUN_001f5294(u32)
         else {
           resourceOwnerLoadNamed(temp_v5,&LAB_001f5964);
           *(unsigned char *)(piVar3 + 0x2496) = 1;
-          FUN_0040ae70(temp_v5,1);
+          moriModelManagerEnsureScene(temp_v5,1);
           *(unsigned char *)(*(int *)(temp_v5 + 0x14) + 0xc4) = 0;
         }
         controllerRefreshAtUnitScale(reinterpret_cast<AnimatedObject *>(piVar3[0x2484]), reinterpret_cast<CameraMotionOutput *>(piVar3 + 0x2485), 0);
@@ -2713,7 +2713,7 @@ LAB_001f8d58:
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
     }
-    FUN_00359a08(piVar3);
+    uniteInheritanceUndoLastAssignedSkill(piVar3);
     temp_v15 = 0;
     temp_v4 = 0xf;
     break;

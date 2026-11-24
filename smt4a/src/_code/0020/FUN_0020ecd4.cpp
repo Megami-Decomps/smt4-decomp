@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps shared constants 0 (r8) and 1 (r6) in registers and has one exit for the no-slot and success returns; build rematerialises them (record null select, timer store and epilogue order differ). */
+/* NON_MATCHING: the loop compares its count with different signedness; retail keeps the popup-enable constant in r6 and lays out the exit paths differently. */
 #include "common.h"
 #include "util/Random.h"
 #include <stdio.h>

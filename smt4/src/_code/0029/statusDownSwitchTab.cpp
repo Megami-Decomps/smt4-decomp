@@ -26,10 +26,7 @@ void statusDownSwitchTab(u32 tab)
     }
     current = g_statusDown;
     statusDownClearTouchRegions(current);
-    current = g_statusDown;
-    current->stateTimer = 0;
-    current->track.previous = current->track.state;
-    current->track.state = 2;
+    statusDownEnterState(g_statusDown, 2);
     if (tab == 0)
         status->nextState = 0;
     if (tab == 1)

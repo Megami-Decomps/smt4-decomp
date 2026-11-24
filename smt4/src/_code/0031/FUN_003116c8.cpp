@@ -16,7 +16,7 @@ int fusionListAvailableSpecialRecipes(int, int *);
 int dataTable01FindByIdWithAoc(...);
 int libc_strcpy(...);
 int __aeabi_memset4(...);
-int FUN_002d91b8(int);
+int saveMarkSpecialRecipeNoticeShown(int);
 int dataTable05Sub9GetCount(void);
 int devilIsUnlocked(...);
 
@@ -39,8 +39,8 @@ extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: __aeabi_memset4. */
-extern int gameDataBlocksGetFlagBit2(unsigned short);
-/* Supplied declaration required: FUN_002d91b8. */
+extern int saveHasShownSpecialRecipeNotice(unsigned short);
+/* Supplied declaration required: saveMarkSpecialRecipeNoticeShown. */
 /* Supplied declaration required: dataTable05Sub9GetCount. */
 /* Supplied declaration required: devilIsUnlocked. */
 
@@ -86,13 +86,13 @@ unsigned int FUN_003116c8(void)
         dataTable54FindById();
         temp_v5 = temp_v9;
         if (((temp_v3 != 0) &&
-            (temp_v6 = gameDataBlocksGetFlagBit2(*(unsigned short *)((int)piVar3 + temp_v8 * 2 + 0x933c)), temp_v6 == 0)
+            (temp_v6 = saveHasShownSpecialRecipeNotice(*(unsigned short *)((int)piVar3 + temp_v8 * 2 + 0x933c)), temp_v6 == 0)
             ) && (temp_v6 = partyClassifyRequestedSources(*piVar3,*(unsigned short *)((int)piVar3 + temp_v8 * 2 + 0x933c),
                                         temp_v10), temp_v6 != 0)) {
           temp_v5 = temp_v9 + 1;
           *(char *)((int)piVar3 + temp_v9 + 0x93dc) =
                (char)*(unsigned short *)((int)piVar3 + temp_v8 * 2 + 0x933c);
-          FUN_002d91b8(*(unsigned short *)((int)piVar3 + temp_v8 * 2 + 0x933c));
+          saveMarkSpecialRecipeNoticeShown(*(unsigned short *)((int)piVar3 + temp_v8 * 2 + 0x933c));
         }
         temp_v8 = temp_v8 + 1;
         temp_v9 = temp_v5;

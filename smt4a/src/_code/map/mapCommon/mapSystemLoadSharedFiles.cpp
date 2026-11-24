@@ -16,7 +16,7 @@ void mapFilterLoad(void);
 void FUN_00244220(void);
 void mapIfLoadWidgets(void);
 void FUN_00363c58(s32 value);
-void FUN_0037b150(void);
+void mapNaviCategoryGridBuild(void);
 
 /* Loads the map-wide scripts and the model content shared by map scenes. */
 void mapSystemLoadSharedFiles(void)
@@ -27,7 +27,7 @@ void mapSystemLoadSharedFiles(void)
     FUN_00363c58(0);
     mapFilterLoad();
     mapIfLoadWidgets();
-    FUN_0037b150();
+    mapNaviCategoryGridBuild();
     asdTMTexTableLoadSprites(0x13);
     asdTMTexTablePrepareNodeImage(0x13, 3);
     asdTMTexTablePrepareNodeImage(0x13, 4);

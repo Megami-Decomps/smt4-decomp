@@ -1,3 +1,4 @@
+#include "gamedata/RosterUnlock.h"
 #include "ui/UiSpriteApi.h"
 #include "code/Code002a_VariantA.h"
 #include "quest_center/QuestRecordA.h"
@@ -8,7 +9,6 @@
 
 extern "C" {
 s32 resourceRunOperationIfUnblocked(void *cursor);
-void rosterAddUnit(u32 questId);
 void gameOptionsClassifyMode();
 void optionsSetFlag1();
 void uiQuestRefreshDetailPages(u32 questId);

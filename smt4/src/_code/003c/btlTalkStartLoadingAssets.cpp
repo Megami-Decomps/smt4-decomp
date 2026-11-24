@@ -14,7 +14,7 @@ static const char sTonePathFormat[] = "battle/talk/Tone%s.tbb";
 extern const char DAT_004017c0[];
 extern const char DAT_004017ac[];
 extern u32 g_btlAux;
-void FUN_003dadd8(u32 value);
+void btlEffectLoadTransitionFiles(u32 value);
 s32 FUN_00256940(BtlMainState *battle, BtlMainState *owner, u32 flags);
 void btlReflectQueueKind34(u32 first, u32 second);
 u32 FUN_00256898(u32 first, u32 second);
@@ -43,7 +43,7 @@ u32 btlTalkStartLoadingAssets(BattleTalkWork *work)
     const BtlUnitData *unit = btlFindEntryBlockByMemberId(work->battle, work->memberId);
     const NkmBaseRecord *record = reinterpret_cast<const NkmBaseRecord *>(nkmBaseGetRecord(unit->id));
     battleTalkLoadFiles(work, record);
-    FUN_003dadd8(g_btlAux);
+    btlEffectLoadTransitionFiles(g_btlAux);
     work->ready = 1;
     BtlMainState *battle = g_btlMain;
     if (battle->talk.unitIndex >= 0 && FUN_00256940(battle, work->battle, 1)) {

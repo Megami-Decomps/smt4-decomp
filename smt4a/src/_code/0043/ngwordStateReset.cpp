@@ -1,47 +1,27 @@
-#include "common.h"
+#include "classes/Obj420fa4.h"
 
 extern "C" {
-
-typedef struct Obj8Holder Obj8Holder;
-
-typedef struct NgwordState {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u8 holder[0x14];   /* Obj8Holder registered while `registered` is set */
-    /* 0x18 */ u8 registered;
-    /* 0x19 */ u8 pending;
-    /* 0x1A */ u8 unk1a;
-    /* 0x1B */ u8 unk1b;
-    /* 0x1C */ u32 unk1c;
-    /* 0x20 */ u32 unk20;
-    /* 0x24 */ u32 unk24;
-    /* 0x28 */ u32 unk28;
-    /* 0x2C */ u32 unk2c;
-    /* 0x30 */ u8 idle;
-} NgwordState;
-
 extern const char g_ngwordMountName[]; /* "ngword:" */
-
 void fsUnmountByName(const char *text);
-void registerObj8Holder(void *holder);
 
-/* Resets the ngword check state, releasing its holder if one is registered. */
-void ngwordStateReset(NgwordState *state)
+/* Unmounts the NG-word archive and releases the scanner's registered buffer. */
+void ngwordStateReset(Obj420fa4 *state)
 {
-    if (state->pending != 0) {
+    if (state->mounted != 0) {
         fsUnmountByName(g_ngwordMountName);
     }
     if (state->registered != 0) {
-        registerObj8Holder(state->holder);
+        registerObj8Holder(&state->unk04Value);
     }
     state->registered = 0;
-    state->pending = 0;
+    state->mounted = 0;
     state->unk1a = 0;
-    state->unk1c = 0;
-    state->unk20 = 0;
-    state->unk24 = 0;
-    state->unk28 = 0;
-    state->unk2c = 0;
-    state->idle = 1;
+    state->workMemory = NULL;
+    state->firstRegion = NULL;
+    state->secondRegion = NULL;
+    state->archiveWorkspace = NULL;
+    state->archivePath = NULL;
+    state->enabled = 1;
 }
 
-}
+} /* extern "C" */

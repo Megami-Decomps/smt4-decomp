@@ -8,7 +8,7 @@ void qsort(void *entries, u32 count, u32 stride, s32 (*compare)(const void *, co
 
 extern s32 FUN_0019215c(const void *left, const void *right); /* 0x19215c */
 extern s32 FUN_001a81a8(const void *left, const void *right); /* 0x1a81a8 */
-extern s32 FUN_001a8268(const void *left, const void *right); /* 0x1a8268 */
+extern s32 partyPanelCompareByCategoryRaceAndRank(const void *left, const void *right); /* 0x1a8268 */
 extern s32 FUN_001b18f0(const void *left, const void *right); /* 0x1b18f0 */
 extern s32 FUN_001e1728(const void *left, const void *right); /* 0x1e1728 */
 extern s32 entryCompare(const void *left, const void *right); /* 0x207230 */
@@ -64,7 +64,7 @@ void partyPanelSortEntries(void)
   }
   if ((*sortMode & 0x7f) == 0x1f) {
     if (ascending != 0) {
-      qsort(panel->entries,0x18,8,FUN_001a8268);
+      qsort(panel->entries,0x18,8,partyPanelCompareByCategoryRaceAndRank);
     }
     else {
       qsort(panel->entries,0x18,8,FUN_002072f0);

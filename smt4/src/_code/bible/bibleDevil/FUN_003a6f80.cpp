@@ -52,7 +52,7 @@ s32 inputIsQuestConfirmPressed(void);
 s32 inputIsQuestCancelPressed(void);
 s32 gameGetNavigationState(void);
 s32 gameGetFlagByte12e8(void);
-void FUN_00233240(void *panel, s32 value);
+void uiSceneApplySpritePreset(void *panel, s32 value);
 void messageDismissNumericBanner(s32 arg);
 void ifTouchRegionClearAll(u32 regions);
 void releaseEntriesA(void *panel); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "u8 *" is incompatible with parameter of type "Obj *")
@@ -103,7 +103,7 @@ void FUN_003a6f80(DevilListInput *work)
         } else {
             ((DevilListInputView *)work)->targetId = 5;
         }
-        FUN_00233240((u8 *)work + 0xDC, ((DevilListInputView *)work)->targetId);
+        uiSceneApplySpritePreset((u8 *)work + 0xDC, ((DevilListInputView *)work)->targetId);
         if (block->previewEnabled == 0) {
             messageDismissNumericBanner(1);
         }
@@ -132,7 +132,7 @@ void FUN_003a6f80(DevilListInput *work)
             }
             buttonHelpSetText(0, 0x323232FF);
             beginStatusPanelClose();
-            FUN_00233240((u8 *)work + 0xDC, 1);
+            uiSceneApplySpritePreset((u8 *)work + 0xDC, 1);
             gameGlobalsSetSubScreenActive(1);
             work->mode = 11;
             work->step = 0;

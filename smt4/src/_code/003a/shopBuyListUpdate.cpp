@@ -14,7 +14,7 @@ void shopEnterQuantitySelection(SelectMenu *, s32); // declcheck: local (the sha
 s32 inputIsQuestMenuPressed(void);
 void FUN_00230df0(u32);
 void FUN_00232848(void);
-void FUN_00233240(void *, u32);
+void uiSceneApplySpritePreset(void *, u32);
 void messageMainFinishWindow(void);
 void ifTouchRegionClearAll(MenuView *);
 void releaseEntriesA(Obj55ca08 *); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "Obj55ca08 *" is incompatible with parameter of type "Obj *")
@@ -49,7 +49,7 @@ void shopBuyListUpdate(SelectMenu *menu)
         menu->menuCursors[2] = 0;
         FUN_00230df0(0);
         FUN_00232848();
-        FUN_00233240(&menu->animation, 1);
+        uiSceneApplySpritePreset(&menu->animation, 1);
         messageMainFinishWindow();
         ifTouchRegionClearAll(menu->view);
         releaseEntriesA(reinterpret_cast<Obj55ca08 *>(menu->touchSelection));

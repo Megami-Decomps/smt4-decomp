@@ -20,7 +20,7 @@ int naviGetActiveStateValue(...);
 int naviMainSelectPair(int);
 int naviMainGetRequestedSection(int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int words2Copy(int, float *);
-int FUN_0049368c(...);
+int uiDrawSizedTextureAtRegionEnd(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_1: 16 slot(s), 64 byte(s) */
@@ -72,7 +72,7 @@ extern float *lmapSceneGetObj(int);
 extern int naviMainGetRequestedMap(int);
 /* Supplied declaration required: naviMainGetRequestedSection. */
 /* Supplied declaration required: words2Copy. */
-/* Supplied declaration required: FUN_0049368c. */
+/* Supplied declaration required: uiDrawSizedTextureAtRegionEnd. */
 extern int NaviMain_GetCurrentMap(int);
 
 
@@ -437,9 +437,9 @@ LAB_00487744:
       temp_v2 = mathHeadingToDirectionCode(temp_v42,cameraViewHeadingDegrees(temp_v37));
       temp_v14 = (int)temp_v29;
       temp_v5 = (int)temp_v28;
-      FUN_0049368c(temp_v42 + 0x4d0,temp_v2 + 0xbc1,temp_v5,temp_v14,0xb,1);
+      uiDrawSizedTextureAtRegionEnd(temp_v42 + 0x4d0,temp_v2 + 0xbc1,temp_v5,temp_v14,0xb,1);
       temp_v2 = mathHeadingToDirectionCode(temp_v42,FUN_00492b98());
-      FUN_0049368c(temp_v42 + 0x4d0,temp_v2 + 0xbb9,temp_v5,temp_v14,0xb,1);
+      uiDrawSizedTextureAtRegionEnd(temp_v42 + 0x4d0,temp_v2 + 0xbb9,temp_v5,temp_v14,0xb,1);
     }
     cameraViewHeadingDegrees(temp_v37);
   }

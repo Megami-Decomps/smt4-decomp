@@ -1,14 +1,15 @@
-/* NON_MATCHING: retail keeps the queue kind 4 in fp across the loop and reads the action status with add + ldr #80; the build keeps 80 in fp for a register-offset load. */
+/* NON_MATCHING: 27 lines (20 with the command's words passed as scalars, before btlAppendPendingCommand's by-value command
+ * was recovered). Retail keeps the queue kind 4 in fp across the loop and reads the action status with add + ldr #80; the build keeps 80 in fp for a register-offset load. */
 #include "battle/BtlEntry.h"
 #include "battle/BtlUnitTarget.h"
 #include "battle/btlMain.h"
+#include "battle/BtlPendingCommands.h"
 #include "battle/btlAction.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {
 s32 valueRangeSameSide(s32, s32);
 u16 btlEntryRollPassiveSkill(u32);
-void FUN_0023c154(BtlMainState *, s32, s32, s32, u32);
 
 /* Queue triggered passive responses from eligible allies of the listed subject. */
 u32 FUN_003d0ac8(BtlMainState **state, void *copies, s32 subject, s32 target)
@@ -29,8 +30,12 @@ u32 FUN_003d0ac8(BtlMainState **state, void *copies, s32 subject, s32 target)
             if ((candidate->data.statusFlags & 0x1C0) == 0) {
                 u16 skill = btlEntryRollPassiveSkill(i);
                 if (skill != 0) {
-                    FUN_0023c154(*state, 4, (*state)->actions[i].participant.combatantIndex,
-                        (*state)->actions[target].participant.combatantIndex, skill);
+                    BtlPendingCommand command;
+                    command.kind = 4;
+                    command.unitIndex = (*state)->actions[i].participant.combatantIndex;
+                    command.first = (*state)->actions[target].participant.combatantIndex;
+                    command.second = skill;
+                    btlAppendPendingCommand(*state, command);
                     queued = 1;
                 }
             }

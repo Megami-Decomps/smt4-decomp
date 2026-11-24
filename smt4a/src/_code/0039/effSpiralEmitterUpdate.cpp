@@ -17,7 +17,7 @@ void effComputeParticleEmission(ParticleEmissionState *state, const ParticleEmis
 void FUN_002fe2e8(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_0027134c(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_00321e98(ParticleEmissionState *emitter, SpiralParticle *particle);
-void FUN_00321d7c(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous);
+void effSampleParticleTransform(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous);
 /* A curve's value at `frame` of `duration` (the spiral emitter's two extra values). */
 f32 FUN_0034f8b4(const void *curve, s32 frame, s32 duration);
 }
@@ -139,7 +139,7 @@ extern "C" void effSpiralEmitterUpdate(ParticleEmissionState *emitter)
                 motion->wave = wave;
                 particle->frame = (s32)age;
             }
-            FUN_00321d7c(reinterpret_cast<ParticleTransformSample *>(particle),
+            effSampleParticleTransform(reinterpret_cast<ParticleTransformSample *>(particle),
                          reinterpret_cast<ParticleTransformCurves *>(definition), particle->frame,
                          reinterpret_cast<const EffectColor *>(&previous));
             particle->scale *= motion->scale;
@@ -170,7 +170,7 @@ extern "C" void effSpiralEmitterUpdate(ParticleEmissionState *emitter)
             motion->phase += motion->phaseStep * step;
             motion->radius += motion->radiusStep * step;
             motion->wave = wave;
-            FUN_00321d7c(reinterpret_cast<ParticleTransformSample *>(particle),
+            effSampleParticleTransform(reinterpret_cast<ParticleTransformSample *>(particle),
                          reinterpret_cast<ParticleTransformCurves *>(definition), frame,
                          reinterpret_cast<const EffectColor *>(&previous));
             particle->scale *= motion->scale;

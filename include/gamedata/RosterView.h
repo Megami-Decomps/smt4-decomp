@@ -6,16 +6,31 @@
 
 /* Per-id state flags of the roster (4 bytes each). */
 struct RosterFlags {
-    /* 0x00 */ u8 known : 1;
-    /*      */ u8 current : 1;
-    /*      */ u8 refresh : 1;
-    /*      */ u8 unkBits : 3;
-    /*      */ u8 hasPartner : 1;
-    /*      */ u8 cleared : 1;
+    struct {
+        u8 known : 1;
+        u8 current : 1;
+        u8 refresh : 1;
+        u8 unkBits : 2;
+        u8 active : 1;
+        u8 hasPartner : 1;
+        u8 cleared : 1;
+    } status; /* 0x00 */
     /* 0x01 */ u8 partner;
-    /* 0x02 */ u8 flagsB;       /* low bits cleared on refresh, bit 5: set for kind 10 with an extra record */
+    union {
+        /* 0x02 */ u8 flagsB;
+        struct {
+            u8 unk0 : 1; /* scrPartyEntryJoin sets this; unlocking the entry clears it. */
+            u8 unk1To4 : 4;
+            u8 goalMet : 1; /* Set when a kind-10 record's goal conditions are satisfied. */
+            u8 unk6To7 : 2;
+        } details;
+    };
     /* 0x03 */ u8 unk03;
 };
+
+typedef char RosterFlagsLayoutCheck[sizeof(RosterFlags) == 4 &&
+    offsetof(RosterFlags, status) == 0 && offsetof(RosterFlags, partner) == 1 &&
+    offsetof(RosterFlags, flagsB) == 2 ? 1 : -1];
 
 /* One roster slot (0xC bytes): a unit id followed by its data. */
 struct RosterEntry {

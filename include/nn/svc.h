@@ -10,6 +10,7 @@
  * armlink replaces each call to them with the svc instruction, so callers use them as functions. */
 extern "C" s32 svcCloseHandle(u32 handle);
 extern "C" s32 svcSetThreadPriority(u32 thread, s32 priority);
+extern "C" s32 svcReleaseMutex(u32 mutex);
 extern "C" s64 svcGetSystemTick(void);
 
 namespace nn {

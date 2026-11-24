@@ -1,4 +1,4 @@
-/* NON_MATCHING: logic and call sequence match; retail hoists the zero into a callee-saved register (shared by the null table entry and the popup phase store, stored with STM) and spills one more register, so the frame is 84 bytes and the popup stores are grouped differently. */
+/* NON_MATCHING: the table lookup's initial argument order and the popup message address/store scheduling differ. */
 #include <stdio.h>
 #include "gamedata/PartnerInfoTable.h"
 #include "map/PopupStateA.h"

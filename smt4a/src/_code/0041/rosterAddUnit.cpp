@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail reloads the flag byte and clears bit 7 and the low bits of the second byte in a separate read-modify-write after the bit-6 update (built folds them into the same register), and addresses the active slot id as base + 2048 + 228 where the build pools 0x8E4. */
+#include "gamedata/RosterUnlock.h"
 #include "gamedata/RosterView.h"
 #include "gamedata/GameFlagWrite.h"
 #include "code/Code001b.h"
@@ -29,21 +30,21 @@ u32 rosterAddUnit(u16 id)
     s32 kind;
     s32 i;
 
-    if (entry->known == 0 && id < 0x15E) {
+    if (entry->status.known == 0 && id < 0x15E) {
         return 0;
     }
     kind = table1bOr1cGetRecordValue(id);
     if (dataTable1bOr1cRecordHasFlag1(id) == 0 && kind != 0 && kind != 10 && kind != 1 && roster->leader != 0) {
         return 0;
     }
-    entry->refresh = 0;
-    entry->current = 1;
+    entry->status.refresh = 0;
+    entry->status.current = 1;
     if (entry->partner != 0) {
-        entry->hasPartner = 1;
+        entry->status.hasPartner = 1;
     } else {
-        entry->hasPartner = 0;
+        entry->status.hasPartner = 0;
     }
-    entry->cleared = 0;
+    entry->status.cleared = 0;
     entry->flagsB &= ~0x3D;
     if (kind == 10 && goalConditionsSatisfied(id) != 0) {
         entry->flagsB |= 0x20;

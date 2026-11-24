@@ -3,7 +3,7 @@
 extern "C" {
 void uiSpriteSetKeyframeThree(BtlUiObjBA *sprite);
 void menu32PlayCursorSeAndSelect(BtlUiObjCA *menu);
-void FUN_00321500(BtlUiObjAA *menu);
+void statusPanelStartIdleFrameAnimation(BtlUiObjAA *menu);
 s32 spriteOperationGetModeThreeCompletion(BtlUiObjBA *sprite);
 BtlUiObjBA *FUN_00502754(u8 *subobject); /* returns the subobject's sprite (+0xBC) */
 void controllerStartInterpolation(u32 controller);
@@ -20,7 +20,7 @@ void FUN_004aa7c8(void)
         state = 11;
         ui = g_btlUi.ui;
         if (menu32ModeIsNot6(&ui->objA) && spriteOperationGetModeThreeCompletion(FUN_00502754(reinterpret_cast<u8 *>(&ui->objA) + 0x23F8))) {
-            FUN_00321500(&ui->objA);
+            statusPanelStartIdleFrameAnimation(&ui->objA);
             uiSpriteSetKeyframeThree(&ui->objB);
         }
     }

@@ -19,7 +19,7 @@ u32 gameFlagsClassify(s32 id);
 u32 naviGetActiveStateValue(void *scene); // declcheck: local (its header also declares the other naviMainSetValuePair form)
 u32 naviMainSelectPair(void *scene);
 u8 *lmapSceneGetObj(void *scene);
-void FUN_0049325c(u32 id, s32 x, s32 y, u32 first, u32 second);
+void uiDrawNativeSizeTableSprite(u32 id, s32 x, s32 y, u32 first, u32 second);
 
 /* Draws the navigation panel's upper frame over the map (textures of file 0x13), unless the map scene is
  * in the state that hides it, the panel is closing or the current map is one of the two classes without
@@ -67,23 +67,23 @@ void naviPanelDrawFrame(Obj532300 *panel)
                 texDrawTableEntryAtStoredOrigin(2, 0x13, 0x112e, x, 0, g_uiTextFontSettings.drawOrder);
                 efctSetSpeed(1.0f);
                 renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
-                FUN_0049325c(0x112f, x, 0, g_uiTextFontSettings.drawOrder, 1);
+                uiDrawNativeSizeTableSprite(0x112f, x, 0, g_uiTextFontSettings.drawOrder, 1);
                 renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
                 efctSetSpeed(vec2GetSpeed(&panel->headings[0]));
                 texDrawTableEntryAtStoredOrigin(2, 0x13, 0x1135, x, 0, g_uiTextFontSettings.drawOrder);
                 efctSetSpeed(1.0f);
                 renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
-                FUN_0049325c(0x1133, x, 0, g_uiTextFontSettings.drawOrder, 1);
-                FUN_0049325c(0x1134, x, 0, g_uiTextFontSettings.drawOrder, 1);
+                uiDrawNativeSizeTableSprite(0x1133, x, 0, g_uiTextFontSettings.drawOrder, 1);
+                uiDrawNativeSizeTableSprite(0x1134, x, 0, g_uiTextFontSettings.drawOrder, 1);
                 if (save->naviRefreshSecond != 0) {
-                    FUN_0049325c(0x1243, x, 0, g_uiTextFontSettings.drawOrder, 1);
+                    uiDrawNativeSizeTableSprite(0x1243, x, 0, g_uiTextFontSettings.drawOrder, 1);
                 }
             } else {
-                FUN_0049325c(0x112d, x, 0, g_uiTextFontSettings.drawOrder, 1);
-                FUN_0049325c(0x1131, x, 0, g_uiTextFontSettings.drawOrder, 1);
-                FUN_0049325c(0x1132, x, 0, g_uiTextFontSettings.drawOrder, 1);
+                uiDrawNativeSizeTableSprite(0x112d, x, 0, g_uiTextFontSettings.drawOrder, 1);
+                uiDrawNativeSizeTableSprite(0x1131, x, 0, g_uiTextFontSettings.drawOrder, 1);
+                uiDrawNativeSizeTableSprite(0x1132, x, 0, g_uiTextFontSettings.drawOrder, 1);
                 if (save->naviRefreshSecond != 0) {
-                    FUN_0049325c(0x1243, x, 0, g_uiTextFontSettings.drawOrder, 1);
+                    uiDrawNativeSizeTableSprite(0x1243, x, 0, g_uiTextFontSettings.drawOrder, 1);
                 }
             }
         }

@@ -18,7 +18,7 @@ int pairSourceGet(unsigned int, unsigned int *, int);
 int effShakeParticleAdvance(unsigned int);
 int motionPlayerStartBlended(...);
 int ptrVectorAt(...);
-int FUN_0040a884(void);
+int moriModelContentLoadBindingById(void);
 int attachmentsSetOffset(unsigned int, float *);
 int FUN_00420f08(...);
 int FUN_00420fc0(...);
@@ -58,7 +58,7 @@ extern int textureCacheGetDirection(void);
 /* Supplied declaration required: motionPlayerStartBlended. */
 extern unsigned int FUN_003fdadc(void);
 /* Supplied declaration required: ptrVectorAt. */
-/* Supplied declaration required: FUN_0040a884. */
+/* Supplied declaration required: moriModelContentLoadBindingById. */
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: attachmentsSetOffset. */
@@ -290,7 +290,7 @@ code_r0x0042138c:
         temp_v9 = modelListInit();
       }
       *(unsigned int *)(temp_v4 + 8) = temp_v9;
-      FUN_0040a884();
+      moriModelContentLoadBindingById();
       temp_v5 = 0;
       temp_v6 = *(int *)(*(int *)(*(int *)(temp_v4 + 8) + 8) + 0x10);
       if (0 < temp_v6) {

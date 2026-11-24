@@ -16,7 +16,7 @@ extern ScriptTransition *DAT_0058812c;
 
 s32 scrGetCommandFrame(void);
 s32 scrGetArg(s32 index);
-void FUN_0035b404(s32 arg);
+void devilMarketCreate(s32 arg);
 void campButtonHelpRelease(void);
 void FUN_003c607c(s32 arg);
 void gameGlobalsReleaseReference(void);
@@ -40,7 +40,7 @@ s32 scrCmdTransitionFinish(void)
     u32 state;
 
     if (scrGetCommandFrame() == 0) {
-        FUN_0035b404(scrGetArg(0));
+        devilMarketCreate(scrGetArg(0));
     }
     state = scrTransitionGetState();
     if (state != 0 && state != 7) {

@@ -10,6 +10,9 @@ extern CecProcessA *g_cecProcess;
 
 /* Asks the StreetPass process whether its optional step can run (0 while there is no process). */
 u32 cecQueryOptionalProcess(void);
+
+/* Initializes the StreetPass process and starts its worker. */
+void cecProcessInitializeAndStart(CecProcessA *process);
 }
 
 #endif

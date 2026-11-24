@@ -89,7 +89,7 @@ int campRebuildEnabledFlagList(...);
 int FUN_0026f7f0(void);
 int statusPanelSetOpen(...);
 int uniteSetMode(...);
-int FUN_002e738c(...);
+int partnerMenuStart(...);
 int partyPanelRefreshFromSlotTable(void);
 int FUN_0031db84(...);
 int FUN_0032d0c8(...);
@@ -263,7 +263,7 @@ extern int FUN_002e2054(void);
 extern int FUN_002e27b8(void);
 extern unsigned long long __aeabi_llsl(unsigned int, unsigned int, int);
 /* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: FUN_002e738c. */
+/* Supplied declaration required: partnerMenuStart. */
 extern int partyPanelIsOutsideDialogState(void);
 extern int recordValueIsZero(void);
 extern int uiQuestGetPendingAction(void);
@@ -1012,7 +1012,7 @@ LAB_003d6870:
       campChangeState(temp_v4);
       break;
     }
-    FUN_002e738c(2);
+    partnerMenuStart(2);
     obj25CRefreshFlags(puVar12[0xcee]);
     puVar12[8] = 1;
     break;

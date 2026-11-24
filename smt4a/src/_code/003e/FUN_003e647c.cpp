@@ -1,4 +1,5 @@
-/* NON_MATCHING: state-transition stores and conditional script-start branch layout differ. */
+/* NON_MATCHING: state-transition stores and conditional script-start branch layout differ (64 lines; the mode
+ * switch goes through npcShopChangeDescriptionMode as in npcShopUpdateItemDescription, 54 lines open-coded). */
 #include "shop/ShopItemDescription.h"
 
 extern "C" {
@@ -41,13 +42,9 @@ void FUN_003e647c(ShopItemDescription *description)
                 description->selectionState.state = 2;
         }
         break;
-    case 99: {
-        u32 previous = description->selectionState.mode;
-        description->selectionState.mode = 3;
-        description->selectionState.state = 0;
-        description->selectionState.previousMode = previous;
+    case 99:
+        npcShopChangeDescriptionMode(description, 3);
         break;
-    }
 }
 }
 }

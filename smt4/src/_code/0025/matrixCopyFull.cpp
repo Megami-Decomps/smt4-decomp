@@ -1,5 +1,8 @@
-#include "shard/W5_W5Match2_PlainData.h"
-extern "C" {
-/* Copy all components of a four-by-four matrix. */
-void matrixCopyFull(Matrix44 *destination,const Matrix44 *source) { *destination=*source; }
+#include "gfx/ModelTransform.h"
+#include <string.h>
+
+/* Copies a matrix to separate storage, including the unused lanes of an affine matrix. */
+extern "C" void matrixCopyFull(Matrix44 *destination, const Matrix44 *source)
+{
+    memcpy(destination, source, sizeof(*destination));
 }

@@ -33,7 +33,7 @@ static void tmnlSetQuestFlag(u32 id, s32 enabled)
 void FUN_001db0b8(const u32 *entry)
 {
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\Terminal\\tmnlMain.cpp", 249);
-    TmnlWork *work = g_tmnl = (TmnlWork *)asdMemAlloc(256, 256, 0, sizeof(TmnlWork) + 0x4C, 1);
+    TmnlWork *work = g_tmnl = (TmnlWork *)asdMemAlloc(256, 256, 0, sizeof(TmnlWork), 1);
     if (questTestPackedFlag(10) == 0) {
         tmnlSetQuestFlag(10, 1);
     }
@@ -44,10 +44,10 @@ void FUN_001db0b8(const u32 *entry)
         tmnlSetQuestFlag(11, 1);
     }
     gameFlagSetValue(0x465, 0, 1);
-    work->unk05 = 1;
+    work->showLocked = 1;
     work->unk10 = 0;
     work->unk14 = 0;
-    work->unk09 = 0;
+    work->destination = 0;
     work->unk0C = 0;
     for (s32 i = 0; i < 10; i++) {
         work->unk20[i] = 0;
@@ -67,8 +67,8 @@ void FUN_001db0b8(const u32 *entry)
     work->done = 0;
     if (entry != NULL) {
         u32 id = *entry & 0xff;
-        work->unk09 = id;
-        work->unk05 = 0;
+        work->destination = id;
+        work->showLocked = 0;
         questSetPackedFlag(id, 1);
         gameCounterAddSaturating(28, 1);
         work->unk10 = 0;

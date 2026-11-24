@@ -58,7 +58,7 @@ s8 touchSelectionGetSelected(const CursorState *cursor);
 LayoutSlot *layoutFindTableEntry(u8 *layout, u32 id);
 void uiDrawScrollingSelectionEntry(RowPanel *panel, s32 index, s32 alpha, s32 row);
 void drawTextAtSnappedRectangle(u8 *layout, f32 x, f32 y, f32 scale, f32 c, s32 style, u32 color, f32 d, const char *text);
-void FUN_00231bcc(u8 *layout, u32 image, s32 x, s32 y, s32 alpha, u32 flags);
+void uiDrawSizedTextureAtRegionEnd(u8 *layout, u32 image, s32 x, s32 y, s32 alpha, u32 flags);
 s32 FUN_00262cb0(u16 id);
 s32 table8Type5GetValue(s32 id);
 void FUN_002b6c34(s16 id, s32 x, s32 y, s32 alpha, s32 a, s32 b);
@@ -101,7 +101,7 @@ void FUN_003abae8(RowPanel *panel, s32 index, s32 row, s32 selected, s32 alpha)
         iconBox = 0x4CD;
     } else {
         iconBox = 0x476;
-        FUN_00231bcc(panel->layout, 0x4DF, baseX, baseY, alpha, 1);
+        uiDrawSizedTextureAtRegionEnd(panel->layout, 0x4DF, baseX, baseY, alpha, 1);
     }
     LayoutSlot *icon = layoutFindTableEntry(panel->layout, iconBox);
     ScreenPoint origin;

@@ -53,7 +53,7 @@ int btlSelectionGetUsableUnit(...);
 int btlQueueActionMessage(...);
 int FUN_004fbeac(...);
 int btlAdjustPropertyAndQueueAction(...);
-int FUN_004fda78(...);
+int btlReflectQueueTargetEntryAction(...);
 int FUN_004fe764(...);
 int VectorSignedToFloat(...);
 
@@ -238,6 +238,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int FUN_002c7bf4(unsigned int *);
 /* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: btlAppendPendingCommand. */
+void btlAppendPendingCommand(BtlMainStateA *state, u32 kind, s32 unitIndex, s32 first, BattleCommandValue second); // declcheck: local (romwright draft: passes the BtlPendingCommand words separately)
 /* Supplied declaration required: btlScriptUnitHasFlags. */
 /* Supplied declaration required: btlEntryBuildSummary. */
 extern int btlStateHasSelectionGateFlag(unsigned int);
@@ -299,7 +300,7 @@ extern int FUN_004f9ae4(int, unsigned int);
 /* Supplied declaration required: FUN_004fbeac. */
 /* Supplied declaration required: btlReflectInitKind23. */
 /* Supplied declaration required: btlAdjustPropertyAndQueueAction. */
-/* Supplied declaration required: FUN_004fda78. */
+/* Supplied declaration required: btlReflectQueueTargetEntryAction. */
 /* Supplied declaration required: FUN_004fe764. */
 /* Supplied declaration required: FUN_004fec2c. */
 /* Supplied declaration required: btlReflectCreateKind41. */
@@ -832,7 +833,7 @@ LAB_004e2ab0:
         temp_v21 = (unsigned int *)(temp_v8 * (param_11 + temp_v52));
         btlAdjustPropertyClamped(temp_v81,1,1,0);
         temp_v5 = temp_v5 + (int)temp_v21;
-        FUN_004fda78(temp_v5 + temp_v12,0,param_2,*(int *)(*param_1 + 0x1ed4) + temp_v102 * 0x10,4,0);
+        btlReflectQueueTargetEntryAction(temp_v5 + temp_v12,0,param_2,*(int *)(*param_1 + 0x1ed4) + temp_v102 * 0x10,4,0);
         temp_v8 = btlScriptUnitHasFlags(*param_1);
         if (temp_v8 != 0) {
           temp_v18 = 0x100028c;
@@ -1403,7 +1404,7 @@ LAB_004e4280:
                 }
                 temp_v8 = btlUnitGetSkillValue(g_btlAux);
                 temp_v13 = temp_v5 + temp_v8 * (param_11 + temp_v52) + temp_v12;
-                FUN_004fda78(temp_v13,0,param_2,*(int *)(*param_1 + 0x1ed4) + temp_v80 * 0x10,3,0);
+                btlReflectQueueTargetEntryAction(temp_v13,0,param_2,*(int *)(*param_1 + 0x1ed4) + temp_v80 * 0x10,3,0);
                 if ((int)temp_v13 <= (int)param_2[7]) {
                   temp_v13 = param_2[7];
                 }

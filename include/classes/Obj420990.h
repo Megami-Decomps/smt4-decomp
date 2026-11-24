@@ -3,6 +3,7 @@
 
 #include "classes/Obj420794.h"
 #include "shard/S1Mover.h"
+#include "nw/math/MTX44.h"
 
 struct Obj420990ResourceState {
     /* 0x00 */ u8 unk00[0x38];
@@ -27,29 +28,40 @@ struct Obj420990Rects {
     /* 0x00 */ f32 rectA[4];    /* left, top, right, bottom */
     /* 0x10 */ u8 unk10[8];
     /* 0x18 */ u32 blendA;
-    /* 0x1C */ u32 unk1c;
+    /* 0x1C */ u32 textureIdA;
     /* 0x20 */ f32 offsetA[2];  /* u, v added to quad A */
     /* 0x28 */ f32 rectB[4];    /* left, top, right, bottom */
     /* 0x38 */ u8 unk38[8];
     /* 0x40 */ u32 blendB;
-    /* 0x44 */ u32 unk44;
+    /* 0x44 */ u32 textureIdB;
     /* 0x48 */ f32 offsetB[2];  /* u, v added to quad B */
     /* 0x50 */ u32 colorTarget[3]; /* handed to the child's setTarget */
 
-    /* The texture source id of quad `index` (0 = A, 1 = B): the two entries are 0x28 bytes apart. */
-    u32 textureSource(s32 index) { s32 offset = 0x1C + index * 0x28; return *(u32 *)((u8 *)this + offset); }
+    /* The texture-id fields of both quads are separated by one quad's stride. */
+    u32 textureSource(s32 index)
+    {
+        const s32 first = offsetof(Obj420990Rects, textureIdA);
+        const s32 stride = offsetof(Obj420990Rects, textureIdB) - first;
+        s32 offset = first + index * stride;
+        return *(const u32 *)((const u8 *)this + offset);
+    }
 };
 
-/* A 0x44-byte entry whose last word is a buffer handle. */
+/* One matrix and texture handle for a quad. */
 struct Obj420990Handle {
-    /* 0x00 */ f32 matrix[16];
+    /* 0x00 */ nw::math::MTX44 matrix;
     /* 0x40 */ u32 handle;
 };
+
+typedef char Obj420990LayoutCheck[
+    offsetof(Obj420990Rects, textureIdA) == 0x1C && offsetof(Obj420990Rects, textureIdB) == 0x44 &&
+    offsetof(Obj420990Rects, colorTarget) == 0x50 && sizeof(Obj420990Rects) == 0x5C &&
+    offsetof(Obj420990Handle, handle) == 0x40 && sizeof(Obj420990Handle) == 0x44 ? 1 : -1];
 
 /* The object whose vtable is at 0x420990 (named after it until its real name is known): a filter
  * object, like Obj42094c, owning eight vertices (two quads; the base's heap block) whose UVs it
  * updates. The base's child is the source its UV data is refreshed from. The vtable is stored by
- * FUN_0034c24c (constructor) and _ZN9Obj420990D0Ev (deleting destructor). */
+ * filterCreateDoubleQuad (constructor) and _ZN9Obj420990D0Ev (deleting destructor). */
 class Obj420990 : public Obj420794 {
 public:
     Obj420990(Obj420794Child *owned) : Obj420794(owned), handles(NULL), rects(NULL) {}

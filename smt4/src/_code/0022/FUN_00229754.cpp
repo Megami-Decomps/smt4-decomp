@@ -1,8 +1,9 @@
 /* NON_MATCHING: the event-condition layout and the slot-kind stores (battleSetActionKind's setter) match; retail keeps
  * the kind 0x23 in r8 for both of its stores (here rematerialised, with 967 built from it) and schedules the
- * FUN_0023c154 arguments in another order. */
+ * btlAppendPendingCommand arguments in another order. */
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
+#include "battle/BtlPendingCommands.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/btlAction.h"
 #include "battle/ActionKindSelection.h"
@@ -17,7 +18,6 @@ s32 isEntryUsable(BattleEventController *); // declcheck: local (the shared decl
 u32 btlEventSelectTrigger(BattleEventController *, u32, s32, u32);
 s32 FUN_00338584(BtlMainState *);
 BtlEntry *btlFindFirstActiveUnit(BtlMainState *);
-void FUN_0023c154(BtlMainState *, s32, s32, s32, ActionKindSelection *);
 }
 
 /* Sets the selected action thread's kind (the setter battleSetActionKind and FUN_00229b10 inline). */
@@ -45,8 +45,12 @@ extern "C" void FUN_00229754(BattleActionOwnerView *owner, ActionKindSelection *
     }
     if (FUN_00338584(owner->battle)) {
         BtlEntry *active = btlFindFirstActiveUnit(owner->battle);
-        FUN_0023c154(owner->battle, 1, owner->battle->actions->participant.combatantIndex,
-                     active->selectionIndex, selection);
+        BtlPendingCommand command;
+        command.kind = 1;
+        command.unitIndex = owner->battle->actions->participant.combatantIndex;
+        command.first = active->selectionIndex;
+        command.second = (u32)selection;
+        btlAppendPendingCommand(owner->battle, command);
     }
     battleSetSelectedActionThreadKind(owner->battle->actionState.index, 0x23);
 }

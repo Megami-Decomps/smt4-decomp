@@ -1,4 +1,5 @@
 /* NON_MATCHING: spilled scan values, the initialized requirement input and shared notification tails differ. */
+#include "gamedata/RosterUnlock.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "code/Code001b.h"
 #include "code/Code002c_Smt4a.h"
@@ -23,7 +24,6 @@ void mapIfDispatchCommand(u32 command, u32 item, u32 amount);
 void mapIfStartTransition(u32 kind, u32 item, u32 amount);
 void FUN_003deea4(u16 value);
 void partyEntryTriggerIfLevelAndFlag3(s32 id);
-void gameFlagUnlockEntryById(s32 id);
 u32 questIsCompleted(s32 index);
 void gameFlagSlotSetEnableBit(s32 index, s8 enabled);
 void flagValueAdd(s32 id, u32 amount);

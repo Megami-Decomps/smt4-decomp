@@ -1,4 +1,4 @@
-/* NON_MATCHING: 28 lines: retail does not thread the empty-span case (start + extent < 0) past the final limit test (it branches back to that test, and for y shares the y = 0 store with the start < 0 case), and hoists the zero for the state-change flag later. */
+/* NON_MATCHING: 10 lines; retail shares the y = 0 assignment between the empty and negative-origin spans. */
 #include "camp/RenderCtxA.h"
 #include "gfx/ScissorCoordinates.h"
 
@@ -11,11 +11,10 @@ static __inline void clipScissorAxis(s32 &position, s32 &extent, s32 limit)
     } else if (position < 0) {
         extent += position;
         position = 0;
-    } else if (position > limit) {
-        extent = position = 0;
-        return;
     }
-    if (position + extent > limit) {
+    if (position > limit) {
+        extent = position = 0;
+    } else if (position + extent > limit) {
         extent = (s32)((f32)limit - (f32)position);
     }
 }

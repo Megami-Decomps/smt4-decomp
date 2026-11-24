@@ -9,7 +9,7 @@
 extern "C" {
 struct UiSpriteState;
 s32 pointConvertToFloat(void *target, u32 x, u32 y);
-void FUN_00233240(void *window, s32 enable);
+void uiSceneApplySpritePreset(void *window, s32 enable);
 s32 flaggedValueHolderGetTotal(void *holder);
 void messageMainSetTargetFlags(s32 flags);
 void gameClearUnlockedSavedId(u32 id);
@@ -67,7 +67,7 @@ void Obj422448::FUN_003ab128()
         messageMainSetTargetFlags(0);
         break;
     case 1:
-        FUN_00233240(flow->window, 1);
+        uiSceneApplySpritePreset(flow->window, 1);
         statusOpenSkillSelection(skill, 1);
         break;
     case 2: {
@@ -90,7 +90,7 @@ void Obj422448::FUN_003ab128()
             flaggedValueHolderGetTotal(flow->entryHolder);
             messageMainSetTargetFlags(1);
         }
-        FUN_00233240(flow->window, 0);
+        uiSceneApplySpritePreset(flow->window, 0);
         buttonHelpSetPreset(0x3e);
         break;
     }

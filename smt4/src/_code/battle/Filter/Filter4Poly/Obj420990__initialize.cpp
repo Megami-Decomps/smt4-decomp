@@ -1,5 +1,6 @@
-/* NON_MATCHING: member function with every call and loop matching; armcc picks r0/r1 the other way round for the base/offset temporaries of the second and third texture loads and keeps the 28 offset in r7 instead of retail's r7/r8 pair. */
+/* NON_MATCHING: some texture loads and the handle store use the opposite base/index registers. */
 #include "classes/Obj420990.h"
+#include "nw/math/MTX44Transform.h"
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
@@ -9,10 +10,9 @@ u32 resourceApplyNodeFlag(u32 kind, u32 source);
 u32 asdTMTexTableLoadEntryAsync(u32 kind, u32 source);
 u32 asdTMTexTableLoadEntryAsyncB(u32 kind, u32 source);
 void FUN_0034c4a0(Obj420990 *filter);
-u32 _ZN2nw4math5MTX448IdentityEv(void);
-void mtx44Copy(void *dest, u32 source);
-}
+} /* extern "C" */
 
+/* Loads the quad textures and initializes their matrices. */
 void Obj420990::initialize(Obj420990Rects *config, u32 flags)
 {
     rects = config;
@@ -20,7 +20,8 @@ void Obj420990::initialize(Obj420990Rects *config, u32 flags)
     buffer = asdMemoryAlloc(0x100, 0x100, 0, 0xA0, 1);
     asdDebugTrace(g_asdFilterSourceFileName, 815);
     handles = (Obj420990Handle *)asdMemoryAlloc(0x100, 0x100, 0, 0x88, 1);
-    for (s32 i = 0; i < 2; i++) {
+    s32 i = 0;
+    do {
         if ((flags & 8) != 0) {
             handles[i].handle = resourceApplyNodeFlag(0x16, rects->textureSource(i));
         } else if ((flags & 0x40) != 0) {
@@ -28,11 +29,10 @@ void Obj420990::initialize(Obj420990Rects *config, u32 flags)
         } else if ((flags & 1) != 0) {
             handles[i].handle = asdTMTexTableLoadEntryAsync(0x16, rects->textureSource(i));
         }
-    }
+    } while (++i < 2);
     FUN_0034c4a0(this);
     refreshTextureCoordinates();
-    for (s32 i = 0; i < 2; i++) {
-        Obj420990Handle *entry = &handles[i];
-        mtx44Copy(entry, _ZN2nw4math5MTX448IdentityEv());
+    for (s32 index = 0; index < 2; ++index) {
+        nw::math::MTX44Identity(&handles[index].matrix);
     }
 }

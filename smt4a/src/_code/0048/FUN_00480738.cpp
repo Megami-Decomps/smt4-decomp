@@ -1,4 +1,4 @@
-/* NON_MATCHING: 22 lines; all five category loops match byte-for-byte, remaining: retail hoists zero into r0 before push and puts the case-0/default pop before the jump table. */
+/* NON_MATCHING: the five category loops match; retail shares an early return between category 0 and the invalid-category default, including the return before the jump table. */
 #include "common.h"
 
 extern "C" {
@@ -13,10 +13,11 @@ s32 flagValueRead(u32 id);
 /* Sum the eleven member values in the requested roster category. */
 extern "C" s32 FUN_00480738(s32 category)
 {
+    if (category == 0) {
+        return 0;
+    }
     s32 total = 0;
     switch (category) {
-    case 0:
-        return 0;
     case 1:
         for (s32 i = 0; i < 11; ++i)
             total += flagValueRead(DAT_0057f6f8[i]);

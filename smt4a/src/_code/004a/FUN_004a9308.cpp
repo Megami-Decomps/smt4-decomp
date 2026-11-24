@@ -5,7 +5,7 @@ extern "C" {
 void uiSpriteSetKeyframeThree(BtlUiObjBA *sprite);
 void FUN_00231cdc(BtlUiObjCA *widget, u32 selection, u32 mode, u32 flags);
 void FUN_002cc96c(BtlUiObjCA *widget);
-void FUN_00321500(BtlUiObjAA *widget);
+void statusPanelStartIdleFrameAnimation(BtlUiObjAA *widget);
 s32 spriteOperationGetModeThreeCompletion(BtlUiObjBA *widget);
 s32 menu32ModeIsNot6(BtlUiObjAA *widget);
 
@@ -13,7 +13,7 @@ s32 menu32ModeIsNot6(BtlUiObjAA *widget);
 static __inline void refreshMenuSprite(BtlUiA *ui)
 {
     if (menu32ModeIsNot6(&ui->objA) != 0 && spriteOperationGetModeThreeCompletion(&ui->objB) != 0) {
-        FUN_00321500(&ui->objA);
+        statusPanelStartIdleFrameAnimation(&ui->objA);
         uiSpriteSetKeyframeThree(&ui->objB);
     }
 }

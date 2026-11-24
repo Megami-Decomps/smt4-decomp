@@ -1,5 +1,6 @@
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
+#include "shard/W6_W6Match7_WaveBuffer.h"
 #include "sound/VoiceManagerCalls.h"
 
 extern "C" {
@@ -9,7 +10,6 @@ void nn_snd_CTR_Voice_SetMixParam(u32 voice, const f32 *);
 void nn_snd_CTR_Voice_SetPitch(u32 voice, f32 pitch);
 void nn_snd_CTR_Voice_SetState(u32 voice, s32 state);
 void nn_snd_CTR_InitializeWaveBuffer(void *);
-u32 soundQueueArchiveWaveBuffers(u32 player, void *archive, void *initial, void *loop, s32 index);
 void soundVoiceSetVolume(u32 voice, f32 volume);
 
 // Reset a stopped voice when necessary, then prepare its target volume and fade.
@@ -45,7 +45,8 @@ void asdWaveVoicePrepareFade(AsdSndWaveVoice *sound, s32 frames, f32 volume, f32
     sound->unk90 = 0;
     for (s32 i = 0; i < 2; ++i)
         nn_snd_CTR_InitializeWaveBuffer(sound->waveBuffers[i]);
-    soundQueueArchiveWaveBuffers(sound->voice, sound->data, sound->waveBuffers[0], sound->waveBuffers[1], 0);
+    soundQueueArchiveWaveBuffers((WavePlayer *)sound->voice, (u32)sound->data,
+        (WaveBuffer *)sound->waveBuffers[0], (WaveBuffer *)sound->waveBuffers[1], 0);
     asdWaveVoicePrepareFade(sound, frames, sound->targetVolume, secondaryVolume);
 }
 }

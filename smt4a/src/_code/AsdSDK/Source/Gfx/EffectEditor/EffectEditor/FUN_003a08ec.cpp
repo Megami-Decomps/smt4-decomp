@@ -7,7 +7,7 @@ int CONCAT44(...);
 int effGetFrameStep(void);
 int FUN_0027134c(int, float *);
 int FUN_002fe2e8(int, float *);
-int FUN_00321d7c(...);
+int effSampleParticleTransform(...);
 int FUN_00321e98(...);
 int FUN_0034f8b4(...);
 int effComputeParticleEmission(int, float *, char [4], int *);
@@ -62,7 +62,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: effGetFrameStep. */
 /* Supplied declaration required: FUN_0027134c. */
 /* Supplied declaration required: FUN_002fe2e8. */
-/* Supplied declaration required: FUN_00321d7c. */
+/* Supplied declaration required: effSampleParticleTransform. */
 /* Supplied declaration required: FUN_00321e98. */
 /* Supplied declaration required: FUN_0034f8b4. */
 /* Supplied declaration required: effComputeParticleEmission. */
@@ -203,7 +203,7 @@ void FUN_003a08ec(int param_1)
             pfVar6[1] = temp_v10;
             pfVar6[2] = temp_v13;
             pfVar6[3] = temp_v11;
-            FUN_00321d7c(pfVar6,pfVar8,temp_v4,&temp_v26);
+            effSampleParticleTransform(pfVar6,pfVar8,temp_v4,&temp_v26);
             pfVar6[6] = pfVar6[6] * pfVar7[4];
             temp_v11 = pfVar6[7];
             temp_v10 = pfVar7[6];
@@ -349,7 +349,7 @@ void FUN_003a08ec(int param_1)
               pfVar6[3] = temp_v13;
               pfVar6[4] = (float)(int)temp_v4;
             }
-            FUN_00321d7c(pfVar6,pfVar8,pfVar6[4],&temp_v26);
+            effSampleParticleTransform(pfVar6,pfVar8,pfVar6[4],&temp_v26);
             pfVar6[6] = pfVar6[6] * pfVar7[4];
             temp_v10 = pfVar6[7];
             temp_v4 = pfVar7[6];

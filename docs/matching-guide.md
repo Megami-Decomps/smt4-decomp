@@ -160,6 +160,11 @@ difference a register tie-break.
   stack slot: retail's larger frame (and a `vldmia`/`vstmia` copy) means the callee takes a reference and the caller
   writes `f(owner, archive, lookup(&ref))`, not a named local passed by address (`Obj4221fc::vfunc0c`,
   `Obj422260::vfunc0c`, both games; `classes/WindowStatus.h`).
+- Four words passed in `r1`-`r3` plus one stack word and stored into consecutive fields of one record can be the record
+  passed by value: smt4 `FUN_0023c154` and smt4a `btlAppendPendingCommand(state, BtlPendingCommand command)` are
+  IDENTICAL with it (8 lines with four scalars, wave 92). Callers fill a local record field by field; smt4a
+  `FUN_004eb740` is IDENTICAL only with its last field left unset (retail stores an uninitialised `s16`), which is
+  undefined behaviour, so it stays `NON_MATCHING` with a defined value.
 - Settle a parameter's type from its callers as well as its definition: an argument every caller passes unnarrowed (no
   `and #255`, no `uxth`) is word-sized even when the callee only stores its low byte, and one they sign-extend is `s16`
   (with the field it is stored into `s16` too). btlHelp's creator smt4a `FUN_00200a68(u16 id, s16 message, …, u32 mode,
@@ -726,6 +731,13 @@ asks for.
   (`asdProcessCreateSimple(name, 4, 0, 0, FUN_0035d080, NULL, 0)`) gives `partnerTopicCreate` IDENTICAL and
   `newHighwayInfoCreate` 10 lines, `static __inline` 25/29, in place 8/29; no function in the image has that body,
   so both creators call it in place.
+- Not evidence (wave 92 review): single-use locals that only reorder loads (`const s32 fromFrame = …; fromValue …;
+  toFrame …;` in both `effScalarKeyFindNextDistinct`s, a `PlayerDataIV *player` and a `u32 points` in smt4
+  `appCheckPurchaseRequirements`, a reference to the lead entry in smt4a `FUN_0038d758`); a fourth spelling of the
+  render-stack pop (`renderCtxPopStateInline`, smt4a `uiDrawMarkerRing`); a plain `static` request helper called in
+  both arms of one `if` (smt4a `loadSlotRequestAsync`); a single-use inline whose layer parameter only moves a
+  constant (smt4a `FUN_003f82b8`); an inline member written for one site whose other retail sites are drafts (smt4a
+  `statusDownInitializeSkillList`). All matched, all stay `NON_MATCHING`.
 - Evidence (wave 91): retail copying the getter's result into another register before the store (`bl getSaveData;
   mov r1, r0; ldr r0, [r4, #16]; strb r0, [r1, #3]`) is a plain `static` setter inlined late: IV's
   `saveLoadWriteMetadataOption(GameSaveData *, u8)` (`gamedata/SaveLoadProcess.h`) at both writes of
@@ -948,6 +960,11 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
 - `vstr s0, [r0, #20]` right after `add r0, r7, r4, lsl #5` (the tile's address) and `vmov.f32 s0, s16`, with the call
   padding `nop {0}` twice after it, is the linker-inlined tile rotation setter `asdTextureTileSetRotation`
   (`inlined.txt` in both games): smt4 `FUN_0034f0fc` and smt4a `FUN_00423700` 8 -> 4 lines (wave 91).
+- A lone `svc 0x14` after `ldr r0, [r0]` of the allocator's mutex handle, with the call padding `nop {0}` after the
+  failure test, is the SDK's `svcReleaseMutex` wrapper armlink inlined, not the `nn::svc::ReleaseMutex` intrinsic
+  (which gives no padding): with the call (`nn/svc.h`) and the smt4a `inlined.txt` row, `asdMemFree` and
+  `asdMemoryAlloc` are IDENTICAL and the four other unlock sites stay so (wave 92). A row one game already has is
+  evidence for the twin's site: smt4a `eventFlagForScene` (`add r0, r0, #0x800`) made `FUN_002a3e10` IDENTICAL.
 - Record setters and getters are linker-inlined too: a widget reloaded into `r0` and the value rematerialised before
   each `strb r1, [r0, #N]` (or a lone `ldr r0, [r0, #N]` followed by the call's `nop` padding) is a call to a
   one-instruction accessor. Write the calls and add the rows after checking each call site's word in the image
@@ -1103,6 +1120,10 @@ register tie-breaks. Fix the source; don't change the compiler per unit.
   plain forwarding call they are IDENTICAL in both games only without VFP, and take `gxSetBufferSwap`'s existing
   `--cpu=5TE` set (softvfp gives the same code). `-O2 -Otime` for the twins smt4 `FUN_001200e8`/smt4a `FUN_0015d444`
   (the owned flag's `1` set after the pointer store), code-identical only with it in both games.
+  Applied (wave 92): `--fpu=softvfp` for the GPU submission twins smt4 `gpuSubmitCommandBlock`/smt4a `FUN_001b4128` (no
+  VFP instruction, IDENTICAL only with the flag in both games, the module's proven `FUN_0017cdcc`/`FUN_0017ce88` carry it).
+  Not applied: softvfp for the ac:u initializer twins smt4 `FUN_00106c28`/smt4a `FUN_0013b5c8` (18 -> 0 lines), with no
+  proven neighbour carrying the flag.
 
 ### `--multifile`
 

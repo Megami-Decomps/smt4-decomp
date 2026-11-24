@@ -18,7 +18,7 @@ void buttonHelpSetPreset(s32 mode);
 void messageDismissNumericBanner(s32 enabled);
 void buttonHelpSetText(s32 mode, u32 color);
 void beginStatusPanelClose();
-void FUN_00233240(void *panel, s32 enabled);
+void uiSceneApplySpritePreset(void *panel, s32 enabled);
 void FUN_00232848();
 void uniteLoadPreviewRoomModel();
 
@@ -72,7 +72,7 @@ void Obj4223c4::bibleApplyConfirmedSelection()
             messageDismissNumericBanner(1);
         buttonHelpSetText(0, 0x323232FF);
         beginStatusPanelClose();
-        FUN_00233240(reinterpret_cast<ConfirmationPanelView *>(screen)->panel, 1);
+        uiSceneApplySpritePreset(reinterpret_cast<ConfirmationPanelView *>(screen)->panel, 1);
         gameGlobalsSetSubScreenActive(1);
         screen->state = 11;
         screen->stateArg = 0;

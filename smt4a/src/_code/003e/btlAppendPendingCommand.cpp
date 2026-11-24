@@ -1,13 +1,11 @@
-/* NON_MATCHING: second command store loads buffer and count in a different order. */
-#include "battle/btlMain.h"
-#include "battle/BattleCommandValue.h"
+#include "battle/BtlPendingCommandsA.h"
 
-// Append a command, preserving the raw bits of its integer-or-float payload.
-extern "C" void btlAppendPendingCommand(BtlMainStateA *state, u32 kind, s32 unitIndex, s32 first, BattleCommandValue second)
+/* Appends a command to the battle's pending commands. */
+extern "C" void btlAppendPendingCommand(BtlMainStateA *state, BtlPendingCommand command)
 {
-    state->pendingCommands.commands[state->pendingCommands.count].kind = kind;
-    state->pendingCommands.commands[state->pendingCommands.count].unitIndex = unitIndex;
-    state->pendingCommands.commands[state->pendingCommands.count].first = first;
-    state->pendingCommands.commands[state->pendingCommands.count].second = second.word;
+    state->pendingCommands.commands[state->pendingCommands.count].kind = command.kind;
+    state->pendingCommands.commands[state->pendingCommands.count].unitIndex = command.unitIndex;
+    state->pendingCommands.commands[state->pendingCommands.count].first = command.first;
+    state->pendingCommands.commands[state->pendingCommands.count].second = command.second;
     state->pendingCommands.count++;
 }

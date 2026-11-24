@@ -23,7 +23,7 @@ typedef struct CursorPanel {
 
 
 void pointConvertToFloat(void *out, s32 x, s32 y);
-void FUN_00233240(void *animation, s32 mode);
+void uiSceneApplySpritePreset(void *animation, s32 mode);
 void buttonHelpSetContext(s32 sound);
 s32 buttonHelpStateIsNot3(void);
 
@@ -31,7 +31,7 @@ s32 buttonHelpStateIsNot3(void);
 void FUN_0039c348(CursorPanel *panel)
 {
     if (panel->state == 0) {
-        FUN_00233240(panel->animation, 1);
+        uiSceneApplySpritePreset(panel->animation, 1);
         if (g_gameState.map.bgResetPending == 0) {
             buttonHelpSetContext(0x1b);
         }

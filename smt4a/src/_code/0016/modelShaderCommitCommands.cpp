@@ -16,7 +16,7 @@ extern u32 g_modelCommandWordCount;
 void cursorResetFromParam(void);
 extern const ModelStateResetPacket DAT_00544d30;
 u32 *FUN_00177e6c(NativeShaderPrefix *shader, u32 *cursor);
-void FUN_001b4128(const u32 *commands, u32 bytes, u32 mode);
+void gpuSubmitCommandBlockInternal(const u32 *commands, u32 bytes, u32 mode);
 
 /* Appends one GPU register write (the parameter word, then the command header naming the
  * register) to the model command block. */
@@ -39,7 +39,7 @@ void modelShaderCommitCommands(ModelShader *owner)
     modelCmdPutRegister(0, 0xF02BC);
     asdModelCommandBlockRelease();
     ModelStateResetPacket reset = DAT_00544d30;
-    FUN_001b4128(reset.values, sizeof(reset), 1);
+    gpuSubmitCommandBlockInternal(reset.values, sizeof(reset), 1);
     cursorResetFromParam();
     modelCmdPutRegister(1, 0xF0111);
     modelCmdPutRegister(1, 0xF0110);

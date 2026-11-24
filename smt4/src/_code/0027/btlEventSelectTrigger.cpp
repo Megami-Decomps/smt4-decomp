@@ -1,4 +1,4 @@
-/* NON_MATCHING: 4 lines: retail forms the battle mask address in r1 (add r1, r0, #0x4000; add r1, r1, #0x4A0) where the build reuses r0. */
+/* NON_MATCHING: the unit-trigger membership test groups the comparisons differently: retail tests 3 and 4 together, then 7 and 5; the build tests 3 separately, then 4, 5 and 7. */
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W4_Match6_BtlScript.h"

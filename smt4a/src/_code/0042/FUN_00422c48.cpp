@@ -18,7 +18,7 @@ u32 FUN_00439e0c(u32 samples, s32 format, s32 channels);
 void FUN_00422c48(void)
 {
     nn_os_CriticalSection_Enter(&g_soundVoiceCriticalSection);
-    if ((s8)g_soundVoicePool.unk01[0] != 0) {
+    if ((s8)g_soundVoicePool.mixThreadRequested != 0) {
         FUN_001cd5ac();
     }
     u32 count = g_soundVoicePool.streamCount;
@@ -57,7 +57,7 @@ void FUN_00422c48(void)
         }
         ++g_soundVoicePool.read;
     }
-    if ((s8)g_soundVoicePool.unk01[0] != 0) {
+    if ((s8)g_soundVoicePool.mixThreadRequested != 0) {
         FUN_001c76b8();
     }
     nn_os_CriticalSection_Leave(&g_soundVoiceCriticalSection);

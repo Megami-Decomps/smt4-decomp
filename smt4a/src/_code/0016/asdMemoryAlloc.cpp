@@ -1,4 +1,3 @@
-/* NON_MATCHING: identical except one compiler nop {0} that retail places between the unlock failure test and its branch in the special-heap path. */
 #include "nn/svc.h"
 #include "classes/AllocatorState.h"
 #include "nn/Result.h"
@@ -16,7 +15,7 @@ void rt_memclr(void *memory, u32 size);
 /* Releases the allocator lock, reporting a failed release. */
 static __inline void allocatorUnlock(void)
 {
-    s32 result = nn::svc::ReleaseMutex(*g_asdMemState.mutex);
+    s32 result = svcReleaseMutex(*g_asdMemState.mutex);
     bool failed = nnResultIsFailure(result);
     if (failed) {
         resultHandleFailure(result, failed);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: the frames increment uses r3 (retail r1) and the final state stores are if-converted (ldrne/movne) where retail branches (ldr r1,[r6]; mov r0,#N; str). */
+/* NON_MATCHING: the two final state stores have retail's branch layout but the state and work pointer use exchanged registers. */
 /* Staff roll, scrolling state: moves the lines up, ends the roll when the last line passes the
  * end or the player skips it. */
 #include "common.h"
@@ -13,14 +13,13 @@ extern int gameFlagIsSet(u32 flag);
 void staffRollScrollUpdate(void)
 {
     StaffRollWork *roll = g_staffRoll;
-    int i;
 
     if (roll->lineA[11].y < roll->endY) {
         g_staffRoll->skip = 1;
         roll->finished = 1;
     } else {
         roll->frames++;
-        for (i = 0; i < 12; i++) {
+        for (s32 i = 0; i < 12; i++) {
             roll->lineA[i].y -= roll->speed;
             roll->lineB[i].y -= roll->speed;
         }
@@ -30,10 +29,10 @@ void staffRollScrollUpdate(void)
     }
     if (roll->finished != 0) {
         if (roll->skip != 0) {
-            g_staffRoll->state = 6;
+            staffRollSetState(g_staffRoll, STAFF_ROLL_STATE_EXIT);
         }
     } else if (roll->skip != 0) {
-        g_staffRoll->state = 3;
+        staffRollSetState(g_staffRoll, STAFF_ROLL_STATE_FADE_OUT);
         return;
     }
 }

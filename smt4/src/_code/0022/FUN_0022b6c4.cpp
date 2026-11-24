@@ -32,7 +32,7 @@ typedef struct Context {
     /* 0xCB8 */ u32 unkCB8;
 } Context;
 
-extern void FUN_00233240(void *obj, s32 arg);
+extern void uiSceneApplySpritePreset(void *obj, s32 arg);
 extern s32 flaggedValueHolderGetTotal(Context *ctx);
 extern void asdTMTexTableLoadEntryAsync(s32 table, u32 entry);
 extern void uiSpriteSetImageKeyframe(Slot *slot, s32 a, s32 b);
@@ -51,8 +51,8 @@ void FUN_0022b6c4(Context *ctx)
     for (i = 0; i < 10; i++) {
         uiSpriteSetImageKeyframe(&ctx->slots[i], 0, 0);
     }
-    FUN_00233240(ctx->unk0A8, 0);
-    FUN_00233240(ctx->unk0A8, 1);
+    uiSceneApplySpritePreset(ctx->unk0A8, 0);
+    uiSceneApplySpritePreset(ctx->unk0A8, 1);
     index = ctx->entries[flaggedValueHolderGetTotal(ctx)]->index;
     next = index + 1;
     ctx->unkC64 = next;

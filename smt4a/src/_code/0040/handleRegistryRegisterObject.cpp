@@ -1,4 +1,5 @@
-/* NON_MATCHING: std::vector<RegisteredObject *>::push_back with its inlined _C_insert_aux matches instruction for instruction except register assignment (retail keeps the element address in r1/r2/r4, the build in r0/r3), and the library calls need the renames of __rw_allocate/__rw_deallocate (rename_S2.tsv). */
+/* NON_MATCHING: the native vector insertion expands to the same 98 rows, but the allocator
+ * slot address, copy-backward loop and new-capacity calculation use different registers. */
 #include "gfx/ObjectRegistry.h"
 
 /* Lists an object that no registry holds yet. */

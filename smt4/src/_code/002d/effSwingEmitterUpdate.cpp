@@ -15,7 +15,7 @@ f32 mathSinFixedAngle(f32 angle);
 void FUN_0024b7bc(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_0024add8(ParticleEmissionState *emitter, SpiralParticle *particle);
 void FUN_0024b5f0(ParticleEmissionState *emitter, SpiralParticle *particle);
-void FUN_0024b660(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous);
+void effSampleParticleTransform(ParticleTransformSample *sample, ParticleTransformCurves *curves, s32 frame, const EffectColor *previous);
 }
 
 /* Updates a swing emitter: emits new particles, and moves each live one along its direction (under
@@ -154,7 +154,7 @@ extern "C" void effSwingEmitterUpdate(ParticleEmissionState *emitter)
                 motion->wave = wave;
                 particle->frame = (s32)age;
             }
-            FUN_0024b660(reinterpret_cast<ParticleTransformSample *>(particle),
+            effSampleParticleTransform(reinterpret_cast<ParticleTransformSample *>(particle),
                          reinterpret_cast<ParticleTransformCurves *>(definition), particle->frame,
                          reinterpret_cast<const EffectColor *>(&previous));
             particle->scale *= motion->scale;
@@ -179,7 +179,7 @@ extern "C" void effSwingEmitterUpdate(ParticleEmissionState *emitter)
             motion->phase += motion->phaseStep;
             motion->radius += motion->radiusStep;
             motion->wave = wave;
-            FUN_0024b660(reinterpret_cast<ParticleTransformSample *>(particle),
+            effSampleParticleTransform(reinterpret_cast<ParticleTransformSample *>(particle),
                          reinterpret_cast<ParticleTransformCurves *>(definition), frame,
                          reinterpret_cast<const EffectColor *>(&previous));
             particle->scale *= motion->scale;

@@ -142,13 +142,15 @@ struct TextureTableEntryIV *asdTMTexTableEntryAt(u32 file, s32 index);
 static __inline void asdTMTexTableEntrySize(u32 file, s32 index, u32 *width, u32 *height)
 {
     TextureTableEntryIV *entry = asdTMTexTableEntryAt(file, index);
+    u32 heightValue;
     if (entry->placement != NULL && entry->placement->mode == 1) {
         *width = entry->placement->width;
-        *height = entry->placement->height;
+        heightValue = entry->placement->height;
     } else {
         *width = entry->width & 0xFFFF7FFF;
-        *height = entry->height & 0xFFFF7FFF;
+        heightValue = entry->height & 0xFFFF7FFF;
     }
+    *height = heightValue;
 }
 
 /* The rectangle of texture `index` in table `file`: the entry's layout position and its drawn size (the

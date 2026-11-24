@@ -93,7 +93,7 @@ int FUN_004eaa68(...);
 int btlUnitStartAction(int *, unsigned int *);
 int btlQueueDuplicateSuppressedAction(...);
 int btlReflectQueueSelectionMarks(...);
-int FUN_004fda78(...);
+int btlReflectQueueTargetEntryAction(...);
 int FUN_004feecc(...);
 int FUN_004fb5a8(...);
 
@@ -256,7 +256,7 @@ extern unsigned int FUN_004fa030(int);
 /* Supplied declaration required: btlReflectCreateKind15. */
 /* Supplied declaration required: FUN_004fd508. */
 /* Supplied declaration required: btlReflectCreateKind34. */
-/* Supplied declaration required: FUN_004fda78. */
+/* Supplied declaration required: btlReflectQueueTargetEntryAction. */
 /* Supplied declaration required: btlReflectQueueValueAction. */
 /* Supplied declaration required: btlQueueMessageTableReflectAction. */
 /* Supplied declaration required: btlReflectQueueDepthOverlays. */
@@ -538,7 +538,7 @@ LAB_004ebd00:
         }
         temp_v14 = temp_v14 + temp_v10;
         temp_v25 = temp_v11;
-        FUN_004fda78(temp_v14,0,puVar25,*(int *)(*piVar16 + 0x1ed4) + temp_v11 * 0x1d0,3,0);
+        btlReflectQueueTargetEntryAction(temp_v14,0,puVar25,*(int *)(*piVar16 + 0x1ed4) + temp_v11 * 0x1d0,3,0);
         temp_v12 = btlScriptUnitHasFlags(*piVar16);
         if (temp_v12 == 0) {
           FUN_004fb5a8(temp_v14 + 1,puVar25,*(int *)(*piVar16 + 0x1ed4) + temp_v11 * 0x1d0);
@@ -588,7 +588,7 @@ LAB_004ebd00:
         btlMainFindEntryByListedId(puVar20,temp_v13);
         temp_v10 = FUN_004f6478(g_btlAux);
         if ((DAT_00571160 & *puVar20) == 0 && (DAT_00571164 & puVar20[1]) == 0) {
-          FUN_004fda78(temp_v10 + temp_v14,0,puVar25,*(int *)(*piVar16 + 0x1ed4) + temp_v13 * 0x1d0,3,0);
+          btlReflectQueueTargetEntryAction(temp_v10 + temp_v14,0,puVar25,*(int *)(*piVar16 + 0x1ed4) + temp_v13 * 0x1d0,3,0);
           FUN_004e5a40(piVar16,temp_v13,1);
           temp_v10 = *(int *)(temp_v20 + 0x14);
           if (temp_v10 < 5) {

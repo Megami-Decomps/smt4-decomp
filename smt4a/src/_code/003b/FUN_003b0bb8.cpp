@@ -1,4 +1,4 @@
-/* NON_MATCHING: argument local and <= -1 stat test recover selection setup; candidate-mask AND registers differ. */
+/* NON_MATCHING: the second mask test swaps AND operands and the exclusion mask loads as a pair. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -7,26 +7,26 @@
 
 extern "C" {
 
+/* Tests whether an eligible combatant has a negative value in the selected property. */
 u32 FUN_003b0bb8()
 {
-    s32 argument = scrGetArg(0);
-    s32 stat = 0;
-    switch (argument) {
-    case 0: stat = 7; break;
-    case 1: stat = 8; break;
-    case 2: stat = 10; break;
-    case 3: stat = 11; break;
+    s32 selector = scrGetArg(0);
+    s32 column = 0;
+    if (selector == 0) {
+        column = 7;
+    } else if (selector == 1) {
+        column = 8;
+    } else if (selector == 2) {
+        column = 10;
+    } else if (selector == 3) {
+        column = 11;
     }
-    // Word fields cannot be added to the shared union beginning at byte 0x0a.
-    struct CandidateStatView { u8 unk000[0x74]; s32 values[12]; };
-    typedef char CandidateStatOffsetCheck[offsetof(CandidateStatView, values) == 0x74 ? 1 : -1];
     for (s32 index = 0; index < 109; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-        u64 flags = entry->flags;
-        if ((flags & g_btlCandidateMasks.unavailable) != 0 &&
-            (flags & g_btlCandidateMasks.required) != 0 &&
-            (flags & g_btlCandidateMasks.excluded) == 0 &&
-            ((CandidateStatView *)entry)->values[stat] <= -1) {
+        if ((g_btlCandidateMasks.unavailable & entry->flags) &&
+            (g_btlCandidateMasks.required & entry->flags) &&
+            !(g_btlCandidateMasks.excluded & entry->flags) &&
+            entry->properties[column] <= -1) {
             scrSetResult(1);
             return 1;
         }
@@ -34,4 +34,4 @@ u32 FUN_003b0bb8()
     scrSetResult(0);
     return 1;
 }
-}
+} /* extern "C" */

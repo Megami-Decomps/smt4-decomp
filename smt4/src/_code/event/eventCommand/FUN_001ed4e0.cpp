@@ -11,9 +11,6 @@ void commonBgStopAndResetFade(void);
 void FUN_002d6658(s32 arg);
 s32 FUN_002ef6b8(s32 id, u32 flagWasSet);
 
-/* The game flag that marks scene `id` as seen. */
-s32 eventFlagForScene(s32 id);
-
 /* Script command: starts the event job for arg0 (once, marking flag 0x800 + arg0) and waits until it ends. */
 u8 FUN_001ed4e0(void)
 {
