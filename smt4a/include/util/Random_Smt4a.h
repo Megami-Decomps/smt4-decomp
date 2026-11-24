@@ -7,6 +7,8 @@ extern "C" {
 
 u32 randomGetUpperSixBits(u32 first,u32 second);
 
+u32 randomGetLowerTenBits(u32 first,u32 second);
+
 void randomStateSeed(RandomState *state, u32 seed);
 
 } /* extern "C" */

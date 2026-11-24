@@ -200,6 +200,11 @@ difference a register tie-break.
 - `randRange` returns `u32` (`util/Random.h`, as the definition computes it and as unsigned float conversions use it);
   a caller that compares it signed writes `(s32)randRange(n)`, one that narrows the bound `randRange((u16)(n))`:
   with those, the header replaced about 95 local prototypes and every caller kept its score (wave 82).
+- A base register formed for byte fields past offset 255 (`add r1, r0, #0x200`, then the loads at `[r1, #0x4d]`...)
+  means at least one of them is read signed: `ldrsb`, `ldrh` and `ldrsh` reach only 255 bytes, `ldrb` and `ldr` 4095.
+  `GameState`'s four map prompt flags (0x24D-0x250) as `s8` gave smt4 `FUN_0031d54c` retail's `g_gameState + 0x200`
+  base (269 -> 87 lines); smt4a `InfoWindowA`'s `unk32C`/`unk32D` as `s8` gave `FUN_00155ca8` its `add fp, r4, #768`
+  (wave 88).
 
 ### 64-bit flag masks
 
@@ -478,6 +483,9 @@ difference a register tie-break.
   defined in the same file: armcc folds them onto one base only for data the translation unit defines. Define them
   in the unit that owns the file's data and keep every other declaration `extern` (smt4 `asdSoundInitialize`,
   smt4a `FUN_00142b84`: IDENTICAL, placed by relink, wave 70).
+- Two address-taken coordinates retail keeps in separate 4-byte stack slots are two `s32` locals (`&x`, `&y` passed
+  separately), not a struct local: armcc gives a struct an 8-aligned slot and shifts the frame. smt4a `FUN_0037c988`
+  367 -> 18 lines (wave 88).
 - Likewise, a float constant pooled ahead of a global's address where the build pools it after can mean
   the "array member" a struct points at is a separate adjacent global: declare it as its own object and
   store `&object` into the pointer (`SoundReverbFilterSize`, smt4 `FUN_00109580`).
@@ -489,6 +497,10 @@ difference a register tie-break.
 Every helper below still needs the evidence the [helper rule](CONTRIBUTING.md#what-a-source-may-contain)
 asks for.
 
+- A sequence retail repeats inline at two or more sites in one unit, where a `static __inline` function with that
+  body stays out of line (armcc's size limit for a function called twice), was forced inline in the original (or a
+  macro): write it once as `static __forceinline` in the header, with that comment. smt4a `lmapAnnounceArea`
+  (`map/LmapAreaAnnounce.h`, three sites): `FUN_002d978c` 278 -> 166 lines with it (wave 88). Never for one site.
 - A stack key or temporary in scope at the end (a `bsearch` key, a copied struct) blocks retail's
   tail call or predication: move the lookup into a `static __inline` helper so its scope ends there.
 - A body retail repeats in its callers (an allocator such as `effBlockCreate`, a sibling function from
@@ -798,6 +810,12 @@ asks for.
   `Handle res(create(allocator), allocator); T *p = new (memory) T(allocator, res, owner); p->initialize(allocator);`
   with no explicit release and no NULL ternary around the placement `new` (`Obj421230ResHandle`/`Obj55b680ResHandle`,
   `include/classes/Obj421230.h`; the light and fog creators of both games, wave 56; third-party code).
+- A zero argument retail builds in a register of its own (`mov r6, r7; mov r2, r6`) where the other zero arguments
+  are immediates is an empty one-pointer class passed by value: NW's texture `Setup(allocator, ResGraphicsFile)`
+  (`nw/gfx/ResGraphicsFile.h`) took smt4a `FUN_00401d18` from 265 to 74 lines (wave 88).
+- A create descriptor whose fields retail loads through `r2` right after fetching the allocator is filled as a chain on
+  a temporary passed straight to the call, `&TextureCreateInfoIV().setData(..).setWidth(..).setHeight(..)`
+  (`shard/W9_W9Match8_WorkRecords.h`): smt4 `FUN_00340ad4` 54 -> 24, `uniteResultLoadTexture` 50 -> 12 (wave 88).
 
 More on classes, constructors and destructors is in [C++](style-and-naming.md#c).
 
@@ -878,6 +896,11 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
   just before it (`mov r0, rN` or `add r0, rN, #off`, then the lone load or store); the generic words
   (`ldr r0, [r0, #0]`, `#4`, `#8`) are noise. Writing the calls made wave 55's smt4a `FUN_0021c1e0`
   (`partyWidgetGetUnitId`) and `FUN_003423e8` (`spriteSetLayer`/`spriteSetVisible`) IDENTICAL.
+- A conditional accessor word (`ldreq r0, [r0, #32]`, `strbeq r1, [r0, #39]`) after a conditional argument setup
+  (`addeq r0, r4, #40; movne r0, #0`) is a linker-inlined call too: armlink keeps the `bleq`'s condition on the
+  inlined instruction, and `build.py` does the same (smt4a `gridNavigationHandleConfirm`'s `scrollListGetOffset`,
+  wave 88). Write the call under the condition (`if (grid->empty) return 0; return scrollListGetOffset(&grid->rows);`
+  in a `static __inline` helper), not a field read.
 - A NULL test retail repeats right before a few stores through a pointer the function has already dereferenced is a
   small real function with its own NULL check, inlined there: write that function's body as a `static __inline`
   copy (smt4 `partyRestoreGroup`, with `FUN_002954bc`'s `if (unit != NULL) { hp = maxHp; mp = maxMp; }`).

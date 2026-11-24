@@ -16,7 +16,7 @@ void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tr
 void sysMemClear(void *memory, u32 size);
 s32 eventIsSkipping();
 s32 aocRunByName(AocSystemA *system, u32 table, u32 file, s32 mode);
-void FUN_002897cc(JobWork *job);
+void npc2dPortraitUpdate(JobWork *job);
 void FUN_0034da3c(JobWork *job);
 
 void npc2dCreatePortraitVariantJob(u32 id, s32 placement, u32 variant)
@@ -42,9 +42,9 @@ void npc2dCreatePortraitVariantJob(u32 id, s32 placement, u32 variant)
     asdDebugTrace(DAT_0052f4fc, 0x380);
     PortraitTaskWorkA *work = static_cast<PortraitTaskWorkA *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(PortraitTaskWorkA), 1));
     sysMemClear(work, sizeof(PortraitTaskWorkA));
-    work->base.scale.x = 1.0f;
-    work->base.scale.y = 1.0f;
-    work->base.scale.z = 0.0f;
+    work->base.scale = 1.0f;
+    work->base.opacity = 1.0f;
+    work->base.fadeStep = 0.0f;
     work->create.handle = 0xFFFFFFFF;
     work->base.state = 0x41;
     work->create.variant = variant;
@@ -66,21 +66,21 @@ void npc2dCreatePortraitVariantJob(u32 id, s32 placement, u32 variant)
         work->create.mode = 4;
     } else if (placement == 2) {
         work->base.x = 72;
-        work->base.scale.z = 0.25f;
+        work->base.fadeStep = 0.25f;
         work->base.rotation = 0.0f;
-        work->base.scale.y = 0.0f;
+        work->base.opacity = 0.0f;
         work->create.mode = 5;
     }
     if (eventIsSkipping()) {
-        work->base.deferred = 1;
+        work->base.loadStep = 1;
     } else {
-        work->base.deferred = 0;
+        work->base.loadStep = 0;
         if (aocRunByName(g_aocSystem, work->create.table, work->create.file, 1))
             aocLoadTextureNode(reinterpret_cast<u32>(g_aocSystem), work->create.table, work->create.file, 0x10000);
         else
             asdTMTexLoadMainHeap(work->create.table, work->create.file);
     }
     work->base.speed = 0.26f;
-    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052f4f0), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002897cc), reinterpret_cast<AsdProcFunc>(FUN_0034da3c), reinterpret_cast<u32>(work));
+    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052f4f0), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(npc2dPortraitUpdate), reinterpret_cast<AsdProcFunc>(FUN_0034da3c), reinterpret_cast<u32>(work));
 }
 }

@@ -17,7 +17,6 @@ extern u8 g_asdFileThread[]; /* the worker thread's handle and joined flag */
 void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, u32 category);
 s32 FUN_002bcc60(void *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(void *), void *argument,
                  u32 stackTop, s32 priority, s32 processor, u32 flags);
-void asdFileThreadMain(void *argument);
 void FUN_00123c88(void);
 void FUN_00123ca4(void);
 void FUN_00123cb4(void);

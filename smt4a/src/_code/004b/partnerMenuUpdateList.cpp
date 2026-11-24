@@ -33,7 +33,7 @@ extern "C" {
 
 u8 gridNavigationHandleConfirm(GridNavigation *list, s32 mode);
 s8 uiStateGetFirstFlag(const void *state);     /* GridNavigation::changed */
-s8 uiStateGetSecondFlag(const void *state);    /* GridNavigation::unk61 */
+s8 uiStateGetSecondFlag(const void *state);    /* GridNavigation::columnChanged */
 void scrollListSetSelectionTracked(GridNavigation *list, s32 row); // declcheck: local (the shared prototype takes a ScrollSelection; the list is a GridNavigation)
 void scrollOwnerSelectIndex(GridNavigation *list, s32 column);
 s32 gameGetMode(void);
@@ -88,7 +88,7 @@ void partnerMenuUpdateList(PartnerSelectMenu *menu)
     if (gameGetMode() == 0) {
         if (uiStateGetSecondFlag(&menu->list) != 0 || uiStateGetFirstFlag(&menu->list) != 0) {
             /* The cursor moved: show the partner now under it. */
-            menu->list.unk61 = 0;
+            menu->list.columnChanged = 0;
             menu->list.changed = 0;
             partnerMenuShowSelectedStatus(menu);
             s32 selectedSlot = menu->slots[menu->selected];

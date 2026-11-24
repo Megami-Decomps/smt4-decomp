@@ -196,8 +196,8 @@ void uniteCreate(void)
     uiSpriteSetKeyframe(&work->sprites.listOffset, 5, 0);
     uiSpriteStateInitFromSource(&work->sprites.unk02E0, 0x24, 0, &work->sprites.resources, 1, 1.0f);
     spriteStartAnimationByIndex(&work->sprites.unk02E0, 2);
-    uiSpriteStateInitFromSource(&work->sprites.unk036C, 0x24, 0, &work->sprites.resources, 1, 1.0f);
-    spriteStartAnimationByIndex(&work->sprites.unk036C, 3);
+    uiSpriteStateInitFromSource(&work->sprites.highlight, 0x24, 0, &work->sprites.resources, 1, 1.0f);
+    spriteStartAnimationByIndex(&work->sprites.highlight, 3);
 
     fileSlotLoad(0x24);
     fileSlotLoad(0x22);

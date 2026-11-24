@@ -22,7 +22,7 @@ WindowStatusResult FUN_003531dc(void *owner, DateTimeValue *output);
 s32 stringFormatUnbounded(char *buffer, const char *format, ...);
 void aocApplicationRecreatePrimaryRequest(AocMain *app);
 WindowStatusResult FUN_002341d4(AocMain *main);
-nn::Result FUN_0038c224(AocCatalogJob *job);
+nn::Result aocCatalogBuildContentRecords(AocCatalogJob *job);
 u32 FUN_003df36c(AocBufferRequest *request);
 u32 recordGetOptionalValue(AocBufferRequest *request);
 s32 nn_fnd_DateTime_GetDay(const DateTimeValue *dateTime); // declcheck: local (protos__code.h's generated prototype takes an undefined4, not the date)
@@ -99,7 +99,7 @@ void aocCatalogJobRun(AocCatalogJob *job)
     }
     job->today = nn_fnd_DateTime_DateToDays(nn_fnd_DateTime_GetYear(&now), nn_fnd_DateTime_GetMonth(&now),
                                             nn_fnd_DateTime_GetDay(&now));
-    nn::Result entries = FUN_0038c224(job);
+    nn::Result entries = aocCatalogBuildContentRecords(job);
     recordClearWideHandle(app->contentFile);
     if (nnResultIsSuccess(entries)) {
         jobSetResult(job, FUN_002341d4(app));

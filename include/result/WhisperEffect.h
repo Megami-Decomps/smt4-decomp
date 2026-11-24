@@ -72,14 +72,15 @@ struct WhisperLayerAnimation {
     s32 phaseFrame;
     s32 period;
 
+    /* Advances the phase by the rate (wrapping at 256), then the three frame counters. */
     void advancePhase()
     {
-        ++phaseFrame;
-        ++scaleFrame;
-        ++alphaFrame;
         phase += rate;
         if (phase > 256.0f)
             phase -= 256.0f;
+        ++phaseFrame;
+        ++scaleFrame;
+        ++alphaFrame;
     }
 };
 struct WhisperLineAnimation {

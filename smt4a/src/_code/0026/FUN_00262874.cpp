@@ -75,7 +75,7 @@ int __aeabi_memcpy4(...);
 int partyPanelHandleCursorEdgeInput(...);
 int scrollListSetSelectionTracked(...);
 int FUN_002c8550(...);
-int FUN_002cbca8(...);
+int partyPanelPreviewStatItem(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_002cf5bc(void);
 int FUN_0037e1b0(...);
 int slotPlacementAssignSlotPosition(...);
@@ -224,7 +224,7 @@ extern int FUN_002c7cb4(void);
 extern unsigned short partyPanelGetSelectedDemonId(void);
 extern unsigned char partyPanelIsTransitionDone(void);
 /* Supplied declaration required: partyPanelPlaceInitialCursors. */
-/* Supplied declaration required: FUN_002cbca8. */
+/* Supplied declaration required: partyPanelPreviewStatItem. */
 /* Supplied declaration required: partyPanelRefreshItemPreview. */
 /* Supplied declaration required: FUN_002cf5bc. */
 /* Supplied declaration required: sysMemClear. */
@@ -1150,7 +1150,7 @@ LAB_00263984:
             FUN_0023b45c(0);
             if (*(char *)(temp_v1 + 0x9b4) == '\t') {
               temp_v14 = gameGetSlotTable();
-              FUN_002cbca8((int)*(char *)(temp_v14 + temp_v22 + 0x1c9f),temp_v22,0);
+              partyPanelPreviewStatItem((int)*(char *)(temp_v14 + temp_v22 + 0x1c9f),temp_v22,0);
             }
             if (temp_v4 != temp_v22) {
               pair40Set(*(unsigned int *)(temp_v1 + temp_v4 * 4 + 0xa10),0);
@@ -1219,7 +1219,7 @@ LAB_00263984:
             if (*(char *)(temp_v1 + 0x9b4) != '\v') {
               FUN_0023b45c(0);
               if (*(char *)(temp_v1 + 0x9b4) == '\t') {
-                FUN_002cbca8(*(unsigned int *)(temp_v1 + temp_v4 * 8 + 0xa80),temp_v4,1);
+                partyPanelPreviewStatItem(*(unsigned int *)(temp_v1 + temp_v4 * 8 + 0xa80),temp_v4,1);
               }
               pair40Set(*(unsigned int *)(temp_v1 + temp_v22 * 4 + 0xa20),0);
             }

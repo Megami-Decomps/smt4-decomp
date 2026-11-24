@@ -6,4 +6,9 @@ extern "C" void asdMemFreeNonNull(void *memory);
 
 static __inline void aocRequestMemoryFree(void *memory) { asdMemFreeNonNull(memory); }
 
+/* The array allocator `new[]` of the AOC records calls in this game (without an owner hint). */
+extern "C" void *asdOperatorNewB(u32 size, void *owner);
+
+static __inline void *aocRecordMemoryAlloc(u32 bytes) { return asdOperatorNewB(bytes, NULL); }
+
 #endif

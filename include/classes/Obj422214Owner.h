@@ -5,23 +5,24 @@
 #include "nn/fnd/DateTime.h"
 #include <stddef.h>
 
-extern "C" void *asdOperatorNewE(u32 bytes, ...);
+#include "addon/AocRequestMemory.h"
 
 /* Nonpolymorphic owner of the concrete buffer window at offset 0x9bc. */
 struct Obj422214Owner {
     Obj422214Owner();
     ~Obj422214Owner();
-    /* The record arrays come from the engine's allocator (smt4a aocCatalogBuildItemRecords). */
-    static void *operator new[](u32 bytes) throw() { return asdOperatorNewE(bytes); }
+    /* The record arrays come from the engine's allocator (smt4a aocCatalogBuildItemRecords, smt4 aocCatalogBuildContentRecords). */
+    static void *operator new[](u32 bytes) throw() { return aocRecordMemoryAlloc(bytes); }
     /* 0x000 */ u8 header[0x80];
     /* 0x080 */ u8 directory[0x100];
     /* 0x180 */ u8 contents[0x800];
-    /* 0x980 */ u8 unk980[0x20];
+    /* 0x980 */ char valueText[0x20];   /* a numeric attribute (or the sale's text) as text; 0 sets flags[5] */
     /* 0x9A0 */ nn::fnd::DateTime modified;
-    /* 0x9A8 */ u16 unk9A8;
+    /* 0x9A8 */ u16 iconId;          /* the content icon archiveReadIcon reads, 0xFFFF for none */
     /* 0x9AA */ u16 contentId;  /* the id the AOC menu passes to its purchase and license requests */
     /* 0x9AC */ u8 flags[8];
-    /* 0x9B4 */ u8 unk9B4[8];
+    /* 0x9B4 */ u8 unk9B4[4];
+    /* 0x9B8 */ u32 blocks;          /* the content's size in blocks */
     /* 0x9BC */ Obj422214 buffers;
 };
 

@@ -39,4 +39,10 @@ typedef char CampCecRankingLayoutCheck[sizeof(CampCecRanking) == 0x274 && offset
     offsetof(CampCecRanking, players) == 0xC4 && offsetof(CampCecRanking, categories) == 0x1B4 &&
     offsetof(CampCecRanking, playerText) == 0x208 && offsetof(CampCecRanking, categoryText) == 0x258 ? 1 : -1];
 
+extern "C" {
+extern CampCecRanking *g_campCecRanking;
+s32 campCecRankingDrawPlayers(void);
+s32 campCecRankingDrawCategories(void);
+} /* extern "C" */
+
 #endif

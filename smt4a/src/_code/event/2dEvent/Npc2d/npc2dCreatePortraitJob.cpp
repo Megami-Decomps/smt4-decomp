@@ -9,7 +9,7 @@ void sysMemClear(void *, u32);
 void *FUN_00283498(u32);
 s32 eventIsSkipping(void);
 NpcPortraitResource *resourceCacheGetOrLoadModel(s32, s32, s32);
-s32 FUN_002897cc(u32);
+s32 npc2dPortraitUpdate(u32);
 void FUN_0034da3c(u32);
 extern const s8 DAT_0052f4f0[];
 
@@ -56,6 +56,6 @@ u32 npc2dCreatePortraitJob(u32 npcId, u32 option, s32 x, s32 y, f32 alpha)
     else
         work->screenRegion = 5;
     work->speed = 0.33f;
-    return asdProcessCreateSimple(DAT_0052f4f0, 4, 0, 0, FUN_002897cc, FUN_0034da3c, reinterpret_cast<u32>(work));
+    return asdProcessCreateSimple(DAT_0052f4f0, 4, 0, 0, npc2dPortraitUpdate, FUN_0034da3c, reinterpret_cast<u32>(work));
 }
 }

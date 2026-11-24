@@ -6,7 +6,7 @@ extern "C" {
 
 
 /* Starts the navigator in state 1: restarts its members and sets the timer to 30, the mode to 2, and stores the given values. */
-void uiNavigatorStart(u32 value, u8 option, u32 unused, u8 flagA, u8 flagB)
+void uiNavigatorStart(u32 value, u8 option, u32 unused, s8 flagA, s8 flagB)
 {
     InfoWindowA *navi;
     UiSpriteState *member;

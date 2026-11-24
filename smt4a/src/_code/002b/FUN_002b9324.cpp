@@ -14,7 +14,7 @@ s32 FUN_002b9324(void)
 {
     s32 status = 0;
     gameFlagsGetBlock();
-    if (g_gameState.unk0DC)
+    if (g_gameState.table2FCounterPending)
         return 4;
     for (u16 id = 100; id < 400; ++id) {
         if (partyEntryFlagsBit1(id)) {

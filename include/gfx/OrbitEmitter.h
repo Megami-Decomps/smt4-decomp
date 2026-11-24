@@ -1,6 +1,5 @@
-/* Apocalypse's two orbit emitters. They keep the particles the spiral emitters keep (gfx/SpiralEmitter.h)
- * and build their vectors in g_vectorScratch with the same inline operations. Only Apocalypse's units
- * include this.
+/* The orbit emitters. They keep the particles the spiral emitters keep (gfx/SpiralEmitter.h)
+ * and build their vectors in g_vectorScratch with the same inline operations.
  * - the orbit emitter (effOrbitEmitterUpdate): each particle circles the emitter's origin in its own randomly
  *   tilted plane, at a radius that grows or shrinks over its life, and falls under gravity;
  * - the axis orbit emitter (effAxisOrbitEmitterUpdate): each particle circles the emitter's vertical axis while it
@@ -31,14 +30,18 @@ struct OrbitEmitterDefinition {
     /* 0x00 */ Vector4 origin;
     /* 0x10 */ RotationQuaternion rotation;
     /* 0x20 */ s32 duration;        /* 0: the emitter loops */
-    /* 0x24 */ u8 unk24[0x48];
+    /* 0x24 */ u32 rate;            /* particles per frame */
+    /* 0x28 */ f32 randomness;      /* of the rate */
+    /* 0x2C */ u8 unk2C[0x40];
     /* 0x6C */ f32 scaleVariance;
     /* 0x70 */ u8 unk70[0x28];
     /* 0x98 */ f32 angleVariance;
     /* 0x9C */ u8 angleMode;        /* 1: random angle and spin direction, 2: no rotation */
     /* 0x9D */ u8 unk9D[0x1B];
     /* 0xB8 */ s32 lifetime;        /* frames a particle lives */
-    /* 0xBC */ u8 unkBC[0xC];
+    /* 0xBC */ u8 unkBC;
+    /* 0xBD */ u8 burstOnFirstFrame;
+    /* 0xBE */ u8 unkBE[0xA];
     /* 0xC8 */ f32 radius;
     /* 0xCC */ f32 radiusVariance;
     /* 0xD0 */ f32 endRadius;

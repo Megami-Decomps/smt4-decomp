@@ -43,8 +43,8 @@ void gridNavigationConfigure(GridNavigation *work, s32 count, s32 visibleRows, s
     colorSetRgba(&work->columns, 3, 4, 32, 32);
     if (alternateKeys != 0)
         objectSetRgba(&work->columns, 12, 13, 32, 32);
-    work->row = 0;
-    work->column = 0;
+    work->rowKeysHeld = 0;
+    work->columnKeysHeld = 0;
     rowWidgetSetMode(&work->rows, 1);
     rowWidgetSetMode(&work->columns, 1);
 }

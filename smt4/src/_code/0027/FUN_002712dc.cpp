@@ -24,14 +24,14 @@ extern "C" {
 
 void FUN_001fa8e4(void);
 void FUN_002c8ce4(void);
-void FUN_0027fde4(void);
+void lmapManholeStep(void);
 void FUN_002e8be0(void);
 void FUN_002e8fdc(void);
-void FUN_002e9b60(void);
+void lmapOverviewDescendStep(void);
 void lmapIntroSceneStep(void);
-void FUN_002ea500(void);
-void FUN_002d424c(void);
-void FUN_002d4874(void);
+void lmapOverviewJumpStep(void);
+void lmapOverviewDepartStep(void);
+void lmapOverviewClimbStep(void);
 void mapGimicRequestNearestOfKind(void);
 void mapFastModelCreate(f32 x, f32 y, f32 z, f32 heading);
 
@@ -321,7 +321,7 @@ void FUN_002712dc(void)
         lmapSceneUpdateRegions();
         return;
     case 7:
-        FUN_0027fde4();
+        lmapManholeStep();
         return;
     case 9:
         FUN_002e8be0();
@@ -330,19 +330,19 @@ void FUN_002712dc(void)
         FUN_002e8fdc();
         return;
     case 13:
-        FUN_002e9b60();
+        lmapOverviewDescendStep();
         return;
     case 15:
         lmapIntroSceneStep();
         return;
     case 17:
-        FUN_002ea500();
+        lmapOverviewJumpStep();
         return;
     case 19:
-        FUN_002d424c();
+        lmapOverviewDepartStep();
         return;
     case 21:
-        FUN_002d4874();
+        lmapOverviewClimbStep();
         return;
     case 23:
         switch (g_lmapScene->state) {
@@ -471,7 +471,7 @@ void FUN_002712dc(void)
             g_lmapScene->moveSpeed = 5.0f;
             g_mapCamera->values[0] = 0.0f;
             g_mapCamera->values[1] = 0.0f;
-            g_lmapScene->unk068 = 0.0f;
+            g_lmapScene->verticalSpeed = 0.0f;
             g_lmapScene->pose.position = g_lmapScene->pose.targetPosition;
             FUN_0020ffe8((OuterFUN_0020ffe8 *)g_lmapScene->playerModel, 80.0f, g_lmapScene->moveMode, 0.0f);
             lmapSceneNextState();
@@ -804,8 +804,8 @@ void FUN_002712dc(void)
         g_lmapScene->pose.targetHeading = g_gameState.overviewHeading;
         g_lmapScene->unk06C = 0;
         if (g_gameState.unk021 && !g_gameState.unk3CC &&
-            (g_lmapScene->unk068 <= -0.1f || g_lmapScene->unk068 >= 0.1f)) {
-            g_lmapScene->pose.targetPosition.y = previous.y - 2.0f - g_lmapScene->unk068;
+            (g_lmapScene->verticalSpeed <= -0.1f || g_lmapScene->verticalSpeed >= 0.1f)) {
+            g_lmapScene->pose.targetPosition.y = previous.y - 2.0f - g_lmapScene->verticalSpeed;
         }
         g_lmapScene->moveMode = 18;
         g_lmapScene->moveSpeed = 10.0f;
@@ -821,11 +821,11 @@ void FUN_002712dc(void)
         g_lmapScene->pose.previousPosition = previous;
         if (!g_gameState.unk3CC && g_gameState.unk021) {
             if (mapProjectPositionToGround(&g_lmapScene->pose.targetPosition, &g_lmapScene->pose.previousPosition)) {
-                g_lmapScene->unk068 = 0.0f;
+                g_lmapScene->verticalSpeed = 0.0f;
             } else {
-                g_lmapScene->unk068 += 2.0f;
-                if (g_lmapScene->unk068 > 20.0f) {
-                    g_lmapScene->unk068 = 20.0f;
+                g_lmapScene->verticalSpeed += 2.0f;
+                if (g_lmapScene->verticalSpeed > 20.0f) {
+                    g_lmapScene->verticalSpeed = 20.0f;
                 }
             }
         }

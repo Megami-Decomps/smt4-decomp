@@ -1,16 +1,11 @@
 #include "common.h"
 #include "gamedata/GameFlags.h"
+#include "gamedata/ProgressionUnlock.h"
 
 extern "C" {
 
-typedef struct FlagRecord {
-    /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ u16 flags[3];
-} FlagRecord;
-
 u32 scrGetArg(u32 index);
 s32 gameDataStatusFlagGet(u16 id);
-FlagRecord *FUN_003de92c(u16 id);
 s32 gameDataSetStatusFlag(u16 id, s32 state);
 
 
@@ -18,7 +13,7 @@ s32 gameDataSetStatusFlag(u16 id, s32 state);
 u32 FUN_0038b21c(void)
 {
     u16 id = scrGetArg(0);
-    FlagRecord *record;
+    const ProgressionUnlockRecord *record;
     s32 i;
 
     if (gameDataStatusFlagGet(id) == 1) {

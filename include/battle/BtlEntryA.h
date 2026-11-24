@@ -85,7 +85,7 @@ typedef struct BtlUnitDataA {
     /* 0x230 */ u32 history[6];     /* [0x394] keys handed back to the battle's accumulators with the unit */
     /* 0x248 */ s32 cursor;         /* [0x3AC] the newest history slot */
     /* 0x24C */ s32 total;          /* [0x3B0] */
-    /* 0x250 */ u8 unk250[0x40];
+    /* 0x250 */ u32 unk250[16];     /* [0x3B4] cleared word by word when the entry is reset */
     /* 0x290 */ s8 state;           /* [0x3F4] */
     /* 0x291 */ u8 unk291[3];
     /* 0x294 */ BtlUnitRecordA *record; /* [0x3F8] the unit record the combatant was built from */

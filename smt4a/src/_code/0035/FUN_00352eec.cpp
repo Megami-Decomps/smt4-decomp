@@ -1,6 +1,7 @@
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "gamedata/MapSaveBlockA.h"
+#include "gamedata/Table2FType1Entry.h"
 
 /* Data table 0x2F entries of the three types, as this loader reads them. */
 struct Table2FType0Entry {
@@ -9,16 +10,6 @@ struct Table2FType0Entry {
     /* 0x0C */ u16 unk0C;
     /* 0x0E */ u16 unk0E;
     /* 0x10 */ u16 rate;
-};
-
-struct Table2FType1Entry {
-    /* 0x00 */ u8 unk00[0xA];
-    /* 0x0A */ u16 level;
-    /* 0x0C */ u16 unk0C;
-    /* 0x0E */ u16 unk0E;
-    /* 0x10 */ u8 unk10[0x6];
-    /* 0x16 */ u16 rate;
-    /* 0x18 */ u32 unk18;
 };
 
 struct Table2FType2Entry {
@@ -33,7 +24,6 @@ extern "C" {
 
 s32 lmapGetSpawnIndex(void);
 Table2FType0Entry *dataTable2FType0GetEntry(u32 id);
-Table2FType1Entry *dataTable2FType1GetEntry(u32 id);
 Table2FType2Entry *dataTable2FType2GetEntry(u32 id);
 
 // Load the selected table 0x2F entry into the flag block; the level becomes -1 when it has none

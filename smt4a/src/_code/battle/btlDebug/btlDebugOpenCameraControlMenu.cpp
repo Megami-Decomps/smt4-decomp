@@ -34,7 +34,7 @@ void btlDebugOpenCameraControlMenu(BattleDebugPanelWork *work, const BattleDebug
     asdListBoxSetFloatItem(work->panelJob, 2, position.y + offset.y, -999, 999);
     asdListBoxSetFloatItem(work->panelJob, 3, position.z + offset.z, -999, 999);
     /* Camera angles use 256 units per turn; the editor shows degrees. */
-    f32 turns256 = g_btlCamera->basePose.angle + g_btlCamera->unk10;
+    f32 turns256 = g_btlCamera->basePose.angle + g_btlCamera->angleOffset;
     f32 degrees = (turns256 * 360.0f) / 256.0f;
     asdListBoxSetFloatItem(work->panelJob, 4, degrees, 0, 360);
     asdListBoxSetFloatItem(work->panelJob, 5, g_btlCamera->basePose.distance + g_btlCamera->unk0C, -90, 90);

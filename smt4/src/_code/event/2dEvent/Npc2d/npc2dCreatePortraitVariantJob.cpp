@@ -23,7 +23,7 @@ const NpcPortraitVariantRecord *aocContentGetIndexedRecord(const NpcTextureSourc
 s32 eventIsSkipping(void);
 s32 aocRunByName(AocSystem *system, s32 table, s32 node, s32 mode);
 void asdTMTexTablePrepareNodeImage(s32 table, s32 node);
-s32 FUN_001dfc64(u32 process);
+s32 npc2dPortraitUpdate(u32 process);
 void FUN_002db92c(u32 process);
 
 void npc2dCreatePortraitVariantJob(u32 npc, s32 position, u32 variant)
@@ -35,45 +35,45 @@ void npc2dCreatePortraitVariantJob(u32 npc, s32 position, u32 variant)
     asdDebugTrace(DAT_0040357c, 788);
     NpcTextureWork *work = (NpcTextureWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(NpcTextureWork), 1);
     memClear(work, sizeof(*work));
-    work->scale.x = 1.0f;
-    work->scale.y = 1.0f;
-    work->scale.z = 0.0f;
+    work->scale = 1.0f;
+    work->opacity = 1.0f;
+    work->fadeStep = 0.0f;
     work->state = 65;
     work->npcId = npc;
-    work->npc.lastImage = -1;
-    work->npcVariant.index = variant;
+    work->lastImage = -1;
+    work->variantIndex = variant;
     work->textureTable = 3;
-    work->npc.source = dataTable25FindById(npc);
-    work->textureNode = aocContentGetIndexedRecord(work->npc.source, work->npcVariant.index)->texture;
+    work->source = dataTable25FindById(npc);
+    work->textureNode = aocContentGetIndexedRecord(work->source, work->variantIndex)->texture;
     switch (position) {
     case 0:
         work->x = -20;
         work->rotation = -48.0f;
-        work->display.screenRegion = 3;
+        work->screenRegion = 3;
         break;
     case 1:
         work->x = 160;
         work->rotation = 48.0f;
-        work->display.screenRegion = 4;
+        work->screenRegion = 4;
         break;
     case 2:
         work->x = 72;
-        work->scale.z = 0.25f;
+        work->fadeStep = 0.25f;
         work->rotation = 0.0f;
-        work->scale.y = 0.0f;
-        work->display.screenRegion = 5;
+        work->opacity = 0.0f;
+        work->screenRegion = 5;
         break;
     }
     if (eventIsSkipping()) {
-        work->deferred = 1;
+        work->loadStep = 1;
     } else {
-        work->deferred = 0;
+        work->loadStep = 0;
         if (aocRunByName(g_aocSystem, work->textureTable, work->textureNode, 1))
             aocLoadTextureNode(reinterpret_cast<u32>(g_aocSystem), work->textureTable, work->textureNode, 0x10000);
         else
             asdTMTexTablePrepareNodeImage(work->textureTable, work->textureNode);
     }
-    AsdProcUpdateFunc update = FUN_001dfc64;
+    AsdProcUpdateFunc update = npc2dPortraitUpdate;
     AsdProcFunc end = FUN_002db92c;
     work->speed = 0.3f;
     asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403570), 2, 0, 0, update, end, reinterpret_cast<u32>(work));

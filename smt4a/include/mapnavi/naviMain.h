@@ -1,6 +1,11 @@
 #pragma once
 #include "common.h"
 
+enum {
+    PLAYER_FLAG_POISON = 5,
+    PLAYER_FLAG_SICK = 9,
+};
+
 extern "C" {
 
 u8 playerHasFlagBit(u32 bit);

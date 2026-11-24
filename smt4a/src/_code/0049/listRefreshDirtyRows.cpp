@@ -1,5 +1,6 @@
 #include "common.h"
 #include "code/Code002a.h"
+#include "classes/Obj536044.h"
 
 class ListRangeRenderer {
 public:
@@ -18,6 +19,7 @@ struct ListRange {
     /* 0x10 */ u8 body[1];
 };
 
+/* Obj536044's shop scene, seen through the fields this function reads. */
 struct ListRefreshState {
     /* 0x0000 */ u32 flags;
     /* 0x0004 */ u8 unk0004[4];
@@ -36,7 +38,6 @@ void uiDrawCompositeSpriteAtRectCorner(void *transition, s32 steps, s32 start, s
 s32 rangeGetMinimumLimit(ListRange *);
 s32 FUN_0031d174(ListRange *);
 u32 flaggedValueHolderGetTotal(ListRange *);
-void FUN_00497d20(ListRefreshState *, s32 row, s32 selected, u32 value);
 void size40Set(ListRangeRenderer *, u32 start, u32 selection);
 void FUN_004986b0(ListRefreshState *);
 void shopDrawEquipmentList(ListRefreshState *);
@@ -58,13 +59,13 @@ void listRefreshDirtyRows(ListRefreshState *state)
         s32 visible = rangeGetMinimumLimit(range);
         for (s32 row = 0; row < visible; ++row) {
             if (!selectedMode || FUN_0031d174(range) != row) {
-                FUN_00497d20(state, row + 1, 0, start + row);
+                shopDrawAppraisalRow((Obj536044 *)state, row + 1, 0, start + row);
             }
         }
         if (selectedMode && range->high > 0) {
             u32 value = flaggedValueHolderGetTotal(range);
             s32 row = FUN_0031d174(range);
-            FUN_00497d20(state, row + 1, 1, value);
+            shopDrawAppraisalRow((Obj536044 *)state, row + 1, 1, value);
         }
         s32 selection = FUN_0031d174(range);
         s32 first = resourceDispatchTaggedOperation(range);

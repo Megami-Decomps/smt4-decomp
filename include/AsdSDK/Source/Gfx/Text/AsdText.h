@@ -38,7 +38,8 @@ typedef struct AsdText {
     /* 0x1C */ u8 unk1C[0x18];
     /* 0x34 */ u32 unk34;       /* 0x402 when created */
     /* 0x38 */ u32 color;       /* default color with the low byte cleared */
-    /* 0x3C */ u8 unk3c[0x14];
+    /* 0x3C */ u8 unk3c[0x10];
+    /* 0x4C */ f32 width;       /* the laid-out text's width in pixels (the message window centres its speaker name by it) */
     /* 0x50 */ s32 unk50;       /* -1 when created */
     /* 0x54 */ u32 unk54;       /* nonzero once the text can be drawn */
     /* 0x58 */ f32 scale;

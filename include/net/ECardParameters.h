@@ -4,7 +4,7 @@
 
 #include "common.h"
 
-extern "C" s32 libc_strncmp(const char *first, const char *second, u32 length);
+#include "runtime/String.h"
 
 struct ECardParameter {
     const char *key;

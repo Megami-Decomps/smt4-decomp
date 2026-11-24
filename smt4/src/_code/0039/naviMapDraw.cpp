@@ -69,7 +69,7 @@ void FUN_0039edf0(NaviMapDrawView *screen);
 void eventRefreshVisibility(NaviMapDrawView *screen);
 void FUN_0039e56c(NaviMapDrawView *screen);
 void naviIconsUpdateScreenRects(NaviMapDrawView *screen);
-void FUN_0039d0d0(NaviMapDrawView *screen);
+void naviDrawIconsAndMarkers(NaviMapDrawView *screen);
 void naviDrawLocationMarkers(NaviMapDrawView *screen);
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 state); // declcheck: local (the shared declaration takes Apocalypse's RenderCtxA)
 void renderCtxPopState(RenderCtx *context, s32 stack); // declcheck: local (the shared declaration takes Apocalypse's RenderCtxA)
@@ -146,7 +146,7 @@ void naviMapDraw(NaviMapDrawView *screen)
             }
         }
     }
-    FUN_0039d0d0(screen);
+    naviDrawIconsAndMarkers(screen);
     naviDrawLocationMarkers(screen);
 
     if (NaviMain_GetPosX(navi) == NaviMain_GetCurrentMap(navi) && screen->map == screen->markerMap) {

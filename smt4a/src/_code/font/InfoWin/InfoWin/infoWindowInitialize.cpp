@@ -3,6 +3,7 @@
 #include "font/InfoWinA.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "code/Code0015_Smt4a.h"
 
 struct InfoWindowParameterDefaults {
     u32 primary[18];
@@ -22,8 +23,6 @@ extern "C" {
 void* asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 void sysMemClear(void* memory, u32 size);
 void FUN_00156478(void);
-void FUN_00155ca8(void);
-u32 taskCreateDraw(const char*, u32, u32, u32, void (*)(void), u32, u32, u32);
 void paramsClearPacket(UiResourceParameters* parameters);
 
 void* spriteHandleCreate(u32 flags);
@@ -39,8 +38,8 @@ void infoWindowInitialize(void)
     InfoWindowA* window = g_infoWin;
     sysMemClear(window, sizeof(InfoWindowA));
     window->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("InfoWin Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00156478), NULL, 0);
-    taskCreateDraw("InfoWin DrawUpLeft", 0x86, 0, 0, FUN_00155ca8, 0, 0, window->task);
-    taskCreateDraw("InfoWin DrawUpRight", 0xE2, 0, 0, FUN_00155ca8, 0, 0, window->task);
+    taskCreateDraw((const s8 *)"InfoWin DrawUpLeft", 0x86, 0, 0, infoWinDraw, NULL, 0, (void *)window->task);
+    taskCreateDraw((const s8 *)"InfoWin DrawUpRight", 0xE2, 0, 0, infoWinDraw, NULL, 0, (void *)window->task);
     window = g_infoWin;
     paramsClearPacket(&window->parameters);
     paramsInit(&window->parameters, g_infoWindowParameterDefaults.primary, sizeof(g_infoWindowParameterDefaults.primary),

@@ -165,6 +165,7 @@ review; the [matching guide](matching-guide.md) shows how to work inside them.
   `vstr s0, [r0, #N]`, a `mov r0, #0` stub, an SDK svc wrapper's `svc N`. A lone instruction like
   that in the middle of retail code is such a call: write the call. `build.py` and `fdiff` do the
   same replacement (the bodies come from the target objects; a NOP body is called, not inlined).
+  A conditional `bl` becomes the instruction with the call's condition (`bleq` -> `ldreq`).
   When retail schedules an unrelated instruction into the slot before that instruction (where a
   build that calls the getter has `nop {0}` and sets the register after it), the caller saw the
   getter's body: write the getter as a `static __inline` function in the unit (FUN_003a72a4's

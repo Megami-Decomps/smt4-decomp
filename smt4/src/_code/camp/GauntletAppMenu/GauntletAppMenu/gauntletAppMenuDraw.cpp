@@ -5,7 +5,6 @@
 extern "C" {
 
 int renderCtxResetColorScale(RenderCtx *context);
-int gauntletAppMenuDrawScreen(GauntletAppMenuWork *menu);
 
 extern GauntletAppMenuWork *g_gauntletAppMenu;
 

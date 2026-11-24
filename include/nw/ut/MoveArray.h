@@ -13,6 +13,15 @@ namespace ut {
 template <class T>
 class MoveArray {
 public:
+    ~MoveArray()
+    {
+        _RW::__rw_destroy(begin, end);
+        end = begin;
+        if (allocator != NULL && begin != NULL) {
+            allocator->release(begin);
+        }
+    }
+
     s32 size() const { return end - begin; }
     s32 capacity() const { return capacityFlags & 0x3fffffff; }
 

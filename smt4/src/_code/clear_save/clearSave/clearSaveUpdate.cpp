@@ -22,7 +22,7 @@ u32 messageMainGetChoiceResult(void);
 u32 messageTargetGetValue(void);
 void titleSetSlotValueState2(u32 index, u32 value);
 void buttonHelpSetText(const s8 *text, u32 style);
-void FUN_001c36d8(u8 *options);
+void clearSaveStartNewGame(u8 *options);
 void FUN_0030aa50(u8 arg);
 u32 jobWorkerPollAndFree(void);
 s32 FUN_00215a24(void);
@@ -150,7 +150,7 @@ s32 clearSaveUpdate(u32 job)
                 work->options[6] = 1;
                 break;
             }
-            FUN_001c36d8(work->options);
+            clearSaveStartNewGame(work->options);
             gameFlagSetValue(0x556, 1, 1);
             gameFlagSetValue(0x555, 1, 1);
             FUN_0030aa50(2);

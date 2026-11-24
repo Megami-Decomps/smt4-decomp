@@ -12,7 +12,6 @@ extern "C" {
 void* gameGetSlotTable(void);
 u32 btlItemComputeValues(u32 owner, u32 itemId, u32* first, u32* second);
 void pair40Set(PartyPanelWidget* widget, u32 first, u32 second);
-void FUN_002cbca8(u32 owner, s32 index, u32 grid);
 }
 
 /* Updates the item-effect values of the selected active-party or stock unit and its preview widget. */
@@ -34,7 +33,7 @@ extern "C" void partyPanelRefreshSelectedItemValues(void *selector, s32 gridSele
         }
         pair40Set(panel->characters[index], first, second);
         statusPreviewMpChange(first, second);
-        FUN_002cbca8(owner, index, 0);
+        partyPanelPreviewStatItem(owner, index, 0);
     } else {
         if (gridSelection) {
             if (panel->alternate) {
@@ -57,6 +56,6 @@ extern "C" void partyPanelRefreshSelectedItemValues(void *selector, s32 gridSele
         btlItemComputeValues(panel->entries[index].packedIndex, panel->previewItem, &first, &second);
         pair40Set(panel->demons[index], first, second);
         statusPreviewMpChange(first, second);
-        FUN_002cbca8(panel->entries[index].packedIndex, index, 1);
+        partyPanelPreviewStatItem(panel->entries[index].packedIndex, index, 1);
     }
 }

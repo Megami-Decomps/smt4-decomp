@@ -77,7 +77,7 @@ u32 gauntletAppMenuSetMode(GauntletAppMenuWork *menu, u32 mode)
     case 5:
         uiSpriteSelectAnim(&menu->list.sprites[3], 1);
         uiStoreTextureEntryCenter(&menu->list.sprites[3], 0x14, listCursorGetRowIfUnblocked(menu->list.controller) + 0x40E);
-        menu->list.sprites[3].unk18 = 0xA0;
+        menu->list.sprites[3].centerX = 0xA0;
         break;
     case 7:
         uiSpriteSetKeyframe(&menu->list.sprites[0], 4, 0);

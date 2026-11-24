@@ -28,12 +28,8 @@
 #include "ui/UiSpriteApi.h"
 
 extern "C" {
-extern CampCecRanking *g_campCecRanking;
-
 u32 spriteHandleCreate(u32 argument);
 s32 FUN_002c0240();
-int FUN_002bfd94(void);
-int FUN_00343e5c(void);
 void rt_aeabi_memclr(void *memory, u32 size);
 }
 
@@ -217,11 +213,11 @@ void campCecRankingCreate(void)
     CampCecRanking *ranking = g_campCecRanking;
     sysMemClear(ranking, sizeof(CampCecRanking));
     ranking->task = asdProcessCreateSimple((const s8 *)"CampCecRanking Calc", 3, 0, 0, (AsdProcUpdateFunc)FUN_002c0240, 0, 0);
-    taskCreateDraw((const s8 *)"CampCecRanking DrawUpLeft", 126, 0, 0, (AsdProcUpdateFunc)FUN_002bfd94, 0, 0,
+    taskCreateDraw((const s8 *)"CampCecRanking DrawUpLeft", 126, 0, 0, (AsdProcUpdateFunc)campCecRankingDrawPlayers, 0, 0,
                    (void *)ranking->task);
-    taskCreateDraw((const s8 *)"CampCecRanking DrawUpRight", 218, 0, 0, (AsdProcUpdateFunc)FUN_002bfd94, 0, 0,
+    taskCreateDraw((const s8 *)"CampCecRanking DrawUpRight", 218, 0, 0, (AsdProcUpdateFunc)campCecRankingDrawPlayers, 0, 0,
                    (void *)ranking->task);
-    taskCreateDraw((const s8 *)"CampCecRanking DrawDown", 234, 0, 0, (AsdProcUpdateFunc)FUN_00343e5c, 0, 0,
+    taskCreateDraw((const s8 *)"CampCecRanking DrawDown", 234, 0, 0, (AsdProcUpdateFunc)campCecRankingDrawCategories, 0, 0,
                    (void *)ranking->task);
     ranking->state = 0;
 

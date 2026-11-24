@@ -253,7 +253,7 @@ struct BtlCameraA {
         /* 0x000 */ BtlCameraVector3 position;
     };
     /* 0x00c */ f32 unk0C;
-    /* 0x010 */ f32 unk10;
+    /* 0x010 */ f32 angleOffset;     /* added to basePose.angle; 1.0e-5 while unset */
     /* 0x014 */ f32 unk14;
     /* 0x018 */ f32 unk18;
     union {
@@ -276,7 +276,9 @@ struct BtlCameraA {
         struct {
             /* 0x06C */ u8 unk06C[0x514];
             /* 0x580 */ BtlCameraVector3 position;
-            /* 0x58C */ u8 unk58C[0x24];
+            /* 0x58C */ u8 unk58C[0xC];
+            /* 0x598 */ BtlCameraVector3 direction; /* towards the point looked at */
+            /* 0x5A4 */ u8 unk5A4[0xC];
             /* 0x5B0 */ f32 projectionDepth; /* used to place effects on offset camera planes */
             /* 0x5B4 */ f32 angle;
             union {

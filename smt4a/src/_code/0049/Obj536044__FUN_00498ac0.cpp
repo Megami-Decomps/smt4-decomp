@@ -99,7 +99,7 @@ void Obj536044::FUN_00498ac0()
         entryDispatchUpdate(&appraisalShop(this)->animation, 2);
         entryDispatchUpdate(&appraisalShop(this)->animation, 0xC);
         s32 total = flaggedValueHolderGetTotal(appraisalShop(this)->flaggedValues);
-        screenShowMessage(appraisalShop(this)->messages[total * 3]);
+        screenShowMessage(appraisalShop(this)->records[total].id);
         if (inputConfirmPressed() != 0) {
             sendEvent100020E();
             obj04Finish();

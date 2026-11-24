@@ -1,6 +1,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlSideLimits.h"
 #include "battle/btlMain.h"
+#include "map/MapVector.h"
 
 struct BattleDirectionEntry {
     /* 0x00 */ u8 unk00[8];
@@ -20,7 +21,7 @@ struct BattleCameraAngle {
 extern "C" {
 extern BtlAuxA *g_btlAux;
 extern BattleCameraAngle *g_btlCamera;
-f32 btlApplyDirectionBucketEffect(BtlAuxA *, u32 kind, s32 x, s32 y);
+MapVector btlApplyDirectionBucketEffect(BtlAuxA *, u32 kind, s32 x, s32 y);
 void btlQueueActionMessage(u32 unused, u32 handle, u32 flags, s32 a, s32 b, s32 direction, s32 c);
 
 // Choose one of five facing buckets using fixed or camera-relative angle thresholds.
@@ -30,7 +31,7 @@ void btlApplyDirectionBucket(u32 unused, BattleDirectionEntry *entry)
     s32 x = entry->x;
     s32 y = entry->y;
     u32 flags = entry->flags;
-    f32 angle = btlApplyDirectionBucketEffect(g_btlAux, kind, x, y);
+    f32 angle = btlApplyDirectionBucketEffect(g_btlAux, kind, x, y).x;
     btlGetMainState();
     s32 direction;
     switch (kind) {

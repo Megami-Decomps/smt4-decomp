@@ -38,7 +38,7 @@ enum {
 extern "C" {
 
 void destroyObj0055c6e4(void *package);
-void FUN_002b4b88(void *array, void (*destructor)(void *));
+void __aeabi_vec_delete(void *array, void (*destructor)(void *));
 u32 jyoucyuGetTableEntry(s32 index);
 s32 asdFsIsSdCardDetected(void);
 RequestParameters aocFinishHandleOperation(AocSystem *system);
@@ -95,7 +95,7 @@ static __inline u32 flagBit(u32 flags, u32 bit)
 static __inline void aocSystemDeletePackages(AocSystem *system)
 {
     if (system->packages != NULL) {
-        FUN_002b4b88(system->packages, destroyObj0055c6e4);
+        __aeabi_vec_delete(system->packages, destroyObj0055c6e4);
         system->packages = NULL;
     }
 }

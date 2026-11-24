@@ -50,6 +50,10 @@ typedef struct BtlEffectGlobals {
         struct { const char *name, *otherName; } reserved;
     };
     /* 0x18 */ void *data;         /* heap block */
+    /* 0x1C */ u32 unk1C;
+    /* 0x20 */ u64 entryMask;      /* entry flags whose effects play centred, below the enemy line */
+    /* 0x28 */ u64 stateMaskA;     /* battle state flags that keep those effects at the lower height */
+    /* 0x30 */ u64 stateMaskB;     /* (the other one) */
 } BtlEffectGlobals;
 
 /* Work area of the job that owns the effects (Shin Megami Tensei IV). */

@@ -1,5 +1,6 @@
 #include "shard/Shard003D.h"
 #include "gamedata/GamePlayerData.h"
+#include "code/Code003d_Smt4a.h"
 
 extern "C" {
 extern void demonBuildAffinitySlots(u16 *table, PlayerDataA *player);

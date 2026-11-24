@@ -36,7 +36,7 @@ void btlCameraApplyEditorValue(CameraDebugMenu *menu, u32 unused, u32 index)
     case 4: {
         f32 degrees = *asdListBoxGetFloatValuePtr(menu->list, index) * 256.0f;
         f32 turns = degrees / 360.0f;
-        g_btlCamera->unk10 = turns - g_btlCamera->basePose.angle;
+        g_btlCamera->angleOffset = turns - g_btlCamera->basePose.angle;
         return;
     }
     case 5:

@@ -116,7 +116,10 @@ struct GameStateMapBlock {
     /* 0x46 */ s16 contentId;      /* the content entry whose enemy motion mapEnemyStartScriptedMove starts */
     /* 0x48 */ s32 actionState;
     /* 0x4C */ s8 actionOption;
-    /* 0x4D */ u8 unk4D[4];
+    /* 0x4D */ s8 unk4D;               /* 0x4D-0x50: prompts whose answer mapMainResumeField handles on the next frame */
+    /* 0x4E */ s8 unk4E;
+    /* 0x4F */ s8 unk4F;
+    /* 0x50 */ s8 unk50;
     /* 0x51 */ s8 bgResetPending;      /* set when the common background must be rebuilt */
     /* 0x52 */ u8 unk52[2];
     /* 0x54 */ f32 unk54;
@@ -140,7 +143,8 @@ typedef struct GameState {
     /* 0x000 */ s32 mapId;              /* the current map: >= 100 are field/dungeon maps */
     /* 0x004 */ s32 areaId;             /* the area within the map */
     /* 0x008 */ u32 currentObjectId;
-    /* 0x00C */ u8 unk00C[8];
+    /* 0x00C */ u32 unk00C;            /* 0x0C, 0x10 and currentObjectId: the navigator's arguments (navigationSetArguments) */
+    /* 0x010 */ u32 unk010;
     /* 0x014 */ s32 resumeMode;         /* 1-3: what the resume point records */
     /* 0x018 */ s8 inputBlocked;        /* nonzero while the map ignores input (indoors, busy, paused) */
     /* 0x019 */ u8 unk019[3];

@@ -58,7 +58,7 @@ AsdText *asdTextCreate(u32 flags);
 void asdTextSetValueFlagsAndScalar(AsdText *text, u32 value, u32 flags, f32 scalar);
 void positionStateSet(AsdText *text, u32 first, u32 second, f32 scalar);
 s32 FUN_00114474(u32 handle);
-s32 FUN_00116a54(u32 handle);
+s32 messageWindowDraw(u32 handle);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
 void drawParameterBlockClear(UiResourceParameters *parameters);
@@ -88,9 +88,9 @@ MessageWindow *messageWindowCreate(void)
     window->taskValue = -2;
     window->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("MESS_C"), 2, 0, 0, FUN_00114474, NULL, reinterpret_cast<u32>(window));
     taskCreateDraw(reinterpret_cast<const s8 *>("MESS_U LEFT"), 0x81, 0, 0,
-        FUN_00116a54, NULL, reinterpret_cast<u32>(window), reinterpret_cast<void *>(window->job));
+        messageWindowDraw, NULL, reinterpret_cast<u32>(window), reinterpret_cast<void *>(window->job));
     taskCreateDraw(reinterpret_cast<const s8 *>("MESS_U RIGHT"), 0xDF, 0, 0,
-        FUN_00116a54, NULL, reinterpret_cast<u32>(window), reinterpret_cast<void *>(window->job));
+        messageWindowDraw, NULL, reinterpret_cast<u32>(window), reinterpret_cast<void *>(window->job));
     drawParameterBlockClear(&window->parameters);
     paramsInit(&window->parameters, sMessagePacketA, sizeof(sMessagePacketA), sMessagePacketB, sizeof(sMessagePacketB),
                sMessagePacketC, sizeof(sMessagePacketC), NULL, 0, sMessagePacketD, sizeof(sMessagePacketD));

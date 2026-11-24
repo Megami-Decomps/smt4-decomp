@@ -2417,12 +2417,12 @@
     {
       "address": "0x108c5c",
       "file": "AsdSDK/Source/Gfx/Model/AsdModel",
-      "function": "FUN_00108c5c",
+      "function": "asdModelCreateSceneTrees",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_00108c5c.o",
+      "object": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdModelCreateSceneTrees.o",
       "size": 1688,
-      "source": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_00108c5c.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_00108c5c.o",
+      "source": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdModelCreateSceneTrees.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdModelCreateSceneTrees.o",
       "thumb": false
     },
     {
@@ -4529,12 +4529,12 @@
     },
     {
       "address": "0x116a54",
-      "function": "FUN_00116a54",
+      "function": "messageWindowDraw",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_00116a54.o",
+      "object": "build/obj/_code/0011/messageWindowDraw.o",
       "size": 2944,
-      "source": "src/_code/0011/FUN_00116a54.cpp",
-      "target": "orig/target/_code/0011/FUN_00116a54.o",
+      "source": "src/_code/0011/messageWindowDraw.cpp",
+      "target": "orig/target/_code/0011/messageWindowDraw.o",
       "thumb": false
     },
     {
@@ -7099,12 +7099,12 @@
     },
     {
       "address": "0x124c60",
-      "function": "FUN_00124c60",
+      "function": "asdTextDrawAtInt",
       "module": "_code",
-      "object": "build/obj/_code/0012/FUN_00124c60.o",
+      "object": "build/obj/_code/0012/asdTextDrawAtInt.o",
       "size": 184,
-      "source": "src/_code/0012/FUN_00124c60.cpp",
-      "target": "orig/target/_code/0012/FUN_00124c60.o",
+      "source": "src/_code/0012/asdTextDrawAtInt.cpp",
+      "target": "orig/target/_code/0012/asdTextDrawAtInt.o",
       "thumb": false
     },
     {
@@ -15620,12 +15620,12 @@
     },
     {
       "address": "0x1525cc",
-      "function": "ARM_common_memset4_6",
+      "function": "__ARM_common_memset4_6",
       "module": "_code",
-      "object": "build/obj/_code/0015/ARM_common_memset4_6.o",
+      "object": "build/obj/_code/0015/__ARM_common_memset4_6.o",
       "size": 24,
-      "source": "src/_code/0015/ARM_common_memset4_6.cpp",
-      "target": "orig/target/_code/0015/ARM_common_memset4_6.o",
+      "source": "src/_code/0015/__ARM_common_memset4_6.cpp",
+      "target": "orig/target/_code/0015/__ARM_common_memset4_6.o",
       "thumb": false
     },
     {
@@ -23368,12 +23368,12 @@
     },
     {
       "address": "0x1c36d8",
-      "function": "FUN_001c36d8",
+      "function": "clearSaveStartNewGame",
       "module": "_code",
-      "object": "build/obj/_code/001c/FUN_001c36d8.o",
+      "object": "build/obj/_code/001c/clearSaveStartNewGame.o",
       "size": 1912,
-      "source": "src/_code/001c/FUN_001c36d8.cpp",
-      "target": "orig/target/_code/001c/FUN_001c36d8.o",
+      "source": "src/_code/001c/clearSaveStartNewGame.cpp",
+      "target": "orig/target/_code/001c/clearSaveStartNewGame.o",
       "thumb": false
     },
     {
@@ -24871,12 +24871,12 @@
     },
     {
       "address": "0x1dfc64",
-      "function": "FUN_001dfc64",
+      "function": "npc2dPortraitUpdate",
       "module": "_code",
-      "object": "build/obj/_code/001d/FUN_001dfc64.o",
+      "object": "build/obj/_code/001d/npc2dPortraitUpdate.o",
       "size": 1104,
-      "source": "src/_code/001d/FUN_001dfc64.cpp",
-      "target": "orig/target/_code/001d/FUN_001dfc64.o",
+      "source": "src/_code/001d/npc2dPortraitUpdate.cpp",
+      "target": "orig/target/_code/001d/npc2dPortraitUpdate.o",
       "thumb": false
     },
     {
@@ -27131,12 +27131,12 @@
     },
     {
       "address": "0x1f9f64",
-      "function": "FUN_001f9f64",
+      "function": "mapEnemyDrawWorldMarkers",
       "module": "_code",
-      "object": "build/obj/_code/001f/FUN_001f9f64.o",
+      "object": "build/obj/_code/001f/mapEnemyDrawWorldMarkers.o",
       "size": 1304,
-      "source": "src/_code/001f/FUN_001f9f64.cpp",
-      "target": "orig/target/_code/001f/FUN_001f9f64.o",
+      "source": "src/_code/001f/mapEnemyDrawWorldMarkers.cpp",
+      "target": "orig/target/_code/001f/mapEnemyDrawWorldMarkers.o",
       "thumb": false
     },
     {
@@ -29438,12 +29438,12 @@
     },
     {
       "address": "0x20f6c8",
-      "function": "FUN_0020f6c8",
+      "function": "mapIfDrawFloatingMarker",
       "module": "_code",
-      "object": "build/obj/_code/0020/FUN_0020f6c8.o",
+      "object": "build/obj/_code/0020/mapIfDrawFloatingMarker.o",
       "size": 1988,
-      "source": "src/_code/0020/FUN_0020f6c8.cpp",
-      "target": "orig/target/_code/0020/FUN_0020f6c8.o",
+      "source": "src/_code/0020/mapIfDrawFloatingMarker.cpp",
+      "target": "orig/target/_code/0020/mapIfDrawFloatingMarker.o",
       "thumb": false
     },
     {
@@ -30609,12 +30609,12 @@
     },
     {
       "address": "0x218c50",
-      "function": "FUN_00218c50",
+      "function": "spriteRowListDraw",
       "module": "_code",
-      "object": "build/obj/_code/0021/FUN_00218c50.o",
+      "object": "build/obj/_code/0021/spriteRowListDraw.o",
       "size": 1172,
-      "source": "src/_code/0021/FUN_00218c50.cpp",
-      "target": "orig/target/_code/0021/FUN_00218c50.o",
+      "source": "src/_code/0021/spriteRowListDraw.cpp",
+      "target": "orig/target/_code/0021/spriteRowListDraw.o",
       "thumb": false
     },
     {
@@ -44470,12 +44470,12 @@
     },
     {
       "address": "0x26cba4",
-      "function": "FUN_0026cba4",
+      "function": "partyPanelPreviewStatItem",
       "module": "_code",
-      "object": "build/obj/_code/0026/FUN_0026cba4.o",
+      "object": "build/obj/_code/0026/partyPanelPreviewStatItem.o",
       "size": 616,
-      "source": "src/_code/0026/FUN_0026cba4.cpp",
-      "target": "orig/target/_code/0026/FUN_0026cba4.o",
+      "source": "src/_code/0026/partyPanelPreviewStatItem.cpp",
+      "target": "orig/target/_code/0026/partyPanelPreviewStatItem.o",
       "thumb": false
     },
     {
@@ -46750,12 +46750,12 @@
     },
     {
       "address": "0x27fde4",
-      "function": "FUN_0027fde4",
+      "function": "lmapManholeStep",
       "module": "_code",
-      "object": "build/obj/_code/0027/FUN_0027fde4.o",
+      "object": "build/obj/_code/0027/lmapManholeStep.o",
       "size": 1408,
-      "source": "src/_code/0027/FUN_0027fde4.cpp",
-      "target": "orig/target/_code/0027/FUN_0027fde4.o",
+      "source": "src/_code/0027/lmapManholeStep.cpp",
+      "target": "orig/target/_code/0027/lmapManholeStep.o",
       "thumb": false
     },
     {
@@ -54233,12 +54233,12 @@
     {
       "address": "0x2a9834",
       "file": "AsdSDK/Source/Gfx/Model/AsdModel",
-      "function": "FUN_002a9834",
+      "function": "asdMdlNodeBuildScene",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_002a9834.o",
+      "object": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdMdlNodeBuildScene.o",
       "size": 1888,
-      "source": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_002a9834.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_002a9834.o",
+      "source": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdMdlNodeBuildScene.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/asdMdlNodeBuildScene.o",
       "thumb": false
     },
     {
@@ -56161,12 +56161,12 @@
     },
     {
       "address": "0x2b4b88",
-      "function": "FUN_002b4b88",
+      "function": "__aeabi_vec_delete",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002b4b88.o",
+      "object": "build/obj/_code/002b/__aeabi_vec_delete.o",
       "size": 12,
-      "source": "src/_code/002b/FUN_002b4b88.cpp",
-      "target": "orig/target/_code/002b/FUN_002b4b88.o",
+      "source": "src/_code/002b/__aeabi_vec_delete.cpp",
+      "target": "orig/target/_code/002b/__aeabi_vec_delete.o",
       "thumb": true
     },
     {
@@ -63681,22 +63681,22 @@
     },
     {
       "address": "0x2d424c",
-      "function": "FUN_002d424c",
+      "function": "lmapOverviewDepartStep",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002d424c.o",
+      "object": "build/obj/_code/002d/lmapOverviewDepartStep.o",
       "size": 1548,
-      "source": "src/_code/002d/FUN_002d424c.cpp",
-      "target": "orig/target/_code/002d/FUN_002d424c.o",
+      "source": "src/_code/002d/lmapOverviewDepartStep.cpp",
+      "target": "orig/target/_code/002d/lmapOverviewDepartStep.o",
       "thumb": false
     },
     {
       "address": "0x2d4874",
-      "function": "FUN_002d4874",
+      "function": "lmapOverviewClimbStep",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002d4874.o",
+      "object": "build/obj/_code/002d/lmapOverviewClimbStep.o",
       "size": 1492,
-      "source": "src/_code/002d/FUN_002d4874.cpp",
-      "target": "orig/target/_code/002d/FUN_002d4874.o",
+      "source": "src/_code/002d/lmapOverviewClimbStep.cpp",
+      "target": "orig/target/_code/002d/lmapOverviewClimbStep.o",
       "thumb": false
     },
     {
@@ -63995,12 +63995,12 @@
     {
       "address": "0x2d5a08",
       "file": "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem",
-      "function": "FUN_002d5a08",
+      "function": "asdGxRenderTargetCreate",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Sys/Gx/AsdGxRenderSystem/FUN_002d5a08.o",
+      "object": "build/obj/_code/AsdSDK/Source/Sys/Gx/AsdGxRenderSystem/asdGxRenderTargetCreate.o",
       "size": 1040,
-      "source": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxRenderSystem/FUN_002d5a08.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxRenderSystem/FUN_002d5a08.o",
+      "source": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxRenderSystem/asdGxRenderTargetCreate.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxRenderSystem/asdGxRenderTargetCreate.o",
       "thumb": false
     },
     {
@@ -67283,22 +67283,22 @@
     },
     {
       "address": "0x2e5c8c",
-      "function": "FUN_002e5c8c",
+      "function": "effOrbitEmitterUpdate",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002e5c8c.o",
+      "object": "build/obj/_code/002e/effOrbitEmitterUpdate.o",
       "size": 2340,
-      "source": "src/_code/002e/FUN_002e5c8c.cpp",
-      "target": "orig/target/_code/002e/FUN_002e5c8c.o",
+      "source": "src/_code/002e/effOrbitEmitterUpdate.cpp",
+      "target": "orig/target/_code/002e/effOrbitEmitterUpdate.o",
       "thumb": false
     },
     {
       "address": "0x2e65b0",
-      "function": "FUN_002e65b0",
+      "function": "effHelixEmitterUpdate",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002e65b0.o",
+      "object": "build/obj/_code/002e/effHelixEmitterUpdate.o",
       "size": 2492,
-      "source": "src/_code/002e/FUN_002e65b0.cpp",
-      "target": "orig/target/_code/002e/FUN_002e65b0.o",
+      "source": "src/_code/002e/effHelixEmitterUpdate.cpp",
+      "target": "orig/target/_code/002e/effHelixEmitterUpdate.o",
       "thumb": false
     },
     {
@@ -67619,12 +67619,12 @@
     },
     {
       "address": "0x2e9b60",
-      "function": "FUN_002e9b60",
+      "function": "lmapOverviewDescendStep",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002e9b60.o",
+      "object": "build/obj/_code/002e/lmapOverviewDescendStep.o",
       "size": 1492,
-      "source": "src/_code/002e/FUN_002e9b60.cpp",
-      "target": "orig/target/_code/002e/FUN_002e9b60.o",
+      "source": "src/_code/002e/lmapOverviewDescendStep.cpp",
+      "target": "orig/target/_code/002e/lmapOverviewDescendStep.o",
       "thumb": false
     },
     {
@@ -67639,12 +67639,12 @@
     },
     {
       "address": "0x2ea500",
-      "function": "FUN_002ea500",
+      "function": "lmapOverviewJumpStep",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002ea500.o",
+      "object": "build/obj/_code/002e/lmapOverviewJumpStep.o",
       "size": 1844,
-      "source": "src/_code/002e/FUN_002ea500.cpp",
-      "target": "orig/target/_code/002e/FUN_002ea500.o",
+      "source": "src/_code/002e/lmapOverviewJumpStep.cpp",
+      "target": "orig/target/_code/002e/lmapOverviewJumpStep.o",
       "thumb": false
     },
     {
@@ -76236,12 +76236,12 @@
     },
     {
       "address": "0x31d54c",
-      "function": "FUN_0031d54c",
+      "function": "mapMainResumeField",
       "module": "_code",
-      "object": "build/obj/_code/0031/FUN_0031d54c.o",
+      "object": "build/obj/_code/0031/mapMainResumeField.o",
       "size": 1372,
-      "source": "src/_code/0031/FUN_0031d54c.cpp",
-      "target": "orig/target/_code/0031/FUN_0031d54c.o",
+      "source": "src/_code/0031/mapMainResumeField.cpp",
+      "target": "orig/target/_code/0031/mapMainResumeField.o",
       "thumb": false
     },
     {
@@ -79698,12 +79698,12 @@
     },
     {
       "address": "0x338790",
-      "function": "FUN_00338790",
+      "function": "btlTurnEndApplyRegenSkills",
       "module": "_code",
-      "object": "build/obj/_code/0033/FUN_00338790.o",
+      "object": "build/obj/_code/0033/btlTurnEndApplyRegenSkills.o",
       "size": 1092,
-      "source": "src/_code/0033/FUN_00338790.cpp",
-      "target": "orig/target/_code/0033/FUN_00338790.o",
+      "source": "src/_code/0033/btlTurnEndApplyRegenSkills.cpp",
+      "target": "orig/target/_code/0033/btlTurnEndApplyRegenSkills.o",
       "thumb": false
     },
     {
@@ -96020,12 +96020,12 @@
     },
     {
       "address": "0x38c224",
-      "function": "FUN_0038c224",
+      "function": "aocCatalogBuildContentRecords",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_0038c224.o",
+      "object": "build/obj/_code/0038/aocCatalogBuildContentRecords.o",
       "size": 2480,
-      "source": "src/_code/0038/FUN_0038c224.cpp",
-      "target": "orig/target/_code/0038/FUN_0038c224.o",
+      "source": "src/_code/0038/aocCatalogBuildContentRecords.cpp",
+      "target": "orig/target/_code/0038/aocCatalogBuildContentRecords.o",
       "thumb": false
     },
     {
@@ -96130,12 +96130,12 @@
     },
     {
       "address": "0x38d598",
-      "function": "FUN_0038d598",
+      "function": "aocCatalogBuildItemRecords",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_0038d598.o",
+      "object": "build/obj/_code/0038/aocCatalogBuildItemRecords.o",
       "size": 1712,
-      "source": "src/_code/0038/FUN_0038d598.cpp",
-      "target": "orig/target/_code/0038/FUN_0038d598.o",
+      "source": "src/_code/0038/aocCatalogBuildItemRecords.cpp",
+      "target": "orig/target/_code/0038/aocCatalogBuildItemRecords.o",
       "thumb": false
     },
     {
@@ -98082,12 +98082,12 @@
     },
     {
       "address": "0x39d0d0",
-      "function": "FUN_0039d0d0",
+      "function": "naviDrawIconsAndMarkers",
       "module": "_code",
-      "object": "build/obj/_code/0039/FUN_0039d0d0.o",
+      "object": "build/obj/_code/0039/naviDrawIconsAndMarkers.o",
       "size": 1072,
-      "source": "src/_code/0039/FUN_0039d0d0.cpp",
-      "target": "orig/target/_code/0039/FUN_0039d0d0.o",
+      "source": "src/_code/0039/naviDrawIconsAndMarkers.cpp",
+      "target": "orig/target/_code/0039/naviDrawIconsAndMarkers.o",
       "thumb": false
     },
     {

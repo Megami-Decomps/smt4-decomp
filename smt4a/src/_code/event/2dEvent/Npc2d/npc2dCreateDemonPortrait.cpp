@@ -10,7 +10,7 @@ extern "C" {
 void sysMemClear(void *memory, u32 size);
 s32 eventIsSkipping();
 NpcPortraitResource *resourceCacheGetOrLoadModel(s32 portraitId, s32 mode, s32 enabled);
-s32 FUN_002897cc(u32 handle);
+s32 npc2dPortraitUpdate(u32 handle);
 void FUN_0034da3c(u32 handle);
 extern const s8 DAT_0052f4f0[]; // "EVE_2dTex"
 
@@ -55,6 +55,6 @@ u32 npc2dCreateDemonPortrait(u32 id, u32 option, s32 x, s32 y, f32 alpha)
         work->screenRegion = 5;
     }
     work->speed = 0.33f;
-    return asdProcessCreateSimple(DAT_0052f4f0, 4, 0, 0, FUN_002897cc, FUN_0034da3c, (u32)work);
+    return asdProcessCreateSimple(DAT_0052f4f0, 4, 0, 0, npc2dPortraitUpdate, FUN_0034da3c, (u32)work);
 }
 }

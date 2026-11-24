@@ -41,14 +41,14 @@ typedef char EnemySpritePositionOffsetsA[
     offsetof(EnemySpriteImageViewA, height) == 0x18 ? 1 : -1];
 
 extern "C" {
-extern const f32 DAT_00527244;
+extern const f32 g_enemySpriteVerticalBaseline;
 extern f32 g_spriteDrawYOffset;
 
 // Derive the centered screen-space origin for an enemy frame or its replacement image.
 void enemySpriteDeriveOrigin(const EnemySpritePositionViewA *draw, BattleVector3 *position, f32 scale)
 {
     const EnemySpriteFrameViewA *frame = (const EnemySpriteFrameViewA *)draw->frameOwner->data;
-    f32 baseY = (f32)frame->anchorY + DAT_00527244 - (f32)frame->offsetY;
+    f32 baseY = (f32)frame->anchorY + g_enemySpriteVerticalBaseline - (f32)frame->offsetY;
     s32 frameTop = frame->originY;
     u16 frameHeight = frame->height;
     f32 width;

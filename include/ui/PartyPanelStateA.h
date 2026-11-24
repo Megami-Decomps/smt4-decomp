@@ -88,7 +88,7 @@ typedef struct PartyPanelStateA {
     /* 0x1078 */ u8 unk1078[4];
     /* 0x107C */ UniteWorkA *unite;                    /* the fusion work */
     /* 0x1080 */ PlayerDataA previewPlayer;                  /* a copy of the player data */
-    /* 0x10E4 */ u8 previewUnit[0x12C];               /* a copy of a slot record */
+    /* 0x10E4 */ SlotRecordA previewUnit;             /* a copy of a slot record */
     /* 0x1210 */ u8 disabled;
     /* 0x1211 */ u8 unk1211[3];
     /* 0x1214 */ u32 unk1214;
@@ -126,6 +126,9 @@ extern "C" {
 #endif
 
 extern PartyPanelStateA *g_partyPanel;
+
+/* Previews the panel's stat item on the unit in `slot` (the protagonist: party index 0, not the stock). */
+void partyPanelPreviewStatItem(s32 slot, s32 index, u32 stock);
 
 #ifdef __cplusplus
 }

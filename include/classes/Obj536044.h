@@ -7,6 +7,7 @@
 #include "shop/EquipmentMenuPage.h"
 #include "shop/ShopPanel.h"
 #include "shop/ShopSlotNeighbors.h"
+#include "shard/S2Scene3a.h"
 #include "shard/W5_W5Match2_PlainData.h"
 #include "shard/W6_W6Match7_NumericStepper.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
@@ -20,6 +21,7 @@ extern "C" void shopEnterQuantitySelection(Obj536044 *shop, s32 nextState);
 extern "C" void shopTrackSelectedItemPreview(Obj536044 *scene);
 extern "C" void shopDrawSelectedItem(Obj536044 *shop);
 extern "C" void FUN_00494d68(Obj536044 *shop, s32 row, s32 selected, const EquipmentMenuItem *entry);
+extern "C" void shopDrawAppraisalRow(Obj536044 *shop, s32 row, s32 selected, s32 index);
 
 /* A scene whose step functions are listed in the table at 0x536044 (named after it until its real
  * name is known): the table holds member-function pointers, not a vtable. */
@@ -93,7 +95,7 @@ protected:
     /* 0x18 */ u8 restricted;           /* slots 0 and 3 take their restricted neighbours, as they do until flag 0x410 is set */
     /* 0x19 */ u8 unk19[3];
     /* 0x1C */ s32 kind;                /* which shop this is; its sale has its own flag (statsTestFlag) */
-    /* 0x20 */ u8 unk20;
+    /* 0x20 */ u8 kindTenFrame;         /* an appraisal row whose second item is of kind 10 gets its own frame */
     /* 0x21 */ u8 onSale;               /* the shop greets with its sale script ("shop_in_sale") */
     /* 0x22 */ u8 previewing;           /* the selected item's preview is up */
     /* 0x23 */ u8 previewReady;         /* the equipment preview model has been requested */
@@ -125,9 +127,10 @@ protected:
     /* 0xB60 */ EquipmentMenuCursor slotInfo[9];
     /* 0xF74 */ EquipmentMenuPage lists[9];
     /* 0x9F86 */ u8 unk9F86[2];
-    /* 0x9F88 */ u8 flaggedValues[0x76];    /* the appraisal list's cursor */
-    /* 0x9FFE */ u16 messages[3];           /* the appraisal records follow: 6 bytes each, the message id first */
-    /* 0xA004 */ u8 unkA004[0xBFFC];
+    /* 0x9F88 */ u8 flaggedValues[0x74];    /* the appraisal list's cursor */
+    /* 0x9FFC */ Scene3aTransactionRecord records[0x2000];  /* the appraisal list's rows */
+    /* 0x15FFC */ u16 recordCount;
+    /* 0x15FFE */ u8 unk15FFE[2];
     /* 0x16000 */ u32 panel;
     /* 0x16004 */ s32 previewEnabled;       /* the selected item is shown on the character */
     /* 0x16008 */ u32 previewedId;          /* the item shown on the character */
@@ -149,6 +152,7 @@ protected:
     friend void shopTrackSelectedItemPreview(Obj536044 *scene);
     friend void shopDrawSelectedItem(Obj536044 *shop);
     friend void FUN_00494d68(Obj536044 *shop, s32 row, s32 selected, const EquipmentMenuItem *entry);
+    friend void shopDrawAppraisalRow(Obj536044 *shop, s32 row, s32 selected, s32 index);
     friend struct Obj536044LayoutCheck;
 };
 
@@ -174,6 +178,8 @@ struct Obj536044LayoutCheck {
     char animation[offsetof(Obj536044, animation) == 0x3CC ? 1 : -1];
     char cursorSprite[offsetof(Obj536044, animation.sprites[0].finished) == 0x476 ? 1 : -1];
     char flaggedValues[offsetof(Obj536044, flaggedValues) == 0x9F88 ? 1 : -1];
+    char records[offsetof(Obj536044, records) == 0x9FFC ? 1 : -1];
+    char recordCount[offsetof(Obj536044, recordCount) == 0x15FFC ? 1 : -1];
     char panel[offsetof(Obj536044, panel) == 0x16000 ? 1 : -1];
     char resource[offsetof(Obj536044, resource) == 0x16028 ? 1 : -1];
     char size[sizeof(Obj536044) == 0x1604C ? 1 : -1];

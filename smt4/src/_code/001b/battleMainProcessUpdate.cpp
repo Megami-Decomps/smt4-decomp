@@ -184,7 +184,7 @@ void soundChannelStopAll(u32 channels);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void *__aeabi_memcpy(void *destination, const void *source, u32 size); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void *saveGetUnlockFlagBlock();
-void FUN_00338790(BattleTaskContext *work);
+void btlTurnEndApplyRegenSkills(BattleTaskContext *work);
 void sequenceRequestClearDeferred();
 void FUN_00208be8();
 s32 sequenceRequestIsDeferred();
@@ -349,7 +349,7 @@ static inline void completeBattleTask(BattleTaskContext *work)
         restoreBattleTaskData();
     if ((work->flags2 & 4) && work->result == 2)
         restoreBattleTaskData();
-    FUN_00338790(work);
+    btlTurnEndApplyRegenSkills(work);
     if ((work->flags & 0x40000) && (work->result == 2 || work->result == 4))
         work->result = 13;
     else if (work->result == 3)

@@ -130,6 +130,57 @@ typedef char BounceEmitterOffsets[sizeof(BounceMotion) == 0x40 &&
     offsetof(BounceEmitterDefinition, lifetime) == 0xB8 && offsetof(BounceEmitterDefinition, spread) == 0xC8 &&
     offsetof(BounceEmitterDefinition, floorY) == 0xF0 && offsetof(BounceEmitterDefinition, bounceDecay) == 0xFC ? 1 : -1];
 
+/* The motion of one particle of IV's helix emitter (smt4 effHelixEmitterUpdate, 0x40 bytes): it circles the emitter's axis
+ * at `radius` while it rises at `speed`. Outside the emitter's space the particle keeps the origin and rotation the
+ * emitter had when it was emitted. */
+struct HelixMotion {
+    /* 0x00 */ f32 origin[3];
+    /* 0x0C */ RotationQuaternion rotation;
+    /* 0x1C */ f32 height;          /* along the axis */
+    /* 0x20 */ f32 radius;
+    /* 0x24 */ f32 radiusStep;
+    /* 0x28 */ f32 phase;           /* radians, as emitted */
+    /* 0x2C */ f32 phaseStep;
+    /* 0x30 */ f32 speed;           /* along the axis; gravity is taken off the height every frame */
+    /* 0x34 */ f32 scale;
+    /* 0x38 */ f32 angleOffset;
+    /* 0x3C */ f32 angleScale;
+};
+
+/* The helix emitter's definition. */
+struct HelixEmitterDefinition {
+    /* 0x00 */ Vector4 origin;
+    /* 0x10 */ RotationQuaternion rotation;
+    /* 0x20 */ s32 duration;        /* 0: the emitter loops */
+    /* 0x24 */ u32 rate;            /* particles a frame */
+    /* 0x28 */ f32 randomness;      /* of the rate */
+    /* 0x2C */ u8 unk2C[0x40];
+    /* 0x6C */ f32 scaleVariance;
+    /* 0x70 */ u8 unk70[0x28];
+    /* 0x98 */ f32 angleVariance;
+    /* 0x9C */ u8 angleMode;        /* 1: random angle and spin direction, 2: no rotation */
+    /* 0x9D */ u8 unk9D[0x1B];
+    /* 0xB8 */ s32 lifetime;        /* frames a particle lives */
+    /* 0xBC */ u8 unkBC;
+    /* 0xBD */ u8 burstOnFirstFrame;
+    /* 0xBE */ u8 unkBE[0xA];
+    /* 0xC8 */ f32 spread;          /* the greatest starting height */
+    /* 0xCC */ f32 radius;
+    /* 0xD0 */ f32 radiusVariance;
+    /* 0xD4 */ f32 endRadius;
+    /* 0xD8 */ f32 endRadiusVariance;
+    /* 0xDC */ f32 phaseStep;
+    /* 0xE0 */ f32 phaseStepVariance;
+    /* 0xE4 */ f32 speed;
+    /* 0xE8 */ f32 speedVariance;
+    /* 0xEC */ f32 gravity;
+    /* 0xF0 */ f32 phaseAcceleration;
+};
+typedef char HelixEmitterOffsets[sizeof(HelixMotion) == 0x40 && offsetof(HelixMotion, height) == 0x1C &&
+    offsetof(HelixEmitterDefinition, scaleVariance) == 0x6C && offsetof(HelixEmitterDefinition, angleMode) == 0x9C &&
+    offsetof(HelixEmitterDefinition, lifetime) == 0xB8 && offsetof(HelixEmitterDefinition, spread) == 0xC8 &&
+    offsetof(HelixEmitterDefinition, phaseAcceleration) == 0xF0 ? 1 : -1];
+
 extern "C" {
 extern const Vector4 DAT_005c1ea0;      /* the spiral emitter's local "up" axis */
 extern const Vector4 DAT_005c1e80;      /* the swing emitter's (effSwingEmitterUpdate) */

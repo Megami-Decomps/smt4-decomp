@@ -91,8 +91,8 @@ typedef struct MapSaveBlockA {
     /* 0x0F54 */ MapMarkerSlot markers[16];
     /* 0x1094 */ s16 progressedItem;      /* the quest item whose count a gain advanced */
     /* 0x1096 */ s16 completedItem;       /* the quest item whose count a gain completed */
-    /* 0x1098 */ u16 secondCompletedItem;
-    /* 0x109A */ u16 secondProgressedItem;
+    /* 0x1098 */ s16 secondCompletedItem;
+    /* 0x109A */ s16 secondProgressedItem;
     /* 0x109C */ u32 fadeActive;
     /* 0x10A0 */ f32 fadeElapsed;
     /* 0x10A4 */ u32 unk10A4;
@@ -153,6 +153,8 @@ typedef char MapSaveBlockALayoutCheck[offsetof(MapSaveBlockA, savePoint) == 0x28
     offsetof(MapSaveBlockA, maze.width) == 0xE04 && offsetof(MapSaveBlockA, slotCount) == 0xE17 &&
     offsetof(MapSaveBlockA, placeStates) == 0xE48 && offsetof(MapSaveBlockA, timers) == 0xE94 &&
     offsetof(MapSaveBlockA, markers) == 0xF54 && offsetof(MapSaveBlockA, progressedItem) == 0x1094 &&
+    offsetof(MapSaveBlockA, completedItem) == 0x1096 && offsetof(MapSaveBlockA, secondCompletedItem) == 0x1098 &&
+    offsetof(MapSaveBlockA, secondProgressedItem) == 0x109A &&
     offsetof(MapSaveBlockA, fadeActive) == 0x109C && offsetof(MapSaveBlockA, bits14A8) == 0x14A8 &&
     offsetof(MapSaveBlockA, overrideEnabled) == 0x150C && offsetof(MapSaveBlockA, currentNavi) == 0x158C &&
     offsetof(MapSaveBlockA, naviSlots) == 0x1590 && offsetof(MapSaveBlockA, sceneResult) == 0x15CC &&

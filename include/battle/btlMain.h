@@ -68,7 +68,9 @@ typedef struct BtlMainState {
             /* 0x006C */ u8 unk006C[0x14];
             /* 0x0080 */ s8 firstBonus;
             /* 0x0081 */ s8 secondBonus;
-            /* 0x0082 */ u8 unk0082[0x42];
+            /* 0x0082 */ u8 unk0082[6];
+            /* 0x0088 */ s32 result;      /* the battle's outcome (the main process tests 2, 3 and 4) */
+            /* 0x008C */ u8 unk008C[0x38];
             /* 0x00C4 */ s32 selectionIndex;
             /* 0x00C8 */ u8 unk00C8[0x90];
             /* 0x0158 */ u32 selectedIds[1];

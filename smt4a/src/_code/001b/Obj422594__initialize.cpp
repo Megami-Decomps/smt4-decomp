@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail reuses r1 for source+16 and r0 for the mode constant. */
 #include "classes/Obj422594.h"
-extern "C" void ARM_common_memset4_6(void *destination, u32 value);
+extern "C" void __ARM_common_memset4_6(void *destination, u32 value); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 struct Obj422594Source {
     u32 unk00;
@@ -37,5 +37,5 @@ void Obj422594::initialize(const void *source)
         } while (i < region.touchCount);
     }
     region.touchCount = 0;
-    ARM_common_memset4_6(&region.left, -1);
+    __ARM_common_memset4_6(&region.left, -1);
 }

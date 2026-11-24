@@ -1,221 +1,120 @@
-#include "gfx/SpritePartDraw.h"
-/* NON_MATCHING: the shared identity is now the native MTX44::Identity() (inlined guard like retail); the translation/scale/rotation temporaries still group VFP stores differently and change saved-register allocation (373 vs 378 rows). */
-#include "common.h"
-#include "nw/math/MTX44.h"
+/* NON_MATCHING: 152 lines (shape 184); the same calls, branches, constants and matrix stores as retail. What differs:
+ * - the frame is 228 bytes (retail 204): the in-scene branch's three vectors (centre, scale, position) leave 24
+ *   bytes of slots this build does not overlap with the four QuadVector temporaries, so those land at other offsets;
+ * - scale.x and scale.y are in s18/s17 (retail s17/s18), and the in-scene position loads depth before y in retail. */
+#include "ui/UiSpriteState.h"
+#include "nw/math/MTX44Transform.h"
 #include "shard/TextureDrawCall.h"
-#include "shard/W5_W5Match2_PlainData.h"
+#include "shard/W6_W6Match7_QuadVectors.h"
+#include "gfx/SpritePartDraw.h"
 #include "camp/RenderCtxTitle.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" {
+using nw::math::MTX44;
+using nw::math::VEC3Value;
 
-struct Vector4 {
-    explicit Vector4(f32 value) : x(value), y(value), z(value), w(value) {}
-    float x, y, z, w;
+enum {
+    SPRITE_DRAW_FLAGS = 2,
+    SPRITE_DRAW_IN_SCENE = 0x2000
 };
 
-struct EffectInstance {
-    u32 resource;       // 0x00
-    s32 primaryIndex;    // 0x04
-    s32 secondaryIndex;  // 0x08
-    s32 positionX;       // 0x0c: signed 20.12
-    s32 positionY;       // 0x10: signed 20.12
-    unsigned char reserved14[4];  // 0x14
-    s16 originX;         // 0x18
-    s16 originY;         // 0x1a
-    s16 originZ;         // 0x1c
-    unsigned char reserved1e[2];  // 0x1e
-    float speed;                 // 0x20
-    unsigned char reserved24[4];  // 0x24
-    float scaleX;                // 0x28
-    float scaleY;                // 0x2c
-    float rotation;              // 0x30
-    float horizontalOffset;      // 0x34
-    s16 drawParameter;   // 0x38
-    s16 scaleMode;       // 0x3a
-    u8 useOrigin;       // 0x3c
-    u8 spatialMode;     // 0x3d
-    unsigned char reserved3e[2];  // 0x3e
-    float uniformScale;          // 0x40
-    unsigned char reserved44[65]; // 0x44
-    u8 enabled;         // 0x85
-};
-
-struct TitleScene;
+/* 128/pi: the binary angle steps (256 a turn) of a radian. */
+#define RADIANS_TO_ANGLE 40.743663787841796875f
 
 extern "C" {
+void mathMatrixBuildRotationXyz(MTX44 *out, f32 x, f32 y, f32 z);
+void cameraSetViewMatrix(RenderCtx *context, const MTX44 *matrix);
+void renderCtxResetColorScale(RenderCtx *context);
 
-void mtx44Copy(Matrix44* destination, const Matrix44* source);
-void nn_math_ARMv6_MTX44MultAsm(
-    Matrix44* destination, const Matrix44* left, const Matrix44* right);
-void mathMatrixBuildRotationXyz(Matrix44* destination, float x, float y, float z);
-void efctSetSpeed(float speed);
-void cameraSetViewMatrix(RenderCtx *scene, const Matrix44* matrix);
-
-
-void quadSetOrderedVectors(
-    const Vector4 &first, const Vector4 &second,
-    const Vector4 &third, const Vector4 &fourth,
-    s32 argument4, s32 argument5);
-void renderCtxApplyTransforms(RenderCtx *scene);
-void renderCtxResetColorScale(RenderCtx *scene);
-}
-
-namespace {
-
-static __inline void setIdentity(Matrix44 *matrix)
+/* Draws the sprite's image through a view matrix built from its position, centre, scale and rotation: on the
+ * screen, or (inScene) at its depth in the scene, scaled by sceneScale. */
+void effectRenderTransformedInstance(UiSpriteState *sprite, f32 parallax)
 {
-    matrix->values[0] = 1.0f;
-    matrix->values[1] = 0.0f;
-    matrix->values[2] = 0.0f;
-    matrix->values[3] = 0.0f;
-    matrix->values[4] = 0.0f;
-    matrix->values[5] = 1.0f;
-    matrix->values[6] = 0.0f;
-    matrix->values[7] = 0.0f;
-    matrix->values[8] = 0.0f;
-    matrix->values[9] = 0.0f;
-    matrix->values[10] = 1.0f;
-    matrix->values[11] = 0.0f;
-    matrix->values[12] = 0.0f;
-    matrix->values[13] = 0.0f;
-    matrix->values[14] = 0.0f;
-    matrix->values[15] = 1.0f;
-}
-
-static __inline void setTranslation(Matrix44 *matrix, f32 x, f32 y, f32 z)
-{
-    setIdentity(matrix);
-    matrix->values[3] = x;
-    matrix->values[7] = y;
-    matrix->values[11] = z;
-}
-
-static __inline void setScale(Matrix44 *matrix, f32 x, f32 y, f32 z)
-{
-    setIdentity(matrix);
-    matrix->values[0] = x;
-    matrix->values[5] = y;
-    matrix->values[10] = z;
-}
-
-} // namespace
-
-extern "C" void effectRenderTransformedInstance(EffectInstance* effect, float horizontalOffset)
-{
-    if (effect == NULL)
+    if (sprite == NULL)
         return;
-    if (effect->enabled == 0)
+    if (sprite->updated == 0)
         return;
-    if (effect->primaryIndex < 0 && effect->secondaryIndex < 0)
+    if (sprite->image < 0 && sprite->secondaryImage < 0)
         return;
 
-    effect->horizontalOffset = horizontalOffset;
+    sprite->parallax = parallax;
 
-    Matrix44 view;
-    Matrix44 transform;
-
-    mtx44Copy(&view, reinterpret_cast<const Matrix44*>(&nw::math::MTX44::Identity()));
-    mtx44Copy(&transform, reinterpret_cast<const Matrix44*>(&nw::math::MTX44::Identity()));
-
-    float scaleX = 1.0f;
-    float scaleY = 1.0f;
     bool scaled = false;
+    bool rotated = false;
+    MTX44 view;
+    MTX44 transform;
+    mtx44Copy(&view, &MTX44::Identity());
+    mtx44Copy(&transform, &MTX44::Identity());
 
-    efctSetSpeed(effect->speed);
+    VEC3Value scale(1.0f, 1.0f, 1.0f);
 
-    const bool rotated = effect->rotation != 0.0f;
-    const float requestedScaleX = effect->scaleX;
-    if (requestedScaleX != 1.0f ||
-        effect->scaleY != 1.0f) {
-        if (effect->scaleMode == 1) {
-            scaleX = requestedScaleX;
-            scaleY = 1.0f;
+    efctSetSpeed(sprite->alpha);
+
+    if (sprite->rotation != 0.0f)
+        rotated = true;
+    if (sprite->scale[1] != 1.0f || sprite->scale[2] != 1.0f) {
+        if (sprite->scaleMode == 1) {
+            scale.x = sprite->scale[1];
+            scale.y = 1.0f;
         } else {
-            scaleX = effect->scaleMode == 2 ? 1.0f : requestedScaleX;
-            scaleY = effect->scaleY;
+            scale.x = sprite->scaleMode == 2 ? 1.0f : sprite->scale[1];
+            scale.y = sprite->scale[2];
         }
         scaled = true;
     }
 
-    // Exact IEEE754 value from literal 0x4222f983.
-    const float rotationFactor = 40.743663787841796875f;
-    u32 drawFlags;
-
-    if (effect->spatialMode != 0) {
-        drawFlags = 0x2002;
-
-        if (effect->useOrigin != 0) {
-            setTranslation(&transform, 
-                static_cast<float>(-static_cast<s32>(effect->originX)),
-                static_cast<float>(-static_cast<s32>(effect->originY)),
-                0.0f);
-            nn_math_ARMv6_MTX44MultAsm(&view, &view, &transform);
+    u32 flags;
+    if (sprite->inScene != 0) {
+        flags = SPRITE_DRAW_IN_SCENE | SPRITE_DRAW_FLAGS;
+        if (sprite->active != 0) {
+            VEC3Value centre((f32)-sprite->centerX, (f32)-sprite->centerY, 0.0f);
+            nw::math::MTX44Translate(&transform, &centre);
+            nw::math::MTX44Mult(&view, &view, &transform);
         }
-
-        const float uniform = effect->uniformScale;
-        setScale(&transform, 
-            scaleX * uniform, scaleY * uniform, 1.0f * uniform);
-        nn_math_ARMv6_MTX44MultAsm(&view, &view, &transform);
-
+        scale.x *= sprite->sceneScale;
+        scale.y *= sprite->sceneScale;
+        scale.z *= sprite->sceneScale;
+        nw::math::MTX44Scale(&transform, &scale);
+        nw::math::MTX44Mult(&view, &view, &transform);
         if (rotated) {
-            mathMatrixBuildRotationXyz(
-                &transform, 0.0f, 0.0f, effect->rotation * rotationFactor);
-            nn_math_ARMv6_MTX44MultAsm(&view, &view, &transform);
+            mathMatrixBuildRotationXyz(&transform, 0.0f, 0.0f, sprite->rotation * RADIANS_TO_ANGLE);
+            nw::math::MTX44Mult(&view, &view, &transform);
         }
-
-        const s32 x = effect->originX + (effect->positionX >> 12);
-        const s32 y = effect->originY + (effect->positionY >> 12);
-        setTranslation(&transform, 
-            static_cast<float>(x) + effect->horizontalOffset,
-            static_cast<float>(-y),
-            static_cast<float>(effect->originZ));
-        nn_math_ARMv6_MTX44MultAsm(&view, &view, &transform);
+        s32 x = sprite->centerX + (sprite->x >> 12);
+        s32 y = sprite->centerY + (sprite->y >> 12);
+        VEC3Value position((f32)x + sprite->parallax, (f32)-y, (f32)sprite->depth);
+        nw::math::MTX44Translate(&transform, &position);
+        nw::math::MTX44Mult(&view, &view, &transform);
     } else {
-        drawFlags = 2;
-
-        const s32 x = effect->originX + (effect->positionX >> 12);
-        const s32 y = effect->originY + (effect->positionY >> 12);
-        setTranslation(&transform, 
-            static_cast<float>(x) + effect->horizontalOffset,
-            static_cast<float>(y), 0.0f);
-        nn_math_ARMv6_MTX44MultAsm(&view, &view, &transform);
-
+        flags = SPRITE_DRAW_FLAGS;
+        s32 x = sprite->centerX + (sprite->x >> 12);
+        s32 y = sprite->centerY + (sprite->y >> 12);
+        VEC3Value position((f32)x + sprite->parallax, (f32)y, 0.0f);
+        nw::math::MTX44Translate(&transform, &position);
+        nw::math::MTX44Mult(&view, &view, &transform);
         if (rotated) {
-            mathMatrixBuildRotationXyz(
-                &transform, 0.0f, 0.0f, effect->rotation * rotationFactor);
-            nn_math_ARMv6_MTX44MultAsm(&view, &view, &transform);
+            mathMatrixBuildRotationXyz(&transform, 0.0f, 0.0f, sprite->rotation * RADIANS_TO_ANGLE);
+            nw::math::MTX44Mult(&view, &view, &transform);
         }
-
         if (scaled) {
-            setScale(&transform, scaleX, scaleY, 1.0f);
-            nn_math_ARMv6_MTX44MultAsm(&view, &view, &transform);
+            nw::math::MTX44Scale(&transform, &scale);
+            nw::math::MTX44Mult(&view, &view, &transform);
         }
-
-        if (effect->useOrigin != 0) {
-            setTranslation(&transform, 
-                static_cast<float>(-static_cast<s32>(effect->originX)),
-                static_cast<float>(-static_cast<s32>(effect->originY)),
-                0.0f);
-            nn_math_ARMv6_MTX44MultAsm(&view, &view, &transform);
+        if (sprite->active != 0) {
+            VEC3Value centre((f32)-sprite->centerX, (f32)-sprite->centerY, 0.0f);
+            nw::math::MTX44Translate(&transform, &centre);
+            nw::math::MTX44Mult(&view, &view, &transform);
         }
     }
 
     cameraSetViewMatrix(g_titleScene, &view);
-
-    const s32 secondaryIndex = effect->secondaryIndex;
-    const s32 parameter = effect->drawParameter;
-    if (secondaryIndex >= 0) {
-        texDrawCompositeSprite(
-            drawFlags, effect->resource, secondaryIndex, 0, 0, parameter);
+    if (sprite->secondaryImage >= 0) {
+        texDrawCompositeSprite(flags, sprite->textureTable, sprite->secondaryImage, 0, 0, sprite->id);
     } else {
-        texDrawTableEntryAtStoredOrigin(
-            drawFlags, effect->resource, effect->primaryIndex, 0, 0, parameter);
+        texDrawTableEntryAtStoredOrigin(flags, sprite->textureTable, sprite->image, 0, 0, sprite->id);
     }
-
     efctSetSpeed(1.0f);
-
-    quadSetOrderedVectors(Vector4(1.0f), Vector4(1.0f), Vector4(1.0f), Vector4(1.0f), 0, 1);
-
+    quadSetOrderedVectors(QuadVector(), QuadVector(), QuadVector(), QuadVector(), 0, 1);
     renderCtxApplyTransforms(g_titleScene);
     renderCtxResetColorScale(g_titleScene);
 }

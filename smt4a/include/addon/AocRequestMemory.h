@@ -6,4 +6,9 @@ extern "C" void asdOperatorDelete(void *memory);
 
 static __inline void aocRequestMemoryFree(void *memory) { asdOperatorDelete(memory); }
 
+/* The array allocator `new[]` of the AOC records calls in this game. */
+extern "C" void *asdOperatorNewE(u32 bytes, ...);
+
+static __inline void *aocRecordMemoryAlloc(u32 bytes) { return asdOperatorNewE(bytes); }
+
 #endif

@@ -4,16 +4,6 @@
 #include "gamedata/EquipmentUpgradeState.h"
 #include "shard/ItemStackLimit.h"
 
-/* The points an equipment upgrade of one kind can still add: hit points (cap 999) and up to three
- * stats (cap 99), laid out like the bonuses already applied. */
-struct UpgradeLimits {
-    s16 hp;        /* 0x00 */
-    u8 unk02[6];
-    s16 statA;     /* 0x08 */
-    s16 statB;     /* 0x0a */
-    s16 statC;     /* 0x0c */
-};
-
 extern "C" {
 s32 equipmentIsFullyUpgraded(void);
 void __ARM_common_memcpy4_5(EquipmentUpgradeModifiers *extras, const EquipmentUpgradeModifiers *source);

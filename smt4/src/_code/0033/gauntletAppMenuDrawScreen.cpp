@@ -1,292 +1,177 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `gauntletAppMenuDrawScreen` (_code @ 0x33149c, 0xa00 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include <stdio.h>
-#include "romwright_types.h"
+/* NON_MATCHING: the frame size, scroll loop and draw order follow retail. The prologue schedules
+ * the sprite address early, the pressed-badge arm is laid out differently, and argument moves differ. */
+#include "camp/GauntletAppMenu/GauntletAppMenu.h"
+#include "camp/RenderCtxTitle.h"
+#include "code/Code0029.h"
+#include "code/Code002a_VariantA.h"
+#include "code/Code002e.h"
+#include "gamedata/DataTableAccess_Smt4.h"
+#include "gamedata/GameDataAccess.h"
+#include "runtime/Stdio.h"
 #include "shard/TextureDrawCall.h"
-#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/AnimatedMessage.h"
+#include "ui/UiSpriteApi.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
-
-int dataTable0BGetValueById(...);
-int dataTable0BFindById(...);
-int appCheckPurchaseRequirements(void);
-int uiDrawListScrollBar(...);
-int gxSetMirroredClippedScissor(...);
-int fadeObjectResetIfActive(...);
-int FUN_002b6b8c(...);
-int FUN_002bdf94(...);
-int drawSetColorFromRGBA8(...);
-int textDrawString(...);
-int gxResetColorQuadToWhite(void);
-int texDrawCompositeSprite(...);
-int efctSetSpeed(void);
-int VectorSignedToFloat(...);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp88; /* 0x88: local_88 */
-    unsigned int sp8C; /* 0x8c: local_8c */
-    unsigned int sp98; /* 0x98: local_98 */
-    unsigned int sp9C; /* 0x9c: local_9c */
-    unsigned int spA0; /* 0xa0: local_a0 */
-    unsigned int spA4; /* 0xa4: local_a4 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-} param_1_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: dataTable0BGetValueById. */
-/* Supplied declaration required: dataTable0BFindById. */
-/* Supplied declaration required: appCheckPurchaseRequirements. */
-/* Supplied declaration required: uiDrawListScrollBar. */
-extern int flagBitIsSet(unsigned int);
-extern unsigned int gameSaveGetPoints(void);
-/* Supplied declaration required: gxSetMirroredClippedScissor. */
-/* Supplied declaration required: fadeObjectResetIfActive. */
-extern int uiListGetVisibleCount(int);
-extern int ifTouchGetSelectionModeForRegion(int);
-extern int listCursorGetRowIfUnblocked(int);
-extern int resourceRunOperationIfUnblocked(int);
-/* Supplied declaration required: FUN_002b6b8c. */
-/* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: gxResetColorQuadToWhite. */
-extern int vec2GetYInt(int);
-extern int vec2GetXInt(int);
-/* Supplied declaration required: texDrawCompositeSprite. */
-/* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-
-
-void gauntletAppMenuDrawScreen(int param_1)
-
-{
-/* irregular: irregular input(s): in_fpscr; 17 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int *piVar11;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int in_fpscr;
-  unsigned int temp_v12;
-  unsigned char temp_v13 [84];
-  
-  temp_v0 = vec2GetXInt(param_1 + 0x2d8);
-  temp_v1 = vec2GetYInt(param_1 + 0x2d8);
-  temp_v11 = 0;
-  temp_v12 = 0;
-  texDrawCompositeSprite(2,0x1d,9,temp_v0,temp_v1,0x65);
-  texDrawTableEntryAtStoredOrigin(2,0x1d,0x57c,temp_v0,temp_v1,0x6a);
-  texDrawTableEntryAtStoredOrigin(2,0x1d,0x57d,temp_v0,temp_v1,0x6a);
-  texDrawTableEntryAtStoredOrigin(2,0x1d,0x57e,temp_v0,temp_v1,0x6a);
-  texDrawTableEntryAtStoredOrigin(2,0x1d,0x57f,temp_v0,temp_v1,0x6a);
-  temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x583));
-  temp_v3 = gameSaveGetPoints();
-  sprintf((char *)temp_v13,"%u",temp_v3);
-  FUN_002bdf94(0,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,1,4,0x6a,temp_v13);
-  temp_v9 = 0;
-  temp_v2 = uiListGetVisibleCount(param_1 + 0x10);
-  if (0 < temp_v2) {
-    do {
-      if ((*(int *)(param_1 + 8) != 2 && *(int *)(param_1 + 8) != 3) ||
-         (temp_v2 = listCursorGetRowIfUnblocked(param_1 + 0x10), temp_v2 != temp_v9)) {
-        temp_v2 = resourceRunOperationIfUnblocked(param_1 + 0x10);
-        temp_v10 = *(unsigned int *)(param_1 + (temp_v2 + temp_v9) * 4 + 0x74);
-        temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,temp_v9 + 0x40e));
-        temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x58f));
-        FUN_002b6b8c(temp_v10 & 0xffff,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v0
-                     ,(int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v1,0x6a);
-        temp_v4 = flagBitIsSet(temp_v10);
-        if (temp_v4 != 0) {
-          temp_v11 = 0x8400ff;
-          temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x595));
-          texDrawCompositeSprite(2,0x1d,8,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v0,
-                       (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v1,0x6a);
-        }
-        else {
-          texDrawTableEntryAtStoredOrigin(2,0x1d,0x58b,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,
-                       0x6a);
-          texDrawTableEntryAtStoredOrigin(2,0x1d,0x58c,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,
-                       0x6a);
-          texDrawTableEntryAtStoredOrigin(2,0x1d,0x58d,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,
-                       0x6a);
-          temp_v5 = temp_v10;
-          appCheckPurchaseRequirements();
-          if (temp_v5 != 0) {
-            if (temp_v5 != 1) {
-              if (temp_v5 == 2) {
-                temp_v11 = 0x5a5a5aff;
-                temp_v12 = 0x787878ff;
-                sprintf((char *)temp_v13,"\?\?\?");
-              }
-            }
-            else {
-              temp_v11 = 0x5a5a5aff;
-              temp_v12 = 0xdc0f14ff;
-              temp_v5 = temp_v10;
-              dataTable0BGetValueById(temp_v10);
-              sprintf((char *)temp_v13,"%d",temp_v5);
-            }
-          }
-          else {
-            temp_v12 = 0xffffffff;
-            temp_v11 = 0xff;
-            temp_v5 = temp_v10;
-            dataTable0BGetValueById(temp_v10);
-            sprintf((char *)temp_v13,"%d",temp_v5);
-          }
-          temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x594));
-          drawSetColorFromRGBA8(temp_v12);
-          FUN_002bdf94(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v0,
-                       (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v1,1,4,0x6f,
-                       temp_v13);
-          gxResetColorQuadToWhite();
-        }
-        temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x590));
-        dataTable0BFindById(temp_v10);
-        VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v1,
-                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        VectorSignedToFloat((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v0,
-                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        textDrawString(2,temp_v11,temp_v10,(int)*(short *)(temp_v2 + 8));
-      }
-      temp_v9 = temp_v9 + 1;
-      temp_v2 = uiListGetVisibleCount(param_1 + 0x10);
-    } while (temp_v9 < temp_v2);
-  }
-  if (*(int *)(param_1 + 8) == 2 || *(int *)(param_1 + 8) == 3) {
-    temp_v2 = resourceRunOperationIfUnblocked(param_1 + 0x10);
-    temp_v9 = listCursorGetRowIfUnblocked(param_1 + 0x10);
-    temp_v10 = *(unsigned int *)(param_1 + (temp_v9 + temp_v2) * 4 + 0x74);
-    temp_v2 = listCursorGetRowIfUnblocked(param_1 + 0x10);
-    temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,temp_v2 + 0x42f));
-    efctSetSpeed();
-    texDrawCompositeSprite(2,0x1d,6,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x79);
-    efctSetSpeed();
-    texDrawTableEntryAtStoredOrigin(2,0x1d,0x429,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x7e);
-    temp_v9 = listCursorGetRowIfUnblocked(param_1 + 0x10);
-    temp_v9 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + temp_v9 * 2 + 0x508));
-    temp_v4 = *(short *)(temp_v2 + 10) + temp_v1;
-    temp_v8 = *(short *)(temp_v2 + 8) + temp_v0;
-    if (!((temp_v9 == 1 || temp_v9 == 2) || temp_v9 == 6)) {
-      texDrawTableEntryAtStoredOrigin(2,0x1d,0x42a,temp_v8,temp_v4,0x83);
-    }
-    else {
-      texDrawTableEntryAtStoredOrigin(2,0x1d,0x42b,temp_v8,temp_v4,0x83);
-    }
-    temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x42a));
-    temp_v8 = vec2GetXInt(param_1 + 0x3f0);
-    temp_v6 = vec2GetYInt(param_1 + 0x3f0);
-    temp_v9 = g_titleScene;
-    piVar11 = (int *)(g_titleScene + 0x130c);
-    temp_v7 = piVar11[*piVar11 + 2];
-    piVar11[*piVar11 + 2] = 3;
-    if (*(char *)(temp_v9 + 0x1324) != '\0' || temp_v7 != 3) {
-      (**(romwright_code **)(temp_v9 + 0x1328))();
-      *(unsigned char *)(temp_v9 + 0x1324) = 0;
-    }
-    gxSetMirroredClippedScissor((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v0,
-                 (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v1,
-                 (int)**(short **)(temp_v2 + 0xc),(int)(*(short **)(temp_v2 + 0xc))[1],1,temp_v6);
-    texDrawTableEntryAtStoredOrigin(2,0x1d,0x42c,(int)*(short *)(temp_v2 + 8) + temp_v8 + temp_v0,
-                 temp_v6 + temp_v1 + (int)*(short *)(temp_v2 + 10),0x88);
-    temp_v9 = g_titleScene;
-    piVar11 = (int *)(g_titleScene + 0x130c);
-    temp_v4 = piVar11[*piVar11 + 2];
-    piVar11[*piVar11 + 2] = 0;
-    if (*(char *)(temp_v9 + 0x1324) != '\0' || temp_v4 != 0) {
-      (**(romwright_code **)(temp_v9 + 0x1328))(0);
-      *(unsigned char *)(temp_v9 + 0x1324) = 0;
-    }
-    texDrawTableEntryAtStoredOrigin(2,0x1d,0x596,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x8d);
-    temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x598));
-    FUN_002b6b8c(temp_v10 & 0xffff,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v0,
-                 (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v2 + 10) + temp_v1,0x92);
-    temp_v9 = flagBitIsSet(temp_v10);
-    if (temp_v9 != 0) {
-      temp_v11 = 0x72e027ff;
-      temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x59e));
-      texDrawCompositeSprite(2,0x1d,8,(int)*(short *)(temp_v9 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v0,
-                   (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v2 + 10) + temp_v1,0x92);
-    }
-    else {
-      temp_v5 = temp_v10;
-      appCheckPurchaseRequirements();
-      if (temp_v5 != 0) {
-        if (temp_v5 != 1) {
-          if (temp_v5 == 2) {
-            temp_v11 = 0x787878ff;
-            temp_v12 = 0x787878ff;
-            sprintf((char *)temp_v13,"\?\?\?");
-          }
-        }
-        else {
-          temp_v11 = 0x787878ff;
-          temp_v12 = 0xdc0f14ff;
-          temp_v5 = temp_v10;
-          dataTable0BGetValueById(temp_v10);
-          sprintf((char *)temp_v13,"%d",temp_v5);
-        }
-      }
-      else {
-        temp_v11 = 0xffffffff;
-        temp_v12 = 0xffffffff;
-        temp_v5 = temp_v10;
-        dataTable0BGetValueById(temp_v10);
-        sprintf((char *)temp_v13,"%d",temp_v5);
-      }
-      temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x59d));
-      drawSetColorFromRGBA8(temp_v12);
-      FUN_002bdf94(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v0,
-                   (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v9 + 10) + temp_v1,1,4,0x97,
-                   temp_v13);
-      gxResetColorQuadToWhite();
-    }
-    temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x599));
-    dataTable0BFindById(temp_v10);
-    VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v9 + 10) + temp_v1,
-                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v0,
-                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    textDrawString(3,temp_v11,temp_v10,(int)*(short *)(temp_v9 + 10));
-  }
-  uiDrawListScrollBar(param_1 + 0x10,temp_v0,temp_v1,0x1d,0x56a,0x56b,0x56c,0x566,0x568,0x567,0x569,
-               (int)*(short *)(param_1 + 0x522),(int)*(short *)(param_1 + 0x51e),
-               (int)*(short *)(param_1 + 0x520),0x97,0);
-  temp_v0 = g_titleScene;
-  if (*(int *)(param_1 + 8) == 5) {
-    temp_v1 = packNibblesAndByte(6,1,0);
-    piVar11 = (int *)(temp_v0 + 0x12ac);
-    temp_v2 = piVar11[*piVar11 + 2];
-    piVar11[*piVar11 + 2] = temp_v1;
-    if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v2 != temp_v1) {
-      (**(romwright_code **)(temp_v0 + 0x12c8))();
-      *(unsigned char *)(temp_v0 + 0x12c4) = 0;
-    }
-    fadeObjectResetIfActive(param_1 + 0x47c);
-    temp_v0 = g_titleScene;
-    temp_v1 = packNibblesAndByte(6,7,0);
-    piVar11 = (int *)(temp_v0 + 0x12ac);
-    temp_v2 = piVar11[*piVar11 + 2];
-    piVar11[*piVar11 + 2] = temp_v1;
-    if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v2 != temp_v1) {
-      (**(romwright_code **)(temp_v0 + 0x12c8))();
-      *(unsigned char *)(temp_v0 + 0x12c4) = 0;
-    }
-  }
-  return;
-}
-
+u16 dataTable0BGetValueById(u32 id);
+u8 appCheckPurchaseRequirements(u32 id);
+s32 resourceRunOperationIfUnblocked(void *widget);
+void drawSetColorFromRGBA8(u32 color);
+void FUN_002b6b8c(s32 id, u32 x, u32 y, u32 depth);
+void FUN_002bdf94(u32 kind, s32 x, s32 y, u32 align, u32 digits, u32 slot, const char *format, ...);
+void fadeObjectResetIfActive(UiSpriteState *sprite);
+u8 ifTouchGetSelectionModeForRegion(s32 region);
+void gxSetMirroredClippedScissor(s32 x, s32 y, u32 width, s32 height, s32 useNarrowScreen);
+void uiDrawListScrollBar(void *widget, s32 x, s32 y, u32 group, u32 frameId, u32 trackId, u32 trackPressedId, u32 arrowAId,
+                        u32 arrowAPressedId, u32 arrowBId, u32 arrowBPressedId, u32 thumbRegion, s32 arrowARegion,
+                        u32 arrowBRegion, s32 layer, s32 horizontal);
 } /* extern "C" */
+
+enum {
+    GAUNTLET_TEXTURES = 0x1D,
+    GAUNTLET_APP_HIGHLIGHT = 2,
+    GAUNTLET_APP_PREVIEW = 3,
+    GAUNTLET_APP_FADE = 5,
+    GAUNTLET_PRICE_NORMAL = 0,
+    GAUNTLET_PRICE_UNAFFORDABLE = 1,
+    GAUNTLET_PRICE_HIDDEN = 2,
+    GAUNTLET_FRAME_SPRITE = 0,
+    GAUNTLET_CURSOR_SPRITE = 1,
+    GAUNTLET_DETAILS_SPRITE = 2,
+    GAUNTLET_FADE_SPRITE = 3
+};
+
+/* Draws the app list, redrawing the selected row above the highlight when it is open. */
+extern "C" void gauntletAppMenuDrawScreen(GauntletAppMenuWork *menu)
+{
+    const s32 x = vec2GetXInt(&menu->list.sprites[GAUNTLET_FRAME_SPRITE]);
+    const s32 y = vec2GetYInt(&menu->list.sprites[GAUNTLET_FRAME_SPRITE]);
+    u32 labelColor = 0;
+    u32 priceColor = 0;
+    char number[64];
+    texDrawCompositeSprite(2, GAUNTLET_TEXTURES, 9, x, y, 0x65);
+    texDrawTableEntryAtStoredOrigin(2, GAUNTLET_TEXTURES, 0x57C, x, y, 0x6A);
+    texDrawTableEntryAtStoredOrigin(2, GAUNTLET_TEXTURES, 0x57D, x, y, 0x6A);
+    texDrawTableEntryAtStoredOrigin(2, GAUNTLET_TEXTURES, 0x57E, x, y, 0x6A);
+    texDrawTableEntryAtStoredOrigin(2, GAUNTLET_TEXTURES, 0x57F, x, y, 0x6A);
+    const TextureTableEntryIV *balance = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x583);
+    __2sprintf(number, "%u", gameSaveGetPoints());
+    FUN_002bdf94(0, balance->x + x, balance->y + y, 1, 4, 0x6A, number);
+    for (s32 row = 0; row < (s32)uiListGetVisibleCount(menu->list.controller); ++row) {
+        if ((menu->list.mode == GAUNTLET_APP_HIGHLIGHT || menu->list.mode == GAUNTLET_APP_PREVIEW) &&
+            listCursorGetRowIfUnblocked(menu->list.controller) == row) {
+            continue;
+        }
+        const u32 app = menu->list.entries[resourceRunOperationIfUnblocked(menu->list.controller) + row];
+        const TextureTableEntryIV *position = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, row + 0x40E);
+        const TextureTableEntryIV *icon = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x58F);
+        FUN_002b6b8c((u16)app, position->x + icon->x + x, position->y + icon->y + y, 0x6A);
+        if (flagBitIsSet(app)) {
+            labelColor = 0x008400FF;
+            const TextureTableEntryIV *ownedMark = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x595);
+            texDrawCompositeSprite(2, GAUNTLET_TEXTURES, 8, position->x + ownedMark->x + x,
+                                   position->y + ownedMark->y + y, 0x6A);
+        } else {
+            texDrawTableEntryAtStoredOrigin(2, GAUNTLET_TEXTURES, 0x58B, position->x + x, position->y + y, 0x6A);
+            texDrawTableEntryAtStoredOrigin(2, GAUNTLET_TEXTURES, 0x58C, position->x + x, position->y + y, 0x6A);
+            texDrawTableEntryAtStoredOrigin(2, GAUNTLET_TEXTURES, 0x58D, position->x + x, position->y + y, 0x6A);
+            switch (appCheckPurchaseRequirements(app)) {
+            case GAUNTLET_PRICE_NORMAL:
+                labelColor = 0x000000FF;
+                priceColor = 0xFFFFFFFF;
+                __2sprintf(number, "%d", (s32)dataTable0BGetValueById(app));
+                break;
+            case GAUNTLET_PRICE_UNAFFORDABLE:
+                labelColor = 0x5A5A5AFF;
+                priceColor = 0xDC0F14FF;
+                __2sprintf(number, "%d", (s32)dataTable0BGetValueById(app));
+                break;
+            case GAUNTLET_PRICE_HIDDEN:
+                labelColor = 0x5A5A5AFF;
+                priceColor = 0x787878FF;
+                __2sprintf(number, "???");
+                break;
+            }
+            const TextureTableEntryIV *cost = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x594);
+            drawSetColorFromRGBA8(priceColor);
+            FUN_002bdf94(0, position->x + cost->x + x, position->y + cost->y + y, 1, 4, 0x6F, number);
+            gxResetColorQuadToWhite();
+        }
+        const TextureTableEntryIV *label = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x590);
+        const char *name = (const char *)dataTable0BFindById(app);
+        textDrawString((f32)(position->x + label->x + x), (f32)(position->y + label->y + y), 0.5859375f,
+                       2, 0.0f, labelColor, 1.0f, name);
+
+    }
+
+    if (menu->list.mode == GAUNTLET_APP_HIGHLIGHT || menu->list.mode == GAUNTLET_APP_PREVIEW) {
+        const s32 firstRow = resourceRunOperationIfUnblocked(menu->list.controller);
+        const u32 app = menu->list.entries[firstRow + listCursorGetRowIfUnblocked(menu->list.controller)];
+        const TextureTableEntryIV *position = asdTMTexTableEntryAt(GAUNTLET_TEXTURES,
+                                                                 listCursorGetRowIfUnblocked(menu->list.controller) + 0x42F);
+        efctSetSpeed(vec2GetSpeed(&menu->list.sprites[GAUNTLET_CURSOR_SPRITE]));
+        texDrawCompositeSprite(2, GAUNTLET_TEXTURES, 6, position->x + x, position->y + y, 0x79);
+        efctSetSpeed(1.0f);
+        texDrawTableEntryAtStoredOrigin(2, GAUNTLET_TEXTURES, 0x429, position->x + x, position->y + y, 0x7E);
+        const u8 touchMode = ifTouchGetSelectionModeForRegion(menu->touch.regions[listCursorGetRowIfUnblocked(menu->list.controller)]);
+        const bool pressed = touchMode == 1 || touchMode == 2 || touchMode == 6;
+        if (!pressed) {
+            texDrawTableEntryAtStoredOrigin(2, GAUNTLET_TEXTURES, 0x42A, position->x + x, position->y + y, 0x83);
+        } else {
+            texDrawTableEntryAtStoredOrigin(2, GAUNTLET_TEXTURES, 0x42B, position->x + x, position->y + y, 0x83);
+        }
+        const TextureTableEntryIV *clip = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x42A);
+        const s32 detailX = vec2GetXInt(&menu->list.sprites[GAUNTLET_DETAILS_SPRITE]);
+        const s32 detailY = vec2GetYInt(&menu->list.sprites[GAUNTLET_DETAILS_SPRITE]);
+        renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, RENDER_STATE_SCISSOR);
+        gxSetMirroredClippedScissor(position->x + clip->x + x, position->y + clip->y + y,
+                                   position->placement->width, position->placement->height, 1);
+        texDrawTableEntryAtStoredOrigin(2, GAUNTLET_TEXTURES, 0x42C,
+                                        position->x + x + detailX, position->y + y + detailY, 0x88);
+        renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
+        texDrawTableEntryAtStoredOrigin(2, GAUNTLET_TEXTURES, 0x596, position->x + x, position->y + y, 0x8D);
+        const TextureTableEntryIV *icon = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x598);
+        FUN_002b6b8c((u16)app, position->x + icon->x + x, position->y + icon->y + y, 0x92);
+        if (flagBitIsSet(app)) {
+            labelColor = 0x72E027FF;
+            const TextureTableEntryIV *ownedMark = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x59E);
+            texDrawCompositeSprite(2, GAUNTLET_TEXTURES, 8, position->x + ownedMark->x + x,
+                                   position->y + ownedMark->y + y, 0x92);
+        } else {
+            switch (appCheckPurchaseRequirements(app)) {
+            case GAUNTLET_PRICE_NORMAL:
+                priceColor = 0xFFFFFFFF;
+                labelColor = 0xFFFFFFFF;
+                __2sprintf(number, "%d", (s32)dataTable0BGetValueById(app));
+                break;
+            case GAUNTLET_PRICE_UNAFFORDABLE:
+                labelColor = 0x787878FF;
+                priceColor = 0xDC0F14FF;
+                __2sprintf(number, "%d", (s32)dataTable0BGetValueById(app));
+                break;
+            case GAUNTLET_PRICE_HIDDEN:
+                labelColor = priceColor = 0x787878FF;
+                __2sprintf(number, "???");
+                break;
+            }
+            const TextureTableEntryIV *cost = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x59D);
+            drawSetColorFromRGBA8(priceColor);
+            FUN_002bdf94(0, position->x + cost->x + x, position->y + cost->y + y, 1, 4, 0x97, number);
+            gxResetColorQuadToWhite();
+        }
+        const TextureTableEntryIV *label = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x599);
+        const char *name = (const char *)dataTable0BFindById(app);
+        textDrawString((f32)(position->x + label->x + x), (f32)(position->y + label->y + y), 0.4296875f,
+                       3, 0.0f, labelColor, 1.0f, name);
+
+    }
+    uiDrawListScrollBar(menu->list.controller, x, y, GAUNTLET_TEXTURES, 0x56A, 0x56B, 0x56C,
+                        0x566, 0x568, 0x567, 0x569, menu->touch.regions[13], menu->touch.regions[11],
+                        menu->touch.regions[12], 0x97, 0);
+    if (menu->list.mode == GAUNTLET_APP_FADE) {
+        renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+        fadeObjectResetIfActive(&menu->list.sprites[GAUNTLET_FADE_SPRITE]);
+        renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+    }
+}

@@ -18,13 +18,13 @@ u32 FUN_003b1d34(void)
             camera->unk3C = 0;
             camera->state = 1;
             camera->unk0C = camera->unk14;
-            camera->unk10 = camera->unk18;
+            camera->angleOffset = camera->unk18;
         } else if (mode == 1) {
             mathVectorClear(camera->vector);
             camera->unk3C = 0;
             camera->state = 1;
             camera->unk0C = 0.0f;
-            camera->unk10 = 0.0f;
+            camera->angleOffset = 0.0f;
         }
     }
     return 1;

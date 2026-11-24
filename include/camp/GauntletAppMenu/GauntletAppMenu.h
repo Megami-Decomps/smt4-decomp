@@ -5,15 +5,9 @@
 #include "common.h"
 #include <stddef.h>
 #include "script/ScriptVm.h"
+#include "ui/UiSpriteState.h"
 
-/* A UI sprite instance of the menu (0x8C bytes); `mode` is the playback mode at 0x3A. */
-typedef struct GauntletSprite {
-    u8 unk00[0x18];
-    /* 0x18 */ u16 unk18;
-    u8 unk1A[0x20];
-    /* 0x3A */ u16 mode;
-    u8 unk3C[0x50];
-} GauntletSprite;
+typedef UiSpriteState GauntletSprite;
 
 /* The menu's sort preference byte (gameDataGetSortPreferences(), smt4a saveGetUserSettingsBlock()). */
 enum {
@@ -72,6 +66,7 @@ typedef char GauntletAppMenuWorkALayoutCheck[
 
 extern "C" {
 void devilDispatchTextureResource(u32 id, u32 argument, u32 first, u32 second, s32 resolveDemon);
+void gauntletAppMenuDrawScreen(GauntletAppMenuWork *menu);
 }
 
 #endif

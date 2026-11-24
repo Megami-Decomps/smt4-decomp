@@ -65,7 +65,7 @@ int beginStatusPanelClose(void);
 int buttonHelpSetPreset(...);
 int __aeabi_memcpy4(...);
 
-int FUN_0026cba4(...);
+int partyPanelPreviewStatItem(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int partyPanelHandleCursorEdgeInput(...);
 int FUN_0026d144(...);
 int partyPanelRefreshSelectedItemValues(...);
@@ -139,7 +139,7 @@ extern int gameGetNavigationState(void);
 /* Supplied declaration required: btlUiPanelFadeInWhenReady. */
 /* Supplied declaration required: partyPanelShowButtonHelp. */
 /* Supplied declaration required: partyPanelRefreshFusionParents. */
-/* Supplied declaration required: FUN_0026cba4. */
+/* Supplied declaration required: partyPanelPreviewStatItem. */
 /* Supplied declaration required: partyPanelHandleCursorEdgeInput. */
 /* Supplied declaration required: partyPanelPollHelpRefresh. */
 /* Supplied declaration required: FUN_0026d144. */
@@ -1041,7 +1041,7 @@ LAB_001c545c:
             FUN_0029dfc0(0);
             if (*(char *)(temp_v1 + 0x66c) == '\t') {
               temp_v4 = gameGetSlotTable();
-              FUN_0026cba4((int)*(char *)(temp_v4 + temp_v24 + 0x9107),temp_v24,0);
+              partyPanelPreviewStatItem((int)*(char *)(temp_v4 + temp_v24 + 0x9107),temp_v24,0);
             }
             if (temp_v6 != temp_v24) {
               pair40Set(*(unsigned int *)(temp_v1 + temp_v6 * 4 + 0x6c8),0);
@@ -1110,7 +1110,7 @@ LAB_001c545c:
             if (*(char *)(temp_v1 + 0x66c) != '\v') {
               FUN_0029dfc0(0);
               if (*(char *)(temp_v1 + 0x66c) == '\t') {
-                FUN_0026cba4(*(unsigned int *)(temp_v1 + temp_v6 * 8 + 0x738),temp_v6,1);
+                partyPanelPreviewStatItem(*(unsigned int *)(temp_v1 + temp_v6 * 8 + 0x738),temp_v6,1);
               }
               pair40Set(*(unsigned int *)(temp_v1 + temp_v24 * 4 + 0x6d8),0);
             }

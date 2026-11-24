@@ -3,17 +3,11 @@
 #include "code/Code002b_Smt4.h"
 #include "ui/UiSpriteApi.h"
 #include "ui/MessageMain.h"
+#include "ui/MessageControl.h"
 #include "AsdSDK/Source/Sys/File/AsdFile.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
-struct MessageControlFlags {
-    u8 prefix[0xC];
-    u8 latched;
-    u8 suppressed;
-};
-
 extern "C" {
-extern MessageControlFlags DAT_0049381c;
 s32 inputQueryButtonState(s32 button, s32 mode);
 s32 querySlotHasHandle(void);
 void workCommandRefreshActiveSlots(void);
@@ -22,13 +16,13 @@ u32 messageAdvanceInputForBox(u32 box)
 {
     if (g_messageMain.banner->box == box)
         return 0;
-    if (inputQueryButtonState(0, 1) || inputQueryButtonState(9, 2) || slotIsActive(6) || DAT_0049381c.suppressed ||
+    if (inputQueryButtonState(0, 1) || inputQueryButtonState(9, 2) || slotIsActive(6) || g_messageControl.suppressed ||
         (g_messageMain.window->box == box && g_messageMain.window->unkA34 == 1 && inputQueryButtonState(1, 1))) {
         if (inputQueryButtonState(9, 2) || slotIsActive(6))
             FUN_001175d4(1);
         if (querySlotHasHandle() && (messageVoiceFlagsGet() & 1))
             workCommandRefreshActiveSlots();
-        if (!DAT_0049381c.suppressed)
+        if (!g_messageControl.suppressed)
             eventQueueAddUniqueIfValid(0x100016C);
         return 1;
     }
@@ -37,16 +31,16 @@ u32 messageAdvanceInputForBox(u32 box)
     if (inputQueryButtonState(8, 1)) {
         u8 mode = g_messageMain.window->mode;
         if (mode != 7 && mode != 8 && mode != 9) {
-            if (DAT_0049381c.latched) {
-                DAT_0049381c.latched = 0;
+            if (g_messageControl.latched) {
+                g_messageControl.latched = 0;
                 eventQueueAddUniqueIfValid(0x100016E);
             } else {
-                DAT_0049381c.latched = 1;
+                g_messageControl.latched = 1;
                 eventQueueAddUniqueIfValid(0x100016D);
             }
         }
-    } else if (inputQueryButtonState(1, 1) && DAT_0049381c.latched) {
-        DAT_0049381c.latched = 0;
+    } else if (inputQueryButtonState(1, 1) && g_messageControl.latched) {
+        g_messageControl.latched = 0;
         eventQueueAddUniqueIfValid(0x100016E);
     }
     return 0;

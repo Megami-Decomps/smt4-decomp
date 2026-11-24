@@ -35,7 +35,7 @@ typedef struct AsdFileRequest {
     /* 0x12c */ void *stream;            /* the open file */
     /* 0x130 */ void (*onDone)(void *); /* called when DONE or FAILED */
     /* 0x134 */ void *onDoneArg;        /* what onDone gets (the request itself if NULL) */
-    /* 0x138 */ void (*onOpen)(void *stream);            /* called with the open file before it is read */
+    /* 0x138 */ void (*onOpen)(char *path);             /* called on the request path before opening it (IV) */
     /* 0x13c */ struct AsdFileRequest *next;
     /* 0x140 */ union {
         struct AsdFileRequest *prev;
@@ -72,6 +72,9 @@ typedef struct AsdFileGlobals {
 #ifdef __cplusplus
 extern "C" {
 #endif
+/* IV's asynchronous file worker entry point, called by the thread launcher. */
+void asdFileThreadMain(void *argument);
+
 /* Canonical declaration (matches the definition). */
 s32 resourceCallDefaultOptions(u32 first, u32 second, u32 third);
 #ifdef __cplusplus

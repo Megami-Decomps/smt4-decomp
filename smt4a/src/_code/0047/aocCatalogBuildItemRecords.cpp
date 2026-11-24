@@ -170,12 +170,12 @@ s32 aocCatalogBuildItemRecords(AocCatalogJob *job)
         AocAttributeName iconLabel = aocItemAttributeLabel(5, halfPair48LowByteA(main->contentFile), halfPair48LowByteB(main->contentFile));
         value = archiveFindEntryValue(archive, (u32)iconLabel.text);
         if (value == 0) {
-            record->unk9A8 = 0;
+            record->iconId = 0;
             sysMemClear(iconData, sizeof(iconData));
         } else {
-            record->unk9A8 = (u16)FUN_001029f4((const char *)value, NULL, 10);
-            if (record->unk9A8 != ICON_NONE) {
-                job->result = archiveReadIcon((const ArchiveIconSource *)main->contentFile, iconData, record->unk9A8);
+            record->iconId = (u16)FUN_001029f4((const char *)value, NULL, 10);
+            if (record->iconId != ICON_NONE) {
+                job->result = archiveReadIcon((const ArchiveIconSource *)main->contentFile, iconData, record->iconId);
                 result = legacyResourceIdRemap(&job->result);
                 if (nnResultIsFailure(result)) {
                     return result;
@@ -191,7 +191,7 @@ s32 aocCatalogBuildItemRecords(AocCatalogJob *job)
         if (nnResultIsFailure(result)) {
             return result;
         }
-        *(u32 *)&record->unk9B4[4] = blocks;
+        record->blocks = blocks;
         DateTimeValue newSince;
         archiveReadNewsSinceDateTime(&newSince, archive);
         record->modified.milliseconds = newSince.milliseconds;

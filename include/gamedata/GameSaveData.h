@@ -113,6 +113,15 @@ typedef struct GameSaveLinkSlot {
     /* 0x04 */ u32 unk04;
 } GameSaveLinkSlot;
 
+/* IV: half of the flag bytes of ids 0..0x3F, and the flag bytes of ids 0x40..0x47, copied as words. */
+typedef struct GameFlagWords {
+    u32 words[8];
+} GameFlagWords;
+
+typedef struct GameFlagTailWords {
+    u32 words[2];
+} GameFlagTailWords;
+
 /* IV: the save body (0x24D28 bytes), copied to and from the work block; it follows the save block's
  * 0x88-byte header. Offsets are from the body; add 0x88 for the save block offset. */
 typedef struct GameSaveBody {
@@ -131,7 +140,10 @@ typedef struct GameSaveBody {
     /* 0x1E924 */ u8 questCenter[0x1D4];
     /* 0x1EAF8 */ u8 indexedFlags[0x98];
     /* 0x1EB90 */ u8 sortPreferences[0x80];
-    /* 0x1EC10 */ u8 flagsA[0x40];       /* flag bytes of ids 0..0x3F */
+    union {
+        /* 0x1EC10 */ u8 flagsA[0x40];       /* flag bytes of ids 0..0x3F */
+        /* 0x1EC10 */ GameFlagWords flagWordsA[2];  /* the same bytes, as the two blocks a new game carries over */
+    };
     /* 0x1EC50 */ u8 unk1EC50;
     /* 0x1EC51 */ u8 unk1EC51[3];
     /* 0x1EC54 */ u32 entryValues[0x1DE];
@@ -177,6 +189,10 @@ typedef struct GameSaveBody {
             u8 prefix[0x20];
             /* 0x24B5C */ u8 flagsB[0x48];  /* flag bytes of ids 0x40..0x47, indexed by id */
         } extendedFlags;
+        struct {
+            u8 prefix[0x60];
+            /* 0x24B9C */ GameFlagTailWords words;  /* flagsB[0x40..0x47], as the block a new game carries over */
+        } extendedFlagWords;
     };
     /* 0x24BA4 */ u8 unk24BA4[0x184];
 } GameSaveBody;
@@ -214,6 +230,7 @@ typedef char GameSaveDataUpperOffsets[offsetof(GameSaveBody, flagRows) == 0x1C5A
     offsetof(GameSaveBody, config.hasConfig) == 0x24AF8 &&
     offsetof(GameSaveBody, config.selection.state.money) == 0x24B20 && offsetof(GameSaveBody, config.selection.state.modeFlags) == 0x24B27 &&
     offsetof(GameSaveBody, linkSlots) == 0x24B2C && offsetof(GameSaveBody, extendedFlags.flagsB) == 0x24B5C &&
+    offsetof(GameSaveBody, flagWordsA) == 0x1EC10 && offsetof(GameSaveBody, extendedFlagWords.words) == 0x24B9C &&
     sizeof(GameSaveBody) == 0x24D28 && sizeof(GameSaveData) == 0x24DB0 ? 1 : -1];
 
 

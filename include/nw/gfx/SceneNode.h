@@ -3,11 +3,20 @@
 
 #include "common.h"
 #include "nw/ut/MoveArray.h"
+#include "nw/ut/RuntimeTypeInfo.h"
+#include "shard/W6_W6Match4_RelativeResourceGraph.h"
 
 namespace nw {
 namespace gfx {
 
 class SceneNode;
+
+/* The child links named by a scene node's resource. */
+struct SceneChildResource {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ s32 count;
+    /* 0x24 */ ResourceRelativePointer<ResourceRelativePointer<SceneChildResource> > children;
+};
 
 /* The children a node owns, plus the node they report as their parent. */
 struct SceneNodeChildren {
@@ -19,9 +28,12 @@ struct SceneNodeChildren {
 
 class SceneNode {
 public:
+    virtual ~SceneNode();
+    virtual const ut::RuntimeTypeInfo *getRuntimeTypeInfo() const;
     bool attachChild(SceneNode *node);
 
-    /* 0x00 */ u8 unk00[0xC];
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ SceneChildResource *resource;
     /* 0x0C */ SceneNode *parent;
     /* 0x10 */ SceneNodeChildren children;
 };
@@ -29,7 +41,9 @@ public:
 } /* namespace gfx */
 } /* namespace nw */
 
+extern "C" bool nw_gfx_SceneNode_AttachChild(nw::gfx::SceneNode *parent, nw::gfx::SceneNode *child);
 extern "C" bool nw_gfx_SceneNode_IsCircularReference(const nw::gfx::SceneNode *node, const nw::gfx::SceneNode *reference);
+extern "C" void sceneNodeAttachDeclaredChild(nw::gfx::SceneNode *parent, nw::gfx::SceneNode *child);
 
 namespace nw {
 namespace gfx {

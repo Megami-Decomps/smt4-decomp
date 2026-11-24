@@ -9,7 +9,7 @@ int texDrawCompositeSprite(...);
 int gameGetPlayerData(void);
 int FUN_0023d150(...);
 int FUN_002ac470(...);
-int FUN_0034cfc0(...);
+int campEquipListDrawRow(...);
 
 /* stack frame of param_4: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -33,7 +33,7 @@ extern int resourceRunOperationIfUnblocked(int);
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_002ac470. */
 extern int gridNavigationGetItemCount(int);
-/* Supplied declaration required: FUN_0034cfc0. */
+/* Supplied declaration required: campEquipListDrawRow. */
 
 
 void FUN_0023c8c0(int *param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -236,7 +236,7 @@ LAB_0023ce68:
     temp_v1 = listCursorGetRowIfUnblocked(temp_v9);
     temp_v0 = *(unsigned short *)(temp_v6 + (temp_v1 + temp_v3) * 2);
     temp_v6 = listCursorGetRowIfUnblocked(temp_v9);
-    FUN_0034cfc0(temp_v10,temp_v6 + 2,temp_v0,temp_v11,param_3);
+    campEquipListDrawRow(temp_v10,temp_v6 + 2,temp_v0,temp_v11,param_3);
   }
   return;
 }

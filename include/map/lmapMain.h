@@ -175,7 +175,7 @@ typedef struct LmapScene {
         /* 0x064 */ f32 previousMotionFrame;
         /* 0x064 */ s32 previousMotionFrameBits; /* retail tests frame crossings as signed float bits */
     };
-    /* 0x068 */ f32 unk068;
+    /* 0x068 */ f32 verticalSpeed; /* added to the position's height each frame of a jump or fall */
     /* 0x06C */ u8 unk06C;
     /* 0x06D */ u8 unk06D[3];
     /* 0x070 */ u32 unk070;
@@ -187,7 +187,17 @@ typedef struct LmapScene {
     /* 0x089 */ u8 unk089[7];
     /* 0x090 */ u32 unk090;
     /* 0x094 */ f32 unk094;
-    /* 0x098 */ u8 unk098[0x9C];
+    /* 0x098 */ u8 unk098[8];
+    /* 0x0A0 */ MapVector jumpTarget;   /* where a jump down from an overview point lands */
+    /* 0x0AC */ f32 jumpHeading;
+    /* 0x0B0 */ MapVector jumpStep;     /* horizontal distance covered per frame of the jump */
+    /* 0x0BC */ s32 jumpFrames;         /* frames of horizontal movement so far (up to 40) */
+    /* 0x0C0 */ u8 unk0C0[0x55];
+    /* 0x115 */ u8 directMoveActive;   /* the target position walks straight to directMoveTarget */
+    /* 0x116 */ u8 unk116[2];
+    /* 0x118 */ MapVector directMoveTarget;
+    /* 0x124 */ MapVector directMoveDirection; /* unit direction from the target position to directMoveTarget */
+    /* 0x130 */ f32 directMoveStep;    /* distance walked per frame */
     /* 0x134 */ s8 updateModels;
     /* 0x135 */ u8 unk135[3];
     /* 0x138 */ LmapScenePositionTransition transition;
@@ -230,6 +240,8 @@ typedef struct LmapScene {
     /* 0x1BA */ u8 unk1BA[2];
 } LmapScene;
 typedef char LmapSceneOffsetsCheck[offsetof(LmapScene, pose) == 0x1C && offsetof(LmapScene, moveMode) == 0x54 &&
+    offsetof(LmapScene, directMoveActive) == 0x115 && offsetof(LmapScene, directMoveStep) == 0x130 &&
+    offsetof(LmapScene, jumpTarget) == 0xA0 && offsetof(LmapScene, jumpFrames) == 0xBC &&
     offsetof(LmapScene, transition) == 0x138 && offsetof(LmapScene, stageModel) == 0x164 &&
     offsetof(LmapScene, playerModel) == 0x194 && offsetof(LmapScene, channelValues) == 0x19C &&
     offsetof(LmapScene, markers.mapFile5) == 0x178 && offsetof(LmapScene, markerState.showFile5) == 0x182 &&

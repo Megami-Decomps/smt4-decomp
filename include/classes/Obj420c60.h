@@ -50,13 +50,13 @@ class Obj3ff290 {
 public:
     virtual ~Obj3ff290() {}
     virtual void vfn00() = 0;
-    virtual void vfn01() = 0;
+    virtual void seek(s64 offset, s32 origin) = 0;
     virtual void vfn02() = 0;
     virtual void vfn03() = 0;
     virtual void vfn04() = 0;
     virtual void vfn05() = 0;
     virtual void vfn06() = 0;
-    virtual void vfn07() = 0;
+    virtual s64 size() = 0;
 };
 
 /* Its implementation level: virtually inherits the interface. */
@@ -71,13 +71,14 @@ class Obj420c60 : public Obj420c60File, public Obj420c60Base {
 public:
     Obj420c60() {}
     virtual ~Obj420c60() {}
-    virtual void vfn01() {}
+    virtual void seek(s64 offset, s32 origin);
     virtual void vfn02() {}
     virtual void vfn03() {}
     virtual void vfn04() {}
     virtual void vfn05() {}
     virtual void vfn06() {}
-    virtual void vfn07() {}
+    virtual s64 size();
+    virtual s32 read(u32 *bytesRead, void *buffer, u32 bytes);
 };
 
 #endif

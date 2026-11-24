@@ -11,18 +11,25 @@ typedef struct MapMain {
     /* 0x00 */ u32 job;           /* job that runs the map mode */
     /* 0x04 */ u8 unk04[8];
     /* 0x0C */ u8 freeOnEnd;      /* 0 = keep the block after the job ends */
-    /* 0x0D */ u8 unk0D[0x17];
+    /* 0x0D */ u8 unk0D;
+    /* 0x0E */ u8 unk0E;
+    /* 0x0F */ u8 unk0F[5];
+    /* 0x14 */ u8 unk14;
+    /* 0x15 */ u8 unk15[0xF];
     /* 0x24 */ u32 state;        /* map-mode controller state */
     /* 0x28 */ u32 stateTime;    /* elapsed updates within the state */
     /* 0x2C */ u32 mapId;
     /* 0x30 */ s32 areaId;
-    /* 0x34 */ u8 unk34[8];
+    /* 0x34 */ u8 unk34[4];
+    /* 0x38 */ s32 unk38;         /* set from g_gameState.argument when the map is left */
     /* 0x3C */ u8 unk3C;
     /* 0x3D */ u8 unk3D[3];
     /* 0x40 */ s32 unk40;         /* 1 and 2 keep the room's own music (mapAmbientAudioUpdate) */
     /* 0x44 */ u8 unk44;
     /* 0x45 */ u8 silent;         /* the room plays no music */
-    /* 0x46 */ u8 unk46[6];
+    /* 0x46 */ u8 unk46;
+    /* 0x47 */ u8 unk47;
+    /* 0x48 */ u8 unk48[4];
     /* 0x4C */ void *systemScriptData;    /* borrowed map/all/mapsys_scr.bf buffer */
     /* 0x50 */ void *systemMessageData;   /* borrowed map/all/mapsys_mes.mbm buffer */
     /* 0x54 */ ScriptProcess *systemScriptProcess;

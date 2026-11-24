@@ -5,11 +5,17 @@
 #include "gfx/SkeletonInstanceBuffers.h"
 #include <stddef.h>
 
-struct ResDicPatriciaNode { u8 data[0x10]; };
+struct ResDicPatriciaName { ResourceRelativePointer<const char> text; };
+struct ResDicPatriciaNode {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ ResourceRelativePointer<ResDicPatriciaName> name;
+    /* 0x0C */ ResourceRelativePointer<void> value;
+};
 struct ResDicPatricia { u8 header[0x1c]; ResDicPatriciaNode nodes[1]; };
 struct ModelBoneSkeleton {
-    u8 unk00[0x1c];
-    ResourceRelativePointer<ResDicPatricia> dictionary;
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ s32 boneCount;
+    /* 0x1C */ ResourceRelativePointer<ResDicPatricia> dictionary;
     u8 unk20[8];
     u32 flags;
     bool hasFlags(u32 mask) const
@@ -52,7 +58,9 @@ struct ModelBoneMatrixProvider {
 };
 typedef char ModelBoneLookupLayoutCheck[
     offsetof(ModelBoneResource, skeleton) == 0xe0 && sizeof(ModelBoneResource) == 0xe4 &&
-    offsetof(ModelBoneSkeleton, dictionary) == 0x1c && offsetof(ModelBoneSkeleton, flags) == 0x28 &&
+    offsetof(ModelBoneSkeleton, boneCount) == 0x18 && offsetof(ModelBoneSkeleton, dictionary) == 0x1c &&
+    offsetof(ModelBoneSkeleton, flags) == 0x28 && offsetof(ResDicPatriciaNode, name) == 8 &&
+    sizeof(ResDicPatriciaNode) == 0x10 &&
     offsetof(ModelBoneMatrixSet, matrices) == 4 && sizeof(SkeletonMatrix34) == 0x30 &&
     offsetof(ModelBoneMatrixProviderVtable, getMatrices) == 0x1c ? 1 : -1];
 typedef char ModelBoneMeshTableLayoutCheck[

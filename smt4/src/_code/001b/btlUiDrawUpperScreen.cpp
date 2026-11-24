@@ -1,5 +1,5 @@
 /* NON_MATCHING: 188 lines (132 by shape); the same calls, branches, frame and saved registers as retail. The second
- * sprite's extraScale is set through uiSpriteSetExtraScale, which armlink inlined (`mov r0, r5; vstr s0, [r0, #48]`,
+ * sprite's rotation is set through uiSpriteSetRotation, which armlink inlined (`mov r0, r5; vstr s0, [r0, #48]`,
  * config/inlined.txt; a direct copy gave 168/96 lines with `ldr; str` but the call is what retail holds). What differs:
  * - the progress is read through r8 here (r7 in retail); retail keeps the UI block in r8 and the slot's 0xE100 base
  *   in r6 (r6 and r8 here), and loads the zero for the render stacks' dirty flags into fp before the `loaded >= 9` branch (after it here);
@@ -34,7 +34,7 @@ extern u16 g_btlUiTestTextureIds[];      /* the test textures' ids, in thousands
 void btlDrawFloatingNumbers(BtlUi *ui, s32 pass);
 void effectRenderTransformedInstance(UiSpriteState *sprite, f32 horizontalOffset);
 void titleDrawLogo(BtlUiObjB *panel);
-void FUN_00218c50(BtlUiObjA *object);
+void spriteRowListDraw(BtlUiObjA *object);
 void FUN_0033cc84(u32 panel);
 void renderCtxResetColorScale(RenderCtx *context);
 
@@ -76,14 +76,14 @@ s32 btlUiDrawUpperScreen(u32 job)
             if (ui->objD.actionRequests.slots[i].secondSprite.updated) {
                 renderCtxSetStackTop(g_titleScene, RENDER_STACK_B, packNibblesAndByte(6, 1, 0));
                 pairSetHalves((Obj *)&ui->objD.actionRequests.slots[i].secondSprite, (s16)(s32)ui->objD.actionRequests.slots[i].position[0], (s16)(s32)ui->objD.actionRequests.slots[i].position[1]);
-                uiSpriteSetExtraScale(&ui->objD.actionRequests.slots[i].secondSprite, ui->objD.actionRequests.slots[i].progress);
+                uiSpriteSetRotation(&ui->objD.actionRequests.slots[i].secondSprite, ui->objD.actionRequests.slots[i].progress);
                 effectRenderTransformedInstance(&ui->objD.actionRequests.slots[i].secondSprite, (f32)parallax);
                 effectRenderTransformedInstance(&ui->objD.actionRequests.slots[i].secondSprite, (f32)parallax);
                 renderCtxSetStackTop(g_titleScene, RENDER_STACK_B, packNibblesAndByte(6, 7, 0));
             }
         }
         titleDrawLogo(&ui->objB);
-        FUN_00218c50(&ui->objA);
+        spriteRowListDraw(&ui->objA);
         FUN_0033cc84(ui->panelState.unk20);
         if (ui->panelState.spriteActive) {
             efctSetSpeed(vec2GetSpeed(&ui->objD.sprite));

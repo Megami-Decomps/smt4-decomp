@@ -139,18 +139,36 @@ typedef struct MapDepartObject {
     /* 0x00 */ void (**vtable)(struct MapDepartObject *self);
 } MapDepartObject;
 
-/* Resources kept while departing (Apocalypse). */
+class MoriModelContent;
+
+/* Resources kept while departing (Apocalypse). The three objects are the map's background models, which
+ * mapBg.cpp's loader (mapBgLoadStep) creates and loads by name. */
 typedef struct MapDepartWorkA {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ u16 unk04;
     /* 0x06 */ u16 unk06;
     /* 0x08 */ u16 unk08;
     /* 0x0A */ u8 unk0A[2];
-    /* 0x0C */ MapDepartObject *objectA;   /* destroyed through their vtables */
-    /* 0x10 */ MapDepartObject *objectB;
-    /* 0x14 */ MapDepartObject *objectC;
+    union {
+        /* 0x0C */ MapDepartObject *objectA;   /* destroyed through their vtables */
+        /* 0x0C */ MoriModelContent *mapModel; /* map/mNNN/mNNN_NN.bam */
+    };
+    union {
+        /* 0x10 */ MapDepartObject *objectB;
+        /* 0x10 */ MoriModelContent *skyModel; /* map/sky/sky_NN.bam */
+    };
+    union {
+        /* 0x14 */ MapDepartObject *objectC;
+        /* 0x14 */ MoriModelContent *mapTextureModel; /* map/mNNN/mNNN_NN_Tex.bch */
+    };
     /* 0x18 */ s16 state;
+    /* 0x1A */ u8 unk1A[2];
+    /* 0x1C */ s32 skyId;   /* 0: no sky model */
+    /* 0x20 */ s16 area;    /* the map file's area and map numbers */
+    /* 0x22 */ s16 map;
 } MapDepartWorkA;
+typedef char MapDepartWorkAOffsets[offsetof(MapDepartWorkA, state) == 0x18 && offsetof(MapDepartWorkA, skyId) == 0x1C &&
+    offsetof(MapDepartWorkA, map) == 0x22 ? 1 : -1];
 
 /* Another block the departure keeps (Apocalypse). */
 typedef struct MapDepartExtraA {

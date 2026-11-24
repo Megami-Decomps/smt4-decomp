@@ -43,7 +43,7 @@ struct BattleViewState {
         } resetSettings;
     };
     /* 0x44 */ s8 navigationSetting;
-    /* 0x45 */ u8 unk45[0x23];
+    /* 0x45 */ char furinMessage[0x23];
     /* 0x68 */ u32 pending;
     union {
         /* 0x6c */ u8 unk6c[4];
@@ -100,7 +100,8 @@ struct BattleViewState {
 typedef char BattleViewStateLayoutCheck[offsetof(BattleViewState, camera.position) == 0x18 &&
     offsetof(BattleViewState, unk28) == 0x28 && offsetof(BattleViewState, unk30) == 0x30 &&
     offsetof(BattleViewState, unk70) == 0x70 && offsetof(BattleViewState, unk76) == 0x76 &&
-    offsetof(BattleViewState, moneyReward) == 0x78 && offsetof(BattleViewState, children) == 0xc8 ? 1 : -1];
+    offsetof(BattleViewState, furinMessage) == 0x45 && offsetof(BattleViewState, moneyReward) == 0x78 &&
+    offsetof(BattleViewState, children) == 0xc8 ? 1 : -1];
 typedef char BattleViewResetFieldsLayoutCheck[
     sizeof(BattleViewState) == 0xd4 && offsetof(BattleViewState, reset.enabled) == 4 &&
     offsetof(BattleViewState, resetSettings.refresh) == 0x34 &&

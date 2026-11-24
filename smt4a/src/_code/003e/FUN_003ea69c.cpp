@@ -6,13 +6,12 @@
 #include "gamedata/UnitStats.h"
 #include "gamedata/PackedSkillSlot.h"
 #include <string.h>
+#include "code/Code003d_Smt4a.h"
 
 extern "C" {
 void clearTwoWords(void *);
 void rt_memclr(void *, u32);
 void sysMemClear(void *, u32);
-u16 playerPackedEntryLow10(u32);
-s16 playerPackedEntryHigh(u32);
 
 void FUN_003ea69c(u32, BtlUnitDataA *unit, const PadState *player)
 {

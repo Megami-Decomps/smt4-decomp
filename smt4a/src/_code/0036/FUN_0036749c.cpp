@@ -1,5 +1,6 @@
 /* NON_MATCHING: 104 lines. distSpatial and mathPositionHeadingDegrees now take their real by-value MapVector arguments, the behind-the-player placement is written per branch (the heading field read at each use, the spawn copied whole), the frame limits are retail's (> 2, > 15, > 3) and FUN_00327ee8 takes the eased x and z. Retail keeps the eased position in s0-s2 for distSpatial (the build reloads it), loads 1/3 and 1/6 into s3/s2, and gives the degree-to-radian factor and the distance 100 the other two saved VFP registers. */
 #include "common.h"
+#include "code/Code0032_Smt4a.h"
 #include "game/GameStateA.h"
 #include "map/LmapViewGlobals.h"
 #include "util/TrigF32.h"
@@ -31,7 +32,6 @@ extern "C" {
 void mapIfApplyEntryRequest(s32 active, u32 record);
 void mapSetSceneState(u32 scene);
 void lmapCameraSetMode(s32 mode);
-void FUN_00324e38(s32 mode);
 void FUN_00327ee8(f32 x, f32 z);
 void FUN_002e364c(MapVector *position);
 void mapEaseSceneHeading(void);

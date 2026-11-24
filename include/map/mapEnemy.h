@@ -74,7 +74,9 @@ struct MapEnemyEntry {
     /* 0x144 */ s8 onRadar;
     /* 0x145 */ u8 unk145[3];
     /* 0x148 */ f32 playerDistance;
-    /* 0x14C */ u8 unk14C[0x10];
+    /* 0x14C */ u8 markerVisible;
+    /* 0x14D */ u8 unk14D[3];
+    /* 0x150 */ MapVector markerPosition;
     /* 0x15C */ u8 arrowVisible;        /* the edge arrow was drawn this frame */
     /* 0x15D */ u8 unk15D[3];
     /* 0x160 */ f32 arrowX;
@@ -118,7 +120,8 @@ struct MapEnemy {
 typedef char MapEnemyEntryOffsetCheck[sizeof(MapEnemyEntry) == 0x180 &&
     offsetof(MapEnemyEntry, position) == 0x20 && offsetof(MapEnemyEntry, locked) == 0x7D &&
     offsetof(MapEnemyEntry, state) == 0x84 && offsetof(MapEnemyEntry, start) == 0x104 &&
-    offsetof(MapEnemyEntry, tracking) == 0x13E && offsetof(MapEnemyEntry, arrowVisible) == 0x15C &&
+    offsetof(MapEnemyEntry, tracking) == 0x13E && offsetof(MapEnemyEntry, markerVisible) == 0x14C &&
+    offsetof(MapEnemyEntry, markerPosition) == 0x150 && offsetof(MapEnemyEntry, arrowVisible) == 0x15C &&
     offsetof(MapEnemyEntry, kind) == 0x174 && offsetof(MapEnemyEntry, model) == 0x178 ? 1 : -1];
 typedef char MapEnemyOffsetCheck[offsetof(MapEnemy, entries) == 0x34 &&
     offsetof(MapEnemy, activeCount) == 0x303C && offsetof(MapEnemy, spawnAttempts) == 0x3044 &&
@@ -186,7 +189,9 @@ struct MapEnemyEntryA {
     /* 0x148 */ s8 onRadar;
     /* 0x149 */ u8 unk149[3];
     /* 0x14C */ f32 playerDistance;
-    /* 0x150 */ u8 unk150[0x10];
+    /* 0x150 */ u8 markerVisible;
+    /* 0x151 */ u8 unk151[3];
+    /* 0x154 */ MapVector markerPosition;
     /* 0x160 */ u8 arrowVisible;
     /* 0x161 */ u8 unk161[3];
     /* 0x164 */ f32 arrowX;
@@ -256,7 +261,8 @@ struct MapEnemyA {
 
 typedef char MapEnemyEntryAOffsetCheck[sizeof(MapEnemyEntryA) == 0x188 &&
     offsetof(MapEnemyEntryA, approachMode) == 0xB4 && offsetof(MapEnemyEntryA, velocity) == 0x128 &&
-    offsetof(MapEnemyEntryA, tracking) == 0x141 && offsetof(MapEnemyEntryA, arrowVisible) == 0x160 &&
+    offsetof(MapEnemyEntryA, tracking) == 0x141 && offsetof(MapEnemyEntryA, markerVisible) == 0x150 &&
+    offsetof(MapEnemyEntryA, markerPosition) == 0x154 && offsetof(MapEnemyEntryA, arrowVisible) == 0x160 &&
     offsetof(MapEnemyEntryA, level) == 0x174 && offsetof(MapEnemyEntryA, kind) == 0x17C &&
     offsetof(MapEnemyEntryA, model) == 0x180 ? 1 : -1];
 typedef char MapEnemyAOffsetCheck[offsetof(MapEnemyA, activeCount) == 0x3D7C &&

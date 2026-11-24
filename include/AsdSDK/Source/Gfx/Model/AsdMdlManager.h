@@ -16,6 +16,7 @@
 struct ModelBoneResource;
 struct ModelBoneMatrixProvider;
 struct ModelBoneAnimationTarget;
+struct AsdGraphicsMesh;
 
 /* The scene node a model draws through (the nw::gfx skeletal model; observed fields). */
 typedef struct AsdMdlSceneNode {
@@ -31,7 +32,10 @@ typedef struct AsdMdlSceneNode {
     /* 0x14C */ s32 secondaryIndex;               /* its track index */
     /* 0x150 */ void *visibilityGroup;            /* the visibility animation group, NULL when the model has none */
     /* 0x154 */ s32 visibilityIndex;              /* its track index */
-    /* 0x158 */ u8 unk158[0x64];
+    /* 0x158 */ u8 unk158[0xC];
+    /* 0x164 */ AsdGraphicsMesh **meshesBegin;
+    /* 0x168 */ AsdGraphicsMesh **meshesEnd;
+    /* 0x16C */ u8 unk16C[0x50];
     /* 0x1BC */ SkeletonMatrix34 viewMatrix;
     /* 0x1EC */ u8 unk1ec[0xA];
     /* 0x1F6 */ u8 positionFollowed;              /* set when an effect takes over the model's position */
@@ -54,7 +58,9 @@ typedef struct AsdMdlNode {
     /* 0x08 */ u32 drawMask;             /* caller supplied parameter, 7 by default */
     /* 0x0C */ s32 sceneGroup;           /* the scene group the model is registered in (lightOwnerRegister), -1: none */
     /* 0x10 */ s32 unk10;                /* -1 by default */
-    /* 0x14 */ u8 unk14[0x10];
+    /* 0x14 */ u8 unk14[8];
+    /* 0x1C */ u16 specialBones[3];
+    /* 0x22 */ u8 unk22[2];
     /* 0x24 */ void **table;             /* count entries, the first is the scene node */
     /* 0x28 */ s32 count;
     /* 0x2C */ AsdMdlSceneNode *sceneNode;
@@ -119,6 +125,7 @@ typedef char AsdMdlObjectLayoutCheck[sizeof(AsdMdlObject) == 0x1C && offsetof(As
     offsetof(AsdMdlObject, records) == 0x18 ? 1 : -1];
 typedef char AsdMdlNodeLayoutCheck[
     offsetof(AsdMdlNode, file) == 4 && offsetof(AsdMdlNode, drawMask) == 8 &&
+    offsetof(AsdMdlNode, specialBones) == 0x1C &&
     offsetof(AsdMdlNode, table) == 0x24 && offsetof(AsdMdlNode, sceneNode) == 0x2C &&
     offsetof(AsdMdlNode, motionCount) == 0x34 && offsetof(AsdMdlNode, active) == 0x4C &&
     offsetof(AsdMdlNode, secondaryMotionTable) == 0x54 && offsetof(AsdMdlNode, secondaryInstance) == 0x60 &&
@@ -129,7 +136,8 @@ typedef char AsdMdlNodeLayoutCheck[
 typedef char AsdMdlSceneNodeLayoutCheck[
     offsetof(AsdMdlSceneNode, boneResource) == 8 && offsetof(AsdMdlSceneNode, trackList) == 0x28 &&
     offsetof(AsdMdlSceneNode, transform) == 0x4C && offsetof(AsdMdlSceneNode, worldMatrix) == 0x8C &&
-    offsetof(AsdMdlSceneNode, secondaryActive) == 0x148 && offsetof(AsdMdlSceneNode, viewMatrix) == 0x1BC &&
+    offsetof(AsdMdlSceneNode, secondaryActive) == 0x148 && offsetof(AsdMdlSceneNode, meshesBegin) == 0x164 &&
+    offsetof(AsdMdlSceneNode, viewMatrix) == 0x1BC &&
     offsetof(AsdMdlSceneNode, positionFollowed) == 0x1F6 && offsetof(AsdMdlSceneNode, skeleton) == 0x220 &&
     offsetof(AsdMdlSceneNode, activeTarget) == 0x228 && offsetof(AsdMdlSceneNode, visibilityGroup) == 0x150 &&
     offsetof(AsdMdlSceneNode, fullBakedAnimEnabled) == 0x231 &&

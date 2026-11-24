@@ -5,7 +5,7 @@ extern "C" {
 
 int destroyObj0055c6e4(...);
 int aocPackageOwnerFreeTables(AocSystem *owner);
-int FUN_002b4b88(void *handle, int (*callback)(...));
+int __aeabi_vec_delete(void *handle, int (*callback)(...));
 
 /* Tears the owner down: clears its counters, destroys its package array with destroyObj0055c6e4, then clears flag 0x10000 in the global block. */
 void aocReleasePackageOwner(AocSystem *owner)
@@ -14,7 +14,7 @@ void aocReleasePackageOwner(AocSystem *owner)
     owner->packageHandle = 0;
     owner->unk350 = 0;
     if (owner->packages != NULL) {
-        FUN_002b4b88(owner->packages, destroyObj0055c6e4);
+        __aeabi_vec_delete(owner->packages, destroyObj0055c6e4);
         owner->packages = NULL;
     }
     aocPackageOwnerFreeTables(owner);

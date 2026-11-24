@@ -233,8 +233,8 @@ void uniteCreate(void)
     uiSpriteSetKeyframe(&work->sprites.listOffset, 5, 0);
     uiSpriteStateInitFromSource(&work->sprites.unk02E0, 0x1A, 0, &work->sprites.resources, 1, 1.0f);
     uiSpriteSelectAnim(&work->sprites.unk02E0, 2);
-    uiSpriteStateInitFromSource(&work->sprites.unk036C, 0x1A, 0, &work->sprites.resources, 1, 1.0f);
-    uiSpriteSelectAnim(&work->sprites.unk036C, 3);
+    uiSpriteStateInitFromSource(&work->sprites.highlight, 0x1A, 0, &work->sprites.resources, 1, 1.0f);
+    uiSpriteSelectAnim(&work->sprites.highlight, 3);
 
     loadSlotEnsureLoaded(0x24);
     loadSlotEnsureLoaded(0x22);

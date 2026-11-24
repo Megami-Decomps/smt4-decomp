@@ -34,11 +34,14 @@ typedef struct InfoWindowA {
     /* 0x284 */ u32 resetState;
     /* 0x288 */ char message[0xA0];
     /* 0x328 */ void *text;                /* the message text object (spriteHandleCreate) */
-    /* 0x32C */ u8 unk32C;
-    /* 0x32D */ u8 unk32D;
+    /* 0x32C */ s8 unk32C;                 /* signed, as unk32D: retail reads both off one base (window + 0x300) */
+    /* 0x32D */ s8 unk32D;
 } InfoWindowA;
 
 extern "C" InfoWindowA *g_infoWin;
+
+/* The window's draw job (registered twice, "InfoWin DrawUpLeft" and "InfoWin DrawUpRight"). */
+extern "C" s32 infoWinDraw(u32 job);
 
 typedef char InfoWindowALayoutCheck[offsetof(InfoWindowA, textWidth) == 0x14 &&
     offsetof(InfoWindowA, hasText) == 0x31 && offsetof(InfoWindowA, parameters) == 0x34 &&

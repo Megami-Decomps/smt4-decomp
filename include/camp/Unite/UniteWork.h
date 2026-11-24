@@ -77,7 +77,7 @@ struct UniteWork {
             /* 0x01C8 */ UiSpriteState open;   /* finished once the option list has opened */
             /* 0x0254 */ UiSpriteState listOffset; /* where the demon lists' scroll bar sits in the panel */
             /* 0x02E0 */ UiSpriteState unk02E0;
-            /* 0x036C */ UiSpriteState unk036C;
+            /* 0x036C */ UiSpriteState highlight; /* the selected entry's flashing highlight: its opacity scales the overlay */
             /* 0x03F8 */ u32 process;          /* the "Unite Calc" process; the draw task is its child */
         } sprites;
         struct {
@@ -287,7 +287,7 @@ struct UniteWorkA {
             /* 0x01C8 */ UiSpriteState open;
             /* 0x0254 */ UiSpriteState listOffset;
             /* 0x02E0 */ UiSpriteState unk02E0;
-            /* 0x036C */ UiSpriteState unk036C;
+            /* 0x036C */ UiSpriteState highlight; /* the selected entry's flashing highlight: its opacity scales the overlay */
             /* 0x03F8 */ u32 process;          /* the "Unite Calc" process; the draw task is its child */
         } sprites;
         struct {
@@ -547,7 +547,7 @@ struct UniteDescriptionEntry {
 typedef char UniteWorkSizeCheck[sizeof(UniteWork) == 0x95F8 ? 1 : -1];
 typedef char UniteWorkCreateOffsets[
     offsetof(UniteWork, sprites.resources) == 0x4 && offsetof(UniteWork, sprites.unk02E0) == 0x2E0 &&
-    offsetof(UniteWork, sprites.unk036C) == 0x36C && offsetof(UniteWork, sprites.process) == 0x3F8 &&
+    offsetof(UniteWork, sprites.highlight) == 0x36C && offsetof(UniteWork, sprites.process) == 0x3F8 &&
     offsetof(UniteWork, menu.openedSeconds) == 0x41C && offsetof(UniteWork, menu.messageFile) == 0x424 &&
     offsetof(UniteWork, menu.scriptFile) == 0x428 && offsetof(UniteWork, unk9460) == 0x9460 &&
     offsetof(UniteWork, preview.camera) == 0x95D0 && offsetof(UniteWork, unk95DC) == 0x95DC &&

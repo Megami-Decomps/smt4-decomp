@@ -470,7 +470,7 @@ void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimG
                     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
                     UiSpriteState *large = &scene->badgeIconsLarge[member];
                     pairSetHalves((Obj *)large, icon->x + iconX, icon->y + iconY);
-                    large->extraScale = scene->badgeScales[member];
+                    large->rotation = scene->badgeScales[member];
                     fadeObjectResetIfActive((FadeObject *)large);
                     fadeObjectResetIfActive((FadeObject *)large);
                     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));

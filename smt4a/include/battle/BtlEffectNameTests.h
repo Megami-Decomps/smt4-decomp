@@ -3,13 +3,13 @@
 #define SMT4A_BATTLE_BTLEFFECTNAMETESTS_H
 
 #include "battle/BtlEffectLoad.h"
+#include "runtime/String.h"
 #include <string.h>
 
 extern "C" {
 extern BtlEffectNames g_btlEffect; // declcheck: local (the battle effect global's users still declare it themselves; for these helpers only)
 u32 libc_strlen(const char *text); // declcheck: local (no C-library string header owns it yet; for these helpers only)
-s32 libc_strncmp(const char *first, const char *second, u32 length);
-}
+} /* extern "C" */
 
 /* Each test checks the name for NULL itself, so retail repeats the test before every comparison and reads
  * g_btlEffect's entry only after it (IV's resolvers show the same repeated tests in retail). */

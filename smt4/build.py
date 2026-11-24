@@ -238,7 +238,8 @@ def link_weak_calls(obj, unit=None):
     - with `unit` (for its address), a branch to the very next instruction, a tail call into the
       function placed right after this one, becomes the same NOP (armlink's --branchnop default);
     - an ARM `bl` to a function of one instruction and `bx lr` becomes that instruction
-      (armlink's --inline, see `inlined_bodies`).
+      (armlink's --inline, see `inlined_bodies`); a conditional `bl` (armcc writes R_ARM_JUMP24)
+      becomes it with the call's condition (`bleq getter` -> `ldreq ...`), when its own is AL.
     armcc itself never emits these NOPs, so every one in the retail code is such a call. The
     relocation goes too. Returns how many.
 
@@ -291,6 +292,13 @@ def link_weak_calls(obj, unit=None):
                 patched += 1
             elif kind == 28 and symbol in inlined_bodies() and struct.unpack_from("<I", data, code + offset)[0] >> 24 == 0xEB:
                 struct.pack_into("<I", data, code + offset, inlined_bodies()[symbol])
+                patched += 1
+            elif (kind in (28, 29) and symbol in inlined_bodies() and inlined_bodies()[symbol] >> 28 == 0xE
+                  and struct.unpack_from("<I", data, code + offset)[0] >> 24 & 0xF == 0xB
+                  and struct.unpack_from("<I", data, code + offset)[0] >> 28 < 0xE):
+                # a conditional BL: the inlined instruction keeps the call's condition (bits 31-28)
+                condition = struct.unpack_from("<I", data, code + offset)[0] & 0xF0000000
+                struct.pack_into("<I", data, code + offset, condition | inlined_bodies()[symbol] & 0x0FFFFFFF)
                 patched += 1
             elif weak_call or next_call:  # BL/B (ARM, Thumb) to an absent weak symbol or the next instruction
                 if kind in (28, 29):

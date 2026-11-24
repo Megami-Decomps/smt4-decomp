@@ -223,9 +223,9 @@ void messageWindowSetupLayoutSprites(MessageWindow *window, u32 layout)
         }
         for (i = 0; i < (s32)window->argument; i++) {
             window->lineDelays[i] = randNextInRange(10);
-            u8 *first = &window->lineOrder[randNextInRange((u16)(window->argument - 1))];
-            u8 *second = &window->lineOrder[randNextInRange((u16)(window->argument - 1))];
-            u8 line = *first;
+            s8 *first = &window->lineOrder[randNextInRange((u16)(window->argument - 1))];
+            s8 *second = &window->lineOrder[randNextInRange((u16)(window->argument - 1))];
+            s8 line = *first;
             *first = *second;
             *second = line;
         }

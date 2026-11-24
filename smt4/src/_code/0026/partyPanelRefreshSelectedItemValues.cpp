@@ -7,7 +7,7 @@ s32 objectPartRunUnlessLocked(void *selection); // declcheck: local (the shared 
 void btlItemComputeValues(s32 unit, u16 item, s32 *first, s32 *second); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void pair40Set(PartyPanelWidget *widget, s32 first, s32 second); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_00298d28(s32 first, s32 second); // declcheck: local (the shared declaration does not compile here or changes this unit)
-void FUN_0026cba4(s32 unit, s32 index, u32 isStock);
+void partyPanelPreviewStatItem(s32 unit, s32 index, u32 isStock); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Updates the item-effect values of the selected active-party or stock unit and its preview widget. */
 void partyPanelRefreshSelectedItemValues(void *selection, s32 stockOnly)
@@ -28,7 +28,7 @@ void partyPanelRefreshSelectedItemValues(void *selection, s32 stockOnly)
         }
         pair40Set(panel->characters[index], first, second);
         FUN_00298d28(first, second);
-        FUN_0026cba4(unit, index, 0);
+        partyPanelPreviewStatItem(unit, index, 0);
     } else {
         if (stockOnly) {
             if (panel->alternate) {
@@ -51,7 +51,7 @@ void partyPanelRefreshSelectedItemValues(void *selection, s32 stockOnly)
         btlItemComputeValues(panel->entries[index].packedIndex, panel->previewItem, &first, &second);
         pair40Set(panel->demons[index], first, second);
         FUN_00298d28(first, second);
-        FUN_0026cba4(panel->entries[index].packedIndex, index, 1);
+        partyPanelPreviewStatItem(panel->entries[index].packedIndex, index, 1);
     }
 }
 }

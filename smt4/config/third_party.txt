@@ -887,6 +887,7 @@
 0x001523e0 FUN_001523e0 between
 0x001524d4 nw_snd_internal_driver_VoiceManager_GetVoiceCount name
 0x00152530 _ZN9Obj42259410initializeEPKv between
+0x001525cc __ARM_common_memset4_6 name
 0x001525e4 FUN_001525e4 callers
 0x001525e8 FUN_001525e8 callers
 0x001525f8 FUN_001525f8 between
@@ -1549,7 +1550,7 @@
 0x002b46f8 libc_bsearch name
 0x002b47f4 fileSlotGetBuffer between
 0x002b4b80 FUN_002b4b80 linker
-0x002b4b88 FUN_002b4b88 between
+0x002b4b88 __aeabi_vec_delete name
 0x002b4b94 soundRequestQueueDequeueUntilToken between
 0x002b4bf8 nw_snd_internal_driver_Voice_Free name
 0x002b4c60 nw_snd_internal_driver_Voice_Stop name

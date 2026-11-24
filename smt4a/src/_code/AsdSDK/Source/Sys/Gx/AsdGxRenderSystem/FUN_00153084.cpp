@@ -16,7 +16,7 @@ typedef char AsdGxSurfaceDescriptionSize[sizeof(AsdGxSurfaceDescription) == 0x18
 extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
 void *asdMemoryAllocAligned(u32, u32, u32, u32, u32, u32);
-extern const char DAT_0053d704[];
+extern const char g_asdGxRenderSystemSourceFileName[];
 
 /* Describe both framebuffer surfaces and optionally allocate their backing storage. */
 void FUN_00153084(AsdGxFramebuffer *framebuffer, const AsdGxSurfaceDescription *description, s32 allocate)
@@ -81,15 +81,15 @@ void FUN_00153084(AsdGxFramebuffer *framebuffer, const AsdGxSurfaceDescription *
             void *data = NULL;
             switch (source->location) {
             case 0x10000:
-                asdDebugTrace(DAT_0053d704, 2663);
+                asdDebugTrace(g_asdGxRenderSystemSourceFileName, 2663);
                 data = asdMemoryAllocAligned(0x10000, 0x100, 0, bytes, 0x40, 1);
                 break;
             case 0x20000:
-                asdDebugTrace(DAT_0053d704, 2664);
+                asdDebugTrace(g_asdGxRenderSystemSourceFileName, 2664);
                 data = asdMemoryAlloc(0x20000, 0x100, 0, bytes, 1);
                 break;
             case 0x30000:
-                asdDebugTrace(DAT_0053d704, 2665);
+                asdDebugTrace(g_asdGxRenderSystemSourceFileName, 2665);
                 data = asdMemoryAlloc(0x30000, 0x100, 0, bytes, 1);
                 break;
             }

@@ -130,7 +130,7 @@ int FUN_001681c4(void);
 int messageSetScriptDisplayMode(void);
 int mapPopupReset(void);
 int FUN_00234b30(void);
-int FUN_00235438(void);
+int questDispatchProgressNotices(void);
 int gameDataCopySaveToWork(void);
 int FUN_002737a8(void);
 int scrScriptProcessStartEntry(...);
@@ -437,7 +437,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_002342b8. */
 /* Supplied declaration required: popupTryStartScrollPrompt. */
 /* Supplied declaration required: FUN_00234b30. */
-/* Supplied declaration required: FUN_00235438. */
+/* Supplied declaration required: questDispatchProgressNotices. */
 /* Supplied declaration required: gameDataCopySaveToWork. */
 /* Supplied declaration required: FUN_00239b10. */
 /* Supplied declaration required: FUN_00244ac8. */
@@ -1508,7 +1508,7 @@ LAB_00276f5c:
       puVar19 = (unsigned int *)&g_gameState;
       DAT_005f1acb = '\0';
     }
-    FUN_00235438();
+    questDispatchProgressNotices();
     if (puVar19 != (unsigned int *)0x1) {
       if (puVar19 != (unsigned int *)0x2) {
         if (puVar19 != (unsigned int *)0x3) {

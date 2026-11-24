@@ -7,7 +7,7 @@
 
 extern "C" {
 void textFormatFullWidthNumber(char *out, s32 value);
-void FUN_002ad414(s32 a, s32 b, s32 c, char *text);
+void ailmentResistanceSummaryFormat(s32 a, s32 b, s32 c, char *text);
 void battleAttributeFormatName(char *buffer, u32 attribute);
 void skillFormatTargetLabel(char *buffer, u32 target);
 void asdTextDrawDirectoryEntry(u32 directory, s32 a, s32 b, s32 c, s32 d, s32 e, u32 f);
@@ -60,7 +60,7 @@ void FUN_003aeb18(s32 textId, u32 flags)
     if (first->element == 13)
         sprintf(text, "\x82\x6C\x82\x95\x82\x94\x82\x85"); /* Ｍｕｔｅ */
     scrSetStringSlot(0x28, text);
-    FUN_002ad414(1, 0, 0, text);
+    ailmentResistanceSummaryFormat(1, 0, 0, text);
     scrSetStringSlot(0x29, text);
     if (textId == 0)
         textId = reinterpret_cast<s32>(g_buttonHelp.mbm); /* this function passes the directory as an integer */

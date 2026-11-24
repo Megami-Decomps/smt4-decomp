@@ -9,6 +9,6 @@ extern "C" {
 /* Whether inherited-skill flag `index` of a unit record is set. */
 u8 bitSetTest(const SlotRecordA *record, u32 index);
 
-void ARM_common_memset4_6(Bytes6 *dest, u32 value);
+void __ARM_common_memset4_6(Bytes6 *dest, u32 value);
 
 } /* extern "C" */

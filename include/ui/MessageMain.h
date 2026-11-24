@@ -37,7 +37,7 @@ struct MessageWindow {
     /* 0x036 */ u8 priority;
     /* The kind-12 window (messageWindowSetupLayoutSprites): up to five shuffled message lines, each with a card sprite (7 to 11). */
     /* 0x037 */ u8 cardStates[5];
-    /* 0x03C */ u8 lineOrder[5];         /* the message line each row shows */
+    /* 0x03C */ s8 lineOrder[5];         /* the message line each row shows */
     /* 0x041 */ u8 lineStates[5];
     /* 0x046 */ u8 lineDelays[5];        /* a random number below 10 for each row */
     /* 0x04B */ u8 unk04B;
@@ -82,7 +82,10 @@ struct MessageWindow {
     /* 0xA19 */ u8 unkA19;
     /* 0xA1A */ u16 savedHelpValues[6];
     /* 0xA26 */ u8 enabled;
-    /* 0xA27 */ u8 unkA27[0xD];
+    /* 0xA27 */ u8 unkA27;
+    /* 0xA28 */ f32 promptOpacity;       /* the page prompt's pulsing overlay */
+    /* 0xA2C */ u8 unkA2C[4];
+    /* 0xA30 */ f32 promptY;             /* the page prompt's bobbing height */
     /* 0xA34 */ u8 unkA34;
     /* 0xA35 */ u8 unkA35[3];
     /* 0xA38 */ s32 taskValue;
@@ -105,7 +108,8 @@ typedef char MessageWindowOffsetsCheck[
     offsetof(MessageWindow, panelStep) == 0x8C && offsetof(MessageWindow, panelCount) == 0x90 && offsetof(MessageWindow, unk098) == 0x98 &&
     offsetof(MessageWindow, parameters) == 0xA4 && offsetof(MessageWindow, sprites) == 0xC4 && offsetof(MessageWindow, sprites[12]) == 0x754 &&
     offsetof(MessageWindow, displayMode) == 0xA11 && offsetof(MessageWindow, savedHelpValues) == 0xA1A &&
-    offsetof(MessageWindow, enabled) == 0xA26 && offsetof(MessageWindow, taskValue) == 0xA38 &&
+    offsetof(MessageWindow, enabled) == 0xA26 && offsetof(MessageWindow, promptOpacity) == 0xA28 &&
+    offsetof(MessageWindow, promptY) == 0xA30 && offsetof(MessageWindow, taskValue) == 0xA38 &&
     sizeof(MessageWindow) == 0xA3C ? 1 : -1];
 typedef char MessageMainSizeCheck[sizeof(MessageMain) == 0x10 ? 1 : -1];
 

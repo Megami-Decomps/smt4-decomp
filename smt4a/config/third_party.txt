@@ -3319,6 +3319,7 @@
 0x001b3ea4 nw_snd_internal_Util_BitFlag_GetValue name
 0x001b3f20 nw_snd_internal_driver_VoiceManager_GetVoiceCount name
 0x001b3f7c _ZN9Obj42259410initializeEPKv between
+0x001b4018 __ARM_common_memset4_6 name
 0x001b4030 __hardfp_fmodf name
 0x001b410c FUN_001b410c callers
 0x001b4110 FUN_001b4110 callers

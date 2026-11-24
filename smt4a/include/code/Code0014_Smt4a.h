@@ -10,4 +10,7 @@ u8 FUN_00146650(void);
 
 void tripleClear(Triple *object);
 
+/* The sound volume setting byte. */
+u8 soundVolumeSettingGet(void);
+
 } /* extern "C" */

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002db06c` (_code @ 0x2db06c, 0x2310 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlockA.h"
+#include "code/Code0014_Smt4a.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -11,7 +12,6 @@ int mapEplSetSlotPosition(...);
 int controllerSetDestination(...);
 int animationSelectClip(...);
 
-int soundVolumeSettingGet(void);
 int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int curveInterpolatePacked(void);

@@ -16,7 +16,7 @@ struct RandomTargetFields {
     } sub;
 };
 
-/* Clears the four action-parameter halfwords inside the +0x164 combatant subobject (matches clearTwoWords at +0x1ce in btlEntryApplyOptionOverrides and FUN_003eee9c). */
+/* Clears the four action-parameter halfwords inside the +0x164 combatant subobject (matches clearTwoWords at +0x1ce in btlEntryApplyOptionOverrides and btlMainLeaveFixedParty). */
 static __inline void clearActionParameters(RandomTargetFields::SubData *sub)
 {
     if (sub != NULL) {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00114474` (_code @ 0x114474, 0x1800 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "ui/ButtonHelp.h"
+#include "ui/MessageControl.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
@@ -42,7 +43,6 @@ typedef struct {
 
 extern int DAT_0043e18c; /* 0x43e18c */
 extern int DAT_0043e190; /* 0x43e190 */
-extern int DAT_0049381c; /* 0x49381c */
 extern int DAT_00493820; /* 0x493820 */
 extern unsigned int DAT_00493824; /* 0x493824 */
 extern signed char DAT_00493828; /* 0x493828 */
@@ -314,7 +314,7 @@ LAB_001149c8:
       if ((*(unsigned int *)(temp_v3 + 0xc) & 8) != 0) {
         if (DAT_00493829 != '\0') {
           DAT_00493829 = '\0';
-          DAT_0049381c = 0;
+          g_messageControl.holdFrames = 0;
           DAT_0049382a = '\0';
         }
         else {
@@ -1015,12 +1015,12 @@ LAB_00115ad8:
     }
     if (*(char *)(temp_v3 + 0x83) != '\0') {
       DAT_00493829 = '\0';
-      DAT_0049381c = 0;
+      g_messageControl.holdFrames = 0;
       DAT_0049382a = '\0';
     }
     if ((DAT_00493828 == '\0') || (*(char *)(*(int *)(temp_v3 + 4) + 0x44) != '\x02')) {
       DAT_00493829 = '\0';
-      DAT_0049381c = 0;
+      g_messageControl.holdFrames = 0;
       DAT_0049382a = '\0';
     }
     else {
@@ -1032,14 +1032,14 @@ LAB_00115ad8:
         else {
           temp_v6 = 8;
         }
-        if (DAT_0049381c < temp_v6) {
-          DAT_0049381c = DAT_0049381c + 1;
+        if (g_messageControl.holdFrames < temp_v6) {
+          g_messageControl.holdFrames = g_messageControl.holdFrames + 1;
         }
         else {
           temp_v7 = *(char *)(temp_v3 + 9);
           if ((temp_v7 != '\a' && temp_v7 != '\b') && (temp_v7 != '\t')) {
             DAT_00493829 = '\x01';
-            DAT_0049381c = 0;
+            g_messageControl.holdFrames = 0;
             DAT_0049382a = '\0';
           }
         }

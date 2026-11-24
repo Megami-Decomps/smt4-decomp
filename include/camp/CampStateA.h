@@ -83,7 +83,12 @@ typedef struct CampStateA {
     /* 0x32A9 */ u8 slotRequestPending;     /* set by menu item 7 with slot request 10 */
     /* 0x32AA */ u8 unk32AA[6];
     /* 0x32B0 */ s8 noticeFlags[7];
-    /* 0x32B7 */ u8 unk32B7[0x101];
+    /* 0x32B7 */ u8 unk32B7;
+    /* 0x32B8 */ GridNavigation upgradeGrid;    /* the equipment-upgrade list (campUpgradeListUpdate) */
+    /* 0x331C */ s32 upgradeIds[7];         /* its rows: the equipment's item id ... */
+    /* 0x3338 */ s32 upgradeParameters[7];  /* ... and what names it to the upgrade functions (itemSelectionCanUse) */
+    /* 0x3354 */ u8 unk3354[0xE];           /* cleared when the list opens */
+    /* 0x3362 */ u8 unk3362[0x56];
     /* 0x33B8 */ u32 usedItem;              /* the item last used from the item list */
     /* 0x33BC */ u8 unk33BC[4];
 } CampStateA;
@@ -105,6 +110,9 @@ typedef char CampStateAMenuFlagsOffsetCheck[offsetof(CampStateA, unk000C) == 0xC
     offsetof(CampStateA, questMenuOpened) == 0x3178 && offsetof(CampStateA, slotRequestPending) == 0x32A9 ? 1 : -1];
 typedef char CampStateAItemOffsetCheck[offsetof(CampStateA, selectedId) == 0x34 &&
     offsetof(CampStateA, usedItem) == 0x33B8 ? 1 : -1];
+typedef char CampStateAUpgradeOffsetCheck[offsetof(CampStateA, upgradeGrid) == 0x32B8 &&
+    offsetof(CampStateA, upgradeIds) == 0x331C && offsetof(CampStateA, upgradeParameters) == 0x3338 &&
+    offsetof(CampStateA, unk3354) == 0x3354 ? 1 : -1];
 typedef char CampStateASizeCheck[sizeof(CampStateA) == 0x33C0 ? 1 : -1];
 
 #ifdef __cplusplus

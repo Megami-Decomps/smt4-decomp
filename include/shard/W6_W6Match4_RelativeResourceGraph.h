@@ -46,6 +46,17 @@ struct GraphicsModelDictionary {
     u8 prefix[0x1C];
     GraphicsModelDictionaryEntry entries[1];
 };
+struct GraphicsShaderBinary {
+    /* 0x00 */ ResourceRelativePointer<void> data;
+};
+struct GraphicsShaderResource {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ ResourceRelativePointer<GraphicsShaderBinary> binary;
+};
+struct GraphicsShaderDictionary {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ ResourceRelativePointer<GraphicsShaderResource> first;
+};
 struct RelativeResourceBlob {
     union {
         u8 unk00[0x20];
@@ -58,6 +69,8 @@ struct RelativeResourceBlob {
         ResourceRelativePointer<RelativeResourceTable> table; // 0x20
         ResourceRelativePointer<GraphicsModelDictionary> modelDictionary; // 0x20
     };
+    /* 0x24 */ u8 unk24[0x1C];
+    /* 0x40 */ ResourceRelativePointer<GraphicsShaderDictionary> shaders;
 };
 struct RelativeResourceView {
     u8 unk00[0x18];
@@ -82,7 +95,8 @@ struct GraphicsResourceFile {
     GraphicsModelDictionaryEntry *end() const { return begin() + data->models.modelCount; }
 };
 typedef char GraphicsResourceGraphLayoutCheck[
-    sizeof(RelativeResourceRecord) == 0xCC && sizeof(RelativeResourceBlob) == 0x24 &&
+    sizeof(RelativeResourceRecord) == 0xCC && sizeof(RelativeResourceBlob) == 0x44 &&
+    __INTADDR__(&((RelativeResourceBlob *)0)->shaders) == 0x40 &&
     sizeof(GraphicsModelDictionaryEntry) == 0x10 && sizeof(GraphicsResourceFile) == 4 &&
     __INTADDR__(&((RelativeResourceRecord *)0)->elementList.count) == 0xC4 &&
     __INTADDR__(&((GraphicsModelDictionary *)0)->entries) == 0x1C &&

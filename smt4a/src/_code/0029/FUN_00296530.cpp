@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00296530` (_code @ 0x296530, 0xad4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlockA.h"
+#include "code/Code0032_Smt4a.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -14,7 +15,6 @@ int handleRegistryRegisterObject(...);
 int vec4Forward(void);
 int FUN_003135bc(void);
 int mapSpawnRandomEventKindEffect(void);
-int FUN_00324e38(...);
 int FUN_00385578(void);
 int linkHolderCallFirst(...);
 int controllerGetSourceValue(...);

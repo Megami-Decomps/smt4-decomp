@@ -4,12 +4,11 @@
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match8_BattleSpritePlacement.h"
-#include "battle/BtlEntryLookup.h"
+#include "battle/EnemyRenderTex.h"
 
 extern "C" {
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, BtlActionRecord *action);
 u32 tableFileFindByKeyPair(BtlMainStateA *battle, s32 actor, u16 id);
-void FUN_00401d18(BattleSpritePlacement *placement, u32 mask, u32 flags, u32 value);
 void FUN_00402290(BattleSpritePlacement *placement);
 
 /* Reuses an active placement or starts the matching inactive placement for an action's subject. */
@@ -61,7 +60,8 @@ s32 FUN_004f7924(void *owner, BtlActionRecord *action)
                 if (actor >= 0) {
                     value = tableFileFindByKeyPair(battle, (s16)actor, id);
                 }
-                FUN_00401d18(placement, 0x20000, 0x20000, value);
+                /* the placement is the entry's render texture (EnemyRenderTex) */
+                enemyRenderTexSetup((EnemyRenderTex *)placement, 0x20000, 0x20000, (const EnemyRenderTexConfiguration *)value);
                 FUN_00402290(placement);
             }
             placements->entries[index].flags |= 1;

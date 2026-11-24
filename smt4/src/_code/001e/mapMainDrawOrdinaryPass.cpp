@@ -3,7 +3,7 @@
 
 extern "C" {
 void mapEplUpdateEntriesIfAny(void);
-void FUN_001f9f64(void);
+void mapEnemyDrawWorldMarkers(void);
 void MapMain_DrawMinimapIcons(void);
 
 u32 mapMainDrawOrdinaryPass(u32 job)
@@ -25,7 +25,7 @@ u32 mapMainDrawOrdinaryPass(u32 job)
         return 0;
     RenderCtx *context = g_titleScene;
     renderCtxPushA(context, renderCtxPackPassFlags(5, 0));
-    FUN_001f9f64();
+    mapEnemyDrawWorldMarkers();
     MapMain_DrawMinimapIcons();
     renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     mapEplUpdateEntriesIfAny();

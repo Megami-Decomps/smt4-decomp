@@ -1,13 +1,20 @@
-#include "common.h"
+#include "nw/gfx/SceneBuilder.h"
+
+using nw::gfx::SceneBuilderParams;
+using nw::gfx::SceneNode;
 
 extern "C" {
 
-void nw_gfx_SceneBuilder_CreateObjectByResourceType(u32 *object, s32 a, s32 b, s32 c, u32 d, u32 e, u32 f, s32 g, s32 h);
+SceneNode *nw_gfx_SceneBuilder_CreateObjectByResourceType(SceneBuilderParams *params, u32 *size, s32 arg,
+    void *storage, RelativeResourceRecord *resource, AsdAllocator *allocator, AsdAllocator *deviceAllocator,
+    s32 arg7, s32 arg8);
 
-/* Forwards to nw_gfx_SceneBuilder_CreateObjectByResourceType with the object, its first word and the two arguments, padding the rest with zeros. */
-void nw_gfx_SceneBuilder_CreateObject(u32 *object, u32 a, u32 b)
+/* Builds a scene object from the resource in the caller's parameters. */
+SceneNode *nw_gfx_SceneBuilder_CreateObject(SceneBuilderParams *params, AsdAllocator *allocator,
+                                           AsdAllocator *deviceAllocator)
 {
-    nw_gfx_SceneBuilder_CreateObjectByResourceType(object, 0, 0, 0, *object, a, b, 0, 0);
+    return nw_gfx_SceneBuilder_CreateObjectByResourceType(params, NULL, 0, NULL, params->resource,
+                                                          allocator, deviceAllocator, 0, 0);
 }
 
 } /* extern "C" */

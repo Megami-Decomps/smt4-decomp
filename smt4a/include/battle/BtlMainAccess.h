@@ -12,6 +12,7 @@ struct BtlPanelSlotA {
 };
 
 struct PartySlotA;
+struct BtlFixedPartySnapshotA;
 
 /* The battle state block as the script and panel code see it: the canonical block followed by the
  * fields the allocation keeps past BtlMainStateA's 0x4CF0 bytes. */
@@ -25,7 +26,7 @@ struct BtlMainStateExtA : BtlMainStateA {
     /* 0x4D70 */ u8 unk4D70[8];
     /* 0x4D78 */ BtlPanelSlotA slots[12];
     /* 0x4E38 */ u8 unk4E38[0x10];
-    /* 0x4E48 */ void *snapshot;      /* 0x34A0 bytes, allocated with the battle's party data */
+    /* 0x4E48 */ BtlFixedPartySnapshotA *snapshot; /* 0x34A0 bytes, allocated with the battle's party data (battle/BtlFixedPartySnapshot.h) */
     /* 0x4E4C */ u8 unk4E4C[0xC];
     /* 0x4E58 */ std::vector<u16> members; /* the ids of the battle members, in order */
 };

@@ -218,6 +218,13 @@ struct TextureCreateInfoIV {
         : height(0), width(0), unk08(1), unk0C(0x02020000), data(NULL), hardwareFormat(0), flag18(0), flag19(1)
     {
     }
+
+    /* The descriptor is filled as a chain on a temporary (NintendoWare's builder idiom), in the call that
+     * creates the texture: retail fetches the allocator argument first and fills the descriptor after it. */
+    TextureCreateInfoIV &setData(void *value) { data = value; return *this; }
+    TextureCreateInfoIV &setHardwareFormat(u32 value) { hardwareFormat = value; return *this; }
+    TextureCreateInfoIV &setWidth(s32 value) { width = value; return *this; }
+    TextureCreateInfoIV &setHeight(s32 value) { height = value; return *this; }
 #endif
 };
 typedef char TextureCreateInfoIVLayoutCheck[

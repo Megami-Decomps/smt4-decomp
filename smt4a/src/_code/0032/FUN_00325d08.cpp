@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00325d08` (_code @ 0x325d08, 0x1440 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlockA.h"
+#include "code/Code0014_Smt4a.h"
+#include "code/Code0032_Smt4a.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 
@@ -27,14 +29,12 @@ int moriModelUnitStartMaterialAnimation(...);
 int gameCounterAddSaturating(...);
 int SBORROW4(...);
 
-int soundVolumeSettingGet(void);
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int mapEaseSceneHeading(void);
 int FUN_003135bc(...);
 int mapSetSceneState(...);
 int padGetNormalizedAnalogStick(...);
 int mapSpawnRandomEventKindEffect(void);
-int FUN_00324e38(...);
 int FUN_00325998(int, int);
 int soundActorStartOnFreeChannel(...);
 int slotTargetApplyActiveValue(unsigned int);

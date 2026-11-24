@@ -70,8 +70,10 @@ struct NkmEnemyRecordA {
     /* 0x0C */ u16 stats[5];            /* the thresholds scripts compare the player's stats with */
     /* 0x16 */ u16 flags;               /* bit 2: the target panel hides the demon until it is registered */
     /* 0x18 */ u8 unk18[0xC];
-    /* 0x24 */ u16 resistances[8];      /* bits 10 and up hold the kind shown on the target panel */
-    /* 0x34 */ u8 unk34[0x1C];
+    union {
+        /* 0x24 */ u16 resistances[8];  /* bits 10 and up hold the kind shown on the target panel */
+        /* 0x24 */ u16 affinities[22];  /* the same entries with the ailments' (11-19); low 10 bits: the rate */
+    };
     /* 0x50 */ u16 skills[8];
     /* 0x60 */ Table00Choice choices[3];
     /* 0x72 */ u8 unk72[2];

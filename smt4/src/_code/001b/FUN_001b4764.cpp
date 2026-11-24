@@ -27,7 +27,7 @@ void FUN_001b4764(void)
     scene->pose.lastPosition.z = 10.0f;
     scene->pose.heading = -90.0f;
     scene->pose.targetHeading = -90.0f;
-    scene->unk068 = 0.0f;
+    scene->verticalSpeed = 0.0f;
     scene->unk06C = 0;
     scene->moveMode = 0;
     scene->moveSpeed = 5.0f;

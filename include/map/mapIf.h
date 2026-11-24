@@ -138,7 +138,7 @@ typedef struct MapIfNotice {
 
 /* The interface's fade (0x18 bytes). */
 typedef struct MapIfFade {
-    /* 0x00 */ u8 active;
+    /* 0x00 */ s8 active;
     /* 0x01 */ u8 unk01;
     /* 0x02 */ s16 id;
     /* 0x04 */ s16 step;
@@ -196,6 +196,8 @@ typedef char MapIfPrimaryRecordOffset[offsetof(MapIfState, primary) == 0x3c &&
 typedef struct MapIfGlobals {
     /* 0x00 */ MapIfState *state;
     /* 0x04 */ MapIfWidgets *widgets;
+    /* 0x08 */ s32 markerFrame;    /* frames the floating marker has been drawn (its sprite sheet step) */
+    /* 0x0C */ f32 markerPhase;    /* the marker's bobbing phase, radians */
 } MapIfGlobals;
 
 /* The interface's state block (Apocalypse layout, 0xCD30 bytes). */
@@ -265,7 +267,7 @@ typedef struct MapIfGlobalsA {
 typedef char MapIfRecordSizeCheck[sizeof(MapIfRecord) == 0x194 ? 1 : -1];
 typedef char MapIfStateSizeCheck[sizeof(MapIfState) == 0xCCE8 ? 1 : -1];
 typedef char MapIfStateASizeCheck[sizeof(MapIfStateA) == 0xCD30 ? 1 : -1];
-typedef char MapIfGlobalsSizeCheck[sizeof(MapIfGlobals) == 0x8 ? 1 : -1];
+typedef char MapIfGlobalsSizeCheck[sizeof(MapIfGlobals) == 0x10 ? 1 : -1];
 typedef char MapIfGlobalsASizeCheck[sizeof(MapIfGlobalsA) == 0x8 ? 1 : -1];
 typedef char MapIfStateAHeadCheck[offsetof(MapIfStateA, unk1C) == 0x1C ? 1 : -1];
 typedef char MapIfStateAPrimaryOffsetCheck[

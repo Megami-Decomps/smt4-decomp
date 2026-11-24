@@ -10,7 +10,6 @@
 extern "C" {
 
 void workSetStateByte(UiSpriteState *element, u8 state);
-s8 uiSpriteGetScaleDone(const UiSpriteState *sprite);
 
 /* Advances the row list by a frame: the removed marks that are still turning away, the state's own
  * animation (opening, applying a change of rows and marks, closing, the banner), the sprites that

@@ -1,4 +1,8 @@
-/* NON_MATCHING: animation-key iteration and layer/line interpolation use different VFP and loop registers. */
+/* NON_MATCHING: 419 raw / 335 shape lines (from 585/537). The particles, layers, lines and states compute what
+ * retail computes; the state cases are in retail's layout order (0, 2, 1: armcc lays case bodies out in source
+ * order). Left: the float constants sit in other VFP registers (10 and 256 swap s16/s20); retail loads a layer's
+ * three frame counters with one ldm before its phase wrap and stores the wrap through the layer pointer; the key
+ * arrays are re-read here; the layer curves place their frames >= 28 arms out of line in retail. */
 #include "result/WhisperEffect.h"
 #include "shard/JobWork.h"
 #include <stddef.h>
@@ -11,49 +15,9 @@ typedef char CheckWhisperViewSize[sizeof(WhisperAnimationView) == 0x1b8 ? 1 : -1
 extern "C" f32 randomGetNormalizedFloat();
 extern "C" s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 
-static __inline void updateWhisperLine(WhisperLineAnimation *line)
-{
-    s32 frame = ++line->positionFrame;
-    s32 blinkFrame = ++line->blinkFrame;
-    const WhisperPositionKey *keys = line->positions;
-    s32 segment = 1;
-    if (frame >= keys[0].frame) {
-        if (frame < keys[1].frame)
-            segment = 1;
-        else if (frame < keys[2].frame)
-            segment = 2;
-        else if (frame >= keys[2].frame)
-            line->positionFrame = frame - keys[2].frame;
-    } else if (frame >= keys[2].frame) {
-        line->positionFrame = frame - keys[2].frame;
-    }
-    f32 elapsed = static_cast<f32>(line->positionFrame - keys[segment - 1].frame);
-    f32 duration = static_cast<f32>(keys[segment].frame - keys[segment - 1].frame);
-    if (elapsed < 0.0f)
-        elapsed = 0.0f;
-    line->x = ((keys[segment].x - keys[segment - 1].x) * elapsed) / duration + keys[segment - 1].x;
-    line->y = ((keys[segment].y - keys[segment - 1].y) * elapsed) / duration + keys[segment - 1].y;
-    line->z = ((keys[segment].z - keys[segment - 1].z) * elapsed) / duration + keys[segment - 1].z;
-    const WhisperBlinkKey *blink = line->blink;
-    s32 blinkIndex = 0;
-    if (blinkFrame >= blink[0].frame) {
-        if (blinkFrame >= blink[1].frame)
-            line->blinkFrame = blinkFrame - blink[1].frame;
-        else
-            blinkIndex = 1;
-    }
-    line->alpha = blink[blinkIndex].visible ? 1.0f : 0.0f;
-    if (line->alpha != 0.0f && line->visible != 0.0f) {
-        if (++line->tick >= 4) {
-            ++line->frame;
-            line->tick -= 4;
-            if (line->frame >= line->frameCount)
-                line->frame -= line->frameCount;
-        }
-    }
-}
-
-// Animate the result-screen whisper layers, keyframed lines and final fade-out.
+/* Animates the result screen's whisper effect: the two jittering particles, the three layers' scale, opacity and
+ * phase curves and the five keyframed text lines, then steps the effect's state (wait for the textures, start the
+ * fade on request, fade out; returns ~0 once faded). */
 extern "C" u32 whisperAdvanceAnimations(u32 job)
 {
     WhisperAnimationView *effect = (WhisperAnimationView *)jobGetWork(job);
@@ -76,64 +40,103 @@ extern "C" u32 whisperAdvanceAnimations(u32 job)
         effect->layers[0].advancePhase();
         effect->layers[1].advancePhase();
         effect->layers[2].advancePhase();
-        for (s32 i = 0; i < 5; ++i)
-            updateWhisperLine(&effect->lines[i]);
-        WhisperLayerAnimation *first = &effect->layers[0];
-        if (first->scaleFrame < 28)
-            first->scale = static_cast<f32>(first->scaleFrame) * 0.4f * 0.035714287f + 2.6f;
-        else if (first->scaleFrame >= 328)
-            first->scale = 3.3f;
-        else
-            first->scale = (static_cast<f32>(first->scaleFrame) - 28.0f) * 0.3f * 0.0033333334f + 3.0f;
-        if (first->phaseFrame == 27) {
-            first->phase = 0.0f;
-            first->rate = 0.028444446623325348f;
+        for (s32 i = 0; i < 5; ++i) {
+            WhisperLineAnimation *line = &effect->lines[i];
+            s32 frame = ++line->positionFrame;
+            s32 blinkFrame = ++line->blinkFrame;
+            s32 segment = 1;
+            if (frame < line->positions[0].frame) {
+                if (frame >= line->positions[2].frame)
+                    line->positionFrame = frame - line->positions[2].frame;
+            } else if (frame >= line->positions[1].frame) {
+                if (frame < line->positions[2].frame)
+                    segment = 2;
+                else if (frame >= line->positions[2].frame)
+                    line->positionFrame = frame - line->positions[2].frame;
+            }
+            f32 elapsed = static_cast<f32>(line->positionFrame - line->positions[segment - 1].frame);
+            f32 duration = static_cast<f32>(line->positions[segment].frame - line->positions[segment - 1].frame);
+            if (elapsed < 0.0f)
+                elapsed = 0.0f;
+            line->x = ((line->positions[segment].x - line->positions[segment - 1].x) * elapsed) / duration + line->positions[segment - 1].x;
+            line->y = ((line->positions[segment].y - line->positions[segment - 1].y) * elapsed) / duration + line->positions[segment - 1].y;
+            line->z = ((line->positions[segment].z - line->positions[segment - 1].z) * elapsed) / duration + line->positions[segment - 1].z;
+            s32 blinkIndex;
+            if (blinkFrame < line->blink[0].frame) {
+                blinkIndex = 0;
+            } else if (blinkFrame >= line->blink[1].frame) {
+                line->blinkFrame = blinkFrame - line->blink[1].frame;
+                blinkIndex = 0;
+            } else {
+                blinkIndex = 1;
+            }
+            line->alpha = line->blink[blinkIndex].visible ? 1.0f : 0.0f;
+            if (line->alpha != 0.0f && line->visible != 0.0f) {
+                if (++line->tick >= 4) {
+                    ++line->frame;
+                    line->tick -= 4;
+                    if (line->frame >= line->frameCount)
+                        line->frame -= line->frameCount;
+                }
+            }
         }
-        if (first->alphaFrame < 28)
-            first->alpha = static_cast<f32>(first->alphaFrame) * 0.86f * 0.035714287f;
-        else if (first->alphaFrame >= 328)
-            first->alpha = 0.45f;
+        if (effect->layers[0].scaleFrame < 28)
+            effect->layers[0].scale = static_cast<f32>(effect->layers[0].scaleFrame) * 0.4f * 0.035714287f + 2.6f;
+        else if (effect->layers[0].scaleFrame >= 328)
+            effect->layers[0].scale = 3.3f;
         else
-            first->alpha = 0.86f - (static_cast<f32>(first->alphaFrame) * 0.41f - 28.0f) * 0.0033333334f;
-        WhisperLayerAnimation *second = &effect->layers[1];
-        if (second->scaleFrame < 28)
-            second->scale = static_cast<f32>(second->scaleFrame) * 0.2f * 0.035714287f + 1.8f;
-        else if (second->scaleFrame >= 328)
-            second->scale = 5.5f;
+            effect->layers[0].scale = (static_cast<f32>(effect->layers[0].scaleFrame) - 28.0f) * 0.3f * 0.0033333334f + 3.0f;
+        if (effect->layers[0].phaseFrame == 27) {
+            effect->layers[0].phase = 0.0f;
+            effect->layers[0].rate = 0.028444446623325348f;
+        }
+        if (effect->layers[0].alphaFrame < 28)
+            effect->layers[0].alpha = static_cast<f32>(effect->layers[0].alphaFrame) * 0.86f * 0.035714287f;
+        else if (effect->layers[0].alphaFrame >= 328)
+            effect->layers[0].alpha = 0.45f;
         else
-            second->scale = (static_cast<f32>(second->scaleFrame) * 0.5f - 28.0f) * 0.0033333334f + 5.0f;
-        second->alpha = second->alphaFrame < 28 ? 0.0f : 0.5f;
-        WhisperLayerAnimation *third = &effect->layers[2];
-        if (third->scaleFrame >= 828)
-            third->scale = 2.45f;
+            effect->layers[0].alpha = 0.86f - (static_cast<f32>(effect->layers[0].alphaFrame) * 0.41f - 28.0f) * 0.0033333334f;
+        if (effect->layers[1].scaleFrame < 28)
+            effect->layers[1].scale = static_cast<f32>(effect->layers[1].scaleFrame) * 0.2f * 0.035714287f + 1.8f;
+        else if (effect->layers[1].scaleFrame >= 328)
+            effect->layers[1].scale = 5.5f;
         else
-            third->scale = 2.6f - static_cast<f32>(third->scaleFrame) * 0.15f * 0.0012077295f;
-        if (third->alphaFrame < 28)
-            third->alpha = 0.0f;
-        else if (third->alphaFrame >= 40)
-            third->alpha = 0.5f;
+            effect->layers[1].scale = (static_cast<f32>(effect->layers[1].scaleFrame) * 0.5f - 28.0f) * 0.0033333334f + 5.0f;
+        effect->layers[1].alpha = effect->layers[1].alphaFrame < 28 ? 0.0f : 0.5f;
+        if (effect->layers[2].scaleFrame >= 828)
+            effect->layers[2].scale = 2.45f;
         else
-            third->alpha = (static_cast<f32>(third->alphaFrame) - 28.0f) * 0.5f * 0.083333336f;
+            effect->layers[2].scale = 2.6f - static_cast<f32>(effect->layers[2].scaleFrame) * 0.15f * 0.0012077295f;
+        if (effect->layers[2].alphaFrame < 28)
+            effect->layers[2].alpha = 0.0f;
+        else if (effect->layers[2].alphaFrame >= 40)
+            effect->layers[2].alpha = 0.5f;
+        else
+            effect->layers[2].alpha = (static_cast<f32>(effect->layers[2].alphaFrame) - 28.0f) * 0.5f * 0.083333336f;
     }
-    if (effect->state == 0) {
+    switch (effect->state) {
+    case 0:
         for (s32 i = 0; i < 5; ++i) {
             if (!asdTMTexTableNodeIsLoaded(0x2c, i))
                 return 0;
         }
         effect->state = 1;
-    } else if (effect->state == 1) {
+        break;
+    case 2:
+        effect->opacity *= 0.7f;
+        if (effect->opacity < 0.01f) {
+            effect->opacity = 0.0f;
+            return ~0u;
+        }
+        break;
+    case 1:
         if (effect->finished) {
             effect->opacity = 1.0f;
             effect->state = 2;
             effect->finished = 0;
             FUN_0021c118(effect->handle, 15);
         }
-    } else if (effect->state == 2) {
-        effect->opacity *= 0.7f;
-        if (effect->opacity < 0.01f) {
-            effect->opacity = 0.0f;
-            return ~0u;
-        }
+        break;
     }
     return 0;
 }

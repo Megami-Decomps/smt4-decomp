@@ -1,355 +1,201 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `gridNavigationHandleConfirm` (_code @ 0x228b04, 0x5fc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: 68 raw lines (from the raw decompilation's 556); the calls, blocks and frame are retail's, and the
+ * conditional getter calls (`bleq scrollListGetOffset`, `bleq` of the +0x1C getter) build as retail's `ldreq`. Left:
+ * the column and the grid's count swap r5/r6; the row position's second accessor is branched here, predicated in
+ * retail (one more instruction, which moves the later branch targets); the short-row test's last mla is scheduled
+ * differently. */
+#include "ui/GridNavigation.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "shard/W5_W5Match7_EntrySort.h"
 
 extern "C" {
 
-int eventQueueAddUniqueIfValid(int);
-int FUN_002be8d0(void);
-int scrollListSetSelection(int, int);
-int FUN_00340f2c(int, int, int);
-int labelsReset(void);
-int __aeabi_idivmod(...);
+void labelsReset(void);
+u32 FUN_002be8d0(RowWidget *widget);
+u32 scrollListSetSelection(RowWidget *widget, s32 index); // declcheck: local (the shared one takes the ScrollList view; a GridNavigation's lists are RowWidgets)
+s32 scrollListGetTop(const RowWidget *widget);
+s32 scrollListGetOffset(const RowWidget *widget);
+s32 objectGetLengthField(const RowWidget *widget);
+s32 FUN_00340f80(const RowWidget *widget);
+u32 padButtonIsPressed(u32 button);
 
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
-
-extern int slotIsActive(void);
-/* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern int padButtonIsPressed(unsigned char);
-/* Supplied declaration required: FUN_002be8d0. */
-/* Supplied declaration required: scrollListSetSelection. */
-/* Supplied declaration required: FUN_00340f2c. */
-/* Supplied declaration required: labelsReset. */
-/* Supplied declaration required: __aeabi_idivmod. */
-
-
-unsigned char gridNavigationHandleConfirm(int param_1,int param_2)
-
+/* The grid's accessors, zero for an empty grid. Each is the body of a real function retail inlines here (IV's
+ * resourceRunOperationIfUnblocked, listCursorGetRowIfUnblocked and gridNavigationGetItemCount for the rows,
+ * resourceRunEmbeddedOperationIfUnblocked, objectPartRunUnlessLocked and uiGridNavigationEntryCount for the
+ * columns), so they are written with those bodies. */
+static __inline s32 gridRowTop(const GridNavigation *grid)
 {
-/* irregular: 7 native warning(s); review required */
-  char temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  unsigned short *puVar12;
-  unsigned int temp_v11;
-  int temp_v12;
-  unsigned short temp_v13;
-  int temp_v14;
-  unsigned char temp_v15;
-  
-  if (*(char *)(param_1 + 0x62) != '\0') {
-    temp_v3 = 0;
-  }
-  else {
-    temp_v4 = *(int *)(param_1 + 0x20);
-    temp_v5 = *(int *)(param_1 + 0x48);
-    temp_v1 = 0;
-    temp_v2 = 0;
-    FUN_00340f2c(0x14,0x14,0x14);
-    if (*(int *)(param_1 + 0x18) >= 2) {
-      temp_v6 = param_1;
-      FUN_002be8d0();
-      if (temp_v6 == 0) {
-        temp_v1 = 0;
-      }
-      else {
-        temp_v1 = 1;
-      }
-    }
-    temp_v6 = *(int *)(param_1 + 0x24);
-    temp_v7 = *(int *)(param_1 + 0x20);
-    temp_v8 = *(int *)(param_1 + 0x38);
-    temp_v9 = __aeabi_idivmod(*(unsigned int *)(param_1 + 0x50),temp_v8);
-    if (temp_v9 <= temp_v7) {
-      scrollListSetSelection(param_1,temp_v9);
-    }
-    if ((!temp_v1) && (temp_v4 != temp_v7)) {
-      temp_v1 = 1;
-    }
-    if (*(int *)(param_1 + 0x40) >= 2) {
-      temp_v4 = param_1 + 0x28;
-      FUN_002be8d0();
-      if (temp_v4 == 0) {
-        temp_v2 = 0;
-      }
-      else {
-        temp_v2 = 1;
-      }
-    }
+    if (grid->empty)
+        return 0;
+    return scrollListGetTop(&grid->rows);
+}
+
+static __inline s32 gridRowOffset(const GridNavigation *grid)
+{
+    if (grid->empty)
+        return 0;
+    return scrollListGetOffset(&grid->rows);
+}
+
+static __inline s32 gridRowCount(const GridNavigation *grid)
+{
+    if (grid->empty)
+        return 0;
+    return FUN_00340f80(&grid->rows);
+}
+
+static __inline s32 gridColumnTop(const GridNavigation *grid)
+{
+    if (grid->empty)
+        return 0;
+    return scrollListGetTop(&grid->columns);
+}
+
+static __inline s32 gridColumnOffset(const GridNavigation *grid)
+{
+    if (grid->empty)
+        return 0;
+    return scrollListGetOffset(&grid->columns);
+}
+
+static __inline s32 gridColumnCount(const GridNavigation *grid)
+{
+    if (grid->empty)
+        return 0;
+    return FUN_00340f80(&grid->columns);
+}
+
+/* Sets the held bit of direction key `key` (button 5, 6, 4 or 3) in `mask`. */
+static __inline void gridKeyHeldSet(u16 *mask, u8 key)
+{
+    if (key == 5)
+        *mask |= 1 << GRID_HELD_BUTTON5;
+    if (key == 6)
+        *mask |= 1 << GRID_HELD_BUTTON6;
+    if (key == 4)
+        *mask |= 1 << GRID_HELD_BUTTON4;
+    if (key == 3)
+        *mask |= 1 << GRID_HELD_BUTTON3;
+}
+
+/* Clears the held bit of direction key `key` in `mask`. */
+static __inline void gridKeyHeldClear(u16 *mask, u8 key)
+{
+    if (key == 5)
+        *mask &= ~(1 << GRID_HELD_BUTTON5);
+    if (key == 6)
+        *mask &= ~(1 << GRID_HELD_BUTTON6);
+    if (key == 4)
+        *mask &= ~(1 << GRID_HELD_BUTTON4);
+    if (key == 3)
+        *mask &= ~(1 << GRID_HELD_BUTTON3);
+}
+
+/* Moves the grid's row and column cursors by the pad, keeps the column inside a short last row, records
+ * which direction keys are held and whether each cursor moved or pushes against an edge. Returns whether
+ * either cursor moved, with the cursor sound when `playSound` is set. */
+bool gridNavigationHandleConfirm(GridNavigation *grid, s32 playSound)
+{
+    if (grid->empty)
+        return false;
+
+    /* retail reads each list's top along with its offset and drops it */
+    scrollListGetTop(&grid->rows);
+    s32 previousRow = scrollListGetOffset(&grid->rows);
+    scrollListGetTop(&grid->columns);
+    s32 previousColumn = scrollListGetOffset(&grid->columns);
+    bool rowMoved = false;
+    bool columnMoved = false;
+    FUN_00340f2c(20, 20, 20, 20);
+    if (grid->rows.visibleRows > 1)
+        rowMoved = FUN_002be8d0(&grid->rows) != 0;
+
+    s32 rowTop = scrollListGetTop(&grid->rows);
+    s32 row = scrollListGetOffset(&grid->rows);
+    objectGetLengthField(&grid->rows);
+    s32 columns = objectGetLengthField(&grid->columns);
+    if (grid->count / columns <= row)
+        scrollListSetSelection(&grid->rows, grid->count / columns);
+    if (!rowMoved && previousRow != row)
+        rowMoved = true;
+    if (grid->columns.visibleRows > 1)
+        columnMoved = FUN_002be8d0(&grid->columns) != 0;
     labelsReset();
-    temp_v4 = *(int *)(param_1 + 0x48);
-    temp_v9 = *(int *)(param_1 + 0x50);
-    __aeabi_idivmod(temp_v9,temp_v8);
-    if ((temp_v14 != 0) && (temp_v9 <= (temp_v6 + temp_v7) * temp_v8 + temp_v4)) {
-      if ((temp_v4 == temp_v5 + 1) &&
-         (((temp_v4 = padButtonIsPressed(*(unsigned char *)(param_1 + 0x2c)), temp_v4 != 0 ||
-           (temp_v4 = padButtonIsPressed(*(unsigned char *)(param_1 + 0x30)), temp_v4 != 0)) &&
-          ((*(unsigned int *)(param_1 + 0x28) & 4) != 0)))) {
-        scrollListSetSelection(param_1 + 0x28,0);
-      }
-      else {
-        scrollListSetSelection(param_1 + 0x28,temp_v14 - 1);
-      }
+
+    /* a short last row: keep the column cursor on its entries */
+    scrollListGetTop(&grid->columns);
+    s32 column = scrollListGetOffset(&grid->columns);
+    s32 lastRowLength = grid->count % columns;
+    if (lastRowLength != 0 && grid->count <= (rowTop + row) * columns + column) {
+        if (column == previousColumn + 1 &&
+            (padButtonIsPressed(grid->columns.keys[0]) || padButtonIsPressed(grid->columns.alternateKeys[0])) &&
+            (grid->columns.flags & 4))
+            scrollListSetSelection(&grid->columns, 0);
+        else
+            scrollListSetSelection(&grid->columns, lastRowLength - 1);
     }
-    temp_v4 = 0;
-    do {
-      temp_v9 = param_1 + temp_v4;
-      temp_v15 = 0;
-      if ((*(char *)(temp_v9 + 4) != ' ') && (temp_v10 = slotIsActive(), temp_v10 != 0)) {
-        temp_v15 = 1;
-      }
-      if (((*(char *)(temp_v9 + 8) != ' ') && (temp_v10 = slotIsActive(), temp_v10 != 0)) || (temp_v15)) {
-        temp_v0 = *(char *)(temp_v9 + 4);
-        puVar12 = (unsigned short *)(param_1 + 0x5c);
-        if (temp_v0 == '\x05') {
-          temp_v13 = *puVar12 | 1;
-          *(unsigned short *)(param_1 + 0x5c) = temp_v13;
-        }
-        else if (temp_v0 == '\x06') {
-          temp_v13 = *puVar12 | 2;
-          *(unsigned short *)(param_1 + 0x5c) = temp_v13;
-        }
-        else if (temp_v0 == '\x04') {
-          temp_v13 = *puVar12 | 4;
-          *(unsigned short *)(param_1 + 0x5c) = temp_v13;
-        }
-        else if (temp_v0 == '\x03') {
-          temp_v13 = *puVar12 | 8;
-          *(unsigned short *)(param_1 + 0x5c) = temp_v13;
-        }
-      }
-      else {
-        temp_v0 = *(char *)(temp_v9 + 4);
-        puVar12 = (unsigned short *)(param_1 + 0x5c);
-        if (temp_v0 == '\x05') {
-          temp_v13 = *puVar12 & 0xfffe;
-          *(unsigned short *)(param_1 + 0x5c) = temp_v13;
-        }
-        else if (temp_v0 == '\x06') {
-          temp_v13 = *puVar12 & 0xfffd;
-          *(unsigned short *)(param_1 + 0x5c) = temp_v13;
-        }
-        else if (temp_v0 == '\x04') {
-          temp_v13 = *puVar12 & 0xfffb;
-          *(unsigned short *)(param_1 + 0x5c) = temp_v13;
-        }
-        else if (temp_v0 == '\x03') {
-          temp_v13 = *puVar12 & 0xfff7;
-          *(unsigned short *)(param_1 + 0x5c) = temp_v13;
-        }
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 4);
-    temp_v4 = 0;
-    do {
-      temp_v9 = param_1 + temp_v4;
-      temp_v15 = 0;
-      if ((*(char *)(temp_v9 + 0x2c) != ' ') && (temp_v10 = slotIsActive(), temp_v10 != 0)) {
-        temp_v15 = 1;
-      }
-      if (((*(char *)(temp_v9 + 0x30) != ' ') && (temp_v10 = slotIsActive(), temp_v10 != 0)) || (temp_v15))
-      {
-        temp_v0 = *(char *)(temp_v9 + 0x2c);
-        puVar12 = (unsigned short *)(param_1 + 0x5e);
-        if (temp_v0 == '\x05') {
-          temp_v13 = *puVar12 | 1;
-          *(unsigned short *)(param_1 + 0x5e) = temp_v13;
-        }
-        else if (temp_v0 == '\x06') {
-          temp_v13 = *puVar12 | 2;
-          *(unsigned short *)(param_1 + 0x5e) = temp_v13;
-        }
-        else if (temp_v0 == '\x04') {
-          temp_v13 = *puVar12 | 4;
-          *(unsigned short *)(param_1 + 0x5e) = temp_v13;
-        }
-        else if (temp_v0 == '\x03') {
-          temp_v13 = *puVar12 | 8;
-          *(unsigned short *)(param_1 + 0x5e) = temp_v13;
-        }
-      }
-      else {
-        temp_v0 = *(char *)(temp_v9 + 0x2c);
-        puVar12 = (unsigned short *)(param_1 + 0x5e);
-        if (temp_v0 == '\x05') {
-          temp_v13 = *puVar12 & 0xfffe;
-          *(unsigned short *)(param_1 + 0x5e) = temp_v13;
-        }
-        else if (temp_v0 == '\x06') {
-          temp_v13 = *puVar12 & 0xfffd;
-          *(unsigned short *)(param_1 + 0x5e) = temp_v13;
-        }
-        else if (temp_v0 == '\x04') {
-          temp_v13 = *puVar12 & 0xfffb;
-          *(unsigned short *)(param_1 + 0x5e) = temp_v13;
-        }
-        else if (temp_v0 == '\x03') {
-          temp_v13 = *puVar12 & 0xfff7;
-          *(unsigned short *)(param_1 + 0x5e) = temp_v13;
-        }
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 4);
-    if (*(char *)(param_1 + 0x62) != '\0') {
-      temp_v4 = 0;
+
+    for (s32 i = 0; i < 4; i++) {
+        bool held = false;
+        if (grid->rows.keys[i] != 32 && slotIsActive(grid->rows.keys[i]))
+            held = true;
+        if ((grid->rows.alternateKeys[i] != 32 && slotIsActive(grid->rows.alternateKeys[i])) || held)
+            gridKeyHeldSet(&grid->rowKeysHeld, grid->rows.keys[i]);
+        else
+            gridKeyHeldClear(&grid->rowKeysHeld, grid->rows.keys[i]);
     }
-    else {
-      temp_v4 = *(int *)(param_1 + 0x24);
+    for (s32 i = 0; i < 4; i++) {
+        bool held = false;
+        if (grid->columns.keys[i] != 32 && slotIsActive(grid->columns.keys[i]))
+            held = true;
+        if ((grid->columns.alternateKeys[i] != 32 && slotIsActive(grid->columns.alternateKeys[i])) || held)
+            gridKeyHeldSet(&grid->columnKeysHeld, grid->columns.keys[i]);
+        else
+            gridKeyHeldClear(&grid->columnKeysHeld, grid->columns.keys[i]);
     }
-    if (*(char *)(param_1 + 0x62) != '\0') {
-      temp_v9 = 0;
+
+    /* a held key changes the row unless the cursor already stood at that end last frame */
+    s32 rowPosition = gridRowTop(grid) + gridRowOffset(grid);
+    grid->changed = 0;
+    if (grid->rowKeysHeld != 0) {
+        if (((grid->rowKeysHeld >> GRID_HELD_BUTTON5) & 1) || ((grid->rowKeysHeld >> GRID_HELD_BUTTON4) & 1)) {
+            if (scrollListGetOffset(&grid->rows) > 0 || grid->lastRowPosition != rowPosition)
+                grid->changed = 1;
+        }
+        if (((grid->rowKeysHeld >> GRID_HELD_BUTTON6) & 1) || ((grid->rowKeysHeld >> GRID_HELD_BUTTON3) & 1)) {
+            s32 position = gridRowTop(grid) + gridRowOffset(grid);
+            if (gridRowCount(grid) - 1 > position || grid->lastRowPosition != rowPosition)
+                grid->changed = 1;
+        }
     }
-    else {
-      temp_v9 = *(int *)(param_1 + 0x20);
+    grid->lastRowPosition = rowPosition;
+
+    s32 columnPosition = gridColumnTop(grid) + gridColumnOffset(grid);
+    grid->columnChanged = 0;
+    if (grid->columnKeysHeld != 0) {
+        if (((grid->columnKeysHeld >> GRID_HELD_BUTTON5) & 1) || ((grid->columnKeysHeld >> GRID_HELD_BUTTON4) & 1)) {
+            if (scrollListGetOffset(&grid->columns) > 0 || grid->lastColumnPosition != columnPosition)
+                grid->columnChanged = 1;
+        }
+        if (((grid->columnKeysHeld >> GRID_HELD_BUTTON6) & 1) || ((grid->columnKeysHeld >> GRID_HELD_BUTTON3) & 1)) {
+            s32 position = gridColumnTop(grid) + gridColumnOffset(grid);
+            if (gridColumnCount(grid) - 1 > position || grid->lastColumnPosition != columnPosition)
+                grid->columnChanged = 1;
+            /* on the last entry of a short last row the column cannot move on */
+            if (lastRowLength != 0 &&
+                (rowTop + row) * columns + gridColumnOffset(grid) - grid->count == -1 &&
+                gridColumnOffset(grid) == previousColumn)
+                grid->columnChanged = 0;
+        }
     }
-    temp_v4 = temp_v4 + temp_v9;
-    *(unsigned char *)(param_1 + 0x60) = 0;
-    temp_v13 = *(unsigned short *)(param_1 + 0x5c);
-    if (temp_v13 != 0) {
-      if (((temp_v13 & 1) != 0) || ((int)((unsigned int)temp_v13 << 0x1d) < 0)) {
-        temp_v15 = *(int *)(param_1 + 0x20) == 0;
-        if (*(int *)(param_1 + 0x20) < 1) {
-          temp_v15 = *(int *)(param_1 + 0x54) == temp_v4;
-        }
-        if (!temp_v15) {
-          *(unsigned char *)(param_1 + 0x60) = 1;
-        }
-      }
-      temp_v11 = (unsigned int)*(unsigned short *)(param_1 + 0x5c);
-      temp_v15 = -1 < (int)(temp_v11 * 0x40000000);
-      if (temp_v15) {
-        temp_v11 = temp_v11 << 0x1c;
-      }
-      if (!temp_v15 || (int)temp_v11 < 0) {
-        if (*(char *)(param_1 + 0x62) != '\0') {
-          temp_v9 = 0;
-        }
-        else {
-          temp_v9 = *(int *)(param_1 + 0x24);
-        }
-        if (*(char *)(param_1 + 0x62) != '\0') {
-          temp_v10 = 0;
-        }
-        else {
-          temp_v10 = *(int *)(param_1 + 0x20);
-        }
-        if (*(char *)(param_1 + 0x62) != '\0') {
-          temp_v12 = 0;
-        }
-        else {
-          temp_v12 = *(int *)(param_1 + 0x1c);
-        }
-        temp_v15 = temp_v12 - 1 == temp_v9 + temp_v10;
-        if (temp_v12 - 1 <= temp_v9 + temp_v10) {
-          temp_v15 = *(int *)(param_1 + 0x54) == temp_v4;
-        }
-        if (!temp_v15) {
-          *(unsigned char *)(param_1 + 0x60) = 1;
-        }
-      }
+    grid->lastColumnPosition = columnPosition;
+
+    if (rowMoved || columnMoved) {
+        if (playSound)
+            eventQueueAddUniqueIfValid(0x100020d);
+        return true;
     }
-    *(int *)(param_1 + 0x54) = temp_v4;
-    if (*(char *)(param_1 + 0x62) != '\0') {
-      temp_v4 = 0;
-    }
-    else {
-      temp_v4 = *(int *)(param_1 + 0x4c);
-    }
-    if (*(char *)(param_1 + 0x62) != '\0') {
-      temp_v9 = 0;
-    }
-    else {
-      temp_v9 = *(int *)(param_1 + 0x48);
-    }
-    temp_v13 = *(unsigned short *)(param_1 + 0x5e);
-    temp_v4 = temp_v4 + temp_v9;
-    *(unsigned char *)(param_1 + 0x61) = 0;
-    if (temp_v13 != 0) {
-      if (((temp_v13 & 1) != 0) || ((int)((unsigned int)temp_v13 << 0x1d) < 0)) {
-        temp_v15 = *(int *)(param_1 + 0x48) == 0;
-        if (*(int *)(param_1 + 0x48) < 1) {
-          temp_v15 = *(int *)(param_1 + 0x58) == temp_v4;
-        }
-        if (!temp_v15) {
-          *(unsigned char *)(param_1 + 0x61) = 1;
-        }
-      }
-      temp_v11 = (unsigned int)*(unsigned short *)(param_1 + 0x5e);
-      temp_v15 = -1 < (int)(temp_v11 * 0x40000000);
-      if (temp_v15) {
-        temp_v11 = temp_v11 << 0x1c;
-      }
-      if (!temp_v15 || (int)temp_v11 < 0) {
-        if (*(char *)(param_1 + 0x62) != '\0') {
-          temp_v9 = 0;
-        }
-        else {
-          temp_v9 = *(int *)(param_1 + 0x4c);
-        }
-        if (*(char *)(param_1 + 0x62) != '\0') {
-          temp_v10 = 0;
-        }
-        else {
-          temp_v10 = *(int *)(param_1 + 0x48);
-        }
-        if (*(char *)(param_1 + 0x62) != '\0') {
-          temp_v12 = 0;
-        }
-        else {
-          temp_v12 = *(int *)(param_1 + 0x44);
-        }
-        temp_v15 = temp_v12 - 1 == temp_v9 + temp_v10;
-        if (temp_v12 - 1 <= temp_v9 + temp_v10) {
-          temp_v15 = *(int *)(param_1 + 0x58) == temp_v4;
-        }
-        if (!temp_v15) {
-          *(unsigned char *)(param_1 + 0x61) = 1;
-        }
-        if (temp_v14 != 0) {
-          if (*(char *)(param_1 + 0x62) != '\0') {
-            temp_v9 = 0;
-          }
-          else {
-            temp_v9 = *(int *)(param_1 + 0x48);
-          }
-          if (((temp_v6 + temp_v7) * temp_v8 + temp_v9) - *(int *)(param_1 + 0x50) == -1) {
-            if (*(char *)(param_1 + 0x62) != '\0') {
-              temp_v6 = 0;
-            }
-            else {
-              temp_v6 = *(int *)(param_1 + 0x48);
-            }
-            if (temp_v6 == temp_v5) {
-              *(unsigned char *)(param_1 + 0x61) = 0;
-            }
-          }
-        }
-      }
-    }
-    *(int *)(param_1 + 0x58) = temp_v4;
-    temp_v3 = 0;
-    if ((unsigned char)(temp_v1 | temp_v2)) {
-      if (param_2 != 0) {
-        eventQueueAddUniqueIfValid(0x100020d);
-      }
-      temp_v3 = 1;
-    }
-  }
-  return temp_v3;
+    return false;
 }
 
 } /* extern "C" */

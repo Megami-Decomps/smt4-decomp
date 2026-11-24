@@ -23,7 +23,7 @@
 #include "ui/UiSpriteApi.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-/* A pair of screen coordinates (FUN_0037c988 takes one by value). */
+/* A pair of screen coordinates (skillScreenDrawSlots takes one by value). */
 struct ScreenOffset {
     s32 x;
     s32 y;
@@ -36,7 +36,7 @@ void numberFontDrawFormatted(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u3
 void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 z, s32 tint);
 void FUN_0020caec(u32 id, u32 a, u32 b, u32 c);
 void unitRecordBuild(s32 id, UnitRecord *out);
-void FUN_0037c988(UniteWorkA *work, UnitRecord *record, s32 drawExtra, s32 mode, u32 flags, f32 scale, ScreenOffset offset);
+void skillScreenDrawSlots(UniteWorkA *work, UnitRecord *record, s32 drawExtra, s32 mode, u32 flags, f32 scale, ScreenOffset offset);
 s32 statusCollectUnlearnedSkillsAboveLevel(u16 id, u32 level, const u16 *known, s16 *out, s32 skip);
 void FUN_00185e84(s16 id, s32 x, s32 y, u32 layer, u32 a, u32 b);
 void drawInteractiveEightRowList(UniteWorkA *work, struct SlotRecordA *record, s32 interactive, s32 x, s32 y, f32 effect);
@@ -128,7 +128,7 @@ void uniteDrawSkillInheritancePanel(s32 x, s32 y, u32 mode, s32 preview, u32 ope
     unitRecordBuild(demon->id, &unit);
     getUnlockedSlotCount(&unit);
     ScreenOffset origin = { x, y };
-    FUN_0037c988(work, &unit, opened, mode, freeSlot, opacity, origin);
+    skillScreenDrawSlots(work, &unit, opened, mode, freeSlot, opacity, origin);
 
     /* The skills the result's level would have taught it and the slots do not hold. */
     s16 lostSkills[LOST_SKILL_ROWS] = { 0 };

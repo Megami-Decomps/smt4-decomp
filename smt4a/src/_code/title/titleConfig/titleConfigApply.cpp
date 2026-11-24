@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code0013_Smt4a.h"
 
 struct TitleConfigValues {
     u8 first;  // 0x0
@@ -11,7 +12,6 @@ extern "C" {
 extern TitleConfigValues g_titleConfigValues;
 
 void FUN_0013c874(u32 value);
-void soundVolumeSettingSet(u32 value);
 void titleConfigSetAudioFlag(u32 value);
 void soundSetVolumeSetting(u32 value);
 

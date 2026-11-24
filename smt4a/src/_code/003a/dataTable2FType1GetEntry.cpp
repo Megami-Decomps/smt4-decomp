@@ -1,16 +1,13 @@
-#include "shard/Shard003A.h"
+#include "gamedata/Table2FType1Entry.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
-extern void *dataTableGet(u32 index, u32 type);
-extern Entry20 *dataTableGetEntries(void *table);
-extern u32 dataTableGetCount(void *table);
-
 /* Entry `index` of data table 0x2F (type 1), or NULL when out of range. */
-Entry20 *dataTable2FType1GetEntry(u32 index)
+Table2FType1Entry *dataTable2FType1GetEntry(u32 index)
 {
     void *table = dataTableGet(0x2F, 1);
-    Entry20 *entries = dataTableGetEntries(table);
+    Table2FType1Entry *entries = (Table2FType1Entry *)dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
 
     if (index >= count) {

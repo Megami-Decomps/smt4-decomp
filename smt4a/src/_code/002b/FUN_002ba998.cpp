@@ -26,8 +26,8 @@ int FUN_0031cd00(...);
 int FUN_0031f138(...);
 int FUN_003984ac(...);
 int soundChannelStopAll(...);
-int FUN_003ee138(...);
-int FUN_003eee9c(...);
+int btlMainEnterFixedParty(...);
+int btlMainLeaveFixedParty(...);
 int FUN_003f135c(...);
 int FUN_0041817c(...);
 int FUN_004aa854(...);
@@ -233,8 +233,8 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: btlHasFilteredCommand. */
 /* Supplied declaration required: btlMainBuffersFree. */
 /* Supplied declaration required: btlUnitStateInitFromRecord. */
-/* Supplied declaration required: FUN_003ee138. */
-/* Supplied declaration required: FUN_003eee9c. */
+/* Supplied declaration required: btlMainEnterFixedParty. */
+/* Supplied declaration required: btlMainLeaveFixedParty. */
 /* Supplied declaration required: btlDecideEnemyFlee. */
 /* Supplied declaration required: FUN_003f135c. */
 /* Supplied declaration required: FUN_003f1d74. */
@@ -997,13 +997,13 @@ LAB_002bbdec:
     puVar20 = (unsigned int *)(temp_v7 + 0x45a0);
     temp_v18 = (*(unsigned int *)(temp_v7 + 0x45a4) & DAT_00573aec) == 0 && (*puVar20 & DAT_00573ae8) == 0;
     if (!temp_v18) {
-      FUN_003eee9c();
+      btlMainLeaveFixedParty();
       temp_v9 = ~DAT_00573afc;
       *puVar20 = *puVar20 & ~DAT_00573af8;
       *(unsigned int *)(temp_v7 + 0x45a4) = *(unsigned int *)(temp_v7 + 0x45a4) & temp_v9;
     }
     else {
-      FUN_003ee138(temp_v7);
+      btlMainEnterFixedParty(temp_v7);
     }
     FUN_004aa854(g_btlUiBlock,temp_v18);
     break;
@@ -1093,7 +1093,7 @@ LAB_002bbdec:
       FUN_003f135c(temp_v7);
     }
     if ((DAT_00573ae8 & *puVar20) != 0 || (*(unsigned int *)(temp_v7 + 0x45a4) & DAT_00573aec) != 0) {
-      FUN_003eee9c(temp_v7);
+      btlMainLeaveFixedParty(temp_v7);
     }
     temp_v6 = 0;
     do {

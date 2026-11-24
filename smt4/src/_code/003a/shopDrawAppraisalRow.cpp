@@ -1,12 +1,11 @@
-/* NON_MATCHING: same calls and branches as retail, and the same 92-byte frame with the text at sp+56, the count
- * at sp+88 and the font at sp+48. What differs is where the other locals live: retail puts the price's item
- * reference at sp+48 too (sharing the font's slot) and the price's x and y at sp+36 and sp+44 (here the item is
- * at sp+36 and x and y at sp+40/44, which armcc then loads with one ldrd: three rows fewer), keeps the name in
- * the outgoing-argument slot sp+16 and the badge's y in sp+8 (here sp+4 and sp+16), spills the scroll sprite and
- * its layout entry in the other order, computes the price's x and y before storing either, and sets up the
- * mark's stack arguments after loading its position. With drawTextAtSnappedRectangle's swept parameter order
- * (wave 82) both name draws set their arguments up in retail's order; the build's frame slots moved with it (the
- * font is at sp+36 and the name at sp+8 here), so the line count is 177 (117 by shape), up from 153. */
+/* NON_MATCHING: 145 lines (81 by shape); same calls and branches as retail. What differs is the frame: retail's
+ * is 92 bytes (text at sp+56, count at sp+88, the font and the price's item reference sharing sp+48, the
+ * price's x and y at sp+36 and sp+44, the name in the outgoing-argument slot sp+16, the badge's y in sp+8); the
+ * build's is 84 bytes with the same locals in other slots (x and y next to each other, loaded with one ldrd).
+ * Retail also spills the scroll sprite and its layout entry in the other order and computes the price's x and
+ * y before storing either. The mark's position is in locals, as every other text of the row has it (wave 88:
+ * its stack arguments are then set up after the position loads, as in retail; Apocalypse's FUN_00497d20, the
+ * same function, gets retail's 92-byte frame that way). */
 #include <stdio.h>
 #include "shard/S2Scene3a.h"
 #include "shard/S1ListPanel.h"
@@ -183,7 +182,9 @@ void shopDrawAppraisalRow(Scene3a *scene, s32 row, s32 selected, s32 index)
 
     const char *mark = "*";
     const TextureTableEntryIV *markOrigin = layoutFindTableEntry(&scene->region, !selected ? 0x100 : 0x101);
-    drawTextAtRelativePosition(&scene->region, 0, markOrigin->x + x, markOrigin->y + y, 0, 7, countColor, depth, mark);
+    s32 markX = markOrigin->x + x;
+    s32 markY = markOrigin->y + y;
+    drawTextAtRelativePosition(&scene->region, 0, markX, markY, 0, 7, countColor, depth, mark);
 
     u32 frame;
     if (scene->appraisal.kindTenFrame && aocEntryIsKindTen(second)) {

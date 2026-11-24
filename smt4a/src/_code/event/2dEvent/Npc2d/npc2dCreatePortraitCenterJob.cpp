@@ -17,7 +17,7 @@ void sysMemClear(void *memory, u32 size);
 NpcTableRecord *FUN_00283498(u32 id);
 
 s32 eventIsSkipping();
-s32 FUN_002897cc(u32 handle);
+s32 npc2dPortraitUpdate(u32 handle);
 void FUN_0034da3c(u32 handle);
 extern const char DAT_0052f4fc[];
 extern const u8 DAT_0052f4ec[3]; // texture slot index of each anchor
@@ -38,11 +38,11 @@ u32 npc2dCreatePortraitCenterJob(u32 id)
     work->table = 0x1c;
     work->state = 0x41;
     work->unk00 = id;
-    work->unk88 = 1;
-    work->unk8c = 0;
-    work->unk90 = 0;
-    work->unk94 = 0;
-    work->unk95 = 0;
+    work->active = 1;
+    work->shortCycleFrame = 0;
+    work->longCycleFrame = 0;
+    work->appearEventQueued = 0;
+    work->fadeOutEventQueued = 0;
     work->alpha = 1.0f;
     for (s32 i = 0; i < 6; ++i) {
         work->unk70[i] = 0;
@@ -74,7 +74,7 @@ u32 npc2dCreatePortraitCenterJob(u32 id)
     }
     work->speed = 0.26f;
     AsdProcFunc end = FUN_0034da3c;
-    AsdProcUpdateFunc update = FUN_002897cc;
+    AsdProcUpdateFunc update = npc2dPortraitUpdate;
     return asdProcessCreateSimple(DAT_0052f4f0, 4, 0, 0, update, end, (u32)work);
 }
 }

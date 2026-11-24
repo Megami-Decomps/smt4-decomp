@@ -550,7 +550,7 @@ LAB_001e8a6c:
       }
       iVar18 = unitGroupHasFlag(2,5);
       if (iVar18 != 0) {
-        FUN_0020f6c8();
+        mapIfDrawFloatingMarker();
       }
     }
     iVar18 = DAT_0044ea00;

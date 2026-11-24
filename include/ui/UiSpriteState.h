@@ -77,17 +77,20 @@ struct UiSpriteState {
     /* 0x14 */ s32 z;
     /* 0x18 */ s16 centerX;        /* a texture entry's centre (uiStoreTextureEntryCenter, through PointDeltaWork) */
     /* 0x1A */ s16 centerY;
-    /* 0x1C */ u8 unk1C[4];
+    /* 0x1C */ s16 depth;          /* the z of a sprite drawn in the scene (inScene) */
+    /* 0x1E */ u8 unk1E[2];
     /* 0x20 */ f32 alpha;
-    /* 0x24 */ f32 scale[3];       /* the scale track sets all three */
-    union {
-        /* 0x30 */ u8 unk30[8];
-        /* 0x30 */ f32 extraScale;  /* the party display sets it from PlayScene::badgeScales */
-    };
+    /* 0x24 */ f32 scale[3];       /* the scale track sets all three; scale[1] and scale[2] scale x and y */
+    /* 0x30 */ f32 rotation;       /* about z, in radians (effectRenderTransformedInstance turns the sprite by it); the
+                                      party display sets it from PlayScene::badgeScales */
+    /* 0x34 */ f32 parallax;       /* the stereo shift effectRenderTransformedInstance stores and adds to x */
     /* 0x38 */ s16 id;
-    /* 0x3A */ u16 layer;
+    /* 0x3A */ s16 scaleMode;      /* 1: only the x scale applies, 2: only the y scale */
     /* 0x3C */ u8 active;
-    /* 0x3D */ u8 unk3D[0xB];
+    /* 0x3D */ u8 inScene;         /* drawn with the scene's depth (flags 0x2002), scaled by sceneScale about its centre */
+    /* 0x3E */ u8 unk3E[2];
+    /* 0x40 */ f32 sceneScale;
+    /* 0x44 */ u8 unk44[4];
     /* 0x48 */ UiResourceParameters *resources;
     /* 0x4C */ UiSpritePositionKey *positionKeys;
     /* 0x50 */ s16 positionKey;
@@ -115,8 +118,8 @@ struct UiSpriteState {
     /* 0x84 */ u8 commandsRunning; /* a finished key continues with the track's next command */
     /* 0x85 */ s8 updated;         /* set by every advance */
     /* 0x86 */ u8 positionDone;
-    /* 0x87 */ u8 alphaDone;
-    /* 0x88 */ u8 scaleDone;
+    /* 0x87 */ s8 alphaDone;
+    /* 0x88 */ u8 scaleDone;       /* read signed through uiSpriteGetScaleDone */
     /* 0x89 */ u8 frameDone;
     /* 0x8A */ s8 finished;        /* all four tracks are done */
     /* 0x8B */ u8 unk8B;
@@ -128,7 +131,7 @@ typedef char UiSpriteKeysLayoutCheck[
     sizeof(UiResourceParameters) == 0x20 && offsetof(UiResourceParameters, frameKeyBytes) == 6 &&
     offsetof(UiResourceParameters, positionKeys) == 0xC && offsetof(UiResourceParameters, commands) == 0x1C ? 1 : -1];
 typedef char UiSpriteStateLayoutCheck[
-    offsetof(UiSpriteState, alpha) == 0x20 && offsetof(UiSpriteState, layer) == 0x3A &&
+    offsetof(UiSpriteState, alpha) == 0x20 && offsetof(UiSpriteState, scaleMode) == 0x3A && offsetof(UiSpriteState, sceneScale) == 0x40 &&
     offsetof(UiSpriteState, resources) == 0x48 && offsetof(UiSpriteState, positionFrame) == 0x52 &&
     offsetof(UiSpriteState, alphaKeys) == 0x58 && offsetof(UiSpriteState, scaleKeys) == 0x64 &&
     offsetof(UiSpriteState, frameKeys) == 0x70 && offsetof(UiSpriteState, commands) == 0x78 &&

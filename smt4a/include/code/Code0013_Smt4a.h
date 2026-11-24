@@ -11,4 +11,7 @@ void gameDataSmallBlockFinalize(void);
 
 void resourceDestroy(Resource *resource);
 
+/* Sets the sound volume setting byte (soundVolumeSettingGet reads it). */
+void soundVolumeSettingSet(u8 value);
+
 } /* extern "C" */

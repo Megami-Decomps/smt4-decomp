@@ -1,6 +1,7 @@
 /* NON_MATCHING: VFP register allocation in state 0 only (20 lines): retail keeps the degrees-to-radians factor in s16
    (shared with the hoisted 5.0f), 40.0f in s17 and z in s18; this build gives them s18, s16 and s16. */
 #include "map/mapDepart.h"
+#include "code/Code0032_Smt4a.h"
 #include "game/GameStateA.h"
 #include "map/LmapViewGlobals.h"
 #include "util/TrigF32.h"
@@ -22,7 +23,6 @@ void mapIfSetMode1(void);
 s32 inputConfirmPressed(void);
 void mapSetSceneState(u32 id);
 void lmapCameraSetMode(s32 mode);
-void FUN_00324e38(s32 mode);
 void FUN_00327ee8(f32 x, f32 z);
 void FUN_002e364c(MapVector *position);
 

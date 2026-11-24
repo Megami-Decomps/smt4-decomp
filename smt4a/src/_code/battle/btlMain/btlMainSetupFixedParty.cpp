@@ -177,7 +177,7 @@ void btlMainSetupFixedParty(BtlMainStateExtA *state)
 
     if (state->snapshot == NULL) {
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlMain.cpp", 13388);
-        state->snapshot = asdMemoryAllocTracked(0x100, 0x100, 0, 0x34A0, 1);
+        state->snapshot = static_cast<BtlFixedPartySnapshotA *>(asdMemoryAllocTracked(0x100, 0x100, 0, 0x34A0, 1));
     }
     FUN_003997b0();
 }

@@ -1,17 +1,19 @@
-#include "classes/AllocatedArray.h"
+#include "AsdSDK/Source/Gfx/Model/AsdSceneNodeArray.h"
+
+using nw::gfx::SceneNode;
+using nw::ut::MoveArray;
 
 extern "C" {
 
-/* Grows the array to hold `count` words; returns whether it does (or already did): false when it
- * does not own its storage or the allocation fails. */
-bool FUN_001aa528(AllocatedArray<u32> *array, s32 count)
+/* Grows the array to hold `count` scene nodes if it owns its storage. */
+bool FUN_001aa528(MoveArray<SceneNode *> *array, s32 count)
 {
     if (array->capacity() >= count) {
         return true;
     }
     AsdAllocatorObject *allocator = array->allocator;
     if (allocator != NULL && (array->capacityFlags & 0xc0000000u) == 0x40000000u) {
-        u32 *storage = static_cast<u32 *>(allocator->allocate(count * sizeof(u32), 0x20));
+        SceneNode **storage = (SceneNode **)allocator->allocate(count * sizeof(*storage), 0x20);
         if (storage == NULL) {
             return false;
         }

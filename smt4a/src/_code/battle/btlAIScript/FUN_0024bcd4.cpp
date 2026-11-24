@@ -33,7 +33,7 @@ int scrScriptProcessCreate(...);
 int FUN_002c2610(void);
 int holderStopJob(...);
 int gameSavedItemsPromoteFlagState(void);
-int FUN_00339270(void);
+int mapBgLoadStep(void);
 int sysClearCachedFlag(void);
 int soundChannelStopAll(...);
 int btlActionPrepareFromSource(...);
@@ -205,7 +205,7 @@ extern int __cxa_guard_acquire(unsigned int *);
 extern int gameStateIsFlagSetAndLarge(void);
 extern int btlEncountCheck(unsigned int);
 /* Supplied declaration required: gameSavedItemsPromoteFlagState. */
-/* Supplied declaration required: FUN_00339270. */
+/* Supplied declaration required: mapBgLoadStep. */
 /* Supplied declaration required: btlPlayMenuConfirmSe. */
 /* Supplied declaration required: sequenceRequestFlushDeferred. */
 extern int sequenceRequestIsPending(void);
@@ -923,7 +923,7 @@ joined_r0x0024cba8:
     temp_v6 = 0x1d;
     break;
   case 0x1d:
-    FUN_00339270();
+    mapBgLoadStep();
     if ((temp_v3 == 0) || (temp_v3 = jobIsValid(*(unsigned int *)(temp_v2 + 4)), temp_v3 != 0))
     goto LAB_0024d75c;
     temp_v6 = 0x1e;

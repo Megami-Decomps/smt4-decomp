@@ -80,7 +80,7 @@ int titleSetSlotValueState2(...);
 int eventQueueAddUniqueIfValid(...);
 int itemTableGetItemRecord(void);
 int campSkillListUpdate(void);
-int FUN_0020dc1c(void);
+int campUpgradeListUpdate(void);
 int FUN_0021b274(...);
 int campResetScreen(void);
 int FUN_0023b45c(...);
@@ -190,7 +190,7 @@ extern int gameGetSlotTable(void);
 extern int uniteStateIsDone(void);
 /* Supplied declaration required: campChangeState. */
 /* Supplied declaration required: FUN_0020d700. */
-/* Supplied declaration required: FUN_0020dc1c. */
+/* Supplied declaration required: campUpgradeListUpdate. */
 extern int bibleIsClosed(void);
 extern int configIsClosed(void);
 /* Supplied declaration required: playLogUpdate. */
@@ -979,7 +979,7 @@ LAB_003d6870:
     campChangeState(temp_v4);
     break;
   case 0xd:
-    FUN_0020dc1c();
+    campUpgradeListUpdate();
     break;
   case 0xe:
     temp_v4 = g_camp[8];

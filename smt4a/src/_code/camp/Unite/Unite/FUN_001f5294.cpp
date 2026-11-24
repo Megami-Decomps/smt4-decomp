@@ -16,7 +16,7 @@ u32 contentBuildWordList(u32 unused, u32 id, ContentWordList* output);
 
 int asdMemoryAllocTraced(...);
 int slotSetRequest(...);
-int FUN_001ff014(...);
+int uniteCreateSelectedResult(...);
 int statusDownRestartTransition(void);
 int uniteResultInitialize(void);
 int sysMemClear(...);
@@ -237,7 +237,7 @@ extern unsigned short recordGetScaledMaximum(int);
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: partyFindSlotById. */
 /* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: FUN_001ff014. */
+/* Supplied declaration required: uniteCreateSelectedResult. */
 /* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: uniteMenuChangeState. */
 /* Supplied declaration required: uniteSortCandidateList. */
@@ -3074,7 +3074,7 @@ LAB_001f9868:
       pairLogAppend((piVar3[temp_v47[0] * 2 + 0x4ee] & 0x3fffffffU) >> 0xf,
                    *(unsigned short *)(ppiVar16 + 0x19));
       temp_v7 = temp_v47[0];
-      FUN_001ff014(temp_v47[0]);
+      uniteCreateSelectedResult(temp_v47[0]);
       pairLogSetValue((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2);
       FUN_0035dd60(temp_v7);
       if (piVar3[0x123] == 0x100007b) {

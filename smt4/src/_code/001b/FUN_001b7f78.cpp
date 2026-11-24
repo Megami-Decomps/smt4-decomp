@@ -98,7 +98,7 @@ int slotSetRequest(...);
 int naviMainStartStateTimer(void);
 int aocFindSupplementalRecordIndex(...);
 int naviRefreshMainBlock(void);
-int FUN_0031d54c(void);
+int mapMainResumeField(void);
 int naviMainSetPosition(...);
 
 int mapInterfaceSetStateTwo(void);
@@ -692,7 +692,7 @@ extern unsigned short gameFlagsGetWorkValue(void);
 /* Supplied declaration required: FUN_003079b4. */
 extern int dataTableFindFirstPermittedRecordIndex(int);
 /* Supplied declaration required: FUN_00316de4. */
-/* Supplied declaration required: FUN_0031d54c. */
+/* Supplied declaration required: mapMainResumeField. */
 extern int FUN_00328b1c(int);
 /* Supplied declaration required: NaviMain_Destroy. */
 /* Supplied declaration required: bgmStopWithoutEntry. */
@@ -3763,7 +3763,7 @@ LAB_001bc008:
         break;
       }
     }
-    FUN_0031d54c();
+    mapMainResumeField();
     break;
   case 0x33:
     mapPerFrameUpdate();
@@ -3790,7 +3790,7 @@ LAB_001bc008:
         *(float *)(temp_v9 + 0x50) = temp_v2;
         *(float *)(g_mapCamera + 0x18) = DAT_0049f9ac;
       }
-      FUN_0031d54c();
+      mapMainResumeField();
       mapIfSetMode1();
     }
     break;
@@ -3820,7 +3820,7 @@ joined_r0x001bce40:
     if (temp_v9 != 2) {
       return 0;
     }
-    FUN_0031d54c();
+    mapMainResumeField();
     break;
   case 0x36:
     gameCopyPersistentSave();
@@ -3862,7 +3862,7 @@ joined_r0x001bce40:
     if (temp_v9 == 0) {
       return 0;
     }
-    FUN_0031d54c();
+    mapMainResumeField();
     break;
   case 0x38:
     *(unsigned char *)(g_mapCamera + 0xa4) = 1;

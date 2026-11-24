@@ -109,7 +109,7 @@ u32 gauntletAppMenuSetMode(GauntletAppMenuWork *menu, u32 mode)
         spriteStartAnimationByIndex(gauntletSprite(menu, 3), 1);
         uiStoreTextureEntryCenter(reinterpret_cast<PointDeltaWork *>(&menu->list.sprites[3]), 0x1D,
                                   listCursorGetRowIfUnblocked(menu->list.controller) + 0x40E);
-        menu->list.sprites[3].unk18 = 0xA0;
+        menu->list.sprites[3].centerX = 0xA0;
         break;
     case 7:
         uiSpriteSetKeyframe((UiSpriteState *)&menu->list.sprites[0], 1, 0);

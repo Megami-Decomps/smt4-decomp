@@ -73,9 +73,9 @@ struct GameStateA {
     /* 0x0D0 */ f32 pointHeading;
     /* 0x0D4 */ s32 table2FType;         /* 1-3: data table 0x2F type 0-2 */
     /* 0x0D8 */ u32 table2FId;
-    /* 0x0DC */ s8 unk0DC;
+    /* 0x0DC */ s8 table2FCounterPending;
     /* 0x0DD */ u8 unk0DD[3];
-    /* 0x0E0 */ s32 unk0E0;
+    /* 0x0E0 */ s32 table2FCounterId;
     /* 0x0E4 */ s32 unk0E4;
     /* 0x0E8 */ s8 unk0E8;
     /* 0x0E9 */ u8 unk0E9;
@@ -207,7 +207,7 @@ struct GameStateA {
     /* 0x390 */ s32 statusTimer;
     /* 0x394 */ s32 giftCounter;
     /* 0x398 */ s32 popupCooldown; /* frames since the last story popup */
-    /* 0x39C */ s32 unk39C;
+    /* 0x39C */ s32 pendingStoryPopup;
     /* 0x3A0 */ u8 unk3A0[2];
     /* 0x3A2 */ s8 unk3A2;
     /* 0x3A3 */ s8 unk3A3;
@@ -270,9 +270,9 @@ struct GameStateA {
     /* 0x4A4 */ f32 unk4A4;
     /* 0x4A8 */ s8 unk4A8;
     /* 0x4A9 */ u8 unk4A9[3];
-    /* 0x4AC */ s32 unk4AC;
-    /* 0x4B0 */ s32 unk4B0;
-    /* 0x4B4 */ s32 unk4B4;
+    /* 0x4AC */ s32 furinStatusCooldown;
+    /* 0x4B0 */ s32 furinHPCooldown;
+    /* 0x4B4 */ s32 furinMoneyCooldown;
     /* 0x4B8 */ s32 lastPick;
     /* 0x4BC */ s32 earlierPick;
     /* 0x4C0 */ u8 unk4C0[4];
@@ -280,7 +280,7 @@ struct GameStateA {
     /* 0x4C8 */ s32 popupCountdown;
     /* 0x4CC */ u8 mapRequested;
     /* 0x4CD */ u8 unk4CD;
-    /* 0x4CE */ s8 unk4CE;
+    /* 0x4CE */ s8 suppressQuestUnlockNotice;
     /* 0x4CF */ u8 unk4CF;
     /* 0x4D0 */ void *current;
     /* 0x4D4 */ void *target;

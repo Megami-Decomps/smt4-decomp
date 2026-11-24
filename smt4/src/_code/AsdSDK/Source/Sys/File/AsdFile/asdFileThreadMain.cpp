@@ -1,330 +1,147 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdFileThreadMain` (_code @ 0x113e4c, 0x624 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses one pool base for the semaphore and worker state, overlays the
+ * release/wait and UTF-16 stack slots differently, and lays out the state switch and queue traversal differently. */
+#include <new>
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/File/AsdFile.h"
+#include "AsdSDK/Source/Sys/File/AsdFilePath.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "nn/Result.h"
+#include "nn/fnd/TimeSpan.h"
+#include "nn/os/LightEvent.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
+#include "sys/HandleWait.h"
 
 extern "C" {
+extern AsdFileGlobals g_asdFile;
+extern u32 g_asdFileMutex;
+extern LightEvent g_asdFileEvent;
+extern CriticalSection *DAT_00465124;
 
-int refIsNullOrZero(...);
-int threadSleepDuration(...);
-int archivePathDeviceOpen(...);
-int asdMemoryAllocAligned(...);
-int asdOperatorNew(...);
-int nn_os_LightEvent_Wait(...);
-int svcWaitSynchronizationN(...);
-int asdMemFree(...);
-int svcReleaseSemaphore(...); // declcheck: local (raw draft: its svcWaitSynchronizationN calls do not fit sys/HandleWait.h)
-int resultHandleFailure(...);
-int asdFatalError(...);
-int FUN_002c618c(...);
-int builtin_strncpy(...);
-
-typedef int romwright_code(...);
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp248; /* 0x248: local_248 */
-} void_stack;
-
-extern unsigned char LAB_002dc6c0; /* 0x2dc6c0 */
-extern signed char g_asdFile; /* 0x465000 */
-extern unsigned int DAT_00465004; /* 0x465004 */
-extern int *DAT_00465010; /* 0x465010 */
-extern unsigned int g_asdFileMutex; /* 0x465014 */
-extern unsigned int g_asdFileEvent; /* 0x465028 */
-extern unsigned int DAT_00465124; /* 0x465124 */
-
-/* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
-extern int FUN_002b90c8(int *, unsigned int, unsigned int *);
-/* Supplied declaration required: refIsNullOrZero. */
-/* Supplied declaration required: threadSleepDuration. */
-/* Supplied declaration required: archivePathDeviceOpen. */
-/* Supplied declaration required: asdMemoryAllocAligned. */
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: nn_os_LightEvent_Wait. */
-/* Supplied declaration required: svcWaitSynchronizationN. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: svcReleaseSemaphore. */
-/* Supplied declaration required: resultHandleFailure. */
-/* Supplied declaration required: asdFatalError. */
-/* Supplied declaration required: FUN_002c618c. */
-extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-extern void nn_os_LightEvent_ClearSignal(unsigned int);
-
-
-void asdFileThreadMain(void)
-
-{
-/* irregular: 1 goto(s); 13 native warning(s); review required */
-  unsigned char *puVar1;
-  int *piVar2;
-  char *pcVar3;
-  unsigned short *puVar4;
-  unsigned int temp_v0;
-  int temp_v1;
-  int *piVar7;
-  int *piVar8;
-  int temp_v2;
-  unsigned int uStack_244;
-  int uStack_240;
-  unsigned char temp_v3 [512];
-  char *temp_v4;
-  unsigned int uStack_38;
-  unsigned char temp_v5 [4];
-  int temp_v6;
-  unsigned int temp_v7;
-  
-  do {
-    nn_os_LightEvent_Wait(&g_asdFileEvent);
-    if (g_asdFile != '\0') {
-      return;
-    }
-    uStack_240 = g_asdFileMutex;
-    temp_v2 = -1;
-    uStack_244 = 0xffffffff;
-    puVar1 = temp_v3;
-    svcWaitSynchronizationN(puVar1,&uStack_240,1,0);
-    if ((int)puVar1 < 0) {
-      resultHandleFailure();
-    }
-    piVar8 = DAT_00465010;
-    piVar2 = &temp_v2;
-    svcReleaseSemaphore(&temp_v2,g_asdFileMutex,1);
-    while( 1 ) {
-      if ((int)piVar2 < 0) {
-        resultHandleFailure();
-      }
-      if (piVar8 == (int *)0x0) break;
-      if (g_asdFile != '\0') {
-        return;
-      }
-      if (!(*piVar8 == 4 || *piVar8 == 5)) {
-        if (piVar8[0x4e] != 0) {
-          uStack_240 = g_asdFileMutex;
-          temp_v2 = -1;
-          uStack_244 = 0xffffffff;
-          puVar1 = temp_v3;
-          svcWaitSynchronizationN(puVar1,&uStack_240,1,0);
-          if ((int)puVar1 < 0) {
-            resultHandleFailure();
-          }
-          (*(romwright_code *)piVar8[0x4e])(piVar8 + 0xb);
-          piVar8[0x4e] = 0;
-          piVar2 = &temp_v2;
-          svcReleaseSemaphore(&temp_v2,g_asdFileMutex,1);
-          if ((int)piVar2 < 0) {
-            resultHandleFailure();
-          }
-        }
-        switch(*piVar8) {
-        case 0:
-          pcVar3 = (char *)0x18;
-          asdOperatorNew();
-          if (pcVar3 != (char *)0x0) {
-            pcVar3[4] = '\0';
-            pcVar3[5] = '\0';
-            pcVar3[6] = '\0';
-            pcVar3[7] = '\0';
-            pcVar3[8] = '\0';
-            pcVar3[9] = '\0';
-            pcVar3[10] = '\0';
-            pcVar3[0xb] = '\0';
-            pcVar3[0xc] = '\0';
-            pcVar3[0xd] = '\0';
-            pcVar3[0xe] = '\0';
-            pcVar3[0xf] = '\0';
-            pcVar3[0x10] = '\0';
-            pcVar3[0x11] = '\0';
-            pcVar3[0x12] = '\0';
-            pcVar3[0x13] = '\0';
-            pcVar3[0x14] = '\0';
-            pcVar3[0x15] = '\0';
-            pcVar3[0x16] = '\0';
-            pcVar3[0x17] = '\0';
-            builtin_strncpy(pcVar3,"h\fB",4);
-          }
-          piVar8[0x4b] = (int)pcVar3;
-          temp_v4 = pcVar3 + 4;
-          temp_v6 = 0;
-          temp_v7 = 0;
-          uStack_38 = 1;
-          piVar7 = piVar8 + 0xb;
-          refIsNullOrZero(&temp_v6);
-          piVar2 = &temp_v2;
-          while ((temp_v1 = FUN_002b90c8(piVar7,0x105,(unsigned int *)&temp_v6), temp_v1 != 0 &&
-                 (puVar4 = (unsigned short *)piVar2, FUN_002c618c(piVar2,piVar7,temp_v1,&temp_v6),
-                 puVar4 != (unsigned short *)0x0))) {
-            piVar2 = (int *)((int)piVar2 + 2);
-            piVar7 = (int *)((int)piVar7 + temp_v1);
-          }
-          *(unsigned short *)piVar2 = 0;
-          temp_v4[0xc] = '\0';
-          temp_v4[0xd] = '\0';
-          temp_v4[0xe] = '\0';
-          temp_v4[0xf] = '\0';
-          temp_v4[0x10] = '\0';
-          temp_v4[0x11] = '\0';
-          temp_v4[0x12] = '\0';
-          temp_v4[0x13] = '\0';
-          temp_v4[4] = '\0';
-          temp_v4[5] = '\0';
-          temp_v4[6] = '\0';
-          temp_v4[7] = '\0';
-          temp_v4[8] = '\0';
-          temp_v4[9] = '\0';
-          temp_v4[10] = '\0';
-          temp_v4[0xb] = '\0';
-          pcVar3 = temp_v4;
-          archivePathDeviceOpen(temp_v4,&temp_v2,uStack_38);
-          if (((unsigned int)pcVar3 & 0x80000000) != 0) {
-            *piVar8 = 5;
-          }
-          temp_v1 = (**(romwright_code **)(*(int *)piVar8[0x4b] + 0x24))();
-          piVar8[6] = temp_v1;
-          temp_v2 = 0;
-          (**(romwright_code **)(*(int *)piVar8[0x4b] + 0xc))();
-          if (piVar8[3] == 0) {
-            temp_v1 = piVar8[9];
-            if (temp_v1 != 0x10) {
-              if (temp_v1 != 1) {
-                if (temp_v1 != 0x11) {
-                  temp_v2 = piVar8[10];
-                  uStack_244 = 1;
-                  temp_v1 = 0x100;
-                  asdMemoryAllocAligned(0x100,0x100,0,piVar8[6]);
-                  piVar8[3] = temp_v1;
-                }
-                else {
-                  temp_v2 = piVar8[10];
-                  uStack_244 = 0;
-                  temp_v1 = 0x10000;
-                  asdMemoryAllocAligned(0x10000,0x100,0,piVar8[6]);
-                  piVar8[3] = temp_v1;
-                }
-              }
-              else {
-                temp_v2 = piVar8[10];
-                uStack_244 = 1;
-                temp_v1 = 0x10000;
-                asdMemoryAllocAligned(0x10000,0x100,0,piVar8[6]);
-                piVar8[3] = temp_v1;
-              }
-            }
-            else {
-              temp_v2 = piVar8[10];
-              uStack_244 = 0;
-              temp_v1 = 0x100;
-              asdMemoryAllocAligned(0x100,0x100,0,piVar8[6]);
-              piVar8[3] = temp_v1;
-            }
-          }
-          nn_os_CriticalSection_Enter(DAT_00465124);
-          DAT_00465004 = 1;
-          temp_v0 = (**(romwright_code **)(*(int *)piVar8[0x4b] + 0x28))
-                            ((int *)piVar8[0x4b],temp_v5,piVar8[3],piVar8[6]);
-          DAT_00465004 = 0;
-          nn_os_CriticalSection_Leave(DAT_00465124);
-          if ((temp_v0 & 0x80000000) != 0) {
-            *piVar8 = 5;
-          }
-          temp_v1 = piVar8[0x4b];
-          if ((*(unsigned int *)(temp_v1 + 4) & 0xfffffffe) != 0) {
-            if ((*(unsigned int *)(temp_v1 + 4) & 1) != 0) {
-              asdFatalError();
-            }
-            nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(*(unsigned int *)(temp_v1 + 4) & 0xfffffffe);
-            *(unsigned int *)(temp_v1 + 4) = 0;
-          }
-          if ((int *)piVar8[0x4b] != (int *)0x0) {
-            (**(romwright_code **)(*(int *)piVar8[0x4b] + 4))();
-          }
-          *piVar8 = 3;
-          piVar8[0x4b] = 0;
-        case 3:
-          *piVar8 = 4;
-        }
-        if ((*piVar8 == 4 || *piVar8 == 5) && (piVar8[0x4c] != 0)) {
-          uStack_240 = g_asdFileMutex;
-          temp_v2 = -1;
-          uStack_244 = 0xffffffff;
-          puVar1 = temp_v3;
-          svcWaitSynchronizationN(puVar1,&uStack_240,1,0);
-          if ((int)puVar1 < 0) {
-            resultHandleFailure();
-          }
-          piVar2 = (int *)piVar8[0x4d];
-          if ((int *)piVar8[0x4d] == (int *)0x0) {
-            piVar2 = piVar8;
-          }
-          (*(romwright_code *)piVar8[0x4c])(piVar2);
-          piVar2 = &temp_v2;
-          svcReleaseSemaphore(&temp_v2,g_asdFileMutex,1);
-joined_r0x0011436c:
-          if ((int)piVar2 < 0) {
-            resultHandleFailure();
-          }
-        }
-        uStack_240 = g_asdFileMutex;
-        temp_v2 = -1;
-        uStack_244 = 0xffffffff;
-        puVar1 = temp_v3;
-        svcWaitSynchronizationN(puVar1,&uStack_240,1,0);
-        if ((int)puVar1 < 0) {
-          resultHandleFailure();
-        }
-        piVar8 = (int *)piVar8[0x4f];
-        piVar2 = &temp_v2;
-        svcReleaseSemaphore(&temp_v2,g_asdFileMutex,1);
-      }
-      else {
-        uStack_240 = g_asdFileMutex;
-        temp_v2 = -1;
-        uStack_244 = 0xffffffff;
-        puVar1 = temp_v3;
-        svcWaitSynchronizationN(puVar1,&uStack_240,1,0);
-        if ((int)puVar1 < 0) {
-          resultHandleFailure();
-        }
-        temp_v1 = piVar8[1];
-        piVar8[1] = temp_v1 - piVar8[2];
-        if (0 < temp_v1 - piVar8[2]) {
-          piVar2 = &temp_v2;
-          svcReleaseSemaphore(&temp_v2,g_asdFileMutex,1);
-          goto joined_r0x0011436c;
-        }
-        temp_v1 = piVar8[0x50];
-        piVar7 = (int *)piVar8[0x4f];
-        if (temp_v1 != 0) {
-          *(int **)(temp_v1 + 0x13c) = piVar7;
-          if (piVar7 != (int *)0x0) {
-            piVar7[0x50] = temp_v1;
-          }
-        }
-        else {
-          DAT_00465010 = piVar7;
-          if (piVar7 != (int *)0x0) {
-            piVar7[0x50] = 0;
-          }
-        }
-        if ((piVar8[4] == 0) && (piVar8[3] != 0)) {
-          asdMemFree();
-        }
-        piVar8[3] = 0;
-        asdMemFree(piVar8);
-        piVar2 = &temp_v2;
-        svcReleaseSemaphore(&temp_v2,g_asdFileMutex,1);
-        piVar8 = piVar7;
-      }
-    }
-    if (g_asdFile != '\0') {
-      return;
-    }
-    nn_os_LightEvent_ClearSignal((unsigned int)&g_asdFileEvent);
-    threadSleepDuration(&LAB_002dc6c0,0);
-  } while( 1 );
-}
-
+void nn_os_LightEvent_Wait(LightEvent *event);
+void threadSleepDuration(nn::fnd::TimeSpan delay);
+void *asdMemoryAllocAligned(u32 heap, u32 kind, u32 flags, u32 size, u32 alignment, s32 tag);
 } /* extern "C" */
+
+enum {
+    ASD_FILE_HEAP_LARGE = 1,
+    ASD_FILE_HEAP_BACK = 0x10,
+    ASD_FILE_HEAP_LARGE_BACK = 0x11
+};
+
+/* Wakes on queued I/O, completes each request, and retires expired entries from the list. */
+extern "C" void asdFileThreadMain(void *)
+{
+    for (;;) {
+        nn_os_LightEvent_Wait(&g_asdFileEvent);
+        if (g_asdFile.stopRequested) {
+            return;
+        }
+
+        handleWait(g_asdFileMutex, -1);
+        AsdFileRequest *request = g_asdFile.head;
+        semaphoreRelease(g_asdFileMutex, 1);
+
+        while (!g_asdFile.stopRequested && request != NULL) {
+            bool removed = false;
+            if (request->state != ASD_FILE_DONE && request->state != ASD_FILE_FAILED) {
+                if (request->onOpen != NULL) {
+                    handleWait(g_asdFileMutex, -1);
+                    request->onOpen(request->path);
+                    request->onOpen = NULL;
+                    semaphoreRelease(g_asdFileMutex, 1);
+                }
+                switch (request->state) {
+                case ASD_FILE_QUEUED: {
+                    void *memory = asdOperatorNew(sizeof(Obj420c60));
+                    request->stream = memory != NULL ? new (memory) Obj420c60 : NULL;
+                    /* The retail worker proceeds on the assumption that this allocation succeeds. */
+                    s32 openResult = fileTryInitializeNarrow(*(Obj420c60 *)request->stream, request->path, 1);
+                    if (nnResultIsFailure(openResult)) {
+                        request->state = ASD_FILE_FAILED;
+                    }
+                    request->size = (u32)((Obj420c60 *)request->stream)->size();
+                    ((Obj420c60 *)request->stream)->seek(0, 0);
+                    if (request->buffer == NULL) {
+                        if (request->heapKind == ASD_FILE_HEAP_BACK) {
+                            asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Sys\\File\\AsdFile.cpp", 665);
+                            request->buffer = asdMemoryAllocAligned(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, request->size, request->alignment, 0);
+                        } else if (request->heapKind == ASD_FILE_HEAP_LARGE) {
+                            asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Sys\\File\\AsdFile.cpp", 667);
+                            request->buffer = asdMemoryAllocAligned(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, request->size, request->alignment, 1);
+                        } else if (request->heapKind == ASD_FILE_HEAP_LARGE_BACK) {
+                            asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Sys\\File\\AsdFile.cpp", 669);
+                            request->buffer = asdMemoryAllocAligned(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, request->size, request->alignment, 0);
+                        } else {
+                            asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Sys\\File\\AsdFile.cpp", 671);
+                            request->buffer = asdMemoryAllocAligned(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, request->size, request->alignment, 1);
+                        }
+                    }
+                    u32 bytesRead = 0;
+                    s32 readResult;
+                    {
+                        ScopedCriticalLock lock(DAT_00465124);
+                        g_asdFile.reading = 1;
+                        readResult = ((Obj420c60 *)request->stream)->read(&bytesRead, request->buffer, request->size);
+                        g_asdFile.reading = 0;
+                    }
+                    if (nnResultIsFailure(readResult)) {
+                        request->state = ASD_FILE_FAILED;
+                    }
+                    ((Obj420c60 *)request->stream)->Close();
+                    delete (Obj420c60 *)request->stream;
+                    request->state = ASD_FILE_READ;
+                    request->stream = NULL;
+                }
+                    /* fall through */
+                case ASD_FILE_READ:
+                    request->state = ASD_FILE_DONE;
+                    break;
+                }
+                if ((request->state == ASD_FILE_DONE || request->state == ASD_FILE_FAILED) && request->onDone != NULL) {
+                    handleWait(g_asdFileMutex, -1);
+                    request->onDone(request->onDoneArg != NULL ? request->onDoneArg : request);
+                    semaphoreRelease(g_asdFileMutex, 1);
+                }
+            } else {
+                handleWait(g_asdFileMutex, -1);
+                request->lifetime -= request->lifetimeStep;
+                if (request->lifetime <= 0) {
+                    AsdFileRequest *next = request->next;
+                    AsdFileRequest *prev = request->prev;
+                    if (prev != NULL) {
+                        prev->next = next;
+                        if (next != NULL) {
+                            next->prev = prev;
+                        }
+                    } else {
+                        g_asdFile.head = next;
+                        if (next != NULL) {
+                            next->prev = NULL;
+                        }
+                    }
+                    if (!request->userBuffer && request->buffer != NULL) {
+                        asdMemFree(request->buffer);
+                    }
+                    request->buffer = NULL;
+                    asdMemFree(request);
+                    request = next;
+                    removed = true;
+                }
+                semaphoreRelease(g_asdFileMutex, 1);
+            }
+            if (removed) {
+                continue;
+            }
+            handleWait(g_asdFileMutex, -1);
+            request = request->next;
+            semaphoreRelease(g_asdFileMutex, 1);
+        }
+
+        if (g_asdFile.stopRequested) {
+            return;
+        }
+        nn_os_LightEvent_ClearSignal(&g_asdFileEvent);
+        threadSleepDuration(nn::fnd::TimeSpan::FromMilliSeconds(3));
+    }
+}
