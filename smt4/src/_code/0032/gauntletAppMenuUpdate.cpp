@@ -1,7 +1,13 @@
 /* NON_MATCHING: 4 lines, one register: retail adds the three scroll-bar regions to the count as `add r0, r1, #3`,
  * the build as `add r1, r1, #3`. Three `touchRegionCount++` after the three registrations give retail's code but
  * are only a split of this `+= 3` (one `++` after each registration is far off), so they are not written.
- * Apocalypse's twin is FUN_003ce598. */
+ * Checked in isolation (three registrations, then the count): every single statement (`+= 3`, `= count + 3`,
+ * a u16 cast, an s16 count, a named copy of the count) adds in place in r1; any two or more consecutive increments
+ * (`++` three times, `+= 1; += 2`, `+= 4; --`) fold to retail's `add r0, r1, #3`. Neither the callee's return type
+ * (u16: no change, s16: 134 lines) nor a three-pass loop (238) helps.
+ * Apocalypse's twin gauntletAppMenuUpdate (0x3ce598) and smt4 sortMenuUpdate have the same add after their three
+ * scroll-bar registrations; statusDownRebuildTouchRegions (proven with `+= N`) is 98 lines off with repeated `++`
+ * at its eight sites, so the repeated form is not a habit of the source either. */
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "ui/UiSpriteApi.h"
 #include "ui/GridNavigation.h"

@@ -27,7 +27,7 @@ void buttonHelpSetText(const s8 *text, u32 color);
 void buttonHelpSetHelpState(u8 value);
 void buttonHelpSetTextVisible(u8 value);
 s16 ifTouchRegionAddRequested(u32 file, s32 index);
-s32 uiSearchPrimary(GridNavigation *list);
+s32 uiListGetVisibleCount(GridNavigation *list);
 /* Moves the list's cursor from the scroll bar or a touched row; `decide` is set when a row is tapped. */
 u32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV *sprite, const s16 *rows,
                                  u32 thumb, u32 previous, u32 next, s8 *decide, s32 alternateAxis, s32 notify);
@@ -40,7 +40,7 @@ static __inline void sortMenuAdvanceFrame(SortMenuWork *work)
 {
     uiSpriteAdvanceAnimation(&work->sprites[10], 1.0f);
     uiSpriteAdvanceAnimation(&work->sprites[11], 1.0f);
-    if ((s32)gridNavigationGetItemCount(&work->list) > uiSearchPrimary(&work->list)) {
+    if ((s32)gridNavigationGetItemCount(&work->list) > uiListGetVisibleCount(&work->list)) {
         uiSpriteAdvanceAnimation(&work->sprites[12], 1.0f);
     }
 }
@@ -135,7 +135,7 @@ s32 sortMenuCalcUpdate(u32 job)
                 }
             }
             sortMenuShowCursorHelp(work);
-            if ((s32)gridNavigationGetItemCount(&work->list) > uiSearchPrimary(&work->list)) {
+            if ((s32)gridNavigationGetItemCount(&work->list) > uiListGetVisibleCount(&work->list)) {
                 work->ids[0] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, 70);
                 work->ids[1] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, 71);
                 work->ids[2] = ifTouchRegionAddRequested(SORT_MENU_TEXTURES, 72);

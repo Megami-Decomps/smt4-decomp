@@ -46,7 +46,7 @@ typedef struct MapIfRecord {
     /* 0x090 */ f32 transform[12];
     /* 0x0C0 */ u8 unk0C0[0xC4];
     /* 0x184 */ u32 values[3];
-    /* 0x190 */ u32 unk190;
+    /* 0x190 */ s32 selectionModelId;  /* model whose selection animation is active in the primary record */
 } MapIfRecord;
 
 typedef char MapIfRecordOffsetCheck[offsetof(MapIfRecord, frame) == 0xC &&
@@ -55,7 +55,7 @@ typedef char MapIfRecordOffsetCheck[offsetof(MapIfRecord, frame) == 0xC &&
     offsetof(MapIfRecord, pending) == 0x41 && offsetof(MapIfRecord, timer) == 0x44 &&
     offsetof(MapIfRecord, position) == 0x50 && offsetof(MapIfRecord, target) == 0x80 &&
     offsetof(MapIfRecord, transform) == 0x90 && offsetof(MapIfRecord, values) == 0x184 &&
-    sizeof(MapIfRecord) == 0x194 ? 1 : -1];
+    offsetof(MapIfRecord, selectionModelId) == 0x190 && sizeof(MapIfRecord) == 0x194 ? 1 : -1];
 
 #define MAP_IF_WIDGETS 0x23
 #define MAP_IF_SLOTS 4

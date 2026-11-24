@@ -1,5 +1,6 @@
 /* NON_MATCHING: the maximum's operand and address setup differs, and the two battle-flag updates use other registers. */
 #include "battle/BtlEntry.h"
+#include "battle/BtlUnitTarget.h"
 #include "battle/BtlGlobals.h"
 #include "battle/btlMain.h"
 
@@ -15,7 +16,6 @@ extern "C" {
 void btlReflectQueueSelectionMarks(u32, CommandEventChoice *, BtlEntry *);
 void btlMenuCursorStepReflectAction(u32, CommandEventChoice *, u32, u32, u32);
 void FUN_002569ac(CommandEventContext *, u32);
-void btlEntryValuesCopy(CommandEventContext *, CommandEventChoice *);
 
 void btlResolveCommandEvent(CommandEventContext *context, CommandEventChoice *choice)
 {
@@ -73,6 +73,6 @@ void btlResolveCommandEvent(CommandEventContext *context, CommandEventChoice *ch
     if (active == 0)
         battle->actionState.mode = 10;
     FUN_002569ac(context, context->battle->actionState.index);
-    btlEntryValuesCopy(context, choice);
+    btlEntryValuesCopy(&context->battle, (BtlUnit *)choice);
 }
 }

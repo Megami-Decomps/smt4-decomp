@@ -3,12 +3,12 @@
 
 extern "C" {
 
-s32 FUN_00284dbc(void);
+s32 questIsReported(void);
 void scrSetResult(s32 value);
 
 s32 scrCommClearGameDataWord(void)
 {
-    FUN_00284dbc();
+    questIsReported();
     gameDataBlocksSetWord(0);
     scrSetResult(0);
     return 1;

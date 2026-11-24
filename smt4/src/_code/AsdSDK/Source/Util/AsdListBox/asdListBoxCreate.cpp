@@ -37,11 +37,11 @@ u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 colorScheme)
     box->x = (f32)x;
     box->height = 128.0f;
     box->y = (f32)y;
-    box->rowHeight = 13;
-    box->rowCount = 10;
+    box->rowHeight = ASD_LISTBOX_DEFAULT_ROW_HEIGHT;
+    box->charWidth = ASD_LISTBOX_DEFAULT_CHAR_WIDTH;
     box->flags |= ASD_LISTBOX_FLAG_MOVABLE;
-    box->visibleRows = box->rowCount;
-    rowWidgetInit(box->widget, box->rowCount, 0);
+    box->visibleRows = ASD_LISTBOX_DEFAULT_VISIBLE_ROWS;
+    rowWidgetInit(box->widget, box->visibleRows, 0);
     colorSetRgba(box->widget, 6, 5, 32, 32);
     box->state = 0;
     return handle;

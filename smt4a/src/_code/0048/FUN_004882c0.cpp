@@ -4,19 +4,7 @@
 extern "C" {
 s32 MapNaviTable_GetCategoryCount(MapNaviTableContext *table);
 MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext *table, u32 index);
-MapNaviMarkerIcon *dataTable2BFindType1Entry(Block66Owner *owner, s32 mapId, u8 category);
-}
-
-/* The marker slots lie past the shared byte-only owner; a local view avoids increasing its alignment. */
-struct MarkerOwnerView {
-    u8 padding[0x66];
-    MapNaviMarker markers[16];
-};
-
-static inline MarkerOwnerView *markerView(Block66Owner *owner)
-{
-    return reinterpret_cast<MarkerOwnerView *>(owner);
-}
+} /* extern "C" */
 
 static inline MapNaviCategoryRecord *findCategory(s32 mapId, s32 section)
 {
@@ -39,24 +27,24 @@ extern "C" void FUN_004882c0(Block66Owner *owner, s32 slot, s32 active, s32 mapI
     if (active != 0) {
         MapNaviCategoryRecord *record = findCategory(mapId, section);
         MapNaviMarkerIcon *icon = dataTable2BFindType1Entry(owner, mapId, record->category);
-        markerView(owner)->markers[slot].mapId = mapId;
-        markerView(owner)->markers[slot].section = section;
-        markerView(owner)->markers[slot].category = record->category;
-        markerView(owner)->markers[slot].icon = icon->icon;
+        owner->primaryMarkers[slot].mapId = mapId;
+        owner->primaryMarkers[slot].section = section;
+        owner->primaryMarkers[slot].category = record->category;
+        owner->primaryMarkers[slot].icon = icon->icon;
         if (enabled != 0)
-            markerView(owner)->markers[slot].enabled = 1;
+            owner->primaryMarkers[slot].enabled = 1;
         else
-            markerView(owner)->markers[slot].enabled = 0;
-        markerView(owner)->markers[slot].x = x;
-        markerView(owner)->markers[slot].y = y;
+            owner->primaryMarkers[slot].enabled = 0;
+        owner->primaryMarkers[slot].x = x;
+        owner->primaryMarkers[slot].y = y;
     } else {
-        markerView(owner)->markers[slot].mapId = 0;
-        markerView(owner)->markers[slot].section = 0;
-        markerView(owner)->markers[slot].category = 0;
-        markerView(owner)->markers[slot].icon = 0;
-        markerView(owner)->markers[slot].enabled = 0;
-        markerView(owner)->markers[slot].x = 0;
-        markerView(owner)->markers[slot].y = 0;
-        markerView(owner)->markers[slot].state = 0;
+        owner->primaryMarkers[slot].mapId = 0;
+        owner->primaryMarkers[slot].section = 0;
+        owner->primaryMarkers[slot].category = 0;
+        owner->primaryMarkers[slot].icon = 0;
+        owner->primaryMarkers[slot].enabled = 0;
+        owner->primaryMarkers[slot].x = 0;
+        owner->primaryMarkers[slot].y = 0;
+        owner->primaryMarkers[slot].state = 0;
     }
 }

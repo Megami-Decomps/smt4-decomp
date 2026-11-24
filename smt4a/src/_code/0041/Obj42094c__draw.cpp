@@ -1,5 +1,6 @@
 /* NON_MATCHING: the render-state pushes and pops are the context's stacks (B the blend mode, A the pass flags) and
  * the colour is filled element-wise as retail does; the vertex copy and projection loops and their VFP registers differ. */
+#include "code/Code0023_Smt4a.h"
 #include "classes/Obj42094c.h"
 #include "camp/RenderCtx.h"
 #include "classes/FilterDraw.h"
@@ -9,7 +10,6 @@ extern "C" {
 void FUN_00409e78(void *filter, f32 *matrix, const void *motion);
 void FUN_0032c808();
 void gpuSubmitFloatVectorsOrDefault(const f32 *color, f32 x, f32 y, f32 z, f32 u, f32 v);
-void FUN_002371b0();
 }
 
 void Obj42094c::draw()
@@ -47,7 +47,7 @@ void Obj42094c::draw()
             gpuSubmitFloatVectorsOrDefault(color, projected[vertex][0], projected[vertex][1],
                 projected[vertex][2], filter->vertices[vertex].u, filter->vertices[vertex].v);
         }
-        FUN_002371b0();
+        effectSubmitDefaultDrawParameters();
     }
     renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);

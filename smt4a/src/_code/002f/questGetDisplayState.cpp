@@ -9,8 +9,8 @@ int questDataGetRecord(void);
 
 extern int idIsAtLeast350(int);
 /* Supplied declaration required: questDataGetRecord. */
-extern int partyEntryFlagsBit3(int);
-extern int partyEntryFlagsBit1(int);
+extern int questIsCompleted(int);
+extern int questHasNewMark(int);
 extern int partyEntryGetByte1(int);
 
 
@@ -34,8 +34,8 @@ int questGetDisplayState(int param_1,int param_2)
   if ((temp_v2 != 0) && (*(char *)(temp_v1 + 6) == '\0')) {
     temp_v0 = 1;
   }
-  temp_v2 = partyEntryFlagsBit1(param_2);
-  temp_v3 = partyEntryFlagsBit3(param_2);
+  temp_v2 = questHasNewMark(param_2);
+  temp_v3 = questIsCompleted(param_2);
   temp_v5 = -1;
   temp_v6 = 0;
   do {

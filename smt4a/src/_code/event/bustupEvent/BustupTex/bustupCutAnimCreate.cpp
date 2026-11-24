@@ -10,15 +10,9 @@
 #include "event/bustupEvent/BustupTex.h"
 #include "addon/AocSystemA.h"
 
-// The animation vectors follow the established texture-work prefix.
-struct BustupTextureCreateWorkA {
-    BustupTextureWork texture;
-    /* 0x90 */ f32 movement[3];
-    /* 0x9C */ f32 rotation[3];
-};
 extern "C" {
-extern const char DAT_0052f77c[]; // Allocation source path.
-extern const char DAT_0052f76c[]; // Shared "EVE_BustupTex" process name.
+extern const char DAT_0052f77c[]; /* Allocation source path. */
+extern const char DAT_0052f76c[]; /* Shared "EVE_BustupTex" process name. */
 void* asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
 s32 eventIsSkipping(void);
 s32 aocRunByName(AocSystemA* system, s32 table, s32 node, u32 option);
@@ -28,9 +22,8 @@ void asdMTeXReleaseJobContext(void* work);
 void bustupCutAnimCreate(s32 portrait)
 {
     asdDebugTrace(DAT_0052f77c, 1178);
-    BustupTextureCreateWorkA* work = static_cast<BustupTextureCreateWorkA*>(
-        asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(BustupTextureCreateWorkA), 1));
-    sysMemClear(work, sizeof(BustupTextureCreateWorkA));
+    BustupTextureWorkA *work = (BustupTextureWorkA *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(*work), 1);
+    sysMemClear(work, sizeof(*work));
     work->texture.previousId = -1;
     work->texture.previousNode = -1;
     work->texture.table = 22;
@@ -58,12 +51,12 @@ void bustupCutAnimCreate(s32 portrait)
     work->texture.active = 0;
     work->texture.visible = 1;
     work->texture.frame = 0.0f;
-    work->movement[0] = 0.0f;
-    work->movement[1] = 0.0f;
-    work->movement[2] = 0.0f;
-    work->rotation[0] = 0.0f;
-    work->rotation[1] = 0.0f;
-    work->rotation[2] = 0.0f;
+    work->currentOffset[0] = 0.0f;
+    work->currentOffset[1] = 0.0f;
+    work->targetOffset[0] = 0.0f;
+    work->targetOffset[1] = 0.0f;
+    work->startOffset[0] = 0.0f;
+    work->startOffset[1] = 0.0f;
     asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052f76c), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0026c568), reinterpret_cast<AsdProcFunc>(asdMTeXReleaseJobContext), reinterpret_cast<u32>(work));
 }
 }

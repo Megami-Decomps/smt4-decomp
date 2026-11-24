@@ -67,7 +67,7 @@ extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: textGetNameToken. */
 extern int gridNavigationGetItemCount(int);
 /* Supplied declaration required: uiDrawListScrollBar. */
-extern int uiSearchPrimary(int);
+extern int uiListGetVisibleCount(int);
 extern int FUN_00358e28(unsigned int);
 /* Supplied declaration required: tmnlGetEntryText. */
 
@@ -415,7 +415,7 @@ unsigned int FUN_0022a5d8(void)
       }
     }
     temp_v8 = gridNavigationGetItemCount(temp_v19);
-    temp_v2 = uiSearchPrimary(temp_v19);
+    temp_v2 = uiListGetVisibleCount(temp_v19);
     if (temp_v2 < temp_v8) {
       efctSetSpeed();
       temp_v10 = vec2GetYInt((UiSpriteState *)(temp_v1 + 0x6b8));

@@ -27,7 +27,7 @@ struct EventEntry {
 s32 mapEnemyHasAvailableSecondaryState(void);
 u32 mapGetDepartureIndex(void);
 s32 gameFlagIsSet(s32 flag);
-s32 FUN_00298dc8(u16 entry);
+s32 questHasNewMark(u16 entry);
 
 /* Entry `index` of the event table: the built-in entries first, then the extra ones. */
 static EventEntry *eventTableEntry(u32 index)
@@ -72,7 +72,7 @@ static s32 eventFlagsAllow(const EventEntry *entry)
 static s32 eventEntryAvailable(const EventEntry *entry, s32 hasSpecial)
 {
     return eventFlagsAllow(entry) != 0 &&
-           (entry->partyEntry == 0 || FUN_00298dc8(entry->partyEntry) != 0) &&
+           (entry->partyEntry == 0 || questHasNewMark(entry->partyEntry) != 0) &&
            (entry->needSpecial != 1 || hasSpecial != 0);
 }
 

@@ -42,7 +42,7 @@ u32 btlReflectQueueSelectionMarks(s32 actor, u32 options, BtlEntry *unit);
 void battleSelectButtonHelpPreset(s32 preset);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void buttonHelpSetPreset(s32 preset);
-void FUN_003c06ac(BattleEventStep *step);
+void btlTalkStartLoadingAssets(BattleEventStep *step);
 void FUN_003dbe68(void *state);
 s32 btlEventAreResourcesReady(void *state);
 s32 FUN_003dcc34(void *state);
@@ -55,7 +55,7 @@ s32 btlTalkRunEventStep(BattleEventStep *step)
 {
     switch (step->state) {
     case 0:
-        FUN_003c06ac(step);
+        btlTalkStartLoadingAssets(step);
         break;
     case 1:
         switch (step->loadStage) {

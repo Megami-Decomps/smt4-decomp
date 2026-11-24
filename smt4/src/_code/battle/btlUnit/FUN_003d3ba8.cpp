@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "util/Random.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUnitTarget.h"
 
 extern "C" {
 
@@ -121,7 +122,6 @@ extern int FUN_002281a4(int);
 /* Supplied declaration required: FUN_00228220. */
 /* Supplied declaration required: FUN_00228930. */
 /* Supplied declaration required: frameRangeExtend. */
-extern int btlUnitIsDeadAndUncopied(unsigned int *, unsigned int *, int);
 /* Supplied declaration required: FUN_00229a3c. */
 /* Supplied declaration required: btlTargetSetFlag10. */
 /* Supplied declaration required: FUN_0023c0d0. */
@@ -499,7 +499,7 @@ LAB_003d444c:
       do {
         if ((*(char *)((int)param_2 + temp_v5 + 0x38) != '\0') &&
            (((*(unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v5 * 0x288) & 0x40) != 0 ||
-            (temp_v6 = btlUnitIsDeadAndUncopied(param_1,param_2,temp_v5), temp_v6 != 0)))) {
+            (temp_v6 = btlUnitIsDeadAndUncopied((BtlMainState **)param_1, (BtlUnit *)param_2, temp_v5), temp_v6 != 0)))) {
           *(unsigned char *)((int)param_2 + temp_v5 + 0x38) = 0;
         }
         temp_v5 = temp_v5 + 1;

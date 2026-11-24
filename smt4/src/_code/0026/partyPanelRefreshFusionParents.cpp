@@ -1,7 +1,5 @@
-/* NON_MATCHING: 6 lines, one register choice. The widget flags are set through the one-instruction setters armlink
- * inlined (partyWidgetSetTransitionPending, partyWidgetSetTransitionKind: inlined.txt rows). In the stock loop's
- * id compare retail loads the stock demon's id into r1 and the excluded unit's into r0 (`cmp r1, r0`); the same
- * trade as in Apocalypse's FUN_002ade88. */
+/* The widget flags are set through the one-instruction setters armlink inlined (partyWidgetSetTransitionPending,
+ * partyWidgetSetTransitionKind: inlined.txt rows). */
 #include "ui/PartyPanelState.h"
 #include "gamedata/UnitStats.h"
 
@@ -33,8 +31,9 @@ void partyPanelRefreshFusionParents()
         }
     }
     for (s32 index = 0; index < 24; ++index) {
-        s32 unit = work->entries[index].packedIndex;
-        if (unit < 0 || (((const StatBlock *)gameGetUnitRecord(unit))->ailments & 0x404) != 0) {
+        /* the stock entries' index is signed */
+        if ((s32)work->entries[index].packedIndex < 0 ||
+            (((const StatBlock *)gameGetUnitRecord((s32)work->entries[index].packedIndex))->ailments & 0x404) != 0) {
             work->entries[index].available = 0;
         }
     }
@@ -56,8 +55,8 @@ void partyPanelRefreshFusionParents()
             }
         }
         for (s32 index = 0; index < 24; ++index) {
-            s32 unit = work->entries[index].packedIndex;
-            if (unit >= 0 && gameGetUnitRecord(unit)->id == excluded->id) {
+            if ((s32)work->entries[index].packedIndex >= 0 &&
+                gameGetUnitRecord((s32)work->entries[index].packedIndex)->id == excluded->id) {
                 work->entries[index].available = 0;
                 partyWidgetSetTransitionKind(work->demons[index], 0);
                 partyWidgetSetTransitionPending(work->demons[index], 1);

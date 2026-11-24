@@ -20,7 +20,7 @@ void asdMemFree(void *block);
 void aocClearFlagD_C(u32 aoc, s32 id);
 void aocClearFlagD_10(u32 aoc, s32 id);
 void nkdwLoadWorldData(Object003fcc94 *object, s32 id);
-void FUN_003fcd20(Object003fcc94 *object, s32 id);
+void npcPackageLoad(Object003fcc94 *object, s32 id);
 
 /* Frees the object's buffer and clears its words and flags, then clears the AOC flag for its id (mode 6 uses flag D_10 instead of D_C). */
 void aocReleaseObjectBufferAndFlag(Object003fcc94 *object)
@@ -39,7 +39,7 @@ void aocReleaseObjectBufferAndFlag(Object003fcc94 *object)
     }
     if (object->mode != 6) {
         aocClearFlagD_C(g_aocSystem, object->id);
-        FUN_003fcd20(object, -object->id);
+        npcPackageLoad(object, -object->id);
         return;
     }
     aocClearFlagD_10(g_aocSystem, object->id);

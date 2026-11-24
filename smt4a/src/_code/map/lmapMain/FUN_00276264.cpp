@@ -55,7 +55,7 @@ int FUN_00244ac8(void);
 int scrScriptProcessGetEntry(...);
 int lmapSceneMoveToWaypoint(...);
 int mapDepartInit(...);
-int FUN_002b79d8(void);
+int mapEffectDisableFlagGatedEntries(void);
 int mapSetSceneState(...);
 int lmapInitializeArea(...);
 int FUN_0033f9f4(void);
@@ -468,7 +468,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapCollisionLoad. */
 extern int messageGetChoiceResult(void);
 extern int mapDepartIsRunning(void);
-/* Supplied declaration required: FUN_002b79d8. */
+/* Supplied declaration required: mapEffectDisableFlagGatedEntries. */
 /* Supplied declaration required: mapGimicClearEntryChildren. */
 /* Supplied declaration required: FUN_002b80b8. */
 /* Supplied declaration required: FUN_002b80fc. */
@@ -2651,7 +2651,7 @@ LAB_0027a7a8:
     }
     if (g_mapSelection == -1) {
       FUN_003a2278(0);
-      FUN_002b79d8();
+      mapEffectDisableFlagGatedEntries();
       DAT_005f1614 = 0;
       puVar2[3] = 0xd;
       puVar2[4] = 0;
@@ -2697,7 +2697,7 @@ LAB_0027a7a8:
     if (DAT_005f1658 != 0) goto LAB_0027a7a8;
     if (g_mapSelection == -1) {
       FUN_003a2278(0);
-      FUN_002b79d8();
+      mapEffectDisableFlagGatedEntries();
       DAT_005f1614 = 0;
       puVar2[3] = 0xd;
       puVar2[4] = 0;
@@ -2744,7 +2744,7 @@ LAB_0027a7a8:
       if (DAT_005f1658 != 0) goto LAB_0027a7a8;
       if (g_mapSelection == -1) {
         uiPlayGatedActionFeedback();
-        FUN_002b79d8();
+        mapEffectDisableFlagGatedEntries();
         DAT_005f1614 = 0;
         puVar2[3] = 0xd;
         puVar2[4] = 0;

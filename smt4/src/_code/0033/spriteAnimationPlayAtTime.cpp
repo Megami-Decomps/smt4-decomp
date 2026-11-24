@@ -1,4 +1,4 @@
-/* NON_MATCHING: 28 lines. Left: retail loads the range's first key into the loop counter's register and copies it for the first-key test (this build the other way round), converts the previous key's time before the span, and multiplies the differences as ratio * difference. */
+/* NON_MATCHING: 16 lines; retail converts the previous key's time before the span and uses the interpolation ratio as the first VFP operand of each product. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 
 /* One keyframe (0x18 bytes). */
@@ -29,15 +29,16 @@ extern "C" {
 void spriteAnimationPlayAtTime(SpriteDrawOwner *owner, s32 index, const SpriteDrawVector3 *placement,
                   u32 flags, s32 filter, s32 positioned, s32 flipY, f32 time, f32 globalScale)
 {
-    AnimSet *set = static_cast<AnimSet *>(owner);
+    AnimSet *set = (AnimSet *)owner;
     if (index >= set->origin->animationCount)
         return;
     SpriteDrawVector2 position(0.0f, 0.0f);
     SpriteDrawVector2 keyScale(100.0f, 100.0f);
-    s32 first = set->ranges[index].first;
-    s32 last = first + set->ranges[index].count - 1;
+    s32 i = set->ranges[index].first;
+    s32 last = i + set->ranges[index].count - 1;
+    s32 first = i;
     s32 key = -1;
-    for (s32 i = first; i <= last; i++) {
+    for (; i <= last; i++) {
         if (time <= (f32)set->keys[i].time) {
             if (time == (f32)set->keys[i].time || first == i) {
                 key = set->keys[i].id;

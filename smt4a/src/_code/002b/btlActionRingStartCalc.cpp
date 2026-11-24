@@ -15,7 +15,7 @@ typedef char BattleActionRingOffsets[offsetof(BattleActionRingView, jobs) == 0xC
 
 extern "C" {
 s32 jobIsValid(u32 job);
-void FUN_004dcb40(BattleUnitRecordState *state, BtlMainStateA *battle,
+void btlActionBindCombatantSlot(BattleUnitRecordState *state, BtlMainStateA *battle,
                   u32 mode, s32 combatantIndex, s32 scale, u32 option);
 u32 taskCreateDraw(const char *name, s32 priority, s32 startDelay, s32 endDelay,
                    void (*update)(u32), void (*destroy)(u32), void *owner, u32 parent);
@@ -29,7 +29,7 @@ void btlActionRingStartCalc(BtlMainStateA *battle, u32 mode, s32 combatantIndex,
     BattleActionRingView *ring = reinterpret_cast<BattleActionRingView *>(battle);
     ring->current = (ring->current + 1) % 12;
     jobIsValid(ring->jobs[ring->current]);
-    FUN_004dcb40(reinterpret_cast<BattleUnitRecordState *>(g_btlAction.slots), battle,
+    btlActionBindCombatantSlot(reinterpret_cast<BattleUnitRecordState *>(g_btlAction.slots), battle,
                  mode, combatantIndex, scale, option);
     ring->jobs[ring->current] = taskCreateDraw("btlAction Calc", 3, 0, 0,
         FUN_00298354, jobPoolStopCurrent, battle, ring->job);

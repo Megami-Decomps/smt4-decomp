@@ -8,7 +8,7 @@ extern const char g_questMessagesPath[];
 void asdLoadFileAsyncSimple(const char *path, void **resource, s32 flags);
 void buttonHelpSetPreset(s32 preset);
 void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
-s32 FUN_00298dc8();
+s32 questHasNewMark();
 void FUN_0029016c(u32 selection, s32 flags);
 void FUN_002900d0();
 s32 gameJumpRequestIsPending();
@@ -36,7 +36,7 @@ u32 questSysLoadStep(AocScriptHolder *step)
     case 2:
         if (scrRunOpcodesStub(step->process) == 2) {
             u32 selection = rosterGetLeaderId();
-            if (FUN_00298dc8()) {
+            if (questHasNewMark()) {
                 FUN_0029016c(selection, 0);
             }
             FUN_002900d0();

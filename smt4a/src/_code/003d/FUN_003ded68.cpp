@@ -4,16 +4,16 @@
 extern "C" {
 ItemEligibilityStateA* gameGetPlayerData(void);
 s32 goalConditionsSatisfied(s32);
-s32 partyEntryFlagsBit3(s32);
-s32 partyEntryFlagsBit1(s32);
+s32 questIsCompleted(s32);
+s32 questHasNewMark(s32);
 
 // Tests the entry's flags, availability, and nonzero player-state threshold.
 u32 FUN_003ded68(s32 id)
 {
-    if (partyEntryFlagsBit3(id) != 0) {
+    if (questIsCompleted(id) != 0) {
         return 0;
     }
-    if (partyEntryFlagsBit1(id) != 0 && goalConditionsSatisfied(id) != 0) {
+    if (questHasNewMark(id) != 0 && goalConditionsSatisfied(id) != 0) {
         return 0;
     }
     if (gameUnlockRecordRequirementsMet(id) != 0) {

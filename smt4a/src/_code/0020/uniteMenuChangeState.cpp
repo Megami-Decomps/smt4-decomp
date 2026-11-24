@@ -1,5 +1,10 @@
 /* NON_MATCHING: one instruction. In state 0x1B's request test retail reads the pending request through its copy
- * of the work pointer (ldrne r0, [r0, #0x488]); the build reads it through the function's own pointer (r4). */
+ * of the work pointer (ldrne r0, [r0, #0x488]); the build reads it through the function's own pointer (r4).
+ * Tried without effect: the test written like its real sibling uniteIsStateTwentyTwo (no argument, a local copy
+ * of g_unite, early return on NULL), a shared (work, request) test under it, s32/u8/u32 results, if chains and
+ * a result local in the helper, the inverted if; a ternary argument to sysPlaySe and the test written in place
+ * through the local are worse (95 and 8 lines). A plain static test with further callers in the unit (late
+ * inlining), field getters under it and a flat view of the two request fields give the same instruction too. */
 #include "ui/ButtonHelp.h"
 #include "common.h"
 #include <stddef.h>

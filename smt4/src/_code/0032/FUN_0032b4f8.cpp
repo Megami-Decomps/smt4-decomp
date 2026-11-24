@@ -5,7 +5,7 @@
 extern "C" {
 
 int gpuSubmitFloatVectorsOrDefault(float *);
-int forwardRecoveredCallback(void);
+int effectSubmitDefaultDrawParameters(void);
 int FUN_002b011c(void);
 int gxSubmitFloatColoredQuad(float *);
 int renderCtxSelectTexture(unsigned int, unsigned int);
@@ -63,7 +63,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
-/* Supplied declaration required: forwardRecoveredCallback. */
+/* Supplied declaration required: effectSubmitDefaultDrawParameters. */
 extern unsigned int mathTriangleWaveBlend(unsigned int, unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_002b011c. */
 /* Supplied declaration required: gxSubmitFloatColoredQuad. */
@@ -261,7 +261,7 @@ void FUN_0032b4f8(int param_1,int param_2,int param_3)
     gpuSubmitFloatVectorsOrDefault(&temp_v21);
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 4);
-  forwardRecoveredCallback();
+  effectSubmitDefaultDrawParameters();
   return;
 }
 

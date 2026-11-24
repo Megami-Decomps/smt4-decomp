@@ -129,7 +129,7 @@ bool partyPanelIsActive(void);
 }
 
 extern "C" {
-u32 partyEntryFlagsBit1(s32 index);
+u32 questHasNewMark(s32 index);
 }
 
 extern "C" {

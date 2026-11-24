@@ -1,26 +1,7 @@
-/* NON_MATCHING: the "_FALSE" copy is now strcpy (armcc's __ARM_common_memcpy4_7, buffer in r8 as retail); the INT width is an if/else of two products (retail's addeq/addne); retail still repeats the "measure the text and add the width" tail in every item-type case where ours merges them into one tail. */
 #include <stdio.h>
 #include <string.h>
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "shard/JobWork.h"
-
-/* The list box work object as the size calculation sees it (observed fields). */
-struct ListBoxMetrics {
-    /* 0x00 */ AsdList items;
-    /* 0x0C */ u8 unk0C[0x44];
-    /* 0x50 */ f32 width;
-    /* 0x54 */ f32 height;
-    /* 0x58 */ s32 charWidth;
-    /* 0x5C */ s32 rowHeight;
-    /* 0x60 */ u8 unk60[8];
-    /* 0x68 */ s32 maxRows;
-    /* 0x6C */ s32 visibleRows;
-    /* 0x70 */ u8 unk70[0xC];
-    /* 0x7C */ s32 hasMeasure;
-    /* 0x80 */ s32 (*measure)(const char *text);
-    /* 0x84 */ u8 unk84[8];
-    /* 0x8C */ char title[1];
-};
 
 extern "C" {
 
@@ -30,39 +11,48 @@ s32 libc_strlen(const char *text);
  * text) gives the width, the number of visible rows the height. */
 void asdListBoxMarkDirty(u32 job)
 {
-    char text[256];
-    ListBoxMetrics *box = (ListBoxMetrics *)jobGetWork(job);
+    AsdListBox *box = (AsdListBox *)jobGetWork(job);
     f32 width = (f32)(libc_strlen(box->title) * box->charWidth);
 
     for (AsdListNode *node = box->items.first; node != NULL; node = node->next) {
-        AsdListBoxItem *item = static_cast<AsdListBoxItem *>(node->item);
+        AsdListBoxItem *item = (AsdListBoxItem *)node->item;
         s32 itemWidth;
 
         if (box->hasMeasure != 0) {
+            /* Formatting scratch is live only for the measurement of that representation. */
             itemWidth = box->measure(item->label);
             switch (item->type) {
             case ASD_LISTBOX_PLAIN:
                 break;
-            case ASD_LISTBOX_TEXT:
+            case ASD_LISTBOX_TEXT: {
+                char text[ASD_LISTBOX_VALUE_TEXT_CAPACITY];
                 sprintf(text, "_%s", item->text);
                 itemWidth = box->measure(text) + itemWidth + box->charWidth;
                 break;
-            case ASD_LISTBOX_TOGGLE:
+            }
+            case ASD_LISTBOX_TOGGLE: {
+                char text[ASD_LISTBOX_VALUE_TEXT_CAPACITY];
                 strcpy(text, "_FALSE");
                 itemWidth = box->measure(text) + itemWidth + box->charWidth;
                 break;
+            }
             case ASD_LISTBOX_INT:
-                if (item->flags != 0) {
-                    sprintf(text, "0x%08X", item->intValue);
-                } else {
+                if (item->flags == 0) {
+                    char text[ASD_LISTBOX_VALUE_TEXT_CAPACITY];
                     sprintf(text, "_%8d", item->intValue);
+                    itemWidth = box->measure(text) + itemWidth + box->charWidth;
+                } else {
+                    char text[ASD_LISTBOX_VALUE_TEXT_CAPACITY];
+                    sprintf(text, "0x%08X", (u32)item->intValue);
+                    itemWidth = box->measure(text) + itemWidth + box->charWidth;
                 }
-                itemWidth = box->measure(text) + itemWidth + box->charWidth;
                 break;
-            case ASD_LISTBOX_FLOAT:
+            case ASD_LISTBOX_FLOAT: {
+                char text[ASD_LISTBOX_VALUE_TEXT_CAPACITY];
                 sprintf(text, "_%4.2f", (double)item->floatValue);
                 itemWidth = box->measure(text) + itemWidth + box->charWidth;
                 break;
+            }
             }
         } else {
             itemWidth = libc_strlen(item->label) * box->charWidth;
@@ -76,10 +66,10 @@ void asdListBoxMarkDirty(u32 job)
                 itemWidth += box->charWidth * 6;
                 break;
             case ASD_LISTBOX_INT:
-                if (item->flags != 0) {
-                    itemWidth += box->charWidth * 11;
-                } else {
+                if (item->flags == 0) {
                     itemWidth += box->charWidth * 9;
+                } else {
+                    itemWidth += box->charWidth * 11;
                 }
                 break;
             case ASD_LISTBOX_FLOAT:
@@ -92,8 +82,8 @@ void asdListBoxMarkDirty(u32 job)
         }
     }
     box->width = width;
-    s32 rows = box->visibleRows < box->maxRows ? box->visibleRows : box->maxRows;
+    s32 rows = box->itemCount < box->visibleRows ? box->itemCount : box->visibleRows;
     box->height = (f32)(box->rowHeight * rows + 4) + (f32)box->rowHeight;
 }
 
-}
+} /* extern "C" */

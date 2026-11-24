@@ -19,7 +19,7 @@ typedef struct {
 
 /* Supplied declaration required: slotTableReplace. */
 /* Supplied declaration required: FUN_001a5e84. */
-extern int FUN_001a8930(int, unsigned int, unsigned int *);
+extern int soundArchiveReadWaveArchiveInfoWithExtension(int, unsigned int, unsigned int *);
 extern unsigned int FUN_005090f4(void);
 
 
@@ -65,7 +65,7 @@ void FUN_0045c1c8(int *param_1,unsigned int param_2,unsigned int param_3)
       do {
         temp_v9 = 0xffffffff;
         temp_v11 = '\0';
-        temp_v2 = FUN_001a8930(temp_v5,temp_v4 | 0x5000000,(unsigned int *)&temp_v9);
+        temp_v2 = soundArchiveReadWaveArchiveInfoWithExtension(temp_v5,temp_v4 | 0x5000000,(unsigned int *)&temp_v9);
         temp_v0 = '\0';
         if (temp_v2 != 0) {
           temp_v0 = temp_v11;

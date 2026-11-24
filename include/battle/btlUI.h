@@ -9,10 +9,11 @@
 #include "common.h"
 #include "battle/BattleUiActionSlot.h"
 #include "ui/UiSpriteState.h"
+#include "ui/SpriteRowList.h"
 #include <stddef.h>
 
 /* Shin Megami Tensei IV layout. */
-typedef struct BtlUiObjA { /* 0x0000 */ u8 unk[0x21F8]; } BtlUiObjA;
+typedef SpriteRowList BtlUiObjA;
 typedef struct BtlUiObjB {
     /* 0x000 */ u8 unk000[0x1C4];
     /* 0x1C4 */ UiSpriteState timer;

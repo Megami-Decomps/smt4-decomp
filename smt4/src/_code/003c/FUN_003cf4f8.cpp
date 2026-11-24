@@ -1,6 +1,7 @@
 /* NON_MATCHING: 158 lines: retail clears both candidate arrays through two walking pointers and a down counter (the
  * build indexes them), and gives the three flags other stack slots (pick-one 568, favour-guarding 572, broad 576). */
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlUnitTarget.h"
 #include "util/Random.h"
 #include "battle/btlAction.h"
 #include "gamedata/SkillDataLookup.h"
@@ -38,7 +39,6 @@ struct EnemyAiContext {
 
 extern "C" {
 void btlEntryBuildSummary(BattleActionInfo *info, BtlMainState *battle, u32 unit);
-s32 btlUnitIsDeadAndUncopied(EnemyAiContext *context, EnemyTurnWork *work, s32 target);
 
 /* Marks a candidate slot unused. */
 static __inline void candidateClear(TargetCandidate *candidate)
@@ -90,7 +90,7 @@ void FUN_003cf4f8(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
     }
     for (s32 target = 0; target < 0x6D; target++) {
         if (work->allowed[target] &&
-            ((context->battle->entries[target].flags & 0x40) || btlUnitIsDeadAndUncopied(context, work, target)))
+            ((context->battle->entries[target].flags & 0x40) || btlUnitIsDeadAndUncopied(&context->battle, (BtlUnit *)work, target)))
             work->allowed[target] = 0;
     }
     if (pickOne) {

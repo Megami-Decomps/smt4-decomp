@@ -12,8 +12,8 @@ typedef struct PlayLogWork {
     /* 0x000 */ UiResourceParameters parameters;
     /* 0x020 */ UiSpriteState sprites[5];
     /* 0x2DC */ ScrollSelection list;
-    /* 0x340 */ u8 unk340[4];
-    /* 0x344 */ s32 state;
+    /* 0x340 */ s32 frame;                  /* frames the screen has run */
+    /* 0x344 */ s32 state;                  /* 0 opening, 1 list, 2 closing, 3 = closed */
     /* 0x348 */ s16 touchRegions[3];
     /* 0x34E */ u8 unk34E[0xA];
     /* 0x358 */ s16 count;

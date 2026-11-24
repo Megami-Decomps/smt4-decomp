@@ -328,7 +328,7 @@ extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: buttonHelpGetValue. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: bitsHolderSetBit. */
-extern int uiSearchPrimary(int *);
+u32 uiListGetVisibleCount(const void *object); // declcheck: local (Code0029.h declares the IV twin, uiListGetVisibleCount, with this signature)
 /* Supplied declaration required: FUN_0034a9c4. */
 extern int uiQuestIsCreated(void);
 /* Supplied declaration required: FUN_0034c340. */
@@ -2146,7 +2146,7 @@ LAB_001f77ec:
       FUN_0023b45c(0);
     }
     temp_v6 = 0;
-    temp_v5 = uiSearchPrimary(temp_v40[0]);
+    temp_v5 = uiListGetVisibleCount(temp_v40[0]);
     if (0 < temp_v5) {
       temp_v31 = piVar3 + 0x1a0c;
       do {
@@ -2240,7 +2240,7 @@ LAB_001f77ec:
           }
         }
         temp_v6 = temp_v6 + 1;
-        temp_v5 = uiSearchPrimary(temp_v40[0]);
+        temp_v5 = uiListGetVisibleCount(temp_v40[0]);
       } while (temp_v6 < temp_v5);
     }
     if (temp_v28 == (int *)0x0) {

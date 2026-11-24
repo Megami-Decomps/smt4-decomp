@@ -1,8 +1,9 @@
 /* NON_MATCHING: readable rebuild from asm of the battle main creation; armcc here lays out the 0x16-byte stack record and the allocation traces differently, and orders the force-flag merges (retail merges the two masks as separate 32-bit ors). */
 #include "AsdSDK/AsdDebug.h"
-#include "sys/Task.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "code/Code0015_Smt4a.h"
 #include "gamedata/SaveSlotTable.h"
+#include "battle/BattleColorOverlay.h"
 
 /* The battle main state (only the fields the creation sets). */
 struct BattleMainState {
@@ -58,17 +59,14 @@ extern "C" {
 extern BattleMainGlobals g_btlMain;
 
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 mode, u32 size, u32 tracked);
-u32 taskCreateDraw(const char *, s32, s32, s32, TaskFunc, TaskFunc, void *, u32);
 u8 *flagValueGetStorage(void);
 void __aeabi_memcpy4(void *dest, const void *source, u32 size);
 void __aeabi_memcpy(void *dest, const void *source, u32 size);
 void FUN_0024d9c4(BattleMainState *state);
 void FUN_0024bcd4(void *work);
 void FUN_002def6c(void *work);
-void FUN_0029853c(void *work);
-void sceneQueryFalse(void *work);
-void btlDrawTopColorOverlay(void *work);
-void btlDrawBottomColorOverlay(void *work);
+s32 FUN_0029853c(u32 job);
+s32 sceneQueryFalse(void);
 
 /* Creates the battle main: its state, copies of the slot table and flag storage, the start
  * parameters (`start` of kind 4 or 0x16, or the default flags) and the main process with its draw tasks. */
@@ -115,11 +113,12 @@ void FUN_00240c64(void *start, s32 kind)
     state->forceFlags |= g_btlMain.forcedMask;
     state->transitionPending = 0;
     state->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("btlMain"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0024bcd4), reinterpret_cast<AsdProcFunc>(FUN_002def6c), reinterpret_cast<u32>(g_btlMain.state));
-    taskCreateDraw("BTLMAIN U", 0x75, 0, 0, FUN_0029853c, NULL, NULL, state->job);
-    taskCreateDraw("BTLMAIN D", 0xEA, 0, 0, sceneQueryFalse, NULL, NULL, state->job);
-    taskCreateDraw("BTLFADE UL", 0x85, 0, 0, btlDrawTopColorOverlay, NULL, NULL, state->job);
-    taskCreateDraw("BTLFADE UR", 0xE1, 0, 0, btlDrawTopColorOverlay, NULL, NULL, state->job);
-    taskCreateDraw("BTLFADE D", 0xED, 0, 0, btlDrawBottomColorOverlay, NULL, NULL, state->job);
+    taskCreateDraw((const s8 *)"BTLMAIN U", 0x75, 0, 0, FUN_0029853c, NULL, 0, (void *)state->job);
+    /* Retail also registers the no-argument zero-result stub as a draw callback. */
+    taskCreateDraw((const s8 *)"BTLMAIN D", 0xEA, 0, 0, (AsdProcUpdateFunc)sceneQueryFalse, NULL, 0, (void *)state->job);
+    taskCreateDraw((const s8 *)"BTLFADE UL", 0x85, 0, 0, btlDrawTopColorOverlay, NULL, 0, (void *)state->job);
+    taskCreateDraw((const s8 *)"BTLFADE UR", 0xE1, 0, 0, btlDrawTopColorOverlay, NULL, 0, (void *)state->job);
+    taskCreateDraw((const s8 *)"BTLFADE D", 0xED, 0, 0, btlDrawBottomColorOverlay, NULL, 0, (void *)state->job);
 }
 
 } /* extern "C" */

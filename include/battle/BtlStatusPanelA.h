@@ -58,13 +58,13 @@ static void statusPanelSetTabImages(StatusPanel *panel, s32 row, s32 headerImage
 }
 
 /* Starts animation `anim` on the row's tab of the first four rows, and on the header with the first. */
-static void statusPanelSelectTabAnims(StatusPanel *panel, s32 row, s32 anim)
+static __inline void statusPanelSelectTabAnims(StatusPanel *panel, s32 row, s32 anim)
 {
-    if (row <= 3) {
-        if (row == 0)
-            uiSpriteSelectAnim(&panel->sprites[STATUS_PANEL_HEADER], anim);
-        uiSpriteSelectAnim(&panel->sprites[STATUS_PANEL_TABS + row], anim);
-    }
+    if (row > 3)
+        return;
+    if (row == 0)
+        uiSpriteSelectAnim(&panel->sprites[STATUS_PANEL_HEADER], anim);
+    uiSpriteSelectAnim(&panel->sprites[STATUS_PANEL_TABS + row], anim);
 }
 
 #endif

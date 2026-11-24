@@ -1,26 +1,10 @@
 #include "common.h"
-#include "shop/shopMain.h"
+#include "shop/ShopSequenceRequest.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
-extern ShopSequenceRequest *g_shopSequenceRequest; /* NULL until first used */
-void *asdOperatorNew(u32 bytes);
 void *jyoucyuGetTableEntry(u32 index);
 s32 scrGetArg(u32 index);
-}
-
-/* Returns the queued shop request, allocating a cleared one on first use. */
-static __inline ShopSequenceRequest *shopGetQueuedRequest(void)
-{
-    if (g_shopSequenceRequest == NULL) {
-        ShopSequenceRequest *request = (ShopSequenceRequest *)asdOperatorNew(sizeof(ShopSequenceRequest));
-        if (request != NULL) {
-            request->pending = 0;
-            request->screen = 0;
-        }
-        g_shopSequenceRequest = request;
-    }
-    return g_shopSequenceRequest;
 }
 
 /* Script command: switches to the shop sequence on screen (category, index), screens of category 1

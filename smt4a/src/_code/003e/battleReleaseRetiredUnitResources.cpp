@@ -1,4 +1,6 @@
-/* NON_MATCHING: only the compare operand order differs: retail loads the retired unit's resource id and the resource id in this order and compares `cmp r0, r1` (resource id first); with the same loads the build emits `cmp r1, r0`. */
+/* NON_MATCHING: only the compare operand order differs: retail loads the retired unit's resource id and the resource id in this order and compares `cmp r0, r1` (resource id first); with the same loads the build emits `cmp r1, r0`.
+ * (Wave 90: naming the retired resource, its id and the resource id as const locals inside the NULL test is IDENTICAL;
+ * rejected, the retired pointer and its id are single-use operands.) */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"

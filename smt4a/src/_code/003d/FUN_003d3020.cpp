@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d3020` (_code @ 0x3d3020, 0x4e8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "code/Code0023_Smt4a.h"
 #include "romwright_types.h"
 
 extern "C" {
 
 int gxSubmitFloatColoredQuad(float *);
 int renderCtxSelectTexture(unsigned int, unsigned int);
-int FUN_002371b0(void);
 int gpuSubmitFloatVectorsOrDefault(float *);
 int FUN_0032c808(void);
 int VectorFloatToUnsigned(double, int);
@@ -66,7 +66,6 @@ extern unsigned int asdTMTexTableGetHeaderValue(unsigned int, unsigned int);
 /* Supplied declaration required: gxSubmitFloatColoredQuad. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 extern unsigned int mathTriangleWaveBlend(unsigned int, unsigned int, unsigned int, int, unsigned int);
-/* Supplied declaration required: FUN_002371b0. */
 /* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: FUN_0032c808. */
 
@@ -261,7 +260,7 @@ void FUN_003d3020(int param_1,int param_2,int param_3)
     gpuSubmitFloatVectorsOrDefault(&temp_v21);
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 4);
-  FUN_002371b0();
+  effectSubmitDefaultDrawParameters();
   return;
 }
 

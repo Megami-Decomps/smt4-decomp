@@ -80,8 +80,8 @@ extern int listCursorGetRowIfUnblocked(int);
 extern int questRecordIsUsable(unsigned int);
 extern int recordIsAvailable(unsigned int);
 extern unsigned int aocGetEntryData(unsigned short);
-extern int FUN_003df004(unsigned int, int, unsigned char **);
-extern int partyEntryFlagsBit3(unsigned int);
+extern int questGetRequirementProgress(unsigned int, int, unsigned char **);
+extern int questIsCompleted(unsigned int);
 extern unsigned int rosterGetLeaderId(void);
 
 
@@ -185,7 +185,7 @@ void FUN_00218640(void)
   temp_v18 = (float)((unsigned long long)temp_v20 >> 0x20);
   if (temp_v25 != 0) {
     renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v13 = partyEntryFlagsBit3(temp_v25);
+    temp_v13 = questIsCompleted(temp_v25);
     temp_v12 = temp_v4 + (int)temp_v18;
     if (temp_v13 != 0) {
       texDrawTableEntryAtStoredOrigin(2,0x1e,0x10,temp_v12,temp_v5,0x68);
@@ -347,7 +347,7 @@ LAB_00218d20:
   questDataGetRecord();
   temp_v29 = temp_v19;
   if (*(char *)(temp_v30 + 0xc) != '\0') {
-    temp_v9 = partyEntryFlagsBit3(temp_v25);
+    temp_v9 = questIsCompleted(temp_v25);
     if (temp_v9 != 0) {
       texDrawTableEntryAtStoredOrigin(2,0x1e,0x2b,temp_v6,temp_v13,0x68);
     }
@@ -355,7 +355,7 @@ LAB_00218d20:
   else {
     temp_v0 = *(char *)(temp_v19 + 6);
     if ((temp_v0 != '\x06') && (temp_v0 != '\t' && temp_v0 != '\v')) {
-      temp_v9 = partyEntryFlagsBit3(temp_v25);
+      temp_v9 = questIsCompleted(temp_v25);
       if (temp_v9 != 0) {
         texDrawTableEntryAtStoredOrigin(2,0x1e,0x2b,temp_v6,temp_v13,0x68);
       }
@@ -374,14 +374,14 @@ LAB_00218d20:
           }
         }
         else {
-          temp_v9 = partyEntryFlagsBit3(temp_v25);
+          temp_v9 = questIsCompleted(temp_v25);
           if (temp_v9 != 0) {
             texDrawTableEntryAtStoredOrigin(2,0x1e,0x2b,temp_v6,temp_v13,0x68);
           }
         }
       }
       else {
-        temp_v9 = partyEntryFlagsBit3(temp_v25);
+        temp_v9 = questIsCompleted(temp_v25);
         if (temp_v9 != 0) {
           texDrawTableEntryAtStoredOrigin(2,0x1e,0x2b,temp_v6,temp_v13,0x68);
         }
@@ -449,7 +449,7 @@ LAB_00218d20:
     temp_v12 = 0;
     temp_v32 = 0;
     do {
-      temp_v9 = FUN_003df004(temp_v25,temp_v12,&puStack_188);
+      temp_v9 = questGetRequirementProgress(temp_v25,temp_v12,&puStack_188);
       if (temp_v9 != 0) {
         temp_v26 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0x34));
         textFormatFullWidthNumber(temp_v33,temp_v24);

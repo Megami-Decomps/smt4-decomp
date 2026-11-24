@@ -1,8 +1,6 @@
-/* NON_MATCHING: 42 lines. The descriptors are nn::gr's BindSymbolVSInput (VertexAttributeDescription, as in
- * vertexAttributeUploadStreams) and primRenderDataVertexBytes takes only the render data. Remaining: the descriptors' frame slots
- * (retail colour +8, texture coordinates +16, positions +24; the build puts positions at +32, the same difference as
- * vertexAttributeUploadStreams), the vertex count loaded before the stream pointer store (retail stores first), and
- * the index allocations' stack arguments stored before the argument loads. */
+/* NON_MATCHING: 34 lines. The descriptors are nn::gr's BindSymbolVSInput (VertexAttributeDescription, as in
+ * vertexAttributeUploadStreams). Retail uses stack slots +8 for colour, +16 for texture coordinates and +24
+ * for positions; the build puts positions at +32. The vertex count also loads before the stream pointer store. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "gfx/RenderTargetState.h"
@@ -74,10 +72,12 @@ void primRenderDataAllocateBuffers(PrimRenderData *prim)
     }
     if ((prim->flags & 0x100) != 0) {
         asdDebugTrace(DAT_004094c8, 386);
-        prim->indices = (u16 *)asdMemoryAllocAligned(0x10000, 0x100, 0, prim->indexCount * 2, 16, 1);
+        const u32 indexBytes = prim->indexCount * sizeof(u16);
+        prim->indices = (u16 *)asdMemoryAllocAligned(0x10000, 0x100, 0, indexBytes, 16, 1);
     } else {
         asdDebugTrace(DAT_004094c8, 383);
-        prim->indices = (u16 *)asdMemoryAllocAligned(0x100, 0x100, 0, prim->indexCount * 2, 16, 1);
+        const u32 indexBytes = prim->indexCount * sizeof(u16);
+        prim->indices = (u16 *)asdMemoryAllocAligned(0x100, 0x100, 0, indexBytes, 16, 1);
     }
     for (u32 i = 0; i < prim->indexCount; i++) {
         prim->indices[i] = 0;

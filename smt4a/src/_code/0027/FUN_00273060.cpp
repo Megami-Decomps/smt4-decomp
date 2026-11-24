@@ -12,7 +12,7 @@ int libm_cosf(void); // declcheck: local (romwright prototype; the shared declar
 int libm_sinf(void); // declcheck: local (decompiler placeholder; its calls do not fit the real libm_sinf(f32))
 int mathAngleDeltaDegrees(void);
 int FUN_002d2834(void);
-int FUN_003281c4(int, unsigned int, unsigned int, int);
+int naviEnableSpatialMarkerSlot(int, unsigned int, unsigned int, int);
 int naviMainQueueRequest(int);
 int mathPositionHeadingDegrees(void);
 int FUN_003b959c(void);
@@ -56,7 +56,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_002d2834. */
-/* Supplied declaration required: FUN_003281c4. */
+/* Supplied declaration required: naviEnableSpatialMarkerSlot. */
 /* Supplied declaration required: naviMainQueueRequest. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_003b959c. */
@@ -326,7 +326,7 @@ LAB_00273700:
                 *(unsigned char *)(temp_v3 + 0x1ae) = 0;
               }
               else {
-                FUN_003281c4(temp_v2,*(unsigned int *)(temp_v1 + 0xc),*(unsigned int *)(temp_v1 + 0x10),1);
+                naviEnableSpatialMarkerSlot(temp_v2,*(unsigned int *)(temp_v1 + 0xc),*(unsigned int *)(temp_v1 + 0x10),1);
               }
               temp_v2 = temp_v2 + 1;
               if (temp_v2 >= 0x28) {

@@ -1,8 +1,13 @@
-/* NON_MATCHING: 6 lines differ, two instruction orders. The prologue loads g_bustupViewer's address (r7) before
- * the first clear's size (mov r1, #256) in retail, after it here; and the portrait row's textDrawFaded call sets
- * x (mov r1, #118) before the scale and the fade in retail, after them here. No parameter order of textDrawFaded
- * changes the second (all five scored). */
-#include "runtime/Stdio.h"
+/* NON_MATCHING: 4 lines, one instruction order. The portrait row's textDrawFaded call sets x (mov r1, #118)
+ * before the scale and the fade in retail (r0, r1, s0, r3, then y's vmov r2), after them here (r0, s0, r3, r1).
+ * No parameter order of textDrawFaded gives retail's: scale before fade gives r0, r1, r3, s0 here and loses three
+ * other callers. Tried without effect: s16/u8/u32 argument types, block locals for x, the fade, the scale or the
+ * text object, default arguments; y converted into a local first is worse (8 lines), and x or the scale as a
+ * function-level local takes a register. The buffers are cleared through the unaligned entry in retail: memset
+ * on the arrays calls the word-aligned one.
+ * The prologue (g_bustupViewer's address loaded before the first clear's size) needs <stdio.h>'s sprintf: with
+ * __2sprintf called as a plain variadic function the two are swapped. */
+#include <stdio.h>
 #include "test/BustupViewerState.h"
 #include "text/TextDraw.h"
 
@@ -31,9 +36,9 @@ static __inline const char *bustupViewerPositionName(s32 position)
         position -= 100;
     }
     if (back) {
-        __2sprintf(name, "BACK_%s", g_bustupViewerPositionNames[position]);
+        sprintf(name, "BACK_%s", g_bustupViewerPositionNames[position]);
     } else {
-        __2sprintf(name, "FRONT_%s", g_bustupViewerPositionNames[position]);
+        sprintf(name, "FRONT_%s", g_bustupViewerPositionNames[position]);
     }
     return name;
 }
@@ -150,35 +155,35 @@ s32 bustupViewerDraw(u32 handle)
         switch (row) {
         case BUSTUP_VIEWER_ROW_MODE:
             if (viewer->mode == BUSTUP_VIEWER_MODE_2D) {
-                __2sprintf(text, "<2D>");
+                sprintf(text, "<2D>");
             } else if (viewer->mode == BUSTUP_VIEWER_MODE_3D) {
-                __2sprintf(text, "<3D>");
+                sprintf(text, "<3D>");
             } else if (viewer->mode == BUSTUP_VIEWER_MODE_3D_2) {
-                __2sprintf(text, "<3D_2>");
+                sprintf(text, "<3D_2>");
             } else if (viewer->mode == BUSTUP_VIEWER_MODE_DOT) {
-                __2sprintf(text, "<DOT>");
+                sprintf(text, "<DOT>");
             } else {
-                __2sprintf(text, "<SWIN>");
+                sprintf(text, "<SWIN>");
             }
             break;
         case BUSTUP_VIEWER_ROW_BACKGROUND:
             if (viewer->backgroundId == 0) {
-                __2sprintf(text, "<None>");
+                sprintf(text, "<None>");
             } else if (viewer->mode == BUSTUP_VIEWER_MODE_2D || viewer->mode == BUSTUP_VIEWER_MODE_DOT ||
                        viewer->mode == BUSTUP_VIEWER_MODE_SWIN) {
-                __2sprintf(text, "<BG_2D_%03d>", viewer->backgroundId);
+                sprintf(text, "<BG_2D_%03d>", viewer->backgroundId);
             } else {
-                __2sprintf(text, "<BG_3D_%03d>", viewer->backgroundId);
+                sprintf(text, "<BG_3D_%03d>", viewer->backgroundId);
             }
             break;
         case BUSTUP_VIEWER_ROW_SELECTION:
-            __2sprintf(text, "<%d>", viewer->selection);
+            sprintf(text, "<%d>", viewer->selection);
             break;
         case BUSTUP_VIEWER_ROW_KIND:
             if (viewer->isNpc[viewer->selection]) {
-                __2sprintf(text, "<NPC>");
+                sprintf(text, "<NPC>");
             } else {
-                __2sprintf(text, "<ENEMY>");
+                sprintf(text, "<ENEMY>");
             }
             break;
         case BUSTUP_VIEWER_ROW_CHARACTER:
@@ -191,18 +196,18 @@ s32 bustupViewerDraw(u32 handle)
                 id = viewer->partnerId;
             }
             if (id == 0) {
-                __2sprintf(text, "<None>");
+                sprintf(text, "<None>");
             } else if (id > 300) {
-                __2sprintf(text, "<CHARID_B%03d>", id - 300);
+                sprintf(text, "<CHARID_B%03d>", id - 300);
             } else if (id >= 200) {
-                __2sprintf(text, "<CHARID_BOSS_%03d>", id - 199);
+                sprintf(text, "<CHARID_BOSS_%03d>", id - 199);
             } else {
-                __2sprintf(text, "<CHARID_%03d>", id);
+                sprintf(text, "<CHARID_%03d>", id);
             }
             break;
         }
         case BUSTUP_VIEWER_ROW_PORTRAIT:
-            __2sprintf(text, "<%03d>", viewer->portraitIds[viewer->selection]);
+            sprintf(text, "<%03d>", viewer->portraitIds[viewer->selection]);
             uiObjectSetColorRgb(viewer->text, color);
             textDrawFaded((const void *)viewer->text, 118, (s32)y, 101, 1.0f);
             break;
@@ -212,11 +217,11 @@ s32 bustupViewerDraw(u32 handle)
             if (row == BUSTUP_VIEWER_ROW_PARTNER_VARIANT) {
                 value = viewer->partnerVariant;
             }
-            __2sprintf(text, "<%d>", value);
+            sprintf(text, "<%d>", value);
             break;
         }
         case BUSTUP_VIEWER_ROW_SUB_WINDOW:
-            __2sprintf(text, "<%d>", viewer->subWindowId);
+            sprintf(text, "<%d>", viewer->subWindowId);
             break;
         case BUSTUP_VIEWER_ROW_PARAM_A:
         case BUSTUP_VIEWER_ROW_PARAM_B:
@@ -240,7 +245,7 @@ s32 bustupViewerDraw(u32 handle)
             } else if (row == BUSTUP_VIEWER_ROW_PARTNER_PARAM_B) {
                 value = viewer->partnerParamB;
             }
-            __2sprintf(text, "<%d>", value);
+            sprintf(text, "<%d>", value);
             break;
         }
         case BUSTUP_VIEWER_ROW_POSITION: {
@@ -256,11 +261,11 @@ s32 bustupViewerDraw(u32 handle)
                 position = 0;
             }
             libc_strcpy(name, bustupViewerPositionName(position));
-            __2sprintf(text, "<%s>", name);
+            sprintf(text, "<%s>", name);
             break;
         }
         case BUSTUP_VIEWER_ROW_SCALE:
-            __2sprintf(text, "<%d%%>", (s32)(viewer->scale[viewer->selection] * 100.0f));
+            sprintf(text, "<%d%%>", (s32)(viewer->scale[viewer->selection] * 100.0f));
             break;
         }
         y += lineHeight;

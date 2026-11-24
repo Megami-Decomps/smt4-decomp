@@ -7,6 +7,7 @@
  *   where this form puts it, after the accepted path's branch to the exit);
  * - retail loads the slots pointer before the acting index at every command store, the build at some of them. */
 #include "battle/BattleCommandController.h"
+#include "battle/BtlUnitTarget.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
 #include "battle/BtlUnitWork.h"
@@ -49,7 +50,6 @@ void FUN_00246d38(s32 a, s32 b, BtlActionRecord *record, u32 mask);
 void FUN_00255180(s32 unit, s32 kind, s32 value);
 void FUN_003c0484(BtlEntry *entry, u32 mask, s32 context);
 void FUN_002569ac(BtlMainState **block, s32 bank);
-void btlEntryValuesCopy(BtlMainState **block, CommandState *work);
 void btlAdjustPropertyClamped(s32 id, s32 stat, s32 delta, s32 preview);
 s32 btlClearActionMarksAndSelectTarget(BtlMainState **block, CommandState *work, s32 target);
 void FUN_00229b10(BtlMainState **block, CommandState *work);
@@ -84,7 +84,7 @@ u32 btlCommandStart(BtlMainState **block, CommandState *work)
         entry->flagMask &= ~0x60000000;
         /* The unsigned literal also clears the mask's high word. */
         entry->flagMask &= ~0x80000000;
-        entry->unk0C8 = 0;
+        entry->targetDelay = 0;
     }
     memClearTwo200(g_btlAux);
     work->selection->kind = 0;
@@ -173,7 +173,7 @@ u32 btlCommandStart(BtlMainState **block, CommandState *work)
     btlReflectCreateKind18(1, work, (*block)->resolution.kind, 1, 1);
     if ((work->entry->flags & 0x20) != 0 && FUN_00245c78() == 0) {
         FUN_002569ac(block, (*block)->actionState.index);
-        btlEntryValuesCopy(block, work);
+        btlEntryValuesCopy(block, (BtlUnit *)work);
         btlAdjustPropertyClamped(work->record->memberId, 29, 1, 0);
         setPendingAction(block, 29);
         return 1;

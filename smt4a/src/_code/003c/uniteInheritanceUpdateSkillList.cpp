@@ -25,7 +25,7 @@ extern "C" {
 u32 uiScrollHandleActionsOrTouch(ScrollSelection *entry, const TextureTableEntryIV *rectangle, const s16 *ids,
     u32 firstKey, u32 secondKey, u32 thirdKey, s8 *blockedMode, s32 secondary, s32 notify);
 s32 gridNavigationHandleConfirm(ScrollSelection *entry, s32 mode);
-s32 uiSearchPrimary(ScrollSelection *list);
+s32 uiListGetVisibleCount(ScrollSelection *list);
 void scrollOwnerSetValue(ScrollSelection *list, s32 value);
 void skillHelpUpdateAttributeAndTarget(u32 id);
 void buttonHelpSetText(u32 mode, u32 color);
@@ -63,7 +63,7 @@ u32 uniteInheritanceUpdateSkillList(UniteWorkA *work, s8 blocked, u32 *selected)
 
             work->inheritanceA.stripSelected = 0;
             if (touched != 0) {
-                flaggedEntrySetValueA((FlaggedEntry *)&work->inheritanceA.skillList, uiSearchPrimary(&work->inheritanceA.skillList) - 1);
+                flaggedEntrySetValueA((FlaggedEntry *)&work->inheritanceA.skillList, uiListGetVisibleCount(&work->inheritanceA.skillList) - 1);
                 work->inheritanceA.stripSelected = 1;
             } else if (lastTouched == 0) {
                 if (wasOnStrip && padQueryLogicalKey(6, 1) != 0) {

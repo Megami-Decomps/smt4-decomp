@@ -25,7 +25,7 @@ void FUN_002573d8(void);
 void effectSpawnPositionDefault(RgbaWord, f32, f32, f32);
 f32 phaseCosInterpolate(f32);
 f32 mathSinFixedAngle(f32);
-void forwardRecoveredCallback(void);
+void effectSubmitDefaultDrawParameters(void);
 
 /* Angle of the i-th of the 19 points on the ring (a full turn in 18 steps, in the interpolation tables' units). */
 static __inline f32 titleRingPhase(s32 i)
@@ -60,7 +60,7 @@ void FUN_001f67ec(const TitleRadialGradient *gradient)
         f32 y = centerY + radius * mathSinFixedAngle(titleRingPhase(i));
         effectSpawnPositionDefault(edgeColor, x, y, 0.0f);
     }
-    forwardRecoveredCallback();
+    effectSubmitDefaultDrawParameters();
     renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
 }
 }

@@ -49,7 +49,7 @@ void commonBgStopChildAndReset(void);
 void placeWindowStartClose(void);
 void FUN_0028a420(s32 a, s32 b);
 void mapSceneResetState(s32 mode);
-void FUN_0026ff54(void);
+void saveLoadUiRestoreBackups(void);
 void mapRestoreSavedSelection(void);
 void encounterFlagsRollSlots(void);
 s32 FUN_002b8694(void);
@@ -158,7 +158,7 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
         }
         if (g_gameState.retainCampResources) {
             /* The camp stays loaded: leave the scene for wherever the pending jump points. */
-            FUN_0026ff54();
+            saveLoadUiRestoreBackups();
             mapSceneResetState(1);
             frameTexCampSetMode(0);
             switch (gameDataBlocksGetSaveData()[2]) {

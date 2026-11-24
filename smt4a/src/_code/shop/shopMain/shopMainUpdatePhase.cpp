@@ -1,9 +1,8 @@
-/* NON_MATCHING: 16 lines, registers only: the constants 1 and 0 swap r7/r8 (retail keeps 1 in r7, the request-clear 0 in r8); the IV twin with the same source is IDENTICAL. */
 #include "common.h"
 #include <stdio.h>
 #include "game/GameStateA.h"
 #include "AsdSDK/Source/Gfx/Camera/AsdCamera.h"
-#include "shop/shopMain.h"
+#include "shop/ShopSequenceRequest.h"
 #include "shard/W6_W6Match5_SequencePacket.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 
@@ -36,9 +35,7 @@ struct ShopSession {
 
 extern "C" {
 extern ShopSession *g_shop;
-extern ShopSequenceRequest *g_shopSequenceRequest;
 
-void *asdOperatorNew(u32 size);
 void asdOperatorDelete(void *block);
 ShopList *FUN_0049c3c0(void *memory, s32 mode, s32 kind, s32 sub);
 void FUN_0019ea5c(ShopList *list);
@@ -53,20 +50,6 @@ s32 lmapMainGetUnk74(void);
 s32 gameStateIsFlagSetAndLarge(void);
 void soundChannelStopAll(s32 mask);
 void titleSetSlotValueState2(s32 a, s32 b);
-
-/* Returns the queued shop request, allocating a cleared one on first use. */
-static __inline ShopSequenceRequest *shopGetQueuedRequest(void)
-{
-    if (g_shopSequenceRequest == NULL) {
-        ShopSequenceRequest *request = (ShopSequenceRequest *)asdOperatorNew(sizeof(ShopSequenceRequest));
-        if (request != NULL) {
-            request->pending = 0;
-            request->screen = 0;
-        }
-        g_shopSequenceRequest = request;
-    }
-    return g_shopSequenceRequest;
-}
 
 /* Steps the shop. Returns -1 once the shop asks to be left, otherwise 0. */
 s32 shopMainUpdatePhase(u32 process)

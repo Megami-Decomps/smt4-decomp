@@ -5,6 +5,7 @@
  * loads once), and in phase 19 it keeps the reflect chance in r0 and the selection kind in r1 (this build ip and
  * r0). */
 #include "battle/BattleCommandController.h"
+#include "battle/BtlUnitTarget.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
 #include "battle/ActionStateChannels.h"
@@ -31,7 +32,6 @@ u8 buttonHelpGetStatus(void);
 s32 btlScriptUnitIsIncapacitated(BtlMainState *state);
 void battleSelectButtonHelpPreset(u32 preset);
 void FUN_002569ac(BtlMainState **block, s32 bank);
-void btlEntryValuesCopy(BtlMainState **block, CommandState *work);
 u32 isEntryUsable(void *event); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "void *" is incompatible with parameter of type "int *")
 void FUN_0027e38c(void *event);
 void FUN_003ca6c4(BtlMainState **block, CommandState *work);
@@ -51,7 +51,7 @@ void frameRangeExtend(BtlMainState **block, CommandState *work, s32 id, s32 a, s
 u32 battleResolveEscapeAttempt(BtlMainState **block, CommandState *work);
 s32 btlEventSelectTrigger(void *event, s32 trigger, s32 unit, s32 a);
 u32 FUN_003dbb40(void *object);
-u32 FUN_003ca32c(BtlMainState **block, CommandState *work);
+u32 btlQueuePartyHalfRecovery(BtlMainState **block, CommandState *work);
 void btlUiRecountParty(BtlUi *ui);
 void objDestroyChild(void *object);
 void btlEffectNumberedRelease(void *object);
@@ -151,7 +151,7 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
     }
     case 28:
         FUN_002569ac(block, actor);
-        btlEntryValuesCopy(block, work);
+        btlEntryValuesCopy(block, (BtlUnit *)work);
         if (isEntryUsable(g_btlEvent) != 0)
             return;
         FUN_0027e38c(g_btlEvent);
@@ -232,7 +232,7 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
         FUN_003dbb40(g_btlAux);
         return;
     case 32:
-        FUN_003ca32c(block, work);
+        btlQueuePartyHalfRecovery(block, work);
         return;
     case 33:
         if ((work->flags & 0x10000) == 0) {

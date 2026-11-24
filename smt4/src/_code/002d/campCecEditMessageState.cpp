@@ -1,4 +1,3 @@
-/* NON_MATCHING: message 7's state pair is stored with stm as retail, but its constants are built in the other order (6 in r1 before 2 in r2); writing followingState before nextState ahead of the message stores (an order only a permutation grid found) reproduces retail. */
 #include "camp/CampCec/CampCecEdit.h"
 #include "script/scrScriptProcess.h"
 #include "quest_center/qcMain.h"
@@ -189,10 +188,10 @@ s32 campCecEditMessageState(CampCecEdit *edit)
         }
         FUN_0026f188(FUN_0026f1f0(), help);
         edit->unk12A = 1;
+        edit->followingState = 2;
+        edit->nextState = 6;
         edit->message = -1;
         edit->nextMessage = -1;
-        edit->nextState = 6;
-        edit->followingState = 2;
         result = 2;
         break;
     }

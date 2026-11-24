@@ -6,7 +6,7 @@
 extern "C" {
 void FUN_002b011c();
 void effectSpawnPositionDefault(u32 effect, f32 x, f32 y, f32 z);
-void forwardRecoveredCallback();
+void effectSubmitDefaultDrawParameters();
 
 // Sort the endpoints, then emit a strip offset along the segment's normal.
 void uiDrawSegmentStrip(u32 firstEffect, u32 secondEffect, f32 startX, f32 startY,
@@ -37,7 +37,7 @@ void uiDrawSegmentStrip(u32 firstEffect, u32 secondEffect, f32 startX, f32 start
         effectSpawnPositionDefault(secondEffect, endX, endY, height);
         effectSpawnPositionDefault(firstEffect, offsetStartX, offsetStartY, height);
         effectSpawnPositionDefault(secondEffect, offsetEndX, offsetEndY, height);
-        forwardRecoveredCallback();
+        effectSubmitDefaultDrawParameters();
     }
 }
 }

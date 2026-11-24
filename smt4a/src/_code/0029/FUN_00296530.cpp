@@ -15,7 +15,7 @@ int handleRegistryRegisterObject(...);
 int vec4Forward(void);
 int FUN_003135bc(void);
 int mapSpawnRandomEventKindEffect(void);
-int FUN_00385578(void);
+int lmapUpdateIdleVoice(void);
 int linkHolderCallFirst(...);
 int controllerGetSourceValue(...);
 int linkHolderApplyFirst(...);
@@ -82,7 +82,7 @@ extern int saveSlotSelectedIsId175(void);
 /* Supplied declaration required: mapSpawnRandomEventKindEffect. */
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_003541c0. */
-/* Supplied declaration required: FUN_00385578. */
+/* Supplied declaration required: lmapUpdateIdleVoice. */
 /* Supplied declaration required: linkHolderCallFirst. */
 /* Supplied declaration required: controllerGetSourceValue. */
 /* Supplied declaration required: linkHolderCopyWords. */
@@ -199,7 +199,7 @@ void FUN_00296530(void)
     FUN_003e566c(g_lmapScene[0x6a]);
     piVar12 = (int *)0x3f800000;
     FUN_003e5558(g_lmapScene[0x6a]);
-    FUN_00385578();
+    lmapUpdateIdleVoice();
     piVar5 = g_lmapScene;
     if (*(int *)(temp_v0 + 0x109c) != 0) {
       if (g_lmapScene[0x74] == 0) {

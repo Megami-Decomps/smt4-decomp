@@ -1,12 +1,12 @@
 /* NON_MATCHING: the endpoint copies and the swap now match; the normal's negation, length and per-axis scaling land in other VFP
  * registers (retail negates deltaX in place and finishes the x offsets before dividing y). */
+#include "code/Code0023_Smt4a.h"
 #include "common.h"
 #include <math.h>
 
 extern "C" {
 void FUN_0032c808();
 void effectSpawnPositionDefault(u32 effect, f32 x, f32 y, f32 z);
-void FUN_002371b0();
 
 // Sort the endpoints, then emit a strip offset along the segment's normal.
 void uiDrawSegmentStrip(u32 firstEffect, u32 secondEffect, f32 startX, f32 startY,
@@ -37,7 +37,7 @@ void uiDrawSegmentStrip(u32 firstEffect, u32 secondEffect, f32 startX, f32 start
         effectSpawnPositionDefault(secondEffect, endX, endY, height);
         effectSpawnPositionDefault(firstEffect, offsetStartX, offsetStartY, height);
         effectSpawnPositionDefault(secondEffect, offsetEndX, offsetEndY, height);
-        FUN_002371b0();
+        effectSubmitDefaultDrawParameters();
     }
 }
 }

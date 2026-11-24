@@ -1,18 +1,19 @@
-/* NON_MATCHING: starts a scroll of the sprite list by `delta` rows with `count` marks changing. Only small differences remain: retail forms the pool + 0x2000 base once (frame/state address and `alternate`), and computes the leaving sprite address before the image select. */
+/* NON_MATCHING: retail forms the pool + 0x2000 base once for frame/state and alternate; this build recomputes it. */
 #include "ui/UiSpriteApi.h"
 #include "ui/SpriteRowList.h"
 #include "sys/RuntimeObjects.h"
 
 
-#define LIST_SCROLL_SOUND 0x1000173
+enum { LIST_SCROLL_SOUND = 0x1000173 };
 
 extern "C" {
 void soundPlaySeUnpanned(u32 sound);
 
+/* Starts scrolling the sprite list by `delta` rows, with `count` selected marks changing. */
 void spriteRowListChange(SpriteRowList *pool, s32 delta, s32 count)
 {
     pool->frame = 0;
-    pool->state = 3;
+    pool->state = SPRITE_ROW_STATE_CHANGING;
     pool->rowCountChange = (s16)delta;
     pool->selectedChange = (s16)count;
     s32 index = pool->rowCount;
@@ -26,11 +27,17 @@ void spriteRowListChange(SpriteRowList *pool, s32 delta, s32 count)
             index += pool->rowCountChange;
         soundPlaySeUnpanned(LIST_SCROLL_SOUND);
         for (s32 i = 0; i < pool->selectedChange; i++) {
-            s32 sprite = SPRITE_ROW_MARK + (index - pool->selectedRow - i - 1);
-            pairSetFirstResetSecond(&pool->sprites[sprite], pool->alternate == 0 ? 7 : 8);
-            sprite = SPRITE_ROW_LEAVING + (index - pool->selectedRow - i - 1);
-            spriteStartAnimationByIndex(&pool->sprites[sprite], 10);
-            pairSetFirstResetSecond(&pool->sprites[sprite], pool->alternate == 0 ? 0xFA6 : 0xFA7);
+            s32 mark = SPRITE_ROW_MARK + (index - pool->selectedRow - i - 1);
+            if (pool->alternate == 0)
+                pairSetFirstResetSecond(&pool->sprites[mark], 7);
+            else
+                pairSetFirstResetSecond(&pool->sprites[mark], 8);
+            s32 leaving = SPRITE_ROW_LEAVING + (index - pool->selectedRow - i - 1);
+            spriteStartAnimationByIndex(&pool->sprites[leaving], 10);
+            if (pool->alternate == 0)
+                pairSetFirstResetSecond(&pool->sprites[leaving], 0xFA6);
+            else
+                pairSetFirstResetSecond(&pool->sprites[leaving], 0xFA7);
         }
     }
 

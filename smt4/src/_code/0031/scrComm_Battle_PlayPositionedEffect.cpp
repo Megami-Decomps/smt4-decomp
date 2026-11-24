@@ -17,7 +17,7 @@ extern const char DAT_00400440[];
 s32 scrGetArg(s32 index);
 s32 isEntryUsable(u32 event); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "u32" is incompatible with parameter of type "int *")
 s32 FUN_0024550c(BtlEffectOwner *owner);
-void FUN_00245420(s32 actor, u32 unit, BtlActionRecord *target, u32 value, s32 effect, s32 lookup, s32 extra);
+void btlReflectQueueParameterTargetWithFollowup(s32 actor, u32 unit, BtlActionRecord *target, u32 value, s32 effect, s32 lookup, s32 extra);
 void FUN_00282820(s32 position, u32 first, u32 second, s32 listedId, s32 layer, u32 mode, u32 kind, const char *text);
 u32 libc_strlen(const char *text);
 
@@ -83,7 +83,7 @@ u32 scrComm_Battle_PlayPositionedEffect(void)
             if (action < 0)
                 continue;
             BtlActionRecord *target = &main->actions[action];
-            FUN_00245420(placed << 3, unit, target, value, effect, i << 3, -1);
+            btlReflectQueueParameterTargetWithFollowup(placed << 3, unit, target, value, effect, i << 3, -1);
             s32 member = target->memberId;
             spawnSlotTexts(effect, unit, slots, placed, member, member);
             placed++;

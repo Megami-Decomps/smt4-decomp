@@ -15,7 +15,7 @@ extern EditorSharedIV g_effectEditorState;
 
 s32 slotIsActive(s32 id);
 // Platform stub (`mov r0, #0; bx lr`) that armlink inlines at the call: the analog read never writes x/y.
-s32 FUN_00284dbc(f32 *x, f32 *y, s32 first, s32 second, s32 third);
+s32 questIsReported(f32 *x, f32 *y, s32 first, s32 second, s32 third);
 s32 padButtonIsPressed(s32 id);
 void asdEffectQueueRelease(void *entry, s32 mode);
 void objectRegistryInsert(void *resource, s32 mode);
@@ -63,7 +63,7 @@ u32 effectEditorFrameStep(void)
     f32 x;
     f32 y;
     if (slotIsActive(28)) {
-        FUN_00284dbc(&x, &y, 0, 0, 0);
+        questIsReported(&x, &y, 0, 0, 0);
     } else {
         x = 0.0f;
         y = 0.0f;

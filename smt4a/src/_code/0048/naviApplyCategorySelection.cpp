@@ -3,7 +3,6 @@
 #include "gamedata/MapNaviCategories.h"
 
 extern "C" {
-MapNaviMarkerIcon *dataTable2BFindType1Entry(NaviCategorySelectionWork *, s32, u32);
 s32 naviMainSelectPair(void *);
 s32 MapNaviTable_GetCategoryCount(MapNaviTableContext *); // declcheck: local (the shared declaration does not compile here or changes this unit)
 const MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext *, u32);

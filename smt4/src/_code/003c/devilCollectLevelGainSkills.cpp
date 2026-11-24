@@ -1,5 +1,5 @@
-/* NON_MATCHING: register allocation only (22 lines): the counters are initialised in another order (retail: complete,
- * levelIndex, skillIndex) and the second loop's level compares swap r0/r2. */
+/* NON_MATCHING: register allocation and scheduling only: retail initializes the completion result
+ * before the two skill cursors and compares the level bounds in the opposite operand order. */
 #include "shard/W5_W5Match2_PairedIds.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 
@@ -12,20 +12,6 @@ struct SkillLearningUnit {
     u8 unk49[2];
     u8 blocked;
 };
-struct LearnedSkill {
-    u16 level;
-    u16 id;
-};
-struct DevilLearningRecord {
-    struct {
-        u16 id;
-        u8 race;
-        u8 level;
-    } common;
-    u8 unk04[0x48];
-    LearnedSkill learned[8]; // 0x4c
-    u8 unk6c[0x28];
-};
 }
 
 extern "C" {
@@ -37,21 +23,21 @@ u32 devilCollectLevelGainSkills(void* context, s32 levelGain, u16* output)
     if (unit->blocked) {
         return 0;
     }
-    const DevilLearningRecord* record = reinterpret_cast<const DevilLearningRecord*>(nkmBaseGetRecord(unit->id));
-    LearnedSkill pending[8] = {};
+    const NkmBaseRecord *record = nkmBaseGetRecord(unit->id);
+    DevilLearnedSkill pending[8] = {};
     s32 pendingCount = 0;
     s32 skillIndex = 0;
     s32 levelIndex = 0;
     u32 complete = 1;
     for (s32 i = 0; i < 8; ++i) {
-        if (record->learned[i].id && record->learned[i].level > static_cast<u32>(unit->level)) {
-            if (recordContainsPairedId(&unit->skills, record->learned[i].id)) {
+        if (record->learnedSkills[i].id && record->learnedSkills[i].level > static_cast<u32>(unit->level)) {
+            if (recordContainsPairedId(&unit->skills, record->learnedSkills[i].id)) {
                 /* Known future skills do not consume the next available learning level. */
                 ++skillIndex;
                 continue;
             }
-            pending[pendingCount].level = record->learned[levelIndex].level;
-            pending[pendingCount].id = record->learned[skillIndex].id;
+            pending[pendingCount].level = record->learnedSkills[levelIndex].level;
+            pending[pendingCount].id = record->learnedSkills[skillIndex].id;
             ++pendingCount;
         }
         ++skillIndex;

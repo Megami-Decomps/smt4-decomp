@@ -19,7 +19,6 @@ s32 padQueryLogicalKey(s32 key, s32 mode);
 s32 ifTouchRegionAddRequested(u32 file, u32 index);
 void eventQueueAddUniqueIfValid(s32 event); // declcheck: local (the shared declaration does not compile here or changes this unit)
 u8 gridNavigationHandleConfirm(ScrollSelection *list, s32 mode);
-u32 saveBlockGetPlaySeconds(void); // declcheck: local (the shared declaration does not compile here or changes this unit)
 u32 uiScrollHandleActionsOrTouch(ScrollSelection *list, const TextureTableEntryIV *rectangle, const s16 *ids, u32 firstKey,
                  u32 secondKey, u32 thirdKey, bool *blocked, s32 secondary, s32 notify);
 s32 resourceRunOperationIfUnblocked(ScrollSelection *list); // declcheck: local (the shared declaration does not compile here or changes this unit)
@@ -67,10 +66,8 @@ void playLogChangePage(PlayLogWorkA *work)
     work->pageStep = 2;
 }
 
-/* NON_MATCHING: 22 lines, one allocation choice in the counter-0x2E rows: retail computes the difference first and
- * into r1 (`sub r1, r6, r0; add r0, r4, r5, lsl #2`), this build the row address first and the difference into r0.
- * playLogBuildPages has the same expression and the same miss. */
-/* One frame of the play log screen: animates the sprites, scrolls the list and moves between states. */
+/* One frame of the play log screen: animates the sprites, keeps the play time row current, scrolls the list and
+ * moves between states. */
 void playLogUpdate(void)
 {
     PlayLogWorkA *work = g_playLog;
@@ -91,10 +88,8 @@ void playLogUpdate(void)
     case 1: {
         for (s32 i = 0; i < gridNavigationGetItemCount(&work->list); i++) {
             PlayLogRecord *row = playLogRecordAt(work->ids[i]);
-            if (row != NULL && row->counter == 0x2E) {
-                u32 value = saveBlockGetPlaySeconds();
-                work->pages[0].values[i] = value - countersGetB(0x2E);
-                work->pages[1].values[i] = value;
+            if (row != NULL && row->counter == PLAY_LOG_COUNTER_PLAY_TIME) {
+                playLogSetPlayTime(work, i);
                 work->values[i] = work->pages[work->page].values[i];
             }
         }

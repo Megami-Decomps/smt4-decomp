@@ -62,7 +62,7 @@ void renderCtxSelectStereoLayout(RenderCtx *context);
 void gxResetColorQuadToWhite(void);
 void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 mode);
 void uiDrawDirectoryRows(void *list, u32 left, u32 top, s32 firstRow, u32 rowCount, u32 columnWidth);
-void FUN_00309ec8(void *list, s32 a, s32 b, u32 first, u32 second, u32 third, u32 rowHeight, u32 rowCount, s32 visibleRows);
+void campCecEditDrawScrollTrack(void *list, s32 a, s32 b, u32 first, u32 second, u32 third, u32 rowHeight, u32 rowCount, s32 visibleRows);
 void FUN_002ec2e0(u32 left, u32 top, u32 rowCount, u32 columnWidth, u32 scrollTop, u32 knob, u32 scrollHeight);
 void renderCtxResetColorScale(RenderCtx *context);
 
@@ -98,7 +98,7 @@ u32 campCecEditDrawContents(void)
         if (firstRow < 11) {
             firstRow = 11;
         }
-        FUN_00309ec8(work->list, 0, 0, work->listFlags & 1, (work->listFlags & 2) >> 1,
+        campCecEditDrawScrollTrack(work->list, 0, 0, work->listFlags & 1, (work->listFlags & 2) >> 1,
                      (work->listFlags & 4) >> 2, work->rowHeight, work->rowCount, firstRow);
         if (visibility->scrollbarVisible != 0) {
             FUN_002ec2e0(work->rowsLeft, work->rowsTop, work->rowCount, work->columnWidth,

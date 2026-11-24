@@ -50,7 +50,7 @@ Table23AvailabilityRecord* FUN_003cd4b4(s32 id)
         if (record->id == id &&
             (record->requiredFlag == 0 || gameFlagIsSet(record->requiredFlag)) &&
             (record->excludedFlag == 0 || !gameFlagIsSet(record->excludedFlag)) &&
-            (record->requiredUnit == 0 || partyEntryFlagsBit1((u16)record->requiredUnit)))
+            (record->requiredUnit == 0 || questHasNewMark((u16)record->requiredUnit)))
             return record;
     }
     return NULL;

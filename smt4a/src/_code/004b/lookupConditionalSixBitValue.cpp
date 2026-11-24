@@ -14,14 +14,14 @@ struct PackedValueEntry {
 };
 extern "C" {
 const PackedValueEntry *dataTable02GetRecordWithAocPackage(u32);
-s32 partyEntryFlagsBit3(u16);
+s32 questIsCompleted(u16);
 s32 goalConditionsSatisfied(u16);
 s32 flagValueRead(u32);
 
 u32 lookupConditionalSixBitValue(u32 id)
 {
     const PackedValueEntry *entry = dataTable02GetRecordWithAocPackage(id);
-    if (!partyEntryFlagsBit3(entry->ownerId) && !goalConditionsSatisfied(entry->ownerId)) {
+    if (!questIsCompleted(entry->ownerId) && !goalConditionsSatisfied(entry->ownerId)) {
         if (entry->ownerId == 0x8d) {
             if (flagValueRead(0x3a) >= 10) {
                 if (id == 0x357 || id == 0x35d) return 0;

@@ -96,7 +96,7 @@ extern unsigned int FUN_002ccd74(int, int);
 extern unsigned int dataTable16Sub2GetRecordS64(unsigned int);
 extern int FUN_002fa75c(void);
 /* Supplied declaration required: uiDrawListScrollBar. */
-extern int uiSearchPrimary(unsigned int);
+extern int uiListGetVisibleCount(unsigned int);
 /* Supplied declaration required: statDrawClampedDelta. */
 /* Supplied declaration required: dataRecordGetKindValue. */
 /* Supplied declaration required: playerSecondaryGetKindValue. */
@@ -164,16 +164,16 @@ void FUN_0028d270(int param_1)
     temp_v16 = 0xb3;
   }
   temp_v24 = (unsigned int *)(param_1 + 0x3c40);
-  temp_v22 = uiSearchPrimary(*temp_v24);
+  temp_v22 = uiListGetVisibleCount(*temp_v24);
   piVar10 = (int *)(param_1 + 0x387c);
   if (*piVar10 == 0x10 || *piVar10 == 0x29) {
     if (*(char *)(param_1 + 0x38b2) == '\0') {
       return;
     }
     temp_v22 = *(int *)(param_1 + 0x3878) + 1;
-    temp_v1 = uiSearchPrimary(*temp_v24);
+    temp_v1 = uiListGetVisibleCount(*temp_v24);
     if (temp_v1 < temp_v22) {
-      temp_v22 = uiSearchPrimary(*temp_v24);
+      temp_v22 = uiListGetVisibleCount(*temp_v24);
     }
   }
   if (*(char *)(param_1 + 0x38b2) == '\0') {
@@ -182,7 +182,7 @@ void FUN_0028d270(int param_1)
   temp_v1 = *piVar10;
   temp_v31 = 0;
   if ((((temp_v1 == 8 || temp_v1 == 10) || temp_v1 == 0xc) &&
-      (temp_v1 = uiSearchPrimary(*temp_v24), temp_v1 <= temp_v22)) &&
+      (temp_v1 = uiListGetVisibleCount(*temp_v24), temp_v1 <= temp_v22)) &&
      (*(int *)(param_1 + temp_v22 * 0x8c + 0xdec) >= 0x3f800000)) {
     temp_v31 = 1;
   }

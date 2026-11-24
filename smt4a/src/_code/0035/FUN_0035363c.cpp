@@ -1,7 +1,6 @@
-/* NON_MATCHING: 116 lines off: the stack parameters are words (retail loads them with ldm); retail keeps the pool
- * counters' address in r9 and the command in fp, loads flagB into sl before the calls and splits the channel loads. */
-#include "shard/W9_W9Match7_FlagGatedEntries.h"
-#include "shard/W9_W9Match8_WorkRecords.h"
+/* NON_MATCHING: retail keeps the pool counters' address in r9 and the command in fp, loads flagB into sl before
+ * the calls and splits the channel loads. The entry initialisation uses the shared runtime record. */
+#include "shard/RuntimeEntryTable.h"
 
 struct EffectRegistrationTransform {
     s32 enabled;
@@ -36,9 +35,7 @@ typedef char EffectRegistrationCommandLayoutCheck[sizeof(EffectRegistrationComma
     offsetof(EffectRegistrationCommand, attachment) == 0x5C ? 1 : -1];
 
 extern "C" {
-extern EntryPoolCountersA DAT_00580c90;
 extern EffectRegistrationCommand DAT_00602020[];
-extern FlagGatedEntry g_recordTable[];
 s32 FUN_00305760(EffectRegistrationAttachment *attachment);
 u32 FUN_00244c70(void *object, u32 first, u32 second, u32 third, f32 x, f32 y, f32 z, f32 rotation);
 
@@ -47,7 +44,7 @@ void FUN_0035363c(void *object, u32 id, u32 reference, u32 styleValue,
     u32 first, u32 second, u32 channel0, u32 channel1, u32 channel2, u32 channel3, u32 channel4, u32 channel5,
     u32 flagA, u32 flagB, u32 kind, u32 vectorXBits, u32 vectorYBits, u32 vectorZBits, u32 third)
 {
-    u32 current = DAT_00580c90.second;
+    s32 current = DAT_00580c90.count;
     EffectRegistrationCommand *command = &DAT_00602020[current];
     command->transform.enabled = 1;
     command->transform.depth = depth;
@@ -76,22 +73,21 @@ void FUN_0035363c(void *object, u32 id, u32 reference, u32 styleValue,
     command->attachment.reference = reference;
     s32 index = FUN_00305760(&command->attachment);
     u32 handle = FUN_00244c70(object, first, second, third, x, y, z, rotation);
-    FlagGatedEntry *entry = &g_recordTable[index];
-    EntryPoolRecordA *record = (EntryPoolRecordA *)entry;
-    entry->creation.handle = handle;
-    record->value16C = flagA;
-    ((EntryPoolRecordA *)&g_recordTable[current])->value16D = flagB;
+    RuntimeEntry *entry = &g_recordTable[index];
+    entry->handle = handle;
+    entry->flags = flagA;
+    g_recordTable[current].mode = flagB;
     entry->object = object;
-    entry->creationState.id = id;
-    entry->creationState.state = -1;
-    entry->lifetime.frame = 0;
-    entry->lifetime.index = -1;
+    entry->creationId = id;
+    entry->state = -1;
+    entry->frame = 0;
+    entry->previous = -1;
     entry->disabled = 0;
-    entry->creation.kind = kind;
-    record->unk16E[0] = 0;
+    entry->kind = kind;
+    entry->unk16E[0] = 0;
     entry->requiredFlag = 0;
-    entry->excludedFlag = 0;
-    record->value174 = 0;
-    ++DAT_00580c90.second;
+    entry->forbiddenFlag = 0;
+    entry->target = 0;
+    ++DAT_00580c90.count;
 }
 }

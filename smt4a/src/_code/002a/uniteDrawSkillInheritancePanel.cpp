@@ -31,7 +31,7 @@ struct ScreenOffset {
 
 extern "C" {
 
-s32 uiSearchPrimary(ScrollSelection *list);
+s32 uiListGetVisibleCount(ScrollSelection *list);
 void numberFontDrawFormatted(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
 void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 z, s32 tint);
 void FUN_0020caec(u32 id, u32 a, u32 b, u32 c);
@@ -116,7 +116,7 @@ void uniteDrawSkillInheritancePanel(s32 x, s32 y, u32 mode, s32 preview, u32 ope
 
     /* The first free slot. */
     s32 freeSlot = 0;
-    for (; freeSlot < uiSearchPrimary(&work->inheritanceA.slotList); freeSlot++) {
+    for (; freeSlot < uiListGetVisibleCount(&work->inheritanceA.slotList); freeSlot++) {
         if (work->inheritanceA.slots[freeSlot] == 0) {
             break;
         }

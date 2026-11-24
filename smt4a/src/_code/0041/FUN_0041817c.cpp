@@ -22,7 +22,7 @@ static __inline u8 *goalFlagEntry(u32 goalId)
     return reinterpret_cast<u8 *>(&reinterpret_cast<RosterView *>(gameFlagBlockGet())->flags[goalId]);
 }
 
-/* Bit 3 of a goal's flag entry (the body of partyEntryFlagsBit3). */
+/* Bit 3 of a goal's flag entry (the body of questIsCompleted). */
 static u32 goalFlagBit3(s32 index)
 {
     return (*goalFlagEntry(index) & 8) >> 3;

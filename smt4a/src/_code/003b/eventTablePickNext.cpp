@@ -29,7 +29,7 @@ u32 dataTableGet(s32 table, s32 sub);
 s32 dataTableGetCount(u32 table);
 EventEntry *dataTableGetEntries(void);
 s32 gameFlagIsSet(s32 flag);
-s32 partyEntryFlagsBit1(u16 entry);
+s32 questHasNewMark(u16 entry);
 
 /* Entry `index` of the event table: the built-in entries first, then the extra ones. */
 static EventEntry *eventTableEntry(u32 index)
@@ -74,7 +74,7 @@ static s32 eventFlagsAllow(const EventEntry *entry)
 static s32 eventEntryAvailable(const EventEntry *entry, s32 hasSpecial)
 {
     return eventFlagsAllow(entry) != 0 &&
-           (entry->partyEntry == 0 || partyEntryFlagsBit1(entry->partyEntry) != 0) &&
+           (entry->partyEntry == 0 || questHasNewMark(entry->partyEntry) != 0) &&
            (entry->needSpecial != 1 || hasSpecial != 0);
 }
 

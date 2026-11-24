@@ -15,7 +15,7 @@ typedef char SaveWriterPayloadLayoutCheck[
     offsetof(SaveWriteBodyPrefix, mode) == 2 && sizeof(SaveWriteBodyPrefix) == 4 ? 1 : -1];
 
 extern "C" {
-s32 FUN_001a1d08(void);
+s32 saveLoadRequestUpdate(void);
 void asdMemFree(void *memory);
 void titleConfigStoreOptions(void);
 GameSaveData *gameDataBlocksGetSaveData(void);
@@ -49,7 +49,7 @@ s32 saveLoadProcessSaveUpdate(u32 process)
         break;
     }
     case 1:
-        if (FUN_001a1d08() == 1) {
+        if (saveLoadRequestUpdate() == 1) {
             if (byte1IsZero()) {
                 asdMemFree(work->buffer);
                 work->state = 3;

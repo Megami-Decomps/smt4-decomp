@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUnitTarget.h"
 
 extern "C" {
 
@@ -22,7 +23,7 @@ int btlRollPassiveSkill(void);
 int btlEntryGetNormalizedPercent(...);
 int btlEntryGetSummaryRatio(...);
 int FUN_003d0ac8(...);
-int FUN_003dda54(...);
+int btlReflectQueueTargetWithFollowup(...);
 int VectorSignedToFloat(...);
 
 int FUN_00228220(...);
@@ -141,7 +142,6 @@ extern int FUN_00228808(int, unsigned int, unsigned int);
 /* Supplied declaration required: mathScaleThreeHalves. */
 /* Supplied declaration required: FUN_0022899c. */
 /* Supplied declaration required: frameRangeExtend. */
-extern int btlUnitIsDeadAndUncopied(int *, unsigned int *, int);
 /* Supplied declaration required: FUN_00229a3c. */
 /* Supplied declaration required: btlTargetSetFlag10. */
 /* Supplied declaration required: FUN_0023c0d0. */
@@ -177,7 +177,7 @@ extern int btlGetApplicableAilmentMask(unsigned int, unsigned int, int, int, uns
 extern int questGetCurrentRecordValue6(void);
 /* Supplied declaration required: FUN_003d0ac8. */
 extern int FUN_003dcad0(int);
-/* Supplied declaration required: FUN_003dda54. */
+/* Supplied declaration required: btlReflectQueueTargetWithFollowup. */
 
 
 /* WARNING: Removing unreachable block (ram,0x003ce2e4) */
@@ -700,7 +700,7 @@ LAB_003cd944:
             }
             *(short *)(temp_v61 + 0xd4) = (short)temp_v8;
           }
-          temp_v8 = btlUnitIsDeadAndUncopied(param_1,param_2,param_8);
+          temp_v8 = btlUnitIsDeadAndUncopied((BtlMainState **)param_1, (BtlUnit *)param_2, param_8);
           if (temp_v8 != 0) {
             temp_v46 = param_2[0x165];
             temp_v18 = 1;
@@ -847,7 +847,7 @@ LAB_003cd944:
           temp_v8 = temp_v8 + 1;
         } while (temp_v8 < 0x85);
       }
-      if (((temp_v59 & 2) != 0) && (temp_v5 = btlUnitIsDeadAndUncopied(param_1,param_2,param_8), temp_v5 == 0)) {
+      if (((temp_v59 & 2) != 0) && (temp_v5 = btlUnitIsDeadAndUncopied((BtlMainState **)param_1, (BtlUnit *)param_2, param_8), temp_v5 == 0)) {
         temp_v3 = 0;
         if (temp_v18 != 0) {
           temp_v3 = temp_v28;
@@ -1068,7 +1068,7 @@ LAB_003ce46c:
         temp_v5 = btlFindEffectValueByNamePrefix(g_btlAux);
         temp_v5 = temp_v5 + temp_v30;
         temp_v7 = btlFindEffectValueByNamePrefix(g_btlAux);
-        FUN_003dda54(temp_v7 + temp_v30,param_2,temp_v71,
+        btlReflectQueueTargetWithFollowup(temp_v7 + temp_v30,param_2,temp_v71,
                      *(int *)(*param_1 + 0x1e98) + param_8 * 0x114,temp_v5,temp_v26);
         frameRangeExtend(param_1,param_2,param_8,temp_v30,10,0xf);
         puVar11 = (unsigned int *)*param_1;
@@ -1200,7 +1200,7 @@ LAB_003ce96c:
     param_2[7] = temp_v4;
   }
   if (((temp_v18 == 0) && (temp_v50 != 0)) && (param_2[0xc] == 0)) {
-    temp_v5 = btlUnitIsDeadAndUncopied(param_1,param_2,param_7);
+    temp_v5 = btlUnitIsDeadAndUncopied((BtlMainState **)param_1, (BtlUnit *)param_2, param_7);
     if (temp_v5 == 0) {
       puVar11 = (unsigned int *)*param_1;
       btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar11), param_8);

@@ -2,7 +2,7 @@
 #include "quest_center/QuestRecordA.h"
 
 extern "C" {
-u32 partyEntryFlagsBit3(u16 id);
+u32 questIsCompleted(u16 id);
 
 static inline s32 compareEntryOrder(const u16 *left, const u16 *right)
 {
@@ -17,9 +17,9 @@ static inline s32 compareEntryOrder(const u16 *left, const u16 *right)
 
 s32 entryCompareFlagsCategoryOrder(const u16 *left, const u16 *right)
 {
-    u32 firstFlags = partyEntryFlagsBit3(*left);
+    u32 firstFlags = questIsCompleted(*left);
     s32 order = 0;
-    u32 secondFlags = partyEntryFlagsBit3(*right);
+    u32 secondFlags = questIsCompleted(*right);
     if ((secondFlags & ~firstFlags) != 0) {
         order = -1;
     }

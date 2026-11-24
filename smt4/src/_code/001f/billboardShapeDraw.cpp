@@ -207,7 +207,7 @@ void billboardShapeDraw(BillboardShape *shape)
         outTexCoord[6] = texCoord[0];
         outTexCoord[7] = texCoord[1];
         debugQuadVertex(outColor[3], outPosition[3], outTexCoord[6], outTexCoord[7]);
-        forwardRecoveredCallback();
+        effectSubmitDefaultDrawParameters();
     }
 
     renderCtxResetColorScale(g_titleScene);

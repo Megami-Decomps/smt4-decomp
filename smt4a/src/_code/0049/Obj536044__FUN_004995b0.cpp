@@ -6,7 +6,13 @@
  * the current state taken before the stores (`s32 current = state;`) gives retail's pair: with it at both
  * sites the function is IDENTICAL, but such a copy is a steering temporary unless something else shows it
  * (with the copy inside changeState itself the direct calls take retail's pair and the calls nested in
- * openCategory do not, which fits the leave site but not the sale notice's, so that is not it either). */
+ * openCategory do not, which fits the leave site but not the sale notice's, so that is not it either).
+ * Wave 90: the pair is not decided at the site: it moves with inline expansions elsewhere in the function
+ * (startScript("shop_sale_open") and the page menu's openCategory both written in place give retail's pair
+ * at the page site, 8 lines; other in-place subsets flip the sale notice's site instead), so the original
+ * differed in how many inline bodies or locals it had, not in these stores. Result types (bool for the
+ * message tests and FUN_00148bb8), an unsigned sale, a signed choice, if/else and early-return shapes and
+ * the cursor initialised at its declaration all stay at 16. */
 #include "classes/Obj536044.h"
 #include "shop/ShopMenuText.h"
 #include "shop/ShopItemDescription.h"

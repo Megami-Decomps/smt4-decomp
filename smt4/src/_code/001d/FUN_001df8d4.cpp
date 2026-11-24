@@ -1,5 +1,5 @@
-/* NON_MATCHING: 34 lines with idMapLookup's real prototype, u8 (u16) from gamedata/SkillFlags.h (20 with the
- * old local s32 (u32) one); retail converts the power once (vcvt into s0, copied to s16; a named f32 power gives the copy in the other direction), loads preferredElement after saving the element, compares the categories in the other register order and keeps the rank's category in r1. */
+/* NON_MATCHING: 28 lines. Retail loads preferredElement after saving the element, swaps the category compare
+ * operands, keeps the rank's category in r1 and uses different registers for the chosen-list address. */
 #include "common.h"
 #include "gamedata/SkillFlags.h"
 #include "gamedata/SkillDataLookup.h"
@@ -23,9 +23,8 @@ u32 FUN_001df8d4(SkillPicker *picker)
         SkillFlagsRecord *typeRecord = dataTable06Sub1GetRecord(picker->candidates.ids[i]);
         u32 id = picker->candidates.ids[i];
         SkillFlagsRecord *record = dataTable06Sub1GetRecord(id);
-        u32 power = record->flags & 31;
-        f32 score = (f32)power;
-        score += (f32)power * 0.01f;
+        u32 power = record->flags & SKILL_PICKER_BASE_POINTS_MASK;
+        f32 score = skillPickerInitialScore(power);
         s32 element = idMapLookup(id);
         if (picker->preferredElement == element)
             score += 1.0f;

@@ -1,4 +1,5 @@
 /* NON_MATCHING: original array classes/constructor identities are unrecovered; retail also retains an unreferenced 0x00447a28 pool word and uses STM for counter initialization. */
+#include "map/MapEffectReservation.h"
 #include "common.h"
 
 struct InitializationArguments {
@@ -12,16 +13,12 @@ struct InitializationCounters {
     u32 second; // 0x04
 };
 
-struct FirstElement {
-    u8 storage[0x178];
-};
 struct SecondElement {
     u8 storage[0x8c];
 };
 
 extern "C" {
 extern InitializationCounters DAT_00447a40;
-extern FirstElement g_namedEntryTable[160];
 extern SecondElement DAT_004afd64[160];
 void FUN_0033b614(void* element);
 void FUN_003494ec(void* element);
@@ -38,7 +35,7 @@ void* FUN_003ee000(u32 first, u32 second, InitializationArguments* arguments)
     DAT_00447a40.first = 0;
     DAT_00447a40.second = 0;
     __aeabi_vec_ctor_nocookie_nodtor(
-        g_namedEntryTable, FUN_0033b614, sizeof(FirstElement), 160);
+        g_namedEntryTable, FUN_0033b614, sizeof(MapEffectInstance), 160);
     return FUN_002c5d54(
         DAT_004afd64, FUN_003494ec, sizeof(SecondElement), 160);
 }

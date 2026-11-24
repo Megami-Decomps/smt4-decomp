@@ -6,7 +6,7 @@ extern void rt_memclr(u8 *block, u32 size);
 
 void block66OwnerClear(Block66Owner *obj)
 {
-    rt_memclr(obj->block66, 0x100);
+    rt_memclr((u8 *)obj->primaryMarkers, sizeof(obj->primaryMarkers));
 }
 
 } /* extern "C" */

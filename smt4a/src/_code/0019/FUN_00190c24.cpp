@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001907a4. */
 extern unsigned int *FUN_00194834(unsigned char *);
 /* Supplied declaration required: FUN_001a5c44. */
-extern int FUN_001a8930(int, unsigned int, unsigned int *);
+extern int soundArchiveReadWaveArchiveInfoWithExtension(int, unsigned int, unsigned int *);
 /* Supplied declaration required: soundArchiveFileEntryIsLoaded. */
 extern unsigned int *FUN_001b3da8(int, unsigned int);
 /* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadImpl. */
@@ -70,7 +70,7 @@ FUN_00190c24(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int
           temp_v4 = puVar4[temp_v2 * 2 + 2];
           temp_v6 = '\0';
           temp_v5[0] = 0xffffffff;
-          temp_v1 = FUN_001a8930(param_1[1],temp_v3,temp_v5);
+          temp_v1 = soundArchiveReadWaveArchiveInfoWithExtension(param_1[1],temp_v3,temp_v5);
           if (temp_v1 == 0) {
             return 0;
           }

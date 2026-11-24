@@ -9,8 +9,8 @@ int FUN_001907a4(...);
 int FUN_00190808(unsigned int *[3]);
 int soundArchiveLoaderConvertWaveArchiveToIndividual(...);
 int FUN_00190fc8(unsigned char [20], int);
-int FUN_001946d4(...);
-int FUN_0019472c(...);
+int soundArchiveReadBankInfoWithExtension(...);
+int soundArchiveReadSequenceSoundInfoWithExtension(...);
 int FUN_00194834(...);
 int nw_snd_SoundArchive_GetSoundType(...);
 
@@ -50,10 +50,10 @@ extern int soundArchiveReadSoundInfoWithExtension(int, unsigned int, unsigned in
 /* Supplied declaration required: FUN_00190808. */
 /* Supplied declaration required: soundArchiveLoaderConvertWaveArchiveToIndividual. */
 /* Supplied declaration required: FUN_00190fc8. */
-/* Supplied declaration required: FUN_001946d4. */
-/* Supplied declaration required: FUN_0019472c. */
-extern int soundInfoOwnerReadInfo(int, unsigned int, unsigned int *);
-extern int soundGroupUpdate(int, unsigned int, unsigned int *);
+/* Supplied declaration required: soundArchiveReadBankInfoWithExtension. */
+/* Supplied declaration required: soundArchiveReadSequenceSoundInfoWithExtension. */
+extern int soundArchiveReadWaveSoundInfoWithExtension(int, unsigned int, unsigned int *);
+extern int soundArchiveReadSoundGroupInfoWithExtension(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_00194834. */
 extern unsigned int optionalNestedValueGet(unsigned int **);
 /* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
@@ -144,7 +144,7 @@ void FUN_00174ebc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
       if (temp_v1 != 1) {
         if (temp_v1 != 2) {
           if (((temp_v1 == 3) && (temp_v20 != 0xffffffff)) &&
-             ((temp_v8 = unaff_r8, temp_v0 = FUN_001946d4(param_1[1],temp_v20,&temp_v8), temp_v0 != 0
+             ((temp_v8 = unaff_r8, temp_v0 = soundArchiveReadBankInfoWithExtension(param_1[1],temp_v20,&temp_v8), temp_v0 != 0
               && (temp_v0 = (**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v8), temp_v0 != 0)))) {
             FUN_001907a4(&temp_v5);
             temp_v3 = FUN_00194834(&temp_v5);
@@ -162,7 +162,7 @@ void FUN_00174ebc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
           temp_v14[1] = 0;
           temp_v13 = unaff_r8;
           temp_v14[0] = unaff_r8;
-          temp_v0 = soundGroupUpdate(param_1[1],temp_v20,&temp_v13);
+          temp_v0 = soundArchiveReadSoundGroupInfoWithExtension(param_1[1],temp_v20,&temp_v13);
           temp_v1 = 0;
           if (temp_v0 != 0) {
             temp_v1 = temp_v13;
@@ -176,7 +176,7 @@ void FUN_00174ebc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
                  (temp_v0 = soundArchiveReadSoundInfoWithExtension(param_1[1],temp_v13,(unsigned int *)&temp_v22), temp_v0 != 0)) {
                 temp_v14[3] = 0;
                 temp_v14[4] = temp_v14[4] & 0xffff0000;
-                temp_v0 = soundInfoOwnerReadInfo(param_1[1],temp_v1,temp_v14 + 2);
+                temp_v0 = soundArchiveReadWaveSoundInfoWithExtension(param_1[1],temp_v1,temp_v14 + 2);
                 if ((temp_v0 != 0) &&
                    (temp_v0 = (**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v22), temp_v0 != 0)) {
                   FUN_00190fc8(temp_v25,temp_v0);
@@ -200,13 +200,13 @@ void FUN_00174ebc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
                 temp_v7 = unaff_r8;
                 temp_v8 = unaff_r8;
                 temp_v9 = unaff_r8;
-                temp_v0 = FUN_0019472c(param_1[1],temp_v1,&temp_v5);
+                temp_v0 = soundArchiveReadSequenceSoundInfoWithExtension(param_1[1],temp_v1,&temp_v5);
                 if (temp_v0 != 0) {
                   temp_v2 = 0;
                   do {
                     if (((unaff_r9[temp_v2 + 1] != -1) &&
                         (temp_v23 = unaff_r8,
-                        temp_v0 = FUN_001946d4(param_1[1],unaff_r9[temp_v2 + 1],&temp_v23), temp_v0 != 0))
+                        temp_v0 = soundArchiveReadBankInfoWithExtension(param_1[1],unaff_r9[temp_v2 + 1],&temp_v23), temp_v0 != 0))
                        && (temp_v0 = (**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v23), temp_v0 != 0)) {
                       FUN_001907a4(temp_v24);
                       temp_v3 = FUN_00194834(temp_v24);
@@ -240,12 +240,12 @@ void FUN_00174ebc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
           temp_v14[1] = unaff_r8;
           temp_v14[2] = unaff_r8;
           temp_v14[3] = unaff_r8;
-          temp_v0 = FUN_0019472c(param_1[1],temp_v20,&temp_v13);
+          temp_v0 = soundArchiveReadSequenceSoundInfoWithExtension(param_1[1],temp_v20,&temp_v13);
           if (temp_v0 != 0) {
             temp_v1 = 0;
             do {
               if (((temp_v14[temp_v1] != 0xffffffff) &&
-                  (temp_v10 = unaff_r8, temp_v0 = FUN_001946d4(param_1[1],temp_v14[temp_v1],&temp_v10),
+                  (temp_v10 = unaff_r8, temp_v0 = soundArchiveReadBankInfoWithExtension(param_1[1],temp_v14[temp_v1],&temp_v10),
                   temp_v0 != 0)) &&
                  (temp_v0 = (**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v10), temp_v0 != 0)) {
                 FUN_001907a4(&temp_v22,temp_v0);

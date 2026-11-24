@@ -11,7 +11,7 @@ int FUN_0024f24c(...);
 int dataTable2fSub0GetCount(void);
 int FUN_0025b670(void);
 int mapEffectReserveAndSpawn(...);
-int FUN_00298dc8(int);
+int questHasNewMark(int);
 int libc_strcpy(...);
 int gameFlagIsSet(void);
 int mapIfRequestRecordById(...);
@@ -74,7 +74,7 @@ extern unsigned int *dataTable2fSub0GetRecord(int);
 extern int FUN_00276264(int);
 extern int FUN_0027d968(void);
 extern unsigned int *dataTable2fSub1GetRecord(int);
-/* Supplied declaration required: FUN_00298dc8. */
+/* Supplied declaration required: questHasNewMark. */
 /* Supplied declaration required: __ARM_common_memcpy4_5. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: gameFlagIsSet. */
@@ -173,7 +173,7 @@ void FUN_0027b65c(int param_1,int param_2)
               do {
                 puVar4 = (unsigned int *)contentEntryGet(temp_v10);
                 if (*puVar4 == 0xffffffff) break;
-                temp_v2 = FUN_00298dc8((short)puVar4[1]);
+                temp_v2 = questHasNewMark((short)puVar4[1]);
                 if ((((temp_v2 != 0) && (*puVar4 == temp_v12)) &&
                     ((*(short *)((int)puVar4 + 6) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
                    (((short)puVar4[2] == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
@@ -305,7 +305,7 @@ LAB_0027ba18:
                   }
                   if (((short)puVar4[2] == 0) || (temp_v4 = gameFlagIsSet(), temp_v4 == 0)) {
                     if ((short)puVar4[1] != 0) {
-                      temp_v10 = FUN_00298dc8((short)puVar4[1]);
+                      temp_v10 = questHasNewMark((short)puVar4[1]);
                       temp_v4 = 0;
                       if (temp_v10 == 0) goto LAB_0027baf8;
                     }
@@ -420,7 +420,7 @@ LAB_0027bccc:
             if (*(int *)(temp_v2 + 0x20) == -1) break;
             if (((*(short *)(temp_v2 + 0x26) == 0) || (temp_v5 = gameFlagIsSet(), temp_v5 == 0)) &&
                ((*(unsigned int *)(temp_v2 + 0x20) == temp_v12 &&
-                (temp_v2 = FUN_00298dc8(*(unsigned short *)(temp_v2 + 0x24)), temp_v2 == 0)))) {
+                (temp_v2 = questHasNewMark(*(unsigned short *)(temp_v2 + 0x24)), temp_v2 == 0)))) {
               temp_v9 = (short)temp_v10;
               goto LAB_0027bd40;
             }

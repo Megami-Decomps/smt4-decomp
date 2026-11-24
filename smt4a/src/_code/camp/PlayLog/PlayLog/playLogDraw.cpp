@@ -25,7 +25,7 @@ extern "C" {
 
 extern PlayLogWorkA *g_playLog;
 
-s32 uiSearchPrimary(ScrollSelection *list);
+s32 uiListGetVisibleCount(ScrollSelection *list);
 s32 resourceRunOperationIfUnblocked(ScrollSelection *list); // declcheck: local (the shared declaration takes another list type)
 void uiDrawListScrollBar(ScrollSelection *list, s32 x, s32 y, u32 group, u32 frameId, u32 trackId, u32 trackPressedId,
                          u32 arrowAId, u32 arrowAPressedId, u32 arrowBId, u32 arrowBPressedId, u32 thumbRegion,
@@ -40,7 +40,7 @@ void playLogDraw(void)
     char text[64];
     char numbers[2][16];
 
-    for (s32 row = 0; row < uiSearchPrimary(&work->list); row++) {
+    for (s32 row = 0; row < uiListGetVisibleCount(&work->list); row++) {
         s32 x = vec2GetXInt(&work->sprites[row]);
         f32 alpha = vec2GetSpeed(&work->sprites[row]);
         efctSetSpeed(alpha);
@@ -58,7 +58,7 @@ void playLogDraw(void)
                 texDrawCompositeSprite(2, PLAY_LOG_SPRITES, 0, x, 0, 11);
             }
         }
-        if (uiSearchPrimary(&work->list) - 1 == row) {
+        if (uiListGetVisibleCount(&work->list) - 1 == row) {
             texDrawTableEntryAtStoredOrigin(2, PLAY_LOG_SPRITES, 29, x, 0, 11);
             uiDrawListScrollBar(&work->list, x, 0, PLAY_LOG_SPRITES, 7, 8, 9, 3, 5, 4, 6, work->touchRegions[2],
                                 work->touchRegions[0], work->touchRegions[1], 11, 0);

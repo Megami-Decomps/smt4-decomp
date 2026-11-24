@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail loads the state flags with ldm into r0/r2 (built: ldrd r0/r1, other and operands), sets the
  * mode argument before the flag in the tail calls of btlCommandMenuEnterMode (built: flag first), and moves the
  * animation id after the slot address in the close loop */
+#include "battle/BtlCommandMenuData.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/BattleHelpers_VariantB.h"
@@ -24,15 +25,7 @@ struct BtlMenuPanel {
     /* 0x3C98 */ u32 clear[4];
 };
 
-
-/* The command menu's battle flag masks (0x573b88). */
-struct CommandMenuMasks {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ u64 blocked; /* state flags that block the menu */
-};
-
 extern "C" {
-extern CommandMenuMasks DAT_00573b88;
 
 void uiSpriteSelectAnim(void *sprite, s32 animation);
 void FUN_0020acd8(BtlMenuPanel *panel, u32 a, u32 b);
@@ -50,7 +43,7 @@ u32 FUN_002cc9e0(BtlMenuPanel *panel, u32 arg);
 static __inline bool btlMenuBlocked(void)
 {
     return btlScriptUnitHasFlags(btlGetMainState()) != 0 ||
-           (btlGetMainState()->stateFlags64.bits & DAT_00573b88.blocked) != 0;
+           (btlGetMainState()->stateFlags64.bits & g_btlCommandMenuData.stateBlocked) != 0;
 }
 
 /* Handles a request to the battle command menu: closes it, switches mode by the requested

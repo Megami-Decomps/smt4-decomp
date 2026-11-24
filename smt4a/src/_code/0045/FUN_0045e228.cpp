@@ -61,7 +61,7 @@ extern unsigned char LAB_001b1aa8; /* 0x1b1aa8 */
 extern unsigned char DAT_00548f40; /* 0x548f40 */
 
 /* Supplied declaration required: FUN_0015fe40. */
-extern int FUN_001946d4(unsigned int, int, unsigned int *);
+extern int soundArchiveReadBankInfoWithExtension(unsigned int, int, unsigned int *);
 /* Supplied declaration required: FUN_001cb8e4. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_004606d8. */
@@ -231,7 +231,7 @@ FUN_0045e228(int param_1,int param_2,unsigned int *param_3,unsigned int *param_4
     if (((*(int *)(param_1 + 0x114) == 0) || (temp_v11[temp_v6 * 2 + 1] == 0)) ||
        (temp_v25[temp_v6 * 2] == 0)) {
       temp_v15 = 0xffffffff;
-      temp_v1 = FUN_001946d4(*(unsigned int *)(param_1 + 4),temp_v11[temp_v6 * 2],(unsigned int *)&temp_v15);
+      temp_v1 = soundArchiveReadBankInfoWithExtension(*(unsigned int *)(param_1 + 4),temp_v11[temp_v6 * 2],(unsigned int *)&temp_v15);
       if (temp_v1 != 0) {
         temp_v1 = vcallSlot5(*(unsigned int *)(param_1 + 0x110),temp_v15);
         temp_v11[temp_v6 * 2 + 1] = temp_v1;

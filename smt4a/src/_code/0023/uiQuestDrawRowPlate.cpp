@@ -24,9 +24,9 @@ extern int g_uiQuest; /* 0x57f28c */
 extern int questRecordIsUsable(void);
 extern int recordIsAvailable(int);
 extern int recordCategoryNineIsActiveInMode24(int);
-extern int FUN_003df004(int, int, int *);
-extern int partyEntryFlagsBit3(int);
-extern int partyEntryFlagsBit1(void);
+extern int questGetRequirementProgress(int, int, int *);
+extern int questIsCompleted(int);
+extern int questHasNewMark(void);
 extern int rosterGetLeaderId(void);
 
 
@@ -57,7 +57,7 @@ uiQuestDrawRowPlate(int param_1,unsigned int param_2,unsigned int param_3,unsign
   uStack_2c = param_3;
   uStack_28 = param_4;
   if (*(char *)(g_uiQuest + 0x90c) != '\0') {
-    temp_v0 = partyEntryFlagsBit1();
+    temp_v0 = questHasNewMark();
     if (temp_v0 != 0) {
       temp_v0 = rosterGetLeaderId();
       if (temp_v0 == 0) {
@@ -73,7 +73,7 @@ uiQuestDrawRowPlate(int param_1,unsigned int param_2,unsigned int param_3,unsign
       texDrawTableEntryAtStoredOrigin(2,0x1e,0x92);
     }
     else {
-      temp_v0 = partyEntryFlagsBit3(temp_v5);
+      temp_v0 = questIsCompleted(temp_v5);
       if (temp_v0 == 0) {
         return temp_v2;
       }
@@ -100,7 +100,7 @@ uiQuestDrawRowPlate(int param_1,unsigned int param_2,unsigned int param_3,unsign
             }
             return 0x57d8ffff;
           }
-          temp_v0 = partyEntryFlagsBit3(temp_v5);
+          temp_v0 = questIsCompleted(temp_v5);
           if (temp_v0 == 0) {
             return temp_v2;
           }
@@ -112,7 +112,7 @@ uiQuestDrawRowPlate(int param_1,unsigned int param_2,unsigned int param_3,unsign
           texDrawTableEntryAtStoredOrigin(2,0x1e,0x91,temp_v6,param_3,param_4);
         }
         else {
-          temp_v0 = partyEntryFlagsBit3(temp_v5);
+          temp_v0 = questIsCompleted(temp_v5);
           if (temp_v0 != 0) {
             texDrawTableEntryAtStoredOrigin(2,0x1e,0x93,temp_v6,param_3,param_4);
           }
@@ -122,7 +122,7 @@ uiQuestDrawRowPlate(int param_1,unsigned int param_2,unsigned int param_3,unsign
         }
       }
       else {
-        temp_v0 = partyEntryFlagsBit3(temp_v5);
+        temp_v0 = questIsCompleted(temp_v5);
         if (temp_v0 == 0) {
           return temp_v2;
         }
@@ -133,8 +133,8 @@ uiQuestDrawRowPlate(int param_1,unsigned int param_2,unsigned int param_3,unsign
       temp_v0 = 0;
       temp_v3 = 1;
       do {
-        temp_v1 = FUN_003df004(temp_v5,temp_v0,temp_v4);
-        if ((temp_v1 != 0) && ((temp_v1 = partyEntryFlagsBit3(temp_v5), temp_v1 != 0 || (0 < temp_v4[0])))) {
+        temp_v1 = questGetRequirementProgress(temp_v5,temp_v0,temp_v4);
+        if ((temp_v1 != 0) && ((temp_v1 = questIsCompleted(temp_v5), temp_v1 != 0 || (0 < temp_v4[0])))) {
           temp_v3 = 0;
           break;
         }
@@ -142,7 +142,7 @@ uiQuestDrawRowPlate(int param_1,unsigned int param_2,unsigned int param_3,unsign
       } while (temp_v0 < 4);
       temp_v0 = recordIsAvailable(temp_v5);
       if (temp_v0 == 0) {
-        temp_v0 = partyEntryFlagsBit3(temp_v5);
+        temp_v0 = questIsCompleted(temp_v5);
         if (temp_v0 == 0) {
           texDrawTableEntryAtStoredOrigin(2,0x1e,0xc2,temp_v6,param_3,param_4);
           return temp_v2;
@@ -154,7 +154,7 @@ uiQuestDrawRowPlate(int param_1,unsigned int param_2,unsigned int param_3,unsign
         texDrawCompositeSprite(2,0x1e,0xe,temp_v6,param_3,param_4);
         return temp_v2;
       }
-      temp_v0 = partyEntryFlagsBit3(temp_v5);
+      temp_v0 = questIsCompleted(temp_v5);
       if (temp_v0 == 0) {
         return temp_v2;
       }

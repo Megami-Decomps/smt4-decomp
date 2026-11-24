@@ -21,7 +21,7 @@ extern "C" {
 
 extern TitleConfigA *g_titleConfig;
 
-s32 uiSearchPrimary(const void *controller);
+s32 uiListGetVisibleCount(const void *controller);
 f32 jobGetScalarValue(void);
 
 /* Draws a row's frame, and the pulsing cursor over the selected one. Retail inlines this and
@@ -100,7 +100,7 @@ s32 titleConfigDraw(void)
     efctSetSpeed(alpha);
     texDrawCompositeSprite(2, 0x24, 0xc, x, y, 0xb);
     s32 selected = resourceRunOperationIfUnblocked((Object *)config->cursor) + listCursorGetRowIfUnblocked(config->cursor);
-    for (s32 row = 0; row < uiSearchPrimary(config->cursor); row++) {
+    for (s32 row = 0; row < uiListGetVisibleCount(config->cursor); row++) {
         memset(text, 0, sizeof(text));
         bool isSelected = false;
         s32 mode;

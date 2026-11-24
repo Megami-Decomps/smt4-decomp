@@ -3,7 +3,7 @@
 
 extern "C" {
 s32 questGetDetailPageCount(s32 id);
-s32 FUN_00298dc8(s32 id);
+s32 questHasNewMark(s32 id);
 s32 idIsAtLeast350(s32 id);
 
 // Count available detail pages and reset a selection that is no longer valid.
@@ -23,7 +23,7 @@ void uiQuestCountDetailPages(u16 id)
         u8 defaultKind = 0;
         if (idIsAtLeast350(id) && questDataGetRecord(id)->kind == 0)
             defaultKind = 1;
-        if (FUN_00298dc8(id) | defaultKind) {
+        if (questHasNewMark(id) | defaultKind) {
             if (questDataGetRecord(id)->flags & 0x40)
                 ++quest->panelView.panel.page;
             if (questGetDetailPageCount(id) > 0)

@@ -31,7 +31,7 @@ extern char g_effMenuCellText[2];
 
 s32 padIsButtonRepeat(u32 button);
 s32 padIsButtonPressed(u32 button);
-void FUN_00282780(s32 x, s32 y, s32 width, s32 height);
+void effMenuAppendDefaultColorRect(s32 x, s32 y, s32 width, s32 height);
 
 /* One step of the effect menu's text entry: moves the cursor over the 13 x 3 character grid and its delete and
  * confirm cells (wrapping), appends or deletes a character, confirms or cancels, then draws the entry field and,
@@ -104,10 +104,10 @@ void effMenuTextEntryStep(KeyboardState *keyboard)
     }
 
     char formatted[20];
-    FUN_00282780(x, y, KEYBOARD_FIELD_WIDTH, KEYBOARD_FIELD_HEIGHT);
+    effMenuAppendDefaultColorRect(x, y, KEYBOARD_FIELD_WIDTH, KEYBOARD_FIELD_HEIGHT);
     sprintf(formatted, "%s%s", keyboard->text, &keyboard->formatArg);
     effMenuDebugDrawText(x + 4, y + 4, 0, formatted);
-    FUN_00282780(x, y + KEYBOARD_LIST_OFFSET_Y, KEYBOARD_FIELD_WIDTH, KEYBOARD_LIST_HEIGHT);
+    effMenuAppendDefaultColorRect(x, y + KEYBOARD_LIST_OFFSET_Y, KEYBOARD_FIELD_WIDTH, KEYBOARD_LIST_HEIGHT);
     if (keyboard->result != 0)
         return;
 

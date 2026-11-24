@@ -1,4 +1,5 @@
 /* NON_MATCHING: signed disabled flag base matches; 64-bit mask loads and icon-loop scratch registers differ. */
+#include "battle/BtlCommandMenuData.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlUI.h"
 #include "battle/btlMain.h"
@@ -6,10 +7,8 @@
 #include "battle/BattleHelpers_VariantB.h"
 
 namespace {
-struct CommandPanelMasks { u8 prefix[0x20]; u64 blocked; };
 }
 extern "C" {
-extern CommandPanelMasks DAT_00573b88;
 s32 ifTouchGetButtonHelpValue();
 void sysPlaySe(u32 sound);
 void buttonHelpSetText(s32 layer, u32 color);
@@ -54,7 +53,7 @@ void FUN_003363a8(BtlUiObjCA *panel, u32 selection, s8 first, u32 second)
         return;
     }
     if (btlScriptUnitHasFlags(btlGetMainState()) != 0 ||
-        (btlGetMainState()->stateFlags64.bits & DAT_00573b88.blocked) != 0) {
+        (btlGetMainState()->stateFlags64.bits & g_btlCommandMenuData.stateBlocked) != 0) {
         buttonHelpSetText(0, 0xF4F4F4FF);
         btlCommandMenuEnterMode(panel, 0x28, 1);
         if (ifTouchGetButtonHelpValue() != 0x3F && btlScriptUnitHasFlags(btlGetMainState()) != 0)

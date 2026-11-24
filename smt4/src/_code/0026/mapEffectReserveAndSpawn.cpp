@@ -2,9 +2,7 @@
 #include "map/MapEffectReservation.h"
 
 extern "C" {
-extern MapEffectReservationState g_entryTableInfo;
 extern MapEffectReservation DAT_004afd64[];
-extern MapEffectInstance g_namedEntryTable[];
 s32 FUN_0021c694(MapEffectAttachmentRequest* request);
 u32 mapIfSpawnEffect(u32 resource, u32 first, u32 second, u32 option, f32 x, f32 y, f32 z, f32 heading);
 
@@ -45,18 +43,18 @@ s32 mapEffectReserveAndSpawn(u32 resource, u32 kind, u32 owner, u32 appearanceRe
     u32 effect = mapIfSpawnEffect(resource, first, second, option, x, y, z, heading);
     MapEffectInstance* instance = &g_namedEntryTable[slot];
     instance->effect = effect;
-    instance->channel = channel;
-    g_namedEntryTable[reservationIndex].mode = mode;
+    instance->state.channel = channel;
+    g_namedEntryTable[reservationIndex].state.mode = mode;
     instance->resource = resource;
     instance->kind = kind;
     instance->target = -1;
-    instance->frame = 0;
-    instance->previous = -1;
-    instance->active = 0;
+    instance->state.frame = 0;
+    instance->state.previous = -1;
+    instance->state.disabled = 0;
     instance->flags = flags;
-    instance->pending = 0;
-    instance->first = 0;
-    instance->second = 0;
+    instance->state.pending = 0;
+    instance->state.requiredFlag = 0;
+    instance->state.forbiddenFlag = 0;
     ++g_entryTableInfo.count;
     return slot;
 }

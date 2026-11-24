@@ -100,7 +100,7 @@ extern int listCursorGetRowIfUnblocked(unsigned int *);
 /* Supplied declaration required: compendiumEntryIsRegistered. */
 /* Supplied declaration required: uiDrawListScrollBar. */
 extern int uiSearchSecondary(unsigned int *);
-extern int uiSearchPrimary(unsigned int *);
+extern int uiListGetVisibleCount(unsigned int *);
 /* Supplied declaration required: gxSetMirroredClippedScissor. */
 /* Supplied declaration required: devilDispatchTextureResource. */
 /* Supplied declaration required: contentEntryFindById. */
@@ -395,7 +395,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
   }
   temp_v1 = resourceRunOperationIfUnblocked(temp_v14);
   temp_v9 = 0;
-  temp_v2 = uiSearchPrimary(temp_v14);
+  temp_v2 = uiListGetVisibleCount(temp_v14);
   if (0 < temp_v2) {
     do {
       if ((temp_v19 == 0) || (temp_v2 = listCursorGetRowIfUnblocked(temp_v14), temp_v2 != temp_v9)) {
@@ -501,7 +501,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
         }
       }
       temp_v9 = temp_v9 + 1;
-      temp_v2 = uiSearchPrimary(temp_v14);
+      temp_v2 = uiListGetVisibleCount(temp_v14);
     } while (temp_v9 < temp_v2);
   }
   temp_v1 = listCursorGetRowIfUnblocked(temp_v14);

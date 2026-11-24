@@ -37,7 +37,7 @@ typedef char TreeBaseLayoutCheck[sizeof(TreeLinks) == 0x10 &&
 } /* namespace MoLive */
 
 /* Links a freshly attached node into the tree and rebalances up to the root. */
-extern "C" void FUN_004d8f4c(MoLive::TreeBase *tree, MoLive::TreeLinks *node);
+extern "C" void aaTreeFinishInsert(MoLive::TreeBase *tree, MoLive::TreeLinks *node);
 
 namespace MoLive {
 
@@ -97,7 +97,7 @@ public:
                 lowerBound = &nil;
             } else {
                 *link = node;
-                FUN_004d8f4c(this, node);
+                aaTreeFinishInsert(this, node);
                 lowerBound = node;
                 result.inserted = true;
             }

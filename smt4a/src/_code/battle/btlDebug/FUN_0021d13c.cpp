@@ -108,7 +108,7 @@ typedef struct {
 } param_1_stack;
 
 extern int g_btlAux; /* 0x573808 */
-extern signed char DAT_00573b88; /* 0x573b88 */
+extern signed char g_btlCommandMenuData; /* 0x573b88 */
 extern signed char DAT_00573b89; /* 0x573b89 */
 extern int DAT_00573b8c; /* 0x573b8c */
 extern int DAT_00573b90; /* 0x573b90 */
@@ -200,7 +200,7 @@ extern int buttonHelpGetPanelMode(void);
 /* Supplied declaration required: gameGlobalsReleaseReference. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 extern int uiSearchSecondary(int);
-extern int uiSearchPrimary(int *);
+extern int uiListGetVisibleCount(int *);
 /* Supplied declaration required: useCounterRelease. */
 /* Supplied declaration required: FUN_00370ecc. */
 /* Supplied declaration required: statusBustUpPortraitAcquire. */
@@ -303,7 +303,7 @@ void FUN_0021d13c(int param_1)
   piVar16 = (int *)(param_1 + 0x3890);
   if (!((*(unsigned int *)(temp_v4 + 0x45ac) & DAT_00573bcc) == 0 &&
        (*(unsigned int *)(temp_v4 + 0x45a8) & DAT_00573bc8) == 0)) {
-    if (DAT_00573b88 == '\0') {
+    if (g_btlCommandMenuData == '\0') {
       if (*(short *)(param_1 + *piVar16 * 2 + 0x4210) != -1) {
         temp_v25 = (short **)0x1;
         temp_v26 = (int *)0x1;
@@ -333,10 +333,10 @@ void FUN_0021d13c(int param_1)
       }
     }
 LAB_0021d1f4:
-    DAT_00573b88 = 1;
+    g_btlCommandMenuData = 1;
   }
   else {
-    if (DAT_00573b88 != '\0') {
+    if (g_btlCommandMenuData != '\0') {
       if (*(short *)(param_1 + *piVar16 * 2 + 0x4210) != -1) {
         temp_v4 = param_1 + *piVar16 * 0x10;
         temp_v9 = 1;
@@ -405,7 +405,7 @@ LAB_0021d1f4:
       temp_v26 = (int *)0x1;
       gridNavigationConfigure(temp_v34,temp_v9,6,1);
     }
-    DAT_00573b88 = 0;
+    g_btlCommandMenuData = 0;
   }
   temp_v4 = reinterpret_cast<int>(btlGetMainState());
   if (!((*(unsigned int *)(temp_v4 + 0x45ac) & DAT_00573bd4) == 0 &&
@@ -1499,7 +1499,7 @@ LAB_0021f338:
   case 0x10:
     if (*(char *)(param_1 + 0x38ba) != '\0') goto LAB_00220474;
     temp_v4 = uiSearchSecondary(param_1 + *piVar16 * 100 + 0x38bc);
-    temp_v7 = uiSearchPrimary(temp_v34);
+    temp_v7 = uiListGetVisibleCount(temp_v34);
     uiSpriteAdvanceAnimation(param_1 + 0x20);
     temp_v9 = 0;
     do {

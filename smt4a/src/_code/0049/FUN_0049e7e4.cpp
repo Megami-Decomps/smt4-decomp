@@ -11,7 +11,7 @@ void efctSetSpeed(f32 speed);
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
 void renderPopStateStacks(void);
 s32 gridNavigationGetItemCount(void *scrollBar);   /* total entries */
-s32 uiSearchPrimary(void *scrollBar);   /* visible entries */
+s32 uiListGetVisibleCount(void *scrollBar);   /* visible entries */
 s32 resourceRunOperationIfUnblocked(void *scrollBar);   /* first visible entry */
 
 /* Draw the panel's scroll bar: its track, and a thumb scaled to the visible share of the entries
@@ -29,17 +29,17 @@ void FUN_0049e7e4(ListPanel *panel, s32 x, s32 y, f32 speed)
     TextureTableEntryIV *track = asdTMTexTableEntryAt(0x33, 0x13);
     s32 thumbHeight;
 
-    if (gridNavigationGetItemCount(scrollBar) <= uiSearchPrimary(scrollBar)) {
+    if (gridNavigationGetItemCount(scrollBar) <= uiListGetVisibleCount(scrollBar)) {
         thumbHeight = track->placement->height;
     } else {
         f32 pixelsPerEntry = (f32)track->placement->height / (f32)gridNavigationGetItemCount(scrollBar);
 
-        thumbHeight = (s32)((f32)uiSearchPrimary(scrollBar) * pixelsPerEntry);
+        thumbHeight = (s32)((f32)uiListGetVisibleCount(scrollBar) * pixelsPerEntry);
         if (thumbHeight < 1) {
             thumbHeight = 1;
         }
         thumbOffset = (s32)((f32)resourceRunOperationIfUnblocked(scrollBar) * pixelsPerEntry);
-        if (resourceRunOperationIfUnblocked(scrollBar) + uiSearchPrimary(scrollBar) == gridNavigationGetItemCount(scrollBar)
+        if (resourceRunOperationIfUnblocked(scrollBar) + uiListGetVisibleCount(scrollBar) == gridNavigationGetItemCount(scrollBar)
             && thumbOffset + thumbHeight < track->placement->height) {
             thumbOffset = track->placement->height - thumbHeight;
         }

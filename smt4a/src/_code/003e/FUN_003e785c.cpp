@@ -1,15 +1,5 @@
 /* NON_MATCHING: twin of IV's battleUpdateScreenFade; retail converts and merges the four channels one after another; armcc unrolls the channel loop and interleaves the conversions across VFP registers. */
-#include "common.h"
-
-struct PairedColorFadeState {
-    /* 0x0000 */ u8 unk0000[0x4d18];
-    /* 0x4D18 */ u32 current[2];
-    /* 0x4D20 */ u32 first[2];
-    /* 0x4D28 */ u32 second[2];
-    /* 0x4D30 */ u32 state[2];
-    /* 0x4D38 */ s32 elapsed[2];
-    /* 0x4D40 */ s32 duration[2];
-};
+#include "battle/BtlMainAccess.h"
 
 static inline u32 interpolateMaskedColor(u32 from, u32 to, f32 weight)
 {
@@ -20,36 +10,36 @@ static inline u32 interpolateMaskedColor(u32 from, u32 to, f32 weight)
 }
 
 /* Advance either direction of the selected packed-color fade. */
-extern "C" void FUN_003e785c(PairedColorFadeState *fade, s32 index)
+extern "C" void FUN_003e785c(BtlMainStateExtA *battle, s32 index)
 {
-    switch (fade->state[index]) {
+    switch (battle->slotColorFade.mode[index]) {
     case 0:
-        fade->state[index] = 1;
+        battle->slotColorFade.mode[index] = 1;
     case 1: {
-        s32 duration = fade->duration[index];
-        f32 weight = 1.0f - (f32)fade->elapsed[index] / (f32)duration;
-        fade->current[index] = interpolateMaskedColor(fade->second[index], fade->first[index], weight);
-        if (++fade->elapsed[index] >= duration)
-            fade->state[index] = 2;
+        s32 duration = battle->slotColorFade.parameters[index];
+        f32 weight = 1.0f - (f32)battle->slotColorFade.timer[index] / (f32)duration;
+        battle->slotColorFade.baseColor[index] = interpolateMaskedColor(battle->slotColorFade.color[index], battle->slotColorFade.previousColor[index], weight);
+        if (++battle->slotColorFade.timer[index] >= duration)
+            battle->slotColorFade.mode[index] = 2;
         break;
     }
     case 2:
-        fade->current[index] = fade->second[index];
-        fade->state[index] = 3;
+        battle->slotColorFade.baseColor[index] = battle->slotColorFade.color[index];
+        battle->slotColorFade.mode[index] = 3;
         break;
     case 4:
-        fade->state[index] = 5;
+        battle->slotColorFade.mode[index] = 5;
     case 5: {
-        s32 duration = fade->duration[index];
-        f32 weight = (f32)fade->elapsed[index] / (f32)duration;
-        fade->current[index] = interpolateMaskedColor(fade->first[index], fade->second[index], weight);
-        if (++fade->elapsed[index] >= duration)
-            fade->state[index] = 6;
+        s32 duration = battle->slotColorFade.parameters[index];
+        f32 weight = (f32)battle->slotColorFade.timer[index] / (f32)duration;
+        battle->slotColorFade.baseColor[index] = interpolateMaskedColor(battle->slotColorFade.previousColor[index], battle->slotColorFade.color[index], weight);
+        if (++battle->slotColorFade.timer[index] >= duration)
+            battle->slotColorFade.mode[index] = 6;
         break;
     }
     case 6:
-        fade->current[index] = fade->second[index];
-        fade->state[index] = 7;
+        battle->slotColorFade.baseColor[index] = battle->slotColorFade.color[index];
+        battle->slotColorFade.mode[index] = 7;
         break;
     }
 }

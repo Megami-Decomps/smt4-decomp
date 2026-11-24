@@ -10,8 +10,8 @@ void stateHolder4Request(s8 value)
 {
     UiQuestApoc *obj = g_uiQuest;
 
-    obj->unk93D = 1;
-    obj->unk945 = value;
+    obj->filtered = 1;
+    obj->filterMode = value;
     uiQuestRebuildLists();
     uiQuestReturnToList();
 }

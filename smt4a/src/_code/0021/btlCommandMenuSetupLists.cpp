@@ -10,6 +10,7 @@
  * `cmp; mov r1, r0` where retail has `movs r1, r0`, and both loops read the selection into r1 (retail r0).
  * (6) `extraCount != 0` is loaded into r0 and set with `movne; moveq` (retail r1, `moveq; movne`), and the last
  * list address is formed through r1. */
+#include "battle/BtlCommandMenuData.h"
 #include "common.h"
 #include <stddef.h>
 #include "battle/BtlMainAccess.h"
@@ -49,19 +50,9 @@ typedef char CommandMenuSetupOffsetCheck[
     offsetof(CommandMenuSetup, slots) == 0x3C44 && offsetof(CommandMenuSetup, ids) == 0x3CA8 &&
     offsetof(CommandMenuSetup, extraList) == 0x3DB4 && offsetof(CommandMenuSetup, targets) == 0x4210 ? 1 : -1];
 
-/* The battle data table (observed fields). */
-struct BattleCommandData {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ s32 firstSelection;
-    /* 0x08 */ s32 secondSelection;
-    /* 0x0C */ u8 unk0C[0x34];
-    /* 0x40 */ u64 blocked;
-};
-
 extern "C" {
 /* The command filter's party list count (a getter armlink inlined: its one instruction is in config/inlined.txt). */
 s16 btlMainGetPartyListCount(BtlMainStateA *state);
-extern BattleCommandData DAT_00573b88;
 u32 FUN_004c67d0(void);
 void FUN_0020d3d4(void *menu);
 void FUN_0023f788(void *menu);
@@ -75,7 +66,7 @@ u32 btlMainGetUnk14(void);
 void qsort(void *elements, u32 count, u32 elementSize, int (*compare)(const void *, const void *));
 int dataTableCompareIdsByOrder(const void *first, const void *second);
 void scrollOwnerSelectIndex(ScrollSelection *owner, s32 index);
-s32 FUN_00284dbc(void);
+s32 questIsReported(void);
 
 /* Whether the player data has both of its unlock words set. */
 static __inline bool playerUnlocked()
@@ -124,13 +115,13 @@ void btlCommandMenuSetupLists(CommandMenuSetup *work)
     BtlMainStateA *battle = btlGetMainState();
     s32 selected = work->selected;
     ScrollSelection *page = &work->lists[4];
-    if ((battle->markerMasks.bits & DAT_00573b88.blocked) != 0) {
+    if ((battle->markerMasks.bits & g_btlCommandMenuData.listMarker) != 0) {
         if (work->targets[selected] == -1 && gameFlagIsSet(0x410) != 0 && playerUnlocked()) {
             gridNavigationConfigure(page, 0x191, 6, 1, 1, 1);
-            scrollListSetSelectionTracked(page, DAT_00573b88.firstSelection + 2);
+            scrollListSetSelectionTracked(page, g_btlCommandMenuData.firstSelection + 2);
         } else {
             gridNavigationConfigure(page, 400, 6, 1, 1, 1);
-            scrollListSetSelectionTracked(page, DAT_00573b88.firstSelection + 1);
+            scrollListSetSelectionTracked(page, g_btlCommandMenuData.firstSelection + 1);
         }
     } else {
         s32 count;
@@ -146,9 +137,9 @@ void btlCommandMenuSetupLists(CommandMenuSetup *work)
     }
     BtlMainStateA *state = btlGetMainState();
     ScrollSelection *party = &work->lists[5];
-    if ((state->markerMasks.bits & DAT_00573b88.blocked) != 0) {
+    if ((state->markerMasks.bits & g_btlCommandMenuData.listMarker) != 0) {
         gridNavigationConfigure(party, btlMainGetPartyListCount(btlGetMainState()), 6, 1, 1, 1);
-        scrollListSetSelectionTracked(party, DAT_00573b88.secondSelection);
+        scrollListSetSelectionTracked(party, g_btlCommandMenuData.secondSelection);
     } else {
         gridNavigationConfigure(party, 1, 6, 1, 0, 1);
     }
@@ -166,7 +157,7 @@ void btlCommandMenuSetupLists(CommandMenuSetup *work)
     gridNavigationConfigure(&work->lists[6], count, 6, 1, 0, 1);
     qsort(work->ids, count, 2, dataTableCompareIdsByOrder);
     scrollOwnerSelectIndex(&work->lists[work->selected], 0);
-    if (FUN_00284dbc() != 0)
+    if (questIsReported() != 0)
         scrollOwnerSelectIndex(&work->lists[0], 1);
     work->current = page;
 }

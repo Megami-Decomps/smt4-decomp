@@ -5,7 +5,6 @@
 
 extern "C" {
 void FUN_0019065c(TaskThreadState *thread);
-void nn_os_CriticalSection_Initialize(void *section);
 void nw_snd_internal_TaskThread_ThreadFunc(void *argument);
 void FUN_00100ad8(void);
 void emptyStub_00100df2(void);
@@ -21,7 +20,7 @@ bool FUN_00174b5c(TaskThreadState *thread, s32 priority, const SoundInitStack *s
         FUN_0019065c(thread);
     }
     thread->stopRequested = 0;
-    nn_os_CriticalSection_Initialize(thread->criticalSection);
+    nn_os_CriticalSection_Initialize(&thread->criticalSection);
     TaskThreadStartContext context;
     context.thread = thread;
     context.descriptor.argumentSize = 4;

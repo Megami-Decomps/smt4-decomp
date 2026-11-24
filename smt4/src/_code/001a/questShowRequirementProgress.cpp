@@ -14,11 +14,11 @@ extern "C" {
 
 SpecialRecord *dataTable2fSub1GetRecord(s32 id);
 void saveFlagSetOrAddCounter(s32 value, s32 mode);
-s32 FUN_00298dc8(u16 quest);
+s32 questHasNewMark(u16 quest);
 s32 table1bOr1cGetRecordValue(u16 quest);
 s32 FUN_00287874(u16 quest);
 s32 questPassesAvailabilityConditions(u16 quest);
-u32 FUN_00298e40(s32 quest, s32 index, QuestRequirementProgress *progress);
+u32 questGetRequirementProgress(s32 quest, s32 index, QuestRequirementProgress *progress);
 void mapIfShowItemResultMessage(u32 result, u32 item, s32 count);
 void mapIfShowRemainingRequirementDialog(u32 kind, u32 item, s32 count);
 
@@ -39,7 +39,7 @@ s32 questShowRequirementProgress(void)
         return 4;
     }
     for (u16 quest = 100; quest < 400; quest++) {
-        if (FUN_00298dc8(quest) == 0) {
+        if (questHasNewMark(quest) == 0) {
             continue;
         }
         s32 kind = table1bOr1cGetRecordValue(quest);
@@ -64,7 +64,7 @@ s32 questShowRequirementProgress(void)
                 progressed = block->secondProgressedItem;
                 for (i = 0; i < 6; i++) {
                     QuestRequirementProgress progress;
-                    if (FUN_00298e40(quest, i, &progress) != 0) {
+                    if (questGetRequirementProgress(quest, i, &progress) != 0) {
                         requirements++;
                         if (progress.remaining > 0) {
                             if (progress.id == progressed) {
@@ -130,7 +130,7 @@ s32 questShowRequirementProgress(void)
                     progressed = block->progressedItem;
                     for (i = 0; i < 6; i++) {
                         QuestRequirementProgress progress;
-                        if (FUN_00298e40(quest, i, &progress) != 0) {
+                        if (questGetRequirementProgress(quest, i, &progress) != 0) {
                             requirements++;
                             if (progress.remaining > 0) {
                                 if (progress.id == progressed) {

@@ -1,4 +1,5 @@
 /* NON_MATCHING: Retail uses a 96-byte stack frame and d8-d9; the draft uses 100 bytes and d8-d13 while preparing draw matrices. */
+#include "code/Code0023_Smt4a.h"
 #include "romwright_types.h"
 #include "classes/Obj42083c.h"
 
@@ -6,7 +7,6 @@ extern "C" {
 
 int renderCtxSelectTexture(int, unsigned int);
 int FUN_00186940(void);
-int FUN_002371b0(void);
 int gpuSubmitFloatVectorsOrDefault(int *);
 int FUN_00409e78(int, float *, int);
 
@@ -41,7 +41,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_00186940. */
-/* Supplied declaration required: FUN_002371b0. */
 /* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: FUN_00409e78. */
 
@@ -169,7 +168,7 @@ void Obj42083c::draw()
     } while (temp_v0 < **(int **)(param_1 + 0x60) + 1);
   }
   gpuSubmitFloatVectorsOrDefault(&temp_v11);
-  FUN_002371b0();
+  effectSubmitDefaultDrawParameters();
   temp_v0 = g_renderCtx;
   piVar10 = (int *)(g_renderCtx + 0x1258);
   temp_v1 = *piVar10;

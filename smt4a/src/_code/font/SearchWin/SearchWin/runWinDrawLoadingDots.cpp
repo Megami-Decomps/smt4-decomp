@@ -1,5 +1,4 @@
-/* NON_MATCHING: retail forms each pushed stack's address after the state call returns (the build before it), and
- * the label position's x/y sums use other scratch registers. */
+/* NON_MATCHING: 10 lines. The pushes and pops match, but the label's x/y sums use different core registers. */
 #include "font/SearchWin/RunWin.h"
 #include "camp/RenderCtx.h"
 #include "gfx/RenderStateStack.h"
@@ -29,12 +28,16 @@ u8 runWinDrawLoadingDots(void)
         return 0;
     {
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
-        renderStackPushCounted(g_renderCtx->stacks + RENDER_STACK_A, renderCtxPackPassFlags(1, 0));
+        RenderCtxA *scene = g_renderCtx;
+        s32 state = renderCtxPackPassFlags(1, false);
+        renderStackPushCounted(scene->stacks + RENDER_STACK_A, state);
         s32 x = vec2GetXInt(&win->window) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
         s32 y = vec2GetYInt(&win->window);
         efctSetSpeed(win->window.alpha);
         texDrawCompositeSprite(2, 8, 0x14, x, y, 101);
-        renderStackPushCounted(g_renderCtx->stacks + RENDER_STACK_B, packNibblesAndByte(6, 1, 0));
+        scene = g_renderCtx;
+        state = packNibblesAndByte(6, 1, 0);
+        renderStackPushCounted(scene->stacks + RENDER_STACK_B, state);
         texDrawCompositeSprite(2, 8, 0x15, x, y, 102);
         renderCtxPopCounted(g_renderCtx, RENDER_STACK_B);
         TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(8, 0x16F);

@@ -7,6 +7,7 @@
 #define ASDSDK_SOURCE_UTIL_ASDLISTBOX_H
 
 #include "AsdSDK/Source/Util/AsdList.h"
+#include <stddef.h>
 
 #define ASD_LISTBOX_PATH_LEN 0x100
 
@@ -65,6 +66,13 @@ typedef struct AsdListBoxModel {
     /* 0x70 */ u32 nextItemId;
 } AsdListBoxModel;
 
+enum {
+    ASD_LISTBOX_DEFAULT_CHAR_WIDTH = 10,
+    ASD_LISTBOX_DEFAULT_ROW_HEIGHT = 13,
+    ASD_LISTBOX_DEFAULT_VISIBLE_ROWS = 10,
+    ASD_LISTBOX_VALUE_TEXT_CAPACITY = 256
+};
+
 /* AsdListBox.flags */
 enum {
     ASD_LISTBOX_FLAG_MOVABLE = 4 /* the circle pad moves the box (2 pixels a frame) */
@@ -72,7 +80,7 @@ enum {
 
 /* The list box object (0x18c bytes). */
 typedef struct AsdListBox {
-    /* 0x000 */ u8 unk000[0xc];
+    /* 0x000 */ AsdList items;
     /* 0x00c */ u8 widget[0x28];             /* row widget, set up by rowWidgetInit/colorSetRgba */
     /* 0x034 */ s32 state;                   /* the update callback's state machine, 0 when created */
     /* 0x038 */ u32 flags;                   /* ASD_LISTBOX_FLAG_* */
@@ -82,12 +90,21 @@ typedef struct AsdListBox {
     /* 0x04c */ f32 y;
     /* 0x050 */ f32 width;
     /* 0x054 */ f32 height;
-    /* 0x058 */ s32 rowCount;
+    /* 0x058 */ s32 charWidth;
     /* 0x05c */ s32 rowHeight;
     /* 0x060 */ u8 unk60[8];
-    /* 0x068 */ s32 visibleRows;             /* rows shown from the scroll position on */
-    /* 0x06c */ u8 unk6c[0x120];
+    /* 0x068 */ s32 visibleRows;             /* maximum number of rows shown */
+    /* 0x06c */ s32 itemCount;
+    /* 0x070 */ u8 unk70[0xc];
+    /* 0x07c */ s32 hasMeasure;
+    /* 0x080 */ s32 (*measure)(const char *text);
+    /* 0x084 */ u8 unk84[8];
+    /* 0x08c */ char title[ASD_LISTBOX_PATH_LEN];
 } AsdListBox;
+
+typedef char AsdListBoxMetricsLayout[sizeof(AsdListBox) == 0x18c &&
+    offsetof(AsdListBox, charWidth) == 0x58 && offsetof(AsdListBox, itemCount) == 0x6c &&
+    offsetof(AsdListBox, measure) == 0x80 && offsetof(AsdListBox, title) == 0x8c ? 1 : -1];
 
 extern "C" {
 u8 buttonHelpIsStateActive(void);

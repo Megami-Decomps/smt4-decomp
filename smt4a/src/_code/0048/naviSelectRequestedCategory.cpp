@@ -4,7 +4,6 @@
 extern "C" {
 s32 naviMainGetRequestedMap(void);
 s32 naviMainGetRequestedSection(void *selection); // declcheck: local (the shared declaration does not compile here or changes this unit)
-MapNaviMarkerIcon *dataTable2BFindType1Entry(Block66Owner *owner, s32 map, u32 category);
 s32 MapNaviTable_GetCategoryCount(MapNaviTableContext *context); // declcheck: local (the shared declaration does not compile here or changes this unit)
 MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext *context, u32 index);
 

@@ -21,7 +21,7 @@ extern u32 g_aocSystem;
 
 s32 asdLoadFileAsyncSimple(const char *name, void **output, u32 flags);
 void nkdwLoadWorldData(Obj4206f8 *content, s32 id);
-void FUN_0033f2b8(Obj4206f8 *content, s32 id);
+void npcPackageLoad(Obj4206f8 *content, s32 id);
 void aocQueueType0c(AocSystem *system, s32 id, void **output, const char *name);
 void aocDisplayQueueFormattedEntry(u32 system, s32 id, void **output, const char *name);
 
@@ -73,7 +73,7 @@ Obj4206f8 *eventResourceCacheAcquire(s32 id, s32 queueLoad, u32 unused, u32 heap
             }
         }
     } else if (id < 0) {
-        FUN_0033f2b8(content, -id);
+        npcPackageLoad(content, -id);
     } else {
         nkdwLoadWorldData(content, id);
     }

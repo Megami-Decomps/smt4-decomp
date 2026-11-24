@@ -1,6 +1,6 @@
 #include "quest_center/QuestRecordA.h"
 
-extern "C" u32 partyEntryFlagsBit3(u16 id);
+extern "C" u32 questIsCompleted(u16 id);
 
 static __inline s32 compareQuestOrder(const u16* left, const u16* right)
 {
@@ -16,9 +16,9 @@ static __inline s32 compareQuestOrder(const u16* left, const u16* right)
 // Sort quests by completion status, special category, then descending display order.
 extern "C" s32 questCompareForDisplayOrder(const u16* left, const u16* right)
 {
-    u32 completedLeft = partyEntryFlagsBit3(*left);
+    u32 completedLeft = questIsCompleted(*left);
     s32 result = 0;
-    u32 completedRight = partyEntryFlagsBit3(*right);
+    u32 completedRight = questIsCompleted(*right);
     if ((completedRight & ~completedLeft) != 0) {
         result = 1;
     }

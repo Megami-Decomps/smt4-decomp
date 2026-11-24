@@ -3,7 +3,7 @@
 
 extern "C" {
 
-u32 FUN_00298e00(u16 id);
+u32 questIsReported(u16 id);
 
 static inline s32 compareDevilRecordOrder(const u16 *first, const u16 *second)
 {
@@ -18,9 +18,9 @@ static inline s32 compareDevilRecordOrder(const u16 *first, const u16 *second)
 /* Sort comparator over two ids: the one whose mask has bits the other lacks sorts first, ties go by record order. */
 s32 devilMaskCompare(u16 *a, u16 *b)
 {
-    u32 maskA = FUN_00298e00(*a);
+    u32 maskA = questIsReported(*a);
     s32 result = 0;
-    u32 maskB = FUN_00298e00(*b);
+    u32 maskB = questIsReported(*b);
 
     if ((maskA & ~maskB) != 0) {
         result = -1;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: 14 lines: the first loop's blocked-mask words land in r2/r3 swapped, the page pointer is set up
  * one instruction later in retail, and retail branches to the kind-3 test out of line (bne/b where the build has
  * beq/b). The constant-false guard is btlDebugQueryEnabled (linker-inlined mov r0, #0). */
+#include "battle/BtlCommandMenuData.h"
 #include "battle/BtlMainAccess.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "common.h"
@@ -16,11 +17,6 @@ struct BtlDebugMenuLists {
 };
 
 /* The mask the entries' battle-state requirement is blocked by (observed field). */
-struct BtlDebugBlockMask {
-    /* 0x00 */ u8 unk00[0x28];
-    /* 0x28 */ u64 blocked;
-};
-
 /* A unit record (observed field). */
 struct BtlDebugUnitRecord {
     /* 0x00 */ u8 unk00[0x62];
@@ -30,9 +26,7 @@ struct BtlDebugUnitRecord {
 /* A demon's data (observed field). */
 extern "C" {
 
-extern BtlDebugBlockMask DAT_00573b88;
 
-BtlDebugEntry *FUN_002cc228(u8 index, s32 empty);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 flag);
 s32 btlListIsKind9Available(void);
@@ -82,7 +76,7 @@ void FUN_0020d3d4(BtlDebugMenuLists *menu)
     s32 slot;
 
     for (i = 0; i < DEBUG_MENU_ENTRY_COUNT; i++) {
-        BtlDebugEntry *entry = FUN_002cc228(i, 1);
+        BtlDebugEntry *entry = btlDebugFindCommandByIndex(i, 1);
 
         if (entry == NULL || entry->enabled != 1) {
             continue;
@@ -93,7 +87,7 @@ void FUN_0020d3d4(BtlDebugMenuLists *menu)
         if (entry->dataFlagId != 0 && gameDataFlagTestBit(entry->dataFlagId) == 0) {
             continue;
         }
-        if (entry->needsBattleState != 0 && (reinterpret_cast<BtlStateMasks *>(btlGetMainState())->held & DAT_00573b88.blocked) != 0) {
+        if (entry->needsBattleState != 0 && (reinterpret_cast<BtlStateMasks *>(btlGetMainState())->held & g_btlCommandMenuData.stateMask28) != 0) {
             continue;
         }
         if (entry->kind == 2) {
@@ -122,7 +116,7 @@ void FUN_0020d3d4(BtlDebugMenuLists *menu)
             record = gameGetSlotRecord(gameGetSlotTable()[slot + 0x1CA0]);
             if (record != NULL) {
                 for (i = 0; i < DEBUG_MENU_ENTRY_COUNT; i++) {
-                    BtlDebugEntry *entry = FUN_002cc228(i, 0);
+                    BtlDebugEntry *entry = btlDebugFindCommandByIndex(i, 0);
 
                     if (entry == NULL || entry->enabled != 1) {
                         continue;
@@ -133,7 +127,7 @@ void FUN_0020d3d4(BtlDebugMenuLists *menu)
                     if (entry->dataFlagId != 0 && gameDataFlagTestBit(entry->dataFlagId) == 0) {
                         continue;
                     }
-                    if (entry->needsBattleState != 0 && (reinterpret_cast<BtlStateMasks *>(btlGetMainState())->held & DAT_00573b88.blocked) != 0) {
+                    if (entry->needsBattleState != 0 && (reinterpret_cast<BtlStateMasks *>(btlGetMainState())->held & g_btlCommandMenuData.stateMask28) != 0) {
                         continue;
                     }
                     if (entry->kind == 5) {

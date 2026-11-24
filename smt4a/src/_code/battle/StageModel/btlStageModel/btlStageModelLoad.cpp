@@ -1,22 +1,15 @@
 /* NON_MATCHING: 186 lines. With the 0x24-byte BAM entries (0x50-byte rows) and an entry pointer in the row search the loop is no longer unrolled; retail still recomputes the found row's address from the index (`adds`), converts all three BAM coordinates before storing them with vstmia (a vector copy), and allocates the zero register and the constant 1 the other way round. */
 #include "battle/BtlMainAccess.h"
+#include "battle/BattleStageAccessory.h"
 #include "common.h"
 #include <stdio.h>
 #include "code/Code001c.h"
-
-// One BAM entry of a stage row (0x24 bytes): name, and three u16 position components stored as floats.
-struct StageBam {
-    char name[0x1e];            // 0x00
-    u16 x;                      // 0x1e
-    u16 y;                      // 0x20
-    u16 z;                      // 0x22
-};
 
 // Stage table row (0x50 bytes): stage/sub-stage ids, two BAM entries and a redirect.
 struct StageRow {
     u16 stage;                  // 0x00
     u16 substage;               // 0x02
-    StageBam bams[2];           // 0x04 (0x24 bytes each)
+    BattleStageAccessoryPart bams[2]; // 0x04 (0x24 bytes each)
     u16 redirectStage;          // 0x4c
     u16 redirectSub;            // 0x4e
 };
@@ -117,7 +110,7 @@ void btlStageModelLoad(BtlStageModel* model, u32 stage, u32 substage)
     row = findStageRow(model);
     if (row == NULL) return;
     for (s32 i = 0; i < 2; i++) {
-        StageBam* bam = &row->bams[i];
+        BattleStageAccessoryPart *bam = &row->bams[i];
         if (bam->name[0] == '0') continue;
         sprintf(name, "%s%s.bam", "battle/battle_map/", bam->name);
         void* bamMemory = asdMemoryAllocTraced(0x20, DAT_00527348, 246);

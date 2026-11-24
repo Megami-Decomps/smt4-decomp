@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a1098` (_code @ 0x3a1098, 0x8cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "code/Code0023_Smt4a.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -9,7 +10,6 @@ int renderCtxSelectDisplayAreaForStereoMode(int);
 int memAlloc(int, int, int, int);
 int renderCtxSelectTexture(...);
 int asdMemFree(void);
-int FUN_002371b0(void);
 int effectSubmitDefaultVectors(void);
 int FUN_00290c28(...);
 int entryListSetPhase(...);
@@ -55,7 +55,6 @@ extern int renderCtxPackPassFlags(unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: asdMemFree. */
 extern unsigned int asdCameraValueGet(unsigned int);
-/* Supplied declaration required: FUN_002371b0. */
 /* Supplied declaration required: effectSubmitDefaultVectors. */
 /* Supplied declaration required: FUN_00290c28. */
 /* Supplied declaration required: entryListSetPhase. */
@@ -263,7 +262,7 @@ joined_r0x003a122c:
       effectSpawnPositionDefault(0xffffffff);
       effectSpawnPositionDefault(0xffffffff);
       effectSpawnPositionDefault(0xffffffff);
-      FUN_002371b0();
+      effectSubmitDefaultDrawParameters();
       break;
     case 10:
       temp_v7 = param_2[8];

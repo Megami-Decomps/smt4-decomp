@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "AsdSDK/Source/Gfx/Camera/AsdCamera.h"
 #include "game/GameState.h"
-#include "shop/shopMain.h"
+#include "shop/ShopSequenceRequest.h"
 #include "shard/W6_W6Match5_SequencePacket.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 
@@ -24,14 +24,12 @@ struct ShopMain {
 extern "C" {
 
 extern ShopMain *g_shop;
-extern ShopSequenceRequest *g_shopSequenceRequest;
 
 
 s32 storyFlagRangeAnySet(void);
 void setFlag10(void);
 void fileSlot17Acquire(s32 *slot);
 void fileSlot17Release(s32 *slot);
-void *asdOperatorNew(u32 bytes);
 u8 *FUN_003a5e30(void *memory, s32 mode, s32 kind, s32 sub);
 void shopResetMessageState(u8 *scene);
 void sceneRunLoadingPhaseUpdate(void);
@@ -42,20 +40,6 @@ s32 FUN_00287304(void);
 s32 gameStateIsFlagSetAndLarge(void);
 void titleSetSlotValueState2(s32 a, s32 b);
 void soundChannelStopAll(s32 channel);
-
-/* Returns the queued shop request, allocating a cleared one on first use. */
-static __inline ShopSequenceRequest *shopGetQueuedRequest(void)
-{
-    if (g_shopSequenceRequest == NULL) {
-        ShopSequenceRequest *request = (ShopSequenceRequest *)asdOperatorNew(sizeof(ShopSequenceRequest));
-        if (request != NULL) {
-            request->pending = 0;
-            request->screen = 0;
-        }
-        g_shopSequenceRequest = request;
-    }
-    return g_shopSequenceRequest;
-}
 
 /* Steps the shop main: 0 builds the scene (unless a story screen takes over), 1 waits for it to
  * load, 2 destroys it, 3 requests the next sequence. Returns -1 when the shop is done. */

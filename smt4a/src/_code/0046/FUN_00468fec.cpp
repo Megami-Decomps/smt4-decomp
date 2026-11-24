@@ -61,14 +61,6 @@ u8 gameFlagIsSet(u32 flag);
 s32 messageGetChoiceResult(void);
 void messageBannerRestartOrClear(void);
 
-/* Makes the cursor model visible when it is hidden. */
-static __inline void showModel(Obj557b18 *model)
-{
-    if ((model->flags & 1) == 0) {
-        model->flags |= 1;
-    }
-}
-
 /* Drives the quest-center choice: shows the help text for the highlighted entry, or reacts to the finished script's answer. */
 void FUN_00468fec(QuestChoiceWork *work)
 {
@@ -106,9 +98,9 @@ void FUN_00468fec(QuestChoiceWork *work)
             if (value != 3) {
                 if (work->cursorMode != 0) {
                     work->cursorMode = 0;
-                    showModel(work->cursorHolder->body);
+                    moriModelBodyShow(work->cursorHolder->body);
                 }
-                showModel(work->cursorHolder->body);
+                moriModelBodyShow(work->cursorHolder->body);
             } else {
                 if (work->cursorMode != 7) {
                     work->cursorMode = 7;
@@ -181,7 +173,7 @@ void FUN_00468fec(QuestChoiceWork *work)
         Obj557b18 *model = work->pointerHolder->body;
         modelPlayClip(model, 0, 0, 0.0f, 0.0f);
         model->speed = 1.0f;
-        showModel(work->cursorHolder->body);
+        moriModelBodyShow(work->cursorHolder->body);
         break;
     }
     }

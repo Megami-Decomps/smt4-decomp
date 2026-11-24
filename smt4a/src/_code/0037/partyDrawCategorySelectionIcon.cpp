@@ -9,7 +9,7 @@ struct PartyCategoryRecord {
 };
 
 extern "C" {
-s32 partyEntryFlagsBit3(s32 id);
+s32 questIsCompleted(s32 id);
 s32 idIsAtLeast350(s32 id);
 void drawSetColorFromRGBA8(u32 color);
 
@@ -19,7 +19,7 @@ void gxResetColorQuadToWhite();
 void partyDrawCategorySelectionIcon(s32 id, u32 x, u32 y, u32 flags)
 {
     u32 sprite = 0;
-    s32 highlighted = partyEntryFlagsBit3(id);
+    s32 highlighted = questIsCompleted(id);
     if (dataTable1bOr1cRecordHasFlag1(id)) {
         sprite = highlighted ? 0x40f : 0x408;
     } else if (!idIsAtLeast350(id)) {

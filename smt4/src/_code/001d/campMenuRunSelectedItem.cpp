@@ -51,7 +51,7 @@ void uniteSetMode(u8 mode);
 void FUN_002a035c(void);
 void campUiResetSlots(void);
 void configOpen(void);
-void FUN_00194ec8(void);
+void playLogCreate(void);
 u32 FUN_002cd37c(void *saved);
 void uniteReleaseModel(void);
 void FUN_0028a924(u32 first, u32 second, u32 third);
@@ -280,7 +280,7 @@ void campMenuRunSelectedItem(void)
         campChangeState(4);
         return;
     case 0x29:
-        FUN_00194ec8();
+        playLogCreate();
         campTimersStart();
         uiSpriteSetKeyframe(&camp->sprites[1], 0, 0);
         FUN_0026d5a4();

@@ -7,7 +7,7 @@ extern "C" {
 
 int dataTable2eSub2GetCount(...);
 int mapDepartFormatPlaceName(int, int, int, unsigned char [144]);
-int forwardRecoveredCallback(void);
+int effectSubmitDefaultDrawParameters(void);
 int textDrawString(int, unsigned int, unsigned char [144]);
 int gxSubmitDrawZeroExtraParams(unsigned int);
 int renderCtxSelectTexture(int, int);
@@ -28,7 +28,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int dataTable2eSub2GetRecord(int);
 /* Supplied declaration required: dataTable2eSub2GetCount. */
 /* Supplied declaration required: mapDepartFormatPlaceName. */
-/* Supplied declaration required: forwardRecoveredCallback. */
+/* Supplied declaration required: effectSubmitDefaultDrawParameters. */
 /* Supplied declaration required: textDrawString. */
 extern unsigned long long asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: gxSubmitDrawZeroExtraParams. */
@@ -74,7 +74,7 @@ unsigned int FUN_0021ef10(void)
     renderCtxSelectStereoLayout(g_titleScene);
     renderCtxSelectTexture(g_titleScene,0);
     gxSubmitDrawZeroExtraParams(temp_v6);
-    forwardRecoveredCallback();
+    effectSubmitDefaultDrawParameters();
     temp_v4 = g_titleScene;
     piVar7 = (int *)(g_titleScene + 0x124c);
     temp_v1 = *piVar7;

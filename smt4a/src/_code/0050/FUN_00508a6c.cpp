@@ -5,8 +5,8 @@
 extern "C" {
 
 int soundArchiveReadSoundInfoWithExtension(int, unsigned int, int [2]);
-int FUN_001946d4(int, unsigned int, int [2]);
-int FUN_001a8930(int, unsigned int, int [2]);
+int soundArchiveReadBankInfoWithExtension(int, unsigned int, int [2]);
+int soundArchiveReadWaveArchiveInfoWithExtension(int, unsigned int, int [2]);
 int FUN_00507acc(int, unsigned int, int [2]);
 
 typedef int romwright_code(...);
@@ -17,8 +17,8 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: soundArchiveReadSoundInfoWithExtension. */
-/* Supplied declaration required: FUN_001946d4. */
-/* Supplied declaration required: FUN_001a8930. */
+/* Supplied declaration required: soundArchiveReadBankInfoWithExtension. */
+/* Supplied declaration required: soundArchiveReadWaveArchiveInfoWithExtension. */
 /* Supplied declaration required: FUN_00507acc. */
 
 
@@ -51,12 +51,12 @@ unsigned int FUN_00508a6c(int *param_1,unsigned int param_2)
       else {
         temp_v4 = 0;
         temp_v3[0] = -1;
-        FUN_001a8930(param_1[1],param_2,temp_v3);
+        soundArchiveReadWaveArchiveInfoWithExtension(param_1[1],param_2,temp_v3);
       }
     }
     else {
       temp_v3[0] = -1;
-      FUN_001946d4(temp_v1,param_2,temp_v3);
+      soundArchiveReadBankInfoWithExtension(temp_v1,param_2,temp_v3);
     }
   }
   else {

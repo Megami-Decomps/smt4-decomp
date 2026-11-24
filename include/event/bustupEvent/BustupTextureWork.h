@@ -24,4 +24,16 @@ struct BustupTextureWork {
     /* 0x88 */ u8 unk88[8];
 };
 typedef char BustupTextureWorkLayoutCheck[(sizeof(BustupTextureWork) == 0x90 && offsetof(BustupTextureWork, deferred) == 0x7C) ? 1 : -1];
+
+/* Apocalypse's extended texture work. FUN_0026c568 interpolates the current pair from the
+ * starting values and snaps it and the starting pair to the target when the transition ends. */
+struct BustupTextureWorkA {
+    /* 0x00 */ BustupTextureWork texture;
+    /* 0x90 */ f32 currentOffset[2];
+    /* 0x98 */ f32 targetOffset[2];
+    /* 0xA0 */ f32 startOffset[2];
+};
+typedef char BustupTextureWorkALayoutCheck[
+    sizeof(BustupTextureWorkA) == 0xA8 && offsetof(BustupTextureWorkA, currentOffset) == 0x90 &&
+    offsetof(BustupTextureWorkA, targetOffset) == 0x98 && offsetof(BustupTextureWorkA, startOffset) == 0xA0 ? 1 : -1];
 #endif

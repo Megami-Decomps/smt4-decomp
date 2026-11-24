@@ -27,7 +27,7 @@ int drawSetColorFromRGBA8(...);
 int renderCtxCalculateStereoParallax(...);
 int gameGetSlotRecord(...);
 int efctCallRoutineWithSpeedOverride(...);
-int FUN_003bb50c(...);
+int portraitDrawClipped(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 int __aeabi_idivmod(...);
@@ -88,7 +88,7 @@ extern int markerKindGetColor(int);
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: efctCallRoutineWithSpeedOverride. */
-/* Supplied declaration required: FUN_003bb50c. */
+/* Supplied declaration required: portraitDrawClipped. */
 extern int gamePackedFlagTest(unsigned int);
 /* Supplied declaration required: FUN_004b457c. */
 extern int FUN_004cc8d8(unsigned short, int);
@@ -266,7 +266,7 @@ LAB_004b05c4:
         temp_v28 = temp_v4;
         drawSetColorFromRGBA8(temp_v4);
       }
-      FUN_003bb50c((int)(short)temp_v26,aiStack_f0[temp_v15] + (int)*(short *)(temp_v24 + 8) + temp_v16
+      portraitDrawClipped((int)(short)temp_v26,aiStack_f0[temp_v15] + (int)*(short *)(temp_v24 + 8) + temp_v16
                    ,aiStack_120[temp_v15] + (int)*(short *)(temp_v24 + 10) + temp_v13,0x6d,1,
                    aiStack_f0[temp_v15] + temp_v16,aiStack_120[temp_v15] + temp_v13,
                    (int)**(short **)(temp_v35 + 0xc),(int)(*(short **)(temp_v35 + 0xc))[1]);

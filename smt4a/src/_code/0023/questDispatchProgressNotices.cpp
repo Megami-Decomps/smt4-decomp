@@ -24,12 +24,12 @@ void mapIfStartTransition(u32 kind, u32 item, u32 amount);
 void FUN_003deea4(u16 value);
 void partyEntryTriggerIfLevelAndFlag3(s32 id);
 void gameFlagUnlockEntryById(s32 id);
-u32 partyEntryFlagsBit3(s32 index);
+u32 questIsCompleted(s32 index);
 void gameFlagSlotSetEnableBit(s32 index, s8 enabled);
 void flagValueAdd(s32 id, u32 amount);
 u32 recordIsAvailable(s32 id);
 s32 FUN_003dedf0(u32 id);
-s32 FUN_003df004(u32 quest, s32 index, QuestRequirementProgress *progress);
+s32 questGetRequirementProgress(u32 quest, s32 index, QuestRequirementProgress *progress);
 u32 partyEntryBitsBit5(s32 index);
 u32 partyEntryBitsBit1(s32 index);
 
@@ -72,16 +72,16 @@ s32 questDispatchProgressNotices(void)
         if (!gameUnlockRecordRequirementsMet(id)) {
             continue;
         }
-        if (!dataTable1bOr1cRecordHasFlag1(id) && partyEntryFlagsBit3(id)) {
+        if (!dataTable1bOr1cRecordHasFlag1(id) && questIsCompleted(id)) {
             ++finishedQuests;
         }
-        if (partyEntryFlagsBit1(id)) {
+        if (questHasNewMark(id)) {
             s32 kind = table1bOr1cGetRecordValue(id);
             if (kind == QUEST_KIND_GOAL) {
                 if (notice == QUEST_NOTICE_SECOND_COMPLETE) {
                     continue;
                 }
-                u32 finished = partyEntryFlagsBit3(id);
+                u32 finished = questIsCompleted(id);
                 if (goalConditionsSatisfied(id) & ~finished) {
                     FUN_003deea4(id);
                     notice = QUEST_NOTICE_GOAL;
@@ -102,7 +102,7 @@ s32 questDispatchProgressNotices(void)
                     s16 completedItem = flags->secondCompletedItem;
                     s16 progressedItem = flags->secondProgressedItem;
                     for (s32 index = 0; index < 4; ++index) {
-                        if (FUN_003df004(id, index, &objective)) {
+                        if (questGetRequirementProgress(id, index, &objective)) {
                             u16 item = objective.id;
                             ++supported;
                             if (objective.remaining > 0) {
@@ -169,7 +169,7 @@ s32 questDispatchProgressNotices(void)
                         s16 progressedItem = flags->progressedItem;
                         s16 completedItem = flags->completedItem;
                         for (s32 index = 0; index < 4; ++index) {
-                            if (FUN_003df004(id, index, &objective)) {
+                            if (questGetRequirementProgress(id, index, &objective)) {
                                 u16 item = objective.id;
                                 ++supported;
                                 if (objective.remaining > 0) {

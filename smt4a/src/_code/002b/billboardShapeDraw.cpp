@@ -4,6 +4,7 @@
  * also holds the facing matrix's address in r5 from the top of each sprite and spills the output texcoord pointer,
  * which permutes r5/r7/r8/sl through all four vertices. The earlier draft scored 451 but built 289 rows: it left code
  * out, so this complete rewrite replaced it (wave 76 review: correctness before score). */
+#include "code/Code0023_Smt4a.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "camp/RenderCtxSelect.h"
@@ -23,7 +24,6 @@ void nn_math_ARMv6_MTX44TransposeAsm(nw::math::MTX44 *out, const nw::math::MTX44
 void mtx44TransformPosition(nw::math::VEC4 *out, const nw::math::MTX44 *matrix, const nw::math::VEC3 *position);
 void billboardShapeGetStream(BillboardShape *shape, u32 attribute, BillboardStream *out);
 void FUN_00186940(void);
-void FUN_002371b0(void);
 } /* extern "C" */
 
 namespace nw {
@@ -206,7 +206,7 @@ void billboardShapeDraw(BillboardShape *shape)
         outTexCoord[6] = texCoord[0];
         outTexCoord[7] = texCoord[1];
         debugQuadVertex(outColor[3], outPosition[3], outTexCoord[6], outTexCoord[7]);
-        FUN_002371b0();
+        effectSubmitDefaultDrawParameters();
     }
 
     renderCtxResetColorScale(g_renderCtx);

@@ -6,7 +6,7 @@ extern "C" {
 
 int poolNodeUnlinkAndDestroy(...);
 int FUN_0022c564(...);
-int FUN_00396f3c(...);
+int aaTreeFinishInsert(...);
 int treeRebalanceAfterErase(...);
 int FUN_003af304(...);
 int FUN_003aff9c(...);
@@ -58,7 +58,7 @@ extern unsigned char LAB_003b156c; /* 0x3b156c */
 extern unsigned int containerGrowCapacity(unsigned int, unsigned int);
 /* Supplied declaration required: poolNodeUnlinkAndDestroy. */
 /* Supplied declaration required: FUN_0022c564. */
-/* Supplied declaration required: FUN_00396f3c. */
+/* Supplied declaration required: aaTreeFinishInsert. */
 /* Supplied declaration required: treeRebalanceAfterErase. */
 extern romwright_code *****aaTreeNext(romwright_code *******);
 extern romwright_code *****aaTreePrev(romwright_code *******);
@@ -231,7 +231,7 @@ unsigned int FUN_003b0f88(unsigned int *param_1,int param_2,unsigned int *param_
           }
           else {
             *temp_v10 = (romwright_code *****)ppppppcVar5;
-            FUN_00396f3c(pppppppcVar9,ppppppcVar5);
+            aaTreeFinishInsert(pppppppcVar9,ppppppcVar5);
             temp_v26 = (romwright_code *******)romwright_piece_3_1((((unsigned int)(temp_v26) >> 8) & 0xffffffU),1);
           }
         }

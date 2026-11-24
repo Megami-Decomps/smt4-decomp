@@ -1,17 +1,14 @@
 #include "map/MapEffectReservation.h"
 
 extern "C" {
-extern MapEffectReservationState g_entryTableInfo;
-extern MapEffectInstance g_namedEntryTable[];
-
-// Set the frame range of the first live map effect created from the resource and deactivate it.
-void FUN_002541b8(u32 resource, u16 first, u16 second)
+/* Sets the flag prerequisites for the first matching map effect and clears its disabled marker. */
+void FUN_002541b8(u32 resource, u16 requiredFlag, u16 forbiddenFlag)
 {
     for (s32 i = 0; i < g_entryTableInfo.count; i++) {
         if (g_namedEntryTable[i].resource == resource) {
-            g_namedEntryTable[i].first = first;
-            g_namedEntryTable[i].second = second;
-            g_namedEntryTable[i].active = 0;
+            g_namedEntryTable[i].state.requiredFlag = requiredFlag;
+            g_namedEntryTable[i].state.forbiddenFlag = forbiddenFlag;
+            g_namedEntryTable[i].state.disabled = 0;
             return;
         }
     }

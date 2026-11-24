@@ -21,7 +21,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_001907a4. */
-extern int FUN_0019472c(int, unsigned int, unsigned int *);
+extern int soundArchiveReadSequenceSoundInfoWithExtension(int, unsigned int, unsigned int *);
 extern unsigned int *FUN_00194834(unsigned char *);
 /* Supplied declaration required: FUN_00194c68. */
 extern unsigned int soundArchiveFileEntryIsLoaded(int);
@@ -59,7 +59,7 @@ unsigned int FUN_00194d6c(int *param_1,unsigned int param_2,unsigned int param_3
     temp_v5[1] = 0xffffffff;
     temp_v5[2] = 0xffffffff;
     temp_v5[3] = 0xffffffff;
-    temp_v1 = FUN_0019472c(param_1[1],param_2,(unsigned int *)&temp_v4);
+    temp_v1 = soundArchiveReadSequenceSoundInfoWithExtension(param_1[1],param_2,(unsigned int *)&temp_v4);
     if (temp_v1 == 0) {
       return 0;
     }

@@ -1,4 +1,4 @@
-#include "battle/btlReflect.h"
+#include "battle/ReflectQueueCommands.h"
 #include "battle/btlHelp.h"
 
 extern "C" {

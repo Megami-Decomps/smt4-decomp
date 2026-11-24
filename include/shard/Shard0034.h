@@ -146,9 +146,7 @@ typedef struct BtlStateB {
     /* 0x4CE0 */ s32 unk4CE0;
     /* 0x4CE4 */ s32 unk4CE4;
     /* 0x4CE8 */ u32 unk4CE8;
-    /* 0x4CEC */ u8 unk4CEC[0x44];
-    /* 0x4D30 */ s32 table4D30[12];
-    /* 0x4D60 */ u8 unk4D60[0x14];
+    /* 0x4CEC */ u8 unk4CEC[0x88];
     /* 0x4D74 */ s32 unk4D74;
     /* 0x4D78 */ LinkEntry10 entries4D78[12];
     /* 0x4E38 */ u8 unk4E38[0x20];

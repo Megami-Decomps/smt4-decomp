@@ -20,7 +20,7 @@ typedef char WaveArchiveLoadInfoOffsets[
 
 extern "C" {
 u32 soundArchiveFileEntryIsLoaded(void *archive);
-s32 FUN_001a8930(void *archive, u32 id, WaveArchiveLoadInfo *info);
+s32 soundArchiveReadWaveArchiveInfoWithExtension(void *archive, u32 id, WaveArchiveLoadInfo *info);
 u32 FUN_001b1c40(SoundArchiveLoaderA *loader, u32 fileId, void *buffer, u32 size, u32 offset, u32 flags);
 u32 nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(const void *header);
 u32 nw_snd_internal_WaveArchiveFile_FileHeader_GetInfoBlockOffset(const void *header);
@@ -41,7 +41,7 @@ void *FUN_001b1ab8(SoundArchiveLoaderA *loader, u32 archiveId, WaveArchiveAlloca
         WaveArchiveLoadInfo info;
         info.fileId = 0xFFFFFFFF;
         info.loadIndividual = 0;
-        if (!FUN_001a8930(loader->archive, archiveId, &info))
+        if (!soundArchiveReadWaveArchiveInfoWithExtension(loader->archive, archiveId, &info))
             return 0;
         if (!info.waveCount)
             return 0;

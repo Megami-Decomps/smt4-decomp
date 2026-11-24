@@ -78,7 +78,7 @@ extern int gridNavigationGetItemCount(int);
 extern int gameGlobalsGetFieldState(void);
 extern int gameGlobalsGetSceneState(void);
 /* Supplied declaration required: unitRecordBuild. */
-extern int uiSearchPrimary(int);
+extern int uiListGetVisibleCount(int);
 /* Supplied declaration required: unitRecordBuildFromSave. */
 /* Supplied declaration required: statDrawClampedDelta. */
 /* Supplied declaration required: recordFindAcceptedById. */
@@ -213,7 +213,7 @@ void FUN_001fc720(int param_1,int param_2)
       temp_v17 = 0;
       if (*(int *)(temp_v2 + 0x518) == 4) {
         if (*(int *)(temp_v2 + 0x524) >= 9) {
-          temp_v8 = uiSearchPrimary(temp_v23);
+          temp_v8 = uiListGetVisibleCount(temp_v23);
           if (temp_v8 == temp_v11 + 1) {
             temp_v17 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v2 + 0x2e4)));
           }
@@ -266,7 +266,7 @@ LAB_001fca00:
             temp_v14 = 0xffffffff;
           }
           else if ((((temp_v9 != 4) || (*(int *)(temp_v2 + 0x524) < 9)) ||
-                   (temp_v9 = uiSearchPrimary(temp_v23), temp_v9 != temp_v11 + 1)) &&
+                   (temp_v9 = uiListGetVisibleCount(temp_v23), temp_v9 != temp_v11 + 1)) &&
                   ((*(char *)(temp_v26 + 0x60) == '\0' || (*(int *)(temp_v2 + 0x664) != temp_v11)))) {
             temp_v14 = 0xffffffff;
             temp_v0 = *(char *)(temp_v2 + temp_v11 + 0x5dc);

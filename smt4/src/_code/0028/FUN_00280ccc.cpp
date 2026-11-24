@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00280ccc` (_code @ 0x280ccc, 0xab8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "map/MapEffectReservation.h"
 #include "romwright_types.h"
 #include "game/GameState.h"
 /* The decompiler copies some game state fields as raw words of another type: those uses cast. */
@@ -24,7 +25,6 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } void_stack;
 
-extern int g_entryTableInfo; /* 0x447a28 */
 
 
 
@@ -67,7 +67,6 @@ extern int g_entryTableInfo; /* 0x447a28 */
 
 
 
-extern unsigned char g_namedEntryTable; /* 0x4a1264 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
@@ -143,7 +142,7 @@ void FUN_00280ccc(void)
   g_gameState.map.destinationSet = 0;
   g_gameState.unk0B8 = '\0';
   g_gameState.unk0C0 = 0xffff;
-  if (0 < g_entryTableInfo) {
+  if (0 < g_entryTableInfo.boundsCount) {
     temp_v8 = in_s3 + 360.0f;
     temp_v21 = 50.0f;
     temp_v22 = 45.0f;
@@ -164,11 +163,11 @@ void FUN_00280ccc(void)
                 temp_v4 = temp_v7 * 0xc + temp_v6 * 0x178;
                 temp_v9 = in_fpscr & 0xfffffff;
                 in_fpscr = temp_v9 | ((unsigned int)(temp_v20 <=
-                                           (temp_v17 * *(float *)(&g_namedEntryTable + temp_v4 + 0x7c) +
+                                           (temp_v17 * *(float *)(((u8 *)g_namedEntryTable) + temp_v4 + 0x7c) +
                                             (temp_v10 + temp_v22) *
-                                            *(float *)(&g_namedEntryTable + temp_v4 + 0x80) +
-                                           in_s2 * *(float *)(&g_namedEntryTable + temp_v4 + 0x84)) -
-                                           *(float *)(&g_namedEntryTable +
+                                            *(float *)(((u8 *)g_namedEntryTable) + temp_v4 + 0x80) +
+                                           in_s2 * *(float *)(((u8 *)g_namedEntryTable) + temp_v4 + 0x84)) -
+                                           *(float *)(((u8 *)g_namedEntryTable) +
                                                      temp_v7 * 4 + temp_v6 * 0x178 + 0xc4)) << 0x1d);
                 if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) goto LAB_00281704;
                 temp_v7 = temp_v7 + 1;
@@ -352,10 +351,10 @@ void FUN_00280ccc(void)
               temp_v5 = temp_v4 * 0xc + temp_v0;
               in_fpscr = (in_fpscr & 0xfffffff) |
                          ((unsigned int)(temp_v20 <=
-                                (temp_v12 * *(float *)(&g_namedEntryTable + temp_v5 + 0x88) +
-                                 (temp_v10 + temp_v21) * *(float *)(&g_namedEntryTable + temp_v5 + 0x8c) +
-                                temp_v15 * *(float *)(&g_namedEntryTable + temp_v5 + 0x90)) -
-                                *(float *)(&g_namedEntryTable + temp_v4 * 4 + temp_v0 + 200)) << 0x1d);
+                                (temp_v12 * *(float *)(((u8 *)g_namedEntryTable) + temp_v5 + 0x88) +
+                                 (temp_v10 + temp_v21) * *(float *)(((u8 *)g_namedEntryTable) + temp_v5 + 0x8c) +
+                                temp_v15 * *(float *)(((u8 *)g_namedEntryTable) + temp_v5 + 0x90)) -
+                                *(float *)(((u8 *)g_namedEntryTable) + temp_v4 * 4 + temp_v0 + 200)) << 0x1d);
               if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) {
                 *(unsigned short *)(temp_v0 + 0x4a13da) = 0;
                 goto LAB_00281704;
@@ -473,7 +472,7 @@ void FUN_00280ccc(void)
       }
 LAB_00281704:
       temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < g_entryTableInfo);
+    } while (temp_v6 < g_entryTableInfo.boundsCount);
     if (temp_v23 != 0) {
       return;
     }

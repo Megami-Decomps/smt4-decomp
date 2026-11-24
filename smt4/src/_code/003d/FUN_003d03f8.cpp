@@ -1,6 +1,7 @@
 /* NON_MATCHING: the protection flag is read through the view pointer as retail does and the incapacitation default is declared where it is tested; still different: retail keeps the skill kind in r3 (subs) with the view in r0, copies the -1 default into the third register before the call, and reads the limit argument of FUN_002551ac before storing the other stack arguments. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlUnitTarget.h"
 #include "battle/btlAction.h"
 
 
@@ -21,7 +22,6 @@ void FUN_002551ac(s32 slot, BtlUnit *unit, BtlActionRecord *skill, s32 a, s32 am
                   s32 s, s32 t, s32 u);
 void btlQueueSkillReflectActions(s32 slot, BtlUnit *unit, BtlActionRecord *skill, s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g,
                   s32 h, s32 i, s32 j);
-s32 btlUnitIsDeadAndUncopied(s32 *state, BtlUnit *unit, s32 kind);
 s32 btlScriptUnitIsIncapacitated(s32 target);
 
 /* Resolve the heal/damage action of a skill on a unit and queue its effects and messages. Returns whether it hit. */
@@ -43,7 +43,7 @@ s32 FUN_003d03f8(s32 *state, BtlUnit *unit, s32 amount, s32 slot, BtlActionRecor
         }
     }
     FUN_0023c0d0(state, unit, skill->memberId, -amount);
-    if (btlUnitIsDeadAndUncopied(state, unit, skill->memberId) != 0) {
+    if (btlUnitIsDeadAndUncopied((BtlMainState **)state, unit, skill->memberId) != 0) {
         hit = 1;
         if ((*context & 0x10) != 0 && reinterpret_cast<BtlTarget *>(*state)->state == 1)
             *reinterpret_cast<u32 *>(*state + 0x88) = 0xD;

@@ -12,9 +12,7 @@ union DirectionalMapEffectReservationView {
     } direction;
 };
 extern "C" {
-extern MapEffectReservationState g_entryTableInfo;
 extern DirectionalMapEffectReservationView DAT_004afd64[];
-extern MapEffectInstance g_namedEntryTable[];
 s32 FUN_0021c694(MapEffectAttachmentRequest *);
 u32 mapIfSpawnEffect(u32, u32, u32, u32, f32, f32, f32, f32);
 
@@ -55,18 +53,18 @@ void FUN_0024f24c(u32 resource, u32 kind, u32 owner, u32 appearance, u32 spawnGr
     u32 effect = mapIfSpawnEffect(resource, spawnGroup, spawnMode, spawnArgument, x, y, z, heading);
     MapEffectInstance *instance = &g_namedEntryTable[instanceIndex];
     instance->effect = effect;
-    instance->channel = channel;
-    g_namedEntryTable[reservationIndex].mode = mode;
+    instance->state.channel = channel;
+    g_namedEntryTable[reservationIndex].state.mode = mode;
     instance->resource = resource;
     instance->kind = kind;
     instance->target = -1;
-    instance->frame = 0;
-    instance->previous = -1;
-    instance->active = 0;
+    instance->state.frame = 0;
+    instance->state.previous = -1;
+    instance->state.disabled = 0;
     instance->flags = flags;
-    instance->pending = 0;
-    instance->first = 0;
-    instance->second = 0;
+    instance->state.pending = 0;
+    instance->state.requiredFlag = 0;
+    instance->state.forbiddenFlag = 0;
     ++g_entryTableInfo.count;
 }
 }

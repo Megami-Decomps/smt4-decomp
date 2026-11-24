@@ -19,7 +19,7 @@ s32 isEntryUsable(void *);
 s32 FUN_004f5a78(ScriptEffectAux *);
 
 void btlAuxQueryCommonUpDownPair(s32, s32);
-void FUN_004fb6f4(s32, s32, BattleRosterRecordA *, u32, s32, s32, s32);
+void btlReflectQueueParameterTargetWithFollowup(s32, s32, BattleRosterRecordA *, u32, s32, s32, s32);
 void btlEmitMessageTableEntries(s32, ScriptEffectUnit *, void *, s32, s32, s32);
 s32 chainCountIdUnflagged(ReflectContext *, u32);
 
@@ -45,7 +45,7 @@ u8 scrBattleStartChainedEffect()
         btlAuxQueryCommonUpDownPair(effect, 1);
         ScriptEffectUnit *unit = reinterpret_cast<ScriptEffectUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         BattleRosterRecordA *visual = btlGetMainState()->roster;
-        FUN_004fb6f4(0, 0, visual, action, effect, 0, -1);
+        btlReflectQueueParameterTargetWithFollowup(0, 0, visual, action, effect, 0, -1);
         void *effects = g_btlAux->effects;
         s32 id = visual->combatant.parameterIndex;
         btlEmitMessageTableEntries(effect, unit, effects, 0, id, id);
@@ -56,7 +56,7 @@ u8 scrBattleStartChainedEffect()
         btlAuxQueryCommonUpDownPair(effect, 1);
         ScriptEffectUnit *unit = reinterpret_cast<ScriptEffectUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         BattleRosterRecordA *visual = btlGetMainState()->roster;
-        FUN_004fb6f4(0, 0, visual, action, effect, 0, -1);
+        btlReflectQueueParameterTargetWithFollowup(0, 0, visual, action, effect, 0, -1);
         void *effects = g_btlAux->effects;
         s32 id = visual->combatant.parameterIndex;
         btlEmitMessageTableEntries(effect, unit, effects, 0, id, id);

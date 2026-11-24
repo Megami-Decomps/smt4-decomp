@@ -10,6 +10,7 @@
 #include "gamedata/UnitStats.h"
 #include "gamedata/PlayerRecordParts.h"
 #include "gamedata/MapSaveBlock.h"
+#include "gamedata/GameSaveLinkSlot.h"
 #include <stddef.h>
 
 /* ---- IV ---- */
@@ -107,11 +108,6 @@ typedef struct GameSaveSelection {
     /* 0x00 */ u8 unk00[0x1C];
     /* 0x1C */ GameSaveSelectionState state;
 } GameSaveSelection;
-
-typedef struct GameSaveLinkSlot {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ u32 unk04;
-} GameSaveLinkSlot;
 
 /* IV: half of the flag bytes of ids 0..0x3F, and the flag bytes of ids 0x40..0x47, copied as words. */
 typedef struct GameFlagWords {

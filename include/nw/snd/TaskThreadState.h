@@ -2,21 +2,25 @@
 #define NW_SND_TASKTHREADSTATE_H
 #include "common.h"
 #include "nn/os/ThreadLaunch.h"
+#include "nn/os/Thread.h"
+#include "nn/os/CriticalSection.h"
 #include <stddef.h>
 
-/* Recovered prefix of the SDK task-thread object. */
+/* The SDK sound task thread owns a kernel thread and a lock initialized when the worker starts. */
 struct TaskThreadState {
-    u32 unk00[2];
-    u8 criticalSection[0xC];
-    u8 stopRequested;
-    u8 started;
+    TaskThreadState() : criticalSection(nn::os::CRITICAL_SECTION_DEFERRED), stopRequested(0), started(0) {}
+
+    /* 0x00 */ NnOsThread thread;
+    /* 0x08 */ nn::os::CriticalSection criticalSection;
+    /* 0x14 */ u8 stopRequested;
+    /* 0x15 */ u8 started;
 };
 struct TaskThreadStartContext {
     TaskThreadState *thread;
     ThreadArgumentDescriptor descriptor;
 };
 typedef char TaskThreadStateLayoutCheck[
-    offsetof(TaskThreadState, criticalSection) == 8 &&
+    offsetof(TaskThreadState, thread) == 0 && offsetof(TaskThreadState, criticalSection) == 8 &&
     offsetof(TaskThreadState, stopRequested) == 0x14 &&
     offsetof(TaskThreadState, started) == 0x15 && sizeof(TaskThreadState) == 0x18 ? 1 : -1];
 typedef char TaskThreadStartContextLayoutCheck[

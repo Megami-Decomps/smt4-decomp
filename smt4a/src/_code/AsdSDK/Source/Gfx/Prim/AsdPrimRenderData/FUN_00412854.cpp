@@ -1,4 +1,5 @@
-/* NON_MATCHING: stream sizes now built through per-stream flag temporaries and the fill loops bound with `vertexCount * 4` (the unrolled loops lose their odd-count prologue): 166 of 166 rows, differing only in register numbering of the first two stream temporaries and in where vertexCount is loaded relative to the pointer stores. Debug-trace calls (file, lines 271 and 312) match. */
+/* NON_MATCHING: 12 lines. The vertex-count loads move ahead of the stream stores, the fill-loop count
+ * uses r2 instead of r1, and the index-count load is scheduled before storing the allocated pointer. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/Prim/AsdPrimRenderData.h"
@@ -70,7 +71,8 @@ void FUN_00412854(PrimRenderData *prim)
         prim->texCoords = prim->buffer + offset;
     }
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Prim\\AsdPrimRenderData.cpp", 312);
-    prim->indices = (u16 *)asdMemoryAllocAligned(0x10000, 0x100, 0, prim->indexCount << 1, 0x10, 1);
+    const u32 indexBytes = prim->indexCount * sizeof(u16);
+    prim->indices = (u16 *)asdMemoryAllocAligned(0x10000, 0x100, 0, indexBytes, 0x10, 1);
     for (i = 0; i < prim->indexCount; i++) {
         prim->indices[i] = 0;
     }

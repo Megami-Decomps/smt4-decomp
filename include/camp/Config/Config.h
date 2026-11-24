@@ -84,7 +84,7 @@ typedef struct ConfigWorkA {
     /* 0x84 */ ScriptProcess *resource;               /* released on close */
     /* 0x88 */ s32 row;                    /* the selected row */
     /* 0x8C */ s32 firstRegionImage;       /* texture table entry of the first row's touch rectangle */
-    /* 0x90 */ u8 unk90[4];
+    /* 0x90 */ s32 regionImageEnd;         /* end of this variant's consecutive texture-table entries */
     /* 0x94 */ ConfigRowA rows[5];
     /* 0xBC */ u32 unkBC;                  /* the value in effect */
     /* 0xC0 */ u8 param;                   /* opened in game: a change has to be confirmed */
@@ -103,6 +103,7 @@ typedef struct ConfigWorkA {
 typedef char ConfigWorkALayoutCheck[
     sizeof(ConfigWorkA) == 0x4CC &&
     offsetof(ConfigWorkA, regions) == 0x6E &&
+    offsetof(ConfigWorkA, firstRegionImage) == 0x8C && offsetof(ConfigWorkA, regionImageEnd) == 0x90 &&
     offsetof(ConfigWorkA, rows) == 0x94 &&
     offsetof(ConfigWorkA, unkBC) == 0xBC &&
     offsetof(ConfigWorkA, sprites) == 0xE8 &&
@@ -113,6 +114,8 @@ typedef char ConfigWorkALayoutCheck[
     offsetof(ConfigWorkA, hasType24B) == 0x4C1 ? 1 : -1];
 
 extern "C" {
+/* Sets up the Apocalypse options screen's rows and sprite tracks for the initial value. */
+void FUN_003d05a4(ConfigWorkA *config, u32 initialValue);
 u32 saveBlockGetPlaySeconds(void);
 }
 

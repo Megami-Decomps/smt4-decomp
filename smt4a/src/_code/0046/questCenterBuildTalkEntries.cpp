@@ -34,14 +34,6 @@ s32 randBetween(s32 minimum, s32 maximum);
 s32 recordCompareSecondWord(const u32 *left, const u32 *right);
 void resourceObjectSetNamedFlag(Obj557b18 *object, const char *name, s32 enabled);
 
-/* Makes a model visible when it is hidden. */
-static __inline void showModel(Obj557b18 *model)
-{
-    if ((model->flags & 1) == 0) {
-        model->flags |= 1;
-    }
-}
-
 /* Builds the scene's talk entries from data table 0x27 (the rows of this scene kind whose flags allow them,
  * one per NPC, sorted by NPC number), then sets up the NPC models for them and moves to state 2. */
 void questCenterBuildTalkEntries(Obj5333c0 *scene)
@@ -113,8 +105,8 @@ void questCenterBuildTalkEntries(Obj5333c0 *scene)
             }
             if (!listed) {
                 if (gameFlagIsSet(GAME_FLAG_ABSENT_NPCS) && !(scene->kind == SCENE_KIND_NO_SEVENTH && i == 6)) {
-                    showModel(scene->npcControllersA[i]->body);
-                    showModel(scene->npcControllersB[i]->body);
+                    moriModelBodyShow(scene->npcControllersA[i]->body);
+                    moriModelBodyShow(scene->npcControllersB[i]->body);
                 } else {
                     variant = randBetween(1, 2);
                 }
@@ -192,8 +184,8 @@ void questCenterBuildTalkEntries(Obj5333c0 *scene)
             }
             for (i = 0; i < scene->npcCount; i++) {
                 if (!listed[i]) {
-                    showModel(scene->npcControllersA[i]->body);
-                    showModel(scene->npcControllersB[i]->body);
+                    moriModelBodyShow(scene->npcControllersA[i]->body);
+                    moriModelBodyShow(scene->npcControllersB[i]->body);
                 }
             }
         }

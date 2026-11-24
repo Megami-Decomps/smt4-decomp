@@ -1,5 +1,4 @@
-/* NON_MATCHING: native static initializer; heap vtable and lock-count instructions are scheduled
- * earlier, and the two destructor symbols and socket allocator vtable still need to be reconciled. */
+/* NON_MATCHING: the native static initializer's instructions match. Two destructor relocations and the socket allocator's vtable relocation differ. */
 #include "classes/Obj55840c.h"
 
 /* The socket allocator starts detached from its work-buffer heap. */

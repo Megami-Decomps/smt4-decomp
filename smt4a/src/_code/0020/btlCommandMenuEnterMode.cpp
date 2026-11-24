@@ -63,7 +63,7 @@ void ifTouchRegionRemove(void);
 void __aeabi_memset4(void *destination, u32 size, u32 value);
 s32 widgetSubCallIfVisible(ScrollSelection *list);
 s32 ifTouchRegionAddRequested(u32 file, u32 index);
-s32 uiSearchPrimary(ScrollSelection *list);
+s32 uiListGetVisibleCount(ScrollSelection *list);
 s32 gridNavigationGetItemCount(ScrollSelection *list);
 
 /* Registers a touch region for the selection's buttons, centred on the visible count. */
@@ -90,7 +90,7 @@ static __inline void addModeRegions(CommandMenuScreen *work, s32 mode)
         addSelectionRegions(work);
     if (mode == 8 || mode == 10 || mode == 12) {
         addSelectionRegions(work);
-        for (s32 i = 0; i < uiSearchPrimary(work->current); i++) {
+        for (s32 i = 0; i < uiListGetVisibleCount(work->current); i++) {
             s32 first;
             if (work->selected == 1)
                 first = 0xC2;
@@ -101,7 +101,7 @@ static __inline void addModeRegions(CommandMenuScreen *work, s32 mode)
             work->regions[0x16 / 2 + i] = ifTouchRegionAddRequested(0xD, first + i);
             work->regionCount++;
         }
-        if (gridNavigationGetItemCount(work->current) > uiSearchPrimary(work->current)) {
+        if (gridNavigationGetItemCount(work->current) > uiListGetVisibleCount(work->current)) {
             if (work->selected == 1) {
                 work->regions[0x10 / 2] = ifTouchRegionAddRequested(0xD, 0x199);
                 work->regions[0x12 / 2] = ifTouchRegionAddRequested(0xD, 0x197);

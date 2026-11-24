@@ -1,7 +1,17 @@
 /* NON_MATCHING: retail's instructions, registers, calls and frame size (raw 24 / shape 22 of 295 rows). What differs:
  * four spill slots are numbered differently (retail keeps the row's x at [sp, #40], the inlined command lookup's
  * count at [sp, #28], its result at [sp, #72] and the party block's base at [sp, #60]; this build uses 24, 0, 64 and
- * 68), and the lookup's kind-2 test has btlCommandMenuKindAt's residue (retail `cmp #2; bne; b`, this build `beq; b`). */
+ * 68), and the lookup's kind-2 test has btlCommandMenuKindAt's residue (retail `cmp #2; bne; b`, this build `beq; b`).
+ * Wave 90, on the kind-2 test (tried in btlCommandMenuKindAt, the same body out of line): the build's pair does
+ * not depend on how the kind tests are worded. else-if, nested ifs, a flat list of `continue` tests, a ternary,
+ * `kind == 5 || kind == 2` around both bodies and a one-case switch inside the else all compile to the same
+ * `beq <kind 2>; b <kind 3>`; retail's `bne <kind 3>; b <kind 2>` is what armcc writes for the last test of a
+ * real switch whose body is not next (seen with `case 2` before `case 5`), but a switch over 5 and 2 tests 2
+ * first whatever the label order, empty labels (6, 8, ...) are dropped before the tests are ordered, and three
+ * or more labels with code become a table. On the slots: retail's frame leaves [sp, #0] to the outgoing
+ * argument and has the lookup's count above it; the build shares [sp, #0] between the two. The cursor flag as
+ * s32, u8 or u32 and an unsigned selection leave the slots where they are (an unsigned row: 28; the flag from one
+ * expression or a switch over the four states: 112, 61). */
 #include "battle/BattleContextCommands.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"

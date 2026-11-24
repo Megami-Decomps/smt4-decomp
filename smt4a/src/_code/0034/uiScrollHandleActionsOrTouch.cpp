@@ -11,7 +11,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-s32 uiSearchPrimary(const FlaggedEntry *);
+s32 uiListGetVisibleCount(const FlaggedEntry *);
 s32 uiSearchSecondary(const FlaggedEntry *);
 u32 scrollListHandleTouch(FlaggedEntry *, Obj422594Pair, u32, u32, u32, s32, s32);
 
@@ -26,7 +26,7 @@ u32 uiScrollHandleActionsOrTouch(FlaggedEntry *entry, const TextureTableEntryIV 
     recordGetModeForId((s16)firstKey);
     u8 blocked = 0;
     s32 accepted = -1;
-    s32 count = uiSearchPrimary(entry);
+    s32 count = uiListGetVisibleCount(entry);
     if (ids != NULL) {
         if (secondary)
             count = uiSearchSecondary(entry);

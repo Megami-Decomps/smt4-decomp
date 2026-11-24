@@ -13,7 +13,7 @@ extern BattleMessageFlagMasks g_btlMessageFlagMasks;
 s32 isEntryUsable(u32 event);
 s32 FUN_004f5a78(BtlEffectOwnerA *owner);
 void btlAuxQueryCommonUpDownPair(s32 message, s32 enabled);
-void FUN_004fb6f4(s32 slot, s32 mode, BattleRosterRecordA *record, u32 effect,
+void btlReflectQueueParameterTargetWithFollowup(s32 slot, s32 mode, BattleRosterRecordA *record, u32 effect,
     s32 message, s32 target, u32 flags);
 void btlEmitMessageTableEntries(s32 message, ScriptUnit *unit, BtlEffectSlotBlock *slots,
     s32 entry, s32 first, s32 second);
@@ -36,7 +36,7 @@ u32 FUN_003a969c()
             if ((entry->flags & g_btlMessageFlagMasks.required) &&
                 !(entry->flags & g_btlMessageFlagMasks.excluded) && entry->ids[0] >= 0) {
                 BattleRosterRecordA *record = &battle->roster[entry->ids[0]];
-                FUN_004fb6f4(written << 3, 0, record, effect, message, index << 3, -1);
+                btlReflectQueueParameterTargetWithFollowup(written << 3, 0, record, effect, message, index << 3, -1);
                 s32 parameter = record->combatant.parameterIndex;
                 btlEmitMessageTableEntries(message, unit, slots, written, parameter, parameter);
                 ++written;

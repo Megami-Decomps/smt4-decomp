@@ -19,7 +19,7 @@
 
 extern "C" {
 
-s32 uiSearchPrimary(ScrollSelection *list);
+s32 uiListGetVisibleCount(ScrollSelection *list);
 Table24Record *dataTable24FindById(u32 id);
 u8 bitTableIndexIsClear(u32 index);
 void uiDrawListScrollBar(Object *widget, s32 x, s32 y, u32 group, u32 frameId, u32 trackId, u32 trackPressedId, u32 arrowAId,
@@ -48,7 +48,7 @@ void uniteDrawPanelRows(s32 x, s32 y, f32 opacity)
     texDrawTableEntryAtStoredOrigin(2, UNITE_SPRITES, 0x1d2, x, y, 0x6a);
 
     s32 top = resourceRunOperationIfUnblocked((Object *)&work->optionListA.list);
-    for (s32 row = 0; row < uiSearchPrimary(&work->optionListA.list); row++) {
+    for (s32 row = 0; row < uiListGetVisibleCount(&work->optionListA.list); row++) {
         if (uiSpriteGetCompletionState(&work->sprites.open) != 0 && listCursorGetRowIfUnblocked(&work->optionListA.list) == row) {
             continue;
         }

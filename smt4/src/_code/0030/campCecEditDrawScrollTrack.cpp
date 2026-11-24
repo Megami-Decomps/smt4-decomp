@@ -1,0 +1,37 @@
+#include "gfx/UiControlDraw.h"
+#include "shard/TextureDrawCall.h"
+#include "shard/S1ListPanel.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+
+extern "C" {
+void uiDrawTableTextureSized(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 width, s32 height, s32 priority);
+
+static __inline void indicatorDraw(UiControlDrawPosition *position, s32 x, s32 y, u32 sprite, s32 priority)
+{
+    texDrawTableEntryAtStoredOrigin(2, 0x39, sprite, position->x + x, y, priority);
+}
+
+/* Draw the two directional indicators and the visible section of the scroll track. */
+void campCecEditDrawScrollTrack(UiControlDrawPosition *position, s32 x, s32 y,
+                 s32 firstActive, s32 secondActive, s32 trackActive,
+                 s32 unused, s32 firstRow, s32 rowCount)
+{
+    s32 hiddenRows = rowCount - 11;
+    indicatorDraw(position, x, y, 0xf5, 0x6e);
+    indicatorDraw(position, x, y, firstActive ? 0xf3 : 0xf1, 0x6f);
+    indicatorDraw(position, x, y, secondActive ? 0xf4 : 0xf2, 0x6f);
+
+    u32 trackSprite;
+    if (trackActive) {
+        trackSprite = 0xf7;
+    } else {
+        trackSprite = 0xf6;
+    }
+    TextureTableEntryIV *track = asdTMTexTableEntryAt(0x39, trackSprite);
+    s32 height = track->placement->height;
+    s32 rowHeight = height / 16;
+    uiDrawTableTextureSized(2, 0x39, trackSprite, position->x + x,
+                 rowHeight * firstRow + y, track->placement->width,
+                 height - rowHeight * hiddenRows, 0x6f);
+}
+}

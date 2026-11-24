@@ -3,12 +3,12 @@
 
 extern "C" {
 
-void FUN_003c91ec(void);
+void saveLoadUiRestoreBackups(void);
 
-/* Forwards to FUN_003c91ec, the function that follows it. */
+/* Forwards to saveLoadUiRestoreBackups, the function that follows it. */
 void FUN_003c91e8(void)
 {
-    FUN_003c91ec();
+    saveLoadUiRestoreBackups();
 }
 
 } /* extern "C" */

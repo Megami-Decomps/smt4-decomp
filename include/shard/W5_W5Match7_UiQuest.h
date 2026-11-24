@@ -11,7 +11,7 @@ struct UiQuestAlternateList {
     /* 0x00 (0x942) */ u8 unk00[6];
     /* 0x06 (0x948) */ u8 cursor[0x64];
     /* 0x6a (0x9ac) */ u8 unk6a[0x64];
-    /* 0xce (0xa10) */ u16 list[1];
+    /* 0xce (0xa10) */ u16 list[99];
 };
 
 /* How many menu states the quest menu remembers: the current one and the one before it. */
@@ -70,7 +70,7 @@ struct UiQuestApoc {
     /* 0x934 */ u32 detailTimer;        /* frames since a quest was picked */
     /* 0x938 */ f32 focusSpeed;
     /* 0x93c */ u8 repositioned;        /* the list cursor was moved onto the focused quest */
-    /* 0x93d */ s8 unk93D;
+    /* 0x93d */ s8 filtered;           /* only the open quests of category filterMode are listed (stateHolder4Request) */
     /* 0x93e */ u8 unk93E;
     /* 0x93f */ s8 state;
     /* 0x940 */ s8 active;
@@ -82,7 +82,7 @@ struct UiQuestApoc {
             /* 0x943 */ s8 addonOwned;
         } messageOwnership;
     };
-    /* 0x945 */ u8 unk945;
+    /* 0x945 */ s8 filterMode;         /* the category choice the filtered list shows */
     /* 0x946 */ u8 unk946[0x66];
     /* 0x9ac */ u8 cursor[0x12a];
     /* 0xad6 */ u16 list[250];
@@ -151,11 +151,20 @@ typedef char UiQuestApocScriptOffsets[
     offsetof(UiQuestApoc, resources) == 0x14 && offsetof(UiQuestApoc, mainSprite) == 0x34 &&
     offsetof(UiQuestApoc, script.messages) == 0x8F4 && offsetof(UiQuestApoc, script.process) == 0x8FC &&
     offsetof(UiQuestApoc, detailTimer) == 0x934 && offsetof(UiQuestApoc, focusSpeed) == 0x938 &&
-    offsetof(UiQuestApoc, repositioned) == 0x93C && offsetof(UiQuestApoc, unk93D) == 0x93D &&
+    offsetof(UiQuestApoc, repositioned) == 0x93C && offsetof(UiQuestApoc, filtered) == 0x93D &&
     offsetof(UiQuestApoc, introPhase) == 0xD48 && offsetof(UiQuestApoc, introTimer) == 0xD4C ? 1 : -1];
 typedef char UiQuestApocMessageOwnershipOffsets[
     offsetof(UiQuestApoc, detailMessages) == 0x92C &&
     offsetof(UiQuestApoc, messageOwnership.addonOwned) == 0x943 &&
     sizeof(UiQuestApoc) == 0xD50 ? 1 : -1];
+
+/* The two quest lists uiQuestRebuildLists fills: the alternate (report) list's cursor and ids through
+ * alternateView(), the open list's in cursor and list. */
+typedef char UiQuestApocListOffsets[
+    offsetof(UiQuestApoc, filterMode) == 0x945 && offsetof(UiQuestApoc, cursor) == 0x9AC &&
+    offsetof(UiQuestApoc, list) == 0xAD6 && offsetof(UiQuestApoc, messageOwnership) == 0x942 &&
+    offsetof(UiQuestAlternateList, cursor) == 0x948 - 0x942 &&
+    offsetof(UiQuestAlternateList, list) == 0xA10 - 0x942 &&
+    sizeof(UiQuestAlternateList) == 0xAD6 - 0x942 ? 1 : -1];
 
 #endif

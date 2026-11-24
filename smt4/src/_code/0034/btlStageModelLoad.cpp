@@ -1,22 +1,19 @@
-/* NON_MATCHING: the accessory offset is stored like retail (vstr of z, vstmia of x/y); remaining: the first argument-save move and the order of the halfword loads and conversions (retail loads z and y first, the build y and z). */
+/* NON_MATCHING: the accessory loop uses a writeback load for the BAM filename, and schedules the position halfword loads and conversions differently. */
 #include <stdio.h>
 #include "battle/BtlMainAccess.h"
+#include "battle/BattleStageAccessory.h"
 #include "shard/W6_W6Match1_BattleStageModel.h"
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
-struct BattleStageAccessoryPart {
-    char name[30];
-    u16 position[3];
-};
+
 struct BattleStageAccessoryRecord {
     u16 area;
     u16 variant;
     BattleStageAccessoryPart parts[2];
 };
-typedef char BattleStageAccessoryLayout[sizeof(BattleStageAccessoryPart) == 0x24 &&
-    sizeof(BattleStageAccessoryRecord) == 0x4C && offsetof(BattleStageAccessoryPart, position) == 0x1E ? 1 : -1];
+typedef char BattleStageAccessoryLayout[sizeof(BattleStageAccessoryRecord) == 0x4C ? 1 : -1];
 
 #define BATTLE_STAGE_DIRECTORY "battle/battle_map/"
 extern "C" {
@@ -56,12 +53,14 @@ void btlStageModelLoad(BattleStageModel *stage, u32 area, u32 variant, u32 optio
     }
     if (!record)
         return;
-    for (s32 index = 0; index < 2; ++index) {
-        if (record->parts[index].name[0] != '0') {
-            sprintf(path, "%s%s.bam", BATTLE_STAGE_DIRECTORY, record->parts[index].name);
-            stage->scene.nodes[index + 1] = reinterpret_cast<BattleStageNode *>(asdMdlManagerCreateSecondList(path, options));
-            stage->scene.offsets[index + 1] = nodeVec3(record->parts[index].position[0], record->parts[index].position[1], record->parts[index].position[2]);
+    s32 index = 0;
+    do {
+        const BattleStageAccessoryPart *part = &record->parts[index];
+        if (part->name[0] != '0') {
+            sprintf(path, "%s%s.bam", BATTLE_STAGE_DIRECTORY, part->name);
+            stage->scene.nodes[index + 1] = (BattleStageNode *)asdMdlManagerCreateSecondList(path, options);
+            stage->scene.offsets[index + 1] = nodeVec3(part->x, part->y, part->z);
         }
-    }
+    } while (++index < 2);
 }
 }

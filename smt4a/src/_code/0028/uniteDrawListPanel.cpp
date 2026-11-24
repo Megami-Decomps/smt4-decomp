@@ -26,7 +26,7 @@ enum {
 
 extern "C" {
 void numberFontDrawFormatted(s32 kind, s32 x, s32 y, s32 align, s32 digits, u32 slot, const char *format, ...);
-s32 uiSearchPrimary(ScrollSelection *list);
+s32 uiListGetVisibleCount(ScrollSelection *list);
 s32 uniteIsStateTwentyTwo(void);
 void uiDrawDataEntryRow(UniteWorkA *work, s32 index, s32 x, s32 y, f32 baseSpeed, f32 speed, s32 selected);
 void FUN_0023dcec(UniteWorkA *work, s32 row, s32 x, s32 y, s32 selected, f32 baseScale, f32 factor);
@@ -79,7 +79,7 @@ void uniteDrawListPanel(s32 x, s32 y, s32 mode, f32 fade)
 
     ScrollSelection *list = &work->selectionLists.sourceList;
     s32 top = resourceRunOperationIfUnblocked((Object *)list);
-    s32 visible = uiSearchPrimary(list);
+    s32 visible = uiListGetVisibleCount(list);
     for (s32 row = 0; row < visible; row++) {
         if (uniteIsStateTwentyTwo() == 0 && listCursorGetRowIfUnblocked(list) == row) {
             continue;

@@ -1,6 +1,4 @@
-/* NON_MATCHING: 16 lines, two register choices. The widget's kind byte is set through partyWidgetSetTransitionKind,
- * a one-instruction setter armlink inlined (inlined.txt row). Retail keeps the stock scan's index and trip count in
- * r1/r0 and, in the party rows' id compare, loads the member's id into r0 and the excluded unit's into r1. */
+/* NON_MATCHING: the stock scan's loop index and trip count use r0/r1 instead of retail's r1/r0. */
 #include "ui/PartyPanelState.h"
 #include "gamedata/UnitStats.h"
 #include "gamedata/SaveSlotTableIV.h"
@@ -26,10 +24,12 @@ void partyPanelRefreshFilterMarks()
     }
     __aeabi_memset4(panel->activeSlots, sizeof(panel->activeSlots), 1);
     panel->activeSlots[0] = 0;
-    for (s32 index = 0; index < 24; ++index) {
-        if ((s32)panel->entries[index].packedIndex < 0) { /* the index is signed */
-            panel->entries[index].available = 1;
+    s32 stockIndex = 0;
+    while (stockIndex < 24) {
+        if ((s32)panel->entries[stockIndex].packedIndex < 0) {
+            panel->entries[stockIndex].available = 1;
         }
+        ++stockIndex;
     }
     for (s32 filter = 0; filter < panel->fusionParentCount; ++filter) {
         s32 id = panel->fusionParentIds[filter];

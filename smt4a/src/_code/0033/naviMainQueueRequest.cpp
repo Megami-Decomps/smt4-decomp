@@ -2,16 +2,15 @@
 #include "mapnavi/NaviMainGlobals.h"
 #include "common.h"
 #include "map/MapSceneAccess.h"
+#include "shard/Shard0048.h"
 
 extern "C" {
 
-extern void FUN_00486328(void *request, u32 id, s32 a, s32 b, s32 c, s32 d, f32 x, f32 y, f32 z);
-
-/* Queues `id` on the navi request with no extra parameters and a zero offset vector. */
+/* Clears a spatial marker slot if the navigation screen exists. */
 void naviMainQueueRequest(u32 id)
 {
     if (g_naviMain != NULL) {
-        FUN_00486328(g_naviMain->request, id, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f);
+        naviSetSpatialMarkerSlot((Block66Owner *)g_naviMain->panel, id, 0, 0, 0.0f, 0.0f, 0.0f, 0, 0);
     }
 }
 

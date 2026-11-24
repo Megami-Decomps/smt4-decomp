@@ -15,7 +15,7 @@ extern "C" {
 void numberFontDrawFormatted(s32 kind, s32 x, s32 y, s32 align, s32 digits, u32 slot, const char *format, ...);
 void FUN_00185e84(s16 id, s32 x, s32 y, u32 layer, u32 a, u32 b);
 void statDrawClampedDelta(SlotRecordA *record, s16 id, s32 x, s32 y, u32 layer, u32 a);
-s32 uiSearchPrimary(const void *list);
+s32 uiListGetVisibleCount(const void *list);
 
 /* Draws row `row` of the skill inheritance screen's candidate list at (x, y): the row's plate (the
  * highlighted, the past-the-limit or the plain one, greyed when the row is not `valid`), then, for a row
@@ -48,7 +48,7 @@ void skillScreenDrawCandidateListRow(UniteWorkA *work, s32 row, SlotRecordA *rec
             texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x171, frame->x + x, frame->y + y, 0x65);
         }
     }
-    if (uiSearchPrimary(&work->inheritanceA.skillList) > row) {
+    if (uiListGetVisibleCount(&work->inheritanceA.skillList) > row) {
         texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x174, frame->x + x, frame->y + y, 0x6a);
         texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x175, frame->x + x, frame->y + y, 0x6a);
         u32 color;

@@ -45,7 +45,7 @@ void useCounterStart(void);
 void scrMessageSetSpeakerTitle(u16 definitionId, s32 includeArguments, s32 convertTitle);
 u32 questRecordIsUsable(u32 id);
 s32 questQueryFalse(void);
-u32 partyEntryFlagsBit3(s32 index);
+u32 questIsCompleted(s32 index);
 u8 rosterHasLeader(void); // declcheck: local (its header belongs to the memory manager)
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 void sysPlaySe(u32 id);
@@ -178,12 +178,12 @@ void uiQuestListInput(void)
             useCounterAppendValue(0x19);
             useCounterStart();
             uiQuestEnterMenuState(g_uiQuest, 30);
-        } else if (quest->unk90c == 0 && !quest->unk93D && padQueryLogicalKey(10, 1)) {
+        } else if (quest->unk90c == 0 && !quest->filtered && padQueryLogicalKey(10, 1)) {
             /* IV jumped to the quest in progress here; Apocalypse only swallows the key. */
         } else if (quest->unk90c == 0 && (padQueryLogicalKey(0, 1) || touched)) {
             u16 id = questListCurrentId(cursor, ids);
 
-            if (quest->unk93D) {
+            if (quest->filtered) {
                 uiQuestEnterMenuState(g_uiQuest, 13);
                 eventQueueAddUniqueIfValid(QUEST_SE_DECIDE);
             } else {
@@ -193,7 +193,7 @@ void uiQuestListInput(void)
                 scrMessageSetSpeakerTitle(id, 0, 1);
                 if (record->kind == 6 || record->kind == 9 || record->kind == 11) {
                     if (questRecordIsUsable(id) || questQueryFalse()) {
-                        if (!partyEntryFlagsBit3(id) || record->kind == 9) {
+                        if (!questIsCompleted(id) || record->kind == 9) {
                             if (rosterHasLeader()) {
                                 /* Another quest is in progress. */
                                 if (rosterGetLeaderId() != id && scrScriptProcessStartEntry(quest->script.process, 4)) {

@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the order of the predicated case-0x501 adjustments differs (retail doubles y and height before halving maximumY with asreq; the build halves first). */
 #include "shard/S1ListPanel.h"
 #include <stddef.h>
 #include "quest_center/qcMain.h"
@@ -11,7 +10,7 @@ typedef char CheckScissorMaximumOffset[offsetof(RenderCtxA, stacks[RENDER_STACK_
 extern "C" s32 asdGxPresetsGetEnable(u32 viewport);
 extern "C" s32 stateValuesGetBySelector(u32 viewport);
 
-// Mirror the requested scissor rectangle into viewport coordinates and enable scissoring.
+/* Mirrors the requested scissor rectangle into viewport coordinates and enables scissoring. */
 extern "C" s32 renderCtxSetMirroredScissorRect(s32 x, s32 y, s32 width, s32 height)
 {
     u32 viewport = renderCtxGetStereoMode(g_renderCtx);
@@ -20,14 +19,15 @@ extern "C" s32 renderCtxSetMirroredScissorRect(s32 x, s32 y, s32 width, s32 heig
     switch (asdGxPresetsGetEnable(viewport)) {
     case 0x500:
         break;
-    case 0x501:
-        if (stateValuesGetBySelector(viewport) == 0)
-            maximumY /= 2;
-        else {
+    case 0x501: {
+        const bool fullResolution = stateValuesGetBySelector(viewport) != 0;
+        maximumY = fullResolution ? maximumY : maximumY / 2;
+        if (fullResolution) {
             y *= 2;
             height *= 2;
         }
         break;
+    }
     }
     s32 minimumX = maximumX - (x + width) + 1;
     s32 endX = maximumX - x;
@@ -49,8 +49,8 @@ extern "C" s32 renderCtxSetMirroredScissorRect(s32 x, s32 y, s32 width, s32 heig
         minimumY = maximumY;
     if (endY > maximumY)
         endY = maximumY;
-    renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR_MINIMUM, static_cast<u32>(minimumY) | (static_cast<u32>(minimumX) << 16));
-    renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR_MAXIMUM, static_cast<u32>(endY) | (static_cast<u32>(endX) << 16));
+    renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR_MINIMUM, (u32)minimumY | ((u32)minimumX << 16));
+    renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR_MAXIMUM, (u32)endY | ((u32)endX << 16));
     renderStackSetCounted(g_renderCtx->stacks + RENDER_STACK_SCISSOR, RENDER_STATE_SCISSOR);
     return 1;
 }

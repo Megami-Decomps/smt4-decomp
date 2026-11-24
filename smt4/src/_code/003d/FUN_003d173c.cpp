@@ -6,7 +6,16 @@
  * The two empty cases are retail's: its decision tree pivots on 212 and then on 148, which a switch over the
  * eleven frames with code cannot produce (it pivots on 218 and 100); two or three more labels between 148 and
  * 212 that only break give exactly retail's tree. Their frame numbers are not recoverable, so 150 and 160 stand
- * for them. */
+ * for them.
+ * Wave 90: paramorder.py over the callee's six units: (actor, options, red, green, blue, value) is the best of
+ * 20 orders (this unit 22 -> 16 raw, 4 shape; nothing lost, no new IDENTICAL), still only reported.
+ * The early address load is the compiler's hoist, not a local: retail places it in the entry block (it is the
+ * pool's first word, ahead of the 40.0f block's sound id) and makes it conditional with the frame load, while
+ * the build hoists it to the switch head with DAT_004398d4's. A use of g_btlMain added to the 40.0f or the skip
+ * block moves the load only as far as that block (after the FUN_00338404 call, where retail has mov r9, #0), so
+ * retail's source has a use the not-ready path can also reach. A pointer or reference to g_btlMain as a local
+ * (129-135 lines), the early return in its plain form or the body nested in the test (both lose ldrne r5:
+ * 18-22) and an s32 result (85) are all further away. */
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "battle/ActionStateChannels.h"
@@ -26,16 +35,13 @@ struct ReflectCutsceneView {
     /* 0x49E8 */ s32 soundSlot;           /* negative: no sound playing */
 };
 
-/* The action record's source id at 0x5c. */
-struct ReflectActionView {
-    /* 0x00 */ u8 unk00[0x5c];
-    /* 0x5c */ s32 sourceId;
-};
-
 typedef char ReflectCutsceneOffsets[
     offsetof(ReflectCutsceneView, scaleGroup) == 0x4394 &&
-    offsetof(ReflectCutsceneView, soundSlot) == 0x49E8 &&
-    offsetof(ReflectActionView, sourceId) == 0x5c ? 1 : -1];
+    offsetof(ReflectCutsceneView, soundSlot) == 0x49E8 ? 1 : -1];
+
+enum {
+    REFLECT_CUTSCENE_LAST_FRAME = 290   /* the frame that ends the cutscene; skipping jumps to it */
+};
 
 extern "C" {
 extern void *g_btlAux;
@@ -94,7 +100,7 @@ u32 FUN_003d173c(BtlMainState **block, ActionStateChannel *channel)
         s32 soundSlot = reinterpret_cast<ReflectCutsceneView *>(*block)->soundSlot;
         if (soundSlot >= 0)
             soundSlotStopById(soundSlot);
-        frame = 0x122;
+        frame = REFLECT_CUTSCENE_LAST_FRAME;
     }
 
     switch (frame) {
@@ -122,8 +128,8 @@ u32 FUN_003d173c(BtlMainState **block, ActionStateChannel *channel)
             if ((action->status & 1) && (action->status & 0x8000)) {
                 action->status |= 0x80000;
                 action->presentationFlags &= ~0x1000;
-                btlActionQueueSourceReflect(reinterpret_cast<ReflectActionView *>(action)->sourceId, channel, action);
-                btlQueueKeyedScalarReflectAction(reinterpret_cast<ReflectActionView *>(action)->sourceId, channel, 0x10001e9, 0, 0, 0, 0);
+                btlActionQueueSourceReflect(action->pendingValue, channel, action);
+                btlQueueKeyedScalarReflectAction(action->pendingValue, channel, 0x10001e9, 0, 0, 0, 0);
             }
         }
         break;
@@ -153,7 +159,7 @@ u32 FUN_003d173c(BtlMainState **block, ActionStateChannel *channel)
     case 266:
         FUN_00244fb0(*block, 0, 1, 15, 0xff);
         break;
-    case 290:
+    case REFLECT_CUTSCENE_LAST_FRAME:
         reinterpret_cast<ReflectCutsceneView *>(*block)->soundSlot = -1;
         FUN_00339254(*block);
         asdDebugHookPtr(DAT_004398d4);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: global loads move later and signed halfword loads fold to unsigned before narrowing. */
 #include "battle/btlUI.h"
 #include "battle/BtlUiGlobal.h"
+#include "code/Code003a_Smt4.h"
 
 struct BattleUiChangeOwner {
     /* 0x0000 */ u8 unk0000[0x4968];
@@ -16,7 +17,6 @@ struct BattleUiChangeView {
 };
 
 extern "C" {
-void FUN_003aea90(BtlUi *ui, s8 first, s8 second);
 
 void FUN_00338060(BattleUiChangeOwner *owner, s32 mode)
 {
@@ -33,7 +33,7 @@ void FUN_00338060(BattleUiChangeOwner *owner, s32 mode)
         FUN_003ae120(g_btlUiBlock, (s8)first, (s8)second);
         break;
     case 1:
-        FUN_003aea90(g_btlUiBlock, (s8)first, (s8)second);
+        btlUiRefreshSpriteRowMarks(g_btlUiBlock, (s8)first, (s8)second);
         break;
     }
     owner->unk496c = owner->unk4968;

@@ -11,7 +11,7 @@ extern "C" {
 void titleSceneMultiplyByCameraView(void *filter, f32 *matrix, const void *motion);
 void nn_math_VEC3TransformCoordArray(f32 *vertices, const f32 *matrix, f32 *output, u32 count);
 void gpuSubmitFloatVectorsOrDefault(const f32 *color, f32 x, f32 y, f32 z, f32 u, f32 v);
-void forwardRecoveredCallback(); // declcheck: local (retail passes nothing: r0 still holds the last submit's result)
+void effectSubmitDefaultDrawParameters(); // declcheck: local (retail passes nothing: r0 still holds the last submit's result)
 }
 
 /* Draws the quad: its four vertices, moved 11 units back and through the filter's camera view, in the
@@ -41,7 +41,7 @@ void Obj42080c::draw()
         gpuSubmitFloatVectorsOrDefault(color, points[vertex][0], points[vertex][1], points[vertex][2],
                                        vertices()[vertex].x, vertices()[vertex].y);
     }
-    forwardRecoveredCallback();
+    effectSubmitDefaultDrawParameters();
     renderCtxPopCounted(g_titleScene, RENDER_STACK_A);
     renderCtxPopCounted(g_titleScene, RENDER_STACK_B);
 }

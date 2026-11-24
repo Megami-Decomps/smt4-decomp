@@ -23,7 +23,7 @@ void mapIfResetRecords()
         record.limits[2] = 2500.0f;
         record.flag40 = 0;
         record.first = 0;
-        record.unk190 = 0;
+        record.selectionModelId = 0;
         record.category = 0;
         record.id = -1;
         record.second = 0;
@@ -64,7 +64,7 @@ void mapIfResetRecords()
     primary.id = -1;
     primary.start.x = 0.0f;
     primary.first = 0;
-    primary.unk190 = 0;
+    primary.selectionModelId = 0;
     primary.start.y = 0.0f;
     primary.start.z = 0.0f;
     primary.second = 0;

@@ -5,7 +5,7 @@ s32 MapNaviTable_GetCategoryCount(MapNaviTableContext *context);
 MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext *context, u32 index);
 
 // Prefer a matching map category whose horizontal interval contains the coordinate.
-MapNaviCategoryRecord *mapNaviFindCategoryAtPosition(u32 context, s32 map, s32 section, f32 unused, f32 coordinate)
+MapNaviCategoryRecord *mapNaviFindCategoryAtPosition(const void *, s32 map, s32 section, f32, f32 coordinate, f32)
 {
     MapNaviTableContext table;
     s32 count = MapNaviTable_GetCategoryCount(&table);

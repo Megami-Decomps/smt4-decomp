@@ -19,7 +19,7 @@ extern "C" {
 u32 dataRecordGetValue(u32 id);
 u8 shopGetEntryAvailability(u32 id);
 u8 gameDataAreaBitTest(u32 bit);
-s32 uiSearchPrimary(const void *widget);
+s32 uiListGetVisibleCount(const void *widget);
 void drawSetColorFromRGBA8(u32 color);
 void numberFontDrawFormatted(s32 kind, s32 x, s32 y, s32 align, s32 digits, u32 slot, const char *format, ...);
 void fadeObjectResetIfActive(UiSpriteState *sprite);
@@ -60,7 +60,7 @@ extern "C" void gauntletAppMenuDrawScreen(GauntletAppMenuWork *menu)
     const TextureTableEntryIV *balance = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x583);
     __2sprintf(number, "%u", gameSaveGetPoints());
     numberFontDrawFormatted(0, balance->x + x, balance->y + y, 1, 4, 0x6A, number);
-    for (s32 row = 0; row < uiSearchPrimary(menu->list.controller); ++row) {
+    for (s32 row = 0; row < uiListGetVisibleCount(menu->list.controller); ++row) {
         if ((menu->list.mode == GAUNTLET_APP_HIGHLIGHT || menu->list.mode == GAUNTLET_APP_PREVIEW) &&
             listCursorGetRowIfUnblocked(menu->list.controller) == row) {
             continue;

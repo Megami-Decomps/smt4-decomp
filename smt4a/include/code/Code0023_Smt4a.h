@@ -6,6 +6,9 @@ struct Holder;
 struct Object;
 extern "C" {
 
+/* Forwards to the effect submission's default parameter setup. */
+void effectSubmitDefaultDrawParameters(void);
+
 void FUN_00239b08(void);
 
 u32 FUN_0023b4a4(s32 index);

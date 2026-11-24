@@ -10,7 +10,7 @@ void titleSceneMultiplyByCameraView(void *filter, f32 *matrix, const void *motio
 void nn_math_VEC3TransformCoordArray(f32 *vertices, const f32 *matrix, f32 *output, u32 count);
 void FUN_002b011c();
 void gpuSubmitFloatVectorsOrDefault(const f32 *color, f32 x, f32 y, f32 z, f32 u, f32 v);
-void forwardRecoveredCallback();
+void effectSubmitDefaultDrawParameters();
 }
 
 void Obj420990::draw()
@@ -36,7 +36,7 @@ void Obj420990::draw()
         gpuSubmitFloatVectorsOrDefault(color, points[vertex].x, points[vertex].y,
             points[vertex].z, vertices()[vertex].u, vertices()[vertex].v);
     }
-    forwardRecoveredCallback();
+    effectSubmitDefaultDrawParameters();
     renderCtxSelectTexture(g_titleScene, (AsdTexture *)((FilterDrawTexture *)handles[1].handle)->handle);
     renderCtxSetB(g_titleScene, rects->blendB);
     titleSceneMultiplyByCameraView(this, matrix, &handles[1]);
@@ -46,7 +46,7 @@ void Obj420990::draw()
         gpuSubmitFloatVectorsOrDefault(color, points[vertex].x, points[vertex].y,
             points[vertex].z, vertices()[vertex].u, vertices()[vertex].v);
     }
-    forwardRecoveredCallback();
+    effectSubmitDefaultDrawParameters();
     renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderStackPop(g_titleScene->stacks + RENDER_STACK_B);
 }

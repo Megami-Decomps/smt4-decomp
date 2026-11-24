@@ -1,75 +1,47 @@
-/* NON_MATCHING: 6 lines (raw and shape), one register choice: retail forms the report list's address in r0 for the
- * first gridNavigationConfigure and copies it to r6 after the other argument moves; this build forms it in r6 and
- * copies it to r0. Without the `reportList` local (the field expression at every use, as for the open list) armcc
- * shares the address the way retail does and the code is retail's, but the frame grows from 20 to 52 bytes (32 unused
- * bytes around `progress`, which only appear while both saved-scroll blocks are present), 14 lines.
- * `listed` is cleared, not skipped, by an open objective: that keeps retail's `if (!listed)` test on the switch arms
- * that leave it true. It is declared at the top (C89 style); declared in the loop the function is 304 lines off. */
 #include "code/Code001b.h"
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "quest_center/QuestRecord.h"
+#include "quest_center/QuestRequirement.h"
+#include "gamedata/GameSaveLinkSlot.h"
 #include "AsdSDK/AsdMemUtil.h"
-
-/* One objective's progress as FUN_00298e40 reports it; only the first word is read here. */
-struct QuestObjectiveProgress {
-    /* 0x0 */ s32 remaining;
-    /* 0x4 */ s32 unk04[2];
-};
-
-/* The saved scroll state of one quest list. */
-struct SavedListCursor {
-    /* 0x0 */ s32 position;
-    /* 0x4 */ s32 top;
-};
 
 extern "C" {
 void rt_memclr(void *destination, u32 size);
 s32 questReadRuntimeFlag(u32 id, u32 flag);
 s32 gameFlagIsSet(u32 id); // declcheck: local (the shared declaration does not compile here or changes this unit)
-s32 FUN_00298e40(u32 id, s32 index, QuestObjectiveProgress *progress);
+u32 questGetRequirementProgress(s32 quest, s32 index, QuestRequirementProgress *progress);
 s32 questIsCompleted(u32 id);
-s32 FUN_00298e00(u32 id); // declcheck: local (the shared declaration does not compile here or changes this unit)
+s32 questIsReported(u32 id); // declcheck: local (the shared declaration does not compile here or changes this unit)
 s32 idIsAtLeast350(u32 id);
 void qsort(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 dataTable1bOr1cCompareRecordKeys(const void *left, const void *right);
 void gridNavigationConfigure(void *list, s32 count, s32 visible, s32 a, s32 b, s32 c);
 void uiQuestSortListByEntryKind(s32 kind);
-u32 FUN_00298dc8(u32 id); // declcheck: local (the shared declaration does not compile here or changes this unit)
+u32 questHasNewMark(u32 id); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void scrollListSetSelectionMarkChanged(void *list, s32 index); // declcheck: local (the shared declaration does not compile here or changes this unit)
-SavedListCursor *gameGetSavedRecordOrFallback(u32 index);
+GameSaveLinkSlot *gameGetSaveLinkSlot(u32 index);
 s32 uiListGetVisibleCount(const void *list); // declcheck: local (the shared declaration does not compile here or changes this unit)
 s32 gridNavigationGetItemCount(const void *list); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void scrollOwnerSetValue(void *list, s32 top);
 void flaggedEntrySetValueA(void *list, s32 position); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
-/* Whether one of the quest's six objectives is still open (or the quest is completed without
- * being reported). */
-static __inline bool questHasOpenObjective(u32 id)
-{
-    for (s32 i = 0; i < 6; i++) {
-        QuestObjectiveProgress progress;
-        if (FUN_00298e40(id, i, &progress) != 0) {
-            if (questIsCompleted(id) != 0 && FUN_00298e00(id) == 0)
-                return true;
-            if (progress.remaining > 0)
-                return true;
-        }
-    }
-    return false;
-}
-
 /* Rebuilds the quest menu's two lists (quests to report, and the open quests filtered by the
- * selected category), selects the first entry of interest in each and restores the saved scroll. */
+ * selected category), selects the first entry of interest in each and restores the saved scroll.
+ * The locals are declared once at the top (C89 style) and shared by the loops: `listed` is cleared, not
+ * skipped, by an open objective, which keeps the `if (!listed)` test on the switch arms that leave it true. */
 void uiQuestRebuildLists(void)
 {
     UiQuest *quest = g_uiQuest;
     s32 reportCount = 0;
     s32 openCount = 0;
     bool listed;
+    s32 i;
+    u16 id;
+    QuestRecord *record;
 
     memClear(quest->cursor.alternate.ids, sizeof(quest->cursor.alternate.ids));
     rt_memclr(quest->list, sizeof(quest->list));
-    for (u16 id = 0; id < 400; id++) {
+    for (id = 0; id < 400; id++) {
         if (id < 350 && questReadRuntimeFlag(id, 0) == 0)
             continue;
         if (id >= 350) {
@@ -84,11 +56,24 @@ void uiQuestRebuildLists(void)
         }
         listed = true;
         if (quest->panelView.panel.confirming != 0) {
-            QuestRecord *record = questDataGetRecord(id);
+            record = questDataGetRecord(id);
             if (record == NULL || record->kind != 0)
                 continue;
-            if (questHasOpenObjective(id))
-                listed = false;
+            /* A quest with one of its six objectives still open (or completed without being reported) is not
+             * listed. */
+            for (i = 0; i < 6; i++) {
+                QuestRequirementProgress progress;
+                if (questGetRequirementProgress(id, i, &progress) != 0) {
+                    if (questIsCompleted(id) != 0 && questIsReported(id) == 0) {
+                        listed = false;
+                        break;
+                    }
+                    if (progress.remaining > 0) {
+                        listed = false;
+                        break;
+                    }
+                }
+            }
             if (listed && idIsAtLeast350(id) == 0) {
                 if (record->area == 0)
                     continue;
@@ -124,19 +109,18 @@ void uiQuestRebuildLists(void)
         quest->list[openCount++] = id;
     }
     qsort(quest->cursor.alternate.ids, reportCount, sizeof(u16), dataTable1bOr1cCompareRecordKeys);
-    void *reportList = quest->panelView.panel.alternate.cursor;
-    gridNavigationConfigure(reportList, reportCount, 10, 1, 1, 1);
+    gridNavigationConfigure(quest->panelView.panel.alternate.cursor, reportCount, 10, 1, 1, 1);
     gridNavigationConfigure(quest->cursor.data, openCount, 10, 1, 1, 1);
     uiQuestSortListByEntryKind(0);
-    for (s32 i = 0; i < reportCount; i++) {
-        if (FUN_00298dc8(quest->cursor.alternate.ids[i]) != 0) {
-            scrollListSetSelectionMarkChanged(reportList, i);
+    for (i = 0; i < reportCount; i++) {
+        if (questHasNewMark(quest->cursor.alternate.ids[i]) != 0) {
+            scrollListSetSelectionMarkChanged(quest->panelView.panel.alternate.cursor, i);
             break;
         }
     }
-    for (s32 i = 0; i < openCount; i++) {
-        if (FUN_00298dc8(quest->list[i]) != 0) {
-            QuestRecord *record = questDataGetRecord(quest->list[i]);
+    for (i = 0; i < openCount; i++) {
+        if (questHasNewMark(quest->list[i]) != 0) {
+            record = questDataGetRecord(quest->list[i]);
             if (record != NULL && record->kind != 0) {
                 scrollListSetSelectionMarkChanged(quest->cursor.data, i);
                 break;
@@ -145,20 +129,20 @@ void uiQuestRebuildLists(void)
     }
     if (quest->panelView.panel.confirming != 0)
         return;
-    if (quest->cursor.alternate.ids[gameGetSavedRecordOrFallback(0)->top + gameGetSavedRecordOrFallback(0)->position] == 0 ||
-        gameGetSavedRecordOrFallback(0)->top + uiListGetVisibleCount(reportList) > gridNavigationGetItemCount(reportList)) {
-        gameGetSavedRecordOrFallback(0)->top = 0;
-        gameGetSavedRecordOrFallback(0)->position = 0;
+    if (quest->cursor.alternate.ids[gameGetSaveLinkSlot(0)->top + gameGetSaveLinkSlot(0)->position] == 0 ||
+        gameGetSaveLinkSlot(0)->top + uiListGetVisibleCount(quest->panelView.panel.alternate.cursor) > gridNavigationGetItemCount(quest->panelView.panel.alternate.cursor)) {
+        gameGetSaveLinkSlot(0)->top = 0;
+        gameGetSaveLinkSlot(0)->position = 0;
     }
-    scrollOwnerSetValue(reportList, gameGetSavedRecordOrFallback(0)->top);
-    flaggedEntrySetValueA(reportList, gameGetSavedRecordOrFallback(0)->position);
-    if (quest->list[gameGetSavedRecordOrFallback(1)->top + gameGetSavedRecordOrFallback(1)->position] == 0 ||
-        gameGetSavedRecordOrFallback(1)->top + uiListGetVisibleCount(quest->cursor.data) > gridNavigationGetItemCount(quest->cursor.data)) {
-        gameGetSavedRecordOrFallback(1)->top = 0;
-        gameGetSavedRecordOrFallback(1)->position = 0;
+    scrollOwnerSetValue(quest->panelView.panel.alternate.cursor, gameGetSaveLinkSlot(0)->top);
+    flaggedEntrySetValueA(quest->panelView.panel.alternate.cursor, gameGetSaveLinkSlot(0)->position);
+    if (quest->list[gameGetSaveLinkSlot(1)->top + gameGetSaveLinkSlot(1)->position] == 0 ||
+        gameGetSaveLinkSlot(1)->top + uiListGetVisibleCount(quest->cursor.data) > gridNavigationGetItemCount(quest->cursor.data)) {
+        gameGetSaveLinkSlot(1)->top = 0;
+        gameGetSaveLinkSlot(1)->position = 0;
     }
-    scrollOwnerSetValue(quest->cursor.data, gameGetSavedRecordOrFallback(1)->top);
-    flaggedEntrySetValueA(quest->cursor.data, gameGetSavedRecordOrFallback(1)->position);
+    scrollOwnerSetValue(quest->cursor.data, gameGetSaveLinkSlot(1)->top);
+    flaggedEntrySetValueA(quest->cursor.data, gameGetSaveLinkSlot(1)->position);
 }
 
 } /* extern "C" */

@@ -1,5 +1,4 @@
-/* NON_MATCHING: 22 lines with idMapLookup's real prototype, u8 (u16) from gamedata/SkillFlags.h (8 with the
- * old local s32 (u32) one); control flow matches; retail converts the cost once (vcvt into s0, copied to the score in s16) where this converts it twice (a float local gives the single vcvt but keeps the score in s0), and compares the two categories in the other register order (either source order gives cmp r0, r1). */
+/* NON_MATCHING: 2 lines: the category equality test uses the opposite order of the same two registers. */
 #include "common.h"
 #include "gamedata/SkillFlags.h"
 #include "gamedata/SkillDataLookup.h"
@@ -22,9 +21,8 @@ u32 FUN_001d01f8(SkillPicker *picker)
         dataTable06Sub1GetRecord(picker->candidates.ids[i]);
         u32 id = picker->candidates.ids[i];
         SkillFlagsRecord *record = dataTable06Sub1GetRecord(id);
-        u32 cost = record->flags & 0x1f;
-        f32 score = (f32)cost;
-        score += (f32)cost * 0.01f;
+        u32 cost = record->flags & SKILL_PICKER_BASE_POINTS_MASK;
+        f32 score = skillPickerInitialScore(cost);
         s32 element = idMapLookup(id);
         if (picker->preferredElement == element) {
             score += 1.0f;

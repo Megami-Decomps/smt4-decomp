@@ -1,87 +1,68 @@
-/* NON_MATCHING: only the initial two 64-bit restriction-mask tests differ in scalar/LDM/LDRD grouping and register allocation; every instruction from the selected-action branch onward matches. -O2 candidate. */
-#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "shard/W6_W6Match7_BattleCandidateMasks.h"
-#include "shard/W5_W5Match7_EntrySort.h"
-#include "gamedata/DataTableAccess_VariantE_EntrySort.h"
-#include "gamedata/SkillDataRecord.h"
+#include "battle/BtlEntryA.h"
+#include "gamedata/BattleUnitSkills.h"
+#include "gamedata/SkillDataLookup.h"
+#include "gamedata/EquipmentRecordA.h"
 #include "gamedata/ConsumableRecordA.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
-struct BattleActionDescriptor {
-    u16 unk00;
-    s16 kind;
-    s16 id;
-    u16 unk06;
+enum {
+    ACTION_ATTACK = 1,
+    ACTION_SKILL = 2,
+    ACTION_SKILL_ALTERNATE = 3,
+    ACTION_ITEM = 8,
+    ATTACK_GUN = 2,
+    SKILL_ATTRIBUTE_SHIFT = 11,
+    SKILL_ATTRIBUTE_MASK = 31,
 };
-struct BattleActionEquipment {
-    u8 unk00[4];
-    u16 id;
-};
-// Additional views into existing opaque bytes, without changing the combatant ABI.
-struct BattleActionCountView {
-    u8 unk000[0x328];
-    BattleActionDescriptor selected;
-    u8 unk330[8];
-    BattleActionDescriptor candidates[10]; // 0x338
-    u8 unk388[0x70];
-    BattleActionEquipment *equipment;      // 0x3f8
-};
-struct BattleActionSkill {
-    u8 unk00[0x28];
-    u32 unk28 : 11;
-    u32 attribute : 5;
-    u32 unkHigh : 16;
-};
-extern "C" {
 
-// Count candidate actions of one attribute, or only the selected action when restricted.
-s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attribute)
+/* Counts candidate actions of one attribute, or only the selected action when restricted. */
+extern "C" s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attribute)
 {
-    const BattleActionCountView *actions = reinterpret_cast<const BattleActionCountView *>(combatant);
     s32 count = 0;
-    if ((g_btlCandidateMasks.unavailable & combatant->flags) ||
-        (combatant->flags & g_btlCandidateMasks.singleAction)) {
-        if (actions->selected.kind == 2 || actions->selected.kind == 3) {
-            const BattleActionSkill *skill = (const BattleActionSkill *)skillDataFindById(actions->selected.id);
-            if (skill != NULL && attribute == skill->attribute) {
+    if ((combatant->flags & g_btlCandidateMasks.unavailable) != 0 ||
+        hasSingleAction(g_btlCandidateMasks, *combatant)) {
+        if (combatant->data.actionList.single.kind == ACTION_SKILL ||
+            combatant->data.actionList.single.kind == ACTION_SKILL_ALTERNATE) {
+            const SkillDataRecordA *skill = skillDataFindById(combatant->data.actionList.single.id);
+            if (skill != NULL && attribute == ((skill->properties >> SKILL_ATTRIBUTE_SHIFT) & SKILL_ATTRIBUTE_MASK)) {
                 ++count;
             }
         }
-        if (actions->selected.kind == 8) {
-            const ConsumableRecordA *item = itemTableGetItemRecord(actions->selected.id);
+        if (combatant->data.actionList.single.kind == ACTION_ITEM) {
+            const ConsumableRecordA *item = itemTableGetItemRecord(combatant->data.actionList.single.id);
             if (item != NULL && item->skillId != 0) {
-                const BattleActionSkill *skill = (const BattleActionSkill *)skillDataFindById(item->skillId);
-                if (skill != NULL && attribute == skill->attribute) {
+                const SkillDataRecordA *skill = skillDataFindById(item->skillId);
+                if (skill != NULL && attribute == ((skill->properties >> SKILL_ATTRIBUTE_SHIFT) & SKILL_ATTRIBUTE_MASK)) {
                     ++count;
                 }
             }
         }
     } else {
         for (s32 index = 0; index < 10; ++index) {
-            if (actions->candidates[index].kind == 2 || actions->candidates[index].kind == 3) {
-                const BattleActionSkill *skill = (const BattleActionSkill *)skillDataFindById(actions->candidates[index].id);
-                if (skill != NULL && attribute == skill->attribute) {
+            if (combatant->data.actionList.available[index].kind == ACTION_SKILL ||
+                combatant->data.actionList.available[index].kind == ACTION_SKILL_ALTERNATE) {
+                const SkillDataRecordA *skill = skillDataFindById(combatant->data.actionList.available[index].id);
+                if (skill != NULL && attribute == ((skill->properties >> SKILL_ATTRIBUTE_SHIFT) & SKILL_ATTRIBUTE_MASK)) {
                     ++count;
                 }
             }
-            if (actions->candidates[index].kind == 8) {
-                const ConsumableRecordA *item = itemTableGetItemRecord(actions->candidates[index].id);
+            if (combatant->data.actionList.available[index].kind == ACTION_ITEM) {
+                const ConsumableRecordA *item = itemTableGetItemRecord(combatant->data.actionList.available[index].id);
                 if (item != NULL && item->skillId != 0) {
-                    const BattleActionSkill *skill = (const BattleActionSkill *)skillDataFindById(item->skillId);
-                    if (skill != NULL && attribute == skill->attribute) {
+                    const SkillDataRecordA *skill = skillDataFindById(item->skillId);
+                    if (skill != NULL && attribute == ((skill->properties >> SKILL_ATTRIBUTE_SHIFT) & SKILL_ATTRIBUTE_MASK)) {
                         ++count;
                     }
                 }
             }
-            if (actions->candidates[index].kind == 1 && actions->candidates[index].id == 2 &&
-                actions->equipment != NULL) {
-                const EquipmentRecordA *entry = itemTableGetEquipmentRecord(actions->equipment->id);
-                if (entry != NULL && attribute ==
-                    entry->traitBits.attribute) {
+            if (combatant->data.actionList.available[index].kind == ACTION_ATTACK &&
+                combatant->data.actionList.available[index].id == ATTACK_GUN && combatant->data.record != NULL) {
+                const EquipmentRecordA *entry = itemTableGetEquipmentRecord(combatant->data.record->equipment.gunRounds);
+                if (entry != NULL && attribute == entry->traitBits.attribute) {
                     ++count;
                 }
             }
         }
     }
     return count;
-}
 }

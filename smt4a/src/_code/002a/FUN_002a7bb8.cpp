@@ -74,7 +74,7 @@ extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_002f3a90. */
 extern int uniteSelectedFusionIsEnabled(void);
 /* Supplied declaration required: uiDrawListScrollBar. */
-extern int uiSearchPrimary(int);
+extern int uiListGetVisibleCount(int);
 
 
 void FUN_002a7bb8(int param_1,int param_2,int param_3)
@@ -198,7 +198,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
   temp_v21 = temp_v2 + 0x67cc;
   temp_v9 = resourceRunOperationIfUnblocked();
   temp_v4 = 0;
-  temp_v8 = uiSearchPrimary(temp_v2 + 0x67cc);
+  temp_v8 = uiListGetVisibleCount(temp_v2 + 0x67cc);
   if (0 < temp_v8) {
     do {
       temp_v6 = temp_v24;
@@ -351,7 +351,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
                    temp_v22);
       gxResetColorQuadToWhite();
       temp_v4 = temp_v4 + 1;
-      temp_v8 = uiSearchPrimary(temp_v21);
+      temp_v8 = uiListGetVisibleCount(temp_v21);
     } while (temp_v4 < temp_v8);
   }
   temp_v4 = resourceRunOperationIfUnblocked(temp_v21);

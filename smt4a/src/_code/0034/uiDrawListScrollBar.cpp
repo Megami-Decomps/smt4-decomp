@@ -9,7 +9,7 @@
 extern "C" {
 s32 widgetSubCallIfVisible(void *widget);
 s32 uiSearchSecondary(void *widget);
-s32 uiSearchPrimary(void *widget);
+s32 uiListGetVisibleCount(void *widget);
 void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 mode);
 
 /* Re-query the controller after each callback, and refresh the render context for each state change.
@@ -58,18 +58,18 @@ void uiDrawListScrollBar(Object *widget, s32 x, s32 y, u32 group, u32 frameId, u
         gxSetMirroredClippedScissor(record->x + x + offset, record->y + y, length, record->placement->height, 1);
     } else {
         s32 total = gridNavigationGetItemCount(widget);
-        s32 shown = uiSearchPrimary(widget);
+        s32 shown = uiListGetVisibleCount(widget);
         s32 length;
         if (total <= shown) {
             length = record->placement->height;
         } else {
             f32 ratio = (f32)record->placement->height / (f32)gridNavigationGetItemCount(widget);
-            length = (s32)((f32)uiSearchPrimary(widget) * ratio);
+            length = (s32)((f32)uiListGetVisibleCount(widget) * ratio);
             if (length < 1) {
                 length = 1;
             }
             offset = (s32)((f32)resourceRunOperationIfUnblocked(widget) * ratio);
-            if (resourceRunOperationIfUnblocked(widget) + uiSearchPrimary(widget) == gridNavigationGetItemCount(widget) &&
+            if (resourceRunOperationIfUnblocked(widget) + uiListGetVisibleCount(widget) == gridNavigationGetItemCount(widget) &&
                 offset + length < record->placement->height) {
                 offset = record->placement->height - length;
             }

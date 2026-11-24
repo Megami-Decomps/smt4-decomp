@@ -1,8 +1,19 @@
-/* NON_MATCHING: 34 lines; same instructions and frame (116 bytes, with the retail slots). Two differences: the entry
- * block is scheduled differently (this build zeroes fp and r9 before the vpush; retail after loading the panel's
- * origin, with the vpush right behind the push), and the hidden large panel's empty-frame draw shares its call with
- * the large layout's last overlay where retail shares the small layout's (so the two `nop`s after that call sit in
- * the other layout and the branches between them move by 8 bytes). */
+/* NON_MATCHING: 26 raw / 4 shape; the same instructions, registers and frame (116 bytes, with the retail slots). One
+ * difference: the hidden large panel's empty-frame draw has no call of its own, it branches to the `bl` of another
+ * draw, and that draw then goes without the two `nop`s armcc puts between a call and a branch. Retail borrows the
+ * small layout's last overlay (0x96), this build the large layout's (0x97), so the `nop` pair sits in the other
+ * layout and the branches between the two move by 8 bytes.
+ * Wave 90, what decides the borrowed call (probed by adding and removing overlays): armcc shares the call only
+ * when the function has six or more `bl texDrawTableEntryAtStoredOrigin; b <end>` blocks (with either chain
+ * removed the empty frame gets its own call; a fifth overlay in the remaining chain brings the sharing back), and
+ * only for a block whose argument set-up differs from the others' (drawn at layer 0x79 the empty frame keeps its
+ * own call). The partner is the last overlay of the chain that ends where the empty frame's branch ends: the
+ * large chain's here (0x4c with the 0x97 branch removed), the small chain's last only when the large chain is
+ * gone. Retail's partner is the small chain's last, so its empty-frame draw left the large layout's block by
+ * another route than the end of the `if (hidden) ... else` around the chain. Not it: `hidden && emptyFrame` as one
+ * test, the small layout's hidden test nested or inverted, the small layout first (`if (!isPlayerVariant)`, 546
+ * lines) or as an `if` of its own (239), the hidden panel leaving through its own efctSetSpeed(1.0f) and return
+ * (225) and the layer of the draw that follows the chain. */
 #include "common.h"
 #include <stdio.h>
 #include "status/StatusStrip.h"

@@ -10,14 +10,14 @@ struct UnlockSpriteEntryView { u8 unk00[0xC]; u16 id; };
 }
 extern "C" {
 UnlockSpriteEntryView *dataTable02GetRecordWithAocPackage(s32 index);
-s32 partyEntryFlagsBit3(u16 id);
+s32 questIsCompleted(u16 id);
 s32 goalConditionsSatisfied(u16 id);
 s32 flagValueRead(u32 index);
 
 s32 textureEntryMeetsUnlockRequirements(u32 index)
 {
     UnlockSpriteEntryView *entry = dataTable02GetRecordWithAocPackage(index);
-    if (partyEntryFlagsBit3(entry->id) != 0)
+    if (questIsCompleted(entry->id) != 0)
         return 0;
     if (goalConditionsSatisfied(entry->id) != 0)
         return 0;

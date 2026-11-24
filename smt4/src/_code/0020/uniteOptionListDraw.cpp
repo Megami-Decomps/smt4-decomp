@@ -1,6 +1,10 @@
 /* NON_MATCHING: allocation only (7 rows). Retail holds the row mark's y in r2 and the slot's in r1 (built: r1 and
  * r2), converts the cursor row's name coordinates through s0/s2 (built: in s1/s0, as both do for the other rows'
- * names) and loads the cursor row's mark x after the slot's. */
+ * names) and loads the cursor row's mark x after the slot's.
+ * Tried without gain (14 or worse): all sixteen operand orders of the two marks' sums (none beats this one, and
+ * changing one site moves the other); `slot`, `record`, `label` and `mark` declared once for both blocks; the name
+ * coordinates as int or float locals (64 to 133) or with explicit casts; the depth as a double literal or a
+ * quotient; the shine coordinates written in the call (26); `touch` as u8/u32; an unsigned row counter (20). */
 #include <stdio.h>
 #include "camp/Unite/UniteWork.h"
 #include "camp/CampStateQueries.h"

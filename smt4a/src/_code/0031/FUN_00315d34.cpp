@@ -1,4 +1,5 @@
 /* NON_MATCHING: overlay/text argument contracts and the 128-byte text buffer match retail; the zero and g_mapIf registers are swapped (r6/r7) and the slide-out cases' idle return gets its own epilogue copy where retail branches to the shared one. */
+#include "code/Code0023_Smt4a.h"
 #include "camp/RenderCtx.h"
 #include "gfx/ColoredQuad.h"
 #include "shard/TextureDrawCall.h"
@@ -31,7 +32,6 @@ struct MapNoticeEntry {
 
 extern "C" {
 
-void FUN_002371b0(void);
 s32 dataTable2ECount(void);
 MapNoticeEntry *dataTable2EGetEntry(s32 index);
 s32 findKeyedRecord(s32 id, s32 sub);
@@ -49,7 +49,7 @@ s32 FUN_00315d34(u32 handle)
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         renderCtxSelectTexture(g_renderCtx, NULL);
         gxSubmitDrawZeroExtraParams(0.0f, 0.0f, 400.0f, 240.0f, overlay, overlay, overlay, 0.0f, overlay);
-        FUN_002371b0();
+        effectSubmitDefaultDrawParameters();
         renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     }
 

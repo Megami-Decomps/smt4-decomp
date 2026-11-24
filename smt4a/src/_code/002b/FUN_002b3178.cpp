@@ -1,4 +1,5 @@
 /* NON_MATCHING: the 0.0f spawn depth is loaded into s23 at the top in retail (here after FUN_00186940), the colour word/alpha loads use different registers, and the pool loads of the angle constants are ordered differently (same residue as smt4 FUN_001f67ec). */
+#include "code/Code0023_Smt4a.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "shard/Shard0036.h"
@@ -24,7 +25,6 @@ void FUN_00186940(void);
 void effectSpawnPositionDefault(u32 color, f32 x, f32 y, f32 z);
 f32 phaseCosine(f32);
 f32 phaseSine(f32);
-void FUN_002371b0(void);
 
 /* Angle of the i-th of the 19 points on the ring (a full turn in 18 steps, in the interpolation tables' units). */
 static __inline f32 titleRingPhase(s32 i)
@@ -59,7 +59,7 @@ void FUN_002b3178(const TitleRadialGradient *gradient)
         f32 y = centerY + radius * phaseSine(titleRingPhase(i));
         effectSpawnPositionDefault(edgeColor.word, x, y, 0.0f);
     }
-    FUN_002371b0();
+    effectSubmitDefaultDrawParameters();
     renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
 }
 }

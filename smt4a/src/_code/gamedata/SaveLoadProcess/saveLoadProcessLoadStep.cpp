@@ -1,5 +1,7 @@
 /* NON_MATCHING: one instruction. The duplicate scan of the party repair compares `cmp entry, other`
- * (retail `cmp r9, sl`); armcc orders the two registers the other way here whichever side the source names first. */
+ * (retail `cmp r9, sl`); armcc puts the loaded party[j] first here whichever side the source names first. Copying
+ * party[j] into a second s32 local used only in that compare is IDENTICAL, but that is a single-use operand
+ * (steering; the sibling party scans' locals are each used more than once). */
 #include "gamedata/SaveLoadProcessState.h"
 #include "gamedata/SaveLoadProcess.h"
 #include "gamedata/GameSaveBlocks.h"
@@ -92,7 +94,7 @@ s32 saveLoadProcessLoadStep(u32 job)
                     }
                     for (i = 0; i < 24; i++) {
                         SaveSlotTableA *table = gameGetSlotTable();
-                        s8 entry = table->party[i];
+                        s32 entry = table->party[i];
                         for (s32 j = i + 1; j < 24; j++) {
                             if (entry == table->party[j]) {
                                 table->party[j] = -1;

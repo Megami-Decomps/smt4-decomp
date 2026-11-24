@@ -57,7 +57,7 @@ extern bool questIsOfferable(unsigned short);
 /* Supplied declaration required: textFormatFullWidthNumber. */
 extern int idIsAtLeast350(unsigned int);
 /* Supplied declaration required: questIsCompleted. */
-extern int FUN_00298e40(unsigned int, int, unsigned char **);
+extern int questGetRequirementProgress(unsigned int, int, unsigned char **);
 /* Supplied declaration required: drawSkillCategoryLabel. */
 extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
@@ -423,7 +423,7 @@ LAB_00198518:
     temp_v6 = 0;
     temp_v30 = 1;
     do {
-      temp_v9 = FUN_00298e40(temp_v25,temp_v6,&puStack_178);
+      temp_v9 = questGetRequirementProgress(temp_v25,temp_v6,&puStack_178);
       if (temp_v9 != 0) {
         temp_v27 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x34));
         textFormatFullWidthNumber(temp_v29,temp_v22);

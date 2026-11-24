@@ -1,4 +1,5 @@
 /* NON_MATCHING: 30 lines; retail loads the battle state mask words with one ldm from 0x45A0 (the build: two ldr from a 0x4500 base), lays the kind-3 test out as bne/b where the build has beq/b, and tests the target slot and the member with two branches (the build predicates the second compare) */
+#include "battle/BtlCommandMenuData.h"
 #include "battle/BtlMainAccess.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "common.h"
@@ -7,17 +8,6 @@
 #include "gamedata/SaveSlotTable.h"
 #include "code/Code002a.h"
 #include "battle/BtlDebugMenuEntry.h"
-
-/* One command-menu entry (only the fields read here). */
-struct CommandEntry {
-    /* 0x00 */ u8 kind;
-    /* 0x01 */ u8 valid;
-    /* 0x02 */ u8 unk02[0x59];
-    /* 0x5B */ u8 limitedByBattle;
-    /* 0x5C */ u16 flagA;
-    /* 0x5E */ u16 flagB;
-    /* 0x60 */ u32 attributes;     /* bit 0: needs the target to be free */
-};
 
 /* The battle command work (only the fields read here). */
 struct CommandWork {
@@ -42,16 +32,8 @@ struct BattleState {
     /* 0x45A0 */ BattleMaskWords masks;
 };
 
-struct BattleMasks {
-    /* 0x00 */ u8 unk00[0x28];
-    /* 0x28 */ u32 maskA;
-    /* 0x2C */ u32 maskB;
-};
-
 extern "C" {
-extern BattleMasks DAT_00573b88;
 
-CommandEntry *FUN_002cc228(u32 index, s32 first);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 flag);
 s32 idListHasFlaggedRecord(SlotRecordA *member);
@@ -73,9 +55,9 @@ static __inline s32 unitHasCommandFlag(SlotRecordA *unit)
 
 /* Whether a target command (kind 3) is usable by the member: not flagged for a free target, and allowed
  * by the member's demon record. */
-static __inline bool targetCommandAllowed(CommandEntry *entry, SlotRecordA *member)
+static __inline bool targetCommandAllowed(BtlDebugEntry *entry, SlotRecordA *member)
 {
-    return entry->kind == 3 && (entry->attributes & 1) == 0 && btlIsDefeatSuppressed() != 0 &&
+    return entry->kind == 3 && (entry->flags & 1) == 0 && btlIsDefeatSuppressed() != 0 &&
            unitHasCommandFlag(member) != 0;
 }
 
@@ -86,23 +68,23 @@ u32 FUN_002cc9e0(CommandWork *work, s32 inBattle)
     if (inBattle != 0 && work->mode == 6)
         return 11;
     SaveSlotTableA *table = gameGetSlotTable();
-    CommandEntry *entry = NULL;
+    BtlDebugEntry *entry = NULL;
     s32 count = 0;
     BtlDebugPage *page = &work->page;
-    for (s32 t = 0; t < 10; t++) {
-        entry = FUN_002cc228(t & 0xFF, work->selected == 0);
+    for (s32 t = 0; t < DEBUG_MENU_ENTRY_COUNT; t++) {
+        entry = btlDebugFindCommandByIndex((u8)t, work->selected == 0);
         SlotRecordA *member = NULL;
         if (work->selected != 0 && table->reserve[work->selected - 1] >= 0)
             member = gameGetSlotRecord(gameGetSlotTable()->reserve[work->selected - 1]);
-        if (entry == NULL || entry->valid != 1)
+        if (entry == NULL || entry->enabled != 1)
             continue;
-        if (entry->flagA != 0 && gameFlagIsSet(entry->flagA) == 0)
+        if (entry->flagId != 0 && gameFlagIsSet(entry->flagId) == 0)
             continue;
-        if (entry->flagB != 0 && gameDataFlagTestBit(entry->flagB) == 0)
+        if (entry->dataFlagId != 0 && gameDataFlagTestBit(entry->dataFlagId) == 0)
             continue;
-        if (entry->limitedByBattle) {
+        if (entry->needsBattleState) {
             BattleMaskWords masks = reinterpret_cast<BattleState *>(btlGetMainState())->masks;
-            if (((masks.low & DAT_00573b88.maskA) | (masks.high & DAT_00573b88.maskB)) != 0)
+            if (((masks.low & g_btlCommandMenuData.stateMask28Words[0]) | (masks.high & g_btlCommandMenuData.stateMask28Words[1])) != 0)
                 continue;
         }
         if (entry->kind == 5) {
@@ -122,7 +104,7 @@ u32 FUN_002cc9e0(CommandWork *work, s32 inBattle)
             if (entry->kind == 9 && btlListIsKind9Available() == 0)
                 continue;
         }
-        if ((entry->attributes & 1) && btlIsDefeatSuppressed() != 0)
+        if ((entry->flags & 1) && btlIsDefeatSuppressed() != 0)
             continue;
         if (listCursorGetRowOfChildIfUnblocked(reinterpret_cast<Object *>(work->lists + work->selected * 100)) == count)
             break;

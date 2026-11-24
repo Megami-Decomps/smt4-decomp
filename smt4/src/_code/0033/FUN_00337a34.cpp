@@ -1,4 +1,5 @@
-/* NON_MATCHING: retained-id scan now uses the twin's plain static helper and matches; only the entry-flags clear differs (retail zeroes the two words with `stm {r3, ip}` from two zero registers, the u64 view stores through one register). */
+/* NON_MATCHING: 24 lines, registers only: the resource loop and the entry-mask clear match; the action-status
+ * clears swap the action table and computed-index scratch registers (r0/r1, ip/r4). */
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -19,7 +20,7 @@ static bool isRetainedResource(const BtlMainState *state, s16 id)
 
 extern "C" {
 
-// Release unretained resources belonging to the selected action and detach its combatant.
+/* Releases unretained resources belonging to the selected action and detaches its combatant. */
 void FUN_00337a34(BtlMainState *state)
 {
     if (state->actionCleanup.selectedAction != -1) {
@@ -35,12 +36,10 @@ void FUN_00337a34(BtlMainState *state)
             state->actionCleanup.selectedResource = NULL;
         }
         state->actions[state->actionCleanup.selectedAction].status = 0;
-        BtlEntry *entry = &state->entries[state->actions[state->actionCleanup.selectedAction].participant.combatantIndex];
-        // A 64-bit member would realign the shared byte union and shift the remaining entry fields.
-        struct EntryFlagsView { u64 flags; };
-        reinterpret_cast<EntryFlagsView *>(entry)->flags = 0;
+        state->entries[state->actions[state->actionCleanup.selectedAction].participant.combatantIndex].flagMask = 0;
         state->actions[state->actionCleanup.selectedAction].participant.combatantIndex = -1;
         state->actionCleanup.selectedAction = -1;
     }
 }
-}
+
+} /* extern "C" */

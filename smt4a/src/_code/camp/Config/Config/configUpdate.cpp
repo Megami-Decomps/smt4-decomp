@@ -36,7 +36,7 @@ void buttonHelpSetText(const s8 *text, u32 color);
 void stateModeDispatch(u32 mode);
 u8 FUN_003d21dc(void);
 void messageMainSetFlag(u8 value);
-s32 uiSearchPrimary(const GridNavigation *cursor);
+s32 uiListGetVisibleCount(const GridNavigation *cursor);
 u8 gridNavigationHandleConfirm(GridNavigation *cursor, s32 mode);
 s32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV *touchArea, const s16 *rowRegions,
                                  s32 thumbRegion, s32 previousRegion, s32 nextRegion, s8 *touched, s32 secondary,
@@ -115,7 +115,7 @@ static __inline void configStartTopMessage(ConfigWorkA *config)
 static __inline bool configAdvanceSprites(ConfigWorkA *config)
 {
     uiSpriteAdvanceAnimation(&config->sprites[0], 1.0f);
-    s32 rows = uiSearchPrimary(&config->cursor);
+    s32 rows = uiListGetVisibleCount(&config->cursor);
     for (s32 i = 0; i < rows; i++)
         uiSpriteAdvanceAnimation(&config->sprites[i + 1], 1.0f);
     bool moving = true;
@@ -151,7 +151,7 @@ void configUpdate(void)
             memset(&work->touchGroup, -1, 12);
             s32 first = work->firstRegionImage;
             work->count = 0;
-            s32 rows = uiSearchPrimary(&work->cursor);
+            s32 rows = uiListGetVisibleCount(&work->cursor);
             for (i = 0; i < rows; i++) {
                 const TextureTableEntryIV *rectangle = asdTMTexTableEntryAt(0x24, first + i);
                 work->regions[i] = ifTouchRegionAdd(rectangle->x, rectangle->y, rectangle->placement->width,

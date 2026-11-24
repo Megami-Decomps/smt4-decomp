@@ -119,7 +119,7 @@ extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: arrayContainsU16. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
-extern int uiSearchPrimary(unsigned int);
+extern int uiListGetVisibleCount(unsigned int);
 /* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: skillHelpUpdateAttributeAndTarget. */
 extern int btlTalkBustupMatchesEntry(unsigned short);
@@ -915,7 +915,7 @@ LAB_0026e66c:
       }
       temp_v6 = recordGetModeForId((int)*(short *)(param_1 + *(short *)(temp_v32 + 0x68) * 2 + 0x43b6));
       if (temp_v6 != 0) {
-        temp_v6 = uiSearchPrimary(temp_v26);
+        temp_v6 = uiListGetVisibleCount(temp_v26);
         flaggedEntrySetValueA(temp_v26,temp_v6 - 1);
       }
       temp_v6 = listCursorGetRowIfUnblocked(temp_v26);

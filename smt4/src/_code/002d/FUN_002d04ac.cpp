@@ -3,14 +3,14 @@
 
 extern "C" {
 
-u32 FUN_00298e00(u16 id);
+u32 questIsReported(u16 id);
 
 /* Orders two ids: a flag superset sorts first, then by the records' sort value (descending). */
 s32 FUN_002d04ac(const u16 *idA, const u16 *idB)
 {
-    u32 flagsA = FUN_00298e00(*idA);
+    u32 flagsA = questIsReported(*idA);
     s32 result = 0;
-    u32 flagsB = FUN_00298e00(*idB);
+    u32 flagsB = questIsReported(*idB);
 
     if ((flagsA & ~flagsB) != 0) {
         result = 1;

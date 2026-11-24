@@ -2,7 +2,15 @@
  * (IDENTICAL there), with the ninth option cleared by memset (armcc emits retail's call to
  * __ARM_common_memclr4_9). Retail loads the party entry into r2 and keeps the slot table in r1 (this
  * build: r1 and r2). Caching the options' address in a local closes the option toggle's base/index
- * swap (12 lines) but is a steering temporary, so it is not used. */
+ * swap (12 lines) but is a steering temporary, so it is not used.
+ * Wave 90: the loop's pair and the toggle's pair (cursor r1, options base r0) flip together with any change
+ * of the function's temporaries, wherever it is: clearSaveRow without its `count` local or with its test as
+ * `count <= index` (16 lines: retail's loop, but the row test's operands and the toggle turn round) or the
+ * loop's test as `work->selectedUnit == slots->party[i]` (14) give retail's loop and IV's toggle (cursor r0,
+ * base r1). Retail has IV's loop with the other toggle, so one of the two sites is worded differently from
+ * IV here. Not it: the counter or `slots` at function scope, a while loop, an explicit cast, a const table,
+ * the toggle as a ternary, `!(x == 1)`, a signed range test (26), a pointer to the option or an inline (16:
+ * a writeback load), the clamp as a ternary, the options cleared by a loop or `memset(.., 9)` (all 22). */
 #include <string.h>
 #include "clear_save/clearSave.h"
 #include "gamedata/GameFlags.h"

@@ -23,6 +23,17 @@ struct SkillPicker {
     /* 0x30 */ s32 rankByType[8];           /* indexed by the skill's category */
 };
 
+enum { SKILL_PICKER_BASE_POINTS_MASK = 0x1F };
+
+/* Starts the score with the candidate's points and a one-percent bonus. */
+static __inline f32 skillPickerInitialScore(u32 points)
+{
+    const f32 basePoints = (f32)points;
+    f32 score = basePoints;
+    score += basePoints * 0.01f;
+    return score;
+}
+
 typedef char SkillPickerLayout[
     offsetof(SkillPicker, chosen) == 0x1C && offsetof(SkillPicker, preferredElement) == 0x2C &&
     sizeof(SkillPicker) == 0x50 ? 1 : -1];

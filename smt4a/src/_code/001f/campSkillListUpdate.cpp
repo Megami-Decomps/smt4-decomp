@@ -1,6 +1,8 @@
 /* NON_MATCHING: every instruction, branch, tail call, padding nop and address agrees with retail (604 rows each) except
  * one register trade: retail keeps the constant 1 in sl and the second MP-change lookup's temporary in fp, this build the
- * other way round (six instructions). */
+ * other way round (six instructions). Tried without effect: s32 for `scrolling`, the restore helper with an early
+ * return, the cost helper as if/else; worse: the cost helper taking the camp or an entry pointer (20 and 215 lines),
+ * the row summed in two statements (158), `touched` declared with the other locals (98), the phases as a switch (20). */
 #include "camp/CampStateA.h"
 #include "camp/CampSkillList.h"
 #include "camp/CampMenuEntry.h"
@@ -31,7 +33,7 @@ void campTouchRegionsRemoveGroup(GridNavigation *list, s32 keep);
 void campShowSelectedEntryHelp(s32 page);
 void campChangeState(s32 newState);
 void campResetScreen(void);
-s32 uiSearchPrimary(GridNavigation *list);
+s32 uiListGetVisibleCount(GridNavigation *list);
 u32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV *rectangle, const s16 *regions,
                                  s32 firstKey, s32 secondKey, s32 thirdKey, s8 *blockedMode, s32 secondary, s32 notify);
 u8 gridNavigationHandleConfirm(GridNavigation *list, s32 mode);
@@ -174,7 +176,7 @@ extern "C" void campSkillListUpdate(void)
         if (FUN_002a7410()) {
             gameGlobalsGetBlock1390();
             campTouchRegionsRemoveGroup(&camp->grids[3], 1);
-            for (s32 i = 0; i < uiSearchPrimary(&camp->grids[3]); i++) {
+            for (s32 i = 0; i < uiListGetVisibleCount(&camp->grids[3]); i++) {
                 ifTouchRegionRemove();
                 camp->touch.rowRegions[i] = -1;
             }

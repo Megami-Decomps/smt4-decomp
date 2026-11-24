@@ -24,7 +24,7 @@ int bgmReleaseStopped(void);
 int FUN_0026fa30(...);
 int encounterFlagsRollSlots(void);
 int mapRestoreSavedSelection(void);
-int FUN_0026ff54(void);
+int saveLoadUiRestoreBackups(void);
 int frameTexApplyMode(...);
 int navigationRequestFieldMode(...);
 int naviMainApplySetting(...);
@@ -66,7 +66,7 @@ int objDestroyModels(...);
 
 int mapCameraUpdateTurn(void);
 void lmapEntryPoolDestroyAll(LmapObj *);
-int FUN_002644a8(void);
+int mapEffectDisableFlagGatedEntries(void);
 int mapInterfaceSetStateTwo(void);
 int FUN_00273840(...);
 int mapIfSetMode1(void);
@@ -355,7 +355,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_002640a4. */
 /* Supplied declaration required: mapCameraUpdateTurn. */
 /* Supplied declaration required: lmapEntryPoolDestroyAll. */
-/* Supplied declaration required: FUN_002644a8. */
+/* Supplied declaration required: mapEffectDisableFlagGatedEntries. */
 extern int lmapMainUpdateScriptTransition(void);
 /* Supplied declaration required: mapIfRestartActiveRecords. */
 /* Supplied declaration required: FUN_00264794. */
@@ -378,7 +378,7 @@ extern int lmapMainUpdateScriptTransition(void);
 /* Supplied declaration required: FUN_0026fa30. */
 /* Supplied declaration required: encounterFlagsRollSlots. */
 /* Supplied declaration required: mapRestoreSavedSelection. */
-/* Supplied declaration required: FUN_0026ff54. */
+/* Supplied declaration required: saveLoadUiRestoreBackups. */
 /* Supplied declaration required: mapTableRelease. */
 /* Supplied declaration required: frameTexApplyMode. */
 /* Supplied declaration required: FUN_002700d0. */
@@ -1781,7 +1781,7 @@ LAB_001d6bd0:
     }
     if (g_mapSelection.selection.group == -1) {
       FUN_00273840(0);
-      FUN_002644a8();
+      mapEffectDisableFlagGatedEntries();
       DAT_0049f934 = 0;
       puVar7[3] = 0xb;
       puVar7[4] = 0;
@@ -1826,7 +1826,7 @@ LAB_001d6bd0:
     if (DAT_0049f970 != 0) goto LAB_001d6bd0;
     if (g_mapSelection.selection.group == -1) {
       FUN_00273840(0);
-      FUN_002644a8();
+      mapEffectDisableFlagGatedEntries();
       DAT_0049f934 = 0;
       puVar7[3] = 0xb;
       puVar7[4] = 0;
@@ -1872,7 +1872,7 @@ LAB_001d6bd0:
     if (DAT_0049f970 != 0) goto LAB_001d6bd0;
     if (g_mapSelection.selection.group == -1) {
       buttonHelpSelectMapPreset();
-      FUN_002644a8();
+      mapEffectDisableFlagGatedEntries();
       DAT_0049f934 = 0;
       puVar7[3] = 0xb;
       puVar7[4] = 0;
@@ -3288,7 +3288,7 @@ joined_r0x001d8c24:
     break;
   case 0x62:
     if (DAT_0049f950 != '\0') {
-      FUN_0026ff54();
+      saveLoadUiRestoreBackups();
       mapSceneResetState(1);
       mapRestoreSavedSelection();
       encounterFlagsRollSlots();

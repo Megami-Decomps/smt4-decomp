@@ -7,7 +7,7 @@
 
 extern "C" {
 s32 gameFlagIsSet(s32 flag);
-u32 FUN_00298dc8(s32 index);
+u32 questHasNewMark(s32 index);
 
 struct AvailabilityExtension {
     u8 unk000[0x414];
@@ -51,7 +51,7 @@ Table23AvailabilityRecord* FUN_00328b1c(s32 id)
         if (record->id == id &&
             (record->requiredFlag == 0 || gameFlagIsSet(record->requiredFlag)) &&
             (record->excludedFlag == 0 || !gameFlagIsSet(record->excludedFlag)) &&
-            (record->requiredUnit == 0 || FUN_00298dc8((u16)record->requiredUnit)))
+            (record->requiredUnit == 0 || questHasNewMark((u16)record->requiredUnit)))
             return record;
     }
     return NULL;

@@ -1,4 +1,5 @@
 /* NON_MATCHING: command-menu cursor to (action, argument) mapping; retail loads the blocked-command masks with ldr/ldm pairs instead of ldrd, keeps a 36-byte frame (9 words) and the work pointer in r6, and lowers the switch with a different jump table order */
+#include "battle/BtlCommandMenuData.h"
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "code/Code002a_VariantA.h"
@@ -40,7 +41,6 @@ struct BtlStateFlags {
 #define BTL_MENU_ARG_BLOCKED 4
 
 extern "C" {
-extern u32 DAT_00573b88[];   /* blocked-command masks; the entries used are at 8 and 18 */
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 bit);
 s32 resourceRunOperationIfUnblocked(BtlMenuCursor *cursor);
@@ -52,7 +52,7 @@ void btlMenuResolveHighlightedCommand(BtlMenuWork *work, u16 *action, s16 *argum
     s32 index = 0;
     BtlStateFlags *state = reinterpret_cast<BtlStateFlags *>(btlGetMainState());
     BtlBits bits = state->bitsA;
-    if (((bits.low & DAT_00573b88[8]) | (bits.high & DAT_00573b88[9])) != 0) {
+    if (((bits.low & g_btlCommandMenuData.stateBlockedWords[0]) | (bits.high & g_btlCommandMenuData.stateBlockedWords[1])) != 0) {
         *action = BTL_MENU_ACTION_BLOCKED;
         *argument = BTL_MENU_ARG_BLOCKED;
         return;
@@ -91,7 +91,7 @@ void btlMenuResolveHighlightedCommand(BtlMenuWork *work, u16 *action, s16 *argum
     case 3: {
         *action = BTL_MENU_ACTION_BLOCKED;
         state = reinterpret_cast<BtlStateFlags *>(btlGetMainState());
-        if ((state->bitsB.low & DAT_00573b88[18]) == 0 && (state->bitsB.high & DAT_00573b88[19]) == 0) {
+        if ((state->bitsB.low & g_btlCommandMenuData.mask48Words[0]) == 0 && (state->bitsB.high & g_btlCommandMenuData.mask48Words[1]) == 0) {
             struct {
                 s32 flagBits[3];
                 s32 entryArgs[3];

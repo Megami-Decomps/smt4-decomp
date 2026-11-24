@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_004ac1fc(...);
 int FUN_004ad228(...);
-int FUN_004d8f4c(...);
+int aaTreeFinishInsert(...);
 int treeRebalanceAfterErase(...);
 int FUN_0050d0ac(...);
 int vtblCopyAssign(...);
@@ -59,7 +59,7 @@ typedef struct {
 /* Supplied declaration required: FUN_004ac1fc. */
 /* Supplied declaration required: FUN_004ad228. */
 extern int *****containerGrowCapacity(int *****);
-/* Supplied declaration required: FUN_004d8f4c. */
+/* Supplied declaration required: aaTreeFinishInsert. */
 /* Supplied declaration required: treeRebalanceAfterErase. */
 extern romwright_code ***aaTreeNext(romwright_code *****);
 extern romwright_code ***aaTreePrev(romwright_code *****);
@@ -248,7 +248,7 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
           }
           else {
             *temp_v7 = (romwright_code ***)ppppcVar5;
-            FUN_004d8f4c(ppppcVar15,ppppcVar5);
+            aaTreeFinishInsert(ppppcVar15,ppppcVar5);
             *(unsigned char *)(temp_v19 + 1) = 1;
           }
         }

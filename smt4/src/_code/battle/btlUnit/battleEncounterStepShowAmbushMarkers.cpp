@@ -1,6 +1,11 @@
 /* NON_MATCHING: 20 lines, all in the collecting loop: retail counts in r1 and builds the record's address in
  * r0 (the index product and the record share a register, the table pointer goes to r3); this build counts in
- * r0 and builds the address in r1. battleShowUnitMarkers, the same loop without the ambush filter, matches there. */
+ * r0 and builds the address in r1. battleShowUnitMarkers, the same loop without the ambush filter, matches there.
+ * Wave 90: nothing in the loop's own wording moves the pair: a counter per loop, an unsigned counter or count
+ * (22-26), `battle->actions + i`, a nested test of the flag, the store and the increment as two statements,
+ * a do/while (26), the status in a local (40 shape) or the three-flag test as an inline shared by both loops
+ * (24-26) all keep the build's pair; the loops as an inline function of their own lose the rest (124 shape),
+ * and the list at function scope loses the first branch's tail call (68). */
 #include "common.h"
 #include <stdlib.h>
 #include "battle/BattleEncounter.h"

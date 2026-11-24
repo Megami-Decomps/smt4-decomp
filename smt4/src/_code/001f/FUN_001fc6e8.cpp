@@ -30,7 +30,7 @@ int asdMemFree(void);
 int jobStop(...);
 int btlTurnEnd(...);
 int FUN_0033a670(...);
-int FUN_0033b3c4(...);
+int btlPopFilteredCommand(...);
 int FUN_00348c10(...);
 int btlHelpFreeEntries(void);
 int btlEffectReleaseResources(...);
@@ -49,7 +49,7 @@ int FUN_00255180(...);
 int FUN_002551ac(...);
 int bgmStopNoForce(...);
 int FUN_0027dbc8(...);
-int btlListedActionsPending(void);
+int btlHasFilteredCommand(void);
 int btlEventSelectTrigger(...);
 int FUN_0027e760(...);
 void bgmRequestSelectedChannelFade(unsigned int frames);
@@ -150,7 +150,7 @@ extern int FUN_00255de0(unsigned int, unsigned int);
 /* Supplied declaration required: bgmStopNoForce. */
 /* Supplied declaration required: FUN_0027dbc8. */
 /* Supplied declaration required: btlSpriteSelectSource. */
-/* Supplied declaration required: btlListedActionsPending. */
+/* Supplied declaration required: btlHasFilteredCommand. */
 extern int isEntryUsable(unsigned int *); // declcheck: local (romwright prototype; the shared declaration in code/Code0027.h does not compile here: argument of type "unsigned int *" is incompatible with parameter of type "int *")
 /* Supplied declaration required: btlEventSelectTrigger. */
 /* Supplied declaration required: FUN_0027e760. */
@@ -187,7 +187,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00337cfc. */
 /* Supplied declaration required: FUN_00338cfc. */
 /* Supplied declaration required: FUN_0033a670. */
-/* Supplied declaration required: FUN_0033b3c4. */
+/* Supplied declaration required: btlPopFilteredCommand. */
 /* Supplied declaration required: FUN_00348c10. */
 /* Supplied declaration required: FUN_003ad754. */
 /* Supplied declaration required: FUN_003ae134. */
@@ -586,7 +586,7 @@ void FUN_001fc6e8(unsigned int param_1)
     *(unsigned int *)(temp_v4 + 0x49c0) = 0xff;
     *(unsigned int *)(temp_v4 + 0x44a0) = *(unsigned int *)(temp_v4 + 0x44a0) & 0xfeffffff;
     temp_v3 = temp_v4;
-    btlListedActionsPending();
+    btlHasFilteredCommand();
     if (temp_v3 == 0) {
       if ((*(short *)(temp_v4 + 0x2f1e) < 0) ||
          (*(short *)(temp_v4 + *(short *)(temp_v4 + 0x2f1e) * 2 + 0x2f06) < 0)) {
@@ -616,7 +616,7 @@ void FUN_001fc6e8(unsigned int param_1)
     }
     break;
   case 0xd:
-    FUN_0033b3c4(temp_v4,&temp_v16);
+    btlPopFilteredCommand(temp_v4,&temp_v16);
     FUN_001f7d50(temp_v4,temp_v16,temp_v17,temp_v18,temp_v19);
     temp_v3 = jobIsValid(*(unsigned int *)(temp_v4 + 0x1c));
     if (temp_v3 == 0) {
@@ -671,7 +671,7 @@ LAB_001fd348:
       *(unsigned int *)(temp_v4 + 0x88) = 2;
     }
     temp_v3 = temp_v4;
-    btlListedActionsPending();
+    btlHasFilteredCommand();
     if (temp_v3 == 0) {
       if (0 < *(int *)(temp_v4 + 0xbc)) {
         temp_v6 = temp_v4 + 0x4900;

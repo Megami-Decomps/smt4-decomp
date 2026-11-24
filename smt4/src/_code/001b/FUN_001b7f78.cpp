@@ -31,7 +31,7 @@ int sequenceRequestKind5(...);
 int bgmReleaseStopped(void);
 int encounterFlagsRollSlots(void);
 int mapRestoreSavedSelection(void);
-int FUN_0026ff54(void);
+int saveLoadUiRestoreBackups(void);
 int mapTableRelease(void);
 int frameTexApplyMode(...);
 int FUN_002700d0(void);
@@ -490,7 +490,7 @@ extern int FUN_0021e4bc(void);
 /* Supplied declaration required: slotFindByPair. */
 /* Supplied declaration required: encounterFlagsRollSlots. */
 /* Supplied declaration required: mapRestoreSavedSelection. */
-/* Supplied declaration required: FUN_0026ff54. */
+/* Supplied declaration required: saveLoadUiRestoreBackups. */
 /* Supplied declaration required: mapTableRelease. */
 /* Supplied declaration required: frameTexApplyMode. */
 /* Supplied declaration required: FUN_002700d0. */
@@ -5696,7 +5696,7 @@ joined_r0x001bfcb4:
     break;
   case 0x71:
     if (DAT_0049f950 != '\0') {
-      FUN_0026ff54();
+      saveLoadUiRestoreBackups();
       mapSceneResetState(1);
       mapRestoreSavedSelection();
       encounterFlagsRollSlots();

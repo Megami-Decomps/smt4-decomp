@@ -23,7 +23,7 @@ extern NpcRoomA *g_npcRoom;
 
 s32 npcRoomUpdate(u32 job);
 s32 FUN_002394a8(u32 job);
-s32 FUN_00284dbc(u32 job);
+s32 questIsReported(u32 job);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
 u32 npc2dCreatePortraitJob(u32 npcId, u32 option, s32 x, s32 y, f32 alpha);
 u32 npc2dCreateDemonPortrait(u32 id, u32 option, s32 x, s32 y, f32 alpha);
@@ -88,7 +88,7 @@ void npcRoomCreate(u32 id)
     room->job = asdProcessCreateSimple((const s8 *)"NpcRoom Calc", 4, 0, 0, npcRoomUpdate, NULL, 0);
     taskCreateDraw((const s8 *)"NpcRoom UDrawLeft", 0x7e, 0, 0, FUN_002394a8, NULL, 0, (void *)room->job);
     taskCreateDraw((const s8 *)"NpcRoom UDrawRight", 0xda, 0, 0, FUN_002394a8, NULL, 0, (void *)room->job);
-    taskCreateDraw((const s8 *)"NpcRoom DDraw", 0xea, 0, 0, FUN_00284dbc, NULL, 0, (void *)room->job);
+    taskCreateDraw((const s8 *)"NpcRoom DDraw", 0xea, 0, 0, questIsReported, NULL, 0, (void *)room->job);
     loadSlotEnsureLoaded(0x1a);
     room->mode = id;
     npcRoomFindRecord(id);

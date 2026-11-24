@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the saved registers of the constants 1 and -1 swap (retail r7 = 1, r8 = -1); IV's twin matches. */
 #include "event/bustupEvent/BustupTextureWork.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/AsdDebug.h"
@@ -6,76 +5,71 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "event/bustupEvent/BustupTex.h"
 #include "addon/AocSystemA.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "code/Code0028_Smt4a.h"
+#include "gamedata/DataTable25Apocalypse.h"
+#include "gamedata/DataTableAccess_Smt4a.h"
 
 namespace {
-struct BustupTextureDefinition {
-    u8 prefix[0x26];
-    u8 section;
-    u8 flags;
-};
+enum { BUSTUP_TEXTURE_VISIBILITY_FLAG = 0x522 };
 }
 extern "C" {
 extern const char DAT_0052f77c[];
 extern const char DAT_0052f76c[];
 s32 gameFlagIsSet(u32 flag);
-BustupTextureDefinition *FUN_00283498(u32 id);
-u32 *dataTable19FindAddonWord(BustupTextureDefinition *definition, u32 index);
-void *asdMemoryAllocTracked(s32 heap, s32 alignment, u32 flags, u32 bytes, s32 fromFront);
 void sysMemClear(void *memory, u32 bytes);
 s32 eventIsSkipping();
 s32 aocRunByName(AocSystemA *system, s32 table, s32 node, u32 mode);
 void FUN_0026c568(void *work);
 void asdMTeXReleaseJobContext(void *work);
 
-// Start a bustup texture job, honoring the add-on availability gate and deferred-load mode.
-void bustupTextureStart(u32 id, s32 useDefinition)
+/* Starts a bustup texture job, honoring the add-on visibility gate and deferred loading. */
+void bustupTextureStart(u32 id, s32 keepPlacement)
 {
-    // Transition values extend beyond the shared 0x90-byte work prefix.
-    struct ExtendedTextureWork : BustupTextureWork { f32 transition[6]; };
-    typedef char ExtendedTextureWorkLayout[sizeof(BustupTextureWork) == 0x90 && sizeof(ExtendedTextureWork) == 0xa8 ? 1 : -1];
-    if (gameFlagIsSet(0x522) && !dataTable19FindAddonWord(FUN_00283498(id), 1))
+    if (gameFlagIsSet(BUSTUP_TEXTURE_VISIBILITY_FLAG) && !dataTable19FindAddonWord((TableRequest *)FUN_00283498(id), 1))
         return;
     asdDebugTrace(DAT_0052f77c, 0x4c0);
-    ExtendedTextureWork *work = static_cast<ExtendedTextureWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(ExtendedTextureWork), 1));
-    sysMemClear(work, sizeof(ExtendedTextureWork));
-    work->id = id;
-    work->previousId = -1;
-    work->previousNode = -1;
-    BustupTextureDefinition *definition = FUN_00283498(id);
-    work->definition = definition;
-    if (!useDefinition) {
-        work->table = 0x17;
-        work->node = -1;
+    BustupTextureWorkA *work = (BustupTextureWorkA *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(*work), 1);
+    sysMemClear(work, sizeof(*work));
+    work->texture.id = id;
+    work->texture.previousId = -1;
+    work->texture.previousNode = -1;
+    DataTable25RecordA *definition = FUN_00283498(id);
+    work->texture.definition = definition;
+    if (!keepPlacement) {
+        work->texture.table = 0x17;
+        work->texture.node = -1;
         /* both placements are (25, 25), but retail still reads the flag */
         if (definition->flags != 0) {
-            work->x = 25.0f;
-            work->y = 25.0f;
+            work->texture.x = 25.0f;
+            work->texture.y = 25.0f;
         } else {
-            work->x = 25.0f;
-            work->y = 25.0f;
+            work->texture.x = 25.0f;
+            work->texture.y = 25.0f;
         }
     }
     if (eventIsSkipping()) {
-        work->deferred = 1;
+        work->texture.deferred = 1;
     } else {
-        if (work->node != -1) {
-            if (aocRunByName(g_aocSystem, work->table, work->node, 1))
-                work->texture = aocLoadTextureNode(reinterpret_cast<u32>(g_aocSystem), work->table, work->node, 0x10000);
+        if (work->texture.node != -1) {
+            if (aocRunByName(g_aocSystem, work->texture.table, work->texture.node, 1))
+                work->texture.texture = aocLoadTextureNode((u32)g_aocSystem, work->texture.table, work->texture.node, 0x10000);
             else
-                work->texture = reinterpret_cast<u32>(asdTMTexTablePrepareNodeImage(work->table, work->node));
+                work->texture.texture = (u32)asdTMTexTablePrepareNodeImage(work->texture.table, work->texture.node);
         }
-        work->deferred = 0;
+        work->texture.deferred = 0;
     }
-    work->alpha = 1.0f;
-    work->active = 0;
-    work->visible = 1;
-    work->frame = 0.0f;
-    work->transition[0] = 0.0f;
-    work->transition[1] = 0.0f;
-    work->transition[2] = 0.0f;
-    work->transition[3] = 0.0f;
-    work->transition[4] = 0.0f;
-    work->transition[5] = 0.0f;
-    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052f76c), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0026c568), reinterpret_cast<AsdProcFunc>(asdMTeXReleaseJobContext), reinterpret_cast<u32>(work));
+    work->texture.frame = 0.0f;
+    work->texture.alpha = 1.0f;
+    work->texture.active = 0;
+    work->texture.visible = 1;
+    work->currentOffset[0] = 0.0f;
+    work->currentOffset[1] = 0.0f;
+    work->targetOffset[0] = 0.0f;
+    work->targetOffset[1] = 0.0f;
+    work->startOffset[0] = 0.0f;
+    work->startOffset[1] = 0.0f;
+    asdProcessCreateSimple((const s8 *)DAT_0052f76c, 4, 0, 0, (AsdProcUpdateFunc)FUN_0026c568,
+                           (AsdProcFunc)asdMTeXReleaseJobContext, (u32)work);
 }
-}
+} /* extern "C" */

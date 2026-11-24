@@ -1,7 +1,14 @@
 /* NON_MATCHING: 14 lines in three places, the same instructions row for row (414). Retail loads the wait counter before
  * it sets up the frame and the zero register (the build after); the single step forward loads index and row with one
  * ldm and keeps index + 1 in r1 (the build two ldr, in r2; the 18-step copy matches); and a sprite entry's file is
- * moved into r0 before the branch (movne) where the build moves it after. */
+ * moved into r0 before the branch (movne) where the build moves it after.
+ * The first is <stdio.h>'s sprintf with the two formats as literals (docs/matching-guide.md: the formats are
+ * shared with formattedTextCopyLabel, so no unit can own them); the other two stay with it. Tried without
+ * effect on those: every static/static __inline choice of the eight helpers (256 combinations), `++row` inside
+ * the test, an early return and `+= 1` in browserSelectNext, the store of `current` after the two counters, an
+ * `else if (value != 0)` or a setter around the sprite group's creation; worse: the steps as a count loop
+ * (182 lines), the `!= 0` arm first (107-160), the entry's value or the new group in a local (144-189).
+ * (Scored on Apocalypse's twin, the same source; a sample of them scores the same here.) */
 #include "runtime/Stdio.h"
 #include "AsdSDK/Source/Gfx/Effect/effMenu.h"
 #include "AsdSDK/AsdDebug.h"
@@ -42,7 +49,7 @@ AsdTexture *textureCreateFromImage(const void *image);
 void asdMemFree(void *memory);
 void *spriteGroupCreateFromFile(const void *file);
 void handleBlockRefDrop(void *resource);
-void FUN_00282780(u32 x, u32 y, u32 width, u32 height);
+void effMenuAppendDefaultColorRect(u32 x, u32 y, u32 width, u32 height);
 void effMenuAppendColorRect(u32 x, u32 y, u32 width, u32 height, u32 alpha, u32 flags);
 extern EffMenuLists g_effMenuHandles;
 extern const char g_formatStringPrefixedText[]; /* "%s%s" */
@@ -250,7 +257,7 @@ u32 effMenuBrowserStep(EffMenuBrowser *menu)
         }
     }
 
-    FUN_00282780(menu->x, menu->y, 0xcc, 0xe8);
+    effMenuAppendDefaultColorRect(menu->x, menu->y, 0xcc, 0xe8);
     if (menu->hasPreview != 0) {
         effMenuAppendColorRect(menu->x, menu->y + 0xea, 0x80, 0x80, menu->previewAlpha, 0);
     }

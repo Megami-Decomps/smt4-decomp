@@ -20,7 +20,7 @@ extern const char DAT_0052726c[];
 
 void asdLoadFileAsyncSimple(const char *path, void **resource, s32 mode);
 void nkdwLoadWorldData(Obj557b08 *model, s32 id);
-void FUN_003fcd20(Obj557b08 *model);
+void npcPackageLoad(Obj557b08 *model);
 void aocQueueType0c(u32 system, s32 id, void **handle, const char *path);
 s32 aocPackageHasTextureContent(u32 system, s32 id, s32 flag);
 void aocDisplayQueueFormattedEntry(u32 system, s32 id, void **handle, const char *path); /* declcheck: local (the shared declaration in shard/W5_W5Match7_EntrySort.h does not compile here: argument of type "void **" is incompatible with parameter of type "u32") */
@@ -78,7 +78,7 @@ Obj557b08 *resourceCacheGetOrLoadModel(s32 id, s32 load, s32 synchronous, u32 al
         }
     } else {
         if (id < 0) {
-            FUN_003fcd20(model);
+            npcPackageLoad(model);
         } else {
             nkdwLoadWorldData(model, id);
         }

@@ -255,55 +255,6 @@ typedef char TextureCreateInfoIVLayoutCheck[
     offsetof(TextureCreateInfoIV, policy.hasData) == 0x19 &&
     sizeof(TextureCreateInfoIV) == 0x1C ? 1 : -1];
 
-/* Observed array element stride, not a subsystem identification. Float
- * triplets reflect the VFP stores; no particular vector-class identity is known. */
-struct EntryPoolRecordA {
-    /* 0x000 */ f32 primaryVectors[8][3];
-    /* 0x060 */ u8 unk060[0xC];
-    /* 0x06C */ f32 vector6C[3];
-    /* 0x078 */ u8 unk078[4];
-    /* 0x07C */ f32 secondaryVectors[6][3];
-    /* 0x0C4 */ f32 scalars[6];
-    /* 0x0DC */ u8 unk0DC[0x80];
-    /* 0x15C */ u16 value15C;
-    /* 0x15E */ u8 unk15E[8];
-    /* 0x166 */ u16 value166;
-    /* 0x168 */ u16 value168;
-    /* 0x16A */ u16 value16A;
-    /* 0x16C */ u8 value16C;
-    /* 0x16D */ u8 value16D;
-    /* 0x16E */ u8 unk16E[6];
-    /* 0x174 */ u32 value174;
-    /* 0x178 */ u16 value178;
-    /* 0x17A */ u16 value17A;
-};
-
-/* Known two-word prefix at the relocated base; not a full global boundary. */
-struct EntryPoolCountersA {
-    u32 first;
-    u32 second;
-};
-
-typedef char EntryPoolRecordALayoutCheck[
-    sizeof(EntryPoolRecordA) == 0x17C &&
-    offsetof(EntryPoolRecordA, primaryVectors) == 0 &&
-    offsetof(EntryPoolRecordA, vector6C) == 0x6C &&
-    offsetof(EntryPoolRecordA, secondaryVectors) == 0x7C &&
-    offsetof(EntryPoolRecordA, scalars) == 0xC4 &&
-    offsetof(EntryPoolRecordA, value15C) == 0x15C &&
-    offsetof(EntryPoolRecordA, value166) == 0x166 &&
-    offsetof(EntryPoolRecordA, value168) == 0x168 &&
-    offsetof(EntryPoolRecordA, value16A) == 0x16A &&
-    offsetof(EntryPoolRecordA, value16C) == 0x16C &&
-    offsetof(EntryPoolRecordA, value16D) == 0x16D &&
-    offsetof(EntryPoolRecordA, value174) == 0x174 &&
-    offsetof(EntryPoolRecordA, value178) == 0x178 &&
-    offsetof(EntryPoolRecordA, value17A) == 0x17A ? 1 : -1];
-typedef char EntryPoolCountersALayoutCheck[
-    sizeof(EntryPoolCountersA) == 8 &&
-    offsetof(EntryPoolCountersA, first) == 0 &&
-    offsetof(EntryPoolCountersA, second) == 4 ? 1 : -1];
-
 struct RenderUpdateBatchA;
 
 /* Observed destination prefix, not the destination's complete allocation. */

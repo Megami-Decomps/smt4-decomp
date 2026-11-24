@@ -28,6 +28,15 @@ typedef struct BtlUnitTargetPair {
 
 #define BTL_UNIT_TARGET_PAIR_COUNT 133
 
+/* The HP values an IV unit keeps for one target while its action plays out. */
+struct BtlUnitTargetState {
+    /* 0x00 */ u16 hp;
+    /* 0x02 */ u16 maxHp;
+    /* 0x04 */ u8 unk04[6];
+};
+
+enum { BTL_UNIT_TARGET_COUNT = 109 };
+
 /* A battle unit (Shin Megami Tensei IV): the work block of one acting combatant. The action module
  * keeps four of them (g_btlAction.slots); btlUnitGet returns the one a script context selects. */
 typedef struct BtlUnit {
@@ -55,7 +64,9 @@ typedef struct BtlUnit {
     /* 0x594 */ u32 unk594;         /* the unit's secondary model group */
     /* 0x598 */ u8 unk598[0x10];
     /* 0x5A8 */ BtlUnitTargetPair pairs[BTL_UNIT_TARGET_PAIR_COUNT];
-    /* 0x9D0 */ u8 unk9D0[0x548];
+    /* 0x9D0 */ u8 unk9D0[4];
+    /* 0x9D4 */ BtlUnitTargetState targetStates[BTL_UNIT_TARGET_COUNT];
+    /* 0xE16 */ u8 unkE16[0x102];
 } BtlUnit;
 
 /* One of the action module's unit slots: the script context that owns it, then the unit. */
@@ -69,7 +80,8 @@ typedef char BtlUnitLayoutCheck[
     offsetof(BtlUnit, state) == 4 && offsetof(BtlUnit, command) == 5 && offsetof(BtlUnit, entry) == 0x20 &&
     offsetof(BtlUnit, data) == 0x28 && offsetof(BtlUnit, targets) == 0x38 &&
     offsetof(BtlUnit, parameter) == 0x580 && offsetof(BtlUnit, unk594) == 0x594 &&
-    offsetof(BtlUnit, pairs) == 0x5A8 ? 1 : -1];
+    offsetof(BtlUnit, pairs) == 0x5A8 && offsetof(BtlUnit, targetStates) == 0x9D4 &&
+    sizeof(BtlUnitTargetState) == 0xA ? 1 : -1];
 
 /* What an Apocalypse unit tracks for one target while its action plays out (0x10 bytes). */
 typedef struct BtlUnitTargetStateA {

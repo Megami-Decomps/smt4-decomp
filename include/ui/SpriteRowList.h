@@ -58,4 +58,6 @@ typedef char SpriteRowListOffsetsCheck[
     offsetof(SpriteRowList, leavingAngles) == 0x21BC &&
     offsetof(SpriteRowList, flashFrames) == 0x21E4 &&
     sizeof(SpriteRowList) == 0x21F8 ? 1 : -1];
+
+extern "C" void spriteRowListRefreshMarks(SpriteRowList *list, s32 rowDelta, s32 markDelta);
 #endif

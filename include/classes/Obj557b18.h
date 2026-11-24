@@ -160,6 +160,15 @@ extern "C" void moriModelBodyReleaseOwnedStorage(Obj557b18 *body);
 /* Clears the pending flag (flags bit 2) and the selection. */
 extern "C" void FUN_003fd790(Obj557b18 *body);
 
+/* Sets the shown flag (flags bit 0) of a body that does not have it yet: the quest center does this to its NPC,
+ * marker and cursor models (questCenterBuildTalkEntries, FUN_00468fec, qcNpcSelectStep). */
+static __inline void moriModelBodyShow(Obj557b18 *body)
+{
+    if ((body->flags & 1) == 0) {
+        body->flags |= 1;
+    }
+}
+
 typedef char Obj557b18LayoutCheck[sizeof(Obj557b18Element) == 0x30 &&
     offsetof(Obj557b18, elements) == 0x24 && offsetof(Obj557b18, position) == 0x1B4 && offsetof(Obj557b18, matrix) == 0x1C0 &&
     offsetof(Obj557b18, scale) == 0x1F0 && offsetof(Obj557b18, selection) == 0x208 &&

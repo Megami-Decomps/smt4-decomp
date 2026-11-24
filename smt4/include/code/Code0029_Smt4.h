@@ -38,7 +38,7 @@ void infoWinStartTimer(void);
 
 void FUN_00297b94(PlayScene *scene, s32 selection, s32 page);
 
-u32 FUN_00298e00(u32 id);
+u32 questIsReported(u32 id);
 
 u8 FUN_0029563c(void);
 

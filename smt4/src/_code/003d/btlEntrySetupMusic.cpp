@@ -1,6 +1,7 @@
 /* NON_MATCHING: only two register choices differ: retail puts the forced music kind 22 and the reloaded music kind
  * (compared with 9) in r1, the build in r0. */
 #include "common.h"
+#include "battle/BtlUnitTarget.h"
 #include "gamedata/SkillDataLookup.h"
 #include "gamedata/ConsumableRecord.h"
 
@@ -83,7 +84,6 @@ extern BtlMainFlags *g_btlMain;
 extern u32 g_btlAux;
 
 void FUN_002569ac(BtlMainState **battle, u32 value);
-void btlEntryValuesCopy(BtlMainState **battle, BtlSetupEntry *entry);
 void entryInvalidateStateTable(BtlMainState *state);
 void entryTableInvalidate(u32 table);
 void FUN_003da890(u32 table);
@@ -114,7 +114,7 @@ void btlEntrySetupMusic(BtlMainState **battle, BtlSetupEntry *entry, u32 unused3
     }
     entry->unk59C = 0;
     FUN_002569ac(battle, (*battle)->unk84);
-    btlEntryValuesCopy(battle, entry);
+    btlEntryValuesCopy(battle, (BtlUnit *)entry);
     entry->musicKind = 0;
     if (((*battle)->flags & BTL_FLAG_SKIP_BGM_KIND) == 0) {
         if (((*battle)->flags & BTL_FLAG_FIXED_ENCOUNTER) == 0) {

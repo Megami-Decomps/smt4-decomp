@@ -1,4 +1,4 @@
-/* NON_MATCHING: first render-stack push schedules depth and previous state differently; second pop loads the stack base into a different register. */
+/* NON_MATCHING: 10 lines. The pushes and pops match, but the label's x/y sums use different core registers. */
 #include "font/SearchWin/RunWin.h"
 #include "ui/UiSpriteApi.h"
 #include "gfx/SpritePartDraw.h"
@@ -10,18 +10,6 @@
 #include "camp/RenderCtx.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxTitle.h"
-
-/* Pushes the evaluated state on the title scene's second stack. */
-static __inline void titleScenePushSecond(RenderCtx *scene, s32 state)
-{
-    renderStackPushCounted(scene->stacks + RENDER_STACK_B, state);
-}
-
-/* Pops the title scene's first stack. */
-static __inline void titleScenePopFirst(RenderCtx *scene)
-{
-    renderStackPop(scene->stacks + RENDER_STACK_A);
-}
 
 extern "C" {
 extern RunWinWork *g_searchWin;
@@ -42,19 +30,21 @@ u8 runWinDrawLoadingDots(void)
     }
     {
         renderCtxSelectStereoLayout(g_titleScene);
-        RenderCtx *first = g_titleScene;
-        renderCtxPushACountedDirect(first, renderCtxPackPassFlags(1, 0));
+        RenderCtx *scene = g_titleScene;
+        s32 state = renderCtxPackPassFlags(1, false);
+        renderStackPushCounted(scene->stacks + RENDER_STACK_A, state);
         s32 x = vec2GetXInt(&win->window) + (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
         s32 y = vec2GetYInt(&win->window);
         efctSetSpeed(win->window.alpha);
         texDrawCompositeSprite(2, 14, 0x14, x, y, 101);
-        RenderCtx *scene = g_titleScene;
-        titleScenePushSecond(scene, packNibblesAndByte(6, 1, 0));
+        scene = g_titleScene;
+        state = packNibblesAndByte(6, 1, 0);
+        renderStackPushCounted(scene->stacks + RENDER_STACK_B, state);
         texDrawCompositeSprite(2, 14, 0x15, x, y, 102);
-        renderStackPopChecked(g_titleScene->stacks + RENDER_STACK_B);
+        renderCtxPopCounted(g_titleScene, RENDER_STACK_B);
         TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(14, 0x16F);
         textDrawString((f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 4, 0.0f,
-                       0xF49800FF, win->window.alpha, reinterpret_cast<const char *>(win->text));
+                       0xF49800FF, win->window.alpha, (const char *)win->text);
         s32 lit = (win->counter / 5) % 8;
         s32 litPrevious = (lit + 7) % 8;
         s32 lit2 = (win->counter / 5 + 4) % 8;
@@ -73,7 +63,7 @@ u8 runWinDrawLoadingDots(void)
         }
         gxResetColorQuadToWhite();
         efctSetSpeed(1.0f);
-        titleScenePopFirst(g_titleScene);
+        renderCtxPopCounted(g_titleScene, RENDER_STACK_A);
     }
     return 0;
 }

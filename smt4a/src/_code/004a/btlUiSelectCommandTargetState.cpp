@@ -1,4 +1,4 @@
-/* NON_MATCHING: register-only with the s8 flag: retail reloads the flag at the end through a pool-literal 0x74b0 + register index and keeps the UI object in r6 and constants in r9,sl,fp,r8. */
+/* NON_MATCHING: the UI global base and constant 1 swap saved registers; this build also inserts two padding hints before the panel-operation check. */
 #include "battle/BtlUiGlobal.h"
 #include "gamedata/SkillDataRecord.h"
 #include "gamedata/ConsumableRecordA.h"
@@ -66,7 +66,7 @@ void btlUiSelectCommandTargetState()
         menu32EnterState27((Menu32 *)&ui->objC);
         BtlUiA *current = g_btlUi.ui;
         if (menu32ModeIsNot5(&current->objA) != 0 &&
-            btlUiPanelOperationIsAllowed(FUN_00502754(reinterpret_cast<u8 *>(&current->objA) + 0x23F8)) != 0) {
+            btlUiPanelOperationIsAllowed(FUN_00502754(current->objA.tail.subobject)) != 0) {
             uiWorkEndState1(&current->objA);
             owner2DCInitSub(&current->objB);
         }

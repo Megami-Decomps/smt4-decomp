@@ -37,7 +37,7 @@ void frameTransitionSetMode(int);
 int commonBgBeginExit(void);
 int objectE0ResetFlags1040(void);
 int campCommonBgRelease(void);
-int FUN_0037a2e4(void);
+int titleConfigCreate(void);
 int saveLoadStartDefaultWindow(void);
 int mobiclipProcessSetFlag77(...);
 int FUN_003c4f28(...);
@@ -130,7 +130,7 @@ extern int FUN_0035e6d4(unsigned int *);
 /* Supplied declaration required: FUN_00363c58. */
 /* Supplied declaration required: mobiclipProcessCreate. */
 /* Supplied declaration required: texEntrySpritesLoad. */
-/* Supplied declaration required: FUN_0037a2e4. */
+/* Supplied declaration required: titleConfigCreate. */
 extern int titleConfigIsClosed(void);
 extern int saveLoadUIHasResult(void);
 /* Supplied declaration required: saveLoadStartDefaultWindow. */
@@ -849,7 +849,7 @@ LAB_0029fb00:
     break;
   case 0xf:
     if (*(char *)((int)DAT_00589170 + 0x5a) == '\0') {
-      FUN_0037a2e4();
+      titleConfigCreate();
       puVar4[0x1f] = 0;
       puVar4[0x1e] = 0x10;
       puVar4[0x20] = 0;

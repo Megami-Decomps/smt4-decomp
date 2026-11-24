@@ -11,7 +11,7 @@ int FUN_00200bcc(unsigned char *);
 int FUN_00202178(...);
 int effEditorNodeChainApply(unsigned char *);
 int asdDebugLog(...);
-int FUN_002b3fd8(int, int, int, int);
+int effMenuAppendDefaultColorRect(int, int, int, int);
 int effMenuAppendColorRect(int, int, int, int, unsigned int, unsigned int);
 int effMenuListAppend(void);
 int VectorSignedToFloat(int, int);
@@ -56,7 +56,7 @@ extern float DAT_00635340; /* 0x635340 */
 /* Supplied declaration required: FUN_00202178. */
 /* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: asdDebugLog. */
-/* Supplied declaration required: FUN_002b3fd8. */
+/* Supplied declaration required: effMenuAppendDefaultColorRect. */
 /* Supplied declaration required: effMenuAppendColorRect. */
 /* Supplied declaration required: effMenuListAppend. */
 
@@ -225,7 +225,7 @@ LAB_00346144:
   param_1[1] = temp_v1;
   *(float *)&param_1[2] = temp_v8;
   *(float *)&param_1[3] = temp_v12;
-  FUN_002b3fd8(0xa0,0x6c,0xdc,0x4c);
+  effMenuAppendDefaultColorRect(0xa0,0x6c,0xdc,0x4c);
   effEditorNodeChainApply(&DAT_0059efb8);
   temp_v14[0] = 0;
   temp_v15[0] = (float)((unsigned long long)temp_v13 >> 0x20);

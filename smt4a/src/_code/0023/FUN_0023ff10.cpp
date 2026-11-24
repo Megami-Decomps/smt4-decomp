@@ -37,7 +37,7 @@ extern QuestUi *g_uiQuest;
 
 void sysPlaySe(u32 id);
 s32 resourceRunOperationIfUnblocked(void *list);
-s32 partyEntryFlagsBit3(u32 id);
+s32 questIsCompleted(u32 id);
 u32 rosterGetLeaderId(void);
 
 /* Plays the cursor sound for the quest screen's current page/column and sets up the help buttons for the
@@ -119,7 +119,7 @@ void FUN_0023ff10(void)
         buttonHelpSelectSlot(2, 0x12, 0, 1);
     } else {
         if (record != NULL && (record->kind == 6 || record->kind == 9 || record->kind == 11)) {
-            s32 hasBit = partyEntryFlagsBit3(id);
+            s32 hasBit = questIsCompleted(id);
             u8 kind = 0;
 
             if (hasBit != 0) {

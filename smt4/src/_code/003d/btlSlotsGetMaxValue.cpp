@@ -1,5 +1,6 @@
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlEntry.h"
+#include "battle/BtlUnitTarget.h"
 #include "battle/btlMain.h"
 
 extern "C" {
@@ -17,8 +18,6 @@ typedef struct BtlUnitTable {
     /* 0x5A8 */ BtlSlot slots[BTL_SLOT_COUNT];
 } BtlUnitTable;
 
-extern s32 btlUnitIsDeadAndUncopied(BtlMainState **state, BtlUnitTable *table, s32 unit);
-
 /* Largest slot value among the used slots whose entry is in the battle and passes btlUnitIsDeadAndUncopied. */
 s32 btlSlotsGetMaxValue(BtlMainState **state)
 {
@@ -30,7 +29,7 @@ s32 btlSlotsGetMaxValue(BtlMainState **state)
         if (table->slots[i].entry >= 0 || table->slots[i].value != 0) {
             BtlEntry *entry = &(*state)->entries[table->slots[i].entry];
 
-            if ((entry->flags & 1) != 0 && btlUnitIsDeadAndUncopied(state, table, entry->ids[0]) == 0 && best < table->slots[i].value) {
+            if ((entry->flags & 1) != 0 && btlUnitIsDeadAndUncopied(state, (BtlUnit *)table, entry->ids[0]) == 0 && best < table->slots[i].value) {
                 best = table->slots[i].value;
             }
         }

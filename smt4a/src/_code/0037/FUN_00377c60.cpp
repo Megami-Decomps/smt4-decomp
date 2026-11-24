@@ -1,5 +1,6 @@
-/* NON_MATCHING: vector argument loads split differently, record address lifetime and VMUL/VADD versus VMLA lowering differ. */
-#include "shard/W9_W9Match8_WorkRecords.h"
+/* NON_MATCHING: the build pools the entry-array address separately (retail derives it from the object table).
+ * Vector loads, branch layout, and fused multiply-adds also differ. */
+#include "shard/RuntimeEntryTable.h"
 #include "shard/S1Mover.h"
 
 struct DebugBoundsShapeA {
@@ -13,17 +14,16 @@ struct DebugBoundsObjectA {
     const DebugBoundsShapeA *shape;
 };
 extern "C" {
-extern s32 DAT_00580c90;
 extern DebugBoundsObjectA *DAT_005f3020[];
 void FUN_002039a0(u32, Vec3f, Vec3f);
 
 void FUN_00377c60()
 {
-    EntryPoolRecordA *records = reinterpret_cast<EntryPoolRecordA *>(reinterpret_cast<u8 *>(DAT_005f3020) + 0x280);
-    for (s32 i = 0; i < DAT_00580c90; ++i) {
+    RuntimeEntry *records = g_recordTable;
+    for (s32 i = 0; i < DAT_00580c90.boundsCount; ++i) {
         const DebugBoundsShapeA *shape = DAT_005f3020[i]->shape;
         s32 kind = *shape->kind;
-        EntryPoolRecordA *record = &records[i];
+        RuntimeEntry *record = &records[i];
         const Vec3f *vertices = reinterpret_cast<const Vec3f *>(record->primaryVectors);
         if (kind == 1) {
             if (shape->subtype == 0x27) {

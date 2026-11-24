@@ -19,7 +19,7 @@ int modelEvaluateFirstScalarChannel(...);
 int aocActivateFileGroupFlags(...);
 int playerInitNewGame(...);
 int mapRestoreSavedSelection(void);
-int FUN_0026ff54(void);
+int saveLoadUiRestoreBackups(void);
 int frameTexCampSetMode(...);
 int FUN_00275dc4(void);
 int animationEvaluateCallback(...); // declcheck: local (romwright prototype; the shared declaration in AsdSDK/Source/Gfx/Model/AsdMotionControlApi.h does not compile here: more than one instance of overloaded function "modelSetScale" has "C" linkage)
@@ -108,7 +108,7 @@ extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: playerInitNewGame. */
 /* Supplied declaration required: encounterFlagsRollSlots. */
 /* Supplied declaration required: mapRestoreSavedSelection. */
-/* Supplied declaration required: FUN_0026ff54. */
+/* Supplied declaration required: saveLoadUiRestoreBackups. */
 /* Supplied declaration required: frameTexCampSetMode. */
 /* Supplied declaration required: FUN_00275dc4. */
 extern int jobWorkerPollAndFree(void);
@@ -604,7 +604,7 @@ LAB_001ea4cc:
         }
       }
       else {
-        FUN_0026ff54();
+        saveLoadUiRestoreBackups();
         mapSceneResetState(1);
         temp_v4 = gameDataBlocksGetSaveData();
         if (*(unsigned char *)(temp_v4 + 2) >= 2) {

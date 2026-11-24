@@ -31,7 +31,7 @@ enum {
 extern "C" {
 extern ConfigWorkA *g_config;
 
-s32 uiSearchPrimary(const GridNavigation *cursor);
+s32 uiListGetVisibleCount(const GridNavigation *cursor);
 void skinObjectUpdateMatrices(RenderCtxA *context); // declcheck: local (called with the render context, as titleMainDraw and campDrawCurrentSubscreen do; the shared prototype names a SkinObject)
 void renderCtxResetColorScale(RenderCtxA *context);
 void configDrawRowFrame(s32 x, s32 y, s32 selected, s32 wide, s32 locked, f32 speed);
@@ -87,7 +87,7 @@ static __inline void configDrawRows(ConfigWorkA *config, f32 speed)
 
     if (configNameTable(0) != NULL) {
         s32 firstImage = config->firstRegionImage;
-        s32 rows = uiSearchPrimary(&config->cursor);
+        s32 rows = uiListGetVisibleCount(&config->cursor);
         ConfigNameTableA *names = configNameTable(0);
         for (s32 i = 0; i < rows; i++) {
             char text[64];

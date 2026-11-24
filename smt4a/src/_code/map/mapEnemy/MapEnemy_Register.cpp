@@ -2,7 +2,13 @@
  * model through r1, the build has them the other way round (18 lines, the same instructions). Declaring `pair` at
  * function scope ahead of the entry loop compiles to retail's bytes, but nothing supports that scoping, so it is
  * not used. The spawn-group arrays are cleared element by element because that is the form whose prologue and
- * entry loop match; inner loops unroll to the same stores with other registers. */
+ * entry loop match; inner loops unroll to the same stores with other registers.
+ * Wave 90: an inner loop per spawn group (one loop of three stores or three loops: the likely original; armcc
+ * unrolls both to these 48 stores in address order) gives the same 256 rows at 38 lines: the
+ * extra-model loop then takes retail's pair, but the allocation's three pool loads and the basePosition copy
+ * take the other pair (ldm r0, {r0, r2}; stm r1), which is exactly what IV's twin still differs by. So the
+ * two sites trade against each other with the number of locals; indexing the extra models without `pair`
+ * (42 shape), walking a pointer (25), an unsigned or shared counter (20, 40) and a do/while (18) do not help. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"

@@ -1,12 +1,14 @@
-/* NON_MATCHING: 24 lines, registers and prologue order only: the choice count read for the list store
- * (retail r1, built r0), one temporary in the first marker-hiding loop, and the order of the hoisted
- * field addresses in the prologue (retail computes &choiceCount first). The highlight loop matches now
- * that the offered NPC's number is read before the cursor test. Retail's address order says the
- * choice-list loop of step 0 is an inlined function body: as a helper (with a 128-byte glyph buffer and
- * `path` declared before `messagePath`, which then give retail's 260-byte frame, and choiceNpc a plain
- * `static`) the count and the address order match and 22 lines remain, the prologue's first adds and the
- * marker-hiding temporary. That helper would have one call site and no other evidence, so the loop
- * stays in place. */
+/* NON_MATCHING: 6 lines, both about &work->choiceCount in step 0's choice-list loop: retail hoists that address
+ * first of the five field addresses in the prologue (the build: fourth, before &selected), and reads the count for
+ * the list store into r1 (`ldr r1; add r0, r4, r1, lsl #2`; the build: r0). The rest is retail's with the real
+ * buffers (128 bytes each, as Apocalypse's twin FUN_0046b18c has them; `path` below `messagePath` on the stack):
+ * the 260-byte frame needs the two marker-hiding loops written in place (as an inline helper they cost 8 more bytes
+ * of frame, which an earlier draft hid with a 120-byte glyph buffer), and the highlight loop needs choiceNpc as a
+ * plain `static` like selectedNpcIsFinished. Tried on top: `++` in the test (26), a post-increment subscript
+ * (stores the count first), the hide loops and the list loop sharing one `i` (18), the cursor test before the
+ * NPC read (10). With step 0's list build (clear the text, zero the count, the loop) as a helper, inline or plain
+ * static, this source is IDENTICAL; that helper has one call site, no real function has its body and the only other
+ * inliner would be Apocalypse's twin, so it is not written. */
 #include <stdio.h>
 #include "ui/DummyAttachmentWork.h"
 #include "script/scrScriptProcess.h"
@@ -60,7 +62,7 @@ static __inline AnimOwner *selectedNpcAnim(DummyAttachmentWork *work)
 }
 
 /* The 1-based marker number of the NPC offered as choice `choice`. */
-static __inline s32 choiceNpc(DummyAttachmentWork *work, s32 choice)
+static s32 choiceNpc(DummyAttachmentWork *work, s32 choice)
 {
     return work->npcEntries[work->choices[choice]].npc;
 }
@@ -69,14 +71,6 @@ static __inline s32 choiceNpc(DummyAttachmentWork *work, s32 choice)
 static u32 selectedNpcIsFinished(DummyAttachmentWork *work)
 {
     return effIsFinished(work->primary[work->selected->npc - 1]->node);
-}
-
-/* Hide every offered NPC's selection marker. */
-static __inline void hideChoiceMarkers(DummyAttachmentWork *work)
-{
-    for (s32 i = 0; i < work->choiceCount; i++) {
-        asdMdlObjectHide(work->secondary[work->npcEntries[work->choices[i]].npc - 1]);
-    }
 }
 
 extern "C" {
@@ -102,7 +96,7 @@ void qcNpcSelectStep(DummyAttachmentWork *work)
         work->choiceCount = 0;
         for (s32 i = 0; i < work->npcEntryCount; i++) {
             char name[128];
-            char glyphs[120];
+            char glyphs[128];
             libc_strcpy((unsigned int *)name,
                         (unsigned int *)dataTable27Sub0GetRecord(&work->npcTable, 0)[work->npcEntries[i].record].name);
             textConvertToGlyphPairs(name, glyphs);
@@ -148,7 +142,10 @@ void qcNpcSelectStep(DummyAttachmentWork *work)
             FUN_002e1230(selectedNpcAnim(work), 0);
             work->step++;
             flagWordSet(&work->flags, 0x100);
-            hideChoiceMarkers(work);
+            /* Hide every offered NPC's marker. */
+            for (s32 i = 0; i < work->choiceCount; i++) {
+                asdMdlObjectHide(work->secondary[choiceNpc(work, i) - 1]);
+            }
             buttonHelpSetPreset(0xa2);
             work->lastChoice = work->cursor;
             return;
@@ -157,11 +154,13 @@ void qcNpcSelectStep(DummyAttachmentWork *work)
         work->step = 5;
         work->playback.requested = 0;
         flagWordClear(&work->flags, 0x100);
-        hideChoiceMarkers(work);
+        for (s32 i = 0; i < work->choiceCount; i++) {
+            asdMdlObjectHide(work->secondary[choiceNpc(work, i) - 1]);
+        }
         break;
     case 2: {
-        char messagePath[64];
         char path[64];
+        char messagePath[64];
         u16 id = dataTable27Sub0GetRecord(&work->npcTable, 0)[work->selected->record].resourceId;
         sprintf(path, "quest_center/npc/n%03d/n%03d.bf", id, id);
         sprintf(messagePath, "quest_center/npc/n%03d/n%03d.mbm", id, id);

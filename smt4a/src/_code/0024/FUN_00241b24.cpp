@@ -37,14 +37,14 @@ void FUN_00241b24(int *param_1,int param_2)
       iVar7 = iVar6;
       if (*param_1 != 0) {
         FUN_00100388(auStack_98,0x241e80);
-        FUN_002b3fd8(iVar9,iVar6,0x96,0xe);
+        effMenuAppendDefaultColorRect(iVar9,iVar6,0x96,0xe);
         DAT_005c10cc = iVar9 + 2;
         DAT_005c10d4 = 5;
         iVar7 = iVar6 + 0x12;
         DAT_005c10d0 = iVar6 + 0xc;
       }
       if ((param_1[4] & 4U) == 0) {
-        FUN_002b3fd8(iVar9,iVar7,0x96,param_1[6] * 10 + 4);
+        effMenuAppendDefaultColorRect(iVar9,iVar7,0x96,param_1[6] * 10 + 4);
       }
       DAT_005c10cc = iVar9 + 2;
       DAT_005c10d0 = iVar7 + 2;

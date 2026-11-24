@@ -19,13 +19,13 @@
 
 extern "C" {
 
-s32 uiSearchPrimary(const void *controller);
+s32 uiListGetVisibleCount(const void *controller);
 u32 uiQuestDrawRowPlate(u32 questId, s32 x, s32 y, s32 depth, s32 focused, s32 pressed);
 const char *questDataGetTitle(u32 questId, u32 key);
 void partyDrawCategorySelectionIcon(s32 id, u32 x, u32 y, u32 flags);
 void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 mode);
 u32 partyEntryBitsBit4(s32 index);
-u32 partyEntryFlagsBit3(s32 index);
+u32 questIsCompleted(s32 index);
 u32 questHasSpecialDetailPage(u32 id);
 void uiDrawListScrollBar(Object *widget, s32 x, s32 y, u32 group, u32 frameId, u32 trackId, u32 trackPressedId, u32 arrowAId,
                          u32 arrowAPressedId, u32 arrowBId, u32 arrowBPressedId, u32 thumbRegion, s32 arrowARegion,
@@ -65,7 +65,7 @@ void uiQuestDrawList(void)
         texDrawTableEntryAtStoredOrigin(2, 0x1e, 0x83, x, y, 0x6a);
     }
 
-    for (s32 row = 0; row < uiSearchPrimary(cursor); row++) {
+    for (s32 row = 0; row < uiListGetVisibleCount(cursor); row++) {
         if (quest->menuState == 2 && listCursorGetRowIfUnblocked(cursor) == row) {
             continue;
         }
@@ -91,7 +91,7 @@ void uiQuestDrawList(void)
         }
     }
 
-    if (uiSearchPrimary(cursor) > 0 &&
+    if (uiListGetVisibleCount(cursor) > 0 &&
         (quest->menuState == 2 || quest->menuState == 6 || quest->menuState == 7 || quest->menuState == 8 ||
          quest->menuState == 9 || quest->menuState == 10)) {
         s32 row = listCursorGetRowIfUnblocked(cursor);
@@ -145,7 +145,7 @@ void uiQuestDrawList(void)
         TextureTableEntryIV *name = asdTMTexTableEntryAt(0x1e, 0xb2);
         sprintf(text, "%s", questDataGetTitle(id, 0));
         textDrawString((f32)(focus->x + name->x + x), (f32)(focus->y + name->y + y), 0.32f, 3, 0.0f, color, alpha, text);
-        if (partyEntryFlagsBit3(id)) {
+        if (questIsCompleted(id)) {
             texDrawTableEntryAtStoredOrigin(2, 0x1e, 0xb0, focus->x + x, focus->y + y, 0xab);
         } else {
             texDrawTableEntryAtStoredOrigin(2, 0x1e, 0xaf, focus->x + x, focus->y + y, 0xab);

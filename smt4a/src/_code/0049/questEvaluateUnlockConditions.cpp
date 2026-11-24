@@ -2,7 +2,7 @@
 
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-s32 partyEntryFlagsBit3(u16 quest);
+s32 questIsCompleted(u16 quest);
 
 // Classify a record as unavailable, unconditional or unlocked by its prerequisites.
 u32 questEvaluateUnlockConditions(const QuestUnlockConditions *conditions)
@@ -15,7 +15,7 @@ u32 questEvaluateUnlockConditions(const QuestUnlockConditions *conditions)
     }
     if (conditions->blockedFlag != 0 && gameFlagIsSet(conditions->blockedFlag))
         return 0;
-    if (conditions->requiredQuest == 0 || partyEntryFlagsBit3(conditions->requiredQuest))
+    if (conditions->requiredQuest == 0 || questIsCompleted(conditions->requiredQuest))
         return 2;
     return 0;
 }

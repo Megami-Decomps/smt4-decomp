@@ -7,7 +7,7 @@
 #include "mobiclip_ctrl/MobiclipCtrl.h"
 
 extern "C" {
-s32 FUN_001a1d08();
+s32 saveLoadRequestUpdate();
 void saveLoadThreadRequestInit(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
 void *gameDataBlocksGetTable();
@@ -28,7 +28,7 @@ s32 saveLoadProcessLoadUpdate(u32 job)
         work->state = 5;
         break;
     case 5:
-        if (FUN_001a1d08() == 1) {
+        if (saveLoadRequestUpdate() == 1) {
             if (byte1IsZero() == 0) {
                 const SaveFilePayloadIV *payload = static_cast<const SaveFilePayloadIV *>(work->buffer);
                 const u32 *table = payload->table;

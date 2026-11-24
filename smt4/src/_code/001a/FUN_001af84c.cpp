@@ -39,9 +39,9 @@ s32 questPassesAvailabilityConditions(s32 quest);
 bool questIsOfferable(u16 quest);
 s32 questQueryFalse(void);
 s32 questIsCompleted(s32 quest);
-s32 FUN_00298dc8(void);
-s32 FUN_00298e00(s32 quest);
-s32 FUN_00298e40(s32 quest, s32 step, s32 *progress);
+s32 questHasNewMark(void);
+s32 questIsReported(s32 quest);
+s32 questGetRequirementProgress(s32 quest, s32 step, s32 *progress);
 s32 recordCategoryNineIsActiveInMode24(s32 quest);
 void texDrawCompositeSprite(u32 layer, u32 table, u32 sprite, u32 x, u32 y, u32 flags);
 
@@ -68,7 +68,7 @@ u32 FUN_001af84c(u16 quest, u32 x, u32 y, u32 flags, s32 full)
     s32 progress[3];
 
     if (g_uiQuest->detailOpen != 0) {
-        if (FUN_00298dc8() != 0) {
+        if (questHasNewMark() != 0) {
             if (rosterGetLeaderId() != 0) {
                 texDrawTableEntryAtStoredOrigin(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_ACTIVE_LOCKED, x, y, flags);
                 color = questColorDim(full);
@@ -90,8 +90,8 @@ u32 FUN_001af84c(u16 quest, u32 x, u32 y, u32 flags, s32 full)
     if (record->kind == 0) {
         bool allDone = true;
         for (s32 step = 0; step < QUEST_STEP_COUNT; step++) {
-            if (FUN_00298e40(quest, step, progress) != 0
-                && ((questIsCompleted(quest) != 0 && FUN_00298e00(quest) == 0) || progress[0] > 0)) {
+            if (questGetRequirementProgress(quest, step, progress) != 0
+                && ((questIsCompleted(quest) != 0 && questIsReported(quest) == 0) || progress[0] > 0)) {
                 allDone = false;
                 break;
             }
@@ -101,12 +101,12 @@ u32 FUN_001af84c(u16 quest, u32 x, u32 y, u32 flags, s32 full)
                 texDrawCompositeSprite(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_NEW, x, y, flags);
             } else if (questIsCompleted(quest) != 0) {
                 texDrawTableEntryAtStoredOrigin(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_DONE, x, y, flags);
-                if (FUN_00298e00(quest) != 0)
+                if (questIsReported(quest) != 0)
                     color = questColorNormal(full);
                 else
                     color = questColorDim(full);
             }
-        } else if (FUN_00298e00(quest) == 0 && questIsCompleted(quest) != 0) {
+        } else if (questIsReported(quest) == 0 && questIsCompleted(quest) != 0) {
             texDrawTableEntryAtStoredOrigin(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_DONE, x, y, flags);
         } else {
             texDrawTableEntryAtStoredOrigin(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_AVAILABLE_ENTRY, x, y, flags);

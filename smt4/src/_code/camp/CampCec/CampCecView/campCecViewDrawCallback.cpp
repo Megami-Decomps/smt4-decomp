@@ -38,7 +38,7 @@ void uiDrawPanelWithValue(CecViewWidget *, s32, s32, u32, s32);
 void FUN_001eb874(u32, CecViewSavedRecord *, CecViewWidget *, s32, s32, bool);
 void FUN_002e15f8(CecViewWidget *, s32, s32);
 void FUN_002ec0b4(s32, s32);
-void FUN_002ec0fc(CecViewWidget *, s32, s32, u32, u32, u32, s32, s32, s32);
+void campCecViewDrawScrollTrack(CecViewWidget *, s32, s32, u32, u32, u32, s32, s32, s32);
 
 u32 campCecViewDrawCallback()
 {
@@ -62,7 +62,7 @@ u32 campCecViewDrawCallback()
             FUN_002ec0b4(x, y);
     }
     u32 flags = fields->flags;
-    FUN_002ec0fc(&fields->widgets[3], 0, 0, flags & 1, (flags & 2) >> 1, (flags & 4) >> 2,
+    campCecViewDrawScrollTrack(&fields->widgets[3], 0, 0, flags & 1, (flags & 2) >> 1, (flags & 4) >> 2,
                  fields->selected, fields->first, fields->count);
     renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderCtxApplyTransforms(g_titleScene);

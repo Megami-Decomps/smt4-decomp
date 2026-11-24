@@ -1,7 +1,7 @@
-#include "common.h"
+#include "battle/BtlDebugMenuEntry.h"
 
-// Compare the leading byte keys of two records.
-extern "C" s32 dataSet16CompareByteKeys(const u8 *left, const u8 *right)
+/* Compares the leading byte keys of two command records. */
+extern "C" s32 dataSet16CompareByteKeys(const void *left, const void *right)
 {
-    return *left - *right;
+    return ((const BtlDebugEntry *)left)->kind - ((const BtlDebugEntry *)right)->kind;
 }

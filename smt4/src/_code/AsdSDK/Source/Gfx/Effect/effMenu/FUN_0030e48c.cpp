@@ -8,7 +8,7 @@ extern "C" {
 int FUN_00256dbc(...);
 int entryListSetPhase(...);
 int effectSpawnPositionDefault(...);
-int forwardRecoveredCallback(void);
+int effectSubmitDefaultDrawParameters(void);
 int FUN_00263028(...);
 int cameraProjectToScreen(...);
 int FUN_002b011c(void);
@@ -51,7 +51,7 @@ extern unsigned int asdCameraValueGet(unsigned int);
 /* Supplied declaration required: FUN_00256dbc. */
 /* Supplied declaration required: entryListSetPhase. */
 /* Supplied declaration required: effectSpawnPositionDefault. */
-/* Supplied declaration required: forwardRecoveredCallback. */
+/* Supplied declaration required: effectSubmitDefaultDrawParameters. */
 /* Supplied declaration required: FUN_00263028. */
 /* Supplied declaration required: cameraProjectToScreen. */
 /* Supplied declaration required: FUN_002b011c. */
@@ -262,7 +262,7 @@ joined_r0x0030e620:
       effectSpawnPositionDefault(0xffffffff);
       effectSpawnPositionDefault(0xffffffff);
       effectSpawnPositionDefault(0xffffffff);
-      forwardRecoveredCallback();
+      effectSubmitDefaultDrawParameters();
       break;
     case 10:
       temp_v7 = param_2[8];

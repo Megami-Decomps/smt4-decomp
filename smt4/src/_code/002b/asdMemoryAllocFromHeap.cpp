@@ -1,4 +1,3 @@
-/* NON_MATCHING: only where `block` is cleared: retail sets it after the size test, next to the default alignment; the build clears it before the test. Assigning `block = NULL;` right after `alignment = 8;` is IDENTICAL (as in smt4a asdMemoryAllocImpl) but was found by trying placements. */
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
 
@@ -22,14 +21,12 @@ static __inline void *allocateLocked(void *heap, void *lock, u32 size, s32 align
  * a negative alignment allocates from the back of an ExpHeap. */
 void *asdMemoryAllocFromHeap(s32 heap, u32 alignmentClass, u32 unused, u32 size, s32 fromFront)
 {
-    void *block = NULL;
-    s32 alignment;
-
     if (size == 0) {
         return NULL;
     }
 
-    alignment = 8;
+    s32 alignment = 8;
+    void *block = NULL;
     switch (alignmentClass) {
     case ASD_ALIGN_DEFAULT:
         alignment = 4;

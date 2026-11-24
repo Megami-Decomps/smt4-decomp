@@ -14,7 +14,7 @@
 
 extern "C" {
 
-u32 btlListedActionsPending(BtlMainState *battle);
+u32 btlHasFilteredCommand(BtlMainState *battle);
 u32 btlRollAilmentChance(u32 id, s32 ailment);
 u32 FUN_00246d38(s32 actor, u32 options, BtlActionRecord *target, u32 mask);
 void btlUiRefreshSlotRanks(BtlUi *ui);
@@ -90,7 +90,7 @@ static __inline void btlTurnCounterAdd(u8 *counter)
  * count the ailments' turns, the support unit may comment, and the turn passes to the other side. */
 void btlTurnEnd(BtlMainState *battle)
 {
-    if (btlListedActionsPending(battle) != 0) {
+    if (btlHasFilteredCommand(battle) != 0) {
         btlRequestState(12);
         return;
     }

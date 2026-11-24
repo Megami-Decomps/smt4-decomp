@@ -12,7 +12,7 @@ struct SaveLoadThreadRequest {
     u32 file; // 0x04
     u32 slot; // 0x08
     s32 step; // 0x0c: the confirmation script's step (saveLoadConfirmScriptStep)
-    u8 unk10[4];
+    /* 0x10 */ u32 confirmFrames; /* frames spent running the request's script and transitions */
     void *payload; // 0x14
     u32 payloadSize; // 0x18
     u8 unk1c[4];
@@ -29,6 +29,7 @@ struct SaveLoadThreadRequest {
 
 typedef char SaveLoadThreadRequestLayoutCheck[sizeof(SaveLoadThreadRequest) == 0x5c && offsetof(SaveLoadThreadRequest, file) == 4 && offsetof(SaveLoadThreadRequest, payload) == 0x14 && offsetof(SaveLoadThreadRequest, payloadSize) == 0x18 && offsetof(SaveLoadThreadRequest, messageFile) == 0x50 && offsetof(SaveLoadThreadRequest, modelFile) == 0x54 ? 1 : -1];
 typedef char SaveLoadThreadRequestWorkerOffsets[
+    offsetof(SaveLoadThreadRequest, confirmFrames) == 0x10 &&
     offsetof(SaveLoadThreadRequest, stackAllocation) == 0x28 &&
     offsetof(SaveLoadThreadRequest, stack) == 0x2c &&
     offsetof(SaveLoadThreadRequest, thread) == 0x44 &&

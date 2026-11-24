@@ -5,7 +5,7 @@ extern "C" {
 
 
 int ifTouchRegionRemove(void);
-int uiSearchPrimary(u32 group);
+int uiListGetVisibleCount(u32 group);
 
 /* Removes the list screen's touch regions: the scroll bar's and every used row's for `group`; with `keep` clear it also runs two trailing ifTouchRegionRemove calls. */
 void campTouchRegionsRemoveGroup(u32 group, int keep)
@@ -22,14 +22,14 @@ void campTouchRegionsRemoveGroup(u32 group, int keep)
     block->touch.scrollRegions[3] = -1;
     block->touch.scrollRegions[4] = -1;
     i = 0;
-    if (uiSearchPrimary(group) > 0) {
+    if (uiListGetVisibleCount(group) > 0) {
         do {
             if (block->touch.rowRegions[i] >= 0) {
                 ifTouchRegionRemove();
                 block->touch.rowRegions[i] = -1;
             }
             i++;
-        } while (uiSearchPrimary(group) > i);
+        } while (uiListGetVisibleCount(group) > i);
     }
     if (keep == 0) {
         ifTouchRegionRemove();

@@ -1,6 +1,5 @@
-/* NON_MATCHING: 12 lines: retail loads &g_mapDepartWork before hoisting the 99 state into r6, and stores the lowered-sky vector x, z, y with three vstr where armcc pairs x and y into a vstmia (writing the stores x, z, y leaves only the prologue order, 2 lines; not done, the order has no reason besides the score). */
 #include "common.h"
-#include "runtime/Stdio.h"
+#include <stdio.h>
 #include "game/GameState.h"
 #include "map/mapDepart.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
@@ -39,11 +38,12 @@ static __inline void departSkyStart(void)
     modelSelectPrimaryMotion(g_mapDepartWork->nodeB->node, 0, 0.0f);
     modelSelectSecondaryMotion(g_mapDepartWork->nodeB->node, 0, 0.0f);
     if (g_mapDepartWork->mapId == DEPART_MAP_LOWERED_SKY) {
-        f32 lowered[3];
-        lowered[0] = 0.0f;
-        lowered[1] = -20000.0f;
-        lowered[2] = 0.0f;
-        nodeSetTranslation(g_mapDepartWork->nodeB->node, 0, lowered);
+        NodeVec3 lowered;
+        /* Keep the sky centered horizontally, changing only its height. */
+        lowered.x = 0.0f;
+        lowered.z = 0.0f;
+        lowered.y = -20000.0f;
+        nodeSetTranslation(g_mapDepartWork->nodeB->node, 0, &lowered.x);
     }
     g_mapDepartWork->modelState = DEPART_STATE_MAP_START;
 }
@@ -79,7 +79,7 @@ u32 mapDepartLoadModelsStep(void)
             g_mapDepartWork->modelState = DEPART_STATE_MAP_START;
             break;
         }
-        __2sprintf(path, "map/sky/sky_%02d.bam", g_mapDepartWork->skyId);
+        sprintf(path, "map/sky/sky_%02d.bam", g_mapDepartWork->skyId);
         g_mapDepartWork->nodeB = asdMdlManagerCreateSecondList(path, DEPART_SKY_MODEL_FLAGS);
         g_mapDepartWork->modelState++;
         /* fall through to the load check */
@@ -103,8 +103,8 @@ u32 mapDepartLoadModelsStep(void)
             g_mapDepartWork->loadMapId = g_mapDepartWork->mapId;
             g_mapDepartWork->loadAreaId = g_mapDepartWork->areaId;
         }
-        __2sprintf(path, "map/m%03d/m%03d_%02d.bam", g_mapDepartWork->loadMapId, g_mapDepartWork->loadMapId,
-                   g_mapDepartWork->loadAreaId);
+        sprintf(path, "map/m%03d/m%03d_%02d.bam", g_mapDepartWork->loadMapId, g_mapDepartWork->loadMapId,
+                g_mapDepartWork->loadAreaId);
         g_mapDepartWork->nodeA = asdMdlManagerCreateSecondList(path, DEPART_MAP_MODEL_FLAGS);
         g_mapDepartWork->modelState++;
         break;

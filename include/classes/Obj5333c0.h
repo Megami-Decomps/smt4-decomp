@@ -62,7 +62,7 @@ extern "C" {
 /* Row `index` of data table 0x27, or NULL when out of range. Callers pass the address of the scene's table byte
  * (Obj5333c0::talkTable), which the lookup does not use. */
 SceneTalkRecord *dataTable27GetEntry(const u8 *table27, u32 index);
-void FUN_0046b18c(Obj5333c0 *scene);
+void qcNpcSelectStep(Obj5333c0 *scene);
 void FUN_0046ba10(Obj5333c0 *scene);
 void FUN_004688c8(Obj5333c0 *scene);
 void questCenterBuildTalkEntries(Obj5333c0 *scene);
@@ -90,7 +90,7 @@ public:
      * scene and, the first time through, points each quest NPC's controllers at its dummy marker. */
     void update();
 
-    friend void FUN_0046b18c(Obj5333c0 *scene);
+    friend void qcNpcSelectStep(Obj5333c0 *scene);
     friend void FUN_0046ba10(Obj5333c0 *scene);
     friend void FUN_004688c8(Obj5333c0 *scene);
     friend void questCenterBuildTalkEntries(Obj5333c0 *scene);
@@ -110,7 +110,7 @@ protected:
         substate = 0;
     }
 
-    /* The NPC conversation state's steps (defined with it, FUN_0046b18c). */
+    /* The NPC conversation state's steps (defined with it, qcNpcSelectStep). */
     void refreshChoiceFlags();
     bool talkScriptReady();
     void endTalkScript();

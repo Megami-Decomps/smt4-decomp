@@ -1,4 +1,3 @@
-/* NON_MATCHING: the requested and current maps are compared in the opposite register order. */
 #include "gamedata/NaviDestinationRecord.h"
 #include "mapnavi/NaviMainGlobals.h"
 #include "game/GameStateA.h"
@@ -10,6 +9,7 @@ const NaviDestinationRecord* dataTableGetEntry49(u8);
 void pair20638Set(NaviTransitionState*, s32, s32, s32);
 void naviSelectRequestedCategory(NaviTransitionState*, s32);
 
+/* Applies the saved destination, changing maps only if the saved map differs from the current map. */
 void naviRequestSavedDestination(void)
 {
     const u8* destinationId = gameFlagsGetWord1590Ptr(0);
@@ -21,12 +21,14 @@ void naviRequestSavedDestination(void)
     NaviMapRequest request = {destination->mapId, destination->unk30, destination->unk32};
     main->mapRequest = request;
     pair20638Set(&main->transition, destination->unk32, destination->unk34, destination->unk36);
-    s32 currentMap = main->currentMap;
-    if (currentMap != destination->mapId) {
-        menuEnterState11(&main->transition, destination->mapId);
+    const s16 requestedMap = destination->mapId;
+    const u32 currentMap = main->currentMap;
+    if (currentMap != requestedMap) {
+        menuEnterState11(&main->transition, requestedMap);
     } else {
         g_gameState.naviMapPending = 1;
         naviSelectRequestedCategory(&main->transition, destination->unk32);
     }
 }
-}
+
+} /* extern "C" */

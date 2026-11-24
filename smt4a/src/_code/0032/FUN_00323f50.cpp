@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00323f50` (_code @ 0x323f50, 0x888 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "code/Code0023_Smt4a.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -14,7 +15,6 @@ int nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20(...);
 int phaseCosine(...);
 int gfxQuaternionWorkspaceBuildMatrix(...);
 int renderGetCameraViewMatrix(...);
-int FUN_002371b0(...);
 int gfxResolveTimedTextureFrame(...);
 int FUN_0032c808(...);
 int quadSourceCopyOut(...);
@@ -121,7 +121,6 @@ extern float DAT_00647358; /* 0x647358 */
 /* Supplied declaration required: phaseCosine. */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: renderGetCameraViewMatrix. */
-/* Supplied declaration required: FUN_002371b0. */
 /* Supplied declaration required: gfxResolveTimedTextureFrame. */
 /* Supplied declaration required: FUN_0032c808. */
 /* Supplied declaration required: quadSourceCopyOut. */
@@ -321,7 +320,7 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
               debugQuadVertex(temp_v37);
               debugQuadVertex(temp_v37);
               debugQuadVertex(temp_v37);
-              FUN_002371b0();
+              effectSubmitDefaultDrawParameters();
             }
           }
           temp_v2 = temp_v2 + 1;
@@ -368,7 +367,7 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
               debugQuadVertex(temp_v37);
               debugQuadVertex(temp_v37);
               debugQuadVertex(temp_v37);
-              FUN_002371b0();
+              effectSubmitDefaultDrawParameters();
             }
           }
           temp_v2 = temp_v2 + 1;

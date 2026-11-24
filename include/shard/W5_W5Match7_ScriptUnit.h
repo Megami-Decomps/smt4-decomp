@@ -53,7 +53,7 @@ u32 gameSaveGetPoints(void);
 extern "C" {
 #endif
 
-u32 FUN_00298dc8(int index);
+u32 questHasNewMark(int index);
 
 #ifdef __cplusplus
 }

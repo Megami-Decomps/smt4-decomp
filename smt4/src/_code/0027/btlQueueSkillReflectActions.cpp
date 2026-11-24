@@ -1,51 +1,30 @@
-/* NON_MATCHING: 13 parameters as the callers pass them (firstAmount is the first stack word); the damage actions are
- * btlReflectCreateKind1c's body and the status action btlReflectQueueStatusChange, inlined. Retail keeps the frame, actor
- * and skill in registers where this build spills r0-r3, and tests the skill id the other way round (movge of the
- * non-reflect flag). */
+/* NON_MATCHING: retail keeps frame, actor and skill in registers, uses the opposite reflect predicate and lays out
+ * the three damage branches differently. The target-action call also schedules its stack arguments differently. */
 #include "battle/BtlMainAccess.h"
-#include "battle/btlReflect.h"
+#include "battle/ReflectQueueCommands.h"
 #include "common.h"
 #include "battle/BtlGlobals.h"
 
-namespace {
-/* A skill record: its id at +0x62 (ids below 0x6d are the "reflect" skills). */
-struct SkillRecord {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ s16 id;
-};
-}
-
 extern "C" {
 void btlAdjustPropertyClamped(s32 id, s32 a, s32 b, s32 c);
-
-void FUN_002268d0(s32 frame, s32 delay, u32 actor, SkillRecord *skill, s32 first, s32 second, s32 mode, s32 arg, f32 speed);
 u32 btlScriptUnitIsIncapacitated(void *state);
 void btlQueueKeyedScalarReflectAction(s32 a, s32 b, u32 sound, s32 c, s32 d, s32 e, s32 f);
 
 /* Queues the reflect actions of a skill use: the optional pre-effect, the one or two damage amounts (with their
    effect and, when a status flag changes, the effect sound), and the follow-up status actions. Always returns 1. */
-u32 btlQueueSkillReflectActions(s32 frame, u32 actor, SkillRecord *skill, u32 unused3, s32 firstAmount, s32 secondAmount,
-                 u32 unused6, u32 statusMask, s32 preDelay, s32 effectDelay, s32 preSide, u32 effectSpeedBits,
+u32 btlQueueSkillReflectActions(s32 frame, u32 actor, ReflectTarget *skill, u32 unused3, s32 firstAmount, s32 secondAmount,
+                 u32 unused6, u32 statusMask, s32 preDelay, s32 effectDelay, s32 preSide, u32 commandFlags,
                  u32 clearMask)
 {
-    union {
-        u32 bits;
-        f32 value;
-    } speed;
-    speed.bits = effectSpeedBits;
-    f32 effectSpeed = speed.value;
-    s32 isReflect = skill->id < 0x6d;
+    s32 isReflect = skill->entryIndex < 0x6d;
     if (isReflect) {
-        btlAdjustPropertyClamped(skill->id, 1, 1, 0);
+        btlAdjustPropertyClamped(skill->entryIndex, 1, 1, 0);
     }
     s16 preFrame = (s16)preDelay + (s16)frame;
     if (preDelay >= 0) {
-        BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), skill->id);
+        BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), skill->entryIndex);
         if (isReflect && entry != NULL && preSide >= 0) {
-            ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, preFrame, 0, actor);
-            action->kind = 6;
-            action->wordValues.unk18 = (u32)entry;
-            action->value = preSide;
+            btlReflectQueueUnitFollowup(6, preFrame, actor, entry, preSide);
         }
     }
     s16 effectFrame = (s16)frame + (s16)effectDelay;
@@ -54,14 +33,14 @@ u32 btlQueueSkillReflectActions(s32 frame, u32 actor, SkillRecord *skill, u32 un
     if (firstAmount >= 1) {
         if (secondAmount >= 1) {
             if (isReflect && effectDelay >= 0) {
-                FUN_002268d0(frame, 0, actor, skill, firstAmount, secondAmount, 5, 1, effectSpeed);
+                FUN_002268d0(frame, 0, actor, skill, firstAmount, secondAmount, 5, (u8)commandFlags, 1);
             }
             reflectCreateKind1c(effectFrame, actor, (u32)skill, firstAmount, 0);
             reflectCreateKind1c(effectFrame, actor, (u32)skill, secondAmount, 1);
             changed = btlScriptUnitIsIncapacitated(static_cast<void *>(btlGetMainState()));
         } else {
             if (isReflect && effectDelay >= 0) {
-                FUN_002268d0(frame, 0, actor, skill, firstAmount, 0, 2, 1, effectSpeed);
+                FUN_002268d0(frame, 0, actor, skill, firstAmount, 0, 2, (u8)commandFlags, 1);
             }
             reflectCreateKind1c(effectFrame, actor, (u32)skill, firstAmount, 0);
             changed = btlScriptUnitIsIncapacitated(static_cast<void *>(btlGetMainState())) & ~clearMask;
@@ -71,7 +50,7 @@ u32 btlQueueSkillReflectActions(s32 frame, u32 actor, SkillRecord *skill, u32 un
         }
     } else if (secondAmount >= 1) {
         if (isReflect && effectDelay >= 0) {
-            FUN_002268d0(frame, 0, actor, skill, secondAmount, 0, 3, 1, effectSpeed);
+            FUN_002268d0(frame, 0, actor, skill, secondAmount, 0, 3, (u8)commandFlags, 1);
         }
         reflectCreateKind1c(effectFrame, actor, (u32)skill, secondAmount, 1);
         changed = btlScriptUnitIsIncapacitated(static_cast<void *>(btlGetMainState()));
@@ -81,9 +60,9 @@ u32 btlQueueSkillReflectActions(s32 frame, u32 actor, SkillRecord *skill, u32 un
     }
     if (statusMask != 0) {
         u32 flags = 0;
-        isReflect = skill->id < 0x6d;
+        isReflect = skill->entryIndex < 0x6d;
         if (isReflect) {
-            BtlUnitData *entry = btlFindEntryBlockByMemberId(btlGetMainState(), skill->id);
+            BtlUnitData *entry = btlFindEntryBlockByMemberId(btlGetMainState(), skill->entryIndex);
             if (entry != NULL) {
                 flags = entry->statusFlags;
             }

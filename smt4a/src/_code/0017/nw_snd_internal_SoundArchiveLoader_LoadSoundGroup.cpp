@@ -25,8 +25,8 @@ typedef struct {
 } param_5_stack;
 
 /* Supplied declaration required: FUN_00190c24. */
-extern int FUN_0019472c(unsigned int, unsigned int, unsigned int *);
-extern int soundGroupUpdate(unsigned int, unsigned int, unsigned int *);
+extern int soundArchiveReadSequenceSoundInfoWithExtension(unsigned int, unsigned int, unsigned int *);
+extern int soundArchiveReadSoundGroupInfoWithExtension(unsigned int, unsigned int, unsigned int *);
 /* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
 extern unsigned int soundArchiveFileEntryIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadImpl. */
@@ -54,7 +54,7 @@ nw_snd_internal_SoundArchiveLoader_LoadSoundGroup
   temp_v4 = 0xffffffff;
   temp_v5 = 0xffffffff;
   uStack_48 = 0;
-  temp_v0 = soundGroupUpdate(*(unsigned int *)(param_1 + 4),param_2,&temp_v4);
+  temp_v0 = soundArchiveReadSoundGroupInfoWithExtension(*(unsigned int *)(param_1 + 4),param_2,&temp_v4);
   if (temp_v0 == 0) {
     return 0;
   }
@@ -95,7 +95,7 @@ nw_snd_internal_SoundArchiveLoader_LoadSoundGroup
             temp_v7[1] = 0xffffffff;
             temp_v7[2] = 0xffffffff;
             temp_v7[3] = 0xffffffff;
-            temp_v0 = FUN_0019472c(*(unsigned int *)(param_1 + 4),temp_v3,(unsigned int *)&temp_v6);
+            temp_v0 = soundArchiveReadSequenceSoundInfoWithExtension(*(unsigned int *)(param_1 + 4),temp_v3,(unsigned int *)&temp_v6);
             if (temp_v0 == 0) {
               return 0;
             }

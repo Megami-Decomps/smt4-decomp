@@ -3,14 +3,14 @@
 extern "C" {
 u16 ifTouchRegionAddRequested(u32 table, u32 image);
 s32 gridNavigationGetItemCount(const void *controller);
-s32 uiSearchPrimary(const void *controller);
+s32 uiListGetVisibleCount(const void *controller);
 
 /* Registers the list screen's touch regions: the scroll bar (when the list overflows), the rows and,
  * in mode 0, the two extra buttons. */
 void campListRegisterTouchRegions(const void *controller, s32 mode)
 {
     CampStateA *state = g_camp;
-    if (gridNavigationGetItemCount(controller) > uiSearchPrimary(controller)) {
+    if (gridNavigationGetItemCount(controller) > uiListGetVisibleCount(controller)) {
         if (mode == 0) {
             state->touch.scrollRegions[0] = ifTouchRegionAddRequested(20, 0x572);
             state->touch.scrollRegions[1] = ifTouchRegionAddRequested(20, 0x570);
@@ -22,7 +22,7 @@ void campListRegisterTouchRegions(const void *controller, s32 mode)
         }
     }
     if (mode == 0) {
-        for (s32 index = 0; index < uiSearchPrimary(controller); ++index) {
+        for (s32 index = 0; index < uiListGetVisibleCount(controller); ++index) {
             if (index >= gridNavigationGetItemCount(controller)) {
                 break;
             }
@@ -31,7 +31,7 @@ void campListRegisterTouchRegions(const void *controller, s32 mode)
         state->touch.scrollRegions[3] = ifTouchRegionAddRequested(20, 0x576);
         state->touch.scrollRegions[4] = ifTouchRegionAddRequested(20, 0x577);
     } else {
-        for (s32 index = 0; index < uiSearchPrimary(controller); ++index) {
+        for (s32 index = 0; index < uiListGetVisibleCount(controller); ++index) {
             if (index >= gridNavigationGetItemCount(controller)) {
                 return;
             }

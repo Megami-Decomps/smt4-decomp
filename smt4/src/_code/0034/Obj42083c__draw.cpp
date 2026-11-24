@@ -7,7 +7,7 @@ extern "C" {
 int titleSceneMultiplyByCameraView(int, float *, int);
 int gpuSubmitFloatVectorsOrDefault(int *);
 int FUN_002573d8(void);
-int forwardRecoveredCallback(void);
+int effectSubmitDefaultDrawParameters(void);
 int renderCtxSelectTexture(int, unsigned int);
 
 typedef int romwright_code(...);
@@ -41,7 +41,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: titleSceneMultiplyByCameraView. */
 /* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: FUN_002573d8. */
-/* Supplied declaration required: forwardRecoveredCallback. */
+/* Supplied declaration required: effectSubmitDefaultDrawParameters. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 
@@ -169,7 +169,7 @@ void Obj42083c::draw()
     } while (temp_v0 < **(int **)(param_1 + 0x60) + 1);
   }
   gpuSubmitFloatVectorsOrDefault(&temp_v11);
-  forwardRecoveredCallback();
+  effectSubmitDefaultDrawParameters();
   temp_v0 = g_titleScene;
   piVar10 = (int *)(g_titleScene + 0x124c);
   temp_v1 = *piVar10;

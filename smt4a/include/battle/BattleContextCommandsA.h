@@ -21,7 +21,6 @@ extern "C" {
 
 extern CommandBlockMasks DAT_00573bd8;
 
-BtlDebugEntry *FUN_002cc228(u8 index, s32 protagonist); // declcheck: local (shard/W6_W6Match1_PositionedStream.h declares it void with other parameter names)
 s32 idListHasFlaggedRecord(SlotRecordA *record);
 s32 btlIsDefeatSuppressed(void);
 s32 btlObjectHasEntryFlag(SlotRecordA *record);
@@ -40,7 +39,7 @@ static __inline u8 actorCardContextCommandKind(ActorCardAnimationsA *scene, s32 
     const SaveSlotTableA *table = gameGetSlotTable();
 
     for (s32 index = 0; index < DEBUG_MENU_ENTRY_COUNT; ++index) {
-        BtlDebugEntry *command = FUN_002cc228((u8)index, scene->page == 0);
+        BtlDebugEntry *command = btlDebugFindCommandByIndex((u8)index, scene->page == 0);
         SlotRecordA *unit = NULL;
         if (scene->page != 4 && scene->page != 0 && table->reserve[scene->page - 1] >= 0)
             unit = gameGetSlotRecord(table->reserve[scene->page - 1]);

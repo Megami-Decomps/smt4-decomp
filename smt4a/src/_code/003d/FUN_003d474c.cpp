@@ -1,4 +1,4 @@
-/* NON_MATCHING: the remaining differences are branch layout and register allocation of the state selection (the two `mov r0, #0` stub calls use FUN_00284dbc as the nearest equivalent stub). */
+/* NON_MATCHING: the remaining differences are branch layout and register allocation of the state selection (the two `mov r0, #0` stub calls use questIsReported as the nearest equivalent stub). */
 #include "common.h"
 #include "quest_center/QuestRecordA.h"
 #include "code/Code002a_VariantA.h"
@@ -24,13 +24,13 @@ typedef struct QuestScreenView {
 extern QuestScreen *g_uiQuest;
 
 s32 resourceRunOperationIfUnblocked(void *list);
-s32 partyEntryFlagsBit1(u32 id);
-s32 partyEntryFlagsBit3(u32 id);
+s32 questHasNewMark(u32 id);
+s32 questIsCompleted(u32 id);
 s32 partyEntryBitsBit4(u32 id);
 u32 questHasSpecialDetailPage(u32 id);
 u32 rosterGetLeaderId(void);
 s32 questRecordIsUsable(u32 id);
-s32 FUN_00284dbc(u32 id); /* a `mov r0, #0` stub armlink inlines */
+s32 questIsReported(u32 id); /* a `mov r0, #0` stub armlink inlines */
 void *dataTableGet(u32 table, u32 section);
 void *dataTableGetEntries(void *section);
 u32 dataTableGetCount(void *section);
@@ -55,17 +55,17 @@ void FUN_003d474c(void)
         return;
     }
     if (screen->mode != 0) {
-        if (partyEntryFlagsBit1(id) != 0) {
+        if (questHasNewMark(id) != 0) {
             state = rosterGetLeaderId() == 0 ? 0 : 6;
         } else {
-            state = partyEntryFlagsBit3(id) != 0 ? 3 : 6;
+            state = questIsCompleted(id) != 0 ? 3 : 6;
         }
     } else {
         QuestRecordA *record = questDataGetRecord(id);
 
         if (record->kind == 6 || record->kind == 9 || record->kind == 11) {
-            if (questRecordIsUsable(id) == 0 && FUN_00284dbc(id) == 0) {
-                if (partyEntryFlagsBit3(id) == 0) {
+            if (questRecordIsUsable(id) == 0 && questIsReported(id) == 0) {
+                if (questIsCompleted(id) == 0) {
                     state = 5;
                 } else if (partyEntryBitsBit4(id) != 0) {
                     state = 3;
@@ -76,14 +76,14 @@ void FUN_003d474c(void)
                 }
             } else if (rosterGetLeaderId() == id) {
                 state = 0;
-            } else if (partyEntryFlagsBit3(id) != 0) {
+            } else if (questIsCompleted(id) != 0) {
                 state = 2;
             } else {
                 state = record->kind == 11 ? 12 : 11;
             }
-        } else if (partyEntryFlagsBit3(id) == 0) {
+        } else if (questIsCompleted(id) == 0) {
             state = 0;
-        } else if (FUN_00284dbc(id) != 0) {
+        } else if (questIsReported(id) != 0) {
             state = 4;
         } else if (partyEntryBitsBit4(id) != 0) {
             state = 3;

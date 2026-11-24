@@ -1,11 +1,11 @@
 /* NON_MATCHING: only the normalisation's scratch registers differ (retail keeps -dx in s5, the sum of squares in s1 and the zero in s3; this build uses s1, s3 and s4). */
+#include "code/Code0023_Smt4a.h"
 #include "common.h"
 #include <math.h>
 
 extern "C" {
 void FUN_0032c808();
 void effectSpawnPositionDefault(u32 effect, f32 x, f32 y, f32 z);
-void FUN_002371b0();
 
 /* Emits paired effects at each endpoint and at a one-unit perpendicular offset. */
 void FUN_0032c810(u32 firstEffect, u32 secondEffect, f32 startX, f32 startY, f32 endX, f32 endY, f32 height)
@@ -23,7 +23,7 @@ void FUN_0032c810(u32 firstEffect, u32 secondEffect, f32 startX, f32 startY, f32
         effectSpawnPositionDefault(secondEffect, endX, endY, height);
         effectSpawnPositionDefault(firstEffect, normalX + startX, normalY + startY, height);
         effectSpawnPositionDefault(secondEffect, normalX + endX, normalY + endY, height);
-        FUN_002371b0();
+        effectSubmitDefaultDrawParameters();
     }
 }
 }

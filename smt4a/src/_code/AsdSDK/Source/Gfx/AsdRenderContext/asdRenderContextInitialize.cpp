@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite of the render context set-up, ported from IV's FUN_0010f144 with Apocalypse's offsets and callees; not yet compared with retail. */
+/* NON_MATCHING: the initial dirty-flag stores and the eye/up/target setup have different register scheduling from retail. */
 #include "common.h"
 #include "map/MapVector.h"
 #include "AsdSDK/AsdLoadFileSyncDefault.h"

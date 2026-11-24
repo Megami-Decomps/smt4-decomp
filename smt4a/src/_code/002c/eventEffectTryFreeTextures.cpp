@@ -3,11 +3,11 @@
 extern "C" {
 
 void eventInitializeBlinkFade(void);
-void FUN_003b6d04(void);
+void eventEffectFreeTextures(void);
 s32 scrGetCommandFrame(void);
 s32 eventEffectIsStateTwo(void);
 
-/* Script command: when scrGetCommandFrame reports nonzero, runs FUN_003b6d04 if eventEffectIsStateTwo allows it and returns whether it did; otherwise runs eventInitializeBlinkFade and returns 0. */
+/* Script command: when scrGetCommandFrame reports nonzero, runs eventEffectFreeTextures if eventEffectIsStateTwo allows it and returns whether it did; otherwise runs eventInitializeBlinkFade and returns 0. */
 u8 eventEffectTryFreeTextures(void)
 {
     s32 result;
@@ -16,7 +16,7 @@ u8 eventEffectTryFreeTextures(void)
     if (result != 0) {
         result = eventEffectIsStateTwo();
         if (result != 0) {
-            FUN_003b6d04();
+            eventEffectFreeTextures();
         }
         return result != 0;
     }

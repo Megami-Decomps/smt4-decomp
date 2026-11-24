@@ -1,5 +1,10 @@
 /* NON_MATCHING: 10 lines, all in the last sprite: retail keeps its draw order in r9 (as for the other
- * sprites) and the frame's width in sl; this build swaps the two registers. */
+ * sprites) and the frame's width in sl; this build swaps the two registers.
+ * The three values go to r9/sl/fp in the order (order, width, height) in retail and (width, order, height) here.
+ * No change (10): the helper's parameter types (u8/u16/s32 order, s16/u32 size), a plain `static` helper, the
+ * placement as a local, `16u`. Worse: parameters (width, height, order) put them in r9/sl/fp in that order (37);
+ * width and height as locals of the caller (49); the frame entry passed in and read inside the helper gives
+ * order r9 but width fp, height sl (29; 6 with `height` declared before `width`, a score-chosen order). */
 #include "gfx/StereoParallax.h"
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"

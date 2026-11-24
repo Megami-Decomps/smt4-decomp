@@ -8,7 +8,7 @@
 extern "C" {
 void efctSetSpeed(f32 speed);
 s32 gridNavigationGetItemCount(void *view);
-s32 uiSearchPrimary(void *view);
+s32 uiListGetVisibleCount(void *view);
 s32 resourceRunOperationIfUnblocked(void *view);
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
 u32 renderPopStateStacks(void);
@@ -27,13 +27,13 @@ void FUN_003f61b4(u8 *list, s32 x, s32 y, f32 speed)
     s32 thumbOffset = 0;
     TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x31, 0x75);
     s32 thumbHeight;
-    if (gridNavigationGetItemCount(view) > uiSearchPrimary(view)) {
+    if (gridNavigationGetItemCount(view) > uiListGetVisibleCount(view)) {
         f32 ratio = (f32)frame->placement->height / (f32)gridNavigationGetItemCount(view);
-        thumbHeight = (s32)((f32)uiSearchPrimary(view) * ratio);
+        thumbHeight = (s32)((f32)uiListGetVisibleCount(view) * ratio);
         if (thumbHeight < 1)
             thumbHeight = 1;
         thumbOffset = (s32)((f32)resourceRunOperationIfUnblocked(view) * ratio);
-        if (resourceRunOperationIfUnblocked(view) + uiSearchPrimary(view) == gridNavigationGetItemCount(view)
+        if (resourceRunOperationIfUnblocked(view) + uiListGetVisibleCount(view) == gridNavigationGetItemCount(view)
             && thumbOffset + thumbHeight < frame->placement->height)
             thumbOffset = frame->placement->height - thumbHeight;
     } else {

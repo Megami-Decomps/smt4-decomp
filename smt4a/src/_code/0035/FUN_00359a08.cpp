@@ -5,7 +5,7 @@
 extern "C" {
 s32 scrollOwnerSetValue(void *cursor, s32 value);
 s32 gridNavigationGetItemCount(void *cursor);
-s32 uiSearchPrimary(const void *cursor);
+s32 uiListGetVisibleCount(const void *cursor);
 s32 flaggedEntrySetValueA(void *cursor, s32 value);
 void skillHelpUpdateAttributeAndTarget(s32 id);
 
@@ -41,7 +41,7 @@ void FUN_00359a08(UniteWorkA *work)
             break;
         }
     }
-    s32 limit = uiSearchPrimary(&work->inheritanceA.skillList) - 2;
+    s32 limit = uiListGetVisibleCount(&work->inheritanceA.skillList) - 2;
     s32 last = gridNavigationGetItemCount(&work->inheritanceA.skillList) - 2;
     s32 scroll = 0;
     if (index > limit) {

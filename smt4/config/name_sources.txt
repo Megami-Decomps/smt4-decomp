@@ -6449,3 +6449,27 @@
 00142fcc gxAddDisplayTransferCommand inferred forwards the seven display-transfer arguments (the replayed type 3 command)
 00142fec gxAddMemoryFillCommand inferred forwards the eight two-buffer memory-fill arguments (the replayed type 2 command)
 0014300c gxAddTextureCopyCommand inferred forwards the eight texture-copy arguments
+0027de98 btlHasFilteredCommand inferred twin of smt4a btlHasFilteredCommand (same filter scan; both written with the shared btlCommandPassesFilter)
+0033b3c4 btlPopFilteredCommand inferred twin of smt4a btlPopFilteredCommand (pops listed commands until one passes the filter; IDENTICAL)
+003dda54 btlReflectQueueTargetWithFollowup inferred queues a kind-0x2B target action and, when requested, a follow-up on the target's combatant
+00245420 btlReflectQueueParameterTargetWithFollowup inferred as btlReflectQueueTargetWithFollowup with a parameter word (kind 0x2C)
+00298dc8 questHasNewMark inferred the quest's new mark; called at the same positions as smt4a partyEntryFlagsBit1 in uiQuestRebuildLists and questSysLoadStep/scriptHolderUpdate
+00298e40 questGetRequirementProgress inferred resolves a quest requirement's progress (uiQuestRebuildLists twins)
+00298e00 questIsReported inferred whether the quest was reported (uiQuestRebuildLists twins)
+00298d98 gameGetSaveLinkSlot inferred returns the save block's GameSaveLinkSlot (gamedata/GameSaveLinkSlot.h)
+0019514c playLogUpdate inferred twin of smt4a playLogUpdate (the same body without the second page)
+003ca32c btlQueuePartyHalfRecovery inferred queues staggered 50% HP/MP recovery actions for the active party
+00225238 spriteRowListRefreshMarks inferred applies row and mark deltas to a SpriteRowList and restarts its row animations
+003aea90 btlUiRefreshSpriteRowMarks inferred the battle UI's forwarder to spriteRowListRefreshMarks
+003c06ac btlTalkStartLoadingAssets inferred starts loading the talk tone (battle/talk/Tone%s.tbb), message and script files
+00282780 effMenuAppendDefaultColorRect inferred appends a four-coordinate rectangle with the default colours
+0026ff54 saveLoadUiRestoreBackups inferred restores the table, config and save snapshots and releases them
+00194ec8 playLogCreate inferred twin of smt4a playLogCreate; its __FILE__ path names PlayLog.cpp
+00396f3c aaTreeFinishInsert inferred restores the extremes and rebalances to the root after a leaf is attached
+001a1d08 saveLoadRequestUpdate inferred the save/load thread request step called by the save and load process updates
+002644a8 mapEffectDisableFlagGatedEntries inferred marks the flag-gated effect entries whose required/forbidden flags fail as disabled
+0025b750 effectSubmitDefaultDrawParameters inferred tail-calls the default effect parameter submission
+003bbd88 cecCardMessageBoxInit inferred twin of smt4a cecCardMessageBoxInit
+0033f2b8 npcPackageLoad inferred loads an NPC package from add-on content or ROM and slices its NKDW sections
+002ec0fc campCecViewDrawScrollTrack inferred draws CampCecView's segmented scroll track (called by its draw callbacks)
+00309ec8 campCecEditDrawScrollTrack inferred draws CampCecEdit's scroll track

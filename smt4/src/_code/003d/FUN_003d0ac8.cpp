@@ -1,11 +1,11 @@
 /* NON_MATCHING: retail keeps the queue kind 4 in fp across the loop and reads the action status with add + ldr #80; the build keeps 80 in fp for a register-offset load. */
 #include "battle/BtlEntry.h"
+#include "battle/BtlUnitTarget.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {
-u32 btlUnitIsDeadAndUncopied(BtlMainState **, void *, s32);
 s32 valueRangeSameSide(s32, s32);
 u16 btlEntryRollPassiveSkill(u32);
 void FUN_0023c154(BtlMainState *, s32, s32, s32, u32);
@@ -13,7 +13,7 @@ void FUN_0023c154(BtlMainState *, s32, s32, s32, u32);
 /* Queue triggered passive responses from eligible allies of the listed subject. */
 u32 FUN_003d0ac8(BtlMainState **state, void *copies, s32 subject, s32 target)
 {
-    if (btlUnitIsDeadAndUncopied(state, copies, target) != 0) {
+    if (btlUnitIsDeadAndUncopied(state, (BtlUnit *)copies, target) != 0) {
         return 0;
     }
     BtlEntry *entry = btlMainFindEntryByListedId(*state, subject);

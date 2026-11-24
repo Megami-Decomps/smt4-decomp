@@ -9147,3 +9147,39 @@
 0019612c gxAddDisplayTransferCommand inferred twin of smt4 FUN_00142fcc
 0019614c gxAddMemoryFillCommand inferred twin of smt4 FUN_00142fec
 0019616c gxAddTextureCopyCommand inferred twin of smt4 FUN_0014300c
+00573b88 g_btlCommandMenuData inferred size:0x50 BtlCommandMenuData (battle/BtlCommandMenuData.h): list selections at 4/8 and the 64-bit masks at 0x20/0x28/0x40/0x48 its seven users read
+004ec950 btlAiScriptDriveCommand inferred drives the AI script's command selection (battle/btlAIScript)
+004fb5dc btlReflectQueueTargetWithFollowup inferred twin of smt4 FUN_003dda54 (kind 0x35, follow-up kind 7)
+004fb6f4 btlReflectQueueParameterTargetWithFollowup inferred twin of smt4 FUN_00245420 (kind 0x36)
+0046b18c qcNpcSelectStep inferred twin of smt4 qcNpcSelectStep (same qc_NpcSelect entry)
+00418584 questIsCompleted inferred twin of smt4 questIsCompleted (same call positions in the uiQuestRebuildLists twins)
+004185ec questHasNewMark inferred twin of smt4 FUN_00298dc8
+003df004 questGetRequirementProgress inferred twin of smt4 FUN_00298e40
+00284dbc questIsReported inferred twin of smt4 FUN_00298e00
+002c2728 gameGetSaveLinkSlot inferred twin of smt4 gameGetSavedRecordOrFallback
+00348ed0 uiListGetVisibleCount inferred twin of smt4 uiListGetVisibleCount (same call positions in uiQuestRebuildLists)
+001a8930 soundArchiveReadWaveArchiveInfoWithExtension inferred the archive's wave-archive info read plus the optional extension's (sibling of soundArchiveReadSoundInfoWithExtension)
+001946d4 soundArchiveReadBankInfoWithExtension inferred the archive's bank info read plus the optional extension's
+0019472c soundArchiveReadSequenceSoundInfoWithExtension inferred the archive's sequence-sound info read plus the optional extension's
+001947dc soundArchiveReadSoundGroupInfoWithExtension inferred the archive's sound-group info read plus the optional extension's (not an update)
+00194784 soundArchiveReadWaveSoundInfoWithExtension inferred the archive's wave-sound info read plus the optional extension's
+003bb50c portraitDrawClipped inferred twin of smt4 portraitDrawClipped
+002df754 btlDrawSelectedCombatantMarkers inferred scans the roster and draws the selected combatants' markers
+002b3fd8 effMenuAppendDefaultColorRect inferred twin of smt4 FUN_00282780
+00486328 naviSetSpatialMarkerSlot inferred fills or clears a spatial marker slot from the category at a position
+003281c4 naviEnableSpatialMarkerSlot inferred calls naviSetSpatialMarkerSlot with active 1
+003b6d04 eventEffectFreeTextures inferred twin of smt4 eventEffectFreeTextures (texture and job teardown)
+003c91ec saveLoadUiRestoreBackups inferred twin of smt4 FUN_0026ff54
+004d8f4c aaTreeFinishInsert inferred twin of smt4 FUN_00396f3c
+0037a2e4 titleConfigCreate inferred twin of smt4 titleConfigCreate
+002b79d8 mapEffectDisableFlagGatedEntries inferred twin of smt4 FUN_002644a8
+004dcb40 btlActionBindCombatantSlot inferred binds the new action-ring slot to its combatant (called by btlActionRingStartCalc)
+002371b0 effectSubmitDefaultDrawParameters inferred twin of smt4 forwardRecoveredCallback
+002cc228 btlDebugFindCommandByIndex inferred binary-searches data table 22's player or reserve section by the leading key byte
+003a8928 scrBtlGroupHasPositiveProperty inferred script predicate on the combatants' shared properties (result through scrSetResult)
+0038bc60 scrBtlFindUnitPropertyEqual inferred script predicate: a combatant whose property equals the argument
+003fcd20 npcPackageLoad inferred twin of smt4 FUN_0033f2b8
+003bf938 scrCommClearPartySlot inferred closes the message rows, commits the slot removals and repairs the selected member (sibling of scrCommClearPartySlotInactive)
+00385578 lmapUpdateIdleVoice inferred the map's idle-voice timer (delay table, then the voice)
+0036c91c campCecViewDrawScrollTrack inferred twin of smt4 FUN_002ec0fc
+0039a1b8 campCecEditDrawScrollTrack inferred twin of smt4 FUN_00309ec8

@@ -187,7 +187,7 @@ void uiQuestListInput(void)
                 if (record->kind == 0) {
                     /* A delivery quest: report it or say why not. */
                     if (questIsCompleted(id)) {
-                        if (FUN_00298e00(id)) {
+                        if (questIsReported(id)) {
                             if (scrScriptProcessStartEntry(quest->script.process, 5))
                                 questListShowRefusal();
                         } else {

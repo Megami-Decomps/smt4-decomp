@@ -20,7 +20,7 @@ int contentEntryGet(...);
 int dataTable2FType0Count(void);
 int dataTable2FType1Count(void);
 int dataTable2FType2Count(void);
-int partyEntryFlagsBit1(int);
+int questHasNewMark(int);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_3: 30 slot(s), 120 byte(s) */
@@ -99,7 +99,7 @@ extern int dataTable23Type4CountWithAoc(void);
 /* Supplied declaration required: dataTable2FType0Count. */
 /* Supplied declaration required: dataTable2FType1Count. */
 /* Supplied declaration required: dataTable2FType2Count. */
-/* Supplied declaration required: partyEntryFlagsBit1. */
+/* Supplied declaration required: questHasNewMark. */
 
 void FUN_00364740(int param_1,unsigned int *param_2,unsigned int *param_3)
 
@@ -214,7 +214,7 @@ LAB_003647c0:
                             do {
                               piVar6 = (int *)contentEntryGet(temp_v7);
                               if (*piVar6 == -1) break;
-                              temp_v4 = partyEntryFlagsBit1((short)piVar6[1]);
+                              temp_v4 = questHasNewMark((short)piVar6[1]);
                               if ((((temp_v4 != 0) && ((unsigned int *)*piVar6 == puVar16)) &&
                                   ((*(short *)((int)piVar6 + 6) == 0 ||
                                    (temp_v4 = gameFlagIsSet(), temp_v4 != 0)))) &&
@@ -337,7 +337,7 @@ LAB_00364b74:
                                 if (((short)puVar11[2] == 0) ||
                                    (temp_v8 = gameFlagIsSet(), temp_v8 == 0)) {
                                   if ((short)puVar11[1] != 0) {
-                                    temp_v3 = partyEntryFlagsBit1((short)puVar11[1]);
+                                    temp_v3 = questHasNewMark((short)puVar11[1]);
                                     temp_v8 = 0;
                                     if (temp_v3 == 0) goto LAB_00364c54;
                                   }
@@ -459,7 +459,7 @@ LAB_00364e34:
                           if (((*(short *)(temp_v7 + 0x26) == 0) ||
                               (temp_v4 = gameFlagIsSet(), temp_v4 == 0)) &&
                              ((*(unsigned int **)(temp_v7 + 0x20) == puVar11 &&
-                              (temp_v7 = partyEntryFlagsBit1(*(unsigned short *)(temp_v7 + 0x24)), temp_v7 == 0)))
+                              (temp_v7 = questHasNewMark(*(unsigned short *)(temp_v7 + 0x24)), temp_v7 == 0)))
                              ) {
                             temp_v34 = (unsigned char *)(int)(short)temp_v16;
                             goto LAB_00364eac;

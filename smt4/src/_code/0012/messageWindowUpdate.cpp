@@ -1,5 +1,3 @@
-/* NON_MATCHING: 16 lines: in the wait-input state retail loads the advance callback once, from a second load of
- * g_asdTextDefaults' address, before testing the last-page flag (the build loads it from the kept base at each call). */
 #include "AsdSDK/Source/Gfx/Text/TextDefaults.h"
 
 #define MESSAGE_WINDOW_PAUSED 0x08
@@ -83,6 +81,7 @@ void messageWindowUpdate(MessageWindow *window)
     u32 flags = window->flags;
     if (flags & MESSAGE_WINDOW_PAUSED)
         return;
+    AsdTextDefaults *defaults = &g_asdTextDefaults;
     switch (window->state) {
     case MESSAGE_WINDOW_IDLE:
         window->frame++;
@@ -90,31 +89,33 @@ void messageWindowUpdate(MessageWindow *window)
     case MESSAGE_WINDOW_PRINTING:
     {
         bool skip = false;
-        if ((flags & MESSAGE_WINDOW_NO_INPUT) || g_asdTextDefaults.skipRequested(window) == 1)
+        if ((flags & MESSAGE_WINDOW_NO_INPUT) || defaults->skipRequested(window) == 1)
             skip = true;
         messageWindowPrintLine(window, skip);
         return;
     }
-    case MESSAGE_WINDOW_WAIT_INPUT:
+    case MESSAGE_WINDOW_WAIT_INPUT: {
         window->frame++;
+        /* Both page paths poll the same advance callback. */
+        AsdTextWindowPoll advance = g_asdTextDefaults.advanceRequested;
         if (flags & MESSAGE_WINDOW_LAST_PAGE) {
             if (window->pages[window->page].id == 0xFFFF) {
                 window->flags = flags | MESSAGE_WINDOW_FINISHED;
             } else if (!(flags & MESSAGE_WINDOW_NO_INPUT)) {
-                s32 request = g_asdTextDefaults.advanceRequested(window);
+                s32 request = advance(window);
                 if (request != 0) {
                     window->state = MESSAGE_WINDOW_PRINTING;
                     window->shownPage = window->page;
                     window->shownChars = 0;
                     if (request == 1 && (window->flags & MESSAGE_WINDOW_NOTIFY_FIRST)
-                        && g_asdTextDefaults.unk18 != 0) {
-                        ((void (*)(s32))g_asdTextDefaults.unk18)(0);
+                        && defaults->unk18 != 0) {
+                        ((void (*)(s32))defaults->unk18)(0);
                         return;
                     }
                 }
             }
         } else if (!(flags & MESSAGE_WINDOW_NO_INPUT)) {
-            s32 request = g_asdTextDefaults.advanceRequested(window);
+            s32 request = advance(window);
             if (request != 0) {
                 if (window->pages[window->page].id == 0xFFFF) {
                     window->state = MESSAGE_WINDOW_IDLE;
@@ -125,13 +126,14 @@ void messageWindowUpdate(MessageWindow *window)
                     window->shownChars = 0;
                 }
                 if (request == 1 && (window->flags & MESSAGE_WINDOW_NOTIFY_FIRST)
-                    && g_asdTextDefaults.unk18 != 0) {
-                    ((void (*)(s32))g_asdTextDefaults.unk18)(0);
+                    && defaults->unk18 != 0) {
+                    ((void (*)(s32))defaults->unk18)(0);
                     return;
                 }
             }
         }
         break;
+    }
     case MESSAGE_WINDOW_WAIT_PAD:
         if (padIsButtonPressed(0) != 0)
             window->state = MESSAGE_WINDOW_PRINTING;

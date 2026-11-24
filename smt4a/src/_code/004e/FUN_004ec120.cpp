@@ -20,7 +20,7 @@ int FUN_004e7418(...);
 int FUN_004e7e08(...);
 int FUN_004eb740(...);
 int FUN_004eb838(...);
-int FUN_004ec950(int *, unsigned int *, int, unsigned int);
+int btlAiScriptDriveCommand(int *, unsigned int *, int, unsigned int);
 int FUN_004ed14c(int *, unsigned int *, int, unsigned int);
 int FUN_004ed5b4(int *, unsigned int *, int, unsigned int);
 int btlStageResetAndClearCameraFlag(...);
@@ -76,7 +76,7 @@ extern int *battleActionSnapshotCommand(int *, unsigned int *, int, unsigned int
 /* Supplied declaration required: FUN_004e7e08. */
 /* Supplied declaration required: FUN_004eb740. */
 /* Supplied declaration required: FUN_004eb838. */
-/* Supplied declaration required: FUN_004ec950. */
+/* Supplied declaration required: btlAiScriptDriveCommand. */
 /* Supplied declaration required: FUN_004ed14c. */
 /* Supplied declaration required: FUN_004ed5b4. */
 /* Supplied declaration required: btlStageResetAndClearCameraFlag. */
@@ -111,7 +111,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     piVar3 = (int *)btlUnitStepCommandMenu(param_1,puVar9,temp_v6,param_4);
     return piVar3;
   case 2:
-    FUN_004ec950(param_1,puVar9,temp_v6,param_4);
+    btlAiScriptDriveCommand(param_1,puVar9,temp_v6,param_4);
     return param_1;
   case 3:
     temp_v6 = jobIsValid(*(unsigned int *)(temp_v6 + 0x80));

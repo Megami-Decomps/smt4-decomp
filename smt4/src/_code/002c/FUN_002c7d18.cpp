@@ -8,7 +8,7 @@ int CONCAT44(double, double);
 int quadHolderCopyOut(...);
 int quadSourceCopyOut(...);
 int gfxResolveTimedTextureFrame(unsigned int, double, unsigned char [16]);
-int forwardRecoveredCallback(...);
+int effectSubmitDefaultDrawParameters(...);
 int renderGetCameraViewMatrix(...);
 int gfxQuaternionWorkspaceBuildMatrix(...);
 int nn_math_ARMv6_MTX34AddTranslateAsm(...);
@@ -115,7 +115,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Supplied declaration required: quadHolderCopyOut. */
 /* Supplied declaration required: quadSourceCopyOut. */
 /* Supplied declaration required: gfxResolveTimedTextureFrame. */
-/* Supplied declaration required: forwardRecoveredCallback. */
+/* Supplied declaration required: effectSubmitDefaultDrawParameters. */
 /* Supplied declaration required: renderGetCameraViewMatrix. */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34AddTranslateAsm. */
@@ -321,7 +321,7 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
               debugQuadVertex(temp_v37);
               debugQuadVertex(temp_v37);
               debugQuadVertex(temp_v37);
-              forwardRecoveredCallback();
+              effectSubmitDefaultDrawParameters();
             }
           }
           temp_v2 = temp_v2 + 1;
@@ -368,7 +368,7 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
               debugQuadVertex(temp_v37);
               debugQuadVertex(temp_v37);
               debugQuadVertex(temp_v37);
-              forwardRecoveredCallback();
+              effectSubmitDefaultDrawParameters();
             }
           }
           temp_v2 = temp_v2 + 1;

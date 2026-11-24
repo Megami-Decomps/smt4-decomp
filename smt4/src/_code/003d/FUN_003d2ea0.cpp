@@ -1,7 +1,9 @@
+/* NON_MATCHING: 194 lines; not yet worked (the marker was missing until wave 90). */
 #include "common.h"
 #include "util/Random.h"
 #include "battle/btlHelp.h"
 #include "battle/BattleCommandController.h"
+#include "battle/BtlUnitTarget.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
 #include "battle/ActionStateChannels.h"
@@ -17,7 +19,6 @@ struct CommandRetreatView {
 extern "C" {
 
 void FUN_002569ac(BtlMainState **turn, s32 bank);
-void btlEntryValuesCopy(BtlMainState **turn, CommandState *work);
 void FUN_00227b14(BtlUi *ui, u16 member, s32 mode);
 void btlSubmitAction(s32 effect, BtlEntry *entry, s32 mode);
 void btlMenuCursorStepReflectAction(s32 chance, CommandState *work, s32 a, BtlActionRecord *record, s32 b);
@@ -29,7 +30,7 @@ void FUN_003c0484(BtlEntry *entry, s32 conditions, s32 context);
 u32 FUN_003d2ea0(BtlMainState **turn, CommandState *work)
 {
     FUN_002569ac(turn, (*turn)->actionState.index);
-    btlEntryValuesCopy(turn, work);
+    btlEntryValuesCopy(turn, (BtlUnit *)work);
     u16 pending = work->selection->responseFlags;
     s32 chance = 0;
     if ((work->flags & 0x1080) == 0) {

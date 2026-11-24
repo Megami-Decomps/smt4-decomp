@@ -1,6 +1,5 @@
-/* NON_MATCHING: 18 lines. Retail loads the perspective's far clip before its near clip (and pools 0.1 after
- * 25600), and stores the two -1 sentinels and `state` one slot later than this build schedules them
- * (`str r0, [r4, #40]!`); the rest is retail's. */
+/* NON_MATCHING: 6 lines. Retail sets the projection pivot before loading the far and near clips;
+ * the build loads the near and far clips before setting the pivot. */
 #include "common.h"
 #include "battle/btlCamera.h"
 #include "status/StatusCamera.h"
@@ -87,22 +86,13 @@ void eventCameraInitialize(BtlCamera *camera)
     camera->rollFrame = 0;
     camera->eyeShiftFrame = 0;
     camera->lookShiftFrame = 0;
-    camera->unk75C = -1;
     camera->moveFrame = 0;
-    camera->unk760 = -1;
+    camera->unk760 = camera->unk75C = -1;
     camera->shakeEffect = shakeEffectAlloc();
     eventCommandSetPendingCleanup(camera->shakeEffect);
-    camera->shake.words[0] = 0;
-    camera->shake.words[1] = 0;
-    camera->shake.words[2] = 0;
-    camera->shake.words[3] = 0;
-    camera->shake.words[4] = 0;
-    camera->shakeExtra.words[0] = 0;
-    camera->shakeExtra.words[1] = 0;
-    camera->shakeExtra.words[2] = 0;
-    camera->shakeExtra.words[3] = 0;
+    camera->shake = BtlCameraShake();
+    camera->shakeExtra = BtlCameraShake();
     camera->state = 1;
-    camera->shakeExtra.words[4] = 0;
 }
 
 } /* extern "C" */

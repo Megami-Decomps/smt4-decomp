@@ -19,7 +19,7 @@ int FUN_002e26a4(void);
 int howToControllerDestroy(void);
 int FUN_00330b74(void);
 int campCommonBgRelease(void);
-int FUN_0037a2e4(void);
+int titleConfigCreate(void);
 int campButtonHelpRelease(void);
 int partyPanelDestroy(void);
 int newHighwayInfoDestroy(void);
@@ -320,7 +320,7 @@ extern unsigned int dataTable15Sub0FindEntry(int);
 /* Supplied declaration required: obj25CRefreshFlags. */
 extern unsigned short FUN_00372140(void);
 extern int uiQuestGetStep(void);
-/* Supplied declaration required: FUN_0037a2e4. */
+/* Supplied declaration required: titleConfigCreate. */
 /* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: messageBannerInitCounter. */
 extern int gauntletAppMenuHasActiveFlags(void);
@@ -2150,7 +2150,7 @@ LAB_003d801c:
   case 0x53:
     temp_v4 = FUN_003ae848();
     if ((temp_v4 != 0) && (temp_v4 = loadSlotIsLoaded(0x3a), temp_v4 != 0)) {
-      FUN_0037a2e4();
+      titleConfigCreate();
       temp_v4 = 0x54;
       campChangeState(temp_v4);
     }

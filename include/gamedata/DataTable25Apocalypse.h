@@ -10,10 +10,12 @@ struct AocSystemA;
 struct DataTable25RecordA {
     /* 0x00 */ char name[0x20];
     /* 0x20 */ s16 id;
-    /* 0x22 */ u8 unk22[6];
+    /* 0x22 */ u8 unk22[5];
+    /* 0x27 */ u8 flags; /* bustupTextureStart tests it when setting the default position */
 };
 typedef char DataTable25RecordALayoutCheck[
-    sizeof(DataTable25RecordA) == 0x28 && offsetof(DataTable25RecordA, id) == 0x20 ? 1 : -1];
+    sizeof(DataTable25RecordA) == 0x28 && offsetof(DataTable25RecordA, id) == 0x20 &&
+    offsetof(DataTable25RecordA, flags) == 0x27 ? 1 : -1];
 
 extern "C" {
 DataTable25RecordA *aocPackageFindRecordById(AocSystemA *system, u32 id);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail unrolls the eight-vertex copy (x and y copied as words, z plus -11.0 from s16, loaded at
  * entry and saved with vpush) where armcc keeps the loop; the render-stack pushes, colour and draw loops agree. */
+#include "code/Code0023_Smt4a.h"
 #include "classes/Obj420990.h"
 #include "camp/RenderCtx.h"
 #include "classes/FilterDraw.h"
@@ -10,7 +11,6 @@ void FUN_00409e78(void *filter, f32 *matrix, const void *motion);
 void nn_math_VEC3TransformCoordArray(f32 *vertices, const f32 *matrix, f32 *output, u32 count);
 void FUN_0032c808();
 void gpuSubmitFloatVectorsOrDefault(const f32 *color, f32 x, f32 y, f32 z, f32 u, f32 v);
-void FUN_002371b0();
 }
 
 void Obj420990::draw()
@@ -36,7 +36,7 @@ void Obj420990::draw()
         gpuSubmitFloatVectorsOrDefault(color, points[vertex].x, points[vertex].y,
             points[vertex].z, vertices()[vertex].u, vertices()[vertex].v);
     }
-    FUN_002371b0();
+    effectSubmitDefaultDrawParameters();
     renderCtxSelectTexture(g_renderCtx, (AsdTexture *)((FilterDrawTexture *)handles[1].handle)->handle);
     renderCtxSetB(g_renderCtx, rects->blendB);
     FUN_00409e78(this, matrix, &handles[1]);
@@ -46,7 +46,7 @@ void Obj420990::draw()
         gpuSubmitFloatVectorsOrDefault(color, points[vertex].x, points[vertex].y,
             points[vertex].z, vertices()[vertex].u, vertices()[vertex].v);
     }
-    FUN_002371b0();
+    effectSubmitDefaultDrawParameters();
     renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     renderStackPop(g_renderCtx->stacks + RENDER_STACK_B);
 }

@@ -4,7 +4,12 @@
  * as retail does: C89-style declarations at the top of the helper) the unit is IDENTICAL; types, the lookup's
  * form, the loop's form and the compare's operand order change nothing. Nothing but the diff picks that
  * declaration order (FUN_003f3f08, the same body as a function, is IDENTICAL in every order), so it is not
- * applied. */
+ * applied. Also tried: the lookup written as FUN_003f3f08 has it (mask zeroed, colour, an if/else assigning the
+ * mask, then the count: 12 lines, the same swap); the count zeroed before the lookup as in
+ * partyPanelDrawAilmentIcon (92); `color` and `levelEntry` declared once for the whole function (12); the
+ * loop in place in case 2 with function-scope locals (65 to 75). The proven sibling partyPanelDrawAilmentIcon
+ * needs the opposite order (its mask before its count; 10 lines with them swapped), so the siblings give this
+ * helper's order no support either. */
 #include "code/Code004b.h"
 #include "shard/TextureDrawCall.h"
 #include "gamedata/SaveSlotRecord.h"

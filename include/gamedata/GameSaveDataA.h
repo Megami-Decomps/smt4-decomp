@@ -243,6 +243,7 @@ typedef struct GameSaveBodyA {
         struct {
             /* 0x27E90 */ s8 values[4];    /* the title configuration's saved setting bytes */
             /* 0x27E94 */ u8 saved;        /* nonzero once the settings were saved */
+            /* 0x27E95 */ u8 reserved[3];  /* copied with the saved settings */
         } titleConfig;
         struct {
             u8 prefix[0x28];
@@ -295,7 +296,8 @@ typedef char GameSaveBodyAOffsetCheck[offsetof(GameSaveBodyA, slots) == 0x4 && o
     offsetof(GameSaveBodyA, pairs.selectedUnit) == 0x27044 && offsetof(GameSaveBodyA, pairs.entries) == 0x270C4 &&
     offsetof(GameSaveBodyA, record.tail.value) == 0x27E0C &&
     offsetof(GameSaveBodyA, saveState) == 0x27E1E && offsetof(GameSaveBodyA, entryFlags) == 0x27E50 &&
-    offsetof(GameSaveBodyA, work.savedFlags) == 0x27EB8 && offsetof(GameSaveBodyA, tail.block28390) == 0x28390 &&
+    offsetof(GameSaveBodyA, titleConfig) == 0x27E90 && offsetof(GameSaveBodyA, titleConfig.saved) == 0x27E94 &&
+    sizeof(((GameSaveBodyA *)0)->titleConfig) == 8 && offsetof(GameSaveBodyA, work.savedFlags) == 0x27EB8 && offsetof(GameSaveBodyA, tail.block28390) == 0x28390 &&
     offsetof(GameSaveBodyA, cecRanking.players) == 0x28310 && offsetof(GameSaveBodyA, cecRanking.categories) == 0x28360 &&
     sizeof(GameSaveBodyA) == 0x2A71C && sizeof(GameSaveDataA) == 0x2A7A4 &&
     offsetof(GameSaveDataA, mapGroup.progress) == 0x66 ? 1 : -1];

@@ -47,15 +47,16 @@ struct BtlActionLoadSlot {
     /* 0x04 */ s32 id;      /* the resource's id, -1 when free */
 };
 
-/* A four-word action saved in the battle's turn list. */
-struct BtlListedAction {
-    /* 0x00 */ s32 kind;
+/* A four-word command listed for the turn (both games: IV listedActions, Apocalypse commands). */
+struct BtlPendingCommand {
+    /* 0x00 */ u32 kind;
     /* 0x04 */ s32 unitIndex;
-    /* 0x08 */ u32 argument0;
-    /* 0x0C */ u32 argument1;
+    /* 0x08 */ u32 first;
+    /* 0x0C */ u32 second;
 };
-typedef char BtlListedActionLayoutCheck[sizeof(BtlListedAction) == 0x10 &&
-    offsetof(BtlListedAction, unitIndex) == 4 ? 1 : -1];
+typedef char BtlPendingCommandLayoutCheck[sizeof(BtlPendingCommand) == 0x10 &&
+    offsetof(BtlPendingCommand, unitIndex) == 4 && offsetof(BtlPendingCommand, first) == 8 &&
+    offsetof(BtlPendingCommand, second) == 0xC ? 1 : -1];
 
 /* The battle's state block, kept by a module global (Shin Megami Tensei IV layout). Its allocation is
  * 0x4A58 bytes (FUN_001b0db4 allocates it with the size of this block). */
@@ -220,7 +221,7 @@ typedef struct BtlMainState {
         } playerCheck;
         struct {
             u8 unk1FD8[0x338];
-            /* 0x2310 */ BtlListedAction *actions; /* the actions listed for the turn (btlListedActionsPending) */
+            /* 0x2310 */ BtlPendingCommand *actions; /* the actions listed for the turn (btlHasFilteredCommand) */
             /* 0x2314 */ s32 count;
         } listedActions;
         struct {
@@ -393,16 +394,6 @@ typedef struct BtlCommandMessageStateA {
 typedef char BtlCommandMessageCurrentCommandOffsetCheck[
     offsetof(BtlCommandMessageStateA, command.currentCommand) == 0x268 &&
     sizeof(BtlCommandMessageStateA) == 0x270 ? 1 : -1];
-
-struct BtlPendingCommand {
-    /* 0x00 */ u32 kind;
-    /* 0x04 */ s32 unitIndex;
-    /* 0x08 */ u32 first;
-    /* 0x0C */ u32 second;
-};
-typedef char BtlPendingCommandLayoutCheck[sizeof(BtlPendingCommand) == 0x10 &&
-    offsetof(BtlPendingCommand, unitIndex) == 4 && offsetof(BtlPendingCommand, first) == 8 &&
-    offsetof(BtlPendingCommand, second) == 0xC ? 1 : -1];
 
 struct BattleCleanupResource {
     /* 0x00 */ u32 unk00;

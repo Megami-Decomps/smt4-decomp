@@ -6,6 +6,7 @@
 #include "gamedata/DataTable.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "gamedata/SaveSlotTableIV.h"
+#include "battle/BattleColorOverlay.h"
 
 namespace {
 /* The battle start request: a short form (one word) or the 18-byte form carrying the camera/party setup. */
@@ -65,8 +66,6 @@ s32 battleMainProcessUpdate(u32 job);
 void FUN_0020f04c(u32 job);
 s32 btlEditorQueryFalse(u32 job);
 s32 sceneQueryFalse(u32 job);
-s32 btlDrawTopColorOverlay(u32 job);
-s32 btlDrawBottomColorOverlay(u32 job);
 
 /* Allocates the battle's work area and its saved copies, applies the start request and starts the battle jobs. */
 void FUN_001b0db4(const BtlStartRequest *request, s32 size)

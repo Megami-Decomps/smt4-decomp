@@ -3,7 +3,11 @@
  * and sums them as at the hit range (0x546: the sums in r1 and r0, moved to r2 and r1 by the final adds). The same
  * statement gives retail's code at 0x542, 0x55E and 0x563; removing the element icon (0x529) from the same case gives
  * it here too. Every layout part has its own variable (one reused `part` cost 8 more rows at 0x528) and every site is
- * written `row + part + x`. */
+ * written `row + part + x`.
+ * No change (16): the icon's x written without the parentheses, with `x + 24` first or last, the element cast.
+ * The layout parts declared once at the top of the function (all eleven, or the weapon case's three) give a third
+ * arrangement here (10 rows: the x sum in r0 as retail, the y sum still in r1 and moved to r2); one `equippedAttack`
+ * for both attack cases is far off (71), as is the element's part declared at the case's scope (18). */
 #include <stdio.h>
 #include "camp/CampEquipment.h"
 #include "camp/CampState.h"

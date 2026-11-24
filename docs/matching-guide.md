@@ -422,6 +422,10 @@ difference a register tie-break.
 - The same applies to a two-way default of a compare key: `if (entry != NULL) order = entry->id; else order = 999;`
   for both keys made the comparators smt4a `entryRefCompareByOrderDefault`, `FUN_00404f00` and `FUN_0049ebf0`
   IDENTICAL where the ternaries were 10-14 lines off (wave 79). Use one spelling for both keys.
+- A frame 8 to 32 bytes larger than retail's, with otherwise retail code, is usually a local declared twice in
+  separate scopes (each copy keeps its own slot): one declaration at the top made both `uiQuestRebuildLists`
+  IDENTICAL (wave 90; every order of the four declarations matches, so none was picked by score). Each instance of an
+  inlined helper keeps its own slots too.
 - Assigning a global and then reading it back into a local (`g = alloc(); T *p = g;`) gives retail's
   reload ([as a sweep](#publish-first-allocation)).
 - A status local (`s32 result = 1;`) after the argument read keeps a constant shared by a shift and
@@ -761,6 +765,10 @@ asks for.
 
 ### Classes
 
+- An allocation tested for NULL before its constructor runs is `new T()` on a class whose
+  `static void *operator new(u32 bytes) throw()` returns `asdOperatorNew(bytes)` (a `throw()` allocator makes armcc
+  emit the test): `shopGetQueuedRequest`'s `ShopSequenceRequest` keeps both games' `shopMainUpdatePhase` and
+  `shopRequestSequence` IDENTICAL (wave 90). Don't write the NULL test by hand around a placement `new`.
 - A destructor slot whose whole body is `b <Base>::~Base` names the base class: smt4a `Obj55c99c` (slot 0 is a tail
   call of `Obj422540::~Obj422540`, the Apocalypse twin vtable `_ZTV9Obj422540`) derives from `Obj422540`, and its
   creator `FUN_004ad184` is IDENTICAL built through the base's constructor (wave 82).
@@ -865,6 +873,18 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
   naming the word. Skip objects left behind by functions renamed since (smt4's `FUN_00335518.o` is today's
   `btlAiScriptLoadFile`) and words that are numbers (smt4 `FUN_001124ac`'s run 0x400400-0x400464 is plain words in
   its smt4a twin): smt4 `btlAiScriptLoadFile` owns its two AI-script formats (wave 79).
+- **`sprintf` against `__2sprintf` has no global rule** (wave 90 census of both games). Both spellings call the same
+  Thumb `__2sprintf` in the image (smt4 0x2be624, smt4a 0x100388; `libc_sprintf` before it is an interworking veneer),
+  and the `_printf_*` R_ARM_NONE imports patch no bytes, so retail cannot say which header a call came from; the
+  prologue shape above is a hint, not a test (it misses smt4a `bustupViewerDraw`'s `push; ldr; mov; vpush` and
+  misleads on `titleConfigDraw`). The same `"dummy_npc%d"` call needs `<stdio.h>` in smt4 `FUN_003846e8` and the plain
+  `__2sprintf` in smt4a `npcDummyBindingsBindPositions`, and of 121 proven `<stdio.h>` units 59 need it. Decide the
+  form per call by an exact match, never by score, and leave proven units as they are. Check the callee too:
+  `sprintf(buf, externArray, ...)` compiles to `__c89sprintf`, which retail never calls, while `&externArray[0]`, a
+  member array or a pointer compiles to `__2sprintf`; writing `&array[0]` only to change the callee is steering, and a
+  member array needs the format block's real layout. A format only one unit uses can be that unit's own
+  `static const char[]` (smt4 `FUN_003c06ac`'s `battle/talk/Tone%s.tbb`, placed by relink), next to a shared format
+  still passed to `__2sprintf`. Never format a buffer into itself (`sprintf(name, "%s%s", name, ...)`).
 - **`__2snprintf` is armlib's `snprintf`** (smt4 0x2522f8, smt4a 0x1028b8, 0x36-byte Thumb): write
   `snprintf(buf, sizeof(buf), fmt, ...)` with `<stdio.h>`, as for `sprintf`; a local prototype of the placeholder
   leaves the prologue and argument scheduling off (smt4 `effectTextureRequestsPump`, smt4a `FUN_0036f0a0` and three

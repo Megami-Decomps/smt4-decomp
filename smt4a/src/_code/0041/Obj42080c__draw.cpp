@@ -1,6 +1,7 @@
 /* NON_MATCHING: 96 lines: retail adds -11.0 (kept in s16 from entry) to each vertex depth and loads each vertex's
  * buffer pointer once, copying the position through VFP pairs; the build subtracts 11.0 and reloads the buffer for
  * every field; the context loads into r4 rather than r1 before the first push. */
+#include "code/Code0023_Smt4a.h"
 #include "classes/Obj42080c.h"
 #include "classes/FilterDraw.h"
 #include "camp/RenderCtxA.h"
@@ -11,7 +12,6 @@ void FUN_00409e78(void *filter, f32 *matrix, const void *motion);
 void FUN_0032c808();
 void nn_math_VEC3TransformCoordArray(f32 *vertices, const f32 *matrix, f32 *output, u32 count);
 void gpuSubmitFloatVectorsOrDefault(const f32 *color, f32 x, f32 y, f32 z, f32 u, f32 v);
-void FUN_002371b0();
 }
 
 /* Draws the quad: its four vertices, moved 11 units back and through the filter's camera view, in the
@@ -41,7 +41,7 @@ void Obj42080c::draw()
         gpuSubmitFloatVectorsOrDefault(color, points[vertex][0], points[vertex][1], points[vertex][2],
                                        vertices()[vertex].x, vertices()[vertex].y);
     }
-    FUN_002371b0();
+    effectSubmitDefaultDrawParameters();
     renderCtxPopCounted(g_renderCtx, RENDER_STACK_A);
     renderCtxPopCounted(g_renderCtx, RENDER_STACK_B);
 }

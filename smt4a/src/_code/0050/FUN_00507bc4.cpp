@@ -1,32 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00507bc4` (_code @ 0x507bc4, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Reads item `id`'s info through FUN_00509110 on the wrapper's archive reference and, when an extension reader is attached
+ * and enabled, merges in the extension's own answer (slot 0x40) for the same item. */
+#include "shard/SoundArchiveWrapper.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned int FUN_00509110(unsigned int);
+u32 FUN_00509110(SoundArchiveRef *reader, u32 id, void *info);
 
-
-unsigned int FUN_00507bc4(int param_1,unsigned int param_2,unsigned int param_3)
-
+u32 FUN_00507bc4(SoundArchiveWrapperA *archive, u32 id, void *info)
 {
-  unsigned int temp_v0;
-  int *piVar2;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_00509110(*(unsigned int *)(param_1 + 4));
-  piVar2 = *(int **)(param_1 + 8);
-  if (piVar2 != (int *)0x0) {
-    if ((char)piVar2[1] == '\0') {
-      temp_v1 = 0;
+    u32 result = FUN_00509110(archive->ref, id, info);
+
+    if (archive->extension != NULL) {
+        result |= archive->extension->readInfo40IfEnabled(id, info);
     }
-    else {
-      temp_v1 = (**(romwright_code **)(*piVar2 + 0x40))(piVar2,param_2,param_3);
-    }
-    temp_v0 = temp_v0 | temp_v1;
-  }
-  return temp_v0;
+    return result;
 }
 
 } /* extern "C" */

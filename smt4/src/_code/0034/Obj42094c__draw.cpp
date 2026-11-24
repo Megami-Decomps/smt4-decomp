@@ -9,7 +9,7 @@ extern "C" {
 void titleSceneMultiplyByCameraView(void *filter, f32 *matrix, const void *motion);
 void FUN_002b011c();
 void gpuSubmitFloatVectorsOrDefault(const f32 *color, f32 x, f32 y, f32 z, f32 u, f32 v);
-void forwardRecoveredCallback();
+void effectSubmitDefaultDrawParameters();
 }
 
 void Obj42094c::draw()
@@ -47,7 +47,7 @@ void Obj42094c::draw()
             gpuSubmitFloatVectorsOrDefault(color, projected[vertex][0], projected[vertex][1],
                 projected[vertex][2], filter->vertices[vertex].u, filter->vertices[vertex].v);
         }
-        forwardRecoveredCallback();
+        effectSubmitDefaultDrawParameters();
     }
     renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
     renderStackPop(g_titleScene->stacks + RENDER_STACK_B);

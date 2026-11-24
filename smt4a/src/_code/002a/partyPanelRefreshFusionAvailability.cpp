@@ -2,7 +2,14 @@
  * (strb r1, [r0, #40]) only the reserve rows' "same as the first parent" compare differs: retail loads the
  * member's id into r1 and fusionParentIds[0] into r0 (`cmp r1, r0`), this build the id into r0 and the parent
  * into r1. The operand order, a local for either side, the first call's id local and an early-out layout of the
- * availability test all compile to the same code or move other rows. */
+ * availability test all compile to the same code or move other rows. So do an inline id getter around
+ * gameGetSlotRecord, casts on either side, and a member pointer local (16-20 lines); a shared "is the first
+ * parent" test for this row and the demon rows' (which retail compares the other way round, parent in r0 and
+ * id in r1 as well) is worse (10-32 lines).
+ * The choice toggles with the record locals around it: IV's partyPanelRefreshFusionParents had the same trade in
+ * its stock loop and matches with the entry's index read in the test and in the call instead of a local, and
+ * here a `member` local for this row or the last loops' tests written without theirs flips the last loops'
+ * compares instead (12-18 lines); no combination of those spellings over the four lookups reaches this row. */
 #include "ui/PartyPanelStateA.h"
 #include "camp/Unite/UniteWork.h"
 #include "camp/Unite/FusionAvailability.h"

@@ -1,7 +1,5 @@
-/* NON_MATCHING: 28 lines; the heading's textDrawString call (real parameter order) and everything after it match.
- * Retail keeps the priority 11 in fp and g_titleScene's address in sl (built: sl and fp), loads that address after
- * the frame's coordinate loads (built: before them), and the second render-state set swaps r1/r2. Both render-state
- * sets read g_titleScene directly, as their siblings do. */
+/* NON_MATCHING: 12 lines; the frame draw's shared layer and the address of g_titleScene still trade saved registers.
+ * Both stack updates use the counted setter, as the Apocalypse config draw does. */
 #include <stdio.h>
 #include "camp/Config/Config.h"
 #include "camp/CampMenuEntry.h"
@@ -31,9 +29,9 @@ void configDrawOptionPanel(s32 x, s32 y, s32 /* display */)
     const TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x2F, 0x20);
     s32 rowX = frame->x + x;
     s32 rowY = frame->y + y;
-    renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+    renderCtxSetStackTop(g_titleScene, RENDER_STACK_B, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 0x2F, 12, rowX, rowY, 11);
-    renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+    renderCtxSetStackTop(g_titleScene, RENDER_STACK_B, packNibblesAndByte(6, 7, 0));
     texDrawCompositeSprite(2, 0x2F, 1, rowX, rowY, 16);
 
     u32 variant = (u32)-1;
@@ -45,7 +43,7 @@ void configDrawOptionPanel(s32 x, s32 y, s32 /* display */)
         variant = 0;
 
     void *section = dataTableGet(0x36, 0);
-    const ConfigurationChoices *options = static_cast<ConfigurationChoices *>(dataTableGetEntries(section));
+    const ConfigurationChoices *options = (const ConfigurationChoices *)dataTableGetEntries(section);
     u32 count = dataTableGetCount(section);
     const ConfigurationChoices *entry = variant < count ? &options[variant] : NULL;
     if (entry) {

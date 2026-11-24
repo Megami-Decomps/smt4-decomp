@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fba4c` (_code @ 0x3fba4c, 0x66c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "code/Code0023_Smt4a.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -10,7 +11,6 @@ int mtx44Copy(float *, unsigned int *);
 int nn_math_ARMv6_MTX44MultAsm(...);
 int nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20(float *, float *, int *);
 int matrixScaleColumnsAlt(...);
-int FUN_002371b0(void);
 int gpuSubmitFloatVectorsOrDefault(...);
 int FUN_0032c808(void);
 int VectorFloatToUnsigned(...);
@@ -112,7 +112,6 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20. */
 /* Supplied declaration required: matrixScaleColumnsAlt. */
-/* Supplied declaration required: FUN_002371b0. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: FUN_0032c808. */
@@ -363,7 +362,7 @@ void FUN_003fba4c(fn_003fba4c_arg0 *param_1,int param_2,int param_3,unsigned int
         gpuSubmitFloatVectorsOrDefault(&temp_v47);
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 4);
-      FUN_002371b0();
+      effectSubmitDefaultDrawParameters();
     }
   }
   return;

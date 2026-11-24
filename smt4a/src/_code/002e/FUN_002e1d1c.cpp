@@ -1,4 +1,4 @@
-/* NON_MATCHING: 25 lines off: retail copies FUN_0039a1b8's three stack words (0x118, 0x120, 0x124) through integer
+/* NON_MATCHING: 25 lines off: retail copies campCecEditDrawScrollTrack's three stack words (0x118, 0x120, 0x124) through integer
  * registers (ldr, ldm, stm), the build through VFP registers; the rest matches. */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
@@ -50,7 +50,7 @@ void gxResetColorQuadToWhite(void);
 void uiSpawnSlotMarkers(void *screen, s32 a, s32 b, s32 c, s32 d, s32 e);
 void uiDrawDirectoryRowsByKind(void *screen, u32 a, u32 b, s32 c, s32 d, s32 e, s32 f);
 void FUN_0036cb0c(u32 a, u32 b, s32 c, s32 d, s32 e, s32 f, s32 g, s32 h, s32 i);
-void FUN_0039a1b8(void *screen, s32 a, s32 b, u32 c, u32 d, u32 e, u32 f, s32 g, s32 h, s32 i);
+void campCecEditDrawScrollTrack(void *screen, s32 a, s32 b, u32 c, u32 d, u32 e, u32 f, s32 g, s32 h, s32 i);
 }
 
 /* Draw the camp CEC edit screen: its frame sprite for the current mode, markers and detail widgets. */
@@ -105,7 +105,7 @@ extern "C" u32 FUN_002e1d1c(void)
             height = 11;
         if (edit->detail.mode != 5 && edit->detail.mode != 1) {
             u32 flags = edit->detail.listFlags;
-            FUN_0039a1b8(&edit->alpha, 0, 0, flags & 1, (flags & 2) >> 1, (flags & 4) >> 2, edit->detail.unk18, edit->detail.unk20,
+            campCecEditDrawScrollTrack(&edit->alpha, 0, 0, flags & 1, (flags & 2) >> 1, (flags & 4) >> 2, edit->detail.unk18, edit->detail.unk20,
                          height, edit->detail.unk24);
         }
         if (detail->detailShown != 0) {

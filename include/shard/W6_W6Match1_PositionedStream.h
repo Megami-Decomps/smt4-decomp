@@ -59,16 +59,6 @@ void FUN_002b5c88(void);
 extern "C" {
 #endif
 
-void FUN_002cc228(u8 character, s32 alternate);
-
-#ifdef __cplusplus
-}
-#endif
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /* The distance between two points (smt4: mathDistanceBetweenPoints). */
 f32 distSpatial(MapVector from, MapVector to);
 /* The absolute difference in degrees between a heading and the direction from one point to another. */

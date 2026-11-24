@@ -3,6 +3,7 @@
 #define SHOP_SHOPMAIN_H
 
 #include "common.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include <stddef.h>
 
 typedef struct ShopWork {
@@ -38,6 +39,9 @@ typedef struct ShopSequenceRequest {
     /* 0x00 */ u8 pending;
     /* 0x01 */ u8 unk01[3];
     /* 0x04 */ s32 screen;
+
+    ShopSequenceRequest() : pending(0), screen(0) {}
+    static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
 } ShopSequenceRequest;
 
 typedef char ShopSequenceRequestLayoutCheck[

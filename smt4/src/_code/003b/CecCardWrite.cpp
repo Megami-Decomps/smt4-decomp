@@ -51,7 +51,10 @@ u32 cecSendCardData(CecCardOwner *owner, u32 argument)
     return status;
 }
 
-u32 FUN_003bbd88(CecMessageBoxRequestPrefixIV *request)
+/* NON_MATCHING: retail derives the application-name address from the title literal, not the saved card-box
+ * base, and schedules the card-box and payload loads differently at both calls. */
+/* Initializes the card's StreetPass message box and translates errors into menu status bits. */
+u32 cecCardMessageBoxInit(CecMessageBoxRequestPrefixIV *request)
 {
     const u32 resource = cecMakeResourceId(0xe5c);
     const u32 result = FUN_003103e4(

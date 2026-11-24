@@ -1,4 +1,6 @@
-/* NON_MATCHING: only the kind-2 test's branch sense differs (retail: cmp #2; bne <kind 3>; b <kind 2>, the build: beq <kind 2>; b <kind 3>). */
+/* NON_MATCHING: only the kind-2 test's branch sense differs (retail: cmp #2; bne <kind 3>; b <kind 2>, the build: beq <kind 2>; b <kind 3>).
+ * Wave 90: the wording of the kind tests does not reach it (else-if, nested, flat, ternary, an `||` around both
+ * bodies and a one-case switch all give the build's pair); see btlCommandMenuDraw's note for the switch forms. */
 #include "battle/BattleContextCommands.h"
 
 extern "C" {

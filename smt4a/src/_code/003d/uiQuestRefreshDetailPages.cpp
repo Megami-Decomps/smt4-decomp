@@ -11,7 +11,7 @@ struct QuestPageMetadata {
 
 extern "C" {
 u8 idIsAtLeast350(u32 id);
-u32 partyEntryFlagsBit1(s32 id);
+u32 questHasNewMark(s32 id);
 s32 partyEntryGetByte1(s32 id);
 u32 questHasSpecialDetailPage(u32 id);
 void questMarkSelectedSpecialDetail(void);
@@ -53,7 +53,7 @@ extern "C" void uiQuestRefreshDetailPages(s32 id)
         if (idIsAtLeast350(id) != 0 && questPageMetadata(id)->kind == 0) {
             unrestrictedDlc = 1;
         }
-        if ((partyEntryFlagsBit1(id) | unrestrictedDlc) != 0) {
+        if ((questHasNewMark(id) | unrestrictedDlc) != 0) {
             if ((questPageMetadata(id)->flags & 0x20) != 0) {
                 ++quest->listState.count;
             }

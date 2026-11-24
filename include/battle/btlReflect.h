@@ -241,8 +241,8 @@ static __inline void btlReflectQueueStatusChange(s16 actor, u32 options, const v
     action->parameter = mask;
 }
 
-/* Queues a target action of `kind` with an integer payload. Shared by the action builders for kinds
- * 0x35 (FUN_004fb5dc) and 0x36 (FUN_004fb6f4). */
+/* Queues a target action of `kind` with an integer payload. Used by IV's kind-0x2B/0x2C builders
+ * and Apocalypse's kind-0x35/0x36 builders. */
 static __inline ReflectAction *btlReflectQueueTargetAction(u32 kind, s32 actor, u32 options,
     const void *target, u32 value)
 {
@@ -253,12 +253,11 @@ static __inline ReflectAction *btlReflectQueueTargetAction(u32 kind, s32 actor, 
     return action;
 }
 
-/* Queues a kind-7 follow-up action on a resolved combatant entry (shared by FUN_004fb5dc and
- * FUN_004fb6f4). */
-static __inline void btlReflectQueueKind7(s32 actor, u32 options, const void *entry, s32 value)
+/* Queues a follow-up action on a resolved combatant entry (kind 6 in IV, kind 7 in Apocalypse). */
+static __inline void btlReflectQueueUnitFollowup(u32 kind, s32 actor, u32 options, const void *entry, s32 value)
 {
     ReflectAction *followup = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
-    followup->kind = 7;
+    followup->kind = kind;
     followup->wordValues.unk18 = (u32)entry;
     followup->value = value;
 }

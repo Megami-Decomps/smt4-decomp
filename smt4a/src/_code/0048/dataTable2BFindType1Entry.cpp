@@ -1,29 +1,22 @@
-#include "common.h"
+#include "gamedata/MapNaviCategories.h"
+#include "gamedata/DataTableAccess_Smt4a.h"
 
 extern "C" {
 
-/* One 0x18-byte entry of data table 0x2B type 1: a key pair then data; a key of -1 ends the table. */
-typedef struct Table2BEntry {
-    /* 0x00 */ s8 first;
-    /* 0x01 */ u8 second;
-    /* 0x02 */ u8 unk02[0x16];
-} Table2BEntry;
-
 s32 dataTable2BType1Count(u32 *table);
-Table2BEntry *dataTable2BType1GetEntry(u32 *table, u32 index);
 
-/* Finds the table 0x2B type 1 entry whose key pair is (first, second); NULL when absent. */
-Table2BEntry *dataTable2BFindType1Entry(u32 unused, s32 first, u32 second, u32 unused2)
+/* Finds the icon record for the map and category, or returns NULL if absent. */
+MapNaviMarkerIcon *dataTable2BFindType1Entry(const void *, s32 mapId, u32 category)
 {
     u32 table;
     s32 count = dataTable2BType1Count(&table);
-    Table2BEntry *entries = dataTable2BType1GetEntry(&table, 0);
+    MapNaviMarkerIcon *entries = (MapNaviMarkerIcon *)dataTable2BType1GetEntry((u32)&table, 0);
 
     for (s32 i = 0; i < count; i++) {
-        if (entries[i].first == -1) {
+        if (entries[i].mapId == -1) {
             return NULL;
         }
-        if (entries[i].first == first && entries[i].second == second) {
+        if (entries[i].mapId == mapId && entries[i].category == category) {
             return &entries[i];
         }
     }

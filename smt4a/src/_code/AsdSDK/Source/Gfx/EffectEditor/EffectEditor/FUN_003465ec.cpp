@@ -12,7 +12,7 @@ int FUN_00200bcc(...);
 int FUN_00202178(...);
 int effEditorNodeChainApply(...);
 int asdDebugLog(...);
-int FUN_002b3fd8(int, int, int, int);
+int effMenuAppendDefaultColorRect(int, int, int, int);
 int effMenuAppendColorRect(...);
 int effMenuListAppend(void);
 int VectorSignedToFloat(int, int);
@@ -78,7 +78,7 @@ extern int slotIsActive(unsigned int);
 /* Supplied declaration required: FUN_00202178. */
 /* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: asdDebugLog. */
-/* Supplied declaration required: FUN_002b3fd8. */
+/* Supplied declaration required: effMenuAppendDefaultColorRect. */
 /* Supplied declaration required: effMenuAppendColorRect. */
 /* Supplied declaration required: effMenuListAppend. */
 
@@ -584,7 +584,7 @@ LAB_00346d7c:
   iRam0059dc68 = (int)(DAT_0059dc64 * temp_v10);
   DAT_0059dc6c = (int)(DAT_0063533c * temp_v13);
   DAT_0059dc70 = (int)(DAT_00635340 * temp_v12);
-  FUN_002b3fd8(0xa0,8,200,0xb0);
+  effMenuAppendDefaultColorRect(0xa0,8,200,0xb0);
   effEditorNodeChainApply(&DAT_0059edf8);
   if (DAT_0059dc2c == 1) {
     effEditorNodeChainApply(0x59eac0);

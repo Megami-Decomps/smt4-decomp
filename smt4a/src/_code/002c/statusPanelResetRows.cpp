@@ -1,6 +1,5 @@
-/* NON_MATCHING: 28 lines: retail hoists 0xFA8 into a saved register where the build hoists 0xFA7, passes the
- * hoisted animation id to the header sprite too (built: `mov r1, #12`), and orders the temporaries of the row-id fill
- * and of the unk243C/unk2438 stores differently. */
+/* NON_MATCHING: 18 lines: retail hoists HP image 0xFA8 where the build hoists 0xFA7, and schedules the
+ * timer state/frame stores differently. The row-id fill and both tab animation arguments now match. */
 #include "battle/BtlStatusPanelA.h"
 #include "battle/BattleContextCommandsA.h"
 #include "common.h"

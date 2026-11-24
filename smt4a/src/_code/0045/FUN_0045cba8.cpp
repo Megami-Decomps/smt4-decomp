@@ -78,8 +78,8 @@ extern int nw_snd_SoundArchive_IsAvailable(void);
 /* Supplied declaration required: FUN_001756d0. */
 extern unsigned long long soundArchiveReadSoundInfoWithExtension(unsigned int, int *, unsigned char *);
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2BAE30. */
-extern int FUN_0019472c(unsigned int, int *, unsigned int **);
-extern int soundInfoOwnerReadInfo(unsigned int, int *, unsigned int **);
+extern int soundArchiveReadSequenceSoundInfoWithExtension(unsigned int, int *, unsigned int **);
+extern int soundArchiveReadWaveSoundInfoWithExtension(unsigned int, int *, unsigned int **);
 /* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern int FUN_0045b844(unsigned int, int *);
@@ -786,7 +786,7 @@ LAB_0045da60:
           else {
             temp_v52 = (int *)0x0;
             temp_v53 = (int *)((unsigned int)temp_v53 & 0xffff0000);
-            temp_v2 = soundInfoOwnerReadInfo(*(unsigned int *)(param_1 + 4),temp_v64,&temp_v51);
+            temp_v2 = soundArchiveReadWaveSoundInfoWithExtension(*(unsigned int *)(param_1 + 4),temp_v64,&temp_v51);
             if (temp_v2 != 0) {
               temp_v8 = param_1;
               FUN_0045c944(param_1,temp_v47,temp_v36,&temp_v51,temp_v34,temp_v35,temp_v57);
@@ -832,7 +832,7 @@ LAB_0045da60:
           temp_v52 = (int *)0xffffffff;
           temp_v53 = (int *)0xffffffff;
           temp_v55 = 0xffffffff;
-          temp_v2 = FUN_0019472c(*(unsigned int *)(param_1 + 4),temp_v64,&temp_v51);
+          temp_v2 = soundArchiveReadSequenceSoundInfoWithExtension(*(unsigned int *)(param_1 + 4),temp_v64,&temp_v51);
           if (temp_v2 != 0) {
             if (puVar13 != (unsigned int *)0x0) {
               if ((int *)puVar13[2] != (int *)0xffffffff) {

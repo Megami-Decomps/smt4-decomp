@@ -5,7 +5,7 @@
 extern "C" {
 void FUN_002b011c();
 void effectSpawnPositionDefault(u32 effect, f32 x, f32 y, f32 z);
-void forwardRecoveredCallback();
+void effectSubmitDefaultDrawParameters();
 
 /* Emits paired effects at each endpoint and at a one-unit perpendicular offset. */
 void FUN_00263028(u32 firstEffect, u32 secondEffect, f32 startX, f32 startY, f32 endX, f32 endY, f32 height)
@@ -23,7 +23,7 @@ void FUN_00263028(u32 firstEffect, u32 secondEffect, f32 startX, f32 startY, f32
         effectSpawnPositionDefault(secondEffect, endX, endY, height);
         effectSpawnPositionDefault(firstEffect, normalX + startX, normalY + startY, height);
         effectSpawnPositionDefault(secondEffect, normalX + endX, normalY + endY, height);
-        forwardRecoveredCallback();
+        effectSubmitDefaultDrawParameters();
     }
 }
 }

@@ -26,8 +26,8 @@ int mapCategoryToDestinationGroup(...);
 int btlGetAffinity(...);
 int halfTable152TopIs2(...);
 int btlUnitClearMatchingPairs(...);
-int FUN_004fb5dc(...);
-int FUN_004fb6f4(...);
+int btlReflectQueueTargetWithFollowup(...);
+int btlReflectQueueParameterTargetWithFollowup(...);
 int btlRecoverHpMpByPercent(...);
 int btlReflectInitKind23(...);
 void FUN_004fd1b8(int actor, unsigned int flags, unsigned int value,
@@ -293,8 +293,8 @@ extern int btlFindEffectValueByNamePrefix(int);
 extern int FUN_004f9a20(int);
 extern int FUN_004f9ae4(int, unsigned int);
 /* Supplied declaration required: btlQueueActionMessage. */
-/* Supplied declaration required: FUN_004fb5dc. */
-/* Supplied declaration required: FUN_004fb6f4. */
+/* Supplied declaration required: btlReflectQueueTargetWithFollowup. */
+/* Supplied declaration required: btlReflectQueueParameterTargetWithFollowup. */
 /* Supplied declaration required: btlRecoverHpMpByPercent. */
 /* Supplied declaration required: FUN_004fbeac. */
 /* Supplied declaration required: btlReflectInitKind23. */
@@ -1369,7 +1369,7 @@ LAB_004e4280:
            (temp_v8 = btlFindEntryValue(param_8,0x28), 0 < temp_v8)) {
           temp_v8 = btlSelectionGetUsableUnit(g_btlAux);
           temp_v21 = (unsigned int *)0xffffffff;
-          FUN_004fb6f4(temp_v8 + temp_v5 + temp_v12,param_2,*(int *)(*param_1 + 0x1ed4) + temp_v80 * 0x10
+          btlReflectQueueParameterTargetWithFollowup(temp_v8 + temp_v5 + temp_v12,param_2,*(int *)(*param_1 + 0x1ed4) + temp_v80 * 0x10
                        ,3,1,0xffffffff);
           temp_v8 = btlSelectionGetUsableUnit(g_btlAux);
           FUN_004fbeac(temp_v8 + temp_v5 + temp_v12,param_2,0,0x37,1);
@@ -1559,7 +1559,7 @@ LAB_004e45bc:
           temp_v5 = btlFindEffectValueByNamePrefix(g_btlAux);
           temp_v5 = temp_v5 + temp_v48;
           temp_v8 = btlFindEffectValueByNamePrefix(g_btlAux);
-          FUN_004fb5dc(temp_v8 + temp_v48 + temp_v12,param_2,temp_v108,
+          btlReflectQueueTargetWithFollowup(temp_v8 + temp_v48 + temp_v12,param_2,temp_v108,
                        *(int *)(*param_1 + 0x1ed4) + param_8 * 0x1d0,temp_v5 + temp_v12,temp_v18);
         btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,param_8,temp_v48,10,0xf);
           puVar13 = (unsigned int *)*param_1;

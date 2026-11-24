@@ -38,7 +38,7 @@ void uiDrawNumberFrame(u32 *, s32, s32, u32, u32);
 const CecViewMarkEntry *gameDataGetMarkEntry(s32);
 void saveSlotDrawSummary(u32, const CecViewMarkEntry *, CecViewRow *, s32, s32, u32);
 void FUN_00359c78(u32 *, s32, s32);
-void FUN_0036c91c(u32 *, s32, s32, u32, u32, u32, s32, s32, u32);
+void campCecViewDrawScrollTrack(u32 *, s32, s32, u32, u32, u32, s32, s32, u32);
 void skinObjectUpdateMatrices(RenderCtxA *);
 void efctSetSpeed(f32);
 
@@ -63,7 +63,7 @@ u32 campCecViewDrawEntries()
             effCreateRegisteredPair(x, y);
     }
     u32 flags = draw->flags;
-    FUN_0036c91c(&draw->rowWork.footerState.footer, 0, 0, flags & 1, (flags & 2) >> 1,
+    campCecViewDrawScrollTrack(&draw->rowWork.footerState.footer, 0, 0, flags & 1, (flags & 2) >> 1,
                  (flags & 4) >> 2, draw->selected, draw->top, draw->total);
     renderStackPop(g_renderCtx->stacks + RENDER_STACK_A);
     skinObjectUpdateMatrices(g_renderCtx);

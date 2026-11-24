@@ -17,7 +17,7 @@ public:
 };
 
 extern "C" {
-s32 FUN_001a8930(void *archive, u32 id, WaveArchiveLoadInfo *info);
+s32 soundArchiveReadWaveArchiveInfoWithExtension(void *archive, u32 id, WaveArchiveLoadInfo *info);
 void FUN_001a5e84(WaveArchiveReader *reader, const void *file, u32 individual);
 bool asdWaveArchiveHasExpectedBlock(const WaveArchiveReader *);
 u32 nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(const void *);
@@ -30,7 +30,7 @@ void soundArchiveLoaderConvertWaveArchiveToIndividual(SoundArchiveLoaderA *loade
     WaveArchiveLoadInfo info;
     info.fileId = 0xFFFFFFFF;
     info.loadIndividual = 0;
-    if (!FUN_001a8930(loader->archive, archiveId, &info) || !info.loadIndividual)
+    if (!soundArchiveReadWaveArchiveInfoWithExtension(loader->archive, archiveId, &info) || !info.loadIndividual)
         return;
 
     const void *file = loader->vtbl->getFile(loader, info.fileId);

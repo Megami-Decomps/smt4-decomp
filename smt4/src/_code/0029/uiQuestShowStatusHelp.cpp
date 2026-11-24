@@ -15,8 +15,8 @@ typedef char QuestStatusLabelSizeCheck[sizeof(QuestStatusLabel) == 0x4A ? 1 : -1
 }
 
 extern "C" {
-u32 FUN_00298dc8(s32 quest);
-u32 FUN_00298e00(u32 quest);
+u32 questHasNewMark(s32 quest);
+u32 questIsReported(u32 quest);
 u32 questIsCompleted(s32 quest);
 bool questIsOfferable(u16 quest);
 u32 resourceRunOperationIfUnblocked(const void *cursor);
@@ -44,7 +44,7 @@ void uiQuestShowStatusHelp()
 
     u32 status;
     if (panel->detailMode) {
-        if (FUN_00298dc8(quest)) {
+        if (questHasNewMark(quest)) {
             status = rosterGetLeaderId() ? 6 : 0;
         } else {
             if (!questIsCompleted(quest)) {
@@ -63,7 +63,7 @@ void uiQuestShowStatusHelp()
             status = questIsCompleted(quest) ? 3 : 5;
         }
     } else if (questIsCompleted(quest)) {
-        status = FUN_00298e00(quest) ? 4 : 3;
+        status = questIsReported(quest) ? 4 : 3;
     } else {
         status = 0;
     }

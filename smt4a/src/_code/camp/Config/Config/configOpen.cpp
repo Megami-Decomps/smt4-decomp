@@ -14,10 +14,9 @@ void asdTMTexTableLoadSprites(u32 id);
 void loadSlotEnsureLoaded(u32 id);
 void sysPlaySe(u32 id);
 void buttonHelpSetText(u32 index, u32 color);
-void FUN_003d05a4(ConfigWorkA *config, u32 parent);
 
-// Open the options screen, acquiring only texture resources it must own.
-void configOpen(u32 parent, u8 mode)
+/* Opens the options screen, acquiring only texture resources it must own. */
+void configOpen(u32 initialValue, u8 mode)
 {
     if (g_config == NULL) {
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Config\\Config.cpp", 1224);
@@ -41,7 +40,7 @@ void configOpen(u32 parent, u8 mode)
     loadSlotEnsureLoaded(0x36);
     sysPlaySe(5);
     buttonHelpSetText(0, 0xF4F4F4FF);
-    FUN_003d05a4(config, parent);
+    FUN_003d05a4(config, initialValue);
     config = g_config;
     config->state = 0;
     config->unk68 = 0;

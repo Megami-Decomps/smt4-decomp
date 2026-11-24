@@ -16,7 +16,7 @@ extern BtlEffectOwner *g_btlAux;
 s32 scrGetArg(s32 index);
 s32 isEntryUsable(u32 event); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "u32" is incompatible with parameter of type "int *")
 s32 FUN_0024550c(BtlEffectOwner *owner);
-void FUN_00245420(s32 actor, u32 unit, BtlActionRecord *target, u32 value, s32 effect, s32 lookup, s32 extra);
+void btlReflectQueueParameterTargetWithFollowup(s32 actor, u32 unit, BtlActionRecord *target, u32 value, s32 effect, s32 lookup, s32 extra);
 void FUN_001b1a48(s32 effect, u32 unit, BtlEffectSlotBlock *slots, s32 flags, s32 firstMember, s32 secondMember);
 
 
@@ -43,7 +43,7 @@ u32 scrComm_Battle_PlayCommonEffect(void)
         loadCommonEffectSet(effect);
         u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
         BtlActionRecord *target = btlGetMainState()->actions;
-        FUN_00245420(0, unit, target, value, effect, 0, -1);
+        btlReflectQueueParameterTargetWithFollowup(0, unit, target, value, effect, 0, -1);
         s32 member = target->memberId;
         FUN_001b1a48(effect, unit, g_btlAux->slots, 0, member, member);
     }

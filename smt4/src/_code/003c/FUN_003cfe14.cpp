@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (211 vs 213 rows); register allocation of the action context and flag constants differs */
 #include "common.h"
+#include "battle/BtlUnitTarget.h"
 #include "battle/BtlMainAccess.h"
 
 struct ActionTarget {
@@ -43,7 +44,6 @@ extern "C" {
 void btlShowListedActionMessage(s32* battle, ActionContext* ctx, s32 id, s32 value, s32 arg);
 u32 FUN_00227fac(u32 listedId);
 void frameRangeExtend(s32* battle, ActionContext* ctx, s32 id, s32 a, s32 b, s32 c);
-s32 btlUnitIsDeadAndUncopied(s32* battle, ActionContext* ctx, s32 id);
 void FUN_0023c0d0(s32* battle, ActionContext* ctx, s32 id, s32 amount);
 void actionCreateKindSeventeen(s32 kind, ActionContext* ctx, s32 arg);
 void btlQueueKeyedScalarReflectAction(s32 a, ActionContext* ctx, s32 b, s32 c, s32 d, s32 e, s32 f);
@@ -72,7 +72,7 @@ u8 FUN_003cfe14(s32* battle, ActionContext* ctx, s32 amount)
         FUN_00227d18(ctx->target->listedId);
     }
     FUN_0023c0d0(battle, ctx, ctx->target->listedId, -amount);
-    s32 followUp = btlUnitIsDeadAndUncopied(battle, ctx, ctx->target->listedId);
+    s32 followUp = btlUnitIsDeadAndUncopied((BtlMainState **)battle, (BtlUnit *)ctx, ctx->target->listedId);
     if (followUp != 0)
         result = 1;
     if ((s32)value > 0) {

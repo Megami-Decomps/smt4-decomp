@@ -27,13 +27,18 @@ typedef char EventEffectALayoutCheck[offsetof(EventEffectA, frame) == 8 &&
 struct EventFilterTexture {
     /* 0x00 */ u32 table;
     /* 0x04 */ u32 node;
-    /* 0x08 */ u8 requested;
-    /* 0x09 */ u8 unk09[3];
+    /* 0x08 */ u8 requested;       /* owns a loaded texture node */
+    /* 0x09 */ u8 entryRequested;  /* owns the indexed table entry */
+    /* 0x0A */ u8 unk0A[2];
 };
+
+typedef char EventFilterTextureLayoutCheck[offsetof(EventFilterTexture, entryRequested) == 9 &&
+    sizeof(EventFilterTexture) == 0xC ? 1 : -1];
 
 /* The fade/slide banner shown over the event scene (Apocalypse). */
 typedef struct EventBannerWork {
-    /* 0x00 */ u8 unk00[8];
+    /* 0x00 */ u32 job;
+    /* 0x04 */ u8 unk04[4];
     /* 0x08 */ s32 state;        /* 0 loading, 1 playing, 2 done */
     /* 0x0C */ s32 offset;       /* vertical slide offset */
     /* 0x10 */ s32 frame;
@@ -43,7 +48,7 @@ typedef struct EventBannerWork {
 } EventBannerWork;
 
 typedef char EventBannerWorkLayoutCheck[offsetof(EventBannerWork, alpha) == 0x14 &&
-    offsetof(EventBannerWork, slideOnly) == 0x19 ? 1 : -1];
+    offsetof(EventBannerWork, slideOnly) == 0x19 && sizeof(EventBannerWork) == 0x1C ? 1 : -1];
 
 /* The module global (Apocalypse): two other words precede the effect pointers. */
 typedef struct EventEffectGlobalsA {
@@ -71,6 +76,8 @@ typedef char EventEffectGlobalsALayoutCheck[sizeof(EventEffectGlobalsA) == 0x88 
     offsetof(EventEffectGlobalsA, texture) == 0x7c ? 1 : -1];
 
 extern "C" {
+/* The banner texture array has its own address in retail's pools (g_eventEffect + 0x1C). */
+extern EventFilterTexture g_eventBannerTextures[2];
 u32 FUN_00284e94(void);
 }
 

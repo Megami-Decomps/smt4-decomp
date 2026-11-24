@@ -1,6 +1,3 @@
-/* NON_MATCHING: 6 lines: the wait (nn::os::WaitAny) matches; for the size left in the file retail loads the
- * produced position into r2:r3 and the limit into r0 (`ldrd r2, [r4, #8]; ldr r0, [r4, #16]`), the build into
- * r0:r1 and r1. */
 #include "mobiclip_ctrl/S4FsReader.h"
 #include "shard/W6_W6Match2_LongDivision.h"
 #include "nn/Result.h"
@@ -27,7 +24,8 @@ void s4FsReaderThreadMain(S4FsReader *reader)
             nn_os_CriticalSection_Leave(reader->lock);
             continue;
         }
-        u32 size = (u32)(reader->limit - reader->produced);
+        s64 remaining = reader->limit - reader->produced;
+        u32 size = (u32)remaining;
         if (size > S4_FS_READER_CHUNK_SIZE) {
             size = S4_FS_READER_CHUNK_SIZE;
         }

@@ -36,4 +36,10 @@ typedef char BtlDebugEntryLayoutCheck[
     sizeof(BtlDebugEntry) == 0x64 && offsetof(BtlDebugEntry, needsBattleState) == 0x5B &&
     offsetof(BtlDebugEntry, flags) == 0x60 && offsetof(BtlStateMasks, held) == 0x45A0 && sizeof(BtlDebugPage) == 0x110 ? 1 : -1];
 
+extern "C" {
+/* Finds the leading byte key in table 22's player (protagonist) or reserve section (Apocalypse). */
+BtlDebugEntry *btlDebugFindCommandByIndex(u8 index, s32 protagonist);
+s32 dataSet16CompareByteKeys(const void *left, const void *right);
+} /* extern "C" */
+
 #endif

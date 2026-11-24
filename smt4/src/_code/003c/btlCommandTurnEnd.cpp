@@ -9,13 +9,13 @@
 #include "battle/BattleHelpers_Smt4.h"
 #include "battle/btlAction.h"
 #include "battle/BtlUnitWork.h"
+#include "battle/BtlUnitTarget.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {
 extern u32 g_btlActionReflect;
 
 s32 nodeListCountActiveById(u32 id);
-s32 btlUnitIsDeadAndUncopied(BtlMainState **block, CommandState *work, s32 index);
 s32 btlNodeListAnyReady(void);
 void FUN_0023f4e4(BtlMainState *state);
 void btlReflectQueuePendingRosterFade(s32 a, CommandState *work, s32 b);
@@ -62,7 +62,7 @@ static __inline bool opposingSideStands(BtlMainState **block, CommandState *work
         count = 4;
     }
     for (s32 index = first; index < first + count; ++index) {
-        if (((*block)->actions[index].status & 1) != 0 && btlUnitIsDeadAndUncopied(block, work, index) == 0)
+        if (((*block)->actions[index].status & 1) != 0 && btlUnitIsDeadAndUncopied(block, (BtlUnit *)work, index) == 0)
             return true;
     }
     return false;
@@ -77,7 +77,7 @@ u32 btlCommandTurnEnd(BtlMainState **block, CommandState *work)
     bool marked = false;
     if ((work->flags & 0x1080) == 0) {
         for (s32 index = 0; index < 109; ++index) {
-            if (((*block)->actions[index].status & 1) != 0 && btlUnitIsDeadAndUncopied(block, work, index) == 0) {
+            if (((*block)->actions[index].status & 1) != 0 && btlUnitIsDeadAndUncopied(block, (BtlUnit *)work, index) == 0) {
                 BtlUnitData *data = &btlMainFindEntryByListedId(*block, index)->data;
                 if (data->primaryFlags != 0 && data->statusFlags == 0) {
                     marked = true;
@@ -118,7 +118,7 @@ u32 btlCommandTurnEnd(BtlMainState **block, CommandState *work)
         bool anyUp = false;
         u8 slotFlags[4] = {0, 0, 0, 0};
         for (s32 i = 0; i < 109; ++i) {
-            if (((*block)->actions[i].status & 1) == 0 || btlUnitIsDeadAndUncopied(block, work, i) != 0)
+            if (((*block)->actions[i].status & 1) == 0 || btlUnitIsDeadAndUncopied(block, (BtlUnit *)work, i) != 0)
                 continue;
             BtlEntry *entry = btlMainFindEntryByListedId(*block, i);
             BtlUnitData *data = &entry->data;
@@ -161,7 +161,7 @@ u32 btlCommandTurnEnd(BtlMainState **block, CommandState *work)
         }
     }
 
-    if (btlUnitIsDeadAndUncopied(block, work, work->record->memberId) == 0 && (work->selection->responseFlags & 0x20) != 0 &&
+    if (btlUnitIsDeadAndUncopied(block, (BtlUnit *)work, work->record->memberId) == 0 && (work->selection->responseFlags & 0x20) != 0 &&
         opposingSideStands(block, work) && (*block)->actionState.mode == 0 && (work->entry->flags & 0x40) == 0 &&
         (work->entry->flags & 0x20000000) == 0 && (work->flags & 4) == 0) {
         s32 value = work->selection->power / 8;

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int uiSearchPrimary(ScrollSelection *list);
+extern int uiListGetVisibleCount(ScrollSelection *list);
 
 /* Selects `index` in the status list, clamped to the number of entries. */
 void statusDownSelectListIndex(int index)
@@ -11,7 +11,7 @@ void statusDownSelectListIndex(int index)
     int count;
 
     if (status != NULL) {
-        count = uiSearchPrimary(&status->list);
+        count = uiListGetVisibleCount(&status->list);
         if (count <= index) {
             index = count - 1;
         }

@@ -50,15 +50,25 @@ struct MapNaviMarker {
     /* 0x0A */ u16 y;
     /* 0x0C */ u8 padding[4];
 };
+/* Data table 0x2B, type 1: maps a map/category pair to its marker icon. */
 struct MapNaviMarkerIcon {
-    /* 0x00 */ u8 padding[3];
+    /* 0x00 */ s8 mapId;
+    /* 0x01 */ u8 category;
+    /* 0x02 */ u8 unk02;
     /* 0x03 */ u8 icon;
+    /* 0x04 */ u8 unk04[0x14];
 };
+
+extern "C" {
+MapNaviMarkerIcon *dataTable2BFindType1Entry(const void *navigation, s32 mapId, u32 category);
+MapNaviCategoryRecord *mapNaviFindCategoryAtPosition(const void *navigation, s32 mapId, s32 section,
+                                                    f32 x, f32 y, f32 z);
+} /* extern "C" */
 typedef char MapNaviMarkerLayoutCheck[
     sizeof(MapNaviMarker) == 0x10 &&
     offsetof(MapNaviMarker, category) == 4 &&
     offsetof(MapNaviMarker, x) == 8 &&
-    offsetof(MapNaviMarkerIcon, icon) == 3 ? 1 : -1];
+    sizeof(MapNaviMarkerIcon) == 0x18 && offsetof(MapNaviMarkerIcon, icon) == 3 ? 1 : -1];
 typedef char MapNaviCategoryLayoutCheck[
     sizeof(MapNaviCategoryRecord) == 0x14 && sizeof(MapNaviCategoryGrid) == 8 &&
     offsetof(MapNaviCategoryRecord, category) == 4 &&
