@@ -24,7 +24,7 @@ int pairSetHalves(...);
 int jobGetScalarValue(void);
 int markerKindGetColor(...);
 int phaseSine(void);
-int FUN_001f3e80(...);
+int mathTriangleWaveBlend(...);
 int fadeObjectResetIfActive(...);
 int efctCallRoutineWithSpeedOverride(...);
 int devilDispatchTextureResource(...);
@@ -127,7 +127,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: markerKindGetColor. */
 /* Supplied declaration required: phaseSine. */
 /* Supplied declaration required: gameGetSlotRecord. */
-/* Supplied declaration required: FUN_001f3e80. */
+/* Supplied declaration required: mathTriangleWaveBlend. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: FUN_0025e704. */
 extern int btlMainGetUnk14(void);
@@ -756,10 +756,10 @@ LAB_002afb00:
             temp_v21 = VectorFloatToUnsigned(temp_v24 * DAT_00573be0,3);
             temp_v10 = temp_v10 & 0xff;
             temp_v21 = temp_v21 & 0xff;
-            temp_v9 = FUN_001f3e80(temp_v22 & 0xff,(unsigned int)DAT_00573bd8,DAT_00573bdc,
+            temp_v9 = mathTriangleWaveBlend(temp_v22 & 0xff,(unsigned int)DAT_00573bd8,DAT_00573bdc,
                                   *(unsigned short *)(temp_v15 + 0x4b36),0);
-            temp_v18 = FUN_001f3e80(temp_v10,temp_v18,DAT_00573bdc,*(unsigned short *)(temp_v15 + 0x4b36),0) & 0xff;
-            temp_v11 = FUN_001f3e80(temp_v21,temp_v11,DAT_00573bdc,*(unsigned short *)(temp_v15 + 0x4b36),0);
+            temp_v18 = mathTriangleWaveBlend(temp_v10,temp_v18,DAT_00573bdc,*(unsigned short *)(temp_v15 + 0x4b36),0) & 0xff;
+            temp_v11 = mathTriangleWaveBlend(temp_v21,temp_v11,DAT_00573bdc,*(unsigned short *)(temp_v15 + 0x4b36),0);
             drawSetColorFromRGBA8((temp_v9 << 0x18) | (temp_v18 << 0x10) | ((temp_v11 & 0xff) << 8) |
                          (unsigned int)DAT_00573bdb);
             temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x43));

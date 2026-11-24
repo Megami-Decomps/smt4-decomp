@@ -7,7 +7,6 @@ struct TerminalDrawName { u8 unk00[6]; char text[30]; };
 extern "C" {
 extern TerminalDrawWork *g_tmnl;
 extern TerminalDrawName g_tmnlEntries[];
-s32 renderCtxPackPassFlags(u32 group, u32 index);
 
 // Draw the terminal name during the active sequence and refresh the scene's scoped render state.
 u32 tmnlDrawDestinationName()

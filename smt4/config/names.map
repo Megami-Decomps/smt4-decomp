@@ -2689,7 +2689,7 @@
 00206ef0 dataCompareSecondaryRank
 00207014 dataComparePrimaryRank
 0022c930 btlTurnOrderRankOf
-002340e4 _ZN17RequestParametersC1Ev
+002340e4 _ZN14AocMenuRequestC1Ev
 0023470c touchRegisterSecondRegion
 0023474c touchRegisterFirstRegion
 00235744 animCurveAdjustFrame
@@ -4683,7 +4683,7 @@
 0022dcac demonIconPanelDrawRow
 00126484 workCommandArm
 002e1b3c gameDataClearSaveRecord
-0034c944 gaugePairIsWithinLimits
+0034c944 animationVisualIsComplete
 002dc55c uiSpriteOperationGetCompletion
 003594b4 cecdDispatchBackendCall
 00359984 cecdDispatchBackendCall2
@@ -6503,3 +6503,18 @@
 003887cc aocSystemMountStep
 003819b8 qcTabListPickRandomTab
 00381958 qcUtilityBuildBonusTab
+00352f10 _ZN15AocCatalogQueryD1Ev
+00103fec commandQueueResetDefaults
+0020147c scrCommFadeMessageUnderlayIn
+00126058 querySlotsClearPending
+002484e0 matrixSetRotationX
+0026e6a0 mathTriangleWaveBlend
+0034c9a0 attackAnimationFirstChildIsComplete
+0038cbdc aocCatalogJobRun
+0029ce60 compendiumComputeSummonCost
+00234330 aocItemAttributeLabel
+00352f9c aocCatalogQueryInit
+0029dc74 unitRecordBuild
+00231dec naviPanelDraw
+00335b80 btlGameOverDraw
+001ebedc campCecDemonRewardState

@@ -1,11 +1,11 @@
 /* NON_MATCHING: the render-state pushes and pops are the context's stacks (B the blend mode, A the pass flags) and
  * the colour is filled element-wise as retail does; the vertex copy and projection loops and their VFP registers differ. */
 #include "classes/Obj42094c.h"
+#include "camp/RenderCtx.h"
 #include "classes/FilterDraw.h"
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
-u32 renderCtxPackPassFlags(u32 mode, u32 value);
 void titleSceneMultiplyByCameraView(void *filter, f32 *matrix, const void *motion);
 void FUN_002b011c();
 void gpuSubmitFloatVectorsOrDefault(const f32 *color, f32 x, f32 y, f32 z, f32 u, f32 v);

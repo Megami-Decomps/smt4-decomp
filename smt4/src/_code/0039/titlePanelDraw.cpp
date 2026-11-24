@@ -25,7 +25,6 @@ extern "C" {
 void renderCtxSelectStereoLayout(RenderCtx *context);
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
-s32 renderCtxPackPassFlags(u32 first, u32 second);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void texDrawCompositeSprite(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
 void FUN_00397db0(TitlePanel *panel, u8 frame, f32 speed);

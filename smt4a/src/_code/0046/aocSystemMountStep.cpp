@@ -1,9 +1,9 @@
-/* NON_MATCHING: 357 lines (shape 237). Control flow, calls, block order and the 76-byte frame match. Retail keeps
+/* NON_MATCHING: 297 lines (shape 213). Control flow, calls, block order and the 76-byte frame match. Retail keeps
  * the constant 1 in r8 from the prologue (this build: a scratch register for the constructor, r9 later) and
  * &g_aocMain in r9, which renames most rows; its stack slots for the step result, the missing-content copy and the
  * request copies sit at other offsets; it copies the queued request as three words plus a doubleword (ldm/ldrd)
- * where this build copies five words; it shares the `state =` store between steps 1 and 2 and loads the thread
- * launch's arguments in another order. Two single-use inline helpers scored better (301/211: the missing-content
+ * where this build copies five words; it loads the thread launch's arguments in
+ * another order. Two single-use inline helpers scored better (301/211: the missing-content
  * test taking the result by value, and a test-and-set of the cancel flag) and were written in place for want of
  * evidence besides the score. */
 #include "addon/aocMain.h"
@@ -79,8 +79,9 @@ static __inline void aocStartWorkerThread(AocWorkerThread *thread, void (*entry)
     }
 }
 
-/* Whether the package's content is in use (its state bit 0). */
-static __inline u8 aocPackageIsActive(AocPackage *package)
+/* Whether the package's content is in use (its state bit 0). A plain static: with its six calls armcc inlines it
+ * late, as retail's code has it (357 lines as `static __inline`). */
+static u8 aocPackageIsActive(AocPackage *package)
 {
     return objGetFlagBit0(&package->id);
 }
@@ -115,7 +116,7 @@ static __inline void aocSystemReleasePackages(AocSystemA *system)
  * while the mount goes on, idle once it is done, or the failure, which is also queued on the AOC process. */
 RequestParameters aocSystemMountStep(AocSystemA *system)
 {
-    RequestParameters request(AOC_REQUEST_ACTIVE);
+    RequestParameters request;
 
     if (sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
         g_aocMain->flags &= ~0x10000u;
@@ -159,17 +160,15 @@ RequestParameters aocSystemMountStep(AocSystemA *system)
             request = step;
             break;
         }
-        case AOC_MOUNT_START_THREAD: {
+        case AOC_MOUNT_START_THREAD:
             if ((s32)system->phase > system->waitFrames) {
                 system->waitFrames++;
-                return request;
+            } else {
+                aocStartWorkerThread(&g_aocMain->thread, FUN_00471adc, system, *g_aocMain->thread.stack,
+                                     AOC_MOUNT_THREAD_PRIORITY, -2);
+                system->state = AOC_MOUNT_JOIN_THREAD;
             }
-
-            aocStartWorkerThread(&g_aocMain->thread, FUN_00471adc, system, *g_aocMain->thread.stack,
-                                 AOC_MOUNT_THREAD_PRIORITY, -2);
-            system->state = AOC_MOUNT_JOIN_THREAD;
             return request;
-        }
         case AOC_MOUNT_JOIN_THREAD:
             if (!threadTryJoinAndClose(&g_aocMain->thread)) {
                 return request;

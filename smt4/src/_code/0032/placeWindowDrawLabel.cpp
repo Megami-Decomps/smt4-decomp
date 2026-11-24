@@ -7,7 +7,6 @@
 
 extern "C" {
 extern PlaceWindow *g_placeWin;
-u32 renderCtxPackPassFlags(u32 slot, u32 flags);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
 void texDrawCompositeSprite(s32 layer, u32 group, u32 frame, s32 x, s32 y, s32 flags);
 void gxResetColorQuadToWhite(void);

@@ -6,7 +6,6 @@
 
 extern "C" {
 void pairCopy(const Point2 *source, Point2 *destination);
-u32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 state);
 void renderCtxPopState(RenderCtx *context, s32 stack);
 void gxResetColorQuadToWhite(void);

@@ -12,7 +12,6 @@
 
 extern "C" {
 
-u32 renderCtxPackPassFlags(u32 value, bool enabled);
 void FUN_0034dc3c(ClippedSprite *sprite);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);

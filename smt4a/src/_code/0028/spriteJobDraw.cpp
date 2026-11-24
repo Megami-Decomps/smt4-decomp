@@ -29,7 +29,6 @@ struct SpriteJobWork {
 
 extern "C" {
 void FUN_00230038(SpriteJobWork *work);
-s32 renderCtxPackPassFlags(u32 a, u32 b);
 void FUN_003fba4c(s32 sprite, s32 layer, s32 frame, SpriteDrawVector3 *origin, u32 color, s32 mode, f32 x, f32 y);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);

@@ -8,7 +8,7 @@ extern "C" {
 
 int CONCAT44(...);
 int FUN_002482d4(void);
-int FUN_002484e0(void);
+int matrixSetRotationX(void);
 int randomAdvanceShiftRegister(void);
 int shiftRandomNextFraction(...);
 int phaseCosInterpolate(void);
@@ -89,7 +89,7 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_002482d4. */
-/* Supplied declaration required: FUN_002484e0. */
+/* Supplied declaration required: matrixSetRotationX. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: shiftRandomNextFraction. */
 /* Supplied declaration required: phaseCosInterpolate. */
@@ -217,7 +217,7 @@ void FUN_00305b14(fn_00305b14_arg0 *param_1)
                   temp_v13 = -temp_v13;
                 }
                 temp_v24 = CONCAT44(temp_v29[10],temp_v13 / temp_v10);
-                FUN_002484e0();
+                matrixSetRotationX();
                 matrixSetRotationY(((f32*)temp_v29)[3]);
                 FUN_002482d4();
                 temp_v26 = 40.743664f;

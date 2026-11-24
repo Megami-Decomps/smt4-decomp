@@ -23817,13 +23817,23 @@
     },
     {
       "address": "0x138a64",
-      "function": "FUN_00138a64",
+      "function": "commandQueueResetDefaults",
       "module": "_code",
-      "object": "build/obj/_code/0013/FUN_00138a64.o",
+      "object": "build/obj/_code/0013/commandQueueResetDefaults.o",
       "size": 24,
-      "source": "src/_code/0013/FUN_00138a64.cpp",
-      "target": "orig/target/_code/0013/FUN_00138a64.o",
-      "thumb": false
+      "source": "src/_code/0013/commandQueueResetDefaults.cpp",
+      "target": "orig/target/_code/0013/commandQueueResetDefaults.o",
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime"
+      ]
     },
     {
       "address": "0x138a80",
@@ -31966,12 +31976,12 @@
     },
     {
       "address": "0x167400",
-      "function": "FUN_00167400",
+      "function": "querySlotsClearPending",
       "module": "_code",
-      "object": "build/obj/_code/0016/FUN_00167400.o",
+      "object": "build/obj/_code/0016/querySlotsClearPending.o",
       "size": 84,
-      "source": "src/_code/0016/FUN_00167400.cpp",
-      "target": "orig/target/_code/0016/FUN_00167400.o",
+      "source": "src/_code/0016/querySlotsClearPending.cpp",
+      "target": "orig/target/_code/0016/querySlotsClearPending.o",
       "thumb": false
     },
     {
@@ -53882,12 +53892,12 @@
     },
     {
       "address": "0x1f3e80",
-      "function": "FUN_001f3e80",
+      "function": "mathTriangleWaveBlend",
       "module": "_code",
-      "object": "build/obj/_code/001f/FUN_001f3e80.o",
+      "object": "build/obj/_code/001f/mathTriangleWaveBlend.o",
       "size": 108,
-      "source": "src/_code/001f/FUN_001f3e80.cpp",
-      "target": "orig/target/_code/001f/FUN_001f3e80.o",
+      "source": "src/_code/001f/mathTriangleWaveBlend.cpp",
+      "target": "orig/target/_code/001f/mathTriangleWaveBlend.o",
       "thumb": false
     },
     {
@@ -58898,12 +58908,12 @@
     },
     {
       "address": "0x23c384",
-      "function": "FUN_0023c384",
+      "function": "resultExpPayoutStep",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_0023c384.o",
+      "object": "build/obj/_code/0023/resultExpPayoutStep.o",
       "size": 1340,
-      "source": "src/_code/0023/FUN_0023c384.cpp",
-      "target": "orig/target/_code/0023/FUN_0023c384.o",
+      "source": "src/_code/0023/resultExpPayoutStep.cpp",
+      "target": "orig/target/_code/0023/resultExpPayoutStep.o",
       "thumb": false
     },
     {
@@ -64154,12 +64164,12 @@
     },
     {
       "address": "0x294854",
-      "function": "FUN_00294854",
+      "function": "mapGimicReleaseAll",
       "module": "_code",
-      "object": "build/obj/_code/0029/FUN_00294854.o",
+      "object": "build/obj/_code/0029/mapGimicReleaseAll.o",
       "size": 204,
-      "source": "src/_code/0029/FUN_00294854.cpp",
-      "target": "orig/target/_code/0029/FUN_00294854.o",
+      "source": "src/_code/0029/mapGimicReleaseAll.cpp",
+      "target": "orig/target/_code/0029/mapGimicReleaseAll.o",
       "thumb": false
     },
     {
@@ -64580,12 +64590,12 @@
     },
     {
       "address": "0x298544",
-      "function": "FUN_00298544",
+      "function": "btlDrawTopColorOverlay",
       "module": "_code",
-      "object": "build/obj/_code/0029/FUN_00298544.o",
+      "object": "build/obj/_code/0029/btlDrawTopColorOverlay.o",
       "size": 260,
-      "source": "src/_code/0029/FUN_00298544.cpp",
-      "target": "orig/target/_code/0029/FUN_00298544.o",
+      "source": "src/_code/0029/btlDrawTopColorOverlay.cpp",
+      "target": "orig/target/_code/0029/btlDrawTopColorOverlay.o",
       "thumb": false
     },
     {
@@ -68523,12 +68533,12 @@
     },
     {
       "address": "0x2c2098",
-      "function": "FUN_002c2098",
+      "function": "scrCommFadeMessageUnderlayIn",
       "module": "_code",
-      "object": "build/obj/_code/002c/FUN_002c2098.o",
+      "object": "build/obj/_code/002c/scrCommFadeMessageUnderlayIn.o",
       "size": 92,
-      "source": "src/_code/002c/FUN_002c2098.cpp",
-      "target": "orig/target/_code/002c/FUN_002c2098.o",
+      "source": "src/_code/002c/scrCommFadeMessageUnderlayIn.cpp",
+      "target": "orig/target/_code/002c/scrCommFadeMessageUnderlayIn.o",
       "thumb": false
     },
     {
@@ -69543,12 +69553,12 @@
     },
     {
       "address": "0x2cb84c",
-      "function": "FUN_002cb84c",
+      "function": "partyPanelPlaceInitialCursors",
       "module": "_code",
-      "object": "build/obj/_code/002c/FUN_002cb84c.o",
+      "object": "build/obj/_code/002c/partyPanelPlaceInitialCursors.o",
       "size": 1112,
-      "source": "src/_code/002c/FUN_002cb84c.cpp",
-      "target": "orig/target/_code/002c/FUN_002cb84c.o",
+      "source": "src/_code/002c/partyPanelPlaceInitialCursors.cpp",
+      "target": "orig/target/_code/002c/partyPanelPlaceInitialCursors.o",
       "thumb": false
     },
     {
@@ -71154,12 +71164,12 @@
     },
     {
       "address": "0x2df4b0",
-      "function": "FUN_002df4b0",
+      "function": "btlDrawBottomColorOverlay",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002df4b0.o",
+      "object": "build/obj/_code/002d/btlDrawBottomColorOverlay.o",
       "size": 260,
-      "source": "src/_code/002d/FUN_002df4b0.cpp",
-      "target": "orig/target/_code/002d/FUN_002df4b0.o",
+      "source": "src/_code/002d/btlDrawBottomColorOverlay.cpp",
+      "target": "orig/target/_code/002d/btlDrawBottomColorOverlay.o",
       "thumb": false
     },
     {
@@ -71570,12 +71580,12 @@
     {
       "address": "0x2e14a4",
       "file": "test/BustupViewer",
-      "function": "FUN_002e14a4",
+      "function": "bustupViewerCreate",
       "module": "_code",
-      "object": "build/obj/_code/test/BustupViewer/FUN_002e14a4.o",
+      "object": "build/obj/_code/test/BustupViewer/bustupViewerCreate.o",
       "size": 236,
-      "source": "src/_code/test/BustupViewer/FUN_002e14a4.cpp",
-      "target": "orig/target/_code/test/BustupViewer/FUN_002e14a4.o",
+      "source": "src/_code/test/BustupViewer/bustupViewerCreate.cpp",
+      "target": "orig/target/_code/test/BustupViewer/bustupViewerCreate.o",
       "thumb": false
     },
     {
@@ -108329,12 +108339,12 @@
     },
     {
       "address": "0x36ce70",
-      "function": "FUN_0036ce70",
+      "function": "campCecEditStepPanelFade",
       "module": "_code",
-      "object": "build/obj/_code/0036/FUN_0036ce70.o",
+      "object": "build/obj/_code/0036/campCecEditStepPanelFade.o",
       "size": 256,
-      "source": "src/_code/0036/FUN_0036ce70.cpp",
-      "target": "orig/target/_code/0036/FUN_0036ce70.o",
+      "source": "src/_code/0036/campCecEditStepPanelFade.cpp",
+      "target": "orig/target/_code/0036/campCecEditStepPanelFade.o",
       "thumb": false
     },
     {
@@ -128142,12 +128152,12 @@
     },
     {
       "address": "0x3e12a8",
-      "function": "FUN_003e12a8",
+      "function": "entryCollectNewIdentifiers",
       "module": "_code",
-      "object": "build/obj/_code/003e/FUN_003e12a8.o",
+      "object": "build/obj/_code/003e/entryCollectNewIdentifiers.o",
       "size": 228,
-      "source": "src/_code/003e/FUN_003e12a8.cpp",
-      "target": "orig/target/_code/003e/FUN_003e12a8.o",
+      "source": "src/_code/003e/entryCollectNewIdentifiers.cpp",
+      "target": "orig/target/_code/003e/entryCollectNewIdentifiers.o",
       "thumb": false
     },
     {
@@ -129148,12 +129158,12 @@
     },
     {
       "address": "0x3e77cc",
-      "function": "FUN_003e77cc",
+      "function": "btlAppendPendingCommand",
       "module": "_code",
-      "object": "build/obj/_code/003e/FUN_003e77cc.o",
+      "object": "build/obj/_code/003e/btlAppendPendingCommand.o",
       "size": 116,
-      "source": "src/_code/003e/FUN_003e77cc.cpp",
-      "target": "orig/target/_code/003e/FUN_003e77cc.o",
+      "source": "src/_code/003e/btlAppendPendingCommand.cpp",
+      "target": "orig/target/_code/003e/btlAppendPendingCommand.o",
       "thumb": false
     },
     {
@@ -137435,12 +137445,12 @@
     },
     {
       "address": "0x422048",
-      "function": "FUN_00422048",
+      "function": "gfxBuildBlackAddCombinerCommands",
       "module": "_code",
-      "object": "build/obj/_code/0042/FUN_00422048.o",
+      "object": "build/obj/_code/0042/gfxBuildBlackAddCombinerCommands.o",
       "size": 204,
-      "source": "src/_code/0042/FUN_00422048.cpp",
-      "target": "orig/target/_code/0042/FUN_00422048.o",
+      "source": "src/_code/0042/gfxBuildBlackAddCombinerCommands.cpp",
+      "target": "orig/target/_code/0042/gfxBuildBlackAddCombinerCommands.o",
       "thumb": false
     },
     {
@@ -139007,6 +139017,16 @@
       "size": 4,
       "source": "src/_code/0042/AocBufferRequest__dtor_AocBufferRequest.cpp",
       "target": "orig/target/_code/0042/AocBufferRequest__dtor_AocBufferRequest.o",
+      "thumb": false
+    },
+    {
+      "address": "0x4279d0",
+      "function": "_ZN15AocCatalogQueryD1Ev",
+      "module": "_code",
+      "object": "build/obj/_code/0042/AocCatalogQuery__dtor_AocCatalogQuery.o",
+      "size": 4,
+      "source": "src/_code/0042/AocCatalogQuery__dtor_AocCatalogQuery.cpp",
+      "target": "orig/target/_code/0042/AocCatalogQuery__dtor_AocCatalogQuery.o",
       "thumb": false
     },
     {
@@ -153109,7 +153129,10 @@
       "size": 52,
       "source": "src/_code/0046/recordPrepareLinkedOwner.cpp",
       "target": "orig/target/_code/0046/recordPrepareLinkedOwner.o",
-      "thumb": false
+      "thumb": false,
+      "multifile": [
+        "packageKindToRecordKind"
+      ]
     },
     {
       "address": "0x46c528",
@@ -155280,12 +155303,12 @@
     },
     {
       "address": "0x47daf4",
-      "function": "_ZN17RequestParametersC1Ev",
+      "function": "_ZN14AocMenuRequestC1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0047/RequestParameters__RequestParameters.o",
+      "object": "build/obj/_code/0047/AocMenuRequest__AocMenuRequest.o",
       "size": 64,
-      "source": "src/_code/0047/RequestParameters__RequestParameters.cpp",
-      "target": "orig/target/_code/0047/RequestParameters__RequestParameters.o",
+      "source": "src/_code/0047/AocMenuRequest__AocMenuRequest.cpp",
+      "target": "orig/target/_code/0047/AocMenuRequest__AocMenuRequest.o",
       "thumb": false
     },
     {
@@ -157719,12 +157742,12 @@
     },
     {
       "address": "0x491abc",
-      "function": "FUN_00491abc",
+      "function": "mapNaviFindCategoryAtPosition",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_00491abc.o",
+      "object": "build/obj/_code/0049/mapNaviFindCategoryAtPosition.o",
       "size": 352,
-      "source": "src/_code/0049/FUN_00491abc.cpp",
-      "target": "orig/target/_code/0049/FUN_00491abc.o",
+      "source": "src/_code/0049/mapNaviFindCategoryAtPosition.cpp",
+      "target": "orig/target/_code/0049/mapNaviFindCategoryAtPosition.o",
       "thumb": false
     },
     {
@@ -159015,12 +159038,12 @@
     },
     {
       "address": "0x49a9a8",
-      "function": "FUN_0049a9a8",
+      "function": "equipmentMenuRebuildPages",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_0049a9a8.o",
+      "object": "build/obj/_code/0049/equipmentMenuRebuildPages.o",
       "size": 1160,
-      "source": "src/_code/0049/FUN_0049a9a8.cpp",
-      "target": "orig/target/_code/0049/FUN_0049a9a8.o",
+      "source": "src/_code/0049/equipmentMenuRebuildPages.cpp",
+      "target": "orig/target/_code/0049/equipmentMenuRebuildPages.o",
       "thumb": false
     },
     {
@@ -159246,22 +159269,22 @@
     },
     {
       "address": "0x49d048",
-      "function": "FUN_0049d048",
+      "function": "dataTable17Sub1ChildGetCount",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_0049d048.o",
+      "object": "build/obj/_code/0049/dataTable17Sub1ChildGetCount.o",
       "size": 84,
-      "source": "src/_code/0049/FUN_0049d048.cpp",
-      "target": "orig/target/_code/0049/FUN_0049d048.o",
+      "source": "src/_code/0049/dataTable17Sub1ChildGetCount.cpp",
+      "target": "orig/target/_code/0049/dataTable17Sub1ChildGetCount.o",
       "thumb": false
     },
     {
       "address": "0x49d09c",
-      "function": "FUN_0049d09c",
+      "function": "dataTable17Sub1ChildGetEntries",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_0049d09c.o",
+      "object": "build/obj/_code/0049/dataTable17Sub1ChildGetEntries.o",
       "size": 84,
-      "source": "src/_code/0049/FUN_0049d09c.cpp",
-      "target": "orig/target/_code/0049/FUN_0049d09c.o",
+      "source": "src/_code/0049/dataTable17Sub1ChildGetEntries.cpp",
+      "target": "orig/target/_code/0049/dataTable17Sub1ChildGetEntries.o",
       "thumb": false
     },
     {
@@ -162635,12 +162658,12 @@
     },
     {
       "address": "0x4b7e20",
-      "function": "FUN_004b7e20",
+      "function": "mikadoGateStep",
       "module": "_code",
-      "object": "build/obj/_code/004b/FUN_004b7e20.o",
+      "object": "build/obj/_code/004b/mikadoGateStep.o",
       "size": 988,
-      "source": "src/_code/004b/FUN_004b7e20.cpp",
-      "target": "orig/target/_code/004b/FUN_004b7e20.o",
+      "source": "src/_code/004b/mikadoGateStep.cpp",
+      "target": "orig/target/_code/004b/mikadoGateStep.o",
       "thumb": false
     },
     {
@@ -164660,12 +164683,12 @@
     },
     {
       "address": "0x4c8cb0",
-      "function": "FUN_004c8cb0",
+      "function": "btlHelpRequestGuestQuest",
       "module": "_code",
-      "object": "build/obj/_code/004c/FUN_004c8cb0.o",
+      "object": "build/obj/_code/004c/btlHelpRequestGuestQuest.o",
       "size": 212,
-      "source": "src/_code/004c/FUN_004c8cb0.cpp",
-      "target": "orig/target/_code/004c/FUN_004c8cb0.o",
+      "source": "src/_code/004c/btlHelpRequestGuestQuest.cpp",
+      "target": "orig/target/_code/004c/btlHelpRequestGuestQuest.o",
       "thumb": false
     },
     {

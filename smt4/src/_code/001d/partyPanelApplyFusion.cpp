@@ -15,7 +15,7 @@ extern "C" {
 SlotTable* gameGetSlotTable(void);
 StatBlock* partyMemberFindById(u32 id);
 void FUN_00269bc4(void* unite);
-void FUN_0029dc74(u32 product, void* resultUnit);
+void unitRecordBuild(u32 product, void* resultUnit);
 void uniteMergeInheritedSkillsAndStats(void* unite, StatBlock* first, StatBlock* second, s32 mode, void* resultUnit);
 s32 gameCountUnits(void);
 void FUN_0029b130(u16 *skills, s32 count, const UnitePairEntryIV *pair, u32 mode);
@@ -43,7 +43,7 @@ u32 partyPanelApplyFusion(void)
     if (parents[0] != NULL && parents[1] != NULL) {
         FUN_00269bc4(panel->unite);
         if (fusionBuildPreviewFromUnits(panel->unite, parents[0], parents[1], &panel->fusionPair) != 0) {
-            FUN_0029dc74(panel->fusionPair.resultIdentifier, panel->fusionResult);
+            unitRecordBuild(panel->fusionPair.resultIdentifier, panel->fusionResult);
             uniteMergeInheritedSkillsAndStats(panel->unite, parents[0], parents[1], 0, panel->fusionResult);
 
             u16 inherited[16];

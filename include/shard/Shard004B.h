@@ -16,18 +16,23 @@ typedef struct ListEntry20 {
     /* 0x24 */ s16 y;
     /* 0x26 */ u8 unk26[2];
     /* 0x28 */ s16 cameraView;   /* the view the scene's camera controller takes for this entry */
-    /* 0x2A */ u8 unk2A;
+    /* 0x2A */ s8 cameraMode;    /* the mode moveCameraCtrlSnapToNode takes with cameraView */
     /* 0x2B */ s8 modelIndex;    /* which of the location's models the entry shows */
     /* 0x2C */ char conditionName[0x10]; /* entry of the condition script that may hide it, "0" for none */
     /* 0x3C */ u16 requiredFlag; /* game flag that must be set (0: none) */
     /* 0x3E */ u16 forbiddenFlag; /* game flag that must be clear (0: none) */
     /* 0x40 */ u8 unk40[0x1A];
     /* 0x5A */ u16 unk5A;
-    /* 0x5C */ u8 unk5C[0x74];
+    /* 0x5C */ u8 unk5C[0x10];
+    /* 0x6C */ char scriptName[0x10];    /* entry of the location's script run when it is chosen, "0" for none */
+    /* 0x7C */ u8 unk7C;         /* nonzero: with a party leader, choosing it runs entry 0x3B of the second script */
+    /* 0x7D */ u8 unk7D[0x53];
 } ListEntry20;
 typedef char ListEntry20LayoutCheck[sizeof(ListEntry20) == 0xD0 && offsetof(ListEntry20, x) == 0x22 &&
     offsetof(ListEntry20, cameraView) == 0x28 && offsetof(ListEntry20, conditionName) == 0x2C &&
-    offsetof(ListEntry20, requiredFlag) == 0x3C && offsetof(ListEntry20, unk5A) == 0x5A ? 1 : -1];
+    offsetof(ListEntry20, requiredFlag) == 0x3C && offsetof(ListEntry20, unk5A) == 0x5A &&
+    offsetof(ListEntry20, cameraMode) == 0x2A && offsetof(ListEntry20, scriptName) == 0x6C &&
+    offsetof(ListEntry20, unk7C) == 0x7C ? 1 : -1];
 
 typedef struct Menu4C {
     /* 0x000 */ u8 unk000[0x20];

@@ -9,7 +9,6 @@
 #include "shard/JobWork.h"
 
 extern "C" {
-s32 renderCtxPackPassFlags(s32 first, s32 second);
 void texDrawCompositeSprite(s32 layer, s32 group, s32 kind, s32 x, s32 y, u32 flags);
 const void *FUN_0023478c(AocMain *main, u32 index);
 s32 FUN_002347b8(AocMain *main, const void *entry, void *strings);

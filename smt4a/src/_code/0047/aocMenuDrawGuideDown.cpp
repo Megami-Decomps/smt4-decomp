@@ -1,4 +1,5 @@
 #include "ui/UiSpriteApi.h"
+#include "camp/RenderCtx.h"
 #include "shard/S1ListPanel.h"
 #include "shard/W4_Match3_AocMainA.h"
 #include "addon/aocApplication.h"
@@ -24,7 +25,6 @@ typedef char CheckDrawWorkPosition[offsetof(AocDrawWork, alternate) == 0x185c ? 
 
 extern "C" {
 AocDrawWork *jobGetWork(u32 job);
-u32 renderCtxPackPassFlags(s32 mode, s32 option);
 void texDrawCompositeSprite(s32 layer, s32 group, s32 sprite, s32 x, s32 y, u32 flags);
 s32 FUN_00473754(AocMain *main, s32 id, AocDrawText *text);
 }

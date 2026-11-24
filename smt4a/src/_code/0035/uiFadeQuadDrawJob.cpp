@@ -7,7 +7,6 @@
 #include "shard/JobWork.h"
 
 extern "C" {
-u32 renderCtxPackPassFlags(u32 state, u32 flags);
 
 // Draw a full-target fade quad with its stored alpha scaled by the job's fade amount.
 u32 uiFadeQuadDrawJob(u32 job)

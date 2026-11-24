@@ -1,8 +1,6 @@
-/* NON_MATCHING: 237 lines. aocItemAttributeLabel is called as its IDENTICAL definition takes it (a `char *`): retail copies
- * each label from one temporary, as for a by-value result (234 lines written so). The query's destructor is missing: retail passes the query to an empty
- * function armlink removed (`mov r0, r6; nop` before both late returns), which the image no longer names. Retail
- * also keeps the by-value results in two slots above the sort strings (frame 0x554, built 0x544), copies the first
- * two labels through VFP registers and keeps &app->contentRequest in r7 across the query loop. */
+/* NON_MATCHING: 199 lines (shape 139). Retail also gives the by-value results one slot each above the sort
+ * strings (frame 0x554) where this build overlays them on the outgoing argument at the bottom of the frame (0x544),
+ * and keeps &now in r9. */
 #include <stdio.h>
 #include "addon/AocBufferRequest.h"
 #include "addon/AocCatalogQuery.h"
@@ -58,10 +56,10 @@ void aocCatalogJobRun(AocCatalogJob *job)
     AocCatalogQuery query;
     aocCatalogQueryInit(&query, buffer, sizeof(buffer));
     query.sorted = 1;
-    aocItemAttributeLabel(app->attributeNames[0].text, 0, halfPair48LowByteA(app->contentFile), halfPair48LowByteB(app->contentFile));
-    aocItemAttributeLabel(app->attributeNames[1].text, 2, halfPair48LowByteA(app->contentFile), halfPair48LowByteB(app->contentFile));
-    aocItemAttributeLabel(app->attributeNames[2].text, 3, halfPair48LowByteA(app->contentFile), halfPair48LowByteB(app->contentFile));
-    aocItemAttributeLabel(app->attributeNames[3].text, 5, halfPair48LowByteA(app->contentFile), halfPair48LowByteB(app->contentFile));
+    app->attributeNames[0] = aocItemAttributeLabel(0, halfPair48LowByteA(app->contentFile), halfPair48LowByteB(app->contentFile));
+    app->attributeNames[1] = aocItemAttributeLabel(2, halfPair48LowByteA(app->contentFile), halfPair48LowByteB(app->contentFile));
+    app->attributeNames[2] = aocItemAttributeLabel(3, halfPair48LowByteA(app->contentFile), halfPair48LowByteB(app->contentFile));
+    app->attributeNames[3] = aocItemAttributeLabel(5, halfPair48LowByteA(app->contentFile), halfPair48LowByteB(app->contentFile));
     stringFormatUnbounded(app->attributeNames[4].text, "%s", "SET_SALE_INDEX");
     stringFormatUnbounded(app->attributeNames[5].text, "%s", "SET_SALE_NEW");
     stringFormatUnbounded(app->attributeNames[6].text, "%s", "SET_SALE_PRICE");
@@ -70,8 +68,8 @@ void aocCatalogJobRun(AocCatalogJob *job)
     query.attributes = app->attributeNames;
     query.attributeCount = 9;
     if (app->catalogFilterCount != 0) {
-        query.filter = app->catalogFilter;
         query.filterCount = app->catalogFilterCount;
+        query.filter = app->catalogFilter;
     }
     aocApplicationRecreatePrimaryRequest(app);
     sprintf(sort.order, "ascending");

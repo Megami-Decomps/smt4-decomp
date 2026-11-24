@@ -5,7 +5,7 @@ extern "C" {
 u32 gameGetPlayerData(void);
 void btlBuildDemonSnapshot(u16 *destination, u32 player);
 void FUN_0026a858(u16 id, u8 *record);
-void FUN_0029dc74(u16 id, u8 *record);
+void unitRecordBuild(u16 id, u8 *record);
 void btlBuildUnitSnapshot(u16 *destination, const u8 *record);
 
 /* Loads the game data's unit snapshot: the player for a negative id, otherwise unit `id` from one of two record sources; then flags the update. */
@@ -23,7 +23,7 @@ void gameLoadUnitSnapshot(s32 id, s32 useAltSource)
         data->unk1E66 = 6;
     } else {
         u8 record[0x60C];
-        FUN_0029dc74((u16)id, record);
+        unitRecordBuild((u16)id, record);
         btlBuildUnitSnapshot(&data->unk1300, record);
         data->unk1E66 = 1;
     }

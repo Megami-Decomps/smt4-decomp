@@ -1,4 +1,5 @@
 #include "ui/UiSpriteApi.h"
+#include "camp/RenderCtx.h"
 /* NON_MATCHING: readable rebuild from asm of a scene overlay draw (the slide-in banner and the mark sprites inside render states); armcc here orders the render-state operations, keeps the scene pointer and the banner sprite in other registers than retail, and loads the owner global after the push. */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
@@ -8,7 +9,6 @@
 
 extern "C" {
 s32 scriptProcessCreateWhenReady(ResultWorkA *scene);
-u32 renderCtxPackPassFlags(s32 a, s32 b);
 void efctSetSpeed(f32 speed);
 void FUN_004b0164(ResultWorkA *scene, u32 x, u32 y);
 void skinObjectUpdateMatrices(RenderCtxA *ctx);

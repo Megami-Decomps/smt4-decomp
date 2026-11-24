@@ -10,7 +10,7 @@ extern "C" {
 int messageWindowUpdate(...);
 int mathInterpolateTimed(...);
 int msgBoxFlagsSetBit7(...);
-int FUN_00167400(void);
+int querySlotsClearPending(void);
 int buttonHelpTransitionPresetFlags(...);
 int buttonHelpSetEnabled(...);
 int bustupCutAnimFinish(void);
@@ -92,7 +92,7 @@ extern int padButtonRepeat(unsigned int);
 extern int ifTouchGetSelectedRegion(void);
 /* Supplied declaration required: uiPanelCloseStateSection. */
 /* Supplied declaration required: msgBoxFlagsClearBit7. */
-/* Supplied declaration required: FUN_00167400. */
+/* Supplied declaration required: querySlotsClearPending. */
 /* Supplied declaration required: uiSpriteSlideFromSide. */
 extern int aocJobIsValid(void);
 /* Supplied declaration required: ifTouchGetButtonHelpValue. */
@@ -1378,7 +1378,7 @@ LAB_0014dfd4:
   messageWindowUpdate(*(unsigned int *)(temp_v2 + 4));
   if (*(int *)(temp_v2 + 4) != 0) {
     if (DAT_005e204e == '\0') {
-      FUN_00167400();
+      querySlotsClearPending();
     }
     if (*(char *)(temp_v2 + 0x95) != '\0') {
       DAT_005e204d = '\0';

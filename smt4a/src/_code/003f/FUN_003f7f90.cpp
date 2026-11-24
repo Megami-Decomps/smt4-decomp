@@ -14,7 +14,6 @@ struct PositionedMenuDrawWork {
     UiSpriteState position;
 };
 extern "C" {
-s32 renderCtxPackPassFlags(u32 first, u32 second);
 void FUN_003f66dc(PositionedMenuDrawWork *work, s32 x, s32 y, f32 speed);
 void efctSetSpeed(f32 speed);
 void renderCtxResetColorScale(RenderCtxA *context);

@@ -28,7 +28,7 @@ s32 fusionComparePairScoreAscending(const void *a, const void *b);
 s32 fusionComparePairPriority(const void *a, const void *b);
 s32 fusionComparePairsByParentPriorityAscending(const void *a, const void *b);
 s32 fusionComparePairsByParentPriorityDescending(const void *a, const void *b);
-u32 FUN_0029ce60(u32 id, s32 a, s32 b, s32 c, s32 d);
+u32 compendiumComputeSummonCost(u32 id, s32 a, s32 b, s32 c, s32 d);
 void qsort(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 void arraySortQsort(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 
@@ -59,10 +59,10 @@ void FUN_00196d78(void)
             const FusionPairBits *pair = (const FusionPairBits *)&work->pairSortIV.pairs[index];
             u32 score = 0;
             if (pair->fields.firstType == 3) {
-                score = FUN_0029ce60(pair->fields.firstId, 1, 0, 0, 0);
+                score = compendiumComputeSummonCost(pair->fields.firstId, 1, 0, 0, 0);
             }
             if (pair->fields.secondType == 3) {
-                score += FUN_0029ce60(pair->fields.secondId, 1, 0, 0, 0);
+                score += compendiumComputeSummonCost(pair->fields.secondId, 1, 0, 0, 0);
             }
             work->pairSortIV.pairScores[work->pairSortIV.sortedPairs[i]] = score;
         }

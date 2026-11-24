@@ -5,7 +5,6 @@ extern "C" {
 void mapEplUpdateEntriesIfAny(void);
 void FUN_001f9f64(void);
 void MapMain_DrawMinimapIcons(void);
-s32 renderCtxPackPassFlags(u32, u32);
 
 u32 mapMainDrawOrdinaryPass(u32 job)
 {

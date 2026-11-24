@@ -1,4 +1,5 @@
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 /* NON_MATCHING: 12 lines. The pops now go through renderStackPopChecked as in retail; what remains: retail converts the
  * stereo parallax through s1 (the build reuses s0), and loads g_renderCtx into r0 before building the stack address in r4. */
@@ -17,7 +18,6 @@ struct OverlayTask {
 }
 
 extern "C" {
-u32 renderCtxPackPassFlags(u32 mode, u32 enabled);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 

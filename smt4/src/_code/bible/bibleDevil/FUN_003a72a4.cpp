@@ -55,7 +55,7 @@ s32 gameGetNavigationState(void);
 s32 gameGetFlagByte12e8(void);
 void FUN_00233240(BibleDevilWidget *, s32);
 s32 flaggedValueHolderGetTotal(void *);
-s32 FUN_0029ce60(u16, s32, s32, s32, s32);
+s32 compendiumComputeSummonCost(u16, s32, s32, s32, s32);
 void messageBannerInitSelection(s32, s32);
 void messageTargetSetValue(s32, s32);
 u32 flaggedEntryGetValueByState(void *);
@@ -90,7 +90,7 @@ void FUN_003a72a4(BibleDevilScreen *screen)
         if (screen->mode == 0) {
             BibleDevilRow *rows = screen->rows;
             s16 id = shopListItemGetId(&rows[flaggedValueHolderGetTotal(screen->cursor)]);
-            s32 delta = FUN_0029ce60(id, static_cast<u8>(screen->page), 0, screen->level >= 100, 0);
+            s32 delta = compendiumComputeSummonCost(id, static_cast<u8>(screen->page), 0, screen->level >= 100, 0);
             messageBannerInitSelection(1, 0);
             messageTargetSetValue(-delta, 0);
         }

@@ -1,11 +1,11 @@
 #include "shard/S1ListPanel.h"
+#include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "util/BitsAndBytes.h"
 #include "shard/JobWork.h"
 #include "event/EventEplEffect.h"
 extern "C" {
 u32 renderCtxPackPassFlagsWithAlpha(u32 compare, f32 reference);
-u32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void effectNodeUpdatePlacedChildren(void *effect);
 
 // Draw task of the EPL event effect job: once started, draws the effect with temporary raster, blend and depth-state overrides.

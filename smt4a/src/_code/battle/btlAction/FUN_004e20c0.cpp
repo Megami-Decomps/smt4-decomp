@@ -237,7 +237,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: skillDataFindById. */
 extern int FUN_002c7bf4(unsigned int *);
 /* Supplied declaration required: dataTable41FindById. */
-/* Supplied declaration required: FUN_003e77cc. */
+/* Supplied declaration required: btlAppendPendingCommand. */
 /* Supplied declaration required: btlScriptUnitHasFlags. */
 /* Supplied declaration required: btlEntryBuildSummary. */
 extern int btlStateHasSelectionGateFlag(unsigned int);
@@ -1757,7 +1757,7 @@ LAB_004e4cac:
         if (((*(unsigned short *)(temp_v13 + 0x274) & 0x11c0) == 0) &&
            (temp_v12 = param_8, FUN_004c14c8(), temp_v12 != 0)) {
           temp_v5 = *(int *)(*param_1 + 0x1ed4);
-          FUN_003e77cc(reinterpret_cast<BtlMainStateA *>(*param_1),4,(int)*(short *)(temp_v5 + param_8 * 0x1d0 + 0x68),
+          btlAppendPendingCommand(reinterpret_cast<BtlMainStateA *>(*param_1),4,(int)*(short *)(temp_v5 + param_8 * 0x1d0 + 0x68),
                        (int)*(short *)(temp_v5 + temp_v30),temp_v12);
         }
       }
@@ -1779,7 +1779,7 @@ LAB_004e4cac:
             if (((*(unsigned short *)(temp_v13 + 0x274) & 0x11c0) == 0) &&
                (temp_v5 = temp_v12, FUN_004c5ec0(), temp_v5 != 0)) {
               temp_v8 = *(int *)(*param_1 + 0x1ed4);
-              FUN_003e77cc(reinterpret_cast<BtlMainStateA *>(*param_1),4,(int)*(short *)(temp_v8 + temp_v12 * 0x1d0 + 0x68),
+              btlAppendPendingCommand(reinterpret_cast<BtlMainStateA *>(*param_1),4,(int)*(short *)(temp_v8 + temp_v12 * 0x1d0 + 0x68),
                            (int)*(short *)(temp_v8 + param_7 * 0x1d0 + 0x68),temp_v5);
             }
           }
@@ -1795,7 +1795,7 @@ LAB_004e4cac:
         if (((*(unsigned short *)(temp_v13 + 0x274) & 0x11c0) == 0) &&
            (temp_v12 = FUN_004c65e8(param_8), temp_v12 != 0)) {
           temp_v5 = *(int *)(*param_1 + 0x1ed4);
-          FUN_003e77cc(reinterpret_cast<BtlMainStateA *>(*param_1),5,(int)*(short *)(temp_v5 + param_8 * 0x1d0 + 0x68),
+          btlAppendPendingCommand(reinterpret_cast<BtlMainStateA *>(*param_1),5,(int)*(short *)(temp_v5 + param_8 * 0x1d0 + 0x68),
                        (int)*(short *)(temp_v5 + temp_v30),temp_v12);
         }
       }
@@ -1816,7 +1816,7 @@ LAB_004e4cac:
     FUN_004c5848();
     if ((temp_v12 != 0) && (temp_v12 = btlFindEntryValue(param_8,0x2c), temp_v12 < 1)) {
       temp_v12 = *(int *)(*param_1 + 0x1ed4);
-      FUN_003e77cc(reinterpret_cast<BtlMainStateA *>(*param_1),7,(int)*(short *)(temp_v12 + param_8 * 0x1d0 + 0x68),
+      btlAppendPendingCommand(reinterpret_cast<BtlMainStateA *>(*param_1),7,(int)*(short *)(temp_v12 + param_8 * 0x1d0 + 0x68),
                    (int)*(short *)(temp_v12 + temp_v30),0x6a);
       btlAdjustPropertyClamped(param_8,0x2c,1,0);
     }

@@ -31,7 +31,6 @@ struct MapNoticeEntry {
 
 extern "C" {
 
-s32 renderCtxPackPassFlags(u32 a, u32 b);
 void FUN_002371b0(void);
 s32 dataTable2ECount(void);
 MapNoticeEntry *dataTable2EGetEntry(s32 index);

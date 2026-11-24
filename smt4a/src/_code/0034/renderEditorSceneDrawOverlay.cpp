@@ -4,7 +4,6 @@
 #include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {
-s32 renderCtxPackPassFlags(u32 kind, u32 flags);
 s32 getFloatPairValue(void);
 s32 displayIsStereoActive(void);
 void debugGuideDrawGrid(u32 style, f32 x, f32 y, f32 depth, f32 size, u32 firstColor, u32 secondColor);

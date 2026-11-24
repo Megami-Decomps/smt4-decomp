@@ -12,7 +12,7 @@ struct FusionParentSources {
 typedef char FusionParentSourcesKindsCheck[offsetof(FusionParentSources, kinds) == 0x1A ? 1 : -1];
 extern "C" {
 GameOptions *partyMemberFindById(u16 id);
-void FUN_0029dc74(u16 id, GameOptions *output);
+void unitRecordBuild(u16 id, GameOptions *output);
 void unitInitializeFromSavedRecord(u16 id, GameOptions *output);
 void bitsetSetBit(GameOptions *owner, u32 bit);
 void unitRecalculateEffectiveStats(GameOptions *unit);
@@ -35,7 +35,7 @@ void FUN_003c8980(u32 mode, const FusionParentSources *parents, GameOptions *out
                 unitInitializeFromSavedRecord(id, &temporary);
                 parent = &temporary;
             } else if (kind == 2) {
-                FUN_0029dc74(id, &temporary);
+                unitRecordBuild(id, &temporary);
                 parent = &temporary;
             }
             for (s32 j = 0; j < 0x40; ++j)

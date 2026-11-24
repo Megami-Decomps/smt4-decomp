@@ -26,7 +26,7 @@ u32 FUN_0015f0f4(u32 job)
         FUN_00176474(g_aocSystem) != 0 && sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
         g_aocMain->flags &= ~0x10000u;
         aocReleasePackageOwner(g_aocSystem);
-        RequestParameters request(1);
+        RequestParameters request;
         request.kind = 1;
         request.word3 = 0;
         request.result = WindowStatusResult(0);

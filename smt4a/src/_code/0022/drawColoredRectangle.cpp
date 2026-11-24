@@ -4,7 +4,6 @@
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
-s32 renderCtxPackPassFlags(u32, u32);
 
 /* Draws the rectangle in its colour at `depth` under a temporary render-state preset. */
 static __inline void drawColoredRectangle(const ColoredRectangle *box, f32 depth)

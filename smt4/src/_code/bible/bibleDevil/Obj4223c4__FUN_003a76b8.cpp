@@ -13,7 +13,7 @@ s32 utilityReturnSuccess(const void *input);
 void buttonHelpSetPreset(u32 preset);
 void *partyMemberFindById(u16 id);
 void FUN_0029da34(s32 screen, s32 enabled, u16 id, void *unit);
-s32 FUN_0029ce60(u16 id, u32 source, s32 a, s32 specialMode, s32 b);
+s32 compendiumComputeSummonCost(u16 id, u32 source, s32 a, s32 specialMode, s32 b);
 void messageTargetSetValue(s32 target, s32 mode);
 void unitInitializeFromSavedRecord(u16 id, StatBlock *unit);
 void FUN_00233240(void *timers, s32 index);
@@ -56,7 +56,7 @@ void Obj4223c4::FUN_003a76b8()
         if (mode == 0) {
             u16 rawId = entries[flaggedValueHolderGetTotal(&state->selection)].id;
             s16 id = rawId;
-            s32 cost = FUN_0029ce60(static_cast<u16>(id), state->source, 0, state->sortMode >= 100, 0);
+            s32 cost = compendiumComputeSummonCost(static_cast<u16>(id), state->source, 0, state->sortMode >= 100, 0);
             messageBannerInitSelection(1, 0);
             messageTargetSetValue(-cost, 0);
             buttonHelpSetPreset(0x2d);

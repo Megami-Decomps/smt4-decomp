@@ -14,7 +14,6 @@ typedef char JyoucyuDrawStatusOffset[offsetof(JyoucyuDrawStatusViewIV, status) =
 extern "C" {
 extern JyoucyuWork *g_jyoucyu;
 extern TitleScene *g_titleScene;
-s32 renderCtxPackPassFlags(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 

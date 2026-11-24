@@ -1,6 +1,10 @@
 #pragma once
 #include "common.h"
 
+struct PlaceTextTableCursor;
+struct PlaceTextRecord;
+struct QuestUnlockConditions;
+
 /* Data-table accessors. */
 extern "C" {
 
@@ -10,7 +14,12 @@ const void *dataFindKeyedRecordWithOverrides(u32 id);
 
 u32 dataTable05Sub9GetCount(void);
 
-void dataTable17Count(void);
+/* Data table 0x17 (Apocalypse): the place records of section 1 and each place's stock rows. The accessors take a
+ * scratch cursor their callers pass and they ignore. */
+const PlaceTextRecord *dataTable17Type1GetEntry(PlaceTextTableCursor *cursor, s32 index);
+s32 dataTable17Count(PlaceTextTableCursor *cursor);
+const QuestUnlockConditions *dataTable17Sub1ChildGetEntries(PlaceTextTableCursor *cursor, s32 index);
+s32 dataTable17Sub1ChildGetCount(PlaceTextTableCursor *cursor, s32 index);
 
 u32 dataTable18Sub0GetCount(void);
 

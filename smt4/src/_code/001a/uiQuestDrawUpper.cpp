@@ -43,7 +43,7 @@ extern TitleScene* g_titleScene;
 extern QuestUi* g_uiQuest;
 
 void renderCtxSelectStereoLayout(TitleScene* scene);
-u32 renderCtxPackPassFlags(u32 a, u32 b);
+u32 renderCtxPackPassFlags(u32 value, bool enabled); // declcheck: local (camp/RenderCtx.h clashes with this unit's TitleScene views)
 void FUN_00197e34(void);
 void uiQuestDrawDetailPanel(void);
 f32 renderCtxCalculateStereoParallax(TitleScene* scene, f32 amount);

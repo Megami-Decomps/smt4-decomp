@@ -75,7 +75,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, int);
+extern unsigned int mathTriangleWaveBlend(unsigned int, unsigned int, unsigned int, int);
 /* Supplied declaration required: floatInterpolateOverDuration. */
 /* Supplied declaration required: renderCtxCallB. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34AddTranslateAsm. */
@@ -241,7 +241,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
           texDrawCompositeSprite(2,0x32,1,(int)(temp_v6 - (float)piVar2[0x1d]));
           FUN_002b64b8();
           temp_v13 = 1.4013e-45f;
-          temp_v2 = FUN_0026e6a0(0x32,100,0x1e,piVar2[0x1a]);
+          temp_v2 = mathTriangleWaveBlend(0x32,100,0x1e,piVar2[0x1a]);
           VectorSignedToFloat(temp_v2,(unsigned char)(temp_v5 >> 0x16) & 3);
           efctSetSpeed();
           if (*piVar2 != 2) {

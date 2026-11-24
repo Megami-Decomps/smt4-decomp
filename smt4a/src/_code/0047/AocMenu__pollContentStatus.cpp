@@ -39,7 +39,7 @@ s32 strIsEmpty(const RequestParameters *result);
 void AocMenu::pollContentStatus()
 {
     AocPollMenu * menu = reinterpret_cast<AocPollMenu *>(this);
-    RequestParameters result;
+    AocMenuRequest result;
     AocMain *aocMain = g_aocMain;
     switch (menu->step) {
     case 0: {
@@ -60,7 +60,7 @@ void AocMenu::pollContentStatus()
                 menu->counter = 3;
                 break;
             case 0x66: {
-                RequestParameters copy = result;
+                AocMenuRequest copy = result;
                 FUN_0047bc90(this, &copy);
                 break;
             }
@@ -92,7 +92,7 @@ void AocMenu::pollContentStatus()
                 menu->counter = 3;
                 break;
             case 0x66: {
-                RequestParameters copy = result;
+                AocMenuRequest copy = result;
                 FUN_0047bc90(this, &copy);
                 break;
             }

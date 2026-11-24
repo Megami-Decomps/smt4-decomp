@@ -96,7 +96,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_001b4a00. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20. */
-extern unsigned int FUN_001f3e80(unsigned int, unsigned int, unsigned int, unsigned int);
+extern unsigned int mathTriangleWaveBlend(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: floatInterpolateOverDuration. */
 /* Supplied declaration required: renderCtxCallB. */
 /* Supplied declaration required: spriteDrawAnimationUnplaced. */
@@ -278,7 +278,7 @@ void FUN_002609d8(fn_002609d8_arg0 *param_1,int param_2,int param_3)
             }
           }
           temp_v16 = 1.4013e-45f;
-          temp_v4 = FUN_001f3e80(0x32,100,0x1e,*(unsigned int *)(temp_v2 + 0x8c));
+          temp_v4 = mathTriangleWaveBlend(0x32,100,0x1e,*(unsigned int *)(temp_v2 + 0x8c));
           VectorSignedToFloat(temp_v4,(unsigned char)(temp_v7 >> 0x16) & 3);
           efctSetSpeed();
           temp_v3 = g_renderCtx;

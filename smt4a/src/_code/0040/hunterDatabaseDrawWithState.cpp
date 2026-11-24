@@ -7,7 +7,6 @@ extern "C" {
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *);
 void efctSetSpeed(f32);
 void renderCtxResetColorScale(RenderCtxA *);
-u32 renderCtxPackPassFlags(u32, u32);
 
 // Draw the database with a temporary draw state, then restore blending and color.
 u32 hunterDatabaseDrawWithState(SpriteDetailPanel *work)

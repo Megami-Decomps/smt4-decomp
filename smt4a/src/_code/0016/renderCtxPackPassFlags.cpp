@@ -1,4 +1,5 @@
 #include "common.h"
+#include "camp/RenderCtx.h"
 
 
 extern "C" {

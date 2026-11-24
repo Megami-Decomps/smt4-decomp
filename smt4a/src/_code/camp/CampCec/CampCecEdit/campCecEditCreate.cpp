@@ -42,7 +42,7 @@ s32 FUN_00342e24(StateAtF4 *edit);
 s32 campCecEditItemState(StateAtF4 *edit);
 s32 FUN_00387d38(StateAtF4 *edit);
 s32 campCecEditRefreshState(StateAtF4 *edit);
-s32 FUN_0036ce70(StateAtF4 *edit);
+s32 campCecEditStepPanelFade(StateAtF4 *edit);
 s32 FUN_00318e7c(StateAtF4 *edit);
 s32 campCecEditChoiceListState(StateAtF4 *edit);
 s32 stepObjStart(StateAtF4 *edit);
@@ -114,7 +114,7 @@ void campCecEditCreate(u8 openMode)
     edit->table.handlers[1] = campCecEditItemState;
     edit->table.handlers[3] = FUN_00387d38;
     edit->table.handlers[4] = campCecEditRefreshState;
-    edit->table.handlers[5] = FUN_0036ce70;
+    edit->table.handlers[5] = campCecEditStepPanelFade;
     edit->table.handlers[9] = FUN_00318e7c;
     edit->table.handlers[6] = campCecEditChoiceListState;
     edit->table.handlers[7] = stepObjStart;

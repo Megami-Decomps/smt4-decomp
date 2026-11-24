@@ -6,7 +6,6 @@
 extern "C" {
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite();
-s32 renderCtxPackPassFlags(u32 kind, u32 flags);
 extern StaffRollWork *g_staffRoll;
 
 // Draw all twelve staff-roll markers under a temporary render state.

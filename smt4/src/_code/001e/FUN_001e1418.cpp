@@ -3,7 +3,6 @@
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
-s32 renderCtxPackPassFlags(u32 kind, u32 flags);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);

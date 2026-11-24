@@ -61,7 +61,7 @@ extern "C" {
 extern u8 g_bibleDevilCallbackContext[];
 
 s32 flaggedValueHolderGetTotal(void *cursor);
-s32 FUN_0029ce60(u16 devil, s32 source, s32 a, s32 specialMode, s32 b);
+s32 compendiumComputeSummonCost(u16 devil, s32 source, s32 a, s32 specialMode, s32 b);
 void messageTargetSetValue(u32 value, s32 flag);
 s32 inputIsQuestMenuPressed(void);
 s32 inputIsQuestCancelPressed(void);
@@ -95,7 +95,7 @@ void FUN_003a8450(DevilView *view)
     s32 cancel = 0;
     DevilEntry *entries = view->entries;
     s16 devil = shopListItemGetId(&entries[flaggedValueHolderGetTotal(view->cursor)]);
-    s32 price = FUN_0029ce60(devil, view->listKind, 0, view->sortMode >= 100, 0);
+    s32 price = compendiumComputeSummonCost(devil, view->listKind, 0, view->sortMode >= 100, 0);
     messageTargetSetValue(-price, 0);
     s32 menuPressed = inputIsQuestMenuPressed();
     SelectedRow *row = &view->row;
@@ -122,7 +122,7 @@ void FUN_003a8450(DevilView *view)
     }
     if (confirm != 0) {
         s16 shown = shopListItemGetId(&entries[flaggedValueHolderGetTotal(view->cursor)]);
-        FUN_0029ede8(0x18, FUN_0029ce60(shown, view->listKind, 0, view->sortMode >= 100, 0), 0xFFFFFFFF, 0);
+        FUN_0029ede8(0x18, compendiumComputeSummonCost(shown, view->listKind, 0, view->sortMode >= 100, 0), 0xFFFFFFFF, 0);
         if (demonPurchaseValidate(view, (u16)shown) != 0) {
             char text[0x84];
             libc_strcpy((unsigned int *)text, (unsigned int *)dataTable01FindByIdWithAoc((u16)shown));

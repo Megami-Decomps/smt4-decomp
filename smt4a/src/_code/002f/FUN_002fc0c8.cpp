@@ -15,7 +15,7 @@ int FUN_00421e9c(...);
 int FUN_00421f34(...);
 unsigned int* commandProfileWriteDefault(unsigned int*);
 unsigned int *asdGxEmitAlphaDepthWritePreset(unsigned int *commands);
-unsigned int* FUN_00422048(void);
+unsigned int* gfxBuildBlackAddCombinerCommands(void);
 int animKeyTableFindKey(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(...);
@@ -103,7 +103,7 @@ extern unsigned int gpuWriteUniformColor(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00421e9c. */
 /* Supplied declaration required: FUN_00421f34. */
 /* Supplied declaration required: commandProfileWriteDefault. */
-/* Supplied declaration required: FUN_00422048. */
+/* Supplied declaration required: gfxBuildBlackAddCombinerCommands. */
 /* Supplied declaration required: asdGxBuildAlphaDepthPresetCommands. */
 extern unsigned int FUN_0042c5cc(unsigned int);
 /* Supplied declaration required: animKeyTableFindKey. */
@@ -210,7 +210,7 @@ void FUN_002fc0c8(unsigned int param_1)
   temp_v0 = 0;
   temp_v4 = 0;
   temp_v5 = 0;
-  param_1 = (unsigned int)FUN_00422048();
+  param_1 = (unsigned int)gfxBuildBlackAddCombinerCommands();
   *puVar8 = param_1;
   param_1 = (unsigned int)commandProfileWriteDefault((unsigned int*)param_1);
   *puVar8 = param_1;

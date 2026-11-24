@@ -5,7 +5,6 @@
 
 extern "C" {
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
-s32 renderCtxPackPassFlags(u32 enabled, u32 mode);
 u32 listCursorGetRowOfChildIfUnblocked(const void *selection);
 void FUN_00227294(s32 first, s32 second, s32 enabled);
 void skinObjectUpdateMatrices(RenderCtxA *context);

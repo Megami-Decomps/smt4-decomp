@@ -38,7 +38,7 @@ s32 messageMainGetChoiceResult(void);
 void messageMainSetTargetFlags(u32 flags);
 void buttonHelpSetPreset(s32 preset);
 s32 flaggedValueHolderGetTotal(u8 *cursor);
-s32 FUN_0029ce60(u16 itemId, u8 quantity, s32 mode, s32 discounted, s32 extra);
+s32 compendiumComputeSummonCost(u16 itemId, u8 quantity, s32 mode, s32 discounted, s32 extra);
 void FUN_002e3150(void);
 }
 
@@ -60,7 +60,7 @@ void Obj4223c4::FUN_003a8240()
     }
     ShopListItem *items = shop->items;
     s16 itemId = shopListItemGetId(&items[flaggedValueHolderGetTotal(shop->cursor)]);
-    s32 price = FUN_0029ce60(itemId, shop->quantity, 0, shop->rank >= 100, 0);
+    s32 price = compendiumComputeSummonCost(itemId, shop->quantity, 0, shop->rank >= 100, 0);
     messageBannerSetCountdown(-price, 0);
     gameGlobalsSetSubScreenActive(1);
     shop->state = 4;

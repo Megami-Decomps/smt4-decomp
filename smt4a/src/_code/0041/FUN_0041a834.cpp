@@ -24,7 +24,6 @@ extern "C" {
 
 void efctSetSpeed(f32 speed);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
-s32 renderCtxPackPassFlags(u32 kind, bool enabled);
 void FUN_003c5de0(s32 handle, u32 id, s32 x, s32 y, u32 priority, f32 scale, f32 speed);
 
 /* Draws the selected icon of the strip at `position`, shifted by the stereo parallax and a phase wobble,

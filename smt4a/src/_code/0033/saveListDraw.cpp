@@ -36,7 +36,6 @@ struct SaveRowImage {
 #define SAVE_ROW_NO_SELECTION 0xFFFFFFFFu
 
 extern "C" {
-s32 renderCtxPackPassFlags(u32 a, u32 b);
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
 SaveRowFrame *asdTMTexTableEntryAt(u32 table, u32 index);

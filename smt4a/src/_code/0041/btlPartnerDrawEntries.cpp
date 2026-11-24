@@ -40,7 +40,6 @@ typedef struct DrawEntrySource {
 } DrawEntrySource;
 
 
-s32 renderCtxPackPassFlags(u32 kind, u32 arg);
 void FUN_003fba4c(u32 model, u32 variant, u32 motion, DrawPlacement *placement, u32 color, u32 flags, DrawVec2 pos);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);

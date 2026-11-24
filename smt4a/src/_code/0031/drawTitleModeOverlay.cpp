@@ -13,7 +13,6 @@ struct TitleRenderState {
 };
 extern "C" {
 extern TitleMainGlobals g_titleMain;
-s32 renderCtxPackPassFlags(u32, u32);
 void titleMainDraw();
 
 u32 drawTitleModeOverlay()

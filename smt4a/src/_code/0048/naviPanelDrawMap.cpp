@@ -63,7 +63,6 @@ extern int DAT_00587f20; /* 0x587f20 */
 extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int gameGetIndexedSlotMember(unsigned int);
-extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */

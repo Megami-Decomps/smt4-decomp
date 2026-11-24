@@ -28,7 +28,6 @@ extern RunWinWork *g_searchWin;
 
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 alpha);
-u32 renderCtxPackPassFlags(s32 a, s32 b);
 
 /* Draws the run window's title, its loading dots (a 3x3 grid where two dots are lit and their
  * predecessors dimmed, advancing every 5 frames) and the label. Returns 0. */

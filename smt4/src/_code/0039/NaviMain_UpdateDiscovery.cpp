@@ -6,7 +6,7 @@
 extern "C" {
 
 int pairCopy(...);
-int FUN_00231dec(...);
+int naviPanelDraw(...);
 int gxResetColorQuadToWhite(void);
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
@@ -47,7 +47,7 @@ extern signed char DAT_0049f941; /* 0x49f941 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: pairCopy. */
-/* Supplied declaration required: FUN_00231dec. */
+/* Supplied declaration required: naviPanelDraw. */
 extern unsigned int lmapSceneGetObj(void);
 extern int mapClassifyPlaceState(int);
 extern int flagBitIsSet(unsigned int);
@@ -318,7 +318,7 @@ LAB_0039f450:
       }
       else if ((*(unsigned int *)(param_1 + 0x10) & 2) == 0) {
         DAT_0044cdd8 = 0xf1;
-        FUN_00231dec(param_1);
+        naviPanelDraw(param_1);
         DAT_0044cdd8 = DAT_0044cdd8 + 1;
       }
       renderCtxApplyTransforms(g_titleScene);

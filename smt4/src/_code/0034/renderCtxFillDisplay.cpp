@@ -3,7 +3,6 @@
 #include "code/Code002b.h"
 
 extern "C" {
-s32 renderCtxPackPassFlags(u32 kind, u8 enabled);
 s32 flagsPackFourBooleans(u8 first, u8 second, u8 third, u8 fourth);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 u32 FUN_00310578(s32 a, s32 b, s32 c, u32 d);
@@ -14,7 +13,7 @@ s32 packThreeNibbles(u32 first, u32 second, u32 third);
 void renderCtxFillDisplay(RenderCtx *context, u32 color, u32 alpha, u32 flags, f32 scale)
 {
     u8 first = 0;
-    u8 second = 0;
+    bool second = false;
     u32 nibble = 0;
     AsdTexture *savedTexture = context->selectedTexture;
     f32 width = renderCtxDisplayWidth(context);
@@ -23,7 +22,7 @@ void renderCtxFillDisplay(RenderCtx *context, u32 color, u32 alpha, u32 flags, f
         first = 1;
     }
     if ((flags & 2) != 0) {
-        second = 1;
+        second = true;
     }
     if ((flags & 4) != 0) {
         nibble = 2;

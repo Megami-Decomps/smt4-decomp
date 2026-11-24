@@ -13,7 +13,6 @@ struct ArrowSpritePositions { u32 ids[2]; };
 extern "C" {
 extern const ArrowSpritePositions DAT_00407540;
 void gxResetColorQuadToWhite(void);
-s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void FUN_003a37dc(SceneArrowDrawWork *work);
 s32 placeWinGetValue(void);
 s32 FUN_001dd910(void);

@@ -37,7 +37,7 @@ void messageIdListSetRange(u32 *entries, u32 group, u32 id, s32 value);
 void AocMenu::runWindowOperation()
 {
     u32 *job = reinterpret_cast<u32 *>(this);
-    RequestParameters event;
+    AocMenuRequest event;
     AocMain *aoc = g_aocMain;
     switch (substep) {
     case 0:
@@ -67,7 +67,7 @@ void AocMenu::runWindowOperation()
                     aocMenuChangeStep(this, 3);
                     break;
                 case 0x66: {
-                    RequestParameters copy = event;
+                    AocMenuRequest copy = event;
                     FUN_0047bc90(this, &copy);
                     break;
                 }

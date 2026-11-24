@@ -1,10 +1,23 @@
-/* NON_MATCHING: only register numbering differs (retail keeps the usage record in r0/r2 where the build uses r1). */
+/* NON_MATCHING: register numbering only: the usage record of the count/bytes update is r0 in retail (r1 here), and in the
+ * payload-bytes update retail holds the usage block in r3 and the alignment in r1 (the build swaps them, as in the
+ * Apocalypse twin and both asdMemoryTrackAllocation twins). */
 #include "sys/AllocationTracking.h"
 #include "classes/AllocatorState.h"
 
 extern "C" {
 u32 asdMemClassifyAddress(AllocationHeader *header);
 
+static void subtractCategoryBytes(u32 bytes, AllocationUsage *usage, u32 category)
+{
+    usage->categoryBytes[category] -= bytes;
+}
+
+static void subtractCategoryPayloadBytes(AllocationUsage *usage, u32 category, u32 bytes)
+{
+    usage->categoryPayloadBytes[category] = (usage->categoryPayloadBytes[category] - bytes) + sizeof(AllocationHeader);
+}
+
+/* Removes an allocation from the usage counters and the allocation list, and returns its backing header. */
 AllocationHeader *asdMemReleaseTrackedAllocation(void *payload)
 {
     AllocationHeader *header = reinterpret_cast<AllocationHeader **>(payload)[-1];
@@ -13,13 +26,9 @@ AllocationHeader *asdMemReleaseTrackedAllocation(void *payload)
     usage->bytes -= header->size;
     if ((header->tag & 0xFF) < 8) {
         u32 category = asdMemClassifyAddress(header);
-        usage = g_asdMemState.usage;
-        usage->categoryBytes[category] -= header->size;
+        subtractCategoryBytes(header->size, g_asdMemState.usage, category);
         category = asdMemClassifyAddress(header);
-        usage = g_asdMemState.usage;
-        usage->categoryPayloadBytes[category] =
-            (usage->categoryPayloadBytes[category] -
-             (header->size - header->alignment)) + sizeof(AllocationHeader);
+        subtractCategoryPayloadBytes(g_asdMemState.usage, category, header->size - header->alignment);
     }
     AllocationLink *link = &header->link;
     if (!(link->previous)) {

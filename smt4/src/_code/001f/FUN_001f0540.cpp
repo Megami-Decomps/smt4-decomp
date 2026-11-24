@@ -13,7 +13,7 @@ int statusCollectUnlearnedSkillsAboveLevel(...);
 int uiDrawListScrollBar(...);
 int gxSetMirroredClippedScissor(...);
 int arrayContainsU16(...);
-int FUN_0029dc74(...);
+int unitRecordBuild(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6c34(...);
 int nkmBaseGetRecord(void);
@@ -73,7 +73,7 @@ extern int flagCountUnlockedSlots(unsigned char *);
 /* Supplied declaration required: arrayContainsU16. */
 extern int uiListGetVisibleCount(int);
 extern int ifTouchGetSelectionModeForRegion(int);
-/* Supplied declaration required: FUN_0029dc74. */
+/* Supplied declaration required: unitRecordBuild. */
 extern int gridNavigationGetItemCount(int);
 extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
@@ -203,7 +203,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x1ed));
     uiDrawDemonIcon((int)*psVar4,*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v13,0x8d,0);
     FUN_002580d4(*psVar4,*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v13,0x92);
-    FUN_0029dc74(*psVar4,temp_v16);
+    unitRecordBuild(*psVar4,temp_v16);
     temp_v4 = flagCountUnlockedSlots(temp_v16);
     temp_v21 = temp_v1 + 0x9000;
     temp_v17 = temp_v1 + 0x9204;

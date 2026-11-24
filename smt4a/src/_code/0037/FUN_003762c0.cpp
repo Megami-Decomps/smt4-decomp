@@ -2,6 +2,7 @@
  * the other order (vadd s0, s2, s0), the colour bytes g/b swap r1/r2 in the unpacking, and one colour move is scheduled
  * before the depth move. */
 #include "shard/S1ListPanel.h"
+#include "camp/RenderCtx.h"
 #include "gfx/ColoredQuad.h"
 #include "camp/RenderCtxA.h"
 #include "shard/Shard0036.h"
@@ -13,7 +14,6 @@ static __inline u32 packMenuColor(u32 r, u32 g, u32 b, u32 a)
 
 extern "C" {
 extern f32 g_uiDrawOffset[2];
-u32 renderCtxPackPassFlags(u32 mode, u32 enabled);
 void effectDrawRectOutline(u32 colorA, u32 colorB, u32 colorC, u32 colorD,
     f32 x, f32 y, f32 width, f32 height, f32 depth, f32 thickness);
 

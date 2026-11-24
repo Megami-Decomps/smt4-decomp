@@ -18,7 +18,6 @@ static __inline void titleScenePushA(RenderCtx *scene, int state)
 extern "C" {
 extern StaffRollWork *g_staffRoll;
 void gxResetColorQuadToWhite(void);
-s32 renderCtxPackPassFlags(u32 type, u32 flags);
 void efctSetSpeed(f32 speed);
 
 /* Draw the twelve scrolling credit entries with a temporary render state. */

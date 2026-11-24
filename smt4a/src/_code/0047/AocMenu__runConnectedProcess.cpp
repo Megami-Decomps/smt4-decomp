@@ -69,7 +69,7 @@ void AocMenu::runConnectedProcess()
   unsigned int temp_v2;
   unsigned int *puVar7;
   unsigned int *puVar8;
-  RequestParameters record;
+  AocMenuRequest record;
   unsigned int temp_v4;
   unsigned int uStack_48;
   unsigned int uStack_44;

@@ -26,7 +26,6 @@ typedef struct QuestUi {
 
 extern QuestUi *g_uiQuest;
 
-s32 renderCtxPackPassFlags(s32 a, s32 b);
 void FUN_00218640(void);
 void FUN_002f6048(QuestUi *ui);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);

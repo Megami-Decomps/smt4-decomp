@@ -613,6 +613,8 @@ typedef struct BtlMainStateA {
         struct {
             /* 0x2000 */ u8 unk2000BeforeHelp[0x268];
             /* 0x2268 */ u32 context;
+            /* 0x226C */ u8 unk226C[0xC];
+            /* 0x2278 */ void *guestQuestMessages; /* event/quest/SubQuestGuest.mbm */
         } helpMessages;
         struct {
             u8 unk2000[0x25a0];
@@ -841,6 +843,7 @@ typedef char BtlMainStateARetiredUnitOffsets[
     sizeof(BtlMainStateA) == 0x4CF0 ? 1 : -1];
 typedef char BtlMainStateAHelpContextOffsetCheck[
     offsetof(BtlMainStateA, helpMessages.context) == 0x2268 &&
+    offsetof(BtlMainStateA, helpMessages.guestQuestMessages) == 0x2278 &&
     sizeof(BtlMainStateA) == 0x4CF0 ? 1 : -1];
 
 /* Party entries share a 300-byte stride; the checked sub-object begins at 0x68. */

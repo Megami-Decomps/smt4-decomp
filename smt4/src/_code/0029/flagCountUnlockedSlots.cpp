@@ -6,7 +6,7 @@ extern "C" {
 extern int flagBitIsSet(u32 button);
 
 /* Counts the held buttons 0x7C-0x7E on top of 4 (5 when 0x7B is held), capped at 8. */
-u32 flagCountUnlockedSlots(void)
+u32 flagCountUnlockedSlots(const StatBlock *unit)
 {
     int count = 4;
 

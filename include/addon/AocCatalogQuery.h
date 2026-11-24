@@ -17,6 +17,10 @@ struct AocCatalogSort {
 
 /* A catalog query (0x34 bytes; aocCatalogQueryInit clears it and stores its work buffer). */
 struct AocCatalogQuery {
+    /* Empty and out of line (smt4 0x352f10, smt4a 0x4279d0, right after AocBufferRequest's destructor): armlink
+     * removed every call, leaving the catalog jobs' `mov r0, <query>; nop` before each return. */
+    ~AocCatalogQuery();
+
     /* 0x00 */ AocAttributeName *attributes;  /* the attributes to return */
     /* 0x04 */ u32 attributeCount;
     /* 0x08 */ char *filter;                  /* an optional filter, filterCount entries */
@@ -39,11 +43,12 @@ struct AocCatalogJob {
 };
 
 extern "C" {
-/* Writes the 0x40-byte message label of item attribute `field` for the entry the two table indices name
- * ("NA_NAME_<group>_<item>") to `label`. Retail's callers give the label one compiler temporary and copy it into
- * place, which suggests a by-value result; the definition (IDENTICAL) fills a `char *` (the same ABI), and written by
- * value it is 2 lines off, so the declaration follows the definition. */
-void aocItemAttributeLabel(char *label, u32 field, u32 groupIndex, u32 itemIndex);
+/* The 0x40-byte message label of item attribute `field` for the entry the two table indices name
+ * ("NA_NAME_<group>_<item>"). It is returned by value: retail's callers give the result one compiler temporary and
+ * copy it into place, and the definition copies the start of its text buffer into the result. */
+AocAttributeName aocItemAttributeLabel(u32 field, u32 groupIndex, u32 itemIndex);
+/* IV's aocItemAttributeLabel. */
+AocAttributeName aocItemAttributeLabel(u32 field, u32 groupIndex, u32 itemIndex);
 }
 
 typedef char AocCatalogQueryLayoutCheck[sizeof(AocCatalogSort) == 0xC0 && sizeof(AocCatalogQuery) == 0x34 &&

@@ -62,7 +62,7 @@ struct SelectionScene {
 
 extern "C" {
 void FUN_0049669c(SelectionScene *scene);
-void FUN_0049a9a8(void);
+void equipmentMenuRebuildPages(void);
 void placeWinCreate(void);
 void spritePresetBankInitialize(void *timers);
 void rectangleInitializeSelection(SelectionRectangle *rectangle, s32 width, s32 a, s32 b);
@@ -137,7 +137,7 @@ SelectionScene *FUN_0049c3c0(SelectionScene *scene, u32 mode, s32 kind, s32 subK
         asdTMTexTableLoadSprites(0x20);
         asdTMTexTablePrepareNodeImage(0x20, 0);
         scene->buttonSprite = 0x83;
-        FUN_0049a9a8();
+        equipmentMenuRebuildPages();
         scene->shown = 1;
         titleSetSlotValueState2(0, 1);
         titleSetSlotValueState2(1, 0);
@@ -172,7 +172,7 @@ SelectionScene *FUN_0049c3c0(SelectionScene *scene, u32 mode, s32 kind, s32 subK
                 soundChannelRequestIfEnabled(music, 0, 0x3C);
         }
     }
-    FUN_0049a9a8();
+    equipmentMenuRebuildPages();
     scene->shown = 1;
     for (s32 page = 0; page < 9; page++) {
         u8 *base = (u8 *)scene->pages + page * 0x1002;

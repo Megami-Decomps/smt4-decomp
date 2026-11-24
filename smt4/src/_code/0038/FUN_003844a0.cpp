@@ -20,7 +20,6 @@ typedef struct TitleOverlay {
 
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
-s32 renderCtxPackPassFlags(u32 kind, u32 arg);
 void FUN_0038368c(TitleOverlay *overlay);
 void renderCtxResetColorScale(RenderCtx *ctx);
 

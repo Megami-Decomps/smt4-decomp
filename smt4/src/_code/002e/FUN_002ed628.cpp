@@ -37,7 +37,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: campMenuEntryDraw. */
 /* Supplied declaration required: curveInterpolatePacked. */
 /* Supplied declaration required: effectSpawnDefaultArguments. */
-extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+extern unsigned int mathTriangleWaveBlend(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: floatInterpolateOverDuration. */
 /* Supplied declaration required: uiDrawTableTextureSized. */
 /* Supplied declaration required: FUN_002b0800. */
@@ -88,7 +88,7 @@ int FUN_002ed628(unsigned int handle)
   }
   if (*(int *)(temp_v0 + 4) != 0) {
     in_s0 = 1.0f;
-    temp_v2 = FUN_0026e6a0(0x28,0x50,0x3c,*(unsigned int *)(temp_v0 + 0x20),0);
+    temp_v2 = mathTriangleWaveBlend(0x28,0x50,0x3c,*(unsigned int *)(temp_v0 + 0x20),0);
     temp_v3 = g_titleScene;
     VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v1 = packNibblesAndByte(6,1,0);
@@ -337,7 +337,7 @@ int FUN_002ed628(unsigned int handle)
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
     curveInterpolatePacked();
     texDrawTableEntryAtStoredOrigin(2,0x2d,0x30,(int)temp_v9,0,0xd);
-    temp_v2 = FUN_0026e6a0(0,100,0xc,*(unsigned int *)(temp_v0 + 0x1c),0);
+    temp_v2 = mathTriangleWaveBlend(0,100,0xc,*(unsigned int *)(temp_v0 + 0x1c),0);
     temp_v3 = g_titleScene;
     VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v0 = packNibblesAndByte(6,1,0);

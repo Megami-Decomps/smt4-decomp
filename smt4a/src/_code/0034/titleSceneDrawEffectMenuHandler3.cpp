@@ -3,7 +3,6 @@
 #include "code/Code0030.h"
 
 extern "C" {
-s32 renderCtxPackPassFlags(u32 index, s32 enabled);
 
 /* Draw mode three with the indexed state, restoring the previous render state. */
 void titleSceneDrawEffectMenuHandler3(void)

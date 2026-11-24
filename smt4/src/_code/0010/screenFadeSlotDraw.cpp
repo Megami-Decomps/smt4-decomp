@@ -5,7 +5,6 @@
 
 extern "C" {
 extern W6Match3SlotState g_screenFadeSlots[2];
-s32 renderCtxPackPassFlags(u32, u32);
 u32 asdGxPresetsGetByKind(u32);
 u32 asdGxPresetsGetHeightByKind(u32);
 

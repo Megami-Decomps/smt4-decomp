@@ -7,7 +7,6 @@
 
 extern "C" {
 extern CommonBgGlobals g_commonBg;
-s32 renderCtxPackPassFlags(s32 enabled, s32 mode);
 void texDrawCompositeSprite(u32 screen, u32 table, u32 image, s32 x, s32 y, u32 flags);
 void renderCtxResetColorScale(RenderCtxA *context);
 

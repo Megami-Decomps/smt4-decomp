@@ -4,7 +4,6 @@
 
 extern "C" {
 void gxResetColorQuadToWhite(void);
-s32 renderCtxPackPassFlags(u32 kind, u32 mode);
 s32 jobIsValid(u32 job);
 void FUN_00285584(u32 job, u32 mode, u32 flags);
 void renderCtxResetColorScale(RenderCtx *context);

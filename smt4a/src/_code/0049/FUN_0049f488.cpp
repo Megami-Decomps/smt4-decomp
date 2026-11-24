@@ -4,7 +4,6 @@
 #include "Model/MoriModelShadowMap.h"
 #include "util/BitsAndBytes.h"
 extern "C" {
-s32 renderCtxPackPassFlags(u32 first, u32 second);
 void FUN_0049d244(HowToScreenWork *screen, s32 x, s32 y, f32 progress);
 void listPanelDraw(HowToScreenWork *screen);
 void efctSetSpeed(f32 speed);

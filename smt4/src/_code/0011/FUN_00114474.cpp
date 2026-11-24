@@ -9,7 +9,7 @@
 extern "C" {
 
 int messageWindowUpdate(...);
-int FUN_00126058(void);
+int querySlotsClearPending(void);
 int msgBoxFlagsSetBit7(...);
 
 int bustupCutAnimFinish(void);
@@ -53,7 +53,7 @@ extern signed char DAT_0049382a; /* 0x49382a */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: messageWindowUpdate. */
 /* Supplied declaration required: gameDataCounterSpend. */
-/* Supplied declaration required: FUN_00126058. */
+/* Supplied declaration required: querySlotsClearPending. */
 extern int msgBoxIsState2(unsigned int);
 /* Supplied declaration required: bustupCutAnimFinish. */
 /* Supplied declaration required: msgBoxFlagsSetBit7. */
@@ -1011,7 +1011,7 @@ LAB_00115ad8:
   messageWindowUpdate(*(unsigned int *)(temp_v3 + 4));
   if (*(int *)(temp_v3 + 4) != 0) {
     if (DAT_0049382a == '\0') {
-      FUN_00126058();
+      querySlotsClearPending();
     }
     if (*(char *)(temp_v3 + 0x83) != '\0') {
       DAT_00493829 = '\0';

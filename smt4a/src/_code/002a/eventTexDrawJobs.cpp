@@ -9,7 +9,6 @@ extern "C" {
 extern EventTexA *g_eventTex;
 s32 jobIsValid(u32 job);
 s32 jobGetStatus(u32 job);
-s32 renderCtxPackPassFlags(u32 a, u32 b);
 void FUN_002609d8(u32 job, s32 x, s32 y);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);

@@ -62,7 +62,7 @@ int FUN_0040ca18(...);
 int FUN_0040d274(...);
 int btlUiSetDefaultLimits(...);
 int FUN_004c8800(...);
-unsigned int FUN_004c8cb0(unsigned int object, int index, unsigned char option);
+unsigned int btlHelpRequestGuestQuest(unsigned int object, int index, unsigned char option);
 int FUN_004c8d8c(...);
 int FUN_004c8e30(...);
 int FUN_004c909c(...);
@@ -190,7 +190,7 @@ extern unsigned int FUN_003d214c(unsigned int);
 extern int FUN_003e48bc(void);
 /* Supplied declaration required: partyAdjustCounterIfEnoughActive. */
 extern unsigned int FUN_003e53ec(void);
-/* Supplied declaration required: FUN_003e77cc. */
+/* Supplied declaration required: btlAppendPendingCommand. */
 /* Supplied declaration required: FUN_003e7840. */
 extern int btlIsExtendedState(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003e7ef0. */
@@ -235,7 +235,7 @@ extern unsigned int FUN_0047fa50(unsigned int);
 /* Supplied declaration required: channelRunMagnitudeQueries. */
 /* Supplied declaration required: FUN_004c8800. */
 /* Supplied declaration required: FUN_004c8c10. */
-/* Supplied declaration required: FUN_004c8cb0. */
+/* Supplied declaration required: btlHelpRequestGuestQuest. */
 /* Supplied declaration required: FUN_004c8d8c. */
 /* Supplied declaration required: FUN_004c8e30. */
 /* Supplied declaration required: FUN_004c909c. */
@@ -817,7 +817,7 @@ joined_r0x0040ec14:
       break;
     }
     if (psVar2[0x12] == 0) {
-      FUN_004c8cb0(*(unsigned int *)(psVar2 + 0x14),*(unsigned int *)(psVar2 + 0x26),1);
+      btlHelpRequestGuestQuest(*(unsigned int *)(psVar2 + 0x14),*(unsigned int *)(psVar2 + 0x26),1);
       psVar2[0x12] = psVar2[0x12] + 1;
       temp_v4 = 1;
       psVar2[1] = temp_v4;
@@ -1185,7 +1185,7 @@ LAB_0040f684:
   case '2':
     temp_v4 = *(short *)(*(int *)(psVar2 + 10) + 0x68);
     temp_v8 = reinterpret_cast<int>(btlGetMainState());
-    FUN_003e77cc(reinterpret_cast<BtlMainStateA *>(temp_v8),6,(int)temp_v4,0,reinterpret_cast<u32>(unaff_r8));
+    btlAppendPendingCommand(reinterpret_cast<BtlMainStateA *>(temp_v8),6,(int)temp_v4,0,reinterpret_cast<u32>(unaff_r8));
     puVar6 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
     btlMainFindEntryByListedId(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (puVar6 != (unsigned int *)0x0) {

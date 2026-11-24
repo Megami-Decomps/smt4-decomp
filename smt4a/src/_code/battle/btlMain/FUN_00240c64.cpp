@@ -67,8 +67,8 @@ void FUN_0024bcd4(void *work);
 void FUN_002def6c(void *work);
 void FUN_0029853c(void *work);
 void sceneQueryFalse(void *work);
-void FUN_00298544(void *work);
-void FUN_002df4b0(void *work);
+void btlDrawTopColorOverlay(void *work);
+void btlDrawBottomColorOverlay(void *work);
 
 /* Creates the battle main: its state, copies of the slot table and flag storage, the start
  * parameters (`start` of kind 4 or 0x16, or the default flags) and the main process with its draw tasks. */
@@ -117,9 +117,9 @@ void FUN_00240c64(void *start, s32 kind)
     state->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("btlMain"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0024bcd4), reinterpret_cast<AsdProcFunc>(FUN_002def6c), reinterpret_cast<u32>(g_btlMain.state));
     taskCreateDraw("BTLMAIN U", 0x75, 0, 0, FUN_0029853c, NULL, NULL, state->job);
     taskCreateDraw("BTLMAIN D", 0xEA, 0, 0, sceneQueryFalse, NULL, NULL, state->job);
-    taskCreateDraw("BTLFADE UL", 0x85, 0, 0, FUN_00298544, NULL, NULL, state->job);
-    taskCreateDraw("BTLFADE UR", 0xE1, 0, 0, FUN_00298544, NULL, NULL, state->job);
-    taskCreateDraw("BTLFADE D", 0xED, 0, 0, FUN_002df4b0, NULL, NULL, state->job);
+    taskCreateDraw("BTLFADE UL", 0x85, 0, 0, btlDrawTopColorOverlay, NULL, NULL, state->job);
+    taskCreateDraw("BTLFADE UR", 0xE1, 0, 0, btlDrawTopColorOverlay, NULL, NULL, state->job);
+    taskCreateDraw("BTLFADE D", 0xED, 0, 0, btlDrawBottomColorOverlay, NULL, NULL, state->job);
 }
 
 } /* extern "C" */

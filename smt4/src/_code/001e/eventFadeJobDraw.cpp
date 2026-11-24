@@ -40,7 +40,6 @@ typedef struct FadeJob {
 
 FadeJob *jobGetWork(u32 handle);
 void FUN_001a79a8(FadeJob *job);
-s32 renderCtxPackPassFlags(u32 slot, u32 flags);
 void FUN_0033e160(u32 handle, s32 zero, s32 level, u8 *params, u32 color, u32 flag, FadeVec2 origin);
 void renderCtxResetColorScale(RenderCtx *context);
 

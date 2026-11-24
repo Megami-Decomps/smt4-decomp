@@ -10,7 +10,6 @@ extern EventFilterTexture DAT_0057f3e8[6];
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
-s32 renderCtxPackPassFlags(u32 first, u32 second);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 
 // Draw callback of the full-screen event filter: one overlay image faded by the work's opacity and pulse.

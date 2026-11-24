@@ -6,7 +6,6 @@
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
-s32 renderCtxPackPassFlags(u32 preset, u32 index);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 void renderCtxResetColorScale(RenderCtx *context);

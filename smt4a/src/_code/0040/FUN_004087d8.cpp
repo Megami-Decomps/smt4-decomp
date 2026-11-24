@@ -13,7 +13,6 @@ struct ChoiceCaptionWork {
 extern "C" {
 void efctSetSpeed(f32 alpha);
 void gxResetColorQuadToWhite(void);
-s32 renderCtxPackPassFlags(s32 first, s32 second);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void texDrawCompositeSprite(s32 layer, u32 texture, u32 frame, s32 x, s32 y, u32 mode);
 f32 fontMeasureTextWidth(const char *text, s32 font, f32 initialWidth);

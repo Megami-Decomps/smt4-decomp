@@ -9,7 +9,9 @@
  * words. It starts active (kind 1) with the default result; its destructor does nothing, but makes it
  * a class value that callers pass by hidden reference (copies are plain block copies). */
 struct RequestParameters {
-    RequestParameters();
+    /* An active request (kind 1) with the default result: a header inline, which every caller outside AocMenu.cpp
+     * expands in place (AocMenu's own requests are AocMenuRequest, classes/AocMenu.h). */
+    RequestParameters() : kind(1), word3(0), word4(0) { result = WindowStatusResult(0); }
     /* An idle request of the given kind. */
     explicit RequestParameters(u8 initialKind) : kind(initialKind), word3(0), word4(0) { result = WindowStatusResult(word4); }
     /* A request holding the given five words. */

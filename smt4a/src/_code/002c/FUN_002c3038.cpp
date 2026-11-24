@@ -23,7 +23,6 @@ u32 jobGetWork(u32 handle);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
-u32 renderCtxPackPassFlags(u32 kind, bool enabled);
 void mobiclipRenderCurrentScreen(void);
 int FUN_00102bbc(void *destination, const void *source, u32 size);
 

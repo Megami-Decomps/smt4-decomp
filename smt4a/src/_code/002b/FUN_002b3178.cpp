@@ -20,7 +20,6 @@ typedef char TitleRadialGradientOffsets[offsetof(TitleRadialGradient, block) == 
     offsetof(TitleGradientBlock, first) == 8 && offsetof(TitleGradientBlock, last) == 0x10 ? 1 : -1];
 
 extern "C" {
-s32 renderCtxPackPassFlags(s32 first, s32 second);
 void FUN_00186940(void);
 void effectSpawnPositionDefault(u32 color, f32 x, f32 y, f32 z);
 f32 phaseCosine(f32);

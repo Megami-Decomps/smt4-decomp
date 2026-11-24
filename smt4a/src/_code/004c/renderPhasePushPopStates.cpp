@@ -7,7 +7,6 @@ struct RenderPhase {
 };
 extern "C" {
 s32 renderCtxPackPassFlagsWithAlpha(u32, f32);
-s32 renderCtxPackPassFlags(u32, u32);
 
 u32 renderPhasePushPopStates(RenderPhase *owner)
 {

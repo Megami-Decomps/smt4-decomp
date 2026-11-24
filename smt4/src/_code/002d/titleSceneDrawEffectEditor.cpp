@@ -1,4 +1,5 @@
 #include "ui/UiSpriteApi.h"
+#include "camp/RenderCtx.h"
 #include "title/titleMain.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/S1ListPanel.h"
@@ -6,7 +7,6 @@
 
 extern "C" {
 extern TitleScene *g_titleScene;
-u32 renderCtxPackPassFlags(u32 mode, u32 option);
 s32 effMenuGetFlag();
 void debugGuideDrawGrid(s32 count, u32 colorA, u32 colorB, f32 x, f32 y, f32 z, f32 height);
 

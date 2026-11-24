@@ -38,7 +38,6 @@ struct LogoObject {
 extern "C" {
 void FUN_002f5288(ScreenHolder *holder, s32 mode);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
-s32 renderCtxPackPassFlags(u32 kind, u8 enabled);
 s32 flagsPackFourBooleans(u8 first, u8 second, u8 third, u8 fourth);
 u32 FUN_003deab0(LogoObject *logo, s32 mode);
 void spriteDrawPartGroup(LogoObject *logo, u32 handle, f32 *position, s32 color, s32 mode, f32 scale); // declcheck: local (the shared declaration does not compile here or changes this unit)

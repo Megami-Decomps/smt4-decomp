@@ -7,7 +7,7 @@ extern "C" {
 
 int CONCAT44(int, double);
 int FUN_002482d4(void);
-int FUN_002484e0(void);
+int matrixSetRotationX(void);
 int FUN_0024add8(int, float *);
 int FUN_0024b5f0(int, float *);
 int FUN_0024b660(float *, unsigned long long *, double, float *);
@@ -69,7 +69,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_002482d4. */
-/* Supplied declaration required: FUN_002484e0. */
+/* Supplied declaration required: matrixSetRotationX. */
 /* Supplied declaration required: FUN_0024add8. */
 /* Supplied declaration required: FUN_0024b5f0. */
 /* Supplied declaration required: FUN_0024b660. */
@@ -221,7 +221,7 @@ void FUN_002e5c8c(int param_1)
                      (pfVar7[7] +
                      (float)((unsigned long long)temp_v16 >> 0x20) * temp_v10 *
                      (float)((unsigned long long)temp_v21 >> 0x20)) * temp_v10;
-            FUN_002484e0();
+            matrixSetRotationX();
             matrixSetRotationY(pfVar7[4]);
             FUN_002482d4();
             temp_v12 = pfVar7[5];
@@ -286,7 +286,7 @@ void FUN_002e5c8c(int param_1)
             pfVar7[3] = temp_v14;
             shiftRandomNextFraction(0);
             pfVar7[4] = (temp_v14 - temp_v10) * temp_v15 * (float)((unsigned long long)temp_v20 >> 0x20);
-            FUN_002484e0();
+            matrixSetRotationX();
             matrixSetRotationY(pfVar7[4]);
             FUN_002482d4();
             temp_v15 = (float)temp_v21;

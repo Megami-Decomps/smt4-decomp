@@ -4,7 +4,6 @@
 
 extern "C" {
 s32 gxPackFadeKindAlphaWord(u32 mode, f32 alpha);
-s32 renderCtxPackPassFlags(u32 first, u32 second);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void taskRunPhase(u32 phase);
 void renderCtxResetColorScale(RenderCtx *context);

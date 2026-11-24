@@ -14,7 +14,6 @@ void effectNodeUpdatePlacedChildren(EffectNode *node);
 void uiSpriteRefreshMode(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 void skinObjectUpdateMatrices(RenderCtxA *context);
-s32 renderCtxPackPassFlags(u32 first, u32 second);
 
 /* Draws the effect editor's menu under its own render states, then pops them again. */
 void effectEditorDrawMenu(void)

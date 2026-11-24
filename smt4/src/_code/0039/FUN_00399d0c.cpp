@@ -8,7 +8,7 @@
 extern "C" {
 
 
-int FUN_00231dec(...);
+int naviPanelDraw(...);
 
 int CONCAT44(double, double);
 int mapExplorationCellMark(...);
@@ -60,7 +60,7 @@ extern unsigned int mapExplorationCellIsMarked(unsigned int, int, int);
 /* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern unsigned char mathHeadingToDirectionCode(int context, float angle);
-/* Supplied declaration required: FUN_00231dec. */
+/* Supplied declaration required: naviPanelDraw. */
 /* Supplied declaration required: titleScissorApplyOrClearRequests. */
 extern float *lmapSceneGetObj(int);
 extern int mapClassifyPlaceState(int);
@@ -878,7 +878,7 @@ LAB_0039aba4:
   }
   titleScissorApplyOrClearRequests(temp_v44,0);
   DAT_0044cdd8 = 0xf1;
-  FUN_00231dec(temp_v44);
+  naviPanelDraw(temp_v44);
   return;
 }
 

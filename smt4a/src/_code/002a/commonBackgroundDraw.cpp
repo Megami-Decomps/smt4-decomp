@@ -1,11 +1,11 @@
 #include "shard/W6_W6Match5_CommonBackground.h"
+#include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 
 extern "C" {
 void efctSetSpeed(f32 speed);
-u32 renderCtxPackPassFlags(u32 mode, u32 option);
 
 // Draw the active common background at its current playback speed, restoring render state.
 s32 commonBackgroundDraw()

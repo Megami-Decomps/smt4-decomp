@@ -5,7 +5,6 @@ extern "C" {
 
 void renderCtxSelectStereoLayout(RenderCtx *context);
 void gxResetColorQuadToWhite(void);
-u32 renderCtxPackPassFlags(u32 slot, u32 flags);
 void debugItemListDraw(void *work);
 void renderCtxResetColorScale(RenderCtx *context);
 

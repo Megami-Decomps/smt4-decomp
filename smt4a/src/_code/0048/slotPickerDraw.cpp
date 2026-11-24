@@ -28,7 +28,6 @@ typedef struct SlotPicker {
 
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
-s32 renderCtxPackPassFlags(s32 a, s32 b);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 

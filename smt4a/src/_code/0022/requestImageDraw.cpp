@@ -13,7 +13,6 @@
 extern "C" {
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void gxResetColorQuadToWhite(void);
-s32 renderCtxPackPassFlags(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);
 void sysMemClear(void *memory, u32 bytes);
 u32 requestIdToCode(u32 id);

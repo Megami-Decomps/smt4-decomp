@@ -20,7 +20,6 @@ typedef char TerminalScreenSlotsOffsetCheck[offsetof(TerminalScreen, slots) == 0
 
 extern "C" {
 extern TerminalScreen *g_tmnl;
-s32 renderCtxPackPassFlags(u32 first, u32 second);
 s32 effectNodeUpdatePlacedChildren(u32 handle);
 
 /* Draws the terminal's slot handles with the three render stacks pushed, for pages 1..98. */

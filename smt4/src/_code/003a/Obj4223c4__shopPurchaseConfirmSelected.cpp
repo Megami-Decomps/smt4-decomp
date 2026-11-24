@@ -32,7 +32,7 @@ s32 gameGlobalsFlagIsClear(void);
 void messageMainSetTargetFlags(s32 flags);
 s32 flaggedValueHolderGetTotal(void *holder);
 s32 partyFindFreeStockSlot(void);
-s32 FUN_0029ce60(u16 id, u8 discounted, s32 mode, bool highLevel, s32 flags);
+s32 compendiumComputeSummonCost(u16 id, u8 discounted, s32 mode, bool highLevel, s32 flags);
 void gameCounterAddSaturating(s32 counter, s32 amount);
 u16 shopListItemGetId(const PurchaseEntry *entry);
 static __inline s32 purchaseMenuIsDiscounted(const PurchaseMenu *menu)
@@ -60,7 +60,7 @@ void Obj4223c4::shopPurchaseConfirmSelected()
         if (slot != -1) {
             dispatchIfFound(slot, itemId, purchaseMenuIsDiscounted(menu));
         }
-        s32 price = FUN_0029ce60(id, menu->discounted, 0, menu->level >= 100, 0);
+        s32 price = compendiumComputeSummonCost(id, menu->discounted, 0, menu->level >= 100, 0);
         partyMoneyAddForward(-price);
         gameCounterAddSaturating(0x28, price);
         gameGlobalsSetSubScreenActive(0);

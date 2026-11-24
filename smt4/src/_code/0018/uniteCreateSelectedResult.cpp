@@ -9,6 +9,7 @@
 #include <stddef.h>
 #include "gamedata/SkillFlags.h"
 #include "gamedata/UnitStats.h"
+#include "shard/W6_W6Match4_RelativeDirectory.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ int arrayContainsU16(const u16* values, int count, u32 value);
 int dataTable06ComparePriority(const void* left, const void* right);
 void qsort(void* base, int count, int elementSize,
                   int (*compare)(const void*, const void*));
-int flagCountUnlockedSlots(StatBlock* member); // declcheck: local (takes the unit; the shared prototype drops the argument)
 u32 randNextInRange(u32 maximum);
 void unitRecalculateEffectiveStats(StatBlock* member);
 u32 FUN_0029c0c0(void* context, StatBlock* member);

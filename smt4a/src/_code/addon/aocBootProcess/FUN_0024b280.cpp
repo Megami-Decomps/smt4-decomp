@@ -66,7 +66,7 @@ static __inline void aocBootCancel(AocBoot *boot)
 u32 FUN_0024b280(void)
 {
     AocBoot *boot = g_aocBoot.boot;
-    RequestParameters request(1);
+    RequestParameters request;
     if (boot->frames < AOC_BOOT_FRAMES_MAX)
         boot->frames++;
 

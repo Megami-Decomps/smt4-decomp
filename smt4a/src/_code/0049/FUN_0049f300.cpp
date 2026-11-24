@@ -11,7 +11,6 @@ struct PanelFrameDrawWork {
 typedef char PanelFrameDrawWorkIconCheck[offsetof(PanelFrameDrawWork, showIcon) == 0x474 ? 1 : -1];
 extern "C" {
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
-s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void FUN_0049d594(PanelFrameDrawWork *work);
 void efctSetSpeed(f32 speed);
 void renderCtxResetColorScale(RenderCtxA *context);

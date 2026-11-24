@@ -19,7 +19,6 @@ typedef char TermScreenASlotsOffsetCheck[offsetof(TermScreenA, slots) == 0x57C ?
 extern "C" {
 extern TermScreenA *g_tmnl;
 s32 renderCtxPackPassFlagsWithAlpha(u32 mode, f32 alpha);
-s32 renderCtxPackPassFlags(u32 kind, u32 enabled);
 void effectNodeUpdatePlacedChildren(u32 handle);
 
 /* Draws the terminal's slot handles with three render states pushed, for pages 1..17. */

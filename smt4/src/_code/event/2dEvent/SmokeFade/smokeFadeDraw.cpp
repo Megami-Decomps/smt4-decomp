@@ -9,7 +9,6 @@ extern "C" {
 extern SmokeFadeState *DAT_0043df28;
 extern SmokeFadeImage DAT_0043df40[2];
 void gxResetColorQuadToWhite();
-u32 renderCtxPackPassFlags(u32 value, bool enabled);
 void efctSetSpeed(f32 speed);
 
 /* Draw callback: draws the two smoke-fade images over the title scene at their opacities. */

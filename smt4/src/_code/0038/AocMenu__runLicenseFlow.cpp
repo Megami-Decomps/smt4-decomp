@@ -53,7 +53,7 @@ enum {
 void AocMenu::runLicenseFlow()
 {
     AocLicenseMenu *menu = (AocLicenseMenu *)this;
-    RequestParameters result;
+    AocMenuRequest result;
     AocMain *aocMain = g_aocMain;
 
     switch (menu->step) {
@@ -77,7 +77,7 @@ void AocMenu::runLicenseFlow()
                     menu->counter = 3;
                     break;
                 case AOC_RESULT_RETRY: {
-                    RequestParameters copy = result;
+                    AocMenuRequest copy = result;
                     FUN_00234124(this, &copy);
                     break;
                 }
@@ -125,7 +125,7 @@ void AocMenu::runLicenseFlow()
                     menu->counter = 3;
                     break;
                 case AOC_RESULT_RETRY: {
-                    RequestParameters copy = result;
+                    AocMenuRequest copy = result;
                     FUN_00234124(this, &copy);
                     break;
                 }
@@ -161,7 +161,7 @@ void AocMenu::runLicenseFlow()
                 menu->counter = 3;
                 break;
             case AOC_RESULT_RETRY: {
-                RequestParameters copy = result;
+                AocMenuRequest copy = result;
                 FUN_00234124(this, &copy);
                 break;
             }

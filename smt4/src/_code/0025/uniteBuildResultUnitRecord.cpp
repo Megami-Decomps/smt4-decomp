@@ -1,13 +1,13 @@
 #include "camp/Unite/UniteGlobals.h"
 #include "gamedata/UnitStats.h"
+#include "shard/W6_W6Match4_RelativeDirectory.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 StatBlock *partyMemberFindById(u32 id); // declcheck: local (the shared declaration does not compile here or changes this unit)
-void FUN_0029dc74(u32 id, StatBlock *result);
+void unitRecordBuild(u32 id, StatBlock *result);
 void uniteMergeInheritedSkillsAndStats(void *context, const StatBlock *first,
     const StatBlock *second, const StatBlock *third, StatBlock *result);
-s32 flagCountUnlockedSlots(const StatBlock *unit); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void unitRecalculateEffectiveStats(StatBlock *unit);
 
 /* Fills `result` for the selected fusion pair: mode 0 the fused demon with its inherited skills, 1 and 2 a copy
@@ -18,7 +18,7 @@ u32 uniteBuildResultUnitRecord(StatBlock *result, s32 selection, s32 mode, u32)
     u32 ok = 0;
     if (mode == 0) {
         if (work->resultPairsIV.pairs[selection].resultId) {
-            FUN_0029dc74(work->resultPairsIV.pairs[selection].resultId, result);
+            unitRecordBuild(work->resultPairsIV.pairs[selection].resultId, result);
             StatBlock *first = partyMemberFindById(work->resultPairsIV.pairs[selection].firstId);
             StatBlock *second = partyMemberFindById(work->resultPairsIV.pairs[selection].secondId);
             if (first && second) {

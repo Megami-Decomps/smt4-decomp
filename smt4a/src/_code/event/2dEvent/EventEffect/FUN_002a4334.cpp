@@ -19,7 +19,6 @@ extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
 extern EventOverlayTexture DAT_0057f430;
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
-s32 renderCtxPackPassFlags(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);
 void gxResetColorQuadToWhite(void);
 

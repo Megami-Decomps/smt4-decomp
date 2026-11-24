@@ -28,10 +28,21 @@ typedef struct ResultStatArrowRegions {
     /* 0x2 */ s16 first;       /* lights arrow image 0xB0 */
 } ResultStatArrowRegions;
 
-/* One 0x28-byte experience total: entry 0 is the pool, 1.. the party members, 0x24 the overflow. */
+/* One 0x28-byte experience entry: entry 0 is the pool, 1.. the party members (slot record index + 1), 25.. the
+ * stock slots, 0x24 the overflow. The gauges are 12-bit fixed point. */
 typedef struct ResultExperienceTotal {
-    /* 0x00 */ s32 total;
-    /* 0x04 */ u8 unk04[0x24];
+    /* 0x00 */ s32 total;        /* experience this entry is awarded */
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ u64 given;        /* of `total`, the part already paid into `exp` (fixed point) */
+    /* 0x10 */ u64 exp;          /* experience towards the next level (fixed point) */
+    /* 0x18 */ u16 gauge;        /* gauge width shown */
+    /* 0x1A */ s16 levelOffset;  /* levels already gained, added to the record's level */
+    /* 0x1C */ s16 levelUpFrame; /* frames of the level-up animation played */
+    /* 0x1E */ s8 maxed;         /* the gauge is full: the level-up animation is playing */
+    /* 0x1F */ u8 done;          /* nothing left to pay out */
+    /* 0x20 */ s16 expBonus;
+    /* 0x22 */ u8 leveledUp;
+    /* 0x23 */ u8 unk23[5];
 } ResultExperienceTotal;
 
 /* Apocalypse's result screen work (0x7F58 bytes, resultCreate): IV's ResultWork is result/Result.h.
@@ -46,7 +57,9 @@ typedef struct ResultWorkA {
     /* 0x06B0 */ UiSpriteState pageCursor;
     /* 0x073C */ u8 unk073C[0x118];
     /* 0x0854 */ UiSpriteState banner;          /* the slide-in banner */
-    /* 0x08E0 */ u8 unk08E0[0x3A84];
+    /* 0x08E0 */ u8 unk08E0[0x1C70];
+    /* 0x2550 */ UiSpriteState slotSprites[24]; /* one per slot record: the level-up effect over its gauge */
+    /* 0x3270 */ u8 unk3270[0x10F4];
     /* 0x4364 */ s32 state;                     /* 0x17: done */
     /* 0x4368 */ s32 previousState;             /* the state before resultSetMode's change */
     /* 0x436C */ s32 step;
@@ -75,7 +88,10 @@ typedef struct ResultWorkA {
     /* 0x442C */ EngineUnit units[37];
     /* 0x74BC */ u8 unk74BC[4];
     /* 0x74C0 */ s32 current;  /* index of the active unit */
-    /* 0x74C4 */ u8 unk74C4[0x74];
+    /* 0x74C4 */ u8 unk74C4[0x26];
+    /* 0x74EA */ s16 levelUpOrder[0x25];        /* per experience entry: its place among the level-ups, or negative */
+    /* 0x7534 */ u8 unk7534[2];
+    /* 0x7536 */ s16 levelUpCount;              /* the next place to hand out */
     /* 0x7538 */ u32 unk7538;
     /* 0x753C */ u8 reserveMarkers[3];
     /* 0x753F */ u8 partyMarkers[24];
@@ -89,7 +105,11 @@ typedef struct ResultWorkA {
     /* 0x75D0 */ u32 unk75D0;                   /* reported by scrCommGetChildValue */
     /* 0x75D4 */ u8 unk75D4[0x29C];
     /* 0x7870 */ ResultExperienceTotal experience[0x25];
-    /* 0x7E38 */ u8 unk7E38[0xF8];
+    /* 0x7E38 */ u8 unk7E38[8];
+    /* 0x7E40 */ s8 levelUpPlaying;             /* a level-up animation is running */
+    /* 0x7E41 */ u8 unk7E41[7];
+    /* 0x7E48 */ u8 unk7E48;                    /* set when the level-up event is queued */
+    /* 0x7E49 */ u8 unk7E49[0xE7];
     /* 0x7F30 */ u32 job;                       /* "Result CALC" */
     /* 0x7F34 */ u32 unk7F34;
     /* 0x7F38 */ u32 drawTask;
@@ -125,6 +145,13 @@ typedef char EngineUnitsOffsets[sizeof(EngineUnit) == 0x150 && offsetof(EngineUn
     offsetof(EngineUnitRecord, id) == 0x62 &&
     offsetof(EngineCleanupOwner, instance) == 0x4 && offsetof(EngineCleanupOwner, scene) == 0x8 &&
     offsetof(EngineCleanupOwner, alpha) == 0x20 ? 1 : -1];
+typedef char ResultWorkAExperienceCheck[
+    sizeof(ResultExperienceTotal) == 0x28 && offsetof(ResultExperienceTotal, given) == 8 &&
+    offsetof(ResultExperienceTotal, exp) == 0x10 && offsetof(ResultExperienceTotal, done) == 0x1F &&
+    offsetof(ResultExperienceTotal, leveledUp) == 0x22 &&
+    offsetof(ResultWorkA, slotSprites) == 0x2550 && offsetof(ResultWorkA, levelUpOrder) == 0x74EA &&
+    offsetof(ResultWorkA, levelUpCount) == 0x7536 && offsetof(ResultWorkA, levelUpPlaying) == 0x7E40 &&
+    offsetof(ResultWorkA, unk7E48) == 0x7E48 ? 1 : -1];
 typedef char ResultWorkAOffsetsCheck[
     offsetof(ResultWorkA, originSprite) == 0x20 && offsetof(ResultWorkA, gridCursor) == 0x624 &&
     offsetof(ResultWorkA, banner) == 0x854 && offsetof(ResultWorkA, state) == 0x4364 &&

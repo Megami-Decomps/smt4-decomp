@@ -23,7 +23,6 @@ extern BlinkFadeDrawState *g_eventEffect;
 extern BlinkFadeImage g_eventBannerTextures[2];
 void gxResetColorQuadToWhite();
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *);
-s32 renderCtxPackPassFlags(u32, u32);
 s32 packNibblesAndByte(u32, u32, u32);
 void efctSetSpeed(f32);
 

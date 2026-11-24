@@ -8,7 +8,6 @@ extern "C" {
 extern SaveLoadProcessA g_saveLoadProcess;
 s32 saveLoadThreadValueGet(void);
 s32 saveLoadJobIsReady(void);
-u32 renderCtxPackPassFlags(u32 state, u32 options);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 

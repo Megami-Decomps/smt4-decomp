@@ -12,7 +12,6 @@ extern EventTex *g_eventTex;
 s32 jobIsValid(u32 job);
 s32 jobGetStatus(u32 job);
 s32 FUN_00285584(u32 job, s32 x, s32 y);
-s32 renderCtxPackPassFlags(u32 first, u32 second);
 s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
 void renderCtxResetColorScale(RenderCtx *context);
 

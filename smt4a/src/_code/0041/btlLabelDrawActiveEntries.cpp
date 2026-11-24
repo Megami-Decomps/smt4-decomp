@@ -19,7 +19,6 @@ typedef char BattleLabelEntryLayoutA[
     offsetof(BattleLabelEntryViewA, sprite.centerX) == 0x2C ? 1 : -1];
 
 extern "C" {
-s32 renderCtxPackPassFlags(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);

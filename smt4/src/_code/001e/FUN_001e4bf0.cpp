@@ -9,7 +9,6 @@ extern "C" {
 void btlUiPartyDisplayDraw(BtlUiObjC *);
 void renderCtxResetColorScale(RenderCtx *);
 void renderCtxSelectStereoLayout(RenderCtx *);
-s32 renderCtxPackPassFlags(u32, u32);
 
 // Draw the lower battle UI only after both texture sets have finished loading.
 s32 FUN_001e4bf0(u32 job)

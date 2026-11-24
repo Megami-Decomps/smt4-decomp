@@ -9,7 +9,6 @@
 
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-u32 renderCtxPackPassFlags(u32 slot, u32 flags);
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 value);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite();

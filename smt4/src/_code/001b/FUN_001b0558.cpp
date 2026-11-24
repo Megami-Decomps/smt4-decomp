@@ -9,7 +9,7 @@ s32 FUN_00282ccc(void);
 void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index);
 void buttonHelpSetText(const char* text, u32 color);
 StatBlock* partyMemberFindById(u32 id);
-void FUN_0029dc74(u32 id, StatBlock* block);
+void unitRecordBuild(u32 id, StatBlock* block);
 void FUN_0029da34(u32 mode, u32 visible, u32 id, StatBlock* block);
 }
 
@@ -55,7 +55,7 @@ extern "C" void FUN_001b0558(void)
         StatBlock fallback;
         StatBlock* member = partyMemberFindById(static_cast<u16>(selection));
         if (member == NULL) {
-            FUN_0029dc74(static_cast<u16>(selection), &fallback);
+            unitRecordBuild(static_cast<u16>(selection), &fallback);
             member = &fallback;
         }
         FUN_0029da34(0, 1, static_cast<u16>(selection), member);

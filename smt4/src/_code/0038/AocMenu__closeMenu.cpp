@@ -29,7 +29,7 @@ static __inline u32 flagBit(u32 flags, u32 bit)
 void AocMenu::closeMenu()
 {
     AocMenu * menu = reinterpret_cast<AocMenu *>(this);
-    RequestParameters request;
+    AocMenuRequest request;
     u32 flags = g_aocMain->flags;
     u32 closing = flagBit(flags, 4);
     flags &= ~0x70u;

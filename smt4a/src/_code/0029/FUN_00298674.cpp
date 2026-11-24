@@ -7,7 +7,6 @@
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers_VariantC.h"
 
 extern "C" {
-u32 renderCtxPackPassFlags(u32, u32);
 void btlUiPartyDisplayDraw(BtlUiObjCA *);
 void renderCtxResetColorScale(RenderCtxA *);
 

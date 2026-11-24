@@ -1,4 +1,4 @@
-/* NON_MATCHING: 43 lines; 60-byte frame, inlined RequestParameters(1), reused sp+20/sp+40 request slots, and submitTokenRequest ldm/ldrd match retail, remaining: WindowStatusResult temp lands at sp+24 instead of sp+40, r7=1 is not kept across calls, and submitTokenRequest's zero branch duplicates jyoucyuGetTableEntry(0). */
+/* NON_MATCHING: 30 lines; 60-byte frame, the inlined RequestParameters(), reused sp+20/sp+40 request slots, and submitTokenRequest ldm/ldrd match retail, remaining: WindowStatusResult temp lands at sp+24 instead of sp+40, r7=1 is not kept across calls, and submitTokenRequest's zero branch duplicates jyoucyuGetTableEntry(0). */
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match1_QueuedRequestToken.h"
 #include "util/BitsAndBytes.h"
@@ -14,7 +14,7 @@ RequestParameters aocResolveMountPath(AocSystemA *system, u32 id);
  * and queues the follow-up request when the event allows it. */
 u32 aocMainAdvancePendingRequest(u32 unusedA, u32 unusedB, u32 id)
 {
-    RequestParameters request(1);
+    RequestParameters request;
     request.kind = 1;
     request.word3 = 0;
     {

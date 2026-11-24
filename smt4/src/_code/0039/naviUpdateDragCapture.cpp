@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the scheduling of the 0.0f constant load and one VFP register choice in the capture block differ. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "shard/NaviMain.h"
 #include "AsdSDK/TexTableEntryRange.h"
@@ -24,10 +23,12 @@ u32 naviUpdateDragCapture(NavigationInterpolation *nav)
             nav->drag.touch.y = (f32)y;
             nav->drag.previousTouch.x = (f32)x;
             nav->drag.previousTouch.y = (f32)y;
-            NavigationPoint value = *(NavigationPoint *)NaviMain_GetCursorPos(nav->cursorData);
+            /* The cursor's value pair, copied field by field as Apocalypse's naviMapHandleInput does. */
+            NaviValuePair value = *NaviMain_GetCursorPos(nav->cursorData);
             nav->drag.touchOrigin.x = (f32)x;
             nav->drag.touchOrigin.y = (f32)y;
-            nav->drag.valueOrigin = value;
+            nav->drag.valueOrigin.x = value.first;
+            nav->drag.valueOrigin.y = value.second;
             nav->drag.velocity.x = 0.0f;
             nav->drag.velocity.y = 0.0f;
             nav->drag.stillFrames = 0;

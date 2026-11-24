@@ -31,7 +31,7 @@ s32 loadSlotMainIsLoaded(BtlMainStateA *state);
 s32 FUN_003e1114(BtlStep *step, BtlMainStateA *state);
 s32 FUN_003f0f2c(BtlMainStateA *state); // declcheck: local (the shared prototype takes another view of the main state)
 s32 FUN_003e03b0(BtlStep *step, BtlMainStateA *state);
-s32 FUN_003e12a8(BtlStep *step, BtlMainStateA *state);
+s32 entryCollectNewIdentifiers(BtlStep *step, BtlMainStateA *state);
 s32 aocLoaderUpdateRecords(BtlStep *step, BtlMainStateA *state);
 s32 FUN_003e0510(BtlStep *step, BtlMainStateA *state);
 s32 FUN_003e3188(BtlStep *step, BtlMainStateA *state);
@@ -96,7 +96,7 @@ static __inline s32 encounterWaitArrangementFile(BtlStep *step, BtlMainStateA *s
         return 0;
     step->counters.unk0C = step->counters.unk10 = 0;
     step->state = 10;
-    return FUN_003e12a8(step, state);
+    return entryCollectNewIdentifiers(step, state);
 }
 
 /* State 19: enters state 20 and runs it. */
@@ -173,7 +173,7 @@ extern "C" s32 battleEncounterTaskUpdate(BtlStep *step, BtlMainStateA *state)
     case 9:
         return encounterWaitArrangementFile(step, state);
     case 10:
-        return FUN_003e12a8(step, state);
+        return entryCollectNewIdentifiers(step, state);
     case 11:
         return aocLoaderUpdateRecords(step, state);
     case 12:

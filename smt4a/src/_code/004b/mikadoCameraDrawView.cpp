@@ -14,7 +14,6 @@ typedef char SkinDrawObjectOffsetsCheck[
 extern "C" {
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void gxResetColorQuadToWhite(void);
-s32 renderCtxPackPassFlags(s32 first, s32 second);
 void FUN_004bade0(void *skinState);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);

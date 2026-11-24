@@ -8,7 +8,6 @@
 extern "C" {
 
 void renderCtxSelectStereoLayout(RenderCtx *context);
-s32 renderCtxPackPassFlags(u32 preset, u32 index);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
 void FUN_002b659c(s32 x, s32 y, s32 width, s32 height);
 void textDrawRangeFaded(void *text, s32 x, s32 y, s32 layer, f32 scale, s32 mode, s32 index);

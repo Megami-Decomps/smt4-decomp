@@ -1,5 +1,6 @@
 /* NON_MATCHING: 50 lines; same flow, constants and float maths. Retail addresses the entry-lock byte as (worker + index) + 844 where armcc adds 844 first, and keeps the zero constant in r7 and the parallax in r6 (swapped here). */
 #include "gamedata/SaveLoadUITable.h"
+#include "camp/RenderCtx.h"
 #include "text/TextDraw.h"
 #include "camp/RenderCtxTitle.h"
 #include "gfx/RenderStateStack.h"
@@ -16,7 +17,6 @@ struct CaptionRecord {
 
 s32 statusCameraRestore(s32 arg);
 void gxResetColorQuadToWhite(void);
-u32 renderCtxPackPassFlags(s32 a, s32 b);
 void efctSetSpeed(f32 speed);
 s32 texDrawCompositeSprite(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
 s32 libc_strlen(const char *text);

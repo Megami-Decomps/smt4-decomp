@@ -4,7 +4,6 @@
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
-s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void efctSetSpeed(f32 opacity);
 
 /* Draw the common background while its transition has a visible contribution. */

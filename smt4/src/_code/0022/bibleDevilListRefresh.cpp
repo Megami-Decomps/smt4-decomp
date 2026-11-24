@@ -13,7 +13,7 @@ int messageIdListInit(...);
 int listScrollerInitialize(...);
 int releaseEntriesA(void); // declcheck: local (romwright prototype; the shared declaration in code/Code0023_Smt4.h does not compile here: too few arguments in function call)
 int ifTouchRegionClearAll(unsigned int);
-int FUN_0029ce60(unsigned int, int, int);
+int compendiumComputeSummonCost(unsigned int, int, int);
 int itemGetFlagBit1(...);
 int nkmBaseGetRecord(...);
 int jyoucyuGetTableEntry(...);
@@ -39,7 +39,7 @@ extern unsigned char gaugePercent(int, unsigned int);
 /* Supplied declaration required: listScrollerInitialize. */
 /* Supplied declaration required: releaseEntriesA. */
 /* Supplied declaration required: ifTouchRegionClearAll. */
-/* Supplied declaration required: FUN_0029ce60. */
+/* Supplied declaration required: compendiumComputeSummonCost. */
 /* Supplied declaration required: itemGetFlagBit1. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: nkmBaseGetRecord. */
@@ -86,7 +86,7 @@ void bibleDevilListRefresh(int param_1)
         if (temp_v3 != 0) {
           FUN_0022e17c(temp_v12,*puVar4,0);
           temp_v4 = (unsigned int)*puVar4;
-          FUN_0029ce60(temp_v4,*(unsigned char *)(param_1 + 0x5a5),0);
+          compendiumComputeSummonCost(temp_v4,*(unsigned char *)(param_1 + 0x5a5),0);
           temp_v13 = temp_v4;
           recordAppendFloatEntry(temp_v2,temp_v12);
         }
@@ -141,7 +141,7 @@ void bibleDevilListRefresh(int param_1)
             nkmBaseGetRecord();
             FUN_0022e17c(temp_v12,*puVar4,1);
             temp_v6 = (unsigned int)*puVar4;
-            FUN_0029ce60(temp_v6,*(unsigned char *)(param_1 + 0x5a5),0);
+            compendiumComputeSummonCost(temp_v6,*(unsigned char *)(param_1 + 0x5a5),0);
             temp_v13 = temp_v6;
             recordAppendFloatEntry(temp_v2,temp_v12);
           }

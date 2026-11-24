@@ -5,7 +5,6 @@
 
 extern "C" {
 u32 renderCtxPackPassFlagsWithAlpha(u32, f32);
-u32 renderCtxPackPassFlags(u32, u32);
 void taskRunPhase(s32);
 void skinObjectUpdateMatrices(RenderCtxA *);
 void renderCtxResetColorScale(RenderCtxA *);

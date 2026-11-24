@@ -31,7 +31,7 @@ void scrScriptProcessStartEntry(u32 script, u32 entry);
 void panelSetTarget(s32 offset, s32 frame);
 void messageBannerInitCounter(s32 a, s32 b);
 void FUN_0049a5b4(ShopMain *shop);
-u32 FUN_0049a9a8(ShopMain *shop);
+u32 equipmentMenuRebuildPages(ShopMain *shop);
 s32 gameFlagIsSet(u32 flag);
 s32 flagValueRead(u32 id);
 u32 tableGroupFindEntryIndex(u32 table, const char *name);
@@ -105,7 +105,7 @@ void _ZN9Obj53604412FUN_00494a34Ev(ShopMain *shop)
         break;
     case 1:
         if (scrRunOpcodesStub(shop->script) == 2) {
-            shop->closeKind = (u8)FUN_0049a9a8(shop);
+            shop->closeKind = (u8)equipmentMenuRebuildPages(shop);
             shop->step = 3;
         }
         break;

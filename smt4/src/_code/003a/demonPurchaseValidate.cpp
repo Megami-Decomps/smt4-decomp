@@ -23,7 +23,7 @@ struct PurchaseMenu {
 
 extern "C" {
 
-s32 FUN_0029ce60(u16 id, u8 discounted, s32 mode, bool highLevel, s32 flags);
+s32 compendiumComputeSummonCost(u16 id, u8 discounted, s32 mode, bool highLevel, s32 flags);
 s32 flaggedValueHolderGetTotal(void *holder);
 u32 gameSlotTableGetHeader(void);
 s32 partyHasStoredDemon(u16 id);
@@ -32,7 +32,7 @@ s32 partyFindFreeStockSlot(void);
 /* Check whether the demon can be bought; on failure record why (1 money, 2 already stored, 3 not allowed, 5 no room) and return 0. */
 s32 demonPurchaseValidate(PurchaseMenu *menu, u16 id)
 {
-    u32 price = FUN_0029ce60(id, menu->discounted, 0, menu->level >= 100, 0);
+    u32 price = compendiumComputeSummonCost(id, menu->discounted, 0, menu->level >= 100, 0);
     PurchaseEntry *entry = &menu->entries[flaggedValueHolderGetTotal(menu->selection)];
     u8 error;
 

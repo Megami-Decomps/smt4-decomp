@@ -11,7 +11,7 @@ int partyPanelHasSlotValue(...);
 int listCursorGetRowOfChildIfUnblocked(...);
 int scrollOwnerSelectIndex(...);
 int scrollListSetSelectionTracked(...);
-int FUN_002cb84c(void);
+int partyPanelPlaceInitialCursors(void);
 int slotPlacementAssignSlotPosition(...);
 
 int sysPlaySe(...);
@@ -65,7 +65,7 @@ extern unsigned int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: scrollListSetSelectionTracked. */
 /* Supplied declaration required: partyPanelRefreshFusionAvailability. */
 /* Supplied declaration required: gameGlobalsSetOverlayActive. */
-/* Supplied declaration required: FUN_002cb84c. */
+/* Supplied declaration required: partyPanelPlaceInitialCursors. */
 /* Supplied declaration required: partyPanelRefreshItemPreview. */
 /* Supplied declaration required: FUN_002f8288. */
 /* Supplied declaration required: skillApplyToMemberAndCharge. */
@@ -557,7 +557,7 @@ LAB_002c4018:
       }
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 0x18);
-    FUN_002cb84c();
+    partyPanelPlaceInitialCursors();
     break;
   case 0x11:
     *(unsigned short *)(temp_v0 + 0x38) = 0xffff;
@@ -611,7 +611,7 @@ LAB_002c4018:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 3);
     *(unsigned int *)(temp_v0 + 0x20) = 8;
-    FUN_002cb84c();
+    partyPanelPlaceInitialCursors();
     break;
   case 0x13:
     temp_v2 = 1;

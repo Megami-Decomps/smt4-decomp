@@ -3,7 +3,6 @@
 #include "shard/W5_W5Match7_UiQuest.h"
 
 extern "C" {
-s32 renderCtxPackPassFlags(s32 first, s32 second);
 void uiQuestDrawList(void);
 
 /* Draws quest-menu states that have visible content inside a temporary render-state scope. */

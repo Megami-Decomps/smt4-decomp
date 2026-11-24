@@ -7,7 +7,6 @@ extern "C" {
 extern SaveByteSettings g_byteSettings;
 s32 saveLoadGetThreadStatus();
 void renderCtxSelectStereoLayout(RenderCtx *context);
-s32 renderCtxPackPassFlags(s32 first, s32 second);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite();
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);

@@ -4,7 +4,6 @@
 #include "Model/MoriModelShadowMap.h"
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
-s32 renderCtxPackPassFlags(s32 mode, s32 flags);
 void FUN_00164034(f32 x, f32 y, f32 width, f32 height, const EffectQuadParameters *first, const EffectQuadParameters *second, const EffectQuadParameters *third, const EffectQuadParameters *fourth, f32 depth); // declcheck: local (code/Code0016.h takes u32 words; this caller passes EffectQuadParameters pointers)
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);

@@ -5,7 +5,6 @@
 
 extern "C" {
 
-u32 renderCtxPackPassFlags(s32 mode, s32 flags); // declcheck: local (ui/AnimatedMessage.h declares it but does not compile in this unit)
 u32 flagsPackFourBooleans(s32 first, s32 second, s32 third, s32 fourth);
 u32 FUN_003a48dc(s32 a, s32 b, s32 c, u32 d);
 u32 packThreeFields(u32 a, s32 b, s32 c);
@@ -17,7 +16,7 @@ u32 packThreeFields(u32 a, s32 b, s32 c);
 void renderCtxFillDisplay(RenderCtxA *context, u32 color, u32 fade, u32 flags, f32 alpha)
 {
     s32 first = 0;
-    s32 second = 0;
+    bool second = false;
     u32 mode = 0;
     AsdTexture *savedTexture = context->selectedTexture;
     f32 width = renderCtxDisplayWidth(context);
@@ -27,7 +26,7 @@ void renderCtxFillDisplay(RenderCtxA *context, u32 color, u32 fade, u32 flags, f
         first = 1;
     }
     if ((flags & 2) != 0) {
-        second = 1;
+        second = true;
     }
     if ((flags & 4) != 0) {
         mode = 2;

@@ -7,7 +7,6 @@ void renderCtxResetColorScale(RenderCtxA *context);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void gxResetColorQuadToWhite();
 s32 jobIsValid(u32 job);
-u32 renderCtxPackPassFlags(u32 mode, u32 option);
 void FUN_002609d8(u32 job, s32 mode, s32 initial);
 
 // Draw the two owned jobs during active menu states, preserving the cached draw state.

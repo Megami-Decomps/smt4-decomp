@@ -4,7 +4,6 @@
 struct RenderStateScopeWork { u8 prefix[0xC]; u32 state; };
 extern "C" {
 s32 renderCtxPackPassFlagsWithAlpha(u32 mode, f32 value);
-s32 renderCtxPackPassFlags(u32 first, u32 second);
 
 u32 FUN_004ce7c4(RenderStateScopeWork *work)
 {

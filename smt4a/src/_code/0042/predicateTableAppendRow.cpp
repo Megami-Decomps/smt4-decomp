@@ -18,7 +18,7 @@ extern "C" {
 
 extern TextRowList DAT_005c0a8c;
 extern TextRow DAT_00642b80[];
-void stringCopyTruncated(char *dst, const char *src, u32 size);
+u32 stringCopyTruncated(char *destination, const char *source, u32 capacity);
 
 /* Append a row of five strings to the text table. */
 void predicateTableAppendRow(const char *first, const char *second, const char *third, const char *fourth, const char *fifth)

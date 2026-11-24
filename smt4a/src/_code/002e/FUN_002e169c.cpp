@@ -11,7 +11,6 @@
 
 extern "C" {
 
-u32 renderCtxPackPassFlags(u32 a, u32 b);
 void FUN_0020bd54(void);
 void fadeObjectResetIfActive(void* fade);
 void textDrawRangeFaded(u32 iconSet, s32 x, s32 y, s32 a, f32 scale, s32 b, s32 c);

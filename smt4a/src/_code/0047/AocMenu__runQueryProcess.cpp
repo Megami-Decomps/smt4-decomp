@@ -52,7 +52,7 @@ enum {
 void AocMenu::runQueryProcess()
 {
     AocQueryMenu * menu = reinterpret_cast<AocQueryMenu *>(this);
-    RequestParameters result;
+    AocMenuRequest result;
     AocMain *aocMain = g_aocMain;
 
     switch (menu->step) {
@@ -74,7 +74,7 @@ void AocMenu::runQueryProcess()
                 menu->counter = 3;
                 break;
             case AOC_RESULT_RETRY: {
-                RequestParameters copy = result;
+                AocMenuRequest copy = result;
                 FUN_0047bc90(this, &copy);
                 break;
             }
@@ -107,7 +107,7 @@ void AocMenu::runQueryProcess()
                 menu->counter = 3;
                 break;
             case AOC_RESULT_RETRY: {
-                RequestParameters copy = result;
+                AocMenuRequest copy = result;
                 FUN_0047bc90(this, &copy);
                 break;
             }

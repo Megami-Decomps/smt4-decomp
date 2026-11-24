@@ -14,7 +14,6 @@ void effectNodeUpdatePlacedChildren(EffectNode *node);
 void layoutApplyForState(RenderCtx *context);
 void renderCtxResetColorScale(RenderCtx *context);
 u32 asdCameraGetSavedRenderPairs(void);
-s32 renderCtxPackPassFlags(u32 first, u32 second);
 void effectRestoreSavedRenderPairs(RenderCtx *context, u32 value);
 
 /* Draws the effect editor's menu with its own render states pushed, then pops them again. */

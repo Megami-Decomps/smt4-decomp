@@ -72,7 +72,7 @@ struct NkmBaseRecord {
     /* 0x34 */ u16 prerequisite;     /* bit 0: needs a registry record; upper bits: its index (0 = own id) */
     /* 0x36 */ u16 requiredFlag;     /* unlock flag; 0 = always unlocked */
     /* 0x38 */ u16 innateFlag;       /* bit set in a new unit's state */
-    /* 0x3A */ u8 unk3A[2];
+    /* 0x3A */ u16 summonCostRate;   /* tenths applied to the compendium's summon cost (compendiumComputeSummonCost) */
     /* 0x3C */ u16 skills[8];        /* initial skills */
     /* 0x4C */ DevilLearnedSkill learnedSkills[8];
     /* 0x6C */ DevilAffinity affinities[16];

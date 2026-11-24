@@ -10,8 +10,6 @@ extern "C" {
 
 u32 FUN_00492c70(void);
 
-void FUN_0049d048(unsigned int param_1,unsigned int param_2);
-
 s32 shopGetEntryPrice(const ShopEntry *entry);
 
 void uiDrawTableTextureAtRectCorner(ScreenRect *rect, u32 id, s32 dx, s32 dy, u32 extra);

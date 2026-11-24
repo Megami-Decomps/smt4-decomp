@@ -18,7 +18,9 @@ struct CampCecInbox {
 struct CampCecDemonRecord {
     /* 0x00 */ u16 id;      /* the devil's id */
     /* 0x02 */ s16 passes;  /* StreetPass tally from which the devil is offered */
-    /* 0x04 */ u8 unk04[8];
+    /* 0x04 */ s16 skill;   /* a skill the devil brings when the tally FUN_0025981c reports reaches skillPasses */
+    /* 0x06 */ s16 skillPasses;
+    /* 0x08 */ u8 unk08[4];
 };
 
 struct CampCecMenu {

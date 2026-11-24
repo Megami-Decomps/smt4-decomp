@@ -14,7 +14,6 @@ typedef char GameIconAnimationOffsets[
     offsetof(GameIconAnimationView, third) == 0x4A4 &&
     offsetof(GameIconAnimationView, first) == 0x530 ? 1 : -1];
 extern "C" {
-s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void unitGetStereoScreenPosition(s32 *x, s32 *y, s32 location, f32 depth);
 void efctSetSpeed(f32 speed);
 

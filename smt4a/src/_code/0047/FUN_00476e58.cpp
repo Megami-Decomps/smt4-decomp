@@ -41,7 +41,7 @@ void FUN_00476e58(AocMenu *menu, u32 unused, u32 nextStep)
     if (resultLevel(legacyResourceIdRemap(&menu->request.result.code)) == -4 ||
         resultLevel(legacyResourceIdRemap(&menu->request.result.code)) == -5 ||
         legacyResourceIdRemap(&menu->request.result.code) == 0xc8813890u) {
-        RequestParameters parameters = menu->request;
+        AocMenuRequest parameters = menu->request;
         FUN_0047bc90(menu, &parameters);
         return;
     }

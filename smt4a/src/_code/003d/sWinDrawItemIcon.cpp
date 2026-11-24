@@ -28,7 +28,6 @@ typedef struct ItemWindow {
 
 extern ItemWindow *g_sWin;
 
-s32 renderCtxPackPassFlags(s32 a, s32 b);
 void efctSetSpeed(f32 speed);
 s32 textureIdIsLoaded(s16 item);
 u32 texDrawTableEntrySized(u32 id, u32 table, s32 texture, s32 x, s32 y, s32 width, s32 height, s32 flag);

@@ -31,7 +31,6 @@ struct CecViewSavedRecord {
 
 extern "C" {
 extern CampCecView *g_campCecView;
-s32 renderCtxPackPassFlags(u32, u32);
 u32 FUN_0025981c();
 CecViewSavedRecord *saveGetIndexedMapValue(u32);
 u16 *asdTMTexTableEntryAt(u32, s32);

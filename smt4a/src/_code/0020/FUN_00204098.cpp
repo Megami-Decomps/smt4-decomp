@@ -100,7 +100,7 @@ int uiSpriteSelectAnim(...);
 int uiSpriteSetImageKeyframe(...);
 int gameGetUnlockedCountLimit(void);
 int uiUpdateChainedSpriteRows(...);
-int FUN_0023c384(...);
+int resultExpPayoutStep(...);
 int mapDepartAdvanceState(void);
 int gameSaveGetPoints(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int sysMemClear(...);
@@ -215,7 +215,7 @@ extern float __aeabi_ul2f(int, unsigned int);
 extern int FUN_0022e750(void);
 /* Supplied declaration required: statusPanelClose. */
 /* Supplied declaration required: gameSavedFlagSet. */
-/* Supplied declaration required: FUN_0023c384. */
+/* Supplied declaration required: resultExpPayoutStep. */
 /* Supplied declaration required: resultExpGaugesRefresh. */
 extern int *FUN_0025e684(int);
 extern int dialogIsActive(void);
@@ -787,7 +787,7 @@ LAB_00204688:
         }
       }
     }
-    FUN_0023c384(temp_v6,temp_v7);
+    resultExpPayoutStep(temp_v6,temp_v7);
     temp_v45 = (int *)0x0;
     temp_v48 = temp_v6 + 0x7500;
     temp_v49 = (char *)(temp_v6 + 0x7e00);

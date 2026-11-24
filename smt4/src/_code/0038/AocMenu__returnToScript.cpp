@@ -1,6 +1,8 @@
 /* NON_MATCHING: both exits that leave for step 3 write state 3/substep 0; retail stores each pair with one stm and keeps
  * the 3 out of the saved registers, this build hoists the 3 into r7 and stores the words separately (substep first); the
- * closing flag's bit extraction also takes other registers. */
+ * closing flag's bit extraction also takes other registers. The queued request is passed by value as the
+ * base RequestParameters: retail copies it whole (ldm/stm, a 52-byte frame), this build member by member out
+ * of the AocMenuRequest local (a base subobject), with a 68-byte frame. */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match8_AocQuestReturn.h"
@@ -63,7 +65,7 @@ void AocMenu::returnToScript()
         }
         return;
     }
-    RequestParameters parameters;
+    AocMenuRequest parameters;
     parameters.kind = 1;
     parameters.word3 = 0;
     parameters.result = WindowStatusResult(parameters.word3);

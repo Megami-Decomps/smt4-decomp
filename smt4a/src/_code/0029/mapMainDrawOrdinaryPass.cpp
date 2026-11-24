@@ -4,7 +4,6 @@
 
 extern "C" {
 extern MapMainA *g_mapMain;
-s32 renderCtxPackPassFlags(s32 preset, s32 index);
 void FUN_002b6f30(void);
 void mapDrawTargetMarkerQuad(void);
 void FUN_002443e4(void);

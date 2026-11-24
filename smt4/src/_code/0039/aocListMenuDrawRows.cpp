@@ -26,7 +26,6 @@ extern "C" {
 
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
-s32 renderCtxPackPassFlags(u32 kind, bool enabled);
 void texDrawCompositeSprite(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
 s32 FUN_0029e924(void *holder);
 s32 flaggedEntryGetValueByState(void *holder);

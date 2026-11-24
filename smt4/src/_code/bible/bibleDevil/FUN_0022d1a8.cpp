@@ -22,7 +22,7 @@ extern s32 DAT_0043d9cc;
 
 s32 FUN_0029e924(void *list);
 s32 rangeLimitMin(void *list);
-u32 FUN_0029ce60(u32 devilId, s32 column, s32 flag);
+u32 compendiumComputeSummonCost(u32 devilId, s32 column, s32 flag);
 BibleLayoutPoint *layoutFindTableEntry(void *layout, s32 id);
 
 /* The shown stat of the entry at `index`: 0 when the column has none. */
@@ -86,9 +86,9 @@ void FUN_0022d1a8(BibleDevilWork *work)
         BibleLayoutPoint *label = layoutFindTableEntry(work->layout, i + 0x42F);
         s32 labelX = label->x;
         s32 labelY = label->y;
-        u32 shown = FUN_0029ce60(devilId, work->column, work->mode != 0);
+        u32 shown = compendiumComputeSummonCost(devilId, work->column, work->mode != 0);
         if (work->mode == 1) {
-            u32 baseline = FUN_0029ce60(devilId, 0, work->mode != 0);
+            u32 baseline = compendiumComputeSummonCost(devilId, 0, work->mode != 0);
             if (shown < baseline)
                 textColor = BIBLE_COLOR_LOWER;
             if (baseline < shown)

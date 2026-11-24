@@ -12,9 +12,9 @@ EncountGroupRecord *dataTable02GetEntryByIndex(s32 index)
         return entries;
     }
     EncountGroupRecord *entry = aocFindSpriteTemplateByKey(g_aocSystem, index);
-    if (entry == NULL) {
-        entry = &entries[index];
+    if (entry != NULL) {
+        return entry;
     }
-    return entry;
+    return &entries[index];
 }
 }

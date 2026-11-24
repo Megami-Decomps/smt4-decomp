@@ -9,7 +9,6 @@
 
 extern "C" {
 
-u32 renderCtxPackPassFlags(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
 void textureRegionBoundsRead(u32 layer, u32 sprite, s32 *bounds);
 void FUN_001849bc(u32 kind, u32 layer, u32 sprite, u32 argument, s32 y, u32 order, s32 *bounds);

@@ -1,4 +1,5 @@
 #include "ui/UiSpriteApi.h"
+#include "camp/RenderCtx.h"
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -13,7 +14,6 @@ void FUN_001f40fc(void *icon, s32 x, s32 y);
 void fadeObjectResetIfActive(void *object);
 void textDrawRangeFaded(const void *text, s32 x, s32 y, s32 fade, u32 start, s32 length, f32 scale);
 void renderCtxResetColorScale(RenderCtx *scene);
-s32 renderCtxPackPassFlags(s32 a, s32 b);
 
 /* Draws the title screen's button help: its fade or icon sprites and the two button icons. */
 u8 FUN_002109cc(void)

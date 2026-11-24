@@ -14,7 +14,6 @@ struct CampCecOverlayWork {
 extern "C" {
 extern CampCecOverlayWork *g_campCec;
 void gxResetColorQuadToWhite();
-s32 renderCtxPackPassFlags(u32 mode, u32 option);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
 void efctSetSpeed(f32 alpha);
 

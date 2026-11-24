@@ -35,7 +35,7 @@ int mapCollisionRelease(void);
 int resourceSlotsRelease(void);
 int mapReleaseTableTexture(...);
 int resourceRemoveSlotOwners(void);
-int FUN_00294854(void);
+int mapGimicReleaseAll(void);
 int mapGimicClearEntryChildren(void);
 int FUN_002ba30c(void);
 int FUN_002d22c0(...);
@@ -460,7 +460,7 @@ extern int scrRunOpcodesStub(unsigned int);
 extern char *campGetState(void);
 /* Supplied declaration required: lmapSceneMoveToWaypoint. */
 /* Supplied declaration required: mapDepartInit. */
-/* Supplied declaration required: FUN_00294854. */
+/* Supplied declaration required: mapGimicReleaseAll. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: popupTryStartDemonHint. */
 /* Supplied declaration required: popupTryStartStory. */
@@ -4040,7 +4040,7 @@ LAB_0027a030:
     }
     resourceSlotsRelease();
     FUN_002ba30c();
-    temp_v22 = FUN_00294854();
+    temp_v22 = mapGimicReleaseAll();
     mapReleaseTableTexture(temp_v22);
     temp_v8 = puVar2[3] + 1;
     puVar2[3] = temp_v8;
@@ -4299,7 +4299,7 @@ LAB_0027ca0c:
     break;
   case 0x68:
     FUN_002ba30c();
-    FUN_00294854();
+    mapGimicReleaseAll();
     puVar2[3] = puVar2[3] + 1;
     break;
   case 0x69:
@@ -4535,7 +4535,7 @@ joined_r0x0027ce58:
     slotOwnerDestroyAllSlots(puVar2 + 0x3d);
     resourceSlotsRelease();
     FUN_002ba30c();
-    temp_v22 = FUN_00294854();
+    temp_v22 = mapGimicReleaseAll();
     mapReleaseTableTexture(temp_v22);
     frameTexturesRelease();
     jobFlagObjStop();

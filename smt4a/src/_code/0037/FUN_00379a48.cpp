@@ -1,4 +1,5 @@
 #include "shard/S1ListPanel.h"
+#include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include <stddef.h>
@@ -19,7 +20,6 @@ typedef char DebugSpatialBoundsOffsets[sizeof(DebugSpatialBounds) == 0x20 &&
 extern "C" {
 extern DebugSpatialBoundsQueue DAT_00611874;
 extern const DebugBoundsPalette DAT_00532240;
-u32 renderCtxPackPassFlags(u32, u32);
 void gxEmitColoredQuad(u32, u32, u32, u32,
                  f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32);
 

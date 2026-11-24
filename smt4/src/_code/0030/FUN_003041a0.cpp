@@ -14,14 +14,14 @@
 extern "C" {
 
 /* Callees without a shared declaration: FUN_00245ed0 transforms the scratch vector by the scratch
- * matrix, FUN_00245f48 is asinf, FUN_002484e0 sets the scratch matrix to an X rotation and
+ * matrix, FUN_00245f48 is asinf, matrixSetRotationX sets the scratch matrix to an X rotation and
  * FUN_002482d4 premultiplies it by the stored one (matrixSetRotationY), matrixCopySelectedToGlobal
  * sets it to a rotation about an axis, mathAtanAngle256 is an arctangent in 1/256 turns. */
 void matrixGetTranslation(Vector4 *out);
 void FUN_00245ed0(void);
 f32 FUN_00245f48(f32 x);
 void FUN_002482d4(void);
-void FUN_002484e0(f32 angle);
+void matrixSetRotationX(f32 angle);
 void matrixCopySelectedToGlobal(const Vector4 *axis, f32 angle);
 f32 phaseCosInterpolate(f32 phase);
 f32 mathSinFixedAngle(f32 phase);
@@ -182,7 +182,7 @@ void FUN_003041a0(LightningEffect *effect)
                 bolt->height = shiftRandomNextFraction(NULL) * params->heightRange;
             }
             bolt->yaw = randomSigned() * PI;
-            FUN_002484e0(bolt->pitch);
+            matrixSetRotationX(bolt->pitch);
             matrixSetRotationY(bolt->yaw);
             FUN_002482d4();
             f32 phase = bolt->elevation * 40.743664f;
@@ -216,7 +216,7 @@ void FUN_003041a0(LightningEffect *effect)
             f32 time = (f32)(bolt->timer + 1);
             f32 elevation = bolt->elevation + (bolt->speed + gravity * time * 0.5f) * time;
 
-            FUN_002484e0(bolt->pitch);
+            matrixSetRotationX(bolt->pitch);
             matrixSetRotationY(bolt->yaw);
             FUN_002482d4();
             f32 elevationPhase = elevation * 40.743664f;

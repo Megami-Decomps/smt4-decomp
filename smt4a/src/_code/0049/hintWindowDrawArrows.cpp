@@ -28,7 +28,6 @@ typedef struct HintWindow {
 } HintWindow;
 
 void gxResetColorQuadToWhite(void);
-s32 renderCtxPackPassFlags(u32 kind, u32 arg);
 void shopMainDrawPairedJobs(HintWindow *window);
 s32 placeWinGetValue(void);
 s32 FUN_00284f70(void);

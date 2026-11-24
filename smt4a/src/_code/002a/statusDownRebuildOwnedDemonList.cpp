@@ -1,4 +1,4 @@
-/* NON_MATCHING: the cursor bound test uses the opposite row and column registers, as in the IV twin. */
+/* NON_MATCHING: only the row and column loads and their sum use different registers in the cursor bound test. */
 #include "status/StatusDownA.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
@@ -30,9 +30,9 @@ void statusDownRebuildOwnedDemonList(const u8 *quantities)
     }
     gridNavigationConfigure(&state->inventory.navigation, state->inventory.count, 9, 4, 1, 1);
     ScrollSelection *controller = (ScrollSelection *)&state->inventory.navigation;
-    s32 count = state->inventory.count;
-    if (count > 0 && count <= state->inventory.column + state->inventory.row * 4) {
-        state->inventory.row = (count - 1) / 4;
+    if (state->inventory.count > 0 &&
+        state->inventory.column + state->inventory.row * 4 >= state->inventory.count) {
+        state->inventory.row = (state->inventory.count - 1) / 4;
         state->inventory.column = state->inventory.count - state->inventory.row * 4 - 1;
         scrollListSetSelectionTracked(controller, state->inventory.row);
         scrollOwnerSelectIndex(controller, state->inventory.column);

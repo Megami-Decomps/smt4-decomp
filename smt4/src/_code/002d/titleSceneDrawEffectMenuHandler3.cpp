@@ -4,7 +4,6 @@
 
 extern "C" {
 
-u32 renderCtxPackPassFlags(u32 slot, u32 flags);
 
 /* Runs effect-menu handler 3 under render state renderCtxPackPassFlags(1, 1) pushed on the title scene's first stack. */
 void titleSceneDrawEffectMenuHandler3(void)

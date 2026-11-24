@@ -13,7 +13,7 @@ extern BtlEncounterGlobalsA g_btlEncount;
 s32 btlFindSelectionIndexByOrdinal(BtlMainStateA *battle, s32 kind);
 void sysMemClear(void *destination, u32 size);
 void aocQueueType38(AocSystemA *system, u16 id, void **destination, const char *path);
-s32 FUN_003e12a8(BtlStep *step, BtlMainStateA *battle);
+s32 entryCollectNewIdentifiers(BtlStep *step, BtlMainStateA *battle);
 s32 FUN_003e3188(BtlStep *step, BtlMainStateA *battle);
 
 /* State 9: waits for the arrangement file, then collects its entries (same inline body as battleEncounterTaskUpdate case 9). */
@@ -24,7 +24,7 @@ static __inline s32 encounterWaitArrangementFile(BtlStep *step, BtlMainStateA *s
     }
     step->counters.unk0C = step->counters.unk10 = 0;
     step->state = 10;
-    return FUN_003e12a8(step, state);
+    return entryCollectNewIdentifiers(step, state);
 }
 
 /* Loads the selected combatant's arrangement from base or add-on content, then advances loading. */

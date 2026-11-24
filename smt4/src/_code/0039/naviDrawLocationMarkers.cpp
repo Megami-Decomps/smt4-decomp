@@ -48,7 +48,6 @@ extern "C" {
 void pairCopy(void *source, f32 *destination);
 void uiGetEntrySize(u32 table, u32 sprite, s32 *width, s32 *height);
 void efctSetSpeed(f32 speed);
-s32 renderCtxPackPassFlags(u32 a, u32 b);
 void uiDrawTableTextureSized(u32 layer, u32 table, u32 sprite, s32 x, s32 y, s32 width, s32 height, u32 flags);
 
 void naviDrawLocationMarkers(MapMarkerScreen *screen)

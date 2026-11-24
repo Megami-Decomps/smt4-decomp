@@ -5,7 +5,6 @@
 extern "C" {
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void efctSetSpeed(f32 speed);
-u32 renderCtxPackPassFlags(u32 mode, u32 option);
 void renderCtxResetColorScale(RenderCtxA *context);
 void contentListDrawRows(void *work);
 

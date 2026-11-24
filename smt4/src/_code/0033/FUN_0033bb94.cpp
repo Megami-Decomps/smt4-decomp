@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/UnitRecordAccess.h"
 #include "code/Code0029.h"
+#include "shard/W6_W6Match4_RelativeDirectory.h"
 
 struct SlotTable {
     u8 unk0000[0x9108];
@@ -17,7 +18,6 @@ void saveMarkIdListSeen(StatBlock* record);
 s32 recordContainsPairedId(StatBlock* record, u32 skill);
 void qsort(void* base, s32 count, s32 size, s32 (*compare)(const void*, const void*));
 s32 dataTable06Sub1CompareBySortKeys(const void* a, const void* b);
-u32 flagCountUnlockedSlots(StatBlock* record);
 void unitRecalculateEffectiveStats(StatBlock* record);
 
 // Merges the unit image `source` into its unit record, collecting the skills

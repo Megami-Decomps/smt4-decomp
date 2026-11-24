@@ -17,7 +17,6 @@ struct DrawHolder {
 extern "C" {
 extern DrawHolder *g_saveLoadRunner;
 
-u32 renderCtxPackPassFlags(u32 kind, bool enabled);
 void efctSetSpeed(f32 speed);
 
 /* Draw task of the save/load screen: draws the holder's target inside a pushed render state, then resets the effect speed. */

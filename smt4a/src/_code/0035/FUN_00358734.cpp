@@ -3,7 +3,6 @@
 #include "util/BitsAndBytes.h"
 extern "C" {
 s32 renderCtxPackPassFlagsWithAlpha(u32 kind, f32 value);
-s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void eplUpdateActiveNodes(void);
 
 u32 FUN_00358734(void)

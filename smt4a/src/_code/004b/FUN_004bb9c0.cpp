@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the mode-word load is scheduled after the phase/timer stores here; retail hoists it above them. */
 #include "common.h"
 
 namespace {
@@ -14,9 +13,19 @@ struct PackedSpriteSource {
 struct ExpandedSpriteState {
     u32 values[6];
     u32 flags;
-    union {
-        u32 word;
-        struct { u8 unk00[3]; u8 format; } fields;
+    /* The mode word's bits, assigned one at a time as the table record initializer (FUN_004bbc4c) fills them:
+     * bits 0-3, then phase and timer, then bits 4-6. */
+    struct {
+        u32 unk0 : 1;
+        u32 unk1 : 1;
+        u32 unk2 : 1;
+        u32 unk3 : 1;
+        u32 unk4 : 1;
+        u32 unk5 : 1;
+        u32 unk6 : 1;
+        u32 unk7 : 1;
+        u32 unk8 : 16;
+        u32 format : 8;
     } mode;
     u8 variant, kind, unk22[2];
     u32 resource;
@@ -44,7 +53,7 @@ extern "C" void FUN_004bb9c0(ExpandedSpriteState *state, const PackedSpriteSourc
     state->resource = source->resource;
     state->flags |= 0x40000000;
     u32 formatCode = (source->flags << 27) >> 29;
-    state->mode.fields.format = formatCode - 1;
+    state->mode.format = formatCode - 1;
     if ((source->flags & 1) != 0)
         state->flags |= 0x10000;
     if ((source->flags & 2) != 0)
@@ -52,15 +61,20 @@ extern "C" void FUN_004bb9c0(ExpandedSpriteState *state, const PackedSpriteSourc
     for (s32 i = 0; i < 4; i++) {
         state->bounds[i] = source->bounds[i];
     }
+    state->mode.unk1 = 0;
+    state->mode.unk2 = 0;
+    state->mode.unk3 = 0;
     state->phase = 0;
     state->timer = 0;
-    state->mode.word &= ~0x7E;
+    state->mode.unk4 = 0;
+    state->mode.unk5 = 0;
+    state->mode.unk6 = 0;
     state->red = 0;
     state->green = 0;
     state->blue = 0;
     state->alpha = 0;
     state->parameter = static_cast<u8>((source->flags << 13) >> 24);
     state->frame = 0;
-    state->mode.word = ((source->flags >> 12) & 0x80) | (state->mode.word & ~0x80);
+    state->mode.unk7 = (source->flags >> 19) & 1;
     state->flags &= 0x7FFFFFFF;
 }

@@ -1,19 +1,16 @@
-#include "shard/Shard0049.h"
+#include "ui/PlaceTextTransition.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
-extern void *dataTableGet(u32 index, u32 type);
-extern Entry8C *dataTableGetEntries(void *table);
-extern u32 dataTableGetCount(void *table);
-
-/* Entry `index` of data table 0x17 (type 1), or NULL when out of range. */
-Entry8C *dataTable17Type1GetEntry(u32 unused, u32 index)
+/* Place record `index` of data table 0x17 (section 1), or NULL when out of range. */
+const PlaceTextRecord *dataTable17Type1GetEntry(PlaceTextTableCursor *cursor, s32 index)
 {
     void *table = dataTableGet(0x17, 1);
-    Entry8C *entries = dataTableGetEntries(table);
+    const PlaceTextRecord *entries = (const PlaceTextRecord *)dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
 
-    if (index >= count) {
+    if ((u32)index >= count) {
         return NULL;
     }
     return &entries[index];

@@ -64,7 +64,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: forwardRecoveredCallback. */
-extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, int, unsigned int);
+extern unsigned int mathTriangleWaveBlend(unsigned int, unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_002b011c. */
 /* Supplied declaration required: gxSubmitFloatColoredQuad. */
 /* Supplied declaration required: renderCtxSelectTexture. */
@@ -131,7 +131,7 @@ void FUN_0032b4f8(int param_1,int param_2,int param_3)
   float temp_v42;
   float fStack_44;
   
-  temp_v1 = FUN_0026e6a0(0,0xff,0x1e,(int)in_s2,1);
+  temp_v1 = mathTriangleWaveBlend(0,0xff,0x1e,(int)in_s2,1);
   temp_v19 = 1.0f;
   temp_v25[2] = 0.0f;
   if (param_2 != 0) {

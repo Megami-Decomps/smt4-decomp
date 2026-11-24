@@ -9070,3 +9070,25 @@
 002c5df4 mapRndMazeUpdateModelVisibility inferred shows and hides the random maze's piece models by cell (w86-f1)
 004ab10c btlUiBuildRosterSummary inferred builds the battle UI's roster masks (w86-f1)
 0046f3ac aocSystemMountStep inferred twin of smt4 aocSystemMountStep
+0047daf4 _ZN14AocMenuRequestC1Ev inferred twin of smt4 _ZN14AocMenuRequestC1Ev
+004279d0 _ZN15AocCatalogQueryD1Ev inferred twin of smt4 _ZN15AocCatalogQueryD1Ev
+00138a64 commandQueueResetDefaults inferred twin of smt4 commandQueueResetDefaults
+002df4b0 btlDrawBottomColorOverlay inferred twin of smt4 btlDrawBottomColorOverlay (shared.py pair; w87-o1)
+00298544 btlDrawTopColorOverlay inferred the top-screen (400-wide) twin of smt4 btlDrawTopColorOverlay (w87-o1)
+002c2098 scrCommFadeMessageUnderlayIn inferred twin of smt4 scrCommFadeMessageUnderlayIn
+00167400 querySlotsClearPending inferred twin of smt4 querySlotsClearPending
+001f3e80 mathTriangleWaveBlend inferred twin of smt4 mathTriangleWaveBlend
+002e14a4 bustupViewerCreate evidence its trace path and task names are the bust-up viewer's (w87-s1)
+00294854 mapGimicReleaseAll inferred twin of smt4 mapGimicReleaseAll (w87-s1)
+0036ce70 campCecEditStepPanelFade inferred steps the StreetPass edit screen's panel fade (w87-s1)
+003e77cc btlAppendPendingCommand inferred appends a command to the battle's pending list (w87-s1)
+003e12a8 entryCollectNewIdentifiers inferred twin of smt4 entryCollectNewIdentifiers (w87-s1)
+00422048 gfxBuildBlackAddCombinerCommands inferred twin of smt4 gfxBuildBlackAddCombinerCommands (ported from it; w87-s2)
+004c8cb0 btlHelpRequestGuestQuest inferred requests the guest-quest help message (event/quest/SubQuestGuest.mbm) (w87-s2)
+00491abc mapNaviFindCategoryAtPosition inferred finds the navigation category under a position (w87-s2)
+002cb84c partyPanelPlaceInitialCursors inferred puts the entered state's cursors on the first unit that can be chosen (w87-f1)
+004b7e20 mikadoGateStep inferred twin of smt4 mikadoGateStep (w87-f2)
+0023c384 resultExpPayoutStep inferred one frame of the result screen's experience payout (w87-f2)
+0049a9a8 equipmentMenuRebuildPages inferred rebuilds the equipment shop's nine item pages from its place's stock (w87-f2)
+0049d09c dataTable17Sub1ChildGetEntries inferred twin of smt4 dataTable17Sub1ChildGetEntries: a place record's stock rows (w87-f2)
+0049d048 dataTable17Sub1ChildGetCount inferred twin of smt4 dataTable17Sub1ChildGetCount: the number of those rows (w87-f2)

@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_00234330(...);
+int aocItemAttributeLabel(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_00234474(...);
 int textConvertToBoundedWide(...);
 int FUN_002345a4(...);
@@ -66,7 +66,7 @@ extern unsigned char LAB_0038cbd4; /* 0x38cbd4 */
 extern unsigned char LAB_00394160; /* 0x394160 */
 extern int g_aocMain; /* 0x432fc8 */
 
-/* Supplied declaration required: FUN_00234330. */
+/* Supplied declaration required: aocItemAttributeLabel. */
 extern unsigned int halfPair48LowByteA(int);
 extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: FUN_00234474. */
@@ -288,7 +288,7 @@ int FUN_0038c224(int param_1)
         }
         temp_v5 = halfPair48LowByteB(temp_v8 + 0x28);
         temp_v6 = halfPair48LowByteA(temp_v8 + 0x28);
-        FUN_00234330(&temp_v31,0,temp_v6,temp_v5);
+        aocItemAttributeLabel(&temp_v31,0,temp_v6,temp_v5);
         temp_v19 = temp_v31;
         uStack_1c0c = uStack_1acc;
         temp_v20 = uStack_1ac8;
@@ -316,7 +316,7 @@ int FUN_0038c224(int param_1)
         }
         temp_v5 = halfPair48LowByteB(temp_v8 + 0x28);
         temp_v6 = halfPair48LowByteA(temp_v8 + 0x28);
-        FUN_00234330(&temp_v27,2,temp_v6,temp_v5);
+        aocItemAttributeLabel(&temp_v27,2,temp_v6,temp_v5);
         temp_v19 = temp_v27;
         uStack_1c0c = uStack_1b4c;
         temp_v20 = uStack_1b48;
@@ -345,7 +345,7 @@ int FUN_0038c224(int param_1)
         memClear(asStack_858,0x800);
         temp_v5 = halfPair48LowByteB(temp_v8 + 0x28);
         temp_v6 = halfPair48LowByteA(temp_v8 + 0x28);
-        FUN_00234330(&temp_v29,3,temp_v6,temp_v5);
+        aocItemAttributeLabel(&temp_v29,3,temp_v6,temp_v5);
         temp_v23 = temp_v29;
         uStack_1bcc = uStack_1b0c;
         uStack_1bc8 = uStack_1b08;
@@ -429,7 +429,7 @@ int FUN_0038c224(int param_1)
         *(unsigned char *)(temp_v9 + 0x180) = 0xff;
         temp_v5 = halfPair48LowByteB(temp_v8 + 0x28);
         temp_v6 = halfPair48LowByteA(temp_v8 + 0x28);
-        FUN_00234330(&temp_v19,5,temp_v6,temp_v5);
+        aocItemAttributeLabel(&temp_v19,5,temp_v6,temp_v5);
         temp_v25 = temp_v19;
         uStack_1b8c = uStack_1c0c;
         uStack_1b88 = temp_v20;

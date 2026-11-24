@@ -38,13 +38,12 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int jobGetWork(unsigned int process);
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
-extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_0018098c. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: texDrawTableEntrySized. */
-extern unsigned int FUN_001f3e80(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+extern unsigned int mathTriangleWaveBlend(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: floatInterpolateOverDuration. */
 /* Supplied declaration required: curveInterpolatePacked. */
 /* Supplied declaration required: effectSpawnDefaultArguments. */
@@ -87,7 +86,7 @@ int campCommonBgRenderFrame(unsigned int process)
   }
   if (*(int *)(temp_v0 + 4) != 0) {
     in_s0 = 1.0f;
-    temp_v2 = FUN_001f3e80(0x28,0x50,0x3c,*(unsigned int *)(temp_v0 + 0x20),0);
+    temp_v2 = mathTriangleWaveBlend(0x28,0x50,0x3c,*(unsigned int *)(temp_v0 + 0x20),0);
     temp_v3 = g_renderCtx;
     VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v1 = packNibblesAndByte(6, 1, 0);
@@ -336,7 +335,7 @@ int campCommonBgRenderFrame(unsigned int process)
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
     curveInterpolatePacked();
     texDrawTableEntryAtStoredOrigin(2,0x22,0x30,(int)temp_v9,0,0xd);
-    temp_v2 = FUN_001f3e80(0,100,0xc,*(unsigned int *)(temp_v0 + 0x1c),0);
+    temp_v2 = mathTriangleWaveBlend(0,100,0xc,*(unsigned int *)(temp_v0 + 0x1c),0);
     temp_v3 = g_renderCtx;
     VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v0 = packNibblesAndByte(6, 1, 0);

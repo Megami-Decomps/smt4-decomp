@@ -6,7 +6,6 @@
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
-u32 renderCtxPackPassFlags(u32 mode, bool enabled);
 
 /* Draws the rectangle in its colour at `depth` under a temporary render-state preset. */
 static __inline void drawColoredRectangle(const ColoredRectangle *box, f32 depth)

@@ -43,6 +43,13 @@ struct EquipmentMenuState {
             u8 prefix[0xB3C];
             /* 0xB3C */ void *indicator;
         } scroll;
+        struct {
+            u8 prefix[0x18];
+            /* 0x18 */ u8 area;      /* the shop's place: the keys of its data table 0x17 record and of its
+                                      * statistics counters (the byte sound.restricted tests) */
+            u8 unk19[3];
+            /* 0x1C */ s32 location;
+        } place;
     };
     /* 0x00B40 */ s32 page;
     union {
@@ -90,6 +97,10 @@ typedef char EquipmentMenuSelectionLayoutCheck[
     offsetof(EquipmentMenuState, selection.delay) == 0xB54 &&
     offsetof(EquipmentMenuState, cursors) == 0xB60 &&
     offsetof(EquipmentMenuState, pages) == 0xF74 ? 1 : -1];
+typedef char EquipmentMenuPlaceOffsetCheck[
+    offsetof(EquipmentMenuState, place.area) == 0x18 &&
+    offsetof(EquipmentMenuState, place.location) == 0x1C &&
+    offsetof(EquipmentMenuCursor, scroll.enabled) == 0xD ? 1 : -1];
 typedef char EquipmentMenuScrollOffsetCheck[
     offsetof(EquipmentMenuCursor, range.count) == 8 &&
     sizeof(EquipmentMenuCursor) == 0x74 &&

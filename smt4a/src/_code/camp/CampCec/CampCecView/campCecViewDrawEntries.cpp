@@ -33,7 +33,6 @@ struct CecViewMarkEntry {
 };
 extern "C" {
 extern CampCecViewA *g_campCecView;
-s32 renderCtxPackPassFlags(u32, u32);
 u32 gameDataBlocksGetWord27E90();
 void uiDrawNumberFrame(u32 *, s32, s32, u32, u32);
 const CecViewMarkEntry *gameDataGetMarkEntry(s32);

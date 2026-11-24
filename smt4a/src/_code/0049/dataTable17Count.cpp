@@ -1,14 +1,12 @@
-#include "shard/Shard0049.h"
-#include "gamedata/DataTableAccess.h"
+#include "ui/PlaceTextTransition.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
-extern void *dataTableGet(u32 index, u32 type);
-extern u32 dataTableGetCount(void *table);
-
-void dataTable17Count(void)
+/* The number of place records in data table 0x17's section 1. */
+s32 dataTable17Count(PlaceTextTableCursor *cursor)
 {
-    dataTableGetCount(dataTableGet(0x17, 1));
+    return dataTableGetCount(dataTableGet(0x17, 1));
 }
 
 } /* extern "C" */

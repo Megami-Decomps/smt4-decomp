@@ -18,7 +18,7 @@ int appGetRemainingCapacity(...);
 int FUN_0029ab54(int, int);
 int FUN_0029acb0(void);
 int flagCountUnlockedSlots(...);
-int FUN_0029dc74(...);
+int unitRecordBuild(...);
 int gridNavigationGetItemCount(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int skillDataFindById(void);
 int FUN_002b6c34(...);
@@ -62,7 +62,7 @@ extern int FUN_0029ac94(void);
 /* Supplied declaration required: FUN_0029acb0. */
 /* Supplied declaration required: flagCountUnlockedSlots. */
 extern int uiListGetVisibleCount(int); // declcheck: local (the shared declaration does not compile here or changes this unit)
-/* Supplied declaration required: FUN_0029dc74. */
+/* Supplied declaration required: unitRecordBuild. */
 extern int itemIsCollectedWithRelated(unsigned short);
 /* Supplied declaration required: gridNavigationGetItemCount. */
 extern int listCursorGetRowIfUnblocked(void);
@@ -268,7 +268,7 @@ LAB_0018733c:
           temp_v4 = flagCountUnlockedSlots();
         }
         else {
-          FUN_0029dc74(*(unsigned short *)(temp_v19 + 0x7e),temp_v13);
+          unitRecordBuild(*(unsigned short *)(temp_v19 + 0x7e),temp_v13);
           temp_v4 = flagCountUnlockedSlots(temp_v13);
         }
       }

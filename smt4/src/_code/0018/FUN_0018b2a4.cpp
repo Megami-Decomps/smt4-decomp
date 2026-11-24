@@ -3,7 +3,6 @@
 
 extern "C" {
 void renderCtxSelectStereoLayout(RenderCtx *);
-s32 renderCtxPackPassFlags(u32, u32);
 void renderCtxResetColorScale(RenderCtx *);
 }
 

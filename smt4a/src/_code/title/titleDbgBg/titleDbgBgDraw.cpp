@@ -12,7 +12,6 @@ struct TitleDebugBackground {
 
 extern "C" {
 extern TitleDebugBackground *g_titleDbgBg;
-s32 renderCtxPackPassFlags(s32 mode, s32 flags);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 f32 asdTextDrawDebugSlotString(s32 mode, void *display, f32 x, f32 y);

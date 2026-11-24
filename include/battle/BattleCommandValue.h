@@ -15,5 +15,5 @@ union BattleCommandValue {
 };
 typedef char BattleCommandValueSizeCheck[sizeof(BattleCommandValue) == 4 ? 1 : -1];
 
-extern "C" void FUN_003e77cc(BtlMainStateA *state, u32 kind, s32 unitIndex, s32 first, BattleCommandValue second);
+extern "C" void btlAppendPendingCommand(BtlMainStateA *state, u32 kind, s32 unitIndex, s32 first, BattleCommandValue second);
 #endif

@@ -11,7 +11,6 @@
 extern "C" {
 
 s32 stateValuesGetBySelector(u32 selector);
-s32 renderCtxPackPassFlags(u32 a, u32 b);
 f32 FUN_001a9698(f32 base, f32 exponent);
 void FUN_0019e3d0(u32 c0, u32 c1, u32 c2, u32 c3,
                   f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,

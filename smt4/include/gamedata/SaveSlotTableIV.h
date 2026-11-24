@@ -13,4 +13,25 @@ SaveSlotTableIV *gameGetSlotTable(void);
 }
 #endif
 
+/* The stock's unit record of devil `id`, or NULL when that devil is not in the stock (Apocalypse:
+ * saveSlotTableFindPartyUnit, gamedata/SaveSlotTable.h). */
+static __inline StatBlock *slotTableFindStockUnit(u32 id)
+{
+    SaveSlotTableIV *table = gameGetSlotTable();
+    u16 i;
+
+    for (i = 0; i < table->stockCount; i++) {
+        s32 entry = table->stock[i];
+
+        if (entry >= 0) {
+            StatBlock *unit = &table->units[entry];
+
+            if (unit->id == id) {
+                return unit;
+            }
+        }
+    }
+    return NULL;
+}
+
 #endif

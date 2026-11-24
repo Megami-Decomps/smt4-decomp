@@ -16,7 +16,7 @@ void AocMenu::waitCloseAnimation()
 {
     ScreenTransitionState * transition = reinterpret_cast<ScreenTransitionState *>(this);
     SceneWindowWork *view = reinterpret_cast<SceneWindowWork *>(this);
-    RequestParameters time;
+    AocMenuRequest time;
     void *animation = &view->dialogJob;
     switch (transition->phase) {
     case 0:

@@ -13,7 +13,6 @@ extern "C" {
 void gxResetColorQuadToWhite(void);
 
 
-s32 renderCtxPackPassFlags(s32 a, s32 b);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 f32 renderCtxCalculateStereoParallax(RenderCtx* ctx, f32 depth);
 void texDrawCompositeSprite(s32 layer, s32 group, s32 index, s32 x, s32 y, s32 z);

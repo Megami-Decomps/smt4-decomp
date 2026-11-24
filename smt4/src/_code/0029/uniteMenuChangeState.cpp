@@ -12,7 +12,7 @@ u32 dataTableGetCount(const void *table);
 void buttonHelpSetText(const char *text, u32 color);
 s32 resourceRunOperationIfUnblocked(const void *cursor);
 s32 listCursorGetRowIfUnblocked(const void *cursor);
-void FUN_0029dc74(u32 id, StatBlock *member);
+void unitRecordBuild(u32 id, StatBlock *member);
 void unitInitializeFromSavedRecord(u32 id, StatBlock *member);
 const void *partyMemberFindById(u32 id);
 void FUN_0029da34(u32 mode, u32 enabled, u32 id, const void *member);
@@ -60,7 +60,7 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
         u16 index = work->firstListIV.indices[selected];
         StatBlock member;
         if (work->firstListIV.kind == 0) {
-            FUN_0029dc74(work->pairListIV.pairs[index].resultId, &member);
+            unitRecordBuild(work->pairListIV.pairs[index].resultId, &member);
             FUN_0029da34(0, 1, work->pairListIV.pairs[index].resultId, &member);
         }
         if (work->firstListIV.kind == 1) {

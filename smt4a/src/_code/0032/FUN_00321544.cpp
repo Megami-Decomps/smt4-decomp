@@ -4,7 +4,6 @@
 
 extern "C" {
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
-s32 renderCtxPackPassFlags(s32 enabled, s32 mode);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 s32 aocJobIsValid();
 s32 btlMainIsSecondJobValid();

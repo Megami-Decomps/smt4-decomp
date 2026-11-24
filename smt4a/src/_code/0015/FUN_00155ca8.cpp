@@ -30,7 +30,6 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderPopStateStacks. */
 /* Supplied declaration required: FUN_00168e00. */
-extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 

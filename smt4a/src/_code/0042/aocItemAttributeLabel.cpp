@@ -1,11 +1,11 @@
 #include "common.h"
+#include "addon/AocCatalogQuery.h"
 
 extern "C" {
 
 const char *lookupTable5B47A0(u32 index);
 const char *lookupTable5B47D0(u32 index);
 s32 stringFormatUnbounded(char *buffer, const char *format, ...);
-void __aeabi_memcpy(void *dest, const void *src, u32 size);
 
 /* The message label format of an entry field. */
 static const char *labelFormat(u32 field)
@@ -30,13 +30,14 @@ static const char *labelFormat(u32 field)
 
 /* Builds the message label of `field` (name, sort name, descriptions, disclaimer, icon) for
  * the entry named by the two table indices, e.g. "NA_NAME_<group>_<item>". */
-void aocItemAttributeLabel(char *label, u32 field, u32 groupIndex, u32 itemIndex)
+AocAttributeName aocItemAttributeLabel(u32 field, u32 groupIndex, u32 itemIndex)
 {
     char buffer[0x44];
 
     stringFormatUnbounded(buffer, labelFormat(field), lookupTable5B47D0(groupIndex),
                  lookupTable5B47A0(itemIndex));
-    __aeabi_memcpy(label, buffer, 0x40);
+    /* the label is the text's first 0x40 bytes (a byte copy: the name has no alignment) */
+    return *(AocAttributeName *)buffer;
 }
 
 } /* extern "C" */

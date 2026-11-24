@@ -54,7 +54,6 @@ extern float DAT_005f1c88; /* 0x5f1c88 */
 extern float DAT_005f1c8c; /* 0x5f1c8c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: distSpatial. */

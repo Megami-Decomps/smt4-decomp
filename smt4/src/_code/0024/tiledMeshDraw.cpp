@@ -26,7 +26,6 @@ typedef char TiledMeshDrawOffsetsCheck[offsetof(TiledMeshDrawWork, flags) == 0x1
 extern "C" {
 void camSetMatrixB(RenderCtx *context, const Matrix44 *matrix);
 void renderCtxSelectBlendPreset(u32 mode);
-s32 renderCtxPackPassFlags(u32 kind, u32 value);
 void vertexAttributeUploadStreams(TiledIndexMesh *mesh);
 void FUN_00343778(RenderCtx *context, const TiledMeshRowDrawState *row);
 void FUN_0023b724(TiledIndexMesh *mesh, s32 mode, s32 firstIndex, s32 indexCount);

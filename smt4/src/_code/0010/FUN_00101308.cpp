@@ -85,7 +85,7 @@ int asdMemoryInit(...);
 int asdNgcInit(...);
 int appletCloseApplication(...);
 int screenFadeSlotsReset(...);
-int FUN_00103fec(...);
+int commandQueueResetDefaults(...);
 int FUN_0010421c(...);
 int gfxInitDefaultDrawColor(...);
 int asdPrimInit(...);
@@ -299,7 +299,7 @@ extern unsigned long long appletProcessSleepQuery(void);
 extern int FUN_00103ec8(void);
 /* Supplied declaration required: FUN_00103f74. */
 /* Supplied declaration required: asdProcessPauseAll. */
-/* Supplied declaration required: FUN_00103fec. */
+/* Supplied declaration required: commandQueueResetDefaults. */
 /* Supplied declaration required: asdPrimSwapBuffers. */
 /* Supplied declaration required: FUN_0010402c. */
 /* Supplied declaration required: modelStartProcessGroup. */
@@ -573,7 +573,7 @@ void FUN_00101308(void)
   textSystemInitialize();
   asdPrimInit(0x100000);
   asdProcessInit(0x163);
-  FUN_00103fec();
+  commandQueueResetDefaults();
   asdTMTexTableLoadList(&LAB_001017ec);
   screenFadeSlotsReset();
   ifTouchAcquire();

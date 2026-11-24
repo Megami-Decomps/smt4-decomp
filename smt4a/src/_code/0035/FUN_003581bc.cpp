@@ -21,7 +21,6 @@ struct MapDepartView {
 
 extern "C" {
 extern MapDepartView *g_mapDepart;
-s32 renderCtxPackPassFlags(u32 a, u32 b);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 void textFormatFullWidthNumber(u8 text[64], s32 value);

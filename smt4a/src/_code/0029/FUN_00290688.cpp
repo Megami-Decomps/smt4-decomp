@@ -5,7 +5,6 @@
 
 extern "C" {
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
-s32 renderCtxPackPassFlags(s32 preset, s32 index);
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
 void skinObjectUpdateMatrices(RenderCtxA *context);

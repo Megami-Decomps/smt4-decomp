@@ -65,7 +65,7 @@ static float romwright_fabs_4(float value)
 extern unsigned int asdTMTexTableGetHeaderValue(unsigned int, unsigned int);
 /* Supplied declaration required: gxSubmitFloatColoredQuad. */
 /* Supplied declaration required: renderCtxSelectTexture. */
-extern unsigned int FUN_001f3e80(unsigned int, unsigned int, unsigned int, int, unsigned int);
+extern unsigned int mathTriangleWaveBlend(unsigned int, unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_002371b0. */
 /* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: FUN_0032c808. */
@@ -131,7 +131,7 @@ void FUN_003d3020(int param_1,int param_2,int param_3)
   float temp_v42;
   float fStack_44;
   
-  temp_v1 = FUN_001f3e80(0,0xff,0x1e,(int)in_s2,1);
+  temp_v1 = mathTriangleWaveBlend(0,0xff,0x1e,(int)in_s2,1);
   temp_v19 = 1.0f;
   temp_v25[2] = 0.0f;
   if (param_2 != 0) {

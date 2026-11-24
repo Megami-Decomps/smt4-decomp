@@ -66,7 +66,7 @@ void buttonHelpSetEnabled(u32 mode);
 void AocMenu::runScriptMenu()
 {
     AocMenuProcess * process = reinterpret_cast<AocMenuProcess *>(this);
-    RequestParameters record;
+    AocMenuRequest record;
     AocMain *aoc = g_aocMain;
     switch (process->phase) {
     case 0:

@@ -24,7 +24,9 @@ void useCounterAppendValue(u8 value);
 extern "C" {
 #endif
 
-u32 flagCountUnlockedSlots(void);
+/* The number of skill slots a unit has unlocked (4 to 8, from flags 0x7b-0x7e). Callers pass the unit; the count
+ * depends only on the flags. */
+u32 flagCountUnlockedSlots(const struct StatBlock *unit);
 
 #ifdef __cplusplus
 }

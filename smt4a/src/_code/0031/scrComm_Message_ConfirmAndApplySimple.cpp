@@ -1,4 +1,4 @@
-/* NON_MATCHING: early completion return layout and frame-counter temporaries differ from retail's shared return block. */
+/* NON_MATCHING: the early `return 1` is built as `moveq r0, #1; beq` to its own epilogue; retail branches straight to the shared `mov r0, #1; pop` at the end. */
 #include "common.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "shard/Shard0047.h"
@@ -29,8 +29,7 @@ u32 scrComm_Message_ConfirmAndApplySimple()
         u32 member = rosterGetLeaderId();
         scrMessageSetSpeakerTitle(member, 0, 1);
         messageSetScriptDisplayMode();
-        u32 frame = scrWorkGetValue(1);
-        s32 result = messageForwardDefaultMode(message, 2, frame, 6, 0);
+        s32 result = messageForwardDefaultMode(message, 2, scrWorkGetValue(1), 6, 0);
         scrWorkSetValue(1, scrWorkGetValue(1) + 1);
         if (result == 1) {
             scrWorkSetValue(1, 0);

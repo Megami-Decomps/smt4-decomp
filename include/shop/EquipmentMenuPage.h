@@ -11,6 +11,10 @@ struct EquipmentMenuCursor {
             u8 unk00[8];
             s32 count;
         } range;
+        struct {
+            u8 unk00[0xD];
+            /* 0x0D */ u8 enabled; /* set after the list scroller is initialised */
+        } scroll;
     };
 };
 struct EquipmentMenuItem {

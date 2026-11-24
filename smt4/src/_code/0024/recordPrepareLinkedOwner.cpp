@@ -1,7 +1,8 @@
-/* NON_MATCHING: only the position of `mov r1, r0` (retail after the -1 test) differs. */
+/* NON_MATCHING: 2 lines: armcc moves the index into r1 (`mov r1, r0`) above the -1 test, retail after it. Compiled in a
+ * multifile run with packageKindToRecordKind (retail keeps r2/r3 across the call, as packageFileDisableByKindName does): 14 lines alone. */
 #include "shard/W5_W5Match2_LocatedRecord.h"
+#include "addon/aocMain.h"
 extern "C" {
-s32 packageKindToRecordKind(s32 kind);
 LocatedRecord *packageFindFileRefByName(void *owner,s32 index,s32 id);
 /* Find a record by ID and read its signed value, returning zero when absent. */
 s32 recordPrepareLinkedOwner(void *owner, s32 id, s32 name)

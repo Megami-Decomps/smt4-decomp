@@ -64,14 +64,13 @@ LmapScenePose *lmapSceneGetObj(void);
 f32 cameraViewHeadingDegrees(void *navi);
 u32 mapClassifyPlaceState(s32 id);
 void titleScissorApplyOrClearRequests(NaviMapDrawView *owner, s32 clip);
-void FUN_00231dec(NaviMapDrawView *screen);
+void naviPanelDraw(NaviMapDrawView *screen);
 void FUN_0039edf0(NaviMapDrawView *screen);
 void eventRefreshVisibility(NaviMapDrawView *screen);
 void FUN_0039e56c(NaviMapDrawView *screen);
 void naviIconsUpdateScreenRects(NaviMapDrawView *screen);
 void FUN_0039d0d0(NaviMapDrawView *screen);
 void naviDrawLocationMarkers(NaviMapDrawView *screen);
-u32 renderCtxPackPassFlags(u32 mode, u32 flags); // declcheck: local (ui/AnimatedMessage.h declares the stack calls below with Apocalypse's context)
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 state); // declcheck: local (the shared declaration takes Apocalypse's RenderCtxA)
 void renderCtxPopState(RenderCtx *context, s32 stack); // declcheck: local (the shared declaration takes Apocalypse's RenderCtxA)
 u8 mathHeadingToDirectionCode(NaviMapDrawView *screen, f32 angle);
@@ -107,7 +106,7 @@ void naviMapDraw(NaviMapDrawView *screen)
         u32 place = mapClassifyPlaceState(map);
         if (place == 2 || place == 3) {
             DAT_0044cdc8.unk10 = NAVI_FRAME_LAYER;
-            FUN_00231dec(screen);
+            naviPanelDraw(screen);
             DAT_0044cdc8.unk10++;
             return;
         }
@@ -198,7 +197,7 @@ void naviMapDraw(NaviMapDrawView *screen)
 
     titleScissorApplyOrClearRequests(screen, 0);
     DAT_0044cdc8.unk10 = NAVI_FRAME_LAYER;
-    FUN_00231dec(screen);
+    naviPanelDraw(screen);
     DAT_0044cdc8.unk10++;
 }
 

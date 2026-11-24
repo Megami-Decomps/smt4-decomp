@@ -6,7 +6,6 @@
 extern "C" {
 extern const MessageImageChoices g_messageSelectedImagePairs;
 void gxResetColorQuadToWhite(void);
-s32 renderCtxPackPassFlags(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 value);
 void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 depth, u32 flags, s32 mode);

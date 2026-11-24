@@ -32,7 +32,6 @@ extern PanelSprite DAT_00526314[24];
 
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
-u32 renderCtxPackPassFlags(s32 a, s32 b);
 s32 textureGetIndexedResource(s32 index);
 void skinObjectUpdateMatrices(RenderCtxA *ctx);
 void renderCtxResetColorScale(RenderCtxA *ctx);

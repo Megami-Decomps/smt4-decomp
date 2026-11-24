@@ -22,7 +22,6 @@ extern SmokeFadeDrawState *g_smokeFadeState;
 extern SmokeFadeImage g_smokeFadeImages[2];
 void gxResetColorQuadToWhite();
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *);
-s32 renderCtxPackPassFlags(u32, u32);
 s32 packNibblesAndByte(u32, u32, u32);
 void efctSetSpeed(f32);
 

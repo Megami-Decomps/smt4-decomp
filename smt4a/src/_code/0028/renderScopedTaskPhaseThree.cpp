@@ -4,7 +4,6 @@
 #include "util/BitsAndBytes.h"
 extern "C" {
 s32 renderCtxPackPassFlagsWithAlpha(u32, f32);
-s32 renderCtxPackPassFlags(u32, u32);
 void taskRunPhase(u32);
 void skinObjectUpdateMatrices(RenderCtxA *);
 void renderCtxResetColorScale(RenderCtxA *);

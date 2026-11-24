@@ -1,4 +1,5 @@
 #include "ui/UiSpriteApi.h"
+#include "camp/RenderCtx.h"
 /* NON_MATCHING: corrected next-dot snapshot, native aligned label copy, signed animation getter and s8 request flag;
  * the anchor's spill slot and the label buffer sit at other frame offsets (frame 124 against 116) and the dot coordinates
  * load as two vldr where retail uses vldmia. */
@@ -34,7 +35,6 @@ struct FloatPoint {
 extern "C" {
 extern UiTextFontSettings g_uiTextFontSettings;
 
-u32 renderCtxPackPassFlags(s32 a, s32 b);
 void renderStackPushIndexed(RenderCtxA *context, s32 index, u32 value);
 void renderCtxPopState(RenderCtxA *context, s32 index);
 void efctSetSpeed(f32 speed);

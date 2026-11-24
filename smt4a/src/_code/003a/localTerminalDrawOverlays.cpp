@@ -13,7 +13,6 @@ struct LocalTerminalDrawState {
 extern "C" {
 extern LocalTerminalDrawState *g_localTmnl;
 s32 renderCtxPackPassFlagsWithAlpha(u32, f32);
-s32 renderCtxPackPassFlags(u32, u32);
 void effectNodeUpdatePlacedChildren(u32);
 
 u32 localTerminalDrawOverlays()

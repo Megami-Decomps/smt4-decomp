@@ -13,6 +13,14 @@ extern "C" void asdOperatorDelete(void *block);
 
 struct AsdText;
 
+/* The request type of AocMenu.cpp: a RequestParameters whose default constructor is defined out of line in that
+ * file (smt4 0x2340e4, smt4a 0x47daf4: the base's inline constructor expanded), which the menu's constructor and
+ * its steps call where every other file expands RequestParameters() in place. */
+struct AocMenuRequest : RequestParameters {
+    AocMenuRequest();
+    using RequestParameters::operator=;
+};
+
 /* The rows of the content list the stylus can pick (0x34 bytes, vtable at 0x42219c in IV): the
  * touch regions registered for the visible rows and what the last update found. The layout is the
  * head of Obj55ca08, the list selector the other menus embed. */
@@ -102,8 +110,8 @@ public:
     };
     /* 0x0208 */ AocMenuWindow *window;
     /* 0x020C */ u8 unk020C[4];
-    /* 0x0210 */ RequestParameters request; /* the request the menu is waiting on */
-    /* 0x0224 */ RequestParameters secondRequest;
+    /* 0x0210 */ AocMenuRequest request; /* the request the menu is waiting on */
+    /* 0x0224 */ AocMenuRequest secondRequest;
     /* 0x0238 */ u32 unk0238;
     /* 0x023C */ u8 unk023C[4];
     /* 0x0240 */ SelectionFlags selection;

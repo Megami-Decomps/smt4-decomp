@@ -5,7 +5,6 @@
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
-s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 s32 packNibblesAndByte(u32 first, u32 second, u32 value);
 void effectNodeUpdatePlacedChildren(void *effect);
 

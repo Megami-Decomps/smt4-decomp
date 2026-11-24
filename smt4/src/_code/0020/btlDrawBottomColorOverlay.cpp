@@ -6,7 +6,6 @@
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
-s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void forwardRecoveredCallback(void);
 
 /* Draws the battle's full-screen colour overlay on the bottom screen and restores the render state. */

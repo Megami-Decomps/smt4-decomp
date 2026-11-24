@@ -3,7 +3,6 @@
 #include "gfx/EffectColorUnpack.h"
 
 extern "C" {
-s32 renderCtxPackPassFlags(s32 mode, s32 flags);
 void efctSetSpeed(f32 speed);
 void gxSetUniformQuadColors(const EffectColor *color);
 void gxResetColorQuadToWhite();

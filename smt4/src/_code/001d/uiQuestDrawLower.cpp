@@ -3,7 +3,6 @@
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
-s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void uiQuestDrawList();
 
 s32 uiQuestDrawLower(u32 job)

@@ -10,7 +10,6 @@ struct JyoucyuLoadingView {
 };
 extern "C" {
 extern JyoucyuGlobals g_jyoucyu;
-s32 renderCtxPackPassFlags(s32 mode, s32 flags);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite();
 

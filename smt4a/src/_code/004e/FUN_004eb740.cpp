@@ -47,7 +47,7 @@ void FUN_004eb740(BtlMainStateA **reference, const BattleEventCandidate *candida
         f32 value; // Never set before use, as in the original.
         BattleCommandValue payload;
         payload.real = value;
-        FUN_003e77cc(state, 1, state->roster->combatant.combatantIndex,
+        btlAppendPendingCommand(state, 1, state->roster->combatant.combatantIndex,
                      entry->selectionIndex, payload);
         reinterpret_cast<BattleCommandSaveView *>(gameDataBlocksGetSaveData())->pending = 0;
     }

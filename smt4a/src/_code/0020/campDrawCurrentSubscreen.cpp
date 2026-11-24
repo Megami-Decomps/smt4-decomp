@@ -6,7 +6,6 @@
 
 extern "C" {
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
-s32 renderCtxPackPassFlags(u32 kind, bool enabled);
 u32 listCursorGetRowOfChildIfUnblocked(void *list);
 s32 partyCountOccupiedSlots(void);
 void saveListDraw(CampStateA *camp);

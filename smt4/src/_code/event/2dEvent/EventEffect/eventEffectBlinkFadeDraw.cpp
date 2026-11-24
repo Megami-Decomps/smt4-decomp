@@ -8,7 +8,6 @@ extern BlinkFadeWork *g_eventEffect;
 extern BlinkFadeTexture DAT_0043df00[2];
 void gxResetColorQuadToWhite();
 void renderCtxSelectStereoLayout(RenderCtx *context);
-u32 renderCtxPackPassFlags(u32 value, bool enabled);
 void efctSetSpeed(f32 speed);
 u32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);

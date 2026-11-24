@@ -6,7 +6,6 @@
 enum { DRAW_SECOND_RENDER_STATE = 0x100, DRAW_PREBUILT_SHAPE = 0x200 };
 
 extern "C" {
-s32 renderCtxPackPassFlags(u32 first, u32 second); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void billboardShapeDraw(u32 shape);
 void camSetMatrixB(RenderCtxA *context, const nw::math::MTX44 *matrix);
 void renderCtxSelectBlendPreset(u32 argument);

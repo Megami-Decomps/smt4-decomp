@@ -8,7 +8,6 @@
 
 
 extern "C" {
-u32 renderCtxPackPassFlags(u32 state, u32 flags);
 u32 asdGxPresetsGetByKind(u32 target);
 u32 asdGxPresetsGetHeightByKind(u32 target);
 

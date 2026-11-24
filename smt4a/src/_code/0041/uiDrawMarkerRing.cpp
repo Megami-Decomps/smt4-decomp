@@ -12,7 +12,6 @@
 
 
 extern "C" {
-s32 renderCtxPackPassFlags(s32 first, s32 second);
 void gxResetColorQuadToWhite(void);
 
 /* Draws the marker ring's nine slot sprites and the two rotating highlight pairs. */

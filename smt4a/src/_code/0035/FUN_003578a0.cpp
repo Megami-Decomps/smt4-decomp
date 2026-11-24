@@ -23,7 +23,6 @@ typedef char DebugMapBoxesLayoutCheck[sizeof(DebugMapBox) == 0x1C &&
 extern "C" {
 extern DebugMapBoxes g_regionTable;
 extern const DebugMapBoxPalette DAT_00532240;
-s32 renderCtxPackPassFlags(u32 kind, u32 enabled);
 void gxEmitColoredQuad(u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor,
     f32 firstX, f32 firstY, f32 firstZ, f32 secondX, f32 secondY, f32 secondZ,
     f32 thirdX, f32 thirdY, f32 thirdZ, f32 fourthX, f32 fourthY, f32 fourthZ);

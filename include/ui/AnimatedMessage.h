@@ -2,6 +2,7 @@
 #define UI_ANIMATEDMESSAGE_H
 
 #include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "camp/RenderCtx.h"
 #include "text/TextDraw.h"
 #include "util/MathFunctions.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -29,7 +30,6 @@ struct UiTextFontGlobals {
 extern "C" {
 extern UiTextFontGlobals g_uiTextFontSettings;
 void words2Copy(const UiFloatPosition *source, UiFloatPosition *destination);
-u32 renderCtxPackPassFlags(s32 mode, s32 flags);
 void renderStackPushIndexed(RenderCtxA *context, s32 stack, u32 state);
 void renderCtxPopState(RenderCtxA *context, s32 stack);
 void efctSetSpeed(f32 speed);

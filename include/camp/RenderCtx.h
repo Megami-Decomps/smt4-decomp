@@ -323,6 +323,9 @@ static __inline void renderCtxPushG(RenderCtxA *context, int state)
 }
 
 extern "C" {
+/* A render pass state: `value` shifted up by 4 (bit 0 set unless it is 1), the 0xf00 bits and, when `enabled`,
+ * 0x1000 (smt4 0x2c5d80, smt4a 0x1692ac). */
+u32 renderCtxPackPassFlags(u32 value, bool enabled);
 u32 asdGxPresetsGetHeightByKind(u32 kind);
 u32 asdGxPresetsGetByKind(u32 kind);
 }

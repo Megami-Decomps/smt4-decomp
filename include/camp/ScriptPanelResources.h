@@ -18,14 +18,15 @@ struct CampScriptPanelResources {
             /* 0x0028 */ u32 state;
             /* 0x002C */ u32 step;         /* step within the state */
             /* 0x0030 */ s32 frame;        /* frames counted by the step */
-            u8 unk0034[8];
+            u8 unk0034[4];
+            /* 0x0038 */ s32 cameraFrame;  /* frames of the camera move to the chosen entry */
             /* 0x003C */ s16 sceneId;
             u8 unk003E[2];
             /* 0x0040 */ s16 startEntryId; /* the list entry the menu opens on (0: none) */
             u8 unk0042[6];
             /* 0x0048 */ u8 exitRequest[4]; /* how to leave with the camp's resources kept: [0] map selection 100-199,
                                              * [1] below 100, [2] 200 and up, [3] save mode 2 */
-            /* 0x004C */ u16 menuTotal;    /* flaggedValueHolderGetTotal of the menu */
+            /* 0x004C */ s16 menuTotal;    /* flaggedValueHolderGetTotal of the menu */
         } mikado;
         /* 0x0000 */ TransformInterpolation scroll; /* the view's scroll towards the selected entry */
         struct {

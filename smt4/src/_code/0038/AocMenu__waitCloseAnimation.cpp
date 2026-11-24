@@ -14,7 +14,7 @@ s8 uiSpriteGetCompletionState(const SceneWindowCursorView *cursor);
 void AocMenu::waitCloseAnimation()
 {
     SceneWindowWork * work = reinterpret_cast<SceneWindowWork *>(this);
-    RequestParameters time;
+    AocMenuRequest time;
     void *job = &work->dialogJob;
     switch (work->transition.phase) {
     case 0:

@@ -1,4 +1,5 @@
 #include "shard/S1ListPanel.h"
+#include "camp/RenderCtx.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "ui/UiSpriteApi.h"
 #include "text/TextDraw.h"
@@ -19,7 +20,6 @@ typedef char TitleBannerSpriteOffset[offsetof(TitleBannerView, sprite) == 0xA88 
 extern "C" {
 extern const u8 DAT_00404c48[];
 void pairCopy(const Point2 *source, Point2 *destination);
-u32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 state);
 void renderCtxPopState(RenderCtx *context, s32 stack);
 void efctSetSpeed(f32 speed);

@@ -9,7 +9,7 @@ void bitsetSetBit(StatBlock *unit, u32 flag);
 void unitRecalculateEffectiveStats(StatBlock *unit);
 
 // Rebuild a runtime unit from its saved level, base stats, skills and experience.
-void unitInitializeFromSavedRecord(u16 id, StatBlock *unit)
+void unitInitializeFromSavedRecord(u32 id, StatBlock *unit)
 {
     const NkmBaseRecord *devil = (const NkmBaseRecord *)nkmBaseGetRecord(id);
     SavedUnitInitialization saved;

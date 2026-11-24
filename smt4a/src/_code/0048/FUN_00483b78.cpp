@@ -21,7 +21,6 @@ typedef char KeyboardPanelOffsets[offsetof(KeyboardPanelState, sideOffset) == 0x
 extern "C" {
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void gxResetColorQuadToWhite();
-s32 renderCtxPackPassFlags(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
 void texDrawCompositeSprite(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);
 void nameFormDrawKeys(KeyboardPanelState *panel, u8 page, f32 progress);

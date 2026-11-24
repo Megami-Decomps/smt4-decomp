@@ -6,6 +6,7 @@
  * source reads g_messageMain.banner: with the wide-banner test reading it twice the base takes r7 and the zero
  * of the backdrops' y argument sl (90 lines). */
 #include "ui/MessageMain.h"
+#include "camp/RenderCtx.h"
 #include "ui/UiSpriteApi.h"
 #include "camp/RenderCtxTitle.h"
 #include "shard/TextureDrawCall.h"
@@ -30,7 +31,6 @@ enum {
 struct RowMenu;
 
 extern "C" {
-u32 renderCtxPackPassFlags(u32 slot, u32 flags); // declcheck: local (ui/AnimatedMessage.h declares these for Apocalypse's RenderCtxA; IV's context is a RenderCtx)
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 value); // declcheck: local (ui/AnimatedMessage.h declares these for Apocalypse's RenderCtxA; IV's context is a RenderCtx)
 s32 renderCtxPopState(RenderCtx *context, s32 stack); // declcheck: local (ui/AnimatedMessage.h declares these for Apocalypse's RenderCtxA; IV's context is a RenderCtx)
 void efctSetSpeed(f32 speed); // declcheck: local (ui/AnimatedMessage.h declares these for Apocalypse's RenderCtxA; IV's context is a RenderCtx)

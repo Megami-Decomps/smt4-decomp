@@ -17,7 +17,7 @@ int uiSpriteSelectAnim(...);
 int partyFindSlotById(...);
 int FUN_0023f900(void);
 int compendiumRegisterPartyDemon(...);
-int FUN_002cb84c(void);
+int partyPanelPlaceInitialCursors(void);
 int partyPanelRefreshItemPreview(void);
 int sysMemClear(...);
 int FUN_002f8288(void);
@@ -223,7 +223,7 @@ extern int FUN_002c7cb4(void);
 /* Supplied declaration required: gameGlobalsSetSceneState. */
 extern unsigned short partyPanelGetSelectedDemonId(void);
 extern unsigned char partyPanelIsTransitionDone(void);
-/* Supplied declaration required: FUN_002cb84c. */
+/* Supplied declaration required: partyPanelPlaceInitialCursors. */
 /* Supplied declaration required: FUN_002cbca8. */
 /* Supplied declaration required: partyPanelRefreshItemPreview. */
 /* Supplied declaration required: FUN_002cf5bc. */
@@ -2770,7 +2770,7 @@ LAB_0026700c:
              (temp_v4 = FUN_0049fbb8(0,(int)*(short *)(temp_v1 + 0x38),*(unsigned short *)(temp_v1 + 0x36)),
              temp_v4 != 0)) {
             FUN_0023b45c(0);
-            FUN_002cb84c();
+            partyPanelPlaceInitialCursors();
             partyPanelRefreshSkillPreview(temp_v14,0);
           }
           temp_v10 = 1;
@@ -2821,7 +2821,7 @@ LAB_0026700c:
           }
           if ((temp_v4 != 0) && (temp_v4 = itemGroupHasIneffectiveTarget(0,*(unsigned short *)(temp_v1 + 0x36)), temp_v4 != 0)) {
             FUN_0023b45c(0);
-            FUN_002cb84c();
+            partyPanelPlaceInitialCursors();
             partyPanelRefreshSelectedItemValues(reinterpret_cast<void*>(temp_v14),0);
           }
           partyPanelShowButtonHelp();

@@ -13,7 +13,6 @@ struct StereoSpriteEffect {
 
 extern "C" {
 void efctSetSpeed(f32 speed);
-s32 renderCtxPackPassFlags(u32 first, u32 second);
 void texDrawTableEntryAtStoredOrigin(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 color);
 void gxResetColorQuadToWhite(void);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);

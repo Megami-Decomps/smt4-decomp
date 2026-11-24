@@ -8,7 +8,6 @@
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
-s32 renderCtxPackPassFlags(u32 mode, u32 enabled);
 
 /* Draws the battle's full-screen colour overlay on the top screen, preserving the current render state. */
 s32 btlDrawTopColorOverlay(u32 job)

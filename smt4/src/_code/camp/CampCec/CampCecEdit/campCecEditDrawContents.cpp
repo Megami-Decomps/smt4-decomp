@@ -60,7 +60,6 @@ void FUN_001eb874(u32 layer, u32 image, void *area, s32 x, s32 y, s32 flag);
 void FUN_002e15f8(void *area, s32 x, s32 y);
 void renderCtxSelectStereoLayout(RenderCtx *context);
 void gxResetColorQuadToWhite(void);
-s32 renderCtxPackPassFlags(u32 mode, u32 option);
 void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 mode);
 void uiDrawDirectoryRows(void *list, u32 left, u32 top, s32 firstRow, u32 rowCount, u32 columnWidth);
 void FUN_00309ec8(void *list, s32 a, s32 b, u32 first, u32 second, u32 third, u32 rowHeight, u32 rowCount, s32 visibleRows);

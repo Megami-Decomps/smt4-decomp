@@ -6,7 +6,6 @@
 extern "C" {
 extern StaffRollWork *g_staffRoll;
 void gxResetColorQuadToWhite(void);
-s32 renderCtxPackPassFlags(u32 preset, u32 index);
 void efctSetSpeed(f32 speed);
 
 // Draw twelve entries in the credits' secondary column with a temporary render preset.

@@ -12,7 +12,6 @@ struct AsdTexture;
 extern "C" {
 extern MenuDrawPoint g_effMenuDrawOffset;
 
-u32 renderCtxPackPassFlags(u32 value, bool enabled);
 void effectDrawRectOutline(u32 color0, u32 color1, u32 color2, u32 color3,
                   f32 x, f32 y, f32 width, f32 height, f32 depth, f32 lineWidth);
 }

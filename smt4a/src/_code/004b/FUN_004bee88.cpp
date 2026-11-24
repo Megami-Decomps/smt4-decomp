@@ -23,7 +23,6 @@ typedef struct PartnerScreenView {
 } PartnerScreenView;
 
 extern const char DAT_0052d83c[];
-s32 renderCtxPackPassFlags(s32 a, s32 b);
 PartnerUnitView *partyGetSlot(u16 index);
 void FUN_004bde34(PartnerScreenView *screen, PartnerUnitView *unit, s32 index, s32 x, s32 y, f32 scale);
 void uiDrawSelectedSpriteIndicator(PartnerScreenView *screen, s32 x, s32 y, f32 scale);

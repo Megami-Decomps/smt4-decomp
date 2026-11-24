@@ -12,7 +12,6 @@ typedef struct StateDrawWork {
 
 void renderCtxSelectStereoLayout(RenderCtx *context);
 void gxResetColorQuadToWhite(void);
-u32 renderCtxPackPassFlags(u32 slot, u32 flags);
 void FUN_003bb77c(void *view);
 void renderCtxResetColorScale(RenderCtx *context);
 

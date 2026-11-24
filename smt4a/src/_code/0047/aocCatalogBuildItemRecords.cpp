@@ -1,7 +1,7 @@
-/* NON_MATCHING: 351 lines (shape 283). Retail's frame holds five more 0x40-byte labels (0x1C00 against 0x1AC0):
- * each aocItemAttributeLabel result lands in a compiler temporary and is copied (two 8-word ldm/stm) into a second
- * slot whose address goes to archiveFindEntryValue, as for a key class with a copy constructor passed by value; the
- * shared declarations take plain pointers, so the labels are passed in place here. Retail also hands both
+/* NON_MATCHING: 350 lines (shape 280). Retail's frame holds more 0x40-byte labels (0x1C00; this build's 0x1C80 has other slots):
+ * each aocItemAttributeLabel result (returned by value) lands in a compiler temporary and is copied (two 8-word
+ * ldm/stm) into a second slot whose address goes to archiveFindEntryValue, as for a key class with a copy
+ * constructor passed by value; the lookup takes a plain pointer, so each label is a local here. Retail also hands both
  * asdOperatorNewE calls a second argument it never set (r5, then g_aocMain's register), which is not written, tests
  * the looked-up text in r0 before moving it to r3, and stores the terminator bytes with mvn #0. */
 #include "addon/AocBufferRequest.h"
@@ -82,7 +82,6 @@ s32 aocCatalogBuildItemRecords(AocCatalogJob *job)
         TableEntryRef entry;
         u16 description[DESCRIPTION_CHARS];
         u8 iconData[ICON_BYTES];
-        AocAttributeName label;
         u32 blocks;
         u32 licenseCount;
         s32 result;
@@ -98,8 +97,8 @@ s32 aocCatalogBuildItemRecords(AocCatalogJob *job)
             record->flags[4] = 1;
         }
 
-        aocItemAttributeLabel(label.text, 0, halfPair48LowByteA(main->contentFile), halfPair48LowByteB(main->contentFile));
-        const char *text = (const char *)archiveFindEntryValue(archive, (u32)label.text);
+        AocAttributeName nameLabel = aocItemAttributeLabel(0, halfPair48LowByteA(main->contentFile), halfPair48LowByteB(main->contentFile));
+        const char *text = (const char *)archiveFindEntryValue(archive, (u32)nameLabel.text);
         if (text == NULL) {
             text = "";
         }
@@ -108,8 +107,8 @@ s32 aocCatalogBuildItemRecords(AocCatalogJob *job)
             return result;
         }
 
-        aocItemAttributeLabel(label.text, 2, halfPair48LowByteA(main->contentFile), halfPair48LowByteB(main->contentFile));
-        text = (const char *)archiveFindEntryValue(archive, (u32)label.text);
+        AocAttributeName shortLabel = aocItemAttributeLabel(2, halfPair48LowByteA(main->contentFile), halfPair48LowByteB(main->contentFile));
+        text = (const char *)archiveFindEntryValue(archive, (u32)shortLabel.text);
         if (text == NULL) {
             text = "";
         }
@@ -119,8 +118,8 @@ s32 aocCatalogBuildItemRecords(AocCatalogJob *job)
         }
 
         sysMemClear(description, sizeof(description));
-        aocItemAttributeLabel(label.text, 3, halfPair48LowByteA(main->contentFile), halfPair48LowByteB(main->contentFile));
-        text = (const char *)archiveFindEntryValue(archive, (u32)label.text);
+        AocAttributeName longLabel = aocItemAttributeLabel(3, halfPair48LowByteA(main->contentFile), halfPair48LowByteB(main->contentFile));
+        text = (const char *)archiveFindEntryValue(archive, (u32)longLabel.text);
         if (text == NULL) {
             text = "";
         }
@@ -168,8 +167,8 @@ s32 aocCatalogBuildItemRecords(AocCatalogJob *job)
         record->contents[length * 2 + 3] = 0;
         record->contents[length * 2] = 0xFF;
 
-        aocItemAttributeLabel(label.text, 5, halfPair48LowByteA(main->contentFile), halfPair48LowByteB(main->contentFile));
-        value = archiveFindEntryValue(archive, (u32)label.text);
+        AocAttributeName iconLabel = aocItemAttributeLabel(5, halfPair48LowByteA(main->contentFile), halfPair48LowByteB(main->contentFile));
+        value = archiveFindEntryValue(archive, (u32)iconLabel.text);
         if (value == 0) {
             record->unk9A8 = 0;
             sysMemClear(iconData, sizeof(iconData));

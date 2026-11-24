@@ -14,7 +14,6 @@
 extern "C" {
 
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
-s32 renderCtxPackPassFlags(u32 a, u32 b);
 void campDrawDetailArea(s32 item, u32 mode);
 void campDrawCommandMenu(void);
 void FUN_00288538(s32 flag);

@@ -24,7 +24,7 @@ u32 FUN_00111004(u32 handle)
         FUN_00121e50(g_aocSystem) != 0 && FUN_002ad1e0(&g_aocMain->operationDone) != 0) {
         g_aocMain->flags &= ~0x10000u;
         aocReleasePackageOwner(g_aocSystem);
-        RequestParameters request(1);
+        RequestParameters request;
         request.kind = 1;
         request.word3 = 0;
         request.result = WindowStatusResult(0);

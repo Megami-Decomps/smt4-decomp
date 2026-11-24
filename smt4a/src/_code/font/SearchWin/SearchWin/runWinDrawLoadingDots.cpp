@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail forms each pushed stack's address after the state call returns (the build before it), and
  * the label position's x/y sums use other scratch registers. */
 #include "font/SearchWin/RunWin.h"
+#include "camp/RenderCtx.h"
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
@@ -16,7 +17,6 @@ void gxResetColorQuadToWhite(void);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *scene, f32 depth);
 void efctSetSpeed(f32 alpha);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
-u32 renderCtxPackPassFlags(s32 a, s32 b);
 
 /* Draws the run window's title, its loading dots (a 3x3 grid where two dots are lit and their
  * predecessors dimmed, advancing every 5 frames) and the label. Returns 0. */

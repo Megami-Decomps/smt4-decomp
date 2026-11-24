@@ -121,6 +121,10 @@ difference a register tie-break.
   `frameHeapInitializeRange` and smt4a's twin (0x3c-byte elements) and smt4 `FUN_003494f0` (elements at
   0x4e25dc); a natural `s64` there compiles to one `stm`. Where the object is 8-aligned the field cannot be packed:
   look for another cause (smt4 `FUN_00361934`).
+- A mask clear retail splits around other stores (`bic #4`, the phase and timer stores, then `bic #56`, in retail's
+  inlined copy of smt4 `FUN_003bbfdc`) is single-bit fields cleared one at a time, in the order the sibling initializer
+  sets them (`PackedRenderState::modeFields`): smt4 `FUN_003bbfdc`, `spriteDescriptorInitFromTemplate` and smt4a
+  `FUN_004bb9c0` are IDENTICAL with it (wave 87). Clearing bits in an order chosen by score alone stays steering.
 - Keep packing local to genuinely unaligned members, with size and offset assertions: packing a whole
   record downgrades its aligned word accesses.
 - The same holds for an outer `__packed` on a naturally aligned record that only embeds packed groups: removing it
@@ -168,6 +172,9 @@ difference a register tie-break.
   through ip: `g_gfxReleaseCallback` takes the block as its fourth argument (`DriverTextureRelease`), which made
   `blockOpen` IDENTICAL in both games (wave 77).
 - A flag parameter that retail tests before storing it into a byte field is `bool` (smt4a `FUN_0041dbdc`, wave 77).
+- A `bool` parameter needs `bool` arguments: `renderCtxPackPassFlags(u32 value, bool enabled)`, declared once in
+  `camp/RenderCtx.h`, made both `renderCtxFillDisplay`s 64 lines off until their pass flag local became `bool` (IDENTICAL
+  again); a `u8`/`s32` flag passed to it costs a `!= 0` conversion (wave 87).
 - A halfword field one caller loads with `ldrsh` and another with `ldrh` can be one `s16` field: the second passes it
   to a `u16` parameter. The analyze list's `BibleAnalyzeListEntry::id` (smt4a `bibleAnalyzeDrawMenu`, `ldrsh`) reaches
   `nkmBaseGetRecord`, defined with `u16`, through a `u32` declaration in `NkmBaseRecordA.h`, which costs
@@ -325,6 +332,10 @@ difference a register tie-break.
   `break`, break the outer loop on it and apply the default once after both: `result = level; break;` …
   `if (result != 0) break;` … `return result != 0 ? result : 1;`. smt4 `FUN_0029aef0` is IDENTICAL with it and
   39 lines off with `return level;` inside the loops (wave 63).
+- A `goto` out of nested loops is not needed for a match: smt4a `FUN_002cb84c` (three nested placements, 1112 bytes)
+  matched with `goto placed;` and is IDENTICAL with `bool placed = false;`, `placed = true; break;` in the inner loop and
+  `if (placed) break;` after it, and with each page test as a plain `if (page == 0) { if (index < 12) … } else if …`
+  (wave 87).
 - A condition computed inside a guarded block and tested after the blocks join is a flag:
   `bool changed = false; if (ready && enabled) changed = memcmp(...) != 0; if (changed) { ... }`
   (smt4 `FUN_001ec6e0`). Nesting the test inside the guard gives a different branch layout.
@@ -754,7 +765,17 @@ asks for.
 - Constructor stores out of order: a base class taking the value in its constructor
   (`Base(kind) : kind(kind)`) gives retail's order; members of types with their own zeroing
   constructors give its registers.
+- A function whose body is a class's inline default constructor, called by one file's functions only while every other
+  file expands that constructor in place, is a derived type's out-of-line constructor: `struct AocMenuRequest :
+  RequestParameters { AocMenuRequest(); using RequestParameters::operator=; };` (`classes/AocMenu.h`), with
+  `RequestParameters()` defined in its header, keeps the AocMenu units' calls and takes the other callers 7-63 lines
+  closer (wave 87). A copy out of the derived object into the base type is member by member (a base subobject);
+  retail's whole `ldm`/`stm` copies mean the copy has the derived type too (`AocMenuRequest copy = result;`).
 - `new (alloc) T` with a constructor and a class `operator new` gives retail's predicated allocation.
+- An unnamed `bx lr` in a gap right after a class's structors, where a function passes an object to a removed call
+  (`mov r0, <object>; nop`) before each return after constructing it, is that object's empty out-of-line destructor:
+  added as a unit (`units.py add`) and written `AocCatalogQuery::~AocCatalogQuery() {}`, it took both catalog jobs from
+  228 to 199 lines (wave 87).
 - A handler a class's function-pointer table calls on `this` is a member function: written as one on the class's
   real fields (`void Obj536044::FUN_00497290()`, `classes/Obj536044.h`) it can match where the same body over a
   unit-local struct view of the object does not: smt4a `Obj536044::FUN_00497290` was 179 lines off as a C function
@@ -797,7 +818,8 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
   argument moves. Write `sprintf` with `<stdio.h>` (cast a `u8` buffer to `char *`) when retail's
   prologue has `vpush; sub sp` right after `push`; an inlined helper containing the `sprintf` anchors
   its caller too. A function that saves no VFP registers can also show `push; ldr; sub sp`: that is
-  still `<stdio.h>` `sprintf` (smt4 `FUN_00194278`). Only a load between `push` and `vpush`
+  still `<stdio.h>` `sprintf` (smt4 `FUN_00194278`; with two loads, `push; ldr; ldr; sub sp`, smt4a `FUN_004b7e20`, as its
+  twin `mikadoGateStep`). Only a load between `push` and `vpush`
   (`push; ldr; vpush; sub sp`, titleConfigDraw) is a plain variadic call: call `__2sprintf` through
   `runtime/Stdio.h` there. A `sprintf` whose format armcc cannot read
   (an `extern const char DAT_x[]`) becomes `__c89sprintf`, which retail never calls: define the format
@@ -988,6 +1010,10 @@ register tie-breaks. Fix the source; don't change the compiler per unit.
   through core registers) are IDENTICAL only with softvfp and every proven unit of the run stays so (wave 82; smt4a
   `FUN_005000c4` is worse with it and keeps the default). `-O2 -Otime` for smt4a `FUN_0020e5f0`/`FUN_00231464` was not
   applied: their proven neighbours break with it, so there is no contiguous run.
+  Applied (wave 87): `-O2 -Otime` for the twins smt4 `FUN_00103fec`/smt4a `FUN_00138a64` (`commandQueueResetDefaults`,
+  separate stores where -O3 forms an `stm`), IDENTICAL only with it, right after `asdProcessPauseAll`, which carries the
+  same flags in both games; the next unit `asdPrimSwapBuffers` (another module) gets worse with it (0 -> 12) and keeps
+  the default.
 
 ### `--multifile`
 
@@ -1002,6 +1028,8 @@ A callee that uses only VFP registers is the clearest case: retail's smt4a `FUN_
 read `r2`/`r3` right after `bl uiClampScrollOffset` (`vmov s1, r2`), and the IDENTICAL `uiClampScrollOffset` writes
 no core register; as its `multifile` partner they went from 163 to 137 and 132 to 110 lines (wave 76). IV's
 `contentMenuRebuildGroup` got worse with the same partner (118 to 135) and has no entry.
+Both `recordPrepareLinkedOwner`s keep `r2`/`r3` across `bl packageKindToRecordKind`, the partner their proven sibling
+`packageFileDisableByKindName` already has: with it they went from 14 to 2 lines (wave 87).
 
 The recipe adds `--no_autoinline`, which most multifile units need (without it their callees are
 inlined). Some need autoinline on: smt4 `mapDepartAdvanceCameraSequence` keeps retail's `r3` across six calls of

@@ -53,7 +53,6 @@ extern int npcRoomGetEntryValue(unsigned int);
 /* Supplied declaration required: npcRoomSlotFadeOpacity. */
 extern int FUN_00168d38(unsigned int);
 extern int FUN_001691a8(void);
-extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001696d4. */
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */

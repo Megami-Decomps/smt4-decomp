@@ -19,7 +19,7 @@ u32 campCecDrawDimmingOverlay();
 void campCecStopCommThread();
 void campCecInboxState();
 void FUN_002ccb7c();
-void FUN_001ebedc();
+void campCecDemonRewardState();
 void campCecStatGainState();
 void FUN_002110ac();
 void campCecMenuIdleState();
@@ -87,7 +87,7 @@ void campCecCreate()
     work->handlers[0] = campCecStopCommThread;
     work->handlers[1] = campCecInboxState;
     work->handlers[2] = FUN_002ccb7c;
-    work->handlers[3] = FUN_001ebedc;
+    work->handlers[3] = campCecDemonRewardState;
     work->handlers[4] = campCecStatGainState;
     work->handlers[5] = FUN_002110ac;
     work->handlers[6] = campCecMenuIdleState;

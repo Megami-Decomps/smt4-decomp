@@ -6,7 +6,13 @@
 #include <stddef.h>
 #include "script/ScriptVm.h"
 
-/* Shin Megami Tensei IV layout. */
+/* One of the game-over screen's two scaled sprites (IV). */
+typedef struct BtlGameOverLayer {
+    /* 0x00 */ f32 alpha;
+    /* 0x04 */ f32 scale;       /* x and y scale about the pivot */
+} BtlGameOverLayer;
+
+/* Shin Megami Tensei IV layout: the fields the game-over code reads (its block is allocated larger). */
 typedef struct BtlGameOver {
     /* 0x00 */ u32 state;
     /* 0x04 */ u32 unk04;
@@ -14,6 +20,11 @@ typedef struct BtlGameOver {
     /* 0x0C */ void *dataA;     /* heap block */
     /* 0x10 */ ScriptProcess *process;   /* script process object */
     /* 0x14 */ void *dataB;     /* heap block */
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u32 drawEnabled; /* the draw tasks draw the screen only in state 8 with this set */
+    /* 0x20 */ f32 frontAlpha;  /* alpha of the sprite drawn last, over the layers */
+    /* 0x24 */ u32 unk24;
+    /* 0x28 */ BtlGameOverLayer layers[2]; /* the two blended sprites scaled about a shared pivot */
 } BtlGameOver;
 
 /* Apocalypse layout: the fields sit four bytes further on. */
@@ -81,7 +92,18 @@ struct BtlGameOverSequence {
     /* 0x14 */ s32 frame;
 };
 
-typedef char BtlGameOverSizeCheck[sizeof(BtlGameOver) == 0x18 ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* The game-over screen's upper-screen draw (IV); `work` is the draw task's work area, unused. */
+u32 btlGameOverDraw(BtlGameOver *gameOver, u32 work);
+#ifdef __cplusplus
+}
+#endif
+
+typedef char BtlGameOverSizeCheck[
+    offsetof(BtlGameOver, drawEnabled) == 0x1C && offsetof(BtlGameOver, layers) == 0x28 &&
+    sizeof(BtlGameOver) == 0x38 ? 1 : -1];
 typedef char BtlGameOverASizeCheck[sizeof(BtlGameOverA) == 0x1C ? 1 : -1];
 typedef char BtlGameOverOwnerSizeCheck[sizeof(BtlGameOverOwner) == 0x30 ? 1 : -1];
 typedef char BtlGameOverOwnerASizeCheck[sizeof(BtlGameOverOwnerA) == 0x50 ? 1 : -1];
