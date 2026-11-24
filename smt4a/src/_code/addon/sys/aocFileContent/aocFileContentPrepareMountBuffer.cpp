@@ -4,6 +4,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match8_AocPoll.h"
 #include "nn/Result.h"
+#include "addon/aocMain.h"
 
 namespace {
 struct AocFileContentWork {
@@ -23,7 +24,6 @@ void rt_memclr(void*, u32);
 u32 legacyResourceIdRemap(const WindowStatusResult *);
 u32 FUN_0042a410(u32*, u32, u32, u32, u32, u32);
 u32 jyoucyuGetTableEntry(u32);
-s32 sysLightEventTryWait(LightEvent*);
 
 /* Prepare the content mount's work buffer and publish any translated failure. */
 WindowStatusOperationResult aocFileContentPrepareMountBuffer(void* context, u32 content)

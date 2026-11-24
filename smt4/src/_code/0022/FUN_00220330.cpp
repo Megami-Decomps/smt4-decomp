@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail materialises the zero (FUN_002ad80c's high size word, later the cleared file fields) once in r6 before fileSystemRequireReady, and schedules `mov r0, r5` before each failure branch; the rest matches. */
+/* NON_MATCHING: retail materialises the zero (archivePathDeviceCreateFile's high size word, later the cleared file fields) once in r6 before fileSystemRequireReady, and schedules `mov r0, r5` before each failure branch; the rest matches. */
 #include "sys/ProcessResult.h"
 #include "shard/RomFileOpenState.h"
 #include "nn/fs/ArchiveCreateFile.h"
@@ -41,7 +41,7 @@ nn::Result FUN_00220330(RomFileOpenState *state, const void *path, u32 size)
         return result;
     }
     fileSystemRequireReady();
-    result = FUN_002ad80c(reinterpret_cast<const u16 *>(normalized), size);
+    result = archivePathDeviceCreateFile(reinterpret_cast<const u16 *>(normalized), size);
     processResultSetValue(result);
     u32 failed = result & 0x80000000;
     if ((s32)failed < 0) {

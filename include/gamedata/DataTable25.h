@@ -13,11 +13,15 @@ struct DataTable25Record {
         /* 0x00 */ char name[0x20];
     };
     /* 0x20 */ u16 id;
-    /* 0x22 */ u8 unk22[0x2b - 0x22];
+    /* 0x22 */ u8 unk22[2];
+    /* 0x24 */ u16 textureId; /* NPC portrait texture node */
+    /* 0x26 */ u8 unk26[4];
+    /* 0x2A */ u8 addonSection; /* section fallback for aocContentGetIndexedRecord */
     /* 0x2B */ u8 flags;    /* bustupTextureStart tests it to place a bustup, though both placements are (25, 25) */
 };
 typedef char DataTable25RecordLayoutCheck[
-    sizeof(DataTable25Record) == 0x2C && offsetof(DataTable25Record, id) == 0x20 ? 1 : -1];
+    sizeof(DataTable25Record) == 0x2C && offsetof(DataTable25Record, id) == 0x20 &&
+    offsetof(DataTable25Record, textureId) == 0x24 && offsetof(DataTable25Record, addonSection) == 0x2A ? 1 : -1];
 
 #ifdef __cplusplus
 extern "C" {

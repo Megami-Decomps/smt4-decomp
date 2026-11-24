@@ -24,7 +24,6 @@ struct SceneStartWork {
 
 extern "C" {
 
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 s32 rosterGetLeaderId(void);
 s32 table1bOr1cGetRecordValue(void); // declcheck: local (the shared declaration in code/Code001b.h does not compile here: too few arguments in function call)
 void contentMenuRebuildGroup(SceneStartWork *work, s32 mode, s32 arg);

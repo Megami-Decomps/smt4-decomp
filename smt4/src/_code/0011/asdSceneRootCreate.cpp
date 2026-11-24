@@ -10,12 +10,8 @@
 
 extern "C" {
 void *FUN_0011dadc(AsdSceneUpdaterDescription *description, AsdAllocatorObject *allocator);
-void *FUN_0011ffc0(AsdSceneLargeDescription *description, AsdAllocatorObject *allocator);
-AsdSceneObject *FUN_0012d1c4(AsdSceneSmallDescription *description, AsdAllocatorObject *allocator);
-AsdSceneObject *FUN_0012cef8(AsdSceneSmallDescription *description, AsdAllocatorObject *allocator);
 void *FUN_0011f5e4(AsdSceneQueueDescription *description, AsdAllocatorObject *allocator);
-void *FUN_00120134(AsdSceneListDescription *description, AsdAllocatorObject *allocator);
-void *FUN_001200e8(void **description, AsdAllocatorObject *allocator);
+AsdSceneObject *FUN_00120134(AsdSceneListDescription *description, AsdAllocatorObject *allocator);
 
 /* Builds a scene root from the allocator and one scene's limits. */
 AsdSceneRoot *asdSceneRootCreate(AsdAllocatorObject *allocator, const AsdModelLimits *limits)
@@ -44,7 +40,7 @@ AsdSceneRoot *asdSceneRootCreate(AsdAllocatorObject *allocator, const AsdModelLi
 
     AsdSceneSmallDescription firstDescription;
     AsdSceneSmallDescription secondDescription;
-    AsdSceneObject *second = FUN_0012d1c4(&firstDescription, allocator);
+    AsdSceneObject *second = asdSceneCreateQueueComponent(&firstDescription, allocator);
     AsdSceneObject *first = FUN_0012cef8(&secondDescription, allocator);
     {
         /* retail destroys the queue description's pointers before the list is built */
@@ -60,7 +56,7 @@ AsdSceneRoot *asdSceneRootCreate(AsdAllocatorObject *allocator, const AsdModelLi
     } else {
         list.enabled = false;
     }
-    void *listResult = FUN_00120134(&list, allocator);
+    AsdSceneObject *listResult = FUN_00120134(&list, allocator);
     root->list = FUN_001200e8(&listResult, allocator);
     root->allocator = allocator;
     return root;

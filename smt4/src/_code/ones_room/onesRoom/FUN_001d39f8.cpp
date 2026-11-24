@@ -14,7 +14,6 @@ void buttonHelpSetPreset(s32);
 void *asdLoadFileSyncDefault(const char *);
 void scrScriptProcessStartEntry(ScriptProcess *, s32);
 void titleRestartSlotState3(s32, s32);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 s32 onesRoomTeardown(u32);
 void onesRoomSetEnabled(void);
 extern OnesRoom *g_onesRoom;

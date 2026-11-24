@@ -13,7 +13,7 @@
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "text/TextDraw.h"
 #include "util/BitsAndBytes.h"
-#include "code/Code0016_Smt4a.h"
+#include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTableEntry.h"
@@ -141,7 +141,7 @@ u32 comWinDraw(void)
                 uiDrawItemCategoryIcon(menu->iconId, left - 13, 8, 121, 0);
             }
             if (menu->type == COM_WIN_TYPE_LOWERED) {
-                FUN_00168470((u16)menu->iconId, left - 13, y + 8, 121);
+                gauntletAppDrawCategoryLabel((u16)menu->iconId, left - 13, y + 8, 121);
             }
         }
     }

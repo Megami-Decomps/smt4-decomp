@@ -17635,13 +17635,13 @@
       "target_path": "orig/target/_code/0012/nw_gfx_SceneEnvironment_SceneEnvironment_sub_object.o"
     },
     {
-      "base_path": "build/obj/_code/0012/FUN_0012d1c4.o",
+      "base_path": "build/obj/_code/0012/asdSceneCreateQueueComponent.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0012d1c4",
+            "name": "asdSceneCreateQueueComponent",
             "size": 52,
             "vram": "0x12d1c4"
           }
@@ -17649,10 +17649,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0012/FUN_0012d1c4.cpp"
+        "source_path": "src/_code/0012/asdSceneCreateQueueComponent.cpp"
       },
-      "name": "_code/0012/FUN_0012d1c4",
-      "target_path": "orig/target/_code/0012/FUN_0012d1c4.o"
+      "name": "_code/0012/asdSceneCreateQueueComponent",
+      "target_path": "orig/target/_code/0012/asdSceneCreateQueueComponent.o"
     },
     {
       "base_path": "build/obj/_code/0012/FUN_0012d1fc.o",
@@ -24639,13 +24639,13 @@
       "target_path": "orig/target/_code/0014/FUN_00142fb8.o"
     },
     {
-      "base_path": "build/obj/_code/0014/FUN_00142fcc.o",
+      "base_path": "build/obj/_code/0014/gxAddDisplayTransferCommand.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00142fcc",
+            "name": "gxAddDisplayTransferCommand",
             "size": 32,
             "vram": "0x142fcc"
           }
@@ -24653,19 +24653,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0014/FUN_00142fcc.cpp"
+        "source_path": "src/_code/0014/gxAddDisplayTransferCommand.cpp"
       },
-      "name": "_code/0014/FUN_00142fcc",
-      "target_path": "orig/target/_code/0014/FUN_00142fcc.o"
+      "name": "_code/0014/gxAddDisplayTransferCommand",
+      "target_path": "orig/target/_code/0014/gxAddDisplayTransferCommand.o"
     },
     {
-      "base_path": "build/obj/_code/0014/FUN_00142fec.o",
+      "base_path": "build/obj/_code/0014/gxAddMemoryFillCommand.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00142fec",
+            "name": "gxAddMemoryFillCommand",
             "size": 32,
             "vram": "0x142fec"
           }
@@ -24673,19 +24673,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0014/FUN_00142fec.cpp"
+        "source_path": "src/_code/0014/gxAddMemoryFillCommand.cpp"
       },
-      "name": "_code/0014/FUN_00142fec",
-      "target_path": "orig/target/_code/0014/FUN_00142fec.o"
+      "name": "_code/0014/gxAddMemoryFillCommand",
+      "target_path": "orig/target/_code/0014/gxAddMemoryFillCommand.o"
     },
     {
-      "base_path": "build/obj/_code/0014/FUN_0014300c.o",
+      "base_path": "build/obj/_code/0014/gxAddTextureCopyCommand.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0014300c",
+            "name": "gxAddTextureCopyCommand",
             "size": 32,
             "vram": "0x14300c"
           }
@@ -24693,10 +24693,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0014/FUN_0014300c.cpp"
+        "source_path": "src/_code/0014/gxAddTextureCopyCommand.cpp"
       },
-      "name": "_code/0014/FUN_0014300c",
-      "target_path": "orig/target/_code/0014/FUN_0014300c.o"
+      "name": "_code/0014/gxAddTextureCopyCommand",
+      "target_path": "orig/target/_code/0014/gxAddTextureCopyCommand.o"
     },
     {
       "base_path": "build/obj/_code/0014/asdCmdBufferAppendCopyTransfer.o",
@@ -108220,13 +108220,13 @@
       "target_path": "orig/target/_code/002a/FUN_002ad1d0.o"
     },
     {
-      "base_path": "build/obj/_code/002a/FUN_002ad1e0.o",
+      "base_path": "build/obj/_code/002a/sysLightEventTryWait.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002ad1e0",
+            "name": "sysLightEventTryWait",
             "size": 4,
             "vram": "0x2ad1e0"
           }
@@ -108234,10 +108234,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002a/FUN_002ad1e0.cpp"
+        "source_path": "src/_code/002a/sysLightEventTryWait.cpp"
       },
-      "name": "_code/002a/FUN_002ad1e0",
-      "target_path": "orig/target/_code/002a/FUN_002ad1e0.o"
+      "name": "_code/002a/sysLightEventTryWait",
+      "target_path": "orig/target/_code/002a/sysLightEventTryWait.o"
     },
     {
       "base_path": "build/obj/_code/002a/nn_os_LightEvent_TryWait.o",
@@ -108520,13 +108520,13 @@
       "target_path": "orig/target/_code/002a/asdSaveHeaderBuildCalendarTime.o"
     },
     {
-      "base_path": "build/obj/_code/002a/FUN_002ad80c.o",
+      "base_path": "build/obj/_code/002a/archivePathDeviceCreateFile.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002ad80c",
+            "name": "archivePathDeviceCreateFile",
             "size": 120,
             "vram": "0x2ad80c"
           }
@@ -108534,10 +108534,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002a/FUN_002ad80c.cpp"
+        "source_path": "src/_code/002a/archivePathDeviceCreateFile.cpp"
       },
-      "name": "_code/002a/FUN_002ad80c",
-      "target_path": "orig/target/_code/002a/FUN_002ad80c.o"
+      "name": "_code/002a/archivePathDeviceCreateFile",
+      "target_path": "orig/target/_code/002a/archivePathDeviceCreateFile.o"
     },
     {
       "base_path": "build/obj/_code/002a/fileSystemRequireReady.o",
@@ -112025,13 +112025,13 @@
       "target_path": "orig/target/_code/002b/gameGetOptionProgressStatus.o"
     },
     {
-      "base_path": "build/obj/_code/002b/FUN_002b6b8c.o",
+      "base_path": "build/obj/_code/002b/gauntletAppDrawCategoryLabel.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002b6b8c",
+            "name": "gauntletAppDrawCategoryLabel",
             "size": 144,
             "vram": "0x2b6b8c"
           }
@@ -112039,10 +112039,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/FUN_002b6b8c.cpp"
+        "source_path": "src/_code/002b/gauntletAppDrawCategoryLabel.cpp"
       },
-      "name": "_code/002b/FUN_002b6b8c",
-      "target_path": "orig/target/_code/002b/FUN_002b6b8c.o"
+      "name": "_code/002b/gauntletAppDrawCategoryLabel",
+      "target_path": "orig/target/_code/002b/gauntletAppDrawCategoryLabel.o"
     },
     {
       "base_path": "build/obj/_code/002b/FUN_002b6c34.o",
@@ -122786,13 +122786,13 @@
       "target_path": "orig/target/_code/002c/listSourceGetFirst.o"
     },
     {
-      "base_path": "build/obj/_code/AsdSDK/Source/Sys/File/AsdLoadFile/FUN_002cb8d8.o",
+      "base_path": "build/obj/_code/AsdSDK/Source/Sys/File/AsdLoadFile/asdLoadFileExists.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002cb8d8",
+            "name": "asdLoadFileExists",
             "size": 488,
             "vram": "0x2cb8d8"
           }
@@ -122801,10 +122801,10 @@
           "_code",
           "AsdSDK/Source/Sys/File/AsdLoadFile"
         ],
-        "source_path": "src/_code/AsdSDK/Source/Sys/File/AsdLoadFile/FUN_002cb8d8.cpp"
+        "source_path": "src/_code/AsdSDK/Source/Sys/File/AsdLoadFile/asdLoadFileExists.cpp"
       },
-      "name": "_code/AsdSDK/Source/Sys/File/AsdLoadFile/FUN_002cb8d8",
-      "target_path": "orig/target/_code/AsdSDK/Source/Sys/File/AsdLoadFile/FUN_002cb8d8.o"
+      "name": "_code/AsdSDK/Source/Sys/File/AsdLoadFile/asdLoadFileExists",
+      "target_path": "orig/target/_code/AsdSDK/Source/Sys/File/AsdLoadFile/asdLoadFileExists.o"
     },
     {
       "base_path": "build/obj/_code/002c/objectValueGetChecked.o",
@@ -133342,13 +133342,13 @@
       "target_path": "orig/target/_code/002e/mapIfResetCounter.o"
     },
     {
-      "base_path": "build/obj/_code/002e/FUN_002e8be0.o",
+      "base_path": "build/obj/_code/002e/lmapCaveOverviewStep.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002e8be0",
+            "name": "lmapCaveOverviewStep",
             "size": 1020,
             "vram": "0x2e8be0"
           }
@@ -133356,10 +133356,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002e/FUN_002e8be0.cpp"
+        "source_path": "src/_code/002e/lmapCaveOverviewStep.cpp"
       },
-      "name": "_code/002e/FUN_002e8be0",
-      "target_path": "orig/target/_code/002e/FUN_002e8be0.o"
+      "name": "_code/002e/lmapCaveOverviewStep",
+      "target_path": "orig/target/_code/002e/lmapCaveOverviewStep.o"
     },
     {
       "base_path": "build/obj/_code/002e/FUN_002e8fdc.o",
@@ -159530,13 +159530,13 @@
       "target_path": "orig/target/_code/0034/FUN_003409f8.o"
     },
     {
-      "base_path": "build/obj/_code/0034/FUN_00340ad4.o",
+      "base_path": "build/obj/_code/0034/enemyRenderTexSetup.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00340ad4",
+            "name": "enemyRenderTexSetup",
             "size": 424,
             "vram": "0x340ad4"
           }
@@ -159544,10 +159544,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0034/FUN_00340ad4.cpp"
+        "source_path": "src/_code/0034/enemyRenderTexSetup.cpp"
       },
-      "name": "_code/0034/FUN_00340ad4",
-      "target_path": "orig/target/_code/0034/FUN_00340ad4.o"
+      "name": "_code/0034/enemyRenderTexSetup",
+      "target_path": "orig/target/_code/0034/enemyRenderTexSetup.o"
     },
     {
       "base_path": "build/obj/_code/0034/FUN_00340c90.o",
@@ -177295,13 +177295,13 @@
       "target_path": "orig/target/_code/0036/Obj4214d8__dtor_Obj4214d8.o"
     },
     {
-      "base_path": "build/obj/_code/0036/Obj4214ec__vfunc00.o",
+      "base_path": "build/obj/_code/0036/Obj4214ec__dtor_Obj4214ec.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "_ZN9Obj4214ec7vfunc00Ev",
+            "name": "_ZN9Obj4214ecD1Ev",
             "size": 4,
             "vram": "0x36a100"
           }
@@ -177309,10 +177309,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0036/Obj4214ec__vfunc00.cpp"
+        "source_path": "src/_code/0036/Obj4214ec__dtor_Obj4214ec.cpp"
       },
-      "name": "_code/0036/Obj4214ec__vfunc00",
-      "target_path": "orig/target/_code/0036/Obj4214ec__vfunc00.o"
+      "name": "_code/0036/Obj4214ec__dtor_Obj4214ec",
+      "target_path": "orig/target/_code/0036/Obj4214ec__dtor_Obj4214ec.o"
     },
     {
       "base_path": "build/obj/_code/0036/FUN_0036a104.o",
@@ -178398,13 +178398,13 @@
       "target_path": "orig/target/_code/0036/FUN_0036ebc0.o"
     },
     {
-      "base_path": "build/obj/_code/0036/FUN_0036ec8c.o",
+      "base_path": "build/obj/_code/0036/textureBuildFileFromConfig.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0036ec8c",
+            "name": "textureBuildFileFromConfig",
             "size": 620,
             "vram": "0x36ec8c"
           }
@@ -178412,10 +178412,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0036/FUN_0036ec8c.cpp"
+        "source_path": "src/_code/0036/textureBuildFileFromConfig.cpp"
       },
-      "name": "_code/0036/FUN_0036ec8c",
-      "target_path": "orig/target/_code/0036/FUN_0036ec8c.o"
+      "name": "_code/0036/textureBuildFileFromConfig",
+      "target_path": "orig/target/_code/0036/textureBuildFileFromConfig.o"
     },
     {
       "base_path": "build/obj/_code/0036/FUN_0036ef0c.o",

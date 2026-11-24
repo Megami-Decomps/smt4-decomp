@@ -48,7 +48,6 @@ extern struct { u32 unk0; s32 selected; } g_animatedPageSelection;
 void sysPlaySe(s32 id);
 void uiSpriteBankApplyPreset(SpritePresetBank *bank, u32 preset);
 u32 slotRecordFindById(u16 id);
-void scriptProcessSetMode(ScriptProcess *script, s32 mode);
 void FUN_0032d0c8(s32 a, s32 b, u16 id, const void *record);
 void unitRecordBuildFromSave(u16 id, u8 *out);
 void panelSetTarget(s32 target, s32 arg);

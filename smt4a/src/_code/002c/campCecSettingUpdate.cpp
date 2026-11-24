@@ -18,7 +18,6 @@ extern "C" {
 extern CampCecSetting *g_campCecSetting;
 
 void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
-void scriptProcessSetMode(ScriptProcess *script, s32 mode);
 s32 messageGetChoiceResult(void);
 void sysPlaySe(s32 id);
 s32 cecProcessGetValue(void);

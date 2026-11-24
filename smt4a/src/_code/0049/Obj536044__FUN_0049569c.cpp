@@ -1,5 +1,6 @@
 #include "ui/PlaceTextTransition.h"
 #include "ui/SceneResourceWait.h"
+#include "script/scrScriptProcess.h"
 
 static inline void placeTextChangeState(PlaceTextTransition *transition, s32 next)
 {
@@ -10,7 +11,6 @@ static inline void placeTextChangeState(PlaceTextTransition *transition, s32 nex
 
 extern "C" {
 u32 sceneResourcesAreReady(SceneResourceWaitState *state);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void titleSetSlotValueState2(s32 screen, s32 frames);
 s32 gameFlagIsSet(u16 flag);
 void placeWinStartText(const char *text);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003909d0` (_code @ 0x3909d0, 0x628 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
@@ -9,7 +10,7 @@
 extern "C" {
 
 int FUN_002347b8(...);
-int texTableRecordCallWithParams(...);
+
 int asdGxBlitScaledQuad(int, int);
 int textDrawString(...);
 int texDrawCompositeSprite(...);

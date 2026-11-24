@@ -24,7 +24,7 @@ void btlGameOverCreateTasks(BtlGameOverJobWork *work)
     g_btlGameOver = static_cast<BtlGameOver *>(asdMemAlloc(0x100, 0x100, 0, 0x40, 1));
     BtlGameOver *state = g_btlGameOver;
     if (gameDataBlocksGetSaveData()->gameOverContinueEnabled != 0 && gameFlagIsSet(0x557) == 0) {
-        state->unk04 |= 1;
+        state->flags |= 1;
         work->flags |= 0x80000000ULL;
     }
 }

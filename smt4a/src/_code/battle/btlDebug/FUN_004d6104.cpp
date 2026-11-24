@@ -1,6 +1,7 @@
 /* NON_MATCHING: typed rewrite of the battle debug menu controller, the smt4a variant of FUN_003c64ec with extra Sake/Face/Reserve pages (1520 vs 1602 rows); retail shares the flag-toggle stores between cases and computes the flag word address after the item query. */
 #include "common.h"
 #include "battle/btlMain.h"
+#include "battle/BtlDebugMenu.h"
 #include "shard/W6_W6Match8_BattleDebug.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "AsdSDK/Source/Util/AsdListHelpers.h"
@@ -36,21 +37,6 @@ struct DebugBattle {
     /* 0x1ED4 */ DebugActionTint *actions;
     /* 0x1ED8 */ u8 unk1ed8[0x26d0];
     /* 0x45A8 */ u64 flags;
-};
-
-/* The debug menu being run: its state number, the open list box and the data the sub menus edit. */
-struct DebugMenu {
-    /* 0x00 */ u32 state;
-    /* 0x04 */ s32 menuMode;
-    /* 0x08 */ u32 confirmed;
-    /* 0x0C */ u32 cameraKind;
-    /* 0x10 */ u32 listBox;
-    /* 0x14 */ u8 onlyAllies;
-    /* 0x15 */ u8 onlyEnemies;
-    /* 0x16 */ u8 includeParty;
-    /* 0x17 */ u8 unk17;
-    /* 0x18 */ u32 mask;
-    /* 0x1C */ s32 entryIndex;
 };
 
 /* The debug globals: the shared prefix, then a table of 64-bit flag masks. */
@@ -123,10 +109,8 @@ void btlReserveEditorApplySelection(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d3df0(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d463c(DebugMenu *menu);
 void btlDebugOpenCameraControlMenu(DebugMenu *menu, DebugBattle *battle);
-void btlCameraApplyEditorValue(DebugMenu *menu, DebugBattle *battle, u32 item);
 void FUN_004d5578(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d5be4(DebugMenu *menu, DebugBattle *battle, u32 item);
-void btlCameraDebugApplyMenuItem(DebugMenu *menu, DebugBattle *battle, u32 item);
 void btlDebugCreatePanelMenu(DebugMenu *menu, DebugBattle *battle);
 void btlDebugCreateUnitMenu(DebugMenu *menu, DebugBattle *battle);
 void btlDebugOpenCameraUpDownMenu(DebugMenu *menu, DebugBattle *battle);

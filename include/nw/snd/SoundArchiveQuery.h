@@ -29,6 +29,13 @@ typedef struct SoundParams {
     /* 0x16 */ u8 frontBypass;
 } SoundParams;
 
+/* Player counts and the bytes reserved for each player's heap. */
+struct ArchivePlayerParams {
+    /* 0x00 */ s32 playableSoundMax;
+    /* 0x04 */ u32 playerHeapSize;
+};
+typedef char ArchivePlayerParamsSizeCheck[sizeof(ArchivePlayerParams) == 8 ? 1 : -1];
+
 typedef struct SequenceSoundInfo {
     /* 0x00 */ u8 unk00[8];
     /* 0x08 */ u32 unk08;
@@ -48,6 +55,7 @@ extern "C" {
 #endif
 
 SoundInfo *nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundInfo(void *infoBlock);
+u8 nw_snd_internal_SoundArchiveFileReader_ReadPlayerInfo(SoundArchiveRef *reader, u32 playerId, ArchivePlayerParams *out);
 s32 nw_snd_internal_SoundArchiveFile_SoundInfo_GetSoundType(SoundInfo *info);
 s32 nw_snd_internal_SoundArchiveFile_SoundInfo_GetPanMode(SoundInfo *info);
 s32 nw_snd_internal_SoundArchiveFile_SoundInfo_GetPanCurve(SoundInfo *info);

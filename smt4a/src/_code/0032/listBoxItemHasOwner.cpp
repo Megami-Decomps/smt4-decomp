@@ -1,23 +1,16 @@
-#include "common.h"
+#include "AsdSDK/Source/Util/AsdListBox.h"
+#include "AsdSDK/Source/Util/AsdListHelpers.h"
+#include "shard/W6_W6Match2_GeometryResources.h"
 
 extern "C" {
 
-typedef struct ListBoxItem {
-    /* 0x000 */ u8 unk000[0x208];
-    /* 0x208 */ void *owner;
-} ListBoxItem;
-
-extern ListBoxItem *asdListBoxFindItem(void);
-
-/* True when the found list box item exists and has an owner. */
-s32 listBoxItemHasOwner(void)
+/* Tests whether the selected list-box item exists and its toggle value is nonzero. */
+s32 listBoxItemHasOwner(u32 listBox, u32 id)
 {
-    ListBoxItem *item = asdListBoxFindItem();
-
+    AsdListBoxItem *item = asdListBoxFindItem(listBox, id);
     if (item == NULL) {
         return 0;
     }
-    return item->owner != NULL;
+    return item->intValue != 0;
 }
-
 } /* extern "C" */

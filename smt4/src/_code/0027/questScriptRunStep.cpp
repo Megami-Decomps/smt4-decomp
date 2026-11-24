@@ -16,7 +16,6 @@ typedef struct QuestScriptRun {
 } QuestScriptRun;
 
 void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void FUN_0029016c(u32 a, s32 b);
 void FUN_002900d0(void);
 void gameJumpRequestClear(void);

@@ -13,7 +13,6 @@ void aocQueueType08(AocSystemA *, u32, void **, u32);
 void sysPlaySe(u32);
 u32 tableGroupFindEntryIndex(void *, const char *);
 void scrScriptProcessStartEntry(ScriptProcess *, u32);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 
 u32 itemEventStartupUpdate(ItemEventStartup *work)
 {

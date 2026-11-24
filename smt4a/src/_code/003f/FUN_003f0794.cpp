@@ -54,7 +54,6 @@ void FUN_00470e64(u32 aoc);
 void btlStageLoadTable(void);
 void battleMapAccessoryLoad(void);
 s32 jyoucyuEnsureResidentEntry(void);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void FUN_003cdb28(void);
 void FUN_003ce360(void);
 

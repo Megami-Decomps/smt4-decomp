@@ -9,7 +9,6 @@
 
 extern "C" {
 extern const u8 DAT_00405878[23];
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void titleSetSlotValueState2(s32 index, s32 mode);
 
 void FUN_00381fd4(SpriteAnchorGroupWork *work)

@@ -67,7 +67,7 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 /* Supplied declaration required: legacyResourceIdRemap. */
 extern int byteIsAtLeast100(unsigned int *);
 extern int objGetFlagBit16(int);
-extern int FUN_002ad1e0(int);
+extern int sysLightEventTryWait(int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 /* Supplied declaration required: asdLoadFileAsync. */
 extern int FUN_002b90c8(int, unsigned int, unsigned int *);
 /* Supplied declaration required: refIsNullOrZero. */
@@ -196,7 +196,7 @@ void FUN_0015c81c(int param_1,int param_2)
   else {
     temp_v2 = objGetFlagBit16(g_aocMain);
     if (temp_v2 != 0) {
-      temp_v2 = FUN_002ad1e0(g_aocMain + 0x98);
+      temp_v2 = sysLightEventTryWait(g_aocMain + 0x98);
       if (temp_v2 != 0) {
         *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
         temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),200);
@@ -407,7 +407,7 @@ LAB_0015cdc8:
         jyoucyuGetTableEntry(0);
         return;
       }
-      temp_v2 = FUN_002ad1e0(g_aocMain + 0x98);
+      temp_v2 = sysLightEventTryWait(g_aocMain + 0x98);
       if (temp_v2 != 0) {
         *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
       }

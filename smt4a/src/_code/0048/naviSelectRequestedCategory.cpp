@@ -3,7 +3,7 @@
 #include "gamedata/MapNaviCategories.h"
 extern "C" {
 s32 naviMainGetRequestedMap(void);
-s32 FUN_00492c70(void *selection); // declcheck: local (the shared declaration does not compile here or changes this unit)
+s32 naviMainGetRequestedSection(void *selection); // declcheck: local (the shared declaration does not compile here or changes this unit)
 MapNaviMarkerIcon *dataTable2BFindType1Entry(Block66Owner *owner, s32 map, u32 category);
 s32 MapNaviTable_GetCategoryCount(MapNaviTableContext *context); // declcheck: local (the shared declaration does not compile here or changes this unit)
 MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext *context, u32 index);
@@ -39,7 +39,7 @@ void naviSelectRequestedCategory(Block66Owner *owner, u32 category)
 {
     NavigationWork *work = (NavigationWork *)owner;
     s32 map = naviMainGetRequestedMap();
-    s32 section = FUN_00492c70(work->selection);
+    s32 section = naviMainGetRequestedSection(work->selection);
     MapNaviMarkerIcon *marker = dataTable2BFindType1Entry(owner, map, category);
     if (marker != NULL) {
         selectCategoryMarker(work, marker);

@@ -12,13 +12,12 @@ public:
     virtual void operation0c();
     virtual void operation10();
     virtual void operation14();
-    virtual s32 createFile(const ArchivePathDescriptor *path, u64 size);
+    virtual s32 createFile(const ArchivePathDescriptor &path, u64 size);
 };
 typedef char ArchiveCreationDeviceSizeCheck[sizeof(ArchiveCreationDevice) == sizeof(ArchivePathDevice) ? 1 : -1];
 
 extern "C" {
-nn::Result FUN_002ad80c(const u16 *path, u64 size);
-nn::Result FUN_00158844(const u16 *path, u64 size);
+nn::Result archivePathDeviceCreateFile(const u16 *path, u64 size);
 }
 
 #endif

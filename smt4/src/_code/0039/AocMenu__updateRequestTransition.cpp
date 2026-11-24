@@ -9,10 +9,7 @@ void AocMenu::updateRequestTransition()
     AocRequestTransition * work = reinterpret_cast<AocRequestTransition *>(this);
     switch (work->transition.phase) {
     case 1:
-        if ((g_aocMain->flags & 4) != 0) {
-            return;
-        }
-        if ((g_aocMain->flags & 8) != 0) {
+        if (aocMainIsBusy(g_aocMain)) {
             return;
         }
         work->transition.flags = 3;

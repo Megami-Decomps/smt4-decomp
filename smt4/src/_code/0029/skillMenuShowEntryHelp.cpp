@@ -1,6 +1,7 @@
 /* NON_MATCHING: 36 lines: retail addresses the id order table from its file's constant block (DAT_00400f98 + 700,
  * a translation-unit data layout this unit cannot give) and lays the index-1 weapon help out before the index-0 one;
- * the page, list and skill branches match. */
+ * the page, list and skill branches match. Written `if (index != 0) { index 1 } else { index 0 }`, the layout is
+ * retail's and only the table's base (one instruction) differs, but every branch target after it shifts (raw 61). */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"

@@ -15,4 +15,7 @@ struct RecordCallParameters {
     u8 unk30[0x10];
 };
 
+/* Builds the default draw parameters and submits the named texture-table record. */
+extern "C" void texTableRecordCallWithParams(u32 first, u32 table, s32 index, u32 second, u32 third, u32 fourth);
+
 #endif

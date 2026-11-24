@@ -9,7 +9,7 @@ u32 scrGetArg(s32 index);
 s32 scrGetCommandFrame(void);
 void uiQuestCreate(s32 value);
 s32 uiQuestIsIdle(void);
-void FUN_002f1554(u32 id);
+void uiQuestOpenDetails(u32 id);
 void uiQuestClose(void);
 void flagEntrySetValue(u32 first, u32 second);
 
@@ -26,7 +26,7 @@ u8 FUN_003b7044(void)
             return 1;
         }
         uiQuestCreate(result);
-        FUN_002f1554(first);
+        uiQuestOpenDetails(first);
     }
     result = uiQuestIsIdle();
     if (result != 0) {

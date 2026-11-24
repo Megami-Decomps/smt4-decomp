@@ -4,6 +4,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include <stdio.h>
 
 extern "C" {
 extern const char DAT_00409814[]; /* __FILE__ */
@@ -19,7 +20,7 @@ void asdLoadFileAsync(const char *path, u32 *result, u32 flags, u32 arg, u32 arg
     AsdLoadJob *job;
 
     memClear(fullPath, ASD_FILE_PATH_LEN);
-    asdLoadFileBuildPath(fullPath, path);
+    asdLoadFileBuildPathStdio(fullPath, path);
 
     asdDebugTrace(DAT_00409814, 353);
     job = (AsdLoadJob *)asdMemAlloc(0x100, 0x100, 0, sizeof(AsdLoadJob), 0);

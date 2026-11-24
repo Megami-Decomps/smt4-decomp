@@ -75,7 +75,7 @@ extern int naviGetActiveStateValue(int);
 /* Supplied declaration required: lmapSceneGetObj. */
 extern int naviMainSelectPair(int);
 extern unsigned int naviMainGetRequestedMap(int);
-extern int FUN_00492c70(int);
+extern int naviMainGetRequestedSection(int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 /* Supplied declaration required: FUN_0049368c. */
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
 
@@ -125,7 +125,7 @@ void FUN_00486444(int param_1)
       return;
     }
     temp_v5 = naviMainGetRequestedMap(temp_v3);
-    temp_v4 = FUN_00492c70(temp_v3);
+    temp_v4 = naviMainGetRequestedSection(temp_v3);
   }
   else {
     temp_v5 = NaviMain_GetCurrentMap(temp_v3);

@@ -1,25 +1,10 @@
 /* Built with the unit's cflags (-O2 -Otime). */
 #include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
-
-namespace {
-/* nw::snd::SoundArchive::SoundInfo */
-struct SoundInfo {
-    /* 0x00 */ u32 fileId;
-    /* 0x04 */ u32 playerId;
-    /* 0x08 */ u8 unk08[0x10];
-};
-
-/* nw::snd::SoundArchive::PlayerInfo */
-struct PlayerInfo {
-    /* 0x00 */ u32 playableSoundMax;
-    /* 0x04 */ u32 playerHeapSize;
-};
-}
+#include "shard/SoundArchiveWrapper.h"
 
 extern "C" {
 
-s32 soundArchiveReadSoundInfoWithExtension(void *archive, u32 soundId, SoundInfo *info);
-s32 FUN_00178458(void *archive, u32 playerId, PlayerInfo *info);
+s32 soundArchiveReadSoundInfoWithExtension(SoundArchiveWrapperA *archive, u32 soundId, SoundParams *out);
 s32 soundArchiveLoaderIsItemLoaded(SoundLoader *loader, u32 id, u32 flags);
 s32 soundArchiveLoaderLoadItem(SoundLoader *loader, u32 id, void *heap, u32 flags, u32 blockSize);
 
@@ -29,11 +14,12 @@ s32 asdSndEnsureCurrentSlotData(u32 soundId)
     AsdSoundSystemA *system = &g_asdSoundSystem;
     void *heap = g_asdSoundSystem.currentSlotB; /* the current slot starts with its heap */
     s32 result = 0;
-    SoundInfo sound;
-    PlayerInfo player = {0, 0};
+    SoundParams sound;
+    ArchivePlayerParams player = {0, 0};
+    SoundArchiveWrapperA *archive = (SoundArchiveWrapperA *)system->archive;
 
-    soundArchiveReadSoundInfoWithExtension(system->archive, soundId, &sound);
-    FUN_00178458(system->archive, sound.playerId, &player);
+    soundArchiveReadSoundInfoWithExtension(archive, soundId, &sound);
+    soundArchiveReadPlayerInfoWithExtension(archive, sound.unk04, &player);
     if (player.playerHeapSize != 0) {
         return 1;
     }

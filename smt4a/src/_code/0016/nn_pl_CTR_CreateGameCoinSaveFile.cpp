@@ -106,7 +106,7 @@ void nn_pl_CTR_CreateGameCoinSaveFile(void)
   
   temp_v1 = (*(unsigned int *)((unsigned char *)&DAT_005c0adc + 0x4));
   fileSystemRequireReady();
-  temp_v1 = FUN_00158844(reinterpret_cast<const u16 *>(temp_v1), 0x14);
+  temp_v1 = archivePathDeviceCreateFile(reinterpret_cast<const u16 *>(temp_v1), 0x14);
   if ((int)temp_v1 >= 0) {
     clockGetTicksAsMicroseconds(&temp_v4);
     temp_v28 = temp_v4;

@@ -1,87 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `btlCombatantMatchesCategory` (_code @ 0x3020fc, 0x1b4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the two action-mode mask tests use different scratch registers; the action scan matches. */
+#include "battle/BtlEntryA.h"
+#include "gamedata/ConsumableRecordA.h"
+#include "gamedata/EquipmentRecordA.h"
+#include "gamedata/GameSaveDataA.h"
+#include "gamedata/SkillDataLookup.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
-extern "C" {
-
-int itemTableGetItemRecord(void);
-int itemTableGetEquipmentRecord(void);
-int skillDataFindById(void);
-
-extern unsigned int DAT_005702a0; /* 0x5702a0 */
-extern unsigned int DAT_005702a4; /* 0x5702a4 */
-extern unsigned int DAT_005702a8; /* 0x5702a8 */
-extern unsigned int DAT_005702ac; /* 0x5702ac */
-
-/* Supplied declaration required: itemTableGetItemRecord. */
-/* Supplied declaration required: itemTableGetEquipmentRecord. */
-/* Supplied declaration required: skillDataFindById. */
-
-
-unsigned int btlCombatantMatchesCategory(unsigned int *param_1,unsigned int param_2)
-
+/* Tests the selected (or any available) action for the requested skill category. */
+extern "C" u32 btlCombatantMatchesCategory(BtlCombatantEntryA *entry, u32 category)
 {
-/* irregular: 3 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned char temp_v4;
-  
-  if (((param_1[1] & DAT_005702a4) == 0 && (*param_1 & DAT_005702a0) == 0) &&
-     ((param_1[1] & DAT_005702ac) == 0 && (*param_1 & DAT_005702a8) == 0)) {
-    temp_v3 = 0;
-    do {
-      temp_v0 = *(short *)((int)param_1 + temp_v3 * 8 + 0x33a);
-      if (temp_v0 == 2 || temp_v0 == 3) {
-        temp_v2 = (int)(short)param_1[temp_v3 * 2 + 0xcf];
-        skillDataFindById();
-        if ((temp_v2 != 0) && (param_2 == (*(unsigned int *)(temp_v2 + 0x28) & 0xffff) >> 0xb)) {
-          return 1;
+    const BattleCandidateMasks *masks = &g_btlCandidateMasks;
+    if ((entry->flags & masks->unavailable) || (entry->flags & masks->singleAction)) {
+        if (entry->data.actionList.single.kind == 2 || entry->data.actionList.single.kind == 3) {
+            const SkillDataRecordA *skill = skillDataFindById(entry->data.actionList.single.id);
+            if (skill && category == skill->skillProperties.category)
+                return 1;
         }
-      }
-      if (*(short *)((int)param_1 + temp_v3 * 8 + 0x33a) == 8) {
-        temp_v2 = (int)(short)param_1[temp_v3 * 2 + 0xcf];
-        itemTableGetItemRecord();
-        if (((temp_v2 != 0) && (temp_v1 = (unsigned int)*(unsigned short *)(temp_v2 + 0x32), temp_v1 != 0)) &&
-           ((skillDataFindById(), temp_v1 != 0 && (param_2 == (*(unsigned int *)(temp_v1 + 0x28) & 0xffff) >> 0xb))))
-        {
-          return 1;
+        if (entry->data.actionList.single.kind == 8) {
+            const ConsumableRecordA *item = itemTableGetItemRecord(entry->data.actionList.single.id);
+            if (item && item->skillId) {
+                const SkillDataRecordA *skill = skillDataFindById(item->skillId);
+                if (skill && category == skill->skillProperties.category)
+                    return 1;
+            }
         }
-      }
-      temp_v0 = *(short *)((int)param_1 + temp_v3 * 8 + 0x33a);
-      temp_v4 = temp_v0 == 1;
-      if (temp_v4) {
-        temp_v0 = (short)param_1[temp_v3 * 2 + 0xcf];
-      }
-      if ((temp_v4 && temp_v0 == 2) && (param_1[0xfe] != 0)) {
-        temp_v1 = (unsigned int)*(unsigned short *)(param_1[0xfe] + 4);
-        itemTableGetEquipmentRecord();
-        if ((temp_v1 != 0) && (param_2 == *(unsigned int *)(temp_v1 + 0x24) >> 0x14)) {
-          return 1;
+    } else {
+        for (s32 i = 0; i < 10; ++i) {
+            if (entry->data.actionList.available[i].kind == 2 || entry->data.actionList.available[i].kind == 3) {
+                const SkillDataRecordA *skill = skillDataFindById(entry->data.actionList.available[i].id);
+                if (skill && category == skill->skillProperties.category)
+                    return 1;
+            }
+            if (entry->data.actionList.available[i].kind == 8) {
+                const ConsumableRecordA *item = itemTableGetItemRecord(entry->data.actionList.available[i].id);
+                if (item && item->skillId) {
+                    const SkillDataRecordA *skill = skillDataFindById(item->skillId);
+                    if (skill && category == skill->skillProperties.category)
+                        return 1;
+                }
+            }
+            if (entry->data.actionList.available[i].kind == 1 && entry->data.actionList.available[i].id == 2 && entry->data.record) {
+                const PlayerDataA *player = (const PlayerDataA *)entry->data.record;
+                const EquipmentRecordA *bullets = itemTableGetEquipmentRecord(player->equipped.bullets);
+                if (bullets && category == bullets->traits >> 20)
+                    return 1;
+            }
         }
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 10);
-  }
-  else {
-    if (*(short *)((int)param_1 + 0x32a) == 2 || *(short *)((int)param_1 + 0x32a) == 3) {
-      temp_v3 = (int)(short)param_1[0xcb];
-      skillDataFindById();
-      if ((temp_v3 != 0) && (param_2 == (*(unsigned int *)(temp_v3 + 0x28) & 0xffff) >> 0xb)) {
-        return 1;
-      }
     }
-    if (*(short *)((int)param_1 + 0x32a) == 8) {
-      temp_v3 = (int)(short)param_1[0xcb];
-      itemTableGetItemRecord();
-      if ((((temp_v3 != 0) && (temp_v1 = (unsigned int)*(unsigned short *)(temp_v3 + 0x32), temp_v1 != 0)) &&
-          (skillDataFindById(), temp_v1 != 0)) && (param_2 == (*(unsigned int *)(temp_v1 + 0x28) & 0xffff) >> 0xb)) {
-        return 1;
-      }
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */

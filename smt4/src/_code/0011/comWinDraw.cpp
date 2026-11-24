@@ -6,6 +6,7 @@
 #include "ui/CommandWindow.h"
 #include "ui/UiSpriteApi.h"
 #include "ui/AnimatedMessage.h"
+#include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "camp/RenderCtxTitle.h"
 #include "gfx/StereoParallax.h"
 #include "nw/math/MTX44Transform.h"
@@ -45,7 +46,6 @@ extern "C" {
 void cameraSetViewMatrix(RenderCtx *scene, const MTX44 *matrix);
 void FUN_002b6db0(u32 id, u32 x, u32 y, u32 z);
 void FUN_002b6c34(s32 skill, s32 x, s32 y, s32 depth, s32 player, s32 highlight);
-void FUN_002b6b8c(s32 id, u32 x, u32 y, u32 z);
 void itemDrawCategoryBadge(u32 id, s32 x, s32 y, s32 priority, s32 markEquipped); // declcheck: local (the definition's own form; the shared header's BadgeWord last argument is how the forwarding wrappers pass it)
 
 /* Draws the common window: its frame scaled about its centre by the open/close animation, then the text with
@@ -128,7 +128,7 @@ u32 comWinDraw(void)
             itemDrawCategoryBadge((s16)window->value, left - 13, 8, 121, 0);
         }
         if (window->state == COM_WIN_STATE_ICON) {
-            FUN_002b6b8c(window->value, left - 13, 8, 121);
+            gauntletAppDrawCategoryLabel(window->value, left - 13, 8, 121);
         }
     }
 

@@ -5,10 +5,6 @@
 #include "shard/SoundArchiveWrapper.h"
 
 namespace {
-struct ArchivePlayerInfo {
-    u32 playableSoundMax;
-    u32 playerHeapSize;
-};
 static u32 alignSoundPoolBytes(u32 size)
 {
     return (size + 31) & ~31u;
@@ -22,18 +18,17 @@ static u32 soundPoolBytes(u32 count, u32 size)
 
 extern "C" {
 u32 FUN_00194fd8(SoundArchiveWrapper *archive);
-s32 FUN_00178458(SoundArchiveWrapper *archive, u32 playerId, ArchivePlayerInfo *info);
 s32 nw_snd_SoundArchive_ReadSoundArchivePlayerInfo(SoundArchiveWrapper *archive, ArchivePoolCountsA *counts);
 
 // Include player heaps, the per-sound pools and optional caller data in the required buffer size.
-u32 FUN_0015fea8(void *, SoundArchiveWrapper *archive, u32 userDataSize)
+u32 FUN_0015fea8(void *, SoundArchiveWrapperA *archive, u32 userDataSize)
 {
     u32 playerCount = FUN_00194fd8(archive);
     u32 size = alignSoundPoolBytes(playerCount * 0x5C);
     u32 index = 0;
     while (index < playerCount) {
-        ArchivePlayerInfo player = {0, 0};
-        if (FUN_00178458(archive, index | 0x04000000, &player) != 0 && player.playerHeapSize != 0)
+        ArchivePlayerParams player = {0, 0};
+        if (soundArchiveReadPlayerInfoWithExtension(archive, index | 0x04000000, &player) != 0 && player.playerHeapSize != 0)
             size += player.playableSoundMax * (alignSoundPoolBytes(player.playerHeapSize) + 0x40);
         ++index;
     }

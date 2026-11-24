@@ -1,8 +1,10 @@
-/* NON_MATCHING: 14 lines, three allocation choices. For the player retail sets the HP percentage first and copies it
- * to the MP one (`vmov s17, s18; vmov s16, s17`, and the same with 100.0 in the full-recovery case), this build the
- * MP one first; in the party loop's full-recovery case retail sets both from the constant (`vmov s16, s23;
- * vmov s17, s23`) where this build copies the first; and for a unit's HP retail loads the current HP into r1 and
- * moves the share into r0, this build the other way round.
+/* NON_MATCHING: 14 lines, three allocation choices; the source is that of IV's twin, which matches. For the player
+ * retail sets the HP percentage first and copies it to the MP one (`vmov s17, s18; vmov s16, s17`, and the same with
+ * 100.0 in the full-recovery case), this build the MP one first; in the party loop's full-recovery case retail sets
+ * both from the constant (`vmov s16, s23; vmov s17, s23`) where this build copies the first; and for a unit's HP
+ * retail loads the current HP into r1 and moves the share into r0, this build the other way round.
+ * Writing the value as `(s16)(current + regenShare(maximum, percent))`, the helper returning only the share, leaves
+ * 6 lines (the two full-recovery orders), but IV's twin is 55 lines off with it, so regenValue() stays.
  * The skill loops are written in place: retail addresses the id array from one hoisted `mov r9, sp` in both loops,
  * which an inline helper taking the array does not give (it copies the pointer at each use, 115 lines). */
 #include "common.h"
@@ -74,8 +76,7 @@ void btlTurnEndApplyRegenSkills(BtlMainStateA *battle)
                         mp += 7.0f;
                         break;
                     case REGEN_FULL:
-                        hp = 100.0f;
-                        mp = 100.0f;
+                        hp = mp = 100.0f;
                         break;
                     case REGEN_HP_5:
                         hp += 5.0f;
@@ -106,9 +107,10 @@ void btlTurnEndApplyRegenSkills(BtlMainStateA *battle)
         u8 count = gameGetSlotTable()->count;
         SaveSlotTableA *table = gameGetSlotTable();
         for (s32 position = 0; position < count; position++) {
-            f32 hp = 0.0f;
-            f32 mp = 0.0f;
             SlotRecordA *unit;
+
+            hp = 0.0f;
+            mp = 0.0f;
             if (table->party[position] >= 0 && (unit = gameGetSlotRecord(table->party[position])) != NULL) {
                 for (s32 i = 0; i < 10; i++) {
                     skills[i] = 0;
@@ -126,8 +128,7 @@ void btlTurnEndApplyRegenSkills(BtlMainStateA *battle)
                                 mp += 7.0f;
                                 break;
                             case REGEN_FULL:
-                                hp = 100.0f;
-                                mp = 100.0f;
+                                hp = mp = 100.0f;
                                 break;
                             case REGEN_HP_5:
                                 hp += 5.0f;

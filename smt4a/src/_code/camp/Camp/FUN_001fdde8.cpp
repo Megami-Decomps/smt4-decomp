@@ -5,6 +5,8 @@
 #include "event/2dEvent/SmokeFade.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/CampMenuEntry.h"
+#include "camp/CampCec/CampCecSetting.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
@@ -32,7 +34,6 @@ int useCounterAppendValue(...);
 int sortMenuAcquire(...);
 int stateAtF4Apply(void);
 int uiScrollHandleActionsOrTouch(...);
-int cecRecordSetEquipment(...);
 int FUN_0036cf98(...);
 int FUN_0038b57c(...);
 int FUN_0038b5fc(...);
@@ -41,7 +42,6 @@ int sysPlayVoice(...);
 int FUN_003df7c4(...);
 
 int asdMemoryAllocTraced(...);
-int gameGetPlayerData(void);
 int statusPanelSetOpen(int);
 int gameGlobalsSetSceneState(...);
 int statusCameraRestore(...);
@@ -73,10 +73,6 @@ extern unsigned char LAB_001fe2e8; /* 0x1fe2e8 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_camp; /* 0x57f108 */
 
-#ifndef ROMWRIGHT_PIECE_2_2_DEFINED
-#define ROMWRIGHT_PIECE_2_2_DEFINED
-#define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
-#endif
 /* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned short ifTouchGetButtonHelpValue(void);
@@ -98,7 +94,6 @@ extern int resourceRunOperationIfUnblocked(int);
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: campTouchRegionsRemoveGroup. */
-extern unsigned int campCecGetOwnRecord(void);
 extern int widgetSubCallIfVisible(int);
 /* Supplied declaration required: gameGlobalsSetSceneState. */
 /* Supplied declaration required: campListRegisterTouchRegions. */
@@ -115,7 +110,6 @@ extern int widgetSubCallIfVisible(int);
 /* Supplied declaration required: stateAtF4Apply. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: objBSetWordByIndex. */
-/* Supplied declaration required: cecRecordSetEquipment. */
 extern int FUN_0036cf78(void);
 /* Supplied declaration required: FUN_0036cf98. */
 /* Supplied declaration required: gameGlobalsQueueValues. */
@@ -154,11 +148,10 @@ void FUN_001fdde8(int param_1)
   short temp_v0;
   unsigned char temp_v1;
   unsigned short temp_v2;
-  short *psVar4;
+  u16 *psVar4;
   unsigned int temp_v3;
   int temp_v4;
   int temp_v5;
-  unsigned int *puVar8;
   int temp_v6;
   short temp_v7;
   int temp_v8;
@@ -171,7 +164,7 @@ void FUN_001fdde8(int param_1)
   char temp_v14 [16];
   
   temp_v5 = g_camp;
-  psVar4 = (short *)gameGetPlayerData();
+  psVar4 = gameGetPlayerData()->equipment;
   temp_v10 = (unsigned int)(param_1 - 0x48U < 7);
   temp_v13 = 0;
   temp_v9 = 0;
@@ -377,7 +370,6 @@ void FUN_001fdde8(int param_1)
     temp_v4 = temp_v13;
     uiScrollHandleActionsOrTouch(temp_v13,temp_v3,temp_v5 + 0x1b3e,(int)*(short *)(temp_v5 + 0x1b34),temp_v8,
                  (int)*(short *)(temp_v5 + 0x1b38),temp_v14,0,1);
-    temp_v2 = (unsigned short)((unsigned int)temp_v8 >> 0x10);
     if (temp_v4 != 0) {
       campShowSelectedEntryHelp(param_1);
       if (temp_v10 != 0) {
@@ -443,9 +435,8 @@ void FUN_001fdde8(int param_1)
         return;
       }
       if (temp_v10 != 0) {
-        puVar8 = (unsigned int *)gameGetPlayerData();
-        temp_v3 = campCecGetOwnRecord();
-        cecRecordSetEquipment(temp_v3,*puVar8,puVar8[1],puVar8[2],romwright_piece_2_2(temp_v2,*(unsigned short *)(puVar8 + 3)));
+        PlayerDataA *player = gameGetPlayerData();
+        cecRecordSetEquipment(campCecGetOwnRecord(), player->streetPassEquipment);
         stateAtF4Apply();
       }
       else {

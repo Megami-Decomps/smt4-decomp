@@ -1,49 +1,40 @@
-/* NON_MATCHING: inverse-extent encodes now match (gpuViewportEncodeInverse); remaining: retail derives the command-header constants arithmetically (orr/add from two loaded words) and issues the stores as post-increment + writeback/strd mix, and converts width before height */
+/* NON_MATCHING: 31 lines, all in the command words: retail post-increments the cursor over the first three words,
+ * stores 0xF0042 with the half height in one strd and derives 0x70043, 0xF0044 and 0xF0068 from the two headers it
+ * loads; this build stores the first pair at [0]/[4] and loads 0xF0044 itself. Written `*cursor++` (as retail's first
+ * stores suggest), the build loads all four headers and swaps the width/height VFP registers (45 lines). */
 #include "gfx/ViewportEncoding.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
-
-
-static __inline u32 encodeInverseExtent(f32 value)
-{
-    GpuFloatEncoding encoding;
-    encoding.value = value;
-    s32 exponent = encoding.bits & 0x7FFFFFFF;
-    u32 fraction;
-    if (exponent != 0) {
-        fraction = encoding.ieee.fraction;
-        exponent = ((encoding.bits >> 23) & 0xFF) - 64;
-        if (exponent < 0) {
-            return encoding.ieee.sign << 30;
-        }
-    } else {
-        fraction = encoding.ieee.fraction;
-    }
-    return fraction | (static_cast<u32>(exponent) << 23) | (encoding.ieee.sign << 30);
-}
+#include "shard/W6_W6Match5_ShaderBinding.h"
 
 extern "C" {
-void asdModelCommitCommandRange(u32* begin, u32* end);
 
+/* Sets the GPU viewport origin and scale for the given pixel rectangle. */
 void asdGxSetViewport(u32 x, s32 y, s32 width, s32 height)
 {
-    f32 widthValue = static_cast<f32>(width);
-    f32 heightValue = static_cast<f32>(height);
+    f32 widthValue = (f32)width;
+    f32 heightValue = (f32)height;
     u32 halfWidth = gpuViewportEncode<16>(widthValue * 0.5f);
-    u32 inverseWidth = encodeInverseExtent(2.0f / widthValue) << 1;
+    u32 inverseWidth = gpuViewportEncodeInverse(2.0f / widthValue) << 1;
     u32 halfHeight = gpuViewportEncode<16>(heightValue * 0.5f);
-    u32 inverseHeight = encodeInverseExtent(2.0f / heightValue) << 1;
-    u32* begin = reinterpret_cast<u32 *>(asdGxGetCommandCursor());
-    u32* cursor = begin;
-    *cursor++ = halfWidth;
-    *cursor++ = 0x70041;
-    *cursor++ = inverseWidth;
-    *cursor++ = 0xF0042;
-    *cursor++ = halfHeight;
-    *cursor++ = 0x70043;
-    *cursor++ = inverseHeight;
-    *cursor++ = 0xF0044;
-    *cursor++ = x | (static_cast<u32>(y) << 16);
-    *cursor++ = 0xF0068;
-    asdModelCommitCommandRange(begin, cursor);
+    u32 inverseHeight = gpuViewportEncodeInverse(2.0f / heightValue) << 1;
+    u32 *begin = (u32 *)asdGxGetCommandCursor();
+    u32 *cursor = begin;
+    cursor[0] = halfWidth;
+    cursor[1] = GPU_VIEWPORT_CMD_HALF_WIDTH;
+    cursor += 2;
+    cursor[0] = inverseWidth;
+    cursor[1] = GPU_VIEWPORT_CMD_INVERSE_WIDTH;
+    cursor += 2;
+    cursor[0] = halfHeight;
+    cursor[1] = GPU_VIEWPORT_CMD_HALF_HEIGHT;
+    cursor += 2;
+    cursor[0] = inverseHeight;
+    cursor[1] = GPU_VIEWPORT_CMD_INVERSE_HEIGHT;
+    cursor += 2;
+    cursor[0] = x | ((u32)y << 16);
+    cursor[1] = GPU_VIEWPORT_CMD_ORIGIN;
+    cursor += 2;
+    asdModelCommitCommandRange((u32)begin, (u32)cursor);
 }
-}
+
+} /* extern "C" */

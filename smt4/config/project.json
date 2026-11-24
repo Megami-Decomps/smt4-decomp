@@ -6062,7 +6062,17 @@
       "size": 72,
       "source": "src/_code/0012/FUN_001200e8.cpp",
       "target": "orig/target/_code/0012/FUN_001200e8.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime"
+      ]
     },
     {
       "address": "0x120134",
@@ -8717,12 +8727,12 @@
     },
     {
       "address": "0x12d1c4",
-      "function": "FUN_0012d1c4",
+      "function": "asdSceneCreateQueueComponent",
       "module": "_code",
-      "object": "build/obj/_code/0012/FUN_0012d1c4.o",
+      "object": "build/obj/_code/0012/asdSceneCreateQueueComponent.o",
       "size": 52,
-      "source": "src/_code/0012/FUN_0012d1c4.cpp",
-      "target": "orig/target/_code/0012/FUN_0012d1c4.o",
+      "source": "src/_code/0012/asdSceneCreateQueueComponent.cpp",
+      "target": "orig/target/_code/0012/asdSceneCreateQueueComponent.o",
       "thumb": false
     },
     {
@@ -12242,33 +12252,63 @@
     },
     {
       "address": "0x142fcc",
-      "function": "FUN_00142fcc",
+      "function": "gxAddDisplayTransferCommand",
       "module": "_code",
-      "object": "build/obj/_code/0014/FUN_00142fcc.o",
+      "object": "build/obj/_code/0014/gxAddDisplayTransferCommand.o",
       "size": 32,
-      "source": "src/_code/0014/FUN_00142fcc.cpp",
-      "target": "orig/target/_code/0014/FUN_00142fcc.o",
-      "thumb": false
+      "source": "src/_code/0014/gxAddDisplayTransferCommand.cpp",
+      "target": "orig/target/_code/0014/gxAddDisplayTransferCommand.o",
+      "thumb": false,
+      "cflags": [
+        "--cpu=5TE",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime"
+      ]
     },
     {
       "address": "0x142fec",
-      "function": "FUN_00142fec",
+      "function": "gxAddMemoryFillCommand",
       "module": "_code",
-      "object": "build/obj/_code/0014/FUN_00142fec.o",
+      "object": "build/obj/_code/0014/gxAddMemoryFillCommand.o",
       "size": 32,
-      "source": "src/_code/0014/FUN_00142fec.cpp",
-      "target": "orig/target/_code/0014/FUN_00142fec.o",
-      "thumb": false
+      "source": "src/_code/0014/gxAddMemoryFillCommand.cpp",
+      "target": "orig/target/_code/0014/gxAddMemoryFillCommand.o",
+      "thumb": false,
+      "cflags": [
+        "--cpu=5TE",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime"
+      ]
     },
     {
       "address": "0x14300c",
-      "function": "FUN_0014300c",
+      "function": "gxAddTextureCopyCommand",
       "module": "_code",
-      "object": "build/obj/_code/0014/FUN_0014300c.o",
+      "object": "build/obj/_code/0014/gxAddTextureCopyCommand.o",
       "size": 32,
-      "source": "src/_code/0014/FUN_0014300c.cpp",
-      "target": "orig/target/_code/0014/FUN_0014300c.o",
-      "thumb": false
+      "source": "src/_code/0014/gxAddTextureCopyCommand.cpp",
+      "target": "orig/target/_code/0014/gxAddTextureCopyCommand.o",
+      "thumb": false,
+      "cflags": [
+        "--cpu=5TE",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime"
+      ]
     },
     {
       "address": "0x14302c",
@@ -54805,12 +54845,12 @@
     },
     {
       "address": "0x2ad1e0",
-      "function": "FUN_002ad1e0",
+      "function": "sysLightEventTryWait",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002ad1e0.o",
+      "object": "build/obj/_code/002a/sysLightEventTryWait.o",
       "size": 4,
-      "source": "src/_code/002a/FUN_002ad1e0.cpp",
-      "target": "orig/target/_code/002a/FUN_002ad1e0.o",
+      "source": "src/_code/002a/sysLightEventTryWait.cpp",
+      "target": "orig/target/_code/002a/sysLightEventTryWait.o",
       "thumb": false
     },
     {
@@ -54966,12 +55006,12 @@
     },
     {
       "address": "0x2ad80c",
-      "function": "FUN_002ad80c",
+      "function": "archivePathDeviceCreateFile",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002ad80c.o",
+      "object": "build/obj/_code/002a/archivePathDeviceCreateFile.o",
       "size": 120,
-      "source": "src/_code/002a/FUN_002ad80c.cpp",
-      "target": "orig/target/_code/002a/FUN_002ad80c.o",
+      "source": "src/_code/002a/archivePathDeviceCreateFile.cpp",
+      "target": "orig/target/_code/002a/archivePathDeviceCreateFile.o",
       "thumb": false
     },
     {
@@ -56721,12 +56761,12 @@
     },
     {
       "address": "0x2b6b8c",
-      "function": "FUN_002b6b8c",
+      "function": "gauntletAppDrawCategoryLabel",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002b6b8c.o",
+      "object": "build/obj/_code/002b/gauntletAppDrawCategoryLabel.o",
       "size": 144,
-      "source": "src/_code/002b/FUN_002b6b8c.cpp",
-      "target": "orig/target/_code/002b/FUN_002b6b8c.o",
+      "source": "src/_code/002b/gauntletAppDrawCategoryLabel.cpp",
+      "target": "orig/target/_code/002b/gauntletAppDrawCategoryLabel.o",
       "thumb": false
     },
     {
@@ -62254,12 +62294,12 @@
     {
       "address": "0x2cb8d8",
       "file": "AsdSDK/Source/Sys/File/AsdLoadFile",
-      "function": "FUN_002cb8d8",
+      "function": "asdLoadFileExists",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Sys/File/AsdLoadFile/FUN_002cb8d8.o",
+      "object": "build/obj/_code/AsdSDK/Source/Sys/File/AsdLoadFile/asdLoadFileExists.o",
       "size": 488,
-      "source": "src/_code/AsdSDK/Source/Sys/File/AsdLoadFile/FUN_002cb8d8.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Sys/File/AsdLoadFile/FUN_002cb8d8.o",
+      "source": "src/_code/AsdSDK/Source/Sys/File/AsdLoadFile/asdLoadFileExists.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Sys/File/AsdLoadFile/asdLoadFileExists.o",
       "thumb": false
     },
     {
@@ -67599,12 +67639,12 @@
     },
     {
       "address": "0x2e8be0",
-      "function": "FUN_002e8be0",
+      "function": "lmapCaveOverviewStep",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002e8be0.o",
+      "object": "build/obj/_code/002e/lmapCaveOverviewStep.o",
       "size": 1020,
-      "source": "src/_code/002e/FUN_002e8be0.cpp",
-      "target": "orig/target/_code/002e/FUN_002e8be0.o",
+      "source": "src/_code/002e/lmapCaveOverviewStep.cpp",
+      "target": "orig/target/_code/002e/lmapCaveOverviewStep.o",
       "thumb": false
     },
     {
@@ -80897,12 +80937,12 @@
     },
     {
       "address": "0x340ad4",
-      "function": "FUN_00340ad4",
+      "function": "enemyRenderTexSetup",
       "module": "_code",
-      "object": "build/obj/_code/0034/FUN_00340ad4.o",
+      "object": "build/obj/_code/0034/enemyRenderTexSetup.o",
       "size": 424,
-      "source": "src/_code/0034/FUN_00340ad4.cpp",
-      "target": "orig/target/_code/0034/FUN_00340ad4.o",
+      "source": "src/_code/0034/enemyRenderTexSetup.cpp",
+      "target": "orig/target/_code/0034/enemyRenderTexSetup.o",
       "thumb": false
     },
     {
@@ -90017,12 +90057,12 @@
     },
     {
       "address": "0x36a100",
-      "function": "_ZN9Obj4214ec7vfunc00Ev",
+      "function": "_ZN9Obj4214ecD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0036/Obj4214ec__vfunc00.o",
+      "object": "build/obj/_code/0036/Obj4214ec__dtor_Obj4214ec.o",
       "size": 4,
-      "source": "src/_code/0036/Obj4214ec__vfunc00.cpp",
-      "target": "orig/target/_code/0036/Obj4214ec__vfunc00.o",
+      "source": "src/_code/0036/Obj4214ec__dtor_Obj4214ec.cpp",
+      "target": "orig/target/_code/0036/Obj4214ec__dtor_Obj4214ec.o",
       "thumb": false
     },
     {
@@ -90570,12 +90610,12 @@
     },
     {
       "address": "0x36ec8c",
-      "function": "FUN_0036ec8c",
+      "function": "textureBuildFileFromConfig",
       "module": "_code",
-      "object": "build/obj/_code/0036/FUN_0036ec8c.o",
+      "object": "build/obj/_code/0036/textureBuildFileFromConfig.o",
       "size": 620,
-      "source": "src/_code/0036/FUN_0036ec8c.cpp",
-      "target": "orig/target/_code/0036/FUN_0036ec8c.o",
+      "source": "src/_code/0036/textureBuildFileFromConfig.cpp",
+      "target": "orig/target/_code/0036/textureBuildFileFromConfig.o",
       "thumb": false
     },
     {

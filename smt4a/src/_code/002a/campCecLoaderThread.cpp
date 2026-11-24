@@ -49,7 +49,6 @@ u8 saveFlagGet27e1f(void);
 void ownerSetName(CampCecReceivedRecord *record, const u16 *name);
 void saveGetEquipment(CecProfile *equipment);
 u8 FUN_002a46b8(void);
-void cecRecordSetEquipment(CampCecReceivedRecord *record, ...);
 s32 gameDataGetRecordValue(void);
 void slotNameDisplaySetEntry(CampCecReceivedRecord *record, s32 demonId);
 u32 gameDataBlocksGetWord27E8C(void);

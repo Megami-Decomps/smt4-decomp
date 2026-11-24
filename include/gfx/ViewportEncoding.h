@@ -2,8 +2,17 @@
 #define GFX_VIEWPORTENCODING_H
 #include "shard/W6_W6Match8_GpuDepth.h"
 
-// Viewport half-extents use 16 fraction bits; inverse extents use 23.
-// Both formats use a seven-bit exponent biased by 63 and flush underflow.
+/* PICA register-write headers: half-extents enable three byte lanes; reciprocals and origin use all four. */
+enum {
+    GPU_VIEWPORT_CMD_HALF_WIDTH = 0x70041,
+    GPU_VIEWPORT_CMD_INVERSE_WIDTH = 0xF0042,
+    GPU_VIEWPORT_CMD_HALF_HEIGHT = 0x70043,
+    GPU_VIEWPORT_CMD_INVERSE_HEIGHT = 0xF0044,
+    GPU_VIEWPORT_CMD_ORIGIN = 0xF0068
+};
+
+/* Viewport half-extents use 16 fraction bits; inverse extents use 23.
+ * Both formats use a seven-bit exponent biased by 63 and flush underflow. */
 template <u32 FractionBits>
 static __inline u32 gpuViewportEncode(f32 value)
 {
@@ -20,7 +29,7 @@ static __inline u32 gpuViewportEncode(f32 value)
         (static_cast<u32>(exponent) << FractionBits) |
         (encoding.ieee.sign << (FractionBits + 7));
 }
-// Inverse extents use 23 fraction bits. The fraction is read in both arms, as retail's code does.
+/* Inverse extents use 23 fraction bits. The fraction is read in both arms, as retail does. */
 static __inline u32 gpuViewportEncodeInverse(f32 value)
 {
     GpuFloatEncoding encoding;

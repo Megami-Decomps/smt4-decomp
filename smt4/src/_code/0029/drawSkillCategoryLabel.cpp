@@ -1,3 +1,4 @@
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "code/Code001b.h"
 #include "quest_center/QuestRecord.h"
 
@@ -5,7 +6,7 @@ extern "C" {
 u32 questIsCompleted(s32 skill);
 s32 idIsAtLeast350(s32 skill);
 void drawSetColorFromRGBA8(u32);
-void texTableRecordCallWithParams(u32, u32, s32, u32, u32, u32);
+
 void gxResetColorQuadToWhite(void);
 
 /* Draw the category label, using the alternate color/record for flagged skills. */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads g_gameState's address at entry (before the work clear) and the clear's base register is r1, not r0; the rest matches. */
+/* NON_MATCHING: retail loads g_gameState's address at entry (before the work clear) and the clear's base register is r1, not r0; the rest matches. Wave 89: clearing the model through a function-scope `MapSingleModelState *` taken from `work` (as placementUpdateSceneState writes the model) while the placement block keeps its own pointer gives 4 lines (the clear moves to r1; only the g_gameState address load stays late), but the same pointer in a block scope gives 28 and reusing one pointer 36, so the form is scope-sensitive and not kept. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "map/SingleModelState.h"
 #include "game/GameState.h"

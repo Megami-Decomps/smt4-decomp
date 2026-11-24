@@ -1,52 +1,22 @@
-/* NON_MATCHING: 15 lines. (1) Retail passes the record search's three accessor calls a scratch object at sp+4 (the slot
-   it later reuses for listScrollerInitialize's sixth argument) and the two child calls one at sp+88; this build passes
-   sp+88 to all five. (2) In the last loop retail sets rows to 9 before the loop and again next to its `moveq r1, #10`
-   at the bottom; this build sets it once at the loop top. */
+/* NON_MATCHING: 15 lines. (1) Retail passes the record search's three accessor calls a scratch object at sp+4 (the
+   slot it later reuses for listScrollerInitialize's sixth argument) and the two child calls one at sp+88; this build
+   passes one object to all five. The search is written in place as in the module's FUN_003a0d64 (IDENTICAL so):
+   Apocalypse's placeTextFindRecord search as an inline with its own scratch object gives retail's two slots here
+   (9 lines) but costs FUN_003a0d64 14 lines unless it reads both fields into single-use locals, so it is not kept
+   (wave 89 review); two handles in place give 43. (2) In the last loop retail sets rows to 9 before the loop and
+   again next to its `moveq r1, #10` at the bottom; this build sets it once at the loop top. A single-use inline
+   returning the row count (`s32 rows = 9; if (i == 7 || i == 8) rows = 10; return rows;`) passed straight to
+   listScrollerInitialize is IDENTICAL here and in the Apocalypse twin, but no real function has that body. */
 #include "common.h"
 #include "shop/CellList.h"
 #include "quest_center/QuestUnlockConditions.h"
+#include "gamedata/PlaceRecordTable.h"
+#include "shop/PlaceScene.h"
 #include "AsdSDK/AsdDebugHooks.h"
-
-#define PLACE_TAB_COUNT 9
-
-/* A record of data table 0x17/1 (0x68 bytes). */
-struct PlaceListRecord {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ s32 key;
-    /* 0x24 */ u16 kind;
-    /* 0x26 */ u8 unk26[0x42];
-};
-
-/* The cursor of one tab's list window (0x74 bytes). */
-struct PlaceListCursor {
-    /* 0x00 */ u8 unk00[0xD];
-    /* 0x0D */ u8 enabled;
-    /* 0x0E */ u8 unk0E[0x66];
-};
-
-/* The place window's work area (only the fields the tab lists touch). */
-struct PlaceListScene {
-    /* 0x0000 */ u8 unk0000[0x14];
-    /* 0x0014 */ u8 placeKind;
-    /* 0x0015 */ u8 unk0015[3];
-    /* 0x0018 */ s32 placeKey;
-    /* 0x001C */ u8 unk001C[0x864];
-    /* 0x0880 */ PlaceListCursor cursors[PLACE_TAB_COUNT];
-    /* 0x0C94 */ CellList tabs[PLACE_TAB_COUNT];
-};
-
-/* The scratch object the data table 0x17/1 accessors take (and ignore) as their first argument. */
-struct Table17Handle {
-    u32 unused;
-};
 
 extern "C" {
 
 u16 *statisticsGetCounter(u8 bank, u32 row, u32 column);
-PlaceListRecord *dataTable17Sub1GetRecord(Table17Handle *ignored, s32 index);
-s32 dataTable17Sub1GetCount(Table17Handle *ignored);
-const QuestUnlockConditions *dataTable17Sub1ChildGetEntries(Table17Handle *ignored, s32 index);
-s32 dataTable17Sub1ChildGetCount(Table17Handle *ignored, s32 index);
 u32 questEvaluateUnlockConditions(const QuestUnlockConditions *conditions);
 s32 gameTestIndexedAuxiliaryFlag(s32 index);
 u32 contentGetEntryKind(u32 id);
@@ -55,9 +25,8 @@ void listCursorSetPage(PlaceListCursor *cursor, s32 page);
 
 /* Fills the nine tab lists of the place window with the entries of the current place, flags those
  * that are locked or unseen, and opens their list windows. Returns whether any entry is active. */
-u32 FUN_003a45fc(PlaceListScene *scene)
+u32 FUN_003a45fc(PlaceScene *scene)
 {
-    Table17Handle table;
     u32 anyActive = 0;
 
     for (s32 i = 0; i < PLACE_TAB_COUNT; i++) {
@@ -65,10 +34,11 @@ u32 FUN_003a45fc(PlaceListScene *scene)
         tab->count = 0;
     }
 
+    Table17Handle table;
     u32 kind = scene->placeKind;
     s32 key = scene->placeKey;
     s32 found = -1;
-    PlaceListRecord *records = dataTable17Sub1GetRecord(&table, 0);
+    PlaceRecord *records = dataTable17Sub1GetRecord(&table, 0);
     for (s32 i = 0; i < dataTable17Sub1GetCount(&table); i++) {
         if (records[i].kind == kind && records[i].key == key) {
             found = i;
@@ -79,12 +49,11 @@ u32 FUN_003a45fc(PlaceListScene *scene)
     const QuestUnlockConditions *entries = dataTable17Sub1ChildGetEntries(&table, found);
     s32 count = dataTable17Sub1ChildGetCount(&table, found);
     for (s32 i = 0; i < count; i++) {
-        const QuestUnlockConditions *entry = &entries[i];
-        u32 id = entry->unk00;
+        u32 id = entries[i].unk00;
         if (id == 0) {
             break;
         }
-        u32 state = questEvaluateUnlockConditions(entry);
+        u32 state = questEvaluateUnlockConditions(&entries[i]);
         if (state != 0) {
             u16 locked = 0;
             s16 active = 0;

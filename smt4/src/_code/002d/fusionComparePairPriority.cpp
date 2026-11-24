@@ -14,17 +14,12 @@ static __inline s32 comparePairMember(u16 firstId, u16 secondId)
     return result;
 }
 
-// Sort fusion pairs by descending priority, then the race/level/id of each ingredient.
+/* Sorts fusion pairs by descending priority, then by each ingredient's race, level and ID. */
 extern "C" s32 fusionComparePairPriority(const u16 *first, const u16 *second)
 {
-    struct PairPriorityView {
-        u8 unk0000[0x78a0];
-        s32 priorities[1]; // 0x78a0
-    };
-    UniteWork *work = g_unite;
-    const PairPriorityView *priority = reinterpret_cast<const PairPriorityView *>(work);
-    s32 result = priority->priorities[*second] - priority->priorities[*first];
+    s32 result = g_unite->pairScoresIV.scores[*second] - g_unite->pairScoresIV.scores[*first];
     if (result == 0) {
+        const UniteWork *work = g_unite;
         result = comparePairMember(work->pairListIV.pairs[*first].firstId,
                                    work->pairListIV.pairs[*second].firstId);
         if (result == 0) {

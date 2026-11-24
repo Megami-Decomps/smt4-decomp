@@ -1,4 +1,4 @@
-/* NON_MATCHING: the request reset (strb, member ctor, owner recovery, ldrd/strd) now matches retail; remaining: retail loads the g_aocMain address first, forwards the freshly built request fields from registers when copying it into the menu (ldr/ldm/stm pieces) where this build copies the whole object with one ldm/stm, and reuses r1 for the constant 2. */
+/* NON_MATCHING: the request reset (strb, member ctor, owner recovery, ldrd/strd) now matches retail; remaining: retail loads the g_aocMain address first, forwards the freshly built request fields from registers when copying it into the menu (ldr/ldm/stm pieces) where this build copies the whole object with one ldm/stm. */
 #include "classes/AocMenu.h"
 #include "AsdSDK/AsdLoadFileSyncDefault.h"
 #include "addon/aocMain.h"
@@ -6,6 +6,8 @@
 #include <stddef.h>
 #include "event/bustupEvent/BustupTex.h"
 #include "addon/AocSystemA.h"
+#include "script/scrScriptProcess.h"
+
 
 extern "C" {
 extern const char DAT_00526444[];
@@ -38,14 +40,9 @@ void AocMenu::openPurchaseList()
     tableValue = dataTableValueOrZero(0x40);
     /* The owner word is a table value here, not a pointer. */
     script = scrScriptProcessCreate(tableFile, reinterpret_cast<void *>(tableValue));
-    script->mode = 2;
-    step = 1;
-    substep = 0;
-    if (window != NULL) {
-        delete window;
-        window = NULL;
-    }
-    g_aocMain->flags &= ~0x70u;
+    scriptProcessSetMode(script, 2);
+    aocMenuChangeStep(this, 1);
+    aocMainClearResult(g_aocMain);
     g_aocMain->mode = 2;
     sysMemClear(prompt, sizeof(prompt));
     __aeabi_memcpy4(prompt, "Please select content to purchase.", 35);

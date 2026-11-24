@@ -1,3 +1,4 @@
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "npc_room/NpcRoom.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
@@ -5,7 +6,7 @@
 extern "C" {
 
 void FUN_00285584(u32 job, s32 a, s32 b);
-void texTableRecordCallWithParams(s32 a, s32 b, u32 c, s32 d, s32 e, s32 f);
+
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 value);
 
 extern NpcRoom *g_npcRoom;

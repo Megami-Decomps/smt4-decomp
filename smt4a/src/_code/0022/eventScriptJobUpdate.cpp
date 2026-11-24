@@ -1,9 +1,4 @@
-/* NON_MATCHING: 6 rows: the pool holds g_aocMain before g_aocJob where retail has them the other way round
- * (the two entry loads and their registers agree; IV's twin has the same difference). armcc numbers pool words in
- * the order it generates the loads, before it moves one up to separate a load from its use: retail generated
- * g_aocJob's first. Testing the busy bits in an inlined `static __inline bool aocMainIsBusy(const AocMain *main)`
- * gives that order, but then the request and g_aocSystem swap r6 and r7 in state 0 (16 rows), so it is not used.
- * Retail's `mov r0, #0` at 0x22600c is the inlined eventScriptFindCompletionFlag stub (config/inlined.txt). */
+/* Retail's `mov r0, #0` at 0x22600c is the inlined eventScriptFindCompletionFlag stub (config/inlined.txt). */
 #include <stdio.h>
 #include "event/EventScriptJob.h"
 #include "addon/aocMain.h"
@@ -52,7 +47,6 @@ void byteTableASetValue(s8 value);
 s32 byteTableAGetValue3(void);
 void byteTableASetValue3(s8 value);
 s32 eventIsSkipping(void);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 tableGroupFindEntryIndex(void *commands, const char *name);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 /* The game flag an event entry raises when it ends. Apocalypse's is a stub returning 0 that armlink
@@ -72,7 +66,7 @@ static __inline void eventJobStop(void)
 {
     asdDebugHookVoid();
     jobStop(g_aocJob->job, 0);
-    g_aocMain->flags &= ~0x70;
+    aocMainClearResult(g_aocMain);
 }
 
 /* FUN_003ca208(): forgets the jobs the script dims. */
@@ -92,9 +86,7 @@ extern "C" s32 eventScriptJobUpdate(u32 job)
     char messagesPath[128];
     EventScriptJobWork *work = g_aocJob;
     AocMain *main = g_aocMain;
-    if (main->flags & 4)
-        return 0;
-    if (main->flags & 8)
+    if (aocMainIsBusy(main))
         return 0;
 
     switch (work->state) {
@@ -203,18 +195,15 @@ extern "C" s32 eventScriptJobUpdate(u32 job)
         break;
     case 95:
         if (pairedAvailabilityBothReady()) {
-            main = g_aocMain;
-            u32 flags = main->flags;
-            if (flags & 4)
+            if (aocMainIsBusy(g_aocMain))
                 return 0;
-            if (flags & 8)
-                return 0;
-            main->flags = flags & ~0x70;
-            aocBootResetAndReleaseBuffers(&main->scriptHolder, 0);
+            aocMainClearResult(g_aocMain);
+            aocBootResetAndReleaseBuffers(&g_aocMain->scriptHolder, 0);
             work->state = 96;
         }
         return 0;
     case 96:
+        /* retail still has the pointer read at entry here (no reload); after the call it reads the global again */
         if (scriptHolderUpdateForward(&main->scriptHolder)) {
             scriptHolderFree2(&g_aocMain->scriptHolder);
             if (gameBlockByte27E98Is1To3())

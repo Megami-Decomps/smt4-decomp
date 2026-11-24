@@ -336,12 +336,8 @@
 0x0012ca58 FUN_0012ca58 callers
 0x0012cf30 FUN_0012cf30 between
 0x0012cf68 nw_gfx_SceneEnvironment_SceneEnvironment_sub_object name
-0x0012d1fc FUN_0012d1fc between
-0x0012d318 FUN_0012d318 between
 0x0012d3f0 nw_gfx_SceneEnvironmentSetting_GetMemorySizeInternal name
 0x0012d520 FUN_0012d520 callers
-0x0012d5e0 FUN_0012d5e0 between
-0x0012d618 FUN_0012d618 between
 0x0012d714 FUN_0012d714 callers
 0x0012d9b0 nw_gfx_Fog_DestroyResFog name
 0x0012da78 nw_gfx_Fog_GetMemorySizeInternal name
@@ -2366,7 +2362,7 @@
 0x0036e434 nw_gfx_Fog_Accept name
 0x0036eaf0 resourceDispatchResolvePayload callers
 0x0036ebc0 FUN_0036ebc0 callers
-0x0036ec8c FUN_0036ec8c between
+0x0036ec8c textureBuildFileFromConfig between
 0x0036ef0c FUN_0036ef0c library
 0x0036efa8 FUN_0036efa8 callers
 0x0036f0c8 FUN_0036f0c8 callers

@@ -1,14 +1,12 @@
-#include "common.h"
+#include "gamedata/PlaceRecordTable.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
-int dataTableGetCount(void);
-int dataTableGet(int id, int index);
-
-void dataTable17Sub1GetCount(void)
+/* The number of place records of data table 0x17 (section 1). */
+s32 dataTable17Sub1GetCount(Table17Handle *ignored)
 {
-    dataTableGet(0x17, 1);
-    dataTableGetCount();
+    return dataTableGetCount(dataTableGet(0x17, 1));
 }
 
 } /* extern "C" */

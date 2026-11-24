@@ -1,4 +1,4 @@
-/* NON_MATCHING: instruction scheduling only: retail hoists `mov r1, #10` above the conditional color select and loads 1.0f before `mov r2, #1`. */
+/* NON_MATCHING: instruction scheduling only: retail hoists `mov r1, #10` above the conditional color select and loads 1.0f before `mov r2, #1`. Tried (wave 89): the colour in a local, if/else, a default with override, switch, an early return, a call per branch (hoists the 10 but cross-jumps the return), u32/s32/bool/u8 returns, narrower duration/fadeIn types, every parameter order (paramorder.py), -O2 and multifile. */
 #include "event/eventCommand.h"
 #include "script/ScriptArgs.h"
 

@@ -9,6 +9,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 #include "addon/AocSystem.h"
 
+
 namespace {
 struct AocPurchaseMenu {
     u32 unk000;
@@ -59,7 +60,7 @@ void AocMenu::openPurchaseList()
     menu->scriptFile = fileLoadSync(DAT_003ff148, &fileSize, 0);
     menu->scriptBuffer = fileSlotGetBuffer(0x41);
     menu->script = scrScriptProcessCreate(menu->scriptFile, menu->scriptBuffer);
-    menu->script->mode = 2;
+    scriptProcessSetMode(menu->script, 2);
     menu->state = 1;
     menu->substate = 0;
     if (menu->window != NULL) {
@@ -67,7 +68,7 @@ void AocMenu::openPurchaseList()
         menu->window = NULL;
     }
     AocMain *main = g_aocMain;
-    main->flags &= ~0x70u;
+    aocMainClearResult(main);
     main->mode = 2;
     memClear(menu->prompt, sizeof(menu->prompt));
     __aeabi_memcpy4(menu->prompt, "Please select content to purchase.", 0x23);

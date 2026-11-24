@@ -28,9 +28,9 @@ void btlCameraStartMove(MovingObject *object, u32 value)
     object->unk728 = 0;
     object->flags |= 0x80000;
 
-    f32 dz = object->from.z - object->to.z;
     f32 dx = object->from.x - object->to.x;
     f32 dy = object->from.y - object->to.y;
+    f32 dz = object->from.z - object->to.z;
     f32 distance = sqrtf(dx * dx + dy * dy + dz * dz);
 
     if (distance >= -0.01f && distance <= 0.01f) {

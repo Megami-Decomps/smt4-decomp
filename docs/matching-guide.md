@@ -703,6 +703,10 @@ asks for.
 - When a caller inlines a real function, its out-of-line copy should call the shared inline and stay IDENTICAL:
   `gameSetFlag1E60` (`shard/GameGlobals.h`, FUN_0029dfc0's body written flat; the comma-assigned spelling is 38 lines
   off) made smt4 `campMenuSessionReset` IDENTICAL, `questReadRuntimeFlagInline` the quest-list collectors (wave 82).
+- Not evidence (wave 89 review): a `static __inline` taking `const f32 &` for a block only one twin pair repeats (the
+  text alpha byte, `0`/`255` fast paths else `* 255.0f`): written in place both `asdTextDrawAtInt`s are IDENTICAL.
+  Choosing a shared helper's spelling (or its absence) per unit by score is not one either: `resetRequestOperation`
+  gives smt4a `FUN_0015f0f4` 18 lines and its IV twin 77, so both twins keep the in-place reset.
 - Not evidence (wave 82 review): an inline used only by a twin pair (`partyPanelWriteVisible`; the sibling
   `FUN_00331380` got worse with it, 23 -> 30), and a second spelling of the render-stack pop with the apply test
   written out (smt4a `FUN_0041c1d4`): both out-of-line `renderCtxPopState` copies are IDENTICAL with either spelling,
@@ -813,6 +817,13 @@ asks for.
 - A zero argument retail builds in a register of its own (`mov r6, r7; mov r2, r6`) where the other zero arguments
   are immediates is an empty one-pointer class passed by value: NW's texture `Setup(allocator, ResGraphicsFile)`
   (`nw/gfx/ResGraphicsFile.h`) took smt4a `FUN_00401d18` from 265 to 74 lines (wave 88).
+- An oversized vtable symbol can cover several independent vtables: a creator that constructs the second class stores
+  `_ZTV9Obj421230+0x3c` where its own `_ZTV9Obj421264+8` belongs, and is IDENTICAL only once each `[0, 0, D1]` header
+  has its own sized symbol (smt4 `FUN_0011ffc0`, `FUN_0012cef8` and their smt4a twins, wave 89).
+- A local whose type zeroes itself in a default constructor keeps its own frame slot where a C struct with an
+  initialiser shares the frame: the path conversion's two-word multibyte state (`AsdPathMbState`, armcc's `mbstate_t`
+  shape, for armlib's `mbsinit`/`mbrlen`/`mbrtowc`) gives smt4 `fileExistsPatchOrRom` retail's 832-byte frame (816 as
+  `mbstate_t state = {0, 0};`, wave 89).
 - A create descriptor whose fields retail loads through `r2` right after fetching the allocator is filled as a chain on
   a temporary passed straight to the call, `&TextureCreateInfoIV().setData(..).setWidth(..).setHeight(..)`
   (`shard/W9_W9Match8_WorkRecords.h`): smt4 `FUN_00340ad4` 54 -> 24, `uniteResultLoadTexture` 50 -> 12 (wave 88).
@@ -1037,6 +1048,11 @@ register tie-breaks. Fix the source; don't change the compiler per unit.
   separate stores where -O3 forms an `stm`), IDENTICAL only with it, right after `asdProcessPauseAll`, which carries the
   same flags in both games; the next unit `asdPrimSwapBuffers` (another module) gets worse with it (0 -> 12) and keeps
   the default.
+  Applied (wave 89): the GPU command-buffer forwarders smt4 `FUN_00142fcc`/`FUN_00142fec`/`FUN_0014300c` and their smt4a
+  twins forward seven or eight arguments, copying the stack words through core registers (`ldm`/`stm`); written as the
+  plain forwarding call they are IDENTICAL in both games only without VFP, and take `gxSetBufferSwap`'s existing
+  `--cpu=5TE` set (softvfp gives the same code). `-O2 -Otime` for the twins smt4 `FUN_001200e8`/smt4a `FUN_0015d444`
+  (the owned flag's `1` set after the pointer store), code-identical only with it in both games.
 
 ### `--multifile`
 

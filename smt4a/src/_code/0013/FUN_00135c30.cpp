@@ -93,7 +93,7 @@ int gfxInitDefaultDrawColor(...);
 int asdPrimInit(...);
 int asdFileHashPackOpen(...);
 int asdTMTexTableLoadList(...);
-int FUN_001399b0(...);
+int asdModelInitializeSceneLights(...);
 int gfxSetupResGraphicsFile(...);
 int FUN_00139c90(...);
 int FUN_0013a1e4(...);
@@ -329,7 +329,7 @@ extern int FUN_00138cb4(void);
 extern int FUN_00139828(void);
 /* Supplied declaration required: asdTMTexTableLoadList. */
 extern unsigned long long appletProcessHomeButton(void);
-/* Supplied declaration required: FUN_001399b0. */
+/* Supplied declaration required: asdModelInitializeSceneLights. */
 /* Supplied declaration required: FUN_00139ab0. */
 /* Supplied declaration required: FUN_00139b6c. */
 extern unsigned long long FUN_00139c4c(void);
@@ -520,7 +520,7 @@ void FUN_00135c30(void)
   temp_v44 = 4;
   temp_v43 = 8;
   temp_v45 = 4;
-  FUN_001399b0(&temp_v37,0);
+  asdModelInitializeSceneLights(&temp_v37,0);
   asdLoadFileSyncNoContext(&LAB_0013605c,0,1,0x80);
   gfxSetupResGraphicsFile();
   temp_v3 = FUN_0013a608(1);

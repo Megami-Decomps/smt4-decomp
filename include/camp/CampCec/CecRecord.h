@@ -3,6 +3,7 @@
 #define CAMP_CAMPCEC_CECRECORD_H
 
 #include "common.h"
+#include "camp/CampCec/CecProfile.h"
 #include <stddef.h>
 
 /* A received StreetPass record (100 bytes; the cec inbox batches and the DataStore entries hold the same record):
@@ -28,5 +29,7 @@ typedef struct CampCecReceivedRecord {
 typedef char CampCecReceivedRecordSizeCheck[sizeof(CampCecReceivedRecord) == 100 &&
     offsetof(CampCecReceivedRecord, demon) == 0x50 && sizeof(CecReceivedDemon) == 0x14 &&
     offsetof(CecReceivedDemon, id) == 0x10 ? 1 : -1];
+
+extern "C" void cecRecordSetEquipment(CampCecReceivedRecord *record, CecProfile equipment);
 
 #endif

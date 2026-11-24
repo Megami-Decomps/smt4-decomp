@@ -1,5 +1,3 @@
-/* NON_MATCHING: 20 lines, VFP allocation only: retail zeroes the MP rate first (s16, then s17 = s16), sets
- * both rates to 100 through the register of the rate it sets first, and loads 3.5 before 100 (s22/s23). */
 #include "common.h"
 #include "battle/btlMain.h"
 #include "gamedata/GameSaveData.h"
@@ -23,6 +21,22 @@ void playerCollectPassiveSkillBits(u16 *skills, int withSource); // declcheck: l
 void halves34Copy(StatBlock *record, u16 *skills); // declcheck: local (the shared declaration takes an opaque Source)
 s32 recordClampCurrentCount(StatBlock *record, s32 value);
 s32 selectionStateSetClamped(StatBlock *record, s32 value);
+
+/* Clamps a recovery percentage to 0-100. */
+static __inline void clamp(f32 *percent)
+{
+    if (*percent < 0.0f) {
+        *percent = 0.0f;
+    } else if (*percent > 100.0f) {
+        *percent = 100.0f;
+    }
+}
+
+/* `current` plus `percent` percent of `maximum`, as the 16-bit value the setters take. */
+static __inline s32 regenValue(s32 maximum, f32 percent, s32 current)
+{
+    return (s16)((s32)((f32)maximum * percent * 0.01f) + current);
+}
 
 /* At the end of a battle with result 1 or 10, restores the HP and MP of the player and the stocked demons
  * by the percentages of their regeneration passive skills; then a downed player gets back up with 1 HP. */
@@ -49,8 +63,7 @@ void btlTurnEndApplyRegenSkills(BtlMainState *battle)
                 mpRate += 7.0f;
                 break;
             case 3:
-                mpRate = 100.0f;
-                hpRate = mpRate;
+                hpRate = mpRate = 100.0f;
                 break;
             case 4:
                 hpRate += 5.0f;
@@ -60,17 +73,19 @@ void btlTurnEndApplyRegenSkills(BtlMainState *battle)
                 break;
             }
         }
-        hpRate = hpRate < 0.0f ? 0.0f : (hpRate > 100.0f ? 100.0f : hpRate);
-        mpRate = mpRate < 0.0f ? 0.0f : (mpRate > 100.0f ? 100.0f : mpRate);
+        clamp(&hpRate);
+        clamp(&mpRate);
         if (!playerPadTestBit(1) && !playerPadTestBit(10) && !playerPadTestBit(2)) {
-            s16 hp = (s16)(FUN_0028d310() + (s32)((f32)FUN_00334038() * hpRate * 0.01f));
-            playerSetClampedStat(hp);
-            if (hp == 0) {
+            s32 current = FUN_0028d310();
+            s32 value = regenValue(FUN_00334038(), hpRate, current);
+            playerSetClampedStat(value);
+            if (value == 0) {
                 gameGetPlayerData()->hp = 0;
             }
-            s16 mp = (s16)(FUN_00333fb0() + (s32)((f32)FUN_00334048() * mpRate * 0.01f));
-            playerSetClampedValue(mp);
-            if (mp == 0) {
+            current = FUN_00333fb0();
+            value = regenValue(FUN_00334048(), mpRate, current);
+            playerSetClampedValue(value);
+            if (value == 0) {
                 gameGetPlayerData()->mp = 0;
             }
         }
@@ -104,8 +119,7 @@ void btlTurnEndApplyRegenSkills(BtlMainState *battle)
                     mpRate += 7.0f;
                     break;
                 case 3:
-                    mpRate = 100.0f;
-                    hpRate = mpRate;
+                    hpRate = mpRate = 100.0f;
                     break;
                 case 4:
                     hpRate += 5.0f;
@@ -115,17 +129,17 @@ void btlTurnEndApplyRegenSkills(BtlMainState *battle)
                     break;
                 }
             }
-            hpRate = hpRate < 0.0f ? 0.0f : (hpRate > 100.0f ? 100.0f : hpRate);
-            mpRate = mpRate < 0.0f ? 0.0f : (mpRate > 100.0f ? 100.0f : mpRate);
+            clamp(&hpRate);
+            clamp(&mpRate);
             if (!flagWordTestBit(record, 1) && !flagWordTestBit(record, 10) && !flagWordTestBit(record, 2)) {
-                s16 hp = (s16)(record->hp + (s32)((f32)record->maxHp * hpRate * 0.01f));
-                recordClampCurrentCount(record, hp);
-                if (hp == 0) {
+                s32 value = regenValue(record->maxHp, hpRate, record->hp);
+                recordClampCurrentCount(record, value);
+                if (value == 0) {
                     record->hp = 0;
                 }
-                s16 mp = (s16)(record->mp + (s32)((f32)record->maxMp * mpRate * 0.01f));
-                selectionStateSetClamped(record, mp);
-                if (mp == 0) {
+                value = regenValue(record->maxMp, mpRate, record->mp);
+                selectionStateSetClamped(record, value);
+                if (value == 0) {
                     record->mp = 0;
                 }
             }

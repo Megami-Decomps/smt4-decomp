@@ -1,6 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015c9f8` (_code @ 0x15c9f8, 0x2d0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gfx/AsdSceneRoot.h"
 
 extern "C" {
 
@@ -17,9 +17,7 @@ extern unsigned char DAT_0055b548; /* 0x55b548 */
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-extern unsigned int *FUN_00172088(unsigned char *);
 extern unsigned int *FUN_001720c0(int *);
-extern unsigned int *FUN_001723b8(unsigned char *, int *);
 
 
 unsigned int * FUN_0015c9f8(int *param_1,int *param_2)
@@ -42,7 +40,7 @@ unsigned int * FUN_0015c9f8(int *param_1,int *param_2)
   unsigned char temp_v7 [8];
   
   if (*param_1 == 0) {
-    puVar2 = (unsigned int *)FUN_00172088(temp_v7);
+    puVar2 = (unsigned int *)FUN_00172088((AsdSceneSmallDescription *)temp_v7, (AsdAllocatorObject *)param_2);
     (*(unsigned int *)&temp_v6) = romwright_piece_3_1(uStack_2b,1);
     temp_v5 = puVar2;
     if ((unsigned int **)param_1 != &temp_v5) {
@@ -60,7 +58,7 @@ unsigned int * FUN_0015c9f8(int *param_1,int *param_2)
   }
   if (param_1[2] == 0) {
     piVar3 = param_1 + 2;
-    puVar2 = (unsigned int *)FUN_001723b8(temp_v7,param_2);
+    puVar2 = (unsigned int *)asdSceneCreateQueueComponent((AsdSceneSmallDescription *)temp_v7, (AsdAllocatorObject *)param_2);
     (*(unsigned int *)&temp_v6) = romwright_piece_3_1(uStack_2b,1);
     temp_v5 = puVar2;
     if ((unsigned int **)piVar3 != &temp_v5) {

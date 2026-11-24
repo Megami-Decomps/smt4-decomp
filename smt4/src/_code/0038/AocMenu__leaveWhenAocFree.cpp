@@ -2,20 +2,6 @@
 #include "addon/aocMain.h"
 #include "classes/Obj422594.h"
 
-static __inline bool aocOperationBusy(u32 flags)
-{
-    if (flags & 4)
-        return true;
-    return false;
-}
-
-static __inline bool aocOperationPending(u32 flags)
-{
-    if (flags & 8)
-        return true;
-    return false;
-}
-
 struct AocWindowStep {
     /* 0x000 */ u32 unk000;
     /* 0x004 */ u32 state;
@@ -28,7 +14,7 @@ struct AocWindowStep {
 void AocMenu::leaveWhenAocFree()
 {
     AocWindowStep* work = reinterpret_cast<AocWindowStep*>(this);
-    if (!aocOperationBusy(g_aocMain->flags) && !aocOperationPending(g_aocMain->flags)) {
+    if (!aocMainIsBusy(g_aocMain)) {
         work->state = 3;
         work->substate = 0;
         if (work->window != NULL) {

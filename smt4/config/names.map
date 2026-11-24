@@ -4058,7 +4058,7 @@
 003e3730 _ZNK9Obj4214b411getCategoryEv
 0036cc3c _ZN9Obj4215f423buildProjectionMatricesEPfS0_
 0036cc34 _ZNK9Obj4215f411getResourceEv
-0036a100 _ZN9Obj4214ec7vfunc00Ev
+0036a100 _ZN9Obj4214ecD1Ev
 003e4ff8 _ZNK9Obj42165417getTypeDescriptorEv
 003c2f3c _ZN9Obj422594D0Ev
 00152530 _ZN9Obj42259410initializeEPKv
@@ -6542,3 +6542,14 @@
 002e65b0 effHelixEmitterUpdate
 00124c60 asdTextDrawAtInt
 001c36d8 clearSaveStartNewGame
+002ad1e0 sysLightEventTryWait
+002b6b8c gauntletAppDrawCategoryLabel
+002ad80c archivePathDeviceCreateFile
+002e8be0 lmapCaveOverviewStep
+0012d1c4 asdSceneCreateQueueComponent
+00340ad4 enemyRenderTexSetup
+002cb8d8 asdLoadFileExists
+0036ec8c textureBuildFileFromConfig
+00142fcc gxAddDisplayTransferCommand
+00142fec gxAddMemoryFillCommand
+0014300c gxAddTextureCopyCommand

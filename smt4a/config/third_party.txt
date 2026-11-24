@@ -2562,10 +2562,6 @@
 0x00171ec8 FUN_00171ec8 callers
 0x001720c0 FUN_001720c0 between
 0x001720f8 nw_gfx_SceneEnvironment_SceneEnvironment_sub_object name
-0x001723f0 FUN_001723f0 between
-0x0017250c FUN_0017250c between
-0x001725e4 FUN_001725e4 between
-0x0017261c FUN_0017261c between
 0x00172718 FUN_00172718 callers
 0x001729b4 nw_gfx_Fog_DestroyResFog name
 0x00172a7c nw_gfx_res_ResMaterial_Setup name
@@ -6652,7 +6648,7 @@
 0x004509fc handlerTableDispatch1 callers
 0x00450a30 FUN_00450a30 callers
 0x00450afc nw_gfx_res_ResGraphicsFile_Cleanup name
-0x00450f58 FUN_00450f58 twin
+0x00450f58 textureBuildFileFromConfig twin
 0x004511d8 FUN_004511d8 twin
 0x00451274 FUN_00451274 callers
 0x004515e4 FUN_004515e4 callers

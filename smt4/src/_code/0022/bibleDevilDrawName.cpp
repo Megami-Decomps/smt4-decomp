@@ -1,50 +1,43 @@
-/* NON_MATCHING: only the saved registers of the entry x/y (retail r8 = x, r9 = y; built the reverse) differ. */
-#include "common.h"
+/* NON_MATCHING: only the saved registers of the entry x/y (retail r8 = x, r9 = y; built the reverse) differ.
+ * Tried the twin's (smt4a entryWindowDrawEntryName) s32 x/y with +=, the sibling bibleDevilDrawRace's form, the
+ * branches swapped, and s16/u16/s32 devil ids (s16 fixes the registers but drops retail's uxth). */
+#include "bible/BibleDevilList.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "addon/LookupRecord.h"
 
-static __inline UiLayoutResourceIV *ownerResource(void *owner)
-{
-    return reinterpret_cast<UiLayoutResourceIV *>(static_cast<u8 *>(owner) + 0xC8);
-}
-
 extern "C" {
 UiLayoutEntryPrefixIV *layoutFindTableEntry(UiLayoutResourceIV *resource, u32 entryId); // declcheck: local (the shared declaration in AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h does not compile here: a value of type "TextureTableEntryIV *" cannot be assigned to an entity of type "const UiLayoutEntryPrefixIV *")
-void drawTextAtSnappedRectangle(UiLayoutResourceIV *resource, f32 x, f32 y,
-                  f32 opacity, f32 rotation, u32 layer, u32 mask,
-                  f32 scale, u32 convertedValue);
+void drawTextAtSnappedRectangle(UiLayoutResourceIV *resource, f32 x, f32 y, f32 opacity, f32 rotation, u32 layer,
+                                u32 color, f32 scale, const char *text);
 
-void bibleDevilDrawName(void *owner, u32 value, u32 entryIndex,
-                  s32 alternate, s32 fade)
+/* Draws a listed devil's name in its row, raised rows on the upper layer in white. */
+void bibleDevilDrawName(BibleDevilWork *work, u32 devil, u32 row, s32 raised, s32 fade)
 {
-    // RSB is a wrapping 32-bit subtraction before signed conversion to float.
-    const f32 opacity = static_cast<f32>(
-        static_cast<s32>(256U - static_cast<u32>(fade))) * (1.0f / 256.0f);
+    const f32 opacity = (f32)(256 - fade) * (1.0f / 256.0f);
 
     const UiLayoutEntryPrefixIV *entry;
     u32 anchorId;
     u32 layer;
-    u32 mask;
-    if (!(alternate != 0)) {
-        entry = layoutFindTableEntry(ownerResource(owner), entryIndex + 0x40EU);
+    u32 color;
+    if (!raised) {
+        entry = layoutFindTableEntry((UiLayoutResourceIV *)work->layout, row + 0x40E);
         anchorId = 0x48B;
         layer = 2;
-        mask = 0xFF;
+        color = 0xFF;
     } else {
-        entry = layoutFindTableEntry(ownerResource(owner), entryIndex + 0x42FU);
+        entry = layoutFindTableEntry((UiLayoutResourceIV *)work->layout, row + 0x42F);
         anchorId = 0x499;
         layer = 3;
-        mask = 0xFFFFFFFFU;
+        color = 0xFFFFFFFF;
     }
 
     const s16 entryX = entry->x;
     const s16 entryY = entry->y;
-    const u32 convertedValue = (u32)dataTable01FindByIdWithAoc(value & 0xFFFFU);
-    const UiLayoutEntryPrefixIV *anchor = layoutFindTableEntry(ownerResource(owner), anchorId);
+    const char *name = (const char *)dataTable01FindByIdWithAoc((u16)devil);
+    const UiLayoutEntryPrefixIV *anchor = layoutFindTableEntry((UiLayoutResourceIV *)work->layout, anchorId);
     const s32 x = anchor->x + entryX;
     const s32 y = anchor->y + entryY;
-    drawTextAtSnappedRectangle(ownerResource(owner), static_cast<f32>(x), static_cast<f32>(y), opacity,
-                 0.0f, layer,
-                 mask, 1.0f, convertedValue);
+    drawTextAtSnappedRectangle((UiLayoutResourceIV *)work->layout, (f32)x, (f32)y, opacity, 0.0f, layer, color,
+                               1.0f, name);
 }
-}
+} /* extern "C" */

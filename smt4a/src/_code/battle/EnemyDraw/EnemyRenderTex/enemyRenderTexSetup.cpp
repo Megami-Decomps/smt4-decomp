@@ -1,10 +1,4 @@
-/* NON_MATCHING: 38 lines (40 by shape); IV's FUN_00340ad4 with a command block for each texture unit. Same
- * instructions, branches and frame as retail. What differs:
- * - the image pointer and its width swap r3/r9 in the size search;
- * - the descriptor's constructor loads its 0x02020000 into r0 after moving the allocator to r1, where retail
- *   loads it into r2 and moves the allocator afterwards;
- * - in the second unit's sampler word retail loads the texture type early (into ip) and keeps the partial
- *   word in r2, where the build schedules it as in the first and third units (which match). */
+/* NON_MATCHING: 10 lines; in the size search the image pointer and width limit swap r9/sl. */
 #include <string.h>
 #include "battle/EnemyRenderTex.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
@@ -16,7 +10,7 @@
 extern "C" {
 extern const char g_enemyRenderTexSourceFileName[];
 TextureUploadResourcePrefixIV *asdGxRenderTargetCreate(s32 width, s32 height, u32 parameter, u32 format, u32 type, u32 depthFormat, u32 flags);
-TextureObject *FUN_00450f58(const TextureCreateInfoIV *info, MemoryAllocator *allocator);
+TextureObject *textureBuildFileFromConfig(const TextureCreateInfoIV *info, MemoryAllocator *allocator);
 void FUN_0015d8e0(TextureObject **object, MemoryAllocator *allocator, ResGraphicsFile file);
 void FUN_00401798(EnemyRenderTex *target, const EnemyRenderTexConfiguration *configuration);
 
@@ -31,14 +25,16 @@ void enemyRenderTexSetup(EnemyRenderTex *target, u32 parameter, u32 flags, const
     s32 width = 8;
     s32 height = 8;
     const EffectBoundsImage *image = target->binding->image;
+    u16 imageWidth = image->width;
     for (s32 bit = 3; bit < 11; ++bit) {
-        if (image->width < (1 << bit)) {
+        if (imageWidth < (1 << bit)) {
             width = 1 << bit;
             break;
         }
     }
+    u16 imageHeight = image->height;
     for (s32 bit = 3; bit < 11; ++bit) {
-        if (image->height < (1 << bit)) {
+        if (imageHeight < (1 << bit)) {
             height = 1 << bit;
             break;
         }
@@ -58,7 +54,7 @@ void enemyRenderTexSetup(EnemyRenderTex *target, u32 parameter, u32 flags, const
     }
     target->resource = asdGxRenderTargetCreate(width, height, parameter, 0x1908, 0x8033, 0x81A5, flags);
     MemoryAllocator *allocator = reinterpret_cast<MemoryAllocator *>(asdMemoryGetAllocatorA());
-    target->object = FUN_00450f58(
+    target->object = textureBuildFileFromConfig(
         &TextureCreateInfoIV()
             .setData(target->resource->data)
             .setHardwareFormat((u8)target->resource->texture->image.hardwareFormat)
@@ -78,9 +74,10 @@ void enemyRenderTexSetup(EnemyRenderTex *target, u32 parameter, u32 flags, const
     commands = target->unitCommands[0];
     *commands++ = texture->dimensions.height | (texture->dimensions.width << 16);
     *commands++ = 0xF0082;
-    *commands++ = ((texture->filterX == 3 || texture->filterX == 4 || texture->filterX == 5) << 2) |
+    s32 filterX = texture->filterX;
+    *commands++ = ((filterX == 3 || filterX == 4 || filterX == 5) << 2) |
         (texture->filterY << 1) | ((format == 12 ? 2 : 0) << 4) |
-        ((texture->filterX == 2 || texture->filterX == 5) << 24) | (texture->image.type << 28);
+        ((filterX == 2 || filterX == 5) << 24) | (texture->image.type << 28);
     *commands++ = 0xF0083;
     *commands++ = 0;
     *commands++ = 0x40084;
@@ -97,9 +94,10 @@ void enemyRenderTexSetup(EnemyRenderTex *target, u32 parameter, u32 flags, const
     commands = target->unitCommands[1];
     *commands++ = texture->dimensions.height | (texture->dimensions.width << 16);
     *commands++ = 0xF0092;
-    *commands++ = ((texture->filterX == 3 || texture->filterX == 4 || texture->filterX == 5) << 2) |
+    filterX = texture->filterX;
+    *commands++ = ((filterX == 3 || filterX == 4 || filterX == 5) << 2) |
         (texture->filterY << 1) | ((format == 12 ? 2 : 0) << 4) |
-        ((texture->filterX == 2 || texture->filterX == 5) << 24) | (texture->image.type << 28);
+        ((filterX == 2 || filterX == 5) << 24) | (texture->image.type << 28);
     *commands++ = 0xF0093;
     *commands++ = 0;
     *commands++ = 0x40094;
@@ -116,9 +114,10 @@ void enemyRenderTexSetup(EnemyRenderTex *target, u32 parameter, u32 flags, const
     commands = target->unitCommands[2];
     *commands++ = texture->dimensions.height | (texture->dimensions.width << 16);
     *commands++ = 0xF009A;
-    *commands++ = ((texture->filterX == 3 || texture->filterX == 4 || texture->filterX == 5) << 2) |
+    filterX = texture->filterX;
+    *commands++ = ((filterX == 3 || filterX == 4 || filterX == 5) << 2) |
         (texture->filterY << 1) | ((format == 12 ? 2 : 0) << 4) |
-        ((texture->filterX == 2 || texture->filterX == 5) << 24) | (texture->image.type << 28);
+        ((filterX == 2 || filterX == 5) << 24) | (texture->image.type << 28);
     *commands++ = 0xF009B;
     *commands++ = 0;
     *commands++ = 0x4009C;

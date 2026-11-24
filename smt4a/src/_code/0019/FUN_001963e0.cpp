@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_00196118(unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_0019612c(unsigned int, unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
-int FUN_0019614c(int, unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int, unsigned int);
-int FUN_0019616c(...);
+int gxAddDisplayTransferCommand(unsigned int, unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
+int gxAddMemoryFillCommand(int, unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int, unsigned int);
+int gxAddTextureCopyCommand(...);
 int FUN_001a2500(unsigned int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -23,9 +23,9 @@ extern signed char DAT_0061a488; /* 0x61a488 */
 extern int DAT_0061a510; /* 0x61a510 */
 
 /* Supplied declaration required: FUN_00196118. */
-/* Supplied declaration required: FUN_0019612c. */
-/* Supplied declaration required: FUN_0019614c. */
-/* Supplied declaration required: FUN_0019616c. */
+/* Supplied declaration required: gxAddDisplayTransferCommand. */
+/* Supplied declaration required: gxAddMemoryFillCommand. */
+/* Supplied declaration required: gxAddTextureCopyCommand. */
 /* Supplied declaration required: FUN_001a2500. */
 
 
@@ -62,7 +62,7 @@ void FUN_001963e0(void)
                      ~(*(unsigned int *)(puVar8 + 0xc) >> 2) & 1,*(unsigned int *)(puVar8 + 0xc) & 1);
         break;
       case 2:
-        FUN_0019614c(*(int *)(puVar8 + 4),
+        gxAddMemoryFillCommand(*(int *)(puVar8 + 4),
                      *(int *)(puVar8 + 4) + (*(unsigned int *)(puVar8 + 0xc) & 0x7fffff),
                      *(unsigned int *)(puVar8 + 8),((*(unsigned int *)(puVar8 + 0xc) >> 0xf) & 0x300) | 1,
                      *(int *)(puVar8 + 0x10),
@@ -84,7 +84,7 @@ void FUN_001963e0(void)
         if (!temp_v8 || temp_v6 < temp_v4 >> 0x10) {
           temp_v3 = temp_v3 | 4;
         }
-        FUN_0019612c(*(unsigned int *)(puVar8 + 4),temp_v4 & 0xffff,temp_v4 >> 0x10,
+        gxAddDisplayTransferCommand(*(unsigned int *)(puVar8 + 4),temp_v4 & 0xffff,temp_v4 >> 0x10,
                      *(unsigned int *)(puVar8 + 8),temp_v7,temp_v5 >> 0x10,
                      ((temp_v2 >> 6) & 0x20) |
                      ((temp_v2 & 0x200) << 7) |
@@ -96,7 +96,7 @@ void FUN_001963e0(void)
         if (((temp_v6 & 0xffff) != 0) || (temp_v3 = 0, (*(unsigned int *)(puVar8 + 0x14) & 0xffff) != 0)) {
           temp_v3 = 4;
         }
-        FUN_0019616c(*(unsigned int *)(puVar8 + 4),*(unsigned int *)(puVar8 + 8),
+        gxAddTextureCopyCommand(*(unsigned int *)(puVar8 + 4),*(unsigned int *)(puVar8 + 8),
                      *(unsigned int *)(puVar8 + 0xc),temp_v6 >> 0x10,temp_v6 & 0xffff,
                      *(unsigned int *)(puVar8 + 0x14) >> 0x10,*(unsigned int *)(puVar8 + 0x14) & 0xffff,temp_v3 | 8);
       }

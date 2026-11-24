@@ -16,7 +16,6 @@ void scrScriptProcessStartEntry(void *process, s32 entry);
 void titleRestartSlotState3(s32 screen, s32 alpha);
 s32 onesRoomTeardown(u32 job);
 void onesRoomRequestTransition();
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 
 /* Create the room resources, start its script, and install its lifetime job. */
 void FUN_002758fc(s32 inactive)

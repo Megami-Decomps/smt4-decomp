@@ -1,3 +1,4 @@
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "gamedata/NkmEnemyLookup.h"
@@ -6,7 +7,7 @@ extern u32 g_aocSystem;
 s32 gameFlagIsSet(u32 flag);
 s32 aocRunByName(u32 system, s32 category, s32 id, s32 mode);
 void texDrawCompositeSprite(s32 channel, s32 category, s32 variant, u32 first, u32 second, u32 third);
-void texTableRecordCallWithParams(s32 channel, s32 category, s32 resource, u32 first, u32 second, u32 third);
+
 void texBindBindTableNode(u32 system, s32 id, s32 channel, s32 category, s32 resource, u32 first, u32 second, u32 third);
 void fieldPlacementGroupSpawn(u32 system, s32 id, s32 channel, s32 resource, s32 mode, u32 first, u32 second, u32 third);
 

@@ -1,4 +1,4 @@
-/* NON_MATCHING: decoding the heap flags after the request is queued schedules a different instruction sequence. */
+/* NON_MATCHING: one extra register reload of the queued request after decoding the heap flags. */
 #include "AsdSDK/Source/Sys/File/AsdLoadPath.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
@@ -22,10 +22,17 @@ void *asdLoadFileSync(const char *path, u32 *size, u32 flags, u32 priority)
     asdLoadFileBuildPath(fullPath, path);
 
     request = asdFileQueueRequest(fullPath, 0);
-    asdFileRequestSetHeapKind(request, ((flags & ASD_LOAD_FLAG_0) != 0) | (((flags & ASD_LOAD_FLAG_1) != 0) ? 0x10 : 0));
+    u8 heapKind = 0;
+    if ((flags & ASD_LOAD_FLAG_0) != 0) {
+        heapKind = 1;
+    }
+    if ((flags & ASD_LOAD_FLAG_1) != 0) {
+        heapKind |= 0x10;
+    }
+    asdFileRequestSetHeapKind(request, heapKind);
     optionalParameterTrySet(request, priority);
     asdFileWait(request);
-    if (asdFileRequestHasFailed(reinterpret_cast<s32 *>(request)) != 0) {
+    if (asdFileRequestHasFailed((s32 *)request) != 0) {
         if (size != NULL) {
             *size = 0;
         }

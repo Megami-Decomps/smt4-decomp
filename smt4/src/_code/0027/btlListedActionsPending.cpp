@@ -1,30 +1,17 @@
-/* NON_MATCHING: register allocation only (retail keeps the kind in r4 and the units base in r0) plus the kind-5 branch polarity and the index zeroing slot. */
-#include "shard/W4_W4Match2_BtlUnits.h"
+/* NON_MATCHING: the kind and the units base trade r4/r0, and the kind-5 branch is inverted. */
+#include "battle/BtlEntry.h"
+#include "battle/btlMain.h"
 
-namespace {
-struct BattleListedAction {
-    /* 0x00 */ s32 kind;
-    /* 0x04 */ s32 unitIndex;
-    /* 0x08 */ u8 unk08[8];
-};
-struct BattleActionListState {
-    /* 0x0000 */ u8 unk0000[0x88];
-    /* 0x0088 */ s32 mode;
-    /* 0x008C */ u8 unk008C[0x1F34];
-    /* 0x1FC0 */ BtlEntry *units;
-    /* 0x1FC4 */ u8 unk1FC4[0x34C];
-    /* 0x2310 */ BattleListedAction *actions;
-    /* 0x2314 */ s32 count;
-};
-}
 extern "C" {
-/* Tests queued action kinds and, in the first mode, their units' required flag group. */
-u32 btlListedActionsPending(BattleActionListState *state)
+/* Checks for an eligible action: kind 5 after the result, or an action whose unit isn't barred from acting. */
+u32 btlListedActionsPending(BtlMainState *state)
 {
-    for (s32 index = 0; index < state->count; ++index) {
-        s32 kind = state->actions[index].kind;
-        if (state->mode == 0) {
-            if (kind != 4 || (state->units[state->actions[index].unitIndex].data.statusFlags & 0x1C0) == 0) {
+    if (state->listedActions.count <= 0)
+        return 0;
+    for (s32 index = 0; index < state->listedActions.count; ++index) {
+        s32 kind = state->listedActions.actions[index].kind;
+        if (state->core.result == 0) {
+            if (kind != 4 || (state->entries[state->listedActions.actions[index].unitIndex].data.statusFlags & 0x1C0) == 0) {
                 return 1;
             }
         } else if (kind == 5) {
@@ -33,4 +20,5 @@ u32 btlListedActionsPending(BattleActionListState *state)
     }
     return 0;
 }
-}
+
+} /* extern "C" */

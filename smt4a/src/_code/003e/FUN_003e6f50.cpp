@@ -20,7 +20,6 @@ u32 FUN_003e6c14(BtlGameOverA *work);
 s32 talkEventStartScript(BtlGameOverA *work);
 u32 touchToContinueSplashStep(BtlGameOverA *work);
 u32 stepStateBattleStart(BtlGameOverA *work);
-void scriptProcessSetMode(void *process, u32 mode);
 }
 
 /* unit-local: save-file game-over counter outside the shared save-data prefixes */

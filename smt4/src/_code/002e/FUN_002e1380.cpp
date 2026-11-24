@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail materialises FUN_002ad80c's zero high size word in r5 before fileSystemRequireReady (one more saved register, a 496-byte frame) and later clears the stream with a fresh zero in r0, passing the stream address through r3; the build uses `mov r3, #0` at the call and pads the frame to 500. Same in Apocalypse's FUN_00359608. */
+/* NON_MATCHING: retail materialises archivePathDeviceCreateFile's zero high size word in r5 before fileSystemRequireReady (one more saved register, a 496-byte frame) and later clears the stream with a fresh zero in r0, passing the stream address through r3; the build uses `mov r3, #0` at the call and pads the frame to 500. Same in Apocalypse's FUN_00359608. */
 #include "sys/ProcessResult.h"
 #include "common.h"
 #include "nn/Result.h"
@@ -49,7 +49,7 @@ nn::Result FUN_002e1380(SaveStreamOwner *owner, u32 id, u32 size)
         return result;
     }
     fileSystemRequireReady();
-    result = FUN_002ad80c(reinterpret_cast<const u16 *>(buffer), size);
+    result = archivePathDeviceCreateFile(reinterpret_cast<const u16 *>(buffer), size);
     if ((s32)(result & 0x80000000) < 0) {
         processResultSetValue(result);
         return result;

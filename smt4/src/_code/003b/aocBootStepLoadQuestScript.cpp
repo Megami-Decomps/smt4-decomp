@@ -14,14 +14,11 @@ void aocBootStepLoadQuestScript(AocStep *step)
 {
     switch (step->substate) {
     case 0:
-        if (g_aocMain->flags & 4) {
-            return;
-        }
-        if (g_aocMain->flags & 8) {
+        if (aocMainIsBusy(g_aocMain)) {
             return;
         }
         infoWinSetShown(0);
-        g_aocMain->flags &= ~0x70;
+        aocMainClearResult(g_aocMain);
         aocScriptHolderReset(&g_aocMain->scriptHolder, 1);
         step->substate = 1;
         break;

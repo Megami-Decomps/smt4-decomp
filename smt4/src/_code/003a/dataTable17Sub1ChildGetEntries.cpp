@@ -1,30 +1,22 @@
-#include "common.h"
+#include "gamedata/PlaceRecordTable.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
-extern unsigned int dataTableGetCount(unsigned int);
-int dataTableGetEntries(void);
-int dataTableGet(int id, int index);
-
-typedef struct Entry {
-    /* 0x00 */ u8 unk00[0x26];
-    /* 0x26 */ u16 subTable;
-} Entry;
-
-/* Looks up record `index` (0x68-byte records) of data table 0x17/1 and queries its sub table. */
-void dataTable17Sub1ChildGetEntries(u32 unused, u32 index)
+/* The stock rows of place record `index` of data table 0x17 (section stockSection + 2). */
+const QuestUnlockConditions *dataTable17Sub1ChildGetEntries(Table17Handle *ignored, s32 index)
 {
-    u32 table = dataTableGet(0x17, 1);
-    Entry *entries = (Entry *)dataTableGetEntries();
+    void *table = dataTableGet(0x17, 1);
+    PlaceRecord *entries = (PlaceRecord *)dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
+    PlaceRecord *record;
 
-    if (index >= count) {
-        entries = NULL;
+    if ((u32)index >= count) {
+        record = NULL;
     } else {
-        entries = (Entry *)((u8 *)entries + index * 0x68);
+        record = &entries[index];
     }
-    dataTableGet(0x17, entries->subTable + 2);
-    dataTableGetEntries();
+    return (const QuestUnlockConditions *)dataTableGetEntries(dataTableGet(0x17, record->stockSection + 2));
 }
 
 } /* extern "C" */

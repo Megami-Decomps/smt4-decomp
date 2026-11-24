@@ -9,7 +9,7 @@
 extern "C" {
 s32 idSetFindSubjectIndex(BtlMainState *state, BtlActionRecord *action);
 u32 tableFileFindByKeyPair(BtlMainState *state, s16 selection, u16 kind);
-void FUN_00340ad4(BattleSpritePlacement *placement, u32 mask, u32 flags, u32 variant);
+void enemyRenderTexSetup(BattleSpritePlacement *placement, u32 mask, u32 flags, u32 variant);
 void FUN_00340c90(BattleSpritePlacement *placement);
 
 u32 FUN_003db0c0(MaterialMergeOwner *owner, BtlActionRecord *action)
@@ -48,7 +48,7 @@ u32 FUN_003db0c0(MaterialMergeOwner *owner, BtlActionRecord *action)
                 if (selection >= 0) {
                     variant = tableFileFindByKeyPair(state, (s16)selection, kind);
                 }
-                FUN_00340ad4(placement, 0x20000, 0x20000, variant);
+                enemyRenderTexSetup(placement, 0x20000, 0x20000, variant);
                 FUN_00340c90(placement);
             }
             owner->placements.entries[i].activation.flags |= 1;

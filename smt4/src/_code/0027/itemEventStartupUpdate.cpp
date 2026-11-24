@@ -26,7 +26,6 @@ void aocQueueType08(AocSystem *system, u32 id, void **output, u32 flags);
 void buttonHelpSetPreset(u32 preset);
 u32 tableGroupFindEntryIndex(void *commands, const char *entry);
 void scrScriptProcessStartEntry(ScriptProcess *script, u32 entry);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 
 u32 itemEventStartupUpdate(QuestAddonScriptWork *work)
 {

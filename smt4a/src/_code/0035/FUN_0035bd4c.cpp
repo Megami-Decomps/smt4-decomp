@@ -1,3 +1,4 @@
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "code/Code0035.h"
 
 extern "C" {
@@ -9,7 +10,7 @@ typedef struct Table0cMessageRecord {
 
 Table0cMessageRecord *dataTable12FindBySortKey(u16 id);
 u32 requestKindToId(s32 id);
-s32 texTableRecordCallWithParams(s32 kind, s32 type, u32 value, u32 x, u32 y, u32 style);
+
 
 /* Draws the selected table-0C record's message (kind 2, type 11). */
 void FUN_0035bd4c(u16 id, u32 x, u32 y, u32 style)

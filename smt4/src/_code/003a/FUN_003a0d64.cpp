@@ -1,45 +1,18 @@
 #include "common.h"
 #include "script/scrScriptProcess.h"
 #include "font/PlaceWin.h"
+#include "gamedata/PlaceRecordTable.h"
+#include "shop/PlaceScene.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 
-/* A place-window scene (only the fields the start-up touches). */
-struct PlaceScene {
-    /* 0x00000 */ u8 unk00000[4];
-    /* 0x00004 */ s32 state;
-    /* 0x00008 */ s32 substate;
-    /* 0x0000C */ u8 unk0000C[8];
-    /* 0x00014 */ u8 placeKind;
-    /* 0x00015 */ u8 unk00015[3];
-    /* 0x00018 */ s32 placeKey;
-    /* 0x0001C */ u8 unk0001C[0x144];
-    /* 0x00160 */ ScriptFile *scriptFile;
-    /* 0x00164 */ void *scriptOwner;
-    /* 0x00168 */ ScriptProcess *scriptA;
-    /* 0x0016C */ ScriptProcess *scriptB;
-    /* 0x00170 */ u8 unk00170[0x15BD0];
-    /* 0x15D40 */ u32 jobA;
-    /* 0x15D44 */ u32 jobB;
-};
-
-/* A record of data table 0x17/1 (0x68 bytes). */
-struct PlaceRecord {
-    /* 0x00 */ u8 text[0x20];
-    /* 0x20 */ s32 key;
-    /* 0x24 */ u16 kind;
-    /* 0x26 */ u8 unk26[0x42];
-};
 
 extern "C" {
 s32 jobIsValid(u32 job);
 s32 eventTexJobSlotsDone(u32 job);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void titleSetSlotValueState2(s32 a, s32 b);
 void messageBannerInitSelection(s32 a, s32 b);
 void messageTargetSetValue(s32 value, s32 arg);
-PlaceRecord *dataTable17Sub1GetRecord(u32 *ignored, u32 index);
-s32 dataTable17Sub1GetCount(u32 *ignored);
 s32 FUN_0028e9d0(u32 flag);
 void saleListBuild(PlaceScene *scene);
 void buttonHelpSetPreset(s32 preset);
@@ -84,7 +57,7 @@ void FUN_003a0d64(PlaceScene *scene)
     u32 kind = scene->placeKind;
     s32 key = scene->placeKey;
     s32 found = -1;
-    u32 ignored;
+    Table17Handle ignored;
     PlaceRecord *records = dataTable17Sub1GetRecord(&ignored, 0);
     for (s32 i = 0; i < dataTable17Sub1GetCount(&ignored); i++) {
         if (records[i].kind == kind && records[i].key == key) {
@@ -92,7 +65,7 @@ void FUN_003a0d64(PlaceScene *scene)
             break;
         }
     }
-    u32 ignoredSecond;
+    Table17Handle ignoredSecond;
     PlaceRecord *record = dataTable17Sub1GetRecord(&ignoredSecond, found);
     placeWinStartText(record->text);
 

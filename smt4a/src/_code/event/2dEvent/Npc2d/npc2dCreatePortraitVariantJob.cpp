@@ -1,86 +1,81 @@
-/* NON_MATCHING: split scale initialization and stored variant reload now match; saved arguments, placement dispatch, and task argument scheduling still differ. */
-#include "event/NpcTextureWork.h"
+/* NON_MATCHING: the initial job stores and placement dispatch use different saved registers and
+ * cross-jump a different placement store. The speed literal and callback pointers pool in another order. */
+#include "event/2dEvent/2dEventTex.h"
+#include "shard/W6_W6Match8_NpcTextureEffect.h"
 #include "AsdSDK/AsdDebug.h"
-#include "shard/JobWork.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "addon/AocSystemA.h"
-struct AocSystemA;
+#include "code/Code0028_Smt4a.h"
+#include "gamedata/DataTableAccess_Smt4a.h"
+
 extern "C" {
-extern const char DAT_0052f4fc[], DAT_0052f4f0[];
+extern const char DAT_0052f4fc[];
+extern const s8 DAT_0052f4f0[];
 s32 gameFlagIsSet(u32 flag);
-u32 FUN_00283498(u32 id);
-const u16 *dataTable19FindAddonWord(u32 id, u32 variant);
-void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tracking);
-void sysMemClear(void *memory, u32 size);
 s32 eventIsSkipping();
 s32 aocRunByName(AocSystemA *system, u32 table, u32 file, s32 mode);
-void npc2dPortraitUpdate(JobWork *job);
-void FUN_0034da3c(JobWork *job);
+s32 npc2dPortraitUpdate(u32 job);
+void FUN_0034da3c(u32 job);
 
-void npc2dCreatePortraitVariantJob(u32 id, s32 placement, u32 variant)
+/* Creates a portrait using the selected add-on record and registers its process. */
+u32 npc2dCreatePortraitVariantJob(u32 id, s32 placement, u32 variant)
 {
-    // This constructor's Apocalypse allocation extends the shared NPC work prefix to 0xBC.
-    union PortraitTaskWorkA {
-        NpcTextureWork base;
-        struct {
-            u8 prefix[0x34];
-            f32 opacity;
-            u32 screenRegion, mode, table, file, handle;
-            u8 unk4C[8];
-            u32 variant, normalizedId;
-            u8 unk5C[0x14];
-            u32 cached[6];
-            u8 tail[0x34];
-        } create;
-    };
-    typedef char PortraitTaskWorkSizeCheck[sizeof(PortraitTaskWorkA) == 0xBC &&
-        offsetof(PortraitTaskWorkA, create.variant) == 0x54 ? 1 : -1];
-    if (gameFlagIsSet(0x522) && dataTable19FindAddonWord(FUN_00283498(id), variant) == NULL)
-        return;
+    if (gameFlagIsSet(0x522) && dataTable19FindAddonWord((TableRequest *)FUN_00283498(id), variant) == NULL)
+        return 0;
     asdDebugTrace(DAT_0052f4fc, 0x380);
-    PortraitTaskWorkA *work = static_cast<PortraitTaskWorkA *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(PortraitTaskWorkA), 1));
-    sysMemClear(work, sizeof(PortraitTaskWorkA));
-    work->base.scale = 1.0f;
-    work->base.opacity = 1.0f;
-    work->base.fadeStep = 0.0f;
-    work->create.handle = 0xFFFFFFFF;
-    work->base.state = 0x41;
-    work->create.variant = variant;
-    work->base.npcId = id;
-    work->base.y = 0;
-    work->create.table = 1;
-    work->create.opacity = 1.0f;
+    NpcTextureEffectWork *work = (NpcTextureEffectWork *)asdMemoryAllocTracked(
+        ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(*work), 1);
+    sysMemClear(work, sizeof(*work));
+    work->scaleX = 1.0f;
+    work->fade = 1.0f;
+    work->fadeStep = 0.0f;
+    work->handle = -1;
+    work->state = 0x41;
+    work->variantIndex = variant;
+    work->unk00 = id;
+    work->y = 0;
+    work->table = 1;
+    work->alpha = 1.0f;
     for (s32 index = 0; index < 6; ++index)
-        work->create.cached[index] = 0;
-    work->create.normalizedId = FUN_00283498(id);
-    work->create.file = *dataTable19FindAddonWord(work->create.normalizedId, work->create.variant);
-    if (placement == 0) {
-        work->base.x = -20;
-        work->base.rotation = -48.0f;
-        work->create.mode = 3;
-    } else if (placement == 1) {
-        work->base.x = 160;
-        work->base.rotation = 48.0f;
-        work->create.mode = 4;
-    } else if (placement == 2) {
-        work->base.x = 72;
-        work->base.fadeStep = 0.25f;
-        work->base.rotation = 0.0f;
-        work->base.opacity = 0.0f;
-        work->create.mode = 5;
+        work->unk70[index] = 0;
+    work->record = (NpcTableRecord *)FUN_00283498(id);
+    work->node = *(const u16 *)dataTable19FindAddonWord((TableRequest *)work->record, work->variantIndex);
+    switch (placement) {
+    case 0:
+        work->x = -20;
+        work->rotation = -48.0f;
+        work->screenRegion = 3;
+        break;
+    case 1:
+        work->x = 160;
+        work->rotation = 48.0f;
+        work->screenRegion = 4;
+        break;
+    case 2:
+        work->x = 72;
+        work->fadeStep = 0.25f;
+        work->rotation = 0.0f;
+        work->fade = 0.0f;
+        work->screenRegion = 5;
+        break;
     }
     if (eventIsSkipping()) {
-        work->base.loadStep = 1;
+        work->resourceState = 1;
     } else {
-        work->base.loadStep = 0;
-        if (aocRunByName(g_aocSystem, work->create.table, work->create.file, 1))
-            aocLoadTextureNode(reinterpret_cast<u32>(g_aocSystem), work->create.table, work->create.file, 0x10000);
+        work->resourceState = 0;
+        if (aocRunByName(g_aocSystem, work->table, work->node, 1))
+            aocLoadTextureNode((u32)g_aocSystem, work->table, work->node, 0x10000);
         else
-            asdTMTexLoadMainHeap(work->create.table, work->create.file);
+            asdTMTexLoadMainHeap(work->table, work->node);
     }
-    work->base.speed = 0.26f;
-    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052f4f0), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(npc2dPortraitUpdate), reinterpret_cast<AsdProcFunc>(FUN_0034da3c), reinterpret_cast<u32>(work));
+    AsdProcUpdateFunc update = npc2dPortraitUpdate;
+    AsdProcFunc end = FUN_0034da3c;
+    work->speed = 0.26f;
+    return asdProcessCreateSimple(DAT_0052f4f0, 4, 0, 0, update, end, (u32)work);
 }
-}
+} /* extern "C" */

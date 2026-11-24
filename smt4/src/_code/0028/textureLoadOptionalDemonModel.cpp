@@ -1,3 +1,4 @@
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "addon/aocMain.h"
 #include "gamedata/DevilModel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -6,7 +7,7 @@
 
 extern "C" {
 s32 recordPrepareLinkedOwner(AocSystem*, u32 table, s32 node);
-void texTableRecordCallWithParams(u32 kind, u32 table, u32 file, s32 x, s32 y, u32 layer);
+
 void textResourceApplyFile(AocSystem*, s32 id, u32 kind, s32 node, s32 x, s32 y, u32 layer);
 
 // Whether the texture of demon `id` (its model, or its override model) is loaded.

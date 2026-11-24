@@ -1,4 +1,3 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 26 diff lines remain, scheduling/register allocation only. */
 #include "font/SearchWin/RunWin.h"
 #include "addon/aocMain.h"
 #include "camp/RenderCtx.h"
@@ -34,16 +33,18 @@ s32 messageWindowDrawJob(u32 job)
         renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
         texDrawCompositeSprite(2, 0x3A, 6, x, y, 0x81);
         u16 strings[8][64];
+        const u32 color = 0xFC4F46FF;
         const void *entry = FUN_0023478c(main, 0x65);
         s32 count = FUN_002347b8(main, entry, strings);
         for (s32 index = 0; index < count; ++index) {
-            const TextureTableEntryIV *position = asdTMTexTableEntryAt(0x3A, index + 0x43);
-            textDrawString((f32)(position->x + x), (f32)(position->y + y), 0.5f,
-                          3, 0.0f,
-                          0xFC4F46FF, 1.0f, reinterpret_cast<const char *>(strings[index]));
+            TextureTableEntryIV *position = asdTMTexTableEntryAt(0x3A, 0x43 + index);
+            s32 textX = position->x + x;
+            s32 textY = position->y + y;
+            textDrawString((f32)textX, (f32)textY, 0.5f, 3, 0.0f, color, 1.0f, (const char *)strings[index]);
         }
-        renderStackPop(g_titleScene->stacks + RENDER_STACK_A);
+        renderCtxPopCounted(g_titleScene, RENDER_STACK_A);
     }
     return 0;
 }
-}
+
+} /* extern "C" */

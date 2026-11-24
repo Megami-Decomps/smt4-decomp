@@ -1,11 +1,10 @@
 /* NON_MATCHING: block layout now matches; retail keeps the state in r1 and the job work in r0 (materialising the NULL result with moveq), and returns asdProcessGetFrames' -1 directly where this build goes through r4. */
-#include "battle/btlGameOver.h"
+#include "battle/BtlGameOverTransition.h"
 #include "shard/JobWork.h"
 
 extern "C" {
 extern BtlGameOver* g_btlGameOver;
 s32 asdProcessGetFrames(u32);
-s32 btlTransitionStep(BtlGameOver*);
 
 // Advances the game-over timer and runs its state machine when the job can update.
 s32 btlGameOverJobUpdate(u32 job)

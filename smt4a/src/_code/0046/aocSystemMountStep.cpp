@@ -39,7 +39,6 @@ extern "C" {
 
 void _ZN9Obj4221d4D1Ev(void *package);
 void __aeabi_vec_delete(void *array, void (*destructor)(void *));
-s32 sysLightEventTryWait(LightEvent *event);
 s32 asdFsIsSdCardDetected(void);
 RequestParameters aocFinishHandleOperation(AocSystemA *system);
 RequestParameters aocEnumerateContentRecords(AocSystemA *system);

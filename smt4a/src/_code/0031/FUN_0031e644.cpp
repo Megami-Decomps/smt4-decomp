@@ -6,13 +6,13 @@ extern "C" {
 extern s32 gameFlagSlotAdvanceCounter(u32 id);
 extern s32 eventIsSkipping(void);
 extern s32 uiQuestCreate(void);
-extern s32 FUN_002f1554(u32 id);
+extern s32 uiQuestOpenDetails(u32 id);
 extern s32 uiQuestIsIdle(void);
 extern s32 uiQuestClose(void);
 extern s32 sysPlaySe(s32 preset);
 
 /* Script command with a u16 argument: on its first frame it runs gameFlagSlotAdvanceCounter and, unless
- * eventIsSkipping reports one, starts FUN_002f1554. Returns 0 while uiQuestIsIdle says nothing is
+ * eventIsSkipping reports one, starts uiQuestOpenDetails. Returns 0 while uiQuestIsIdle says nothing is
  * pending, otherwise sets button help preset 0x92 and returns 1. */
 u32 FUN_0031e644(void)
 {
@@ -24,7 +24,7 @@ u32 FUN_0031e644(void)
             return 1;
         }
         uiQuestCreate();
-        FUN_002f1554(id);
+        uiQuestOpenDetails(id);
     }
     if (uiQuestIsIdle() == 0) {
         return 0;

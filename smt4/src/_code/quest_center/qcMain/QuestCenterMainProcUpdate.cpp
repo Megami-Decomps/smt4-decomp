@@ -3,6 +3,7 @@
  * registers, so retail's source holds a use of 1 this one does not. */
 #include "common.h"
 #include "quest_center/qcMain.h"
+#include "quest_center/QuestRuntime.h"
 #include "classes/SelectionState.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -38,7 +39,6 @@ s32 gameFlagIsSet(u32 flag);
 s32 gameStateIsFlagSetAndLarge(void);
 s32 FUN_00287304(void);
 void bgmResumeOrRequestTrack(u32 bgm);
-void questCompletionSetTierFlags(s32 mode);
 void commonBgStopChildAndBeginTransition(void);
 void commonBgAcquire(void);
 s32 bgmGetStateById(u32 id);
@@ -103,7 +103,7 @@ s32 QuestCenterMainProcUpdate(u32 handle)
         if (g_qcMain.resident == 0) {
             if (kind == 1 && gameFlagIsSet(0x235)) {
                 if (!gameFlagIsSet(0x1c0) || !gameFlagIsSet(0x424) || objectFlagBitIsSet(qcGetCenterSlotGroups(1), 4)) {
-                    questCompletionSetTierFlags(0);
+                    questCompletionSetTierFlags(NULL);
                 }
             }
             const QcStartSequence *sequence = NULL;

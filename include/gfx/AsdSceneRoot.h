@@ -12,6 +12,7 @@
 /* An object made from an allocator that it keeps at 0x04 and destroys itself through it. */
 class AsdSceneObject {
 public:
+    AsdSceneObject(AsdAllocatorObject *allocator) : allocator(allocator) {}
     virtual ~AsdSceneObject();
     /* 0x04 */ AsdAllocatorObject *allocator;
 
@@ -21,6 +22,33 @@ public:
         allocator->release(this);
     }
 };
+
+/* The scene objects the root's builders make (FUN_0011ffc0, FUN_0012cef8, asdSceneCreateQueueComponent, FUN_001200e8 and their
+ * smt4a twins), named after their smt4 vtables until their real names are known. Each vtable lists only the
+ * destructor. */
+
+/* The 12-byte object FUN_0011ffc0 builds; its destructor (FUN_00367528) is empty. */
+class Obj421264 : public AsdSceneObject {
+public:
+    Obj421264(AsdAllocatorObject *allocator) : AsdSceneObject(allocator), unk08(0) {}
+    virtual ~Obj421264();
+    /* 0x08 */ u32 unk08;
+};
+
+/* The 8-byte object FUN_0012cef8 builds; its destructor (FUN_003680fc) is empty. */
+class Obj421374 : public AsdSceneObject {
+public:
+    Obj421374(AsdAllocatorObject *allocator) : AsdSceneObject(allocator) {}
+    virtual ~Obj421374();
+};
+
+/* The 8-byte queue component asdSceneCreateQueueComponent builds; its destructor (smt4 0x36a100, smt4a _ZN9Obj4214ecD1Ev) is empty. */
+class Obj4214ec : public AsdSceneObject {
+public:
+    Obj4214ec(AsdAllocatorObject *allocator) : AsdSceneObject(allocator) {}
+    virtual ~Obj4214ec();
+};
+typedef char Obj4214ecSizeCheck[sizeof(Obj4214ec) == 8 ? 1 : -1];
 
 /* An owning pointer to a scene object: assignment swaps, and a pointer still owning its object
  * destroys it. */
@@ -52,6 +80,15 @@ template <class T> struct AsdSceneMovePtr {
             owned = otherOwned;
         }
     }
+};
+
+/* The 16-byte object FUN_001200e8 builds: it takes over the list the list builder made, which its destructor
+ * (FUN_003683d4) destroys. */
+class Obj4213d4 : public AsdSceneObject {
+public:
+    Obj4213d4(AsdAllocatorObject *allocator, AsdSceneObject *list) : AsdSceneObject(allocator), list(list) {}
+    virtual ~Obj4213d4();
+    /* 0x08 */ AsdSceneMovePtr<AsdSceneObject> list;
 };
 
 /* The limits the scene's updater is built with. */
@@ -86,6 +123,18 @@ struct AsdSceneSmallDescription {
 struct AsdSceneLargeDescription {
     u8 unk00[12];
 };
+
+/* The scene objects' builders: each allocates its object from `allocator` and returns it, or NULL if the
+ * allocation failed (smt4 names; smt4a FUN_0015d31c, FUN_00172088, asdSceneCreateQueueComponent, FUN_0015d444). */
+extern "C" {
+AsdSceneObject *FUN_0011ffc0(AsdSceneLargeDescription *description, AsdAllocatorObject *allocator);
+AsdSceneObject *FUN_0012cef8(AsdSceneSmallDescription *description, AsdAllocatorObject *allocator);
+AsdSceneObject *asdSceneCreateQueueComponent(AsdSceneSmallDescription *description, AsdAllocatorObject *allocator);
+AsdSceneObject *FUN_001200e8(AsdSceneObject **list, AsdAllocatorObject *allocator);
+AsdSceneObject *FUN_0015d31c(AsdSceneLargeDescription *description, AsdAllocatorObject *allocator);
+AsdSceneObject *FUN_00172088(AsdSceneSmallDescription *description, AsdAllocatorObject *allocator);
+AsdSceneObject *FUN_0015d444(AsdSceneObject **list, AsdAllocatorObject *allocator);
+} /* extern "C" */
 
 /* The three scene objects the queue builder takes over. */
 struct AsdSceneQueueDescription {

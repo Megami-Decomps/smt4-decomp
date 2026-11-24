@@ -37,4 +37,13 @@ struct RequestParameters {
 };
 typedef char RequestParametersSizeCheck[sizeof(RequestParameters) == 0x14 ? 1 : -1];
 
+/* Puts a request back to active (kind 1) with an empty result; the menu, its script return and the mount step all
+ * reset a request this way before they give it its kind. */
+static __inline void resetRequestOperation(RequestParameters *operation)
+{
+    operation->kind = 1;
+    operation->word3 = 0;
+    operation->result = WindowStatusResult(operation->word3);
+}
+
 #endif

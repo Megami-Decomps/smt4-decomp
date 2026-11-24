@@ -55,7 +55,6 @@ extern const u32 DAT_0052c758[10];   /* the item gift kind of every fifth record
 
 char *libc_strcpy(char *destination, const char *source); // declcheck: local (the shared header keeps the decompiler's word-pointer view)
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 maskToCode(u32 mask);
 u32 dataStoreGetProgress(void);
 u32 dataStoreGetValue50(void);

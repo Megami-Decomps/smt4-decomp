@@ -2,7 +2,7 @@
 #define EVENT_NPCTEXTUREWORK_H
 #include "common.h"
 #include <stddef.h>
-struct NpcTextureSource;
+struct DataTable25Record;
 /* The Npc2d portrait job's work area (0x98 bytes), shared by the portrait creators and the update
  * npc2dPortraitUpdate. */
 struct NpcTextureWork {
@@ -30,7 +30,7 @@ struct NpcTextureWork {
     /* 0x48 */ u32 portraitHandle;  /* the cached NKDW portrait resource (BattleFrameSprite) */
     /* 0x4C */ s32 portraitId;
     /* 0x50 */ u32 variantIndex;
-    /* 0x54 */ NpcTextureSource *source;
+    /* 0x54 */ DataTable25Record *source;
     /* 0x58 */ f32 animationFrame;
     /* 0x5C */ u8 animate;
     u8 unk5D[3];

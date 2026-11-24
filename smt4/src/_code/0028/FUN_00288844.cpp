@@ -1,9 +1,9 @@
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "common.h"
 #include "camp/Unite/UniteWork.h"
 
 extern "C" {
 
-int texTableRecordCallWithParams(int a, int b, int c, u32 d, u32 e, u32 f);
 
 void FUN_00288844(u32 a, u32 b, u32 c)
 {

@@ -1,33 +1,24 @@
-/* NON_MATCHING: register allocation of the tail only: retail keeps the chosen index in r2 and builds the bit in r0
- * (moveq r0, r2), where this build loads the index straight into r0. */
-#include "common.h"
-#include <stddef.h>
+/* NON_MATCHING: the tail keeps the tab in r2 and its bit in r0 in retail (r0 and r2 in the build).
+ * Retail merges the flag before the built-tab test, and its additional moveq shifts two branches. */
+#include "quest_center/qcUtility.h"
 #include "util/Random.h"
-
-struct RandomChoiceStateView {
-    u8 unk00[8];
-    u8 usedMask; /* 0x08 */
-    u8 suppressedMask; /* 0x09 */
-    u8 previousChoice; /* 0x0a */
-};
-typedef char RandomChoicePreviousOffset[offsetof(RandomChoiceStateView, previousChoice) == 0xa ? 1 : -1];
 
 extern "C" {
 
 /* Exhaust all four choices before restarting, without repeating the previous choice. */
-u32 qcTabListPickRandomTab(RandomChoiceStateView *state)
+u32 qcTabListPickRandomTab(QcTabListState *state)
 {
-    if (state->usedMask == 0xf)
-        state->usedMask = 0;
+    if (state->flags == 0xf)
+        state->flags = 0;
     s32 skip = randNextInRange(3);
-    u8 used = state->usedMask;
+    u8 used = state->flags;
     bool searching = true;
     while (searching) {
         for (s32 i = 0; i < 4; i++) {
             if (!(used & (1 << i))) {
                 if (skip == 0) {
-                    if (state->previousChoice != i) {
-                        state->previousChoice = i;
+                    if (state->tab != i) {
+                        state->tab = i;
                         searching = false;
                         break;
                     }
@@ -37,11 +28,12 @@ u32 qcTabListPickRandomTab(RandomChoiceStateView *state)
             }
         }
     }
-    u32 choice = state->previousChoice;
-    u32 bit = 1 << choice;
-    if (bit & state->suppressedMask)
+    u32 choice = state->tab;
+    u32 bit = 1u << choice;
+    if (bit & state->builtTabs)
         choice = 5;
-    state->usedMask = used | bit;
+    state->flags = used | bit;
     return choice;
 }
-}
+
+} /* extern "C" */

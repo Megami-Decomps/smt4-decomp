@@ -65,7 +65,6 @@ s32 FUN_0022655c(const char *path);
 void FUN_00213bc8(const char *path);
 u32 FUN_003d2eec(const char *path);
 void titleSetSlotValueState2(u32 screen, u32 duration);
-u32 sysLightEventTryWait(LightEvent *event);
 void FUN_00229104();
 s32 moviePumpUntilReady();
 s32 slotIsActive(u32 button);

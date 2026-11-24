@@ -8,6 +8,7 @@
 #include <stddef.h>
 #include "quest_center/qcMain.h"
 
+
 struct CampResultMessageView { u8 unk00[0x3F]; u8 message; };
 struct CampResultStateView {
     u8 unk000[0x28];
@@ -79,7 +80,7 @@ void FUN_003b8c40(CampResultStateView *work)
         work->resultScript = asdLoadFileSyncDefault("battle/Result.bf");
         work->resultMessages = asdLoadFileSyncDefault("battle/ResultMsg.mbm");
         work->resultProcess = scrScriptProcessCreate(work->resultScript, work->resultMessages);
-        work->resultProcess->mode = 3;
+        scriptProcessSetMode(work->resultProcess, 3);
         scrScriptProcessStartEntry(work->resultProcess, tableGroupFindEntryIndex(work->resultScript, "ProcCharonRequestFirst"));
         work->operation = 0;
         return;

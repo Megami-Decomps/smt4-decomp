@@ -1,4 +1,3 @@
-/* NON_MATCHING: initial global/ID loads are reordered and first/second index registers exchanged; all 75 instructions otherwise agree. */
 #include "camp/Unite/UniteGlobals.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 
@@ -16,17 +15,12 @@ static __inline s32 compareFusionComponent(u16 leftId, u16 rightId)
 }
 extern "C" {
 
-// Sort fusion pairs by score, then each component's race, descending level and ID.
+/* Sorts fusion pairs by score, then each component's race, descending level and ID. */
 s32 fusionComparePairScoreAscending(const u16 *left, const u16 *right)
 {
-    struct PairScoreView {
-        u8 unk0000[0x78a0];
-        s32 scores[1]; // 0x78a0
-    };
-    UniteWork *work = g_unite;
-    const PairScoreView *score = reinterpret_cast<const PairScoreView *>(work);
-    s32 difference = score->scores[*left] - score->scores[*right];
+    s32 difference = g_unite->pairScoresIV.scores[*left] - g_unite->pairScoresIV.scores[*right];
     if (difference == 0) {
+        const UniteWork *work = g_unite;
         difference = compareFusionComponent(work->pairListIV.pairs[*left].firstId,
                                             work->pairListIV.pairs[*right].firstId);
         if (difference == 0)
@@ -35,4 +29,4 @@ s32 fusionComparePairScoreAscending(const u16 *left, const u16 *right)
     }
     return difference;
 }
-}
+} /* extern "C" */

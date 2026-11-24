@@ -43,22 +43,25 @@ s32 textMeasureLineWidth(TextMeasureState *text, s32 line)
             if (currentLine == line)
                 break;
             if (charCodeIsPrivateUseGlyph(code)) {
+                bool foundPageEnd = false;
                 switch (code) {
                 case 0xf801:
                     ++currentLine;
                     break;
                 case 0xf802:
-                    goto measure;
+                    foundPageEnd = true;
+                    break;
                 default:
                     position += sentinelLookupGetValue(code);
                     break;
                 }
+                if (foundPageEnd)
+                    break;
             }
         }
         ++position;
     } while (position < text->start + 999);
 
-measure:
     s32 width = 0;
     for (;;) {
         u32 code = text->cells[position].code;

@@ -44,6 +44,8 @@ typedef char EventTexDrawLayoutCheck[offsetof(EventTex, drawOrigin) == 0x60 && s
 
 extern "C" {
 u8 *saveGetUserSettingsBlock(void);
-}
+/* Starts a portrait for the requested table variant; returns its job handle or zero. */
+u32 npc2dCreatePortraitVariantJob(u32 npc, s32 position, u32 variant);
+} /* extern "C" */
 
 #endif

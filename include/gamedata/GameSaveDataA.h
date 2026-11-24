@@ -7,6 +7,7 @@
 #include "common.h"
 #include "gamedata/GameData.h"
 #include "gamedata/PlayerRecordParts.h"
+#include "camp/CampCec/CecProfile.h"
 #include "gamedata/MapSaveBlockA.h"
 #include "gamedata/SavedUnitChoice.h"
 #include <stddef.h>
@@ -17,6 +18,7 @@ typedef struct PlayerDataA {
     union {
         /* 0x00 */ u16 equipment[7];
         /* 0x00 */ PlayerEquipment equipped;
+        /* 0x00 */ CecProfile streetPassEquipment;
     };
     struct {
         /* 0x0E */ u16 hp;

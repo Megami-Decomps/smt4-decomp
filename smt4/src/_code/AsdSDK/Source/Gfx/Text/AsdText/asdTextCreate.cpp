@@ -16,7 +16,7 @@ AsdText *asdTextCreate(u32 arg)
 
     text->unk34 = 0x402;
     text->unkAC = 0;
-    text->unk50 = -1;
+    text->drawLayer = -1;
     text->unkB0 = 0;
     text->unk9c = -1;
     text->color = g_asdTextDefaults.color & 0xffffff00;

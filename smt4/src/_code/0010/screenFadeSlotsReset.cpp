@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the float store's schedule differs (retail stores value first, the build last). */
+/* NON_MATCHING: only the float store's schedule differs (retail stores value first, the build last). Tried (wave 89): the float store last, an int 0, s32/u32/u16/s16 indices, an element pointer, while/do-while loops, the unsized array and the global indexed directly. */
 #include "shard/W6_W6Match3_SlotState.h"
 
 extern "C" {

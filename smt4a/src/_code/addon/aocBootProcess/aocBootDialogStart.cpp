@@ -7,7 +7,7 @@ extern "C" {
 extern AocBootGlobals g_aocBoot;
 void *asdMemoryAllocTracked(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
 void FUN_0015f258(void *dialog);
-void FUN_0024b280(void);
+void aocBootUpdate(void);
 void aocBootRelease(void);
 
 /* Allocate the boot dialog if necessary and start its calculation process. */
@@ -23,10 +23,10 @@ u32 aocBootDialogStart(void)
     boot->dialogOpen = 0;
     FUN_0015f258(boot->dialog);
     boot->frames = 0;
-    u32 job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("aocBoot CALC"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0024b280), reinterpret_cast<AsdProcFunc>(aocBootRelease), 0);
+    u32 job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("aocBoot CALC"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(aocBootUpdate), reinterpret_cast<AsdProcFunc>(aocBootRelease), 0);
     boot = g_aocBoot.boot;
     boot->job = job;
-    g_aocMain->flags &= ~0x70;
+    aocMainClearResult(g_aocMain);
     return boot->job;
 }
 }

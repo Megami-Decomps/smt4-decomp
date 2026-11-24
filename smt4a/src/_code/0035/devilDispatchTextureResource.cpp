@@ -1,3 +1,4 @@
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include <stddef.h>
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
@@ -8,7 +9,7 @@
 extern "C" {
 s32 gameFlagIsSet(u32);
 s32 recordPrepareLinkedOwner(AocSystemA *, u32, s32);
-void texTableRecordCallWithParams(s32, u32, s32, u32, u32, u32);
+
 void texBindBindTableNode(AocSystemA *, u32, s32, u32, s32, u32, u32, u32);
 
 /* Resolve the demon's texture resource and dispatch or request its operation. */

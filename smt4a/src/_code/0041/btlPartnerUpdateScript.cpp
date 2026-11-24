@@ -9,7 +9,6 @@ void asdMemFree(void *memory);
 void FUN_00416610(void *entries);
 void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
 void scrScriptProcessStartEntry(ScriptProcess *state, u32 entry);
-void scriptProcessSetMode(ScriptProcess *state, s32 mode);
 }
 static inline void releasePartnerScript(BtlPartnerAttackA *work)
 {

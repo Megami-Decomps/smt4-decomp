@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b6c34` (_code @ 0x2b6c34, 0x15c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -7,7 +8,7 @@ extern "C" {
 
 int FUN_001386f8(void);
 int skillDataFindById(void);
-int texTableRecordCallWithParams(int, int, unsigned int, int, int, int);
+
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(void);
 int gxResetColorQuadToWhite(void);

@@ -6430,3 +6430,22 @@
 00124c60 asdTextDrawAtInt inferred draws text at integer coordinates (w88-f1)
 0049381c g_messageControl inferred the message control block (MessageControl; w88-f1)
 001c36d8 clearSaveStartNewGame inferred carries a clear save over into a new game (w88-f2)
+00421230 _ZTV9Obj421230 inferred size:0x34 vtable: its 11 slots end before the [0, 0, 0x367528] header at 0x421264 (image words)
+00421264 _ZTV9Obj421264 inferred size:0xc vtable [0, 0, D1 0x367528]; FUN_0011ffc0 stores its address point +8 (gfx/AsdSceneRoot.h Obj421264); next header at 0x421270
+00421340 _ZTV9Obj421340 inferred size:0x34 vtable: its 11 slots end before the [0, 0, 0x3680fc] header at 0x421374 (image words)
+00421374 _ZTV9Obj421374 inferred size:0xc vtable [0, 0, D1 0x3680fc]; FUN_0012cef8 stores its address point +8 (gfx/AsdSceneRoot.h Obj421374)
+004213d4 _ZTV9Obj4213d4 inferred size:0xc vtable [0, 0, D1 0x3683d4]; the next header starts at 0x4213e0 (image words)
+0036a100 _ZN9Obj4214ecD1Ev inferred destructor: slot 0 of _ZTV9Obj4214ec, as smt4a already names its twin
+00432fe4 DAT_00432fe4 inferred not a separate object: the second word of g_aocBoot (AocBootGlobals::finished), stored through g_aocBoot's pool word by aocBootUpdate
+00432fe0 g_aocBoot inferred size:0x8 AocBootGlobals (boot pointer, finished flag; addon/aocBootProcess.h), as smt4a
+002ad1e0 sysLightEventTryWait inferred twin of smt4a sysLightEventTryWait (same forwarder to nn_os_LightEvent_TryWait; called at the same points of both games' boot updates)
+002b6b8c gauntletAppDrawCategoryLabel inferred draws the label message (0x411-0x416) of a Gauntlet app's category
+002ad80c archivePathDeviceCreateFile inferred UTF-16 path lookup on the archive, then the device's create-file call
+002e8be0 lmapCaveOverviewStep inferred state 0 spawns map/all/action_cave.bam, then waits for confirm or cancel
+0012d1c4 asdSceneCreateQueueComponent inferred makes the scene queue's 8-byte Obj4214ec component (gfx/AsdSceneRoot.h)
+00340ad4 enemyRenderTexSetup inferred counterpart of smt4a enemyRenderTexSetup (same size search and target setup, without the sampler packets)
+002cb8d8 asdLoadFileExists inferred twin of smt4a asdLoadFileExists
+0036ec8c textureBuildFileFromConfig inferred allocates and fills the texture file's header, body and pixels from the create descriptor
+00142fcc gxAddDisplayTransferCommand inferred forwards the seven display-transfer arguments (the replayed type 3 command)
+00142fec gxAddMemoryFillCommand inferred forwards the eight two-buffer memory-fill arguments (the replayed type 2 command)
+0014300c gxAddTextureCopyCommand inferred forwards the eight texture-copy arguments

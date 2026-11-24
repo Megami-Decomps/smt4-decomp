@@ -179,9 +179,9 @@ struct SkillDataRecordA {
     union {
         /* 0x28 */ u32 properties;
         struct {
-            u32 unk00 : 12;
+            u32 unk00 : 11;
             u32 category : 5;
-            u32 unk11 : 15;
+            u32 unk10 : 16;
         } skillProperties;
         struct {
             u32 unk00 : 5;

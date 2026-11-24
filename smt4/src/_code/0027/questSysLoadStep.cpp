@@ -12,7 +12,6 @@ s32 FUN_00298dc8();
 void FUN_0029016c(u32 selection, s32 flags);
 void FUN_002900d0();
 s32 gameJumpRequestIsPending();
-void scriptProcessSetMode(ScriptProcess *process, u32 mode);
 
 // Load quest script resources, run the requested entry, and finish any jump entry.
 u32 questSysLoadStep(AocScriptHolder *step)

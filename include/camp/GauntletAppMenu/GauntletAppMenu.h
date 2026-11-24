@@ -67,6 +67,9 @@ typedef char GauntletAppMenuWorkALayoutCheck[
 extern "C" {
 void devilDispatchTextureResource(u32 id, u32 argument, u32 first, u32 second, s32 resolveDemon);
 void gauntletAppMenuDrawScreen(GauntletAppMenuWork *menu);
+
+/* Draws an app's category label at (x, y) at the given priority: IV and Apocalypse, respectively. */
+void gauntletAppDrawCategoryLabel(s32 appId, u32 x, u32 y, u32 priority);
 }
 
 #endif

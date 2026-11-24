@@ -6,12 +6,12 @@ void gpuSubmitCommandBlock(const void *commands, u32 bytes, u32 mode);
 
 void gpuSubmitTextureBindCommands(u32 width, u32 height, u32 format, u32 address)
 {
-    TextureCommandBlock formats = g_gpuCommandDefaults.formats;
-    TextureCommandBlock command = g_gpuCommandDefaults.command;
-    command.words[2] = (width << 16) | height;
-    command.words[3] = formats.words[format] | 0x2200;
-    command.words[5] = address >> 3;
-    command.words[12] = format;
+    TextureCommandFormats formats = g_gpuCommandDefaults.formats;
+    TextureBindPacket command = g_gpuCommandDefaults.command;
+    command.dimensions = (width << 16) | height;
+    command.formatFlags = formats.words[format] | 0x2200;
+    command.encodedAddress = address >> 3;
+    command.format = format;
     gpuSubmitCommandBlock(&command, sizeof(command), 1);
 }
 }

@@ -27,7 +27,6 @@ struct UnitScreenReadyViewA {
     u32 refresh;
 };
 extern "C" {
-void scriptProcessSetMode(ScriptProcess* process, s32 mode);
 void __aeabi_memset4(void* destination, u32 size, u32 value);
 void ifTouchRegionRemove(void);
 void ifTouchResetRecord(void);

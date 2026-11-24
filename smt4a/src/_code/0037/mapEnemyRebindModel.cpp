@@ -1,6 +1,7 @@
 #include "gamedata/EncounterSelection.h"
-/* NON_MATCHING: 20 lines. The two release steps are the inlines mapEnemyAssignSpawns shares (map/MapEnemySlotModel.h).
- * Remaining: the build loads model->body above the owned test (retail loads it in each arm, and reads the
+/* NON_MATCHING: 41 lines. The two release steps are the inlines mapEnemyAssignSpawns shares (map/MapEnemySlotModel.h).
+ * The record lookup starts from NULL: retail never sets it for a kind outside 1-4 and reads it anyway, and leaving the
+ * local unset (undefined behaviour, wave 89 review) gives 20 lines. Remaining at 20: the build loads model->body above the owned test (retail loads it in each arm, and reads the
  * flags through a second register in the borrowed arm), which also stops the registered test from being
  * predicated (`ldrbne; cmpne`), and it clears r8 one instruction early. */
 #include "shard/W4_Match1b_RegisteredHandle.h"
@@ -14,10 +15,11 @@
 
 extern "C" {
 
+/* The spawn record `index` of the table selection `kind` (1-4) uses; NULL for any other kind. */
 static __inline MapEnemySpawn *enemySelectionRecordForKind(u32 kind, s32 index)
 {
     MapEnemyA *enemies = g_mapEnemy;
-    MapEnemySpawn *record;
+    MapEnemySpawn *record = NULL;
     if (kind == 1)
         record = &enemies->spawnTables[0].entries[index];
     else if (kind == 2)

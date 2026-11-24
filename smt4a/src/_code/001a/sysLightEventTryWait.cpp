@@ -1,13 +1,14 @@
 #include "common.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 
-extern void nn_os_LightEvent_TryWait(void);
+s32 nn_os_LightEvent_TryWait(LightEvent *event);
 
-/* Forwards to the function that follows it in the binary. */
-void sysLightEventTryWait(void)
+/* Tests an event without waiting; the tail call to the next function is linked as a nop. */
+s32 sysLightEventTryWait(LightEvent *event)
 {
-    nn_os_LightEvent_TryWait();
+    return nn_os_LightEvent_TryWait(event);
 }
 
 } /* extern "C" */

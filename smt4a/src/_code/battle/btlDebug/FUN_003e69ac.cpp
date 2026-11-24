@@ -1,9 +1,10 @@
-/* NON_MATCHING: the 64-bit flag clears use per-word and/bic with mvn in retail (built folds the masks with orr+bic), the cases share one exit instead of duplicating the epilogue, and the stack setup assigns script mode via a separate register */
+/* NON_MATCHING: the 64-bit flag clears use per-word and/bic with mvn in retail (built folds the masks with orr+bic) and the cases share one exit instead of duplicating the epilogue */
 #include "battle/BtlMainAccess.h"
 #include "script/scrScriptProcess.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "battle/BtlUiGlobal.h"
+
 
 extern "C" {
 
@@ -54,7 +55,7 @@ u32 FUN_003e69ac(ContinueState *continueState)
         BtlMainStateA *battle = btlGetMainState();
         /* The owner word is the help messages' context here. */
         continueState->script = scrScriptProcessCreate(continueState->resource, reinterpret_cast<void *>(battle->helpMessages.context));
-        continueState->script->mode = 2;
+        scriptProcessSetMode(continueState->script, 2);
         battle->stateFlags64.bits = battle->stateFlags64.bits & ~DAT_005715d0[1].whole & ~DAT_005715d0[2].whole;
         if (dialogIsActive() != 0) {
             dialogClose(1);

@@ -1,4 +1,5 @@
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlGameOverTransition.h"
 #include "battle/btlMain.h"
 #include "gamedata/GameFlags.h"
 #include "code/Code002c.h"
@@ -7,17 +8,6 @@
 struct BattleActionHistoryState;
 
 extern "C" {
-
-typedef struct BtlEndTask {
-    s32 state;      /* 0x00 */
-    u32 flags;      /* 0x04: bit 0 skips the follow-up job */
-    u8 unk08[4];
-    u32 unk0C;      /* 0x0C */
-    u8 unk10[4];
-    u32 unk14;      /* 0x14 */
-    u32 job;        /* 0x18 */
-} BtlEndTask;
-
 
 void FUN_0033a780(BattleActionHistoryState *state);
 void btlTalkBustUpDestroy(void);
@@ -28,16 +18,15 @@ void eventCommandDispatchPendingCleanup(void);
 u32 gameFlagIsSet(u32 flag);
 u32 FUN_002ef6b8(s32 kind, u32 arg);
 s32 jobIsValid(u32 job);
-s32 FUN_0023f074(BtlEndTask *task);
 s32 eventFlagForScene(s32 scene);
 
 /* Once both pairedAvailabilityGetState slots report 3, stops the battle's jobs and starts the follow-up job (flag 0x817). */
-s32 FUN_0023f194(BtlEndTask *task)
+s32 FUN_0023f194(BtlGameOver *task)
 {
-    if (task->unk0C == 0) {
+    if (task->dataA == NULL) {
         return 0;
     }
-    if (task->unk14 == 0) {
+    if (task->dataB == NULL) {
         return 0;
     }
     {
@@ -52,10 +41,10 @@ s32 FUN_0023f194(BtlEndTask *task)
                 eventCommandDispatchPendingCleanup();
             if (!(task->flags & 1)) {
                 u32 completionFlag = eventFlagForScene(23);
-                task->job = FUN_002ef6b8(23, gameFlagIsSet(completionFlag));
+                task->followupJob = FUN_002ef6b8(23, gameFlagIsSet(completionFlag));
                 gameFlagSetValue(completionFlag, 1, 1);
                 task->state = 5;
-                if (jobIsValid(task->job) == 0) {
+                if (jobIsValid(task->followupJob) == 0) {
                     task->state = 6;
                     return FUN_0023f074(task);
                 }

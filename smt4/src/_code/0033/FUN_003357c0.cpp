@@ -1,5 +1,7 @@
-#include "battle/btlGameOver.h"
+#include "battle/BtlGameOverTransition.h"
+#include "gamedata/GameDataAccess.h"
 #include "shard/GameDataBlocks.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "battle/BtlUiGlobal.h"
 
 struct BtlUi;
@@ -21,9 +23,6 @@ void FUN_00282820(s32, s32, s32, s32, s32, s32, s32, s32);
 void btlUiPlaySceneFadeOutWhenReady(BtlUi *);
 u32 FUN_0023f27c(s32, u32, u32, u32, void *, s32, s32, s32, s32);
 void slotSetRequest(s32, u32, u32);
-void asdLoadFileAsyncSimple(const char *, void **, s32);
-GameSaveBody *gameDataBlocksGetSaveData();
-s32 FUN_0023f194(BtlGameOver *);
 
 s32 FUN_003357c0(BtlGameOver *work)
 {
@@ -41,9 +40,9 @@ s32 FUN_003357c0(BtlGameOver *work)
     if (work->frameCounter <= DAT_00439a70.loadFrame)
         return 0;
     work->state = 3;
-    asdLoadFileAsyncSimple(!(work->unk04 & 1) ? DAT_004009cc : DAT_004009e8, &work->dataA, 0);
-    asdLoadFileAsyncSimple(!(work->unk04 & 1) ? DAT_0040098c : DAT_004009ac, &work->dataB, 0);
-    GameSaveBody *save = gameDataBlocksGetSaveData();
+    asdLoadFileAsyncSimple(!(work->flags & 1) ? DAT_004009cc : DAT_004009e8, &work->scriptFileAddress, 0);
+    asdLoadFileAsyncSimple(!(work->flags & 1) ? DAT_0040098c : DAT_004009ac, &work->messageFileAddress, 0);
+    GameSaveBody *save = (GameSaveBody *)gameDataBlocksGetSaveData();
     if (save->gameOverContinueEnabled < 255)
         ++save->gameOverContinueEnabled;
     work->state = 4;

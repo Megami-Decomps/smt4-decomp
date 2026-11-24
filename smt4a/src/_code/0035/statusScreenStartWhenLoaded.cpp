@@ -1,6 +1,6 @@
-/* NON_MATCHING: 77 lines off: retail hoists the s8 fields' base (screen + 0x100) and the zero result to entry, sets
- * the result 3 before the fade loop (keeping the screen in r6 and the index in r4), and does not share the 2 of the
- * script's and the screen's states in a saved register. */
+/* NON_MATCHING: 70 lines off: retail hoists the s8 fields' base (screen + 0x100) and the zero result to entry and
+ * sets the result 3 before the fade loop (keeping the screen in r6 and the index in r4). The script's mode is set
+ * through scriptProcessSetMode, the setter armlink inlines (config/inlined.txt). */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "camp/CampCec/CampCecView.h"
@@ -8,6 +8,7 @@
 #include "script/scrScriptProcess.h"
 #include "script/ScriptVm.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
+
 
 struct StatusScene {
     /* 0x00 */ u8 unk00[0x1C];
@@ -108,7 +109,7 @@ u32 statusScreenStartWhenLoaded(StatusScreen *screen)
             devilModelReady(screen->devil)) {
             ScriptProcess *script = scrScriptProcessCreate(screen->scriptData, screen->scriptOwner);
             screen->script = script;
-            script->mode = 2;
+            scriptProcessSetMode(script, 2);
             screen->ready = 1;
             linkHolderApplyFlag(screen->links, 1);
             controllerApplyPreset(screen->links, screen->character->preset);

@@ -1,6 +1,12 @@
 /* NON_MATCHING: 3 rows by shape (13 raw), in the scroller loop's head only: retail loads the page size 9 in the
  * loop-back block (`mov r1, #9; moveq r1, #10` after the compare) and once more on the way in
- * (`movne r1, #9`), where this build loads it once in the block both paths reach. */
+ * (`movne r1, #9`), where this build loads it once in the block both paths reach.
+ * Lead (wave 89, not applied): retail's shape is a 9 that is copied before the 7/8 test replaces it, which the
+ * ternary never gives and the in-place `visible = 9; if (..) visible = 10;` loses again (38 lines). The row count
+ * returned by a single-use inline (`s32 rows = 9; if (page == 7 || page == 8) rows = 10; return rows;`) passed
+ * straight to listScrollerInitialize is IDENTICAL, as is an in-place copy of that value; neither is kept: the
+ * siblings (FUN_004964e0, smt4 FUN_002302d8) compute the same 9/10 in place, no function in either game has that
+ * body, and the IV twin FUN_003a45fc would only repeat the helper. */
 #include "shard/Shard0049.h"
 #include "shard/W6_W6Match5_StatisticsBanks.h"
 #include "addon/AocEntryKind.h"

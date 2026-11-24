@@ -12,19 +12,21 @@ typedef struct BtlGameOverLayer {
     /* 0x04 */ f32 scale;       /* x and y scale about the pivot */
 } BtlGameOverLayer;
 
-/* Shin Megami Tensei IV layout: the fields the game-over code reads (its block is allocated larger). */
+/* Shin Megami Tensei IV layout: the script transition and splash animation share this work area. */
 typedef struct BtlGameOver {
     /* 0x00 */ u32 state;
-    /* 0x04 */ u32 unk04;
+    /* 0x04 */ u32 flags;       /* bit 0: use the level-event files and skip the follow-up job */
     /* 0x08 */ u32 frameCounter;
-    /* 0x0C */ void *dataA;     /* heap block */
-    /* 0x10 */ ScriptProcess *process;   /* script process object */
-    /* 0x14 */ void *dataB;     /* heap block */
-    /* 0x18 */ u32 unk18;
-    /* 0x1C */ u32 drawEnabled; /* the draw tasks draw the screen only in state 8 with this set */
+    /* 0x0C */ union { void *dataA; u32 scriptFileAddress; };
+    /* 0x10 */ ScriptProcess *process;
+    /* 0x14 */ union { void *dataB; u32 messageFileAddress; };
+    /* 0x18 */ u32 followupJob;
+    /* 0x1C */ union { u32 drawEnabled; s32 splashPhase; };
     /* 0x20 */ f32 frontAlpha;  /* alpha of the sprite drawn last, over the layers */
-    /* 0x24 */ u32 unk24;
+    /* 0x24 */ f32 crossfadeFrame;
     /* 0x28 */ BtlGameOverLayer layers[2]; /* the two blended sprites scaled about a shared pivot */
+    /* 0x38 */ s32 splashWait;
+    /* 0x3C */ s32 touchRegion;
 } BtlGameOver;
 
 /* Apocalypse layout: the fields sit four bytes further on. */
@@ -103,7 +105,7 @@ u32 btlGameOverDraw(BtlGameOver *gameOver, u32 work);
 
 typedef char BtlGameOverSizeCheck[
     offsetof(BtlGameOver, drawEnabled) == 0x1C && offsetof(BtlGameOver, layers) == 0x28 &&
-    sizeof(BtlGameOver) == 0x38 ? 1 : -1];
+    offsetof(BtlGameOver, touchRegion) == 0x3C && sizeof(BtlGameOver) == 0x40 ? 1 : -1];
 typedef char BtlGameOverASizeCheck[sizeof(BtlGameOverA) == 0x1C ? 1 : -1];
 typedef char BtlGameOverOwnerSizeCheck[sizeof(BtlGameOverOwner) == 0x30 ? 1 : -1];
 typedef char BtlGameOverOwnerASizeCheck[sizeof(BtlGameOverOwnerA) == 0x50 ? 1 : -1];

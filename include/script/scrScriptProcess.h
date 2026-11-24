@@ -56,6 +56,9 @@ void scrScriptProcessDestroy(ScriptProcess *process);
 /* Runs the process's opcodes (forwards to scrRunOpcodes); 2 means the script has finished. */
 u32 scrRunOpcodesStub(ScriptProcess *process);
 
+/* Sets the process's mode (0x108); a one-instruction setter armlink inlines at every call (config/inlined.txt). */
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
+
 void FUN_00298d50(u32 value);
 
 /* Canonical declaration (matches the definition). */

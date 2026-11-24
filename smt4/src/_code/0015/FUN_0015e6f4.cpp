@@ -34,7 +34,7 @@ extern int g_aocMain; /* 0x432fc8 */
 /* Supplied declaration required: _ZN21WindowOperationResultC1Eh. */
 extern int legacyResourceIdRemap(unsigned int *);
 /* Supplied declaration required: strcmp. */
-extern int FUN_002ad1e0(int);
+extern int sysLightEventTryWait(int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ev. */
 extern int fsUnmountByName(int);
@@ -112,7 +112,7 @@ void FUN_0015e6f4(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
         temp_v6 = temp_v7;
         uStack_68 = uStack_54;
         jyoucyuGetTableEntry(0);
-        temp_v1 = FUN_002ad1e0(g_aocMain + 0x98);
+        temp_v1 = sysLightEventTryWait(g_aocMain + 0x98);
         temp_v8[0] = temp_v5;
         uStack_44 = uStack_64;
         uStack_40 = uStack_60;

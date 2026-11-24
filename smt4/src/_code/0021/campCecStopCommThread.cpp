@@ -37,7 +37,6 @@ void linkHolderApplyFlag(void *scene, u32 flag);
 void gameDataRemoveHomeButtonHold(u32 reason);
 void gameDataFlagsClearAndRefresh(u32 reason);
 void asdMemFree(void *block);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 }
 
 /* Waits for the communication thread to end, then finalizes it and closes its handle. */

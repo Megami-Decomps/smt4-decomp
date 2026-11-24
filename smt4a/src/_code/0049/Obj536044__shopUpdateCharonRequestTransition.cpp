@@ -10,7 +10,6 @@ void sysPlaySe(u32);
 u32 gameDataBlocksGetWord();
 u32 FUN_004d05b4();
 void asdLoadFileAsyncSimple(const char *, void **, u32);
-void scriptProcessSetMode(ScriptProcess *, s32);
 void slotSetRequest(u32, u32, u32);
 s32 screenFadeIsBusy();
 void messageDismissNumericBanner(u32);

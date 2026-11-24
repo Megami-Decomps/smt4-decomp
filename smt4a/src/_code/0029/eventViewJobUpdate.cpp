@@ -1,7 +1,5 @@
-/* NON_MATCHING: 36 lines. As in eventScriptJobUpdate, the pool holds g_aocMain before g_aocJob where retail has
- * them the other way round, and in the menu state the wrap limit 999 and the state value 2 trade r5 and r6. The
- * wraps are EVENT_WRAP_VALUE (event/EventScriptJob.h), as in IV's twin FUN_001e4d70: retail forms the stepped value
- * again for the in-range result, as the macro does. */
+/* The wraps are EVENT_WRAP_VALUE (event/EventScriptJob.h), as in IV's twin: retail forms the stepped value again
+ * for the in-range result, as the macro does. */
 #include <stdio.h>
 #include "event/EventScriptJob.h"
 #include "addon/aocMain.h"
@@ -44,7 +42,6 @@ void bustupCutAnimStopJob(void);
 void eventTexReleaseJobs(void);
 void eventCommandStop(void);
 void eventOpeningResetValidJob(void);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 u32 eventScriptFindCompletionFlag(u32 eventId, const ScriptVmLabel *entry);
 u32 padButtonIsPressed(u32 button);
@@ -60,7 +57,7 @@ static __inline void eventJobStop(void)
 {
     asdDebugHookVoid();
     jobStop(g_aocJob->job, 0);
-    g_aocMain->flags &= ~0x70;
+    aocMainClearResult(g_aocMain);
 }
 
 /* FUN_003ca208(): forgets the jobs the script dims. */
@@ -80,10 +77,9 @@ extern "C" s32 eventViewJobUpdate(void)
     char messagesPath[128];
     EventScriptJobWork *work = g_aocJob;
 
-    if (g_aocMain->flags & 4)
+    if (aocMainIsBusy(g_aocMain)) {
         return 0;
-    if (g_aocMain->flags & 8)
-        return 0;
+    }
 
     switch (work->state) {
     case EVENT_VIEW_INIT:

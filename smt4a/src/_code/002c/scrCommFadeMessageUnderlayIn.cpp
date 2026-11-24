@@ -1,4 +1,4 @@
-/* NON_MATCHING: instruction scheduling only: retail hoists `mov r1, #10` above the conditional color select and loads 1.0f before `mov r2, #1`. */
+/* NON_MATCHING: instruction scheduling only: retail hoists `mov r1, #10` above the conditional color select and loads 1.0f before `mov r2, #1`. Tried (wave 89, on the IV twin): if/else, switch, a call per branch, other return and parameter types and orders, -O2 and multifile. */
 #include "event/eventCommand.h"
 #include "script/ScriptArgs.h"
 

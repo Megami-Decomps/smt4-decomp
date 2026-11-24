@@ -18,7 +18,6 @@ void *asdLoadFileSyncDefault(const char *path);
 s32 eventScriptFindCompletionFlag(u32 event, char *entryName);
 s32 tableGroupFindEntryIndex(TableGroupHeader *table, const char *entryName);
 void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 
 // Load a map event's script/messages from DLC or ROM and start its named entry.
 u32 FUN_00270e34(void)

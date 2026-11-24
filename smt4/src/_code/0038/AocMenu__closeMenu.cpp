@@ -42,7 +42,7 @@ void AocMenu::closeMenu()
         FUN_00126fb8(reinterpret_cast<u8 *>(g_aocMain) + 0x80);
         aocClearDisplayFlag(g_aocSystem);
         aocReleasePackageOwner(g_aocSystem);
-        if (FUN_002ad1e0(&g_aocMain->operationDone) != 0)
+        if (sysLightEventTryWait(&g_aocMain->operationDone) != 0)
             g_aocMain->flags &= ~0x10000u;
         return;
     }
@@ -66,7 +66,7 @@ void AocMenu::closeMenu()
                 menu->substep = 3;
             } else if (byteIsAtLeast100(&request) != 0) {
                 menu->substep = 9999;
-                if (FUN_002ad1e0(&g_aocMain->operationDone) != 0)
+                if (sysLightEventTryWait(&g_aocMain->operationDone) != 0)
                     g_aocMain->flags &= ~0x10000u;
                 jobStopAndClearFlags(menu);
             }
@@ -86,7 +86,7 @@ void AocMenu::closeMenu()
             break;
         aocClearDisplayFlag(g_aocSystem);
         aocReleasePackageOwner(g_aocSystem);
-        if (FUN_002ad1e0(&g_aocMain->operationDone) != 0)
+        if (sysLightEventTryWait(&g_aocMain->operationDone) != 0)
             g_aocMain->flags &= ~0x10000u;
         aocMenuChangeStep(menu, 3);
         break;

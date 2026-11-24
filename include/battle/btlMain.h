@@ -47,6 +47,16 @@ struct BtlActionLoadSlot {
     /* 0x04 */ s32 id;      /* the resource's id, -1 when free */
 };
 
+/* A four-word action saved in the battle's turn list. */
+struct BtlListedAction {
+    /* 0x00 */ s32 kind;
+    /* 0x04 */ s32 unitIndex;
+    /* 0x08 */ u32 argument0;
+    /* 0x0C */ u32 argument1;
+};
+typedef char BtlListedActionLayoutCheck[sizeof(BtlListedAction) == 0x10 &&
+    offsetof(BtlListedAction, unitIndex) == 4 ? 1 : -1];
+
 /* The battle's state block, kept by a module global (Shin Megami Tensei IV layout). Its allocation is
  * 0x4A58 bytes (FUN_001b0db4 allocates it with the size of this block). */
 typedef struct BtlMainState {
@@ -210,7 +220,7 @@ typedef struct BtlMainState {
         } playerCheck;
         struct {
             u8 unk1FD8[0x338];
-            /* 0x2310 */ void *actions;         /* the actions listed for the turn (btlListedActionsPending) */
+            /* 0x2310 */ BtlListedAction *actions; /* the actions listed for the turn (btlListedActionsPending) */
             /* 0x2314 */ s32 count;
         } listedActions;
         struct {

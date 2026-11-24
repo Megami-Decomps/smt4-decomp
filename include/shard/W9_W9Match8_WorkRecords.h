@@ -201,21 +201,38 @@ typedef char TextureBindingPrefixIVLayoutCheck[
     offsetof(TextureBindingPrefixIV, object) == 0xC &&
     sizeof(TextureBindingPrefixIV) == 0x10 ? 1 : -1];
 
-/* Descriptor passed to FUN_0036ec8c. The trailing bytes are not initialized. Its constructor sets every
- * field (FUN_00340ad4 stores the defaults of the fields it then overwrites). */
+/* Descriptor passed to textureBuildFileFromConfig. The trailing bytes are not initialized. Its constructor sets every
+ * field (enemyRenderTexSetup stores the defaults of the fields it then overwrites). */
 struct TextureCreateInfoIV {
-    s32 height;
-    s32 width;
-    u32 unk08;
+    struct Dimensions {
+        s32 height;
+        s32 width;
+        s32 mipCount;
+
+#ifdef __cplusplus
+        Dimensions() : height(0), width(0), mipCount(1) {}
+#endif
+    };
+
+    /* The texture builder allocates the pixel buffer only when enabled, then optionally clears it. */
+    struct AllocationPolicy {
+        bool clearData;
+        bool hasData;
+
+#ifdef __cplusplus
+        AllocationPolicy() : clearData(false), hasData(true) {}
+#endif
+    };
+
+    Dimensions dimensions;
     u32 unk0C;
     void *data;
     u32 hardwareFormat;
-    u8 flag18;
-    u8 flag19;
+    AllocationPolicy policy;
 
 #ifdef __cplusplus
     TextureCreateInfoIV()
-        : height(0), width(0), unk08(1), unk0C(0x02020000), data(NULL), hardwareFormat(0), flag18(0), flag19(1)
+        : dimensions(), unk0C(0x02020000), data(NULL), hardwareFormat(0), policy()
     {
     }
 
@@ -223,19 +240,19 @@ struct TextureCreateInfoIV {
      * creates the texture: retail fetches the allocator argument first and fills the descriptor after it. */
     TextureCreateInfoIV &setData(void *value) { data = value; return *this; }
     TextureCreateInfoIV &setHardwareFormat(u32 value) { hardwareFormat = value; return *this; }
-    TextureCreateInfoIV &setWidth(s32 value) { width = value; return *this; }
-    TextureCreateInfoIV &setHeight(s32 value) { height = value; return *this; }
+    TextureCreateInfoIV &setWidth(s32 value) { dimensions.width = value; return *this; }
+    TextureCreateInfoIV &setHeight(s32 value) { dimensions.height = value; return *this; }
 #endif
 };
 typedef char TextureCreateInfoIVLayoutCheck[
-    offsetof(TextureCreateInfoIV, height) == 0 &&
-    offsetof(TextureCreateInfoIV, width) == 4 &&
-    offsetof(TextureCreateInfoIV, unk08) == 8 &&
+    offsetof(TextureCreateInfoIV, dimensions.height) == 0 &&
+    offsetof(TextureCreateInfoIV, dimensions.width) == 4 &&
+    offsetof(TextureCreateInfoIV, dimensions.mipCount) == 8 &&
     offsetof(TextureCreateInfoIV, unk0C) == 0xC &&
     offsetof(TextureCreateInfoIV, data) == 0x10 &&
     offsetof(TextureCreateInfoIV, hardwareFormat) == 0x14 &&
-    offsetof(TextureCreateInfoIV, flag18) == 0x18 &&
-    offsetof(TextureCreateInfoIV, flag19) == 0x19 &&
+    offsetof(TextureCreateInfoIV, policy.clearData) == 0x18 &&
+    offsetof(TextureCreateInfoIV, policy.hasData) == 0x19 &&
     sizeof(TextureCreateInfoIV) == 0x1C ? 1 : -1];
 
 /* Observed array element stride, not a subsystem identification. Float

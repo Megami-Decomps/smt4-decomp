@@ -1,8 +1,10 @@
-/* NON_MATCHING: both exits that leave for step 3 write state 3/substep 0; retail stores each pair with one stm and keeps
- * the 3 out of the saved registers, this build hoists the 3 into r7 and stores the words separately (substep first); the
- * closing flag's bit extraction also takes other registers. The queued request is passed by value as the
- * base RequestParameters: retail copies it whole (ldm/stm, a 52-byte frame), this build member by member out
- * of the AocMenuRequest local (a base subobject), with a 68-byte frame. */
+/* NON_MATCHING: 73 lines. The request is queued by value as its RequestParameters base: retail copies it whole
+ * (five plain words, a 52-byte frame), this build member by member out of the AocMenuRequest local (a base
+ * subobject), which moves the frame and every register after it. Passing it as static_cast<RequestParameters &>
+ * gives retail's copy (17 lines) but only steers (the w87 review rejected the same cast); a RequestParameters local
+ * is 76. Both exits that leave for step 3 are aocMenuChangeStep(this, 3): retail forms the 3 at each site and stores
+ * step and substep with one stm, this build keeps the 3 in r7 and stores the two words separately (armcc inlining the
+ * helper late, as with many calls of it in one file). */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match8_AocQuestReturn.h"
@@ -14,69 +16,46 @@ void msgWindowReset();
 void messageBannerRestartOrClear();
 void ifTouchRegionRemove();
 
-/* Bit `bit` of a flag word, as 0 or 1. */
-static __inline u32 flagBit(u32 flags, u32 bit)
-{
-    return (flags & (1u << bit)) >> bit;
-}
-
 /* Waits for the add-on request to finish, then restarts the menu's script and leaves for step 3; the first pass queues
  * the request unless the AOC process is closing. */
 void AocMenu::returnToScript()
 {
     AocQuestReturnView *work = (AocQuestReturnView *)this;
-    if (work->substate != 0) {
-        if (work->substate != 1) {
-            return;
+
+    switch (work->substate) {
+    case 0: {
+        if (aocMainTakeCancel()) {
+            aocMenuChangeStep(this, 3);
+            break;
         }
-        u32 flags = g_aocMain->flags;
-        if ((flags & 4) != 0) {
-            return;
+        AocMenuRequest parameters;
+        resetRequestOperation(&parameters);
+        parameters.kind = 200;
+        u32 argument;
+        if (work->contentCode == 0x6a) {
+            argument = work->argument;
+        } else {
+            argument = (g_aocMain->flags & 0x100) != 0 ? 2 : 1;
         }
-        if ((flags & 8) != 0) {
-            return;
+        g_aocMain->queueRequest(parameters, argument, 0);
+        work->substate = 1;
+        break;
+    }
+    case 1:
+        if (aocMainIsBusy(g_aocMain)) {
+            break;
         }
         scrScriptProcessDestroy(work->process);
         work->process = NULL;
         ScriptProcess *process = scrScriptProcessCreate(work->script, work->messages);
         work->process = process;
-        process->mode = 2;
+        scriptProcessSetMode(process, 2);
         msgWindowReset();
         messageBannerRestartOrClear();
         ifTouchRegionRemove();
         ifTouchRegionRemove();
-        work->state = 3;
-        work->substate = 0;
-        if (work->child != NULL) {
-            delete work->child;
-            work->child = NULL;
-        }
-        return;
+        aocMenuChangeStep(this, 3);
+        break;
     }
-    AocMain *main = g_aocMain;
-    u32 closing = flagBit(main->flags, 4);
-    main->flags &= ~0x70;
-    if (closing) {
-        work->state = 3;
-        work->substate = 0;
-        if (work->child != NULL) {
-            delete work->child;
-            work->child = NULL;
-        }
-        return;
-    }
-    AocMenuRequest parameters;
-    parameters.kind = 1;
-    parameters.word3 = 0;
-    parameters.result = WindowStatusResult(parameters.word3);
-    parameters.kind = 200;
-    u32 argument;
-    if (work->contentCode == 0x6a) {
-        argument = work->argument;
-    } else {
-        argument = (g_aocMain->flags & 0x100) != 0 ? 2 : 1;
-    }
-    g_aocMain->queueRequest(parameters, argument, 0);
-    work->substate = 1;
 }
 }

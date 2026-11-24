@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail alternates between the address of the info field and a direct displacement from the entry; the build uses the same address at all later lookups. */
+/* NON_MATCHING: retail computes the texture info field's address before loading the constant 1; the build reverses those two instructions. */
 #include "common.h"
 #include "camp/PlayLog/PlayLog.h"
 
@@ -65,14 +65,14 @@ void contentEntryInitializeTexture(Entry *entry)
         }
         asdTMTexLoadMainHeap(texId, texSub);
     }
-    FUN_00403a34(entry, info->id);
+    FUN_00403a34(entry, entry->info->id);
     gridNavigationConfigure(entry->sprite, entry->resource, 8, 1, 0, 1);
     flagsSetOrClearBit(entry->sprite, 0);
     entry->unk108 = 0;
     entry->unk08c = 0;
-    if (tableFlagBit1(info->id) != 0 || tableFlagBit2(info->id) != 0) {
-        gameDataSetEnabledBit(info->id, 0);
-        FUN_0040a844(info->id, 0);
+    if (tableFlagBit1(entry->info->id) != 0 || tableFlagBit2(entry->info->id) != 0) {
+        gameDataSetEnabledBit(entry->info->id, 0);
+        FUN_0040a844(entry->info->id, 0);
     }
 }
 

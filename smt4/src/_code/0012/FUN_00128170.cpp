@@ -43,7 +43,7 @@ unsigned int FUN_00128170(void)
   sysRequestFatalBreak();
   uVar4 = DAT_00471b60;
   fileSystemRequireReady();
-  FUN_002ad80c(uVar4,extraout_r1,0x14,0);
+  archivePathDeviceCreateFile(uVar4,extraout_r1,0x14,0);
   if ((int)uVar4 >= 0) {
     clockGetTicksAsMicroseconds(&uStack_a8);
     uStack_18 = uStack_a8;

@@ -16,4 +16,7 @@ struct QuestRuntimeFlagBlock {
 typedef char QuestRuntimeStatusLayoutCheck[
     sizeof(QuestRuntimeStatus) == 4 &&
     offsetof(QuestRuntimeFlagBlock, quests) == 0x200 ? 1 : -1];
+
+/* Updates quest completion flags and writes the reward index if reward is not NULL. */
+extern "C" void questCompletionSetTierFlags(u32 *reward);
 #endif

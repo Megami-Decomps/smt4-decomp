@@ -66,13 +66,26 @@ typedef struct RenderCtx {
     /* 0x11EC */ RenderStateStack stacks[RENDER_STACK_COUNT]; /* indexed by RenderStackKind */
 } RenderCtx;
 
+/* The six bounds passed when setting up an orthographic screen camera. */
+struct OrthoBounds {
+    /* 0x00 */ f32 left;
+    /* 0x04 */ f32 right;
+    /* 0x08 */ f32 bottom;
+    /* 0x0C */ f32 top;
+    /* 0x10 */ f32 nearClip;
+    /* 0x14 */ f32 farClip;
+};
+
 /* Apocalypse layout: the stacks are 0xC further on. */
 typedef struct RenderCtxA {
     union {
         /* 0x0000 */ u8 unk0000[0x52C];
         struct {
             u8 unk0000[0x4A0];
-            /* 0x04A0 */ u8 camera[0x6C];
+            union {
+                /* 0x04A0 */ u8 camera[0x6C];
+                /* 0x04A0 */ OrthoBounds ortho;
+            };
             /* 0x050C */ f32 parameter;
             /* 0x0510 */ f32 minimum;
             /* 0x0514 */ f32 maximum;
@@ -149,6 +162,7 @@ typedef char RenderCtxDefaultViewOffsetsCheck[
     offsetof(RenderCtx, stereo.defaultView.scale) == 0x518 && sizeof(RenderCtx) == 0x136C ? 1 : -1];
 typedef char RenderCtxAStereoOffsetCheck[
     offsetof(RenderCtxA, stereo.camera) == 0x4A0 &&
+    offsetof(RenderCtxA, stereo.ortho) == 0x4A0 && sizeof(OrthoBounds) == 0x18 &&
     offsetof(RenderCtxA, stereo.parameter) == 0x50C &&
     offsetof(RenderCtxA, stereo.minimum) == 0x510 &&
     offsetof(RenderCtxA, stereo.maximum) == 0x514 &&

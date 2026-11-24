@@ -26,16 +26,9 @@ static __inline void aocMenuStopChild(AocMenu *menu)
     }
 }
 
-static __inline void resetRequestOperation(RequestParameters *operation)
-{
-    operation->kind = 1;
-    operation->word3 = 0;
-    operation->result = WindowStatusResult(operation->word3);
-}
-
 extern "C" void aocMenuUpdate(AocMenu *menu)
 {
-    if ((u32)(menu->step - 4) < 11 && FUN_002ad1e0(&g_aocMain->operationDone)) {
+    if ((u32)(menu->step - 4) < 11 && sysLightEventTryWait(&g_aocMain->operationDone)) {
         g_aocMain->flags &= ~0x10000u;
         aocMenuSetButtonHelp(menu, -1, 0);
         jobOwnerFreeSlotAndStop(menu->jobOwner);

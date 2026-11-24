@@ -39,7 +39,7 @@ void btlEnsureEnemyDrawResources(BattleCleanupResource *resource, s32 mode);
 BattleCleanupResource *resourceCacheGetOrLoadModel(s32 id, s32 load, s32 synchronous);
 void FUN_004cae0c(BtlMainStateA *battle, BattleRosterRecordA *record, s32 duration, u32 alpha);
 void FUN_004fe764(s32 unit, u32 argument, u32 target, u32 value, u32 parameter);
-f32 FUN_004cb90c(s32 plane);
+f32 battleCameraGetProjectionScale(s32 plane);
 
 /* Whether one of the battle's loaded resources has the id: stateEntryFindById's search, inlined (the SMT IV
  * twin has the same helper). */
@@ -132,7 +132,7 @@ s32 btlSummonLoadAndSpawn(BtlMainStateA *battle, u32 id)
         record->summon.tints[0] = DAT_0057aa1c;
         record->summon.tints[1] = DAT_0057aa1c;
         record->summon.tints[2] = DAT_0057aa1c;
-        record->summon.scale = FUN_004cb90c(1);
+        record->summon.scale = battleCameraGetProjectionScale(1);
         record->summon.presentationFlags |= 0x800;
         battle->entries[entryIndex].data.parts[0] = enemy->battleTextureId;
         battle->entries[entryIndex].ids[0] = record->summon.memberId;

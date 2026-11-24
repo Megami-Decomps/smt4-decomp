@@ -9,7 +9,7 @@ extern "C" {
 
 int uiObjectSetColorRgb(...);
 int effectRenderTransformedInstance(...);
-int FUN_00163ec4(...);
+int asdTextDrawAtInt(...);
 int FUN_00164034(...);
 int textDrawRangeFaded(...);
 int messageWindowDrawSprites(...);
@@ -56,7 +56,7 @@ extern signed char DAT_005e204c; /* 0x5e204c */
 /* Supplied declaration required: textDrawString. */
 extern int FUN_00162848(unsigned int);
 /* Supplied declaration required: effectRenderTransformedInstance. */
-/* Supplied declaration required: FUN_00163ec4. */
+/* Supplied declaration required: asdTextDrawAtInt. */
 /* Supplied declaration required: FUN_00164034. */
 /* Supplied declaration required: textDrawRangeFaded. */
 /* Supplied declaration required: messageBannerDrawCounterPlates. */
@@ -531,7 +531,7 @@ LAB_0014fe60:
           temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x28));
         }
         renderCtxCalculateStereoParallax(g_renderCtx);
-        FUN_00163ec4(*(unsigned int *)(temp_v5 + 4),(int)*(short *)(temp_v6 + 8) + (int)temp_v18,
+        asdTextDrawAtInt(*(unsigned int *)(temp_v5 + 4),(int)*(short *)(temp_v6 + 8) + (int)temp_v18,
                      *(short *)(temp_v6 + 10) - 1,0x33);
       }
     }

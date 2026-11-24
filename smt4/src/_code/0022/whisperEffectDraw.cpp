@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `whisperEffectDraw` (_code @ 0x22413c, 0x6e4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -7,7 +8,7 @@ extern "C" {
 int CONCAT44(...);
 int FUN_0024d5bc(...);
 int renderCtxCallB(...);
-int texTableRecordCallWithParams(...);
+
 int renderCtxCalculateStereoParallax(int);
 int gxResetColorQuadToWhite(void);
 int efctSetSpeed(void);

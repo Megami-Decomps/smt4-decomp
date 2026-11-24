@@ -1,7 +1,6 @@
-/* NON_MATCHING: 36 lines, same 631 rows. In the kind-12 set-up retail reads window->argument into r0 after the last
- * lineStates store and builds the zero again in both branches, where the build reads it into r2 two rows earlier and
- * keeps the zero. In the card loop the source stores cardStates[i] first, as retail does; the build then swaps r8/r9
- * through the loop (storing after the card sprite's address is formed scores 16, a store order chosen by score). */
+/* NON_MATCHING: 36 lines. In the kind-12 setup, the build loads window->argument into r2 before the
+ * final line state store (retail: r0, after the store). The card loop differs in the scheduling of the
+ * state reset and sprite initializer and swaps the registers holding zero and the sprite ID. */
 #include "ui/MessageMain.h"
 #include "ui/UiSpriteApi.h"
 #include "ui/UiTexturePlacement.h"
@@ -47,22 +46,25 @@ static s32 textMeasureLineWidthInline(AsdText *text, s32 line)
                 break;
             }
             if (charCodeIsPrivateUseGlyph(code)) {
+                bool foundPageEnd = false;
                 switch (code) {
                 case ASD_TEXT_CODE_LINE_END:
                     ++currentLine;
                     break;
                 case ASD_TEXT_CODE_PAGE_END:
-                    goto measure;
+                    foundPageEnd = true;
+                    break;
                 default:
                     position += sentinelLookupGetValue(code);
                     break;
                 }
+                if (foundPageEnd)
+                    break;
             }
         }
         ++position;
     } while (position < text->firstCell + MESSAGE_LINE_SCAN_LIMIT);
 
-measure:
     s32 width = 0;
     for (;;) {
         u32 code = text->cells[position].code;

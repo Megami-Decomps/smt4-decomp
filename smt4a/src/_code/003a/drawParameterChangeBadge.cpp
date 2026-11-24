@@ -1,11 +1,12 @@
 /* NON_MATCHING: amount and X saved registers are exchanged, and one icon-call argument move is scheduled differently. */
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include <stdio.h>
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 u32 requestKindToId(u32 kind);
-void texTableRecordCallWithParams(u32 screen, u32 table, s32 index, u32 x, u32 y, u32 layer);
+
 void drawSetColorFromRGBA8(u32 color);
 void numberFontDrawFormatted(u32 screen, s32 x, s32 y, s32 mode, s32 font, s32 layer,
                   const char *format, ...);

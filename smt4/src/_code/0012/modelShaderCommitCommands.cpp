@@ -1,4 +1,4 @@
-/* NON_MATCHING: 10 lines, all in the last register write (0 to 0x100E0): retail loads the command word before the count update and the zero after it, the build sets the zero first. */
+/* NON_MATCHING: 10 lines, all in the last register write (0 to 0x100E0): retail loads the command word before the count update and the zero after it, the build sets the zero first. Tried (wave 89): s32/u32 word count, narrower value types, (u32)NULL, and the tail as a post0100e0-like helper taking the posted object (71 lines). */
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "common.h"
 #include "gfx/ModelShader.h"

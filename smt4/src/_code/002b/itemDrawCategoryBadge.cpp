@@ -1,3 +1,4 @@
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "shard/TextureDrawCall.h"
 #include "gamedata/ConsumableRecord.h"
 #include "gamedata/GamePlayerData.h"
@@ -9,7 +10,7 @@ extern "C" {
 u32 aocEntryGetKind(u32 id);
 const ItemCategoryView *dataTable08Sub0GetRecord(u32 id);
 u32 categoryIdFromIndex(u32 category);
-void texTableRecordCallWithParams(s32 layer, s32 group, u32 image, s32 x, s32 y, s32 priority);
+
 
 // Draw an item's category icon and optionally mark the currently equipped entry.
 void itemDrawCategoryBadge(u32 id, s32 x, s32 y, s32 priority, s32 markEquipped)

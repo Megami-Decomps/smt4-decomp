@@ -19,7 +19,6 @@ struct GameOverTransition {
 };
 
 extern "C" {
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void asdTMTexTableLoadTmx(u32 table, u32 flags);
 void asdTMTexTableReleaseNode(u32 table, u32 index);
 s32 campButtonHelpIsActive(void);

@@ -8,17 +8,14 @@ extern "C" {
 
 void *asdMemoryAllocTraced(u32 size, const char *file, int line);   /* allocate with source location */
 
-// Spawns the cave action model at the given position and starts it moving there.
-void mapIfSpawnCaveAction(f32 x, f32 y, f32 z, f32 w)
+/* Spawns the cave action model at the given position and starts it moving there. */
+void mapIfSpawnCaveAction(MapMarkerPosition position)
 {
     MapIfModelSlotA *block = &g_mapIf.state->slots[2];
     block->active = 1;
     block->state = 0;
     block->timer = 0;
-    block->position.x = x;
-    block->position.y = y;
-    block->position.z = z;
-    block->position.w = w;
+    block->position = position;
     void *mem = asdMemoryAllocTraced(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapIf.cpp", 0x1827);
     if (mem != NULL) {
         mem = modelListInit(mem);

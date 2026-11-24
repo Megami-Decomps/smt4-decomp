@@ -7,21 +7,16 @@ typedef struct PlayerInfo {
     /* 0x00 */ u32 id;
 } PlayerInfo;
 
-typedef struct PlayerParams {
-    /* 0x00 */ u32 id;
-    /* 0x04 */ u32 unk04;
-} PlayerParams;
-
 extern PlayerInfo *nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetPlayerInfo(void *infoBlock);
 extern u32 nw_snd_internal_Util_BitFlag_GetValueOrZero(PlayerInfo *info);
 
-u8 nw_snd_internal_SoundArchiveFileReader_ReadPlayerInfo(SoundArchiveRef *ref, u32 unused, PlayerParams *out)
+u8 nw_snd_internal_SoundArchiveFileReader_ReadPlayerInfo(SoundArchiveRef *ref, u32 unused, ArchivePlayerParams *out)
 {
     PlayerInfo *info = nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetPlayerInfo(ref->infoBlock);
 
     if (info != NULL) {
-        out->id = info->id;
-        out->unk04 = nw_snd_internal_Util_BitFlag_GetValueOrZero(info);
+        out->playableSoundMax = info->id;
+        out->playerHeapSize = nw_snd_internal_Util_BitFlag_GetValueOrZero(info);
         return 1;
     }
     return 0;

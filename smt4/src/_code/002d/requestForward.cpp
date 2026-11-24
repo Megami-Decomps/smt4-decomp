@@ -1,8 +1,8 @@
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "common.h"
 
 extern "C" {
 
-extern void texTableRecordCallWithParams(s32 a, s32 b, s32 kind, u32 arg1, u32 arg2, u32 arg3);
 
 /* Maps a request id (1..10) to its code and forwards it; id 0 does nothing. */
 void requestForward(s32 id, u32 arg1, u32 arg2, u32 arg3)

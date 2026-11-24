@@ -31,7 +31,7 @@ struct RenderCommand {
 };
 typedef char RenderCommandSizeCheck[sizeof(RenderCommand) == sizeof(AsdCmdRecord) ? 1 : -1];
 
-/* The display-transfer flags word FUN_00142fcc takes. */
+/* The display-transfer flags word gxAddDisplayTransferCommand takes. */
 struct DisplayTransferFlags {
     u32 flipVertical : 1;   /* bit 0 */
     u32 outputTiled : 1;    /* bit 1 */
@@ -52,9 +52,9 @@ struct DisplayTransferFlags {
 extern "C" {
 
 void FUN_00142fb8(u32 a, u32 b, u32 c, u32 d);
-void FUN_00142fcc(u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g);
-void FUN_00142fec(u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g, u32 h);
-void FUN_0014300c(u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g, u32 h);
+void gxAddDisplayTransferCommand(u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g);
+void gxAddMemoryFillCommand(u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g, u32 h);
+void gxAddTextureCopyCommand(u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g, u32 h);
 void FUN_00147948(u32 a, u32 b, u32 c, u32 d);
 
 /* Replays the recorded render-state commands of the current graphics queue up to the limit. */
@@ -77,7 +77,7 @@ void gfxReplayRecordedCommands(void)
             FUN_00147948(cmd->a, cmd->b, ~(cmd->c >> 2) & 1, cmd->c & 1);
             break;
         case 2:
-            FUN_00142fec(cmd->a, cmd->a + (cmd->c & 0x7FFFFF), cmd->b, ((cmd->c >> 15) & 0x300) | 1,
+            gxAddMemoryFillCommand(cmd->a, cmd->a + (cmd->c & 0x7FFFFF), cmd->b, ((cmd->c >> 15) & 0x300) | 1,
                          cmd->d, (cmd->f & 0x7FFFFF) + cmd->d, cmd->e, ((cmd->f >> 15) & 0x300) | 1);
             break;
         case 3: {
@@ -95,14 +95,14 @@ void gfxReplayRecordedCommands(void)
             flags.bits.blockMode32 = options.blockMode32;
             flags.bits.outputTiled = options.outputTiled;
             flags.bits.keepTiled = options.keepTiled;
-            FUN_00142fcc(cmd->a, cmd->c & 0xFFFF, cmd->c >> 16, cmd->b, cmd->d & 0xFFFF, cmd->d >> 16, flags.word);
+            gxAddDisplayTransferCommand(cmd->a, cmd->c & 0xFFFF, cmd->c >> 16, cmd->b, cmd->d & 0xFFFF, cmd->d >> 16, flags.word);
             break;
         }
         case 4: {
             u32 flags = 0;
             if ((cmd->d & 0xFFFF) != 0 || (cmd->e & 0xFFFF) != 0)
                 flags = 4;
-            FUN_0014300c(cmd->a, cmd->b, cmd->c, cmd->d >> 16, cmd->d & 0xFFFF, cmd->e >> 16,
+            gxAddTextureCopyCommand(cmd->a, cmd->b, cmd->c, cmd->d >> 16, cmd->d & 0xFFFF, cmd->e >> 16,
                          cmd->e & 0xFFFF, flags | 8);
             break;
         }

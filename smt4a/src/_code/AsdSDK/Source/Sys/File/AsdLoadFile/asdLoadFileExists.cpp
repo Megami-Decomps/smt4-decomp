@@ -1,79 +1,27 @@
-/* NON_MATCHING: native constructs a polymorphic stream through a VTT; its virtual-base hierarchy is not recovered by this scoped handle model. */
 #include "AsdSDK/Source/Sys/File/AsdLoadPath.h"
-#include "nn/fs/ArchivePath.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/asdFileHashPackIsOpen.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
-
-struct FileProbeConversionState { u32 words[2]; };
-struct FileProbeHandle;
+#include "AsdSDK/Source/Sys/File/AsdFilePath.h"
 
 extern "C" {
 void rt_aeabi_memclr(void *, u32);
 u32 asdFileHashPackContains(const char *);
-s32 refIsNullOrZero(FileProbeConversionState *);
-u32 FUN_00100836(const char *, u32, FileProbeConversionState *);
-u32 FUN_002e3c44(u16 *, const char *, u32, FileProbeConversionState *);
-void sysFatalBreak();
-void vcallSlot12IfValid(u32);
-}
+} /* extern "C" */
 
-struct FileProbeHandle {
-    u32 handle;
-    u32 state[4];
-
-    FileProbeHandle() : handle(0)
-    {
-        state[0] = state[1] = state[2] = state[3] = 0;
-    }
-    void close()
-    {
-        if (handle & ~1u) {
-            if (handle & 1) {
-                sysFatalBreak();
-            }
-            vcallSlot12IfValid(handle & ~1u);
-            handle = 0;
-        }
-    }
-    u32 open(const u16 *path)
-    {
-        state[0] = state[1] = state[2] = state[3] = 0;
-        return archivePathDeviceOpen(&handle, path, 1);
-    }
-    ~FileProbeHandle() { close(); }
-};
-
+/* Tells whether the file can be opened: a path the hash pack holds counts even when the open fails. */
 extern "C" u32 asdLoadFileExists(const char *path)
 {
-    u16 widePath[264];
     char fullPath[ASD_FILE_PATH_LEN];
     rt_aeabi_memclr(fullPath, sizeof(fullPath));
-    if (g_asdLoadFileUseRawPaths || asdLoadFileHasDevice(path)) {
-        sprintf(fullPath, path);
-    } else {
-        sprintf(fullPath, "rom:/%s", path);
-    }
+    asdLoadFileBuildPath(fullPath, path);
     bool inHashPack = false;
     if (asdFileHashPackIsOpen() && asdFileHashPackContains(fullPath)) {
         inHashPack = true;
     }
-    FileProbeHandle file;
-    FileProbeConversionState conversion = {{0, 0}};
-    refIsNullOrZero(&conversion);
-    u16 *destination = widePath;
-    const char *source = fullPath;
-    for (;;) {
-        u32 length = FUN_00100836(source, 0x105, &conversion);
-        if (length == 0 || !FUN_002e3c44(destination, source, length, &conversion)) {
-            break;
-        }
-        ++destination;
-        source += length;
-    }
-    *destination = 0;
-    u32 result = file.open(widePath);
-    file.close();
+    Obj55813c stream;
+    s32 result = fileTryInitializeNarrow(stream, fullPath, 1);
+    stream.Close();
     if ((s32)(result & 0x80000000) < 0 && !inHashPack) {
         return 0;
     }

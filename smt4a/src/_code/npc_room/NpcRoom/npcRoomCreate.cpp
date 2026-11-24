@@ -25,7 +25,6 @@ s32 npcRoomUpdate(u32 job);
 s32 FUN_002394a8(u32 job);
 s32 FUN_00284dbc(u32 job);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 npc2dCreatePortraitJob(u32 npcId, u32 option, s32 x, s32 y, f32 alpha);
 u32 npc2dCreateDemonPortrait(u32 id, u32 option, s32 x, s32 y, f32 alpha);
 void jobSetParent(u32 parent, u32 job);

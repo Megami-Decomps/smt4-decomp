@@ -9125,3 +9125,25 @@
 00401d18 enemyRenderTexSetup inferred sets up an enemy's render texture (EnemyRenderTex.cpp trace; w88-f2)
 0020dc1c campUpgradeListUpdate inferred the camp equipment-upgrade list's state (w88-f2)
 005272c8 g_enemyRenderTexSourceFileName evidence its bytes are the EnemyRenderTex.cpp path (w88-f2)
+0055b680 _ZTV9Obj55b680 inferred size:0x34 vtable: its 11 slots end before the [0, 0, 0x4487bc] header at 0x55b6b4 (image words)
+0055b6b4 _ZTV9Obj421264 inferred size:0xc vtable [0, 0, D1 0x4487bc]; FUN_0015d31c stores its address point +8; twin class of smt4 Obj421264 (gfx/AsdSceneRoot.h)
+0055b75c _ZTV9Obj55b75c inferred size:0x34 vtable: its 11 slots end before the [0, 0, 0x44914c] header at 0x55b790 (image words)
+0055b790 _ZTV9Obj421374 inferred size:0xc vtable [0, 0, D1 0x44914c]; FUN_00172088 stores its address point +8; twin class of smt4 Obj421374
+0055b7f0 DAT_0055b7f0 inferred named after its own address; the class is smt4 Obj4213d4's twin (renamed below)
+0055b7f0 _ZTV9Obj4213d4 inferred size:0xc vtable [0, 0, D1 0x44959c]; FUN_0015d444 (twin of FUN_001200e8) stores its address point +8; twin class of smt4 Obj4213d4; next header at 0x55b7fc
+0024b280 aocBootUpdate inferred twin of smt4 aocBootUpdate (same source, both IDENTICAL)
+00168470 gauntletAppDrawCategoryLabel inferred twin of smt4 FUN_002b6b8c
+00178458 soundArchiveReadPlayerInfoWithExtension inferred the archive's player-info read plus the optional extension's (sibling of soundArchiveReadSoundInfoWithExtension)
+00158844 archivePathDeviceCreateFile inferred twin of smt4 FUN_002ad80c
+00365dcc lmapCaveOverviewStep inferred twin of smt4 FUN_002e8be0
+001723b8 asdSceneCreateQueueComponent inferred twin of smt4 FUN_0012d1c4
+001399b0 asdModelInitializeSceneLights inferred builds both scene passes and attaches the existing light nodes
+00163ec4 asdTextDrawAtInt inferred counterpart of smt4 asdTextDrawAtInt (same draw with Apocalypse's stereo correction)
+00450f58 textureBuildFileFromConfig inferred twin of smt4 FUN_0036ec8c
+002f1554 uiQuestOpenDetails inferred twin of smt4 uiQuestOpenDetails (ported, IDENTICAL)
+002e5fdc scrCommMapDepart inferred twin of smt4 scrCommMapDepart (ported, IDENTICAL)
+00492c70 naviMainGetRequestedSection inferred returns g_naviMain->mapRequest.unk04, compared with the record's section by the category search
+004cb90c battleCameraGetProjectionScale inferred projection scale from the plane, view angle and base pose
+0019612c gxAddDisplayTransferCommand inferred twin of smt4 FUN_00142fcc
+0019614c gxAddMemoryFillCommand inferred twin of smt4 FUN_00142fec
+0019616c gxAddTextureCopyCommand inferred twin of smt4 FUN_0014300c

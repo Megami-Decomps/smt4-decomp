@@ -1,7 +1,8 @@
-/* NON_MATCHING: the request's constructor and the second kind/word3/result store sequence retail repeats after it, and
- * the timeout test materialised as a bool (movne/moveq; teq #1, as in IV's twin), now follow retail; remaining:
- * retail reuses one stack slot for both WindowStatusResult temporaries (frame 48), keeps zero in r6 from the top and
- * predicates the wait arguments. */
+/* NON_MATCHING: 46 lines. The timeout test materialised as a bool (movne/moveq; teq #1, as in IV's twin) follows
+ * retail. The request reset is written in place as in IV's twin FUN_00111004 (one form for the pair):
+ * resetRequestOperation (shard/W6_W6Match5_QueuedRequest.h, the reset aocMenuUpdate inlines) gives 18 lines here
+ * but 77 in the twin (14 in place), so neither twin takes it. Remaining: retail keeps zero in r6 from the top, where
+ * this build forms it at the request; the copy's base register and the wait arguments' predication differ. */
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include "nn/Result.h"
@@ -11,7 +12,6 @@
 
 extern "C" {
 s32 FUN_00176474(AocSystemA *system);
-s32 sysLightEventTryWait(LightEvent *event);
 void aocReleasePackageOwner(AocSystemA *system);
 void nnOsThreadImplDestroy(u32 *waitHandle);
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);

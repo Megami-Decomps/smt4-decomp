@@ -34,7 +34,7 @@ WindowStatusOperationResult aocFileContentPrepareMountBuffer(AocFileContentBuffe
         jyoucyuGetTableEntry(0);
         operation.status = 100;
         operation.result = result;
-        if ((u32)legacyResourceIdRemap(&result) != 0xC9413891 && FUN_002ad1e0(&g_aocMain->operationDone) != 0) {
+        if ((u32)legacyResourceIdRemap(&result) != 0xC9413891 && sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
             g_aocMain->flags &= ~0x10000;
             operation.status = 200;
         }

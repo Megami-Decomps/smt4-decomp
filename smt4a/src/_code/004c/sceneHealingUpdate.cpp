@@ -1,4 +1,4 @@
-/* NON_MATCHING: the block layout and every call match. Retail keeps the work in r5 and its short-lived values in r4, materialises the state-2 constant at both stores (the build hoists it into r8) and reloads g_freeCamera through r4 for the second store. */
+/* NON_MATCHING: the block layout and every call match. Retail keeps the work in r5 and its short-lived values in r4 (this build the other way round) and reloads g_freeCamera through r4 for the second store. */
 #include "shard/HealingSceneWork.h"
 #include "script/scrScriptProcess.h"
 #include "game/GameStateA.h"
@@ -6,6 +6,7 @@
 #include "Model/MoriModelManager.h"
 #include "gfx/ControllerModel.h"
 #include "gfx/FreeCamera.h"
+
 
 struct HealingFieldJob {
     /* 0x00 */ u32 unk00;
@@ -94,7 +95,7 @@ extern "C" s32 sceneHealingUpdate(HealingSceneWork *work)
                 healingModelStart(&work->models[index]);
             }
             work->script = scrScriptProcessCreate(work->heapA, work->heapB);
-            work->script->mode = 2;
+            scriptProcessSetMode(work->script, 2);
             void *table = dataTableFileGetTable(work->tableFile, 0);
             work->entries = dataTableGetEntries(table);
             work->count = dataTableGetCount(table);

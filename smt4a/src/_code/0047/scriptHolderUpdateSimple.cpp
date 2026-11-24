@@ -4,7 +4,6 @@
 #include "code/Code0041_Smt4a.h"
 
 extern "C" {
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void asdLoadFileAsyncSimple(const char *path, void **destination, u32 flags);
 void optionsClearFlag1(void);

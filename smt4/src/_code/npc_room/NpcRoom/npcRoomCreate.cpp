@@ -32,7 +32,6 @@ u32 FUN_00252190(u32 npcId, u32 mode, s32 x);
 u32 FUN_00285e44(s32 npcId, u32 style, s32 x);
 void jobSetParent(u32 parent, u32 job);
 void FUN_002fdfe0(u32 job, u32 value);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void commonBgAcquire(void);
 void buttonHelpCreate(void);
 

@@ -14,7 +14,7 @@ struct GauntletAppRecord {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ u16 id;                    /* sort key */
     /* 0x22 */ u8 kind;                   /* 0 counts towards categoryCounts when bought */
-    /* 0x23 */ u8 unk23;
+    /* 0x23 */ u8 labelCategory;          /* selects the category label at 0x411-0x416 */
     /* 0x24 */ u16 order;                 /* list order among apps of equal cost */
     /* 0x26 */ u16 cost;                  /* app points */
     /* 0x28 */ u8 unk28[2];
@@ -29,6 +29,7 @@ struct GauntletAppRecord {
 typedef char GauntletAppRecordLayoutCheck[
     sizeof(GauntletAppRecord) == 0x40 &&
     offsetof(GauntletAppRecord, id) == 0x20 &&
+    offsetof(GauntletAppRecord, labelCategory) == 0x23 &&
     offsetof(GauntletAppRecord, cost) == 0x26 &&
     offsetof(GauntletAppRecord, minimumLevel) == 0x2B &&
     offsetof(GauntletAppRecord, requiredFlags) == 0x2C &&
@@ -40,7 +41,7 @@ struct GauntletAppRecordA {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ u16 id;
     /* 0x22 */ u8 kind;
-    /* 0x23 */ u8 unk23;
+    /* 0x23 */ u8 labelCategory;          /* selects the category label at 0x411-0x416 */
     /* 0x24 */ u16 order;
     /* 0x26 */ u16 cost;
     /* 0x28 */ u8 unk28[2];
@@ -50,6 +51,7 @@ struct GauntletAppRecordA {
 };
 
 typedef char GauntletAppRecordAOffsets[
+    offsetof(GauntletAppRecordA, labelCategory) == 0x23 &&
     offsetof(GauntletAppRecordA, cost) == 0x26 &&
     offsetof(GauntletAppRecordA, levelAndCategory) == 0x2A &&
     offsetof(GauntletAppRecordA, requiredFlags) == 0x2C &&

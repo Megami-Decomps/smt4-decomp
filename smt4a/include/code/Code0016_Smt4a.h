@@ -9,9 +9,6 @@ struct FileHeader;
 struct TextLine;
 extern "C" {
 
-
-void FUN_00168470(s32 id, u32 arg0, u32 arg1, u32 arg2);
-
 s32 FUN_0016003c(Buffer *buffer);
 
 void vectorClear(Vector *vector);

@@ -1,11 +1,12 @@
 /* NON_MATCHING: sprite-selection value stays in r2 rather than retail's r0, changing x/y saved-register allocation. */
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "gamedata/SkillDataRecord.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 bool idIsAbove400(u32 id);
 u32 requestKindToId(u32 kind);
-void texTableRecordCallWithParams(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, s32 depth);
+
 s32 padGetMappedValue(u32 id);
 s32 dataTableCountRecordStages(u32 id);
 void drawSetColorFromRGBA8(u32 color);

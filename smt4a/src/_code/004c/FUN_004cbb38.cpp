@@ -50,7 +50,6 @@ s32 soundChannelRequestIfEnabled(s32 a, s32 b, s32 c);
 void statusPanelClose(void);
 void buttonHelpSetText(u32 a, u32 color);
 void sysPlaySe(u32 id);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode); /* a one-instruction setter armlink inlines (inlined.txt) */
 static const char s_devilMessagePathFormat[] = "battle/DevilMsg/%s.mbm";
 
 /* devilGetVoiceCategory's body (inlined.txt: ldrb r0, [r0, #56]): the demon's talk tone. */

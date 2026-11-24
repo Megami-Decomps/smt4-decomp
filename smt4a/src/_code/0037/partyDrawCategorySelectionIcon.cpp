@@ -1,3 +1,4 @@
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "common.h"
 #include "code/Code001b.h"
 #include "quest_center/QuestRecordA.h"
@@ -11,7 +12,7 @@ extern "C" {
 s32 partyEntryFlagsBit3(s32 id);
 s32 idIsAtLeast350(s32 id);
 void drawSetColorFromRGBA8(u32 color);
-void texTableRecordCallWithParams(s32 layer, u32 group, u32 sprite, u32 x, u32 y, u32 flags);
+
 void gxResetColorQuadToWhite();
 
 // Select a party member's category icon, using its highlighted variant when flag 3 is set.

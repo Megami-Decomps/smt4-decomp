@@ -25,7 +25,7 @@ extern "C" {
 void FUN_001fa8e4(void);
 void FUN_002c8ce4(void);
 void lmapManholeStep(void);
-void FUN_002e8be0(void);
+void lmapCaveOverviewStep(void);
 void FUN_002e8fdc(void);
 void lmapOverviewDescendStep(void);
 void lmapIntroSceneStep(void);
@@ -324,7 +324,7 @@ void FUN_002712dc(void)
         lmapManholeStep();
         return;
     case 9:
-        FUN_002e8be0();
+        lmapCaveOverviewStep();
         return;
     case 11:
         FUN_002e8fdc();

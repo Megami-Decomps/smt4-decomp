@@ -1,8 +1,8 @@
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "common.h"
 
 extern "C" {
 
-int texTableRecordCallWithParams(int a, int b, u32 c, u32 d, u32 e, u32 f);
 
 void FUN_002b6db0(u32 a, u32 b, u32 c, u32 d)
 {

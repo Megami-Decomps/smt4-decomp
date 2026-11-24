@@ -1,8 +1,4 @@
-/* NON_MATCHING: 85 lines (51 by shape); IV's uniteResultLoadTexture with a command block for each texture unit,
- * as enemyRenderTexSetup builds them. Same instructions as retail. What differs: the descriptor's constructor loads its
- * 0x02020000 into r0 after moving the allocator to r1 (retail: into r2, the allocator moved afterwards), and the
- * sampler words of the three units keep their partial values in other scratch registers, the third unit also
- * storing its last words in another grouping. */
+/* NON_MATCHING: 10 lines; the first unit's sampler word uses r3 rather than r2 for the X filter bits. */
 #include <string.h>
 #include "battle/EnemyRenderTex.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
@@ -13,7 +9,7 @@
 
 extern "C" {
 TextureUploadResourcePrefixIV *asdGxRenderTargetCreate(s32 width, s32 height, u32 parameter, u32 format, u32 type, u32 depthFormat, u32 flags);
-TextureObject *FUN_00450f58(const TextureCreateInfoIV *info, MemoryAllocator *allocator);
+TextureObject *textureBuildFileFromConfig(const TextureCreateInfoIV *info, MemoryAllocator *allocator);
 void FUN_0015d8e0(TextureObject **object, MemoryAllocator *allocator, ResGraphicsFile file);
 
 /* Create the render texture of the given size and a texture object over its upload resource, and build the
@@ -22,7 +18,7 @@ void uniteEnemyRenderSetup(EnemyRenderTex *target, u32 extent, u32 options, u32 
 {
     target->resource = asdGxRenderTargetCreate(width, height, extent, 0x1908, 0x8033, 0x81A5, options);
     MemoryAllocator *allocator = reinterpret_cast<MemoryAllocator *>(asdMemoryGetAllocatorA());
-    target->object = FUN_00450f58(
+    target->object = textureBuildFileFromConfig(
         &TextureCreateInfoIV()
             .setData(target->resource->data)
             .setHardwareFormat((u8)target->resource->texture->image.hardwareFormat)
@@ -41,9 +37,10 @@ void uniteEnemyRenderSetup(EnemyRenderTex *target, u32 extent, u32 options, u32 
     commands = target->unitCommands[0];
     *commands++ = texture->dimensions.height | (texture->dimensions.width << 16);
     *commands++ = 0xF0082;
-    *commands++ = ((texture->filterX == 3 || texture->filterX == 4 || texture->filterX == 5) << 2) |
+    s32 filterX = texture->filterX;
+    *commands++ = ((filterX == 3 || filterX == 4 || filterX == 5) << 2) |
         (texture->filterY << 1) | ((format == 12 ? 2 : 0) << 4) |
-        ((texture->filterX == 2 || texture->filterX == 5) << 24) | (texture->image.type << 28);
+        ((filterX == 2 || filterX == 5) << 24) | (texture->image.type << 28);
     *commands++ = 0xF0083;
     *commands++ = 0;
     *commands++ = 0x40084;
@@ -60,9 +57,10 @@ void uniteEnemyRenderSetup(EnemyRenderTex *target, u32 extent, u32 options, u32 
     commands = target->unitCommands[1];
     *commands++ = texture->dimensions.height | (texture->dimensions.width << 16);
     *commands++ = 0xF0092;
-    *commands++ = ((texture->filterX == 3 || texture->filterX == 4 || texture->filterX == 5) << 2) |
+    filterX = texture->filterX;
+    *commands++ = ((filterX == 3 || filterX == 4 || filterX == 5) << 2) |
         (texture->filterY << 1) | ((format == 12 ? 2 : 0) << 4) |
-        ((texture->filterX == 2 || texture->filterX == 5) << 24) | (texture->image.type << 28);
+        ((filterX == 2 || filterX == 5) << 24) | (texture->image.type << 28);
     *commands++ = 0xF0093;
     *commands++ = 0;
     *commands++ = 0x40094;
@@ -79,9 +77,10 @@ void uniteEnemyRenderSetup(EnemyRenderTex *target, u32 extent, u32 options, u32 
     commands = target->unitCommands[2];
     *commands++ = texture->dimensions.height | (texture->dimensions.width << 16);
     *commands++ = 0xF009A;
-    *commands++ = ((texture->filterX == 3 || texture->filterX == 4 || texture->filterX == 5) << 2) |
+    filterX = texture->filterX;
+    *commands++ = ((filterX == 3 || filterX == 4 || filterX == 5) << 2) |
         (texture->filterY << 1) | ((format == 12 ? 2 : 0) << 4) |
-        ((texture->filterX == 2 || texture->filterX == 5) << 24) | (texture->image.type << 28);
+        ((filterX == 2 || filterX == 5) << 24) | (texture->image.type << 28);
     *commands++ = 0xF009B;
     *commands++ = 0;
     *commands++ = 0x4009C;

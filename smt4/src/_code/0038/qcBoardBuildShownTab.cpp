@@ -6,6 +6,7 @@
  * bytes above the name buffer); a single-use constant local is not written without other evidence. */
 #include "ui/DummyAttachmentWork.h"
 #include "quest_center/qcUtility.h"
+#include "quest_center/QuestRuntime.h"
 #include "gamedata/GameFlags.h"
 #include "gamedata/GameDataAccess.h"
 #include "shard/W6_W6Match5_EntryCollection.h"
@@ -32,12 +33,10 @@ extern "C" {
 
 s32 gameFlagIsSet(u32 flag); // declcheck: local (its headers belong to the battle and camp menus)
 s32 storyModeCanProceed(u32 mode);
-void questCompletionSetTierFlags(u32 *reward);
 u8 *qcGetCenterSlotGroups(s32 index);
 u8 objectFlagBitIsSet(QcTabListState *list, u32 bit);
 void qcTabListResetStamp(QcTabListState *list);
 u32 qcUtilityBuildBonusTab(QcTabListState *list, u32 group, u32 forcedSlot, u32 weightKind);
-u32 qcTabListPickRandomTab(QcTabListState *list);
 int qcUtilityBuildAndMarkTabList(QcTabListState *list, u32 tab, u32 group, u32 weightKind, u32 firstRandomSlot,
                                  u32 lastRandomSlot);
 int dataTable26GroupGetRecord(u32 unused, int group, u32 index);

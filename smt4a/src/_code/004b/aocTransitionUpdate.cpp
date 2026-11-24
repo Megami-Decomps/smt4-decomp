@@ -1,5 +1,3 @@
-/* NON_MATCHING: only the cancel-bit test differs: the build keeps the AocMain pointer in r1 and the flags in r0 (retail:
- * r0/r2), as in FUN_004d7e20. */
 #include "map/MapJumpTransition.h"
 #include "game/GameStateA.h"
 #include "shard/W4_Match3_AocMainA.h"

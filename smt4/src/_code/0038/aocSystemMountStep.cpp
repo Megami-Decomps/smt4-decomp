@@ -117,7 +117,7 @@ RequestParameters aocSystemMountStep(AocSystem *system)
 {
     RequestParameters request;
 
-    if (FUN_002ad1e0(&g_aocMain->operationDone) != 0) {
+    if (sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
         g_aocMain->flags &= ~0x10000u;
         system->state = AOC_MOUNT_DONE;
         request.kind = AOC_REQUEST_CANCELLED;
@@ -253,7 +253,7 @@ RequestParameters aocSystemMountStep(AocSystem *system)
     if (legacyResourceIdRemap(&request.result) == 0xc9413891) {
         return request;
     }
-    if (FUN_002ad1e0(&g_aocMain->operationDone) != 0) {
+    if (sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
         g_aocMain->flags &= ~0x10000u;
     } else if (request.kind != AOC_REQUEST_CANCELLED) {
         if (g_aocMain->submitTokenRequest(request, *reinterpret_cast<QueuedRequestHandle *>(&request.result)) != 0) {

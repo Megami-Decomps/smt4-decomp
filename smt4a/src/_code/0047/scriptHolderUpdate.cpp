@@ -8,7 +8,6 @@ extern "C" {
 void sysPlaySe(u32 sound);
 void asdLoadFileAsyncSimple(const char *path, void **buffer, s32 flags);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void optionsClearFlag1();
 u32 FUN_003a36b4(void);
 s32 gameBlockByte27E98Is1To3();

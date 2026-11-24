@@ -1,4 +1,4 @@
-#include "common.h"
+#include "event/2dEvent/2dEventTex.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/JobWork.h"
 
@@ -17,7 +17,6 @@ u32 eventTexGetCurrent(void);
 void eventTexSetCurrent(u32 handle);
 s32 jobIsValid(u32 handle);
 s32 eventTexHasEmptySlot(void);
-u32 npc2dCreatePortraitVariantJob(u32 id, s32 mode, u32 arg);
 void eventInsertSortedTextureJob(u32 handle);
 
 /* Script command: on its first frame creates the event texture job from arguments 0 and 1 and

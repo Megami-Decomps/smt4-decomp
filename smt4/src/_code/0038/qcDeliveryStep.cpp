@@ -10,6 +10,7 @@
 #include "script/scrScriptProcess.h"
 #include "quest_center/QuestRecord.h"
 #include "quest_center/QuestDelivery.h"
+#include "quest_center/QuestRuntime.h"
 #include "quest_center/qcMain.h"
 #include "result/ResultSpoils.h"
 #include "gamedata/GameFlags.h"
@@ -43,7 +44,6 @@ void scrResultStopJobAndReleaseUi(void);
 void messageSetConfirmDisplayMode(void);
 u32 gameFlagEntryActivate(u32 id);
 u8 questDeactivate(u32 id);
-void questCompletionSetTierFlags(u32 *reward);
 
 /* The id of the quest chosen for delivery (qcGetDeliveryQuestId's body). */
 static u16 deliveryQuestId(DummyAttachmentWork *work)

@@ -20,7 +20,7 @@ struct ArchivePathDescriptor {
 };
 class ArchivePathDevice {
 public:
-    virtual u32 open(u32* result, const ArchivePathDescriptor* path, u32 flags);
+    virtual u32 open(u32* result, const ArchivePathDescriptor &path, u32 flags);
 };
 /* Opens an archive-qualified UTF-16 path on its archive's device and stores the file handle on success.
  * Returns the device's result code, or 0xC8804465 when no device owns the archive name. The callers' code

@@ -2,12 +2,10 @@
  * it to the entry, so every loop register is renumbered. */
 #include "nw/snd/SoundArchiveDisk.h"
 #include "nn/fs/ArchivePath.h"
+#include "AsdSDK/Source/Sys/File/AsdFilePath.h"
 #include "nn/Result.h"
 
 extern "C" {
-void refIsNullOrZero(MoviePathConversionState *conversion);
-u32 FUN_00100836(const char *text, u32 encoding, MoviePathConversionState *conversion);
-s32 FUN_002e3c44(u16 *output, const char *text, u32 bytes, MoviePathConversionState *conversion);
 void sysReportCheckFailure(u32 result, const void *location);
 }
 
@@ -21,11 +19,11 @@ static inline s32 openNativeFile(MovieOpenFile *file, const char *path, u32 mode
 {
     u16 widePath[264];
     u16 *output = widePath;
-    MoviePathConversionState conversion = {0, 0};
-    refIsNullOrZero(&conversion);
+    AsdPathMbState conversion;
+    refIsNullOrZero(&conversion.state);
     u32 bytes;
     while ((bytes = FUN_00100836(path, 0x105, &conversion)) != 0 &&
-        FUN_002e3c44(output, path, bytes, &conversion)) {
+        FUN_002e3c44(output, path, bytes, &conversion) != 0) {
         ++output;
         path += bytes;
     }

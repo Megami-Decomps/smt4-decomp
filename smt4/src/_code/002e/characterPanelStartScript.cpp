@@ -5,7 +5,6 @@
 
 extern "C" {
 u32 FUN_0026f784(void *link);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void linkHolderApplyFlag(void *link, u32 flag);
 void characterInfoPanelPopulate(void *panel, u32 selection, const void *record);
 u32 buttonHelpTextIsVisible(void);

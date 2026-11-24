@@ -10,7 +10,6 @@ void messageSetMode(s32);
 void sysPlaySe(s32);
 void pickObjStart(PickObjectResources *, const char *);
 void titleSetSlotValueState2(s32, s32);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 
 /* Wait for both resource pairs, instantiate them, then select the initial state. */
 void FUN_00468574(PickObjectResources *work)

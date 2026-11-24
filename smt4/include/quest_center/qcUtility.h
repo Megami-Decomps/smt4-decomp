@@ -49,6 +49,9 @@ struct QcQuestRecord {
 typedef char QcQuestRecordCheck[sizeof(QcQuestRecord) == 0x20 ? 1 : -1];
 
 extern "C" {
+/* Picks the next ordinary tab without a repeat, or returns 5 when that tab is already built. */
+u32 qcTabListPickRandomTab(QcTabListState *list);
+
 /* Fills tab `tab` of the list; returns 1 when a bonus slot was placed. */
 u32 QcUtility_BuildTabList(QcTabListState *list, s32 tab, s32 group, s32 forcedSlot, s32 weightKind,
                            s32 firstRandomSlot, s32 lastRandomSlot);

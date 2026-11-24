@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00479b6c` (_code @ 0x479b6c, 0x658 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
@@ -13,7 +14,7 @@ int mathInterpolateTimed(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int renderCtxSelectTexture(int, unsigned int);
-int texTableRecordCallWithParams(...);
+
 int effectSubmitDefaultVectors(int, int);
 int sysMemClear(...);
 int FUN_00473754(...);

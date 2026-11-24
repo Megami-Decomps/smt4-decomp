@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "classes/FloatState.h"
+#include "quest_center/QuestRuntime.h"
 #include <new>
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -59,7 +60,6 @@ void qcGetCenterSlotGroups(u32 area);
 s32 timerStampIsExpired(void);
 void qcTabListResetStamp(void);
 s32 storyModeCanProceed(u8 area);
-void questCompletionSetTierFlags(s32 flag);
 void titleRestartSlotState3(s32 slot, s32 value);
 
 void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
@@ -143,7 +143,7 @@ void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
         }
     }
     if (storyModeCanProceed(scene->area) != 0)
-        questCompletionSetTierFlags(0);
+        questCompletionSetTierFlags(NULL);
     titleRestartSlotState3(0, 0xFF);
     titleRestartSlotState3(1, 0xFF);
     gameCounterAddSaturating(0x1C, 1);

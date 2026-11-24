@@ -18,7 +18,7 @@ float cameraViewHeadingDegrees(int);
 float FUN_00492b98(void);
 int naviGetActiveStateValue(...);
 int naviMainSelectPair(int);
-int FUN_00492c70(int);
+int naviMainGetRequestedSection(int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int words2Copy(int, float *);
 int FUN_0049368c(...);
 int VectorSignedToFloat(...);
@@ -70,7 +70,7 @@ extern unsigned long long *sub68OwnerGetBlock60(int);
 extern float *lmapSceneGetObj(int);
 /* Supplied declaration required: naviMainSelectPair. */
 extern int naviMainGetRequestedMap(int);
-/* Supplied declaration required: FUN_00492c70. */
+/* Supplied declaration required: naviMainGetRequestedSection. */
 /* Supplied declaration required: words2Copy. */
 /* Supplied declaration required: FUN_0049368c. */
 extern int NaviMain_GetCurrentMap(int);
@@ -158,7 +158,7 @@ void FUN_00487470(int param_1)
     temp_v31 = naviMainGetRequestedMap(temp_v37);
     temp_v23 = temp_v18;
     temp_v24 = temp_v20;
-    FUN_00492c70(temp_v37);
+    naviMainGetRequestedSection(temp_v37);
     temp_v18 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v42 + 0x20638),
                                         (unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v20 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v42 + 0x2063c),

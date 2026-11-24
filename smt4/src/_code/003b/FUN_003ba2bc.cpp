@@ -28,7 +28,6 @@ s32 stageAssetsLoaded(void);
 s32 spriteTable2aIsLoaded(void *sprites);
 void __ARM_common_memcpy4_6(void *a, void *b);
 void mikadoLoadSceneResources(Unk3ba2bcOwner *owner);
-void scriptProcessSetMode(ScriptProcess *part, s32 mode);
 void buttonHelpSelectByProgress(Unk3ba2bcOwner *owner);
 
 /* Once everything is loaded, builds both parts and, if a start is pending, starts the owner. */

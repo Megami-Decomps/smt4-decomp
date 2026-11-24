@@ -35,7 +35,6 @@ void bgmReleaseStopped(void);
 void mapDepartSetTarget(s32 first, s32 second, u32 third);
 s32 FUN_0027d8c8(void);
 void gameRestoreWorkSave(s32 kind);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void soundChannelRequestIfEnabled(s32 id, s32 flag, s32 frames);
 void titleSetSlotValueState2(s32 channel, s32 frames);
 s32 gameFlagIsSet(u32 flag);

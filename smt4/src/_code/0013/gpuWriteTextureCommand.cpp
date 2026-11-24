@@ -8,13 +8,13 @@ void gpuSubmitCommandBlock(const void *commands, u32 byteCount, s32 copyCommands
 void gpuWriteTextureCommand(u32 width, u32 height, s32 textureFormat, u32 byteAddress,
                   u32 wrap, u32 minFilter, u32 magFilter)
 {
-    TextureCommandBlock formats = g_gpuCommandDefaults.formats;
-    TextureCommandBlock command = g_gpuCommandDefaults.command;
-    command.words[2] = height | (width << 16);
-    command.words[3] = (wrap << 12) | (wrap << 8) | (minFilter << 2) | (magFilter << 1) |
-                       formats.words[textureFormat];
-    command.words[5] = byteAddress >> 3;
-    command.words[12] = textureFormat;
+    TextureCommandFormats formats = g_gpuCommandDefaults.formats;
+    TextureBindPacket command = g_gpuCommandDefaults.command;
+    command.dimensions = height | (width << 16);
+    command.formatFlags = (wrap << 12) | (wrap << 8) | (minFilter << 2) | (magFilter << 1) |
+                          formats.words[textureFormat];
+    command.encodedAddress = byteAddress >> 3;
+    command.format = textureFormat;
     gpuSubmitCommandBlock(&command, sizeof(command), 1);
 }
 }

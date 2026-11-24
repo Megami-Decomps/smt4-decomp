@@ -1,24 +1,19 @@
-#include "common.h"
+#include "gamedata/PlaceRecordTable.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
-extern u32 dataTableGetCount(u32 table);
-extern int dataTableGetEntries(void);
-extern u32 dataTableGet(u32 id, u32 index);
-
-/* Address of record `index` (0x68-byte records) of data table 0x17/1, or 0 when out of range. */
-int dataTable17Sub1GetRecord(u32 unused, u32 index)
+/* Place record `index` of data table 0x17 (section 1), or NULL when out of range. */
+PlaceRecord *dataTable17Sub1GetRecord(Table17Handle *ignored, s32 index)
 {
-    u32 table = dataTableGet(0x17, 1);
-    int entries = dataTableGetEntries();
+    void *table = dataTableGet(0x17, 1);
+    PlaceRecord *entries = (PlaceRecord *)dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
 
-    if (index >= count) {
-        entries = 0;
-    } else {
-        entries = entries + index * 0x68;
+    if ((u32)index >= count) {
+        return NULL;
     }
-    return entries;
+    return &entries[index];
 }
 
 } /* extern "C" */

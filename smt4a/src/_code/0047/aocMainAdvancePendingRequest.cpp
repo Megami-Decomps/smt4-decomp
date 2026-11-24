@@ -6,7 +6,6 @@
 #include "addon/AocSystemA.h"
 
 extern "C" {
-s32 sysLightEventTryWait(LightEvent *event);
 u32 jyoucyuGetTableEntry(s32 index);
 RequestParameters aocResolveMountPath(AocSystemA *system, u32 id);
 

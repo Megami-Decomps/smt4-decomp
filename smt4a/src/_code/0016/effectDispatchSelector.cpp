@@ -1,9 +1,10 @@
 /* NON_MATCHING: saved GPR allocation and paired stack argument stores differ from retail. */
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "common.h"
 
 extern "C" f32 jobGetScalarValue(void);
 extern "C" void efctSetSpeed(f32 speed);
-extern "C" void texTableRecordCallWithParams(u32 first, u32 table, s32 index, u32 second, u32 third, u32 fourth);
+
 
 /* Dispatch an effect selector while temporarily reducing the global effect speed. */
 extern "C" void effectDispatchSelector(u32 kind, u32 first, u32 second, u32 third, f32 speed)

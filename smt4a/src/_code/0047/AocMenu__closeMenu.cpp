@@ -14,7 +14,6 @@ void jobOwnerFreeSlotAndStop(void *owner);
 void jobFlagsWorkStop(AocMenu *menu);
 void aocReleasePackageOwner(AocSystemA *system);
 void aocResetOperationState(AocSystemA *system);
-s32 sysLightEventTryWait(void *event);
 u8 buttonHelpStateIsNot3(void);
 u8 strIsEmpty(const void *value);
 u8 byteIsAtLeast100(const void *value);
@@ -43,7 +42,7 @@ void AocMenu::closeMenu()
         FUN_0016ccb4(reinterpret_cast<u8 *>(g_aocMain) + 0x80);
         aocClearDisplayFlag(g_aocSystem);
         aocReleasePackageOwner(g_aocSystem);
-        if (sysLightEventTryWait(reinterpret_cast<u8 *>(g_aocMain) + 0x98) != 0)
+        if (sysLightEventTryWait(&g_aocMain->operationDone) != 0)
             g_aocMain->flags &= ~0x10000u;
         return;
     }
@@ -67,7 +66,7 @@ void AocMenu::closeMenu()
                 menu->substep = 3;
             } else if (byteIsAtLeast100(&request) != 0) {
                 menu->substep = 9999;
-                if (sysLightEventTryWait(reinterpret_cast<u8 *>(g_aocMain) + 0x98) != 0)
+                if (sysLightEventTryWait(&g_aocMain->operationDone) != 0)
                     g_aocMain->flags &= ~0x10000u;
                 jobFlagsWorkStop(menu);
             }
@@ -87,7 +86,7 @@ void AocMenu::closeMenu()
             break;
         aocClearDisplayFlag(g_aocSystem);
         aocReleasePackageOwner(g_aocSystem);
-        if (sysLightEventTryWait(reinterpret_cast<u8 *>(g_aocMain) + 0x98) != 0)
+        if (sysLightEventTryWait(&g_aocMain->operationDone) != 0)
             g_aocMain->flags &= ~0x10000u;
         aocMenuChangeStep(menu, 3);
         break;

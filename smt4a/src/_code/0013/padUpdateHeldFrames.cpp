@@ -1,6 +1,4 @@
-/* NON_MATCHING: 12 lines. Retail pools the pad buffer's address ahead of g_padInputState and sets
- * `available = 1` predicated right after the compare (movne/strne); the build sets it inside the success block.
- * The loop, the snapshot copy and the reset flag match. */
+/* NON_MATCHING: only the literal pool order differs: retail pools the pad buffer ahead of g_padInputState. */
 #include "sys/InputHoldCounters.h"
 #include "AsdSDK/AsdMemCopy.h"
 #include "input/PadAnalog.h"
@@ -17,11 +15,14 @@ u32 g_padHeldFramesSnapshot[31];
 /* Updates each mapped input's hold duration and consumes the pending-reset flag. */
 void padUpdateHeldFrames(void)
 {
-    if (FUN_00159814(g_padInputState.device, &g_padInputs[0]) != 0) {
+    bool ready = FUN_00159814(g_padInputState.device, g_padInputs) != 0;
+    if (ready) {
         g_padInputState.available = 1;
-        memcpySrcFirst(g_padHeldFrames, g_padHeldFramesSnapshot, sizeof(g_padHeldFrames));
     } else {
         g_padInputState.available = 0;
+    }
+    if (ready) {
+        memcpySrcFirst(g_padHeldFrames, g_padHeldFramesSnapshot, sizeof(g_padHeldFrames));
     }
     s32 available = g_padInputState.available;
     for (s32 i = 0; i < 31; i++) {
@@ -43,4 +44,4 @@ void padUpdateHeldFrames(void)
         g_padInputState.flags &= ~2u;
     }
 }
-}
+} /* extern "C" */

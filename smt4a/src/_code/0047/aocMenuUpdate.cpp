@@ -10,7 +10,6 @@ struct JobFlagsWork;
 struct SceneWindowWork;
 extern "C" {
 
-s32 sysLightEventTryWait(LightEvent *event);
 void aocMenuSetButtonHelp(SceneWindowWork *window, s32 value, s32 mode);
 void jobOwnerFreeSlotAndStop(JobOwner *owner);
 void jobFlagsWorkStop(JobFlagsWork *work);
@@ -30,13 +29,6 @@ static __inline void aocMenuStopChild(AocMenu *scene)
 }
 
 // Restore the waiting status for a finished add-on request.
-static __inline void resetRequestOperation(RequestParameters *operation)
-{
-    operation->kind = 1;
-    operation->word3 = 0;
-    operation->result = WindowStatusResult(operation->word3);
-}
-
 // Runs the scene one frame. While the content is released (states 4..14 with the add-on event signalled) the scene
 // shuts down instead: it stops its job, clears the result and returns to state 17.
 void aocMenuUpdate(AocMenu *scene)

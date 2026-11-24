@@ -68,7 +68,7 @@ extern "C" void gauntletAppMenuDrawScreen(GauntletAppMenuWork *menu)
         const u32 app = menu->list.entries[resourceRunOperationIfUnblocked((Object *)menu->list.controller) + row];
         const TextureTableEntryIV *position = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, row + 0x40E);
         const TextureTableEntryIV *icon = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x58F);
-        FUN_00168470((u16)app, position->x + icon->x + x, position->y + icon->y + y, 0x6A);
+        gauntletAppDrawCategoryLabel((u16)app, position->x + icon->x + x, position->y + icon->y + y, 0x6A);
         if (gameDataFlagTestBit(app)) {
             labelColor = 0x57D8FFFF;
             const TextureTableEntryIV *ownedMark = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x595);
@@ -135,7 +135,7 @@ extern "C" void gauntletAppMenuDrawScreen(GauntletAppMenuWork *menu)
         }
         texDrawTableEntryAtStoredOrigin(2, GAUNTLET_TEXTURES, 0x596, position->x + x, position->y + y, 0x8D);
         const TextureTableEntryIV *icon = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x598);
-        FUN_00168470((u16)app, position->x + icon->x + x, position->y + icon->y + y, 0x92);
+        gauntletAppDrawCategoryLabel((u16)app, position->x + icon->x + x, position->y + icon->y + y, 0x92);
         if (gameDataFlagTestBit(app)) {
             labelColor = 0x57D8FFFF;
             const TextureTableEntryIV *ownedMark = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x59E);

@@ -1,8 +1,6 @@
-/* NON_MATCHING: 14 lines. As in eventScriptJobUpdate, retail's pool holds g_aocJob before g_aocMain and loads both
- * addresses before `sub sp` (this build: g_aocMain first, one load after); everything else agrees. The two empty
- * calls (states 0 and 99) are linker-removed in retail; asdDebugHookVoid is assumed, as its sibling
+/* The two empty calls (states 0 and 99) are linker-removed in retail; asdDebugHookVoid is assumed, as its sibling
  * eventScriptJobUpdate calls it at the same point. */
-#include "runtime/Stdio.h"
+#include <stdio.h>
 #include "event/EventScriptJob.h"
 #include "addon/aocMain.h"
 #include "addon/AocSystem.h"
@@ -26,7 +24,7 @@ extern EventScriptJobWork *g_aocJob;
 u32 padIsButtonRepeat(u32 button);
 u32 padIsButtonPressed(u32 button);
 s32 aocPackageGrantsItem(AocSystem *system, u32 itemId, s32 checkAvailable); // declcheck: local (the shared declaration takes Apocalypse's AocSystemA)
-s32 FUN_002cb8d8(const char *name);
+s32 asdLoadFileExists(const char *name);
 void asdLoadFileSetUseRawPaths(u8 useRawPaths);
 s32 asdLoadFileGetUseRawPaths(void);
 u32 jyoucyuGetTableEntry(s32 index);
@@ -45,7 +43,6 @@ void messageSlotSet(s32 value);
 void soundChannelStopAll(u32 value);
 bool messageAnyWindowActive(void);
 u32 debugFlagEditorUpdate(void);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 /* The game flag an event entry raises when it ends, 0 when it has none. */
 u32 eventScriptFindCompletionFlag(u32 eventId, const ScriptVmLabel *entry);
@@ -57,7 +54,7 @@ static __inline void eventJobStop(void)
 {
     asdDebugHookVoid();
     jobStop(g_aocJob->job, 0);
-    g_aocMain->flags &= ~0x70;
+    aocMainClearResult(g_aocMain);
 }
 
 extern "C" {
@@ -69,12 +66,8 @@ s32 eventViewJobUpdate(void)
     char commandsPath[128];
     char messagesPath[128];
     EventScriptJobWork *work = g_aocJob;
-    AocMain *main = g_aocMain;
 
-    if (main->flags & 4) {
-        return 0;
-    }
-    if (main->flags & 8) {
+    if (aocMainIsBusy(g_aocMain)) {
         return 0;
     }
 
@@ -159,8 +152,8 @@ s32 eventViewJobUpdate(void)
             asdLoadFileSetUseRawPaths(1);
             work->rawPathsSet = 1;
         }
-        __2sprintf(commandsPath, "event/e%03d/e%03d.bf", work->eventId, work->eventId);
-        __2sprintf(messagesPath, "event/e%03d/e%03d.mbm", work->eventId, work->eventId);
+        sprintf(commandsPath, "event/e%03d/e%03d.bf", work->eventId, work->eventId);
+        sprintf(messagesPath, "event/e%03d/e%03d.mbm", work->eventId, work->eventId);
         if (aocPackageGrantsItem(g_aocSystem, work->eventId, 0)) {
             work->commands = aocDrawText7(g_aocSystem, work->eventId, NULL);
             work->messages = aocBufferQueueDisplay(g_aocSystem, work->eventId, NULL);
@@ -170,7 +163,7 @@ s32 eventViewJobUpdate(void)
                 break;
             }
         } else {
-            if (!FUN_002cb8d8(commandsPath)) {
+            if (!asdLoadFileExists(commandsPath)) {
                 work->state = EVENT_VIEW_MENU;
                 work->frames = 0;
                 break;

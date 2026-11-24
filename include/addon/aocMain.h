@@ -113,13 +113,34 @@ s32 objHasFlagBit16(AocMain *main);
 void aocMenuSetReadyFlag(AocMain *owner, u8 ready);
 }
 
-/* Clears the menu's request bits 4-6 and reports whether bit 4 (cancelled or failed) was set (IV's aocTransitionUpdate,
- * Apocalypse's aocTransitionUpdate and FUN_004d7e20). */
+/* Whether a request is still queued or running (bits 2 and 3 of the flags); the job updates, the boot step and the
+ * menu's request transition all wait on it before they go on. */
+static __inline bool aocMainIsBusy(const AocMain *main)
+{
+    if (main->flags & 4) {
+        return true;
+    }
+    if (main->flags & 8) {
+        return true;
+    }
+    return false;
+}
+
+/* Clears the request's result bits 4-6 (aocJobStop, the boot step, the menu's closing paths). */
+static __inline void aocMainClearResult(AocMain *main)
+{
+    main->flags &= ~0x70;
+}
+
+/* Clears the request's result bits 4-6 and reports whether bit 4 (cancelled or failed) was set: the transition and
+ * boot updates, the menu's return to its script, IV's FUN_0022a07c and Apocalypse's FUN_004d7e20. */
 static __inline u32 aocMainTakeCancel(void)
 {
-    u32 flags = g_aocMain->flags;
-    g_aocMain->flags = flags & ~0x70U;
-    return (flags & 0x10) >> 4;
+    AocMain *main = g_aocMain;
+    u32 cancelled = (main->flags & 0x10) >> 4;
+
+    aocMainClearResult(main);
+    return cancelled;
 }
 
 /* The display block that AOC drives (Shin Megami Tensei IV layout). */
@@ -186,8 +207,8 @@ u32 aocMainPollShutdown(void);
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Tests an event without waiting (tail call to nn_os_LightEvent_TryWait, linked as a nop). */
-s32 FUN_002ad1e0(void *event);
+/* Tests an event without waiting (tail call to nn_os_LightEvent_TryWait, linked as a nop), in both games. */
+s32 sysLightEventTryWait(LightEvent *event);
 #ifdef __cplusplus
 }
 #endif

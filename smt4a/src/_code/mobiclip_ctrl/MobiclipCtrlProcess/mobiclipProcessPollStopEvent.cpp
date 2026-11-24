@@ -11,7 +11,6 @@ struct MovieProcessStatus {
 
 extern "C" {
 extern MobiclipProcessGlobals g_mobiclipProcess;
-u32 sysLightEventTryWait(LightEvent *event);
 
 u32 mobiclipProcessPollStopEvent()
 {

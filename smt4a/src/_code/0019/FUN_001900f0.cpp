@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001900f0` (_code @ 0x1900f0, 0x1ac bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/SoundArchiveWrapper.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_4_stack;
 
-extern int FUN_00178458(unsigned int, unsigned int, int *);
 extern unsigned int FUN_00194fd8(unsigned int);
 /* Supplied declaration required: FUN_001a5974. */
 /* Supplied declaration required: FUN_001a59c0. */
@@ -37,8 +37,7 @@ unsigned int FUN_001900f0(int param_1,unsigned int param_2,unsigned int *param_3
   unsigned int temp_v6;
   unsigned int temp_v7;
   int unaff_r9;
-  int temp_v8;
-  int temp_v9;
+  ArchivePlayerParams player;
   int iStack_34;
   unsigned int temp_v10;
   unsigned int *puStack_2c;
@@ -65,14 +64,14 @@ unsigned int FUN_001900f0(int param_1,unsigned int param_2,unsigned int *param_3
           else {
             temp_v5 = FUN_001a59f4(temp_v7);
           }
-          temp_v8 = 0;
-          temp_v9 = 0;
-          temp_v2 = FUN_00178458(temp_v10,temp_v1 | 0x4000000,&temp_v8);
-          if ((temp_v2 != 0) && (FUN_001a5974(temp_v5,temp_v8), temp_v9 != 0)) {
+          player.playableSoundMax = 0;
+          player.playerHeapSize = 0;
+          temp_v2 = soundArchiveReadPlayerInfoWithExtension((SoundArchiveWrapperA *)temp_v10,temp_v1 | 0x4000000,&player);
+          if ((temp_v2 != 0) && (FUN_001a5974(temp_v5,player.playableSoundMax), player.playerHeapSize != 0)) {
             temp_v2 = 0;
-            if (temp_v2 < temp_v8) {
+            if (temp_v2 < player.playableSoundMax) {
               do {
-                temp_v4 = temp_v9;
+                temp_v4 = player.playerHeapSize;
                 temp_v3 = *param_3;
                 if ((temp_v3 & 0x1f) != 0) {
                   return 0;
@@ -104,9 +103,9 @@ unsigned int FUN_001900f0(int param_1,unsigned int param_2,unsigned int *param_3
                 }
                 FUN_001a59c0(temp_v5);
                 temp_v2 = temp_v2 + 1;
-              } while (temp_v2 < temp_v8);
+              } while (temp_v2 < player.playableSoundMax);
             }
-            *(int *)(temp_v5 + 0x34) = temp_v8;
+            *(int *)(temp_v5 + 0x34) = player.playableSoundMax;
           }
           temp_v1 = temp_v1 + 1;
           temp_v7 = temp_v7 + 0x5c;

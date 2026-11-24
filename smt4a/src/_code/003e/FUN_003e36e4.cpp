@@ -1,4 +1,6 @@
-/* NON_MATCHING: table-row copy, selection reset and mode-transition register scheduling differ. */
+/* NON_MATCHING: table-row copy, selection reset and mode-transition register scheduling differ. The script's mode
+ * is stored directly: retail's `str r1, [r0, #264]` has no call boundary around it (no reload or padding a removed
+ * scriptProcessSetMode call would leave), and written as that call the function is 63 lines off (36 so). */
 #include "gamedata/DataTable.h"
 #include "script/scrScriptProcess.h"
 

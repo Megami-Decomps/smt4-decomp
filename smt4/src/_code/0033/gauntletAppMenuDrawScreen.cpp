@@ -18,7 +18,6 @@ u16 dataTable0BGetValueById(u32 id);
 u8 appCheckPurchaseRequirements(u32 id);
 s32 resourceRunOperationIfUnblocked(void *widget);
 void drawSetColorFromRGBA8(u32 color);
-void FUN_002b6b8c(s32 id, u32 x, u32 y, u32 depth);
 void FUN_002bdf94(u32 kind, s32 x, s32 y, u32 align, u32 digits, u32 slot, const char *format, ...);
 void fadeObjectResetIfActive(UiSpriteState *sprite);
 u8 ifTouchGetSelectionModeForRegion(s32 region);
@@ -66,7 +65,7 @@ extern "C" void gauntletAppMenuDrawScreen(GauntletAppMenuWork *menu)
         const u32 app = menu->list.entries[resourceRunOperationIfUnblocked(menu->list.controller) + row];
         const TextureTableEntryIV *position = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, row + 0x40E);
         const TextureTableEntryIV *icon = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x58F);
-        FUN_002b6b8c((u16)app, position->x + icon->x + x, position->y + icon->y + y, 0x6A);
+        gauntletAppDrawCategoryLabel((u16)app, position->x + icon->x + x, position->y + icon->y + y, 0x6A);
         if (flagBitIsSet(app)) {
             labelColor = 0x008400FF;
             const TextureTableEntryIV *ownedMark = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x595);
@@ -132,7 +131,7 @@ extern "C" void gauntletAppMenuDrawScreen(GauntletAppMenuWork *menu)
         renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
         texDrawTableEntryAtStoredOrigin(2, GAUNTLET_TEXTURES, 0x596, position->x + x, position->y + y, 0x8D);
         const TextureTableEntryIV *icon = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x598);
-        FUN_002b6b8c((u16)app, position->x + icon->x + x, position->y + icon->y + y, 0x92);
+        gauntletAppDrawCategoryLabel((u16)app, position->x + icon->x + x, position->y + icon->y + y, 0x92);
         if (flagBitIsSet(app)) {
             labelColor = 0x72E027FF;
             const TextureTableEntryIV *ownedMark = asdTMTexTableEntryAt(GAUNTLET_TEXTURES, 0x59E);

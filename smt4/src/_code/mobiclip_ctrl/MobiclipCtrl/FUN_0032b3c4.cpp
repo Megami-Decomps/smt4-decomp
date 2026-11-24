@@ -1,12 +1,10 @@
 /* NON_MATCHING: retail keeps 0, 1 (0x105 derived as 1 + 260) and the open-file pointer (loaded at entry) in callee-saved registers, derives the addresses of DAT_004c4080/DAT_004c40e0 and DAT_004c3a38/DAT_004c3a50/DAT_004c3af8/g_mobiclipPlayer from one base each (they are one object in the original; the symbols still split them), and its backend pool word names the reader field's own symbol. */
 #include "mobiclip_ctrl/MobiclipPlaybackStart.h"
+#include "AsdSDK/Source/Sys/File/AsdFilePath.h"
 #include "nn/fs/ArchivePath.h"
 #include "nn/Result.h"
 
 extern "C" {
-s32 refIsNullOrZero(MoviePathConversionState *);
-s32 FUN_002b90c8(const char *, u32, MoviePathConversionState *);
-u16 *FUN_002c618c(u16 *, const char *, s32, MoviePathConversionState *);
 void asdFatalError(void);
 void FUN_0034dddc(void *, void *, void *);
 u32 FUN_0034e134(void *);
@@ -27,12 +25,12 @@ void FUN_0032b3c4(const char *filename)
 {
     {
         u16 path[264];
-        MoviePathConversionState conversionState = {0, 0};
+        AsdPathMbState conversion;
         u16 *output = path;
-        refIsNullOrZero(&conversionState);
-        s32 consumed;
-        while ((consumed = FUN_002b90c8(filename, 0x105, &conversionState)) != 0 &&
-               FUN_002c618c(output, filename, consumed, &conversionState)) {
+        refIsNullOrZero(&conversion.state);
+        u32 consumed;
+        while ((consumed = FUN_002b90c8(filename, 0x105, &conversion)) != 0 &&
+               FUN_002c618c((wchar_t *)output, filename, consumed, &conversion) != 0) {
             ++output;
             filename += consumed;
         }

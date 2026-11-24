@@ -1,18 +1,21 @@
-/* NON_MATCHING: both template blocks are copied as in retail; only the scheduling of the words[5] and words[12] stores around the format-table load differs. */
 #include "shard/TextureCommandTemplates.h"
 
 extern "C" {
 extern const TextureCommandTemplates g_gpuCommandTemplates;
 void gpuSubmitCommandBlock(const void *commands, u32 bytes);
 
+/* Submits the default texture-bind packet with the image's dimensions, format, and address. */
 void gpuSubmitTextureConfig(u32 width, u32 height, u32 format, u32 address)
 {
-    TextureCommandBlock formats = g_gpuCommandTemplates.formats;
-    TextureCommandBlock command = g_gpuCommandTemplates.command;
-    command.words[2] = (width << 16) | height;
-    command.words[5] = address >> 3;
-    command.words[3] = formats.words[format] | 0x2200;
-    command.words[12] = format;
+    TextureCommandFormats formats = g_gpuCommandTemplates.formats;
+    TextureBindPacket command = g_gpuCommandTemplates.command;
+    u32 packedDimensions = (width << 16) | height;
+    u32 encodedAddress = address >> 3;
+    command.dimensions = packedDimensions;
+    u32 formatFlags = formats.words[format] | 0x2200;
+    command.formatFlags = formatFlags;
+    command.encodedAddress = encodedAddress;
+    command.format = format;
     gpuSubmitCommandBlock(&command, sizeof(command));
 }
-}
+} /* extern "C" */

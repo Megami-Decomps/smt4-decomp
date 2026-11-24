@@ -8,7 +8,6 @@
 #include "script/scrScriptProcess.h"
 
 extern "C" {
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 s32 utilityReturnSuccess(const void *input);
 void buttonHelpSetPreset(u32 preset);
 void *partyMemberFindById(u16 id);

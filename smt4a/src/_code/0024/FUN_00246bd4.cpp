@@ -75,7 +75,7 @@ int linkHolderApplyFirst(...);
 
 int mapIfSetMode1(...);
 int FUN_002342b8(...);
-int mapIfSpawnCaveAction(...);
+int mapIfSpawnCaveAction(...); // declcheck: local (generated expansion of lmapCaveOverviewStep; this unit has no retail call to mapIfSpawnCaveAction)
 int mapIfSpawnDownAction(...);
 int mapIfReleasePanel(...);
 int mapIfOverlayRelease(...);

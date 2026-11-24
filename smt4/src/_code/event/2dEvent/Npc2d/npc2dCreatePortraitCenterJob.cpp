@@ -4,17 +4,12 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "bible/bibleAnalyze.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-
-struct NpcTextureSource {
-    u8 unk00[0x24];
-    u16 textureId;
-};
+#include "gamedata/DataTable25.h"
 
 extern "C" {
 extern const char DAT_0040357c[], DAT_00403570[];
 extern const u8 DAT_0040356c[3];
 void memClear(void *, u32);
-NpcTextureSource *dataTable25FindById(s32);
 s32 eventIsSkipping();
 void asdTMTexTablePrepareNodeImage(s32, s32);
 s32 npc2dPortraitUpdate(u32);

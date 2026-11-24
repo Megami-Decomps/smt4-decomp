@@ -5,6 +5,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
+
 struct UnlockLogWork {
     u8 unk00[0x20];
     PartnerTopicRecord *entries;
@@ -54,7 +55,7 @@ void unlockLogMenuInitializeReadyResources(UnlockLogWork *work)
     work->entries = partnerTopicRecords(table);
     work->entryCount = dataTableGetCount(table);
     work->script = scrScriptProcessCreate(work->flow, work->screen);
-    work->script->mode = 2;
+    scriptProcessSetMode(work->script, 2);
     work->unk3c = 0;
     FUN_003f5bd8(work, (s32)work->entryCount);
     for (s32 index = 0; index < 9; ++index)

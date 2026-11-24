@@ -64,7 +64,7 @@ extern int naviMainConditionsHold(int);
 extern unsigned int lmapSceneGetObj(void);
 extern int naviMainSelectPair(int);
 /* Supplied declaration required: naviMainGetRequestedMap. */
-extern int FUN_00492c70(int);
+extern int naviMainGetRequestedSection(int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 /* Supplied declaration required: FUN_00492c84. */
 /* Supplied declaration required: words2Copy. */
 /* Supplied declaration required: MapNaviTable_GetAreaCount. */
@@ -141,7 +141,7 @@ void FUN_004920d4(int param_1)
     temp_v27 = DAT_005f1604;
     if (DAT_005f1a5e != '\0') {
       naviMainGetRequestedMap(temp_v3);
-      temp_v4 = FUN_00492c70(temp_v3);
+      temp_v4 = naviMainGetRequestedSection(temp_v3);
       temp_v27 = DAT_005f1604;
       if (DAT_005f1a5e != '\0') {
         temp_v27 = FUN_00492c84(temp_v3);

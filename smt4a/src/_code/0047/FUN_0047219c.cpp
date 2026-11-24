@@ -1,4 +1,8 @@
-/* NON_MATCHING: control flow, calls, the by-reference request ABI and the inlined RequestParameters constructor sequence (strb, member ctor, owner recovered with `sub r4, r0, #4`, ldrd/strd) match; armcc gives every hidden-reference temporary its own stack slot (88-byte frame) where retail reuses sp+20 and sp+40 (64 bytes), and splits the submitTokenRequest argument copy into ldm pieces. */
+/* NON_MATCHING: 45 lines. Control flow, calls, the by-reference request ABI, the request's reset
+ * (resetRequestOperation) and the whole-word copies match; armcc gives every hidden-reference temporary its own
+ * stack slot (80-byte frame) where retail reuses sp+20 and sp+40 (64 bytes), and retail keeps the shared
+ * `jyoucyuGetTableEntry(0)` tail at the end of the function (the unchanged-resource arm), where this build keeps the
+ * copy after submitTokenRequest. */
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match1_QueuedRequestToken.h"
 #include "util/BitsAndBytes.h"
@@ -6,7 +10,6 @@
 #include "addon/AocSystemA.h"
 
 extern "C" {
-s32 sysLightEventTryWait(LightEvent *event);
 u32 jyoucyuGetTableEntry(s32 index);
 
 /* The AOC job step: takes the content system's pending request (or the one it already holds),
@@ -14,9 +17,7 @@ u32 jyoucyuGetTableEntry(s32 index);
 u32 FUN_0047219c(void)
 {
     RequestParameters request;
-    request.kind = 1;
-    request.word3 = 0;
-    request.result = WindowStatusResult(request.word3);
+    resetRequestOperation(&request);
     request.kind = 100;
 
     if (sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
@@ -34,11 +35,9 @@ u32 FUN_0047219c(void)
         if (sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
             g_aocMain->flags &= ~0x10000u;
         } else if (request.kind != 200) {
-            QueuedRequestHandle handle = {request.result.code, request.result.description};
-            if (g_aocMain->submitTokenRequest(request, handle) != 0) {
-                return 0;
+            if (g_aocMain->submitTokenRequest(request, *reinterpret_cast<QueuedRequestHandle *>(&request.result)) == 0) {
+                jyoucyuGetTableEntry(0);
             }
-            jyoucyuGetTableEntry(0);
             return 0;
         }
         jyoucyuGetTableEntry(0);

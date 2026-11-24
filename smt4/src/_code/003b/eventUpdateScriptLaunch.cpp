@@ -10,7 +10,6 @@
 extern "C" {
 void transformInterpolationStep(EventScriptScene *scene);
 void messageSetConfirmDisplayMode();
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 tableGroupFindEntryIndex(void *script, const char *name);
 void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 

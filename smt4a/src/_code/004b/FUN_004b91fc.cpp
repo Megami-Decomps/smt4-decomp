@@ -29,7 +29,6 @@ s32 isFlag1F0Set(void *flags);
 void __ARM_common_memcpy4_6(void *destination, const void *source);
 void mikadoLoadSceneResources(SceneSetupWork *work);
 void soundPlayCueForContextKind(SceneSetupWork *work);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 
 /* Places the scene, moves setup on to step 2 and clears the pending flag. */
 static __inline void sceneSetupPlace(SceneSetupWork *scene)

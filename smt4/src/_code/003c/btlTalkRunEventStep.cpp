@@ -41,7 +41,6 @@ extern void *g_btlActionReflect;
 u32 btlReflectQueueSelectionMarks(s32 actor, u32 options, BtlEntry *unit);
 void battleSelectButtonHelpPreset(s32 preset);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void buttonHelpSetPreset(s32 preset);
 void FUN_003c06ac(BattleEventStep *step);
 void FUN_003dbe68(void *state);

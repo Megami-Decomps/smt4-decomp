@@ -14,7 +14,6 @@ typedef struct TalkEvent {
     /* 0x18 */ void *script;
 } TalkEvent;
 
-extern void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 
 extern s32 pairedAvailabilityGetState(s32 arg);
 extern void FUN_003f14a0(void);

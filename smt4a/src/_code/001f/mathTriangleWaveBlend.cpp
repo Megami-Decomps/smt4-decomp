@@ -1,4 +1,4 @@
-/* NON_MATCHING: only scheduling remains: retail computes `range` before `half`'s final shift and moves the time argument into r0 before the period into r1. Twin of smt4 FUN_0026e6a0. */
+/* NON_MATCHING: only scheduling remains: retail computes `range` before `half`'s final shift (2 lines). Twin of smt4 FUN_0026e6a0. */
 #include "common.h"
 
 extern "C" {
@@ -18,10 +18,8 @@ s32 mathTriangleWaveBlend(s32 a, s32 b, s32 period, s32 time, s32 invert)
     }
     s32 half = period / 2;
     s32 range = high - low;
-    if (time < 0) {
-        time = -time;
-    }
-    s32 offset = (time % period - half) * range / half;
+    s32 elapsed = time < 0 ? -time : time;
+    s32 offset = (elapsed % period - half) * range / half;
     if (offset < 0) {
         offset = -offset;
     }

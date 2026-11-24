@@ -1,7 +1,3 @@
-/* NON_MATCHING: 6 rows, the port of Apocalypse's FUN_00225ddc: the pool holds g_aocMain before g_aocJob where
- * retail has them the other way round (the two entry loads, their registers and all the code agree). Scoping
- * the entry check's `main` in a bare block ({ AocMain *main = g_aocMain; if ...; if ...; }) with state 95
- * declaring its own gives IDENTICAL, but the block has no meaning beyond its scope, so it is not written. */
 #include <stdio.h>
 #include "event/EventScriptJob.h"
 #include "addon/aocMain.h"
@@ -48,7 +44,6 @@ void FUN_002897d0(u8 value);
 s32 FUN_002897c0(void);
 void FUN_002897b0(u8 value);
 int eventIsSkipping(void);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 tableGroupFindEntryIndex(void *commands, const char *name);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 /* The game flag an event entry raises when it ends, 0 when it has none. */
@@ -65,7 +60,7 @@ static __inline void eventJobStop(void)
 {
     asdDebugHookVoid();
     jobStop(g_aocJob->job, 0);
-    g_aocMain->flags &= ~0x70;
+    aocMainClearResult(g_aocMain);
 }
 
 /* The event script job's update: loads the event's script, runs it to its end, then returns to the
@@ -76,9 +71,7 @@ extern "C" s32 eventScriptJobUpdate(u32 job)
     char messagesPath[128];
     EventScriptJobWork *work = g_aocJob;
     AocMain *main = g_aocMain;
-    if (main->flags & 4)
-        return 0;
-    if (main->flags & 8)
+    if (aocMainIsBusy(main))
         return 0;
 
     switch (work->state) {
@@ -174,19 +167,16 @@ extern "C" s32 eventScriptJobUpdate(u32 job)
         break;
     case 95:
         if (screenFadesAllReady()) {
-            main = g_aocMain;
-            u32 flags = main->flags;
-            if (flags & 4)
+            if (aocMainIsBusy(g_aocMain))
                 return 0;
-            if (flags & 8)
-                return 0;
-            main->flags = flags & ~0x70;
-            aocScriptHolderReset(&main->scriptHolder, 0);
+            aocMainClearResult(g_aocMain);
+            aocScriptHolderReset(&g_aocMain->scriptHolder, 0);
             work->state = 96;
         }
         return 0;
     case 96:
-        if (questSysUpdateLoad(&g_aocMain->scriptHolder)) {
+        /* retail still has the pointer read at entry here (no reload); after the call it reads the global again */
+        if (questSysUpdateLoad(&main->scriptHolder)) {
             aocScriptHolderRelease(&g_aocMain->scriptHolder);
             if (gameJumpRequestIsPending())
                 work->state = 97;

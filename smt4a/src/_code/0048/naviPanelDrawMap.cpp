@@ -79,7 +79,7 @@ extern unsigned int naviGetActiveStateValue(void);
 /* Supplied declaration required: lmapSceneGetObj. */
 extern unsigned int naviMainSelectPair(unsigned char *);
 /* Supplied declaration required: naviMainGetRequestedMap. */
-extern unsigned int FUN_00492c70(unsigned char *);
+extern unsigned int naviMainGetRequestedSection(unsigned char *);
 /* Supplied declaration required: FUN_0049325c. */
 /* Supplied declaration required: words2Copy. */
 /* Supplied declaration required: FUN_0049368c. */
@@ -128,7 +128,7 @@ void naviPanelDrawMap(int param_1)
   temp_v15 = 0.0f;
   if (g_gameState.f005f1a5e != '\0') {
     temp_v3 = naviMainGetRequestedMap(temp_v19);
-    temp_v2 = FUN_00492c70(temp_v19);
+    temp_v2 = naviMainGetRequestedSection(temp_v19);
   }
   if ((*(unsigned int *)(param_1 + 0x10) & 0x1000000) != 0) {
     words2Copy(param_1 + 0x4d0,&temp_v15);
@@ -141,7 +141,7 @@ void naviPanelDrawMap(int param_1)
     if (*(char *)(param_1 + 0xc) != '\0') {
       if (g_gameState.f005f1a5e != '\0') {
         temp_v2 = naviMainGetRequestedMap();
-        temp_v3 = FUN_00492c70(temp_v19);
+        temp_v3 = naviMainGetRequestedSection(temp_v19);
       }
       else {
         temp_v2 = NaviMain_GetCurrentMap(temp_v19);

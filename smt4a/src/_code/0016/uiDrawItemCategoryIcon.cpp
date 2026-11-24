@@ -1,3 +1,4 @@
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "shard/TextureDrawCall.h"
 #include "gamedata/ConsumableRecordA.h"
@@ -13,7 +14,7 @@ extern "C" {
 u32 aocEntryGetKind(u32 id);
 Entry00192690 *contentEntryFindById2(u32 id);
 u32 requestKindToId(u32 kind);
-void texTableRecordCallWithParams(u32, u32, s32, u32, u32, u32);
+
 
 void uiDrawItemCategoryIcon(u32 id, s32 x, s32 y, s32 layer, s32 showEquipped)
 {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: the wait is sys/HandleWait.h's handleWait with the bool test of threadTryJoinAndClose; remaining:
  * retail keeps the request kind 1 in r8 for both stores, reuses one stack slot for both WindowStatusResult(0)
- * temporaries (frame 48, built 60), and builds the wait's stack arguments with str+stm. */
+ * temporaries (frame 48, built 60), and builds the wait's stack arguments with str+stm. The request reset stays in
+ * place, as in the Apocalypse twin FUN_0015f0f4: resetRequestOperation gives 77 lines here (18 there, 46 in place). */
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include "nn/Result.h"
@@ -21,7 +22,7 @@ u32 FUN_00111004(u32 handle)
     AocJobWork *work = (AocJobWork *)jobGetWork(handle);
 
     if (work->operationActive == 1 && work->requestId == work->completedId &&
-        FUN_00121e50(g_aocSystem) != 0 && FUN_002ad1e0(&g_aocMain->operationDone) != 0) {
+        FUN_00121e50(g_aocSystem) != 0 && sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
         g_aocMain->flags &= ~0x10000u;
         aocReleasePackageOwner(g_aocSystem);
         RequestParameters request;

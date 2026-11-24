@@ -1,5 +1,3 @@
-/* NON_MATCHING: only the cancel-bit test differs: the build keeps the AocMain pointer in r1 and the flags in r0 (retail:
- * r0/r2), as in Apocalypse's FUN_004b8f18 and FUN_004d7e20. */
 #include "addon/aocMain.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match6_ContentTransition.h"

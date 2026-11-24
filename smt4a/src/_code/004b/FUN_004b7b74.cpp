@@ -7,6 +7,7 @@
 #include <stddef.h>
 #include "event/2dEvent/EventEffect.h"
 
+
 struct MapMenuReturnRecord { u8 unk00[0x3f]; u8 textId; };
 struct MapMenuCompletionWork {
     u8 unk0000[0x28];
@@ -82,7 +83,7 @@ void FUN_004b7b74(MapMenuCompletionWork *work)
         work->resultTable = asdLoadFileSyncDefault("battle/Result.bf");
         work->resultMessages = asdLoadFileSyncDefault("battle/ResultMsg.mbm");
         work->resultProcess = scrScriptProcessCreate(work->resultTable, work->resultMessages);
-        work->resultProcess->mode = 3;
+        scriptProcessSetMode(work->resultProcess, 3);
         scrScriptProcessStartEntry(work->resultProcess,
             tableGroupFindEntryIndex(work->resultTable, "ProcCharonRequestFirst"));
         work->choice = 0;

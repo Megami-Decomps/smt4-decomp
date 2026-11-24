@@ -1,4 +1,3 @@
-/* NON_MATCHING: the flag test is aocMainTakeCancel (addon/aocMain.h); retail allocates the flag word in r2 and updates it in place (bic r2, r2, #112) where the build uses r1/r3 (register choice only). */
 #include "common.h"
 #include "addon/aocMain.h"
 #include "script/scrScriptProcess.h"

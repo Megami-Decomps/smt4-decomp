@@ -24,7 +24,6 @@ void transformInterpolationStep(TransformInterpolation *);
 void asdMemFree(void *);
 void messageSetScriptDisplayMode();
 void *asdLoadFileSyncDefault(const char *);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 tableGroupFindEntryIndex(void *, const char *);
 void scrScriptProcessStartEntry(ScriptProcess *, u32);
 

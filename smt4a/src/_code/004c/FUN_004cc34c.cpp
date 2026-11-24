@@ -50,7 +50,6 @@ void lmapMainCallIfActive();
 s32 mikadoPollShutdown();
 void mikadoRequestSoundChannel();
 void bgmFadeOut(u32 duration);
-void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 }
 
 /* Moves the workflow to `state`, restarting its step counter. */

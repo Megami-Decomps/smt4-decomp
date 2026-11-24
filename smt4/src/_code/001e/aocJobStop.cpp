@@ -12,7 +12,7 @@ void aocJobStop(void)
 {
     asdDebugHookVoid();
     jobStop(*g_aocJob, 0);
-    g_aocMain->flags &= ~0x70;
+    aocMainClearResult(g_aocMain);
 }
 
 } /* extern "C" */

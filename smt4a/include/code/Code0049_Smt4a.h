@@ -8,7 +8,7 @@ struct SubmenuWork;
 struct EffectRect;
 extern "C" {
 
-u32 FUN_00492c70(void);
+u32 naviMainGetRequestedSection(void);
 
 s32 shopGetEntryPrice(const ShopEntry *entry);
 

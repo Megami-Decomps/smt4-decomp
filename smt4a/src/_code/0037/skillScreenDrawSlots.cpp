@@ -1,6 +1,4 @@
-/* NON_MATCHING: 18 lines (from 367): the frame, the offset copies through VFP registers and every call are retail's.
- * Left: retail loads the slot's id before the cursor skill's (the compare's operands come out swapped here), and the
- * second render-stack set swaps r1/r2 for the previous state and the entry address. */
+/* NON_MATCHING: 12 lines; the second render-stack set swaps r1/r2 for the previous state and entry address. */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "camp/Unite/UniteWork.h"
@@ -52,9 +50,9 @@ void skillScreenDrawSlots(UniteWorkA *work, SlotRecordA *record, s32 drawSelecte
             texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x270, icon->x + x, icon->y + y, 0x65);
             skillScreenDrawSlotRow(work, slot, record, selectedRow, icon->x + x, icon->y + y, scale);
             if (mode == 1 && (s32)work->transition.frame >= 5) {
-                if (work->inheritanceA.slots[slot] ==
-                    work->inheritanceA.skills[resourceRunOperationIfUnblocked((Object *)&work->inheritanceA.skillList) +
-                                              listCursorGetRowIfUnblocked(&work->inheritanceA.skillList)]) {
+                s32 candidateRow = resourceRunOperationIfUnblocked((Object *)&work->inheritanceA.skillList) +
+                    listCursorGetRowIfUnblocked(&work->inheritanceA.skillList);
+                if (work->inheritanceA.slots[slot] == work->inheritanceA.skills[candidateRow]) {
                     efctSetSpeed(vec2GetSpeed(&work->sprites.highlight) * scale);
                     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
                     texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x173, icon->x + x, icon->y + y, 0x65);
