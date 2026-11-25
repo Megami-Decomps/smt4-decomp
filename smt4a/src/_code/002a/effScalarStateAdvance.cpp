@@ -1,27 +1,29 @@
-/* NON_MATCHING (b1454): the key pointers add the keys' 4-byte offset first (retail folds it into each field offset), and the step division's registers differ (retail subtracts into s2, converts the frame count into s1 and divides into s0). */
+/* NON_MATCHING: key field offsets now match; retail loads the first value before both frame loads,
+ * and the subtraction, frame conversion and division use different VFP registers. */
 #include "AsdSDK/Source/Gfx/Effect/EffectScalarKeys.h"
 
 extern "C" {
+
 /* Skips zero-length segments and prepares the next scalar interpolation step. */
 void effScalarStateAdvance(EffectScalarKeyState *track, const EffectScalarKeySource *source)
 {
     s32 step = 1;
-    if (track->index >= 3)
+    if (track->index >= 3) {
         track->index = 4;
-    s32 current = track->index;
-    for (; current + step < 4; step++) {
-        s32 span = source->keys[current + step].frame - source->keys[current].frame;
+    }
+    for (; track->index + step < 4; step++) {
+        s32 span = source->keys[track->index + step].frame - source->keys[track->index].frame;
         track->duration = span;
         if (span > 0) {
-            const EffectScalarTrackKey *from = &track->keys[current];
-            s32 next = current + step;
-            const EffectScalarTrackKey *to = &track->keys[next];
-            s32 frames = to->frame - from->frame;
-            track->step = (to->value - from->value) / frames;
-            track->target = to->value;
-            track->index = static_cast<s8>(current + step);
+            s32 nextIndex = track->index + step;
+            s32 frameCount = track->keys[nextIndex].frame - track->keys[track->index].frame;
+            f32 valueChange = track->keys[nextIndex].value - track->keys[track->index].value;
+            track->step = valueChange / (f32)frameCount;
+            track->target = track->keys[nextIndex].value;
+            track->index = (s8)nextIndex;
             break;
         }
     }
 }
-}
+
+} /* extern "C" */

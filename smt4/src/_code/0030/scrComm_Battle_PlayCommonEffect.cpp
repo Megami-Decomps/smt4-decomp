@@ -1,7 +1,9 @@
 /* NON_MATCHING: the effect-set names are pooled pc-relative here; retail addresses them through pool words as
  * objects (DAT_00400428/34) it shares with scrComm_Battle_PlayPositionedEffect (one file's pooled literals; a
  * translation unit cannot be carved while the literals have no symbol), so the copy's registers and the final
- * owner-load scheduling differ. */
+ * owner-load scheduling differ.
+ * Copying the names as extern __align(4) 9-byte records DAT_00400428/34 gives retail's __ARM_common_memcpy4_9
+ * (w93-s17), but they are string literals, not a record type; the alignment only picks the helper. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -29,7 +31,7 @@ static __inline void loadCommonEffectSet(s32 effect)
         strcpy(name, "commonDw");
     else
         strcpy(name, "commonUp");
-    FUN_002454c4(g_btlAux, reinterpret_cast<u32>(name), 1, 0);
+    FUN_002454c4(g_btlAux, name, 1, 0);
 }
 
 // Play the common up/down effect for the script's current battle unit.

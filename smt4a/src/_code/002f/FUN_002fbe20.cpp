@@ -1,24 +1,20 @@
-/* NON_MATCHING: retail retains unused error literal 0xd8e0a002; saved string/length registers and outgoing stores also differ. */
-#include "common.h"
+/* NON_MATCHING: the header name and the value length occupy swapped saved registers. */
+#include "code/Code0043_Smt4a.h"
+#include "net/HttpRequest.h"
 
-struct WideRequestContext {
-    u32 unk00;
-    s32 state; // 0x04
-    u32 unk08;
-    u32 handle; // 0x0c
-};
+extern "C" u32 libc_strlen(const char *text);
 
-extern "C" {
-u32 libc_strlen(const u16 *);
-u32 FUN_0043b0dc(u32 *, s32, const u16 *, u32, const u16 *, u32);
-
-u32 FUN_002fbe20(WideRequestContext *context, const u16 *first, const u16 *second)
+/* Adds a header to the HTTP request. */
+extern "C" u32 FUN_002fbe20(HttpRequestContext *request, const char *name, const char *value)
 {
-    if (context->state <= 0)
-        return 0xd8a0a064;
-    u32 secondLength = libc_strlen(second) + 1;
-    u32 firstLength = libc_strlen(first) + 1;
-    return FUN_0043b0dc(&context->handle, context->state, first, firstLength,
-                         second, secondLength);
-}
+    enum { MISSING_STRING = 0xD8E0A002, INVALID_REQUEST = 0xD8A0A064 };
+    if (name == NULL || value == NULL) {
+        return MISSING_STRING;
+    }
+    if (request->requestHandle <= 0) {
+        return INVALID_REQUEST;
+    }
+    u32 valueLength = libc_strlen(value) + 1;
+    u32 nameLength = libc_strlen(name) + 1;
+    return nn_http_detail_AddRequestHeaderField(&request->session, (u32)request->requestHandle, name, nameLength, value, valueLength);
 }

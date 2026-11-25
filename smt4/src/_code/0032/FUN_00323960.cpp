@@ -1,4 +1,5 @@
-/* NON_MATCHING: the two editor blocks are defined here (DAT_0044f578, 0x2e0 bytes, then g_effectEditorState) so armcc derives the first from the second like retail (`sub r1, r5, #736`); remaining: retail reloads the list straight into r0 for the second call (ours caches it in r2) and the pool order differs. The retail blocks are initialised .data holding code/string pointers: a shared editor-data source must replace these zero stand-ins. */
+/* NON_MATCHING: fdiff reproduces the instructions, but the editor templates are retail .data
+ * objects holding menu tables and code/string pointers, not the zero-filled stand-ins below. */
 #include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
@@ -14,8 +15,6 @@ extern "C" {
 
 u32 DAT_0044f578[0x2e0 / 4];
 EditorBlock00323960 g_effectEditorState;
-
-void linkedItemsRemoveAndRelease(LinkedItems *items, LinkedItem *item);
 
 /* Selects the current editor item and resets the two editing blocks. */
 void FUN_00323960(void)

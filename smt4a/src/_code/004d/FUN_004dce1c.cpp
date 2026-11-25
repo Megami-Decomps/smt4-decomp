@@ -1,4 +1,4 @@
-/* NON_MATCHING: the u64 battle flag tests/updates schedule their loads and register use differently (retail loads each mask as ldm pairs and pairs the word ORs), the escape-state tail is laid out in a different branch order, and the g_btlAux flag word is read through a pool constant offset. */
+/* NON_MATCHING: the two 64-bit mask tests and the second mask update have different paired loads and scratch registers; retail also schedules the auxiliary flag-address load after the attempt count store. */
 #include "common.h"
 
 namespace {
@@ -77,7 +77,7 @@ s32 lcgRandomRange(u32 limit);
 void FUN_004dce1c(BtlUnitHandle *handle, BtlAiAction *action)
 {
     action->unk56c = 0;
-    BtlFlagsData *flagsData = reinterpret_cast<BtlFlagsData *>(handle->data);
+    BtlFlagsData *flagsData = (BtlFlagsData *)handle->data;
     if ((flagsData->flags & g_btlAction.mask128) == 0 && (handle->data->stateFlags & 0x40000) != 0) {
         if ((action->flags & 0x2000) == 0) {
             FUN_004fbeac(0, action, 0, 5, 0);
@@ -92,11 +92,11 @@ void FUN_004dce1c(BtlUnitHandle *handle, BtlAiAction *action)
     FUN_004fd508(0, action, 15, action->uiIndex, 1);
     s32 chance = FUN_004c67d0();
     s32 escaped = lcgRandomRange(99) < chance;
-    u8 attempts = handle->data->attempts + 1;
-    handle->data->attempts = attempts;
+    /* Retail checks the upper bound after the increment has narrowed to the stored byte. */
+    u32 attempts = ++handle->data->attempts;
     handle->data->attempts = attempts < 255 ? attempts : 255;
-    if ((reinterpret_cast<BtlAuxBlock *>(g_btlAux)->flags & 0x400) != 0) {
-        nameEntriesRegisterVerNames(reinterpret_cast<void *>(g_btlAux));
+    if ((((BtlAuxBlock *)g_btlAux)->flags & 0x400) != 0) {
+        nameEntriesRegisterVerNames((void *)g_btlAux);
     }
     if (handle->data->phase == 3) {
         escaped = 1;
@@ -104,13 +104,14 @@ void FUN_004dce1c(BtlUnitHandle *handle, BtlAiAction *action)
     if (gameProgressIsAdvanced() != 0) {
         escaped = 0;
     }
-    flagsData = reinterpret_cast<BtlFlagsData *>(handle->data);
-    if ((g_btlAction.mask128 & flagsData->flags) != 0) {
+    flagsData = (BtlFlagsData *)handle->data;
+    if ((flagsData->flags & g_btlAction.mask128) != 0) {
         escaped = 1;
     }
     if (handle->data->uiState == 4) {
         if ((handle->data->stateFlags & 0x40000) != 0) {
             handle->data->uiState = 0;
+            escaped = 0;
         } else {
             escaped = 1;
         }
@@ -125,15 +126,16 @@ void FUN_004dce1c(BtlUnitHandle *handle, BtlAiAction *action)
             FUN_004d7fe4(g_btlEvent);
             return;
         }
+        FUN_004fbeac(0, action, 0, 1, 0);
     } else {
         gameCounterAddSaturating(5, 1);
         handle->data->uiState = 0;
-        flagsData = reinterpret_cast<BtlFlagsData *>(handle->data);
+        flagsData = (BtlFlagsData *)handle->data;
         flagsData->flags |= g_btlAction.mask110;
-        flagsData = reinterpret_cast<BtlFlagsData *>(handle->data);
+        flagsData = (BtlFlagsData *)handle->data;
         flagsData->flags |= g_btlAction.mask150;
+        FUN_004fbeac(0, action, 0, 1, 0);
     }
-    FUN_004fbeac(0, action, 0, 1, 0);
 }
 
 } /* extern "C" */

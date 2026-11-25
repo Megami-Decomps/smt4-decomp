@@ -10,13 +10,13 @@ extern BtlEncounterGlobalsA g_btlEncount;
 u32 isEntryUsable(const BtlEventStateA *event);
 u32 FUN_004d7a70(BtlEventStateA *event, u32 kind, s32 index, s32 flags);
 void FUN_004d7fe4(BtlEventStateA *event);
-void frameTexRequestFade(s32 kind);
+void frameTexApplyMode(s32 kind);
 u32 pairedAvailabilityGetState(u32 display);
 void screenFadeStartIn(u32 display, s32 frames, u32 alpha);
 void FUN_003ed6e8(BtlMainStateA *state);
 void btlAiBuildTurnOrder(BtlMainStateA *state);
 s32 btlFindSelectionIndexByOrdinal(BtlMainStateA *state, s32 flags);
-void FUN_0047f444(s32 kind);
+void btlPlaySelectedEntryVoice(s32 kind);
 void FUN_004aa2e0(BtlUiA *ui, s32 mode);
 u32 FUN_003e0cd4(BtlStep *step, BtlMainStateA *state);
 
@@ -44,7 +44,7 @@ u32 FUN_003e2504(BtlStep *step, BtlMainStateA *state)
         if (!special) {
             FUN_004aa2e0(g_btlUiBlock, 0);
         } else if (btlFindSelectionIndexByOrdinal(state, 1) < 0 && !(state->encounter.controlFlags & 0x20)) {
-            FUN_0047f444(3);
+            btlPlaySelectedEntryVoice(3);
         }
         step->counters.unk10 = 0;
         step->counters.unk0C = 0;
@@ -53,7 +53,7 @@ u32 FUN_003e2504(BtlStep *step, BtlMainStateA *state)
     }
     if (FUN_004d7a70(event, 0xB, -1, 0)) {
         if (!(state->stateFlags64.bits & masks->fadeStarted)) {
-            frameTexRequestFade(2);
+            frameTexApplyMode(2);
             state->stateFlags64.bits |= masks->fadeStarted;
         }
         if (pairedAvailabilityGetState(0) == 3) {

@@ -89,6 +89,17 @@ u32 aocContentLookupSucceeds(AocSystem *system, u32 id);
 AocPackageDirectoryEntry *packageFindRecordByName(AocSystem *system, s32 kind, u32 key);
 AocPackageFile *packageFindFileRefByName(AocSystem *system, s32 kind, u32 key);
 PassiveSkillRecord *recordTableFindById(AocSystem *system, u32 id);
+} /* extern "C" */
+
+/* Looks up the runtime resource associated with a package entry rather than its file tables. */
+static __inline void *aocFindLinkedResource(AocSystem *system, s32 kind, u32 key)
+{
+    AocPackageFile *entry = packageFindFileRefByName(system, kind, key);
+    void *resource = NULL;
+    if (entry != NULL) {
+        resource = entry->linkedResource;
+    }
+    return resource;
 }
 
 #endif

@@ -6,7 +6,9 @@
 
 /* A StreetPass mark entry of IV's save data (saveGetIndexedMapValue), 0x4C bytes. */
 typedef struct CampCecMarkEntryIV {
-    /* 0x00 */ u8 unk00[0x48];
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u8 flags;                   /* bit 0x10: entry not yet seen */
+    /* 0x21 */ u8 unk21[0x27];
     /* 0x48 */ u16 count;                  /* 0 = unused entry */
     /* 0x4A */ u8 unk4A[2];
 } CampCecMarkEntryIV;
@@ -38,7 +40,8 @@ typedef struct CampCecView {
     /* 0x148 */ s32 usedCount;             /* entries with a nonzero count */
     /* 0x14C */ s32 previewed;             /* entry the status scene's model was last set up for */
     /* 0x150 */ u32 touchRepeat;           /* frames a scroll arrow has been held */
-    /* 0x154 */ u8 unk154[8];
+    /* 0x154 */ u32 navigationFlags;      /* scrollbar cap and thumb variants */
+    /* 0x158 */ u8 unk158[4];
     /* 0x15C */ u8 done;                   /* the screen has finished */
     /* 0x15D */ u8 unk15D[0x3];
     /* 0x160 */ void *heap;                /* camp/CecEdit_one_msg.mbm; heap block, freed on close */
@@ -49,6 +52,10 @@ typedef struct CampCecView {
 } CampCecView;
 
 typedef char CampCecViewSizeCheck[sizeof(CampCecView) == 0x16C && sizeof(CampCecMarkEntryIV) == 0x4C ? 1 : -1];
+typedef char CampCecViewNavigationCheck[
+    __INTADDR__(&((CampCecView *)0)->navigationFlags) == 0x154 &&
+    __INTADDR__(&((CampCecMarkEntryIV *)0)->flags) == 0x20 &&
+    __INTADDR__(&((CampCecMarkEntryIV *)0)->count) == 0x48 ? 1 : -1];
 
 /* A StreetPass mark entry of the save data (gameDataGetMarkEntry), 100 bytes. */
 typedef struct CampCecMarkEntry {

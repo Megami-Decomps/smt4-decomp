@@ -17,7 +17,7 @@ struct PlayerEquipmentBlock {
 extern "C" {
 u32 uiStateHasAnyActiveFlag(const FlaggedValueHolder *holder);
 void statusCameraRestore(s32 mode);
-void FUN_0038b5fc(s32 kind, u16 id);
+void statusModelPreviewOutfitPart(s32 kind, u16 id);
 void __aeabi_memcpy4(void *destination, const void *source, s32 bytes);
 void FUN_003df7c4(PlayerEquipmentBlock *block);
 void FUN_00372100(PlayerEquipmentBlock *block, s32 arg);
@@ -39,11 +39,11 @@ void shopTrackSelectedItemPreview(Obj536044 *menu)
     } else if (!menu->previewing) {
         if (id != 0) {
             if (aocEntryGetKindForward(id) == 4)
-                FUN_0038b5fc(0, id);
+                statusModelPreviewOutfitPart(0, id);
             if (aocEntryGetKindForward(id) == 5)
-                FUN_0038b5fc(1, id);
+                statusModelPreviewOutfitPart(1, id);
             if (aocEntryGetKindForward(id) == 6)
-                FUN_0038b5fc(2, id);
+                statusModelPreviewOutfitPart(2, id);
         }
         menu->previewing = 1;
     } else {

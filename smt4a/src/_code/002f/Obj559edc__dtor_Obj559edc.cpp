@@ -1,24 +1,16 @@
-/* NON_MATCHING: implicit member teardown uses different loop and this-adjustment register scheduling. */
+/* NON_MATCHING: retail advances this in the vtable store and schedules each virtual entry destructor
+ * lookup through r1; the build uses a separate add and loads each entry's vtable through r0. */
 #include "classes/Obj559edc.h"
-
-extern "C" {
-void asdOperatorDeleteArray(void *memory);
-extern const u8 _ZTV9Obj55a4b8[];
-}
 
 template <class Entry> inline Obj559edcEntries<Entry>::~Obj559edcEntries()
 {
+    Entry *entry = begin;
     Entry *last = end;
-    for (Entry *entry = begin; entry != last; ++entry) {
+    while (entry != last) {
         entry->~Entry();
+        ++entry;
     }
     asdOperatorDeleteArray(begin);
-}
-
-inline Obj559edcVector::~Obj559edcVector()
-{
-    vtable = _ZTV9Obj55a4b8 + 8;
-    asdOperatorDeleteArray(data);
 }
 
 /* Members release the entry arrays, vectors, buffer and address in reverse order. */

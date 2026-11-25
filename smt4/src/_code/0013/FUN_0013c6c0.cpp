@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002b23bc(unsigned int, unsigned int, unsigned int, unsigned char *);
+int libc_vsnprintf(unsigned int, unsigned int, unsigned int, unsigned char *);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp4; /* 0x4: local_4 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002b23bc. */
+/* Supplied declaration required: libc_vsnprintf. */
 
 
 void FUN_0013c6c0(unsigned int param_1,unsigned int param_2,int param_3,unsigned int param_4)
@@ -23,7 +23,7 @@ void FUN_0013c6c0(unsigned int param_1,unsigned int param_2,int param_3,unsigned
   if (param_3 + 1U < param_2) {
     param_2 = param_3 + 1U;
   }
-  FUN_002b23bc(param_1,param_2,param_4,&uStack00000000);
+  libc_vsnprintf(param_1,param_2,param_4,&uStack00000000);
                     /* WARNING: Treating indirect jump as return */
   return;
 }

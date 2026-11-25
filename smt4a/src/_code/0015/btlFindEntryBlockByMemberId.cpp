@@ -1,4 +1,3 @@
-/* NON_MATCHING: the outer fixed-capacity index and entry base now use retail's registers; the member-id lookup's scratch registers and loop condition differ. */
 #include "battle/BtlGlobals.h"
 #include "battle/BtlEntryA.h"
 
@@ -7,15 +6,14 @@ extern "C" {
 /* Returns the data block of the first battle entry listing this member, or NULL. */
 BtlUnitDataA *btlFindEntryBlockByMemberId(BtlMainStateA *state, s32 id)
 {
+    enum { ENTRY_COUNT = 109, MEMBER_ID_COUNT = 50 };
     BtlUnitDataA *result = NULL;
-    for (u32 unit = 0; unit < 109; unit++) {
-        for (s32 i = 0; i < 50; i++) {
-            s32 entry = state->entries[unit].ids[i];
-
-            if (entry < 0) {
+    for (s32 unit = 0; unit < ENTRY_COUNT; unit++) {
+        for (s32 member = 0; member < MEMBER_ID_COUNT; member++) {
+            if (state->entries[unit].ids[member] < 0) {
                 break;
             }
-            if (entry == id) {
+            if (state->entries[unit].ids[member] == id) {
                 result = &state->entries[unit].data;
                 return result;
             }

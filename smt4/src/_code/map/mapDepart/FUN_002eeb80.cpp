@@ -22,7 +22,7 @@ void soundActorQueueStartPending(void);
 void FUN_002757a8(void);
 void resourceTableReleaseHandles(void);
 void FUN_002758d8(void);
-void FUN_002759bc(void);
+void frameTexturesRelease(void);
 void mapDepartSyncModelVisibility(void);
 void FUN_00275bc8(void);
 void frameTexCampSetMode(s32 arg);
@@ -97,7 +97,7 @@ u32 FUN_002eeb80(void)
     }
     if (g_mapDepartSequence.frame < 100) {
         if (g_mapDepartSequence.frame > 12 && NaviMain_IsCreated() != 0) {
-            FUN_002759bc();
+            frameTexturesRelease();
             FUN_002758d8();
             resourceTableReleaseHandles();
             FUN_0028a420(0, 0);

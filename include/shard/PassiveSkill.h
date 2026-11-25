@@ -76,6 +76,6 @@ struct SkillDataRecord;
 
 extern "C" const PassiveSkillRecord *passiveSkillLookupRecord(u32 id);
 /* Whether a passive skill's affinity word matches a skill record (the skill inheritance pick). IV only. */
-extern "C" bool FUN_0026a604(const PassiveSkillRecord *passive, const SkillDataRecord *skill);
+extern "C" bool passiveAffinityAppliesToSkill(const PassiveSkillRecord *passive, const SkillDataRecord *skill);
 
 #endif

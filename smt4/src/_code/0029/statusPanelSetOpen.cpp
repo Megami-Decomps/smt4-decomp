@@ -1,9 +1,9 @@
+#include "status/StatusMenuMode.h"
 #include "shard/GameGlobals.h"
 
 extern "C" {
 
 void statusPanelRefreshSelection(s32 value);
-void statusDownRestoreTabForMode(void);
 void uiSpriteSetKeyframe(void *timer, s32 frames, s32 arg); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Opens (open != 0) or closes the status display unless state 2/3 is active, then reapplies its tab. */

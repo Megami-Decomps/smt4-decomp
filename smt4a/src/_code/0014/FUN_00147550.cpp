@@ -1,3 +1,4 @@
+#include "nn/err/Fatal.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00147550` (_code @ 0x147550, 0x190 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -9,14 +10,13 @@ int FUN_0015a230(void);
 int FUN_0015a308(int);
 int FUN_0015a32c(void);
 int FUN_0015a4d0(unsigned int);
-int FUN_0015a4e0(void);
+int appletCloseServiceSession(void);
 int FUN_0015a52c(int);
 int FUN_0015a79c(unsigned int, int, unsigned int);
 int FUN_0015ac90(void);
 int FUN_0015adc4(void);
 int FUN_001713d8(unsigned int);
 int FUN_001713e8(unsigned int);
-int errThrowFatal(int, int);
 int nn_applet_CTR_detail_OpenSession(void);
 int nn_applet_CTR_detail_CloseSession(void);
 
@@ -37,7 +37,7 @@ extern int FUN_0015a2e8(void);
 /* Supplied declaration required: FUN_0015a308. */
 /* Supplied declaration required: FUN_0015a32c. */
 /* Supplied declaration required: FUN_0015a4d0. */
-/* Supplied declaration required: FUN_0015a4e0. */
+/* Supplied declaration required: appletCloseServiceSession. */
 /* Supplied declaration required: FUN_0015a52c. */
 /* Supplied declaration required: FUN_0015a79c. */
 extern int FUN_0015aa30(unsigned int, unsigned int, unsigned int *, unsigned int *);
@@ -80,7 +80,7 @@ int FUN_00147550(unsigned int param_1,unsigned int param_2,unsigned int param_3)
       FUN_0015a52c(temp_v3);
       FUN_001713d8(temp_v4 & 1);
       FUN_001713e8((temp_v4 & 2) >> 1);
-      FUN_0015a4e0();
+      appletCloseServiceSession();
       FUN_0015a4d0(param_1);
       FUN_0015a308(uStack_18);
       temp_v0 = FUN_0015a2e8();
@@ -105,7 +105,7 @@ int FUN_00147550(unsigned int param_1,unsigned int param_2,unsigned int param_3)
       }
       return 0;
     }
-    FUN_0015a4e0();
+    appletCloseServiceSession();
   }
   return temp_v0;
 }

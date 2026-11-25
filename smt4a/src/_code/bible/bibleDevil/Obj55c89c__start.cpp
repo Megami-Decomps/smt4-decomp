@@ -8,7 +8,7 @@ extern "C" {
 
 int taskCreateDraw(...);
 int buttonHelpSetText(...);
-int FUN_002c8550(...);
+int menuSetModeAndResetTransitions(...);
 int FUN_0034a9c4(...);
 int fusionReleaseRegisteredHandle(void);
 int rectangleInitializeSelection(...);
@@ -43,7 +43,7 @@ extern unsigned int DAT_0057f0b8; /* 0x57f0b8 */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: buttonHelpSetText. */
-/* Supplied declaration required: FUN_002c8550. */
+/* Supplied declaration required: menuSetModeAndResetTransitions. */
 /* Supplied declaration required: FUN_0034a9c4. */
 /* Supplied declaration required: fusionReleaseRegisteredHandle. */
 /* Supplied declaration required: rectangleInitializeSelection. */
@@ -81,7 +81,7 @@ void Obj55c89c::start()
   *(unsigned char *)((int)param_1 + 0xa876) = 0;
   slotPoolResetTrackedState();
   (**(romwright_code **)(*param_1 + 0x20))(param_1);
-  FUN_002c8550(2);
+  menuSetModeAndResetTransitions(2);
   piVar1 = (int *)0x100;
   asdMemoryAllocTracked(0x100,0x100,0,4,1);
   g_animatedPageSelection = piVar1;
@@ -129,7 +129,7 @@ void Obj55c89c::start()
   temp_v0 = flaggedValueHolderGetTotal(param_1 + 8);
   FUN_0034a9c4((short)param_1[temp_v0 * 8 + 0x21a],0);
   if ((char)param_1[0x218] == '\x01') {
-    FUN_002c8550(2);
+    menuSetModeAndResetTransitions(2);
     return;
   }
   return;

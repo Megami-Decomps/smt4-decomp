@@ -8,10 +8,16 @@
 static __inline bool btlCommandPassesFilter(const BtlMainStateA *state, s32 index)
 {
     if (state->commandFilter.mode != 0) {
-        return state->pendingCommands.commands[index].kind == 6;
+        if (state->pendingCommands.commands[index].kind != 6) {
+            return false;
+        }
+        return true;
     }
-    return state->pendingCommands.commands[index].kind != 4 ||
-        !(state->entries[state->pendingCommands.commands[index].unitIndex].data.statusFlags & 0x11c0);
+    if (state->pendingCommands.commands[index].kind == 4 &&
+        (state->entries[state->pendingCommands.commands[index].unitIndex].data.statusFlags & 0x11c0)) {
+        return false;
+    }
+    return true;
 }
 
 /* Appends a command to the pending commands (IV: FUN_0023c154). */

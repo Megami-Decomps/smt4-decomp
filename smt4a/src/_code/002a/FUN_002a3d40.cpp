@@ -1,4 +1,5 @@
-/* NON_MATCHING: with a call per frame the 0.8f scale is hoisted into s16 after the first frame call as in retail; retail then cross-jumps the two eventSetUnderMessageFade calls into one (b to a shared bl, then b to the return-0 epilogue) and places the not-0x15 return right after the third test. */
+/* NON_MATCHING: retail cross-jumps the two fade calls into one and sets their direction
+ * argument last; our build emits a separate padded call for each frame. */
 #include "common.h"
 
 extern "C" {
@@ -7,24 +8,26 @@ s32 eventSetUnderMessageFade(u32 color, s32 first, s32 second, f32 scale);
 s32 scrGetCommandFrame(void);
 s32 eventIsSkipping(void);
 
-/* Script command: starts the under-message fade for command frame 0 (fade in) or 9 (fade out); done at once for frame 0x15 or when a fade is already running. */
+enum {
+    UNDER_MESSAGE_FADE_IN_FRAME = 0,
+    UNDER_MESSAGE_FADE_OUT_FRAME = 9,
+    UNDER_MESSAGE_FADE_DONE_FRAME = 21
+};
+
+/* Fades the message underlay in and out, finishing at frame 21 or when the event is skipped. */
 u32 FUN_002a3d40(void)
 {
-    if (eventIsSkipping() != 0) {
-        return 1;
-    }
-    if (scrGetCommandFrame() == 0) {
-        eventSetUnderMessageFade(0xffffffff, 10, 1, 0.8f);
+    if (!eventIsSkipping()) {
+        if (scrGetCommandFrame() == UNDER_MESSAGE_FADE_IN_FRAME) {
+            eventSetUnderMessageFade(0xffffffff, 10, 1, 0.8f);
+        } else if (scrGetCommandFrame() == UNDER_MESSAGE_FADE_OUT_FRAME) {
+            eventSetUnderMessageFade(0xffffffff, 12, 0, 0.8f);
+        } else if (scrGetCommandFrame() == UNDER_MESSAGE_FADE_DONE_FRAME) {
+            return 1;
+        }
         return 0;
     }
-    if (scrGetCommandFrame() == 9) {
-        eventSetUnderMessageFade(0xffffffff, 12, 0, 0.8f);
-        return 0;
-    }
-    if (scrGetCommandFrame() == 0x15) {
-        return 1;
-    }
-    return 0;
+    return 1;
 }
 
 } /* extern "C" */

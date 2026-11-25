@@ -35,8 +35,8 @@ int sortMenuAcquire(...);
 int stateAtF4Apply(void);
 int uiScrollHandleActionsOrTouch(...);
 int FUN_0036cf98(...);
-int FUN_0038b57c(...);
-int FUN_0038b5fc(...);
+int statusModelRestoreOutfitPart(...);
+int statusModelPreviewOutfitPart(...);
 int campCecPreviewEquipmentChoice(...);
 int sysPlayVoice(...);
 int FUN_003df7c4(...);
@@ -117,8 +117,8 @@ extern int FUN_0036cf78(void);
 /* Supplied declaration required: messageBannerInitCounter. */
 /* Supplied declaration required: gameSetStatusCameraHeightMode. */
 /* Supplied declaration required: messageRestoreBanner. */
-/* Supplied declaration required: FUN_0038b57c. */
-/* Supplied declaration required: FUN_0038b5fc. */
+/* Supplied declaration required: statusModelRestoreOutfitPart. */
+/* Supplied declaration required: statusModelPreviewOutfitPart. */
 /* Supplied declaration required: campCecPreviewEquipmentChoice. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003df7c4. */
@@ -330,18 +330,18 @@ void FUN_001fdde8(int param_1)
         if (param_1 != 0x16) {
           if (param_1 == 0x17) {
             temp_v3 = 1;
-            FUN_0038b5fc(temp_v3,temp_v2);
+            statusModelPreviewOutfitPart(temp_v3,temp_v2);
           }
           else if (param_1 == 0x18) {
             temp_v3 = 2;
-            FUN_0038b5fc(temp_v3,temp_v2);
+            statusModelPreviewOutfitPart(temp_v3,temp_v2);
           }
           else if ((param_1 == 0x4b || param_1 == 0x4c) || param_1 == 0x4d) {
             campCecPreviewEquipmentChoice();
           }
         }
         else {
-          FUN_0038b5fc(0,temp_v2);
+          statusModelPreviewOutfitPart(0,temp_v2);
         }
         *(unsigned char *)(temp_v5 + 0x3c) = 0;
         if ((temp_v12 & ~temp_v10) != 0) {
@@ -456,9 +456,9 @@ void FUN_001fdde8(int param_1)
       }
       else {
         statusCameraRestore(0);
-        FUN_0038b57c(0);
-        FUN_0038b57c(1);
-        FUN_0038b57c(2);
+        statusModelRestoreOutfitPart(0);
+        statusModelRestoreOutfitPart(1);
+        statusModelRestoreOutfitPart(2);
       }
       *(int *)(temp_v5 + 0x20) = *(int *)(temp_v5 + 0x20) + 1;
       temp_v3 = 0x100020f;
@@ -534,14 +534,14 @@ void FUN_001fdde8(int param_1)
         if (param_1 != 0x17) {
           if ((param_1 == 0x18) && (psVar4[5] != *(short *)(temp_v9 + temp_v8 * 2))) {
             temp_v3 = 2;
-            FUN_0038b57c(temp_v3);
+            statusModelRestoreOutfitPart(temp_v3);
             statusCameraRestore(0);
             *(unsigned char *)(temp_v5 + 0x3c) = 1;
           }
         }
         else if (psVar4[4] != *(short *)(temp_v9 + temp_v8 * 2)) {
           temp_v3 = 1;
-          FUN_0038b57c(temp_v3);
+          statusModelRestoreOutfitPart(temp_v3);
           statusCameraRestore(0);
           *(unsigned char *)(temp_v5 + 0x3c) = 1;
         }
@@ -585,14 +585,14 @@ void FUN_001fdde8(int param_1)
         }
         else if (psVar4[4] != *(short *)(temp_v9 + temp_v8 * 2)) {
           temp_v3 = 1;
-          FUN_0038b57c(temp_v3);
+          statusModelRestoreOutfitPart(temp_v3);
           statusCameraRestore(0);
           *(unsigned char *)(temp_v5 + 0x3c) = 1;
         }
       }
       else if (psVar4[3] != *(short *)(temp_v9 + temp_v8 * 2)) {
         temp_v3 = 0;
-        FUN_0038b57c(temp_v3);
+        statusModelRestoreOutfitPart(temp_v3);
         statusCameraRestore(0);
         *(unsigned char *)(temp_v5 + 0x3c) = 1;
       }

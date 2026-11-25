@@ -1,42 +1,42 @@
+/* NON_MATCHING: retail reads the bottom framebuffer's mode before the channel tests (each mode through a
+ * zero-offset address add) where the build reads it in each arm. Copying both modes into const locals in the
+ * both-channels arm gives IDENTICAL (w93-s12), but the flag stores cannot change the modes, so those locals
+ * only steer the schedule. */
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
-/* NON_MATCHING: zero-offset address adds (getter arguments) and the placement of the second state load differ. */
 
-extern "C" {
+enum {
+    CHANNEL_TOP = 0,
+    CHANNEL_BOTTOM = 1,
+    CHANNEL_BOTH = 2,
+    FRAMEBUFFER_TOP = 0,
+    FRAMEBUFFER_BOTTOM = 2,
+    FRAMEBUFFER_NO_ANTIALIAS = 0x500
+};
 
-static __inline s32 gxPresetsGetFirstState(const AsdGxPresets *presets)
+/* Updates the selected channels' full-resolution flags when antialiasing is available. */
+extern "C" void asdGxSetChannelFlags(s32 channel, u8 value)
 {
-    return presets->framebuffers[0].mode;
-}
-
-static __inline s32 gxPresetsGetSecondState(const AsdGxPresets *presets)
-{
-    return presets->framebuffers[2].mode;
-}
-
-// Update one or both channel flags unless that channel is in state0x500.
-void asdGxSetChannelFlags(s32 channel, u8 value)
-{
-    s32 firstState = gxPresetsGetFirstState(&g_asdGxPresets);
-    s32 secondState;
-
-    if (channel == 0) {
-        if (firstState != 0x500) {
-            g_asdGxPresets.fullResolution[0] = value;
+    AsdGxPresets *presets = &g_asdGxPresets;
+    switch (channel) {
+    case CHANNEL_TOP:
+        if (presets->framebuffers[FRAMEBUFFER_TOP].mode != FRAMEBUFFER_NO_ANTIALIAS) {
+            presets->fullResolution[CHANNEL_TOP] = value;
         }
-        return;
+        break;
+    case CHANNEL_BOTTOM:
+        if (presets->framebuffers[FRAMEBUFFER_BOTTOM].mode != FRAMEBUFFER_NO_ANTIALIAS) {
+            presets->fullResolution[CHANNEL_BOTTOM] = value;
+        }
+        break;
+    case CHANNEL_BOTH:
+        if (presets->framebuffers[FRAMEBUFFER_TOP].mode != FRAMEBUFFER_NO_ANTIALIAS) {
+            presets->fullResolution[CHANNEL_TOP] = value;
+        }
+        if (presets->framebuffers[FRAMEBUFFER_BOTTOM].mode != FRAMEBUFFER_NO_ANTIALIAS) {
+            presets->fullResolution[CHANNEL_BOTTOM] = value;
+        }
+        break;
+    default:
+        break;
     }
-    secondState = gxPresetsGetSecondState(&g_asdGxPresets);
-    if (channel == 1) {
-        if (secondState != 0x500) {
-            g_asdGxPresets.fullResolution[1] = value;
-        }
-    } else if (channel == 2) {
-        if (firstState != 0x500) {
-            g_asdGxPresets.fullResolution[0] = value;
-        }
-        if (secondState != 0x500) {
-            g_asdGxPresets.fullResolution[1] = value;
-        }
-    }
-}
 }

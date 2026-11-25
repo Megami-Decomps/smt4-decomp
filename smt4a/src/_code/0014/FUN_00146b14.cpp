@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016236c(...);
+int svcControlMemory(...);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 extern int g_nnosHeapState; /* 0x5c0ac8 */
 extern unsigned int DAT_005c0acc; /* 0x5c0acc */
 
-/* Supplied declaration required: FUN_0016236c. */
+/* Supplied declaration required: svcControlMemory. */
 
 
 void FUN_00146b14(unsigned int param_1)
@@ -36,7 +36,7 @@ void FUN_00146b14(unsigned int param_1)
           temp_v0 = 0;
         }
         piVar1 = temp_v1;
-        FUN_0016236c(piVar1,temp_v0,0,param_1 - DAT_005c0acc,0x10003,3);
+        svcControlMemory(piVar1,temp_v0,0,param_1 - DAT_005c0acc,0x10003,3);
         if (-1 < (int)piVar1) {
           if (DAT_005c0acc != 0) {
             DAT_005c0acc = param_1;
@@ -50,7 +50,7 @@ void FUN_00146b14(unsigned int param_1)
     }
     else {
       piVar1 = temp_v1;
-      FUN_0016236c(piVar1,g_nnosHeapState + param_1,0,DAT_005c0acc - param_1,1,0);
+      svcControlMemory(piVar1,g_nnosHeapState + param_1,0,DAT_005c0acc - param_1,1,0);
       if (-1 < (int)piVar1) {
         if (param_1 == 0) {
           g_nnosHeapState = 0;

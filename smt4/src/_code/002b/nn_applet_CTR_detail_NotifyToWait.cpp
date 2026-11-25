@@ -1,3 +1,4 @@
+#include "nn/err/Fatal.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `nn_applet_CTR_detail_NotifyToWait` (_code @ 0x2bb2e4, 0x24 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -10,7 +11,6 @@ int FUN_00144f90(...);
 int FUN_002bb100(...);
 int threadSleepDuration(...);
 int FUN_002bb378(...);
-int errThrowFatal(...);
 int nn_os_LightEvent_Wait(...);
 int software_interrupt(...);
 

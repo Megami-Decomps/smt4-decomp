@@ -1,4 +1,3 @@
-/* NON_MATCHING: saved skill-history base and comparison scratch use ip/r6 instead of retail's r6/ip. */
 #include "status/StatusDownA.h"
 
 
@@ -7,12 +6,15 @@ extern "C" void statusReplaceSkills(const u16 *source, u8 count);
 /* Flag nonempty skills absent from the previous eight-slot history. */
 extern "C" void statusMarkNewSkills(const u16 *source, u8 count)
 {
+    s32 index;
+    StatusDownStateA *status;
+    StatusDownIdHistory previous;
     if (count > 16)
         return;
-    StatusDownStateA *status = g_statusDown;
-    StatusDownIdHistory previous = status->history;
+    status = g_statusDown;
+    previous = status->history;
     statusReplaceSkills(source, count);
-    for (s32 index = 0; index < (s32)count; ++index) {
+    for (index = 0; index < (s32)count; ++index) {
         u16 skill = status->ids[index];
         if (skill != 0) {
             s32 oldIndex;

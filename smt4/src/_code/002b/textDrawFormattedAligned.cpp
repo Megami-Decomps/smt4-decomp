@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b23bc(...);
+int libc_vsnprintf(...);
 int texDrawTableEntryAtStoredOrigin(int, int);
 
 /* stack frame of param_1: 3 slot(s), 9 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002b23bc. */
+/* Supplied declaration required: libc_vsnprintf. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 
 
@@ -33,8 +33,8 @@ void textDrawFormattedAligned(unsigned int param_1)
   unsigned char temp_v4 [44];
   
   temp_v1 = (unsigned long long)in_stack_00000004;
-  FUN_002b23bc(temp_v3,0x20,in_stack_00000008,&uStack0000000c);
-  FUN_002b23bc(temp_v4,0x20,temp_v3,&temp_v2,temp_v3);
+  libc_vsnprintf(temp_v3,0x20,in_stack_00000008,&uStack0000000c);
+  libc_vsnprintf(temp_v4,0x20,temp_v3,&temp_v2,temp_v3);
   switch(param_1) {
   case 0:
     break;

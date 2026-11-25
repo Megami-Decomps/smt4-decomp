@@ -1,4 +1,4 @@
-/* NON_MATCHING: twin of smt4 FUN_0033c1bc; everything up to the setDrawState inlines matches retail, which keeps the ring pointer through a temporary (ldr r1,[g_renderCtx]; add r4,r1,...) and loads the dirty flag / flush callback into r2/r1 instead of r0. */
+/* NON_MATCHING: the scissor call's origin and placement loads and the slide's first draw still schedule differently. */
 #include "camp/RenderCtxA.h"
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -8,7 +8,7 @@
 
 struct UnitStatus {
     u8 unk00[0x60];
-    u16 ailments;           // 0x60
+    /* 0x60 */ u16 ailments;
 };
 
 extern "C" {
@@ -23,8 +23,7 @@ static void setDrawState(s32 value)
     renderStackSet(g_renderCtx->stacks + RENDER_STACK_SCISSOR, value);
 }
 
-// Draws the status ailment icons of a member; with two or more it also draws the
-// icon that follows the highlighted one, offset by the scroll position.
+/* Draws a member's ailment icons, sliding in the next icon when the list cycles. */
 void partyPanelWidgetDrawAilments(PartyPanelWidget* strip, s32 x, s32 y)
 {
     u32 slot = 0x12;
@@ -63,10 +62,13 @@ void partyPanelWidgetDrawAilments(PartyPanelWidget* strip, s32 x, s32 y)
             }
         }
         setDrawState(3);
-        gxSetMirroredClippedScissor(strip->origin.x + layout->x, strip->origin.y + layout->y, layout->placement->width, layout->placement->height, 1);
+        ScreenPoint origin = strip->origin;
+        gxSetMirroredClippedScissor(origin.x + layout->x, origin.y + layout->y,
+                                   layout->placement->width, layout->placement->height, 1);
         s32 shift = (strip->ailmentScroll - 0x14) * -3;
+        s32 nextShift = shift + 13;
         effectDispatchSelector(current, layout->x + shift + x, layout->y + y, 0x7e, 1.0f);
-        effectDispatchSelector(following, layout->x + x + shift + 0xd, layout->y + y, 0x7e, 1.0f);
+        effectDispatchSelector(following, layout->x + nextShift + x, layout->y + y, 0x7e, 1.0f);
         setDrawState(0);
     }
 }

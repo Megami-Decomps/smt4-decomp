@@ -1,19 +1,18 @@
 #include "common.h"
 #include "mobiclip_ctrl/helper_S4Player.h"
+#include "nn/os/ProcessEventIpc.h"
 
 extern "C" {
 
 #define RESULT_INVALID_HANDLE 0xE0409FFF
 
-extern s32 FUN_00426754(void *object);
-
-/* Forwards the object a non-NULL handle refers to to FUN_00426754, otherwise returns the invalid-handle result. */
+/* Registers a nonzero event handle; otherwise returns the invalid-handle result. */
 s32 FUN_0042640c(void **handle)
 {
     if (handle == NULL || *handle == NULL) {
         return RESULT_INVALID_HANDLE;
     }
-    return FUN_00426754(*handle);
+    return FUN_00426754((u32)*handle);
 }
 
-}
+} /* extern "C" */

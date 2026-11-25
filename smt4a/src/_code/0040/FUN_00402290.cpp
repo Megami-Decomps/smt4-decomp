@@ -11,7 +11,7 @@ int renderCtxResetColorScale(...);
 int renderCtxSelectTexture(...);
 int skinObjectUpdateMatrices(...);
 int effectApplyFiveComponentsWithDefaults(void);
-int FUN_0037aa68(void *, int *);
+int renderTargetBindAndClear(void *, int *);
 int packFields(...);
 int flagsPackFourBooleans(...);
 int block530OwnerReset(int, float *, int);
@@ -66,7 +66,7 @@ extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: effectApplyFiveComponentsWithDefaults. */
-/* Supplied declaration required: FUN_0037aa68. */
+/* Supplied declaration required: renderTargetBindAndClear. */
 extern int renderCtxPackPassFlagsWithAlpha(unsigned int);
 /* Supplied declaration required: packFields. */
 /* Supplied declaration required: flagsPackFourBooleans. */
@@ -129,7 +129,7 @@ void FUN_00402290(fn_00402290_arg0 *param_1)
   temp_v33 = 0;
   temp_v34 = 0;
   uStack_3c = 0x3f800000;
-  FUN_0037aa68(param_1->field_0x8,&temp_v32);
+  renderTargetBindAndClear(param_1->field_0x8,&temp_v32);
   temp_v0 = g_renderCtx;
   temp_v35 = temp_v32;
   uStack_34 = temp_v33;

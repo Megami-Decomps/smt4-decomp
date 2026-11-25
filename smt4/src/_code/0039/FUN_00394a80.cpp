@@ -1,25 +1,15 @@
-#include "common.h"
+#include "battle/BtlActionFallback.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
-// Private view of the fallback table's 16-byte records.
-struct TableEntryView {
-    u16 id;             // 0x00
-    u8 unk02[6];        // 0x02
-    u32 unk08;          // 0x08
-    u16 unk0C;          // 0x0C
-    u8 unk0E[2];        // 0x0E
-};
-
 extern "C" {
-extern const TableEntryView g_jyoucyuRowTable[3];
 s32 btlQueueKeyedScalarReflectAction(u32 index, u32 argument, u32 entryValue, u32 flag,
                  u32 unkStack0, u32 unkStack4, u32 unkStack8);
 
-static __inline const TableEntryView* findFallbackEntry(u32 id)
+static __inline const BtlActionFallback *findFallbackEntry(u32 id)
 {
     s32 index = 0;
-    while (index < 3) {
-        const TableEntryView* entry = &g_jyoucyuRowTable[index];
+    while (index < BTL_FALLBACK_ACTION_COUNT) {
+        const BtlActionFallback *entry = &g_jyoucyuRowTable[index];
         if (entry->id == id) {
             return entry;
         }
@@ -28,13 +18,13 @@ static __inline const TableEntryView* findFallbackEntry(u32 id)
     return 0;
 }
 
-// Dispatches the first matching fallback entry when table 1 is unavailable.
+/* Dispatches the first matching fallback entry when table 1 is unavailable. */
 u32 FUN_00394a80(u32 id, u32 argument, s32 indexOffset)
 {
     if (jyoucyuGetTableEntry(1) == 0) {
-        const TableEntryView* entry = findFallbackEntry(id);
-        if (entry != 0 && entry->unk08 != 0) {
-            btlQueueKeyedScalarReflectAction(entry->unk0C + indexOffset, argument, entry->unk08, 1, 0, 0, 0);
+        const BtlActionFallback *entry = findFallbackEntry(id);
+        if (entry != 0 && entry->action != 0) {
+            btlQueueKeyedScalarReflectAction(entry->index + indexOffset, argument, entry->action, 1, 0, 0, 0);
         }
     }
     return 0;

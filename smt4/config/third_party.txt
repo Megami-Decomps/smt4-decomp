@@ -154,7 +154,6 @@
 0x0011c7fc nn_hid_CTR_PadReader_PadReader_sub_object name
 0x0011cf04 FUN_0011cf04 callers
 0x0011d0dc FUN_0011d0dc between
-0x0011d0e4 FUN_0011d0e4 between
 0x0011d0ec FUN_0011d0ec between
 0x0011d1b4 FUN_0011d1b4 between
 0x0011d1c4 nn_applet_CTR_CloseAppletHook name
@@ -1542,6 +1541,7 @@
 0x002aee28 nw_gfx_Camera_UpdateCameraMatrix name
 0x002af370 nw_gfx_SceneNode_IsCircularReference name
 0x002af3b4 nw_snd_internal_SoundArchiveLoader_Load name
+0x002b23bc libc_vsnprintf name
 0x002b3abc nngxCheckVramBank name
 0x002b41cc nw_gfx_AnimGroup_GetMemorySizeForInitialize name
 0x002b4270 nw_gfx_TransformNode_GetMemorySizeForInitialize name
@@ -1630,6 +1630,10 @@
 0x002bb4bc FUN_002bb4bc between
 0x002bb4c4 nn_fs_detail_FileBase_TryRead name
 0x002bb54c nn_fs_detail_FileBase_TryGetSize name
+0x002bb638 FUN_002bb638 between
+0x002bb648 faultReportKind5 between
+0x002bb6c4 FUN_002bb6c4 between
+0x002bb7c4 svcControlMemory name
 0x002bb7ec nn_os_AddressSpaceManager_Allocate name
 0x002bb99c fsMountRegister between
 0x002bbbc8 cameraComposeMatrices between
@@ -2336,7 +2340,7 @@
 0x003684f0 FUN_003684f0 between
 0x003684f8 FUN_003684f8 between
 0x00368500 FUN_00368500 between
-0x003685fc FUN_003685fc between
+0x003685fc scalarAnimationAdvance between
 0x0036865c FUN_0036865c callers
 0x00368a28 FUN_00368a28 between
 0x00368ab0 FUN_00368ab0 callers

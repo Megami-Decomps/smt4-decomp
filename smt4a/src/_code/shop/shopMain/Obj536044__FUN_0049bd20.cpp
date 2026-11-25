@@ -23,7 +23,7 @@ s32 FUN_004d0494(void);
 s32 inputIsQuestCancelPressed(void);
 s32 inputIsQuestMenuPressed(void);
 void FUN_0038b010(u8 value);
-void FUN_0038b57c(s32 index);
+void statusModelRestoreOutfitPart(s32 index);
 void statusCameraRestore(s32 usePreset);
 void sendEvent1000210(void);
 void sendEvent100020F(void);
@@ -93,13 +93,13 @@ void Obj536044::FUN_0049bd20()
         if (slot == 3 || slot == 4 || slot == 5 || g_shopListSlotNeighbors[slot].next == 3 || g_shopListSlotNeighbors[slot].next == 4 ||
             g_shopListSlotNeighbors[slot].next == 5) {
             if (slot == 3) {
-                FUN_0038b57c(0);
+                statusModelRestoreOutfitPart(0);
             }
             if (slot == 4) {
-                FUN_0038b57c(1);
+                statusModelRestoreOutfitPart(1);
             }
             if (slot == 5) {
-                FUN_0038b57c(2);
+                statusModelRestoreOutfitPart(2);
             }
             statusCameraRestore(0);
             previewing = 0;
@@ -133,13 +133,13 @@ void Obj536044::FUN_0049bd20()
         if (slot == 3 || slot == 4 || slot == 5 || g_shopListSlotNeighbors[slot].next == 3 || g_shopListSlotNeighbors[slot].next == 4 ||
             g_shopListSlotNeighbors[slot].next == 5) {
             if (slot == 3) {
-                FUN_0038b57c(0);
+                statusModelRestoreOutfitPart(0);
             }
             if (slot == 4) {
-                FUN_0038b57c(1);
+                statusModelRestoreOutfitPart(1);
             }
             if (slot == 5) {
-                FUN_0038b57c(2);
+                statusModelRestoreOutfitPart(2);
             }
             statusCameraRestore(0);
             previewing = 0;

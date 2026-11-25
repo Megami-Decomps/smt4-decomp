@@ -9,7 +9,7 @@ extern BtlStageGlobals g_btlStage;
 extern const char DAT_004017a0[]; // "Light_EFT"
 void mdlHandleArrayDestroy(BattleStageModel *stage);
 void asdModelSlotSetColor(u32 slot, u32 bank, f32 red, f32 green, f32 blue);
-void FUN_002759bc(void);
+void frameTexturesRelease(void);
 void frameTexConfigureCaptureTextures(s32 mode);
 void FUN_00340350(BattleStageModel *stage);
 void FUN_0034043c(BattleStageModel *stage);
@@ -62,7 +62,7 @@ u32 btlStageUpdate(BattleStageModel *stage, u32 work)
         if (stage->context != NULL) {
             stage->context = NULL;
         }
-        FUN_002759bc();
+        frameTexturesRelease();
         mdlHandleArrayDestroy(stage);
         stage->state = 0;
         break;

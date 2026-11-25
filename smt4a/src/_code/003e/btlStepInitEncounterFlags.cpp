@@ -6,7 +6,7 @@ void FUN_003e0cd4(BtlStep *step, BtlMainStateA *battle);
 void FUN_003ed6e8(BtlMainStateA *battle);
 s32 btlFindSelectionIndexByOrdinal(BtlMainStateA *battle, s32 mode);
 void btlAiBuildTurnOrder(BtlMainStateA *battle);
-void FUN_0047f444(s32 mode);
+void btlPlaySelectedEntryVoice(s32 mode);
 void FUN_004aa2e0(BtlUiA *ui, s32 mode);
 void btlCameraStartMove(void *camera, s32 duration);
 
@@ -41,7 +41,7 @@ void btlStepInitEncounterFlags(BtlStep *step, BtlMainStateA *battle)
         battle->stateFlags64.bits |= g_btlEncount.transition;
         battle->stateFlags64.bits |= g_btlEncount.finished;
         if (btlFindSelectionIndexByOrdinal(battle, 1) < 0 && (battle->encounter.controlFlags & 0x20) == 0)
-            FUN_0047f444(3);
+            btlPlaySelectedEntryVoice(3);
     }
     btlStepEnter(step, 25);
     FUN_003e0cd4(step, battle);

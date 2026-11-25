@@ -11,7 +11,7 @@ typedef struct StepWork {
 
 void eventQueueAddUnique(u32 event);
 void frameTexInitActive(void);
-void frameTexRequestFade(s32 a);
+void frameTexApplyMode(s32 a);
 void *rosterGetLeaderId(void);
 s32 table1bOr1cGetRecordValue(void); // declcheck: local (the shared declaration in code/Code001b.h does not compile here: too few arguments in function call)
 void qcMainSetMode(s32 mode);
@@ -37,7 +37,7 @@ void FUN_00469d38(StepWork *work)
         break;
     case 1:
         if (work->counter == 0) {
-            frameTexRequestFade(1);
+            frameTexApplyMode(1);
         }
         if (++work->counter > 3) {
             work->counter++;

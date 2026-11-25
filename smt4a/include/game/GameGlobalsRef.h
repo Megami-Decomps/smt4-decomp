@@ -6,5 +6,6 @@
 #include "shard/Shard0033.h"
 
 extern "C" ObjBRef g_gameGlobals; /* 0x588fd0 */
+extern "C" void gameStateChange(s32 state);
 
 #endif

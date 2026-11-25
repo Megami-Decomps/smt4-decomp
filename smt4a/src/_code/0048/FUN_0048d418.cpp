@@ -1,5 +1,6 @@
+/* NON_MATCHING: 40 lines. The area filters group the comparisons differently, and the output loop uses
+ * different scratch registers for the row address, source cursor and remaining count. */
 #include "map/InteractionFlags.h"
-/* NON_MATCHING: for-loop counter lifetimes match; mode predicate grouping and sort/output scratch registers differ. */
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 
@@ -36,11 +37,11 @@ void FUN_0048d418(SelectableList *list, s32 kind)
 {
     s16 ids[32] = {0};
     u32 view;
-    s32 i = 0;
+    s32 i;
     s32 count = 0;
     s32 j;
 
-    for (; i < dataTable2BType1Count(&view); ++i) {
+    for (i = 0; i < dataTable2BType1Count(&view); ++i) {
         TableRecord *record = dataTable2BType1GetEntry(&view, i);
         s32 found;
 

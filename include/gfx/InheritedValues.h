@@ -4,6 +4,8 @@
 #include "classes/AllocatorWordVector.h"
 #include "classes/WordVector.h"
 #include <stddef.h>
+#include <algorithm>
+#include <functional>
 
 struct InheritedValueSource {
     /* 0x00 */ u8 unk00[0x5c];
@@ -34,12 +36,10 @@ public:
     /* 0xA0 */ u32 firstCount;
     /* 0xA4 */ u32 secondCount;
 
-    u32 &slot(u32 index) { return slots[index]; }
-
-    void appendRange(u32 *first, u32 *last, Appender appender)
+    /* Replays the source range through a bound append member. */
+    void appendRange(const WordRange &range, Appender appender)
     {
-        for (; first != last; ++first)
-            (this->*appender)(*first);
+        std::for_each(range.begin, range.end, std::bind1st(std::mem_fun(appender), this));
     }
 };
 struct InheritedValueDestination {

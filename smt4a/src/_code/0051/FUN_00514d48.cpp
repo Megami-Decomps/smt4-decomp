@@ -7,7 +7,6 @@ extern "C" {
 
 int FUN_00122024(int, unsigned int *);
 int rt_malloc(...);
-int asdOperatorDeleteArray(unsigned int);
 int _ZN9Obj55aff4D1Ev(unsigned char *[2]);
 int FUN_002e9518(int, int);
 int _ZN9Obj55aff4C1Ev(...);
@@ -98,12 +97,12 @@ int * FUN_00514d48(int *param_1,unsigned int param_2)
   temp_v18 = 0;
   temp_v19 = (unsigned int *)0x0;
   temp_v0 = _ZN9Obj5596acC1EhRK10WordVector(temp_v0 + 0x20,3,&temp_v17);
-  asdOperatorDeleteArray(temp_v17);
+  asdOperatorDeleteArray((void *)temp_v17);
   temp_v20 = 0;
   temp_v21 = 0;
   temp_v22 = 0;
   temp_v0 = _ZN9Obj5596acC1EhRK10WordVector(temp_v0 + 0x14,3,&temp_v20);
-  asdOperatorDeleteArray(temp_v20);
+  asdOperatorDeleteArray((void *)temp_v20);
   temp_v0 = _ZN12ZeroWordPairC1Ev(temp_v0 + 0x18);
   temp_v0 = _ZN12ZeroWordPairC1Ev(temp_v0 + 8);
   temp_v0 = _ZN12ZeroWordPairC1Ev(temp_v0 + 0x18);

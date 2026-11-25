@@ -1,7 +1,7 @@
-/* NON_MATCHING: 50 lines: retail keeps id/battle/kind-3 in r6/r8/r7 (ours r8/r7/r6), loads the forced-roll mask
- * through other registers, and for kind 4 finishes the resistance read before calling btlGetPropertyMaximum,
- * keeping it in r2 across the call (a --multifile caller, as btlAdjustPropertyClamped is). */
-#include <stdio.h>
+/* NON_MATCHING: 6 lines. The kind-4 resistance stays in r2 across btlGetPropertyMaximum in retail;
+ * this build saves it in r5. The callee leaves r2 untouched (also used as a multifile partner by
+ * btlAdjustPropertyClamped), but compiling with it here changes the earlier forced-roll mask test. */
+#include "runtime/Stdio.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlEntryLookup.h"
 #include "battle/BattleHelpers_Smt4a.h"
@@ -11,7 +11,7 @@
 extern "C" {
 
 /* The resistance of the unit to the property (0 without a unit). */
-static __inline s32 resistanceOf(u32 id, s32 property)
+static __inline s32 resistanceOf(s32 id, u32 property)
 {
     BtlCombatantEntryA *unit = btlMainFindEntryByListedId(btlGetMainState(), id);
     return unit != NULL ? unit->properties[property] : 0;
@@ -26,7 +26,7 @@ u32 btlRollAilment(u32 id, s32 kind)
     BtlMainStateA *battle = btlGetMainState();
     BtlCombatantEntryA *unit = btlMainFindEntryByListedId(battle, id);
     f32 base = 0.0f;
-    s32 property;
+    u32 property;
     switch (kind) {
     case 7:
         base = 20.0f;
@@ -65,9 +65,14 @@ u32 btlRollAilment(u32 id, s32 kind)
     f32 resistance = (f32)resistanceOf(id, property);
     if (kind == 12)
         return (s32)resistance > 0;
-    if (kind == 4)
-        return resistanceOf(id, property) == btlGetPropertyMaximum(property);
-    if ((g_btlSkillResponseMasks.alwaysProc & battle->stateFlags64.bits) != 0)
+    if (kind == 4) {
+        s32 currentResistance = resistanceOf(id, property);
+        s32 maximum = btlGetPropertyMaximum(property);
+        if (currentResistance == maximum)
+            return 1;
+        return 0;
+    }
+    if (battle->stateFlags64.bits & g_btlSkillResponseMasks.alwaysProc)
         return (s32)resistance > 3;
     f32 over = 0.0f;
     if (luck > 100.0f) {
@@ -81,22 +86,22 @@ u32 btlRollAilment(u32 id, s32 kind)
     char label[32] = { 0 };
     switch (kind) {
     case 7:
-        sprintf(label, "\x90\x87\x96\xB0");
+        __2sprintf(label, "\x90\x87\x96\xB0");
         break;
     case 6:
-        sprintf(label, "\x8D\xAC\x97\x90");
+        __2sprintf(label, "\x8D\xAC\x97\x90");
         break;
     case 8:
-        sprintf(label, "\x8B\xD9\x94\x9B");
+        __2sprintf(label, "\x8B\xD9\x94\x9B");
         break;
     case 3:
-        sprintf(label, "\x8D\x8F\x88\xF3");
+        __2sprintf(label, "\x8D\x8F\x88\xF3");
         break;
     case 11:
-        sprintf(label, "\x96\xA3\x97\xB9");
+        __2sprintf(label, "\x96\xA3\x97\xB9");
         break;
     case 13:
-        sprintf(label, "\x96\x82\x95\x95");
+        __2sprintf(label, "\x96\x82\x95\x95");
         break;
     }
     if ((s32)resistance == 0)

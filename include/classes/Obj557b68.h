@@ -3,39 +3,35 @@
 
 #include "common.h"
 #include <stddef.h>
+#include <vector>
 #include "classes/Obj557b18.h"
 
-struct Obj557b68Entry {
-    u32 values[2]; // 0x00
+struct Obj557b68ColorEntry {
+    /* 0x00 */ u32 color;
+    /* 0x04 */ u8 enabled;
 };
 
-extern "C" void _ZN4__rw15__rw_deallocateEPvji(void* entries, s32 count, s32 allocator);
+typedef char Obj557b68ColorEntryLayoutCheck[sizeof(Obj557b68ColorEntry) == 8 ? 1 : -1];
 extern "C" void asdOperatorDelete(void* block);
 extern "C" u32* setMinus1ReturnPtr(u32* value);
 extern "C" void* __aeabi_vec_ctor_nocookie_nodtor(void* array, void* (*construct)(void*), u32 size, u32 count);
 
-struct Obj557b68EntryVector {
-    Obj557b68Entry* begin;    // 0x00
-    Obj557b68Entry* end;      // 0x04
-    Obj557b68Entry* capacity; // 0x08
-
-    Obj557b68EntryVector() : begin(0), end(0), capacity(0) {}
-
-    ~Obj557b68EntryVector()
-    {
-        _ZN4__rw15__rw_deallocateEPvji(begin, capacity - begin, 0);
-    }
-};
-
 struct Obj557b68WordVector {
-    u32* begin;    // 0x00
-    u32* end;      // 0x04
-    u32* capacity; // 0x08
+    /* 0x00 */ std::vector<u32> words;
 
     Obj557b68WordVector();
+    ~Obj557b68WordVector();
 };
 
-// A word set to -1 by its constructor.
+enum { MORI_SCENE_COLOR_LISTS = 8 };
+
+/* The scene's colour slots and per-colour item lists. The lists are destroyed before the colours. */
+struct Obj557b68Vectors {
+    /* 0x00 */ std::vector<Obj557b68ColorEntry> colors;
+    /* 0x0C */ Obj557b68WordVector records[MORI_SCENE_COLOR_LISTS];
+};
+
+/* A word set to -1 by its constructor. */
 struct Obj557b68MinusOne {
     u32 value;
 
@@ -55,11 +51,19 @@ struct Obj557b68Projection {
     f32 farClip;                      // 0x68
 };
 
-// The first block of the object's state: counters, three matrices and the projection setup.
+/* Projection setup and the two words cleared at its start by the scene constructor. */
+struct Obj557b68ProjectionSetup {
+    Obj557b68ProjectionSetup() : unk00(0), unk04(0) {}
+
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ Obj557b68Projection projection;
+};
+
+/* The first block of the object's state: counters, three matrices and the projection setup. */
 struct Obj557b68Layer {
     Obj557b68Layer()
         : unk010(0), unk014(0), unk018(0), unk01c(0),
-          unk050(0), unk054(0),
           width(240.0f), height(400.0f), unk0cc(0x18000000),
           unk0d4(0.0f), unk0d8(1.0f), unk0dc(0), unk0e0(0), unk0e8(0)
     {
@@ -70,9 +74,7 @@ struct Obj557b68Layer {
     u32 unk018;                       // 0x018
     u32 unk01c;                       // 0x01C
     Obj557b18Matrix matrixA;          // 0x020
-    u32 unk050;                       // 0x050
-    u32 unk054;                       // 0x054
-    Obj557b68Projection projection;   // 0x058
+    Obj557b68ProjectionSetup projectionSetup; /* 0x050 */
     f32 width;                        // 0x0C4
     f32 height;                       // 0x0C8
     u32 unk0cc;                       // 0x0CC
@@ -85,22 +87,18 @@ struct Obj557b68Layer {
     u32 unk0e8;                       // 0x0E8
 };
 
-// Three view sizes and four flags.
+/* Three view sizes and four flags. */
 struct Obj557b68Tail {
-    Obj557b68Tail()
-        : unk0ec(0), unk0f0(4), unk0f2(4), unk0f4(4), unk0f6(0), unk0f7(0), unk0f8(0), unk0f9(0)
+    Obj557b68Tail() : unk0ec(0)
     {
+        for (s32 i = 0; i < 3; ++i) viewSizes[i] = 4;
+        for (s32 i = 0; i < 4; ++i) viewFlags[i] = 0;
     }
 
-    u32 unk0ec;                       // 0x0EC
-    u16 unk0f0;                       // 0x0F0
-    u16 unk0f2;                       // 0x0F2
-    u16 unk0f4;                       // 0x0F4
-    u8 unk0f6;                        // 0x0F6
-    u8 unk0f7;                        // 0x0F7
-    u8 unk0f8;                        // 0x0F8
-    u8 unk0f9;                        // 0x0F9
-    u8 unk0fa[2];                     // 0x0FA
+    /* 0x00 */ u32 unk0ec;
+    /* 0x04 */ u16 viewSizes[3];
+    /* 0x0A */ u8 viewFlags[4];
+    /* 0x0E */ u8 unk0fa[2];
 };
 
 // An owner of one entry vector and eight word vectors (vtable at 0x557b68).
@@ -118,8 +116,7 @@ public:
     u32 unk0fc;                       // 0x0FC
     u32 unk100;                       // 0x100
     u32 unk104;                       // 0x104
-    Obj557b68EntryVector entries;     // 0x108
-    Obj557b68WordVector records[8];   // 0x114
+    Obj557b68Vectors vectors;        /* 0x108 */
     u8 unk174[8];                    // 0x174
     f32 fogStart;                    // 0x17C
     f32 fogEnd;                      // 0x180
@@ -130,11 +127,12 @@ public:
 };
 
 typedef char Obj557b68LayoutCheck[offsetof(Obj557b68, layer) == 0x10 && offsetof(Obj557b68Layer, matrixA) == 0x10 &&
-    offsetof(Obj557b68Layer, projection.matrixB) == 0x4C && offsetof(Obj557b68Layer, projection.matrixC) == 0x7C &&
-    offsetof(Obj557b68Layer, projection.farClip) == 0xB0 &&
+    offsetof(Obj557b68Layer, projectionSetup.projection.matrixB) == 0x4C &&
+    offsetof(Obj557b68Layer, projectionSetup.projection.matrixC) == 0x7C &&
+    offsetof(Obj557b68Layer, projectionSetup.projection.farClip) == 0xB0 &&
     offsetof(Obj557b68Layer, unk0e4) == 0xD4 && sizeof(Obj557b68Layer) == 0xDC &&
     offsetof(Obj557b68, tail) == 0xEC && offsetof(Obj557b68, unk104) == 0x104 &&
-    offsetof(Obj557b68, entries) == 0x108 && offsetof(Obj557b68, records) == 0x114 &&
+    offsetof(Obj557b68, vectors.colors) == 0x108 && offsetof(Obj557b68, vectors.records) == 0x114 &&
     offsetof(Obj557b68, fogStart) == 0x17C && offsetof(Obj557b68, fogColor) == 0x190 &&
     sizeof(Obj557b68) == 0x194 ? 1 : -1];
 

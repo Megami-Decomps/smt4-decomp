@@ -16,13 +16,18 @@ struct SlotPlacementMotion {
 
 struct SlotPlacement : SlotPlacementMotion {
     /* 0x18 */ u8 unk18[0xA];
-    /* 0x22 */ u8 mode;
+    /* 0x22 */ u8 mode;        /* nonzero uses the alternate texture-table rows */
     /* 0x23 */ u8 unk23[9];
     /* 0x2C */ s32 startX;
     /* 0x30 */ s32 startY;
+    /* 0x34 */ u8 unk34[4];
+    /* 0x38 */ s32 slot;
+    /* 0x3C */ s32 mirrored;   /* switches which group of slots moves horizontally */
 };
 
 typedef char SlotPlacementOffsetCheck[sizeof(SlotPlacementMotion) == 0x18 &&
-    offsetof(SlotPlacement, startX) == 0x2C && sizeof(SlotPlacement) == 0x34 ? 1 : -1];
+    offsetof(SlotPlacement, mode) == 0x22 && offsetof(SlotPlacement, startX) == 0x2C &&
+    offsetof(SlotPlacement, slot) == 0x38 && offsetof(SlotPlacement, mirrored) == 0x3C &&
+    sizeof(SlotPlacement) == 0x40 ? 1 : -1];
 
 #endif

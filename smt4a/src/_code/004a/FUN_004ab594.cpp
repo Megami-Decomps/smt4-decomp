@@ -3,13 +3,6 @@
 #include "shard/Shard0031.h"
 #include "gamedata/SaveSlotTable.h"
 
-/* Keep 64-bit mask alignment out of BtlUiA's four-byte-aligned shared layout. */
-struct BattlePartySelectionView {
-    u8 unk0000[0x7490];
-    u64 reserveMask;
-    u64 activeMask;
-};
-
 extern "C" {
 s32 FUN_002cc9e0(BtlUiObjCA *widget, u32 mode);
 u64 __aeabi_llsl(u64 value, u32 count);
@@ -28,15 +21,14 @@ u32 FUN_004ab594(BtlUiA *)
     if (FUN_002cc9e0(&ui->objC, 1) != 10)
         return ~0u;
     SaveSlotTableA *party = gameGetSlotTable();
-    const BattlePartySelectionView *selection = (const BattlePartySelectionView *)ui;
     PartySelection chosen = {-1, -1};
     for (s32 i = -1; i < 3; ++i) {
-        if (selection->reserveMask & (1 << (i + 1))) {
+        if (ui->selectedTargets & (1 << (i + 1))) {
             chosen.reserve = i;
             break;
         }
     }
-    u64 activeMask = selection->activeMask;
+    u64 activeMask = ui->selectionExtra;
     for (s32 i = 0; i < 24; ++i) {
         if (activeMask & __aeabi_llsl(1, i + 1))
             chosen.active = i;

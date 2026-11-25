@@ -1,4 +1,4 @@
-/* NON_MATCHING: file close uses a base-subobject writeback that retail does not use. */
+/* NON_MATCHING: the stream close matches; retail restores the owner pointer before destroying the vector, while armcc uses the saved owner and pre-indexes it to the vector. */
 #include "shard/ResourceVectorOwner.h"
 #include "classes/Obj55813c.h"
 extern "C" {
@@ -6,7 +6,7 @@ void FUN_00157110(ResourceVectorOwner *owner);
 void asdMemFree(void *allocation);
 }
 
-// The vector's destructor releases its allocation after these owned resources are closed.
+/* Closes the pack's resources before the vector releases its allocation. */
 ResourceVectorOwner::~ResourceVectorOwner()
 {
     FUN_00157110(this);
@@ -17,8 +17,15 @@ ResourceVectorOwner::~ResourceVectorOwner()
         storage.cursor = 0;
         storage.capacity = 0;
     }
-    if (storage.file != NULL) {
-        storage.file->Close();
+    Obj55813c *stream = storage.file;
+    if (stream != NULL) {
+        if ((stream->handle & ~1u) != 0) {
+            if (stream->handle & 1) {
+                sysFatalBreak();
+            }
+            vcallSlot12IfValid(stream->handle & ~1u);
+            stream->handle = 0;
+        }
         delete storage.file;
         storage.file = NULL;
     }

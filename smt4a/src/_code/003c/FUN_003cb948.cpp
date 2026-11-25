@@ -24,7 +24,7 @@ static __inline AreaHandleList *areaHandles(LmapMainStateA *state)
 
 extern "C" {
 extern s8 DAT_005f0c04[];
-void FUN_00399290(u32 index, s32 visible);
+void lmapSetMarkerVisible(u32 index, s32 visible);
 }
 
 /* Copies the visible (non-9) cells of the 8x10 grid, column by column, into DAT_005f0c04. */
@@ -52,14 +52,14 @@ extern "C" void FUN_003cb948(const s8 *grid)
                 if (g_lmapMainState != NULL && !areaSlotRegistered(g_lmapMainState, index))
                     areaSlotRegistered(g_lmapMainState, index) = 1;
             }
-            FUN_00399290(index, 1);
+            lmapSetMarkerVisible(index, 1);
         } else {
             if (g_lmapMainState != NULL && areaSlotRegistered(g_lmapMainState, index)) {
                 ptrListRemoveClearOwner(g_handleRegistry, ptrVectorAt(areaHandles(state), index));
                 if (g_lmapMainState != NULL && areaSlotRegistered(g_lmapMainState, index))
                     areaSlotRegistered(g_lmapMainState, index) = 0;
             }
-            FUN_00399290(index, 0);
+            lmapSetMarkerVisible(index, 0);
         }
     }
 }

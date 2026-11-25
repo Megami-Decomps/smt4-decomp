@@ -1,3 +1,4 @@
+#include "nn/err/Fatal.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `nn_applet_CTR_detail_GetAppletManInfo` (_code @ 0x1102c8, 0x84 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -7,7 +8,6 @@ extern "C" {
 int FUN_0011d798(int, unsigned char [4], int *, int *, unsigned int [2]);
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
-int errThrowFatal(void);
 
 /* stack frame of param_5: 5 slot(s), 17 byte(s) */
 typedef struct {
@@ -36,10 +36,7 @@ void nn_applet_CTR_detail_GetAppletManInfo
   unsigned int temp_v3 [2];
   
   FUN_002bb378();
-  FUN_0011d798(param_1,temp_v0,&temp_v1,&temp_v2,temp_v3);
-  if (param_1 < 0) {
-    errThrowFatal();
-  }
+  throwFatalIfFailed(FUN_0011d798(param_1,temp_v0,&temp_v1,&temp_v2,temp_v3), __current_pc());
   nn_applet_CTR_detail_CloseSession();
   if (param_2 != (unsigned char *)0x0) {
     *param_2 = temp_v0[0];

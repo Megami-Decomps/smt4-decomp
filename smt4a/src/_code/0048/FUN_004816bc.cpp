@@ -1,47 +1,30 @@
-/* NON_MATCHING: the final if/else-if branch is predicated here; retail branches around a shared store. */
-#include "common.h"
+/* NON_MATCHING: the hidden-case mask update is predicated and shares the first store block; retail branches to the final shared store. */
 #include "game/GameStateA.h"
+#include "map/FieldNpc.h"
+#include "classes/Obj557b18.h"
 
-struct StateBits {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u32 bits;
-};
-
-struct StateTarget {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ StateBits *state;
-};
-
-struct StateOwner {
-    /* 0x00 */ u8 unk00[0x78];
-    /* 0x78 */ StateTarget *target;
-    /* 0x7C */ u32 flags;
-};
-
-extern "C" {
-
-/* Virtual slot: sets or clears the low two state bits of the owner's target from its flags and the game state. */
-void FUN_004816bc(StateOwner *self)
+/* Updates the marker's model flags for pause, loading and the marker's hidden state. */
+extern "C" void FUN_004816bc(FieldNpc *npc)
 {
-    if (self->target == NULL) {
+    if (npc->controller == NULL) {
         return;
     }
-    StateBits *state = self->target->state;
+    Obj557b18 *body = npc->controller->body;
 
     if (g_gameState.paused == 0) {
-        if (self->flags & 8) {
-            state->bits &= ~3;
+        if (npc->flags & NPC_FLAG_HIDDEN) {
+            body->flags &= ~NPC_VISIBLE_BITS;
         }
-        if (!(self->flags & 4)) {
+        if (!(npc->flags & NPC_FLAG_NEAR)) {
             if (g_gameState.loading != 0) {
-                state->bits |= 3;
-            } else if (self->flags & 8) {
-                state->bits &= ~3;
+                body->flags |= NPC_VISIBLE_BITS;
+                return;
+            }
+            if (npc->flags & NPC_FLAG_HIDDEN) {
+                body->flags &= ~NPC_VISIBLE_BITS;
             }
             return;
         }
     }
-    state->bits |= 3;
+    body->flags |= NPC_VISIBLE_BITS;
 }
-
-} /* extern "C" */

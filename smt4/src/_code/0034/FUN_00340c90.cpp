@@ -10,7 +10,7 @@ int spriteDrawPartGroup(...); // declcheck: local (the shared declaration does n
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
 int renderCtxSelectTexture(...);
-int FUN_002f5288(void *, int *);
+int renderTargetBindAndClear(void *, int *);
 int packNibbleFields(...);
 int renderCtxSetMatrices(int, float *, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int VectorSignedToFloat(...);
@@ -66,7 +66,7 @@ extern int gxPackFadeKindAlphaWord(unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002f5288. */
+/* Supplied declaration required: renderTargetBindAndClear. */
 /* Supplied declaration required: packNibbleFields. */
 /* Supplied declaration required: renderCtxSetMatrices. */
 extern unsigned int FUN_003deab0(void *, unsigned int);
@@ -121,7 +121,7 @@ void FUN_00340c90(fn_00340c90_arg0 *param_1)
   temp_v32 = 0;
   temp_v33 = 0;
   uStack_2c = 0x3f800000;
-  FUN_002f5288(param_1->field_0x8,&temp_v31);
+  renderTargetBindAndClear(param_1->field_0x8,&temp_v31);
   temp_v0 = *(int *)((int)param_1->field_0x8 + 0xc);
   temp_v4 = *(unsigned int *)(temp_v0 + 0x18);
   temp_v5 = *(unsigned int *)(temp_v0 + 0x14);

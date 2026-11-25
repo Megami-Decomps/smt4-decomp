@@ -1,5 +1,5 @@
 /* NON_MATCHING: 12 lines: retail loads the first version digit into r4 before materialising the 1300 limit (the
- * register swap of FUN_002d8cc8), compares the stored id against the record's (cmp r7, ip), and in the single-payload
+ * register swap of encounterArrangementFindStagePosition), compares the stored id against the record's (cmp r7, ip), and in the single-payload
  * case compares the version before loading the payload offset. */
 #include "shard/VersionedResource.h"
 

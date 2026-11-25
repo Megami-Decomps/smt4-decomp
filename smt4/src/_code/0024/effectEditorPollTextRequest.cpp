@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail stores the zero owner again before creating the request and reloads the request after storing its state; this build drops the store and keeps the pointer. */
+/* NON_MATCHING: the status getter matches retail; the startup arm still lacks the release stub that takes the path/context and produces the NULL list owner before effMenuCreate. */
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 
@@ -26,7 +26,7 @@ void effectEditorPollTextRequest(u32 unused, u32 size, EffectTextResult *result)
 {
     if (g_effectEditor.nodeList != NULL) {
         effMenuBrowserStep(g_effectEditor.request);
-        result->state = g_effectEditor.request->state;
+        result->state = effMenuNodeGetState(g_effectEditor.request);
         result->label = formattedTextCopyLabel(g_effectEditor.request, result);
         result->extra = linkedObjGetValue(g_effectEditor.request);
         FUN_003241c4(g_effectEditor.request, result->body);

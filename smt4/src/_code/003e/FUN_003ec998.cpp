@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail clears DAT_0044ea20 with one two-register stm (a 64-bit field) and pools its address first. */
+/* NON_MATCHING: the initializer starts at 0x3EC98C, 12 bytes before this unit's push. The preceding load and two moves supply the apparent arguments; its literal at 0x3ECA34 is already in this target. The draft also differs in the 64-bit clear and the vector initializer's scheduling. */
 #include "common.h"
 #include <new>
 #include "shard/W6_W6Match7_QuadVectors.h"

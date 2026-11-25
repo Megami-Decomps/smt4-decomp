@@ -24,7 +24,6 @@ struct SkillInfo {
 
 extern "C" {
 s32 FUN_003af084(BtlUi *block);
-void btlUiCopyStatePairs(BtlUi *block, char *valid, u64 *mask, u64 *pair);
 s32 btlFindEntrySelectionByKey(BtlMainState *block, s32 index);
 s32 playerPadTestBit(u32 bit);
 void btlEntryBuildSummary(BattleEntrySummary *result, BtlMainState *state, const BtlEntry *entry);
@@ -67,7 +66,7 @@ u32 FUN_003cae6c(BtlMainState **block, CommandState *state)
     if (FUN_003af084(g_btlUiBlock) == 0) {
         return 0;
     }
-    char valid = 0;
+    u8 valid = 0;
     u64 mask = 0;
     u64 pair = 0;
     btlUiCopyStatePairs(g_btlUiBlock, &valid, &mask, &pair);

@@ -18,8 +18,8 @@ u32 eventCommandGetPendingCleanup(void);
 void effShakeParticleAdvance(ScreenShakeState *shake);
 const MotionOffset *FUN_0018f654(ScreenShakeState *shake);
 
-// Refresh the current event-texture shake offset when the updated motion is nonzero.
-u32 eventTexUpdateScreenShake(void)
+/* Refreshes the current event-texture shake offset when the updated motion is nonzero. */
+s32 eventTexUpdateScreenShake(u32 /* job */)
 {
     ScreenShakeState *shake =
         reinterpret_cast<ScreenShakeState *>(eventCommandGetPendingCleanup());

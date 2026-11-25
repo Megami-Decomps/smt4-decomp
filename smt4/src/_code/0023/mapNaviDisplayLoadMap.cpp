@@ -1,6 +1,7 @@
-/* NON_MATCHING: one index serves all three loops (retail reuses the clear loop's spent counter as the category index); only the scheduling of the two centre computations differs (retail interleaves the x and y spans with the category loads). */
+/* NON_MATCHING: retail loads each centre's destination slot before its origin and uses different scratch registers. */
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/MapSystemTable.h"
+#include "gamedata/MapNaviCategories.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include "AsdSDK/TexTableLoaded.h"
 #include "shard/MapNaviTable_GetCategoryCount.h"
@@ -21,22 +22,9 @@ struct MapNaviDisplay {
     u8 ready;
 };
 
-struct MapNaviCategoryRecord {
-    s16 map;
-    s16 category;
-    u8 unk04[2];
-    s8 minX;
-    s8 minY;
-    s8 maxX;
-    s8 maxY;
-    u8 unk0a[2];
-    s16 originX;
-    s16 originY;
-    s16 offsetX;
-    s16 offsetY;
-};
+enum { MAP_NAVI_TILE_PIXELS = 12 };
 
-// The accessor is stateless; its methods read table 0x2b, section 0.
+/* The accessor is stateless; its methods read table 0x2B, section 0. */
 struct MapNaviTable {};
 
 extern "C" {
@@ -45,6 +33,7 @@ TexNode* asdTMTexTablePrepareNodeImage(s32 table, s32 node);
 const MapNaviCategoryRecord* MapNaviTable_GetCategoryRecord(const MapNaviTable* table, s32 index);
 void FUN_0039d69c(MapNaviDisplay* display, s32 map);
 
+/* Loads the navigation texture and calculates the grid and marker positions for the map. */
 void mapNaviDisplayLoadMap(MapNaviDisplay* display, s32 map)
 {
     s32 i;
@@ -79,17 +68,23 @@ void mapNaviDisplayLoadMap(MapNaviDisplay* display, s32 map)
     MapNaviTable table;
     for (i = 0; i < MapNaviTable_GetCategoryCount(&table); ++i) {
         const MapNaviCategoryRecord* record = MapNaviTable_GetCategoryRecord(&table, i);
-        if (record->map == map) {
-            display->iconPositions[record->category].x = record->originX + record->offsetX;
-            display->iconPositions[record->category].y = record->originY + record->offsetY;
-            display->centers[record->category].x = record->originX + (record->maxX - record->minX) * 12 / 2;
-            display->centers[record->category].y = record->originY + (record->maxY - record->minY) * 12 / 2;
-            display->gridOrigins[record->category].x = record->minX;
-            display->gridOrigins[record->category].y = record->minY;
+        if (record->id == map) {
+            display->iconPositions[record->slot].x = record->placement.originX + record->placement.offsetX;
+            display->iconPositions[record->slot].y = record->placement.originY + record->placement.offsetY;
+            s32 widthInTiles = record->endX - record->startX;
+            s32 heightInTiles = record->endY - record->startY;
+            MapNaviPoint centerOffset = {
+                widthInTiles * MAP_NAVI_TILE_PIXELS / 2,
+                heightInTiles * MAP_NAVI_TILE_PIXELS / 2
+            };
+            display->centers[record->slot].x = record->placement.originX + centerOffset.x;
+            display->centers[record->slot].y = record->placement.originY + centerOffset.y;
+            display->gridOrigins[record->slot].x = record->startX;
+            display->gridOrigins[record->slot].y = record->startY;
         }
     }
 
     FUN_0039d69c(display, map);
     display->ready = 1;
 }
-}
+} /* extern "C" */

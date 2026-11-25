@@ -4,7 +4,7 @@
 #include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
-BattleCommandEntry *FUN_00292960(u8 index, int primary);
+BattleCommandEntry *btlDebugFindCommandByIndex(u8 index, int primary);
 u32 FUN_00293988(void *scene);
 s32 FUN_0023dcb8(void);
 s32 idOwnerHasActiveObject(void *unit);
@@ -16,7 +16,7 @@ void FUN_0028e9ec(BattleCommandMenu *menu)
 {
     s32 count = 0;
     for (s32 i = 0; i < 9; i++) {
-        BattleCommandEntry *command = FUN_00292960(i, 1);
+        BattleCommandEntry *command = btlDebugFindCommandByIndex(i, 1);
         if (!battleCommandIsAvailable(command))
             continue;
         if (command->kind == 2) {
@@ -35,7 +35,7 @@ void FUN_0028e9ec(BattleCommandMenu *menu)
             void *unit = gameGetUnitRecord(gameGetSlotTable()[0x9108 + slot]);
             if (unit != 0) {
                 for (s32 i = 0; i < 9; i++) {
-                    BattleCommandEntry *command = FUN_00292960(i, 0);
+                    BattleCommandEntry *command = btlDebugFindCommandByIndex(i, 0);
                     if (!battleCommandIsAvailable(command))
                         continue;
                     if (command->kind == 5) {

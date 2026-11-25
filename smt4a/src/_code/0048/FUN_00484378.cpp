@@ -53,7 +53,6 @@ void uiSpriteSetImageKeyframe(u8 *sprite, s32 frame, s32 flag);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
 s32 *logFormatBuffer(NameBuffer *name, s8 *destination, s32 mode);
 void nameEntryCopyEditedName(NameEntryMenu *menu, NameBuffer *name);
-void stateSetterEnterState(NameEntryMenu *menu, s32 state);
 s32 scrRunOpcodesStub(u32 script);
 s32 messageMainIsIdle(void);
 s32 messageGetChoiceResult(void);
@@ -77,7 +76,7 @@ void FUN_00484378(NameInputView *menu)
         return;
     }
     if (messageGetChoiceResult() != 0) {
-        stateSetterEnterState((NameEntryMenu *)menu, 2);
+        stateSetterEnterState(menu, 2);
         sysPlaySe(0x97);
         return;
     }
@@ -112,14 +111,14 @@ void FUN_00484378(NameInputView *menu)
         s32 length = convertToBufferAndStore(storage.chars, (u16 *)menu->confirmed);
         if (*status == 0 && length < 6) {
             buttonHelpTeardownSlots();
-            stateSetterEnterState((NameEntryMenu *)menu, 7);
+            stateSetterEnterState(menu, 7);
             return;
         }
-        stateSetterEnterState((NameEntryMenu *)menu, 6);
+        stateSetterEnterState(menu, 6);
         scrScriptProcessStartEntry(menu->script, 4);
     } else {
         buttonHelpTeardownSlots();
-        stateSetterEnterState((NameEntryMenu *)menu, 7);
+        stateSetterEnterState(menu, 7);
     }
 }
 }

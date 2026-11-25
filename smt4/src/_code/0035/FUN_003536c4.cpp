@@ -6,7 +6,7 @@ extern "C" {
 
 int tokenRegistryGetValue(int, unsigned int *); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int tokenRegistryCopyEntries(int, unsigned int *, unsigned int);
-int FUN_003df478(int, unsigned char [4], unsigned int *, int, unsigned int);
+int tokenRegistryCopyRange(int, unsigned char [4], unsigned int *, int, unsigned int);
 
 /* stack frame of param_3: 5 slot(s), 14 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern unsigned char DAT_004d4000; /* 0x4d4000 */
 
 /* Supplied declaration required: tokenRegistryGetValue. */
 /* Supplied declaration required: tokenRegistryCopyEntries. */
-/* Supplied declaration required: FUN_003df478. */
+/* Supplied declaration required: tokenRegistryCopyRange. */
 
 
 void FUN_003536c4(int param_1,int param_2,unsigned int param_3)
@@ -75,7 +75,7 @@ void FUN_003536c4(int param_1,int param_2,unsigned int param_3)
       if (temp_v3 != 0) {
         do {
           temp_v0 = param_1;
-          FUN_003df478(param_1,temp_v4,&temp_v5,1,temp_v2);
+          tokenRegistryCopyRange(param_1,temp_v4,&temp_v5,1,temp_v2);
           if (temp_v0 < 0) {
             return;
           }

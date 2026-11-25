@@ -1,22 +1,25 @@
-/* NON_MATCHING: constants and register allocation match retail (the named count hoists 0x7de and derives 0x7df); retail sets up the call argument before the bounds branch and returns from mid-function, the build places the epilogue last (nop {0}; b). */
 #include "gamedata/ConsumableRecordA.h"
 
 extern "C" {
 u16 flagValueRead(s32 id);
 
+/* Finds the first item with the content flag and reads its value when its id is valid. */
 u32 contentGetFirstFlaggedValue(void)
 {
-    const u32 count = 0x7de;
+    enum { LAST_CONTENT_ITEM_ID = 0x7de, CONTENT_ITEM_FLAG = 1 << 3 };
+    const u32 count = LAST_CONTENT_ITEM_ID;
     u32 result = 0;
+    u32 foundId = 0;
     for (u32 id = 0; id < count + 1; id++) {
         const ConsumableRecordA *record = itemTableGetItemRecord(id);
-        if (record != NULL && (record->flags & 8)) {
-            if (id - 1 < count) {
-                result = flagValueRead(id);
-            }
-            return result;
+        if (record != NULL && (record->flags & CONTENT_ITEM_FLAG)) {
+            foundId = id;
+            break;
         }
+    }
+    if (foundId - 1 < count) {
+        result = flagValueRead(foundId);
     }
     return result;
 }
-}
+} /* extern "C" */

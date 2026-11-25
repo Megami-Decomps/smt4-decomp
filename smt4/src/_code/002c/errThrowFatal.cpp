@@ -1,4 +1,4 @@
-#include "common.h"
+#include "nn/err/Fatal.h"
 
 namespace {
 struct ErrorWords {
@@ -14,7 +14,7 @@ struct Error {
 extern "C" {
 extern Error DAT_004d4200;
 void FUN_002ad4f8(Error *error);
-void errThrowFatal(u32 result, u32 context)
+void errThrowFatal(u32 result, u32 context, ...)
 {
     s32 severity = result >> 27;
     if (result & 0x80000000) {

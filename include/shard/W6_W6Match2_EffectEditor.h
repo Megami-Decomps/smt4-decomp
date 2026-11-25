@@ -20,6 +20,12 @@ struct EffectEditorSelection {
     /* 0x34 */ EffectSelectionTemplate *object;
 };
 
+/* Initialized to the empty selection by IV's module initializer. */
+struct EffectEditorInitialSelection {
+    explicit EffectEditorInitialSelection(s64 value) : value(value) {}
+    s64 value;
+};
+
 /* The effect editor's state (smt4 0x44ea80, smt4a 0x59dbe0; the same layout in both games): its mode
  * bytes, the selected record (list, index, block, item, object), the effect node it renders, the text
  * request and the name and label menu nodes. The block runs on to 0x15650 bytes (two editor blocks
@@ -62,6 +68,10 @@ struct EffectEditor {
     /* 0x68 */ u32 unk68;
     /* 0x6C */ u8 unk6C[0xC];
     /* 0x78 */ u32 overlayEnabled; /* renderEditorSceneDrawOverlay draws the overlay */
+    /* 0x7C */ char newCommandLabel[0x18];
+    /* 0x94 */ char exitCommandLabel[0x10];
+    /* 0xA4 */ const char *unkA4;
+    /* 0xA8 */ EffectEditorInitialSelection initialSelection;
 };
 typedef char EffectEditorLayoutCheck[
     __INTADDR__(&((EffectEditor *)0)->index) == 0x0C &&
@@ -71,7 +81,8 @@ typedef char EffectEditorLayoutCheck[
     __INTADDR__(&((EffectEditor *)0)->name) == 0x44 &&
     __INTADDR__(&((EffectEditor *)0)->active) == 0x54 &&
     __INTADDR__(&((EffectEditor *)0)->overlayEnabled) == 0x78 &&
-    sizeof(EffectEditor) == 0x7c ? 1 : -1];
+    __INTADDR__(&((EffectEditor *)0)->initialSelection) == 0xA8 &&
+    sizeof(EffectEditor) == 0xB0 ? 1 : -1];
 
 /* The independently addressed editor record and its three mode bytes. */
 struct EffectEditorSettings {

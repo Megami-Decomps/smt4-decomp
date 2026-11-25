@@ -4,7 +4,6 @@
 #include "game/GameGlobalsRef.h"
 
 extern "C" {
-void gameStateChange(s32 state);
 
 void unitStatusResetSpriteState(void)
 {

@@ -5,7 +5,7 @@
 extern "C" {
 extern FormattedTextContext g_asdFontGlyphSets;
 extern char DAT_004d9780[256];
-s32 FUN_002b23bc(char *buffer, u32 bytes, const char *format, va_list arguments);
+s32 libc_vsnprintf(char *buffer, u32 bytes, const char *format, va_list arguments);
 f32 textDrawCore(u32 color, u32 font, const char *text, s32 length,
                  f32 x, f32 y, f32 z, f32 rotation, f32 width, f32 height, f32 spacing, f32 scale);
 void rt_memclr(void *buffer, u32 bytes);
@@ -18,7 +18,7 @@ f32 asdFontDrawFormattedAt(f32 x, f32 y, const char *format, ...)
     f32 result = 0.0f;
     const char *text = format;
     rt_memclr(DAT_004d9780, sizeof(DAT_004d9780));
-    s32 length = FUN_002b23bc(DAT_004d9780, sizeof(DAT_004d9780), text, arguments);
+    s32 length = libc_vsnprintf(DAT_004d9780, sizeof(DAT_004d9780), text, arguments);
     va_end(arguments);
     if (length == 0)
         return result;

@@ -1,3 +1,4 @@
+#include "nn/err/Fatal.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c0d50` (_code @ 0x2c0d50, 0x3ec bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -16,7 +17,6 @@ int FUN_002bb180(void);
 int FUN_002bb194(...);
 int appletSetUnlockFlag(int);
 int FUN_002c12bc(...);
-int errThrowFatal(int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_8: 12 slot(s), 48 byte(s) */

@@ -1,3 +1,4 @@
+#include "nn/err/Fatal.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00110838` (_code @ 0x110838, 0xa8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "nn/applet/SleepModule.h"
@@ -14,7 +15,6 @@ int FUN_002bb140(int);
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int FUN_002c0d50(unsigned int *, unsigned int, int, unsigned int [2], int);
-int errThrowFatal(int, int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {

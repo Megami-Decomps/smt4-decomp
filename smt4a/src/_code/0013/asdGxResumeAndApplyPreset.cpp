@@ -4,7 +4,6 @@ extern "C" {
 void asdFileWakeWorker(void);
 void asdGxSetTopScreenMode(u32 mode);
 void gxLcdClearForceBlack(void);
-u8 asdGxGetBlackForced(const AsdGxPresets *presets);
 
 void asdGxResumeAndApplyPreset(void)
 {
@@ -22,7 +21,7 @@ void asdGxResumeAndApplyPreset(void)
             break;
         }
     }
-    if (!asdGxGetBlackForced(&g_asdGxPresets)) {
+    if (!asdGxWasBlackCleared(&g_asdGxPresets)) {
         gxLcdClearForceBlack();
         g_asdGxPresets.forceBlackCleared = 1;
     }

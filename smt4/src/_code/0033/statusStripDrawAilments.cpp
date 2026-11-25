@@ -1,4 +1,6 @@
-/* NON_MATCHING: 170 vs 171 rows: same control flow as retail; the shared zero temporary lands in r0 (retail r1, with the member loaded into r0) and the tail's flush-callback registers differ. */
+/* NON_MATCHING: 18 lines: the zeroed counters are stored in another order and the layout pointer is spilled to sp+28
+ * (retail sp+16). Declaring current and following before count and n gives IDENTICAL (w93-s16), but only the order of
+ * the declarations changes: steering. */
 #include "common.h"
 #include "ui/UiControl.h"
 #include "gamedata/GamePlayerData.h"
@@ -11,18 +13,12 @@ extern "C" {
 
 void gxSetMirroredClippedScissor(s32 x, s32 y, s32 w, s32 h, s32 arg);
 
-static void setDrawState(s32 value)
-{
-    renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, value);
-}
-
-// Draws the status ailment icons of a member; with two or more it also draws the
-// icon that follows the highlighted one, offset by the scroll position.
-void statusStripDrawAilments(StatusStrip* strip, s32 x, s32 y)
+/* Draws a member's current ailment icon and, while scrolling, the following icon. */
+void statusStripDrawAilments(StatusStrip *strip, s32 x, s32 y)
 {
     u32 slot = 0x12;
     if (strip->isPlayerVariant != 0) slot = 0x50;
-    TextureTableEntryIV* layout = asdTMTexTableEntryAt(0x19, slot);
+    TextureTableEntryIV *layout = asdTMTexTableEntryAt(0x19, slot);
     s32 count, n, current, following;
     count = n = current = following = 0;
     u32 ailments;
@@ -52,12 +48,16 @@ void statusStripDrawAilments(StatusStrip* strip, s32 x, s32 y)
                 n++;
             }
         }
-        setDrawState(3);
+        renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 3);
         gxSetMirroredClippedScissor(strip->originX + layout->x, strip->originY + layout->y, layout->placement->width, layout->placement->height, 1);
-        s32 shift = (strip->scroll - 0x14) * -3;
-        messageKindForward((s16)current, layout->x + shift + x, layout->y + y, 0x7e);
-        messageKindForward((s16)following, layout->x + x + shift + 0xd, layout->y + y, 0x7e);
-        setDrawState(0);
+        /* The paired icons share the slide offset while the scissor is active. */
+        {
+            s32 shift = (strip->scroll - 0x14) * -3;
+            s32 nextShift = shift + 13;
+            messageKindForward((s16)current, layout->x + (shift + x), layout->y + y, 0x7e);
+            messageKindForward((s16)following, layout->x + (nextShift + x), layout->y + y, 0x7e);
+        }
+        renderStackSet(g_titleScene->stacks + RENDER_STACK_SCISSOR, 0);
     }
 }
 

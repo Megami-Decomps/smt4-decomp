@@ -7,7 +7,7 @@ void FUN_0033449c(s32 mode);
 void FUN_0031f718(s32 id, s32 first, s32 second);
 void objBInitBlock19D0(void *list, s32 first, s32 second);
 void FUN_003343c0(s32 mode);
-void FUN_002c8550(s32 state);
+void menuSetModeAndResetTransitions(s32 state);
 void FUN_0037e1b0(s32 first, s32 second);
 u32 FUN_0034a9ac(void);
 void statusPanelSetOpen(s32 open);
@@ -55,7 +55,7 @@ void uniteConfirmResultPair(s32 selection)
     FUN_0031f718(work->list.id, 0, 0);
     objBInitBlock19D0(&work->list, 0, 0);
     FUN_003343c0(0);
-    FUN_002c8550(9);
+    menuSetModeAndResetTransitions(9);
     FUN_0037e1b0(0, 0);
     statusPanelSetOpen(FUN_0034a9ac() != static_cast<u16>(work->list.id));
     if (work->panelOffset > 0) {
@@ -63,7 +63,7 @@ void uniteConfirmResultPair(s32 selection)
         panelSetTarget(-work->panelOffset, 0);
     }
     buttonHelpSetText(0, 0xf4f4f4ff);
-    FUN_002c8550(8);
+    menuSetModeAndResetTransitions(8);
     uniteMenuChangeState(0x13, 1);
 }
 }

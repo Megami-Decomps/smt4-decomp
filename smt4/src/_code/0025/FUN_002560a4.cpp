@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail preloads 0x2A5 and derives the first flag id from it (sub #67), comparing the second id against the register; armcc here loads and compares each id separately. */
 #include "common.h"
 #include "gamedata/GameFlags.h"
 
@@ -26,11 +25,9 @@ void FUN_002560a4(s32 id)
         data->state = 0;
         if (id == 0x2A3) {
             gameFlagSetValue(0x262, 1, 1);
-            return;
         }
         if (id == 0x2A5) {
             gameFlagSetValue(0x263, 1, 1);
-            return;
         }
     }
 }

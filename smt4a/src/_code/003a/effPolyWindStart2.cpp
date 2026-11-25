@@ -1,0 +1,17 @@
+#include "AsdSDK/Source/Gfx/Effect/PolyWindStart.h"
+
+extern "C" u8 DAT_005c1130[4];
+
+/* Restarts the wind polygon effect with unused segments and default colors. */
+extern "C" void effPolyWindStart2(PolyObject *object)
+{
+    u32 index;
+    const PolyWindBlock &block = *(const PolyWindBlock *)object->state;
+    const PolyWindParams &params = *(const PolyWindParams *)object->work;
+    const u32 segmentCount = params.segments;
+    PolyWindStartSegment<0x30> *segment = (PolyWindStartSegment<0x30> *)block.data;
+    for (index = 0; index < segmentCount; ++index, ++segment) {
+        effGeomSetPointColor((EffGeomPointHandle *)block.geom, (u16)index, DAT_005c1130);
+        segment->id = -1;
+    }
+}

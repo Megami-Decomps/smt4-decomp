@@ -1,16 +1,10 @@
-#include "shard/W5_W5Match1_RecordKeys.h"
+#include "title/SequenceSelector.h"
 
-extern "C" {
-
-extern ParameterTriple g_startMenuProcessGroup;
-
-/* Stores three parameters and resets their pending state. */
-void paramTripleSet(u32 first, u32 second, u32 third)
+/* Configures the StartMenu's sequence choices and selects the first entry. */
+extern "C" void paramTripleSet(s32 processGroup, const SequenceSelectionEntry *entries, u32 count)
 {
-    g_startMenuProcessGroup.first = first;
-    g_startMenuProcessGroup.second = second;
-    g_startMenuProcessGroup.third = third;
-    g_startMenuProcessGroup.state = 0;
+    g_startMenuProcessGroup.processGroup = processGroup;
+    g_startMenuProcessGroup.entries = entries;
+    g_startMenuProcessGroup.count = count;
+    g_startMenuProcessGroup.selection = 0;
 }
-
-} /* extern "C" */

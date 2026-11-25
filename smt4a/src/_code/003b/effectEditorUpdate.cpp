@@ -8,7 +8,6 @@ extern EffectSelectionTemplate g_effectEditorState;
 void effMenuTextEntryStep(EffMenuNode *node);
 void namedObjectFormatName(EffMenuNode *node, const char *text);
 void engineFreeCallback(void *memory);
-s32 effMenuNodeGetState(EffMenuNode *node);
 
 u32 effectEditorUpdate()
 {

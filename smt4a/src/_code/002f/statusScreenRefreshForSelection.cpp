@@ -1,4 +1,5 @@
 /* NON_MATCHING: the repeated g_gameGlobals reloads, the unrolled id search and the mode tests are scheduled differently from retail (built has fewer rows: the search loop is not unrolled by two); the status refresh is the same. */
+#include "status/StatusMenuMode.h"
 #include "common.h"
 
 extern "C" {
@@ -18,7 +19,6 @@ typedef struct DemonView {
 
 extern StatusGlobals g_gameGlobals;
 
-void gameTransitionStartStep(void);
 void FUN_00230d2c(void);
 void asdTextDrawDirectoryEntry(u32 a, s32 b, s32 c, s32 d, s32 e, u32 f, s32 text);
 void statusDownRebuildOwnedDemonList(s16 *demons);

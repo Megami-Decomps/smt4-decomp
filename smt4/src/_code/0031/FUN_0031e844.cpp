@@ -1,27 +1,25 @@
-/* NON_MATCHING: the 144-byte copy now calls rt_memcpy_w144 like retail; retail reaches DAT_0044f864 and DAT_0044f54c from g_effectEditorState's literal (one base register: the editor's default slots are defined in the same source as this code, with their initial menu data), which this unit does not reproduce. */
-#include "ui/UiSpriteApi.h"
+/* NON_MATCHING: retail's editor menus share one base for the selection template and its predecessor;
+ * this unit addresses the predecessor separately. Call argument scheduling also differs. */
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
 #include "AsdSDK/Source/Util/AsdListHelpers_LinkedItems.h"
 
 extern "C" {
-extern s32 DAT_0044f864;
 extern u32 DAT_0044f54c;
 extern EffectSelectionTemplate g_effectEditorState;
-void rt_memcpy_w144(void* destination, const void* source);
-LinkedItem* effPartCloneAfter(LinkedItems* list, LinkedItem* after);
+void rt_memcpy_w144(void *destination, const void *source);
+LinkedItem *effPartCloneAfter(LinkedItems *list, LinkedItem *after);
 
-// Duplicate the selected effect part and select the scratch template.
+/* Duplicates the selected effect part and selects the scratch template. */
 u32 FUN_0031e844(void)
 {
-    LinkedItem* selected = linkedFindItemByIndex(
-        static_cast<LinkedItems*>(g_effectEditor.list),
-        g_effectEditor.index + DAT_0044f864);
-    LinkedItem* copy = effPartCloneAfter(
-        static_cast<LinkedItems*>(g_effectEditor.list), selected);
+    LinkedItem *selected = linkedFindItemByIndex(
+        (LinkedItems *)g_effectEditor.list,
+        g_effectEditorState.indices.extraOffset + g_effectEditor.index);
+    LinkedItem *copy = effPartCloneAfter((LinkedItems *)g_effectEditor.list, selected);
     DAT_0044f54c = 0;
     rt_memcpy_w144(&copy->data, &selected->data);
     g_effectEditor.object = &g_effectEditorState;
     return 0;
 }
-}
+} /* extern "C" */

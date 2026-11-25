@@ -1,4 +1,5 @@
-/* NON_MATCHING: register allocation only: retail puts dx in s0 and dz in s1 (built: s1 and s0) */
+/* NON_MATCHING: register allocation only: retail puts dx in s0 and dz in s1 (built: s1 and s0). A single-use
+ * `squaredDistance` local passed to sqrtf gives IDENTICAL (w93-s3) but only steers registers. */
 #include "common.h"
 #include <math.h>
 

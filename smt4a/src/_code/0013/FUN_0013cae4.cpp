@@ -3,11 +3,10 @@
 #include "battle/btlMain.h"
 #include "code/Code0014.h"
 #include "code/Code0015.h"
-#include "battle/BtlEntryLookup.h"
+#include "battle/BtlEntryVoice.h"
 
 extern "C" {
 void FUN_001566a8(s32 category, u32 sound, u32 volume, u32 flags, s32 enabled, float left, float right);
-void FUN_0015f490(u32 id, s32 sound, f32 volume, u32 enabled, u32 flags);
 
 // Play a battle sound, resolving category ten through the current combatant group.
 u32 FUN_0013cae4(s32 category, u32 sound)

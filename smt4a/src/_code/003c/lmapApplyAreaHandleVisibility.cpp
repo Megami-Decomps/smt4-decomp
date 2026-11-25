@@ -35,7 +35,7 @@ extern const u8 DAT_0058033c[], DAT_0058038c[], DAT_005803dc[];
 extern const u8 DAT_0058042c[], DAT_0058047c[], DAT_005804cc[];
 void FUN_003cb948(const u8 *mask);
 RegisteredHandle *ptrVectorAt(LmapHandleTable *, u32 index);
-void FUN_00399290(u32 index, s32 enabled);
+void lmapSetMarkerVisible(u32 index, s32 enabled);
 
 // Apply the special-area visibility mask, or enable every map handle.
 void lmapApplyAreaHandleVisibility(void)
@@ -88,7 +88,7 @@ void lmapApplyAreaHandleVisibility(void)
             g_lmapMainState->areaSlots[index].registered == 0) {
             g_lmapMainState->areaSlots[index].registered = 1;
         }
-        FUN_00399290(index, 1);
+        lmapSetMarkerVisible(index, 1);
     }
 }
 }

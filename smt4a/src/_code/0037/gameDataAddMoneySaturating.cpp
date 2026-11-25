@@ -1,21 +1,15 @@
-/* NON_MATCHING: retail loads g_gameDataBlocks and the save work twice, reading the money at its direct offset and
- * writing it through a +0x88 body block (as FUN_002f5004 in IV); armcc folds the two loads into one address. */
-#include "common.h"
+/* NON_MATCHING: retail loads the save-block pointer twice, reading the counter at its direct offset and
+ * writing through the body at +0x88; the compiler combines the accesses. */
+#include "gamedata/GameSaveBlocks.h"
 
-extern "C" {
-
-struct SaveWork { u8 unk00000[0x27e90]; u32 money; };
-struct GameBlocks { u32 unk00; SaveWork *work; };
-extern GameBlocks g_gameDataBlocks;
-
-void gameDataAddMoneySaturating(u32 amount)
+/* Adds to the saved count of received StreetPass records, capped at 9,999,999. */
+extern "C" void gameDataAddMoneySaturating(u32 amount)
 {
-    u32 money = g_gameDataBlocks.work->money + amount;
-    if (money > 9999999) {
-        g_gameDataBlocks.work->money = 9999999;
+    enum { MAX_RECEIVED_RECORDS = 9999999 };
+    u32 total = g_gameDataBlocks.saveBlock->body.record.tail.unk08 + amount;
+    if (total > MAX_RECEIVED_RECORDS) {
+        g_gameDataBlocks.saveBlock->body.record.tail.unk08 = MAX_RECEIVED_RECORDS;
     } else {
-        g_gameDataBlocks.work->money = money;
+        g_gameDataBlocks.saveBlock->body.record.tail.unk08 = total;
     }
 }
-
-} /* extern "C" */

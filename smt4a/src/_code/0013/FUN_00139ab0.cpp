@@ -1,12 +1,12 @@
+/* NON_MATCHING: retail loads the elapsed-frame count and interval together, then adds 1 to the interval,
+ * subtracts the elapsed count and reserves the final wait. The build loads and schedules those separately. */
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
-/* NON_MATCHING: retail loads both queue words with ldm (begin, end) and keeps the +1 and -1 as separate adds in the flush count (armcc folds them or emits subgt); the build also adds a nop before the force-black test when it goes through asdGxGetBlackForced. */
 
 extern "C" {
 void asdFileWakeWorker(void);
 void asdGxSetTopScreenMode(u32 mode);
 void gxLcdClearForceBlack(void);
 void asdGfxWaitVblank(u32 command);
-u8 asdGxGetBlackForced(const AsdGxPresets *presets);
 
 /* Flush the queued GX commands, wake the file worker, then apply a pending top-screen preset. */
 void FUN_00139ab0(void)
@@ -32,7 +32,7 @@ void FUN_00139ab0(void)
             break;
         }
     }
-    if (!asdGxGetBlackForced(&g_asdGxPresets)) {
+    if (!asdGxWasBlackCleared(&g_asdGxPresets)) {
         gxLcdClearForceBlack();
         g_asdGxPresets.forceBlackCleared = 1;
     }

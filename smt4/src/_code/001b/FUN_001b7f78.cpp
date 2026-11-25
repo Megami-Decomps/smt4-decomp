@@ -134,7 +134,7 @@ int FUN_002757a8(void);
 int mapEnemyHasAvailableSecondaryState(void);
 int resourceTableReleaseHandles(void);
 int FUN_002758d8(void);
-int FUN_002759bc(void);
+int frameTexturesRelease(void);
 int mapDepartSyncModelVisibility(void);
 int FUN_00275bc8(void);
 int frameTexCampSetMode(...);
@@ -536,7 +536,7 @@ extern char *campGetState(void);
 /* Supplied declaration required: mapEnemyHasAvailableSecondaryState. */
 /* Supplied declaration required: resourceTableReleaseHandles. */
 /* Supplied declaration required: FUN_002758d8. */
-/* Supplied declaration required: FUN_002759bc. */
+/* Supplied declaration required: frameTexturesRelease. */
 /* Supplied declaration required: mapDepartSyncModelVisibility. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: frameTexCampSetMode. */
@@ -2964,7 +2964,7 @@ LAB_001bb1d4:
     temp_v9 = puVar14[10];
     puVar14[10] = temp_v9 + 1;
     if (temp_v9 + 1 >= 0xd) {
-      FUN_002759bc();
+      frameTexturesRelease();
       FUN_002758d8();
       resourceTableReleaseHandles();
       temp_v5 = mapEnemyHasAvailableSecondaryState();
@@ -5677,7 +5677,7 @@ joined_r0x001bfcb4:
         FUN_0010421c();
         *(unsigned char *)(puVar23 + 0xf) = 0;
       }
-      FUN_002759bc();
+      frameTexturesRelease();
       mapIfDestroy();
       return 0;
     }

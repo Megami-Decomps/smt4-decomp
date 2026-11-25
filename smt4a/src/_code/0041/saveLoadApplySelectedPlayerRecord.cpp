@@ -33,7 +33,7 @@ typedef struct SelectMenu {
 
 void statusCameraRestore(s32 arg);
 void __aeabi_memcpy4(void *dest, const void *src, u32 size);
-void FUN_0038b5fc(s32 slot, u16 value);
+void statusModelPreviewOutfitPart(s32 slot, u16 value);
 void FUN_0023b45c(s32 arg);
 
 /* When the cursor moves to a new entry, applies it to the player data if it is selectable. */
@@ -51,9 +51,9 @@ void saveLoadApplySelectedPlayerRecord(SelectMenu *menu)
         statusCameraRestore(0);
         menu->unk068 = 0;
         __aeabi_memcpy4((void *)gameGetPlayerData(), menu->record, sizeof(SelectRecord));
-        FUN_0038b5fc(1, menu->record->value1);
-        FUN_0038b5fc(2, menu->record->value2);
-        FUN_0038b5fc(0, menu->record->value0);
+        statusModelPreviewOutfitPart(1, menu->record->value1);
+        statusModelPreviewOutfitPart(2, menu->record->value2);
+        statusModelPreviewOutfitPart(0, menu->record->value0);
         return;
     }
     FUN_0023b45c(0);

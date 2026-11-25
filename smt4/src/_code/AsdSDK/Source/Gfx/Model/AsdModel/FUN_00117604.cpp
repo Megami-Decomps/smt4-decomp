@@ -18,7 +18,7 @@ extern u32 DAT_00464b10;
 extern u32 DAT_00464b14;
 extern u32 DAT_00464b18;
 extern u32 DAT_00464b00;
-void FUN_001325c4(ModelOwner *slots, u32 traverser, u32 state, u32 flags);
+void modelApplyInheritedValues(ModelOwner *slots, u32 traverser, u32 state, u32 flags);
 void FUN_00131c98(ModelOwner *slots, u32 traverser, u32 flags);
 void FUN_0013231c(ModelOwner *slots, u32 state, s32 mode, s32 flags);
 void FUN_001326b4(ModelOwner *slots, u32 first, u32 second, s32 flags);
@@ -40,7 +40,7 @@ void FUN_00117604()
         return;
     }
     void *context = g_asdModelSlotArray3[0]->slot;
-    FUN_001325c4(g_asdModelSlotArray3[0], g_asdModelSceneRoots[0], DAT_00464b10, DAT_00464bbc[0]);
+    modelApplyInheritedValues(g_asdModelSlotArray3[0], g_asdModelSceneRoots[0], DAT_00464b10, DAT_00464bbc[0]);
     if (g_asdLightCount.render.active != 0 && g_asdLightCount.render.dirty == 0) {
         SceneNode *builder = g_asdModelTransformBuilder[0];
         SceneNode *root = sceneGroup1Root[0];

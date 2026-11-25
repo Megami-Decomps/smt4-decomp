@@ -1,17 +1,17 @@
-/* NON_MATCHING: RGB VFP registers/store batching and alpha/scale constant scheduling differ from retail. */
-#include "shard/W6_W6Match3_EffectColor.h"
+/* NON_MATCHING: RGB extraction and its VFP conversions use different registers and schedule
+ * the opaque alpha load earlier. The stores and literal pool now have retail's shape. */
+#include "shard/W6_W6Match7_QuadVectors.h"
 
-extern "C" {
-void gxSetUniformQuadColors(const EffectColor *color);
-
-// The packed low byte is ignored: this draw path always uses opaque alpha.
-void drawSetColorFromRGBA8(u32 packed)
+/* Expands the three RGB bytes; the quad state supplies alpha, not the low byte. */
+extern "C" void drawSetColorFromRGBA8(u32 packed)
 {
-    EffectColor color;
-    color.red = (f32)(packed >> 24) * (1.0f / 255.0f);
-    color.green = (f32)((packed >> 16) & 0xff) * (1.0f / 255.0f);
-    color.blue = (f32)((packed >> 8) & 0xff) * (1.0f / 255.0f);
-    color.alpha = 1.0f;
-    gxSetUniformQuadColors(&color);
-}
+    QuadVector color;
+    color.xyz.x = (f32)(u8)(packed >> 24);
+    color.xyz.y = (f32)(u8)(packed >> 16);
+    color.xyz.z = (f32)(u8)(packed >> 8);
+    const f32 normalize = 1.0f / 255.0f;
+    color.xyz.x *= normalize;
+    color.xyz.y *= normalize;
+    color.xyz.z *= normalize;
+    gxSetUniformQuadColors(&color.xyz);
 }

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "nn/err/Fatal.h"
 
 namespace {
 struct ErrorWords {
@@ -16,7 +16,7 @@ extern Error DAT_0062d200;
 void FUN_00189a80(Error *error);
 
 /* Records a fatal error when the result severity is neither 1 nor -7, then invokes the fatal handler. */
-void errThrowFatal(u32 result, u32 context)
+void errThrowFatal(u32 result, u32 context, ...)
 {
     s32 severity = result >> 27;
     if (result & 0x80000000) {

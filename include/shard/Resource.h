@@ -81,6 +81,10 @@ typedef char ResourceSizingRecordSizeCheck[sizeof(ResourceSizingRecord) == 0x14 
 typedef char ResourceSizingGroupSizeCheck[sizeof(ResourceSizingGroup) == 0x20 ? 1 : -1];
 typedef char ResourceSizingStateSizeCheck[sizeof(ResourceSizingState) == 0xA0 ? 1 : -1];
 
-extern "C" ResourceHandler g_handlerTable[];
+extern "C" {
+extern ResourceHandler g_handlerTable[];
+u32 FUN_001cd01c(ResourceSizingState *state, u32 *blob);
+u32 FUN_001cd064(const ResourceSizingState *state);
+} /* extern "C" */
 
 #endif

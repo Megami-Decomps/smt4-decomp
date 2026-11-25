@@ -8,7 +8,7 @@ extern "C" {
 
 int renderCtxResetColorScale(int);
 int skinObjectUpdateMatrices(int);
-int FUN_0037aa68(unsigned int, int);
+int renderTargetBindAndClear(unsigned int, int);
 int block530OwnerReset(int, float *, int);
 int renderCtxFillDisplay(int, int *, int, int);
 int VectorSignedToFloat(...);
@@ -47,7 +47,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-/* Supplied declaration required: FUN_0037aa68. */
+/* Supplied declaration required: renderTargetBindAndClear. */
 extern int renderCtxPackPassFlagsWithAlpha(unsigned int);
 extern int flagsPackFourBooleans(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: block530OwnerReset. */
@@ -95,7 +95,7 @@ void FUN_0040c190(int param_1)
   unsigned int temp_v29;
   unsigned int temp_v30;
   
-  FUN_0037aa68(*(unsigned int *)(param_1 + 8),0);
+  renderTargetBindAndClear(*(unsigned int *)(param_1 + 8),0);
   temp_v0 = g_renderCtx;
   temp_v7 = 0.0f;
   temp_v27 = 0;

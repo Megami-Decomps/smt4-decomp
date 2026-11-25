@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bb7c4(unsigned char *, unsigned int, int, unsigned int, int, int);
+int svcControlMemory(unsigned char *, unsigned int, int, unsigned int, int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned char g_nnosHeapState; /* 0x471b48 */
 
-/* Supplied declaration required: FUN_002bb7c4. */
+/* Supplied declaration required: svcControlMemory. */
 
 
 void osSetHeapSize(unsigned int param_1)
@@ -29,7 +29,7 @@ void osSetHeapSize(unsigned int param_1)
   if ((param_1 & 0xfff) == 0) {
     if ((*(unsigned int *)((unsigned char *)&g_nnosHeapState + 0x8)) < param_1) {
       puVar2 = temp_v1;
-      FUN_002bb7c4(puVar2,(*(unsigned int *)((unsigned char *)&g_nnosHeapState + 0x8)) + 0x8000000,0,param_1 - (*(unsigned int *)((unsigned char *)&g_nnosHeapState + 0x8)),3,3);
+      svcControlMemory(puVar2,(*(unsigned int *)((unsigned char *)&g_nnosHeapState + 0x8)) + 0x8000000,0,param_1 - (*(unsigned int *)((unsigned char *)&g_nnosHeapState + 0x8)),3,3);
       temp_v0 = param_1;
       if ((int)puVar2 < 0) {
         return;
@@ -37,7 +37,7 @@ void osSetHeapSize(unsigned int param_1)
     }
     else {
       puVar2 = temp_v1;
-      FUN_002bb7c4(puVar2,param_1 + 0x8000000,0,(*(unsigned int *)((unsigned char *)&g_nnosHeapState + 0x8)) - param_1,1,0);
+      svcControlMemory(puVar2,param_1 + 0x8000000,0,(*(unsigned int *)((unsigned char *)&g_nnosHeapState + 0x8)) - param_1,1,0);
       temp_v0 = param_1;
       if ((int)puVar2 < 0) {
         return;

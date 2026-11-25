@@ -46,7 +46,7 @@ void objectE0ResetFlags1040(void);
 void obj04Finish(void);
 void frameTransitionSetMode(s32 mode);
 void frameTexInitActive(void);
-void frameTexRequestFade(s32 request);
+void frameTexApplyMode(s32 request);
 void commonBgStopChildAndReset(void);
 void FUN_002c3398(s32 a, s32 b);
 void FUN_00363c58(s32 mode);
@@ -262,7 +262,7 @@ void mikadoCampVisitUpdate(CampScriptPanelResources *work)
     case 7:
         work->mikado.frame++;
         if (work->mikado.frame == 1) {
-            frameTexRequestFade(4);
+            frameTexApplyMode(4);
         }
         if (work->mikado.frame >= 4) {
             work->mikado.state = 17;

@@ -1,16 +1,17 @@
-/* NON_MATCHING: counter-product registers differ and the frequency copy uses LDRD/STRD instead of retail's two-register LDM/STM. */
+/* NON_MATCHING: retail stores the scaled elapsed value one word at a time and copies the epoch
+ * with LDM/STM; armcc allocates the multiply differently and copies the epoch with LDRD/STRD. */
 #include "common.h"
 
 extern "C" {
 u64 FUN_00159aa4();
-u64* FUN_001593ac(u64* divisor, const u64* value);
+u64 *FUN_001593ac(u64 *baseTime, const u64 *elapsed);
 extern const u64 DAT_00589370;
 
-// Convert the current counter to microseconds using the configured counter frequency.
-void clockGetTicksAsMicroseconds(u64* output)
+/* Adds the elapsed time to the system's epoch value. */
+void clockGetTicksAsMicroseconds(u64 *output)
 {
-    u64 scaled = FUN_00159aa4() * 1000000;
-    u64 frequency = DAT_00589370;
-    *output = *FUN_001593ac(&frequency, &scaled);
+    u64 elapsed = FUN_00159aa4() * 1000000;
+    u64 time = DAT_00589370;
+    *output = *FUN_001593ac(&time, &elapsed);
 }
-}
+} /* extern "C" */

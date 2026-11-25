@@ -164,3 +164,10 @@ arm 0x50094c 0x50096c nn::fs FileServerArchive file GetSize: slot 4 of vtable 0x
 # nn::gr: a second copy of the third-party PICA command builder FUN_00188a40 (byte-identical, pool words included;
 # smt4's twin is FUN_001394d4) (w92-s13).
 arm 0x1c6b34 0x1c6c0c nn::gr CTR command builder: PICA register command words only; byte-identical to the third-party FUN_00188a40
+# armlib software-float helpers with a private register protocol (operands in r0-r5, fp, r6 forwarded): the same shape as
+# the third-party 0x2e4268/0x2e4298 and smt4's 0x155afc/0x2c6614, called from armlib Thumb code at 0x101b04/0x101b0a (w93-s15).
+arm 0x1c5888 0x1c58e8 armlib software-float divide/multiply-and-round shims: private r0-r6/fp protocol, armlib callers
+# The CTR-SDK's hand-written svc 0x01 (ControlMemory) wrapper: `push {r0, r4}; ldr r0, [sp, #8]; ldr r4, [sp, #12];
+# svc 1; ldr r2, [sp]; str r1, [r2]`, the output-address shape of the other svc wrappers, which armcc cannot produce;
+# smt4 twin 0x2bb7c4 (w93-s15).
+arm 0x16236c 0x162390 CTR-SDK svcControlMemory: push {r0, r4}; stack operands to r0/r4; svc 1; ldr r2, [sp]; str r1, [r2]

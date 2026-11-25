@@ -1,3 +1,4 @@
+#include "nn/err/Fatal.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015ac90` (_code @ 0x15ac90, 0x128 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -5,7 +6,6 @@
 extern "C" {
 
 int FUN_00170454(void);
-int errThrowFatal(int, int);
 
 extern signed char DAT_005b4464; /* 0x5b4464 */
 extern int DAT_005b4468; /* 0x5b4468 */

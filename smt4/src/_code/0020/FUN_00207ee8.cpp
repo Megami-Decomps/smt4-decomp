@@ -1,27 +1,30 @@
-/* NON_MATCHING: retail copies the first word of DAT_00472550 into the projection input with a core ldr/str through a copied
- * address register (add r1, ip, #0) where the build reuses s0, and writes the screen vector back as four core words
- * (ldm; vmov ip, s0; stm) where the build stores three words and the cleared w separately. */
-#include "map/mapDepart.h"
-#include "shard/W5_W5Match2_PlainData.h"
+/* NON_MATCHING: the initial scratch copy's address registers and scheduling differ; the xyz reloads and the
+ * final four-word store now match. */
 #include "code/Code002c.h"
 #include "gfx/VectorScratch.h"
+#include "map/MapVector.h"
+
+/* The vector-copy inline used by the adjacent scratch operations. */
+static __inline void vector4Copy(const Vector4 *source, Vector4 *destination)
+{
+    *destination = *source;
+}
 
 extern "C" {
 extern Vector4 DAT_00472550;
 void cameraProjectToScreen(f32 *screen, s32 display, void *camera, const MapVector *world);
 
-// Projects the camera scratch direction to screen space and stores it back (w cleared),
-// keeping the previous direction in DAT_00472550; returns the projected depth.
+/* Projects the scratch point to screen space, retaining the original in the effect scratch vector. */
 f32 FUN_00207ee8(void)
 {
-    void *camera = reinterpret_cast<void *>(asdCameraGetSavedRenderPairs());
-    Vector4 *previous = &DAT_00472550;
-    *previous = g_vectorScratch.first.vector;
-    MapVector world = { previous->x, previous->y, previous->z };
+    void *camera = (void *)asdCameraGetSavedRenderPairs();
+    vector4Copy(&g_vectorScratch.first.vector, &DAT_00472550);
+    MapVector world = { DAT_00472550.x, DAT_00472550.y, DAT_00472550.z };
     Vector4 screen;
     cameraProjectToScreen(&screen.x, 0, camera, &world);
     screen.w = 0.0f;
-    g_vectorScratch.first.vector = screen;
+    vector4Copy(&screen, &g_vectorScratch.first.vector);
     return screen.z;
 }
-}
+
+} /* extern "C" */

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail keeps the zero in r6 and loads each descriptor's slot into r5 (swapped here); the stores, the pool search and the tail call match. */
 #include "AsdSDK/asdVramBlockListInsert.h"
 
 extern "C" {

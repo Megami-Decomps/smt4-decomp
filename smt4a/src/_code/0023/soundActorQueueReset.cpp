@@ -13,7 +13,7 @@ void soundActorQueueReset(void)
     queue->count = 0;
     queue->pending = 0;
     queue->enabled = 0;
-    for (s32 index = 0; index < 32; ++index) {
+    for (s32 index = 0; index < SOUND_ACTOR_QUEUE_CAPACITY; ++index) {
         SoundActorQueueEntry *entry = &queue->entries[index];
         entry->active = 0;
         entry->position.x = 0.0f;

@@ -11,16 +11,8 @@
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
-
-/* One row of the battle command table (0x60 bytes). */
-struct ContextCommandDefinition {
-    /* 0x00 */ u8 kind;
-    /* 0x01 */ u8 enabled;
-    /* 0x02 */ u8 unk02[0x59];
-    /* 0x5B */ u8 blockedInBattleMode;     /* hidden while the battle has flag 0x40000 */
-    /* 0x5C */ u16 requiredGameFlag;
-    /* 0x5E */ u16 requiredStatusFlag;
-};
+#include "battle/BattleCommandLookup.h"
+#include "code/Code0023.h"
 
 /* ContextCommandDefinition::kind values the list treats specially. */
 enum {
@@ -33,10 +25,8 @@ enum {
 };
 
 extern "C" {
-const ContextCommandDefinition *FUN_00292960(u8 index, bool protagonist);
 s32 idOwnerHasActiveObject(void *unit);
 u32 FUN_00293988(void *battle);
-s32 FUN_0023dcb8(void); // declcheck: local (code/Code0023.h declares it void; the list tests its result)
 }
 
 /* The kind of the `ordinal`-th available command of the open command menu, or 0. btlCommandMenuKindAt is this
@@ -48,7 +38,7 @@ static u8 playSceneContextCommandKind(PlayScene *scene, s32 ordinal)
     s32 accepted = 0;
     const SaveSlotTableIV *table = gameGetSlotTable();
     for (s32 index = 0; index < CONTEXT_COMMAND_COUNT; ++index) {
-        const ContextCommandDefinition *command = FUN_00292960((u8)index, scene->commandOwner == 0);
+        const ContextCommandDefinition *command = btlDebugFindCommandByIndex((u8)index, scene->commandOwner == 0);
         void *unit = NULL;
         if (scene->commandOwner != 0 && table->active[scene->commandOwner - 1] >= 0)
             unit = gameGetUnitRecord(table->active[scene->commandOwner - 1]);

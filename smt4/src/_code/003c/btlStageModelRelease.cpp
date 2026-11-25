@@ -10,7 +10,7 @@
 #include "sys/ResultReport.h"
 
 extern "C" {
-void FUN_002759bc(void);
+void frameTexturesRelease(void);
 void mdlHandleArrayDestroy(BattleStageModel *stage);
 
 /* Waits for the loader thread to end, then finalizes and closes it. */
@@ -39,7 +39,7 @@ void btlStageModelRelease(BattleStageModel *stage)
     if (void *context = stage->context) {
         stage->context = NULL;
     }
-    FUN_002759bc();
+    frameTexturesRelease();
     mdlHandleArrayDestroy(stage);
     stage->state = 0;
 }

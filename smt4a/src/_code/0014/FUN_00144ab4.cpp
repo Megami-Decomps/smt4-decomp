@@ -2,10 +2,9 @@
  * framebuffer bind and loads width, height and mode with one ldm, as a by-value {x, y, width, height} viewport
  * argument does (code identical then, but the setter's constant-argument callers lose their order); with four ints
  * the zeros come last. The displays[1..2]/framebuffers[1..2] pool words also need g_asdGxPresets sized. */
-#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
+#include "gfx/RenderTargetBind.h"
 
 extern "C" {
-void FUN_00154d68(const void *color, const void *depth, s32 width, s32 height);
 void asdGfxSetMode(u32 mode);
 void asdGxSetViewport(s32 x, s32 y, s32 width, s32 height);
 void asdGfxBindTarget(u32 buffer);

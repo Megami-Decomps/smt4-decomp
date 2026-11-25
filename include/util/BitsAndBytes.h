@@ -15,6 +15,18 @@ u32 packNibblesAndByte(s32 a, s32 b, u32 byte);
 
 } /* extern "C" */
 
+/* Sets or clears one bit of a byte-packed flag array. */
+static __inline void bitArrayWrite(u8 *bits, u32 bit, s32 set)
+{
+    u8 *byte = bits + (bit >> 3);
+    u8 mask = 1 << (bit & 7);
+    if (set != 0) {
+        *byte |= mask;
+    } else {
+        *byte &= ~mask;
+    }
+}
+
 /* Sets `bits` in a flag word. Retail inlines it (the store follows the preceding byte stores, nothing hoisted): the
  * navigation screens' steps of both games and the battle units use it. */
 static __inline void flagsSetBits(u32 *flags, u32 bits)

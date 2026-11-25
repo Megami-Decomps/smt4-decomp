@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001377a0(unsigned char *, int);
-int FUN_002bb7c4(...);
+int svcControlMemory(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 extern unsigned char g_nnosAddressSpaceManagerApplication; /* 0x4d4600 */
 
 /* Supplied declaration required: FUN_001377a0. */
-/* Supplied declaration required: FUN_002bb7c4. */
+/* Supplied declaration required: svcControlMemory. */
 extern int asdAddressSpaceAllocate(unsigned char *, int, unsigned int, unsigned int);
 
 
@@ -45,14 +45,14 @@ unsigned char * addressSpaceMapApplicationMemoryBlock(int param_1,unsigned int p
     else {
       *(unsigned int *)(param_1 + 0x14) = param_2;
       puVar1 = temp_v2;
-      FUN_002bb7c4(puVar1,temp_v0,param_2,param_3,4,3);
+      svcControlMemory(puVar1,temp_v0,param_2,param_3,4,3);
       if (-1 < (int)puVar1) {
         puVar1 = temp_v2;
-        FUN_002bb7c4(puVar1,*(unsigned int *)(param_1 + 0x14),0,param_3,6,0);
+        svcControlMemory(puVar1,*(unsigned int *)(param_1 + 0x14),0,param_3,6,0);
         if ((int)puVar1 < 0) {
           temp_v1 = *(unsigned int *)(param_1 + 0x14);
           FUN_001377a0(&g_nnosAddressSpaceManagerApplication,param_1);
-          FUN_002bb7c4(temp_v2,temp_v0,temp_v1,param_3,5,3);
+          svcControlMemory(temp_v2,temp_v0,temp_v1,param_3,5,3);
         }
         return puVar1;
       }

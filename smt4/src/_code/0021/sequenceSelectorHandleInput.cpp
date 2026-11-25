@@ -1,50 +1,50 @@
-/* NON_MATCHING: retail's empty entry loop counts down from the count through a copy of the state pointer (add r0, r4, #0; subs; bne) where the build counts up, and the request's entry offset is built in r2 where the build uses r0; the rest matches. */
-#include "common.h"
+/* NON_MATCHING: retail copies the state pointer before loading the countdown and has a single zero test;
+ * the build loads the count directly and emits an additional loop-limit check. */
+#include "title/SequenceSelector.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 
-struct SequenceSelectionEntry {
-    const char *name;
-    u32 sequence;
-};
-struct SequenceSelectionState {
-    u32 unk00;
-    SequenceSelectionEntry *entries;
-    u32 count;
-    u32 selection;
-};
-
 extern "C" {
-extern SequenceSelectionState g_startMenuProcessGroup;
 s32 padIsButtonPressed(u32 button);
 s32 padIsButtonRepeat(u32 button);
 
-/* Select a sequence with wrapping single steps and clamped page steps. */
-u32 sequenceSelectorHandleInput(void)
+/* Selects a sequence with wrapping single steps and clamped page steps. */
+s32 sequenceSelectorHandleInput(u32 handle)
 {
-    /* Counts through the entries; what this loop did per entry is compiled out of this build. */
-    u32 i = 0;
-    while (i < g_startMenuProcessGroup.count)
-        i++;
-    if (padIsButtonPressed(0)) {
-        asdSequenceRequest(g_startMenuProcessGroup.entries[g_startMenuProcessGroup.selection].sequence, NULL, 0);
-        return ~0u;
+    SequenceSelectionState *state = &g_startMenuProcessGroup;
+    /* The retail build leaves the countdown after removing the per-entry work. */
+    u32 remaining = state->count;
+    if (remaining != 0) {
+        do {
+        } while (--remaining != 0);
     }
-    if (padIsButtonRepeat(5))
-        --g_startMenuProcessGroup.selection;
-    if (padIsButtonRepeat(6))
-        ++g_startMenuProcessGroup.selection;
-    if ((s32)g_startMenuProcessGroup.selection < 0)
-        g_startMenuProcessGroup.selection = g_startMenuProcessGroup.count - 1;
-    if (g_startMenuProcessGroup.selection >= g_startMenuProcessGroup.count)
-        g_startMenuProcessGroup.selection = 0;
-    if (padIsButtonPressed(4))
-        g_startMenuProcessGroup.selection -= 25;
-    if (padIsButtonPressed(3))
-        g_startMenuProcessGroup.selection += 25;
-    u32 count = g_startMenuProcessGroup.count;
-    g_startMenuProcessGroup.selection = (s32)g_startMenuProcessGroup.selection > 0 ? g_startMenuProcessGroup.selection : 0;
-    if (g_startMenuProcessGroup.selection >= count)
-        g_startMenuProcessGroup.selection = count - 1;
+    if (padIsButtonPressed(SEQUENCE_SELECTOR_CONFIRM)) {
+        asdSequenceRequest(state->entries[state->selection].sequence, NULL, 0);
+        return -1;
+    }
+    if (padIsButtonRepeat(SEQUENCE_SELECTOR_PREVIOUS)) {
+        --state->selection;
+    }
+    if (padIsButtonRepeat(SEQUENCE_SELECTOR_NEXT)) {
+        ++state->selection;
+    }
+    if ((s32)state->selection < 0) {
+        state->selection = state->count - 1;
+    }
+    if (state->selection >= state->count) {
+        state->selection = 0;
+    }
+    if (padIsButtonPressed(SEQUENCE_SELECTOR_PAGE_BACK)) {
+        state->selection -= SEQUENCE_SELECTOR_PAGE_SIZE;
+    }
+    if (padIsButtonPressed(SEQUENCE_SELECTOR_PAGE_FORWARD)) {
+        state->selection += SEQUENCE_SELECTOR_PAGE_SIZE;
+    }
+    u32 count = state->count;
+    state->selection = (s32)state->selection > 0 ? state->selection : 0;
+    if (state->selection >= count) {
+        state->selection = count - 1;
+    }
     return 0;
 }
-}
+
+} /* extern "C" */

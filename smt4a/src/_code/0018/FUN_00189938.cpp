@@ -1,9 +1,9 @@
-/* NON_MATCHING: the fatal result handler still needs the SDK's instruction-address argument; the saved fields are scheduled differently around the load guard. */
+#include "nn/err/Fatal.h"
+/* NON_MATCHING: saved fields are scheduled differently around the load guard. */
 #include "nn/dsp/DspComponent.h"
 #include "nn/Result.h"
 
 extern "C" {
-int errThrowFatal(void);
 int FUN_001a1118(int, int);
 extern void (*DAT_0061a664[8])(void);
 
@@ -22,8 +22,7 @@ void FUN_00189938(void)
     } else {
         result = DSP_RESULT_CANNOT_LOAD_COMPONENT;
     }
-    if (nnResultIsFailure(result))
-        errThrowFatal();
+    throwFatalIfFailed(result, __current_pc());
 
     for (s32 i = 0; i < 8; ++i) {
         if (DAT_0061a664[i])

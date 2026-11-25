@@ -1,9 +1,9 @@
-#include "common.h"
+#include "battle/BtlDebugMenuEntry.h"
 #include <stdio.h>
+
 extern "C" {
 void buttonHelpSetText(const char *text, u32 color);
 void screenSetColor670(u32 color, s32 row, s32 first, s32 length);
-const char *requestSubmitScrLookup(u8 index, s32 alternate);
 
 /* Select a context hint, adding the numeric amount and its colored span when needed. */
 void screenSetContextHint(void *owner, s32 kind, s32 alternate)
@@ -25,7 +25,7 @@ void screenSetContextHint(void *owner, s32 kind, s32 alternate)
     case 4: lookup = 7; break;
     case 12: lookup = 9; break;
     }
-    const char *text = requestSubmitScrLookup(lookup, alternate == 0);
+    const char *text = btlFindCommandHint(lookup, alternate == 0);
     if (kind == 9) {
         char buffer[128];
         sprintf(buffer, text, work->amount);

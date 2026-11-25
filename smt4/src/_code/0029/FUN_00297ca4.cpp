@@ -1,15 +1,14 @@
-/* NON_MATCHING: block order now matches retail; retail keeps menu+0x3000 in r5 and the command in r6 (the build
- * swaps them) and branches to the kind-2 checks with bne/b where the build uses beq/b. */
+/* NON_MATCHING: 4 lines. Retail enters the kind-2 checks with bne/b where the build uses beq/b. */
 #include "battle/BattleCommandMenu.h"
+#include "battle/BattleCommandLookup.h"
+#include "code/Code0023.h"
 #include "code/Code0029_Smt4.h"
+#include "gamedata/SaveSlotTableIV.h"
 #include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
-BattleCommandEntry *FUN_00292960(u8 index, int primary);
 u32 FUN_00293988(void *scene);
-s32 FUN_0023dcb8(void);
 s32 idOwnerHasActiveObject(void *unit);
-s8 *gameGetSlotTable(void);
 s32 objectPartRunUnlessLocked(CommandCounter *counter);
 
 /* Find the command the cursor selects among the available ones and return its menu action code. */
@@ -17,14 +16,14 @@ u32 FUN_00297ca4(BattleCommandMenu *menu, s32 confirm)
 {
     if (confirm != 0 && menu->mode == 6)
         return 11;
-    s8 *slotTable = gameGetSlotTable();
-    BattleCommandEntry *command;
+    const SaveSlotTableIV *slotTable = gameGetSlotTable();
+    const ContextCommandDefinition *command;
     s32 count = 0;
     for (s32 i = 0; i < 9; i++) {
-        command = FUN_00292960(i, menu->cursor == 0);
-        void *unit = 0;
-        if (menu->cursor != 0 && slotTable[0x9107 + menu->cursor] >= 0)
-            unit = gameGetUnitRecord(gameGetSlotTable()[0x9107 + menu->cursor]);
+        command = btlDebugFindCommandByIndex(i, menu->cursor == 0);
+        void *unit = NULL;
+        if (menu->cursor != 0 && slotTable->active[menu->cursor - 1] >= 0)
+            unit = gameGetUnitRecord(gameGetSlotTable()->active[menu->cursor - 1]);
         if (!battleCommandIsAvailable(command))
             continue;
         if (command->kind == 5) {
@@ -46,7 +45,7 @@ u32 FUN_00297ca4(BattleCommandMenu *menu, s32 confirm)
             break;
         count++;
     }
-    if (command != 0) {
+    if (command != NULL) {
         switch (command->kind) {
         case 1:
             return 1;

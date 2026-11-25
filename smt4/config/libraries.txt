@@ -158,3 +158,10 @@ arm 0x3df9e4 0x3dfa2c nn::fs RomFsArchive/FileServerArchive file GetSize: slot 4
 # 0x00900251, 0xead0fead, ...); byte-identical, pool words included, to smt4a's third-party FUN_00188a40 and to its
 # second smt4a copy FUN_001c6b34 (w92-s13).
 arm 0x1394d4 0x1395ac nn::gr CTR command builder: PICA register command words only; byte-identical to smt4a's third-party FUN_00188a40
+# armlib's vsnprintf wrapper in Thumb, the exact shape of smt4a's third-party libc_vsnprintf (0x100df4): takes the put-byte
+# callback pc-relatively, calls the format engine and appends the terminator (w93-s15, w93-pic).
+thumb 0x2b23bc 0x2b23ee armlib vsnprintf wrapper: add pc callback, format engine call, terminator; twin of smt4a libc_vsnprintf
+# The CTR-SDK's hand-written svc 0x01 (ControlMemory) wrapper: `push {r0, r4}; ldr r0, [sp, #8]; ldr r4, [sp, #12];
+# svc 1; ldr r2, [sp]; str r1, [r2]`, the output-address shape of the other svc wrappers, which armcc cannot produce;
+# smt4a twin 0x16236c (w93-s15).
+arm 0x2bb7c4 0x2bb7e8 CTR-SDK svcControlMemory: push {r0, r4}; stack operands to r0/r4; svc 1; ldr r2, [sp]; str r1, [r2]

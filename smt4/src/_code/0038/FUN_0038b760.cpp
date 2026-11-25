@@ -1,28 +1,29 @@
-/* NON_MATCHING: The compiler merges repeated resource guards and omits retail accessor hints. */
+/* NON_MATCHING: retail tests the count before copying it into the saved register and leaves the allocator's unused owner argument unset. */
+#include "addon/AocPackage.h"
 #include "gamedata/TableEntryCache.h"
 #include "gamedata/DataTable.h"
+#include "gamedata/DataTableAccess_VariantA.h"
 #include "AsdSDK/Source/Sys/Mem/AsdOperatorNewB.h"
-extern "C" {
-void* dataTableFileGetTable(void*, u32);
-EntryState* __aeabi_vec_ctor_nocookie_nodtor(EntryState*, void (*)(EntryState*), u32, u32);
 
-// Loads the table and constructs a parallel state entry for every table record.
-void FUN_0038b760(TableEntryCache* cache)
+extern "C" {
+EntryState *__aeabi_vec_ctor_nocookie_nodtor(EntryState *, void (*)(EntryState *), u32, u32); // declcheck: local (entryStateClear is still declared as a C callback, rather than a native constructor)
+
+/* Allocates a file slot for every entry in the package directory. */
+void FUN_0038b760(AocPackage *package)
 {
-    if (cache->source.enabled != 0 && cache->source.resource != NULL) {
-        dataTableGetEntries(dataTableFileGetTable(cache->source.resource, 0));
+    if (package->directoryLoaded != 0 && package->directoryFile != NULL) {
+        dataTableGetEntries(dataTableFileGetTable((u32)package->directoryFile, 0));
     }
-    if (cache->source.enabled != 0 && cache->source.resource != NULL) {
-        u32 count = dataTableGetCount(dataTableFileGetTable(cache->source.resource, 0));
-        if (count != 0) {
-            void *owner; // Retail does not initialise the allocator's owner word.
-            EntryState* states = (EntryState*)asdOperatorNewB(count * sizeof(EntryState), owner);
-            if (states != NULL) {
-                states = __aeabi_vec_ctor_nocookie_nodtor(states, entryStateClear,
-                                                        sizeof(EntryState), count);
-            }
-            cache->states = states;
+    u32 count = 0;
+    if (package->directoryLoaded != 0 && package->directoryFile != NULL) {
+        count = dataTableGetCount(dataTableFileGetTable((u32)package->directoryFile, 0));
+    }
+    if (count != 0) {
+        EntryState *files = (EntryState *)asdOperatorNewB(count * sizeof(AocPackageFile), NULL);
+        if (files != NULL) {
+            files = __aeabi_vec_ctor_nocookie_nodtor(files, entryStateClear, sizeof(AocPackageFile), count);
         }
+        package->files = (AocPackageFile *)files;
     }
 }
-}
+} /* extern "C" */

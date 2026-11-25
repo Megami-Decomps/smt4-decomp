@@ -58,7 +58,7 @@ void FUN_0023b45c(s32 value);
 s32 buttonHelpIsActionActive(s32 value);
 void statusCameraRestore(s32 value);
 void FUN_0033449c(s32 value);
-void FUN_0038b5fc(s32 index, u32 value);
+void statusModelPreviewOutfitPart(s32 index, u32 value);
 void saveLoadApplySelectedPlayerRecord(SelectScreen *screen);
 void FUN_0041e450(SelectScreen *screen);
 void FUN_0041e7c0(SelectScreen *screen);
@@ -121,9 +121,9 @@ extern "C" void FUN_0041f22c(SelectScreen *screen)
         if (screen->entryFlags[screen->selected] == 0)
             FUN_0023b45c(0);
         __aeabi_memcpy4(gameGetPlayerData(), screen->playerCopy, 0xE);
-        FUN_0038b5fc(1, screen->ids.idB);
-        FUN_0038b5fc(2, screen->ids.idC);
-        FUN_0038b5fc(0, screen->ids.idA);
+        statusModelPreviewOutfitPart(1, screen->ids.idB);
+        statusModelPreviewOutfitPart(2, screen->ids.idC);
+        statusModelPreviewOutfitPart(0, screen->ids.idA);
         screen->openRequested = 1;
         buttonHelpSetText(0, 0xF4F4F4FF);
         selectScreenChangeState(screen, 5);

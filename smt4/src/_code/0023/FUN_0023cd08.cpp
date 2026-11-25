@@ -12,7 +12,7 @@
 #include "battle/BtlGlobals.h"
 
 extern "C" {
-const BattleVector3 *FUN_002d8c3c(void *arrangement);
+const BattleVector3 *versionedResourceGetPayload(void *arrangement);
 void enemyDrawCalcVerticalOffset(const EnemyDrawOffsetOwner *owner, BattleVector3 *output, f32 scale);
 
 /* idSetFindSubjectIndex's body: the position of the action's member within its combatant entry, or -1 when absent. */
@@ -37,7 +37,7 @@ BattleVector3 FUN_0023cd08(BtlMainState *state, s32 index, s32 forceEnemy)
     BtlActionRecord *action = &state->actions[index];
     BattleVector3 position;
     if ((action->status & 0x10) != 0 && forceEnemy == 0) {
-        position = *FUN_002d8c3c(state->arrangement.file);
+        position = *versionedResourceGetPayload(state->arrangement.file);
         position.z += 2.0f;
         BtlUnitData *source = btlFindEntryBlockByMemberId(state, index);
         u8 kind = nkmEnemyFindById(source->id)->arrangementFirst;

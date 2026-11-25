@@ -1,11 +1,12 @@
-/* NON_MATCHING: Retail ldr r1, [pc, #128] differs from recovered ldr r1, [pc, #112]. */
+/* NON_MATCHING: retail returns on a null panel before opening the frame, reloads g_partyPanel for
+ * the visibility store, then reloads the stored flag. This build keeps the address and value. */
 #include "ui/ButtonHelp.h"
 #include "ui/PartyPanelStateA.h"
 #include "shard/W4_Match1b_RegisteredHandle.h"
 
 extern "C" {
 
-// Update the panel flag and issue the corresponding group-3 command.
+/* Updates party-panel visibility and the corresponding group-3 button help. */
 void FUN_00331380(s32 active)
 {
     PartyPanelStateA* panel = g_partyPanel;
@@ -18,4 +19,5 @@ void FUN_00331380(s32 active)
         }
     }
 }
-}
+
+} /* extern "C" */

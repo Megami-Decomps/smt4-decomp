@@ -5,7 +5,7 @@ extern "C" {
 
 int FUN_00131c98(int, unsigned int, int);
 int FUN_0013231c(int, unsigned int, int, int);
-int FUN_001325c4(int, unsigned int, unsigned int, int);
+int modelApplyInheritedValues(int, unsigned int, unsigned int, int);
 int sceneTraverserVisit(unsigned int, int);
 int _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(int *, int *, int *, int *);
 int renderCtxResetFrameStacks(unsigned int);
@@ -34,7 +34,7 @@ extern signed char DAT_004dadac; /* 0x4dadac */
 
 /* Supplied declaration required: FUN_00131c98. */
 /* Supplied declaration required: FUN_0013231c. */
-/* Supplied declaration required: FUN_001325c4. */
+/* Supplied declaration required: modelApplyInheritedValues. */
 /* Supplied declaration required: sceneTraverserVisit. */
 /* Supplied declaration required: _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_. */
 /* Supplied declaration required: renderCtxResetFrameStacks. */
@@ -58,7 +58,7 @@ void FUN_001183d8(void)
   
   if ((g_gfxSettings != '\0') && ((0 < DAT_004dad98 || ((DAT_00464b78 & 1) != 0)))) {
     temp_v2 = *(unsigned int *)(DAT_00464bb8 + 4);
-    FUN_001325c4(DAT_00464bb8,DAT_00464b80,DAT_00464b1c,1);
+    modelApplyInheritedValues(DAT_00464bb8,DAT_00464b80,DAT_00464b1c,1);
     temp_v0 = DAT_00464b88;
     if ((DAT_004dad9c != '\0') && (DAT_004dad9d == '\0')) {
       temp_v1 = sceneGroup4Root;

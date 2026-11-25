@@ -1,14 +1,13 @@
-#include "common.h"
+#include "title/SequenceSelector.h"
 
 extern "C" {
 
 void screenFadeStartIn(s32 channel, s32 a, s32 b);
 void asdSequenceStart(s32 id, u8 *table, s32 size);
-void paramTripleSet(s32 id, u8 *table, s32 size);
 void sysSetCachedPair(u8 *start, u8 *end);
 s32 pairedAvailabilityGetState(s32 channel);
 extern u8 DAT_00580000[];
-extern u8 DAT_00580150[];
+extern const SequenceSelectionEntry DAT_00580150[];
 extern u8 LAB_0015110c;   /* start of a code range */
 extern u8 LAB_00151230;   /* end of it */
 

@@ -8,8 +8,9 @@ extern "C" {
 
 /* The battle's state block. */
 BtlMainState *btlGetMainState(void);
+void btlAddEncounterExclusionId(BtlMainState *state, s32 id);
 
-}
+} /* extern "C" */
 
 extern "C" {
 void FUN_00394b0c(void);

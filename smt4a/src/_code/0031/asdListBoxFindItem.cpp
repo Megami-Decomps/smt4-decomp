@@ -2,7 +2,7 @@
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "shard/JobWork.h"
 
-// The list node holding the item `id`, or NULL.
+/* Finds the node whose item has the requested id. */
 static __inline AsdListNode* listBoxFindNode(AsdListBoxModel* model, u32 id)
 {
     for (AsdListNode* node = model->items.first; node != NULL; node = node->next) {
@@ -12,7 +12,7 @@ static __inline AsdListNode* listBoxFindNode(AsdListBoxModel* model, u32 id)
     return NULL;
 }
 
-// Look up a list-box item by its id.
+/* Looks up a list-box item by its id. */
 extern "C" AsdListBoxItem* asdListBoxFindItem(u32 job, u32 id)
 {
     AsdListBoxItem* item = NULL;

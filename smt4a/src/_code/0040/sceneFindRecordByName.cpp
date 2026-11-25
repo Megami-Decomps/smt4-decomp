@@ -10,8 +10,8 @@ extern "C" {
 
 NamedSceneRecord *sceneFindRecordByName(Obj557b68 *scene, u32 group, const char *name)
 {
-    u32 *cursor = scene->records[group].begin;
-    u32 *end = scene->records[group].end;
+    std::vector<u32>::iterator cursor = scene->vectors.records[group].words.begin();
+    std::vector<u32>::iterator end = scene->vectors.records[group].words.end();
     for (; cursor != end; ++cursor) {
         NamedSceneRecord *record = (NamedSceneRecord *)*cursor;
         if (record != NULL && strcmp(record->name, name) == 0) {

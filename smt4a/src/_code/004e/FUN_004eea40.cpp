@@ -517,7 +517,7 @@ LAB_004ef7f0:
   }
   if ((*param_2 & 0x1080) == 0) {
     if (iStack_68 == 2 || iStack_68 == 3) {
-      FUN_0047eccc(uStack_74 & 0xffff);
+      btlGetResidentOrFallbackAction(uStack_74 & 0xffff);
       FUN_0047f138(uStack_74 & 0xffff,puVar25,iVar4);
       if ((*param_2 & 0x1080) != 0) {
         iVar8 = 1;

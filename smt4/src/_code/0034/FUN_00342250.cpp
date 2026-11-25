@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023d078(int, int);
+int combinerAddConstantColor(int, int);
 int FUN_0023d158(int, unsigned int);
 int matrixScaleColumns(unsigned char [48], unsigned char [48], float *);
 int animKeyTableFindKey(int, int);
@@ -63,7 +63,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0023d078. */
+/* Supplied declaration required: combinerAddConstantColor. */
 extern int gpuWriteUniformColor(int, unsigned int);
 /* Supplied declaration required: FUN_0023d158. */
 extern unsigned int resourceGetIndexedEntry(int, unsigned int);
@@ -229,7 +229,7 @@ void FUN_00342250(int param_1,unsigned int param_2)
             temp_v9 = temp_v2;
           }
           if (temp_v7 != temp_v23) {
-            FUN_0023d078(temp_v22,temp_v23);
+            combinerAddConstantColor(temp_v22,temp_v23);
             temp_v7 = temp_v23;
           }
           temp_v1 = *(int *)(temp_v3 + 0x44);

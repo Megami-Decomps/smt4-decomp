@@ -1,4 +1,4 @@
-/* NON_MATCHING: class layout, inlined matrix/-1 member constructors and nested blocks recovered; armcc keeps its own base-register strategy (retail rebases through writeback `str r5,[r0,#16]!` and `[r0,#220]!`, registers r4/r5/r6 vs r4-r8). */
+/* NON_MATCHING: the projection and colour-list subobjects are recovered; the constructor still uses different bases through the matrix setup and combines some tail stores that retail emits separately (108 lines). */
 #include "classes/Obj557b68.h"
 
 Obj557b68::Obj557b68()

@@ -71,7 +71,7 @@ int FUN_0026d144(...);
 int partyPanelRefreshSelectedItemValues(...);
 int pair40Set(...);
 int slotPlacementAssignSlotAndPosition(...);
-int menuSetModeAndResetTransitions(...);
+int menuSetModeAndResetTransitions(...); // declcheck: local (the typed mode declaration regresses this large draft: 5233 -> 5674 diff lines)
 int FUN_0029e890(...);
 int scrollListSetSelectionMarkChanged(...);
 

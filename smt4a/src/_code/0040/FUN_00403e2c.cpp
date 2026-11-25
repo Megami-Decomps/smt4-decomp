@@ -1,5 +1,6 @@
 /* NON_MATCHING: identical calls and branches; retail keeps 0 in r7 (the touched flag) and 1 in r6 across the calls with a 28-byte frame, armcc here allocates r6 for the flag and re-materialises 1. */
 #include "common.h"
+#include "addon/PackageSelection.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* The list menu scene (only the fields this update reads or writes). */
@@ -11,23 +12,22 @@ struct ListMenu {
     /* 0x0FC */ u8 unk0FC[4];
     /* 0x100 */ u32 selectedId;
     /* 0x104 */ u8 unk104[8];
-    /* 0x10C */ u8 area[0x12];
-    /* 0x11E */ u8 unk11E[4];
-    /* 0x122 */ s16 areaY;
-    /* 0x124 */ s16 areaWidth;
-    /* 0x126 */ s16 areaX;
+    /* 0x10C */ s16 rowTouchIds[10];
+    /* 0x120 */ u8 unk120[2];
+    /* 0x122 */ s16 previousTouchId;
+    /* 0x124 */ s16 nextTouchId;
+    /* 0x126 */ s16 backTouchId;
     /* 0x128 */ u8 unk128[0x24];
     /* 0x14C */ u8 confirmSprite[0x8C];
     /* 0x1D8 */ u8 backSprite[0x8C];
     /* 0x264 */ u8 unk264[0x8C];
     /* 0x2F0 */ u8 scrollA[0x8C];
     /* 0x37C */ u8 scrollB[0x8C];
-    /* 0x408 */ u16 ids[1];
+    /* 0x408 */ u16 ids[300];
+    /* 0x660 */ void *rows;
+    /* 0x664 */ PackageSelectableRecord *selected;
 };
-
-struct ListMenuTail {
-    /* 0x664 */ u32 selectedCopy;
-};
+typedef char ListMenuSelectionCheck[offsetof(ListMenu, selected) == 0x664 ? 1 : -1];
 
 extern "C" {
 s32 padQueryLogicalKey(s32 button, s32 mode);
@@ -42,7 +42,6 @@ void useCounterStart(void);
 void useCounterAppendValue(s32 id);
 void sortMenuAcquire(s32 id, s32 arg);
 s32 uiScrollHandleActionsOrTouch(void *list, const TextureTableEntryIV *touchArea, void *area, s32 x, s32 y, s32 w, u8 *flag, s32 a, s32 b);
-u32 contentFindRecordById(void);
 void FUN_004029f4(ListMenu *menu, s32 a, s32 b);
 void contentEntryInitializeTexture(ListMenu *menu);
 s32 ifTouchGetSelectionMode(void);
@@ -59,11 +58,12 @@ void FUN_00403e2c(ListMenu *menu)
     menu->cursor = resourceRunOperationIfUnblocked(menu->list);
     menu->pageCount = listCursorGetRowIfUnblocked(menu->list);
     menu->selectedId = menu->ids[menu->pageCount + menu->cursor];
-    ((ListMenuTail *)((u8 *)menu + 0x664))->selectedCopy = contentFindRecordById();
+    menu->selected = contentFindRecordById(menu->selectedId);
     u8 touched = 0;
     s32 mode = ifTouchGetSelectionMode();
     const TextureTableEntryIV *touchArea = asdTMTexTableEntryAt(50, 139);
-    if (uiScrollHandleActionsOrTouch(menu->list, touchArea, menu->area, menu->areaX, menu->areaY, menu->areaWidth, &touched, 0, 1))
+    if (uiScrollHandleActionsOrTouch(menu->list, touchArea, menu->rowTouchIds, menu->backTouchId,
+                                     menu->previousTouchId, menu->nextTouchId, &touched, 0, 1))
         return;
     if (padQueryLogicalKey(0, 1) || mode == 6) {
         eventQueueAddUniqueIfValid(0x0100020E);

@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b8798` (_code @ 0x1b8798, 0x3e0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/Resource.h"
 
 extern "C" {
 
 int trackCombinationInitialize(unsigned int *, unsigned int, int, int, unsigned int, int, int *);
 int FUN_001c398c(...);
 int FUN_001c3bb8(...);
-int FUN_001cd01c(unsigned int *, unsigned int);
 int __aeabi_vec_ctor_nocookie_nodtor(int, unsigned char *, int, int);
 
 /* stack frame of param_5: 3 slot(s), 12 byte(s) */
@@ -25,7 +25,6 @@ extern int objectInitDefaults(void);
 /* Supplied declaration required: FUN_001c398c. */
 /* Supplied declaration required: FUN_001c3bb8. */
 extern unsigned int *FUN_001c3d20(unsigned int *, int, unsigned int);
-/* Supplied declaration required: FUN_001cd01c. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
@@ -84,7 +83,7 @@ void FUN_001b8798(int param_1,int *param_2,int *param_3,int param_4,int param_5)
         *(unsigned int *)(temp_v1 + 0x34) = 0;
       }
       puVar3 = unaff_r5;
-      FUN_001cd01c(unaff_r5,*puVar6);
+      FUN_001cd01c((ResourceSizingState *)unaff_r5, (u32 *)*puVar6);
       temp_v0 = 0;
       if (puVar3 != (unsigned int *)0x0) {
         temp_v0 = (*param_2 + 3U) & 0xfffffffc;

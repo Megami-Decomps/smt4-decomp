@@ -8,7 +8,7 @@ extern "C" {
 int screenFadeStartIn(int, int, int);
 int dataTableGetEntries(void);
 int dataTableFileGetTable(...);
-int frameTexRequestFade(int);
+int frameTexApplyMode(int);
 int FUN_003e0cd4(unsigned int *, int);
 int FUN_003ed6e8(int);
 int btlLoadBossAppearData(...);
@@ -47,7 +47,7 @@ extern int pairedAvailabilityGetState(unsigned int);
 extern int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: dataTableFileGetTable. */
-/* Supplied declaration required: frameTexRequestFade. */
+/* Supplied declaration required: frameTexApplyMode. */
 /* Supplied declaration required: FUN_003e0cd4. */
 /* Supplied declaration required: FUN_003ed6e8. */
 extern int FUN_003f1230(int);
@@ -154,7 +154,7 @@ LAB_003e1f28:
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < 0x36);
         if ((*puVar10 & DAT_00573888) == 0 && (*(unsigned int *)(param_2 + 0x45a4) & DAT_0057388c) == 0) {
-          frameTexRequestFade(2);
+          frameTexApplyMode(2);
           temp_v5 = *puVar10 | DAT_00573888;
           *(unsigned int *)(param_2 + 0x45a4) = DAT_0057388c | *(unsigned int *)(param_2 + 0x45a4);
           *puVar10 = temp_v5;

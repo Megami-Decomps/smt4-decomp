@@ -87,7 +87,7 @@ int ifTouchRegionAdd(...);
 int resourceRunEmbeddedOperationIfUnblocked(...);
 int scrollOwnerSelectIndex(...);
 int gameGlobalsSetOverlayActive(...);
-int FUN_002c8550(...);
+int menuSetModeAndResetTransitions(...);
 int rt_memclr(...);
 int FUN_002f3a90(void);
 int useCounterAppendValue(...);
@@ -292,7 +292,7 @@ extern int widgetSubCallIfVisible(int *);
 extern int useCounterGetCurrentValue(void);
 extern int FUN_002c7cb4(void);
 /* Supplied declaration required: gameGlobalsSetOverlayActive. */
-/* Supplied declaration required: FUN_002c8550. */
+/* Supplied declaration required: menuSetModeAndResetTransitions. */
 extern int FUN_002c8748(void);
 /* Supplied declaration required: FUN_002c8894. */
 extern int FUN_002c905c(void);
@@ -2090,7 +2090,7 @@ LAB_001f77ec:
           nkmBaseGetRecord();
           temp_v10 = computeCountLimit();
           if (temp_v10 < *(unsigned short *)(temp_v7 + 6)) {
-            FUN_002c8550(0xd);
+            menuSetModeAndResetTransitions(0xd);
           }
           unitRecordBuild((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2,&temp_v25);
           FUN_0032d0c8(0,1,(piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2,&temp_v25);
@@ -2609,7 +2609,7 @@ LAB_001f8d58:
     objBInitBlock19D0(piVar3 + 0x19a7,0);
     FUN_0033449c(1);
     FUN_003343c0(0);
-    FUN_002c8550(9);
+    menuSetModeAndResetTransitions(9);
     statusPanelSetOpen(0);
     buttonHelpSetText(0,0xf4f4f4ff);
     piVar3[0x103] = 0x13;
@@ -2814,7 +2814,7 @@ LAB_001f9868:
           unitRecordBuild((short)piVar3[0x148e],piVar3 + 0x19a7);
         }
         if (*(char *)((int)piVar3 + 0x9071) != '\0') {
-          FUN_002c8550(2);
+          menuSetModeAndResetTransitions(2);
           piVar19 = g_unite;
           if (g_unite != (int *)0x0) {
             *(unsigned char *)(g_unite + 0x108) = 3;
@@ -2824,7 +2824,7 @@ LAB_001f9868:
           *(unsigned char *)((int)piVar3 + 0x9071) = 0;
         }
         else {
-          FUN_002c8550(2);
+          menuSetModeAndResetTransitions(2);
           FUN_0033449c(0);
           statusDisplayBindUnitRecord(piVar3 + 0x19a7,0,0);
           statusPanelSetOpen(0);
@@ -2847,7 +2847,7 @@ LAB_001f9868:
       return 0;
     }
     eventQueueAddUniqueIfValid(0x100020e);
-    FUN_002c8550(2);
+    menuSetModeAndResetTransitions(2);
     FUN_0033449c(0);
     nkmBaseGetRecord(*(unsigned short *)((int)piVar3 + 0x66fe));
     uniteInheritanceBuildSkillList(*(unsigned short *)((int)piVar3 + 0x66fe));
@@ -2893,7 +2893,7 @@ LAB_001f9868:
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
     }
-    FUN_002c8550(2);
+    menuSetModeAndResetTransitions(2);
     FUN_0033449c(0);
     gameGlobalsSetMenuOpenFlag(0);
     FUN_00333dc8(0);
@@ -3113,7 +3113,7 @@ LAB_001f9868:
     if (temp_v18 && piVar19 != (int *)0x0) {
       flagValueSub(piVar19,1);
     }
-    FUN_002c8550(2);
+    menuSetModeAndResetTransitions(2);
     statusPanelClose();
     statusDownRestartTransition();
     gameGlobalsSetMenuOpenFlag(0);
@@ -3588,7 +3588,7 @@ LAB_001fac1c:
               if (temp_v12 != '\x03') {
                 FUN_0031f718((int)*(short *)((int)piVar3 + temp_v4 * 2 + 0x5238),0);
                 if (*(char *)((int)piVar3 + (char)piVar3[0x1a0c] + 0x5251) == '\0') {
-                  FUN_002c8550(0xe);
+                  menuSetModeAndResetTransitions(0xe);
                 }
               }
               else {
@@ -3606,12 +3606,12 @@ LAB_001fac1c:
               temp_v10 = computeCountLimit();
               temp_v18 = (unsigned short)puVar15[3] <= temp_v10;
               if (temp_v10 < (unsigned short)puVar15[3]) {
-                FUN_002c8550(0xd);
+                menuSetModeAndResetTransitions(0xd);
                 temp_v18 = 1;
               }
             }
             else {
-              FUN_002c8550(0xe);
+              menuSetModeAndResetTransitions(0xe);
             }
           }
           temp_v4 = (int)(char)piVar3[0x1a0c];
@@ -4023,7 +4023,7 @@ joined_r0x001fbbe8:
           nkmBaseGetRecord();
           temp_v10 = computeCountLimit();
           if (temp_v10 < *(unsigned short *)(temp_v7 + 6)) {
-            FUN_002c8550(0xd);
+            menuSetModeAndResetTransitions(0xd);
           }
         }
         if ((char)piVar3[0x1a0c] == '\x01') {
@@ -4095,11 +4095,11 @@ LAB_001fc128:
             temp_v7 = computeCountLimit();
             if (temp_v7 < *(unsigned short *)((int)temp_v30 + 6)) {
               temp_v15 = 0xd;
-              FUN_002c8550(temp_v15);
+              menuSetModeAndResetTransitions(temp_v15);
             }
           }
           else {
-            FUN_002c8550(0xe);
+            menuSetModeAndResetTransitions(0xe);
           }
         }
         else {
@@ -4110,7 +4110,7 @@ LAB_001fc128:
               FUN_0031f718((int)*(short *)((int)piVar3 + temp_v4 * 2 + 0x5238),0);
               if (*(char *)((int)piVar3 + (char)piVar3[0x1a0c] + 0x5251) == '\0') {
                 temp_v15 = 0xe;
-                FUN_002c8550(temp_v15);
+                menuSetModeAndResetTransitions(temp_v15);
               }
             }
             else {

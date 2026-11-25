@@ -13,7 +13,7 @@ u8 btlCommandMenuKindAt(PlayScene *scene, s32 ordinal)
     s32 accepted = 0;
     const SaveSlotTableIV *table = gameGetSlotTable();
     for (s32 index = 0; index < CONTEXT_COMMAND_COUNT; ++index) {
-        const ContextCommandDefinition *command = FUN_00292960((u8)index, scene->commandOwner == 0);
+        const ContextCommandDefinition *command = btlDebugFindCommandByIndex((u8)index, scene->commandOwner == 0);
         void *unit = NULL;
         if (scene->commandOwner != 0 && table->active[scene->commandOwner - 1] >= 0)
             unit = gameGetUnitRecord(table->active[scene->commandOwner - 1]);

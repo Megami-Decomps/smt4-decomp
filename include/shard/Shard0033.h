@@ -20,6 +20,8 @@ typedef struct MenuState {
     /* 0x2B1 */ u8 unk2B1;
 } MenuState;
 
+class StatusScreenModel;
+
 /* Apocalypse live game-session data, held by the singleton reference below. */
 typedef struct ObjB {
     union {
@@ -115,7 +117,7 @@ typedef struct ObjB {
             /* 0x2032 */ u8 allowed;
         } sessionEligibility;
     };
-    /* 0x2034 */ u32 unk2034;
+    /* 0x2034 */ StatusScreenModel *statusModel;
     /* 0x2038 */ f32 statusModelPosition[3];
     /* 0x2044 */ u8 unk2044[0x10];
     /* 0x2054 */ s32 statusCameraHeightOffset;
@@ -152,7 +154,8 @@ typedef char ObjBSessionOffsetsCheck[sizeof(ObjB) == 0x20F4 &&
     offsetof(ObjB, mapGroupIndex) == 0x20A8 && offsetof(ObjB, mapGroupsFile) == 0x20CC &&
     offsetof(ObjB, scaledMaxHp) == 0x20E8 && offsetof(ObjB, scaledMaxMp) == 0x20EC ? 1 : -1];
 typedef char ObjBMenuSpriteOffsetsCheck[
-    offsetof(ObjB, statusSprites.status) == 0x418 && offsetof(ObjB, statusModelPosition) == 0x2038 &&
+    offsetof(ObjB, statusSprites.status) == 0x418 && offsetof(ObjB, statusModel) == 0x2034 &&
+    offsetof(ObjB, statusModelPosition) == 0x2038 &&
     offsetof(ObjB, animationSteps) == 0x20D4 &&
     offsetof(ObjB, unk20E6) == 0x20E6 &&
     offsetof(ObjB, menuReset.first) == 0x18 &&

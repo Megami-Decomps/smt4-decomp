@@ -9,7 +9,7 @@ extern "C" {
 int CONCAT44(...);
 int nn_math_ARMv6_MTX44MultAsm(float *, int, int);
 int FUN_001a6fbc(float *);
-int FUN_00399290(unsigned int, int);
+int lmapSetMarkerVisible(unsigned int, int);
 int FUN_003b5c54(unsigned int, int);
 int nn_math_ARMv6_MTX33CopyAsm(int *, float *);
 
@@ -108,7 +108,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 /* Supplied declaration required: FUN_001a6fbc. */
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_00399290. */
+/* Supplied declaration required: lmapSetMarkerVisible. */
 /* Supplied declaration required: FUN_003b5c54. */
 /* Supplied declaration required: nn_math_ARMv6_MTX33CopyAsm. */
 
@@ -442,10 +442,10 @@ void FUN_003699e4(int param_1)
                     (float)((unsigned long long)temp_v38 >> 0x20) * temp_v64) - temp_v83)) &&
          (temp_v4 >= (temp_v43 * temp_v62 + temp_v44 * temp_v63 + temp_v42 * temp_v64) -
                    temp_v84)) {
-        FUN_00399290(temp_v3,1);
+        lmapSetMarkerVisible(temp_v3,1);
       }
       else {
-        FUN_00399290(temp_v3,0);
+        lmapSetMarkerVisible(temp_v3,0);
       }
     }
     if ((*(int *)(((int)g_lmapMainState) + 0x40) != 100) && (*(int *)(temp_v0 + 0x4ef8) != 0)) {

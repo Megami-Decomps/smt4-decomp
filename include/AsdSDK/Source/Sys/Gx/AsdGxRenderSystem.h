@@ -80,7 +80,7 @@ typedef struct AsdGxPresets {
     /* 0x1C4 */ f32 frameTime;              /* microseconds per frame at the current interval */
     /* 0x1C8 */ s32 stereoMode;             /* 1: stereoscopic 3D */
     /* 0x1CC */ s32 pendingStereoMode;
-    /* 0x1D0 */ u8 forceBlackCleared;
+    /* 0x1D0 */ s8 forceBlackCleared;
     /* 0x1D1 */ u8 unk1D1[0x23];
     /* 0x1F4 */ s32 displayMode;            /* 1: the display buffers are not bound (suspended) */
     /* 0x1F8 */ u32 colorFormat;            /* GL format of the color buffers (0x8058: RGBA8) */
@@ -107,6 +107,12 @@ typedef char AsdGxPresetsOffsets[
 
 extern "C" {
 extern AsdGxPresets g_asdGxPresets;
+}
+
+/* Reports whether the LCD has already been released from forced black. */
+static __inline s8 asdGxWasBlackCleared(const AsdGxPresets *presets)
+{
+    return presets->forceBlackCleared;
 }
 
 /* A GL-like texture or buffer object. */

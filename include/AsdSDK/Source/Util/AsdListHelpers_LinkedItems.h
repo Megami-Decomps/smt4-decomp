@@ -6,6 +6,7 @@
 extern "C" {
 
 LinkedItem *linkedFindItemByIndex(const LinkedItems *owner,u32 index);
+void linkedItemsRemoveAndRelease(LinkedItems *items, LinkedItem *item);
 
 } /* extern "C" */
 

@@ -1,3 +1,4 @@
+#include "nn/err/Fatal.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `nn_applet_CTR_detail_CallUtility` (_code @ 0x2b5838, 0xcc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -6,7 +7,6 @@ extern "C" {
 
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
-int errThrowFatal(unsigned int, int);
 
 /* stack frame of param_6: 5 slot(s), 20 byte(s) */
 typedef struct {

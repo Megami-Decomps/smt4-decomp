@@ -1,8 +1,8 @@
 #include "shard/Shard0048.h"
+#include "name/nameMain.h"
 
 extern "C" {
 
-extern void stateSetterEnterState(StateSetter *obj, s32 state);
 
 void stateSetterStart9(StateSetter *obj)
 {

@@ -15,24 +15,27 @@ u32 FUN_0045b384(NamedResourceBindingArray* bindings,
     if (request->count > bindings->capacity)
         return 0x80000001;
 
-    for (u32 index = 0; index < request->count; ++index) {
-        if (bindings->resources[index] == NULL) {
-            NamedResourceDirectoryData* directory = &owner->directory->data;
-            void* resource = NULL;
-            const char* name = request->names[index];
-            u32 resourceIndex = nameTableLookupEntry(directory->nameIndex, name, libc_strlen(name));
-            if (resourceIndex != 0xFFFF)
-                resource = owner->directory->data.resources[resourceIndex];
-            if (resource == NULL)
-                missing = 1;
-            else
-                found = 1;
-            bindings->resources[index] = resource;
-        }
+    if (request->count != 0) {
+        u32 index = 0;
+        do {
+            if ((*bindings)[index] == NULL) {
+                NamedResourceDirectoryData *directory = &owner->directory->data;
+                void *resource = NULL;
+                const char *name = request->names[index];
+                u32 resourceIndex = nameTableLookupEntry(directory->nameIndex, name, libc_strlen(name));
+                if (resourceIndex != 0xFFFF)
+                    resource = owner->directory->data.resources[resourceIndex];
+                if (resource == NULL)
+                    missing = 1;
+                else
+                    found = 1;
+                (*bindings)[index] = resource;
+            }
+        } while (++index < request->count);
     }
     u32 index = request->count;
     while (index < bindings->capacity)
-        bindings->resources[index++] = NULL;
+        (*bindings)[index++] = NULL;
 
     if (found) {
         if (missing)

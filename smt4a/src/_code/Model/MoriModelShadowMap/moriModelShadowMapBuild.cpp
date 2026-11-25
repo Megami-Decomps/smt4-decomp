@@ -78,7 +78,7 @@ struct ShadowDrawSettings {
  * render target. */
 void moriModelShadowMapBuild(MoriModelShadowMap *shadowMap, Obj557b68Layer *layer)
 {
-    Obj557b68Projection *projection = &layer->projection;
+    Obj557b68Projection *projection = &layer->projectionSetup.projection;
     TexSource source;
     source.address = *DAT_0056fcc4;
     source.height = kShadowMapSize;

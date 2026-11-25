@@ -1,4 +1,5 @@
 #include "shard/Shard0048.h"
+#include "name/nameMain.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ typedef struct Rect48 {
     /* 0xAC */ u32 unkAC;
 } Rect48;
 
-extern void stateSetterEnterState(Rect48 *obj, s32 state);
 
 void rect48Init(Rect48 *obj)
 {

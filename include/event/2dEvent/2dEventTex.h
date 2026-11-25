@@ -43,6 +43,13 @@ typedef char EventTexDrawLayoutCheck[offsetof(EventTex, drawOrigin) == 0x60 && s
     offsetof(EventTexA, drawOrigin) == 0x90 && sizeof(EventTexA) == 0x98 ? 1 : -1];
 
 extern "C" {
+/* Callbacks registered by eventTexCreate. */
+s32 eventTexUpdateScreenShake(u32 job);
+void eventTextureRelease(u32 job);
+s32 eventTexUpdateScreenShake(u32 job);
+void eventTexFree(u32 job);
+s32 eventTexDrawJobs(u32 job);
+
 u8 *saveGetUserSettingsBlock(void);
 /* Starts a portrait for the requested table variant; returns its job handle or zero. */
 u32 npc2dCreatePortraitVariantJob(u32 npc, s32 position, u32 variant);

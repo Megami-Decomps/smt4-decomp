@@ -1,3 +1,4 @@
+#include "nn/err/Fatal.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00110180` (_code @ 0x110180, 0x140 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -14,7 +15,6 @@ int FUN_002bb194(int);
 int FUN_002bb20c(void);
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
-int errThrowFatal(...);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -56,10 +56,7 @@ int FUN_00110180(unsigned int param_1,unsigned int param_2,unsigned int param_3)
   FUN_002bb378();
   temp_v1 = temp_v5;
   temp_v0 = -1;
-  FUN_0011d798(0xffffffff,temp_v3,temp_v4,&temp_v2);
-  if (temp_v0 < 0) {
-    errThrowFatal();
-  }
+  throwFatalIfFailed(FUN_0011d798(0xffffffff,temp_v3,temp_v4,&temp_v2), __current_pc());
   nn_applet_CTR_detail_CloseSession();
   temp_v0 = FUN_002bb2c8();
   if (temp_v0 != 0) {

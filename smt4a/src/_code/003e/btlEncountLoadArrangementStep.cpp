@@ -70,7 +70,7 @@ s32 FUN_003e0f94(BattleEncounterQuery *query, EncounterContextA *context);
 void FUN_003e0bb8(BattleEncounterQuery *query, EncounterContextA *context);
 s32 pairedEntryTableContains(EncounterContextA *context, u16 id);
 void btlQueueActionMessage(s32, s32, s32, s32, s32, s32, s32);
-void frameTexRequestFade(s32 mode);
+void frameTexApplyMode(s32 mode);
 
 /* Encounter state 0x16: copies the file's records in, marks the unloaded ones and moves on to state 0x17. */
 void btlEncountLoadArrangementStep(BattleEncounterQuery *query, EncounterContextA *context)
@@ -136,7 +136,7 @@ void btlEncountLoadArrangementStep(BattleEncounterQuery *query, EncounterContext
     query->pending = 0;
     result = FUN_003e0f94(query, context);
     if (result != 2 && result != 5 && !(context->flags & g_btlEncount.startedMask)) {
-        frameTexRequestFade(2);
+        frameTexApplyMode(2);
         context->flags |= g_btlEncount.startedMask;
     }
     FUN_003e0bb8(query, context);

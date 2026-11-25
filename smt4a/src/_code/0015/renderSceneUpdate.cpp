@@ -25,7 +25,7 @@ struct RenderSceneLightState {
 
 extern "C" {
 extern RenderSceneLightState g_asdLightCount;
-void FUN_0017712c(ModelOwner *owner, void *traverser, u32 mask, s32 enabled);
+void modelApplyInheritedValues(ModelOwner *owner, void *traverser, u32 mask, s32 enabled);
 void FUN_00176800(ModelOwner *owner, void *traverser, s32 enabled);
 void nw_gfx_SceneNode_AttachChild(void *builder, u32 tree);
 void FUN_00176e84(ModelOwner *owner, u32 mask, s32 mode, s32 flags);
@@ -42,7 +42,7 @@ extern "C" void renderSceneUpdate(void)
         return;
     // The scene owner keeps its render context at +4.
     void *context = reinterpret_cast<RenderSceneOwner *>(g_gfxSettings.owner[1])->context;
-    FUN_0017712c(g_gfxSettings.owner[1], g_gfxSettings.attachInfo[1], g_gfxSettings.node1, 1);
+    modelApplyInheritedValues(g_gfxSettings.owner[1], g_gfxSettings.attachInfo[1], g_gfxSettings.node1, 1);
     if (g_asdLightCount.visit && !g_asdLightCount.skipVisit) {
         FUN_00197eb0((ModelSlotVectorA *)((RenderSceneBuilder *)g_gfxSettings.transformBuilder[1])->state,
                       (s32)g_gfxSettings.sceneGroupRoot[1]);

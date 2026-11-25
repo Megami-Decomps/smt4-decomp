@@ -5,6 +5,7 @@
 #include "common.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 #include "gamedata/GameDataAccess_Shard0031.h"
+#include "name/nameMain.h"
 
 // Two-character slot of the name being typed (high byte first).
 struct NameSlot {
@@ -58,7 +59,6 @@ void nameFormSetCharacter(NameEntryScreen* screen, s32 position, s32 character);
 void FUN_00484be0(NameEntryScreen* screen);
 void sendEvent100020E(void);
 void sendEvent100020F(void);
-void stateSetterEnterState(NameEntryScreen* screen, s32 state);
 
 // Types the chosen character (or the blank cell) at the cursor and advances it.
 static inline void typeCharacter(NameEntryScreen* screen, s32 character)

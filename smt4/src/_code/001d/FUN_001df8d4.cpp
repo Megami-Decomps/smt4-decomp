@@ -31,7 +31,7 @@ u32 FUN_001df8d4(SkillPicker *picker)
         const SkillDataRecord *skill = skillDataFindById(id);
         if (skill != NULL) {
             for (s32 j = 0; j < picker->passives.count; j++) {
-                if (picker->passives.ids[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives.ids[j]), skill)) {
+                if (picker->passives.ids[j] != 0 && passiveAffinityAppliesToSkill(passiveSkillLookupRecord(picker->passives.ids[j]), skill)) {
                     score += 1.0f;
                     break;
                 }
@@ -68,7 +68,7 @@ u32 FUN_001df8d4(SkillPicker *picker)
         const SkillDataRecord *skill = skillDataFindById(picker->candidates.ids[best]);
         if (skill != NULL) {
             for (s32 j = 0; j < picker->passives.count; j++) {
-                if (picker->passives.ids[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives.ids[j]), skill)) {
+                if (picker->passives.ids[j] != 0 && passiveAffinityAppliesToSkill(passiveSkillLookupRecord(picker->passives.ids[j]), skill)) {
                     picker->chosen.ids[picker->chosen.count] = picker->passives.ids[j];
                     picker->chosen.count++;
                     picker->passives.ids[j] = 0;

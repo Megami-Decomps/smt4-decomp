@@ -52,7 +52,7 @@ extern unsigned char DAT_004207e8; /* 0x4207e8 */
 /* Supplied declaration required: FUN_001d01f8. */
 /* Supplied declaration required: FUN_001df8d4. */
 /* Supplied declaration required: FUN_00205568. */
-extern int FUN_0026a604(unsigned int);
+extern int passiveAffinityAppliesToSkill(unsigned int);
 /* Supplied declaration required: idMapLookup. */
 /* Supplied declaration required: passiveSkillLookupRecord. */
 extern int affinityShouldReplaceState(unsigned short, unsigned int);
@@ -246,7 +246,7 @@ LAB_0029b3f4:
         do {
           temp_v4 = (unsigned int)*(unsigned short *)(temp_v7 + temp_v1 * 2 + 0x3c);
           if (((temp_v4 != 0) && (skillDataFindById(), temp_v4 != 0)) &&
-             (temp_v5 = FUN_0026a604(temp_v3), temp_v5 != 0)) {
+             (temp_v5 = passiveAffinityAppliesToSkill(temp_v3), temp_v5 != 0)) {
             *(unsigned short *)(temp_v17 + temp_v18 * 2) = *(unsigned short *)(temp_v13 + temp_v2 * 2);
             temp_v18 = temp_v18 + 1;
             *(unsigned short *)(temp_v13 + temp_v2 * 2) = 0;

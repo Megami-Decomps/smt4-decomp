@@ -1,5 +1,6 @@
 /* NON_MATCHING: 131 lines (118 vs 101 rows): if/else-if action dispatch and for-loop scan match; duplicate character reads are merged and byte assembly differs. */
 #include "ui/GridNavigation.h"
+#include "name/nameMain.h"
 struct NameConfirmationWork {
     u8 unk000[8];
     u8 changed;
@@ -32,7 +33,6 @@ static __inline bool nameIsEmpty(const NameConfirmationWork *work, s8 index)
 }
 extern "C" {
 s32 flaggedEntryGetValueB(const GridNavigation *actions);
-void stateSetterEnterState(NameConfirmationWork *work, s32 state);
 void sendEvent100020D(void);
 void sendEvent100020E(void);
 

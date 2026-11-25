@@ -17,8 +17,8 @@ s32 btlUiAcceptSelection(void)
     }
     result = playSceneAcceptsInput(&ui->objC);
     if (result != 0) {
-        btlCommandMenuResolveLayout(&ui->objC, &ui->unk7E4E, &ui->unk7E50);
-        if (ui->unk7E4E == 0xE) {
+        btlCommandMenuResolveLayout(&ui->objC, &ui->panelState.acceptedCommand, &ui->unk7E50);
+        if (ui->panelState.acceptedCommand == 0xE) {
             *state = 10;
         } else {
             *state = 0;

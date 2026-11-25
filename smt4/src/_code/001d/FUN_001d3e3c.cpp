@@ -94,7 +94,7 @@ int mapUpdateLocationAvailability(void);
 int clearFlags310To31F(void);
 int FUN_002757a8(void);
 int FUN_002758d8(void);
-int FUN_002759bc(void);
+int frameTexturesRelease(void);
 int FUN_00275bc8(void);
 int frameTexCampSetMode(...);
 int FUN_00275dc4(void);
@@ -406,7 +406,7 @@ extern unsigned int campGetState(void);
 /* Supplied declaration required: FUN_00275364. */
 /* Supplied declaration required: FUN_002757a8. */
 /* Supplied declaration required: FUN_002758d8. */
-/* Supplied declaration required: FUN_002759bc. */
+/* Supplied declaration required: frameTexturesRelease. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: frameTexCampSetMode. */
 /* Supplied declaration required: FUN_00275dc4. */
@@ -1460,7 +1460,7 @@ joined_r0x001d535c:
     if (temp_v6 + 1 < 4) {
       return 0;
     }
-    FUN_002759bc();
+    frameTexturesRelease();
     FUN_002758d8();
     FUN_0028a420(0);
     temp_v6 = 0xd;
@@ -3281,7 +3281,7 @@ joined_r0x001d8c24:
     slotPoolReleaseResources();
     FUN_002700d0();
     mapTableRelease();
-    FUN_002759bc();
+    frameTexturesRelease();
     mapIfDestroy();
     temp_v6 = puVar7[3] + 1;
     puVar7[3] = temp_v6;

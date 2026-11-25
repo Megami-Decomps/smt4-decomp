@@ -68,6 +68,7 @@ void FUN_004688c8(Obj5333c0 *scene);
 void questCenterBuildTalkEntries(Obj5333c0 *scene);
 void questCenterBeginConversation(Obj5333c0 *scene);
 void questInteractionChooseEntry(Obj5333c0 *scene);
+void scenePartAdvanceState(Obj5333c0 *scene);
 u16 idOwnerGetRecordHalf(Obj5333c0 *scene);
 s32 pickObjStart(Obj5333c0 *scene, const char *entry);
 void qcCtrlStart(Obj5333c0 *scene, s32 kind, s32 mode, s32 frozen);
@@ -98,6 +99,7 @@ public:
     friend void questCenterBuildTalkEntries(Obj5333c0 *scene);
     friend void questCenterBeginConversation(Obj5333c0 *scene);
     friend void questInteractionChooseEntry(Obj5333c0 *scene);
+    friend void scenePartAdvanceState(Obj5333c0 *scene);
     friend u16 idOwnerGetRecordHalf(Obj5333c0 *scene);
     friend s32 pickObjStart(Obj5333c0 *scene, const char *entry);
     friend void qcCtrlStart(Obj5333c0 *scene, s32 kind, s32 mode, s32 frozen);

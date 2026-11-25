@@ -32,7 +32,7 @@ u32 FUN_001cffd0(SkillPicker *picker)
         const SkillDataRecord *skillData = skillDataFindById(skill);
         if (skillData != NULL) {
             for (s32 j = 0; j < picker->passives.count; j++) {
-                if (picker->passives.ids[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives.ids[j]), skillData)) {
+                if (picker->passives.ids[j] != 0 && passiveAffinityAppliesToSkill(passiveSkillLookupRecord(picker->passives.ids[j]), skillData)) {
                     score += 1.0f;
                     break;
                 }

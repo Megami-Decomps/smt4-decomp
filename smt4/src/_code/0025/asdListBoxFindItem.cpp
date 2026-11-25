@@ -3,7 +3,7 @@
 #include "shard/JobWork.h"
 #include "shard/W6_W6Match2_GeometryResources.h"
 
-// The list node holding the item uid=197609(thele) gid=197609 groups=197609, or NULL.
+/* Finds the node whose item has the requested id. */
 static __inline AsdListNode* listBoxFindNode(AsdListBoxModel* model, u32 id)
 {
     for (AsdListNode* node = model->items.first; node != NULL; node = node->next) {
@@ -13,11 +13,11 @@ static __inline AsdListNode* listBoxFindNode(AsdListBoxModel* model, u32 id)
     return NULL;
 }
 
-// Look up a list-box item by its id.
+/* Looks up a list-box item by its id. */
 extern "C" AsdListBoxItem* asdListBoxFindItem(u32 job, u32 id)
 {
     AsdListBoxItem* item = NULL;
-    AsdListNode* node = listBoxFindNode(reinterpret_cast<AsdListBoxModel*>(jobGetWork(job)), id);
+    AsdListNode* node = listBoxFindNode((AsdListBoxModel *)jobGetWork(job), id);
     if (node != NULL)
         item = (AsdListBoxItem*)node->item;
     return item;

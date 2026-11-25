@@ -273,6 +273,10 @@ typedef struct BtlMainState {
             /* 0x48B8 */ u32 minimumPercentApplied;   /* set once an affinity query raised its percent to the minimum */
         } affinity;
         struct {
+            u8 prefix[0x48BC - 0x44A8];
+            /* 0x48BC */ s32 ids[42]; /* encounter exclusion IDs, zero for an empty slot */
+        } encounterExclusions;
+        struct {
             u8 unk44a8[0x10];
             /* 0x44B8 */ BtlScriptStatusRecord records[128];
         } unitStatus;
@@ -736,6 +740,10 @@ typedef struct BtlMainStateA {
             /* 0x3030 */ u32 unk3030;
             /* 0x3034 */ s32 ddmDevilCount;  /* "DDM devil cnt" */
         } debugValues;                       /* values the debug flag menu edits, by its labels */
+        struct {
+            u8 prefix[0x4BC4 - 0x2000];
+            /* 0x4BC4 */ s32 ids[42]; /* encounter exclusion IDs, zero for an empty slot */
+        } encounterExclusions;
     };
     /* 0x4CD0 */ u8 unk4cd0;
     /* 0x4CD1 */ s8 unk4cd1;
@@ -747,6 +755,24 @@ typedef struct BtlMainStateA {
     /* 0x4CE8 */ s32 actionSoundId;  /* the sound an action switches to (btlUnitStartAction) */
     /* 0x4CEC */ s32 specialEffect; /* effect handle for the special combatant, 0 = none */
 } BtlMainStateA;
+
+typedef char BattleEncounterExclusionsLayoutCheck[
+    offsetof(BtlMainState, encounterExclusions.ids) == 0x48BC &&
+    offsetof(BtlMainStateA, encounterExclusions.ids) == 0x4BC4 ? 1 : -1];
+
+/* The inlined body of pairedEntryTableContains in both games. */
+template <class MainState>
+static __inline s32 btlPairedEntryTableContains(const MainState *state, s32 id)
+{
+    enum { EXCLUSION_COUNT = sizeof(state->encounterExclusions.ids) / sizeof(s32) };
+    for (s32 i = 0; i < EXCLUSION_COUNT; i += 2) {
+        if (state->encounterExclusions.ids[i] == id || state->encounterExclusions.ids[i + 1] == id) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 typedef char BtlMainStateADebugValueOffsetCheck[
     offsetof(BtlMainStateA, debugValues.lastSaveTime) == 0x302C &&
     offsetof(BtlMainStateA, debugValues.ddmDevilCount) == 0x3034 &&

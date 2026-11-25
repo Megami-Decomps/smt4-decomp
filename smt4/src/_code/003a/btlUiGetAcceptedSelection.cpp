@@ -10,7 +10,7 @@ void btlUiGetAcceptedSelection(u32 unused, u16 *outA, u16 *outB)
     BtlUi *ui = g_btlUi.ui;
 
     if (playSceneAcceptsInput(&ui->objC) != 0) {
-        *outA = ui->unk7E4E;
+        *outA = ui->panelState.acceptedCommand;
         *outB = ui->unk7E50;
     }
 }

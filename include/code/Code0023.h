@@ -16,7 +16,8 @@ u32 FUN_0023b3b8(void);
 
 void FUN_0023b45c(s32 flag);
 
-void FUN_0023dcb8(void);
+/* Tests the current quest's flag before the protagonist's battle commands are offered. */
+s32 FUN_0023dcb8(void);
 
 void FUN_0023fad8(void *object);
 

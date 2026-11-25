@@ -12,22 +12,12 @@ void statusCameraRestore(s32 enabled);
 s32 byte1IsZero();
 void FUN_0023b45c(s32 enabled);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-void FUN_0038b5fc(s32 kind, u16 value);
+void statusModelPreviewOutfitPart(s32 kind, u16 value);
 void buttonHelpSetText(s32 slot, u32 color);
 void ptrListRemoveClearOwner(void *registry, u32 handle);
 void statusPanelClose();
 
-/* Enters editor state `next`, remembering the state it leaves and restarting its frame count. */
-static __inline void editorEnter(SavedUnitSelection *selection, u8 next)
-{
-    SavedUnitSelection::SavedUnitSelectionEditor *editor = &selection->editor;
-    u8 previous = editor->state;
-    editor->state = next;
-    editor->previous = previous;
-    editor->frame = 0;
-}
-
-// Apply staged player stats when requested, or release editor resources before closing.
+/* Applies staged player stats when requested, or releases editor resources before closing. */
 void savedUnitEditorApplyOrClose(SavedUnitSelection *editor)
 {
     if (objBStateAllowsAction() && editor->active) {
@@ -47,12 +37,12 @@ void savedUnitEditorApplyOrClose(SavedUnitSelection *editor)
         if (!editor->changes[editor->selected])
             FUN_0023b45c(0);
         __aeabi_memcpy4(gameGetPlayerData(), &editor->editor.stats, sizeof(UnitSevenStats));
-        FUN_0038b5fc(1, editor->editor.stats.values[4]);
-        FUN_0038b5fc(2, editor->editor.stats.values[5]);
-        FUN_0038b5fc(0, editor->editor.stats.values[3]);
+        statusModelPreviewOutfitPart(1, editor->editor.stats.values[4]);
+        statusModelPreviewOutfitPart(2, editor->editor.stats.values[5]);
+        statusModelPreviewOutfitPart(0, editor->editor.stats.values[3]);
         editor->active = 1;
         buttonHelpSetText(0, 0xF4F4F4FF);
-        editorEnter(editor, 5);
+        savedUnitEditorEnter(editor, 5);
     } else {
         if (editor->resource != NULL) {
             ptrListRemoveClearOwner(g_handleRegistry, editor->resource->handle);
@@ -63,7 +53,7 @@ void savedUnitEditorApplyOrClose(SavedUnitSelection *editor)
         }
         statusPanelClose();
         buttonHelpTransitionPresetFlags(3);
-        editorEnter(editor, 9);
+        savedUnitEditorEnter(editor, 9);
     }
     editor->editor.pending = 0;
 }

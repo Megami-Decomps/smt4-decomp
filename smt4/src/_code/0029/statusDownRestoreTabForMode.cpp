@@ -1,4 +1,5 @@
 /* NON_MATCHING: the mode-13 and default tab tails are now separate blocks like retail; retail also re-reads g_gameGlobals.data after the stores (typed global access here keeps one copy). */
+#include "status/StatusMenuMode.h"
 #include "shard/GameGlobals.h"
 
 struct StatusTabReset {

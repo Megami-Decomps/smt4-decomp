@@ -5,6 +5,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "classes/Obj42242c.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "status/StatusMenuMode.h"
 
 struct BibleInitRow { u32 unk00; s16 id; u8 unk06[0x1a]; };
 struct BibleInitFields {
@@ -37,7 +38,6 @@ struct BibleDevilTasks { BibleDevilTaskWork *work; s32 selected; };
 extern "C" {
 extern BibleDevilTasks g_bibleDevilCallbackContext;
 void entryTableClear(void *table);
-void menuSetModeAndResetTransitions(s32);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, BibleDevilTaskWork *, u32);
 s32 uiCallbackUpdate(u32);
 void uiCallbackFree(u32);

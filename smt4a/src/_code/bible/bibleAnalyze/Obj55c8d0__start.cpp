@@ -7,7 +7,7 @@ extern "C" {
 
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(int, int, int, int, int);
-int FUN_002c8550(int);
+int menuSetModeAndResetTransitions(int);
 int FUN_0031f718(int, int);
 int loadSlotEnsureLoaded(...);
 int FUN_004930e4(int);
@@ -42,7 +42,7 @@ extern int *DAT_0057f0a0; /* 0x57f0a0 */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_002c8550. */
+/* Supplied declaration required: menuSetModeAndResetTransitions. */
 /* Supplied declaration required: FUN_0031f718. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 extern int gameTestProgressFlag(int);
@@ -79,7 +79,7 @@ void Obj55c8d0::start()
   slotPoolResetTrackedState();
   (**(romwright_code **)(*param_1 + 0x20))(param_1);
   FUN_0031f718(0,1);
-  FUN_002c8550(7);
+  menuSetModeAndResetTransitions(7);
   if ((char)param_1[0x218] == '\x01') {
     FUN_004930e4(0);
   }

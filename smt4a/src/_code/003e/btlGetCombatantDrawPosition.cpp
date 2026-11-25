@@ -1,6 +1,7 @@
 /* NON_MATCHING: 134 vs 134 rows (48 diff lines); table lookup, switch and return epilogue match retail, leaving only an r5/r6/r7 rotation (world/index/slot) and cmp operand order in slotIndexOf. */
 #include "gamedata/DataTable.h"
 #include "gamedata/NkmEnemyLookup.h"
+#include "shard/VersionedResource.h"
 
 struct BattleVec3 {
     f32 x, y, z;
@@ -55,7 +56,6 @@ extern "C" {
 BattleRosterEntry *btlFindEntryBlockByMemberId(BattleWorldView *world, s32 index); /* declcheck: local (BtlEntryLookup.h types parameter as BtlMainStateA *) */
 BattleSlotList *btlMainFindEntryByListedId(BattleWorldView *world, s32 slotId); /* declcheck: local (BtlEntryLookup.h types parameter as BtlMainStateA *) */
 void *dataTableFileGetTable(void *file, u32 section); /* declcheck: local (DataTableAccess_VariantA.h types parameter as u32) */
-BattleVec3 *FUN_00348ee8(void *anchor);
 EnemyDrawObject *stateEntryFindById(BattleWorldView *world, s32 id);
 void enemyDrawCalcVerticalOffset(EnemyDrawObject *object, BattleVec3 *offset, f32 scale);
 
@@ -103,7 +103,7 @@ BattleVec3 btlGetCombatantDrawPosition(BattleWorldView *world, s32 index, s32 fo
         position = found->position;
     } else {
         if ((actor->flags & 0x10) && force == 0) {
-            position = *FUN_00348ee8(world->anchor);
+            position = *(const BattleVec3 *)versionedResourceGetPayload(world->anchor);
             position.z += 2.0f;
             u8 bustUp = nkmEnemyFindById(btlFindEntryBlockByMemberId(world, index)->id)->bustUp;
             f32 height = 0.0f;

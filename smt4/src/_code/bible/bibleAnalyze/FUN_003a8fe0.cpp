@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "bible/bibleAnalyze.h"
+#include "status/StatusMenuMode.h"
 
 class Obj42238c : public ObjBase3c2ef0 {
 public:
@@ -88,7 +89,6 @@ extern "C" {
 extern u32 *g_btlDevilListCallbackContext;
 
 void entryTableClear(void *table);
-void menuSetModeAndResetTransitions(s32 mode);
 void FUN_00240cec(s32 arg);
 u32 taskCreateDraw(const char *name, s32 priority, u32 first, u32 second,
                    void *update, void *end, void *work, u32 parent);

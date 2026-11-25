@@ -24,7 +24,7 @@ void unitRecordBuild(s32 id, UnitRecord *out);
 void unitRecordBuildFromSave(u32 id, UnitRecord *unit);
 void FUN_0032d0c8(void *directory, u32 index, u16 id, void *record);
 void skillHelpUpdateAttributeAndTarget(s32 id);
-void FUN_002c8550(s32 mode);
+void menuSetModeAndResetTransitions(s32 mode);
 void FUN_00184b90(u8 *owner, s32 direction); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void gameGlobalsSetMenuOpenFlag(u8 value); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_00333dc8(u8 value); // declcheck: local (the shared declaration does not compile here or changes this unit)
@@ -100,7 +100,7 @@ void uniteMenuChangeState(u32 state, s32 rememberPrevious)
             sysPlaySe(0x57);
             u32 index = resourceRunOperationIfUnblocked(&unite->inheritanceA.skillList) + listCursorGetRowIfUnblocked(&unite->inheritanceA.skillList);
             skillHelpUpdateAttributeAndTarget(unite->inheritanceA.skills[index]);
-            FUN_002c8550(0xF);
+            menuSetModeAndResetTransitions(0xF);
         }
         break;
     case 0x13:

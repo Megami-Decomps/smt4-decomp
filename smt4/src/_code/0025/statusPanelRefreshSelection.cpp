@@ -1,3 +1,4 @@
+#include "status/StatusMenuMode.h"
 #include "shard/GameGlobals.h"
 #include "bible/bibleDevil.h"
 
@@ -20,7 +21,6 @@ void statusReplaceSkills(u16 *skills, u8 count);
 void statusRefreshSkillsMarkNew(u16 *skills, u8 count);
 StatusRefreshMemberView *partyMemberFindById(u32 id);
 s32 statusCollectUnlearnedSkillsAboveLevel(u16 memberId, u32 level, const u16 *skills, u32 *result, s32 skip);
-void statusDownRestoreTabForMode();
 void FUN_00215a8c(const void *entry);
 void statusDownSetSelectedEntryDescription(s16 id);
 void statusBuildFlaggedDemonList(const u8 *flags);

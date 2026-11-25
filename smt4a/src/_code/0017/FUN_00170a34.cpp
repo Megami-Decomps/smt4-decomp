@@ -1,3 +1,4 @@
+#include "nn/err/Fatal.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00170a34` (_code @ 0x170a34, 0x344 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -7,7 +8,6 @@ extern "C" {
 int FUN_001713d8(int);
 int FUN_001713e8(int);
 int svcWaitSynchronizationN(unsigned int *, int *, int, int);
-int errThrowFatal(...);
 int FUN_0018b68c(unsigned int);
 int FUN_0018b69c(void);
 int FUN_0018b6d4(void);
@@ -98,10 +98,7 @@ void FUN_00170a34(void)
     puVar1 = &temp_v5;
     temp_v4 = 0xffffffff;
     uStack_24 = 0xffffffff;
-    svcWaitSynchronizationN(puVar1,&temp_v6,3,0);
-    if ((int)puVar1 < 0) {
-      errThrowFatal();
-    }
+    throwFatalIfFailed(svcWaitSynchronizationN(puVar1,&temp_v6,3,0), __current_pc());
     if (DAT_005b4448 != '\0') {
       return;
     }

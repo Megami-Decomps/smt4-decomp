@@ -1,9 +1,8 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "nn/srv/SessionIpc.h"
 
 extern "C" {
-
-s32 FUN_0016fa4c(u32 handle, u32 arg, s32 level, u32 extra);
 
 /* The service state at 0x5c0b10 (its session handle, DAT_005c0b18, follows at 0x8). */
 struct AsdModelService {
@@ -23,7 +22,7 @@ s32 srvGetServiceHandle(u32 handle, u32 arg, s32 level, u32 extra)
     if (level > 8) {
         return 0xd9006405;
     }
-    return FUN_0016fa4c(handle, arg, level, extra);
+    return FUN_0016fa4c((u32 *)handle, (const char *)arg, level, extra);
 }
 
 } /* extern "C" */

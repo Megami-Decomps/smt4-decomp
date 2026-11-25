@@ -1,26 +1,26 @@
-/* NON_MATCHING: canonical vector arguments are restored; saved vector copy order and gimmick record address registers differ. */
+/* NON_MATCHING: the entry base and field tests use swapped r0/r1; the initial VFP copies are in y/x/z order instead of y/z/x. */
 #include "shard/W6_W6Match6_CollisionQuad.h"
 #include "map/MapGimicGlobal.h"
 
 extern "C" {
+bool mapResolveCircleOverlapXZ(CollisionVector *result, CollisionVector first,
+                               f32 firstRadius, CollisionVector second, f32 secondRadius);
 
-bool mapResolveCircleOverlapXZ(CollisionVector *result, CollisionVector first, f32 firstRadius,
-                              CollisionVector second, f32 secondRadius);
-
-// Resolve the position sequentially against active type-13 gimmick circles.
-void FUN_002947b8(CollisionVector *result, CollisionVector position)
+/* Pushes the position out of each active kind-13 gimmick's collision circle. */
+void FUN_002947b8(CollisionVector *result, CollisionVector point)
 {
+    CollisionVector current = point;
     for (s32 index = 0; index < MAP_GIMIC_ENTRIES; ++index) {
-        const MapGimicEntryA &record = g_mapGimic->entries[index];
-        if (record.active != 0 && record.kind == 13) {
+        const MapGimicA *gimmicks = g_mapGimic;
+        const MapGimicEntryA &entry = gimmicks->entries[index];
+        if (entry.active && entry.kind == 13) {
             CollisionVector resolved;
-            CollisionVector center = {record.position.x, record.position.y, record.position.z};
-            if (mapResolveCircleOverlapXZ(&resolved, position, 50.0f, center, 50.0f)) {
-                position = resolved;
+            CollisionVector center = {entry.position.x, entry.position.y, entry.position.z};
+            if (mapResolveCircleOverlapXZ(&resolved, current, 50.0f, center, 50.0f)) {
+                current = resolved;
             }
         }
     }
-
-    *result = position;
+    *result = current;
 }
-}
+} /* extern "C" */

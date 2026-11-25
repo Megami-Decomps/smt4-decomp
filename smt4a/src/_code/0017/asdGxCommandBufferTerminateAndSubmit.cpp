@@ -1,4 +1,4 @@
-#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "AsdSDK/Source/Gfx/AsdGxCommandRecord.h"
 
 extern "C" {
 extern u32 *g_commandBufferCursor;
@@ -35,10 +35,7 @@ void asdGxCommandBufferTerminateAndSubmit(void)
         *g_commandBufferCursor++ = 0x12345678;
         *g_commandBufferCursor++ = 0xF0010;
     }
-    AsdCmdRecord *record = &buffer->entries[buffer->listCount];
-    record->kind = 1;
-    record->commands = buffer->start + buffer->committedOffset;
-    record->byteCount = buffer->writeOffset - buffer->committedOffset;
+    AsdCmdRecord *record = asdGxDescribeCommandSegment(buffer);
     if (buffer->unk34 != 0)
         heapCloseOpenBlock(buffer, record);
     record->flags &= ~2u;

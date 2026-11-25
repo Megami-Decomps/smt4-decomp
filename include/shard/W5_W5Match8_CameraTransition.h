@@ -3,6 +3,20 @@
 #include "common.h"
 #include <stddef.h>
 struct W5Match8Vec3 { f32 x, y, z; };
+
+struct CameraSecondaryTransition {
+    /* 0x00 */ f32 progress;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ u32 duration;
+    /* 0x10 */ u32 frame;
+    /* 0x14 */ u32 mode;
+};
+typedef char CameraSecondaryTransitionLayoutCheck[
+    offsetof(CameraSecondaryTransition, duration) == 0x0C &&
+    offsetof(CameraSecondaryTransition, frame) == 0x10 &&
+    offsetof(CameraSecondaryTransition, mode) == 0x14 &&
+    sizeof(CameraSecondaryTransition) == 0x18 ? 1 : -1];
+
 struct W5Match8CameraTransition {
     union {
         /* 0x000 */ u8 unk000[0x5BC];
@@ -79,11 +93,7 @@ struct W5Match8CameraTransition {
     /* 0x828 */ u32 angleFrame;
     /* 0x82C */ u32 angleMode;
     /* 0x830 */ u8 unk830[0xC];
-    /* 0x83C */ f32 secondaryProgress;
-    /* 0x840 */ u8 unk840[0x8];
-    /* 0x848 */ u32 secondaryDuration;
-    /* 0x84C */ u32 secondaryFrame;
-    /* 0x850 */ u32 secondaryMode;
+    /* 0x83C */ CameraSecondaryTransition secondary;
     /* 0x854 */ W5Match8Vec3 positionProgress;
     /* 0x860 */ u8 unk860[0x18];
     /* 0x878 */ u32 positionDuration;
@@ -129,6 +139,7 @@ typedef char CameraLookAtOffsets[
 typedef char CameraTargetFrameOffsets[
     offsetof(W5Match8CameraTransition, reference.position) == 0x5a4 &&
     offsetof(W5Match8CameraTransition, targetFrame) == 0x748 &&
+    offsetof(W5Match8CameraTransition, secondary) == 0x83C &&
     sizeof(W5Match8CameraTransition) == 0x884 ? 1 : -1];
 
 #endif

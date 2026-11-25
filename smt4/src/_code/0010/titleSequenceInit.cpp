@@ -2,13 +2,13 @@
 #include "code/Code0013.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdSequence.h"
+#include "title/SequenceSelector.h"
 
 extern "C" {
 
 extern AsdSeqState DAT_00446e00[];
-extern u8 DAT_00446f2c;
+extern const SequenceSelectionEntry DAT_00446f2c[];
 void asdSequenceStart(s32 group, AsdSeqState *states, u32 stateCount);
-void paramTripleSet(u32 first, u32 second, u32 third);
 void setCallbackBinding(CallbackBinding binding);
 void titleDbgBgCreateDefault(void);
 void titleDbgBgStopThunk(void);
@@ -18,7 +18,7 @@ void titleSequenceInit(void)
 {
     CallbackBinding binding;
     asdSequenceStart(1, DAT_00446e00, 0x19);
-    paramTripleSet(0xc9, (u32)&DAT_00446f2c, 0x14);
+    paramTripleSet(0xc9, DAT_00446f2c, 0x14);
     binding.context = (void *)titleDbgBgStopThunk;
     binding.callback = (void (*)(void *))titleDbgBgCreateDefault;
     setCallbackBinding(binding);

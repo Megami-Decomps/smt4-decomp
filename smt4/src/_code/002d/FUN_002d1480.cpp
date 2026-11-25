@@ -1,16 +1,15 @@
 /* NON_MATCHING: grid index generation uses a different stack frame and multiply/index register allocation. */
 /* Builds grid-cell indices by replicating a triangle pattern with each cell's vertex offset. */
+#include "classes/EffGeomRecord.h"
 #include "gfx/TiledIndexMesh.h"
 
 extern "C" {
-TiledIndexMesh *FUN_00207498(s32 rows, s32 verticesPerRow, s32 trianglesPerRow, u32 flags);
-
 TiledIndexMesh *FUN_002d1480(s32 rows, s32 columns, s32 trianglesPerCell, s16 vertexStride,
                            const u16 *pattern, u32 flags)
 {
-    TiledIndexMesh *mesh = FUN_00207498(rows, (s16)(columns * vertexStride),
-                                      (s16)(columns * trianglesPerCell), flags);
-    u16 *indices = mesh->storage->indices;
+    EffGeomPointHandle *mesh = FUN_00207498(rows, (s16)(columns * vertexStride),
+                                          (s16)(columns * trianglesPerCell), flags);
+    u16 *indices = reinterpret_cast<u16 *>(mesh->record->vertices);
     s32 indexCount = trianglesPerCell * 3;
     s32 groups = (indexCount + 2) / 3;
     s32 rowStride = columns * vertexStride;
@@ -23,6 +22,6 @@ TiledIndexMesh *FUN_002d1480(s32 rows, s32 columns, s32 trianglesPerCell, s16 ve
             }
         }
     }
-    return mesh;
+    return reinterpret_cast<TiledIndexMesh *>(mesh);
 }
 }

@@ -1,6 +1,6 @@
-/* NON_MATCHING: complete; the same instructions with three registers permuted. Retail keeps the phase in r3 and
- * the hoisted phase numbers 10 and 50 in r2 and ip (the build ip, r3, r2). The pull-back's first point is loaded
- * and stored as three floats at once (vldmia/vstmia s0-s2) where the build moves them one by one. */
+/* NON_MATCHING: 30 lines. Retail keeps the phase in r3 and the hoisted phase numbers 10 and 50 in r2 and ip
+ * (the build uses ip, r3, r2). This also changes how the immediate destinations store the phase and clear the counter. */
+#include <string.h>
 #include "map/LmapViewGlobals.h"
 #include "util/TrigF32.h"
 
@@ -126,10 +126,9 @@ void lmapViewUpdateCloseUpSequence(void)
         }
         break;
     case kPhasePullBack:
-        center = g_lmapScene->pose.targetPosition;
-        point.x = center.x;
-        point.y = center.y + 200.0f;
-        point.z = center.z;
+        /* Raise the player's position to the look-at point for the immediate pull-back. */
+        memcpy(&point, &g_lmapScene->pose.targetPosition, sizeof(point));
+        point.y += 200.0f;
         request.value.target.first = point;
         center = g_lmapScene->pose.targetPosition;
         point.x = center.x + libm_sinf((g_lmapScene->pose.targetHeading - 180.0f) * DEGREES_TO_RADIANS) * 200.0f;

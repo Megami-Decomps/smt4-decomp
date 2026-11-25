@@ -12,7 +12,7 @@ extern "C" {
 s32 uiAnimationAdvanceChannel(void *, s32);
 void pointConvertToFloat(FloatPoint *, s32, s32);
 void buttonHelpSetPreset(s32);
-void FUN_0029d960(void *);
+void bibleRefreshSelectedDevilPreview(void *);
 void messageIdListInit(MessageIdList *, u32, s32, s32);
 }
 void Obj4223c4::FUN_003a6e68()
@@ -64,7 +64,7 @@ void Obj4223c4::FUN_003a6e68()
         buttonHelpSetPreset(0x2D);
     else
         buttonHelpSetPreset(view->source == 1 ? 0x4C : 0x4D);
-    FUN_0029d960(screen);
+    bibleRefreshSelectedDevilPreview(screen);
     gameGlobalsSetSubScreenActive(0);
     view->state = 2;
     view->timer = 0;

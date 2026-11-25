@@ -4,10 +4,10 @@
  * Left: retail keeps 0 in r0 from entry and shares the "message = service description" move with the 0xE0A0D0A9
  * case, tests 0xC8A08035 twice (a compare, then an adds), and allocates the module mask in ip. */
 #include "classes/WindowStatus.h"
+#include "nn/err/Fatal.h"
 
 extern "C" {
 s32 FUN_001bd5b8(u32 *description);
-void errThrowFatal(s32 error, u32 location, ...); /* also passed the failure bit, as sysReportCheckFailure is */
 }
 
 /* Converts an SDK result into the corresponding game message ID. */

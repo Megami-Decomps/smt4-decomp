@@ -1,7 +1,6 @@
-/* NON_MATCHING: 58 lines (raw and shape). Same instructions and layout as retail; what differs is the order of
- * the three transition stores (counters 0x10 and 0xC, state) at states 2, 4/5, 7, 14, 16 and 18, where retail uses
- * three different orders and one source form gives armcc's other choice, and the registers of the 64-bit mask OR
- * in state 0. The states that retail shows as inlined step functions are written as such, as in IV's
+/* NON_MATCHING: 50 lines (raw and shape). The transition stores (counters 0x10 and 0xC, state) are
+ * scheduled differently in states 2, 4/5, 7, 14, 16 and 19. In state 0 the flag test matches but the flag
+ * update uses LDM rather than LDRD. The states that retail shows as inlined step functions are written as such, as in IV's
  * FUN_003349c0: state 0 (copies the battle state to r6), 5 (inlined twice), 9 and 19 (keep the arguments in
  * r0/r1 for the tail call) and 26 (its own `return 0` epilogue). encounterRunKind (state 24) has no such
  * evidence of its own; in place the unrelated transition stores get other orders (163 raw / 115 shape). */
@@ -19,7 +18,7 @@ extern void *g_btlActionReflect;
 extern void *g_btlAux;
 s32 isEntryUsable(BtlStep *event); // declcheck: local (takes the event step; the shared prototype has the decompiler's s32 *)
 s32 FUN_004d7a70(BtlStep *event, u32 kind, u32 value, u32 flags);
-void frameTexRequestFade(u32 state);
+void frameTexApplyMode(u32 state);
 void screenFadeStartIn(u32 index, u32 first, u32 second);
 void FUN_004d7fe4(BtlStep *event);
 s32 FUN_003e11ac(BtlStep *step, BtlMainStateA *state);
@@ -66,9 +65,9 @@ static __inline s32 encounterStartEvent(BtlStep *step, BtlMainStateA *state)
     if (isEntryUsable(g_btlEvent))
         return 0;
     if (FUN_004d7a70(g_btlEvent, 9, -1u, 0)) {
-        if (!(g_btlEncount.initializedMask & state->stateFlags64.bits)) {
-            frameTexRequestFade(2);
-            state->stateFlags64.bits = g_btlEncount.initializedMask | state->stateFlags64.bits;
+        if (!(state->stateFlags64.bits & g_btlEncount.initializedMask)) {
+            frameTexApplyMode(2);
+            state->stateFlags64.bits |= g_btlEncount.initializedMask;
             if (pairedAvailabilityGetState(1) == 3)
                 screenFadeStartIn(1, 10, 0xff);
         }

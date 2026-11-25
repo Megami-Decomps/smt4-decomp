@@ -15,6 +15,7 @@ enum SleepQueryReply {
 
 void appletSetSleepQueryState(u8 state); /* stores the sleep-query state byte */
 void nn_applet_CTR_detail_ReplySleepQueryToManager(u32 reply);
+u32 FUN_0013b9b0(u32 handle, u8 reply);
 void nn_applet_CTR_ReplySleepQuery(s32 reply);
 
 }

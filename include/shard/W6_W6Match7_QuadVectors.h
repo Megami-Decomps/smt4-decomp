@@ -26,8 +26,12 @@ struct QuadVector {
 };
 typedef char QuadVectorSizeCheck[sizeof(QuadVector) == 0x10 ? 1 : -1];
 
+/* Sets the four vertex colors from RGB, with the shared quad alpha. */
+extern "C" void gxSetUniformQuadColors(const QuadVector3 *color);
+
 struct QuadVectorState {
-    /* 0x00 */ u8 unk00[0x2c];
+    /* 0x00 */ u8 unk00[0x1c];
+    /* 0x1c */ QuadVector defaultColor;
     /* 0x2c */ QuadVector corners[4];
     /* 0x6c */ u8 mode;
     /* 0x6d */ u8 unk6d[0x10];
@@ -35,7 +39,9 @@ struct QuadVectorState {
     /* 0x7e */ u8 unk7e[6];
     /* 0x84 */ f32 defaultW;
 };
-typedef char QuadVectorStateCheck[offsetof(QuadVectorState, defaultW) == 0x84 ? 1 : -1];
+typedef char QuadVectorStateCheck[offsetof(QuadVectorState, defaultColor) == 0x1C &&
+    offsetof(QuadVectorState, corners) == 0x2C &&
+    offsetof(QuadVectorState, defaultW) == 0x84 && sizeof(QuadVectorState) == 0x88 ? 1 : -1];
 
 /* Stores the four corner vectors in the order the mode's table gives, replacing their W components with
    the default unless preserveW is set. A C++ function: armcc 4.1 faults on an extern "C" function taking

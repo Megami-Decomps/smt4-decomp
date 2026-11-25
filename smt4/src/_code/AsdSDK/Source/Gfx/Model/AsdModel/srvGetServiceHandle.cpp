@@ -1,9 +1,8 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "nn/srv/SessionIpc.h"
 
 extern "C" {
-
-s32 FUN_00129628(u32 handle, u32 arg, s32 level, u32 extra);
 
 extern s32 g_srvInitializeCount;
 
@@ -17,7 +16,7 @@ s32 srvGetServiceHandle(u32 handle, u32 arg, s32 level, u32 extra)
     if (level > 8) {
         return 0xd9006405;
     }
-    return FUN_00129628(handle, arg, level, extra);
+    return FUN_00129628((u32 *)handle, (const char *)arg, level, extra);
 }
 
 } /* extern "C" */

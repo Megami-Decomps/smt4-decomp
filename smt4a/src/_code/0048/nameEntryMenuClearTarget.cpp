@@ -1,4 +1,4 @@
-#include "common.h"
+#include "name/nameMain.h"
 
 extern "C" {
 
@@ -22,7 +22,6 @@ extern NameBuffer *gameGetPlayerName(void);
 extern NameBuffer *gameDataGetPlayerName(void);
 extern NameBuffer *gameBlockGetArea221AA(void);
 extern void nameEntryCopyEditedName(NameEntryMenu *menu, NameBuffer *buffer);
-extern void stateSetterEnterState(NameEntryMenu *menu, s32 state);
 
 static __inline void nameBufferClear(NameBuffer *buffer)
 {

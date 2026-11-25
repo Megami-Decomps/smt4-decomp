@@ -1,54 +1,19 @@
 /* NON_MATCHING: updates a field NPC marker (appears after leaving the trigger range, rises into view with its sound, then follows the NPC lifted by the lmap view's height); retail tests the near and pending bits one at a time before setting the active byte (armcc here merges them into one tst #5), keeps the visibility stores in shared blocks and allocates the float temporaries differently. */
 #include "gamedata/MapSaveBlockA.h"
 #include "map/LmapViewGlobals.h"
+#include "map/FieldNpc.h"
 #include "game/GameStateA.h"
 #include "map/LmapGlobals.h"
 #include "gfx/ControllerModel.h"
 #include "shard/W6_W6Match1_PositionedStream.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
-#define NPC_FLAG_PENDING 0x01
-#define NPC_FLAG_RISING 0x02
-#define NPC_FLAG_NEAR 0x04
-#define NPC_FLAG_HIDDEN 0x08
-#define NPC_BYTE_FLAG_ACTIVE 0x10
-#define NPC_VISIBLE_BITS 3
 #define NPC_TRIGGER_DISTANCE 300.0f
 #define NPC_RISE_STEP 100.0f
 #define NPC_KIND_FLOATING_A 0
 #define NPC_KIND_FLOATING_B 3
 #define NPC_KIND_GROUND_A 1
 #define NPC_KIND_GROUND_B 2
-
-struct NpcController {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ Obj557b18 *body;
-};
-
-struct FieldNpc {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ u8 byteFlags;
-    /* 0x0D */ u8 unk0D[0x1F];
-    /* 0x2C */ MapVector position;
-    /* 0x38 */ u8 unk38[0xC];
-    /* 0x44 */ MapVector rotation;   /* Euler angles in degrees */
-    /* 0x50 */ MapVector scale;
-    /* 0x5C */ u32 queueCount;
-    /* 0x60 */ u8 unk60[4];
-    /* 0x64 */ u32 messageId;
-    /* 0x68 */ u8 unk68[4];
-    /* 0x6C */ s32 counter;
-    /* 0x70 */ s32 mode;
-    /* 0x74 */ u8 unk74[4];
-    /* 0x78 */ NpcController *controller;
-    /* 0x7C */ u32 flags;
-    /* 0x80 */ u8 unk80[4];
-    /* 0x84 */ u16 limit;
-    /* 0x86 */ u8 unk86[5];
-    /* 0x8B */ u8 kind;
-    /* 0x8C */ u8 unk8C[0xC];
-    /* 0x98 */ MapVector offset;
-};
 
 extern "C" {
 

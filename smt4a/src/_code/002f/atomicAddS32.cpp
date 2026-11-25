@@ -1,12 +1,15 @@
-/* NON_MATCHING: the exclusive retry and returned old value match; the compiler swaps the sum/status registers and moves the result after the retry branch. */
+/* NON_MATCHING: retail moves the old counter to the result register before the conditional retry;
+ * armcc moves it after the branch. */
 #include "sys/AtomicCounter.h"
 
-// Add to a shared counter atomically, returning its previous value.
+/* Atomically adds to a shared counter and returns its previous value. */
 extern "C" s32 atomicAddS32(s32 *counter, s32 amount)
 {
-    u32 before;
-    do {
-        before = __ldrex(counter);
-    } while (__strex(before + static_cast<u32>(amount), counter) != 0);
-    return static_cast<s32>(before);
+    for (;;) {
+        u32 before = __ldrex(counter);
+        u32 after = before + (u32)amount;
+        if (__strex(after, counter) == 0) {
+            return (s32)before;
+        }
+    }
 }

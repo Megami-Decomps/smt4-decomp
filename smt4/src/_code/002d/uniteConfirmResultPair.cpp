@@ -1,6 +1,7 @@
 #include "camp/Unite/UniteGlobals.h"
 #include <string.h>
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "status/StatusMenuMode.h"
 
 /* A fusion pair entry as retail reads and writes it: one 64-bit bitfield record. Kept local: an
  * 8-aligned shared pair type would change UniteWork's size and other users' record alignment. */
@@ -24,7 +25,6 @@ extern "C" {
 void uniteBuildResultUnitRecord(void *cursor, s32 index, s32 mode);
 void gameLoadUnitSnapshot(s32 id, s32 mode);
 void FUN_0029c4e4(void *cursor, s32 mode);
-void menuSetModeAndResetTransitions(s32 mode);
 void FUN_0029e890(s32 first, s32 second);
 u32 FUN_002d96a4();
 void statusPanelSetOpen(s32 enabled);

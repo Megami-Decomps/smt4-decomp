@@ -1,5 +1,4 @@
-/* NON_MATCHING: register allocation only: retail keeps record/index/the world+0x1F00 base in r7/r6/r5 (built r5/r7/r6),
- * and loads the table unit's byte at 0x1A0 after storing tableRecord; the 64-bit state stores now give retail's strd. */
+/* NON_MATCHING: retail keeps the input record in r7 and world in r8 (swapped here), and clears the last words of the input array through the saved record address one word earlier. */
 #include "common.h"
 #include "gamedata/UnitRecordAccess.h"
 #include "gamedata/NkmEnemyLookup.h"
@@ -7,9 +6,13 @@
 /* A unit record as stored in the party tables (0x18C bytes; only the fields this code reads are named). */
 struct UnitRecordIn {
     /* 0x000 */ u8 flags;           /* bit 0: player */
-    /* 0x001 */ u8 unk001[7];
+    /* 0x001 */ u8 unk001;
+    /* 0x002 */ u16 id;
+    /* 0x004 */ u8 unk004[4];
     /* 0x008 */ s16 unitIndex;
-    /* 0x00A */ u8 unk00A[0x142];
+    /* 0x00A */ u8 unk00A[0xCA];
+    /* 0x0D4 */ s8 special;
+    /* 0x0D5 */ u8 unk0D5[0x77];
     /* 0x14C */ u32 reset14C[13];   /* cleared on entry */
     /* 0x180 */ u32 reset180;
     /* 0x184 */ u32 reset184;
@@ -78,19 +81,8 @@ void FUN_00255e38(SlotWorld *world, UnitRecordIn *record, s32 kind, s32 index, s
     SlotTableEntry *entry;
 
     record->reset184 = 0;
-    record->reset14C[0] = 0;
-    record->reset14C[1] = 0;
-    record->reset14C[2] = 0;
-    record->reset14C[3] = 0;
-    record->reset14C[4] = 0;
-    record->reset14C[5] = 0;
-    record->reset14C[6] = 0;
-    record->reset14C[7] = 0;
-    record->reset14C[8] = 0;
-    record->reset14C[9] = 0;
-    record->reset14C[10] = 0;
-    record->reset14C[11] = 0;
-    record->reset14C[12] = 0;
+    for (u32 i = 0; i < sizeof(record->reset14C) / sizeof(*record->reset14C); ++i)
+        record->reset14C[i] = 0;
     record->reset180 = 0;
     switch (kind) {
     case 0:
@@ -109,8 +101,8 @@ void FUN_00255e38(SlotWorld *world, UnitRecordIn *record, s32 kind, s32 index, s
         slot = FUN_0033a5a0();
         __aeabi_memcpy4(&slot->record, record, sizeof(UnitRecordIn));
         slot->state = 0x11;
-        slot->tableRecord = nkmEnemyFindById(*(u16 *)((u8 *)slot + 0xCE));
-        if (*((u8 *)slot + 0x1A0) == 1) {
+        slot->tableRecord = nkmEnemyFindById(slot->record.id);
+        if (slot->record.special == 1) {
             slot->state |= 0x100;
         }
         world->tableCount++;

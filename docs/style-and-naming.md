@@ -92,9 +92,10 @@ local view or prototype, and keep the contract.
 - **`addon/AocRequestMemory.h`** (per game): the deallocator an application request's `delete` calls
   (smt4a `asdOperatorDelete`, smt4 `asdMemFreeNonNull`), so `addon/AocBufferRequest.h` serves both games.
 - **`shard/W6_W6Match8_UiResourceParameters.h`**: UI sprite resource packets (`UiResourceParameters`)
-  and the shared `paramsInit` declaration: five `u16` byte counts followed by five resource pointers,
-  in a 0x20-byte block. Pass all five pointer/count pairs, including unused `NULL, 0` pairs; do not
-  redeclare the initialiser with word-sized counts or variadic arguments.
+  and the shared `paramsInit` declaration. The packet holds five `u16` byte counts followed by five
+  resource pointers, in a 0x20-byte block; the initialiser takes each count as a `u32` and narrows it
+  when storing (both definitions match only so). Pass all five pointer/count pairs, including unused
+  `NULL, 0` pairs; do not redeclare the initialiser locally or with variadic arguments.
 - **`battle/btlReflect.h`**: `btlQueueReflectAction`. Its actor selectors are word-sized arguments
   even though the allocator stores their low halfwords: keep the caller's explicit signed-halfword
   conversions, and fill a newly queued payload through the returned action, not the queue context.

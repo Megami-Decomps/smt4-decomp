@@ -1,16 +1,15 @@
 /* NON_MATCHING: index loop is unrolled and multiply/stack/register allocation differs from retail. */
+#include "classes/EffGeomRecord.h"
 #include "gfx/TiledIndexMesh.h"
 
 extern "C" {
-TiledIndexMesh *FUN_00207498(s32 rows, s32 verticesPerRow, s32 trianglesPerRow, u32 flags);
-
 // Replicate a triangle pattern across a grid whose adjacent cells share a vertex column.
 TiledIndexMesh *FUN_002469ec(s32 rows, s32 columns, const u16 *pattern, s32 verticesPerColumn, u32 flags)
 {
     s32 trianglesPerCell = verticesPerColumn * 2 - 2;
-    TiledIndexMesh *mesh = FUN_00207498(rows, (s16)((columns + 1) * verticesPerColumn),
-                                     (s16)(columns * trianglesPerCell), flags);
-    u16 *indices = mesh->storage->indices;
+    EffGeomPointHandle *mesh = FUN_00207498(rows, (s16)((columns + 1) * verticesPerColumn),
+                                          (s16)(columns * trianglesPerCell), flags);
+    u16 *indices = reinterpret_cast<u16 *>(mesh->record->vertices);
     s32 patternTriangles = (trianglesPerCell * 3 + 2) / 3;
     s32 patternIndexCount = patternTriangles * 3;
     s32 rowStride = (columns + 1) * verticesPerColumn;
@@ -23,6 +22,6 @@ TiledIndexMesh *FUN_002469ec(s32 rows, s32 columns, const u16 *pattern, s32 vert
             }
         }
     }
-    return mesh;
+    return reinterpret_cast<TiledIndexMesh *>(mesh);
 }
 }

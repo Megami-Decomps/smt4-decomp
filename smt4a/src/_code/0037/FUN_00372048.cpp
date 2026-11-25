@@ -1,9 +1,9 @@
+#include "status/StatusMenuMode.h"
 #include "shard/Shard0033.h"
 #include "game/GameGlobalsRef.h"
 
 extern "C" {
 u32 FUN_00334044();
-void gameTransitionStartStep(void);
 
 // Clamp the selection to the last entry, update the display, and clear refresh.
 void FUN_00372048(s32 index)

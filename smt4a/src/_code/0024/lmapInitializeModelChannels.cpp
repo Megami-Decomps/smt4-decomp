@@ -1,8 +1,8 @@
 #include "map/LmapGlobals.h"
+#include "player_model/playerModel.h"
 
 extern "C" {
 void playerModelStartBaseMotion(LmapScript *owner, u32 selector);
-void playerLoadOutfitPartModel(LmapScript *owner, u8 channel, u32 selector);
 void playerModelLoadByIndex(LmapScript *owner, u8 channel, u32 value, u32 selector);
 
 /* Initializes the three model channels, restoring their saved values when requested. The selector is

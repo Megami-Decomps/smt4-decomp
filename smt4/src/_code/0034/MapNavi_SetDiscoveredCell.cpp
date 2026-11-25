@@ -1,17 +1,15 @@
-/* NON_MATCHING: compiler reassociates the bitset address and removes the post-store byte mask before comparison. */
-#include "shard/W6_W6Match5_MapDiscovery.h"
+/* NON_MATCHING: the bit-array update is inlined, but the build reassociates the byte address
+ * and reloads the updated byte from memory instead of narrowing the stored register. */
+#include "code/Code002c.h"
+#include "util/BitsAndBytes.h"
 
-extern "C" MapDiscoveryState *saveGetFlagRowTable(void);
+enum { DISCOVERED_CELLS_OFFSET = 0x12F0 };
 
-// Update a cell's discovered bit and report whether its containing byte changed.
+/* Sets a cell's discovery flag and reports whether it changed. */
 extern "C" u8 MapNavi_SetDiscoveredCell(u32 cell, s32 discovered)
 {
-    MapDiscoveryState *state = saveGetFlagRowTable();
-    u8 *bits = state->discovered;
-    u8 *byte = &bits[cell >> 3];
-    u8 previous = *byte;
-    u8 mask = 1u << (cell & 7);
-    u32 updated = discovered != 0 ? mask | previous : previous & ~mask;
-    *byte = updated;
-    return (u8)previous != updated;
+    u8 *bits = saveGetFlagRowTable() + DISCOVERED_CELLS_OFFSET;
+    u8 previous = bits[cell >> 3];
+    bitArrayWrite(bits, cell, discovered);
+    return bits[cell >> 3] != previous;
 }

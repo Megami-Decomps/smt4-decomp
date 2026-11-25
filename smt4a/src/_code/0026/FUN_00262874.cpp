@@ -74,7 +74,7 @@ int __aeabi_memcpy4(...);
 
 int partyPanelHandleCursorEdgeInput(...);
 int scrollListSetSelectionTracked(...);
-int FUN_002c8550(...);
+int menuSetModeAndResetTransitions(...);
 int partyPanelPreviewStatItem(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_002cf5bc(void);
 int FUN_0037e1b0(...);
@@ -219,7 +219,7 @@ extern int statusDownGetFlag(void);
 extern int FUN_002c7cb4(void);
 /* Supplied declaration required: FUN_002c7cd4. */
 /* Supplied declaration required: gameGlobalsGetBlock1390. */
-/* Supplied declaration required: FUN_002c8550. */
+/* Supplied declaration required: menuSetModeAndResetTransitions. */
 /* Supplied declaration required: gameGlobalsSetSceneState. */
 extern unsigned short partyPanelGetSelectedDemonId(void);
 extern unsigned char partyPanelIsTransitionDone(void);
@@ -1108,7 +1108,7 @@ LAB_00263984:
           FUN_0037e1b0(0);
           statusDisplayBindUnitRecord(temp_v1 + 0xe98,0,0);
           statusPanelSetOpen(1);
-          FUN_002c8550(3);
+          menuSetModeAndResetTransitions(3);
         }
       }
     }
@@ -2152,7 +2152,7 @@ LAB_00265c00:
         FUN_0037e1b0((int)(char)(*(char *)(temp_v1 + 0xe8a) + '\x01'),1);
         statusDisplayBindUnitRecord(temp_v10,0,0);
         FUN_0033449c(0);
-        FUN_002c8550(0xc);
+        menuSetModeAndResetTransitions(0xc);
         statusPanelSetOpen(1);
       }
       else {
@@ -2168,7 +2168,7 @@ LAB_00265c00:
         else {
           temp_v10 = 10;
         }
-        FUN_002c8550(temp_v10);
+        menuSetModeAndResetTransitions(temp_v10);
         statusPanelSetOpen(1);
       }
     }
@@ -2224,7 +2224,7 @@ LAB_002661cc:
                     FUN_0037e1b0(0);
                     statusDisplayBindUnitRecord(temp_v1 + 0xe98,0,0);
                     statusPanelSetOpen(1);
-                    FUN_002c8550(3);
+                    menuSetModeAndResetTransitions(3);
                     statusDownRestartTransition();
                     FUN_00285800();
                     FUN_00230ac0(4,0xffffffff,0);
@@ -2581,7 +2581,7 @@ LAB_00266ac4:
         FUN_0037e1b0(0);
         statusDisplayBindUnitRecord(temp_v1 + 0xe98,0,0);
         statusPanelSetOpen(1);
-        FUN_002c8550(3);
+        menuSetModeAndResetTransitions(3);
       }
     }
     temp_v4 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x14));
@@ -3119,7 +3119,7 @@ LAB_0026700c:
         FUN_0037e1b0(0);
         statusDisplayBindUnitRecord(temp_v1 + 0xe98,0,0);
         statusPanelSetOpen(1);
-        FUN_002c8550(3);
+        menuSetModeAndResetTransitions(3);
         statusDownRestartTransition();
         FUN_00285800();
         FUN_00230ac0(4,0xffffffff,0);

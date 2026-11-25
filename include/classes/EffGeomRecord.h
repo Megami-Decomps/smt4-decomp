@@ -160,20 +160,23 @@ typedef char EffGeomHandleLayoutCheck[offsetof(EffGeomHandle, buffer) == 0xC &&
 /* EffGeomHandle.tag of a handle around a vertex buffer (bit 0x200 marks the buffer style). */
 enum { EFF_GEOM_HANDLE_BUFFER = 0x300 };
 
-/* The 0x5C-byte handle of a point-style geometry builder: the record, one four-float vertex per
+/* The 0x5C-byte handle of a point-style geometry builder: the record, one color per
  * point, the element counts and an identity transform. */
+struct EffectColor;
 struct EffGeomPointHandle {
     /* 0x00 */ EffGeomRecord *record;
-    /* 0x04 */ f32 *points;
-    /* 0x08 */ u16 pointCount;
-    /* 0x0A */ u16 rows;
-    /* 0x0C */ u16 columns;
-    /* 0x0E */ u16 vertexCount;
-    /* 0x10 */ u16 elementCount;
+    /* 0x04 */ EffectColor *points;
+    /* 0x08 */ s16 pointCount;
+    /* 0x0A */ s16 rows;
+    /* 0x0C */ s16 columns;
+    /* 0x0E */ s16 vertexCount;
+    /* 0x10 */ s16 elementCount;
     /* 0x12 */ u16 flags;
-    /* 0x14 */ u8 unk14[4];
+    /* 0x14 */ s32 *referenceCount;
     /* 0x18 */ f32 transform[16];
     /* 0x58 */ u32 unk58;
 };
+
+extern "C" EffGeomPointHandle *FUN_00207498(s32 count, s16 rows, s16 columns, u32 flags);
 
 #endif

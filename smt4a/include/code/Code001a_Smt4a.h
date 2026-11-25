@@ -1,5 +1,6 @@
 #pragma once
 #include "common.h"
+#include "gfx/TextureDrawRequest.h"
 
 /* Functions in the 0x001a0000 code block whose subsystem is not known yet; each declaration matches its definition. */
 struct Holder;
@@ -11,6 +12,5 @@ void FUN_001a1244(Holder *object);
 
 s32 bustupPlaceActiveSlot(BustupPlacement *placement, s32 slot);
 
-void requestParamsInitialize(Record *record, u32 a, u32 b, u32 c, u32 d);
 
 } /* extern "C" */

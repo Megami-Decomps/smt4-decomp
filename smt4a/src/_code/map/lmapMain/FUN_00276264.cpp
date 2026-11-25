@@ -40,7 +40,7 @@ int mapGimicClearEntryChildren(void);
 int FUN_002ba30c(void);
 int FUN_002d22c0(...);
 int engineRecordsUnregisterHandles(void);
-int frameTexRequestFade(...);
+int frameTexApplyMode(...);
 int mapProjectPointHeightToCollision(...);
 int messageStartIntroAnimation(void);
 int ptrVectorAt(...);
@@ -165,7 +165,7 @@ int followerDisplayUpdate(...);
 int FUN_0036b824(...);
 int FUN_00378000(void);
 int mapEnvironmentSelectPreset(...);
-int FUN_00399290(...);
+int lmapSetMarkerVisible(...);
 int FUN_003d502c(...);
 int lmapEnemyCtrlLoadModels(...);
 int fieldBuildAreaPlacementList(...);
@@ -489,7 +489,7 @@ extern int mapDepartIsRunning(void);
 extern int pairedAvailabilityBothReady(void);
 extern int buttonHelpIsActionActive(unsigned int);
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: frameTexRequestFade. */
+/* Supplied declaration required: frameTexApplyMode. */
 extern unsigned int gameSaveGetPoints(void);
 /* Supplied declaration required: FUN_00311b74. */
 /* Supplied declaration required: popupStart. */
@@ -544,7 +544,7 @@ extern char FUN_00386720(void);
 /* Supplied declaration required: FUN_00387014. */
 /* Supplied declaration required: FUN_00398004. */
 /* Supplied declaration required: FUN_00398024. */
-/* Supplied declaration required: FUN_00399290. */
+/* Supplied declaration required: lmapSetMarkerVisible. */
 /* Supplied declaration required: lmapApplyMapAndArea. */
 /* Supplied declaration required: FUN_003a2278. */
 /* Supplied declaration required: gameApplyCurrentFlagTableEntry. */
@@ -1231,7 +1231,7 @@ LAB_00276f5c:
     if (puVar2[0x2b9] != 0) {
       for (temp_v10 = 0; temp_v10 < *(unsigned int *)(*(int *)(puVar2[0x2b9] + 8) + 0x10); temp_v10 = temp_v10 + 1)
       {
-        FUN_00399290(temp_v10,0);
+        lmapSetMarkerVisible(temp_v10,0);
       }
     }
     if (((DAT_005f1776 == '\0') && (DAT_005f1748 != '\0')) &&
@@ -2223,7 +2223,7 @@ LAB_00278774:
       if (g_lmapMainState[0x2b9] != 0) {
         for (temp_v10 = 0; temp_v10 < *(unsigned int *)(*(int *)(puVar19[0x2b9] + 8) + 0x10);
             temp_v10 = temp_v10 + 1) {
-          FUN_00399290(temp_v10,0);
+          lmapSetMarkerVisible(temp_v10,0);
         }
       }
       if (puVar19[0x13be] != 0) {
@@ -3643,7 +3643,7 @@ LAB_0027a030:
     if (puVar2[0x2b9] != 0) {
       for (temp_v10 = 0; temp_v10 < *(unsigned int *)(*(int *)(puVar2[0x2b9] + 8) + 0x10); temp_v10 = temp_v10 + 1)
       {
-        FUN_00399290(temp_v10,0);
+        lmapSetMarkerVisible(temp_v10,0);
         temp_v8 = temp_v13;
         if (*(char *)(puVar2 + temp_v10 * 0x22 + 0x2de) != '\0') {
           temp_v22 = *(unsigned int *)(puVar2[0x2b9] + 8);
@@ -3847,7 +3847,7 @@ LAB_0027a030:
     if (puVar2[0x2b9] != 0) {
       for (temp_v10 = 0; temp_v10 < *(unsigned int *)(*(int *)(puVar2[0x2b9] + 8) + 0x10); temp_v10 = temp_v10 + 1)
       {
-        FUN_00399290(temp_v10,0);
+        lmapSetMarkerVisible(temp_v10,0);
       }
       FUN_003699e4();
     }
@@ -3985,7 +3985,7 @@ LAB_0027a030:
     if (puVar2[0x2b9] != 0) {
       for (temp_v10 = 0; temp_v10 < *(unsigned int *)(*(int *)(puVar2[0x2b9] + 8) + 0x10); temp_v10 = temp_v10 + 1)
       {
-        FUN_00399290(temp_v10,0);
+        lmapSetMarkerVisible(temp_v10,0);
         if (*(char *)(puVar2 + temp_v10 * 0x22 + 0x2de) != '\0') {
           temp_v22 = *(unsigned int *)(puVar2[0x2b9] + 8);
           ptrVectorAt(temp_v22,temp_v10);
@@ -4161,7 +4161,7 @@ LAB_0027a030:
     if (puVar2[0x2b9] != 0) {
       for (temp_v10 = 0; temp_v10 < *(unsigned int *)(*(int *)(puVar2[0x2b9] + 8) + 0x10); temp_v10 = temp_v10 + 1)
       {
-        FUN_00399290(temp_v10,0);
+        lmapSetMarkerVisible(temp_v10,0);
       }
       FUN_003699e4();
     }
@@ -4377,7 +4377,7 @@ joined_r0x0027ce58:
     break;
   case 0x6f:
     if (puVar2[4] == 0) {
-      frameTexRequestFade(4);
+      frameTexApplyMode(4);
     }
     temp_v8 = puVar2[4];
     puVar2[4] = temp_v8 + 1;
@@ -4405,7 +4405,7 @@ joined_r0x0027ce58:
     if (puVar2[0x2b9] != 0) {
       for (temp_v10 = 0; temp_v10 < *(unsigned int *)(*(int *)(puVar2[0x2b9] + 8) + 0x10); temp_v10 = temp_v10 + 1)
       {
-        FUN_00399290(temp_v10,0);
+        lmapSetMarkerVisible(temp_v10,0);
         if (*(char *)(puVar2 + temp_v10 * 0x22 + 0x2de) != '\0') {
           temp_v22 = *(unsigned int *)(puVar2[0x2b9] + 8);
           ptrVectorAt(temp_v22,temp_v10);

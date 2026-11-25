@@ -68,6 +68,13 @@ typedef struct PolyGeom {
     /* 0x54 */ u32 flags;
 } PolyGeom;
 
+/* Sets the packed RGBA color of a polygon geometry. The ring geometry reset callbacks
+ * use the same store (IV FUN_00303ae8 / FUN_00304164, Apocalypse FUN_003919b8 / FUN_00392034). */
+static __inline void polyGeomSetColor(PolyGeom *geom, u32 color)
+{
+    geom->color = color;
+}
+
 /* One allocation holding a geometry and the per-segment data that goes with it. */
 typedef struct PolyGeomBlock {
     /* 0x00 */ void *data;      /* points at payload */

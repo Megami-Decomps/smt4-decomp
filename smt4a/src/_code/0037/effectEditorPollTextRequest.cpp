@@ -1,4 +1,4 @@
-/* NON_MATCHING: typed request accesses remove retail's reloads and known-zero owner initialization. */
+/* NON_MATCHING: the status getter matches retail; the startup arm still lacks the release stub that takes the path/context and produces the NULL list owner before effMenuCreate. */
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include <stddef.h>
 
@@ -27,7 +27,7 @@ void effectEditorPollTextRequest(u32 unused, u32 context, TextRequestResultView 
 {
     if (g_effectEditor.nodeList != 0) {
         effMenuBrowserStep(g_effectEditor.request);
-        result->state = g_effectEditor.request->state;
+        result->state = effMenuNodeGetState(g_effectEditor.request);
         result->labelValue = formattedTextCopyLabel(g_effectEditor.request, result);
         result->linkedValue = linkedObjGetValue(g_effectEditor.request);
         FUN_003c4984(g_effectEditor.request, result->selection);

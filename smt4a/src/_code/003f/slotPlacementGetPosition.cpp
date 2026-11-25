@@ -1,53 +1,40 @@
-/* NON_MATCHING: branch/store layout matches; slot and x-output pointers use exchanged saved registers. */
-#include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/SlotPlacement.h"
 
-extern "C" {
-
-
-typedef struct Slot {
-    /* 0x00 */ u8 unk00[0x22];
-    /* 0x22 */ u8 override;
-    /* 0x23 */ u8 unk23[0x15];
-    /* 0x38 */ s32 index;
-    /* 0x3C */ s32 shifted;
-} Slot;
-
-
-/* Looks up the slot's screen position; slots 16 and up use the table's second page and are moved
- * by 400 horizontally (the left-shifted layout moves slots 4-15 the other way). */
-void slotPlacementGetPosition(Slot *slot, s32 *x, s32 *y)
+/* Looks up a slot's screen position and applies the horizontal shift for its group. */
+extern "C" void slotPlacementGetPosition(SlotPlacement *placement, s32 *x, s32 *y)
 {
-    s32 index = slot->index;
-    TextureTableEntryIV *position;
-    s32 shifted;
+    enum {
+        SLOT_POSITION_TABLE = 17,
+        SLOT_POSITION_FIRST_ROW = 45,
+        SLOT_POSITION_ALT_FIRST_ROW = 87,
+        SLOT_FIRST_MIRRORED = 4,
+        SLOT_LAST_MIRRORED = 15,
+        SLOT_MIRRORED_COUNT = SLOT_LAST_MIRRORED - SLOT_FIRST_MIRRORED + 1,
+        SLOT_HORIZONTAL_SHIFT = 400
+    };
+    s32 slot = placement->slot;
+    const TextureTableEntryIV *row;
 
-    if (slot->override != 0) {
-        position = asdTMTexTableEntryAt(0x11, index + 0x57);
-        *x = position->x;
-        *y = position->y;
+    if (placement->mode != 0) {
+        row = asdTMTexTableEntryAt(SLOT_POSITION_TABLE, slot + SLOT_POSITION_ALT_FIRST_ROW);
+        *x = row->x;
+        *y = row->y;
         return;
     }
-    if (index > 15) {
-        index -= 12;
+    if (slot > SLOT_LAST_MIRRORED) {
+        slot -= SLOT_MIRRORED_COUNT;
     }
-    position = asdTMTexTableEntryAt(0x11, index + 0x2d);
-    *x = position->x;
-    *y = position->y;
-    if (slot->shifted == 0) {
-        if (slot->index > 15) {
-            shifted = *x + 400;
-        } else {
-            return;
+    row = asdTMTexTableEntryAt(SLOT_POSITION_TABLE, slot + SLOT_POSITION_FIRST_ROW);
+    *x = row->x;
+    *y = row->y;
+    if (placement->mirrored == 0) {
+        if (placement->slot > SLOT_LAST_MIRRORED) {
+            *x += SLOT_HORIZONTAL_SHIFT;
         }
     } else {
-        if ((u32)(slot->index - 4) <= 11) {
-            shifted = *x - 400;
-        } else {
-            return;
+        if ((u32)placement->slot - SLOT_FIRST_MIRRORED <= SLOT_MIRRORED_COUNT - 1) {
+            *x -= SLOT_HORIZONTAL_SHIFT;
         }
     }
-    *x = shifted;
 }
-
-} /* extern "C" */

@@ -13,7 +13,7 @@ namespace {
 /* Resource fields overlap the canonical state's byte-aligned padding. */
 struct BattlePositionResourcesView {
     u8 unk0000[0x1EC4];
-    const VersionedResourceHeader *stagePosition;
+    const void *stagePosition;
     u8 unk1EC8[0x3CC];
     void *overrides;
 };
@@ -79,7 +79,6 @@ BattleAppearancePositionView *btlFindEntryBlockByMemberId(BtlMainStateA *state, 
 BattleGroupPositionMembersView *btlMainFindEntryByListedId(BtlMainStateA *state, s16 group);
 EnemyDrawOffsetOwner *stateEntryFindById(BtlMainStateA *state, u32 id);
 void btlEnemyDrawCalcVerticalOffset(const EnemyDrawOffsetOwner *owner, BattleVector3 *output, f32 scale);
-const u8 *FUN_00348f74(const VersionedResourceHeader *resource);
 
 Vec3f btlGetCombatantOverridePosition(BtlMainStateA *state, s32 index, s32 forceAttachment)
 {
@@ -93,7 +92,7 @@ Vec3f btlGetCombatantOverridePosition(BtlMainStateA *state, s32 index, s32 force
         position = selected->position;
     } else {
         if ((roster->motion.flags & 0x10) != 0 && forceAttachment == 0) {
-            const Vec3f *stage = (const Vec3f *)FUN_00348f74(resources->stagePosition);
+            const Vec3f *stage = (const Vec3f *)encounterArrangementFindStagePosition(resources->stagePosition);
             position = *stage;
             position.z += 2.0f;
             u8 bustUp = nkmEnemyFindById(btlFindEntryBlockByMemberId(state, index)->id)->bustUp;

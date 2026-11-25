@@ -20,7 +20,7 @@ typedef struct Menu {
 
 int buttonHelpIsNotActive(void);
 int pointConvertToFloat(void *layout, u32 a, u32 b);
-int FUN_0029d960(Menu *menu);
+int bibleRefreshSelectedDevilPreview(Menu *menu);
 
 /* Refreshes the menu layout from its cursor; if the cursor is enabled and buttonHelpIsNotActive allows it, switches the menu to state (2, 0) and refreshes again. */
 }
@@ -41,6 +41,6 @@ void Obj4223c4::FUN_003a7834()
         menu->state.first = 2;
         menu->state.second = 0;
         pointConvertToFloat(menu->layout, 0, 0);
-        FUN_0029d960(menu);
+        bibleRefreshSelectedDevilPreview(menu);
     }
 }

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "AsdSDK/Source/Gfx/Effect/effMenu.h"
 #include "shard/W6_W6Match2_GeometryResources.h"
 
 extern "C" {
@@ -23,7 +23,6 @@ typedef struct EditorOffsets0031ba38 {
 } EditorOffsets0031ba38;
 
 void effMenuTextEntryStep(EditorObject0031ba38 *object);
-s32 effMenuNodeGetState(EditorObject0031ba38 *object);
 s32 linkedFindItemByIndex(u32 source, s32 offset);
 void namedObjectFormatName(EditorObject0031ba38 *object, s32 offset);
 

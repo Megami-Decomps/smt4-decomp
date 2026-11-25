@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail keeps the best key in r1, the entry key in r2, the entry pointer in r3 and the count in ip; the build rotates r1-r3/ip. */
+/* NON_MATCHING: retail keeps the entry pointer in r3 and the count in ip; the build swaps them. */
 #include "gamedata/DataTable.h"
 
 extern "C" {
@@ -9,36 +9,34 @@ typedef struct PairEntry {
 } PairEntry;
 
 
-/* Looks `key` up in table 6/2; without an exact match returns the value of the entry with the largest key (or, for a negative key, the smallest). */
-int FUN_003cd9e8(int key)
+/* Looks up a signed key in table 6/2, falling back to the highest positive key or lowest negative key. */
+s32 FUN_003cd9e8(s32 key)
 {
     void *table;
-    PairEntry *entries;
+    const PairEntry *entries;
     u32 count;
-    int bestKey;
-    int bestValue;
+    s32 bestKey;
+    s32 bestValue;
     u32 i;
 
     table = dataTableGet(6, 2);
-    entries = static_cast<PairEntry *>(dataTableGetEntries(table));
+    entries = (const PairEntry *)dataTableGetEntries(table);
     count = dataTableGetCount(table);
     bestKey = 0;
     bestValue = 0;
     for (i = 0; i < count; i++) {
-        PairEntry *entry = &entries[i];
+        const PairEntry *entry = &entries[i];
 
         if (entry->key == key) {
             return entries[i].value;
         }
         if (key < 0) {
-            if (entry->key < bestKey) {
-                bestValue = entry->value;
-                bestKey = entry->key;
-            }
-        } else if (bestKey < entry->key) {
-            bestValue = entry->value;
-            bestKey = entry->key;
+            if (entry->key >= bestKey) continue;
+        } else {
+            if (entry->key <= bestKey) continue;
         }
+        bestValue = entry->value;
+        bestKey = entry->key;
     }
     return bestValue;
 }

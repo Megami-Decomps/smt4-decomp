@@ -9,7 +9,7 @@
 /* One file slot of a package (0x10 bytes), parallel to the directory entries. */
 struct AocPackageFile {
     /* 0x00 */ void *data;      /* the file's data tables (dataTableFileGetTable) */
-    /* 0x04 */ u8 unk04[4];
+    /* 0x04 */ void *linkedResource; /* kind-specific runtime data built from the file */
     /* 0x08 */ u32 result;      /* result of the last texture load from this file */
     /* 0x0C */ u8 available;    /* the file is loaded */
     /* 0x0D */ u8 completion;   /* texture load completion */
@@ -44,7 +44,8 @@ typedef char AocPackageLayoutCheck[sizeof(AocPackage) == 0x50 && offsetof(AocPac
     offsetof(AocPackage, flags) == 0x34 && offsetof(AocPackage, directoryLoaded) == 0x45 &&
     offsetof(AocPackage, directoryFile) == 0x48 && offsetof(AocPackage, files) == 0x4C ? 1 : -1];
 typedef char AocPackageFileLayoutCheck[sizeof(AocPackageFile) == 0x10 &&
-    offsetof(AocPackageFile, result) == 8 && offsetof(AocPackageFile, available) == 0xC &&
+    offsetof(AocPackageFile, linkedResource) == 4 && offsetof(AocPackageFile, result) == 8 &&
+    offsetof(AocPackageFile, available) == 0xC &&
     offsetof(AocPackageFile, completion) == 0xD ? 1 : -1];
 typedef char AocPackageDirectoryEntryLayoutCheck[sizeof(AocPackageDirectoryEntry) == 0x40 &&
     offsetof(AocPackageDirectoryEntry, name) == 1 && offsetof(AocPackageDirectoryEntry, value) == 0x3C ? 1 : -1];

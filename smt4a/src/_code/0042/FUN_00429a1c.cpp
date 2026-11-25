@@ -1,9 +1,9 @@
+#include "nn/err/Fatal.h"
 /* NON_MATCHING: eCard parameter classification and current-PC error reporting restored; lookup register reuse, branch direction and literal placement differ. */
 #include "common.h"
 #include "net/ECardParameters.h"
 
 extern "C" {
-void errThrowFatal(u32 result, u32 location);
 extern const char DAT_00536ca6[]; // REDEEMABLE
 extern const char DAT_00536cb1[]; // REDEEMED
 extern const char DAT_00536c9e[]; // REVOKED

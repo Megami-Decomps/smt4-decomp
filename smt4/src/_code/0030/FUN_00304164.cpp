@@ -1,22 +1,13 @@
-#include "common.h"
+#include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 
-struct Target {
-    /* 0x00 */ u8 unk00[0x50];
-    /* 0x50 */ u32 value;
-};
+extern "C" {
 
-struct Holder {
-    /* 0x00 */ Target *target;
-};
+extern u32 DAT_00472560;
 
-struct Object {
-    /* 0x00 */ u8 unk00[0x3C];
-    /* 0x3C */ Holder *holder;
-};
-
-extern "C" u32 DAT_00472560;
-
-extern "C" void FUN_00304164(Object *object)
+/* Resets the packed color of a kind-1 ring geometry. */
+void FUN_00304164(PolyObject *obj)
 {
-    object->holder->target->value = DAT_00472560;
+    polyGeomSetColor(*(PolyGeom **)obj->state, DAT_00472560);
 }
+
+} /* extern "C" */

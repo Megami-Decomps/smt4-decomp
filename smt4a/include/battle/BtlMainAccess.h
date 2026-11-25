@@ -52,8 +52,9 @@ extern "C" {
 
 /* The battle's state block. */
 BtlMainStateA *btlGetMainState(void);
+void btlAddEncounterExclusionId(BtlMainStateA *state, s32 id);
 
-}
+} /* extern "C" */
 
 /* The same block including the fields past the canonical size. */
 static __inline BtlMainStateExtA *btlGetMainStateExt(void)

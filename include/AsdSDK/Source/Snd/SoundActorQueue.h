@@ -6,6 +6,7 @@
 #include <stddef.h>
 
 
+enum { SOUND_ACTOR_QUEUE_CAPACITY = 32 };
 
 struct SoundActorQueueEntry {
     /* 0x00 */ u8 active;
@@ -33,8 +34,10 @@ struct SoundActorQueue {
     /* 0x08 */ u8 pending;
     /* 0x09 */ u8 enabled;
     /* 0x0a */ u8 unk0a[2];
-    /* 0x0c */ SoundActorQueueEntry entries[1];
+    /* 0x0c */ SoundActorQueueEntry entries[SOUND_ACTOR_QUEUE_CAPACITY];
 };
+
+typedef char SoundActorQueueSizeCheck[sizeof(SoundActorQueue) == 0x40C ? 1 : -1];
 
 typedef char SoundActorQueueEntrySizeCheck[sizeof(SoundActorQueueEntry) == 0x20 ? 1 : -1];
 typedef char SoundActorQueueTimerOffsetCheck[offsetof(SoundActorQueueEntry, inactiveFrames) == 0x12 &&

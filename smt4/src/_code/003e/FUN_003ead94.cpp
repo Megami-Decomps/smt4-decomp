@@ -1,28 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ead94` (_code @ 0x3eada0, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies a saved zero to r0 on pool exhaustion before branching out;
+ * armcc branches directly because the allocation result is already NULL. */
+#include "sound/PooledSoundInstance.h"
 
-extern "C" {
+extern "C" void *nw_snd_internal_PoolImpl_AllocImpl(void *pool);
 
-extern int nw_snd_internal_PoolImpl_AllocImpl(int);
-
-
-void FUN_003ead94(int param_1)
-
+/* Allocates a fixed-size instance from the owner's pool and initializes its playback defaults. */
+extern "C" PooledSoundInstance *FUN_003ead94(u8 *ownerInterface, u32 requestedBytes)
 {
-/* irregular: irregular input(s): in_ZR; 1 native warning(s); review required */
-  int temp_v0;
-  unsigned char in_ZR;
-  
-  if ((in_ZR) && (temp_v0 = nw_snd_internal_PoolImpl_AllocImpl(param_1 + 8), temp_v0 != 0)) {
-    *(unsigned int *)(temp_v0 + 0x18) = 0;
-    *(unsigned int *)(temp_v0 + 0x1c) = 0;
-    *(unsigned int *)(temp_v0 + 0x20) = 0;
-    *(unsigned int *)(temp_v0 + 0x24) = 0x3f000000;
-    *(unsigned char *)(temp_v0 + 0x28) = 1;
-    *(unsigned char *)(temp_v0 + 0x29) = 0;
-  }
-  return;
+    PooledSoundOwner *owner = (PooledSoundOwner *)(ownerInterface - offsetof(PooledSoundOwner, secondaryInterface));
+    if (requestedBytes != sizeof(PooledSoundInstance)) {
+        return NULL;
+    }
+    PooledSoundInstance *instance = (PooledSoundInstance *)nw_snd_internal_PoolImpl_AllocImpl(&owner->freeList);
+    if (instance == NULL) {
+        return NULL;
+    }
+    instance->unk18 = 0;
+    instance->unk1C = 0;
+    instance->unk20 = 0;
+    instance->scale = 0.5f;
+    instance->enabled = 1;
+    instance->unk29 = 0;
+    return instance;
 }
-
-} /* extern "C" */

@@ -13,7 +13,7 @@ u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
 void asdMemFree(void *memory);
 void gameCounterAddSaturating(s32 kind, s32 enabled);
-void frameTexRequestFade(s32 state);
+void frameTexApplyMode(s32 state);
 
 // Create the encounter job, reset its candidate slots and queue the initial encounter state.
 void btlEncountInitialize(BtlMainStateA *battle)
@@ -44,7 +44,7 @@ void btlEncountInitialize(BtlMainStateA *battle)
         u64 flags = battle->stateFlags64.bits;
         if ((flags & g_btlEncount.initialStateMask) == 0 &&
             (flags & g_btlEncount.initializedMask) == 0) {
-            frameTexRequestFade(2);
+            frameTexApplyMode(2);
             battle->stateFlags64.bits = g_btlEncount.initializedMask | battle->stateFlags64.bits;
         }
     }

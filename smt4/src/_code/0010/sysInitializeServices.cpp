@@ -1,4 +1,4 @@
-#include "nn/Result.h"
+#include "nn/err/Fatal.h"
 
 extern "C" {
 extern u8 g_sysServicesInitialized;   /* the services are up */
@@ -10,15 +10,6 @@ void nn_cfg_CTR_Initialize(void);
 s32 nnAmConnectOnce(void);
 s32 nimAocConnect(u32 *session, const char *name);
 s32 nimAocInitialize(void);
-void errThrowFatal(s32 result, u32 address);
-
-/* Reports a failed result to the fatal error handler, with the address of the check. */
-static inline void throwFatalIfFailed(s32 result, u32 address)
-{
-    if (nnResultIsFailure(result)) {
-        errThrowFatal(result, address);
-    }
-}
 
 /* Starts the system services once: the user file system, the configuration and application-manager
  * services, then the nim:aoc service. A failure is fatal and reported with the address it was detected at. */

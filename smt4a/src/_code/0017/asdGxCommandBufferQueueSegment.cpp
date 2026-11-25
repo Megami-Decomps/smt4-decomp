@@ -1,13 +1,12 @@
-/* NON_MATCHING: only the record address differs: retail folds it into a pre-indexed `strb r6, [r0, r1, lsl #2]!`
- * (the build adds first), which shifts the pool by one word. Initialising the cursor in two steps
- * (`entry = buffer->entries; entry += buffer->listCount;`) gives retail's code but is only a split of this
- * statement (asdCmdBufferAppendCopyTransfer indexes the same way), so it is not written. */
-#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "AsdSDK/Source/Gfx/AsdGxCommandRecord.h"
 
+/* unit-local: the prior segment's GPU link command, whose size word the queue patches. */
 struct CommandSegmentLink {
-    u32 header[2];
-    u32 commandCount;
+    /* 0x00 */ u32 header[2];
+    /* 0x08 */ u32 commandCount;
 };
+
+enum { COMMAND_SEGMENT_LINK_TRAILER_SIZE = 0x18 };
 extern "C" {
 extern u32 *g_commandBufferCursor;
 extern u32 *g_commandBufferEnd;
@@ -44,13 +43,10 @@ void asdGxCommandBufferQueueSegment(void)
         *g_commandBufferCursor++ = 0x12345678;
         *g_commandBufferCursor++ = 0xF0010;
     }
-    AsdCmdRecord *entry = &buffer->entries[buffer->listCount];
-    entry->kind = 1;
-    entry->commands = buffer->start + buffer->committedOffset;
-    entry->byteCount = buffer->writeOffset - buffer->committedOffset;
-    CommandSegmentLink *link = (CommandSegmentLink *)buffer->unk34;
-    if (link != NULL) {
-        link->commandCount = ((u32)entry->commands + entry->byteCount - (u32)link - 24) >> 3;
+    AsdCmdRecord *entry = asdGxDescribeCommandSegment(buffer);
+    if (buffer->unk34 != 0) {
+        ((CommandSegmentLink *)buffer->unk34)->commandCount =
+            ((u32)entry->commands + entry->byteCount - buffer->unk34 - COMMAND_SEGMENT_LINK_TRAILER_SIZE) >> 3;
         entry->byteCount = buffer->unk30;
         buffer->unk34 = 0;
         buffer->unk30 = 0;

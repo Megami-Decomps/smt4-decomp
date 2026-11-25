@@ -1,4 +1,6 @@
-/* NON_MATCHING: 46 lines: retail hoists the 0/1 constants above the first load, threads the free-slot search's exit straight past the -1 (the build re-tests the bound), keeps its own epilogue after the found slot and cross-jumps the second model load into the first one's tail; the case 1 clone falling through into case 2 and the per-use g_mapGimic reads match. */
+/* NON_MATCHING: 34 lines. Retail hoists the 0/1 constants above the first load, sets -1 on exhausting
+ * the slot search without re-testing the bound, keeps a separate epilogue after finding a slot, and
+ * cross-jumps the second model load into the first one's tail. */
 #include <stdio.h>
 #include "map/MapGimicGlobal.h"
 
@@ -41,7 +43,7 @@ u32 mapGimicStepUnitSpawner(void)
                 s32 slot = 0;
                 while (slot < MAP_GIMIC_COUNT && current->entries[slot].active != 0)
                     slot++;
-                if (slot >= MAP_GIMIC_COUNT)
+                if (slot == MAP_GIMIC_COUNT)
                     slot = -1;
                 current->slot = (s16)slot;
                 if ((s16)slot != -1) {

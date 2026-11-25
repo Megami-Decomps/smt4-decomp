@@ -47,7 +47,7 @@ struct LogoObject {
 };
 
 extern "C" {
-void FUN_002f5288(ScreenHolder *holder, s32 mode);
+void renderTargetBindAndClear(ScreenHolder *holder, s32 mode);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 s32 flagsPackFourBooleans(u8 first, u8 second, u8 third, u8 fourth);
 u32 FUN_003deab0(LogoObject *logo, s32 mode);
@@ -101,7 +101,7 @@ static __inline void mtx44Ortho(Matrix44 *matrix, f32 left, f32 right, f32 botto
    render states the logo needs pushed for the draw and popped afterwards. */
 void titleLogoDraw(UniteRenderTarget *request)
 {
-    FUN_002f5288(request->holder, 0);
+    renderTargetBindAndClear(request->holder, 0);
     ScreenSize *screen = request->holder->screen;
     Matrix44 projection;
     f32 width = (f32)screen->width;

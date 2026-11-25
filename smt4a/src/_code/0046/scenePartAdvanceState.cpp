@@ -1,45 +1,34 @@
-/* NON_MATCHING: retail conditionally executes the kind 1/2 arm (cmp, cmpne, moveq/strdeq) and falls through into the other arm; the build uses branches */
-#include "common.h"
+#include "classes/Obj5333c0.h"
+#include "script/scrScriptProcess.h"
 #include "code/Code0013.h"
 #include "ui/UiControl.h"
 #include "code/Code003c_Smt4a.h"
 
 extern "C" {
 
-typedef struct ScenePart00469e1c {
-    /* 0x000 */ u32 unk000;
-    /* 0x004 */ u32 state;
-    /* 0x008 */ u32 unk008;
-    /* 0x00c */ u8 unk00c[0xe];
-    /* 0x01a */ u8 kind;
-    /* 0x01b */ u8 unk01b[0x299];
-    /* 0x2b4 */ u32 *handle;
-} ScenePart00469e1c;
+void titleSetSlotValueState2(u32 slot, u32 value);
 
-s32 scrRunOpcodesStub(u32 handle);
-void titleSetSlotValueState2(s32 index, s32 value);
-
-/* Once the handle reports 2, picks the next state (0x10 for kinds 1 and 2, else 3 and resets finished slots), then refreshes. */
-void scenePartAdvanceState(ScenePart00469e1c *part)
+/* Advances the quest scene once its script finishes; the normal path also resets finished slots. */
+void scenePartAdvanceState(Obj5333c0 *scene)
 {
-    if (scrRunOpcodesStub(*part->handle) != 2) {
-        return;
-    }
-    if (part->kind == 1 || part->kind == 2) {
-        part->state = 0x10;
-        part->unk008 = 0;
-    } else {
-        part->state = 3;
-        part->unk008 = 0;
-        if (pairedAvailabilityGetState(0) == 3) {
-            titleSetSlotValueState2(0, 10);
+    enum { SCRIPT_FINISHED = 2, SLOT_FINISHED = 3, SLOT_RESET_FRAMES = 10,
+           CONTINUE_SCENE = 3, CONTINUE_FROZEN_SCENE = 16 };
+
+    if (scrRunOpcodesStub(*scene->script) == SCRIPT_FINISHED) {
+        if (scene->frozen == 1 || scene->frozen == 2) {
+            scene->startState(CONTINUE_FROZEN_SCENE);
+        } else {
+            scene->startState(CONTINUE_SCENE);
+            if (pairedAvailabilityGetState(0) == SLOT_FINISHED) {
+                titleSetSlotValueState2(0, SLOT_RESET_FRAMES);
+            }
+            if (pairedAvailabilityGetState(1) == SLOT_FINISHED) {
+                titleSetSlotValueState2(1, SLOT_RESET_FRAMES);
+            }
         }
-        if (pairedAvailabilityGetState(1) == 3) {
-            titleSetSlotValueState2(1, 10);
-        }
+        messageSetMode(0);
+        messageMainRequestBanner();
     }
-    messageSetMode(0);
-    messageMainRequestBanner();
 }
 
 } /* extern "C" */

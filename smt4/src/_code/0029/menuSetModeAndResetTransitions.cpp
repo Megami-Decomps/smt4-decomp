@@ -1,25 +1,22 @@
-/* NON_MATCHING: retail retains the zero and high-page state base across the guards; compiler loads a full counter displacement and uses different guard/return layout. Candidate O2. */
-#include "shard/GameGlobals.h"
+#include "status/StatusMenuMode.h"
+#include "status/StatusTabTransition.h"
 
-extern "C" void statusDownRestoreTabForMode();
+enum {
+    STATUS_MODE_FUSION_CONFIRMED = 7,
+    STATUS_MODE_FUSION_PREVIEW = 8
+};
 
-// Leave modes seven/eight by resetting the tab and its pending-state flag.
-extern "C" void menuSetModeAndResetTransitions(s32 mode)
+/* Resets the status tab and its pending state when leaving a fusion result mode. */
+extern "C" void menuSetModeAndResetTransitions(u8 mode)
 {
-    GameData* state = g_gameGlobals.data;
+    GameData *state = g_gameGlobals.data;
     u8 previous = state->unk1E66;
     state->unk1E66 = mode;
-    if (previous != 8) {
-        if (previous != 7) {
-            return;
+    if (previous == STATUS_MODE_FUSION_PREVIEW) {
+        if (mode != STATUS_MODE_FUSION_PREVIEW) {
+            statusResetTabTransition();
         }
-        if (mode == 7) {
-            return;
-        }
-    } else if (mode == 8) {
-        return;
+    } else if (previous == STATUS_MODE_FUSION_CONFIRMED && mode != STATUS_MODE_FUSION_CONFIRMED) {
+        statusResetTabTransition();
     }
-    state->unk12E4 = 0;
-    statusDownRestoreTabForMode();
-    state->unk1E63 = 0;
 }

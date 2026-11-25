@@ -5,14 +5,14 @@
 
 extern "C" {
 void FUN_001377a0(AddressSpaceManager *manager, AddressSpaceRegion *region);
-s32 FUN_002bb7c4(u32 *outAddress, u32 address, u32 source, u32 size, u32 operation, u32 permission);
+s32 svcControlMemory(u32 *outAddress, u32 address, u32 source, u32 size, u32 operation, u32 permission);
 extern AddressSpaceManager g_nnosAddressSpaceManagerApplication;
 
 /* Runs one memory-control operation (svc ControlMemory wrapper) and reports a failure. */
 static __inline void controlMemory(u32 address, u32 source, u32 size, u32 operation, u32 permission)
 {
     u32 output;
-    s32 result = FUN_002bb7c4(&output, address, source, size, operation, permission);
+    s32 result = svcControlMemory(&output, address, source, size, operation, permission);
     bool failed = nnResultIsFailure(result);
     if (failed)
         resultHandleFailure(result, failed);

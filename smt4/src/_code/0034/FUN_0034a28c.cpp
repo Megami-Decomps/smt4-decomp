@@ -8,7 +8,7 @@ int asdModelAdvanceCommandCursor(...);
 int FUN_00349e34(...);
 int nw_gfx_RenderContext_ResetState_364D68(...);
 
-int FUN_0023d078(...);
+int combinerAddConstantColor(...);
 int FUN_0023d158(...);
 int matrixScaleColumns(...);
 int animKeyTableFindKey(...);
@@ -75,7 +75,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0023d078. */
+/* Supplied declaration required: combinerAddConstantColor. */
 extern int gpuWriteUniformColor(int, unsigned int);
 /* Supplied declaration required: FUN_0023d158. */
 extern unsigned int resourceGetIndexedEntry(int, unsigned int);
@@ -342,7 +342,7 @@ void FUN_0034a28c(int param_1,unsigned int param_2)
             temp_v6 = temp_v1;
           }
           if (temp_v7 != temp_v28) {
-            FUN_0023d078(temp_v23[0],temp_v28);
+            combinerAddConstantColor(temp_v23[0],temp_v28);
             temp_v7 = temp_v28;
           }
           temp_v0 = *(int *)(temp_v3 + 0x44);
@@ -435,7 +435,7 @@ void FUN_0034a28c(int param_1,unsigned int param_2)
             temp_v6 = temp_v1;
           }
           if (temp_v7 != temp_v24) {
-            FUN_0023d078(temp_v23[0],temp_v24);
+            combinerAddConstantColor(temp_v23[0],temp_v24);
             temp_v7 = temp_v24;
           }
           temp_v0 = *(int *)(temp_v25 + 0x44);

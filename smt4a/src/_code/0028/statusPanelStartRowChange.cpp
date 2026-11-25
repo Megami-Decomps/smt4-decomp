@@ -1,15 +1,12 @@
-/* NON_MATCHING: 127 lines (73 by shape), complete. What differs:
- * - retail keeps the two "no variant" arms of the gauge loop out of line (after the row loop's `if (row == 0)` test,
- *   each with its own call and a branch back); the build keeps them in place and shares the call;
- * - retail clears the timer's frame through a pool word (`ldr ip, =0x2438; str r4, [ip, r5]`), the build through
- *   0x2400 + 0x38 (panelStartState(3) would store the pair with one stm);
- * - the gauge loop loads the variant into r0 and the selection into r1 (the build r1 and r0). */
+/* NON_MATCHING: the timer stores match. The gauge loop's comparison and arguments are assigned
+ * different registers, and retail keeps both non-variant arms out of line rather than sharing a call. */
 #include "battle/BtlStatusPanelA.h"
 #include "battle/BattleContextCommandsA.h"
 #include "map/lmapMain.h"
 #include "common.h"
 
 enum {
+    PANEL_ROW_CHANGE = 3,
     kVoiceRowChange = 0x1000214
 };
 
@@ -24,8 +21,7 @@ void statusPanelStartRowChange(StatusPanel *panel, s32 rowDelta, s32 gaugeCount)
     s32 row;
     s32 i;
 
-    panel->timer.state = 3;
-    panel->timer.frame = 0;
+    statusPanelStartPhase(panel, PANEL_ROW_CHANGE);
     panel->rowDelta = rowDelta;
     panel->gaugeCount = gaugeCount;
     rows = panel->rowCount;

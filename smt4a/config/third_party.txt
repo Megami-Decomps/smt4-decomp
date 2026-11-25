@@ -2433,6 +2433,7 @@
 0x00161b14 addressBlockInit library
 0x00161dbc _ZSt16__introsort_loopIPP10SortObjecti14SortObjectLessEvT_S4_T0_T1_ name
 0x00162234 nn_math_ARMv6_MTX34InvTransposeAsm name
+0x0016236c svcControlMemory name
 0x00162390 FUN_00162390 between
 0x001623b4 FUN_001623b4 between
 0x001623d0 FUN_001623d0 between
@@ -2464,6 +2465,7 @@
 0x0016e0f8 nn_os_ThreadLocalStorage_ClearAllSlots name
 0x0016e144 FUN_0016e144 between
 0x0016e1a4 FUN_0016e1a4 between
+0x0016e1a8 FUN_0016e1a8 between
 0x0016e2a8 nn_pl_CTR_CreateGameCoinSaveFile name
 0x0016e468 FUN_0016e468 callers
 0x0016e544 FUN_0016e544 between
@@ -2472,6 +2474,7 @@
 0x0016e6b8 FUN_0016e6b8 between
 0x0016e700 FUN_0016e700 between
 0x0016e758 FUN_0016e758 between
+0x0016e7c0 faultReportKind5 between
 0x0016e830 nn_fnd_detail_CreateHeap name
 0x0016ea54 _ZN2nn3fnd8DateTimeC1Eiiiiiii name
 0x0016ea8c nn_hid_CTR_AnalogStickClamper_SetClampParam name
@@ -2525,6 +2528,7 @@
 0x00170358 nn_applet_CTR_detail_InquireNotification name
 0x001703b0 sleepQueryAnswer between
 0x001703e8 FUN_001703e8 between
+0x00170404 FUN_00170404 between
 0x00170414 FUN_00170414 between
 0x00170454 FUN_00170454 between
 0x00170464 FUN_00170464 between
@@ -3557,9 +3561,11 @@
 0x001c5370 rt_memmove_w name
 0x001c53f0 FUN_001c53f0 callers
 0x001c53fc FUN_001c53fc callers
-0x001c5464 FUN_001c5464 twin
-0x001c57ac FUN_001c57ac twin
-0x001c58e8 FUN_001c58e8 twin
+0x001c5464 FUN_001c5464 callers
+0x001c57ac FUN_001c57ac callers
+0x001c5888 FUN_001c5888 library
+0x001c58b8 FUN_001c58b8 library
+0x001c58e8 FUN_001c58e8 callers
 0x001c6b34 FUN_001c6b34 library
 0x001c6c24 FUN_001c6c24 between
 0x001c6da0 FUN_001c6da0 between
@@ -3639,6 +3645,7 @@
 0x001cd2dc nw_snd_internal_MoveValue_float_int_SetTarget name
 0x001cd32c FUN_001cd32c library
 0x001cd33c FUN_001cd33c callers
+0x001cd390 FUN_001cd390 callers
 0x001cd428 FUN_001cd428 callers
 0x001cd448 FUN_001cd448 between
 0x001cd464 FUN_001cd464 callers
@@ -6361,14 +6368,14 @@
 0x0043b028 FUN_0043b028 library
 0x0043b044 FUN_0043b044 library
 0x0043b0a0 FUN_0043b0a0 library
-0x0043b0dc FUN_0043b0dc library
+0x0043b0dc nn_http_detail_AddRequestHeaderField name
 0x0043b13c FUN_0043b13c library
 0x0043b1a8 FUN_0043b1a8 library
 0x0043b1ec FUN_0043b1ec library
-0x0043b21c FUN_0043b21c library
+0x0043b21c nn_http_detail_CancelConnection name
 0x0043b24c FUN_0043b24c library
 0x0043b2a4 FUN_0043b2a4 library
-0x0043b2d4 FUN_0043b2d4 library
+0x0043b2d4 nn_http_detail_AddDefaultCert name
 0x0043b308 FUN_0043b308 library
 0x0043b338 FUN_0043b338 library
 0x0043b380 FUN_0043b380 library
@@ -6613,7 +6620,7 @@
 0x00449708 FUN_00449708 between
 0x00449710 FUN_00449710 between
 0x00449718 FUN_00449718 between
-0x0044988c FUN_0044988c between
+0x0044988c scalarAnimationAdvance between
 0x004498e0 FUN_004498e0 between
 0x004498ec FUN_004498ec callers
 0x00449ce0 FUN_00449ce0 between
@@ -7625,7 +7632,7 @@
 0x00522a08 FUN_00522a08 between
 0x00522a48 FUN_00522a48 between
 0x00522bf4 _ZN15Obj55aff4VectoraSERKS_ between
-0x00522df0 sysWordVectorRelease between
+0x00522df0 _ZN19Obj557b68WordVectorD1Ev between
 0x00522e18 _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE6insertERKS5_ name
 0x00522f50 FUN_00522f50 between
 0x00523060 _ZSt16__insertion_sortIP21RenderBatchSortRecord27RenderBatchSecondaryKeyLessEvT_S3_T0_ name

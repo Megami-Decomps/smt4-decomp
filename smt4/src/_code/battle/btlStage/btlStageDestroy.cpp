@@ -29,7 +29,7 @@ extern BtlStageGlobals g_btlStage;
 s32 jobIsValid(u32 job);
 void jobStop(u32 job, s32 arg);
 void addressSpaceRegionFree(AddressSpaceRegion *region);
-void FUN_002759bc(void);
+void frameTexturesRelease(void);
 void mdlHandleArrayDestroy(BattleStageModel *stage);
 }
 
@@ -75,7 +75,7 @@ extern "C" void btlStageDestroy(u32 handle)
         if (context != NULL) {
             stage->context = NULL;
         }
-        FUN_002759bc();
+        frameTexturesRelease();
         mdlHandleArrayDestroy(stage);
         stage->state = 0;
         asdMemFree(g_btlStage.stage);

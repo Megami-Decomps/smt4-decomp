@@ -14,8 +14,14 @@ enum {
 
 struct RowWidget {
     u32 flags;          /* 4: a key held on the first entry wraps to it (the columns of a short last row) */
-    u8 keys[4];         /* the pad buttons that move the cursor (colorSetRgba); 32 = none */
-    u8 alternateKeys[4]; /* the same moves on other buttons (objectSetRgba); 32 = none */
+    union {
+        u8 keys[4];     /* the pad buttons that move the cursor (colorSetRgba); 32 = none */
+        u32 packedKeys;
+    };
+    union {
+        u8 alternateKeys[4]; /* the same moves on other buttons (objectSetRgba); 32 = none */
+        u32 packedAlternateKeys;
+    };
     u32 unk0c;
     s32 rowCount;
     s32 mode;

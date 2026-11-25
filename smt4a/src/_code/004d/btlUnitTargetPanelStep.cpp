@@ -20,7 +20,6 @@ extern "C" {
 
 s32 btlFindSelectionIndexByLookupKey(const BtlMainStateA *state, s32 key);
 void btlEntryBuildSummary(BattleEntrySummaryA *summary, BtlMainStateA *battle, BtlCombatantEntryA *entry);
-void FUN_004ab80c(BtlUiA *ui, u8 *confirmed, u64 *selected, u64 *extra);
 void btlUIClearWorkTables(BtlUiA *ui); // declcheck: local (callers pass the UI block; the definition ignores it)
 void FUN_004e980c(BtlMainStateA **context, BtlUnitA *unit);
 void FUN_004eb838(BtlMainStateA **context, BtlUnitA *unit);
@@ -57,7 +56,7 @@ u32 btlUnitTargetPanelStep(BtlMainStateA **context, BtlUnitA *unit)
     u8 confirmed = 0;
     u64 selected = 0;
     u64 extra = 0;
-    FUN_004ab80c(g_btlUiBlock, &confirmed, &selected, &extra);
+    btlUiCopyStatePairs(g_btlUiBlock, &confirmed, &selected, &extra);
 
     bool revives = false;     /* the action is a revival skill */
     bool fromReserve = false; /* which revives a unit of the reserve */

@@ -392,6 +392,10 @@ difference a register tie-break.
 - A local pointer to a global moves its pool word earlier; a constant passed through a
   `static __inline` helper's parameter moves it later, or keeps it in a callee-saved register;
   named locals declared in retail's pool order fix the order of constants.
+- Before reordering source for float constants whose pool rows look swapped, decode each `vldr sN, [pc, #off]`:
+  the literal is at the instruction's address + 8 + `off`. Read that way, the render-target clear functions
+  (smt4 `FUN_002f5288`, smt4a `FUN_0037aa68`) pass a zero RGBA and opacity 1.0, not white and 0.0, and both match
+  with no reordering (wave 93).
 - Chained assignment (`current[i] = maximum[i] = value;`) stores one value through both pointers the
   way retail does; separate statements reload or reorder it.
 - A function that returns a moved copy of a by-value struct parameter assigns into the parameter and copies it out
@@ -1196,3 +1200,8 @@ its own cflags ignored (the wave-49 IPC stubs all come back IDENTICAL with `twin
 - `push {r4, lr}; bl f; pop {r4, pc}` where the build tail-calls `b f` (smt4's `Obj4224b0`/`d4`/`f8`/`51c`
   destructors, `FUN_003e4fe8`, `FUN_003e5d78`; smt4a `FUN_0050625c`, `FUN_00506fec`) only comes back with `f`
   declared `__weak`, which the rules forbid for a function the image defines; leave them `NON_MATCHING` (wave 84).
+  `--apcs=/interwork/fpic` also turns those sibling `b`s into framed calls (the four destructors and both games'
+  `modelPartSetRotationDegrees`, smt4 `modelSetAnglesDegrees`), but it is not the retail setting: it loads globals
+  with `ldr` + `add rX, pc, rX` and `R_ARM_REL32` words where retail keeps absolute ones (smt4a `uiSelectionRefresh`
+  keeps the call and an absolute `g_gameState+0x200`), and every candidate range breaks proven neighbours
+  (`gameDataGetFlagBits`, `playerModelLoadSlot`). No `/fpic` range exists in either game (wave 93).

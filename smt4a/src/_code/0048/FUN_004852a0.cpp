@@ -1,27 +1,18 @@
-#include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "ui/UiSpriteApi.h"
-
-struct StateSetterSpriteWork {
-    u8 unk000[0xa4];
-    s32 spriteX;
-    u32 unk0a8;
-    s32 savedSpriteX;
-    u8 unk0b0[0x270];
-    UiSpriteState firstSprite; // 0x320
-    UiSpriteState secondSprite; // 0x3ac
-};
+#include "shard/W6_W6Match3_NameFormStateA.h"
 
 extern "C" {
-void stateSetterEnterState(StateSetterSpriteWork* work, s32 state);
 
-void FUN_004852a0(StateSetterSpriteWork* work)
+/* Advances the name form's opening animation and enters the input state when both sprites finish. */
+void FUN_004852a0(NameFormStateA *form)
 {
-    uiSpriteSlideFromSide(&work->firstSprite, 0);
-    uiSpriteAdvanceAnimation(&work->secondSprite, 1.0f);
-    work->spriteX = vec2GetXInt(&work->firstSprite);
-    work->savedSpriteX = work->spriteX;
-    if (uiSpriteGetCompletionState(&work->firstSprite) != 0 && uiSpriteGetCompletionState(&work->secondSprite) != 0) {
-        stateSetterEnterState(work, 2);
+    uiSpriteSlideFromSide(&form->blinkSprite, 0);
+    uiSpriteAdvanceAnimation(&form->animation, 1.0f);
+    form->keyboard.sideOffset = vec2GetXInt(&form->blinkSprite);
+    form->keyboard.backgroundOffset = form->keyboard.sideOffset;
+    if (uiSpriteGetCompletionState(&form->blinkSprite) != 0 && uiSpriteGetCompletionState(&form->animation) != 0) {
+        stateSetterEnterState(form, 2);
     }
 }
-}
+
+} /* extern "C" */

@@ -67,7 +67,7 @@ s32 pairedEntryTableContains(BtlStartState *state, u16 id);
 void btlQueueActionMessage(s32 a, s32 b, u32 id, s32 c, s32 d, s32 e, s32 f);
 void FUN_003ed6e8(BtlStartState *state);
 void btlAiBuildTurnOrder(BtlStartState *state);
-void frameTexRequestFade(s32 mode);
+void frameTexApplyMode(s32 mode);
 void FUN_003e0bb8(BtlStep *request, BtlStartState *state);
 void contentRequestStart(BtlStep *request, BtlStartState *state);
 
@@ -110,7 +110,7 @@ void FUN_003e1454(BtlStep *request, BtlStartState *state)
         btlStepEnter(request, 0x17);
         result = FUN_003e0f94(request, state);
         if (result != 2 && result != 5 && (state->flags & g_btlEncount.intro) == 0) {
-            frameTexRequestFade(2);
+            frameTexApplyMode(2);
             state->flags = g_btlEncount.intro | state->flags;
         }
         FUN_003e0bb8(request, state);

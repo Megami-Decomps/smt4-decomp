@@ -13,7 +13,8 @@ static __inline AsdVramBlockA *takeBlockDescriptor(AsdMemTable *table)
 {
     if (table != NULL && table->entries != NULL) {
         AsdVramBlockA *entries = static_cast<AsdVramBlockA *>(table->entries);
-        for (s32 i = 0; i < 512; ++i) {
+        s32 i;
+        for (i = 0; i < 512; ++i) {
             AsdVramBlockA *block = &entries[i];
             if (block->poolId == 0) {
                 block->addr = 0;

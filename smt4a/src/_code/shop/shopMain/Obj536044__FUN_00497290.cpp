@@ -14,7 +14,7 @@ s32 inputIsQuestRepeatRight(void);
 s32 FUN_004d0494(void);
 s32 inputIsQuestCancelPressed(void);
 s32 inputIsQuestMenuPressed(void);
-void FUN_0038b57c(s32 index);
+void statusModelRestoreOutfitPart(s32 index);
 void statusCameraRestore(s32 a);
 void sendEvent1000210(void);
 void sendEvent100020F(void);
@@ -59,13 +59,13 @@ void Obj536044::FUN_00497290()
     if (inputIsQuestRepeatRight() != 0 || recordGetModeForId(nextItem) == 6) {
         if (slot != SHOP_SLOT_ITEMS) {
             if (slot == 3) {
-                FUN_0038b57c(0);
+                statusModelRestoreOutfitPart(0);
             }
             if (slot == 4) {
-                FUN_0038b57c(1);
+                statusModelRestoreOutfitPart(1);
             }
             if (slot == 5) {
-                FUN_0038b57c(2);
+                statusModelRestoreOutfitPart(2);
             }
             statusCameraRestore(0);
             previewing = 0;
@@ -89,13 +89,13 @@ void Obj536044::FUN_00497290()
     } else if (FUN_004d0494() != 0 || recordGetModeForId(previousItem) == 6) {
         if (slot != SHOP_SLOT_ITEMS) {
             if (slot == 3) {
-                FUN_0038b57c(0);
+                statusModelRestoreOutfitPart(0);
             }
             if (slot == 4) {
-                FUN_0038b57c(1);
+                statusModelRestoreOutfitPart(1);
             }
             if (slot == 5) {
-                FUN_0038b57c(2);
+                statusModelRestoreOutfitPart(2);
             }
             statusCameraRestore(0);
             previewing = 0;
@@ -119,13 +119,13 @@ void Obj536044::FUN_00497290()
     }
     if (inputIsQuestMenuPressed() != 0) {
         if (slot == 3) {
-            FUN_0038b57c(0);
+            statusModelRestoreOutfitPart(0);
         }
         if (slot == 4) {
-            FUN_0038b57c(1);
+            statusModelRestoreOutfitPart(1);
         }
         if (slot == 5) {
-            FUN_0038b57c(2);
+            statusModelRestoreOutfitPart(2);
         }
         uiSpriteBankApplyPreset(&animation, 1);
         sendEvent100020F();

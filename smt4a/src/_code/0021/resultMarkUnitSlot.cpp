@@ -1,8 +1,7 @@
 #include "shard/X14_EngineUnits.h"
 #include "shard/Shard0031.h"
 #include "gamedata/SaveSlotTable.h"
-
-extern "C" void FUN_0015f490(u32 handle, s32 kind, f32 scale, s32 enabled, s32 flags);
+#include "battle/BtlEntryVoice.h"
 
 /* Marks the party or reserve slot and queues the marker animation once. */
 extern "C" void resultMarkUnitSlot(ResultWorkA *units, s32 slot, u32 handle, s32 animate)

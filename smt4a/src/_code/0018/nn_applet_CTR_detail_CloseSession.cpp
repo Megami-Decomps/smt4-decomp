@@ -1,10 +1,10 @@
+#include "nn/err/Fatal.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `nn_applet_CTR_detail_CloseSession` (_code @ 0x18b964, 0x60 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
 
-int errThrowFatal(int, int);
 int resultHandleFailure(void);
 int software_interrupt(int);
 

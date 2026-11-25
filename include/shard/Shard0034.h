@@ -362,7 +362,7 @@ typedef struct ScalarAnimationChannel {
     /* 0x00 */ u8 unk00[0x38];
     /* 0x38 */ f32 current;
     /* 0x3C */ f32 previous;
-    /* 0x40 */ u32 unk40;
+    /* 0x40 */ f32 step;       /* advance added to the current position before interpolation */
     /* 0x44 */ ScalarRange range;
     /* 0x4C */ ScalarInterpolation interpolate;
     /* 0x50 */ void *work;

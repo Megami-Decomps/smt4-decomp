@@ -36,7 +36,7 @@ u32 uniteStartOrQueueRequest(s32 request);
 void partyPanelRemoveLastFusionParent(void);
 void FUN_002a7b74(void);
 void FUN_00284ee4(s32 start);
-void FUN_002c8550(s32 state);
+void menuSetModeAndResetTransitions(s32 state);
 void FUN_0037e1b0(s32 value, u8 flag);
 
 /* Runs the skill inheritance screen's candidate list: moves the cursor between the rows and the button
@@ -200,7 +200,7 @@ u32 uniteInheritanceUpdateSkillList(UniteWorkA *work, s8 blocked, u32 *selected)
             ifTouchRegionRemove();
             ifTouchRegionRemove();
             FUN_0037e1b0(work->pairSort.pairKind, work->history.returnTo == 30 ? 0 : 1);
-            FUN_002c8550(1);
+            menuSetModeAndResetTransitions(1);
             if (!keepHelp) {
                 buttonHelpSetText(0, 0xF4F4F4FF);
             }

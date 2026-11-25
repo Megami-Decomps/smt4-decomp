@@ -32,7 +32,7 @@ extern "C" {
 extern u32 DAT_00589368;
 extern ResourceMappingPacket DAT_0062d000[];
 u32 tokenRegistryCopyEntries(const u32 *resource, ResourceMappingInfo *info, const ResourceMappingKey *key, u32 count);
-u32 FUN_00500350(const u32 *resource, u32 *key, ResourceMappingInfo *info, u32 count, u32 index);
+u32 tokenRegistryCopyRange(const u32 *resource, u32 *key, ResourceMappingInfo *info, u32 count, u32 index);
 
 u32 FUN_00428428(const u32 *resource, const ResourceMappingKey *keys, u32 count)
 {
@@ -59,7 +59,7 @@ u32 FUN_00428428(const u32 *resource, const ResourceMappingKey *keys, u32 count)
     } else {
         u32 key;
         for (u32 i = 0; i < available; ++i) {
-            result = FUN_00500350(resource, &key, &info, 1, i);
+            result = tokenRegistryCopyRange(resource, &key, &info, 1, i);
             if (nnResultIsFailure(result)) {
                 return result;
             }

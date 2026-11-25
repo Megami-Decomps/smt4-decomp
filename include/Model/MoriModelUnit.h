@@ -2,6 +2,16 @@
 #define MODEL_MORIMODELUNIT_H
 
 #include "common.h"
+#include <stddef.h>
+
+/* Array view used for the model unit's node positions. Its storage is supplied by the caller. */
+struct FloatArray {
+    /* 0x00 */ f32 *values;
+    /* 0x04 */ u32 count;
+
+    f32 &operator[](s32 index) { return values[index]; }
+};
+typedef char FloatArrayLayoutCheck[sizeof(FloatArray) == 8 && offsetof(FloatArray, count) == 4 ? 1 : -1];
 
 struct IdArray {
     /* 0x00 */ u16 *values;

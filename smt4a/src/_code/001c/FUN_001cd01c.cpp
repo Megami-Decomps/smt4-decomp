@@ -1,28 +1,23 @@
-/* NON_MATCHING: countdown loop now matches retail's shape; retail predicates the index init (movne ip,#0) and uses lr as a scratch register (push {r4, lr}), the build uses r4/r5. */
-/* Reads the table of section offsets at the start of a packed blob into the sizing state (one group pointer per section),
- * then lets FUN_001cd064 (placed right after, so the last call is a linker NOP) size the result. */
+/* NON_MATCHING: the masked count and table address are scheduled differently;
+ * the loop uses r4/r5 where retail uses lr/r4. */
 #include "shard/Resource.h"
 
-struct PackedBlob {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ u32 sectionCount;   /* low byte */
-    /* 0x08 */ u32 sectionOffsets[1];  /* sectionCount entries, then the blob's trailing words */
+enum {
+    RESOURCE_BLOB_SECTION_COUNT_WORD = 1,
+    RESOURCE_BLOB_SECTION_COUNT_MASK = 0xFF,
+    RESOURCE_BLOB_OFFSET_TABLE_WORD = 2,
+    RESOURCE_BLOB_EXTRA_SIZE_WORD = 5 /* relative to the end of the offset table */
 };
 
-extern "C" {
-u32 FUN_001cd064(const ResourceSizingState *resource);
-
-u32 FUN_001cd01c(ResourceSizingState *state, PackedBlob *blob)
+/* Resolves the blob's group offsets and returns its unpacked workspace size. */
+extern "C" u32 FUN_001cd01c(ResourceSizingState *state, u32 *blob)
 {
-    const u32 *offsets = blob->sectionOffsets;
-    u32 count = blob->sectionCount & 0xFF;
-
+    const u32 *offsets = blob + RESOURCE_BLOB_OFFSET_TABLE_WORD;
+    u32 count = blob[RESOURCE_BLOB_SECTION_COUNT_WORD] & RESOURCE_BLOB_SECTION_COUNT_MASK;
     state->count = count;
-    s32 i = 0;
-    for (u32 remaining = count; remaining != 0; --remaining) {
-        state->groups[i++] = (ResourceSizingGroup *)((u8 *)blob + *offsets++);
+    for (u32 i = 0; i < count; ++i) {
+        state->groups[i] = (ResourceSizingGroup *)((u8 *)blob + *offsets++);
     }
-    state->extraWords = offsets[5];
+    state->extraWords = offsets[RESOURCE_BLOB_EXTRA_SIZE_WORD];
     return FUN_001cd064(state);
-}
 }

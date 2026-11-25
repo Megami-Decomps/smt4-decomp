@@ -1,18 +1,12 @@
-#include "shard/GameGlobals.h"
 #include "code/Code0026_Smt4.h"
+#include "status/StatusTabTransition.h"
 
 extern "C" {
 
-int statusDownRestoreTabForMode(void);
-
-
+/* Clears the old status tab and its navigation state. */
 void FUN_0026d670(void)
 {
-    GameData *data = g_gameGlobals.data;
-
-    g_gameGlobals.data->unk12E4 = 0;
-    statusDownRestoreTabForMode();
-    data->unk1E63 = 0;
+    statusResetTabTransition();
 }
 
 } /* extern "C" */

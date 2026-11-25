@@ -1,3 +1,4 @@
+#include "nn/err/Fatal.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00170494` (_code @ 0x170494, 0x4a8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -9,7 +10,6 @@ int appletSetUnlockFlag(unsigned int);
 int appletSetSleepQueryState(...); // declcheck: local (romwright prototype; the shared declaration in nn/applet/SleepQuery.h does not compile here)
 int FUN_00170e6c(int);
 int FUN_0018991c(void);
-int errThrowFatal(unsigned int, int);
 int FUN_0018b6c0(void);
 int FUN_0018b6f8(void);
 int FUN_0018b92c(void);

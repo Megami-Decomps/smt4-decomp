@@ -1,4 +1,5 @@
 /* NON_MATCHING: signed index loop matches zero-count branch; copy-loop source/destination scratch registers differ. */
+#include "classes/EffGeomRecord.h"
 #include "gfx/TiledIndexMesh.h"
 #include "shard/W6_W6Match3_EffectColor.h"
 #include "AsdSDK/Source/Gfx/Effect/effBehavior.h"
@@ -15,20 +16,18 @@ struct EffectGeometryCloneView {
     s32 *referenceCount;
 };
 extern "C" {
-EffectGeometryCloneView *FUN_00207498(s32, s32, s32, u16);
-
 EffectGeometryCloneView *FUN_00219fc4(EffectGeometryCloneView *source)
 {
-    EffectGeometryCloneView *copy = FUN_00207498(source->count, source->verticesPerItem,
-                                               source->trianglesPerItem, source->flags);
+    EffGeomPointHandle *copy = FUN_00207498(source->count, source->verticesPerItem,
+                                           source->trianglesPerItem, source->flags);
     if (source->referenceCount) {
         copy->referenceCount = source->referenceCount;
         refCountIncrement(reinterpret_cast<int *>(copy->referenceCount));
     }
     for (s32 i = 0; i < source->storage->counts.indexCount; ++i)
-        copy->storage->indices[i] = source->storage->indices[i];
+        reinterpret_cast<u16 *>(copy->record->vertices)[i] = source->storage->indices[i];
     for (s32 i = 0; i < source->count; ++i)
-        copy->colors[i] = source->colors[i];
-    return copy;
+        copy->points[i] = source->colors[i];
+    return reinterpret_cast<EffectGeometryCloneView *>(copy);
 }
 }

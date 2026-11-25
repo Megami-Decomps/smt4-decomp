@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00208c08` (_code @ 0x208c08, 0x1518 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "status/StatusMenuMode.h"
 #include <stdio.h>
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
@@ -17,7 +18,6 @@ int eventQueueAddUniqueIfValid(...);
 int eventQueueAddUnique(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
-int gameTransitionStartStep(void);
 int statusCameraApply(void);
 int linkHolderRunAll(...);
 int FUN_003e5558(...);

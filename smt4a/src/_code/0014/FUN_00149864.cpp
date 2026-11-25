@@ -1,70 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00149864` (_code @ 0x149864, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc swaps the saved registers for the heap selector and the driver callback table,
+ * and schedules the heap copy after the first pool load. */
+#include "shard/W6_W6Match7_DefaultTextureWork.h"
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
-
-typedef int romwright_code(...);
-extern romwright_code *g_gfxAllocateCallback; /* 0x58918c */
-extern romwright_code *g_gfxReleaseCallback; /* 0x589190 */
-extern int DAT_0061a594; /* 0x61a594 */
-
-
-void FUN_00149864(int param_1,int param_2,int param_3,int param_4)
-
-{
-/* irregular: irregular input(s): in_r12 */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  romwright_code *in_r12;
-  
-  puVar2 = *(unsigned int **)(DAT_0061a594 * 4 + 0x61a598);
-  if (param_1 != 0x8057) {
-    if (param_1 < 0x8057) {
-      if (param_1 == 0x8051) {
-        temp_v1 = 3;
-      }
-      else {
-        if (param_1 != 0x8056) {
-          return;
-        }
-        temp_v1 = 2;
-      }
-    }
-    else if (param_1 == 0x8058) {
-      temp_v1 = 4;
-    }
-    else {
-      if (param_1 != 0x8d62) {
-        return;
-      }
-      temp_v1 = 2;
-    }
-  }
-  else {
-    temp_v1 = 2;
-  }
-  if ((param_4 == 0x10000 || param_4 == 0x20000) || param_4 == 0x30000) {
-    if (puVar2[1] != 0) {
-      in_r12 = g_gfxReleaseCallback;
-    }
-    if (puVar2[1] != 0 && in_r12 != (romwright_code *)0x0) {
-      (*in_r12)(puVar2[5],0x104,*puVar2);
-    }
-    if (g_gfxAllocateCallback == (romwright_code *)0x0) {
-      temp_v0 = 0;
-    }
-    else {
-      temp_v0 = (*g_gfxAllocateCallback)(param_4,0x104,*puVar2,temp_v1 * param_2 * param_3);
-    }
-    puVar2[5] = param_4;
-    puVar2[1] = temp_v0;
-    puVar2[2] = param_1;
-    puVar2[3] = param_2;
-    puVar2[4] = param_3;
-  }
-  return;
+extern DriverMemoryCallbacks g_gfxAllocateCallback;
 }
 
-} /* extern "C" */
+/* Reallocates the selected render target's pixel storage for a supported format and heap. */
+extern "C" void FUN_00149864(u32 format, u32 width, u32 height, u32 heap)
+{
+    AsdGfxTarget *texture = g_asdGfxContext.targets[g_asdGfxContext.activeTarget];
+    u32 bytesPerPixel;
+    switch (format) {
+    case 0x8051:
+        bytesPerPixel = 3;
+        break;
+    case 0x8056:
+    case 0x8057:
+    case 0x8D62:
+        bytesPerPixel = 2;
+        break;
+    case 0x8058:
+        bytesPerPixel = 4;
+        break;
+    default:
+        return;
+    }
+    switch (heap) {
+    case ASD_HEAP_EXTRA:
+    case ASD_HEAP_VRAM_A:
+    case ASD_HEAP_VRAM_B: {
+        const DriverMemoryCallbacks *callbacks = &g_gfxAllocateCallback;
+        if (texture->pixels != NULL && callbacks->release != NULL) {
+            callbacks->release(texture->heap, ASD_ALIGN_16, texture->id, texture->pixels);
+        }
+        void *allocation;
+        if (callbacks->allocate != NULL) {
+            allocation = callbacks->allocate(heap, ASD_ALIGN_16, texture->id, bytesPerPixel * width * height);
+        } else {
+            allocation = NULL;
+        }
+        texture->heap = heap;
+        texture->pixels = (u8 *)allocation;
+        texture->format = format;
+        texture->width = width;
+        texture->height = height;
+        break;
+    }
+    }
+}

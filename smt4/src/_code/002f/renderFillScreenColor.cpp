@@ -1,6 +1,7 @@
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
+#include "gfx/RenderTargetClear.h"
 
 /* unit-local: an RGBA colour; a new one starts out opaque white. */
 struct RenderColor {
@@ -15,7 +16,7 @@ void renderCtxFillDisplay(RenderCtx *scene, const RenderColor *color, u32 mode, 
 
 /* Fills the screen with the colour (red, green, blue, alpha) under the scene's stereo mode for the active
  * graphics preset, then restores the scene's mode. */
-void renderFillScreenColor(u32 mode, u32 flags, f32 red, f32 green, f32 blue, f32 alpha, f32 opacity)
+void renderFillScreenColor(f32 red, f32 green, f32 blue, f32 alpha, u32 mode, u32 flags, f32 opacity)
 {
     RenderColor color;
     s32 savedPreset = renderCtxGetStereoMode(g_titleScene);

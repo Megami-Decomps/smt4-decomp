@@ -8,6 +8,8 @@
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;  /* 0x57a9b8 */
 extern BtlUiA *g_btlUiBlock;   /* 0x57a9c8: g_btlUi.ui */
-}
+
+void btlUiCopyStatePairs(BtlUiA *owner, u8 *confirmed, u64 *targets, u64 *extra);
+} /* extern "C" */
 
 #endif

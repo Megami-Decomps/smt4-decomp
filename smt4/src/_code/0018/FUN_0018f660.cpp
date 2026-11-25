@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018f660` (_code @ 0x18f660, 0x127c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "status/StatusMenuMode.h"
 #include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 
 extern "C" {
 
 int asdAnimGetTrackLastFrame(...);
-int statusDownRestoreTabForMode(void);
 int FUN_00296284(...);
 int statusCameraApply(void);
 int eventQueueAddUnique(...);

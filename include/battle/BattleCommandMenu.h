@@ -2,18 +2,11 @@
 #define BATTLE_BATTLECOMMANDMENU_H
 
 #include "common.h"
+#include "battle/BattleCommandTable.h"
 #include "battle/BtlMainAccess.h" /* Shin Megami Tensei IV only */
 #include <stddef.h>
 
-/* One battle command table entry (0x60 bytes). */
-struct BattleCommandEntry {
-    u8 kind;
-    u8 enabled;
-    u8 unk02[0x59];
-    u8 hiddenInEvent;       // 0x5B
-    u16 requiredGameFlag;   // 0x5C
-    u16 requiredFlagBit;    // 0x5E
-};
+typedef ContextCommandDefinition BattleCommandEntry;
 
 /* Per-menu command counter (0x64 bytes): index 0 is the party's, 1..3 the party slots'. */
 struct CommandCounter {
@@ -38,8 +31,6 @@ struct BattleCommandMenu {
 };
 
 typedef char BattleCommandMenuOffsets[
-    offsetof(BattleCommandEntry, hiddenInEvent) == 0x5B &&
-    offsetof(BattleCommandEntry, requiredFlagBit) == 0x5E &&
     offsetof(BattleCommandMenu, mode) == 0x3048 &&
     offsetof(BattleCommandMenu, cursor) == 0x305C &&
     offsetof(BattleCommandMenu, counters) == 0x3088 &&
@@ -58,9 +49,9 @@ static __inline bool battleCommandIsAvailable(const BattleCommandEntry *command)
         return false;
     if (command->requiredGameFlag != 0 && gameFlagIsSet(command->requiredGameFlag) == 0)
         return false;
-    if (command->requiredFlagBit != 0 && flagBitIsSet(command->requiredFlagBit) == 0)
+    if (command->requiredStatusFlag != 0 && flagBitIsSet(command->requiredStatusFlag) == 0)
         return false;
-    if (command->hiddenInEvent != 0 && (btlGetMainState()->battleFlags & 0x40000) != 0)
+    if (command->blockedInBattleMode != 0 && (btlGetMainState()->battleFlags & 0x40000) != 0)
         return false;
     return true;
 }

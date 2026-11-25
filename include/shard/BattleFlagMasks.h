@@ -20,13 +20,19 @@ struct BattleMasks {
     /* 0x158 */ u64 allowMask;
     /* 0x160 */ u8 unk160[0x188 - 0x160];
     /* 0x188 */ u64 partialFleeMask;
-    /* 0x190 */ u8 unk190[0x208 - 0x190];
+    /* 0x190 */ u8 unk190[0x1F8 - 0x190];
+    /* 0x1F8 */ u64 streetPassListOverrideMask; /* allows the list without any saved entries */
+    /* 0x200 */ u8 unk200[8];
     /* 0x208 */ u64 stopMaskA;
     /* 0x210 */ u64 forceFleeMask;
     /* 0x218 */ u64 forceMask;
     /* 0x220 */ u8 unk220[0x250 - 0x220];
     /* 0x250 */ u64 stopMaskB;
 };
+
+typedef char BattleMasksStreetPassOffsetCheck[
+    offsetof(BattleMasks, streetPassListOverrideMask) == 0x1F8 &&
+    offsetof(BattleMasks, stopMaskA) == 0x208 ? 1 : -1];
 
 struct BattleFlagsState {
     /* 0x0000 */ u8 unk0000[0xf0];

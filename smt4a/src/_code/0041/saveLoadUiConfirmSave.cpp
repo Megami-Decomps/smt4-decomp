@@ -31,7 +31,7 @@ void statusCameraRestore(s32 usePreset);
 void FUN_0033440c(u32 value);
 void FUN_0034aac8(u8 value);
 void gameGlobalsQueueValues(PlayerDataA *player, s32 mode);
-s32 FUN_0038b5fc(s32 mode, u32 value);
+s32 statusModelPreviewOutfitPart(s32 mode, u32 value);
 void messageMainSetFlag(u8 value);
 u32 saveLoadStartSave(s32 slot, u8 option);
 s32 saveLoadThreadHasResult(void);
@@ -114,9 +114,9 @@ void saveLoadUiConfirmSave(SaveSlotHeaderWork *ui)
             gameGlobalsSetOverlayActive(1);
             statusCameraRestore(0);
             ui->suspended = 0;
-            FUN_0038b5fc(1, ui->player->equipment[4]);
-            FUN_0038b5fc(2, ui->player->equipment[5]);
-            FUN_0038b5fc(0, ui->player->equipment[3]);
+            statusModelPreviewOutfitPart(1, ui->player->equipment[4]);
+            statusModelPreviewOutfitPart(2, ui->player->equipment[5]);
+            statusModelPreviewOutfitPart(0, ui->player->equipment[3]);
         }
         ui->flag0f = 1;
         ui->popupActive = 1;

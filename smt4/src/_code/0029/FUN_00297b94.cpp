@@ -3,9 +3,9 @@
 #include "shard/PlayScene.h"
 #include <stddef.h>
 #include "code/Code0029_Smt4.h"
+#include "battle/BattleCommandLookup.h"
 
 extern "C" {
-const char *FUN_002e38c0(u8 message, s32 alternate);
 void buttonHelpSetText(const char *text, u32 color);
 void FUN_00253fe8(u32 color, s32 start, s32 line, s32 length);
 
@@ -30,7 +30,7 @@ void FUN_00297b94(PlayScene *scene, s32 selection, s32 page)
     case 5: message = 8; break;
     case 4: message = 7; break;
     }
-    const char *text = FUN_002e38c0(message, page == 0);
+    const char *text = btlFindCommandHint(message, page == 0);
     if (selection == 9) {
         char buffer[128];
         sprintf(buffer, text, help->value);

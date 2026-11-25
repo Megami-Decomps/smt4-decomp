@@ -1,26 +1,17 @@
-#include "common.h"
+#include "battle/BtlActionFallback.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
 
-typedef struct Row00394750 {
-    /* 0x00 */ u16 id;
-    /* 0x02 */ u8 unk02[2];
-    /* 0x04 */ u32 value;
-    /* 0x08 */ u8 unk08[8];
-} Row00394750;
-
 void asdSoundSelectSlotB(s32 value);
 void asdSndEnsureCurrentSlotData(u32 value);
 
-extern Row00394750 g_jyoucyuRowTable[3]; /* 0x43988c */
-
 /* The table row with the given id, or NULL. */
-static __inline Row00394750 *findRow(u32 id)
+static __inline const BtlActionFallback *findRow(u32 id)
 {
     s32 index = 0;
-    while (index < 3) {
-        Row00394750 *row = &g_jyoucyuRowTable[index];
+    while (index < BTL_FALLBACK_ACTION_COUNT) {
+        const BtlActionFallback *row = &g_jyoucyuRowTable[index];
         if (row->id == id) {
             return row;
         }
@@ -33,10 +24,10 @@ static __inline Row00394750 *findRow(u32 id)
 void jyoucyuRowApply(u32 id)
 {
     if (jyoucyuGetTableEntry(1) == 0) {
-        Row00394750 *row = findRow(id);
+        const BtlActionFallback *row = findRow(id);
         u32 value;
         if (row != NULL) {
-            value = row->value;
+            value = row->sound;
         }
         if (row == NULL || value == 0) {
             return;

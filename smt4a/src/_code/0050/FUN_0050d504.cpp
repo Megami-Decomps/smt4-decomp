@@ -1,40 +1,25 @@
-/* NON_MATCHING: retail materialises the null result of a failed allocation with moveq r0, r1 (a null-checked pointer conversion); the build branches on the compare instead */
-/* Creates the sound-pool instance for type 0x2C: allocates it from the pool next to the owner and fills its defaults. */
-#include "common.h"
+/* NON_MATCHING: retail copies a saved zero to r0 on pool exhaustion before branching out;
+ * armcc branches directly because the allocation result is already NULL. */
+#include "sound/PooledSoundInstance.h"
 
-extern "C" {
-/* A pooled instance: only the default-initialised tail is known. */
-struct PoolInstance {
-    /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ u32 unk18;
-    /* 0x1C */ u32 unk1c;
-    /* 0x20 */ u32 unk20;
-    /* 0x24 */ f32 scale;
-    /* 0x28 */ u8 enabled;
-    /* 0x29 */ u8 unk29;
-};
+extern "C" void *nw_snd_internal_PoolImpl_AllocImpl(void *pool);
 
-PoolInstance *nw_snd_internal_PoolImpl_AllocImpl(void *pool);
-
-/* `owner` is the second interface of the pool owner, 4 bytes into the object; the pool is at +8 of the object. */
-PoolInstance *FUN_0050d504(u8 *owner, u32 type)
+/* Allocates a fixed-size instance from the owner's pool and initializes its playback defaults. */
+extern "C" PooledSoundInstance *FUN_0050d504(u8 *ownerInterface, u32 requestedBytes)
 {
-    u8 *object = owner - 4;
-    PoolInstance *instance;
-
-    if (type != 0x2C) {
+    PooledSoundOwner *owner = (PooledSoundOwner *)(ownerInterface - offsetof(PooledSoundOwner, secondaryInterface));
+    if (requestedBytes != sizeof(PooledSoundInstance)) {
         return NULL;
     }
-    instance = nw_snd_internal_PoolImpl_AllocImpl(object + 8);
+    PooledSoundInstance *instance = (PooledSoundInstance *)nw_snd_internal_PoolImpl_AllocImpl(&owner->freeList);
     if (instance == NULL) {
         return NULL;
     }
     instance->unk18 = 0;
-    instance->unk1c = 0;
+    instance->unk1C = 0;
     instance->unk20 = 0;
     instance->scale = 0.5f;
     instance->enabled = 1;
     instance->unk29 = 0;
     return instance;
-}
 }

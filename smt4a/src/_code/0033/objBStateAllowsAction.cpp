@@ -1,17 +1,16 @@
 #include "shard/Shard0033.h"
 #include "network/DataStore/DataStoreMain.h"
 #include "game/GameGlobalsRef.h"
+#include "code/Code003e_Smt4a.h"
 
 extern "C" {
 
-extern s32 fourPtrsAllNull(u32 value);
-
-/* True when the object's state is 5, 6, 7 or 9 and fourPtrsAllNull accepts its +0x2034 value. */
+/* True for states 5, 6, 7 and 9 once the status model has no pending resources. */
 u32 objBStateAllowsAction(void)
 {
     s32 state = g_gameGlobals.instance->activeState;
 
-    if ((state == 5 || state == 6 || state == 7 || state == 9) && fourPtrsAllNull(g_gameGlobals.instance->unk2034) != 0) {
+    if ((state == 5 || state == 6 || state == 7 || state == 9) && fourPtrsAllNull((FourPtrs *)g_gameGlobals.instance->statusModel) != 0) {
         return 1;
     }
     return 0;

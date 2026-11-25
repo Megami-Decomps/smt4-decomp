@@ -5,13 +5,13 @@
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_EnemyDrawOffset.h"
+#include "shard/VersionedResource.h"
 #include "gamedata/NkmEnemyRecord.h"
 #include "code/Code0027.h"
 #include "gamedata/NkmEnemyLookup.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {
-const BattleVector3 *FUN_002d8cc8(void *arrangement);
 void btlEnemyDrawCalcVerticalOffset(const EnemyDrawOffsetOwner *owner, BattleVector3 *output, f32 scale);
 
 /* idSetFindSubjectIndex's body: the position of the action's member within its combatant entry, or -1 when absent. */
@@ -36,7 +36,7 @@ BattleVector3 btlActionEffectAnchor(BtlMainState *state, s32 index, s32 forceEne
     BtlActionRecord *action = &state->actions[index];
     BattleVector3 position;
     if ((action->status & 0x10) != 0 && forceEnemy == 0) {
-        position = *FUN_002d8cc8(state->arrangement.file);
+        position = *(const BattleVector3 *)encounterArrangementFindStagePosition(state->arrangement.file);
         position.z += 2.0f;
         BtlUnitData *source = btlFindEntryBlockByMemberId(state, index);
         u8 kind = nkmEnemyFindById(source->id)->arrangementFirst;

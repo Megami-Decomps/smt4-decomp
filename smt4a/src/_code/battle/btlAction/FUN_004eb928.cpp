@@ -56,7 +56,7 @@ int FUN_004fee24(...);
 
 int itemTableGetItemRecord(void);
 int FUN_002c7bf4(...);
-int FUN_0047eccc(...);
+int btlGetResidentOrFallbackAction(...);
 int FUN_0047f138(...);
 int btlSlotSetStoreValue(...);
 int btlAdjustPropertyClamped(...);
@@ -193,7 +193,7 @@ extern int btlMotionFindSelection(int, unsigned short); // declcheck: local (the
 /* Supplied declaration required: FUN_003f2594. */
 /* Supplied declaration required: FUN_003f2638. */
 /* Supplied declaration required: FUN_003f2aac. */
-/* Supplied declaration required: FUN_0047eccc. */
+/* Supplied declaration required: btlGetResidentOrFallbackAction. */
 /* Supplied declaration required: FUN_0047f138. */
 /* Supplied declaration required: flagValueSub. */
 /* Supplied declaration required: FUN_004a92d0. */
@@ -889,7 +889,7 @@ code_r0x004ef7f0:
     }
     if ((*puVar25 & 0x1080) == 0) {
       if (iStack_68 == 2 || iStack_68 == 3) {
-        FUN_0047eccc(uStack_74 & 0xffff);
+        btlGetResidentOrFallbackAction(uStack_74 & 0xffff);
         FUN_0047f138(uStack_74 & 0xffff,puVar29,temp_v5);
         if ((*puVar25 & 0x1080) != 0) {
           temp_v9 = 1;

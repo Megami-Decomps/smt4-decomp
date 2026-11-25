@@ -1,32 +1,21 @@
-#include <vector>
-#include "common.h"
+#include "classes/Obj557b68.h"
 
-/* One colour slot of a model scene (8 bytes): a grey opaque colour, off until set. */
-struct SceneColorEntry {
-    /* 0x0 */ u32 color;
-    /* 0x4 */ u8 enabled;
+namespace {
+enum {
+    MORI_SCENE_DEFAULT_COLOR = 0x808080ff,
+    MORI_SCENE_LIST_RESERVE = 8,
 };
+}
 
-struct SceneListItem;
-
-/* The part of the model scene (Obj557b68) this function fills: its colour slots and its eight item lists
- * (released by FUN_00406a1c). */
-struct SceneColorLists {
-    /* 0x000 */ u8 unk000[0x104];
-    /* 0x104 */ s32 count;
-    /* 0x108 */ std::vector<SceneColorEntry> colors;
-    /* 0x114 */ std::vector<SceneListItem *> lists[8];
-};
-
-/* Gives the scene one default colour slot per element and room for eight items in each element's list. */
-extern "C" void moriSceneInitColorLists(SceneColorLists *scene)
+/* Gives each scene element a default colour slot and reserves its item list. */
+extern "C" void moriSceneInitColorLists(Obj557b68 *scene)
 {
-    scene->colors.reserve(scene->count);
-    for (s32 i = 0; i < scene->count; i++) {
-        SceneColorEntry entry;
-        entry.color = 0x808080ff;
+    scene->vectors.colors.reserve(scene->unk104);
+    for (s32 i = 0; i < (s32)scene->unk104; ++i) {
+        Obj557b68ColorEntry entry;
+        entry.color = MORI_SCENE_DEFAULT_COLOR;
         entry.enabled = 0;
-        scene->colors.push_back(entry);
-        scene->lists[i].reserve(8);
+        scene->vectors.colors.push_back(entry);
+        scene->vectors.records[i].words.reserve(MORI_SCENE_LIST_RESERVE);
     }
 }

@@ -1,17 +1,19 @@
-/* NON_MATCHING: VFP register numbering differs (retail converts red through s4->s5 so the result lands in s1; build uses s2-s4 for red/green/blue). */
-#include "shard/W6_W6Match3_EffectColor.h"
+/* NON_MATCHING: 12 lines; the red and green extracts use the opposite registers, and alpha is masked into r0 rather than ip. */
+#include "gfx/VectorScratch.h"
+#include <string.h>
 
-extern "C" {
-
-extern EffectColor DAT_004ea91c;
-
-// Channel labels are provisional; preserve the engine's high-to-low packed order.
-void renderCtxSetPackedColor(u32 packed)
+/* Unpacks an RRGGBBAA word into the render context's colour scratch slot. */
+extern "C" void renderCtxSetPackedColor(u32 packed)
 {
-    DAT_004ea91c.red = (f32)(packed >> 24) * (1.0f / 255.0f);
-    DAT_004ea91c.green = (f32)((packed >> 16) & 0xff) * (1.0f / 255.0f);
-    DAT_004ea91c.blue = (f32)((packed >> 8) & 0xff) * (1.0f / 255.0f);
-    DAT_004ea91c.alpha = (f32)(packed & 0xff) * (1.0f / 255.0f);
+    /* A little-endian copy orders the channels from alpha to red in memory. */
+    u8 channels[4];
+    memcpy(channels, &packed, sizeof(channels));
+    const f32 scale = 1.0f / 255.0f;
+    EffectColor color = {
+        (f32)channels[3] * scale,
+        (f32)channels[2] * scale,
+        (f32)channels[1] * scale,
+        (f32)channels[0] * scale,
+    };
+    effectColorCopy(&color, &g_vectorScratch.first.color);
 }
-
-} // extern "C"

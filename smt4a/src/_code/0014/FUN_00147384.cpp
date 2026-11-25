@@ -1,3 +1,4 @@
+#include "nn/err/Fatal.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00147384` (_code @ 0x147384, 0x140 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -11,7 +12,6 @@ int nn_gxlow_CTR_SaveVramSysArea(void);
 int FUN_00170e58(void);
 int FUN_00170ebc(int);
 int FUN_001716c0(void);
-int errThrowFatal(...);
 int nn_applet_CTR_detail_OpenSession(void);
 int nn_applet_CTR_detail_CloseSession(void);
 int svcSleepThread(int, int);
@@ -56,10 +56,7 @@ int FUN_00147384(unsigned int param_1,unsigned int param_2,unsigned int param_3)
   nn_applet_CTR_detail_OpenSession();
   temp_v1 = temp_v5;
   temp_v0 = -1;
-  FUN_0015ab30(0xffffffff,temp_v3,temp_v4,&temp_v2);
-  if (temp_v0 < 0) {
-    errThrowFatal();
-  }
+  throwFatalIfFailed(FUN_0015ab30(0xffffffff,temp_v3,temp_v4,&temp_v2), __current_pc());
   nn_applet_CTR_detail_CloseSession();
   temp_v0 = FUN_001703e8();
   if (temp_v0 != 0) {

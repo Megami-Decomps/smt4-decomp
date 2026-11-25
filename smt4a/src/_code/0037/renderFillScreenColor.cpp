@@ -1,6 +1,7 @@
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 #include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
+#include "gfx/RenderTargetClear.h"
 
 /* unit-local: an RGBA colour; a new one starts out opaque white. */
 struct RenderColor {
@@ -15,7 +16,7 @@ void renderCtxResetFrameState(RenderCtxA *context);
 void renderCtxFillDisplay(RenderCtxA *context, RenderColor *color, u32 arg0, u32 arg1, f32 value);
 
 /* Draws with `color` under the render context's slot for the active graphics preset, then restores the slot. */
-void renderFillScreenColor(u32 arg0, u32 arg1, f32 red, f32 green, f32 blue, f32 alpha, f32 value)
+void renderFillScreenColor(f32 red, f32 green, f32 blue, f32 alpha, u32 mode, u32 flags, f32 opacity)
 {
     RenderColor color;
     s32 savedSlot = renderCtxGetStereoMode(g_renderCtx);
@@ -32,7 +33,7 @@ void renderFillScreenColor(u32 arg0, u32 arg1, f32 red, f32 green, f32 blue, f32
     renderCtxSetStereoMode(g_renderCtx, slot);
     renderCtxResetFrameState(g_renderCtx);
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
-    renderCtxFillDisplay(g_renderCtx, &color, arg0, arg1, value);
+    renderCtxFillDisplay(g_renderCtx, &color, mode, flags, opacity);
     renderCtxSetStereoMode(g_renderCtx, savedSlot);
 }
 

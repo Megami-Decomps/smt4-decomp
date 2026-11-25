@@ -4,6 +4,12 @@
 #include "common.h"
 #include <stddef.h>
 
+enum {
+    NAME_FORM_NO_CHARACTER = -1,
+    NAME_FORM_FULLWIDTH_SPACE = 0x8140,
+    NAME_FORM_FONT_TABLE = 3,
+};
+
 struct NameFormCharacter {
     s8 high;
     s8 low;

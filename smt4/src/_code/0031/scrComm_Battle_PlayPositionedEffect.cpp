@@ -1,4 +1,6 @@
-/* NON_MATCHING: 54 lines: the effect-set names are pooled pc-relative here but are shared objects in retail (DAT_00400428/34, also used by scrComm_Battle_PlayCommonEffect); retail keeps FUN_002454c4's constant 1 in r4 across the copy, and stores the slot loop's spilled unit/member parameters separately where this build pairs them (strd). */
+/* NON_MATCHING: 54 lines: the effect-set names are pooled pc-relative here but are shared objects in retail (DAT_00400428/34, also used by scrComm_Battle_PlayCommonEffect); retail keeps FUN_002454c4's constant 1 in r4 across the copy, and stores the slot loop's spilled unit/member parameters separately where this build pairs them (strd).
+ * Copying the names as extern __align(4) 9-byte records DAT_00400428/34 gives retail's __ARM_common_memcpy4_9
+ * (w93-s17), but they are string literals, not a record type; the alignment only picks the helper. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -59,7 +61,7 @@ static __inline void loadCommonEffectSet(s32 effect)
         strcpy(name, "commonDw");
     else
         strcpy(name, "commonUp");
-    FUN_002454c4(g_btlAux, reinterpret_cast<u32>(name), 1, 0);
+    FUN_002454c4(g_btlAux, name, 1, 0);
 }
 
 /* Script command: plays the common up/down effect (by the sign of arg 1) at every living party unit. */

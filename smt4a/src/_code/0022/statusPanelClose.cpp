@@ -32,8 +32,6 @@ s32 lmapMainIsRunning(void);
 void statusCameraDestroy(void);
 
 
-void gameStateChange(s32 state);
-
 /* Closes the status panel: hides the status model, restarts the panel's sprite animations and
  * returns to state 3. */
 void statusPanelClose(void)
@@ -43,16 +41,16 @@ void statusPanelClose(void)
         return;
     if (game->unk2018 == 3 || game->unk2018 == 10) {
         if (lmapSceneGetScript()) {
-            if (game->unk2034) {
+            if (game->statusModel) {
                 Vec3 position;
                 position.x = game->statusModelPosition[0];
                 position.y = game->statusModelPosition[1] + 1000.0f;
                 position.z = game->statusModelPosition[2];
-                linkHolderRunAll((StatusScreenModel *)game->unk2034, &position);
+                linkHolderRunAll(game->statusModel, &position);
                 lmapSceneSetUnk134(1);
             }
-        } else if (game->unk2034) {
-            resourceOwnerReleaseAll((StatusScreenModel *)game->unk2034);
+        } else if (game->statusModel) {
+            resourceOwnerReleaseAll(game->statusModel);
             if (!lmapMainIsRunning()) {
                 g_handleRegistry->entry->unkC4 = game->unk20E6;
                 resourceOwnerReleaseAndReset(g_handleRegistry);
@@ -60,11 +58,11 @@ void statusPanelClose(void)
                 g_handleRegistry->entry->unkC4 = game->unk20E6;
             }
             if (g_gameGlobals.ownsStatusModel) {
-                if (game->unk2034)
-                    delete (StatusScreenModel *)game->unk2034;
+                if (game->statusModel)
+                    delete game->statusModel;
             }
         }
-        if (game->unk2034)
+        if (game->statusModel)
             statusCameraDestroy();
     }
     uiSpriteSetKeyframe(&game->statusSprites.status[0], 5, 0);

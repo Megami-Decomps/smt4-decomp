@@ -266,29 +266,26 @@ typedef char BtlUiActionRequestsOffsetCheck[
     offsetof(BtlUiObjD, actionRequests.slots) == 0x61EC &&
     sizeof(BtlUiObjD) == 0x7180 ? 1 : -1];
 
-/* Two words the panel hands back to its caller as a pair. */
-typedef struct BtlUiValuePair {
-    u32 first;
-    u32 second;
-} BtlUiValuePair;
-
 /* Panel status is embedded at 0x7e00; its active flag belongs to the sprite animation. */
 typedef struct BtlUiPanelState {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ u32 unk20;
     /* 0x24 */ u8 unk24[4];
-    /* 0x28 */ BtlUiValuePair firstPair;
-    /* 0x30 */ BtlUiValuePair secondPair;
+    /* 0x28 */ u64 selectedTargets;
+    /* 0x30 */ u64 selectionExtra;
     /* 0x38 */ s32 state;
     /* 0x3C */ u8 unk3C[0x0C];
     /* 0x48 */ s8 requiresTargetSelection;
     /* 0x49 */ u8 pairFlag;              /* reported with the two pairs */
     /* 0x4A */ u8 unk4A;
     /* 0x4B */ u8 spriteActive;
+    /* 0x4C */ u8 unk4C[2];
+    /* 0x4E */ u16 acceptedCommand;
 } BtlUiPanelState;
-typedef char BtlUiPanelStateLayoutCheck[offsetof(BtlUiPanelState, firstPair) == 0x28 &&
+typedef char BtlUiPanelStateLayoutCheck[offsetof(BtlUiPanelState, selectedTargets) == 0x28 &&
+    offsetof(BtlUiPanelState, selectionExtra) == 0x30 &&
     offsetof(BtlUiPanelState, state) == 0x38 && offsetof(BtlUiPanelState, pairFlag) == 0x49 &&
-    sizeof(BtlUiPanelState) == 0x4C ? 1 : -1];
+    sizeof(BtlUiPanelState) == 0x50 ? 1 : -1];
 
 typedef struct BtlUiSettings {
     /* 0x00 */ u16 slotRanks[4];
@@ -302,8 +299,6 @@ typedef struct BtlUi {
     /* 0x2200 */ BtlUiObjB objB;
     /* 0x2460 */ BtlUiObjC objC;
     /* 0x7E00 */ BtlUiPanelState panelState;
-    /* 0x7E4C */ u8 unk7E4C[2];
-    /* 0x7E4E */ u16 unk7E4E;
     /* 0x7E50 */ u16 unk7E50;
     /* 0x7E52 */ u8 unk7E52[2];
     /* 0x7E54 */ u16 listedIds[0x20];
@@ -415,8 +410,8 @@ typedef struct BtlUiA {
     };
     /* 0x7488 */ u32 unk7488;              /* the preview controller, deleted on teardown */
     /* 0x748C */ u8 unk748C[4];
-    /* 0x7490 */ BtlUiValuePair firstPair;
-    /* 0x7498 */ BtlUiValuePair secondPair;
+    /* 0x7490 */ u64 selectedTargets;
+    /* 0x7498 */ u64 selectionExtra;
     /* 0x74A0 */ s32 state;
     /* 0x74A4 */ u8 unk74A4[0x0C];
     /* 0x74B0 */ s8 requiresTargetSelection;
@@ -503,7 +498,8 @@ typedef char BtlUiARequestOffsetsCheck[sizeof(BtlUiObjDA) == 0x5AA4 &&
     sizeof(BtlUiA) == 0x12FD0 &&
     offsetof(BtlUiA, requestCounts.counts) == 0xF064 ? 1 : -1];
 
-typedef char BtlUiAPanelOffsetsCheck[offsetof(BtlUiA, firstPair) == 0x7490 &&
+typedef char BtlUiAPanelOffsetsCheck[offsetof(BtlUiA, selectedTargets) == 0x7490 &&
+    offsetof(BtlUiA, selectionExtra) == 0x7498 &&
     offsetof(BtlUiA, pairFlag) == 0x74B1 && offsetof(BtlUiA, listedIds) == 0x74BC &&
     offsetof(BtlUiA, listedIdCount) == 0x7504 && offsetof(BtlUiA, objD.numbers.slots) == 0x75B4 &&
     offsetof(BtlUiA, objA.tail.subobject) == 0x2400 ? 1 : -1];

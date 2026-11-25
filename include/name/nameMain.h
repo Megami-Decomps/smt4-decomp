@@ -34,6 +34,8 @@ typedef char NameGlobalsStatusOffsetCheck[offsetof(NameGlobals, status.active) =
 
 extern "C" {
 void stateSetterConstructDefault(void *a);
+/* Enters the next state of the Apocalypse name form, updating its touch regions and script. */
+void stateSetterEnterState(void *object, s32 nextState);
 /* Converts the multibyte `text` into the wide string `wide` and returns how many of its characters are
  * digits (the name entry's confirm step checks the typed name with it). */
 s32 convertToBufferAndStore(const char *text, u16 *wide);

@@ -16,7 +16,7 @@ typedef char StatusSlotTableOffsets[offsetof(StatusSlotTable, count) == 0x1CA3 ?
 extern "C" {
 void FUN_0023b45c(s32 value);
 void FUN_0034a9c4(u32 id, s32 value);
-void FUN_002c8550(s32 value);
+void menuSetModeAndResetTransitions(s32 value);
 void objBInitBlock12DC(void);
 void objBInitBlock12DC5(void);
 void statusPanelSetOpen(s32 open);
@@ -70,7 +70,7 @@ void compendiumRefreshStatusPreview(CompendiumBrowseWorkA *panel)
             }
             s32 previous = gameGlobalsGetFieldState();
             FUN_0034a9c4(id, 0);
-            FUN_002c8550(2);
+            menuSetModeAndResetTransitions(2);
             if (previous == 5 && FUN_00372014() != 0) {
                 objBInitBlock12DC5();
             }
@@ -100,7 +100,7 @@ void compendiumRefreshStatusPreview(CompendiumBrowseWorkA *panel)
         s32 previous = gameGlobalsGetFieldState();
         FUN_0034a9c4(id, 0);
         if (compendiumEntryIsRegistered(id) == 0) {
-            FUN_002c8550(0xE);
+            menuSetModeAndResetTransitions(0xE);
         }
         s32 current = gameGlobalsGetFieldState();
         if (current == 5) {

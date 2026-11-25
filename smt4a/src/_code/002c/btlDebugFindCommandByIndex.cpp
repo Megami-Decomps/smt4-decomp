@@ -17,7 +17,7 @@ BtlDebugEntry *btlDebugFindCommandByIndex(u8 index, s32 protagonist)
     u32 count = dataTableGetCount(section);
     BtlDebugEntry key;
     key.kind = index; /* The comparator reads only the leading byte of each record. */
-    return (BtlDebugEntry *)libc_bsearch(&key, entries, count, sizeof(key), dataSet16CompareByteKeys);
+    return (BtlDebugEntry *)libc_bsearch(&key.kind, entries, count, sizeof(BtlDebugEntry), dataSet16CompareByteKeys);
 }
 
 } /* extern "C" */

@@ -64,7 +64,7 @@ extern float DAT_0063077c; /* 0x63077c */
 extern unsigned char g_asdSoundOptions; /* 0x6308f8 */
 extern signed char DAT_0063098a; /* 0x63098a */
 extern signed char DAT_0063098b; /* 0x63098b */
-extern unsigned int DAT_0063098c; /* 0x63098c */
+extern unsigned int g_quadBlendModes; /* 0x63098c */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -219,7 +219,7 @@ int FUN_00184efc(unsigned int param_1,int param_2,unsigned int *param_3,int para
     else {
 LAB_00185068:
       if (DAT_0063098b != '\0') {
-        temp_v8 = *(int *)((int)&DAT_0063098c + (temp_v0 >> 4 & 0xfc));
+        temp_v8 = *(int *)((int)&g_quadBlendModes + (temp_v0 >> 4 & 0xfc));
         piVar15 = (int *)(g_renderCtx + 0x12b8);
         temp_v7 = *piVar15;
         temp_v14 = piVar15[temp_v7 + 2];

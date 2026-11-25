@@ -5,7 +5,7 @@ extern "C" {
 extern s32 scrGetCommandFrame(void);
 extern void scrCommMessageSetMode(s32 value);
 extern void frameTexInitActive(void);
-extern void frameTexRequestFade(s32 value);
+extern void frameTexApplyMode(s32 value);
 extern void messageSlotSet(s32 value);
 extern void eventQueueAddUnique(u32 value);
 
@@ -17,7 +17,7 @@ u8 scrCommThreePhase(void)
     if (scrGetCommandFrame() == 0) {
         scrCommMessageSetMode(1);
         frameTexInitActive();
-        frameTexRequestFade(3);
+        frameTexApplyMode(3);
         return 0;
     }
     if (scrGetCommandFrame() != 1) {
@@ -29,7 +29,7 @@ u8 scrCommThreePhase(void)
         return step >= 3;
     }
     eventQueueAddUnique(0x1000222);
-    frameTexRequestFade(1);
+    frameTexApplyMode(1);
     return 0;
 }
 

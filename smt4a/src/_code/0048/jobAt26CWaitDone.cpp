@@ -1,4 +1,5 @@
 #include "shard/Shard0048.h"
+#include "name/nameMain.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ typedef struct JobAt26C {
 } JobAt26C;
 
 extern s32 scrRunOpcodesStub(u32 job);
-extern void stateSetterEnterState(JobAt26C *obj, s32 state);
 extern void sysPlaySe(u32 id);
 
 /* Once the job reports 2, switches to state 2 and plays sound 0x97. */

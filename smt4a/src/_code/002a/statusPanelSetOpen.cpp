@@ -1,10 +1,10 @@
+#include "status/StatusMenuMode.h"
 #include "shard/Shard0033.h"
 #include "game/GameGlobalsRef.h"
 
 extern "C" {
 
 void statusScreenRefreshForSelection(s32 value);
-void gameTransitionStartStep(void);
 
 /* Opens (open != 0) or closes the status display unless state 3/4 is active, then reapplies its tab. */
 void statusPanelSetOpen(s32 open)

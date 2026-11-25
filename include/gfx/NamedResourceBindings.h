@@ -22,6 +22,8 @@ struct NamedResourceDirectory {
 struct NamedResourceBindingArray {
     /* 0x00 */ void** resources;
     /* 0x04 */ u32 capacity;
+
+    void *&operator[](u32 index) { return resources[index]; }
 };
 struct NamedResourceBindingRequest {
     /* 0x00 */ u8 unk00[0x18];
@@ -40,5 +42,7 @@ typedef char NamedResourceBindingOffsetsCheck[
     offsetof(NamedResourceBindingRequest, names) == 0x18 &&
     sizeof(NamedResourceBindingRequest) == 0x20 &&
     offsetof(NamedResourceBindingRequest, count) == 0x1C &&
-    offsetof(NamedResourceBindingOwner, directory) == 0x30 ? 1 : -1];
+    offsetof(NamedResourceBindingOwner, directory) == 0x30 &&
+    offsetof(NamedResourceBindingArray, capacity) == 4 &&
+    sizeof(NamedResourceBindingArray) == 8 ? 1 : -1];
 #endif
