@@ -2,11 +2,11 @@
 #include "script/scrScriptProcess.h"
 #include "code/Code0041_Smt4a.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 void sysPlaySe(u32 sound);
 void asdLoadFileAsyncSimple(const char *path, void **buffer, s32 flags);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void optionsClearFlag1();
 u32 FUN_003a36b4(void);
 s32 gameBlockByte27E98Is1To3();

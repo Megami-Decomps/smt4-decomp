@@ -428,7 +428,7 @@ LAB_004ef594:
       if (iVar13 != 0) {
         if ((!((DAT_00571168 & *(unsigned int *)param_2[8]) == 0 &&
               (((unsigned int *)param_2[8])[1] & DAT_0057116c) == 0)) && (iVar13 >= 2)) {
-          FUN_004de7a0(piVar14,param_2,&uStack_288);
+          btlSelectTargetByScoreRank(piVar14,param_2,&uStack_288);
           sVar3 = (short)piVar14;
         }
         else {
@@ -630,7 +630,7 @@ LAB_004ef7f0:
   if (iVar5 != 0) {
     iVar29 = 0;
     do {
-      iVar23 = FUN_004f80e4(DAT_00573808);
+      iVar23 = btlGetMaximumNamedValue(DAT_00573808);
       if (-1 < iVar23) {
         iVar23 = iVar5 + iVar29 * 0x16;
         btlQueueMessageTableReflectAction(*(short *)(iVar23 + 0x10) + iVar4,puVar25,(int)*(short *)(param_2[9] + 0x6a),0,

@@ -4,7 +4,6 @@
 
 extern "C" {
 void asdGxWaitForPreviousFrame(void);
-WindowStatusResult recordQueryAndValidatePair(void *owner);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 
 // Query the AOC service and classify its status. The object itself is not touched.

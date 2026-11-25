@@ -65,7 +65,6 @@ struct MapRangeWork {
 extern "C" {
 extern MapRangeWork *g_mapRangeWork;
 
-f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
 f32 mathGetShortestAngleDelta(f32 first, f32 second);
 f32 mathAbsHeadingErrorToPoint(f32 x, f32 y, f32 z, f32 heading, f32 targetX, f32 targetY, f32 targetZ);
 void FUN_002df824(s32 id, s32 flag);

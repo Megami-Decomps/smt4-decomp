@@ -1,15 +1,12 @@
-/* NON_MATCHING: retail loads start[0] separately inside each branch (built hoists it) and orders two pool loads differently; the bend point, join point and call arguments match. */
+/* NON_MATCHING: one floating-point add uses reversed operands, and opacity conversion
+ * and endpoint loads are scheduled differently at the tail call. */
 #include "gfx/RoutedConnector.h"
 #include "title/titleMain.h"
-#include <math.h>
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
-void uiDrawSegmentStrip(u32 firstColor, u32 secondColor, f32 startX, f32 startY,
-                  f32 endX, f32 endY, f32 opacity, f32 width);
-
-// Draw a two-segment connector with a clamped diagonal and a horizontal end segment.
-void uiDrawRoutedConnector(const RoutedConnectorState* state, const f32* start, const f32* end,
+/* Draws a two-segment connector with a clamped diagonal and a horizontal end segment. */
+void uiDrawRoutedConnector(const RoutedConnectorState *state, const f32 *start, const f32 *end,
                   u32 color, s32 fade)
 {
     renderCtxSelectTexture(g_titleScene, 0);
@@ -19,8 +16,7 @@ void uiDrawRoutedConnector(const RoutedConnectorState* state, const f32* start, 
     f32 bendY = end[1];
     if (state->reverse) {
         bendX = end[0] - 16.0f;
-        if (fabsf(bendX - start[0]) < 1.0f)
-            bendX = start[0];
+        bendX = snapConnectorBend(start, bendX);
         f32 vertical = fabsf(bendY - start[1]);
         if (vertical - fabsf(bendX - start[0]) < 0.0f) {
             bendX = vertical + start[0];
@@ -28,8 +24,7 @@ void uiDrawRoutedConnector(const RoutedConnectorState* state, const f32* start, 
         }
     } else {
         bendX = end[0] + 16.0f;
-        if (fabsf(bendX - start[0]) < 1.0f)
-            bendX = start[0];
+        bendX = snapConnectorBend(start, bendX);
         f32 vertical = fabsf(bendY - start[1]);
         if (vertical - fabsf(bendX - start[0]) < 0.0f) {
             bendX = start[0] - vertical;
@@ -43,4 +38,4 @@ void uiDrawRoutedConnector(const RoutedConnectorState* state, const f32* start, 
     uiDrawSegmentStrip(color, color, joinX, joinY, end[0], end[1],
                   (256 - fade) * (1.0f / 256.0f), 1.0f);
 }
-}
+} /* extern "C" */

@@ -1,16 +1,9 @@
-/* NON_MATCHING: slot loop is now one-based like retail (count+1 guard); retail keeps the constant 1 and the zero in r5/r7 (push of r3/r7) and loads begin/end with ldm {r0,r2} where ours uses ldrd. */
-#include "common.h"
+/* NON_MATCHING: iteration now uses the retail slot range; saved zero/one registers and the first list's address register differ. */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_Smt4a.h"
+#include "AsdSDK/asdModelGetSlotArray1.h"
+#include "shard/S1GfxModel.h"
 
-struct EnvironmentSlot {
-    u8 unk00[0xc];
-    u32 state;
-};
-struct EnvironmentSlotArray {
-    u8 unk00[0x18];
-    EnvironmentSlot **begin;
-    EnvironmentSlot **end;
-};
 struct EnvironmentBankState {
     u32 unk00, unk04, unk08, unk0c, unk10;
 };
@@ -24,26 +17,12 @@ extern EnvironmentBankState DAT_00636d20[];
 extern u32 DAT_005b3bd8[];
 extern u32 *DAT_005b3be0[];
 void sysMemClear(void *memory, u32 bytes);
-EnvironmentSlotArray *asdModelGetSlotArray1(u32 bank);
-EnvironmentSlotArray *asdModelGetSlotArray2(u32 bank);
 u32 asdLoadFileSyncNoContext(u32 resource, s32 mode, s32 flags, u32 size);
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 void FUN_003168b8(u32 *handle, u32 bank);
 }
 
-static __inline void resetEnvironmentSlots(EnvironmentSlotArray *slots)
-{
-    EnvironmentSlot **slot = slots->begin;
-    s32 count = slots->end - slot;
-    for (s32 index = 1; index <= count; ++index, ++slot) {
-        if (*slot != NULL) {
-            (*slot)->state = 0;
-        }
-    }
-    slots->end = slots->begin;
-}
-
-// Clear the environment's model banks and slot lists, then install its new resource handle.
+/* Clears the environment's model banks and slot lists, then installs its new resource handle. */
 extern "C" void asdEnvResetModelBank(u32 resource, u32 bank)
 {
     sysMemClear(&g_asdModelBanks[bank], sizeof(AsdModelBank));
@@ -56,11 +35,11 @@ extern "C" void asdEnvResetModelBank(u32 resource, u32 bank)
     state->unk08 = 0;
     state->unk0c = 0;
     state->unk10 = 0;
-    resetEnvironmentSlots(asdModelGetSlotArray1(bank));
-    resetEnvironmentSlots(asdModelGetSlotArray2(bank));
+    asdModelDetachSlotList((ModelSlotList *)asdModelGetSlotArray1(bank));
+    asdModelDetachSlotList((ModelSlotList *)asdModelGetSlotArray2(bank));
     DAT_005b3bd8[bank] = asdLoadFileSyncNoContext(resource, 0, 1, 0x80);
-    u32 *handle = static_cast<u32 *>(asdMemoryAllocTraced(sizeof(u32),
-        "c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Model\\AsdEnv.cpp", 0x48b));
+    u32 *handle = (u32 *)asdMemoryAllocTraced(sizeof(u32),
+        "c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Model\\AsdEnv.cpp", 0x48b);
     if (handle != NULL) {
         *handle = DAT_005b3bd8[bank];
     }

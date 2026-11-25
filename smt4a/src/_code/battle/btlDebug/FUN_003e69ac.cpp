@@ -4,6 +4,7 @@
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "battle/BtlUiGlobal.h"
+#include "script/ScriptEntry.h"
 
 
 extern "C" {
@@ -26,7 +27,6 @@ extern u32 g_btlAux;
 s32 dialogIsActive(void);
 void dialogClose(s32 arg);
 void btlUiPanelStart(BtlUiA *block);
-void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 void sysPlaySe(u32 id);
 s32 gameFlagIsSet(u32 flag);
 void btlUiClearSelectionSlots(BtlUiA *block);

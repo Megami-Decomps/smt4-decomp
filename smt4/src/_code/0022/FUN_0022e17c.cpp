@@ -1,6 +1,7 @@
 #include "gamedata/NkmBaseRecord.h"
 #include "gamedata/UnitStats.h"
 #include "gamedata/SaveSlotTableIV.h"
+#include "gamedata/UnitRecordAccess.h"
 
 struct DevilComparisonIdentityView { struct { u16 id; u8 race; u8 level; } sort; u8 category; u8 variant; };
 struct DevilComparisonSummaryView {
@@ -26,7 +27,6 @@ union UnitComparisonGrowthView {
 };
 typedef char DevilComparisonSummaryOffsets[offsetof(DevilComparisonSummaryView, name) == 0x1C ? 1 : -1];
 extern "C" {
-void unitInitializeFromSavedRecord(u16, StatBlock *);
 const char *dataTable01FindByIdWithAoc(u32);
 
 /* Fills a fusion comparison row: the demon's identity and name, its level, HP and MP from its saved record, and

@@ -4,7 +4,6 @@
 
 extern "C" {
 
-ItemCategoryEntry *itemCategoryFindByItemId(u32 id);
 
 /* Returns how many of the item can be held: 1 for unlimited storage, the record's limit for limited
  * types (999 when the record leaves it 0), 0 for unknown items. */

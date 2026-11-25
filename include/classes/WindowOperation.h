@@ -1,24 +1,19 @@
 #ifndef CLASSES_WINDOWOPERATION_H
 #define CLASSES_WINDOWOPERATION_H
 
-#include "classes/WindowStatus.h"
+#include "shard/W6_W6Match5_QueuedRequest.h"
 
-struct WindowOperationResult {
-    WindowOperationResult() : status(0), first(0), second(0) {}
+/* The mount window's request value. Callers outside the file-content routines also use
+ * its out-of-line constructor; the request's data and by-value ABI are shared. */
+struct WindowOperationResult : RequestParameters {
     explicit WindowOperationResult(u8 status);
-    /* Empty, but it makes the class non-trivial: armcc then constructs a named result directly in the call's
-       hidden result storage and tests it there (FUN_0038a048, smt4a FUN_00471adc), as WindowStatusOperationResult. */
-    ~WindowOperationResult() {}
-    /* 0x00 */ u8 status;
-    /* 0x04 */ WindowStatusResult result;
-    /* 0x0c */ u32 first;
-    /* 0x10 */ u32 second;
+    using RequestParameters::operator=;
 };
 typedef char WindowOperationResultLayoutCheck[
     sizeof(WindowOperationResult) == 0x14 &&
     offsetof(WindowOperationResult, result) == 4 &&
-    offsetof(WindowOperationResult, first) == 0xc &&
-    offsetof(WindowOperationResult, second) == 0x10 ? 1 : -1];
+    offsetof(WindowOperationResult, word3) == 0xc &&
+    offsetof(WindowOperationResult, word4) == 0x10 ? 1 : -1];
 struct WindowOperationRequest {
     /* 0x00 */ u16 id;
     /* 0x02 */ u16 unk02;
@@ -27,6 +22,15 @@ struct WindowOperationRequest {
 struct WindowOperationState {
     /* 0x00 */ u8 unk00[8];
     /* 0x08 */ WindowOperationRequest request;
+    /* 0x20 */ void *mountBuffer;
+    /* 0x24 */ char mountName[0x10];
+    /* 0x34 */ s32 mountBufferSize;
 };
+typedef char WindowOperationMountOffsets[
+    offsetof(WindowOperationState, mountBuffer) == 0x20 &&
+    offsetof(WindowOperationState, mountName) == 0x24 &&
+    offsetof(WindowOperationState, mountBufferSize) == 0x34 ? 1 : -1];
+
+extern "C" RequestParameters aocFileContentPrepareMountBuffer(WindowOperationState *state, u32 id);
 
 #endif

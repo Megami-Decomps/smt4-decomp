@@ -21,7 +21,7 @@ int FUN_002e364c(...);
 int lmapCameraSetMode(...);
 int mapIfReleaseSlot3(void);
 int mapDepartSpawnPlayerEffect(unsigned int);
-int FUN_00327ee8(void);
+int mapSelectContainingRegions(void);
 int FUN_0033abd4(void);
 int mathPositionHeadingDegrees(void);
 int table23FindRecordByKey(unsigned int, unsigned int, unsigned int);
@@ -54,7 +54,7 @@ extern int pairedAvailabilityBothReady(void);
 /* Supplied declaration required: mapIfReleaseSlot3. */
 /* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: mapDepartSpawnPlayerEffect. */
-/* Supplied declaration required: FUN_00327ee8. */
+/* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_0033abd4. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: table23FindRecordByKey. */
@@ -118,14 +118,14 @@ void FUN_0036785c(void)
         *(int *)(temp_v1 + 4) = temp_v2 + 1;
         *(unsigned int *)(temp_v1 + 8) = 0;
         FUN_002e364c(g_lmapScene + 0x28);
-        FUN_00327ee8();
+        mapSelectContainingRegions();
         return;
       }
       if (temp_v2 >= 0x33) {
         if (temp_v2 != 0x33) {
           if (temp_v2 != 0x34) {
             FUN_002e364c(g_lmapScene + 0x28);
-            FUN_00327ee8();
+            mapSelectContainingRegions();
             return;
           }
           pfVar1 = (float *)(g_lmapScene + 0x20);
@@ -141,20 +141,20 @@ void FUN_0036785c(void)
           *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
           if (temp_v6 <= 0.0f) {
             FUN_002e364c(g_lmapScene + 0x28);
-            FUN_00327ee8();
+            mapSelectContainingRegions();
             return;
           }
           *(int *)(temp_v1 + 4) = temp_v2 + 1;
           *(unsigned int *)(temp_v1 + 8) = 0;
           FUN_002e364c(g_lmapScene + 0x28);
-          FUN_00327ee8();
+          mapSelectContainingRegions();
           return;
         }
         temp_v1 = *(int *)(g_lmapScene + 8) + 1;
         *(int *)(g_lmapScene + 8) = temp_v1;
         if (temp_v1 < 0x15) {
           FUN_002e364c(g_lmapScene + 0x28);
-          FUN_00327ee8();
+          mapSelectContainingRegions();
           return;
         }
         FUN_0033abd4();
@@ -200,7 +200,7 @@ LAB_00367d2c:
         *(int *)(temp_v1 + 4) = temp_v2 + 1;
         *(unsigned int *)(temp_v1 + 8) = 0;
         FUN_002e364c(g_lmapScene + 0x28);
-        FUN_00327ee8();
+        mapSelectContainingRegions();
         return;
       }
       if (temp_v2 != 0) {
@@ -251,7 +251,7 @@ LAB_00367d2c:
           }
         }
         FUN_002e364c(g_lmapScene + 0x28);
-        FUN_00327ee8();
+        mapSelectContainingRegions();
         return;
       }
       *(unsigned int *)(g_lmapScene + 0x54) = 0;
@@ -290,14 +290,14 @@ LAB_00367d2c:
         *(int *)(temp_v1 + 4) = temp_v2 + 1;
         *(unsigned int *)(temp_v1 + 8) = 0;
         FUN_002e364c(g_lmapScene + 0x28);
-        FUN_00327ee8();
+        mapSelectContainingRegions();
         return;
       }
       if (temp_v2 < 0x5b) {
         if (temp_v2 != 0x36) {
           if (temp_v2 != 0x37) {
             FUN_002e364c(g_lmapScene + 0x28);
-            FUN_00327ee8();
+            mapSelectContainingRegions();
             return;
           }
           *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
@@ -305,7 +305,7 @@ LAB_00367d2c:
           temp_v0 = 0x12;
           mapSetSceneState(temp_v0);
           FUN_002e364c(g_lmapScene + 0x28);
-          FUN_00327ee8();
+          mapSelectContainingRegions();
           return;
         }
         mapIfReleaseSlot3();
@@ -323,13 +323,13 @@ LAB_00367d2c:
              (temp_v1 = *(int *)(g_lmapScene + 8) + 1, *(int *)(g_lmapScene + 8) = temp_v1, temp_v1 < 4)
              ) {
             FUN_002e364c(g_lmapScene + 0x28);
-            FUN_00327ee8();
+            mapSelectContainingRegions();
             return;
           }
           temp_v0 = 1;
           mapSetSceneState(temp_v0);
           FUN_002e364c(g_lmapScene + 0x28);
-          FUN_00327ee8();
+          mapSelectContainingRegions();
           return;
         }
         mapIfOverlayRelease();
@@ -360,7 +360,7 @@ LAB_00367d2c:
     }
     if ((*(int *)(g_lmapScene + 8) < 0x1f) || (temp_v1 = pairedAvailabilityBothReady(), temp_v1 == 0)) {
       FUN_002e364c(g_lmapScene + 0x28);
-      FUN_00327ee8();
+      mapSelectContainingRegions();
       return;
     }
     temp_v2 = *(int *)(g_lmapScene + 4);
@@ -369,7 +369,7 @@ LAB_00367d2c:
   *(int *)(temp_v1 + 4) = temp_v2 + 1;
   *(unsigned int *)(temp_v1 + 8) = 0;
   FUN_002e364c(g_lmapScene + 0x28);
-  FUN_00327ee8();
+  mapSelectContainingRegions();
   return;
 }
 

@@ -6,8 +6,6 @@
 
 extern "C" {
 void cameraMatrixCacheReset(RenderCtx *context, s32 mode);
-u32 asdGxPresetsGetByKind(u32 kind);
-u32 asdGxPresetsGetHeightByKind(u32 kind);
 void FUN_0011d0dc(RenderCtx *context, f32 left, f32 right, f32 bottom, f32 top, f32 nearClip, f32 farClip);
 void FUN_0011d084(RenderCtx *context, const f32 *matrix);
 void asdCameraRegister(RenderCtx *context);

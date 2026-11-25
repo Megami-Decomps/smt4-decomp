@@ -6,6 +6,7 @@
 #include "game/GameState.h"
 #include "gamedata/SaveSlotTableIV.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 struct BattleTaskActor {
     u8 unk00[0x50];
@@ -142,7 +143,6 @@ BattleTaskOpening *dataTableGetEntries(void *table);
 s32 dataTableGetCount(void *table);
 s32 nodeListCountActiveById(void *list, u32 id);
 void FUN_0027e5e4(BattleTaskActor *actor);
-void scrScriptProcessStartEntry(ScriptProcess *script, u32 entry);
 void buttonHelpSetPreset(u32 preset);
 s32 btlEventSelectTrigger(void *event, u32 kind, u32 value, u32 flags);
 s32 gameFlagIsSet(u32 id);
@@ -190,7 +190,7 @@ void FUN_00208be8();
 s32 sequenceRequestIsDeferred();
 void sequenceRequestFlushDeferred();
 void gameSaveSetBattleResultCode(u32 result);
-void FUN_002faf88();
+void mapRequestDestinationSequence();
 void asdSequenceRequestInitial();
 s32 FUN_0039440c(AocScriptHolder *controller);
 void FUN_00394508(AocScriptHolder *controller);
@@ -380,7 +380,7 @@ static inline void completeBattleTask(BattleTaskContext *work)
         if (work->result == 2) {
             if (work->resultMode == 1) {
                 sequenceRequestClearDeferred();
-                FUN_002faf88();
+                mapRequestDestinationSequence();
             } else if (work->resultMode == 0) {
                 sequenceRequestClearDeferred();
                 asdSequenceRequestInitial();
@@ -395,12 +395,12 @@ static inline void completeBattleTask(BattleTaskContext *work)
             asdSequenceRequest(14, &area, sizeof(area));
         } else if (FUN_002080e8()) {
             if (supportUnitProgressIsComplete())
-                FUN_002faf88();
+                mapRequestDestinationSequence();
             else
                 asdSequenceRequest(8, NULL, 0);
         } else if (FUN_00287304()) {
             if (supportUnitProgressIsComplete())
-                FUN_002faf88();
+                mapRequestDestinationSequence();
             else
                 asdSequenceRequest(6, NULL, 0);
         } else if (tmnlHasSelection()) {

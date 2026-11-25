@@ -10,7 +10,6 @@ struct CategoryPair {
 extern "C" {
 s32 scrGetArg(u32 index);
 void *btlMainGetDataTable(void *state, u32 table);
-u32 dataTableGetCount(void *table);
 s32 randNextInRange(u16 maximum);
 void scrSetResult(s32 result);
 

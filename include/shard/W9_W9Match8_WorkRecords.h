@@ -1153,30 +1153,29 @@ struct ResourceDescriptorKeyA {
     u32 attributes;
 };
 
-/* Accessed prefix only; neither the record extent nor its trailing text length is known. */
+/* The descriptor's fixed fields followed by its variable-length decimal text. */
 struct ResourceDescriptorRecordPrefixA {
-    u8 unk00[0x0c];
-    ResourceDescriptorKeyA key;
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ ResourceDescriptorKeyA key;
+    /* 0x14 */ char text[1];
 };
 typedef char ResourceDescriptorRecordPrefixALayoutCheck[
     offsetof(ResourceDescriptorRecordPrefixA, unk00) == 0 &&
     offsetof(ResourceDescriptorRecordPrefixA, key) == 0x0c &&
     offsetof(ResourceDescriptorKeyA, attributes) == 4 &&
-    sizeof(ResourceDescriptorRecordPrefixA) == 0x14 ? 1 : -1];
+    offsetof(ResourceDescriptorRecordPrefixA, text) == 0x14 ? 1 : -1];
 
 /* Accessed prefix of DAT_0061b000, not the extent initialized by initBlockE30. */
 struct ResourceDescriptorPrefixA {
     u8 unk00[8];
     u64 programId; /* mode, id and format of the descriptor */
-    u32 parsedLow;
-    u32 parsedHigh;
-    u32 value;
+    /* 0x10 */ u64 parsedValue;
+    /* 0x18 */ u32 value;
 };
 typedef char ResourceDescriptorPrefixALayoutCheck[
     offsetof(ResourceDescriptorPrefixA, unk00) == 0 &&
     offsetof(ResourceDescriptorPrefixA, programId) == 8 &&
-    offsetof(ResourceDescriptorPrefixA, parsedLow) == 0x10 &&
-    offsetof(ResourceDescriptorPrefixA, parsedHigh) == 0x14 &&
+    offsetof(ResourceDescriptorPrefixA, parsedValue) == 0x10 &&
     offsetof(ResourceDescriptorPrefixA, value) == 0x18 &&
     sizeof(ResourceDescriptorPrefixA) == 0x20 ? 1 : -1];
 

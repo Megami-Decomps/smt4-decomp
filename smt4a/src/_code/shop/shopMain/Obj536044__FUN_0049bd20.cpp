@@ -11,6 +11,7 @@
 #include "code/Code004d_Smt4a.h"
 #include "gamedata/GameDataAccess.h"
 #include "camp/CampMenuEntry.h"
+#include "script/ScriptEntry.h"
 
 struct CountAt5A;
 
@@ -35,7 +36,6 @@ void releaseEntriesB(CountAt5A *entries);
 void menuOpenCommandList(Obj536044 *shop);
 void shopSelectEntryStart(Obj536044 *shop, s32 kind);
 s32 tableGroupFindEntryIndex(u32 table, const char *name);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 void buttonHelpSetText(const s8 *text, u32 color);
 
 extern const ShopSlotStep g_shopListSlotNeighbors[7]; /* the neighbours of the equipment slots while their list is shown */

@@ -27,10 +27,11 @@
 #include "shop/ShopItemDescription.h"
 #include "gamedata/GameDataAccess.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "script/ScriptEntry.h"
+#include "sys/WindowStatusCheck.h"
 
 extern "C" {
 
-nn::Result legacyResourceIdRemap(const WindowStatusResult *result); // declcheck: local (the headers return a plain word, which changes this caller's code)
 void buttonHelpSetEnabled(u32 value);
 u32 buttonHelpIsActionActive(u32 action);
 WindowStatusResult aocOpenPackedArchive(void *file, const void *archive);
@@ -52,7 +53,6 @@ void aocMenuSetButtonHelp(AocMenu *menu, u32 selection, s32 mode);
 s32 bgmGetStateById(u32 id);
 void bgmResumeOrRequestTrack(u32 id);
 u32 tableGroupFindEntryIndex(void *table, const char *name);
-void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 
 }
 
@@ -83,7 +83,7 @@ static __inline Obj422214Owner *selectedRecord(AocMain *main, AocMenu *menu)
 /* Stops the step with the error of a failed archive operation; false when it succeeded. */
 static __inline bool failOnArchiveError(AocMenu *menu, WindowStatusResult result)
 {
-    if (nnResultIsFailure(legacyResourceIdRemap(&result))) {
+    if (windowStatusFailed(result)) {
         menu->substep = 9999;
         failRequestOperation(&menu->request, result);
         return true;

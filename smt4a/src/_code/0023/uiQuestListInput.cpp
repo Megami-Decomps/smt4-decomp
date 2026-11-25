@@ -17,6 +17,7 @@
 #include "shard/W5_W5Match7_FlagBanks.h"
 #include "code/Code002a_VariantA.h"
 #include "code/Code002f.h"
+#include "script/ScriptEntry.h"
 
 /* Sounds of the quest menu. */
 #define QUEST_SE_DECIDE 0x100020E
@@ -47,7 +48,6 @@ u32 questRecordIsUsable(u32 id);
 s32 questQueryFalse(void);
 u32 questIsCompleted(s32 index);
 u8 rosterHasLeader(void); // declcheck: local (its header belongs to the memory manager)
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 void sysPlaySe(u32 id);
 s32 recordCategoryNineIsActiveInMode24(u32 recordId);
 void FUN_00212724(void);

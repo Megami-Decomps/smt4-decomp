@@ -74,7 +74,6 @@ static inline const NkmBaseRecordA *getDevilRecord(u16 id)
 extern "C" {
 extern UniteScreenWork *g_uniteEffectWork;
 u32 resourceCacheGetOrLoadModel(u16, u32, u32);
-Table25Record *dataTable25Section0FindById(s32);
 
 
 void uniteRenderTargetSetTexture(UniteRenderTarget *target, u32 texture);

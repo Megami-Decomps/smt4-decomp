@@ -12,7 +12,6 @@ void textFormatFullWidthNumber(char *output, s32 value);
 void battleAttributeFormatName(char *out, s32 kind);
 void skillFormatTargetLabel(char *text, s32 target);
 void ailmentResistanceSummaryFormat(u32 a, u32 b, u32 id, char *text);
-void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y, RelativeDirectory *directory, u32 index);
 
 // Fill the help text variables for a demon's normal attack (hit range, attribute, target, ailment) and draw its help entry.
 void FUN_0032d0c8(RelativeDirectory *directory, u32 index, u16 devilId, u32 extra)

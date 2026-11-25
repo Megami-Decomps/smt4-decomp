@@ -16,12 +16,12 @@
 #include "code/Code002a_Smt4a.h"
 #include "code/Code002a_VariantA.h"
 #include "code/Code002c_Smt4a.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 
 const char *dataFindKindRecordWithAocOverrides(u32 id, s32 alternate);
 /* Draws formatted text right-aligned in a field of `digits` characters. */
-void numberFontDrawFormatted(s32 font, s32 x, s32 y, s32 align, s32 digits, s32 layer, const char *format, ...);
 void configDraw(void);
 void playLogDraw(void);
 /* The other pages of the camp's detail area. */

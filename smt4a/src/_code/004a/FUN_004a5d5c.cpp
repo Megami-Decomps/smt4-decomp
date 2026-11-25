@@ -6,7 +6,6 @@
 
 extern "C" {
 void sysPlaySe(u32 sound);
-void FUN_0023b45c(s32 value);
 void statusPanelSetOpen(s32 open);
 s32 statusDownGetFlag();
 void FUN_0031f718(s16 id, s32 enabled, s32 initial);

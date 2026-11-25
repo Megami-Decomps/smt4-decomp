@@ -3,7 +3,6 @@
 #include "battle/Talk/btlTalkBustUp.h"
 
 extern "C" {
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 s32 aocJobIsValid();
 s32 btlMainIsSecondJobValid();

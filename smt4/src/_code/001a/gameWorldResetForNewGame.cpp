@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "runtime/String.h"
 
 namespace {
 /* The game world block: only the fields this reset writes are named by their offset. */
@@ -142,7 +143,6 @@ struct GameDataBlocks {
     /* 0x0c */ DemonRange *demonRange;
 };
 extern GameDataBlocks g_gameDataBlocks;
-void rt_memclr(void *data, u32 size);
 void FUN_0033f81c(void);
 void FUN_002c4924(void);
 void inventoryResetSavedTableEntries(void);

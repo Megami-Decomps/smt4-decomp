@@ -1,6 +1,5 @@
-/* NON_MATCHING: register allocation only in the head (retail: mul into ip, g_lmapView in r3) and in the record
- * branch (g_gameState in r1, 7 in r2); retail also keeps the destination -3 arm's store inline where the build keeps
- * the -2 arm's. */
+/* NON_MATCHING: the destination switch matches the shared state stores, but tests -3 first
+ * instead of -1. The game-state base and by-value sound argument schedule still differ. */
 #include "map/MapIfGlobals.h"
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"
@@ -11,9 +10,9 @@ extern "C" {
 
 s32 soundActorStartOnFreeChannel(u32 sound, MapVector position); // declcheck: local (the shared declaration takes an AsdSnd3dPosition; the record holds a MapVector, as in FUN_00245f70)
 
-// Applies a state change to interface entry `index` (-1: none): `blocked` is stored in the interface head and cleared
-// again when the entry does not lead to the map being viewed. With it clear, every active entry in a closing state
-// (8, 10, 12, 14, 16) is sent to state 6; with it set, the entry in state 6 moves on to its follow-up state.
+/* Applies a state change to interface entry `index` (-1: none). Clears `blocked` when the entry
+ * leads to another map. With it clear, all active entries in closing states return to state 6;
+ * with it set, the entry in state 6 moves on to its follow-up state. */
 u32 mapIfApplyEntryRequest(u8 blocked, s32 index)
 {
     MapIfStateA *state = g_mapIf.state;
@@ -32,28 +31,35 @@ u32 mapIfApplyEntryRequest(u8 blocked, s32 index)
                 }
             } else {
                 s32 destination = state->records[index].destination;
-                if (destination == -1) {
+                switch (destination) {
+                case -1:
                     state->records[index].state = 9;
                     soundActorStartOnFreeChannel(0x10002ab, state->records[index].start);
-                } else if (destination == -2) {
+                    break;
+                case -2:
                     state->records[index].state = 11;
                     soundActorStartOnFreeChannel(0x10002ab, state->records[index].start);
-                } else if (destination == -3) {
+                    break;
+                case -3:
                     state->records[index].state = 13;
                     soundActorStartOnFreeChannel(0x10002ab, state->records[index].start);
-                } else if (state->records[index].values[2] != 0) {
-                    state->records[index].state = 7;
-                    if (g_gameState.inputBlocked == 0 || g_lmapView->mode != 0) {
-                        if (g_gameState.mapId < 100)
+                    break;
+                default:
+                    if (state->records[index].values[2] != 0) {
+                        state->records[index].state = 7;
+                        if (g_gameState.inputBlocked == 0 || g_lmapView->mode != 0) {
+                            if (g_gameState.mapId < 100)
+                                soundActorStartOnFreeChannel(0x10002ab, state->records[index].start);
+                            else
+                                soundActorStartOnFreeChannel(0x10002ab, mapVectorScaled(&state->records[index].start, 1.0f / 3.0f));
+                        }
+                    } else {
+                        state->records[index].state = 15;
+                        if (g_gameState.inputBlocked == 0) {
                             soundActorStartOnFreeChannel(0x10002ab, state->records[index].start);
-                        else
-                            soundActorStartOnFreeChannel(0x10002ab, mapVectorScaled(&state->records[index].start, 1.0f / 3.0f));
+                        }
                     }
-                } else {
-                    state->records[index].state = 15;
-                    if (g_gameState.inputBlocked == 0) {
-                        soundActorStartOnFreeChannel(0x10002ab, state->records[index].start);
-                    }
+                    break;
                 }
             }
             state->records[index].proximityTimer = 0;
@@ -73,4 +79,4 @@ u32 mapIfApplyEntryRequest(u8 blocked, s32 index)
     }
     return 1;
 }
-}
+} /* extern "C" */

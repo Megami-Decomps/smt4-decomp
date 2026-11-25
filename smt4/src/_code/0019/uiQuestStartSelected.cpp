@@ -2,6 +2,7 @@
 #include "common.h"
 #include "code/Code0029_VariantB.h"
 #include "shard/W4_W4Match2_UiQuest.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ void uiQuestCountDetailPages(u32 id);
 void uiQuestShowStatusHelp(void);
 void gameGetOptionProgressStatus(void);
 void buttonHelpSetPreset(s32 preset);
-s32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 s32 resourceRunOperationIfUnblocked(const void *list);
 
 /* Starts the selected quest's script entry 3; when it starts, enters state 0xc. */

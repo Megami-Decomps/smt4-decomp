@@ -3,7 +3,6 @@
 #include "shard/W6_W6Match2_EmitterResources.h"
 
 extern "C" {
-EffEmitter *effEmitterCreateSmall(EffEmitterDesc *descriptor);
 EffEmitter *effEmitterCreate(u32 count);
 void polygonTrackRebuildResources(ResourceEmitter *emitter, u32 id, const EmitterArguments *arguments);
 void objectBufferFree(void *buffer);

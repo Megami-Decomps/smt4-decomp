@@ -58,7 +58,6 @@ void FUN_0020d3d4(void *menu);
 void FUN_0023f788(void *menu);
 bool gameFlagIsSet(u32 index);
 void gridNavigationConfigure(ScrollSelection *list, s32 count, s32 columns, s32 first, s32 second, s32 third);
-void scrollListSetSelectionTracked(ScrollSelection *list, s32 index);
 void *sysMemClear(void *destination, u32 size);
 s32 FUN_0047fbb4(u32 id);
 s32 FUN_0047fd9c(s32 id, void *unit);

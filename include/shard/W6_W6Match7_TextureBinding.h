@@ -29,7 +29,10 @@ struct TextureBindingState {
         } flushing;
     };
     /* 0x058 */ TextureBindingSources sources;
-    /* 0x10c */ u8 unk10c[0x664];
+    /* 0x10c */ u8 unk10c[0x4cc];
+    /* 0x5d8 */ u32 unk5d8;
+    /* 0x5dc */ u32 unk5dc;
+    /* 0x5e0 */ u8 unk5e0[0x190];
     /* 0x770 */ u32 configuration;
 };
 typedef char TextureBindingFlushOffsets[
@@ -37,6 +40,8 @@ typedef char TextureBindingFlushOffsets[
     offsetof(TextureBindingState, updates.pending) == 4 &&
     offsetof(TextureBindingState, flushing.active) == 0x18 &&
     offsetof(TextureBindingState, flushing.suppress) == 0x19 &&
+    offsetof(TextureBindingState, unk5d8) == 0x5d8 &&
+    offsetof(TextureBindingState, unk5dc) == 0x5dc &&
     sizeof(TextureBindingState) == 0x774 ? 1 : -1];
 
 struct TextureBindingCache {

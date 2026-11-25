@@ -22,4 +22,18 @@ typedef char SegmentedScalarCurveLayoutCheck[
     offsetof(SegmentedScalarCurve, firstFraction) == 0x18 &&
     offsetof(SegmentedScalarCurve, secondValue) == 0x1c &&
     offsetof(SegmentedScalarCurve, secondFraction) == 0x20 ? 1 : -1];
+
+struct SegmentValues {
+    f32 start;
+    f32 end;
+    f32 rate;
+};
+
+/* Selects the end key for a zero-length interval; otherwise gives its fractional progress. */
+static __inline SegmentValues getSegmentValues(f32 duration, f32 frame, f32 start, f32 end)
+{
+    SegmentValues segment = { start, end, duration != 0.0f ? frame / duration : 1.0f };
+    return segment;
+}
+
 #endif

@@ -3,6 +3,7 @@
 #include "classes/WindowStatus.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include "addon/AocSystem.h"
+#include "script/ScriptEntry.h"
 
 /* An object the menu owns and releases through its deleting destructor. */
 class AocConfirmHandler {
@@ -39,7 +40,6 @@ void buttonHelpSetEnabled(u32 value);
 void ifTouchRegionClearAll(void *regions);
 void releaseEntriesA(void *notice); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "u8 *" is incompatible with parameter of type "Obj *")
 u32 tableGroupFindEntryIndex(u32 resource, const char *name);
-void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 void aocMenuSetButtonHelp(AocConfirmMenu *menu, u32 state, s32 enabled);
 s32 messageMainGetChoiceResult(void);
 void FUN_00126fb8(void *owner);

@@ -6,7 +6,6 @@
 #include "battle/BattleHelpers.h"
 
 extern "C" {
-s32 scrGetArg(s32 index);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 
 /* Test whether the requested battle group, or the active entry, has a unit at or below the HP

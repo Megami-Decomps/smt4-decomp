@@ -24,6 +24,12 @@ struct MoveCameraResource {
 };
 class MoriModelContent;    /* Model/MoriModelContent.h */
 
+/* Eye and target of one camera pose. */
+struct MoveCameraPose {
+    /* 0x00 */ Vec3f position;
+    /* 0x0C */ Vec3f target;
+};
+
 /* mikado/moveCamera/MoveCameraCtrl.cpp (Apocalypse): the mikado scene's camera controller (0x7A0 bytes; the scene
  * allocates it as MikadoTalkWorkA, mikado/mikadoMain.h). moveCameraCtrlSetup loads the camera model, its camera
  * track and the point markers. */
@@ -51,13 +57,13 @@ struct MoveCameraCtrlWork {
     f32 distance;
     MoveCameraResource *resource;
     s32 selectedKey;
-    u8 padding[0x18];
+    /* 0x59C */ MoveCameraPose poseStep;       /* per-frame change toward the selected key */
     /* 0x5B4 */ Vec3f initialPosition;
     /* 0x5C0 */ Vec3f initialTarget;
-    /* 0x5CC */ u8 unk5CC[0x18];
+    /* 0x5CC */ MoveCameraPose destinationPose;
     /* 0x5E4 */ Vec3f firstKeyPosition;        /* the camera track's first key, as loaded */
     /* 0x5F0 */ Vec3f firstKeyTarget;
-    /* 0x5FC */ u8 unk5FC[0xC];
+    /* 0x5FC */ MapVector pointStep;           /* per-frame change toward savedPointPosition */
     /* 0x608 */ MapVector pointPosition;       /* where the point marker stands */
     /* 0x614 */ MapVector savedPointPosition;  /* restored when the camera snaps to a key */
     /* 0x620 */ MapVector points[0x20];        /* positions of the "Dum_" bones */
@@ -69,8 +75,11 @@ typedef char MoveCameraCtrlLayoutCheck[sizeof(MoveCameraResource) == 0x48 &&
     offsetof(MoveCameraCtrlWork, eye) == 0x55C &&
     offsetof(MoveCameraCtrlWork, up) == 0x584 &&
     offsetof(MoveCameraCtrlWork, resource) == 0x594 &&
+    offsetof(MoveCameraCtrlWork, poseStep) == 0x59C &&
     offsetof(MoveCameraCtrlWork, initialPosition) == 0x5B4 &&
     offsetof(MoveCameraCtrlWork, initialTarget) == 0x5C0 &&
+    offsetof(MoveCameraCtrlWork, destinationPose) == 0x5CC &&
+    offsetof(MoveCameraCtrlWork, pointStep) == 0x5FC &&
     offsetof(MoveCameraCtrlWork, pointCount) == 0xC && offsetof(MoveCameraCtrlWork, hasPoints) == 0x15 &&
     offsetof(MoveCameraCtrlWork, cameraModel) == 0x18 && offsetof(MoveCameraCtrlWork, firstKeyPosition) == 0x5E4 &&
     offsetof(MoveCameraCtrlWork, pointPosition) == 0x608 && offsetof(MoveCameraCtrlWork, points) == 0x620 &&

@@ -4,7 +4,6 @@
 
 extern "C" {
 
-s32 scrGetArg(s32 index);
 s32 eventIsSkipping(void);
 void titleSetSlotValueState2(s32 index, s32 value);
 

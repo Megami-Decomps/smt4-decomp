@@ -19,6 +19,7 @@
 #include "code/Code002c.h"
 #include "code/Code0028_Smt4.h"
 #include "code/Code0013.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern EventScriptJobWork *g_aocJob;
@@ -45,7 +46,6 @@ s32 FUN_002897c0(void);
 void FUN_002897b0(u8 value);
 int eventIsSkipping(void);
 u32 tableGroupFindEntryIndex(void *commands, const char *name);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 /* The game flag an event entry raises when it ends, 0 when it has none. */
 u32 eventScriptFindCompletionFlag(u32 eventId, const ScriptVmLabel *entry);
 u8 gameJumpRequestIsPending(void);

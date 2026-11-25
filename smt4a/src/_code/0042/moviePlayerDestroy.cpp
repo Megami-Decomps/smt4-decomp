@@ -5,7 +5,6 @@
 
 extern "C" {
 void mobiclipS4PlayerDestroy(void *player);
-void deblockerHandleRelease(u32 *handle);
 void nn_os_Thread_FinalizeImpl(u32 *thread);
 }
 

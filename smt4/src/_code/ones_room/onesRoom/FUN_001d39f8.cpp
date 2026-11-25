@@ -4,6 +4,7 @@
 #include <string.h>
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
@@ -12,7 +13,6 @@ void buttonHelpCreate(void);
 void commonBgStopChildAndBeginTransition(void);
 void buttonHelpSetPreset(s32);
 void *asdLoadFileSyncDefault(const char *);
-void scrScriptProcessStartEntry(ScriptProcess *, s32);
 void titleRestartSlotState3(s32, s32);
 s32 onesRoomTeardown(u32);
 void onesRoomSetEnabled(void);

@@ -1,4 +1,5 @@
-/* NON_MATCHING: the ATBC validation now sits after the epilogue as in retail; the file and payload copies take r5/r6 the other way round, the trace's string address is scheduled earlier, and the payload pointer comes from a writeback load. */
+/* NON_MATCHING: the file and payload validation use different saved registers, and the trace's string
+ * address and the arguments to memcmp are scheduled differently. */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/ModelContainer.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
@@ -15,28 +16,7 @@ void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void asdListAdd(AsdList *list, void *item, s32 index);
 s32 rt_memcmp(const void *left, const void *right, u32 size);
 
-// An unwrapped model already points at its payload; ATBC adds a validated header.
-static __inline void *modelContainerGetPayload(u8 *file, u32 *payloadSize)
-{
-    void *payload = file;
-    if (rt_memcmp(file, DAT_00409428, 4) == 0) {
-        AsdModelContainerHeader *container = reinterpret_cast<AsdModelContainerHeader *>(file);
-        u32 offset = container->payloadOffset;
-        if (offset == 0) {
-            offset = container->fallbackOffset;
-        }
-        AsdModelPayloadHeader *header = reinterpret_cast<AsdModelPayloadHeader *>(file + offset);
-        if (rt_memcmp(header, DAT_00409438, 7) == 0) {
-            *payloadSize = header->payloadSize;
-            payload = header + 1;
-        } else {
-            payload = NULL;
-        }
-    }
-    return payload;
-}
-
-// Register a model image, accepting either raw data or an ATBC-wrapped MDLSIGN payload.
+/* Registers a model image, accepting either raw data or an ATBC-wrapped MDLSIGN payload. */
 AsdModelEntry *asdModelRegisterImage(u8 *file, u32 parameter)
 {
     // AsdModelEntry only describes the first 0xC bytes; this registration owns 0x1C.
@@ -70,7 +50,25 @@ AsdModelEntry *asdModelRegisterImage(u8 *file, u32 parameter)
     model->file = file;
 
     u32 payloadSize = 0;
-    model->payload = modelContainerGetPayload(file, &payloadSize);
+    void *payload;
+    /* An unwrapped model points directly at its payload. */
+    if (rt_memcmp(file, DAT_00409428, 4) == 0) {
+        AsdModelContainerHeader *container = (AsdModelContainerHeader *)file;
+        u32 offset = container->payloadOffset;
+        if (offset == 0) {
+            offset = container->fallbackOffset;
+        }
+        AsdModelPayloadHeader *header = (AsdModelPayloadHeader *)(file + offset);
+        if (rt_memcmp(header, DAT_00409438, 7) == 0) {
+            payloadSize = header->payloadSize;
+            payload = header + 1;
+        } else {
+            payload = NULL;
+        }
+    } else {
+        payload = file;
+    }
+    model->payload = payload;
     void *auxiliary = NULL;
     if (rt_memcmp(file, DAT_00409428, 4) == 0) {
         auxiliary = file + reinterpret_cast<AsdModelContainerHeader *>(file)->auxiliary.offset;

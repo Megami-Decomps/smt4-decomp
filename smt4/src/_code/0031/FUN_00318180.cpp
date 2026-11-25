@@ -8,7 +8,6 @@ extern "C" {
 
 
 
-s32 scrGetArg(s32 index);
 
 /* Script command: sets the result to 0 when the live, non-excluded unit with id `arg0` has bit `arg1` clear in its mask; 1 otherwise. */
 u32 FUN_00318180(void)

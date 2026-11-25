@@ -10,7 +10,6 @@ extern void *g_handleRegistry;
 extern s8 g_saveLoadUIBase;
 void statusCameraRestore(s32 enabled);
 s32 byte1IsZero();
-void FUN_0023b45c(s32 enabled);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void statusModelPreviewOutfitPart(s32 kind, u16 value);
 void buttonHelpSetText(s32 slot, u32 color);

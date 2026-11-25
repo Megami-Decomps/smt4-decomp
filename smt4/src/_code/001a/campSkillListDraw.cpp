@@ -26,7 +26,7 @@ extern "C" {
 u32 resourceRunOperationIfUnblocked(const GridNavigation *grid);
 void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide);
 s32 FUN_002987d8(s32 unit, s32 skill);
-s32 FUN_00298848(u32 skill, s32 unit);
+s32 skillCanUseInField(u32 skill, s32 unit);
 void FUN_002b6c34(s32 skill, s32 x, s32 y, s32 depth, s32 player, s32 highlight);
 void textDrawFormattedAligned(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *text);
 void drawSetColorFromRGBA8(u32 packed);
@@ -61,7 +61,7 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
         name = (const char *)aocIndexValueOrDefault(skill);
         if (name != NULL) {
             u32 color = 0xff;
-            if (!(FUN_00298848(skill, (s16)camp->skills[resourceRunOperationIfUnblocked(grid) + i].unit) && FUN_002987d8(unit, skill) &&
+            if (!(skillCanUseInField(skill, (s16)camp->skills[resourceRunOperationIfUnblocked(grid) + i].unit) && FUN_002987d8(unit, skill) &&
                   campSkillUserCanAct(&camp->skills[resourceRunOperationIfUnblocked(grid) + i]))) {
                 color = 0x5a5a5aff;
             }
@@ -106,7 +106,7 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
         name = (const char *)aocIndexValueOrDefault(skill);
         if (name != NULL) {
             u32 color = 0xffffffff;
-            if (!(FUN_00298848(skill, (s16)camp->skills[resourceRunOperationIfUnblocked(grid) + listCursorGetRowIfUnblocked(grid)].unit) &&
+            if (!(skillCanUseInField(skill, (s16)camp->skills[resourceRunOperationIfUnblocked(grid) + listCursorGetRowIfUnblocked(grid)].unit) &&
                 FUN_002987d8(unit, skill) &&
                   campSkillUserCanAct(&camp->skills[resourceRunOperationIfUnblocked(grid) + listCursorGetRowIfUnblocked(grid)]))) {
                 color = 0x5a5a5aff;

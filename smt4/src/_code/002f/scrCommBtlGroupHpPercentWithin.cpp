@@ -7,7 +7,6 @@
 extern "C" {
 
 extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
-extern s32 btlScriptResolveGroupArg(s32 group);
 
 /* Script command: pushes whether the HP percentage of the present, non-excluded units of the current group (and the
  * active entry) is at most argument 0. */

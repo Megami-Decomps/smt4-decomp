@@ -8,7 +8,6 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
-bool aocRunByName(u32 arg0, u32 name, u32 arg2, int checked);
 s32 texTableRequestNamedTextureLoad(AocSystem *system, s32 table, u32 entry, s32 flags);
 s32 asdTMTexTablePrepareNodeImage(s32 table, u32 entry);
 s32 btlTalkBustUpApplyTexturePlacement(BtlTalkBustUp *bustUp);

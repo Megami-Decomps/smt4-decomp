@@ -6,12 +6,12 @@
 #include "script/scrScriptProcess.h"
 #include "battle/btlEvent.h"
 #include "game/GameState.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 void transformInterpolationStep(EventScriptScene *scene);
 void messageSetConfirmDisplayMode();
 u32 tableGroupFindEntryIndex(void *script, const char *name);
-void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 
 // Load and run the selected event script, then release both script resources when it ends.
 void eventUpdateScriptLaunch(EventScriptScene *scene)

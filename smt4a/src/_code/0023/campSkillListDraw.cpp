@@ -24,11 +24,11 @@
 #include "code/Code002a_VariantA.h"
 #include "code/Code002c_Smt4a.h"
 #include "code/Code004b_Smt4a.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 
 /* Draws formatted text right-aligned in a field of `digits` characters. */
-void numberFontDrawFormatted(s32 font, s32 x, s32 y, s32 align, s32 digits, s32 layer, const char *format, ...);
 /* The list's scroll bar. */
 void FUN_0023d150(GridNavigation *grid, s32 x, s32 y, s32 mode);
 /* Whether `target` (a unit slot, negative for the player) can use the skill from the camp. */

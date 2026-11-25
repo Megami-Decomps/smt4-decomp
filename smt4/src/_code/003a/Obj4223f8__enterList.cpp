@@ -2,16 +2,16 @@
 #include "classes/Obj4223f8.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "gamedata/DataTable.h"
+#include "quest_center/qcMain.h"
 
 extern "C" {
 s32 utilityReturnSuccess(const void *state);
 s32 stageAssetsLoaded();
 void uiSceneApplySpritePreset(void *panel, s32 mode);
-void buttonHelpSetPreset(u32 preset);
 s32 flaggedValueHolderGetTotal(const SelectionFlags *selection);
 void gameLoadUnitSnapshot(s32 id, s32 mode);
 void statusPanelSetOpen(s32 open);
-void FUN_0029dfc0(s32 mode);
 
 }
 

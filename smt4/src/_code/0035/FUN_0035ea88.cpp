@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable body; register assignment of the block/memory arguments differs (retail copies the block pointer, build copies the memory pointer). */
 #include "common.h"
+#include "runtime/String.h"
 
 struct MemoryBlock {
     u8 *begin;
@@ -8,7 +9,6 @@ struct MemoryBlock {
 };
 
 extern "C" {
-void rt_memclr(void *base, u32 size);
 
 void FUN_0035ea88(MemoryBlock *block, u8 *memory)
 {

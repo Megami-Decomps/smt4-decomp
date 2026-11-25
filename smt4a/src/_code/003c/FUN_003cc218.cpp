@@ -5,7 +5,6 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-void scrSetResult(s32 result);
 
 // Test whether an eligible combatant with the requested id has a positive entry value.
 u32 FUN_003cc218()

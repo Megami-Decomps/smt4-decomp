@@ -2,7 +2,6 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-void scrCommMessageSetMode(s32 mode);
 u32 messageWindowShowOrPoll(u32 owner, u32 message, s32 frame, s32 style, s32 option, u32 duration);
 
 // Submit both script values and the frame to the mode-fifteen transition.

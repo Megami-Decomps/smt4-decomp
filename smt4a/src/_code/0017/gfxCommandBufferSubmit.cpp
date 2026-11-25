@@ -1,20 +1,20 @@
-/* NON_MATCHING: the command cursor uses a different register; retail forms two complete final command-pair stores, where the build interleaves the words. */
+/* NON_MATCHING: the VFP-enabled build interleaves the final command-pair stores. With --fpu=softvfp the unit is IDENTICAL. */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "shard/W6_W6Match5_DisplayMode.h"
 
 
 extern "C" {
-void globalCriticalSectionEnterForward();
 void globalCriticalSectionLeaveForward();
 void FUN_001963e0();
 
 // Terminate the pending GPU commands and enqueue the command-list submission.
 void gfxCommandBufferSubmit(AsdCmdBuffer *buffer, u32 size)
 {
-    u32 cursor = buffer->writeOffset;
-    if (cursor == buffer->committedOffset) {
+    if (buffer->committedOffset == buffer->writeOffset) {
         return;
     }
-    u32 *commands = reinterpret_cast<u32 *>(buffer->start + cursor);
+    u32 cursor = buffer->writeOffset;
+    u32 *commands = (u32 *)(buffer->start + cursor);
     if ((cursor & 8) != 0) {
         buffer->writeOffset += 0x18;
     } else {

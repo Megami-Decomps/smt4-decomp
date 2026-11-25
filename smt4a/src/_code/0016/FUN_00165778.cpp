@@ -7,6 +7,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxA.h"
 #include "nw/math/MTX44Transform.h"
+#include "ui/NumberFont.h"
 
 using nw::math::MTX44;
 using nw::math::VEC3Value;
@@ -38,7 +39,6 @@ extern "C" {
 
 s32 fontMeasureLineAdvance(const char* text, s32 font);
 void skinObjectUpdateMatrices(RenderCtxA *ctx);
-void numberFontDrawFormatted(s32 a, s32 x, s32 y, s32 b, s32 c, s32 d, const char* format, s32 value);
 MTX44 FUN_0019a0dc(RenderCtxA *scene);
 void camSetMatrixA(RenderCtxA *ctx, const MTX44 *matrix);
 

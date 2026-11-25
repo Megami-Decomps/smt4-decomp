@@ -12,7 +12,7 @@ u16 saveIsRecordValueBounded(u32 index);
 
 s32 binFileGetValue(BinFile *file);
 
-struct Table2dSection4Record *FUN_00314638(u32 index);
+struct Table2dSection4Record *dataTable45GetAmbientPlacement(u32 index);
 
 s32 FUN_0031d174(void *list);
 

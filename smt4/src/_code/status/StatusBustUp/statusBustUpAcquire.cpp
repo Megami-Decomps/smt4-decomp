@@ -4,11 +4,11 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "runtime/String.h"
 
 extern "C" {
 extern StatusBustUpResources g_statusBustUpResources;
 void asdTMTexTableLoadTmx(u32 table, u32 node);
-void rt_memclr(void *block, u32 size);
 
 /* Takes a reference on the bust-up resources, loading the textures and allocating the work
  * buffers on the first one. */

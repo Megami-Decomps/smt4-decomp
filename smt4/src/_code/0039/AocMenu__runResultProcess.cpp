@@ -9,6 +9,7 @@
 #include "nn/Result.h"
 #include "sys/RuntimeObjects.h"
 #include "util/BitsAndBytes.h"
+#include "sys/WindowStatusCheck.h"
 
 /* The query operation the menu is polling (its deleting destructor is vtable slot 1). */
 class AocQueryHandler {
@@ -40,7 +41,7 @@ struct AocQueryMenu {
 extern "C" {
 
 void FUN_00233e70(AocQueryMenu *menu, s32 first, s32 second);
-WindowStatusResult FUN_002341d4(AocMain *main);
+WindowStatusResult resourceLoadDisplayMetadata(AocMain *main);
 s32 strIsEmpty(const RequestParameters *result);
 u32 flaggedValueHolderGetTotal(void *holder);
 
@@ -122,8 +123,8 @@ void AocMenu::runResultProcess()
         break;
     }
     case 4: {
-        WindowStatusResult status = FUN_002341d4(aocMain);
-        if (nnResultIsFailure(legacyResourceIdRemap(&status))) {
+        WindowStatusResult status = resourceLoadDisplayMetadata(aocMain);
+        if (windowStatusFailed(status)) {
             menu->step = 9999;
             failRequestOperation(&menu->result, status);
             break;

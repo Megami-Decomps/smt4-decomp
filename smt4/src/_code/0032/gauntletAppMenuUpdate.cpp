@@ -29,6 +29,7 @@
 #include "code/Code0029_VariantB.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "script/ScriptEntry.h"
 
 #define GAUNTLET_TEXTURES 29
 #define GAUNTLET_SE_DECIDE 0x100016D
@@ -39,7 +40,6 @@ extern "C" {
 extern GauntletAppMenuWork *g_gauntletAppMenu;
 
 u32 gauntletAppMenuSetMode(GauntletAppMenuWork *menu, u32 mode);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 s32 ifTouchRegionAddRequested(u32 file, s32 index);
 u32 padIsButtonPressed(u32 button);
 u32 padIsButtonRepeat(u32 button);

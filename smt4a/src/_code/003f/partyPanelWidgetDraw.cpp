@@ -16,6 +16,7 @@
 #include "gamedata/SaveSlotRecord.h"
 #include "code/Code0025_Smt4a.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 
@@ -26,7 +27,6 @@ u32 heldAmountLessThan(s32 amount, u32 id);
 u8 valueAtMostFifthOfTotal(s32 value, s32 total);
 void drawSetColorFromRGBA8(u32 packed);
 void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 z, s32 tint);
-void numberFontDrawFormatted(s32 font, s32 x, s32 y, s32 align, s32 digits, s32 z, const char *text);
 void FUN_00183788(s32 value, s32 maximum, s32 shown, s32 mode, u32 table, u32 frame, u32 fill, u32 low, u32 change,
                   s32 x, s32 y, s32 z, s32 flags);
 void FUN_0025e704(s32 value, s32 maximum, s32 shown, s32 mode, u32 table, u32 frame, u32 fill, u32 change, s32 x,

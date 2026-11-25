@@ -4,7 +4,6 @@
 #include "shard/TextureDrawCall.h"
 
 extern "C" {
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
 void skinObjectUpdateMatrices(RenderCtxA *context);

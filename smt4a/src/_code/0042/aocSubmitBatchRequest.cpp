@@ -39,7 +39,7 @@ extern u8 DAT_0061b000;
 
 void stringCopyTruncated(void *destination, const void *source, u32 bytes);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
-nn::Result FUN_00427e68(s32 handle, u32 mode);
+nn::Result resourceApplyProgramDescriptor(s32 handle, u32 mode);
 u32 tokenTableGet(void);
 nn::Result tokenResolveAddress(u32 token, u8 **resolved, s32 handle);
 s32 appletIsExitRequested(void);
@@ -54,7 +54,7 @@ WindowStatusResult aocSubmitBatchRequest(s32 *handle, const RequestSettings *set
     if (count > 20) {
         return WindowStatusResult(0xE061389C);
     }
-    nn::Result result = FUN_00427e68(*handle, extended ? 13 : 4);
+    nn::Result result = resourceApplyProgramDescriptor(*handle, extended ? 13 : 4);
     if (!nnResultIsFailure(result)) {
         RequestEntry *entries = DAT_0061b030.entries;
         for (u32 i = 0; i < count; i++) {

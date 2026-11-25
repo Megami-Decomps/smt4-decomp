@@ -1,5 +1,7 @@
-/* NON_MATCHING: 295 lines (197 by shape). Each allocation site tests the default heap first and repeats the heap-kind selection inline with its asdDebugTrace(MoriModelResource.cpp, line) call like retail (lines 131/134, 159/162, 176, 188/191, 208, 218/221), and the camera state is initialised with the table setup. Retail keeps the first block's previous table in sl and a second NULL source (passed to the slot-4 transfer) in a stack slot; this build spills the previous table there instead, so the resource and table registers are swapped throughout. */
-#include "common.h"
+/* NON_MATCHING: the table walk now uses the camera constructor's inline. Retail keeps the first
+ * block's previous table in sl and the slot-4 NULL transfer source in a stack slot; this build
+ * spills the previous table there instead, changing register allocation across the copies. */
+#include "classes/Obj557af8.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 
@@ -9,10 +11,10 @@
 
 /* The table pointers of a loaded camera animation; slots 2-4 are replaced by the allocated blocks. */
 struct CameraAnimTables {
-    /* 0x00 */ void *slots[6];
+    /* 0x00 */ const void *slots[6];
     /* 0x18 */ void *alignedA;
     /* 0x1C */ void *alignedB;
-    /* 0x20 */ void *alignedAMirror;
+    /* 0x20 */ const void *alignedAMirror;
     /* 0x24 */ void *alignedBMirror;
 };
 
@@ -41,13 +43,10 @@ void moriCameraAnimLoad(u8 *state, u8 *resource, s32 kindC, s32 kindA, s32 kindB
 {
     CameraAnimState *anim = (CameraAnimState *)state;
     CameraAnimTables *t = &anim->tables;
-    s32 *tableOffset = (s32 *)(resource + 8);
-    s32 *tablePresent = (s32 *)(resource + 0x20);
-    for (s32 i = 0; i < 6; i++)
-        t->slots[i] = tablePresent[i] != 0 ? resource + tableOffset[i] : NULL;
+    asdAnimCameraResolveTables((const AsdAnimCameraResource *)resource, t->slots);
     t->alignedA = NULL;
     t->alignedB = NULL;
-    void *previousA = NULL;
+    const void *previousA = NULL;
     if (*(s32 *)(resource + 0x2C) != 0) {
         previousA = t->slots[3];
         void *block = NULL;
@@ -130,11 +129,11 @@ void moriCameraAnimLoad(u8 *state, u8 *resource, s32 kindC, s32 kindA, s32 kindB
     }
     _ZN18AsdAnimCameraState10InitializeEPK21AsdAnimCameraResourceP18AsdAnimCameraSetup(state + 0xC, resource, t);
     if (kindA != MEMORY_DEFAULT && *(s32 *)(resource + 0x2C) != 0)
-        asdGxQueueMemoryTransfer(previousA, t->slots[3], *(u32 *)(resource + 0x2C));
+        asdGxQueueMemoryTransfer(previousA, (void *)t->slots[3], *(u32 *)(resource + 0x2C));
     if (*(s32 *)(resource + 0x30) != 0 && kindB != MEMORY_DEFAULT)
-        asdGxQueueMemoryTransfer(NULL, t->slots[4], *(u32 *)(resource + 0x30));
+        asdGxQueueMemoryTransfer(NULL, (void *)t->slots[4], *(u32 *)(resource + 0x30));
     if (kindC != MEMORY_DEFAULT && *(s32 *)(resource + 0x28) != 0)
-        asdGxQueueMemoryTransfer(t->alignedAMirror, t->slots[2], *(u32 *)(resource + 0x28));
+        asdGxQueueMemoryTransfer(t->alignedAMirror, (void *)t->slots[2], *(u32 *)(resource + 0x28));
     if (kindD != MEMORY_DEFAULT && *(s32 *)(resource + 0x3C) != 0)
         asdGxQueueMemoryTransfer(t->alignedBMirror, t->alignedB, *(u32 *)(resource + 0x3C));
 }

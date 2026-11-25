@@ -9,6 +9,7 @@
 #include "gamedata/ConsumableRecordA.h"
 #include "battle/BtlGlobals.h"
 #include "battle/BtlUiGlobal.h"
+#include "runtime/String.h"
 
 /* The command's chosen skill: the kind of thing it is and its id. */
 struct CommandSelectionA {
@@ -45,7 +46,6 @@ struct UiPositionA {
 extern "C" {
 
 void __aeabi_memset4(void *block, u32 size, s32 value);
-void *rt_memclr(void *block, u32 size);
 void FUN_004aa798(BtlUiA *ui, void *arg, s32 count);
 u32 FUN_004aaebc(BtlUiA *ui, u32 kind, u32 parameter, u16 option, u16 variant, u32 flags, const void *label,
                  f32 x, f32 y, f32 z);

@@ -19,6 +19,7 @@
 #include "code/Code0029_Smt4.h"
 #include "code/Code0029_VariantA.h"
 #include "code/Code0029_VariantB.h"
+#include "script/ScriptEntry.h"
 
 /* Sounds of the quest menu. */
 #define QUEST_SE_DECIDE 0x100016D
@@ -41,7 +42,6 @@ void buttonHelpSetText(const s8 *text, u32 style);
 void sortMenuCreate(u32 owner, u8 option);
 void useCounterStart(void);
 void uiBindRecordRewardText(u32 id, s32 showRewards, s32 description);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 bool questIsOfferable(u16 questId);
 s32 questQueryFalse(void);
 u32 questIsCompleted(s32 index);

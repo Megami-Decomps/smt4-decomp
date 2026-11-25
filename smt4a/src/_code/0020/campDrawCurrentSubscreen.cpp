@@ -5,7 +5,6 @@
 
 
 extern "C" {
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 u32 listCursorGetRowOfChildIfUnblocked(void *list);
 s32 partyCountOccupiedSlots(void);
 void saveListDraw(CampStateA *camp);

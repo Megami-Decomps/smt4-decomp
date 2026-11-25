@@ -1,4 +1,4 @@
-/* NON_MATCHING: owner test, the lookup-table base (UiLookupTable at +0x3c), slot value/state pointers and the non-`rev` byte swap now match retail; the swap's masks are materialised differently (retail keeps 0xFF in a register) and the lookup key lives in r1 in retail (here r0, so a redundant move). */
+/* NON_MATCHING: retail uses register masks for the big-endian value and schedules the slot stores after its conversion. */
 #include "common.h"
 #include "shard/S3UiLookup.h"
 #include "addon/AocSystemA.h"
@@ -8,9 +8,6 @@ extern "C" {
 u32 libc_strlen(const u16 *str);
 u32 nameTableLookupEntry(void *dictionary, const u16 *str, u32 length);
 void FUN_004064a8(UiLookupObj *obj, u32 slot, UiFoundEntry *entry, u32 handle);
-
-/* Byte swap of a big endian value. */
-#define SWAP32(v) (((v) << 24) | ((((v) >> 8) & 0xFF) << 16) | ((((v) >> 16) & 0xFF) << 8) | ((v) >> 24))
 
 /* For every slot of the owner's name lists, looks each name up in the dictionary: entries with
  * flag 8 go to FUN_004064a8; the first entry of type 2 per slot records its value and marks the
@@ -30,15 +27,14 @@ void FUN_0040683c(UiLookupObj *obj)
 
         for (u32 i = 0; i < list->count; i++) {
             const u16 *name = list->names[i];
-            UiContext *context = owner->context;
-            UiLookupTable *lookup = &context->lookup;
-            u32 key = nameTableLookupEntry(lookup->dictionary, name, libc_strlen(name));
-
-            if (key != UILOOKUP_NOT_FOUND) {
-                UiFoundEntry *entry = owner->context->lookup.entries[key];
+            UiLookupTable *lookup = &owner->context->lookup;
+            u32 key;
+            if ((key = nameTableLookupEntry(lookup->dictionary, name, libc_strlen(name))) != UILOOKUP_NOT_FOUND) {
+                UiContext *entryContext = owner->context;
+                UiFoundEntry *entry = entryContext->lookup.entries[key];
 
                 if ((entry->flags & 8) != 0) {
-                    FUN_004064a8(obj, slot, entry, *owner->context->handle);
+                    FUN_004064a8(obj, slot, entry, *entryContext->handle);
                 } else if (entry->flags == 2 && !recorded) {
                     u32 value = entry->value;
 

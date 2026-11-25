@@ -31,7 +31,7 @@ CountdownBlockA *gameDataGetExtraBlock(void);
 void gameApplyFlagTriggers(void);
 u32 FUN_004d0d70(u32 slot);
 void partySlotsCompact(void);
-void FUN_00388068(void);
+void cecApplyRankingBonuses(void);
 void gameFlagsSetFlagsFromTaggedGroupEntries(AocSystemA *system);
 void clockRecordStartSeconds(void);
 
@@ -121,7 +121,7 @@ s32 saveLoadProcessLoadStep(u32 job)
                     }
                 }
                 if (!work->rawLoad) {
-                    FUN_00388068();
+                    cecApplyRankingBonuses();
                     gameFlagsSetFlagsFromTaggedGroupEntries(g_aocSystem);
                 }
             }

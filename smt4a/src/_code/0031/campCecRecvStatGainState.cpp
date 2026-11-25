@@ -17,11 +17,11 @@
 #include "shard/W6_W6Match3_FormatBuffer.h"
 #include "ui/UiControl.h"
 #include "map/lmapMain.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
 SlotRecordA *stockFindSelectedUnit(void);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 s32 btlTalkBustUpGetValue(void);
 void btlTalkBustUpSetDemonTexture(u32 demonId, s32 deferred);
 void btlTalkBustUpSetUnk2F4(u8 value);

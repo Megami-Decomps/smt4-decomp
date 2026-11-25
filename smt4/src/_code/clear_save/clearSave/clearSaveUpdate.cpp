@@ -10,6 +10,7 @@
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "shard/W6_W6Match2_ScrollList.h"
 #include "sys/RuntimeObjects.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern ClearSaveWork *g_clearSave;
@@ -17,7 +18,6 @@ extern ClearSaveWork *g_clearSave;
 u32 uiAdjustIntegerFromRepeat(s32 *value, s32 minimum, s32 maximum, s32 wrap, s32 mode, s32 step);
 u32 padIsButtonPressed(u32 button);
 u32 padIsButtonRepeat(u32 button);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 u32 messageMainGetChoiceResult(void);
 u32 messageTargetGetValue(void);
 void titleSetSlotValueState2(u32 index, u32 value);

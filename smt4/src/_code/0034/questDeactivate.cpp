@@ -5,7 +5,6 @@
 
 extern "C" {
 QuestRuntimeFlagBlock *gameGetFlagBlock();
-s32 table1bOr1cGetRecordValue(u32 id);
 void gameFlagEntryActivate(u32 id);
 void FUN_0023ddbc(u32 flag, s32 value);
 

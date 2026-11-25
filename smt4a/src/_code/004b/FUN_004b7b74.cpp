@@ -6,6 +6,7 @@
 #include "font/InfoWinA.h"
 #include <stddef.h>
 #include "event/2dEvent/EventEffect.h"
+#include "script/ScriptEntry.h"
 
 
 struct MapMenuReturnRecord { u8 unk00[0x3f]; u8 textId; };
@@ -45,7 +46,6 @@ u16 flaggedValueHolderGetTotal(FlaggedValueHolder *);
 void sysPlaySe(u32);
 void *asdLoadFileSyncDefault(const char *);
 u32 tableGroupFindEntryIndex(void *, const char *);
-void scrScriptProcessStartEntry(ScriptProcess *, u32);
 
 void FUN_004b7b74(MapMenuCompletionWork *work)
 {

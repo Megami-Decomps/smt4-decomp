@@ -3,6 +3,7 @@
  * scriptProcessSetMode call would leave), and written as that call the function is 63 lines off (36 so). */
 #include "gamedata/DataTable.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 struct NpcShopSelectionRecord {
     u32 key;
@@ -25,7 +26,6 @@ struct NpcShopSelectionState {
 };
 
 extern "C" {
-void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 s32 tableGroupFindEntryIndex(void *group, const char *name);
 s32 loadSlotIsLoaded(u32 slot);
 extern const char DAT_0053322c[]; /* npcShop_Select_00 */

@@ -12,7 +12,7 @@ int FUN_002ba998(void);
 int FUN_002d2000(void);
 int tmnlResetSelection(void);
 int sequenceRequestFlushDeferred(void);
-int FUN_003848a4(void);
+int mapRequestDestinationSequence(void);
 int titleSetSlotValueState2(...);
 int FUN_003e785c(...);
 int FUN_003ebad4(...);
@@ -209,7 +209,7 @@ extern int btlEncountCheck(unsigned int);
 /* Supplied declaration required: btlPlayMenuConfirmSe. */
 /* Supplied declaration required: sequenceRequestFlushDeferred. */
 extern int sequenceRequestIsPending(void);
-/* Supplied declaration required: FUN_003848a4. */
+/* Supplied declaration required: mapRequestDestinationSequence. */
 /* Supplied declaration required: sysClearCachedFlag. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: titleSetSlotValueState2. */
@@ -1100,7 +1100,7 @@ LAB_0024d284:
       }
       else {
         sysClearCachedFlag();
-        FUN_003848a4();
+        mapRequestDestinationSequence();
       }
     }
     else {

@@ -1,11 +1,11 @@
 #include "classes/Obj536044.h"
 #include "code/Code0035_Smt4a.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 s32 messageMainIsIdle();
 u32 tableGroupFindEntryIndex(u32 table, const char *name);
-void scrScriptProcessStartEntry(ScriptProcess *, u32);
 void sysPlaySe(u32);
 u32 gameDataBlocksGetWord();
 u32 FUN_004d05b4();

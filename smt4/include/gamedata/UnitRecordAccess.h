@@ -11,6 +11,9 @@ extern "C" {
 /* The 0x604-byte saved record of slot table entry `index`. */
 StatBlock *gameGetUnitRecord(u32 index);
 
+/* Initializes a transient unit record for the given demon id. */
+void unitInitializeFromSavedRecord(u32 id, StatBlock *unit);
+
 } /* extern "C" */
 
 #endif

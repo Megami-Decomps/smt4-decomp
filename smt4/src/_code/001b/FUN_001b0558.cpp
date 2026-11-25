@@ -5,7 +5,7 @@
 
 extern "C" {
 s32 partyPanelIsTransitionDone(void);
-s32 FUN_00282ccc(void);
+s32 partyPanelGetSelectedDemonId(void);
 void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index);
 void buttonHelpSetText(const char* text, u32 color);
 StatBlock* partyMemberFindById(u32 id);
@@ -27,7 +27,7 @@ extern "C" void FUN_001b0558(void)
 {
     PartyPanelState* panel = g_partyPanel;
     s32 equippedWeapon = partyPanelIsTransitionDone();
-    s32 selection = FUN_00282ccc();
+    s32 selection = partyPanelGetSelectedDemonId();
     if (equippedWeapon) {
         updateEquippedWeaponHelp(NULL, 0);
         return;

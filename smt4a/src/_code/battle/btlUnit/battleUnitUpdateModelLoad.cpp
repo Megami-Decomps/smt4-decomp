@@ -32,7 +32,6 @@ u32 *battleModelOwnerInitialize(u32 *word);
 void btlUiAddRequest(BtlUiA *ui, u16 id);
 void battleEffectUpdateProjectionScale(BattleEffectSetup *render);
 void FUN_004d854c(s32 *owner);
-bool FUN_004d87e4(void **holder);
 void modelOwnerLoadNamed(ModelOwner *owner, const char *name);
 extern BattleEffectGlobals g_battleEffectSettings;
 extern const char g_battleUnitSourceFile[]; // battle/btlUnit.cpp diagnostic filename

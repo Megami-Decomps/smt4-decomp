@@ -5,10 +5,10 @@
 #include "shard/W6_W6Match3_ScrollSelection.h"
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "gamedata/GameSaveLinkSlot.h"
+#include "runtime/String.h"
 
 extern "C" {
 void *sysMemClear(void *destination, u32 size);
-void rt_memclr(void *destination, u32 size);
 void qsort(void *elements, u32 count, u32 elementSize, int (*compare)(const void *, const void *));
 int dataTable1bOr1cCompareRecordKeys(const void *first, const void *second);
 u32 dataTable1bOr1cRecordHasFlag1(u32 id);
@@ -18,7 +18,6 @@ u32 questIsCompleted(s32 index);
 u8 idIsAtLeast350(u32 value);
 s32 questIsReported(u32 id);
 void gridNavigationConfigure(ScrollSelection *list, s32 count, s32 columns, s32 first, s32 second, s32 third);
-void scrollListSetSelectionTracked(ScrollSelection *list, s32 index);
 void uiQuestSortListByEntryKind(s32 mode);
 s32 uiListGetVisibleCount(ScrollSelection *list);
 s32 gridNavigationGetItemCount(ScrollSelection *list);

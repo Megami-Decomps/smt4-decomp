@@ -1,6 +1,7 @@
 /* NON_MATCHING: armcc computes the third table pointer directly from the base (+0x4200) instead of a running +0x2100 chain and schedules the stride=0x400 store after movls. */
 #include "common.h"
 #include "mobiclip/MobiclipAllocator.h"
+#include "runtime/String.h"
 
 /* The codec's decoder state (allocated as 0x670 bytes); only the fields set up here are named. */
 struct MobiclipDecoderState {
@@ -32,7 +33,6 @@ struct MobiclipTables {
 extern "C" {
 extern MobiclipTables DAT_0053faa0;
 
-void rt_memclr(void *destination, u32 size);
 
 /* Creates the decoder state and frame buffers for the given size; returns 1 on success. */
 u32 mobiclipFrameSetCreate(MobiclipFrameSet *set, u32 width, u32 height, u32 frameCount, s32 flags, s32 mode)

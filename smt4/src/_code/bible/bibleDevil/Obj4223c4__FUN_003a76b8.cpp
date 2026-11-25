@@ -6,6 +6,7 @@
 #include "shard/Shard004A.h"
 #include "code/Code0029_Smt4.h"
 #include "script/scrScriptProcess.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 s32 utilityReturnSuccess(const void *input);
@@ -14,7 +15,6 @@ void *partyMemberFindById(u16 id);
 void FUN_0029da34(s32 screen, s32 enabled, u16 id, void *unit);
 s32 compendiumComputeSummonCost(u16 id, u32 source, s32 a, s32 specialMode, s32 b);
 void messageTargetSetValue(s32 target, s32 mode);
-void unitInitializeFromSavedRecord(u16 id, StatBlock *unit);
 void uiSceneApplySpritePreset(void *timers, s32 index);
 void devilListUpdatePreview(Obj42247c *view);
 extern s32 g_bibleDevilCallbackContext[2];

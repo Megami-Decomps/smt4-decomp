@@ -5,7 +5,6 @@
 extern "C" {
 
 s32 stateValuesGetBySelector(u32);
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *);
 void frameTexDrawXfadeCapture(u32);
 
 // "XFADEDR" draw: draws the cross-fade on the right screen once it is enabled and its left capture is done.

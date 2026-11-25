@@ -11,7 +11,9 @@ typedef struct Obj25C {
     union {
         /* 0x00 */ u8 unk00[0x2C4];
         struct {
-            u8 prefix[8];
+            /* 0x00 */ u8 unk00[4];
+            /* 0x04 */ u8 mode;
+            /* 0x05 */ u8 unk05[3];
             /* 0x08 */ s32 state;
         } transition;
         struct {
@@ -30,7 +32,8 @@ typedef struct Obj25C {
     /* 0x334 */ u32 unk334;
     /* 0x338 */ u8 flags[12];
 } Obj25C;
-typedef char Obj25CSelectionOffsetsCheck[offsetof(Obj25C, transition.state) == 8 &&
+typedef char Obj25CSelectionOffsetsCheck[offsetof(Obj25C, transition.mode) == 4 &&
+    offsetof(Obj25C, transition.state) == 8 &&
     offsetof(Obj25C, selection.cursor) == 0x260 && offsetof(Obj25C, selectionIndex.selected) == 0x32C &&
     sizeof(Obj25C) == 0x344 ? 1 : -1];
 

@@ -22,10 +22,19 @@ typedef struct LmapMain {
     /* 0x74 */ s8 unk74;
 } LmapMain;
 
-/* An object embedded in the map state; known only through the functions that take it. */
+/* Prefix of the map's story-marker placement list. */
 typedef struct LmapObj {
-    /* 0x00 */ u8 unk00[1];
+    /* 0x00 */ u32 flags;
 } LmapObj;
+
+/* State used while the scene rises to its entry height. */
+struct LmapEntryRaiseTransition {
+    /* 0x00 */ u32 phase;
+    /* 0x04 */ s32 frame;
+    /* 0x08 */ MapVector start;
+    /* 0x14 */ MapVector end;
+};
+typedef char LmapEntryRaiseTransitionSize[sizeof(LmapEntryRaiseTransition) == 0x20 ? 1 : -1];
 
 /* One 0x88-byte slot of the state block's marker and model tables: the marker's pose and its
  * registration and visibility bytes (lmapMainCreate clears 0x84-0x86 of every slot). */
@@ -52,7 +61,9 @@ typedef struct LmapMainState {
     /* 0x0B */ s8 external;      /* nonzero: lmapRaiseSceneTransition steps the map instead of lmapMainUpdateState */
     /* 0x0C */ u32 unk0C;
     /* 0x10 */ u32 unk10;
-    /* 0x14 */ u8 unk14[0x2C];
+    /* 0x14 */ u8 unk14[4];
+    /* 0x18 */ LmapEntryRaiseTransition entryRaise;
+    /* 0x38 */ u8 unk38[8];
     /* 0x40 */ s32 mapId;
     /* 0x44 */ u8 unk44[4];
     /* 0x48 */ u32 areaId;
@@ -76,14 +87,14 @@ typedef struct LmapMainState {
     /* 0xD0 */ u32 stateStep; /* cleared when the state changes */
     /* 0xD4 */ u32 stateTime; /* cleared when the state changes */
     /* 0xD8 */ u8 unkD8[4];
-    /* 0xDC */ f32 unkDC;
-    /* 0xE0 */ u8 unkE0;
+    /* 0xDC */ union { f32 unkDC; f32 entryRaiseAlpha; };
+    /* 0xE0 */ union { u8 unkE0; u8 entryRaiseDirty; };
     /* 0xE1 */ u8 unkE1;
     /* 0xE2 */ u8 unkE2[2];
     /* 0xE4 */ s32 unkE4;
     /* 0xE8 */ f32 unkE8;
     /* 0xEC */ LmapObj obj;
-    /* 0xED */ u8 unkED[0x8A3];
+    /* 0xF0 */ u8 unkF0[0x8A0];
     /* 0x990 */ u8 unk990;
     /* 0x991 */ u8 unk991[3];
     /* 0x994 */ s32 unk994;
@@ -129,7 +140,9 @@ typedef struct LmapMainState {
 } LmapMainState;
 typedef char LmapMainStateLayoutCheck[sizeof(LmapMainState) == 0x4F04 && offsetof(LmapMainState, obj) == 0xEC &&
     offsetof(LmapMainState, slots) == 0xAAC && offsetof(LmapMainState, unk4EAC) == 0x4EAC &&
-    offsetof(LmapMainState, unkC8) == 0xC8 && offsetof(LmapMainState, words) == 0xA10 ? 1 : -1];
+    offsetof(LmapMainState, unkC8) == 0xC8 && offsetof(LmapMainState, words) == 0xA10 &&
+    offsetof(LmapMainState, entryRaise) == 0x18 && offsetof(LmapMainState, entryRaiseAlpha) == 0xDC &&
+    offsetof(LmapMainState, entryRaiseDirty) == 0xE0 ? 1 : -1];
 
 /* A polymorphic object: slot 1 of its vtable destroys it. */
 typedef struct LmapScript {
@@ -256,13 +269,16 @@ typedef struct LmapMainStateA {
     /* 0x000B */ s8 external;
     /* 0x000C */ u32 unk00C;
     /* 0x0010 */ u32 unk010;
-    /* 0x0014 */ u8 unk014[0x2C];
+    /* 0x0014 */ u8 unk014[4];
+    /* 0x0018 */ LmapEntryRaiseTransition entryRaise;
+    /* 0x0038 */ u8 unk038[8];
     /* 0x0040 */ u32 mapId;
     /* 0x0044 */ u32 unk044;
     /* 0x0048 */ u32 areaId;
     /* 0x004C */ u16 unk04C;
     /* 0x004E */ u16 unk04E;
-    /* 0x0050 */ u8 unk050[0x44];
+    /* 0x0050 */ u8 unk050[0x40];
+    /* 0x0090 */ f32 cameraFocusLift;
     /* 0x0094 */ u8 unk094;         /* set when a scripted move starts */
     /* 0x0095 */ u8 unk095[0x2F];
     /* 0x00C4 */ f32 scaleA;
@@ -274,8 +290,8 @@ typedef struct LmapMainStateA {
     /* 0x00D0 */ u32 stateStep;     /* cleared when the state changes */
     /* 0x00D4 */ u32 stateTime;     /* cleared when the state changes */
     /* 0x00D8 */ u8 unk0D8[4];
-    /* 0x00DC */ f32 unk0DC;
-    /* 0x00E0 */ u8 unk0E0;
+    /* 0x00DC */ union { f32 unk0DC; f32 entryRaiseAlpha; };
+    /* 0x00E0 */ union { u8 unk0E0; u8 entryRaiseDirty; };
     /* 0x00E1 */ u8 unk0E1;
     /* 0x00E2 */ u8 unk0E2[2];
     /* 0x00E4 */ s32 unk0E4;
@@ -283,7 +299,7 @@ typedef struct LmapMainStateA {
     /* 0x00EC */ u32 unk0EC;
     /* 0x00F0 */ u32 unk0F0;
     /* 0x00F4 */ LmapObj obj;
-    /* 0x00F5 */ u8 unk0F5[0x8E3];
+    /* 0x00F8 */ u8 unk0F8[0x8E0];
     /* 0x09D8 */ u8 unk9D8;
     /* 0x09D9 */ u8 unk9D9[3];
     /* 0x09DC */ u32 unk9DC;
@@ -558,7 +574,9 @@ typedef char LmapMainStateAOffsetsCheck[offsetof(LmapMainStateA, state) == 0xCC 
     offsetof(LmapMainStateA, scriptCode) == 0xA2C && offsetof(LmapMainStateA, actors) == 0xA54 &&
     offsetof(LmapMainStateA, areaModel) == 0xAE4 && offsetof(LmapMainStateA, areaSlots) == 0xAF4 &&
     offsetof(LmapMainStateA, model) == 0x4EF8 && offsetof(LmapMainStateA, modelSlots) == 0x4F00 &&
-    offsetof(LmapMainStateA, scriptState) == 0x9354 && sizeof(LmapMainStateA) == 0x9370 ? 1 : -1];
+    offsetof(LmapMainStateA, scriptState) == 0x9354 && sizeof(LmapMainStateA) == 0x9370 &&
+    offsetof(LmapMainStateA, entryRaise) == 0x18 && offsetof(LmapMainStateA, entryRaiseAlpha) == 0xDC &&
+    offsetof(LmapMainStateA, entryRaiseDirty) == 0xE0 && offsetof(LmapMainStateA, obj) == 0xF4 ? 1 : -1];
 
 extern "C" {
 u32 gameDataCopySaveEntry(u32 index, void *dest);

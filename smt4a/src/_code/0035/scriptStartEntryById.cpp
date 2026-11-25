@@ -1,5 +1,6 @@
 #include "common.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 struct ScriptTable;
 struct LazyScriptState {
@@ -11,7 +12,6 @@ struct LazyScriptState {
 extern "C" {
 extern LazyScriptState g_lazyScriptState;
 u32 tableGroupFindEntryIndex(ScriptTable* table, u32 id);
-void scrScriptProcessStartEntry(ScriptProcess* process, u32 index);
 
 // Lazily creates the script process, then starts the entry selected by ID.
 void scriptStartEntryById(u32 id)

@@ -1,40 +1,25 @@
-/* NON_MATCHING: leading-zero helper branching, byte narrowing and text/argument saved registers differ. */
-#include "common.h"
+#include "ui/NumberFont.h"
+#include "util/DecimalDigit.h"
 #include <stdio.h>
 
-/* A digit value of ten denotes a suppressed leading zero. */
-static u8 decimalDigit(u32 value, u8 place)
-{
-    if (value == 0) {
-        if (place == 1)
-            return 0;
-    }
-    u32 threshold = 1;
-    for (u32 i = 0; i < place - 1u; ++i)
-        threshold *= 10;
-    if (threshold > value)
-        return 10;
-    for (u32 i = 0; i < place - 1u; ++i)
-        value /= 10;
-    return static_cast<u8>(value % 10);
-}
+enum { PADDED_NUMBER_COLUMNS = 7 };
 
 extern "C" {
-void numberFontDrawFormatted(s32, u32, u32, s32, s32, u32, const char *);
 
-/* Draw a seven-column decimal number padded with spaces on the left. */
-void digitsDrawPaddedNumber(u32 value, u32 x, u32 y, u32 color)
+/* Draws a seven-column decimal number padded with spaces on the left. */
+void digitsDrawPaddedNumber(u32 value, s32 x, s32 y, u32 slot)
 {
-    char text[20];
+    char text[16];
     s32 column = 0;
-    for (s32 place = 7; place >= 1; --place, ++column) {
-        u8 digit = decimalDigit(value, static_cast<u8>(place));
-        if (digit == 10)
+    for (s32 place = PADDED_NUMBER_COLUMNS; place >= 1; --place, ++column) {
+        u8 digit = decimalDigit(value, (u8)place);
+        if (digit == DECIMAL_DIGIT_LEADING_BLANK) {
             text[column] = ' ';
-        else
+        } else {
             sprintf(text + column, "%d", digit);
+        }
     }
     text[column] = '\0';
-    numberFontDrawFormatted(0, x, y, 0, 5, color, text);
+    numberFontDrawFormatted(0, x, y, 0, 5, slot, text);
 }
-}
+} /* extern "C" */

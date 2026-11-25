@@ -19,7 +19,6 @@ struct KeyboardPanelState {
 typedef char KeyboardPanelOffsets[offsetof(KeyboardPanelState, sideOffset) == 0xa4 && offsetof(KeyboardPanelState, backgroundOffset) == 0xac && offsetof(KeyboardPanelState, animation) == 0x3ac ? 1 : -1];
 }
 extern "C" {
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void gxResetColorQuadToWhite();
 void efctSetSpeed(f32 speed);
 void texDrawCompositeSprite(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);

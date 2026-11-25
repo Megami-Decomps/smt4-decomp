@@ -15,6 +15,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "code/Code003c_Smt4a.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
@@ -24,7 +25,6 @@ void npcRoomDestroy(void);
 void titleSetSlotValueState2(s32 screen, s32 frames);
 void jobSetIntensity(u32 job, s32 intensity);
 s32 slotIsReady(u32 index);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void sysPlaySe(u32 id);
 void buttonHelpSetSelectedId(s32 id);
 u8 messageWindowIsState1(void);

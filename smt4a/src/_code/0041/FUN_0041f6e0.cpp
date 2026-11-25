@@ -22,7 +22,6 @@ extern void sysMemClear(void *block, s32 size);
 extern void __ARM_common_memcpy4_8(void *dest, void *src);
 extern void saveLoadStartLoad(s32 step, s32 arg);
 extern void statusPanelSetOpen(s32 arg);
-extern void FUN_0023b45c(s32 arg);
 extern void statusCameraRestore(s32 arg);
 
 /* Reads each slot's profile, then restores the session after the editor's resources load. */

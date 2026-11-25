@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "gamedata/SkillDataRecord.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 bool idIsAbove400(u32 id);
@@ -10,7 +11,6 @@ u32 requestKindToId(u32 kind);
 s32 padGetMappedValue(u32 id);
 s32 dataTableCountRecordStages(u32 id);
 void drawSetColorFromRGBA8(u32 color);
-void numberFontDrawFormatted(u32 layer, s32 x, s32 y, u32 flags, u32 font, s32 depth, const char *format, ...);
 void gxResetColorQuadToWhite(void);
 
 // Draw a categorized skill icon and its clamped, color-coded upgrade badge.

@@ -1,6 +1,7 @@
 #ifndef SYS_RESOURCE_DISPLAY_METADATA_H
 #define SYS_RESOURCE_DISPLAY_METADATA_H
 #include "common.h"
+#include "sys/WindowStatusCheck.h"
 #include <stddef.h>
 
 struct ResourceDisplayMetadata {

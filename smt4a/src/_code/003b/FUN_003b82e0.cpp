@@ -7,7 +7,6 @@
 extern "C" {
 s32 btlResolveEntryChoice(s32 choice);
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
-void scrSetResult(s32 result);
 
 // Test whether a matching active unit has a positive value in the selected battle stat.
 u32 FUN_003b82e0()

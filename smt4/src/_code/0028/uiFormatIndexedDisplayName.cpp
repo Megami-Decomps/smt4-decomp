@@ -9,7 +9,6 @@ extern const char *const DAT_00403390[8];
 const char *aocEntryDataById(u32 index, u32 group);
 const char *aocIndexValueOrDefault(u32 index);
 s32 libc_sprintf(char *output, const char *format, ...);
-void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 
 void uiFormatIndexedDisplayName(u32 unused, s32 kind, s32 index, char *output)
 {

@@ -1,6 +1,4 @@
-/* NON_MATCHING: retail predicates the cursor reset (movgt; strhgt) ahead of its ble and places the empty case
- * after the epilogue (this build keeps it inline before the shared store); the reset loop swaps r1/r2 and the
- * entry-flag loop r3/ip. */
+/* NON_MATCHING: retail predicates the populated cursor reset before branching and places the empty case after the epilogue. */
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/btlMain.h"
 
@@ -11,8 +9,9 @@ void battleSortTurnOrder(BtlMainState *, s32);
 /* Lists the active entries of the battle's side in turn order, with each one's speed bonus rolled. */
 void battleInitializeTurnOrder(BtlMainState *state)
 {
-    for (s32 i = 0; i < 12; ++i)
-        state->turnOrder.order[i] = -1;
+    s32 slot;
+    for (slot = 0; slot < 12; ++slot)
+        state->turnOrder.order[slot] = -1;
     state->turnOrder.cursor = -1;
 
     s32 first, count;
@@ -28,24 +27,28 @@ void battleInitializeTurnOrder(BtlMainState *state)
     }
     s32 end = first + count;
     s32 entries = 0;
-    for (s32 i = first; end > i; ++i) {
-        if ((state->entries[i].flags & 1) && !(state->entries[i].flags & 0x40)) {
-            state->turnOrder.order[entries] = state->entries[i].selectionIndex;
-            state->entries[i].data.speedBonus = 0;
-            if (state->entries[i].flags & 2)
-                state->entries[i].data.speedBonus += 5;
-            if (!(state->battleFlags & 0x40000))
-                state->entries[i].data.speedBonus += FUN_00255de0(-3, 3);
-            ++entries;
-        }
+    if (end > first) {
+        slot = first;
+        do {
+            const u32 flags = state->entries[slot].flags;
+            if ((flags & 1) && !(flags & 0x40)) {
+                state->turnOrder.order[entries] = state->entries[slot].selectionIndex;
+                state->entries[slot].data.speedBonus = 0;
+                if (state->entries[slot].flags & 2)
+                    state->entries[slot].data.speedBonus += 5;
+                if (!(state->battleFlags & 0x40000))
+                    state->entries[slot].data.speedBonus += FUN_00255de0(-3, 3);
+                ++entries;
+            }
+        } while (end > ++slot);
     }
     if (entries > 0) {
         state->turnOrder.cursor = 0;
-        battleSortTurnOrder(state, 0);
+        battleSortTurnOrder(state, state->turnOrder.cursor);
         state->resolution.kind = state->turnOrder.order[state->turnOrder.cursor];
-    } else {
-        state->turnOrder.cursor = -1;
-        state->resolution.kind = -1;
+        return;
     }
+    state->turnOrder.cursor = -1;
+    state->resolution.kind = -1;
 }
-}
+} /* extern "C" */

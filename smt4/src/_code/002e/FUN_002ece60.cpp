@@ -4,9 +4,9 @@
 #include "gamedata/UnitRecordAccess.h"
 #include "gamedata/SaveSlotTableIV.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
-void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void buttonHelpSetPreset(s32 preset);
 void cecProcessStart(void);
 void FUN_0025461c(void);

@@ -1,22 +1,19 @@
-/* NON_MATCHING: player coordinate loads group into VLDM and floating coordinate register/add operand order differs. */
-#include "map/LmapGlobals.h"
-#include "AsdSDK/Source/Snd/SoundActorQueue.h"
+/* NON_MATCHING: x and y load in the opposite order, and the second random displacement uses s1 rather than s2. */
+#include "map/LmapSoundPosition.h"
 #include "game/GameState.h"
 
 extern "C" {
 s32 randBetween(s32 minimum, s32 maximum);
 
-/* Spawn a category-specific ambient effect at a randomized player-relative position. */
+/* Spawns a category-specific ambient effect at a randomized player-relative position. */
 void FUN_0025bc80(void)
 {
-    SoundActorQueuePosition position = {
-        g_lmapScene->pose.position.x,
-        g_lmapScene->pose.position.y,
-        g_lmapScene->pose.position.z
-    };
-    position.x += (f32)randBetween(-20, 20);
-    position.z += (f32)randBetween(-20, 20);
-    u32 variant = (u32)randBetween(0, 100) & 3;
+    SoundActorQueuePosition position = lmapSceneSoundPosition();
+    s32 displacement = randBetween(-20, 20);
+    position.x += displacement;
+    displacement = randBetween(-20, 20);
+    position.z += displacement;
+    u32 variant = randBetween(0, 100) & 3;
     switch (g_gameState.selectedKind) {
     case 0: soundActorStartOnFreeChannel(variant + 0x1000203, position); return;
     case 1: soundActorStartOnFreeChannel(variant + 0x1000208, position); return;
@@ -25,4 +22,4 @@ void FUN_0025bc80(void)
     case 4: soundActorStartOnFreeChannel(variant + 0x1000217, position); return;
     }
 }
-}
+} /* extern "C" */

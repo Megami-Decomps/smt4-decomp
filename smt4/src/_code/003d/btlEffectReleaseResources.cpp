@@ -16,7 +16,6 @@ void modelManagerReleaseSlots(MaterialMergeOwner *);
 void keyedRecordsFreeAll(void);
 void textureCacheReleaseAll(void);
 void btlSpritePlacementRelease(BattleSpritePlacement *);
-void asdMdlManagerMarkDestroy(AsdMdlObject *);
 void asdMemFree(void *);
 }
 

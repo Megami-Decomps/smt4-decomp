@@ -1,15 +1,11 @@
-/* NON_MATCHING (b1454): plain `static` progress helper now gives retail's both-operands-first zero test; remaining: retail does not merge the per-arm divisions (98 rows vs 90) and loads the keys after the segment lengths. */
+/* NON_MATCHING: the opening division is merged across cases and the zero test and
+ * floating-point conversion of the elapsed time are scheduled differently. */
 #include "gfx/SegmentedScalarCurve.h"
 
-static f32 segmentProgress(f32 frame, f32 duration)
-{
-    return duration != 0.0f ? frame / duration : 1.0f;
-}
-
-// Evaluate a linear scalar track with zero, one or two intermediate keys.
+/* Evaluates a linear scalar track with zero, one or two intermediate keys. */
 extern "C" f32 FUN_00269508(const void *data, s32 frame, s32 duration)
 {
-    const SegmentedScalarCurve *curve = static_cast<const SegmentedScalarCurve *>(data);
+    const SegmentedScalarCurve *curve = (const SegmentedScalarCurve *)data;
     if (duration == 0)
         return curve->start;
     f32 total = static_cast<f32>(duration);
@@ -26,9 +22,11 @@ extern "C" f32 FUN_00269508(const void *data, s32 frame, s32 duration)
             end = curve->firstValue;
             progress = static_cast<f32>(frame) / static_cast<f32>(split);
         } else {
-            start = curve->firstValue;
-            end = curve->end;
-            progress = segmentProgress(static_cast<f32>(frame - split), static_cast<f32>(duration - split));
+            SegmentValues segment = getSegmentValues((f32)(duration - split), (f32)(frame - split),
+                                                    curve->firstValue, curve->end);
+            start = segment.start;
+            end = segment.end;
+            progress = segment.rate;
         }
     } else if (curve->intermediateCount == 2) {
         s32 first = static_cast<s32>(curve->firstFraction * total);
@@ -39,13 +37,17 @@ extern "C" f32 FUN_00269508(const void *data, s32 frame, s32 duration)
         } else {
             s32 second = static_cast<s32>(curve->secondFraction * total);
             if (frame < second) {
-                start = curve->firstValue;
-                end = curve->secondValue;
-                progress = segmentProgress(static_cast<f32>(frame - first), static_cast<f32>(second - first));
+                SegmentValues segment = getSegmentValues((f32)(second - first), (f32)(frame - first),
+                                                        curve->firstValue, curve->secondValue);
+                start = segment.start;
+                end = segment.end;
+                progress = segment.rate;
             } else {
-                start = curve->secondValue;
-                end = curve->end;
-                progress = segmentProgress(static_cast<f32>(frame - second), static_cast<f32>(duration - second));
+                SegmentValues segment = getSegmentValues((f32)(duration - second), (f32)(frame - second),
+                                                        curve->secondValue, curve->end);
+                start = segment.start;
+                end = segment.end;
+                progress = segment.rate;
             }
         }
     } else {

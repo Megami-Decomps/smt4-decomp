@@ -1,6 +1,7 @@
 /* NON_MATCHING: the retained format pointer and the va_list pointer swap saved registers (r4/r5) and the format load is scheduled after the pool load. */
 #include "font/FormattedText.h"
 #include <stdarg.h>
+#include "runtime/String.h"
 
 extern "C" {
 extern FormattedTextContext g_asdFontGlyphSets;
@@ -8,7 +9,6 @@ extern char DAT_004d9780[256];
 s32 libc_vsnprintf(char *buffer, u32 bytes, const char *format, va_list arguments);
 f32 textDrawCore(u32 color, u32 font, const char *text, s32 length,
                  f32 x, f32 y, f32 z, f32 rotation, f32 width, f32 height, f32 spacing, f32 scale);
-void rt_memclr(void *buffer, u32 bytes);
 
 /* Formats and draws text with the current font and color at the supplied position. */
 f32 asdFontDrawFormattedAt(f32 x, f32 y, const char *format, ...)

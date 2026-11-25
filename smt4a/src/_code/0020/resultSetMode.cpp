@@ -3,6 +3,7 @@
 #include "code/Code0023.h"
 #include "code/Code002c.h"
 #include "gamedata/SaveSlotTable.h"
+#include "script/ScriptEntry.h"
 
 struct ScriptProcess;
 extern "C" {
@@ -10,9 +11,7 @@ s32 ifTouchRegionRemove(void);
 void sysPlaySe(u16 sound);
 void buttonHelpTransitionPresetFlags(s32 mode);
 void buttonHelpSetText(s32 target, u32 color);
-void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 void statusDownSwitchTab(u8 value);
-void gameGlobalsSetOverlayActive(u8 value);
 void gameGlobalsSetSceneState(u8 value);
 void gameGlobalsReleaseReference(void);
 void FUN_0033449c(u8 value);

@@ -23,6 +23,7 @@
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 #include "battle/Talk/btlTalkBustUpRelease.h"
 #include "code/Code002c_VariantA.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
@@ -33,7 +34,6 @@ u32 fileSlotLoad(u32 id);
 void buttonHelpSetPresetDefault(void);
 u32 eventScriptFindCompletionFlag(u16 id, const NamedRecordName *name);
 s32 tableGroupFindEntryIndex(void *table, const char *name);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 void navigationResetTimer(void);
 void messageSlotSet(s32 value);
 u32 unlockFlagTest(u32 id);

@@ -4,7 +4,6 @@
 
 extern "C" {
 
-extern s32 scrGetArg(s32 index);
 extern u32 FUN_00285e44(u32 value, s32 a, u32 b);
 extern void eventTexRegisterAndSortTask(u32 value);
 extern void eventTexSetJobParam(void);

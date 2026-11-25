@@ -1,4 +1,5 @@
-/* NON_MATCHING: the id/kind registers are reversed, and the out-of-battle HP/MP clamps use different scratch registers. */
+/* NON_MATCHING: the saved-record HP/MP clamps use different scratch registers for
+ * the maximum and destination address; the live battle path matches. */
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
@@ -29,10 +30,14 @@ void btlAddClampedVital(s32 id, s32 kind, s32 amount)
         BtlUnitData *live = btlFindEntryBlockByMemberId(state, id);
         if (live == NULL)
             return;
-        if (kind == VITAL_HP)
+        switch (kind) {
+        case VITAL_HP:
             addClampedVital(&live->hp, live->maxHp, amount);
-        if (kind == VITAL_MP)
+            break;
+        case VITAL_MP:
             addClampedVital(&live->mp, live->maxMp, amount);
+            break;
+        }
         BtlEntry *entry = btlMainFindEntryByListedId(state, id);
         if (entry->data.equipA) {
             entry->data.equipA->hp = live->hp;
@@ -51,10 +56,14 @@ void btlAddClampedVital(s32 id, s32 kind, s32 amount)
         return;
     }
     StatBlock *unit = gameGetUnitRecord(id - BTL_ENTRY_COUNT);
-    if (kind == VITAL_HP)
-        addClampedVital(&unit->hp, unit->maxHp, amount);
-    else if (kind == VITAL_MP)
+    switch (kind) {
+    case VITAL_MP:
         addClampedVital(&unit->mp, unit->maxMp, amount);
+        break;
+    case VITAL_HP:
+        addClampedVital(&unit->hp, unit->maxHp, amount);
+        break;
+    }
 }
 
 } /* extern "C" */

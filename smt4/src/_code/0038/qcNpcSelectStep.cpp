@@ -24,6 +24,7 @@
 #include "code/Code0021_Smt4.h"
 #include "code/Code002d_Smt4.h"
 #include "code/Code002e_Smt4.h"
+#include "script/ScriptEntry.h"
 
 /* A row of data table 0x27/0 (0x88 bytes): a quest center NPC. */
 struct QuestCenterNpcRecord {
@@ -39,7 +40,6 @@ extern const char DAT_004058cc[]; /* "<br>" */
 u32 effIsFinished(AsdMdlNode *model);
 QuestCenterNpcRecord *dataTable27Sub0GetRecord(u8 *table, u32 index);
 s32 tableGroupFindEntryIndex(u32 table, const char *name);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 s32 scrScriptProcessStartMappedEntry(DummyAttachmentWork *work, const char *name);
 u32 messageTargetGetValue(void);
 u32 messageMainGetChoiceResult(void);

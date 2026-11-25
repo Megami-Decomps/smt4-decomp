@@ -697,7 +697,7 @@ code_r0x0032d518:
           uVar20 = (unsigned int)*(unsigned short *)((int)puVar17 + (iVar7 + iVar19) * 2 + 0x1db4);
           if (uVar20 == 0) break;
           table8Type5GetValue();
-          iVar7 = FUN_00298848();
+          iVar7 = skillCanUseInField();
           if (iVar7 != 0) {
             iVar7 = FUN_0028d1f4(uVar20);
             piVar10 = (int *)FUN_002a8764();

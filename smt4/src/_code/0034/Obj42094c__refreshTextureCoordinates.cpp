@@ -1,12 +1,12 @@
-/* NON_MATCHING: code, constants and the paired min/max load match retail; retail allocates the hoisted 0.0 constant to s19 below the other VFP constants (s20-s22) and uses two separate loads for the particle array and config instead of ldrd. */
 #include "classes/Obj42094c.h"
+#include "nw/math/VEC3.h"
+#include "util/Random.h"
 
 extern "C" {
 s32 randBetween(s32 minimum, s32 maximum);
-u32 randNextInRange(u32 limit);
 f32 phaseCosInterpolate(f32 angle);
 f32 mathSinFixedAngle(f32 angle);
-}
+} /* extern "C" */
 
 /* Refresh the quad coordinates and initialize each filter motion's phase and speed. */
 extern "C" void _ZN9Obj42094c25refreshTextureCoordinatesEv(Filter4PolyView *filter)
@@ -21,21 +21,14 @@ extern "C" void _ZN9Obj42094c25refreshTextureCoordinatesEv(Filter4PolyView *filt
     filter->vertices[3].u = filter->config->right;
     filter->vertices[3].v = filter->config->bottom;
     for (s32 index = 0; index < filter->config->count; ++index) {
-        filter->motions[index].frame = filter->config->frameStep * index;
+        s32 frame = filter->config->frameStep * index;
+        filter->motions[index].frame = frame;
         f32 fraction = randBetween(-32767, 32768) * (1.0f / 32768.0f);
         f32 speed = filter->config->maximumSpeed - filter->config->minimumSpeed;
         speed *= fraction;
         speed += filter->config->minimumSpeed;
         f32 phase = (f32)randNextInRange(65535) * (1.0f / 65536.0f) * 256.0f;
-        f32 *velocity = &filter->motions[index].x;
-        f32 x = phaseCosInterpolate(phase);
-        f32 y = mathSinFixedAngle(phase);
-        velocity[0] = x;
-        velocity[1] = y;
-        velocity[2] = 0;
-        velocity = &filter->motions[index].x;
-        velocity[0] *= speed;
-        velocity[1] *= speed;
-        velocity[2] *= speed;
+        setFilterPlanarVelocity(&filter->motions[index].velocity, phase, phaseCosInterpolate, mathSinFixedAngle);
+        nw::math::VEC3Scale(&filter->motions[index].velocity, &filter->motions[index].velocity, speed);
     }
 }

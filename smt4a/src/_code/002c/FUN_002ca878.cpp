@@ -5,6 +5,7 @@
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxA.h"
+#include "ui/NumberFont.h"
 
 
 extern "C" {
@@ -15,7 +16,6 @@ void efctSetSpeed(f32 speed);
 u32 table01RecordLookupForContent(u32 id);
 void uiDrawItemOrStatusIcon(u32 id, s32 x, s32 y, u32 flags, u32 arg);
 void drawSetColorFromRGBA8(u32 color);
-void numberFontDrawFormatted(s32 a, s32 x, s32 y, s32 b, s32 c, u32 flags, const char *text);
 void gxResetColorQuadToWhite(void);
 s32 fontMeasureLineAdvance(const char *text, s32 mode);
 

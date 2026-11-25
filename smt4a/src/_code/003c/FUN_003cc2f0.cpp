@@ -8,7 +8,6 @@ extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
-s32 btlFindEntryValue(s32 unitIndex, u32 kind);
 void scrSetResult(s32 value);
 
 // Test matching eligible combatants for a positive parameter of the queried kind.

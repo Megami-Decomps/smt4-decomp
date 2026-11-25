@@ -1,4 +1,4 @@
-/* NON_MATCHING: frame, pushed registers and control flow match; remaining: the kind-1 path (slot-record tail call) is placed after the common call in retail but inline here, and two loads are scheduled in another order. */
+/* NON_MATCHING: the two detail-kind checks schedule their flag and record-ID loads differently. */
 #include "ui/ItemListSelection.h"
 #include "gamedata/GameSaveDataA.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
@@ -32,33 +32,38 @@ void unitRecordBuildFromSave(u32 id, SlotRecordA *record);
 u32 compendiumEntryIsRegistered(u16 id);
 void FUN_0032d0c8(u32 screen, u32 kind, u16 id, const SlotRecordA *record);
 
-static inline u16 itemListGetSelectedDetailId(ItemListDetailRecord *records, FlaggedValueHolder *selection)
+static __inline u16 itemListGetSelectedDetailId(ItemListDetailRecord *records, FlaggedValueHolder *selection)
 {
     return records[flaggedValueHolderGetTotal(selection)].id;
 }
 
+/* Shows details from the saved slot when available, or from a temporary record. */
 void FUN_0032cfe0(ItemListSelectionOwner *owner)
 {
     ItemListDetailOwnerView *work = (ItemListDetailOwnerView *)owner;
     ItemListDetailRecord *records = work->records;
-    SlotRecordA record;
     s16 id = (s16)itemListGetSelectedDetailId(records, &work->selection);
-    if (work->useSlotRecord) {
+    const bool useSlotRecord = work->useSlotRecord != 0;
+    if (useSlotRecord) {
         id = (s16)itemListGetSelectedDetailId(records, &work->selection);
-        if (work->detailKind == 1) {
-            SlotRecordA *slot = slotRecordFindById((u16)id);
-            // Retail's corresponding tail call falls through into the adjacent renderer.
-            FUN_0032d0c8(0, 1, (u16)id, slot);
-            return;
-        }
-        unitRecordBuildFromSave((u16)id, &record);
-    } else {
-        unitRecordBuildFromSave((u16)id, &record);
-        if (compendiumEntryIsRegistered((u16)id) == 0) {
-            FUN_0032d0c8(0, 2, (u16)id, &record);
-            return;
-        }
     }
-    FUN_0032d0c8(0, 1, (u16)id, &record);
+
+    if (!useSlotRecord || work->detailKind != 1) {
+        SlotRecordA record;
+        if (useSlotRecord) {
+            unitRecordBuildFromSave((u16)id, &record);
+        } else {
+            unitRecordBuildFromSave((u16)id, &record);
+            if (compendiumEntryIsRegistered((u16)id) == 0) {
+                FUN_0032d0c8(0, 2, (u16)id, &record);
+                return;
+            }
+        }
+        FUN_0032d0c8(0, 1, (u16)id, &record);
+        return;
+    }
+
+    SlotRecordA *slot = slotRecordFindById((u16)id);
+    FUN_0032d0c8(0, 1, (u16)id, slot);
 }
-}
+} /* extern "C" */

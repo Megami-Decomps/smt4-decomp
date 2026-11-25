@@ -28,6 +28,14 @@ static __inline VEC3 *VEC3Sub(VEC3 *out, const VEC3 *a, const VEC3 *b)
     return out;
 }
 
+static __inline VEC3 *VEC3Scale(VEC3 *out, const VEC3 *v, f32 scale)
+{
+    out->x = v->x * scale;
+    out->y = v->y * scale;
+    out->z = v->z * scale;
+    return out;
+}
+
 static __inline f32 VEC3Dot(const VEC3 *a, const VEC3 *b)
 {
     return a->x * b->x + a->y * b->y + a->z * b->z;

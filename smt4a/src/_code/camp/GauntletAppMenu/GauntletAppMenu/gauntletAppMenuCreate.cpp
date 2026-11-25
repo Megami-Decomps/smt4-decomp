@@ -24,7 +24,6 @@ u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, GauntletTaskFun
                    void *work, u32 parent);
 s32 gameFlagIsSet(u32 flag);
 void gauntletAppMenuSetMode(GauntletAppMenuWork *menu, s32 mode);
-u32 dataTableGetCount(void *section);
 void paramsClearPacket(void *params);
 
 void uiSpriteStateInitFromSource(GauntletSprite *sprite, s32 group, s32 image, void *params, s32 flags, f32 scale);

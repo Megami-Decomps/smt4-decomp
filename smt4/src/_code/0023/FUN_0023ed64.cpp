@@ -11,7 +11,6 @@ void asdTMTexTableLoadTmx(s32 group, s32 option);
 void asdTMTexTableLoadEntryAsync(s32 group, s32 index);
 void asdTMTexTableReleaseNode(s32 group, s32 index);
 s32 ifTouchRegionAdd(u16 x, u16 y, u16 width, u16 height);
-void ifTouchRegionRemove(void);
 s32 ifTouchGetSelectionMode(void);
 s32 padIsButtonPressed(u32 button);
 s32 bgmGetStateById(u32 sound);

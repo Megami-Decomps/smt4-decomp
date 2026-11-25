@@ -1,7 +1,6 @@
 #include "common.h"
 #include "script/ScriptArgs.h"
 extern "C" {
-s32 scrGetArg(s32 index);
 s32 randNextInRange(u16 range);
 
 // Tests a script-supplied chance against a random value in the supplied range.

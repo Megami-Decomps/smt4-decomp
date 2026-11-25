@@ -3,9 +3,9 @@
 #include "gamedata/SaveSlotRecord.h"
 #include "gamedata/SaveSlotTable.h"
 #include "code/Code002a_Smt4a.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
-void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 void sysPlaySe(s32 sound);
 void cecProcessStart(void);
 void cecProcessCall4(void);

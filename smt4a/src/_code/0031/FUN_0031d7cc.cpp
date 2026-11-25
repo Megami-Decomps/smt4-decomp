@@ -2,7 +2,7 @@
 #include "ui/UiSpriteApi.h"
 
 extern "C" {
-void FUN_004bdce0(CallbackOwner *owner, s32 x, s32 y, f32 value);
+void btlDrawRosterLabels(CallbackOwner *owner, s32 x, s32 y, f32 value);
 void FUN_004bee88(CallbackOwner *owner, s32 x, s32 y, f32 value);
 extern CallbackOwnerSlots g_callbackOwnerSlots;
 
@@ -18,7 +18,7 @@ u32 FUN_0031d7cc(void)
         case 1:
         case 3:
             FUN_004bee88(owner, x, y, value);
-            FUN_004bdce0(owner, x, y, value);
+            btlDrawRosterLabels(owner, x, y, value);
             break;
         case 2:
             break;

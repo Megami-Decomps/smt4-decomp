@@ -7,7 +7,6 @@
 extern "C" {
 void countersRecordPlayerMaxima();
 u32 countersGetA(s32);
-u32 countersGetB(s32);
 s32 FUN_003dfe88();
 s32 FUN_003dfd44();
 

@@ -2,6 +2,7 @@
 #include "common.h"
 #include "battle/BtlGlobals.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ extern void holderStopJob2(u32 state);
 extern void objectJobStop(u32 state);
 extern void btlUiSessionDestroy(u32 state);
 extern void eventCommandClearPending(void);
-extern void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 
 /* Starts the talk event's script process once both pairedAvailabilityGetState checks report 3, after shutting
  * down the battle state. Always returns 0. */

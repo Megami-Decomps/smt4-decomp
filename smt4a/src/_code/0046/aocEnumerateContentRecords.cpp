@@ -2,12 +2,12 @@
 #include "addon/aocMain.h"
 #include "nn/Result.h"
 #include "kernel/jyoucyuGetTableEntry.h"
+#include "sys/WindowStatusCheck.h"
 
 extern "C" {
 AocHandleJob *_ZN21WindowOperationResultC1Eh(u32 job, u32 kind);
 WindowStatusResult aocEnumerateContentWindow(u32 *parameters, AocEnumerationResult *enumeration,
                               AocContentRecord *records, s32 capacity, s32 offset);
-u32 legacyResourceIdRemap(WindowStatusResult *result);
 s32 objGetFlagBit1(const AocContentRecord *record);
 s32 objGetFlagBit0(const AocContentRecord *record);
 
@@ -26,7 +26,7 @@ void aocEnumerateContentRecords(u32 job, AocContentEnumeration *content)
     AocEnumerationResult enumeration;
     enumeration.count = 0;
     request->result = aocEnumerateContentWindow(content->parameters, &enumeration, records, 32, 0);
-    if (nnResultIsFailure(legacyResourceIdRemap(&request->result))) {
+    if (windowStatusFailed(request->result)) {
         request->state = 100;
         if (legacyResourceIdRemap(&request->result) == 0xC9413915) {
             jyoucyuGetTableEntry(0);

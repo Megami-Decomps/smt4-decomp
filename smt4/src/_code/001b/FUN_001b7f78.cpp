@@ -478,7 +478,7 @@ extern int gameMapHasActiveSlotId(int);
 /* Supplied declaration required: mapMarkVisitedAndUpdateRegionFlags. */
 /* Supplied declaration required: FUN_0021be00. */
 /* Supplied declaration required: gfxDestroyModelGroups. */
-extern int FUN_0021e4bc(void);
+extern int mapObjUpdatePlacementLoad(void);
 /* Supplied declaration required: mapCollisionAllocBuffers. */
 /* Supplied declaration required: mapApplyDeparturePoint. */
 /* Supplied declaration required: mdlManagerMarkAllDestroy. */
@@ -1189,7 +1189,7 @@ LAB_001b8a74:
     mapObjRequestTransition(puVar14[0xb],puVar14[0xc]);
     puVar14[9] = puVar14[9] + 1;
 LAB_001b8a8c:
-    temp_v9 = FUN_0021e4bc();
+    temp_v9 = mapObjUpdatePlacementLoad();
     if (temp_v9 == 0) {
       return 0;
     }
@@ -5224,7 +5224,7 @@ LAB_001bf4ac:
     mapObjRequestTransition(puVar14[0xb],puVar14[0xc]);
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf4c4:
-    temp_v9 = FUN_0021e4bc();
+    temp_v9 = mapObjUpdatePlacementLoad();
     if (temp_v9 == 0) {
       return 0;
     }

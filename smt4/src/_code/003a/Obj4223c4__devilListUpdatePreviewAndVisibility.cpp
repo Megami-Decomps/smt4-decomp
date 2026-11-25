@@ -35,8 +35,8 @@ void unitInitializeFromSavedRecord(u16 id, void *record);
 void FUN_0029da34(s32 screen, s32 mode, u16 id, const void *record);
 void *partyMemberFindById(u16 id);
 void bibleDevilUpdatePreviewInput(DevilListWork *work);
-void FUN_003a6f80(DevilListWork *work);
-void FUN_003a8450(DevilListWork *work);
+void bibleDevilHandleListInput(DevilListWork *work);
+void bibleDevilHandleSelectionInput(DevilListWork *work);
 void devilListUpdatePreview(DevilListWork *work);
 void objectWordsClear(DevilListVisibility *visibility);
 void devilListMarkOrInsertQualifiedEntry(DevilListVisibility *visibility, u16 id);
@@ -77,9 +77,9 @@ void Obj4223c4::devilListUpdatePreviewAndVisibility()
             }
         }
         if (!(flags->previewEnabled)) {
-            FUN_003a8450(work);
+            bibleDevilHandleSelectionInput(work);
         } else {
-            FUN_003a6f80(work);
+            bibleDevilHandleListInput(work);
         }
     }
     devilListUpdatePreview(work);

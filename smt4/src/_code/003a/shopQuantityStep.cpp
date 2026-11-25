@@ -21,6 +21,7 @@
 #include "code/Code0023.h"
 #include "code/Code0029.h"
 #include "code/Code0029_Smt4.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
@@ -45,7 +46,6 @@ const char *itemGetNameOrFallback(u32 id, s32 payload);
 void textEncodeFontSlot(s32 slot, const u8 *text); // declcheck: local (declared in the sound system's header)
 void FUN_0029ede8(s32 index, u32 first, u32 second, u32 third); // declcheck: local (declared in the compendium's header)
 s32 tableGroupFindEntryIndex(void *table, const char *name);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 void messageMainSetTargetFlags(u8 value);
 u8 gameGlobalsDataExists(void);
 u32 messageMainGetChoiceResult(void);

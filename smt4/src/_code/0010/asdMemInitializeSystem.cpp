@@ -15,7 +15,7 @@ extern AsdMemSystemFull DAT_004e3ff0;
 extern AsdMemoryFull g_asdMemory;
 
 u32 nnosGetAppMemAlloc(void);
-u32 FUN_0010f97c(void);
+u32 asdMemoryGetProcessCommittedBytes(void);
 void osSetHeapSize(u32 size);
 void FUN_0010f9d0(u32 size);
 u32 nnosGetApplicationMemorySize(void);
@@ -46,7 +46,7 @@ void asdMemInitializeSystem(u32 reserveSize, u32 allocatorSize, u32 extraReserve
     u32 appMemSize = nnosGetAppMemAlloc();
     u32 addressSpaceSize;
 
-    osSetHeapSize(appMemSize - FUN_0010f97c() - reserveSize);
+    osSetHeapSize(appMemSize - asdMemoryGetProcessCommittedBytes() - reserveSize);
     FUN_0010f9d0(reserveSize);
     addressSpaceSize = nnosGetApplicationMemorySize();
     nnosInitAddressSpaceOnce(0x8000000, addressSpaceSize);

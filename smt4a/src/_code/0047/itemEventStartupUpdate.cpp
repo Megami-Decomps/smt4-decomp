@@ -5,6 +5,7 @@
 #include "addon/aocMain.h"
 #include "quest_center/QuestRecordA.h"
 #include "addon/AocSystemA.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 u16 rosterGetLeaderId(void);
@@ -12,7 +13,6 @@ void aocQueueType07(AocSystemA *, u32, void **, u32);
 void aocQueueType08(AocSystemA *, u32, void **, u32);
 void sysPlaySe(u32);
 u32 tableGroupFindEntryIndex(void *, const char *);
-void scrScriptProcessStartEntry(ScriptProcess *, u32);
 
 u32 itemEventStartupUpdate(ItemEventStartup *work)
 {

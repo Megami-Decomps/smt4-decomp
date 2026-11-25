@@ -4,6 +4,7 @@
 #include "code/Code0024.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/BtlUiGlobal.h"
+#include "script/ScriptEntry.h"
 
 struct BattleStepContext {
     u8 unk0000[0x1fc0];
@@ -40,7 +41,6 @@ extern void *g_btlActionReflect;
 
 u32 btlReflectQueueSelectionMarks(s32 actor, u32 options, BtlEntry *unit);
 void battleSelectButtonHelpPreset(s32 preset);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void buttonHelpSetPreset(s32 preset);
 void btlTalkStartLoadingAssets(BattleEventStep *step);
 void FUN_003dbe68(void *state);

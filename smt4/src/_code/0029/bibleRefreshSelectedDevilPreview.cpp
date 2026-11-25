@@ -2,10 +2,10 @@
 #include "gamedata/UnitStats.h"
 #include "gamedata/GameDataAccess.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
-void unitInitializeFromSavedRecord(u32 id, StatBlock *unit);
 void FUN_0029da34(RelativeDirectory *directory, u32 entry, u16 devilId, u32 context);
 
 /* Shows the selected devil's status, using the party member when the preview is on the party column. */

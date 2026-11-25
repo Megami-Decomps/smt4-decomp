@@ -9,7 +9,6 @@ extern "C" {
 s32 btlResolveEntryChoice(s32);
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *);
 s32 FUN_003249c0(const BtlCombatantEntryA *entry, s32 id);
-void scrSetResult(s32);
 }
 
 /* FUN_003249c0's body, inlined here: counts the entry's kind-two or kind-three actions with the id, from its

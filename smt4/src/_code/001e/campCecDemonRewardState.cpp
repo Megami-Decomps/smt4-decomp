@@ -24,9 +24,9 @@
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include <string.h>
+#include "script/ScriptEntry.h"
 
 extern "C" {
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void unitRecalculateEffectiveStats(StatBlock *unit);
 void btlTalkBustUpReleaseAllSlots(void);
 void btlTalkBustUpReleaseTexture(void);

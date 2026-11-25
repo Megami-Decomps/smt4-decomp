@@ -23,13 +23,13 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "shard/W5_W5Match2_RelativeData.h"
+#include "runtime/String.h"
 
 extern "C" {
 
 extern const char g_effMiscHeaderNestedSourceFileName[]; /* "...\Effect\././effMisc.h": __FILE__ of the header's allocator */
 extern const char g_effParticleSourceFileName[];             /* __FILE__ of effParticle.cpp */
 
-void rt_memclr(void *block, s32 size);
 void *resourceResolveHeaderPointer(const RelativeDataB *record);
 void *resourceResolveDataPointer(const RelativeDataA *record);
 AsdTexture *sysGetTableWord(u16 id); // declcheck: local (returns the texture; sys/RuntimeObjects.h's u32 view also redeclares refCountIncrement)

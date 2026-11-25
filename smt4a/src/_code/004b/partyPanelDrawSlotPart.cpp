@@ -16,12 +16,12 @@
 #include "gamedata/GamePlayerData.h"
 #include "ui/UiControl.h"
 #include "ui/AnimatedMessage.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 
 void drawSetColorFromRGBA8(u32 color);
 void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 z, s32 tint);
-void numberFontDrawFormatted(u32 screen, s32 x, s32 y, s32 mode, s32 font, s32 layer, const char *format, ...);
 u32 texDrawTableEntrySized(u32 id, u32 table, s32 texture, s32 x, s32 y, s32 width, s32 height, u32 tag);
 
 /* The ailment bits of slot `slot`, the player's for a negative slot. */

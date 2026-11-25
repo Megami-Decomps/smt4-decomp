@@ -3,6 +3,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "code/Code0035.h"
 #include "code/Code003c_Smt4a.h"
+#include "script/ScriptEntry.h"
 
 struct ScriptProcess;
 
@@ -39,7 +40,6 @@ void flagValueSub(u32 id, u32 count);
 void flagValueAdd(u32 id, u32 count);
 void screenStartOrClear(u32 screen, s32 kind);
 s32 tableGroupFindEntryIndex(void *table, const char *name);
-void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 s32 scrRunOpcodesStub(ScriptProcess *script);
 bool panelIsMissingOrFlagClear();
 s32 messageGetChoiceResult();

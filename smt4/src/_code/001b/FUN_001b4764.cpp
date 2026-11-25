@@ -36,8 +36,8 @@ void FUN_001b4764(void)
     scene->unk070 = 0;
     scene->unk074[0] = 0.0f;
     scene->unk074[1] = 0.0f;
-    scene->unk074[2] = 0.0f;
-    scene->unk074[3] = 0.0f;
+    scene->slideStep = 0.0f;
+    scene->unk080 = 0.0f;
     scene->unk084 = 0;
     scene->unk088 = 0;
     scene->unk090 = 0;

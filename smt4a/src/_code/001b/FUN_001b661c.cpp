@@ -1,4 +1,5 @@
 #include "common.h"
+#include "runtime/String.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ typedef struct Block5c4bb4 {
 extern Block5c4bb4 DAT_005c4bb4;
 
 void __aeabi_memset4(void *dest, u32 arg, u32 table);
-void rt_memclr(void *dest, u32 arg);
 
 typedef struct Holder {
     /* 0x00 */ u8 unk00[0x24];

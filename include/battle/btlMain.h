@@ -147,6 +147,11 @@ typedef struct BtlMainState {
             /* 0x008C */ u16 ids[20];
             /* 0x00B4 */ s16 count;
         } slotSkills;
+        struct {
+            u8 prefix[0xB8];
+            /* 0x00B8 */ u32 mapId;
+            /* 0x00BC */ u32 spawnId;
+        } scenarioLocation;       /* the map start restored from battle/Systematic.tbb */
     };
     /* 0x1E84 */ s16 unitTotal;
     /* 0x1E86 */ u8 unk1E86[2];
@@ -364,6 +369,8 @@ typedef char BtlMainStateBodyOffsetCheck[
     offsetof(BtlMainState, actionCleanup.selectedResource) == 0x4458 ? 1 : -1];
 typedef char BtlMainStateTailOffsetCheck[
     offsetof(BtlMainState, battleFlags) == 0x44A0 && offsetof(BtlMainState, battleMask) == 0x44A0 && offsetof(BtlMainState, sprite.flags) == 0x44A4 &&
+    offsetof(BtlMainState, scenarioLocation.mapId) == 0xB8 && offsetof(BtlMainState, scenarioLocation.spawnId) == 0xBC &&
+    offsetof(BtlMainState, residentResources.systematicTable) == 0x223C &&
     offsetof(BtlMainState, editorMask) == 0x44A8 && offsetof(BtlMainState, editorControl.flags) == 0x44A8 && offsetof(BtlMainState, editorControl.flags44AC) == 0x44AC &&
     offsetof(BtlMainState, encounterControl.blocked) == 0x44B7 && offsetof(BtlMainState, affinity.minimumPercentApplied) == 0x48B8 &&
     offsetof(BtlMainState, flags49BC) == 0x49BC && offsetof(BtlMainState, selectedGroup) == 0x49C0 &&

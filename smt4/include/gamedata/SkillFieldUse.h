@@ -12,7 +12,9 @@ extern "C" {
 /* Applies a restoring skill or item effect to the player (target < 0) or to party unit `target`; with `preview`
  * set nothing is written and the HP that would be restored goes to `amountOut`. 0 when the effect does something. */
 u32 skillApplyRestoreToMember(s32 source, s32 target, const SkillDataRecord *effect, s32 preview, s32 *amountOut);
-}
+s32 skillUseOnParty(s32 user, u32 skillId, s32 preview);
+s32 skillUseOnTarget(s32 user, s32 target, u32 skillId, s32 preview);
+} /* extern "C" */
 
 /* Charges the MP cost of `skill` to its user: a negative unit is the player, who pays the discounted cost,
  * otherwise the unit record pays the skill's own cost. MP stops at 0. Both field-use functions charge the

@@ -1,9 +1,9 @@
-/* NON_MATCHING: saved panel register and numeric text coordinate/width load scheduling differ. */
+/* NON_MATCHING: the panel register, clamp/texture lookup schedule, and coordinate additions differ. */
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-// Observed prefix of the panel owning the packed numeric value.
+/* Observed prefix of the panel, whose numeric value is packed into a word. */
 struct PackedNumberPanelView {
     u8 prefix[0x7E3C];
     union {
@@ -21,6 +21,7 @@ void textFormatFullWidthNumber(char *, u32);
 f32 fontMeasureTextWidth(const char *, u32, f32);
 void gxResetColorQuadToWhite(void);
 
+/* Draws the five sprite layers and centers the full-width number on their caption anchor. */
 void FUN_004b40f4(PackedNumberPanelView *panel, s32 x, s32 y)
 {
     char text[64];
@@ -35,10 +36,9 @@ void FUN_004b40f4(PackedNumberPanelView *panel, s32 x, s32 y)
         value = 9999;
     const TextureTableEntryIV *number = asdTMTexTableEntryAt(0x1D, 0xCB);
     textFormatFullWidthNumber(text, value);
-    s32 width = static_cast<s32>(fontMeasureTextWidth(text, 3, 1.0f));
-    s32 textX = anchor->x + number->x + x + (56 - width) / 2;
-    s32 textY = anchor->y + number->y + y;
-    textDrawString(static_cast<f32>(textX), static_cast<f32>(textY), 0.0f, 3, 1.0f, 0x9FDDDDFF, 1.0f, text);
+    s32 width = (s32)fontMeasureTextWidth(text, 3, 1.0f);
+    textDrawString(anchor->x + number->x + (x + (56 - width) / 2), anchor->y + number->y + y,
+                   0.0f, 3, 1.0f, 0x9FDDDDFF, 1.0f, text);
     gxResetColorQuadToWhite();
 }
-}
+} /* extern "C" */

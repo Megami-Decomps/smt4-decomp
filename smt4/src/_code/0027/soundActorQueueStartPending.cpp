@@ -2,7 +2,6 @@
 
 extern "C" {
 extern SoundActorQueue *g_soundActorQueue;
-u32 soundActorStartOnFreeChannel(u32 soundId, SoundActorQueuePosition position);
 
 // When the queue was flagged pending, start the sound of every active non-positional entry that has no handle yet.
 void soundActorQueueStartPending()

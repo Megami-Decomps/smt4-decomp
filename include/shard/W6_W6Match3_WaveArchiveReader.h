@@ -3,6 +3,14 @@
 
 #include "common.h"
 
+enum {
+    WAVE_ARCHIVE_HEADER_BYTES = 0x2C,
+    WAVE_ARCHIVE_READ_ALIGNMENT = 32,
+    WAVE_ARCHIVE_HEADER_SCRATCH_BYTES =
+        ((WAVE_ARCHIVE_HEADER_BYTES + WAVE_ARCHIVE_READ_ALIGNMENT - 1) & ~(WAVE_ARCHIVE_READ_ALIGNMENT - 1)) +
+        WAVE_ARCHIVE_READ_ALIGNMENT
+};
+
 struct WaveArchiveFileBlock {
     u32 signature;
     u32 byteSize;

@@ -4,6 +4,7 @@
 #include "gamedata/GameDataAccess.h"
 #include "gamedata/GameSaveDataA.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern void *g_btlAux;
@@ -12,7 +13,6 @@ extern const char DAT_005285fc[]; /* battle/gameover/gameover.bf */
 extern const char DAT_005285dc[]; /* battle/gameover/gameover.mbm */
 void effectRequestByName(void *aux, const char *name);
 s32 btlPollVersionedEffectTexture(void *aux);
-void scrScriptProcessStartEntry(void *process, s32 entry);
 void campCommonBgRelease(void);
 void campButtonHelpRelease(void);
 u32 FUN_003e6c14(BtlGameOverA *work);

@@ -47,7 +47,7 @@ void recordAppendFloatEntry(CompendiumEntryListIV *list, const CompendiumListEnt
 void motionPlayForMode(void *screen, s32 mode, s32 flags);
 void listScrollerInitialize(SelectionFlags *selection, s32 rows, s32 count, s32 current, s32 first, s32 second);
 void *jyoucyuGetTableEntry(s32 index);
-void FUN_003a9bb4(void *screen);
+void compendiumListMapEncounterDemons(void *screen);
 void messageIdListInit(Obj55ca08 *selection, u32 table, u32 first, s32 count);
 
 // Populate registered compendium entries and synchronize its list window and touch regions.
@@ -82,7 +82,7 @@ void FUN_003a8aa0(Obj42247c *screen)
         jyoucyuGetTableEntry(0);
         jyoucyuGetTableEntry(0);
     } else {
-        FUN_003a9bb4(screen);
+        compendiumListMapEncounterDemons(screen);
     }
     Obj4221a4 *window = reinterpret_cast<Obj4221a4 *>(screen->touchSelection.unk34);
     window->initialize(&screen->flags);

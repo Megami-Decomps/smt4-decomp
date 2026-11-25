@@ -4,16 +4,6 @@
 #include "gfx/ModelFileSource.h"
 #include "AsdSDK/AsdMemUtil.h"
 
-static inline void detachModelSlots(ModelSlotList *list)
-{
-    ModelSlot **end = list->slots.end;
-    for (ModelSlot **slot = list->slots.begin; slot != end; ++slot) {
-        if (*slot != NULL)
-            (*slot)->attached = 0;
-    }
-    list->slots.end = list->slots.begin;
-}
-
 extern "C" {
 extern AsdModelBank g_asdModelBanks[2];
 extern AsdModelBank g_asdModelSlotBanks[2];
@@ -35,8 +25,8 @@ void FUN_002a09b4(const char *path, u32 bank)
     memClear(&g_asdModelBanks2[bank], sizeof(AsdModelBank));
     memClear(&g_asdModelSlotBanks2[bank], sizeof(AsdModelBank));
     g_asdModelIdLists[bank] = AsdModelIdList();
-    detachModelSlots(asdModelGetSlotArray1(bank));
-    detachModelSlots(asdModelGetSlotArray2(bank));
+    asdModelDetachSlotList(asdModelGetSlotArray1(bank));
+    asdModelDetachSlotList(asdModelGetSlotArray2(bank));
     DAT_00464a9c[bank] = asdLoadFileSync(path, 0, 1, 0x80);
     ModelFileSource *source = (ModelFileSource *)asdOperatorNew(sizeof(ModelFileSource), path);
     if (source != NULL)

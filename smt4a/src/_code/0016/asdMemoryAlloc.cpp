@@ -2,6 +2,7 @@
 #include "classes/AllocatorState.h"
 #include "nn/Result.h"
 #include "sys/ResultReport.h"
+#include "runtime/String.h"
 
 /* The allocator's global state, as far as the allocation entry points use it. */
 extern "C" {
@@ -10,7 +11,6 @@ extern "C" {
 void asdAllocatorLock(void);
 void *asdMemoryAllocImpl(u32 a, u32 b, u32 c, u32 size, s32 extra);
 void *asdMemInitAllocationHeader(void *block, u32 size, u32 alignment, u32 flags);
-void rt_memclr(void *memory, u32 size);
 
 /* Releases the allocator lock, reporting a failed release. */
 static __inline void allocatorUnlock(void)

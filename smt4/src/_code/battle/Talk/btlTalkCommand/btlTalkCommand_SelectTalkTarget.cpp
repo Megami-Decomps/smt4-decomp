@@ -1,4 +1,4 @@
-/* NON_MATCHING: the unsigned target now loads and passes like retail (ldrh, no uxth); callee-saved register assignment for source/target/record (retail r6/r4/r5) and one native alignment NOP differ. */
+/* NON_MATCHING: the source, target ID and target record are kept in different callee-saved registers. */
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -55,13 +55,11 @@ u32 btlTalkCommand_SelectTalkTarget()
                     candidates[count++] = (s16)devil->id;
                 }
             }
-            s32 result;
             if (count) {
-                result = candidates[(s16)randNextInRange((u16)(count - 1))];
+                scrSetResult(candidates[(s16)randNextInRange((u16)(count - 1))]);
             } else {
-                result = -1;
+                scrSetResult(-1);
             }
-            scrSetResult(result);
         }
         asdMemFree(candidates);
     }

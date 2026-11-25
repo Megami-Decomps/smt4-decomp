@@ -19,7 +19,7 @@ struct Holder {
 
 extern "C" {
 
-void FUN_002b3178(void *block, u32 value);
+void titleDrawRadialGradient(void *block, u32 value);
 
 /* Virtual slot: when the owned object is enabled, passes its block and the child's value on. */
 void FUN_003222d4(Holder *self)
@@ -28,7 +28,7 @@ void FUN_003222d4(Holder *self)
     u8 *block = owned->block;
 
     if (owned->enabled) {
-        FUN_002b3178(block, self->child->value);
+        titleDrawRadialGradient(block, self->child->value);
     }
 }
 

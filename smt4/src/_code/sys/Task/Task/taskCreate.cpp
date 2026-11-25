@@ -3,10 +3,10 @@
 #include "AsdSDK/AsdDebug.h"
 #include <stddef.h>
 #include <string.h>
+#include "runtime/String.h"
 
 extern "C" {
 void *asdMemoryAlloc(u32 heap, u32 tag, u32 mode, u32 size, u32 flags);
-void rt_memclr(void *memory, u32 size);
 }
 
 static __inline void taskInsertBefore(Task *task, Task *following)

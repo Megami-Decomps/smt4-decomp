@@ -29,7 +29,7 @@ int FUN_00294d6c(void);
 int statusCameraSelectPreset(int);
 int resourceReleaseReference(void);
 int aocTextureEntryLoadOnce(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
-int FUN_002950e8(...);
+int uiSpriteSlideFromVerticalEdge(...);
 int statusBustUpPortraitRelease(...);
 int lmapPlayerModelDestroy(...); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
 int linkHolderClearFlagGroup(int);
@@ -99,7 +99,7 @@ extern unsigned int *_ZN9Obj4206e8C1Ev(void);
 /* Supplied declaration required: resourceReleaseReference. */
 /* Supplied declaration required: aocTextureEntryLoadOnce. */
 extern int nkdwHeaderParse(unsigned int);
-/* Supplied declaration required: FUN_002950e8. */
+/* Supplied declaration required: uiSpriteSlideFromVerticalEdge. */
 /* Supplied declaration required: statusBustUpPortraitRelease. */
 /* Supplied declaration required: FUN_00296284. */
 /* Supplied declaration required: lmapPlayerModelDestroy. */
@@ -189,8 +189,8 @@ unsigned int FUN_0018f660(void)
       *(int *)(pcVar4 + 0x14) = *(int *)(pcVar4 + 0x14) + 1;
       return 0;
     }
-    FUN_002950e8(pcVar4 + 0x418,1);
-    FUN_002950e8(pcVar4 + 0x4a4,0);
+    uiSpriteSlideFromVerticalEdge(pcVar4 + 0x418,1);
+    uiSpriteSlideFromVerticalEdge(pcVar4 + 0x4a4,0);
     if ((*(int *)(pcVar4 + 0x10) >= 6) && (temp_v7 = uiSpriteAdvanceAnimation((UiSpriteState *)(pcVar4 + 0x530)), temp_v7 != 0)) {
       pcVar4[0x12dc] = '\0';
       pcVar4[0x12dd] = '\0';
@@ -814,8 +814,8 @@ joined_r0x00190660:
     }
   }
   else if (*(int *)(pcVar4 + 0x12dc) >= 8) {
-    FUN_002950e8(pcVar4 + 0x418,1);
-    FUN_002950e8(pcVar4 + 0x4a4,0);
+    uiSpriteSlideFromVerticalEdge(pcVar4 + 0x418,1);
+    uiSpriteSlideFromVerticalEdge(pcVar4 + 0x4a4,0);
     if ((*(int *)(pcVar4 + 0x1c) >= 6) && (temp_v7 = uiSpriteAdvanceAnimation((UiSpriteState *)(pcVar4 + 0x530)), temp_v7 != 0)) {
       pcVar4[0x20] = '\x01';
     }

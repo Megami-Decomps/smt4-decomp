@@ -13,8 +13,8 @@ void asdGfxCmdBufferForward8(u32, u32, u32, u32, u32, u32, u32, u32);
 void gxCommandClearColorDepth(AsdGxRenderBuffer *color, AsdGxRenderBuffer *depth, u32 stencil, u32 clearMask,
                   s32 synchronize, f32 red, f32 green, f32 blue, f32 alpha, f32 depthValue)
 {
-    u32 colorBits = 32;
-    u32 depthBits = 32;
+    u32 colorBits, depthBits;
+    colorBits = depthBits = 32;
     u32 colorFormat = color->format;
     u32 colorAddress = color->buffer;
     u32 colorBytes = color->bytes;

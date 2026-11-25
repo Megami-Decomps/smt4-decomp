@@ -45,6 +45,8 @@ extern "C" {
 void statusPanelResetRows(StatusPanel *panel, s32 variant, s32 rowCount, s32 selected);
 /* Starts a row change: `rowDelta` rows added or removed, `gaugeCount` gauges refreshed with it. */
 void statusPanelStartRowChange(StatusPanel *panel, s32 rowDelta, s32 gaugeCount);
+/* Adjusts the opening and closing row counts and restarts their animations. */
+void statusPanelAnimateRowChange(StatusPanel *panel, s8 addedRows, s8 closingRows);
 } /* extern "C" */
 
 /* Enters a new animation phase and restarts the panel's frame counter. */

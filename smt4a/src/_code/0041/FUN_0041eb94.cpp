@@ -1,4 +1,4 @@
-/* NON_MATCHING: addressing and scheduling of the initial snapshot copies and the second name copy still differ. */
+/* NON_MATCHING: the two initial snapshot copies still use a different source base and schedule. */
 #include "gamedata/SavedUnitSelection.h"
 #include "gamedata/GameDataAccess.h"
 #include "code/Code0023.h"
@@ -13,7 +13,6 @@ char *libc_strcpy(char *, const char *);
 void FUN_0033440c(u32);
 void gameGlobalsQueueValues(UnitRecord *, s32);
 void FUN_0034aac8(s32);
-void FUN_0023b45c(s32);
 void statusCameraRestore(s32);
 void objBSetWordByIndex(s32, u16);
 
@@ -32,8 +31,7 @@ void FUN_0041eb94(SavedUnitSelection *work)
     player->experience = choice->bits;
     libc_strcpy(reinterpret_cast<char *>(player->name), choice->name);
     player->level = choice->id;
-    GameSaveBodyA *save = reinterpret_cast<GameSaveBodyA *>(gameDataBlocksGetSaveData());
-    libc_strcpy(reinterpret_cast<char *>(save->slots.hero.name), choice->name);
+    libc_strcpy((char *)((GameSaveBodyA *)gameDataBlocksGetSaveData())->slots.hero.name, choice->name);
     FUN_0033440c(work->choices[work->selected].kind);
     gameGlobalsQueueValues(work->unit, 0);
     choice = &work->choices[work->selected];

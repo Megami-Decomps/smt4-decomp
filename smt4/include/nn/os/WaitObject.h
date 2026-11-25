@@ -8,6 +8,7 @@
 #define SMT4_NN_OS_WAITOBJECT_H
 
 #include "nn/Result.h"
+#include "nn/fnd/TimeSpan.h"
 #include "nn/os/Thread.h"
 #include "sys/ResultReport.h"
 
@@ -28,6 +29,19 @@ static __inline void WaitOne(NnOsHandle *object)
     if (failed) {
         resultHandleFailure(result, failed);
     }
+}
+
+/* The timed WaitOne returns the result so the caller can distinguish a timeout. */
+static __inline s32 WaitOne(const NnOsHandle *object, nn::fnd::TimeSpan timeout)
+{
+    s32 signaled;
+    u32 handles[1] = { object->handle };
+    s32 result = svcWaitSynchronizationN(&signaled, handles, 1, 0, timeout.nanoseconds);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        resultHandleFailure(result, failed);
+    }
+    return result;
 }
 
 /* WaitObject::WaitAny: waits until one of the objects is signalled and returns its index. */

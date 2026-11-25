@@ -15,6 +15,7 @@
 #include "gamedata/ConsumableRecord.h"
 #include "battle/BtlGlobals.h"
 #include "battle/BtlUiGlobal.h"
+#include "runtime/String.h"
 
 /* The battle UI's position argument, passed by value. */
 struct UiPosition {
@@ -30,7 +31,6 @@ struct CommandActionView {
 extern "C" {
 u32 FUN_003aeaa4(BtlUi *ui, u16 kind, u32 value, s16 first, s16 second, u16 third, UiPosition position);
 void FUN_003ae850(BtlUi *ui, void *arg, s32 count);
-void rt_memclr(void *block, u32 size);
 void __aeabi_memset4(void *block, u32 size, s32 value);
 
 /* Skills of category 2, 3 and 4 make the window's choice unavailable to the ordinary targets. */

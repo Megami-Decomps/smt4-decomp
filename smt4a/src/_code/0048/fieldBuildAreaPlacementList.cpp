@@ -1,7 +1,7 @@
 #include "field/FieldPlacementList.h"
+#include "runtime/String.h"
 
 extern "C" {
-void rt_memclr(void *memory, u32 size);
 const FieldPlacementRecord *fieldFindAreaPlacementRecord(s32 index);
 void FUN_00482fe8(FieldPlacementList *list);
 void enemySpawnChooseCandidates(FieldPlacementList *list, s32 mode);

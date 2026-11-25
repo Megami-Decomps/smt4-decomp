@@ -25,7 +25,7 @@ struct WindowRequestBuffer {
 extern "C" {
 void sysMemClear(void *block, u32 size);
 void stringCopyTruncated(void *dest, const char *src, u32 size);
-nn::Result FUN_00427e68(u32 token, u32 mode);
+nn::Result resourceApplyProgramDescriptor(u32 token, u32 mode);
 u32 tokenTableGet(void);
 nn::Result tokenResolveAddress(u32 context, WindowRequestEntry **entry, u32 token);
 s32 appletIsExitRequested(void);
@@ -39,7 +39,7 @@ WindowStatusResult FUN_00429048(const u32 *token, const char *name)
 {
     WindowRequestEntry *entry;
     u32 scratch;
-    nn::Result status = FUN_00427e68(*token, 2);
+    nn::Result status = resourceApplyProgramDescriptor(*token, 2);
     if (nnResultIsFailure(status)) {
         return WindowStatusResult(status);
     }

@@ -2,11 +2,11 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "runtime/String.h"
 
 extern "C" {
 extern const char g_effMiscHeaderNestedSourceFileName[]; /* "...\Effect\././effMisc.h": __FILE__ of the header's allocator */
 
-void rt_memclr(void *block, s32 size);
 
 /* Allocates a zeroed effect object of `size` bytes from the extra heap, 16-byte aligned
  * (effMisc.h line 450: the header's inline allocator). */

@@ -18,7 +18,7 @@ void mapIfSetMode1(void);
 s32 inputConfirmPressed(void);
 void mapSetSceneState(u32 id);
 void lmapCameraSetMode(s32 mode);
-void FUN_00327ee8(f32 x, f32 z);
+void mapSelectContainingRegions(f32 x, f32 z);
 void FUN_002e364c(MapVector *position);
 
 void sysPlaySe(s32 id);
@@ -138,7 +138,7 @@ void lmapCaveOverviewStep(void)
         break;
     }
     FUN_002e364c(&g_lmapScene->pose.targetPosition);
-    FUN_00327ee8(g_lmapScene->pose.position.x, g_lmapScene->pose.position.z);
+    mapSelectContainingRegions(g_lmapScene->pose.position.x, g_lmapScene->pose.position.z);
 }
 
 } /* extern "C" */

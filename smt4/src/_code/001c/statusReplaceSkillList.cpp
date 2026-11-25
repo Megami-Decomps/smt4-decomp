@@ -9,7 +9,6 @@ struct StatusSkillMemberView {
 
 extern "C" {
 void statusReplaceSkills(u16 *skills, u8 count);
-void statusDownSetSelectedIds(const u32 *result, s32 selection);
 StatusSkillMemberView *partyMemberFindById(u32 id);
 void __aeabi_memcpy(void *destination, const void *source, u32 size); // declcheck: local (the shared declaration does not compile here or changes this unit)
 s32 statusCollectUnlearnedSkillsAboveLevel(u16 memberId, u32 level, const u16 *skills, u32 *result, s32 skip);

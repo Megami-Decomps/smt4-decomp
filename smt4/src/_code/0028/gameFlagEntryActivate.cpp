@@ -1,6 +1,5 @@
-/* NON_MATCHING: the flag loop now matches (gameFlagSetValue's body); retail stores the entry flags before reloading them
-   for the 0x80/secondary clears, clears the primary counters with three unaligned word stores (a __packed 12-byte record,
-   which as a type here swaps r4/r5 and scores worse) and returns once after the slot loop. */
+/* NON_MATCHING: retail reloads the entry flags for the final clears, uses unaligned word stores
+ * for the primary counters, and joins the successful slot path with the common return. */
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "code/Code0029.h"
 #include "gamedata/GameDataAccess_VariantA.h"
@@ -21,7 +20,6 @@ typedef char ActiveFlagBlockViewOffsetsCheck[offsetof(ActiveFlagBlockView, slots
     offsetof(ActiveFlagBlockView, primaryCounters) == 0x87A ? 1 : -1];
 
 extern "C" {
-s32 table1bOr1cGetRecordValue(u32 id);
 void words3Clear(void *words);
 void FUN_0023ddbc(u32 flag, s32 value);
 
@@ -40,6 +38,17 @@ static __inline void gameFlagWrite(u32 flag, s32 value)
     }
 }
 
+/* Clears the selection's flags 0x500-0x51f, as in questDeactivate. */
+static __inline void clearSelectedQuestFlags(void)
+{
+    u32 flag;
+
+    for (flag = 0x500; flag < 0x520; flag++) {
+        gameFlagWrite(flag, 0);
+    }
+}
+
+/* Activates an available quest entry and resets its selection or repeat-slot progress. */
 u32 gameFlagEntryActivate(u32 id)
 {
     GameFlagBlockPrefixIV *flags = reinterpret_cast<GameFlagBlockPrefixIV *>(gameGetFlagBlock());
@@ -76,9 +85,7 @@ u32 gameFlagEntryActivate(u32 id)
         block->primaryCounters[4] = 0;
         block->primaryCounters[5] = 0;
         block->primaryCounter = 0;
-        for (u32 flag = 0x500; flag < 0x520; ++flag) {
-            gameFlagWrite(flag, 0);
-        }
+        clearSelectedQuestFlags();
     }
     return 1;
 }

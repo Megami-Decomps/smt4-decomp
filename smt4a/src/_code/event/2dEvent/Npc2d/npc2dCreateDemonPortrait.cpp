@@ -1,4 +1,5 @@
-/* NON_MATCHING: state/option store merging, zero-store scheduling and process-callback argument packing differ; candidate -O2. */
+/* NON_MATCHING: retail packs the two callbacks and the work pointer into one stack store before starting the process;
+ * this build splits the stores and schedules them around the speed and region initialization differently. */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -30,9 +31,12 @@ u32 npc2dCreateDemonPortrait(u32 id, u32 option, s32 x, s32 y, f32 alpha)
     work->stopWhenHidden = 0;
     work->animate = 1;
     work->alpha = alpha;
-    for (s32 i = 0; i < 6; ++i) {
-        work->unk70[i] = 0;
-    }
+    work->move.startX = 0;
+    work->move.startY = 0;
+    work->move.endX = 0;
+    work->move.endY = 0;
+    work->move.frame = 0;
+    work->move.frames = 0;
     work->portraitId = nkmEnemyFindById((u16)id)->battleTextureId;
     if (eventIsSkipping()) {
         work->resourceState = 1;
@@ -41,19 +45,21 @@ u32 npc2dCreateDemonPortrait(u32 id, u32 option, s32 x, s32 y, f32 alpha)
         work->resourceState = 2;
     }
     work->unk00 = (u16)(-id);
+    s32 region;
     if (x <= -100) {
-        work->screenRegion = 0x11;
+        region = 0x11;
     } else if (x <= -60) {
-        work->screenRegion = 3;
+        region = 3;
     } else if (x >= 100) {
-        work->screenRegion = 0x12;
+        region = 0x12;
     } else if (x >= 40) {
-        work->screenRegion = 4;
+        region = 4;
     } else if (x < 0) {
-        work->screenRegion = 0x13;
+        region = 0x13;
     } else {
-        work->screenRegion = 5;
+        region = 5;
     }
+    work->screenRegion = region;
     work->speed = 0.33f;
     return asdProcessCreateSimple(DAT_0052f4f0, 4, 0, 0, npc2dPortraitUpdate, FUN_0034da3c, (u32)work);
 }

@@ -1,61 +1,43 @@
-/* NON_MATCHING: retained region-table base recovered; input/zero VFP grouping and region/edge index registers differ. */
-#include "shard/W5_W5Match7_SceneState.h"
 #include "game/GameState.h"
+#include "map/SelectionRegion.h"
 #include "util/MathFunctions.h"
+#include "util/VectorMath.h"
 
-struct RegionEdge {
-    MapVector origin;
-    MapVector normal;
-};
+extern "C" SelectionRegionsIV DAT_004c14a0;
 
-struct MapRegion {
-    /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ u16 kind;
-    /* 0x1a */ u16 id;
-    /* 0x1c */ RegionEdge edgeA, edgeB, edgeC, edgeD;
-};
-
-struct MapRegionTable {
-    MapRegion regions[32];
-    /* 0xf80 */ s32 count;
-};
-
-struct RegionPoint {
-    f32 x, z;
-};
-
-extern "C" {
-extern MapRegionTable DAT_004c14a0;
-void vec3DirectionBetween(f32 *out, f32 fromX, f32 fromY, f32 fromZ, f32 toX, f32 toY, f32 toZ);
-
-// Select the containing map region independently for ordinary and alternate kinds.
-void mapSelectContainingRegions(RegionPoint point)
+/* Selects the last containing region independently for the primary and secondary overrides. */
+extern "C" void mapSelectContainingRegions(f32 x, f32 z)
 {
-    MapRegionTable *table = &DAT_004c14a0;
-    g_gameState.overrideKinds[0] = -1;
-    g_gameState.overrideKinds[2] = -1;
-    for (s32 index = 0; index < table->count; ++index) {
-        MapRegion *region = &table->regions[index];
-        MapVector direction;
-        MapVector normal;
+    SelectionRegionsIV *regions = &DAT_004c14a0;
+    GameState *overrides = &g_gameState;
+    overrides->overrideKinds[0] = -1;
+    overrides->overrideKinds[2] = -1;
+    for (s32 index = 0; index < regions->count; ++index) {
+        nw::math::VEC3 point;
+        point.x = x;
+        point.y = 0.0f;
+        point.z = z;
+        SelectionRegionQuad *region = &regions->regions[index];
         bool inside = true;
-        for (s32 edge = 0; edge < 4; ++edge) {
-            switch (edge) {
+        for (s32 side = 0; side < 4; ++side) {
+            nw::math::VEC3 normal;
+            nw::math::VEC3 direction;
+            switch (side) {
             case 0:
-                normal = region->edgeA.normal;
-                vec3DirectionBetween(&direction.x, region->edgeA.origin.x, region->edgeA.origin.y, region->edgeA.origin.z, point.x, 0.0f, point.z);
+                normal = region->planes[0].normal;
+                vec3DirectionBetween(&direction, region->planes[0].origin, point);
                 break;
             case 1:
-                normal = region->edgeB.normal;
-                vec3DirectionBetween(&direction.x, region->edgeB.origin.x, region->edgeB.origin.y, region->edgeB.origin.z, point.x, 0.0f, point.z);
+                normal = region->planes[1].normal;
+                vec3DirectionBetween(&direction, region->planes[1].origin, point);
                 break;
             case 2:
-                normal = region->edgeC.normal;
-                vec3DirectionBetween(&direction.x, region->edgeC.origin.x, region->edgeC.origin.y, region->edgeC.origin.z, point.x, 0.0f, point.z);
+                normal = region->planes[2].normal;
+                vec3DirectionBetween(&direction, region->planes[2].origin, point);
                 break;
             case 3:
-                normal = region->edgeD.normal;
-                vec3DirectionBetween(&direction.x, region->edgeD.origin.x, region->edgeD.origin.y, region->edgeD.origin.z, point.x, 0.0f, point.z);
+                normal = region->planes[3].normal;
+                vec3DirectionBetween(&direction, region->planes[3].origin, point);
                 break;
             }
             if (mathVec3Dot(normal.x, normal.y, normal.z, direction.x, direction.y, direction.z) < 0.0f) {
@@ -63,13 +45,11 @@ void mapSelectContainingRegions(RegionPoint point)
                 break;
             }
         }
-        if (!inside)
-            continue;
-        if (region->kind == 0) {
-            g_gameState.overrideKinds[0] = region->id;
-        } else {
-            g_gameState.overrideKinds[2] = region->id;
+        if (inside) {
+            if (region->secondary == 0)
+                overrides->overrideKinds[0] = region->kind;
+            else
+                overrides->overrideKinds[2] = region->kind;
         }
     }
-}
 }

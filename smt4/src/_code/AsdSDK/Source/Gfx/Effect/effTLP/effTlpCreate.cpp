@@ -1,4 +1,5 @@
-/* NON_MATCHING: allocation size, trace, entries/objects and the loops match (the default texture takes the block); retail stores refCount/unk20/self with one stm before the entries/objects pair (zero in r0, shared with the loop index), the build splits the triple around that pair. */
+/* NON_MATCHING: the lifetime record now uses one stm, but it is scheduled after the entry and object pointers.
+ * The first entry copy uses a different set of scratch registers. */
 #include "AsdSDK/Source/Gfx/Effect/effTLP.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match2_TextureHolder.h"
@@ -23,9 +24,7 @@ TlpObject *effTlpCreate(TlpFile *file)
     u32 size = entriesSize + count * 4 + 0x28;
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effTLP.cpp", 54);
     tlp = (TlpObject *)memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
-    tlp->refCount = 0;
-    tlp->unk20 = -1;
-    tlp->self = tlp;
+    tlp->lifetime = TlpLifetime(tlp);
     tlp->entries = (TlpEntry *)tlp->payload;
     tlp->objects = (void **)(tlp->entries + count);
     src = file->entry;
@@ -51,7 +50,7 @@ TlpObject *effTlpCreate(TlpFile *file)
         total += tlp->entries[i].length + 1;
     }
     tlp->totalLength = total;
-    tlp->refCount++;
+    ++tlp->lifetime.refCount;
     return tlp;
 }
 

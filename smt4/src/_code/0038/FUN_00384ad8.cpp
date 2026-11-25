@@ -3,7 +3,6 @@
 
 extern "C" {
 
-void renderCtxSelectStereoLayout(RenderCtx *context);
 void gxResetColorQuadToWhite(void);
 void debugItemListDraw(void *work);
 void renderCtxResetColorScale(RenderCtx *context);

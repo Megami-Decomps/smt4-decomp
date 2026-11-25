@@ -1,6 +1,7 @@
 /* NON_MATCHING: one scheduling difference: the 0x1BE clear's address is computed after the unk116 store instead of before it (a `u8 *firstClearGroup = unit->clear1BE;` temporary hoisted above the stores reproduces it, but it is steering). */
 #include "battle/BattleUnitInit.h"
 #include "gamedata/NkmBaseRecordA.h"
+#include "runtime/String.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ u32 randomGetLowerTenBits(UnitSourceRecord *record, u32 index);
 u32 randomGetUpperSixBits(UnitSourceRecord *record, u32 index);
 u32 partySlotFindIndex(UnitSourceRecord *record);
 void clearTwoWords(void *words);
-void rt_memclr(void *memory, u32 size);
 void sysMemClear(void *memory, u32 size);
 
 /* Initializes a battle unit's state block from a party demon record; `enemy` marks a unit that is not

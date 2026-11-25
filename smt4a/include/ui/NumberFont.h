@@ -40,7 +40,8 @@ static __inline s32 numberGlyphWidth(u32 kind)
     return width;
 }
 
-/* numberFontMeasureFormatted(kind, format, ...) measures and numberFontDrawFormatted(kind, x, y, align, digits,
- * slot, format, ...) draws a formatted number; their callers still declare them locally. */
+/* Draws a formatted number in a field of `digits` glyphs. */
+extern "C" void numberFontDrawFormatted(s32 kind, s32 x, s32 y, s32 align, s32 digits, u32 slot,
+    const char *format, ...);
 
 #endif

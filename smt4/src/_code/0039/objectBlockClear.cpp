@@ -1,8 +1,8 @@
 #include "common.h"
+#include "runtime/String.h"
 
 extern "C" {
 
-int rt_memclr(void *block, int size);
 
 typedef struct Obj {
     /* 0x00 */ u8 unk00[0x62];

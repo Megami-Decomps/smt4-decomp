@@ -7,7 +7,6 @@ s32 renderCtxPackPassFlagsWithAlpha(u32, f32);
 void taskRunPhase(u32);
 void skinObjectUpdateMatrices(RenderCtxA *);
 void renderCtxResetColorScale(RenderCtxA *);
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *);
 
 s32 renderScopedTaskPhaseThree(u32 job)
 {

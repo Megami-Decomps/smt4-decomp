@@ -1,4 +1,4 @@
-/* NON_MATCHING: 46 lines: retail's frame is 140 bytes with the header scratch at sp+16 (104 bytes) below the reader at sp+120, where this build puts the reader first; the heap-bound test is one predicated compare chain in retail, and the wave count, allocator and size get other registers. */
+/* NON_MATCHING: the header scratch offset and saved registers differ. Retail predicates its second heap bounds comparison. */
 #include "shard/S3SoundArchiveLoader.h"
 #include "shard/W6_W6Match3_WaveArchiveReader.h"
 #include "sound/WaveArchiveConvert.h"
@@ -49,10 +49,10 @@ void *FUN_00150d2c(SoundArchiveLoader *loader, u32 archiveId, WaveArchiveAllocat
             return 0;
         waveCount = info.waveCount;
     }
-    /* The archive reader requires a 32-byte-aligned temporary header. */
-    u8 storage[0x2C + 31];
-    void *header = (void *)(((u32)storage + 31) & ~31u);
-    if (soundArchiveLoaderReadFile(loader, fileId, header, 0x2C, 0, flags) != 0x2C)
+    /* The read rounds up to a full transfer block, even though it returns the requested byte count. */
+    u8 storage[WAVE_ARCHIVE_HEADER_SCRATCH_BYTES];
+    void *header = (void *)(((u32)storage + WAVE_ARCHIVE_READ_ALIGNMENT - 1) & ~(WAVE_ARCHIVE_READ_ALIGNMENT - 1));
+    if (soundArchiveLoaderReadFile(loader, fileId, header, WAVE_ARCHIVE_HEADER_BYTES, 0, flags) != WAVE_ARCHIVE_HEADER_BYTES)
         return 0;
     u32 fileOffset = nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(header);
     u32 infoOffset = nw_snd_internal_WaveArchiveFile_FileHeader_GetInfoBlockOffset(header);
@@ -62,7 +62,8 @@ void *FUN_00150d2c(SoundArchiveLoader *loader, u32 archiveId, WaveArchiveAllocat
     u8 *data = (u8 *)allocator->allocate(size);
     u32 heapBase = nnosGetHeapBase();
     u32 heapSize = nnosGetHeapSize();
-    if ((u32)data < heapBase || (u32)data + size > heapBase + heapSize)
+    u32 dataEnd = (u32)data + size;
+    if ((u32)data < heapBase || dataEnd > heapBase + heapSize)
         return 0;
     if (soundArchiveLoaderReadFile(loader, fileId, data, fileOffset, 0, flags) != fileOffset)
         return 0;

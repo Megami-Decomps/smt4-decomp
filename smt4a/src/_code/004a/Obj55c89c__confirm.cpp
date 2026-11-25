@@ -19,7 +19,6 @@ struct BibleItemEntry {
  * handler touches are named. */
 class BibleItemMenu : public BibleView {
 public:
-    void confirm();
 
     /* 0x04 */ u8 unk04[0x10];
     /* 0x14 */ u32 state;

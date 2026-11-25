@@ -2,6 +2,7 @@
 #include "common.h"
 #include "script/scrScriptProcess.h"
 #include "battle/btlEvent.h"
+#include "script/ScriptEntry.h"
 
 struct MenuScriptState {
     /* 0x000 */ u8 unk000[0x350];
@@ -20,7 +21,6 @@ struct MenuScriptState {
 };
 
 extern "C" {
-void scrScriptProcessStartEntry(void *process, s32 entry);
 void sysPlaySe(s32 id);
 void cecProcessCall4(void);
 

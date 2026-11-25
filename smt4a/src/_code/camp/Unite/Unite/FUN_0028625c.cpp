@@ -64,7 +64,7 @@ extern int FUN_002b2ca8(...); /* 0x2b2ca8 */
 extern int devilCompareByRankGradeAscending(...); /* 0x2ce824 */
 extern int uniteCandidateCompare(...); /* 0x2fe074 */
 extern int FUN_00321cc0(...); /* 0x321cc0 */
-extern int FUN_00337110(...); /* 0x337110 */
+extern int fusionCompareRecipeByDemon(...); /* 0x337110 */
 extern int btlDevilCompareValueKindAndOrder(...); /* 0x34f6fc */
 extern unsigned char LAB_0034f784; /* 0x34f784 */
 extern int recordKindOrderCompare(...); /* 0x3603a0 */
@@ -578,7 +578,7 @@ LAB_00286c80:
               qsort(temp_v18,param_1[0x172],8,&LAB_0034f784);
             }
             else {
-              qsort(temp_v18,temp_v12,8,FUN_00337110);
+              qsort(temp_v18,temp_v12,8,fusionCompareRecipeByDemon);
             }
           }
           else {

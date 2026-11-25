@@ -6,6 +6,7 @@
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/GameDataAccess.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 void efctSetSpeed(f32 speed);
@@ -14,7 +15,6 @@ void FUN_00185e84(s16 demon, s32 x, s32 y, u32 slot, s32 a, s32 b);
 void statDrawClampedDelta(PlayerDataA *source, s32 other, s32 x, s32 y, u32 slot, s32 a);
 u32 skillGetCostWithRankReduction(u32 demon, u32 flag);
 u32 skillGetAdjustedCost(PlayerDataA *source, u32 other);
-void numberFontDrawFormatted(u32 a, s32 x, s32 y, u32 b, u32 c, u32 slot, const char *format, u32 value);
 
 /* Draws one demon row of the status list at (x, y): its panel, name, power and level readouts. */
 void FUN_0037e5c0(s32 index, s32 x, s32 y, f32 speed)

@@ -1,7 +1,6 @@
 #include "gfx/Variant.h"
 
 extern "C" {
-    u32 variantCopyWithToken(Variant *destination, const Variant *source, const u32 *token, void *allocator);
 }
 
 extern "C" {

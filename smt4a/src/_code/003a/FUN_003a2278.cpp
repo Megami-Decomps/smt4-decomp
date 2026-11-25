@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the arm layout differs: retail shares the sysPlaySe call of the first 0xD3 arm with the final else arm and places the second 0xD3 arm, the 0x105 arm and the final arm after the main path. */
+/* NON_MATCHING: armcc inserts one padding NOP before the shared preset call. */
 #include "ui/ButtonHelp.h"
 #include "common.h"
 #include "game/GameStateA.h"
@@ -14,7 +14,7 @@ void commonBgStopChildAndBeginTransition(void);
 void commonBgReset(void);
 s32 playerCanAffordRecoverySkill(void);
 
-/* Opens (nonzero) or updates/closes (zero) the map pause menu: plays the matching sound, resets the
+/* Opens (nonzero) or updates/closes (zero) the map pause menu: selects the button-help preset, resets the
  * background and restores the field when the menu closes. */
 void FUN_003a2278(s32 open)
 {
@@ -38,11 +38,12 @@ void FUN_003a2278(s32 open)
         sub68OwnerCall3();
         return;
     }
+    s32 pendingPreset = -1;
     if (sub68OwnerCall2()) {
         sub68OwnerCall3();
     } else {
         if ((g_gameState.mapId == 5 && g_gameState.areaId == 12) || !gameFlagIsSet(0x49A)) {
-            sysPlaySe(0xD3);
+            pendingPreset = 0xD3;
         } else if (gameFlagIsSet(12) && !gameFlagIsSet(16)) {
             sysPlaySe(0xD3);
         } else if (playerCanAffordRecoverySkill()) {
@@ -56,9 +57,11 @@ void FUN_003a2278(s32 open)
                 buttonHelpSelectSlot(1, 0, 0, 1);
             }
         } else {
-            sysPlaySe(g_gameState.mapId >= 100 ? 0xD2 : 0x41);
+            pendingPreset = g_gameState.mapId >= 100 ? 0xD2 : 0x41;
         }
     }
+    if (pendingPreset >= 0)
+        sysPlaySe(pendingPreset);
     if (gameFlagIsSet(12) && !gameFlagIsSet(16))
         commonBgStopChildAndBeginTransition();
 }

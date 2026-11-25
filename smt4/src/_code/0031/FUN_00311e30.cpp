@@ -3,7 +3,6 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-s32 scrGetArg(s32 index);
 
 /* Tests whether an eligible group unit has the requested status-entry kind. */
 u32 FUN_00311e30(void)

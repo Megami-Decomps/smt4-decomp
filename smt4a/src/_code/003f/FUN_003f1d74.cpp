@@ -14,6 +14,7 @@
 #include "code/Code0029.h"
 #include "code/Code003e.h"
 #include "code/Code0018.h"
+#include "runtime/String.h"
 
 /* unit-local: the battle state fields this preset loader writes, until btlMain.h names them */
 struct BattlePresetState {
@@ -69,7 +70,6 @@ void appRefundAllPoints(void);
 void FUN_003e49e8(void);
 void partyAdjustCounterIfEnoughActive(u16 counter);
 void *__aeabi_memset4(void *dest, s32 size, s32 value);
-void rt_memclr(void *destination, u32 size);
 
 /* Starts a battle from party preset `index` of the battle's preset table (when the battle state allows it):
  * builds the player from the record, fills the party and stock, sets the preset flags and the party money. */

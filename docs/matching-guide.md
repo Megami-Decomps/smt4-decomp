@@ -398,6 +398,10 @@ difference a register tie-break.
   with no reordering (wave 93).
 - Chained assignment (`current[i] = maximum[i] = value;`) stores one value through both pointers the
   way retail does; separate statements reload or reorder it.
+- Not accepted, though each matched once (wave 94): a reference alias of a global (`AocMain *&main = g_aocMain;`) to
+  hoist its pool load; a single-use by-value copy of a 4-byte record to get a whole-word load (`ldr; lsl; lsrs`) with
+  no by-value API behind it; `__align(4)` on a local table and per-object `.constdata$$` section attributes to
+  place string literals; single-use snapshots of global fields to order their loads.
 - A function that returns a moved copy of a by-value struct parameter assigns into the parameter and copies it out
   whole (`first.x = …; first.z = …; *result = first;`), not field by field into the result: smt4/smt4a
   `mapResolveCircleOverlapXZ` (wave 78).
@@ -759,6 +763,15 @@ asks for.
 - nn::os's `WaitObject::WaitOne` and `Thread::Join` are per-game header inlines (`nn/os/WaitObject.h`: IV waits through
   `WaitSynchronizationN`, Apocalypse through `WaitSynchronization1`); `nn::os::ThreadJoin` made smt4 `FUN_002ecfe4`
   IDENTICAL and moved two smt4a thread teardowns from 12/14 to 2/4 lines (wave 82).
+- Where retail forms a member vector's address again after a call (the owner's array pointer reloaded), scaling it is
+  nn::math's `VEC3Scale(&v, &v, s)` header inline (`nw/math/VEC3.h`), which takes the address twice: both games'
+  `Obj42094c::refreshTextureCoordinates` are IDENTICAL with it and `prepareGeometry` goes 61 -> 50 lines. A pointer
+  local assigned the same address a second time is not a substitute (wave 94).
+- A provider result tested as `nnResultIsFailure(legacyResourceIdRemap(&status))` through `windowStatusFailed(const
+  WindowStatusResult &)` (`sys/WindowStatusCheck.h`) lays the frame out as retail does in both games'
+  `resourceLoadDisplayMetadata` (50 -> IDENTICAL); every site whose local declaration allows it uses it with no change
+  (smt4a `FUN_00429c08` 57 -> 43). Units that keep a `declcheck: local` declaration returning another type test in
+  place (wave 94).
 
 ### Loops and data
 
@@ -889,7 +902,8 @@ More on classes, constructors and destructors is in [C++](style-and-naming.md#c)
   inline (Apocalypse's 9-byte clear-save options, `FUN_00241058`): write the `memset`. So is
   `__ARM_common_memset4_12` for a 12-byte `memset` of any one value (smt4a 0x50d778, once called
   `fillThreeWordsWithByte`): `memset(ui->touchRegions, -1, sizeof(ui->touchRegions))` keeps
-  `saveLoadUiRebuildTouchRegions` IDENTICAL (wave 69). A caller
+  `saveLoadUiRebuildTouchRegions` IDENTICAL (wave 69). IV's linked copy of `__ARM_common_memclr4_5` (5-byte clear)
+  is 0x3eb068: named so, `unitRollGrowthStat`'s `memset` relinks (wave 94). A caller
   that retail compiled against an opaque copy (it keeps a dead store into the copied record) declares
   `ARM_common_memcpy4_6_call`, an alias in `config/symbols.txt`.
 - **`__2sprintf` is armlib's `sprintf`**: armcc compiles `sprintf(buf, fmt, ...)` under `<stdio.h>` as a

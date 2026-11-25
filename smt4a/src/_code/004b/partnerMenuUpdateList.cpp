@@ -15,6 +15,7 @@
 #include "code/Code002a_VariantA.h"
 #include "code/Code0033.h"
 #include "code/Code0035_Smt4a.h"
+#include "script/ScriptEntry.h"
 
 /* Sounds of the partner menu. */
 enum {
@@ -42,7 +43,6 @@ void sysPlaySe(u32 id);
 void statusPanelSetOpen(s32 open);
 u32 itemApplyPercentageHpHeal(PartySlotA *target, u32 itemId, s32 checkOnly);
 s32 tableGroupFindEntryIndex(TableGroupHeader *table, const char *name);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 s8 FUN_0022e714(void);
 void screenShowMessage(s32 id);
 void FUN_0032d0c8(RelativeDirectory *directory, u32 index, u16 devilId, u32 extra);

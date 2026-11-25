@@ -13,10 +13,10 @@
 #include "util/BitsAndBytes.h"
 #include "code/Code002a_VariantA.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 void drawSetColorFromRGBA8(u32 color);
-void numberFontDrawFormatted(s32 layer, s32 x, s32 y, s32 z, s32 scale, s32 depth, const char *format, ...);
 
 enum {
     STAT_GREY = 0x9B9B9BFF,

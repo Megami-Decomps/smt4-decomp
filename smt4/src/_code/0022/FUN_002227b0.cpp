@@ -1,13 +1,13 @@
-/* NON_MATCHING: retail loads the limit/requested pair with four plain ldr (low, low, high, high) and compares size/buffered and scratchSize/chunk with the operands the other way round; the svc 0x18 call matches through nn::svc::SignalEvent. */
+/* NON_MATCHING: retail loads limit/requested with four individual loads and compares the buffered and scratch lengths with the operands reversed. */
 #include "mobiclip_ctrl/S4FsReader.h"
 #include "shard/W6_W6Match2_LongDivision.h"
 #include "nn/Result.h"
 #include "nn/svc.h"
 #include "sys/ResultReport.h"
+#include <string.h>
 
 extern "C" {
 __value_in_regs LongDivisionResult ll_sdiv(s64 dividend, s64 divisor);
-void __aeabi_memcpy(void *destination, const void *source, u32 size); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Hands out the next block of the movie: a pointer into the ring buffer, or into a contiguous
  * copy when the block wraps around the end of the ring. Returns 0 when the movie is used up, the
@@ -19,7 +19,7 @@ u32 FUN_002227b0(S4FsReader *reader, void **block)
     }
 
     u32 chunk = reader->chunkSize;
-    u32 size = (u32)(reader->limit - reader->requested);
+    u32 size = (u32)reader->limit - (u32)reader->requested;
     if (size > chunk) {
         size = chunk;
     }
@@ -49,8 +49,8 @@ u32 FUN_002227b0(S4FsReader *reader, void **block)
             reader->scratchSize = reader->chunkSize;
         }
         u32 head = S4_FS_READER_RING_SIZE - offset;
-        __aeabi_memcpy(reader->scratch, reader->ring + offset, head);
-        __aeabi_memcpy(reader->scratch + head, reader->ring, size - head);
+        memcpy(reader->scratch, reader->ring + offset, head);
+        memcpy(reader->scratch + head, reader->ring, size - head);
         data = reader->scratch;
     }
     *block = data;

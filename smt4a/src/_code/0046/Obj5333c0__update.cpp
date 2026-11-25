@@ -6,7 +6,7 @@
 extern "C" {
 u8 lookupNameEntry(AsdMdlNode *node, const char *name, EffectAttachmentPosition *position);
 void controllerSetDestination(void *model, EffectAttachmentPosition *position);
-void FUN_00407eb0(SceneTransform *transform, u32 wanted, u32 flags);
+void moveCameraCtrlMoveToKey(SceneTransform *transform, u32 wanted, u32 flags);
 void spatialAdvanceTransformTransition(SceneTransform *transform);
 }
 
@@ -23,7 +23,7 @@ void Obj5333c0::update()
     if (!frozen) {
         if (transformCurrent != transformWanted) {
             transformCurrent = transformWanted;
-            FUN_00407eb0(transform, transformWanted, 0);
+            moveCameraCtrlMoveToKey(transform, transformWanted, 0);
         }
         spatialAdvanceTransformTransition(transform);
     }

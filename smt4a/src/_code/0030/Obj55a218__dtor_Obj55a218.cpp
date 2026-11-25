@@ -4,7 +4,6 @@
 extern "C" {
 extern const u8 _ZTV9Obj55a218[];
 void deletingDtor_002eb7c0(Obj55a218 *self);
-void FUN_002f674e(u32 handle);
 
 void _ZN9Obj55a218D1Ev(Obj55a218 *self)
 {

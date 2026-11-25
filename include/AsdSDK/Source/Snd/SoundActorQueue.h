@@ -48,6 +48,13 @@ typedef char SoundActorQueuePositionLayoutCheck[
     offsetof(SoundActorQueuePosition, z) == 8 &&
     offsetof(SoundActorQueueEntry, position) == 0x14 ? 1 : -1];
 
+/* Builds the by-value position passed to an actor sound request. */
+static __inline SoundActorQueuePosition soundActorPosition(f32 x, f32 y, f32 z)
+{
+    SoundActorQueuePosition position = {x, y, z};
+    return position;
+}
+
 /* Adapt the engine's three-float position arrays to the positional-sound value type. */
 static __inline SoundActorQueuePosition soundActorPositionFromArray(const f32 *values)
 {

@@ -14,6 +14,7 @@
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
@@ -25,7 +26,6 @@ void bgmRequestSelectedChannelFade(u32 frames);
 void soundChannelRequestIfEnabled(u32 id, s32 a, s32 frames);
 void jobSetIntensity(u32 job, s32 intensity);
 s32 slotIsReady(u32 index);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void buttonHelpSetContext(s32 context);
 u8 messageWindowIsState1(void);
 s32 messageTargetGetValue(void);

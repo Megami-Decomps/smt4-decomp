@@ -20,6 +20,7 @@
 #include "shard/W6_W6Match8_ArchiveValues.h"
 #include "shard/W6_W6Match8_DateTimeValue.h"
 #include "text/TextCode.h"
+#include "sys/WindowStatusCheck.h"
 
 /* One licence entry of an item (0x18 bytes); bits 0 and 1 of `flags` are read through objGetFlagBit0/1. */
 struct AocItemLicense {
@@ -46,7 +47,6 @@ enum {
 extern "C" {
 
 void asdOperatorDeleteB(void *memory);
-s32 legacyResourceIdRemap(const WindowStatusResult *result); // declcheck: local (the shared declarations take a packed id or a bare pointer and return u32)
 u16 halfPair48LowByteA(void *file);
 u16 halfPair48LowByteB(void *file);
 u32 archiveFindEntryValue(Archive *archive, u32 key);
@@ -201,7 +201,7 @@ s32 aocCatalogBuildItemRecords(AocCatalogJob *job)
         u8 allBit1 = 1;
         u8 allBit0 = 1;
         job->result = FUN_005006a8(archive, &licenseCount, licenses, licenseTotal, 0);
-        if (nnResultIsFailure(legacyResourceIdRemap(&job->result))) {
+        if (windowStatusFailed(job->result)) {
             asdOperatorDeleteB(licenses);
             return legacyResourceIdRemap(&job->result);
         }

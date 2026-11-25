@@ -3,7 +3,7 @@
 
 extern "C" {
 extern AsdFileHashPack *g_asdFileHashPack;
-AsdHashPackEntry *FUN_001a70dc(AsdFileHashPack *index, const char *path);
+AsdHashPackEntry *asdFileHashPackFindNamedEntry(AsdFileHashPack *index, const char *path);
 
 /* Whether the open pack holds `path`. */
 u8 asdFileHashPackContains(const char *path)
@@ -11,6 +11,6 @@ u8 asdFileHashPackContains(const char *path)
     AsdFileHashPack *pack = g_asdFileHashPack;
     if (pack == NULL)
         return 0;
-    return FUN_001a70dc(pack, path) != NULL;
+    return asdFileHashPackFindNamedEntry(pack, path) != NULL;
 }
 }

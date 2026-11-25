@@ -16,11 +16,11 @@
 #include "gamedata/SaveSlotTableIV.h"
 #include "gamedata/SkillFlags.h"
 #include "gamedata/UnitStats.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
 void unitRecordBuild(u32 id, StatBlock *block);
-void unitInitializeFromSavedRecord(u32 id, StatBlock *unit);
 void bitsetSetBit(StatBlock *unit, u32 flag);
 void unitRecalculateEffectiveStats(StatBlock *unit);
 u32 randomGetUpperSixBits(const StatBlock *unit, u8 index);

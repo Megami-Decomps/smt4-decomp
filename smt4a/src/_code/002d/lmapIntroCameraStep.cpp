@@ -11,7 +11,7 @@ extern "C" {
 
 void mapEaseSceneHeading(void);
 u32 FUN_002e364c(f32 *target);
-void FUN_00327ee8(f32 x, f32 z);
+void mapSelectContainingRegions(f32 x, f32 z);
 
 /* Steps the field map's intro camera: start the move, hold for ten frames and announce the area, slide the
  * target along the scene's transition for eighteen frames and announce its second part, then speed up.
@@ -60,7 +60,7 @@ void lmapIntroCameraStep(void)
     scene->pose.position.y += (scene->pose.targetPosition.y - scene->pose.position.y) * (1.0f / 6.0f);
     scene->pose.position.z += (scene->pose.targetPosition.z - scene->pose.position.z) * (1.0f / 3.0f);
     FUN_002e364c(&g_lmapScene->pose.targetPosition.x);
-    FUN_00327ee8(g_lmapScene->pose.position.x, g_lmapScene->pose.position.z);
+    mapSelectContainingRegions(g_lmapScene->pose.position.x, g_lmapScene->pose.position.z);
 }
 
 } /* extern "C" */

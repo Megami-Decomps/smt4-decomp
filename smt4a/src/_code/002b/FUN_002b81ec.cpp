@@ -30,7 +30,7 @@ int FUN_002e364c(...);
 int mapSetSceneState(...);
 int padGetNormalizedAnalogStick(float *, unsigned int *, int);
 int FUN_00325998(...);
-int FUN_00327ee8(void);
+int mapSelectContainingRegions(void);
 void lmapSceneStartMovement(signed char);
 int FUN_00354098(void);
 int gameCounterAddSaturating(...);
@@ -94,7 +94,7 @@ extern int saveSlotSelectedIsId175(void);
 /* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: FUN_00325998. */
-/* Supplied declaration required: FUN_00327ee8. */
+/* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: mapEnemyAssignSpawns. */
 /* Supplied declaration required: FUN_00354098. */
 /* Supplied declaration required: sysPlayVoice. */
@@ -218,7 +218,7 @@ void FUN_002b81ec(void)
             mapSetSceneState(3);
             gameCounterAddSaturating(0x14,1);
             FUN_002e364c(g_lmapScene + 0x28);
-            FUN_00327ee8();
+            mapSelectContainingRegions();
             if (*(int *)(g_lmapScene + 0x1d0) == 1 || *(int *)(g_lmapScene + 0x1d0) == 9) {
               lmapSceneStartMovement(0);
             }
@@ -618,7 +618,7 @@ void FUN_002b81ec(void)
         mapSetSceneState(0x1f);
         gameCounterAddSaturating(0x16,1);
       }
-      FUN_00327ee8();
+      mapSelectContainingRegions();
       if ((temp_v9 & 0x800) != 0) {
         mapEnemyAssignSpawns();
       }
@@ -825,7 +825,7 @@ void FUN_002b81ec(void)
   *(unsigned int *)(temp_v5 + 0x278) = 0;
   *(unsigned int *)(temp_v5 + 0x27c) = 0;
   FUN_002e364c(temp_v5 + 0x28);
-  FUN_00327ee8();
+  mapSelectContainingRegions();
   return;
 }
 

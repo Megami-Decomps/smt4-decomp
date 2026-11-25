@@ -1,11 +1,11 @@
 #include "classes/Obj5333c0.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 struct TableGroupHeader;
 
 extern "C" {
 s32 tableGroupFindEntryIndex(TableGroupHeader *table, const char *name);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 index);
 
 // Try the secondary script's entry map first, then fall back to the primary script.
 s32 pickObjStart(Obj5333c0 *scene, const char *entry)

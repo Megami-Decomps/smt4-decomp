@@ -41,7 +41,6 @@ struct CampCecEdit {
 
 extern "C" {
 extern CampCecEdit *g_campCecEdit;
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void texDrawCompositeSprite(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
 void efctSetSpeed(f32 speed);
 void skinObjectUpdateMatrices(RenderCtxA *context);

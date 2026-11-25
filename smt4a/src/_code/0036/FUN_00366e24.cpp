@@ -22,7 +22,7 @@ int lmapCameraSetMode(int);
 int mapIfReleaseSlot3(void);
 int mapDepartSpawnPlayerEffect(unsigned int);
 int mapObjFindNearestPointByCategory(int, int, int, int *, float [7], unsigned int);
-int FUN_00327ee8(void);
+int mapSelectContainingRegions(void);
 int sysPlayVoice(int);
 int soundActorStartOnFreeChannel(...);
 
@@ -62,7 +62,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: mapObjFindNearestPointByCategory. */
-/* Supplied declaration required: FUN_00327ee8. */
+/* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int inputIsQuestMenuPressed(void);
@@ -253,7 +253,7 @@ void FUN_00366e24(void)
           *(unsigned int *)(g_lmapScene + 4) = 0x5b;
           *(unsigned int *)(temp_v2 + 8) = 0;
           FUN_002e364c(g_lmapScene + 0x28);
-          FUN_00327ee8();
+          mapSelectContainingRegions();
           return;
         }
         if (temp_v1 == 0x5b) {
@@ -262,14 +262,14 @@ void FUN_00366e24(void)
           *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
           *(unsigned int *)(temp_v2 + 8) = 0;
           FUN_002e364c(g_lmapScene + 0x28);
-          FUN_00327ee8();
+          mapSelectContainingRegions();
           return;
         }
         if ((temp_v1 != 0x5c) ||
            (temp_v2 = *(int *)(g_lmapScene + 8) + 1, *(int *)(g_lmapScene + 8) = temp_v2, temp_v2 < 4))
         {
           FUN_002e364c(g_lmapScene + 0x28);
-          FUN_00327ee8();
+          mapSelectContainingRegions();
           return;
         }
         temp_v0 = 1;
@@ -311,7 +311,7 @@ void FUN_00366e24(void)
     }
   }
   FUN_002e364c(g_lmapScene + 0x28);
-  FUN_00327ee8();
+  mapSelectContainingRegions();
   return;
 }
 

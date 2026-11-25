@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002341d4(...);
+int resourceLoadDisplayMetadata(...);
 int aocItemAttributeLabel(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int recordClearWideHandle(...);
 int archiveFileReplaceHandle(int *, int, int);
@@ -43,7 +43,7 @@ extern unsigned char LAB_0038e0ac; /* 0x38e0ac */
 extern unsigned char LAB_0038e0bc; /* 0x38e0bc */
 extern int g_aocMain; /* 0x432fc8 */
 
-/* Supplied declaration required: FUN_002341d4. */
+/* Supplied declaration required: resourceLoadDisplayMetadata. */
 /* Supplied declaration required: aocItemAttributeLabel. */
 extern unsigned int halfPair48LowByteA(int);
 extern unsigned int halfPair48LowByteB(int);
@@ -270,7 +270,7 @@ void FUN_0038dc48(int param_1)
       aocCatalogBuildItemRecords();
       recordClearWideHandle(temp_v0 + 0x28);
       if (-1 < temp_v1) {
-        FUN_002341d4(&temp_v8,temp_v0);
+        resourceLoadDisplayMetadata(&temp_v8,temp_v0);
         *(unsigned int *)(param_1 + 0xc) = temp_v8;
         *(unsigned int *)(param_1 + 0x10) = uStack_f4;
         legacyResourceIdRemap(param_1 + 0xc);

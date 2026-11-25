@@ -7,7 +7,6 @@
 
 extern "C" {
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
-void scrSetResult(s32 result);
 
 // Check eligible selected combatants and the active override for a unit ID.
 u32 FUN_0034e27c(void)

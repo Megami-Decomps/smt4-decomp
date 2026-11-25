@@ -8,7 +8,6 @@ struct MapMarkerModels {
     /* 0x9c */ AsdMdlObject* boss;
 };
 
-extern "C" AsdMdlObject* asdMdlManagerCreateLoaded(const char* path, u32 flags);
 
 extern "C" void lmapCreateEnemyMarkerModels(MapMarkerModels* models)
 {

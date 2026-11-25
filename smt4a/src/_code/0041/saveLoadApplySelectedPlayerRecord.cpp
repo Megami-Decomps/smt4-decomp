@@ -34,7 +34,6 @@ typedef struct SelectMenu {
 void statusCameraRestore(s32 arg);
 void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 void statusModelPreviewOutfitPart(s32 slot, u16 value);
-void FUN_0023b45c(s32 arg);
 
 /* When the cursor moves to a new entry, applies it to the player data if it is selectable. */
 void saveLoadApplySelectedPlayerRecord(SelectMenu *menu)

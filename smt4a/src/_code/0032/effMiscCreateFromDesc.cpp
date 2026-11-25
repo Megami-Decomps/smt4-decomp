@@ -1,10 +1,6 @@
-#include "AsdSDK/Source/Gfx/Effect/effMisc.h"
-#include "AsdSDK/AsdDebug.h"
-#include "AsdSDK/AsdMemAlloc.h"
-#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/Source/Gfx/Effect/EffMiscInit.h"
 
 extern "C" {
-extern const char g_effMiscHeaderSourceFileName[]; /* "...\Effect\./effMisc.h": __FILE__ of the header's allocator */
 
 EffMiscObject *effMiscCreate(u32 kind, void *params);
 void *resourceResolveHeaderPointer(EffMiscDesc *desc);
@@ -12,17 +8,12 @@ u32 *resourceResolveDataPointer(EffMiscDesc *desc);
 void *sysGetTableWord(u32 id);
 void *textureCreateFromImage(u32 *resource);
 void *asdEffectTextureCreate(u32 *resource);
-void rt_memclr(void *block, s32 size);
-
-extern EffMiscKind g_effMiscKinds[];
 
 /* Allocates a zeroed shared-resource record of the given type holding one reference
  * (effMisc.h line 450: the header's inline allocator). */
 static __inline EffMiscShared *newShared(u32 type, u32 size)
 {
-    asdDebugTrace(g_effMiscHeaderSourceFileName, 450);
-    EffMiscShared *shared = (EffMiscShared *)memAlloc(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, size, 0x10, 1);
-    rt_memclr(shared, size);
+    EffMiscShared *shared = (EffMiscShared *)effMiscAllocateZeroed(size);
     shared->type = type;
     shared->refCount = 1;
     return shared;

@@ -4,7 +4,6 @@
 #include <math.h>
 
 extern "C" {
-f32 shiftRandomNextFraction(ShiftRandomState *state);
 
 /* Compute burst or continuous emission count, retaining the fractional count between frames. */
 void effComputeParticleEmission(ParticleEmissionState *state, const ParticleEmissionDefinition *definition,

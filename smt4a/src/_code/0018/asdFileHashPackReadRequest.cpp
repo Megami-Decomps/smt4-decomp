@@ -1,15 +1,14 @@
-/* NON_MATCHING: 49 lines: retail unrolls the uppercase loop by two (as FUN_001a70dc, likely one shared helper of
- * the original file, inlined late), which also gives it one saved register less and a 268-byte frame. */
+/* NON_MATCHING: the seek offset load sits after the stream load, rather than before argument setup. */
 #include <stdio.h>
 #include "AsdSDK/Source/Sys/File/AsdFileHashPack.h"
 #include "nn/Result.h"
+#include "shard/W8X15_PackageList.h"
 
 extern "C" {
 void rt_aeabi_memclr(void *, u32);
 u32 libc_strlen(const char *);
-void pathStripScheme(AsdFileHashPack *, char *, u32);
 s32 libc_toupper(s32);
-const AsdHashPackEntry *FUN_001a70dc(AsdFileHashPack *, const char *);
+const AsdHashPackEntry *asdFileHashPackFindNamedEntry(AsdFileHashPack *, const char *);
 void *asdFileAllocBuffer(AsdFileHashPack *, AsdFileRequest *);
 void acmpUnpackInPlace(void **, void *, u32);
 void asdMemFreeAndClear(void **);
@@ -26,11 +25,15 @@ u32 asdFileHashPackReadRequest(AsdFileHashPack *pack, AsdFileRequest *request)
     sprintf(path, request->path);
     pathStripScheme(pack, path, libc_strlen(path));
     s32 length = libc_strlen(path);
-    for (s32 index = 0; index < length; ++index) {
-        char *c = &path[index];
-        *c = libc_toupper(static_cast<s8>(*c));
+    /* Process a leading unpaired byte, then convert two bytes at a time. */
+    s32 index = length > 0 ? length & 1 : 0;
+    if (index == 1)
+        path[0] = libc_toupper((s8)path[0]);
+    for (; index < length; index += 2) {
+        path[index] = libc_toupper((s8)path[index]);
+        path[index + 1] = libc_toupper((s8)path[index + 1]);
     }
-    const AsdHashPackEntry *entry = FUN_001a70dc(pack, path);
+    const AsdHashPackEntry *entry = asdFileHashPackFindNamedEntry(pack, path);
     if (!entry || !entry->storedSize)
         return 0;
     switch (request->state) {
@@ -40,7 +43,7 @@ u32 asdFileHashPackReadRequest(AsdFileHashPack *pack, AsdFileRequest *request)
         request->size = compressed ? entry->uncompressedSize : storedSize;
         if (!request->buffer)
             request->buffer = asdFileAllocBuffer(pack, request);
-        pack->stream->io->seek(pack->stream, static_cast<s64>(entry->offset), 0);
+        pack->stream->io->seek(pack->stream, entry->offset, SEEK_SET);
         u32 transferred;
         s32 result = pack->stream->io->read(pack->stream, &transferred, request->buffer, storedSize);
         request->readResult = result;
@@ -63,4 +66,4 @@ u32 asdFileHashPackReadRequest(AsdFileHashPack *pack, AsdFileRequest *request)
     }
     return 1;
 }
-}
+} /* extern "C" */

@@ -5,12 +5,12 @@
 #include "gamedata/TableGroup.h"
 #include "gfx/ModelBoneAttachment.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 void uiSceneApplySpritePreset(Scene3aSprites *animation, u32 index);
 void pointConvertToFloat(FloatPoint *point, s32 x, s32 y);
 s32 tableGroupFindEntryIndex(TableGroupHeader *resource, const char *name);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 s32 modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
 void nodeSetTranslation3f(AsdMdlNode *node, s32 index, NodeVec3 translation);
 } /* extern "C" */

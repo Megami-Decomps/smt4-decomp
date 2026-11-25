@@ -3,9 +3,9 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "battle/BtlGlobals.h"
+#include "runtime/String.h"
 
 extern "C" {
-void rt_memclr(void *buffer, u32 size);
 void clearTwoWords(void *value);
 
 /* Clears queued commands for the requested roster category, excluding inactive combatants. */

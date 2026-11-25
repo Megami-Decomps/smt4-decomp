@@ -11,7 +11,7 @@ int FUN_001681c4(...);
 int FUN_002950a8(...);
 int FUN_002e364c(...);
 int lmapSceneRestoreEntryPosition(...);
-int FUN_00327ee8(...);
+int mapSelectContainingRegions(...);
 int naviMainApplyRequestValue(...);
 int titleSetSlotValueState2(...);
 int linkedTargetSetFloat(...);
@@ -117,7 +117,7 @@ extern int mapJobIsDone(void);
 /* Supplied declaration required: mapSpawnRandomEventKindEffect. */
 /* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: mapTrapEnable. */
-/* Supplied declaration required: FUN_00327ee8. */
+/* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: naviMainApplyRequestValue. */
 /* Supplied declaration required: FUN_00365c94. */
 extern int dataTableGetRecord23(void);
@@ -718,7 +718,7 @@ LAB_002dad8c:
                 }
               }
               FUN_002e364c(g_lmapScene + 0x28);
-              FUN_00327ee8();
+              mapSelectContainingRegions();
               return;
             }
             temp_v0 = *(int *)(g_lmapScene + 8) + 1;
@@ -729,7 +729,7 @@ LAB_002dad8c:
                 *(unsigned int *)(temp_v6 + 8) = 0;
               }
               FUN_002e364c(g_lmapScene + 0x28);
-              FUN_00327ee8();
+              mapSelectContainingRegions();
               return;
             }
           }
@@ -742,7 +742,7 @@ LAB_002dad8c:
                 *(unsigned int *)(temp_v6 + 8) = 0;
               }
               FUN_002e364c(g_lmapScene + 0x28);
-              FUN_00327ee8();
+              mapSelectContainingRegions();
               return;
             }
           }
@@ -756,7 +756,7 @@ LAB_002dad8c:
               *(unsigned int *)(temp_v6 + 8) = 0;
             }
             FUN_002e364c(g_lmapScene + 0x28);
-            FUN_00327ee8();
+            mapSelectContainingRegions();
             return;
           }
         }
@@ -771,7 +771,7 @@ LAB_002dad8c:
         *(unsigned int *)(temp_v6 + 0x54) = 0;
         *(unsigned int *)(temp_v6 + 0x58) = 0x40400000;
         FUN_002e364c(g_lmapScene + 0x28);
-        FUN_00327ee8();
+        mapSelectContainingRegions();
         return;
       }
       if (temp_v0 >= 0x29) {
@@ -804,7 +804,7 @@ LAB_002dad8c:
     }
   }
   FUN_002e364c(g_lmapScene + 0x28);
-  FUN_00327ee8();
+  mapSelectContainingRegions();
   return;
 }
 

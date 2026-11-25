@@ -11,7 +11,6 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 alpha);
 void sysMemClear(void *memory, u32 bytes);

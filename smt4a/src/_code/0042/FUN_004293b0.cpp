@@ -18,7 +18,7 @@ struct AsyncMapPacket {
 typedef char AsyncMapPacketOffsetsCheck[offsetof(AsyncMapPacket, descriptor) == 0x48 &&
     offsetof(AsyncMapPacket, name) == 0x50 && offsetof(AsyncMapPacket, value) == 0x70 ? 1 : -1];
 extern "C" {
-nn::Result FUN_00427e68(s32 handle, s32 operation);
+nn::Result resourceApplyProgramDescriptor(s32 handle, s32 operation);
 u32 tokenTableGet();
 nn::Result tokenResolveAddress(u32 context, const AsyncMapHandleObject **object, s32 handle);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
@@ -42,7 +42,7 @@ WindowStatusResult FUN_004293b0(const s32 *handle, const AsyncMapParameters *par
     const AsyncMapMetadata *metadata, const s8 *name)
 {
     u32 token;
-    nn::Result status = FUN_00427e68(*handle, 6);
+    nn::Result status = resourceApplyProgramDescriptor(*handle, 6);
     if (!nnResultIsFailure(status)) {
         AsyncMapPacket *packet = &DAT_0061b030;
         const AsyncMapHandleObject *object;

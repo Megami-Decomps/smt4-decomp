@@ -25,7 +25,7 @@ void mapIfReleaseResource(void);
 bool mapIfHasSelection(void);
 void FUN_002342b8(void);
 u32 FUN_002e364c(f32 *target);
-void FUN_00327ee8(f32 x, f32 z);
+void mapSelectContainingRegions(f32 x, f32 z);
 
 /* Steps the scene through the overview point's approach: walk up to the point and show its marker, wait for
  * confirm (states 10-13: announce the area and leave for scene state 20) or cancel (90-92: back to the map,
@@ -158,7 +158,7 @@ void lmapOverviewPointStep(void)
         break;
     }
     FUN_002e364c(&g_lmapScene->pose.targetPosition.x);
-    FUN_00327ee8(g_lmapScene->pose.position.x, g_lmapScene->pose.position.z);
+    mapSelectContainingRegions(g_lmapScene->pose.position.x, g_lmapScene->pose.position.z);
 }
 
 } /* extern "C" */

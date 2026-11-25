@@ -22,6 +22,7 @@
 #include "code/Code0013.h"
 #include "code/Code002e.h"
 #include "quest_center/qcMain.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern EventScriptJobWork *g_aocJob;
@@ -43,7 +44,6 @@ void bustupCutAnimStopJob(void);
 void eventTexReleaseJobs(void);
 void eventCommandStop(void);
 void eventOpeningResetValidJob(void);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 u32 padButtonIsPressed(u32 button);
 s32 flagBrowserStep(void);
 u32 asdLoadFileExists(const char *path);

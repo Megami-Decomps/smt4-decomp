@@ -16,6 +16,7 @@
 #include "shard/SaveSlotHeaderWork.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 struct DataBlockTable {
     /* 0x00 */ u8 unk00[0x62];
@@ -33,7 +34,6 @@ void saveLoadUiRestartSlotSpritesAndWait(SaveSlotHeaderWork *ui);
 void spriteListMenuResetSprites(SaveSlotHeaderWork *ui, s32 resetHeader);
 void FUN_0041dbdc(SaveSlotHeaderWork *ui, bool selected);
 void saveMenuCacheSlotHeadersStep(SaveSlotHeaderWork *ui);
-void scrScriptProcessStartEntry(ScriptProcess *script, s32 index);
 DataBlockTable *gameDataBlocksGetTable(void);
 
 void messageMainSetFlag(s32 value);

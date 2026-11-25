@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ typedef struct QuestScriptRun {
     /* 0x14 */ ScriptProcess *process;
 } QuestScriptRun;
 
-void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void FUN_0029016c(u32 a, s32 b);
 void FUN_002900d0(void);
 void gameJumpRequestClear(void);

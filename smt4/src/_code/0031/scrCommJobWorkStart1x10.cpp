@@ -3,7 +3,6 @@
 
 extern "C" {
 
-s32 scrGetArg(s32 index);
 s32 bustupSpriteStartTransition(u32 work, s32 a, s32 b);
 
 static inline void startJobWorkCommand(u32 job, s32 first, s32 frames)

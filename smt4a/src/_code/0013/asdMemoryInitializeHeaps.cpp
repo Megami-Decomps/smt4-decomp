@@ -9,7 +9,7 @@
 extern "C" {
 
 u32 nnosGetAppMemAlloc(void);
-u32 FUN_00146ac0(void);
+u32 asdMemoryGetProcessCommittedBytes(void);
 void osSetHeapSize(u32 size);
 void FUN_00146b14(u32 size);
 u32 FUN_00146898(void);
@@ -46,7 +46,7 @@ void asdMemoryInitializeHeaps(u32 reserve, u32 heapSize, u32 arg2)
     u32 appMemSize = nnosGetAppMemAlloc();
     u32 addressSpaceSize;
 
-    osSetHeapSize(appMemSize - FUN_00146ac0() - reserve);
+    osSetHeapSize(appMemSize - asdMemoryGetProcessCommittedBytes() - reserve);
     FUN_00146b14(reserve);
     addressSpaceSize = FUN_00146898();
     nnosInitAddressSpaceOnce(0x8000000, addressSpaceSize);

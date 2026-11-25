@@ -9,15 +9,14 @@
 #include "script/scrScriptProcess.h"
 #include "script/ScriptEntryLookup.h"
 #include "event/EventCompletion.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern MapMainState *g_mapMain;
 void messageSetScriptDisplayMode();
-s32 aocPackageGrantsItem(AocSystemA *system, u32 id, s32 flags);
 void asdMemFree(void *memory);
 void *asdLoadFileSyncDefault(const char *path);
 s32 tableGroupFindEntryIndex(void *script, const char *name);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 
 /* Loads a map event's script and messages and starts its named or overridden entry. */
 u32 mapStartEventScript()

@@ -33,7 +33,7 @@ void mapObjectVisibilityRestore(void);
 void FUN_00273f90(void);
 void mapIfRefreshMarkers(void);
 void gameStateSelectKind(void);
-void FUN_001d36cc(void);
+void ambientSoundUpdateByDistance(void);
 
 /* Per-frame map update: runs each map subsystem in order. */
 void mapPerFrameUpdate(void)
@@ -63,7 +63,7 @@ void mapPerFrameUpdate(void)
     FUN_00273f90();
     mapIfRefreshMarkers();
     gameStateSelectKind();
-    FUN_001d36cc();
+    ambientSoundUpdateByDistance();
 }
 
 } /* extern "C" */

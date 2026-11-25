@@ -43,6 +43,8 @@ __svc(0x28) s64 GetSystemTick(void);
 __svc(0x32) s32 SendSyncRequest(u32 session);
 __svc(0x35) __value_in_regs ResultAndValue GetThreadIdRaw(u32 unused, u32 thread);
 __svc(0x38) __value_in_regs ResultAndValue GetResourceLimitRaw(u32 unused, u32 process);
+/* Writes the usage of each requested resource; resource identifiers use 32-bit words. */
+__svc(0x3a) s32 GetResourceLimitCurrentValues(s64 *values, u32 limit, const s32 *resources, s32 count);
 
 } // namespace svc
 

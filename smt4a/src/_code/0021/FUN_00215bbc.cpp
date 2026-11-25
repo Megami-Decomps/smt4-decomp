@@ -2,7 +2,6 @@
 #include "camp/PartyPanel/PartyPanel.h"
 
 extern "C" void gameGlobalsSetOverlayActive(s32 enabled);
-extern "C" void unitStatusResetSpriteState();
 
 // Enable the common initializer before setting up this screen.
 extern "C" void FUN_00215bbc()

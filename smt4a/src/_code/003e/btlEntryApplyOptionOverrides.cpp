@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "Model/MoriModelResource.h"
+#include "runtime/String.h"
 
 /* A ten-bit value with a six-bit companion packed into one halfword. */
 struct TenSix {
@@ -76,7 +77,6 @@ u32 randomGetLowerTenBits(MemberSource* member, u32 index);
 u32 randomGetUpperSixBits(MemberSource* member, u32 index);
 CategoryEntry* dataTableGetCategoryEntry(s32 category, u16 variant);
 void clearTwoWords(void *words);
-void rt_memclr(void *block, u32 size);
 
 /* Builds a battle entry from a party member, rolling its random slots unless saved data exists. */
 void btlEntryApplyOptionOverrides(void *unused, BattleEntry *entry, MemberSource *member)

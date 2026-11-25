@@ -5,6 +5,7 @@
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxA.h"
+#include "ui/NumberFont.h"
 
 struct StatusRecord {
     /* 0x00 */ u8 unk00[0x64];
@@ -23,7 +24,6 @@ s16 dataTable10FindValue(u16 id);
 u32 table01RecordLookupForContent(void);
 void uiDrawItemOrStatusIcon(s32 icon, s32 x, s32 y, s32 index, s32 flags);
 void drawSetColorFromRGBA8(u32 rgba);
-void numberFontDrawFormatted(s32 mode, s32 x, s32 y, s32 align, s32 digits, s32 index, const char *text);
 void gxResetColorQuadToWhite(void);
 s32 fontMeasureLineAdvance(const char *text, s32 mode);
 

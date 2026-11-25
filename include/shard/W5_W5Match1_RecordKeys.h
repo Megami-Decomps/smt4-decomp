@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include "shard/FloatSortRecord.h"
+#include <stddef.h>
 
 struct ByteStateWork {
     /* 0x00 */ u8 padding[0x85];
@@ -60,12 +61,18 @@ struct SignedBytePriority {
 
 struct MapObjectRequest {
     /* 0x00 */ u32 job;
-    /* 0x04 */ u16 map;
-    /* 0x06 */ u16 object;
-    /* 0x08 */ u16 mode;
-    /* 0x0A */ u16 timer;
-    /* 0x0C */ u32 unk0C;
-    /* 0x10 */ u32 state;
+    /* 0x04 */ union { u16 map; s16 mapId; };
+    /* 0x06 */ union { u16 object; s16 areaId; };
+    /* 0x08 */ union { u16 mode; s16 step; };
+    /* 0x0A */ union { u16 timer; s16 entryIndex; }; /* current row of the placement table */
+    union {
+        /* 0x0C */ u32 unk0C;
+        struct {
+            /* 0x0C */ s16 slot;      /* the object slot being loaded, -1 if no slot is free */
+            /* 0x0E */ u8 unk0E[2];
+        } loading;
+    };
+    /* 0x10 */ union { u32 state; s32 loadedCount; };
 };
 
 struct UnsignedDivisionResult {
@@ -327,15 +334,28 @@ struct TitleCommandLists {
 
 struct RenderChannelEntry {
     /* 0x000 */ u8 active;
-    /* 0x001 */ u8 unk001[0x137];
+    /* 0x001 */ s8 textLength;
+    /* 0x002 */ s8 captureLength;
+    /* 0x003 */ u8 type;
+    /* 0x004 */ CallbackBinding binding;
+    /* 0x00C */ u16 text[126];
+    /* 0x108 */ u16 captureText[24];
 };
 
 struct RenderChannelTable {
     /* 0x0000 */ RenderChannelEntry entries[64];
-    /* 0x4E00 */ u16 selected;
-    /* 0x4E02 */ u16 unk4E02;
+    /* 0x4E00 */ s16 selected;
+    /* 0x4E02 */ u16 unk4E02; /* text cursor */
     /* 0x4E04 */ u16 previous;
     /* 0x4E06 */ u16 mode;
+    /* 0x4E08 */ u8 unk4e08[0x24];
+    /* 0x4E2C */ u32 pending;
+};
+
+struct TextHistoryCapture {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u16 text[24];
+    /* 0x34 */ u16 count;
 };
 
 struct RenderChannelState {
@@ -343,8 +363,14 @@ struct RenderChannelState {
     /* 0x01 */ u8 ready;
     /* 0x02 */ u8 unk02[2];
     /* 0x04 */ RenderChannelTable *table;
-    /* 0x08 */ void *capture;
+    /* 0x08 */ TextHistoryCapture *capture;
+    /* 0x0C */ CallbackBinding binding;
 };
+
+typedef char RenderChannelLayout[
+    sizeof(RenderChannelEntry) == 0x138 && offsetof(RenderChannelEntry, captureText) == 0x108 &&
+    offsetof(RenderChannelTable, selected) == 0x4E00 && offsetof(RenderChannelTable, pending) == 0x4E2C &&
+    offsetof(TextHistoryCapture, count) == 0x34 && offsetof(RenderChannelState, binding) == 0xC ? 1 : -1];
 
 struct MatrixTranslation {
     /* 0x00 */ u32 first;

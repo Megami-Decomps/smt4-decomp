@@ -14,6 +14,7 @@
 #include "ui/AnimatedMessage.h"
 #include "ui/UiSpriteApi.h"
 #include "util/BitsAndBytes.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 u32 dataRecordGetValue(u32 id);
@@ -21,7 +22,6 @@ u8 shopGetEntryAvailability(u32 id);
 u8 gameDataAreaBitTest(u32 bit);
 s32 uiListGetVisibleCount(const void *widget);
 void drawSetColorFromRGBA8(u32 color);
-void numberFontDrawFormatted(s32 kind, s32 x, s32 y, s32 align, s32 digits, u32 slot, const char *format, ...);
 void fadeObjectResetIfActive(UiSpriteState *sprite);
 void uiDrawListScrollBar(Object *widget, s32 x, s32 y, u32 group, u32 frameId, u32 trackId, u32 trackPressedId, u32 arrowAId,
                         u32 arrowAPressedId, u32 arrowBId, u32 arrowBPressedId, u32 thumbRegion, s32 arrowARegion,

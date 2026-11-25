@@ -3,6 +3,7 @@
 #include "status/StatusCamera.h"
 #include "code/Code0029_Smt4.h"
 #include "gamedata/UnitStats.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 void buttonHelpSetPreset(u32 preset);
@@ -13,7 +14,6 @@ void buttonHelpSetText(const char *text, u32 color);
 s32 resourceRunOperationIfUnblocked(const void *cursor);
 s32 listCursorGetRowIfUnblocked(const void *cursor);
 void unitRecordBuild(u32 id, StatBlock *member);
-void unitInitializeFromSavedRecord(u32 id, StatBlock *member);
 const void *partyMemberFindById(u32 id);
 void FUN_0029da34(u32 mode, u32 enabled, u32 id, const void *member);
 void buttonHelpShowSkillDetails(u32 id);

@@ -9,7 +9,6 @@ typedef struct Entry003004fc {
     /* 0x27c */ s32 value;
 } Entry003004fc;
 
-s32 scrGetArg(s32 index);
 Entry003004fc *btlMainFindEntryByListedId(void *state, s32 id);
 s32 gameGetUnitRecord(s32 index);
 s32 nkmGrowEventLearnRandomSkill(s32 value);

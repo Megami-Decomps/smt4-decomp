@@ -2,9 +2,9 @@
 #include "ui/UiControl_Smt4a.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "runtime/String.h"
 
 extern "C" {
-void rt_memclr(void *, u32);
 void __aeabi_memset4(void *, u32, s32);
 void asdTMTexTableLoadTmx(u32, u32);
 extern const char DAT_0052d3c4[]; /* event/PartnerTopic/PartnerTopic.mbm */

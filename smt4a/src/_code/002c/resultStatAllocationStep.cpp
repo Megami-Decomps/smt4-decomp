@@ -19,6 +19,7 @@
 #include "code/Code0033.h"
 #include "code/Code0035.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "script/ScriptEntry.h"
 
 struct StatBlock;
 struct PlayerStats;
@@ -34,7 +35,6 @@ u32 uiScrollHandleActionsOrTouch(FlaggedEntry *owner, const TextureTableEntryIV 
 u8 gridNavigationHandleConfirm(FlaggedEntry *cursor, s32 mode);
 s32 padQueryLogicalKey(s32 key, s32 mode);
 void buttonHelpSetText(const s8 *text, u32 color);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 void sysPlaySe(u32 id);
 void dialogClose(s32 immediate);
 void infoWinSetTimer(u32 timer);

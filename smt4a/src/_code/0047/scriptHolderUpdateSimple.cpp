@@ -2,9 +2,9 @@
 #include "shard/Shard0047.h"
 #include "script/scrScriptProcess.h"
 #include "code/Code0041_Smt4a.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void asdLoadFileAsyncSimple(const char *path, void **destination, u32 flags);
 void optionsClearFlag1(void);
 u32 FUN_003a36b4(void);

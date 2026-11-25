@@ -13,7 +13,6 @@ void textEncodeFontSlot(u32, const char *);
 void btlFormatCategoryLabel(char *, u32);
 void skillFormatTargetLabel(char *, s32);
 void FUN_001f4568(u32, u32, u32, char *);
-void asdTextDrawDirectoryEntry(AsdText *, u32, s32, s32, s32, RelativeDirectory *, u32);
 
 void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index)
 {

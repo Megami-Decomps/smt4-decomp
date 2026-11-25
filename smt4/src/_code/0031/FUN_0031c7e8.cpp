@@ -7,7 +7,6 @@
 extern "C" {
 
 
-s32 scrGetArg(s32 index);
 
 /* Script command: sets the result to 1 when the live, non-excluded unit with id `arg0` has a positive stat (arg 1: 0 -> 7, 1 -> 10, 2 -> 11). */
 u32 FUN_0031c7e8(void)

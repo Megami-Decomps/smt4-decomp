@@ -2,7 +2,6 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-void scrSetResult(s32);
 
 // Script command: sets the result to whether the battle script flag given by argument 0 is set.
 u32 FUN_00380504(void)

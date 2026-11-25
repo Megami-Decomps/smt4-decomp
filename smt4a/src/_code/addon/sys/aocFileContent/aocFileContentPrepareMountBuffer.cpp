@@ -1,56 +1,53 @@
-/* NON_MATCHING: canonical native constructors and result return recovered; output aggregate is copied from the stack instead of constructed in return storage. */
-#include "runtime/Stdio.h"
-#include <stddef.h>
-#include "AsdSDK/AsdDebug.h"
-#include "shard/W6_W6Match8_AocPoll.h"
-#include "nn/Result.h"
+/* NON_MATCHING: on the failure path retail loads g_aocMain's address before the second legacyResourceIdRemap call;
+ * this build loads it after (and pools it after the status constant). w94-s4 matched it by reading the global through a local `AocMain *&main = g_aocMain` reference alias, which only
+ * steers the allocation (not kept). */
+#include <stdio.h>
 #include "addon/aocMain.h"
+#include "addon/sys/aocFileContent.h"
+#include "classes/WindowOperation.h"
+#include "nn/Result.h"
+#include "AsdSDK/AsdDebug.h"
+#include "util/BitsAndBytes.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
+#include "sys/RuntimeObjects.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
+#include "sys/WindowStatusCheck.h"
+#include "runtime/String.h"
 
-namespace {
-struct AocFileContentWork {
-    u8 unk00[0x20];
-    void* buffer;
-    char mountName[0x10];
-    u32 bufferSize;
-};
-}
+/* The mount format occupies eight bytes of the module's string table, including padding. */
+struct AocMountNamePattern { char text[8]; };
+
+enum { AOC_MOUNT_RETRY = 200, AOC_CONTENT_READY = 0x10000 };
+enum { AOC_RESULT_NO_CHANGE = 0xC9413891 };
 
 extern "C" {
 extern const char g_aocFileContentSourcePath[];
-extern const char g_aocMountNameFormat[];
-void asdMemFree(void*);
-void* asdMemoryAlloc(u32, u32, u32, u32, u32);
-void rt_memclr(void*, u32);
-u32 legacyResourceIdRemap(const WindowStatusResult *);
-u32 FUN_0042a410(u32*, u32, u32, u32, u32, u32);
-u32 jyoucyuGetTableEntry(u32);
+extern const AocMountNamePattern g_aocMountNameFormat; /* "aoc%d:" */
 
-/* Prepare the content mount's work buffer and publish any translated failure. */
-WindowStatusOperationResult aocFileContentPrepareMountBuffer(void* context, u32 content)
+/* Queries an add-on archive's size, prepares its mount buffer, or returns a translated failure. */
+RequestParameters aocFileContentPrepareMountBuffer(WindowOperationState *state, u32 id)
 {
-    AocFileContentWork* work = static_cast<AocFileContentWork*>(context);
-    if (work->buffer != NULL) {
-        asdMemFree(work->buffer);
-        work->buffer = NULL;
+    if (state->mountBuffer != NULL) {
+        asdMemFree(state->mountBuffer);
+        state->mountBuffer = NULL;
     }
-    WindowStatusOperationResult output(0);
-
-    WindowStatusResult result(FUN_0042a410(&work->bufferSize, 0x19A2, content, 2, 2, 0));
-    if (nnResultIsFailure(legacyResourceIdRemap(&result))) {
+    RequestParameters operation(0);
+    WindowStatusResult archiveStatus(aocFileContentQueryMountBufferSize(&state->mountBufferSize, 0x19A2, id, 2, 2, 0));
+    if (windowStatusFailed(archiveStatus)) {
         jyoucyuGetTableEntry(0);
-        output.status = 100;
-        output.result = result;
-        if (legacyResourceIdRemap(&result) != 0xC9413891 &&
+        failRequestOperation(&operation, archiveStatus);
+        if (legacyResourceIdRemap(&archiveStatus) != AOC_RESULT_NO_CHANGE &&
             sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
-            g_aocMain->flags &= ~0x10000U;
-            output.status = 200;
+            flagsClearBits(&g_aocMain->flags, AOC_CONTENT_READY);
+            operation.kind = AOC_MOUNT_RETRY;
         }
-        return output;
+        return operation;
     }
     asdDebugTrace(g_aocFileContentSourcePath, 190);
-    work->buffer = asdMemoryAlloc(0x100, 0x100, 0, work->bufferSize, 1);
-    rt_memclr(work->buffer, work->bufferSize);
-    __2sprintf(work->mountName, g_aocMountNameFormat, content);
-    return output;
+    state->mountBuffer = asdMemoryAlloc(0x100, 0x100, 0, state->mountBufferSize, 1);
+    rt_memclr(state->mountBuffer, state->mountBufferSize);
+    sprintf(state->mountName, g_aocMountNameFormat.text, id);
+    return operation;
 }
-} // extern "C"
+} /* extern "C" */

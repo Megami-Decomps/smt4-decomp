@@ -4,7 +4,6 @@
 struct ScriptTransitionContext;
 
 extern "C" {
-u32 scrGetCommandFrame();
 void messageWindowShowOrPoll(ScriptTransitionContext* context, u32 argument, u32 frame, s32 mode, s32 first, s32 second);
 
 static void showTransition(s32 mode, s32 wait)

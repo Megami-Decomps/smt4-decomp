@@ -1,4 +1,5 @@
-/* NON_MATCHING: free-slot search predication and the shift/copy address registers differ. */
+/* NON_MATCHING: the shift/copy address registers differ, and armcc folds the final save-body offset
+ * into the record-table offset instead of computing it before the tail call. */
 #include "gamedata/SavedRecords.h"
 
 /* Index of the first unused record, or -1 when all 32 are in use. */
@@ -22,7 +23,7 @@ extern "C" void savedRecordInsertAtFront(const SavedRecord100 *record)
     s32 freeSlot = findFreeRecord();
     freeSlot = freeSlot == -1 ? 31 : freeSlot;
     if (freeSlot == 0) {
-        memcpySrcFirst(record, getSavedRecord(0), sizeof(SavedRecord100));
+        setSavedRecord(0, record);
         return;
     }
 
@@ -31,5 +32,5 @@ extern "C" void savedRecordInsertAtFront(const SavedRecord100 *record)
         SavedRecord100 *source = getSavedRecord(index);
         setSavedRecord(freeSlot - moved, source);
     }
-    memcpySrcFirst(record, getSavedRecord(0), sizeof(SavedRecord100));
+    setSavedRecord(0, record);
 }

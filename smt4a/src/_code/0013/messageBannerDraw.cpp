@@ -11,6 +11,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxA.h"
 #include "text/TextDraw.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ void FUN_00151e4c(MessageWindowA *message);
 void messageBannerDrawCounterPlates(s32 index);
 const char *dataFindKindRecordWithAocOverrides(s32 value, s32 option);
 void uiDrawGroupedNumber(s32 value, s32 x, s32 y, s32 signedDisplay);
-void numberFontDrawFormatted(s32 font, s32 x, s32 y, s32 align, s32 digits, s32 layer, const char *format, ...);
 void drawSetColorFromRGBA8(u32 packed);
 void messageCreatePanelEffects(u32 first, u32 second, u32 accent, u32 last);
 void messageDrawPairedFrameSprites(u32 leftBase, u32 leftOverlay, u32 leftEdge,

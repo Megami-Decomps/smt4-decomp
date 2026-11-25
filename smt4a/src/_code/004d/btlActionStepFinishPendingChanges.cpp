@@ -5,33 +5,19 @@
 #include "bible/bibleAnalyze.h"
 #include "battle/btlEditor.h"
 #include "battle/BtlUiGlobal.h"
-
-struct BattleActionStep {
-    u32 state;        /* 0x00 */
-    u32 flags;        /* 0x04 */
-    u8 unk08[0xc];
-    u32 process;      /* 0x14 */
-    u8 unk18[0x10];
-    s32 ticks;        /* 0x28 */
-};
-struct BattleActionEvent {
-    u8 unk00[0x20];
-    u64 pendingMask;  /* 0x20 */
-    u64 uiMask;       /* 0x28 */
-};
+#include "battle/BattleEventAction.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
-extern BattleActionEvent g_btlEvent;
 extern BattleActionCamera *g_btlCamera;
 extern void *g_btlAux;
 s32 btlCameraCanAdvance(BattleActionCamera *camera, BtlMainStateA *battle, s32 flags);
 void btlQueueDuplicateSuppressedAction(s32, s32, s32);
-s32 scrRunOpcodesStub(u32 process);
 void btlPlayMenuConfirmSe(s32 mode);
 void btlStageResetAndClearCameraFlag(void *context);
 
-// Apply pending action camera/UI changes once, then clear their masks when the process ends.
-u32 btlActionStepFinishPendingChanges(BattleActionStep *step, BtlMainStateA *battle)
+/* Applies pending action camera/UI changes once, then clears their masks when the script ends. */
+u32 btlActionStepFinishPendingChanges(BattleEventAssetLoadState *step, BtlMainStateA *battle)
 {
     if ((battle->stateFlags64.bits & g_btlEvent.pendingMask) != 0 && (step->flags & 1) == 0) {
         if (g_btlCamera->target >= 0 && btlCameraCanAdvance(g_btlCamera, battle, 1)) {
@@ -40,7 +26,7 @@ u32 btlActionStepFinishPendingChanges(BattleActionStep *step, BtlMainStateA *bat
         FUN_004feecc(1, 0);
         step->flags |= 1;
     }
-    if (scrRunOpcodesStub(step->process) == 2) {
+    if (scrRunOpcodesStub(step->scriptProcess) == 2) {
         if ((battle->stateFlags64.bits & g_btlEvent.pendingMask) != 0) {
             btlPlayMenuConfirmSe(0);
             if ((battle->stateFlags64.bits & g_btlEvent.uiMask) != 0) {
@@ -52,9 +38,9 @@ u32 btlActionStepFinishPendingChanges(BattleActionStep *step, BtlMainStateA *bat
         battle->stateFlags64.bits &= ~g_btlEvent.pendingMask;
         btlStageResetAndClearCameraFlag(g_btlAux);
     }
-    if (step->ticks < 0xffff) {
-        ++step->ticks;
+    if (step->frames < 0xffff) {
+        ++step->frames;
     }
     return 0;
 }
-}
+} /* extern "C" */

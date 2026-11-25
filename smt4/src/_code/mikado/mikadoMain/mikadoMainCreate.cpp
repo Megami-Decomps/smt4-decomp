@@ -10,7 +10,6 @@ extern "C" {
 
 extern MikadoGlobals g_mikado;
 
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 u32 taskCreateDraw(const char *name, s32 group, s32 startDelay, s32 endDelay, AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
 s32 FUN_001fdff0(u32 handle);
 void mikadoDestroyCameraCallback(u32 handle);

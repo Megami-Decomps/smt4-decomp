@@ -47,7 +47,6 @@ void asdListBoxSetFloatItem(u32 listBox, u32 id, s32 minimum, s32 maximum, f32 v
 BtlCombatantEntryA *FUN_003e83b4(BtlMainStateA *state, s32 index, s32 matches);
 u16 saveIsRecordValueBounded(u32 index);
 s32 gameRecordSetValueClamped(u32 index, s32 value);
-s32 btlFindEntryValue(s32 id, u32 index);
 void btlSlotSetStoreValue(u32 key, s32 index, u32 value);
 
 // Apply the edited item of the combatant editor to the selected combatant, or refill the list when the selection changes.

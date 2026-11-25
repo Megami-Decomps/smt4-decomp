@@ -24,7 +24,6 @@ extern "C" {
 
 DebugListWork *jobGetWork(void);
 void renderCtxResetColorScale(RenderCtx *context);
-void renderCtxSelectStereoLayout(RenderCtx *context);
 void FUN_0032accc(void);
 void FUN_0026281c(char *text, const u8 *item, s32 size);
 

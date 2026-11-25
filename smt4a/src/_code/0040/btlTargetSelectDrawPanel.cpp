@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int efctSetSpeed(void);
 int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
 int gxResetUniformQuadColorsAndScale(void);
-int numberFontDrawFormatted(...);
 int renderCtxCalculateStereoParallax(int);
 int FUN_003d3020(int, int, int);
 int drawFacingElbowSegments(int, float *, float *, unsigned int, int);

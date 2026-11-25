@@ -1,7 +1,7 @@
-/* NON_MATCHING: retail forms &color (r0) before the first product multiply and packs through `vldmia r0, {s1-s4}`; the build adds the address after the product stores and orders the float-to-byte conversions and REV moves differently (helpers, VFP copy, multiply and frame selection match). */
+/* NON_MATCHING: retail forms the scratch-color address before multiplying; the build forms it
+ * afterward and uses different registers to pack and byte-reverse the converted channels. */
 #include "shard/W6_W6Match8_ScreenEffect.h"
-#include "gfx/EffectColorMath.h"
-#include "gfx/VectorScratch.h"
+#include "gfx/EffectColorScratch.h"
 
 static void effectColorAssign(EffectColor *destination, const EffectColor *source)
 {
@@ -16,17 +16,12 @@ static void effectColorScale(const EffectColor *factor, EffectColor *color)
     color->alpha *= factor->alpha;
 }
 
-static u32 effectColorPackFrom(EffectColor color)
-{
-    return ((u32)(color.red * 255.0f) << 24) | (((u32)(color.green * 255.0f) & 255) << 16) |
-           (((u32)(color.blue * 255.0f) & 255) << 8) | ((u32)(color.alpha * 255.0f) & 255);
-}
-
 extern "C" {
 void renderCtxSetPackedColor(u32);
 f32 FUN_00269508(const u8 *, s32, s32);
 u32 colorRampBlendWithFade(const u8 *, const ScreenEffectWeightTrack *, s32, s32);
 
+/* Samples the screen effect's color and geometry curves at the current frame. */
 void FUN_002d11b8(ScreenEffectJob *job)
 {
     ScreenEffectResource *resource = job->resource;
@@ -56,7 +51,7 @@ void FUN_002d11b8(ScreenEffectJob *job)
     effectColorAssign(&g_vectorScratch.second.color, &g_vectorScratch.first.color);
     renderCtxSetPackedColor(color);
     effectColorScale(&g_vectorScratch.second.color, &g_vectorScratch.first.color);
-    u32 packed = effectColorPackFrom(g_vectorScratch.first.color);
+    u32 packed = packCurrentEffectColor();
     output->color.r = __rev(packed) >> 24;
     output->color.g = __rev(packed) >> 16;
     output->color.b = __rev(packed) >> 8;

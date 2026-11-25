@@ -18,6 +18,7 @@
 #include "shop/ShopItemDescription.h"
 #include "text/TextDraw.h"
 #include "util/MemoryHelpers_VariantC.h"
+#include "script/ScriptEntry.h"
 
 enum {
     SCENE_FLAG_TALKING = 0x100, /* Obj5333c0::flags: an NPC conversation is in progress */
@@ -40,7 +41,6 @@ u32 messageMainGetValue(void);
 u32 animationChannelsAllFinished(const Obj557b18 *body);
 f32 candidateGetPreferredValue(Obj557b18 *body);
 s32 tableGroupFindEntryIndex(void *table, const char *name);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 void FUN_0046a278(Obj5333c0 *scene, s32 index);
 
 } /* extern "C" */

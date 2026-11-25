@@ -1,25 +1,11 @@
-/* NON_MATCHING: the position is read before the stores (retail loads the three coordinates ahead of the kind store) and the stores follow retail's order; the first block still splits the position copy (str with writeback, then stm), the second computes &targetPosition from the base where retail pools it separately (g_gameState's symbol size 0x500 does not cover 0x5A0, so retail's word reads DAT_005f1b9c). */
+/* NON_MATCHING: the sole diff is the target-position pool relocation. Both resolve to 0x005F1B9C,
+ * but g_gameState's configured size ends at g_lmapMain, before the target position. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "game/GameStateA.h"
-struct MapTransitionRecord {
-    /* 0x00 */ u8 unk00[3];
-    /* 0x03 */ u8 kind;
-    /* 0x04 */ s16 x;
-    /* 0x06 */ s16 y;
-    /* 0x08 */ s16 z;
-    /* 0x0A */ s16 heading;
-};
+#include "gamedata/DataTableAccess_AocTable23.h"
 extern "C" {
 s32 scrGetArg(u32 index);
 s32 table23FindRecordByKey(s32 map, u32 area, u32 object);
-const MapTransitionRecord *dataTableGetRecord23(u32 index);
-
-/* The record's position as a map vector. */
-static __inline MapVector transitionPosition(const MapTransitionRecord *record)
-{
-    MapVector position = {(f32)record->x, (f32)record->y, (f32)record->z};
-    return position;
-}
 
 /* Stores the two script-selected map transition records. */
 u32 scrCommSetTransitionRecords(void)
@@ -34,9 +20,9 @@ u32 scrCommSetTransitionRecords(void)
     u32 secondObject = scrGetArg(5);
     s32 index = table23FindRecordByKey(firstMap, firstArea, firstObject);
     if (index != -1) {
-        const MapTransitionRecord *record = dataTableGetRecord23(index);
-        MapVector position = transitionPosition(record);
-        g_gameState.savedObjectId = record->kind;
+        const Table23Record *record = dataTableGetRecord23(index);
+        const MapVector position = {(f32)record->x, (f32)record->y, (f32)record->z};
+        g_gameState.savedObjectId = record->key.value;
         g_gameState.savedMapId = firstMap;
         g_gameState.savedAreaId = firstArea;
         g_gameState.savedPosition = position;
@@ -45,11 +31,11 @@ u32 scrCommSetTransitionRecords(void)
     }
     index = table23FindRecordByKey(secondMap, secondArea, secondObject);
     if (index != -1) {
-        const MapTransitionRecord *record = dataTableGetRecord23(index);
-        MapVector position = transitionPosition(record);
+        const Table23Record *record = dataTableGetRecord23(index);
+        const MapVector position = {(f32)record->x, (f32)record->y, (f32)record->z};
         g_gameState.targetMapId = secondMap;
         g_gameState.targetAreaId = secondArea;
-        g_gameState.targetKind = record->kind;
+        g_gameState.targetKind = record->key.value;
         g_gameState.targetPosition = position;
         g_gameState.targetHeading = record->heading;
         g_gameState.targetHeadingCopy = record->heading;

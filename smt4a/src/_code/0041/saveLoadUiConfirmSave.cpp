@@ -16,6 +16,7 @@
 #include "gamedata/GameDataAccess_VariantG.h"
 #include "shop/ShopItemDescription.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
@@ -23,7 +24,6 @@ void gameDataBlocksReleaseHold(u32 bits);
 void *gameDataBlocksGetTable(void);
 void sysPlaySe(u32 id);
 void FUN_002299b0(u16 *save);
-void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void clockRecordStartSeconds(void);
 char *libc_strcpy(char *destination, const char *source); // declcheck: local (the shared header keeps the decompiler's word-pointer view)
 void messageStateEndMode2(void);

@@ -2,12 +2,12 @@
 #include "addon/AocBufferRequest.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/AsdDebug.h"
+#include "runtime/String.h"
 
 extern "C" {
 
 void asdMemFree(void *ptr);
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
-void rt_memclr(void *buffer, u32 size);
 void sysFatalBreak(void);
 
 void aocApplicationRecreatePrimaryRequest(AocMain *app)

@@ -9,7 +9,6 @@
 extern "C" {
 
 s32 modelPairTryBind(ResultWork *result);
-void renderCtxSelectStereoLayout(RenderCtx *context);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
 void efctSetSpeed(f32 speed);
 void FUN_003b3388(ResultWork *result, u32 x, u32 y);

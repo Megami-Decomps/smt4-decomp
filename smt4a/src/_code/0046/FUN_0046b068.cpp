@@ -3,7 +3,6 @@
 #include "camp/RenderCtx.h"
 
 extern "C" {
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void gxResetColorQuadToWhite();
 void FUN_0046a108(void *subject);
 void skinObjectUpdateMatrices(RenderCtxA *context);

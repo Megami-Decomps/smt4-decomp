@@ -6,7 +6,6 @@
 #include "code/Code0037.h"
 
 extern "C" {
-s32 dataTable2ECount();
 s32 dataTableGetRecordFortyEight();
 void FUN_003b9720(s32 area, s32 index);
 void gameClearMapGroupFlags(s32 area);

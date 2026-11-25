@@ -4,12 +4,12 @@
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/Effect/effParticle.h"
 #include "AsdSDK/Source/Gfx/Effect/effParticleParamCopy.h"
+#include "runtime/String.h"
 
 extern "C" {
 extern const char g_effMiscHeaderNestedSourceFileName[];
 void *memAlloc(u32 pool, u32 category, u32 options, u32 size,
                u32 alignment, u32 count);
-void rt_memclr(void *destination, u32 size);
 void objectBufferFree(void *buffer);
 void *effGeomCloneHandle(void *source);
 

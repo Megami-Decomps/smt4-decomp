@@ -5,7 +5,6 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-s32 scrGetArg(s32 index);
 
 static __inline s32 entryHpPercentage(const BtlCombatantEntryA *entry)
 {

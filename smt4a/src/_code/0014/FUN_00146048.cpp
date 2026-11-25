@@ -79,7 +79,6 @@ void objectListsClearActive(SlotOwner *owner);
 void FUN_00144ab4(s32 value);
 void asdGxFlushCommandBuffer(void);
 void renderCtxResetFrameState(RenderCtxA *context);
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 modelUploadStereoMatrices(ModelSlot *model, ModelAnimationSet *animations);
 void holderFlushPending(u32 handle);
 

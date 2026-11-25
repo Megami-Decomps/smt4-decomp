@@ -2,11 +2,11 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match8_StatGrowth.h"
+#include "runtime/String.h"
 
 extern "C" {
 void *asdOperatorNewD(u32 size);
 void asdOperatorDeleteC(void *memory);
-void rt_memclr(void *memory, u32 size);
 void aocCollectLevelEntries(LevelEntry *entries, u32 *count, u32 kind, u32 maxLevel);
 
 // Sum the per-level bonus over a level increase, including add-on growth ranges.

@@ -1,8 +1,8 @@
 #include "camp/CampScript.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 void campResetScreen(void);
-void scrScriptProcessStartEntry(ScriptProcess *script, u32 entry);
 void partyPanelRefreshFromSlotTable(void);
 s32 scrRunOpcodesStub(ScriptProcess *script);
 

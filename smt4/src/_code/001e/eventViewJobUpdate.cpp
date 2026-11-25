@@ -16,6 +16,7 @@
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "code/Code0028_Smt4.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
@@ -43,7 +44,6 @@ void messageSlotSet(s32 value);
 void soundChannelStopAll(u32 value);
 bool messageAnyWindowActive(void);
 u32 debugFlagEditorUpdate(void);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 /* The game flag an event entry raises when it ends, 0 when it has none. */
 u32 eventScriptFindCompletionFlag(u32 eventId, const ScriptVmLabel *entry);
 

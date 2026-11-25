@@ -12,7 +12,6 @@ s32 idIsAbove400(s32 id);
 void btlFormatCategoryLabel(char *buffer, u32 category);
 void textEncodeFontSlot(s32 slot, const u8 *text);
 void skillFormatTargetLabel(char *buffer, s32 target);
-void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y, RelativeDirectory *directory, u32 index);
 
 void buttonHelpShowSkillDetails(s32 skill)
 {

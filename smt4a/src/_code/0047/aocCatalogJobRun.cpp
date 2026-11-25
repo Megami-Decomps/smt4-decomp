@@ -8,10 +8,10 @@
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 #include "shard/W6_W6Match8_DateTimeValue.h"
+#include "sys/WindowStatusCheck.h"
 
 extern "C" {
 
-s32 legacyResourceIdRemap(const WindowStatusResult *result); // declcheck: local (the shared declarations take a packed id or a bare pointer and return u32)
 WindowStatusResult aocOpenPackedArchive(void *file, const void *archive);
 void recordClearWideHandle(void *file);
 u16 halfPair48LowByteA(void *file);
@@ -21,7 +21,7 @@ WindowStatusResult aocServiceQueryCatalog(AocBufferRequest *request, u32 offset,
 WindowStatusResult FUN_00427ff4(void *owner, DateTimeValue *output);
 s32 stringFormatUnbounded(char *buffer, const char *format, ...);
 void aocApplicationRecreatePrimaryRequest(AocMain *app);
-WindowStatusResult FUN_00473980(AocMain *main);
+WindowStatusResult resourceLoadDisplayMetadata(AocMain *main);
 nn::Result aocCatalogBuildContentRecords(AocCatalogJob *job);
 u32 FUN_00500234(AocBufferRequest *request);
 u32 FUN_00500244(AocBufferRequest *request);
@@ -38,7 +38,7 @@ enum {
 static __inline bool jobSetResult(AocCatalogJob *job, WindowStatusResult result)
 {
     job->result = result;
-    return nnResultIsFailure(legacyResourceIdRemap(&job->result));
+    return windowStatusFailed(job->result);
 }
 
 /* Runs the shop's catalog job: opens the content file, asks the service for the sale catalog sorted by
@@ -102,7 +102,7 @@ void aocCatalogJobRun(AocCatalogJob *job)
     nn::Result entries = aocCatalogBuildContentRecords(job);
     recordClearWideHandle(app->contentFile);
     if (nnResultIsSuccess(entries)) {
-        jobSetResult(job, FUN_00473980(app));
+        jobSetResult(job, resourceLoadDisplayMetadata(app));
     }
 }
 

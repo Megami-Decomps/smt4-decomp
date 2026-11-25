@@ -13,6 +13,7 @@
 #include "ui/AnimatedMessage.h"
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/NumberFont.h"
 
 enum {
     UNITE_TEX_TABLE = 26,
@@ -25,7 +26,6 @@ enum {
 };
 
 extern "C" {
-void numberFontDrawFormatted(s32 kind, s32 x, s32 y, s32 align, s32 digits, u32 slot, const char *format, ...);
 s32 uiListGetVisibleCount(ScrollSelection *list);
 s32 uniteIsStateTwentyTwo(void);
 void uiDrawDataEntryRow(UniteWorkA *work, s32 index, s32 x, s32 y, f32 baseSpeed, f32 speed, s32 selected);

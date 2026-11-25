@@ -76,7 +76,7 @@ s32 uiScrollHandleActionsOrTouch(void *listbox, u32 handle, void *position, s32 
 void FUN_003fd690(u16 id, s32 mode);
 s32 flagsAtGetBit1(u16 id);
 void FUN_0049d140(DirectoryScreenWork *work, s32 state, s32 arg);
-void FUN_0049de10(DirectoryScreenWork *work);
+void howToLayoutSelectedPage(DirectoryScreenWork *work);
 
 /* Re-selects the directory entry under the cursor and handles confirm/cancel input. */
 void FUN_0049df84(DirectoryScreenWork *work)
@@ -108,7 +108,7 @@ void FUN_0049df84(DirectoryScreenWork *work)
         if (node > 0 && !asdTMTexTableNodeIsLoaded(0x33, node)) {
             asdTMTexLoadMainHeap(0x33, node);
         }
-        FUN_0049de10(work);
+        howToLayoutSelectedPage(work);
         gridNavigationConfigure(work->flags, work->height, 9, 1, 1, 1);
         flagsSetOrClearBit(work->flags, 0);
         work->pending = 0;

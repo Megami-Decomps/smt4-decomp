@@ -25,6 +25,7 @@
 #include "script/scrScriptProcess.h"
 #include "shop/ShopItemDescription.h"
 #include "quest_center/qcMain.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern ClearSaveWorkA *g_clearSave;
@@ -32,7 +33,6 @@ extern ClearSaveWorkA *g_clearSave;
 u32 uiAdjustIntegerFromRepeat(s32 *value, s32 minimum, s32 maximum, s32 wrap, s32 mode, s32 step);
 u32 padButtonIsPressed(u32 button);
 s32 gameSlotTableFindFree(void);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 u32 messageMainGetValue(void);
 void titleSetSlotValueState2(u32 index, u32 value);
 void sysPlaySe(u32 id);

@@ -16,6 +16,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "ui/AnimatedMessage.h"
 #include "text/TextDraw.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 
@@ -24,7 +25,6 @@ u32 unitMatchesAlignment(s32 unitId);
 bool equipmentHasPositiveUpgrade(u32 item);
 u32 equipmentIsFullyUpgraded(u32 itemId);
 void drawSetColorFromRGBA8(u32 packed);
-void numberFontDrawFormatted(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
 void effectDispatchSelector(u32 kind, u32 first, u32 second, u32 third, f32 speed);
 
 /* Draws an equipment row of the camp's equipment lists (list kinds 19-25 and 72-78) at (x, y): its frame,

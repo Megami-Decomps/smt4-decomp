@@ -32,7 +32,7 @@ typedef char AsyncTransferDataOffsetsCheck[
 extern "C" {
 extern AsyncTransferData DAT_0061b030;
 extern u8 DAT_0061b000[];
-nn::Result FUN_00427e68(u32 token, u32 operation);
+nn::Result resourceApplyProgramDescriptor(u32 token, u32 operation);
 void *tokenTableGet(void);
 s32 tokenResolveAddress(void *registry, AsyncTransferContext **context, u32 token);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
@@ -47,7 +47,7 @@ WindowStatusResult FUN_00429210(const u32 *token, const AsyncTransferFormat *for
 {
     if (count > 64)
         return WindowStatusResult(0xE0613880);
-    nn::Result result = FUN_00427e68(*token, 8);
+    nn::Result result = resourceApplyProgramDescriptor(*token, 8);
     if (!nnResultIsFailure(result)) {
         AsyncTransferContext *context;
         result = tokenResolveAddress(tokenTableGet(), &context, *token);

@@ -15,6 +15,7 @@
 #include "shard/W6_W6Match8_StatGrowth.h"
 #include "code/Code0048_Smt4a.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "script/ScriptEntry.h"
 
 struct MapIfSpawnPose { f32 x, y, z, heading; };
 
@@ -46,7 +47,6 @@ void sub68OwnerCall7(void);
 void FUN_002d88e0(MapIfSpawnPose pose);
 void mapPlaceSet(s32 map, s32 area, u32 variant);
 s32 tableGroupFindEntryIndex(TableGroupHeader *table, const char *name);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 void mapIfReleaseSlot0AndReset(void);
 void mapIfReleaseFirstOverlay(void);
 void mapIfClose(void);

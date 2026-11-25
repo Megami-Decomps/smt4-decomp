@@ -8,6 +8,7 @@
 #include "gamedata/SaveLoadThreadRequest.h"
 #include "shard/Sys43e310.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "script/ScriptEntry.h"
 
 enum EventState {
     EVENT_START = 0,
@@ -20,7 +21,6 @@ enum EventState {
 
 extern "C" {
 s32 FUN_00223898(SaveLoadThreadRequest *request, s32 kind);
-s32 scrScriptProcessStartEntry(void *process, s32 entry);
 void gameDataFlagsClear(s32 flag);
 void gameDataFlagsClearAndRefresh(s32 flag);
 void gameDataRemoveHomeButtonHold(s32 flag);

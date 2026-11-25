@@ -12,6 +12,7 @@
 #include "game/GameStateA.h"
 #include "gamedata/GameDataAccess_Smt4a.h"
 #include "gamedata/GameDataAccess_VariantG.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
@@ -20,7 +21,6 @@ s32 dataTable33Type0Count(u8 *table);
 ListEntry20 *dataTable33GetEntryByGroup(u8 *table, s32 group, u32 index);
 s32 dataTable33GroupCount(u8 *table, s32 group);
 void FUN_001b4a74(Menu4C *menu);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 s32 tableGroupFindEntryIndex(TableGroupHeader *table, const char *name);
 void resultGetListEntryLabel(Menu4C *menu, ListEntry20 *entry, s32 mode);
 s32 packageListCountSectionRecords(AocSystemA *system, u32 section);

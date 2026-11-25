@@ -22,7 +22,7 @@ s32 statusGetAvailableChoiceCount(void);
 u32 resourceRunOperationIfUnblocked(const GridNavigation *grid);
 u16 table8Type5GetValue(u16 id);
 void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide);
-s32 FUN_00298848(u32 skill, s32 unit);
+s32 skillCanUseInField(u32 skill, s32 unit);
 void FUN_002b6c34(s32 skill, s32 x, s32 y, s32 depth, s32 player, s32 highlight);
 void textDrawFormattedAligned(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 depth, const char *text);
 
@@ -75,7 +75,7 @@ void campAppListDraw(s32 x, s32 y, s32 drawCursor)
                 const char *name = (const char *)aocIndexValueOrDefault(skill);
                 if (name != NULL) {
                     u32 color = 0xff;
-                    if (FUN_00298848(skill, -1)) {
+                    if (skillCanUseInField(skill, -1)) {
                         if (FUN_0028d1f4(skill) > gameGetSlotTable()->money) {
                             color = APP_COLOR_DISABLED;
                         }
@@ -122,7 +122,7 @@ void campAppListDraw(s32 x, s32 y, s32 drawCursor)
             const char *name = (const char *)aocIndexValueOrDefault(skill);
             if (name != NULL) {
                 u32 color = 0xffffffff;
-                if (FUN_00298848(skill, -1)) {
+                if (skillCanUseInField(skill, -1)) {
                     if (FUN_0028d1f4(skill) > gameGetSlotTable()->money) {
                         color = APP_COLOR_DISABLED;
                     }

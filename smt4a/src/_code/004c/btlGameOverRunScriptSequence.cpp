@@ -5,6 +5,7 @@
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 struct GameOverTransition {
     /* 0x00 */ u8 unk00[8];
@@ -22,7 +23,6 @@ extern "C" {
 void asdTMTexTableLoadTmx(u32 table, u32 flags);
 void asdTMTexTableReleaseNode(u32 table, u32 index);
 s32 campButtonHelpIsActive(void);
-void scrScriptProcessStartEntry(ScriptProcess* process, u32 entry);
 s32 fountainCrazingSumahoUpdate(GameOverTransition* transition);
 void asdMemFree(void* data);
 extern const char DAT_00530edc[];

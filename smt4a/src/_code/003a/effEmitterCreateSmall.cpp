@@ -1,12 +1,12 @@
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 #include "AsdSDK/AsdDebug.h"
+#include "runtime/String.h"
 
 extern "C" {
 
 extern const char g_effMiscSourceFileName[]; /* ././effMisc.h: __FILE__ */
 
 void *memAlloc(int, int, int, int size, int align, int);
-void rt_memclr(void *block, s32 size);
 
 /* Allocates a zeroed effect object of `size` bytes from the main heap, 16-byte aligned. */
 static __inline void *effAllocCleared(s32 size)

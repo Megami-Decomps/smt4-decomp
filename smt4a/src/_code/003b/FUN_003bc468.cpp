@@ -7,7 +7,6 @@
 
 extern "C" {
 s32 btlResolveEntryChoice(s32 choice);
-void scrSetResult(s32 result);
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 
 // Count eligible combatants missing at least the requested amount of HP.

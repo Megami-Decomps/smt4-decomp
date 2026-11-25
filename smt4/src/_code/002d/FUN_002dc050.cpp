@@ -4,7 +4,6 @@
 extern "C" {
 
 s32 flagValueRead(s32 value);
-s32 scrGetArg(s32 index);
 
 /* Script command: reports flagValueRead of the first argument. */
 u32 FUN_002dc050(void)

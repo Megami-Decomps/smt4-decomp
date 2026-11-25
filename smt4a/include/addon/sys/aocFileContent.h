@@ -4,7 +4,7 @@
 #include "common.h"
 
 extern "C" {
-void FUN_0042a410(u32 id, u32 mode, u32 first, u32 second, u32 third, u32 fourth);
+u32 aocFileContentQueryMountBufferSize(s32 *size, u32 title, u32 mode, s32 directoryCount, s32 archiveCount, s32 readHeader);
 }
 
 #endif

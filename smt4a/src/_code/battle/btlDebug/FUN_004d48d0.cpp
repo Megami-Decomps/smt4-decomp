@@ -18,7 +18,6 @@ void jobStop(u32 job, s32 mode);
 void asdListBoxAddItems(u32 job, const AsdListBoxEntry *items, u32 count);
 void jobSetText(u32 job, const char *text);
 void asdListBoxSetToggleItem(u32 job, s32 item, s32 value);
-void asdListBoxSetIntItem(u32 job, s32 item, s32 value, s32 minimum, s32 maximum, u8 flags);
 s32 dataTable22GetCount(void);
 
 // Recreate the debug menu panel from the battle's marker masks and the menu settings.

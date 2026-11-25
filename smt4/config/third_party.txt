@@ -749,8 +749,6 @@
 0x0014ca58 FUN_0014ca58 between
 0x0014ca60 dataTable40BsearchRecord between
 0x0014caa4 aocContentFindIndexedRecord between
-0x0014cbcc aocTextureNodeLoad between
-0x0014ce2c FUN_0014ce2c between
 0x0014cf4c nn_ulcd_CTR_StereoCamera_GetParallax name
 0x0014cf84 nw_gfx_res_ResTextureMapper_GetMemorySizeForCloneInternal name
 0x0014cfe8 FUN_0014cfe8 between
@@ -3010,7 +3008,7 @@
 0x003eaeec FUN_003eaeec between
 0x003eaf90 FUN_003eaf90 between
 0x003eaf9c FUN_003eaf9c between
-0x003eb068 FUN_003eb068 between
+0x003eb068 __ARM_common_memclr4_5 name
 0x003eb078 mathlib_ceilf name
 0x003eb108 FUN_003eb108 callers
 0x003eb2c8 FUN_003eb2c8 callers

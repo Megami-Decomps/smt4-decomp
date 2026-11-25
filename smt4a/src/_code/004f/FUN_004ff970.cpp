@@ -8,13 +8,13 @@ typedef struct SlotValue {
     /* 0x0C */ s32 valid;
 } SlotValue;
 
-typedef struct SlotOwner {
+typedef struct SlotValueOwner {
     /* 0x00 */ u8 unk00[0x84];
     /* 0x84 */ SlotValue slot;
-} SlotOwner;
+} SlotValueOwner;
 
 /* The slot's value, or 0xFFFF when it holds none. */
-u32 FUN_004ff970(SlotOwner *owner)
+u32 FUN_004ff970(SlotValueOwner *owner)
 {
     SlotValue *slot = &owner->slot;
 

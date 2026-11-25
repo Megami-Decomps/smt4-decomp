@@ -1,4 +1,6 @@
-/* NON_MATCHING: the job handle and x are allocated to swapped registers (r5/r6), the idle path splits the current-offset copy into two str where retail uses strd, and case 3 stores the state before loading the base position. */
+/* NON_MATCHING: retail keeps the job in r5 and x (then the state 2) in r6; this build swaps them. w94-s4 matched it with a
+ * plain-static jobGetWork wrapper (commented as there to make armcc inline it late), a one-line by-value offset getter
+ * and a `-horizontalScale` constant; all three only steer allocation, so they are not kept. */
 #include "shard/S1Mover.h"
 #include "addon/aocMain.h"
 #include "shard/JobWork.h"
@@ -44,13 +46,14 @@ s32 bustupCutAnimAssignSlot(u32 job, s32 slot);
 void bustupSpriteStartTransition(BustupPlacementWork* work, s32 operation, s32 duration);
 u32 bustupPlaceActiveSlot(Vec3f* position, s32 slot);
 
+/* Assigns the bust-up slot and updates its current or transitioning placement. */
 void bustupCutAnimSetPlacement(u32 job, s32 slot, s32 snap, s32 x, s32 y)
 {
     if (gameFlagIsSet(0x522) && job == 0) {
         return;
     }
 
-    BustupPlacementWork* work = (BustupPlacementWork*)jobGetWork(job);
+    BustupPlacementWork *work = (BustupPlacementWork *)jobGetWork(job);
     if (work->textureIndex != -1 && work->textureActive != 0) {
         asdTMTexTableReleaseNode(work->textureTable, work->textureIndex);
         packageFileDisableByKindName(g_aocSystem, work->textureTable, work->textureIndex);
@@ -70,10 +73,11 @@ void bustupCutAnimSetPlacement(u32 job, s32 slot, s32 snap, s32 x, s32 y)
         if (work->state != 0) {
             work->state = 1;
         } else {
+            const BustupOffset destination = work->destination;
             work->hidden = 0;
             work->progress = 0.0f;
-            work->current = work->destination;
-            work->previous = work->destination;
+            work->current = destination;
+            work->previous = destination;
         }
     } else if (result == 1) {
         bustupSpriteStartTransition(work, 2, 0);
@@ -84,12 +88,13 @@ void bustupCutAnimSetPlacement(u32 job, s32 slot, s32 snap, s32 x, s32 y)
         } else {
             bustupSpriteStartTransition(work, 6, 0);
         }
+        const BustupOffset destination = work->destination;
         work->state = 2;
-        work->previous = work->destination;
-        work->current = work->destination;
+        work->previous = destination;
+        work->current = destination;
     } else if (result == 3) {
         bustupSpriteStartTransition(work, 5, 0);
-        BustupPlacementWork* active = (BustupPlacementWork*)jobGetWork(job);
+        BustupPlacementWork *active = (BustupPlacementWork *)jobGetWork(job);
         active->startPosition = active->basePosition;
         active->state = 1;
         bustupPlaceActiveSlot(&work->position, work->slot);

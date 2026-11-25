@@ -4,7 +4,6 @@
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
 extern "C" {
-s32 scrGetArg(s32 index);
 
 /* The entry stat a script kind argument selects (0, 1, 2 -> 7, 10, 11); 0 for any other kind. */
 static __inline s32 statForKind(s32 kind)

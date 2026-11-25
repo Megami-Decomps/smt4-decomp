@@ -1,54 +1,41 @@
-/* NON_MATCHING: endpoint load hoisting and floating-point register scheduling differ from retail. */
-#include "common.h"
+/* NON_MATCHING: one floating-point add uses reversed operands, and opacity conversion
+ * and endpoint loads are scheduled differently at the tail call. */
+#include "gfx/RoutedConnector.h"
 #include "camp/RenderCtxA.h"
-#include <math.h>
 #include "camp/RenderCtx.h"
 
-struct SegmentPoint {
-    f32 x;
-    f32 y;
-};
-
-struct SegmentStyle {
-    u8 unk00[0xa4];
-    u8 rightFacing; /* 0xa4 */
-};
-
 extern "C" {
-void uiDrawSegmentStrip(u32 colorA, u32 colorB, f32 x0, f32 y0, f32 x1, f32 y1, f32 alpha, f32 scale);
-
-// Draw two joined segments with the elbow offset toward the facing side.
-void drawFacingElbowSegments(const SegmentStyle *style, const SegmentPoint *start,
-                  const SegmentPoint *end, u32 color, s32 transparency)
+/* Draws a two-segment connector with a clamped diagonal and a horizontal end segment. */
+void drawFacingElbowSegments(const RoutedConnectorStateA *state, const f32 *start, const f32 *end,
+                            u32 color, s32 fade)
 {
     renderCtxSelectTexture(g_renderCtx, 0);
-    f32 x = end->x;
-    f32 y = end->y;
-    f32 offsetX = 0.0f;
-    f32 offsetY = 0.0f;
-    if (style->rightFacing) {
-        x -= 16.0f;
-        if (fabsf(x - start->x) < 1.0f) {
-            x = start->x;
-        }
-        if (fabsf(y - start->y) - fabsf(x - start->x) < 0.0f) {
-            x = fabsf(y - start->y) + start->x;
-            offsetX = -0.5f;
+    f32 bendX;
+    f32 pixelOffset = 0.0f;
+    f32 pixelOffsetY = 0.0f;
+    f32 bendY = end[1];
+    if (state->reverse) {
+        bendX = end[0] - 16.0f;
+        bendX = snapConnectorBend(start, bendX);
+        f32 vertical = fabsf(bendY - start[1]);
+        if (vertical - fabsf(bendX - start[0]) < 0.0f) {
+            bendX = vertical + start[0];
+            pixelOffset = -0.5f;
         }
     } else {
-        x += 16.0f;
-        if (fabsf(x - start->x) < 1.0f) {
-            x = start->x;
-        }
-        if (fabsf(y - start->y) - fabsf(x - start->x) < 0.0f) {
-            x = start->x - fabsf(y - start->y);
-            offsetX = 0.5f;
+        bendX = end[0] + 16.0f;
+        bendX = snapConnectorBend(start, bendX);
+        f32 vertical = fabsf(bendY - start[1]);
+        if (vertical - fabsf(bendX - start[0]) < 0.0f) {
+            bendX = start[0] - vertical;
+            pixelOffset = 0.5f;
         }
     }
-    SegmentPoint adjustedElbow = {offsetX + x, offsetY + y};
-    uiDrawSegmentStrip(color, color, start->x, start->y, x, y,
-                 (256 - transparency) * (1.0f / 256.0f), 1.0f);
-    uiDrawSegmentStrip(color, color, adjustedElbow.x, adjustedElbow.y, end->x, end->y,
-                 (256 - transparency) * (1.0f / 256.0f), 1.0f);
+    f32 joinX = pixelOffset + bendX;
+    f32 joinY = pixelOffsetY + bendY;
+    uiDrawSegmentStrip(color, color, start[0], start[1], bendX, bendY,
+                      (256 - fade) * (1.0f / 256.0f), 1.0f);
+    uiDrawSegmentStrip(color, color, joinX, joinY, end[0], end[1],
+                      (256 - fade) * (1.0f / 256.0f), 1.0f);
 }
-}
+} /* extern "C" */

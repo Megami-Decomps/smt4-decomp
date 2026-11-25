@@ -6,7 +6,6 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-void scrSetResult(s32 value);
 
 /* Script command: rolls 0-99 against the percentage weights of section 10, 11 or 12 (argument 0 =
  * 1, 2 or 3) of the battle's data-table file and sets the result to the one-based index of the row

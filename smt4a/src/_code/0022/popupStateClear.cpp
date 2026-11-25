@@ -1,9 +1,9 @@
 #include "common.h"
 #include "map/PopupStateA.h"
+#include "runtime/String.h"
 
 extern "C" {
 
-void rt_memclr(u8 *block, s32 size);
 
 /* Clears the popup state: the leading words, the text buffer and the pending queue with the word after it. */
 void popupStateClear(void)

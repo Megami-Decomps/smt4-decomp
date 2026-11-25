@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "code/Code003c_Smt4a.h"
+#include "script/ScriptEntry.h"
 
 struct ScriptProcess;
 struct NpcShopNameEntry {
@@ -30,7 +31,6 @@ extern const char g_npcShopSelectState5EntryName[]; // "npcShop_Select_03"
 extern const char g_npcShopSelectDefaultEntryName[]; // "npcShop_Select_00"
 const char *dataFindKindRecordWithAocOverrides(u32 id, s32 mode);
 s32 tableGroupFindEntryIndex(void *table, const char *name);
-void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 s32 scrRunOpcodesStub(ScriptProcess *script);
 bool panelIsMissingOrFlagClear();
 u32 messageGetChoiceResult();

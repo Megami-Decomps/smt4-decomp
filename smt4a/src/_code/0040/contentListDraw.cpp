@@ -3,7 +3,6 @@
 #include "util/BitsAndBytes.h"
 
 extern "C" {
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void efctSetSpeed(f32 speed);
 void renderCtxResetColorScale(RenderCtxA *context);
 void contentListDrawRows(void *work);

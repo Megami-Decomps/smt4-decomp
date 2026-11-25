@@ -3,7 +3,6 @@
 
 extern "C" {
 
-int bufferHandleRelease(u32 texture);
 
 typedef struct ObjectVtbl {
     /* 0x0 */ void *unk0;

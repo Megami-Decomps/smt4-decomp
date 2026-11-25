@@ -23,7 +23,7 @@ u32 screenFadeIsBusy(void);
 s32 gameFlagIsSet(u32 flag); // declcheck: local (its headers belong to the battle and camp menus)
 s32 storyModeCanProceed(u32 mode);
 void qcBoardBuildShownTab(DummyAttachmentWork *work);
-u32 FUN_002950e8(UiSpriteState *sprite, s32 fromBelow);
+u32 uiSpriteSlideFromVerticalEdge(UiSpriteState *sprite, s32 fromBelow);
 s32 FUN_00296284(UiSpriteState *sprite, s32 reverse, s32 vertical);
 u8 *qcGetCenterSlotGroups(s32 index);
 s32 slotGroupFindFree(const SlotGroups *groups, u32 group);
@@ -119,7 +119,7 @@ void qcBoardStep(DummyAttachmentWork *work)
         uiSpriteAdvanceAnimation(&work->board.sprites[3]);
         if (uiSpriteGetCompletionState(&work->board.sprites[3]) != 0) {
             flagWordSet(&work->flags, 0x10);
-            u32 first = FUN_002950e8(&work->board.sprites[0], 0);
+            u32 first = uiSpriteSlideFromVerticalEdge(&work->board.sprites[0], 0);
             s32 second = FUN_00296284(&work->board.sprites[1], 0, 0);
             s32 third = FUN_00296284(&work->board.sprites[2], 0, 1);
 

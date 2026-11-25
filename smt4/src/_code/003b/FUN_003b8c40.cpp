@@ -7,6 +7,7 @@
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include <stddef.h>
 #include "quest_center/qcMain.h"
+#include "script/ScriptEntry.h"
 
 
 struct CampResultMessageView { u8 unk00[0x3F]; u8 message; };
@@ -45,7 +46,6 @@ s32 listUpdateRevealTransition(FlaggedValueHolder *value);
 void buttonHelpSelectByProgress(CampResultStateView *work);
 u16 flaggedValueHolderGetTotal(const FlaggedValueHolder *value);
 s32 tableGroupFindEntryIndex(const void *script, const char *entry);
-void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void *asdLoadFileSyncDefault(const char *path);
 void infoWinSetMessage(void *window, u32 message);
 

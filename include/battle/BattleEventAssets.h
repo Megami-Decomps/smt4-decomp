@@ -21,6 +21,8 @@ struct BattleEventAssetSourceA {
     u8 unk0f4[0x3c];
     char name[1]; // 0x130
 };
+struct ScriptProcess;
+
 /* The Apocalypse battle event block (BtlEvent in battle/btlEvent.h is Shin Megami Tensei IV's). */
 struct BattleEventAssetLoadState {
     /* 0x00 */ u32 state;           /* BtlEventStateA */
@@ -28,12 +30,13 @@ struct BattleEventAssetLoadState {
     /* 0x08 */ void *table;         /* the event table file */
     /* 0x0C */ void *messages;      /* the message bank file (.mbm) */
     /* 0x10 */ void *script;        /* the script file (.bf) */
-    /* 0x14 */ void *scriptProcess;
+    /* 0x14 */ ScriptProcess *scriptProcess;
     /* 0x18 */ void *entries;       /* the event table's records */
     /* 0x1C */ u32 entryCount;
     /* 0x20 */ s32 entry;           /* script entry to start, negative while none is chosen */
     /* 0x24 */ s32 type;
-    /* 0x28 */ u32 frames;          /* frames the script has run */
+    /* 0x28 */ s32 frames;          /* frames the script has run */
+    /* 0x2C */ u8 stage;            /* auxiliary resources' preparation stage */
 };
 
 /* BattleEventAssetLoadState::state. Each state hands over to the next in the same frame when its wait is over. */
@@ -55,7 +58,9 @@ typedef char BattleEventAssetSourceAOffsetsCheck[
     offsetof(BattleEventAssetSourceA, name) == 0x130 &&
     offsetof(BattleEventAssetLoadState, messages) == 0xc &&
     offsetof(BattleEventAssetLoadState, script) == 0x10 &&
+    offsetof(BattleEventAssetLoadState, scriptProcess) == 0x14 &&
     offsetof(BattleEventAssetLoadState, entry) == 0x20 &&
-    offsetof(BattleEventAssetLoadState, frames) == 0x28 ? 1 : -1];
+    offsetof(BattleEventAssetLoadState, frames) == 0x28 &&
+    offsetof(BattleEventAssetLoadState, stage) == 0x2c ? 1 : -1];
 
 #endif

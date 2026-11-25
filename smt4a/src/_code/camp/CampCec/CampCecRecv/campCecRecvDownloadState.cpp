@@ -27,6 +27,7 @@
 #include "script/scrScriptProcess.h"
 #include "shard/W6_W6Match1_Table25Record.h"
 #include "shard/W6_W6Match2_FormattedTextSource.h"
+#include "script/ScriptEntry.h"
 
 struct PlayerSummary;
 
@@ -54,7 +55,6 @@ extern CampCecRecv *g_campCecRecv;
 extern const u32 DAT_0052c758[10];   /* the item gift kind of every fifth record, in a cycle of ten */
 
 char *libc_strcpy(char *destination, const char *source); // declcheck: local (the shared header keeps the decompiler's word-pointer view)
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 u32 maskToCode(u32 mask);
 u32 dataStoreGetProgress(void);
 u32 dataStoreGetValue50(void);
@@ -84,7 +84,6 @@ void cecRankingRebuild(void);
 void FUN_00330b7c(void);
 u8 FUN_0031cee0(void);
 SlotRecordA *stockFindSelectedUnit(void);
-Table25Record *dataTable25Section0FindById(s32 id);
 void slotNameDisplaySetEntry(CampCecReceivedRecord *record, s32 entryId);
 u32 playerSummaryIsIncomplete(CampCecReceivedRecord *record);
 void savedRecordInsertAtFront(const CampCecReceivedRecord *record);

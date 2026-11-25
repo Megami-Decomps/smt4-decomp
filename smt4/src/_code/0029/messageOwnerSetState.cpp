@@ -1,5 +1,6 @@
 #include "common.h"
 #include "code/Code0029_Smt4.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ struct MessageOwner {
 void touchLayoutRebuildRegions(void);
 void buttonHelpSetPreset(u32 preset);
 void messageMainFinishWindow(void);
-void scrScriptProcessStartEntry(ScriptProcess *process, s32 index);
 
 /* Switches the message owner to `state`: state 2 shows the button help and starts the script's first entry; states 4 and 5 finish the window. */
 void messageOwnerSetState(MessageOwner *owner, s32 state)

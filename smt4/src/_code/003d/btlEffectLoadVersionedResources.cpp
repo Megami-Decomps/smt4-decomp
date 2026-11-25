@@ -1,64 +1,51 @@
-/* NON_MATCHING: nameStartsWith/nameEquals keep retail's repeated null tests; retail loads each g_btlEffect prefix after its test, keeps the &formatted pointer in a callee-saved register and uses a 260-byte frame. */
-#include "runtime/Stdio.h"
-#include "shard/W6_W6Match6_EffectLoader.h"
+/* NON_MATCHING: the frame is allocated before the request check, and armcc keeps the
+ * path workspace's base instead of the formatted path's address in a saved register. */
 #include "AsdSDK/AsdMemUtil.h"
+#include "battle/BtlEffectNameTests.h"
+#include "runtime/Stdio.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
-#include <string.h>
 #include "shard/W6_W6Match7_KeyedRecordStorage.h"
 
 extern "C" {
-extern BtlEffectGlobals g_btlEffect;
 extern const char DAT_00400914[];
-extern const char DAT_0040090c[];
-extern const char DAT_004008c4[];
-u32 libc_strlen(const char *);
-s32 libc_strncmp(const char *, const char *, u32);
+extern const char DAT_0040090c[]; /* NOT_EFT sentinel. */
+extern const char DAT_004008c4[]; /* Battle effect path format. */
+u32 FUN_00249e54(u32 id, const char *version);
+} /* extern "C" */
 
-static __inline bool nameStartsWith(const char *name, const char *prefix)
+/* Registers versioned effects from the first four names of its request. */
+extern "C" void btlEffectLoadVersionedResources(BtlEffectWork *owner)
 {
-    return name && !libc_strncmp(name, prefix, libc_strlen(prefix));
-}
+    /* unit-local: the workspace used to format and copy the path. */
+    struct EffectPaths { char path[128]; char formatted[128]; };
 
-static __inline bool nameEquals(const char *name, const char *other)
-{
-    return name && !strcmp(name, other);
-}
+    if (owner->request == NULL)
+        return;
 
-u32 FUN_00249e54(u32, const char *);
+    enum { EFFECT_COUNT = 4 };
+    s32 index = 0;
+    do {
+        const char *name = owner->request->names[index];
+        if (libc_strlen(name) == 0 || strcmp(name, DAT_00400914) == 0 || strcmp(DAT_0040090c, name) == 0)
+            continue;
+        if (btlEffectHasNumberedPrefix(name) || btlEffectIsIgnoredName(name) ||
+            btlEffectHasIgnoredPrefix(name) || btlEffectIsIgnoredNameB(name))
+            continue;
 
-// Load versioned battle effect resources after excluding reserved effect names.
-void btlEffectLoadVersionedResources(EffectLoader *loader)
-{
-    if (loader->names != NULL) {
-        for (s32 slot = 0; slot < 4; ++slot) {
-            const char *name = loader->names->names[slot];
-            if (!libc_strlen(name) || !strcmp(name, DAT_00400914) ||
-                !strcmp(DAT_0040090c, name))
-                continue;
-            if (nameStartsWith(name, g_btlEffect.prefix))
-                continue;
-            if (nameEquals(name, g_btlEffect.reserved.name))
-                continue;
-            if (nameStartsWith(name, g_btlEffect.otherPrefix))
-                continue;
-            if (nameEquals(name, g_btlEffect.reserved.otherName))
-                continue;
-            char path[128];
-            char formattedPath[128];
-            memClear(path, sizeof(path));
-            memClear(formattedPath, sizeof(formattedPath));
-            __2sprintf(formattedPath, DAT_004008c4, name);
-            libc_strcpy(reinterpret_cast<unsigned int *>(path), reinterpret_cast<unsigned int *>(formattedPath));
-            if (libc_strlen(path)) {
-                EffectResource *resource = &loader->resources[slot];
-                const char *version = resource->version;
-                if (version[0] == 'V' && version[1] == 'E' && version[2] == 'R') {
-                    u32 handle = keyedRecordRegisterName((const char *)resource->storage);
-                    resource->handle = handle;
-                    resource->handle = FUN_00249e54(handle, version);
-                }
-            }
+        EffectPaths paths;
+        memClear(paths.path, sizeof(paths.path));
+        memClear(paths.formatted, sizeof(paths.formatted));
+        __2sprintf(paths.formatted, DAT_004008c4, name);
+        libc_strcpy((u32 *)paths.path, (u32 *)paths.formatted);
+        if (libc_strlen(paths.path) == 0)
+            continue;
+
+        BtlEffectFileSlot *slot = &owner->slots[index];
+        const char *version = (const char *)slot->file;
+        if (version[0] == 'V' && version[1] == 'E' && version[2] == 'R') {
+            u32 id = keyedRecordRegisterName(slot->name);
+            slot->handle = (u8)id;
+            slot->handle = (u8)FUN_00249e54(id, version);
         }
-    }
-}
+    } while (++index < EFFECT_COUNT);
 }

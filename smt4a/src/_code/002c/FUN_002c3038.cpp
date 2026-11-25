@@ -22,7 +22,6 @@ extern "C" {
 u32 jobGetWork(u32 handle);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void mobiclipRenderCurrentScreen(void);
 int FUN_00102bbc(void *destination, const void *source, u32 size);
 

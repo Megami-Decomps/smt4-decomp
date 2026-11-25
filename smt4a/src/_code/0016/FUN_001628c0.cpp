@@ -1,5 +1,6 @@
-/* NON_MATCHING: written like its sibling FUN_001566a8 (third scratch buffer, failure value, <stdio.h> sprintf); the slot search copies the queue base into another register and the request stores schedule differently. The two format strings are the ones FUN_001566a8 defines (one pooled copy in the image), so neither unit can own them yet. */
-#include <stdio.h>
+/* NON_MATCHING: the variadic format calls change the prologue, and the slot search and request-field stores
+ * use a different register schedule. The image pools these two formats with FUN_001566a8. */
+#include "runtime/Stdio.h"
 #include "code/Code0016.h"
 #include "sound/VoiceLoadQueue.h"
 #include "kernel/jyoucyuGetTableEntry.h"
@@ -13,8 +14,8 @@ u32 asdSoundGetObjectCount(void);
 u32 asdLoadFileExists(const char *path);
 void workCommandArm(void *file, VoiceLoadRequest *request);
 } /* extern "C" */
-static const char s_voiceDirectory[] = "snd/voice/";
-static const char s_voiceFileFormat[] = "%s.bcwav";
+extern "C" const char DAT_0053629c[]; /* "snd/voice/" */
+extern "C" const char DAT_00536288[]; /* "%s.bcwav" */
 
 
 /* Reserves a voice-load slot and schedules the named wave file with per-channel stereo gains. */
@@ -31,15 +32,14 @@ extern "C" u32 FUN_001628c0(const char *name, s32 kind, u8 flags, u8 priority, f
         return failure;
     if (g_soundObjectTable.disabled != 0 || kind == 0)
         return failure;
-    sprintf(directory, s_voiceDirectory);
+    __2sprintf(directory, DAT_0053629c);
     libc_strcat(directory, name);
-    sprintf(path, s_voiceFileFormat, directory);
+    __2sprintf(path, DAT_00536288, directory);
     asdSoundGetObjectCount();
-    VoiceLoadQueue *queue = &g_soundObjectTable;
-    s32 index = findFreeVoiceLoadRequest(queue);
+    s32 index = findFreeVoiceLoadRequest(&g_soundObjectTable);
     if (index == -1)
         return failure;
-    VoiceLoadRequest *request = voiceLoadRequestAt(queue, index);
+    VoiceLoadRequest *request = voiceLoadRequestAt(&g_soundObjectTable, index);
     if (request == NULL || !asdLoadFileExists(path))
         return failure;
     request->group = 0;

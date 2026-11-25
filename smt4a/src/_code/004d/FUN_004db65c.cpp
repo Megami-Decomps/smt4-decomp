@@ -22,7 +22,6 @@ extern "C" {
 PairedKeyRecord *dataTable1fFindPairedKey(u32 first, u32 second);
 u32 entryDefIsAvailable(FusionState *state, u16 id);
 s32 fusionRecordPassesFilter(FusionState *state, u32 first, u32 second, u32 id);
-CompactSortRecord *findSkillMetadataById(u16 id);
 void qsort(void *elements, u32 count, u32 elementSize, s32 (*compare)(const void *, const void *));
 u32 battleCandidateMatchesSkillFilters(FusionState *state, u32 first, u32 second, u32 demonId);
 s32 halfwordKeyEmptyLastCompare(const void *left, const void *right);

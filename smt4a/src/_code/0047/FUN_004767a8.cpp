@@ -14,7 +14,7 @@ int FUN_00427ff4(...);
 int FUN_00429934(int *, AocCatalogRequest *);
 int FUN_00429c08(int *, AocCatalogRequest *, int);
 int stringFormatUnbounded(...);
-int FUN_00473980(...);
+int resourceLoadDisplayMetadata(...);
 void aocApplicationRecreateDecoder(struct AocMain *app);
 int aocCatalogBuildItemRecords(void);
 
@@ -48,7 +48,7 @@ extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: FUN_00429934. */
 /* Supplied declaration required: FUN_00429c08. */
 /* Supplied declaration required: stringFormatUnbounded. */
-/* Supplied declaration required: FUN_00473980. */
+/* Supplied declaration required: resourceLoadDisplayMetadata. */
 /* Supplied declaration required: aocApplicationRecreateDecoder. */
 /* Supplied declaration required: aocCatalogBuildItemRecords. */
 extern unsigned int valueHolderGetValue(unsigned int);
@@ -260,7 +260,7 @@ void FUN_004767a8(int param_1)
       aocCatalogBuildItemRecords();
       recordClearWideHandle(temp_v0 + 0x28);
       if (-1 < temp_v1) {
-        FUN_00473980(&temp_v8,temp_v0);
+        resourceLoadDisplayMetadata(&temp_v8,temp_v0);
         *(unsigned int *)(param_1 + 0xc) = temp_v8;
         *(unsigned int *)(param_1 + 0x10) = uStack_f4;
         legacyResourceIdRemap(param_1 + 0xc);

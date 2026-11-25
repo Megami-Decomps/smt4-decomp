@@ -25,10 +25,11 @@
 #include "ui/UiControl.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "code/Code004d.h"
+#include "script/ScriptEntry.h"
+#include "sys/WindowStatusCheck.h"
 
 extern "C" {
 
-nn::Result legacyResourceIdRemap(const WindowStatusResult *result); // declcheck: local (the headers return a plain word, which changes this caller's code)
 void buttonHelpSetEnabled(u32 value);
 WindowStatusResult archiveFileReplaceHandle(void *file, const void *archive);
 void recordClearWideHandle(void *file);
@@ -50,7 +51,6 @@ void aocMenuSetButtonHelp(AocMenu *menu, u32 selection, s32 mode);
 s32 bgmGetStateById(u32 id);
 void bgmResumeOrRequestTrack(u32 id);
 u32 tableGroupFindEntryIndex(void *table, const char *name);
-void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 s32 messageMainGetChoiceResult(void);
 
 }
@@ -82,7 +82,7 @@ static __inline Obj422214Owner *selectedRecord(AocMain *main, AocMenu *menu)
 /* Stops the step with the error of a failed archive operation; false when it succeeded. */
 static __inline bool failOnArchiveError(AocMenu *menu, WindowStatusResult result)
 {
-    if (nnResultIsFailure(legacyResourceIdRemap(&result))) {
+    if (windowStatusFailed(result)) {
         menu->substep = 9999;
         failRequestOperation(&menu->request, result);
         return true;

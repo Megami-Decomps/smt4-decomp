@@ -3,9 +3,9 @@
  * one-instruction call armlink inlined (config/inlined.txt: retail keeps its `nop {0}` call padding after the
  * 90-degree store and shares one store for the 180/270 arms). */
 #include "classes/Obj420a2c.h"
+#include "runtime/String.h"
 
 extern "C" {
-void rt_memclr(void *memory, u32 size);
 void asdTextureTileCreate(Obj420a2cEntry *tile, s32 width, s32 height, s32 x, s32 y, s32 sourceWidth,
                           s32 sourceHeight, u32 format, u32 type, u32 pixels, u32 flags);
 

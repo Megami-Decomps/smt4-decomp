@@ -7,7 +7,6 @@
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
 void gxResetColorQuadToWhite();
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *);
 s32 packNibblesAndByte(u32, u32, u32);
 void efctSetSpeed(f32);
 

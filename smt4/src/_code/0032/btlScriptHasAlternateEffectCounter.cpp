@@ -4,7 +4,6 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-s32 scrGetArg(s32 index);
 s32 btlScriptResolveGroupArg(s32 group);
 void btlSideGetEntryRange(s32 group, s32 *first, s32 *count);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);

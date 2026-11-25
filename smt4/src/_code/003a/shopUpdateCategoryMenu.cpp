@@ -15,13 +15,13 @@
 #include "shop/ShopMenuText.h"
 #include "shard/W5_W5Match2_ScalarArguments.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
 void uiSceneApplySpritePreset(Scene3aSprites *animation, u32 index);
 void pointConvertToFloat(FloatPoint *point, s32 x, s32 y);
 s32 tableGroupFindEntryIndex(TableGroupHeader *table, const char *name);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 void equipmentMenuBuildVisibleCategories(ShopScreen *screen, s32 mode);
 void shopSelectEntryStart(ShopScreen *screen, s32 mode);
 void FUN_002302d8(ShopScreen *screen, s32 refreshHelp);

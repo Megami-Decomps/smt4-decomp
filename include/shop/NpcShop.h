@@ -19,7 +19,10 @@ enum {
 struct NpcShopOffer {
     /* 0x00 */ u16 shopId;
     /* 0x02 */ u16 demonId;
-    /* 0x04 */ u8 unk04[0x20];
+    /* 0x04 */ s32 price;
+    /* 0x08 */ u16 skills[8];
+    /* 0x18 */ u16 level;
+    /* 0x1A */ u16 stats[5];
 };
 
 struct NpcShopWork {
@@ -37,10 +40,13 @@ struct NpcShopWork {
     /* 0x99 */ u8 unk99[3];
     /* 0x9C */ u32 shopId;
     /* 0xA0 */ s32 selected;            /* the chosen offer */
+    /* 0xA4 */ s32 skillCount;          /* skills offered to the selected demon */
+    /* 0xA8 */ s32 unlockedCount;       /* how many skill slots are available */
 };
 
 typedef char NpcShopWorkCheck[sizeof(NpcShopOffer) == 0x24 && offsetof(NpcShopWork, offers) == 0x20 &&
     offsetof(NpcShopWork, choices) == 0x8C && offsetof(NpcShopWork, askedBefore) == 0x98 &&
-    offsetof(NpcShopWork, selected) == 0xA0 ? 1 : -1];
+    offsetof(NpcShopWork, selected) == 0xA0 && offsetof(NpcShopWork, skillCount) == 0xA4 &&
+    offsetof(NpcShopOffer, level) == 0x18 ? 1 : -1];
 
 #endif

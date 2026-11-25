@@ -12,6 +12,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "code/Code0019.h"
 #include "gamedata/GameDataAccess_VariantG.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ extern const char DAT_00533f48[];   /* the number format */
 extern const char DAT_00533f4c[];   /* the title format */
 
 void drawSetColorFromRGBA8(u32 color);
-void numberFontDrawFormatted(u32 drawContext, s32 x, s32 y, u32 option0, u32 option1, u32 option2, const char *format, ...);
 void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 style, s32 option);
 void FUN_003849cc(s32 id, s32 sub, s32 flag, char *buffer, s32 level);
 const char *configValueName(s32 index);

@@ -11,6 +11,7 @@
 #include "script/scrScriptProcess.h"
 #include "code/Code0026_Smt4.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "script/ScriptEntry.h"
 
 enum {
     /* LmapMainState::state */
@@ -40,7 +41,6 @@ void mapFastMarkerCreate(f32 x, f32 y, f32 z, f32 heading);
 void messageSetConfirmDisplayMode(void);
 void mapDepartSetTarget(s32 group, s32 map, u32 target);
 s32 tableGroupFindEntryIndex(TableGroupHeader *table, const char *name);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 s32 soundPlaySeUnpanned(u32 id);
 void mapIfResetCounter(void);
 void FUN_002dfea4(void);

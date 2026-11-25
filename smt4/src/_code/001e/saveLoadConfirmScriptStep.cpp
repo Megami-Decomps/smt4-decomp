@@ -9,6 +9,7 @@
 #include "nn/fnd/TimeSpan.h"
 #include "classes/WindowStatus.h"
 #include "shard/GameDataBlocks.h"
+#include "script/ScriptEntry.h"
 
 /* SaveLoadThreadRequest.step */
 enum {
@@ -24,7 +25,6 @@ enum {
 
 extern "C" {
 s32 FUN_002103dc(s32 query, s32 first, s32 second);
-void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void FUN_00223898(SaveLoadThreadRequest *request, s32 kind);
 void FUN_002e2f14(SaveLoadThreadRequest *request);
 void gameDataFlagsSet(u32 mask);

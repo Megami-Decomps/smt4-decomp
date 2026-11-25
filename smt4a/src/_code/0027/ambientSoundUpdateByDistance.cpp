@@ -5,7 +5,6 @@ extern "C" {
 f32 distSpatial(MapVector first, SoundActorQueuePosition second);
 s32 asd3dSoundActorIsPlaying(u32 handle);
 void resourceHandleRelease(u32 handle);
-u32 soundActorStartOnFreeChannel(u32 soundId, SoundActorQueuePosition position);
 
 /* The queue the pointer below starts out pointing at (.bss, unnamed). */
 extern SoundActorQueue g_soundActorQueueStorage;

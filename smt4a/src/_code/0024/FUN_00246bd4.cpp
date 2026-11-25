@@ -134,7 +134,7 @@ int FUN_002e364c(...);
 int mapSetSceneState(...);
 int padGetNormalizedAnalogStick(...);
 int FUN_00325998(...);
-int FUN_00327ee8(...);
+int mapSelectContainingRegions(...);
 void lmapSceneStartMovement(signed char);
 int FUN_00354098(...);
 int gameCounterAddSaturating(...);
@@ -374,7 +374,7 @@ extern int mapJobIsDone(void);
 /* Supplied declaration required: FUN_00325998. */
 /* Supplied declaration required: mapObjFindNearestPointByCategory. */
 /* Supplied declaration required: mapTrapEnable. */
-/* Supplied declaration required: FUN_00327ee8. */
+/* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_00330108. */
 /* Supplied declaration required: FUN_0033982c. */
 /* Supplied declaration required: vectorPairTransitionStep. */
@@ -618,7 +618,7 @@ LAB_002b82a8:
       piVar18[0x9e] = 0;
       piVar18[0x9f] = 0;
       FUN_002e364c(piVar18 + 10);
-      FUN_00327ee8();
+      mapSelectContainingRegions();
       return;
     }
     temp_v10 = DAT_005f1618;
@@ -661,7 +661,7 @@ LAB_002b82a8:
           mapSetSceneState(3);
           gameCounterAddSaturating(0x14,1);
           FUN_002e364c(g_lmapScene + 10);
-          FUN_00327ee8();
+          mapSelectContainingRegions();
           if (g_lmapScene[0x74] == 1 || g_lmapScene[0x74] == 9) {
             lmapSceneStartMovement(0);
           }
@@ -1060,7 +1060,7 @@ LAB_002b82a8:
       mapSetSceneState(0x1f);
       gameCounterAddSaturating(0x16,1);
     }
-    FUN_00327ee8();
+    mapSelectContainingRegions();
     if (((unsigned int)piVar18 & 0x800) != 0) {
       mapEnemyAssignSpawns();
     }
@@ -1925,7 +1925,7 @@ LAB_003270a0:
 LAB_003270b0:
     FUN_002e364c(g_lmapScene + 10);
 LAB_003270bc:
-    FUN_00327ee8();
+    mapSelectContainingRegions();
     mapEaseSceneHeading();
     piVar18 = g_lmapScene;
     piVar10 = g_lmapScene + 7;
@@ -2596,7 +2596,7 @@ LAB_003270bc:
           piVar18[1] = temp_v32 + 1;
           piVar18[2] = 0;
           FUN_002e364c(g_lmapScene + 10);
-          FUN_00327ee8();
+          mapSelectContainingRegions();
           return;
         }
         if (temp_v32 < 0x37) {
@@ -2616,7 +2616,7 @@ LAB_003270bc:
             piVar18[1] = temp_v32 + 1;
             piVar18[2] = 0;
             FUN_002e364c(g_lmapScene + 10);
-            FUN_00327ee8();
+            mapSelectContainingRegions();
             return;
           }
           if (temp_v32 == 0x33) {
@@ -2624,7 +2624,7 @@ LAB_003270bc:
             g_lmapScene[2] = temp_v32 + 1;
             if (temp_v32 + 1 < 0x15) {
               FUN_002e364c(g_lmapScene + 10);
-              FUN_00327ee8();
+              mapSelectContainingRegions();
               return;
             }
             FUN_0033abd4();
@@ -2657,7 +2657,7 @@ LAB_003270bc:
           if (temp_v32 != 0x34) {
             if (temp_v32 != 0x35) {
               FUN_002e364c(g_lmapScene + 10);
-              FUN_00327ee8();
+              mapSelectContainingRegions();
               return;
             }
             temp_v18 = (float)g_lmapScene[0x1a];
@@ -2677,7 +2677,7 @@ LAB_003270bc:
             }
             if ((g_lmapScene[2] < 0x1f) || (temp_v32 = mapIfHasSelection(), temp_v32 != 0)) {
               FUN_002e364c(g_lmapScene + 10);
-              FUN_00327ee8();
+              mapSelectContainingRegions();
               return;
             }
             FUN_002342b8();
@@ -2698,7 +2698,7 @@ LAB_003270bc:
             piVar18[2] = piVar18[2] + 1;
             if (temp_v18 <= 0.0f) {
               FUN_002e364c(g_lmapScene + 10);
-              FUN_00327ee8();
+              mapSelectContainingRegions();
               return;
             }
           }
@@ -2709,7 +2709,7 @@ LAB_003270bc:
             mapIfOverlayRelease();
             mapSetSceneState(0xc);
             FUN_002e364c(g_lmapScene + 10);
-            FUN_00327ee8();
+            mapSelectContainingRegions();
             return;
           }
           if (temp_v32 != 0x5a) {
@@ -2717,13 +2717,13 @@ LAB_003270bc:
               if ((temp_v32 != 0x5c) ||
                  (temp_v32 = g_lmapScene[2], g_lmapScene[2] = temp_v32 + 1, temp_v32 + 1 < 4)) {
                 FUN_002e364c(g_lmapScene + 10);
-                FUN_00327ee8();
+                mapSelectContainingRegions();
                 return;
               }
               temp_v17 = 1;
               mapSetSceneState(temp_v17);
               FUN_002e364c(g_lmapScene + 10);
-              FUN_00327ee8();
+              mapSelectContainingRegions();
               return;
             }
             mapIfOverlayRelease();
@@ -2734,7 +2734,7 @@ LAB_003270bc:
         piVar18[1] = temp_v32 + 1;
         piVar18[2] = 0;
         FUN_002e364c(g_lmapScene + 10);
-        FUN_00327ee8();
+        mapSelectContainingRegions();
         return;
       }
       switch(temp_v32) {
@@ -3023,7 +3023,7 @@ LAB_00366704:
       g_lmapScene[2] = temp_v32 + 1;
       if (temp_v32 + 1 < 0x12) {
         FUN_002e364c(g_lmapScene + 10);
-        FUN_00327ee8();
+        mapSelectContainingRegions();
         return;
       }
       padGetNormalizedAnalogStick(&uStack_54,(int)&uStack_54 + 4,0);
@@ -3031,7 +3031,7 @@ LAB_00366704:
           ((*(unsigned int *)((unsigned char *)&uStack_54 + 4)) < 0xbf000001)) &&
          (((int)(*(unsigned int *)((unsigned char *)&uStack_54 + 4)) < 0x3f000001 && (g_lmapScene[2] < 0x1f)))) {
         FUN_002e364c(g_lmapScene + 10);
-        FUN_00327ee8();
+        mapSelectContainingRegions();
         return;
       }
       g_lmapScene[0x16] = 0x40a00000;
@@ -3039,7 +3039,7 @@ LAB_00366704:
       mapSetSceneState(temp_v17);
     }
     FUN_002e364c(g_lmapScene + 10);
-    FUN_00327ee8();
+    mapSelectContainingRegions();
     return;
   case 0xd:
     fStack_3c = temp_v19;
@@ -3212,7 +3212,7 @@ LAB_00366704:
             g_lmapScene[1] = 0x5b;
             piVar18[2] = 0;
             FUN_002e364c(g_lmapScene + 10);
-            FUN_00327ee8();
+            mapSelectContainingRegions();
             return;
           }
           if (temp_v32 == 0x5b) {
@@ -3221,13 +3221,13 @@ LAB_00366704:
             g_lmapScene[1] = g_lmapScene[1] + 1;
             piVar18[2] = 0;
             FUN_002e364c(g_lmapScene + 10);
-            FUN_00327ee8();
+            mapSelectContainingRegions();
             return;
           }
           if ((temp_v32 != 0x5c) ||
              (temp_v32 = g_lmapScene[2], g_lmapScene[2] = temp_v32 + 1, temp_v32 + 1 < 4)) {
             FUN_002e364c(g_lmapScene + 10);
-            FUN_00327ee8();
+            mapSelectContainingRegions();
             return;
           }
           temp_v17 = 1;
@@ -3269,7 +3269,7 @@ LAB_00366704:
       }
     }
     FUN_002e364c(g_lmapScene + 10);
-    FUN_00327ee8();
+    mapSelectContainingRegions();
     return;
   case 0xf:
     fStack_20 = fStack_28;
@@ -4093,7 +4093,7 @@ LAB_0033eae8:
             g_lmapScene[1] = 0x5b;
             piVar18[2] = 0;
             FUN_002e364c(g_lmapScene + 10);
-            FUN_00327ee8();
+            mapSelectContainingRegions();
             return;
           }
           if (temp_v32 == 0x5b) {
@@ -4102,13 +4102,13 @@ LAB_0033eae8:
             g_lmapScene[1] = g_lmapScene[1] + 1;
             piVar18[2] = 0;
             FUN_002e364c(g_lmapScene + 10);
-            FUN_00327ee8();
+            mapSelectContainingRegions();
             return;
           }
           if ((temp_v32 != 0x5c) ||
              (temp_v32 = g_lmapScene[2], g_lmapScene[2] = temp_v32 + 1, temp_v32 + 1 < 4)) {
             FUN_002e364c(g_lmapScene + 10);
-            FUN_00327ee8();
+            mapSelectContainingRegions();
             return;
           }
           temp_v17 = 1;
@@ -4150,7 +4150,7 @@ LAB_0033eae8:
       }
     }
     FUN_002e364c(g_lmapScene + 10);
-    FUN_00327ee8();
+    mapSelectContainingRegions();
     return;
   case 0x17:
     fStack_20 = temp_v35;
@@ -5563,7 +5563,7 @@ code_r0x00313648:
     }
     FUN_002e364c(g_lmapScene + 10);
     g_lmapScene[0x57] = 0;
-    FUN_00327ee8();
+    mapSelectContainingRegions();
     piVar18 = g_lmapScene;
     g_lmapScene[7] =
          (int)((float)g_lmapScene[7] +
@@ -5629,7 +5629,7 @@ code_r0x00313648:
     }
     FUN_002e364c(g_lmapScene + 10);
     g_lmapScene[0x57] = 0;
-    FUN_00327ee8();
+    mapSelectContainingRegions();
     piVar18 = g_lmapScene;
     g_lmapScene[7] =
          (int)((float)g_lmapScene[7] +

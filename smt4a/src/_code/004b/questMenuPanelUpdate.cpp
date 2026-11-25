@@ -70,7 +70,7 @@ QuestEntry *menu4CGetEntry(void *menu);
 s32 FUN_004babd8(void *menu);
 void linkSlotSetFlag1C(QuestLinkSlot *slot, s32 value);
 void linkSlotSetFlag20(QuestLinkSlot *slot, s32 value);
-void FUN_00407eb0(QuestLinkSlot *slot, s32 kind, s32 unused);
+void moveCameraCtrlMoveToKey(QuestLinkSlot *slot, s32 kind, s32 unused);
 void FUN_004b8ba0(void *panel);
 void listSelectItem(QuestLinkSlot *slot, s32 index);
 void mapRecordResumePoint(void);
@@ -115,7 +115,7 @@ void questMenuPanelUpdate(QuestPanel *panel)
             s32 kind = current->kind;
             if (((panel->sceneId != 4 && panel->sceneId != 3) || (kind != 0 && kind != 6)) ||
                 (before->kind != 0 && before->kind != 6)) {
-                FUN_00407eb0(panel->link, kind, 0);
+                moveCameraCtrlMoveToKey(panel->link, kind, 0);
             }
             if (current->listIndex >= 0) {
                 listSelectItem(panel->link, current->listIndex);

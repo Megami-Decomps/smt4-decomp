@@ -1,10 +1,10 @@
 /* NON_MATCHING: the mode tests, the table walk and the failure exits match; retail stores the three table pointers by stepping one register (base, +0x2100, +0x2100) where this build computes the third from the base first, and puts the 1024 stride default in r0 instead of r1. */
 #include "mobiclip_ctrl/VxDecoder.h"
 #include "mobiclip/MobiclipAllocator.h"
+#include "runtime/String.h"
 
 extern "C" {
 extern const u8 DAT_0040bc5c[3][0x2100];
-void rt_memclr(void *memory, u32 bytes);
 
 // Allocate a VX decoder and its YUV frame buffers for the supported output mode.
 u32 FUN_001ae420(VxDecoder *decoder, u32 width, u32 height, u32 bufferCount,

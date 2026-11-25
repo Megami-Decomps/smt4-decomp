@@ -4,7 +4,6 @@
 
 extern "C" {
 void partyPanelTickWidget(PartyPanelWidget* widget);
-u16* FUN_0029acb0();
 s32 ailmentSelectorGetColor(PartyPanelWidget* widget);
 }
 

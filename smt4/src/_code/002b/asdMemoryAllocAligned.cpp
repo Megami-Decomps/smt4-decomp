@@ -1,5 +1,6 @@
 #include "common.h"
 #include "classes/AllocatorState.h"
+#include "runtime/String.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
 AsdMemoryBlock *asdMemoryAllocFromHeap(u32 heap, u32 kind, u32 flags, u32 size, s32 tag);
 void asdMemoryTrackAllocation(AsdMemoryBlock *block);
-void rt_memclr(void *dest, u32 size);
 
 /* Fills in the block's header and returns its user data: the first `alignment` boundary past the
  * header, whose preceding word points back at the block. */

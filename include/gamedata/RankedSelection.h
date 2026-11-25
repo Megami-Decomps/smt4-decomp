@@ -20,4 +20,12 @@ struct RankedSelection {
     /* 0x04 */ s32 score;
 };
 
+/* Counts the choice and returns its id; both score-ranking paths use this operation. */
+static __inline s32 recordRankedSelection(SelectionResult *result)
+{
+    s32 id = result->id;
+    ++result->count;
+    return id;
+}
+
 #endif

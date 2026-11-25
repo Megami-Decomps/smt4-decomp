@@ -1,4 +1,4 @@
-/* NON_MATCHING: see fdiff; trace/color/quaternion now match retail shape, register scheduling differs. */
+/* NON_MATCHING: retail interleaves the default color's core-register copy with the quaternion stores and keeps the work pointer in r0; this build copies color with VFP. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonWind.h"
 #include "AsdSDK/AsdDebug.h"
 #include <string.h>

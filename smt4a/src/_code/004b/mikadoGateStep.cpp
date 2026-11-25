@@ -7,6 +7,7 @@
 #include "script/scrScriptProcess.h"
 #include "shard/Shard0047.h"
 #include "code/Code002b_Smt4a.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern s32 g_scrConditionRejected;
@@ -20,7 +21,6 @@ void dialogClose(s32 immediate);
 void sysPlaySe(u32 id);
 void buttonHelpSetText(s32 index, u32 color);
 u32 tableGroupFindEntryIndex(void *group, const char *name);
-void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 void FUN_0040738c(MikadoTalkWorkA *talk, f32 frame);
 void FUN_00407a80(MikadoTalkWorkA *talk);
 void moveCameraCtrlCreateEntry(MikadoTalkWorkA *talk, const char *name, s32 index);

@@ -21,7 +21,6 @@
 #include "code/Code0022_Smt4.h"
 
 extern "C" {
-StatBlock *saveResolvePartySlot(u32 partySlot);
 extern void *g_btlEvent;
 extern VersionedTextureOwner *g_btlAux;
 

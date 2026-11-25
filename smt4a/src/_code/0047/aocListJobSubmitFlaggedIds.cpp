@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebugHooks.h"
 #include "nn/Result.h"
 #include "code/Code004f_VariantA.h"
+#include "sys/WindowStatusCheck.h"
 
 extern "C" {
 
@@ -33,7 +34,6 @@ void table30GetEntryB(AocListEntry **entry, void *table, u32 index);
 void *asdOperatorNewE(u32 size, ...);
 WindowStatusResult FUN_004ffee0(AocListEntry **entry, u8 *extra, AocListItem *item, s32 flag, u32 index);
 WindowStatusResult FUN_005003b4(void *handle, void *buffer, u32 count);
-s32 legacyResourceIdRemap(const WindowStatusResult *result);
 u8 objGetFlagBit0(AocListItem *item);
 int jyoucyuGetTableEntry(s32 index);
 u16 contentIndexGetValue(const u16 *index);
@@ -44,7 +44,7 @@ void aocListJobSubmitFlaggedIds(AocListJob *job)
 {
     AocMain *aoc = g_aocMain;
     job->result = sdkCreateEncodedResourceDescriptor((u8 *)aoc + 0x20, (u8 *)aoc + 0x18);
-    if (nnResultIsFailure(legacyResourceIdRemap(&job->result))) {
+    if (windowStatusFailed(job->result)) {
         return;
     }
     AocListEntry *entry;
@@ -59,7 +59,7 @@ void aocListJobSubmitFlaggedIds(AocListJob *job)
             AocListItem item;
             u8 extra[8];
             job->result = FUN_004ffee0(&entry, extra, &item, 1, i);
-            if (nnResultIsFailure(legacyResourceIdRemap(&job->result))) {
+            if (windowStatusFailed(job->result)) {
                 legacyResourceIdRemap(&job->result);
                 asdOperatorDeleteB(ids);
                 asdDebugHookPtr(&entry);
@@ -70,7 +70,7 @@ void aocListJobSubmitFlaggedIds(AocListJob *job)
             }
         }
         job->result = FUN_005003b4((u8 *)aoc + 0x20, ids, kept);
-        if (nnResultIsFailure(legacyResourceIdRemap(&job->result))) {
+        if (windowStatusFailed(job->result)) {
             legacyResourceIdRemap(&job->result);
             asdOperatorDeleteB(ids);
             asdDebugHookPtr(&entry);

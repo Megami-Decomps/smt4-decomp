@@ -1,4 +1,5 @@
-/* NON_MATCHING: register-only: retail keeps the record-list global in r7 and the constant 1 in r8 (built swapped), and its find-free-record loop and record address use r2 where built uses r3. */
+/* NON_MATCHING: the full-list guard avoids indexing with -1, which retail does not check.
+ * The search loop's address register and the active/state/variant store schedule also differ. */
 #include "gamedata/MapSaveBlockA.h"
 #include "gfx/EngineRecordList.h"
 #include "Model/MoriModelContent.h"
@@ -8,6 +9,7 @@ extern "C" {
 extern EngineRecordList *g_engineRecordList;
 void *asdMemoryAllocTraced(u32 bytes, const char *file, s32 line);
 
+/* The same 32-slot free-record search also appears in FUN_00356674. */
 static __inline s32 findFreeRecord(EngineRecordList *list)
 {
     for (s32 i = 0; i < 32; ++i) {
@@ -28,23 +30,24 @@ void FUN_003276f0(s32 delay, s32 alternate, f32 x, f32 y, f32 z, f32 w)
     list->counter18 = 0;
     list->counterCE0 = 0;
     list->modelSlot = 1;
-    MoriModelContent *models = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent),
-        "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp", 971));
+    MoriModelContent *models = (MoriModelContent *)asdMemoryAllocTraced(sizeof(MoriModelContent),
+        "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp", 971);
     models = models != NULL ? modelListInit(models) : NULL;
     g_engineRecordList->models[g_engineRecordList->modelSlot].models = models;
     resourceOwnerLoadFileSync(models, "map/unit/u007.bam");
     moriModelContentLoadBody(g_engineRecordList->models[g_engineRecordList->modelSlot].models, 0);
     list = g_engineRecordList;
-    s32 index = findFreeRecord(list);
-    list->selectedRecord = static_cast<s16>(index);
-    EngineEffectRecord *record = &list->records[static_cast<s16>(index)];
+    list->selectedRecord = (s16)findFreeRecord(list);
+    if (list->selectedRecord < 0) {
+        return;
+    }
+    EngineEffectRecord *record = &list->records[list->selectedRecord];
     list->activeCount++;
+    record->active = 1;
     if (alternate != 0) {
-        record->active = 1;
         record->state = 11;
         record->variant = 2;
     } else {
-        record->active = 1;
         record->variant = 0;
         record->state = 1;
     }
@@ -66,4 +69,4 @@ void FUN_003276f0(s32 delay, s32 alternate, f32 x, f32 y, f32 z, f32 w)
     handleRegistryRegisterObject(g_handleRegistry,
         list->models[modelSlot].models->body);
 }
-}
+} /* extern "C" */

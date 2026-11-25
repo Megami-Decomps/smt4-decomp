@@ -7,6 +7,7 @@
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ int FUN_00288b20(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
-int numberFontDrawFormatted(...);
 int FUN_00185e84(...);
 int skillDataFindById(void);
 int statusDownDrawIndicatorPairs(int, int);

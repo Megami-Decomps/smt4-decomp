@@ -5,7 +5,6 @@
 
 extern "C" {
 
-s32 scrGetArg(s32 index);
 BtlDataIdRecord *btlDataFindRecordById(void *state, u16 id);
 
 /* Script command: sets the result to value argument 1 (0-3) of the battle data row whose id is

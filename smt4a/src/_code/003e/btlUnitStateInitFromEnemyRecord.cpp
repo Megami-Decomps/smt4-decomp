@@ -8,6 +8,7 @@
 #include "battle/BattleUnitInit.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "gamedata/GameDataAccess.h"
+#include "runtime/String.h"
 
 /* An enemy record as the battle reads it when it builds a unit (halfword indexed in the original
    data; only the fields this initializer copies are named). */
@@ -41,7 +42,6 @@ struct EnemyBattle {
 extern "C" {
 void sysMemClear(void *memory, u32 size);
 void clearTwoWords(void *words);
-void rt_memclr(void *memory, u32 size);
 u32 gameDataGetTableValue(void);
 s32 FUN_001f4da0(s32 sourceId);
 

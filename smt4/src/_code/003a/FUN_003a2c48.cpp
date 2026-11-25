@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "ui/UiSpriteState.h"
 #include <stddef.h>
+#include "script/ScriptEntry.h"
 
 struct ScriptProcess;
 struct ScriptTable;
@@ -59,7 +60,6 @@ typedef char AppraiseSceneLayoutCheck[offsetof(AppraiseScene, selection) == 0x82
 extern "C" {
 u32 scrRunOpcodesStub(ScriptProcess *state);
 u32 tableGroupFindEntryIndex(ScriptTable *table, const char *name);
-void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
 void uiSceneApplySpritePreset(void *animations, s32 value);
 s32 uiAnimationAdvanceChannel(void *animations, s32 channel);

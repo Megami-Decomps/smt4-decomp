@@ -2,12 +2,12 @@
 #include "common.h"
 #include "saveLoadUI/SaveSlotRow.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/NumberFont.h"
 
 
 
 extern "C" {
 void drawSetColorFromRGBA8(u32 color);
-void numberFontDrawFormatted(u32 drawContext, s32 x, s32 y, u32 option0, u32 option1, u32 option2, const char *format, ...);
 void gxResetColorQuadToWhite(void);
 
 // Draw an elapsed time as hours:minutes:seconds, right-aligned against `position`.

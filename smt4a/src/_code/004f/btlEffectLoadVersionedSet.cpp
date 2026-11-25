@@ -18,8 +18,8 @@ struct BtlMainStateA;
 s32 btlScriptUnitHasFlags(void);
 u32 FUN_003478dc(u32, const char *);
 void btlEffectResolveNames(VersionLoadSet *set);
-void FUN_004f7cd0(VersionLoadSet *set);
-void FUN_004f9278(VersionLoadSet *set);
+void btlEffectLoadVersionedResources(VersionLoadSet *set);
+void btlEffectLoadSecondaryResources(VersionLoadSet *set);
 void FUN_004f9e0c(VersionLoadSet *set);
 void textureCachePollReady(void);
 
@@ -49,8 +49,8 @@ void btlEffectLoadVersionedSet(VersionLoadSet *set)
     }
     registerVersionRecords(set);
     btlEffectResolveNames(set);
-    FUN_004f7cd0(set);
-    FUN_004f9278(set);
+    btlEffectLoadVersionedResources(set);
+    btlEffectLoadSecondaryResources(set);
     FUN_004f9e0c(set);
     textureCachePollReady();
 }

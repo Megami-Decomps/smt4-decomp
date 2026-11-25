@@ -3,6 +3,7 @@
 #include "classes/WindowStatus.h"
 #include "test/BustupViewer.h"
 #include "addon/AocSystemA.h"
+#include "script/ScriptEntry.h"
 
 /* An object the menu owns and releases through its deleting destructor. */
 class AocConfirmHandler {
@@ -39,7 +40,6 @@ void buttonHelpSetEnabled(u32 value);
 void releaseEntriesB(void *regions);
 void releaseEntriesA(void *notice);
 u32 tableGroupFindEntryIndex(u32 resource, const char *name);
-void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 void aocMenuSetButtonHelp(AocConfirmMenu *menu, u32 state, s32 enabled);
 s32 messageGetChoiceResult(void);
 void FUN_0016ccb4(void *owner);

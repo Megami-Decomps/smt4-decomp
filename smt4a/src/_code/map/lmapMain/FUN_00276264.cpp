@@ -96,7 +96,7 @@ int gameDataSaveSetValues(...);
 int gameSaveBlockRebuild27E98(void);
 int mapRestoreSavedDestination(...);
 int FUN_00483294(...);
-int FUN_00294a84(...);
+int popupTryQueueSelectedPartyMessage(...);
 int FUN_00482fd4(...);
 
 int sysPlaySe(...);
@@ -540,7 +540,7 @@ extern int FUN_00356380(void);
 /* Supplied declaration required: helpResourcesRelease. */
 /* Supplied declaration required: FUN_003847d4. */
 /* Supplied declaration required: gameFlagsWriteWordBit. */
-extern char FUN_00386720(void);
+extern char lmapRaiseSceneTransition(void);
 /* Supplied declaration required: FUN_00387014. */
 /* Supplied declaration required: FUN_00398004. */
 /* Supplied declaration required: FUN_00398024. */
@@ -615,7 +615,7 @@ extern int battleValuesSet(unsigned int, unsigned int);
 /* Supplied declaration required: mapIfRestartActiveRecords. */
 /* Supplied declaration required: mapIfSetOpaqueMode. */
 /* Supplied declaration required: FUN_0024ad50. */
-/* Supplied declaration required: FUN_00294a84. */
+/* Supplied declaration required: popupTryQueueSelectedPartyMessage. */
 extern unsigned int regionFindRecord(int);
 /* Supplied declaration required: naviMainRequestProcessing. */
 /* Supplied declaration required: mapGimicInitializeProcessing. */
@@ -1581,7 +1581,7 @@ LAB_00276f5c:
                 temp_v1 = DAT_005f1bc4;
                 if (DAT_005f1bc4 == '\0') {
                   if (*(char *)((int)puVar2 + 0xb) != '\0') {
-                    temp_v1 = FUN_00386720();
+                    temp_v1 = lmapRaiseSceneTransition();
                   }
                   else {
                     puVar19 = puVar2;
@@ -2353,7 +2353,7 @@ LAB_00279490:
               temp_v22 = 0;
             }
           }
-          FUN_00294a84(temp_v22);
+          popupTryQueueSelectedPartyMessage(temp_v22);
         }
       }
     }

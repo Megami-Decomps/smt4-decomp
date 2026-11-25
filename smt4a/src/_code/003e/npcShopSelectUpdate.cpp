@@ -15,11 +15,11 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "code/Code003c_Smt4a.h"
 #include <string.h>
+#include "script/ScriptEntry.h"
 
 extern "C" {
 s32 panelIsMissingOrFlagClear(void);
 s32 tableGroupFindEntryIndex(void *table, const char *name);
-void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 void sysPlaySe(s32 se);
 s32 gameFlagIsSet(u32 flag);
 

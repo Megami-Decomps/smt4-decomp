@@ -1,4 +1,5 @@
-/* NON_MATCHING: -O2 candidate; incoming saved registers, signed-table index address folding, coordinate pair store and callback argument packing differ. */
+/* NON_MATCHING: argument register allocation, texture-node indexing, the coordinate pair store and callback packing differ. */
+#include <string.h>
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -31,9 +32,7 @@ u32 npcCreateTextureEffectJob(u32 id, s32 x, s32 y)
     work->unk00 = 0;
     work->table = 0;
     work->alpha = 1.0f;
-    for (s32 i = 0; i < 6; ++i) {
-        work->unk70[i] = 0;
-    }
+    memset(&work->move, 0, sizeof(work->move));
     void *section = dataTableGet(0x1A, 0);
     const s16 *nodes = bgDataTextureNodes(section);
     dataTableGetCount(section);

@@ -24,6 +24,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include <string.h>
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern ConfigWorkA *g_config;
@@ -41,7 +42,6 @@ u8 gridNavigationHandleConfirm(GridNavigation *cursor, s32 mode);
 s32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV *touchArea, const s16 *rowRegions,
                                  s32 thumbRegion, s32 previousRegion, s32 nextRegion, s8 *touched, s32 secondary,
                                  s32 notify);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 s32 ifTouchRegionAdd(s32 x, s32 y, s32 width, s32 height); // declcheck: local (callers pass sign-extended halfwords; the shared u16 prototype changes the loads)
 }
 

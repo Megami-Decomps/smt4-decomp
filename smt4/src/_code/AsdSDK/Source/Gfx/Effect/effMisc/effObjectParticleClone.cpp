@@ -2,10 +2,10 @@
  * counts) where this build reuses it, and keeps the source in r4 and the clone in r5 (the build: r5 and r4). */
 #include "AsdSDK/Source/Gfx/Effect/EmitterCloneResource.h"
 #include "AsdSDK/AsdDebug.h"
+#include "runtime/String.h"
 
 extern "C" {
 void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 blockAlignment, s32 kind);
-void rt_memclr(void *memory, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void effObjectParticleSetSource(EffEmitter *emitter, u16 kind, EffEmitterDesc *description);
 void FUN_0031ce4c(EffEmitter *emitter);

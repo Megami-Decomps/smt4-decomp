@@ -6,14 +6,16 @@
 
 struct Table23Record {
     union {
-        u8 data[0x0c];
+        u8 data[4];
         struct {
             s8 category;
             s8 subtype;
             u8 variant;
-            u8 value;
+            u8 value;    /* placement kind */
         } key;
     };
+    /* 0x04 */ s16 x, y, z;
+    /* 0x0A */ s16 heading;
 };
 
 // The common extension tail lies beyond both canonical AocSystem prefixes.
@@ -40,5 +42,8 @@ typedef char Table23RecordKeyOffsetsCheck[
     offsetof(Table23Record, key.category) == 0 &&
     offsetof(Table23Record, key.subtype) == 1 &&
     offsetof(Table23Record, key.variant) == 2 && sizeof(Table23Record) == 0xC ? 1 : -1];
+typedef char Table23RecordPlacementOffsetsCheck[
+    offsetof(Table23Record, key.value) == 3 && offsetof(Table23Record, x) == 4 &&
+    offsetof(Table23Record, heading) == 0xA ? 1 : -1];
 
 #endif

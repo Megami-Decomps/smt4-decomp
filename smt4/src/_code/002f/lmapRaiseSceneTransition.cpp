@@ -1,6 +1,5 @@
-/* NON_MATCHING: retail loads case 0's 800.0f target height at entry, before the switch (the build loads it in
- * case 0, which shifts the case offsets and registers), and sets the secondary map's 0 by copying the mode's zero
- * (movne r2, r3) where the build writes movne r2, #0. */
+/* NON_MATCHING: for a map without secondary collision, retail copies the zero area argument into
+ * the secondary map argument; the build emits a second immediate zero. */
 #include "map/LmapMainGlobals.h"
 #include "game/GameState.h"
 
@@ -14,82 +13,60 @@ void mapInitializeStoryMarkerEffects(u32 map);
 void objSetBaseAndValue(LmapObj *object, s32 base, u32 value);
 void entryListCollectMatches(LmapObj *object);
 
-// Raise the scene over thirty frames, then restore story-marker tracking on completion.
+/* Raises the scene over thirty frames, then restores story-marker tracking on completion. */
 u32 lmapRaiseSceneTransition()
 {
-    // The shared state's padding begins at unaligned 0x09 and its tracker is only a prefix.
-    struct EntryTransitionView {
-        u8 prefix[0xB];
-        u8 frozen;
-        u8 padding0C[0xC];
-        u32 phase;
-        s32 frame;
-        MapVector start;
-        MapVector end;
-        u8 padding38[8];
-        s32 map;
-        u8 padding44[4];
-        u32 entry;
-        u8 padding4C[0x44];
-        f32 distance;
-        u8 padding94[0x48];
-        f32 alpha;
-        u8 dirty;
-        u8 paddingE1[0xB];
-        u32 trackerFlags;
-    };
-    typedef char EntryTransitionOffsetsCheck[offsetof(EntryTransitionView, phase) == 0x18 &&
-        offsetof(EntryTransitionView, start) == 0x20 && offsetof(EntryTransitionView, alpha) == 0xDC &&
-        offsetof(EntryTransitionView, trackerFlags) == 0xEC ? 1 : -1];
-    EntryTransitionView *transition = reinterpret_cast<EntryTransitionView *>(g_lmapMainState);
-    switch (transition->phase) {
+    LmapMainState *state = g_lmapMainState;
+    const f32 endHeight = 800.0f;
+    const s32 liftFrames = 30;
+    switch (state->entryRaise.phase) {
     case 0:
-        transition->start = g_lmapScene->pose.position;
-        transition->end = transition->start;
-        transition->end.y = 800.0f;
-        transition->alpha = 0.0f;
-        transition->dirty = 1;
-        transition->entry = 99;
+        state->entryRaise.start = g_lmapScene->pose.position;
+        state->entryRaise.end = state->entryRaise.start;
+        state->entryRaise.end.y = endHeight;
+        state->entryRaiseAlpha = 0.0f;
+        state->entryRaiseDirty = 1;
+        state->areaId = 99;
         g_gameState.areaId = 99;
         mapCollisionRelease();
-        mapCollisionLoad(transition->map, transition->entry,
-            transition->map != 101 ? 0 : 101, transition->map != 101 ? 0 : 10);
-        transition->phase = 1;
-        transition->frame = 0;
+        mapCollisionLoad(state->mapId, state->areaId,
+            state->mapId != 101 ? 0 : 101, state->mapId != 101 ? 0 : 10);
+        state->entryRaise.phase = 1;
+        state->entryRaise.frame = 0;
         break;
     case 1:
-        fieldPlayerMoveByStick((LmapMainState *)transition);
-        ++transition->frame;
-        g_lmapScene->pose.position.y = transition->start.y +
-            (transition->end.y - transition->start.y) * (f32)transition->frame * 0.033333335f;
-        if (transition->frame >= 30) {
+        fieldPlayerMoveByStick(state);
+        ++state->entryRaise.frame;
+        g_lmapScene->pose.position.y = state->entryRaise.start.y +
+            (state->entryRaise.end.y - state->entryRaise.start.y) * (f32)state->entryRaise.frame * (1.0f / liftFrames);
+        if (state->entryRaise.frame >= liftFrames) {
             g_gameState.inputBlocked = 0;
             g_gameState.map.transitionCompleted = 1;
-            transition->alpha = 1.0f;
-            transition->dirty = 1;
-            transition->phase = 2;
+            state->entryRaiseAlpha = 1.0f;
+            state->entryRaiseDirty = 1;
+            state->entryRaise.phase = 2;
         }
         break;
     case 2:
-        fieldPlayerMoveByStick((LmapMainState *)transition);
+        fieldPlayerMoveByStick(state);
         break;
     case 3:
     case 4:
         break;
     case 5:
-        transition->distance = 200.0f;
+        state->cameraFocusLift = 200.0f;
         lmapUpdateMapBgm();
-        transition = reinterpret_cast<EntryTransitionView *>(g_lmapMainState);
-        transition->frozen = 0;
-        transition->trackerFlags &= ~2;
+        state = g_lmapMainState;
+        state->external = 0;
+        state->obj.flags &= ~2;
         FUN_00281784();
-        mapInitializeStoryMarkerEffects(transition->map);
-        objSetBaseAndValue((LmapObj *)&transition->trackerFlags, transition->map - 100, transition->entry);
-        entryListCollectMatches((LmapObj *)&transition->trackerFlags);
+        mapInitializeStoryMarkerEffects(state->mapId);
+        objSetBaseAndValue(&state->obj, state->mapId - 100, state->areaId);
+        entryListCollectMatches(&state->obj);
         g_gameState.inputBlocked = 0;
         g_gameState.map.transitionCompleted = 1;
         break;
     }
     return 0;
 }
-}
+} /* extern "C" */

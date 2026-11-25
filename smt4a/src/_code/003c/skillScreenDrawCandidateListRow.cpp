@@ -10,9 +10,9 @@
 #include "code/Code004b_Smt4a.h"
 #include "gamedata/nkm/NkmGrowEvent.h"
 #include "ui/AnimatedMessage.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
-void numberFontDrawFormatted(s32 kind, s32 x, s32 y, s32 align, s32 digits, u32 slot, const char *format, ...);
 void FUN_00185e84(s16 id, s32 x, s32 y, u32 layer, u32 a, u32 b);
 void statDrawClampedDelta(SlotRecordA *record, s16 id, s32 x, s32 y, u32 layer, u32 a);
 s32 uiListGetVisibleCount(const void *list);

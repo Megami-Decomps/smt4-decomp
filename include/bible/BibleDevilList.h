@@ -5,6 +5,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
+#include "shard/S2Scene3a.h"
 
 #define BIBLE_STAT_ROWS 10
 
@@ -23,7 +24,9 @@ struct BibleDevilEntry {
 struct BibleDevilTouchSelection {
     /* 0x00 */ u8 unk00[0x11];
     /* 0x11 */ s8 selected;
-    /* 0x12 */ u8 unk12[0x26];
+    /* 0x12 */ s8 released;
+    /* 0x13 */ u8 unk13[0x21];
+    /* 0x34 */ u32 regions;
     /* 0x38 */ u32 drawLayer;       /* the layer the list's entries are drawn on */
 };
 
@@ -31,25 +34,40 @@ struct BibleDevilTouchSelection {
 struct BibleDevilWork {
     /* 0x000 */ u8 unk000[0x14];
     /* 0x014 */ s32 step;
-    /* 0x018 */ u8 unk018[8];
+    /* 0x018 */ s32 phase;
+    /* 0x01C */ u8 unk01C[4];
     /* 0x020 */ FlaggedValueHolder list; /* the scrolling selection: its count, first visible entry and cursor */
-    /* ...   */ u8 unk020[0xA8 - sizeof(FlaggedValueHolder)];
-    /* 0x0C8 */ u8 layout[0x494];
+    /* 0x094 */ s8 sortMode;         /* modes 100 and above use special summon pricing */
+    /* 0x095 */ u8 unk095[0x33];
+    union {
+        /* 0x0C8 */ u8 layout[0x494];
+        struct {
+            /* 0x0C8 */ u8 rectangle[0x14];
+            /* 0x0DC */ Scene3aSprites animation;
+        } display;
+    };
     /* 0x55C */ BibleDevilTouchSelection touchSelection;
-    /* 0x598 */ u8 unk598[0xC];
+    /* 0x598 */ u8 unk598[8];
+    /* 0x5A0 */ u32 script;
     /* 0x5A4 */ s8 mode;            /* 0: per-devil columns, 1: compare two devils, other: detail */
     /* 0x5A5 */ s8 column;
     /* 0x5A6 */ u8 unk5A6;
     /* 0x5A7 */ s8 viewing;
     /* 0x5A8 */ BibleDevilEntry entries[0x500];
-    /* 0xA5A8 */ u8 unkA5A8[0xA];
+    /* 0xA5A8 */ u8 unkA5A8[8];
+    /* 0xA5B0 */ u8 purchaseState;   /* why the selected devil cannot be summoned */
+    /* 0xA5B1 */ u8 unkA5B1;
     /* 0xA5B2 */ u16 lastId;         /* the devil the panel shows */
+    /* 0xA5B4 */ s16 exitPreset;     /* animation selected when leaving the list */
 };
 
 typedef char BibleDevilWorkLayoutCheck[sizeof(BibleDevilEntry) == 0x20 && offsetof(BibleDevilWork, list.count) == 0x28 && offsetof(BibleDevilWork, layout) == 0xC8 &&
     offsetof(BibleDevilWork, touchSelection) == 0x55C && offsetof(BibleDevilWork, touchSelection.drawLayer) == 0x594 &&
     offsetof(BibleDevilWork, mode) == 0x5A4 && offsetof(BibleDevilWork, entries) == 0x5A8 &&
-    offsetof(BibleDevilWork, lastId) == 0xA5B2 ? 1 : -1];
+    offsetof(BibleDevilWork, display.animation) == 0xDC && offsetof(BibleDevilWork, touchSelection.regions) == 0x590 &&
+    offsetof(BibleDevilWork, script) == 0x5A0 && offsetof(BibleDevilWork, phase) == 0x18 &&
+    offsetof(BibleDevilWork, sortMode) == 0x94 && offsetof(BibleDevilWork, purchaseState) == 0xA5B0 &&
+    offsetof(BibleDevilWork, lastId) == 0xA5B2 && offsetof(BibleDevilWork, exitPreset) == 0xA5B4 ? 1 : -1];
 
 /* The stat rows the list draws beside its entries, filled by FUN_0022d1a8: the stat and its comparison colour,
  * then the position, digits and colour of the summon cost. Six adjacent arrays (0x49357c-0x493784): the list's

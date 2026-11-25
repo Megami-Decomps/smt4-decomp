@@ -77,7 +77,9 @@ struct Scene3a {
     /* 0x00168 */ ScriptProcess *process;   /* the shop script */
     /* 0x0016C */ ScriptProcess *menuProcess;   /* the category menu's script ("shop_select") */
     /* 0x00170 */ char menuText[0x200];     /* the menu's rows, one "name<br>" each (shopSelectEntryStart) */
-    /* 0x00370 */ u8 unk370[0xC];
+    /* 0x00370 */ void *resultTable;       /* battle/Result.bf */
+    /* 0x00374 */ void *resultMessages;
+    /* 0x00378 */ ScriptProcess *resultProcess;  /* second Charon request */
     /* 0x0037C */ u32 listId;
     union {
         /* 0x00380 */ AsdTextureRegion region;
@@ -140,6 +142,7 @@ typedef char Scene3aQuantityLayoutCheck[offsetof(Scene3a, pageTransition) == 4 &
     offsetof(Scene3a, appraisal.kindTenFrame) == 0x1C &&
     offsetof(Scene3a, scriptTable) == 0x160 && offsetof(Scene3a, process) == 0x168 &&
     offsetof(Scene3a, greeting.onSale) == 0x1D && offsetof(Scene3a, menuText) == 0x170 &&
+    offsetof(Scene3a, resultTable) == 0x370 && offsetof(Scene3a, resultProcess) == 0x378 &&
     offsetof(Scene3a, listId) == 0x37C && offsetof(Scene3a, menu.rows) == 0x15D2C &&
     offsetof(Scene3a, menu.rowCount) == 0x15D3C && offsetof(Scene3a, menuCursors) == 0x15D58 &&
     offsetof(Scene3a, menuCursorSet) == 0x15D64 &&

@@ -5,7 +5,6 @@
 extern "C" {
 
 extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
-extern s32 scrGetArg(s32 index);
 extern s32 btlScriptResolveGroupArg(s32 group);
 extern void btlSideGetEntryRange(u32 group, s32 *first, s32 *count);
 

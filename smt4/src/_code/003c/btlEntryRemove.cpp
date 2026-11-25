@@ -6,6 +6,7 @@
 #include "gamedata/SaveSlotTableIV.h"
 #include "gamedata/FlagBitTests.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "runtime/String.h"
 
 /* BtlEntry.flagMask bits the removal reads. */
 enum {
@@ -28,7 +29,6 @@ void objectFlagsClear(BtlUnitLink *object, u16 mask);
 void FUN_003ae2d0(BtlUi *ui, s32 slot, s32 partySlot, s32 immediate);
 void btlQueueKeyedScalarReflectAction(s32 a, s32 b, u32 resource, s32 a4, s32 a5, s32 a6, s32 a7);
 void __aeabi_memset4(void *block, u32 size, s32 value);
-void rt_memclr(void *block, u32 size);
 
 /* Removes entry `index` from the battle: clears the action records that name it, hands back or retires
  * the unit it stands for (`removeLinked`: the unit is lost; `keepLink`: an active party member keeps its

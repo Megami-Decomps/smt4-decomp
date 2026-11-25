@@ -5,11 +5,11 @@
 #include "nn/Result.h"
 #include "code/Code0023.h"
 #include "gamedata/GameDataAccess_Shard0050.h"
+#include "sys/WindowStatusCheck.h"
 
 extern "C" {
 void asdGxWaitForPreviousFrame();
 ItemCodeInfo FUN_003df244(ItemPropertyResource **resource);
-s32 legacyResourceIdRemap(const WindowStatusResult *result);
 }
 
 /* Looks up the selected entry's item code and runs its content request on the AOC service: status 0 on success,
@@ -22,7 +22,7 @@ WindowStatusOperationResult Obj4221fc::vfunc0c(const void *)
     TableEntryRef ref;
     table30GetEntryB(reinterpret_cast<u8 **>(&ref.entry), reinterpret_cast<Table30 *>(manager->contentRequest), state);
     output.result = aocServiceRunItemRequest(manager->service, manager->contentArchive, FUN_003df244(&ref.entry));
-    if (!nnResultIsFailure(legacyResourceIdRemap(&output.result))) {
+    if (!windowStatusFailed(output.result)) {
         output.status = 0;
     } else if (legacyResourceIdRemap(&output.result) == (s32)0xc9213801) {
         output.status = 0x67;

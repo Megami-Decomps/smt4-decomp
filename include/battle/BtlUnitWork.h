@@ -99,7 +99,8 @@ typedef struct BtlUnitA {
     /* 0x000 */ u32 flags;
     /* 0x004 */ s8 state;
     /* 0x005 */ u8 command;         /* the action command requested next */
-    /* 0x006 */ u8 unk006[6];
+    /* 0x006 */ u16 ticks;          /* increments while the current action state runs */
+    /* 0x008 */ u32 elapsed;        /* reset together with ticks when the command changes */
     /* 0x00C */ u32 unk00C;         /* cleared when an action starts (btlUnitStartAction) */
     /* 0x010 */ u8 unk010[0xC];
     /* 0x01C */ u32 unk01C;         /* cleared when an action starts */
@@ -136,6 +137,7 @@ typedef struct BtlActionSlotA {
 
 typedef char BtlUnitALayoutCheck[
     sizeof(BtlUnitA) == 0x1250 && sizeof(BtlActionSlotA) == 0x1254 && offsetof(BtlUnitA, entry) == 0x20 &&
+    offsetof(BtlUnitA, ticks) == 0x06 && offsetof(BtlUnitA, elapsed) == 0x08 &&
     offsetof(BtlUnitA, data) == 0x28 && offsetof(BtlUnitA, targets) == 0x38 &&
     offsetof(BtlUnitA, cameraMode) == 0x594 && offsetof(BtlUnitA, uiMode) == 0x59D && offsetof(BtlUnitA, pairs) == 0x5B8 &&
     offsetof(BtlUnitA, record) == 0x24 && offsetof(BtlUnitA, unk01C) == 0x1C && offsetof(BtlUnitA, unk56C) == 0x56C &&

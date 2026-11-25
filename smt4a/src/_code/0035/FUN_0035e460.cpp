@@ -25,19 +25,7 @@ static __inline Table04ExtraRecord *findExtraRecord(u32 id)
     return record;
 }
 
-typedef struct AocItemSlot {
-    u8 id;
-    u8 unk01;
-} AocItemSlot;
-
-/* An entry of the data table skillDataFindById searches: `slot` lists its used slots first. */
-typedef struct AocItemEntry {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ AocItemSlot slot[9];
-    /* 0x74 */ u8 unk74[0x4];
-} AocItemEntry;
-
-#define AOC_ID_LIMIT 400  /* ids above it are add-on ids, searched in table 4 */
+enum { AOC_ID_LIMIT = 400 }; /* Higher ids are add-on ids, searched in table 4. */
 
 /* Number of used slots (up to 9) of data table 4 entry `id`, negated when `positive` is 0.
  * Returns 0 for an unknown id; add-on ids (> 400) are only looked up. */
@@ -46,17 +34,17 @@ s32 FUN_0035e460(u32 id, s32 positive)
     if (id > AOC_ID_LIMIT) {
         findExtraRecord(id);
     } else {
-        AocItemEntry *entry = (AocItemEntry *)skillDataFindById(id);
+        const SkillDataRecordA *entry = skillDataFindById(id);
 
         if (entry != NULL) {
             s32 sign = positive != 0 ? 1 : -1;
             s32 used = 0;
 
-            for (s32 i = 0; i < 9; i++) {
-                if (entry->slot[i].id == 0) {
+            for (s32 index = 0; index < 9; ++index) {
+                if (entry->stages[index][0] == 0) {
                     break;
                 }
-                used++;
+                ++used;
             }
             return used * sign;
         }

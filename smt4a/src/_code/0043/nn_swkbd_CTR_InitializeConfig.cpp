@@ -1,4 +1,5 @@
 #include "shard/Shard0043.h"
+#include "runtime/String.h"
 
 extern "C" {
 
@@ -48,7 +49,6 @@ typedef struct SwkbdConfig {
     /* 0x354 */ u8 unk354;
 } SwkbdConfig;
 
-extern void rt_memclr(u8 *dst, s32 size);
 extern void sysMemClear(void *ptr, u32 size);
 
 /* Fills a software keyboard config with its defaults. */

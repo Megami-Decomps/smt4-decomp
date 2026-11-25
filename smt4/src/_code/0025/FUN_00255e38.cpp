@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/UnitRecordAccess.h"
 #include "gamedata/NkmEnemyLookup.h"
+#include "runtime/String.h"
 
 /* A unit record as stored in the party tables (0x18C bytes; only the fields this code reads are named). */
 struct UnitRecordIn {
@@ -68,7 +69,6 @@ extern "C" {
 UnitSlot *FUN_002561d8(SlotWorld *world, s32 index, u32 arg);
 UnitSlot *FUN_0033a5a0(void);
 void __aeabi_memcpy4(void *dest, const void *src, s32 size);
-void rt_memclr(void *dest, s32 size);
 void *gameGetPlayerData(void);
 u8 *gameGetSlotTable(void);
 s32 FUN_003be758(UnitSlot *slot);

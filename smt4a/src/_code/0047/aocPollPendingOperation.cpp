@@ -2,6 +2,7 @@
 #include "classes/ResourceLookup.h"
 #include "nn/Result.h"
 #include "sys/RuntimeObjects.h"
+#include "sys/WindowStatusCheck.h"
 
 extern "C" {
 s32 asyncOperationStartOrPollNonBlocking(void *request, nn::Result *code, u32 *detail);
@@ -23,7 +24,7 @@ WindowStatusOperationResult aocPollPendingOperation(AocPollStep *step)
             if (nnResultIsFailure(queryResultFailureOnly(&main->queryResult))) {
                 WindowStatusResult failure = FUN_00473acc((ResourceLookup *)main);
                 step->result = failure;
-                if (nnResultIsFailure(legacyResourceIdRemap(&step->result))) {
+                if (windowStatusFailed(step->result)) {
                     output.result = step->result;
                     output.status = AOC_PENDING_LOOKUP_FAILED;
                     return output;

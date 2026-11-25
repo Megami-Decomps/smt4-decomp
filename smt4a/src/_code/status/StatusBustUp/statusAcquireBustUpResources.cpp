@@ -1,4 +1,5 @@
 #include "AsdSDK/AsdDebug.h"
+#include "runtime/String.h"
 
 struct StatusBustupResources {
     s8 users;
@@ -11,7 +12,6 @@ extern StatusBustupResources g_statusBustUpResources;
 void asdTMTexTableLoadTmx(s32, s32);
 void asdTMTexTableLoadSprites(s32);
 void *asdMemoryAllocTracked(u32, u32, s32, u32, s32);
-void rt_memclr(void *, u32);
 }
 
 /* Acquire the shared status portraits and their zero-initialized lookup buffers. */

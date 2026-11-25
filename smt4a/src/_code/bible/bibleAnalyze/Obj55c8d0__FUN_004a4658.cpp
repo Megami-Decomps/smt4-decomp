@@ -1,23 +1,13 @@
-/* NON_MATCHING: the display-name fallback is loaded before the lookup in retail (movs/moveq), the callback flag update uses a
-   pre-indexed ldrh, the state/step pair is one strd, and retail keeps `mov r3, #0` live across the linker-removed
-   shopListItemGetId (a multifile clobber-set case, as in smt4's followCursorAndDescribe). */
+/* NON_MATCHING: retail updates the callback flag with a writeback halfword load, stores the state/phase pair with strd,
+ * and keeps r3 live across the linker-inlined shopListItemGetId. */
 #include "runtime/Stdio.h"
 #include "ui/UiSpriteApi.h"
 #include "shard/Shard004A.h"
 #include "classes/Obj55c8d0.h"
+#include "classes/Obj422594.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 
 namespace {
-struct AnalyzeCallback;
-struct AnalyzeCallbackTable {
-    void (*unk00)();
-    void (*unk04)();
-    void (*activate)(AnalyzeCallback *, FlaggedValueHolder *);
-};
-struct AnalyzeCallback {
-    const AnalyzeCallbackTable *vtable;
-    u16 flags;
-};
 struct AnalyzePositionedButton {
     u8 unk00[0x20];
     f32 position[2];
@@ -39,8 +29,7 @@ struct AnalyzeSuffixGlobals {
 };
 typedef char AnalyzeConfirmationOffsets[
     sizeof(AnalyzePositionedButton) == 0x8C &&
-    offsetof(AnalyzeEntryListView, entries) == 0x864 &&
-    offsetof(AnalyzeCallback, flags) == 4 ? 1 : -1];
+    offsetof(AnalyzeEntryListView, entries) == 0x864 ? 1 : -1];
 }
 extern "C" {
 u32 shopListItemGetId(const BibleAnalyzeListEntry *entry);
@@ -52,7 +41,6 @@ void sysPlaySe(u32 sound);
 const char *dataLookupDisplayName(u32 *key, u32 id);
 void buttonHelpSetText(const char *text, u32 color);
 void FUN_0032d0c8(s32 first, s32 second, u16 id, s32 fourth);
-void gameGlobalsSetMenuOpenFlag(u8 value);
 void messageIdListSetRange(void *controls, s32 kind, u32 flags, s32 count);
 
 }
@@ -71,15 +59,17 @@ void Obj55c8d0::FUN_004a4658()
     BibleAnalyzeListEntry *entries = reinterpret_cast<AnalyzeEntryListView *>(screen)->entries;
     if (screen->unk0860 == 0) {
         s32 index = flaggedValueHolderGetTotal(&screen->selection.holder);
-        const NkmBaseRecordA *record = nkmBaseGetRecord(entries[index].id);
+        const NkmBaseRecordA *record = nkmBaseGetRecord((u16)entries[index].id);
         sysPlaySe((record->extraFlags & 2) ? 0x121 : 0x30);
     } else {
         sysPlaySe(0x48);
     }
     if (screen->unk0860 != 0) {
         u32 key;
+        const char *fallback = DAT_0052b5bc;
         const char *name = dataLookupDisplayName(&key, screen->displayNameId);
-        name = name == NULL ? DAT_0052b5bc : name;
+        if (name == NULL)
+            name = fallback;
         char message[80];
         __2sprintf(message, DAT_0052b5c4, name, DAT_0057f0a0.suffix);
         buttonHelpSetText(message, 0x323232FF);
@@ -92,10 +82,8 @@ void Obj55c8d0::FUN_004a4658()
     screen->state = 2;
     screen->unk18 = 0;
     pointConvertToFloat(screen->cursor.position, 0, 0);
-    AnalyzeCallback *callback = static_cast<AnalyzeCallback *>(screen->confirmation.callback);
-    callback->vtable->activate(callback, &screen->selection.holder);
-    callback = static_cast<AnalyzeCallback *>(screen->confirmation.callback);
-    callback->flags |= 0x1000;
+    ((Obj422594 *)screen->confirmation.callback)->initialize(&screen->selection.holder);
+    ((Obj422594 *)screen->confirmation.callback)->state.flags |= 0x1000;
     s32 count = screen->listCount.count;
     if (screen->unk0860 != 0) {
         count = count < 10 ? count : 10;

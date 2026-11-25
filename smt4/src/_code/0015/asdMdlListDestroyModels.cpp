@@ -18,7 +18,6 @@ struct ModelListOwner {
 };
 
 extern "C" {
-void asdMdlManagerDestroy(AsdMdlObject *model);
 void dlistFreeAll(ModelList *list);
 
 // Destroy each owned model before releasing the list entries.

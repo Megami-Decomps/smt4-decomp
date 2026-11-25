@@ -29,7 +29,7 @@ extern void flagsSetOrClearBit(void *panel, s32 arg);
 extern s32 textureGetIndexedResource(s32 id);
 extern void sysPlayVoice(u32 id);
 extern s32 loadSlotIsLoaded(s32 id);
-extern void FUN_0049de10(Screen *screen);
+extern void howToLayoutSelectedPage(Screen *screen);
 
 /* Opens the selected tutorial entry when its resources are ready. */
 void howToOpenSelectedEntry(Screen *screen)
@@ -56,7 +56,7 @@ void howToOpenSelectedEntry(Screen *screen)
     if (resource > 0 && asdTMTexTableNodeIsLoaded(0x33, resource) == 0) {
         asdTMTexLoadMainHeap(0x33, resource);
     }
-    FUN_0049de10(screen);
+    howToLayoutSelectedPage(screen);
     gridNavigationConfigure(screen->panel, screen->unk094, 9, 1, 1, 1);
     flagsSetOrClearBit(screen->panel, 0);
     screen->unk188 = 0;

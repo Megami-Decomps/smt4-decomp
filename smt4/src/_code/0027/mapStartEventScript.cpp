@@ -5,6 +5,7 @@
 #include "gamedata/TableGroup.h"
 #include "addon/AocSystem.h"
 #include "addon/AocFileBufferApi.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern MapMain *g_mapMain;
@@ -19,7 +20,6 @@ void asdMemFree(void *memory);
 void *asdLoadFileSyncDefault(const char *path);
 s32 eventScriptFindCompletionFlag(u32 event, char *entryName);
 s32 tableGroupFindEntryIndex(TableGroupHeader *table, const char *entryName);
-void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 
 /* Loads a map event's script and messages from DLC or ROM and starts its named entry. */
 u32 mapStartEventScript(void)

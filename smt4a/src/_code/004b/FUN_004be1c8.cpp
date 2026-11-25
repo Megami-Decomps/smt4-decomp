@@ -28,7 +28,6 @@ struct UnitScreenReadyViewA {
 };
 extern "C" {
 void __aeabi_memset4(void* destination, u32 size, u32 value);
-void ifTouchRegionRemove(void);
 void ifTouchResetRecord(void);
 UnitCategoryRecord* partyGetSlot(u16 unit);
 u16 ifTouchRegionAddRequested(u32 table, s32 region);

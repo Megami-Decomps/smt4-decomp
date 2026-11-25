@@ -47,6 +47,18 @@ typedef char ModelSlotListSizeCheck[sizeof(ModelSlotList) == 0x24 && sizeof(Mode
 typedef char ModelSlotVectorOffsetCheck[offsetof(ModelSlotList, slots) == 0x10 &&
     offsetof(ModelSlotListA, slots) == 0x10 ? 1 : -1];
 
+/* Detaches the models registered with an environment slot list, retaining its capacity. */
+static __inline void asdModelDetachSlotList(ModelSlotList *list)
+{
+    ModelSlot **end = list->slots.end;
+    for (ModelSlot **slot = list->slots.begin; slot != end; ++slot) {
+        if (*slot != NULL) {
+            (*slot)->attached = 0;
+        }
+    }
+    list->slots.end = list->slots.begin;
+}
+
 /* Selects a slot by index. */
 typedef struct ModelSelector {
     /* 0x000 */ u32 unk000;

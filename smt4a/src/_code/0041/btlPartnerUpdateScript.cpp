@@ -1,6 +1,7 @@
 #include "runtime/Stdio.h"
 #include "battle/btlPartnerAttack.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 struct ScriptProcess;
 extern "C" {
 extern const char DAT_00529854[];
@@ -8,7 +9,6 @@ extern const char DAT_00529870[];
 void asdMemFree(void *memory);
 void FUN_00416610(void *entries);
 void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
-void scrScriptProcessStartEntry(ScriptProcess *state, u32 entry);
 }
 static inline void releasePartnerScript(BtlPartnerAttackA *work)
 {

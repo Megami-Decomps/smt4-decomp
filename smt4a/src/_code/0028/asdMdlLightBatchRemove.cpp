@@ -39,7 +39,6 @@ extern void *g_asdModelTransformBuilder[2];
 extern void *g_effAsdLightHandle[2];
 extern LightCount g_asdLightCount[2];
 void nw_gfx_SceneNode_AttachChild(void *parent, LightRegistry *child);
-void sceneTraverserVisit(void *traverser, void *root);
 
 /* Removes every light of the batch from its registry, then leaves the scene group it was in. */
 void asdMdlLightBatchRemove(LightBatch *batch)

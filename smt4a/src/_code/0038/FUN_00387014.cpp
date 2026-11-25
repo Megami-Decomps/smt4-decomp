@@ -3,7 +3,7 @@
 #include "map/LmapMainGlobals.h"
 
 extern "C" {
-void FUN_00386720(void);
+void lmapRaiseSceneTransition(void);
 void lmapMainUpdateState(LmapMainStateA *state);
 void FUN_0036a434(LmapMainStateA *state);
 void followerDisplayUpdate(LmapMainStateA *state);
@@ -19,7 +19,7 @@ void FUN_00387014(void)
     LmapMainStateA *state = g_lmapMainState;
     if (game->unk5C8 == 0) {
         if (state->external != 0) {
-            FUN_00386720();
+            lmapRaiseSceneTransition();
         } else {
             lmapMainUpdateState(state);
         }

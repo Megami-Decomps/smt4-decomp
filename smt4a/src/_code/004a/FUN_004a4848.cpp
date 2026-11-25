@@ -48,7 +48,7 @@ void inventoryListAppend(InventoryListView *list, const CampUnitComparison *reco
 void listScrollerInitialize(InventoryCursorState *cursor, s32 visible, s32 count, s32 first, s32 mode, s32 enabled);
 u8 gaugePercent(InventoryListView *list);
 void *jyoucyuGetTableEntry(u32 index);
-void FUN_004a5b20(Screen4A *work);
+void compendiumListMapEncounterDemons(Screen4A *work);
 void messageIdListSetRange(InventoryHelpList *help, u32 group, u32 image, s32 count);
 
 /* Rebuilds the available demons, initializes the selection widget, and refreshes the help rows. */
@@ -85,7 +85,7 @@ void FUN_004a4848(Screen4A *owner)
         jyoucyuGetTableEntry(0);
         jyoucyuGetTableEntry(0);
     } else {
-        FUN_004a5b20(owner);
+        compendiumListMapEncounterDemons(owner);
     }
     work->widget->vtable->setCursor(work->widget, &work->cursor);
     work->widget->flags |= 0x1000;

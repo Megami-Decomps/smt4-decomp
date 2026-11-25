@@ -7,6 +7,7 @@
 #include <stddef.h>
 #include "sys/ResultReport.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 /* The memory mapped for the loader's stack: its destructor unmaps it, and the block goes back
  * through the engine's operator delete. */
@@ -43,14 +44,12 @@ typedef char ScriptLoadStateOffsets[offsetof(ScriptLoadState, loadState) == 0x7f
     offsetof(ScriptLoadState, threadStack) == 0x804 ? 1 : -1];
 
 extern "C" {
-void nn_os_Thread_FinalizeImpl(u32 *thread);
 void addressSpaceRegionFree(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);
 void asdMemFree(void *block);
 void gameDataBlocksReleaseHold(u32 mask);
 void gameDataFlagsClearBits(u32 mask);
 void rt_aeabi_memclr(void *memory, u32 size);
-void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 void gameDataAddHomeButtonHold(u32 mask);
 void gameDataBlocksAddFlags(u32 mask);
 }

@@ -9,11 +9,11 @@
 #include "shard/TextureDrawCall.h"
 #include "ui/AnimatedMessage.h"
 #include "ui/UiSpriteApi.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 void FUN_00169a1c(s32 icon, s32 x, s32 y, s32 z);
 void drawSetColorFromRGBA8(u32 color);
-void numberFontDrawFormatted(s32 kind, s32 x, s32 y, s32 align, s32 digits, u32 slot, const char *format, ...);
 }
 
 enum {

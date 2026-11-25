@@ -15,6 +15,7 @@
 #include "code/Code002a_VariantA.h"
 #include "quest_center/qcMain.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "script/ScriptEntry.h"
 
 struct StatBlock;
 struct MenuTask;
@@ -32,7 +33,6 @@ u32 uiScrollHandleActionsOrTouch(FlaggedEntry *owner, const TextureTableEntryIV 
 u8 gridNavigationHandleConfirm(FlaggedEntry *cursor, s32 mode);
 s32 inputQueryButtonState(s32 key, s32 mode);
 void buttonHelpSetText(const s8 *text, u32 style);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 u32 messageMainGetChoiceResult(void);
 s32 buttonHelpGetStatus(void);
 void playerRecalcStatsFromEquipment(PlayerDataIV *player);

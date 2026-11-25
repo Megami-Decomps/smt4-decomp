@@ -1,10 +1,10 @@
 /* NON_MATCHING: strip destination offset is hoisted into an extra saved register. */
 #include "addon/aocIcon.h"
 #include "AsdSDK/AsdDebug.h"
+#include "runtime/String.h"
 
 extern "C" {
 void *asdMemoryAllocAligned(u32 heap, u32 type, u32 options, u32 size, u32 alignment, u32 clear);
-void rt_memclr(void *memory, u32 size);
 void nnnstdMemCpy(void *destination, const void *source, u32 size);
 AsdTexture *asdTextureCreate(s32 type);
 void FUN_00281024(void);

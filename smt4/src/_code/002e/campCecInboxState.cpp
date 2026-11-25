@@ -23,6 +23,7 @@
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Sys/Save/AsdSaveHeader.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
@@ -41,7 +42,6 @@ u32 FUN_0025981c(void);
 int cecSlotGet(u32 index);
 void FUN_002cef34(const void *source);
 void FUN_002f5004(u32 amount);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 u8 gameDataBlocksGetFlagByteA(void);
 StatBlock *stockFindSelectedUnit(void);
 void __aeabi_memset4(void *destination, u32 size, u32 value);

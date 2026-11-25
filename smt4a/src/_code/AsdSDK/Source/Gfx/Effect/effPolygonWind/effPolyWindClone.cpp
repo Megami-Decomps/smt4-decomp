@@ -1,12 +1,13 @@
-/* NON_MATCHING: the debug trace and identity quaternions now match retail; retail copies the default color with an ldm of three words plus one ldr/str (integer) interleaved with the quaternion stores, here word-by-word. */
+/* NON_MATCHING: retail interleaves the default color's core-register copy with the quaternion stores and keeps the work pointer in r0; this build copies color with VFP. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonWind.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/AsdDebug.h"
 #include <string.h>
 
-static void quaternionSetIdentity(PolyVec4 *quaternion)
+static __inline void quaternionSetIdentity(PolyVec4 *quaternion)
 {
-    memset(quaternion, 0, sizeof(*quaternion));
+    PolyVec4 zero = {0, 0, 0, 0};
+    *quaternion = zero;
     quaternion->w = 1.0f;
 }
 
@@ -32,10 +33,7 @@ PolyObject *effPolyWindClone(PolyObject *src)
     obj->work = obj->workData;
     obj->frame = 0;
     obj->kind = kind;
-    obj->color.x = g_polyDefaultColor.x;
-    obj->color.y = g_polyDefaultColor.y;
-    obj->color.z = g_polyDefaultColor.z;
-    obj->color.w = g_polyDefaultColor.w;
+    obj->color = g_polyDefaultColor;
     quaternionSetIdentity(&obj->rotation0);
     quaternionSetIdentity(&obj->rotation1);
     __aeabi_memcpy(obj->work, srcWork, workSize);

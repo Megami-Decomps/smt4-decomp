@@ -3,7 +3,6 @@
 
 extern "C" {
 s32 gxIsStereoscopic3dEnabled(void);
-u32 asdGxPresetsGetHeightByKind(u32 index);
 f32 nn_ulcd_CTR_StereoCamera_GetParallax(void *camera, f32 value);
 
 // Transform and clamp a stereo depth before applying the active eye's parallax scale.

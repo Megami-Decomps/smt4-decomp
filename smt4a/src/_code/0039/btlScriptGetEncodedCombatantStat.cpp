@@ -9,7 +9,6 @@
 
 extern "C" {
 s32 btlResolveEntryChoice(s32 choice);
-void scrSetResult(s32 result);
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
 
 // Find the requested combatant with an encoded statistic whose high six bits equal one.

@@ -1,6 +1,7 @@
 #include "nn/swkbd/SoftwareKeyboardConfig.h"
 #include "nn/Result.h"
 #include "shard/W6_W6Match7_QuestInteraction.h"
+#include "runtime/String.h"
 
 extern "C" {
 void nn_swkbd_CTR_InitializeConfig(SoftwareKeyboardConfig *);
@@ -12,7 +13,6 @@ void FUN_0043c988(void);
 s32 FUN_0043c808(u32 *, SoftwareKeyboardConfig *, void *, u32, u32, u32, u32, u32, u32);
 s32 textConvertBoundedToUtf8Impl(char *, s32 *, const u16 *, s32 *);
 void sysFatalBreak(void);
-void rt_memclr(void *, u32);
 extern u8 g_bssStart[4096];
 
 u32 systemKeyboardReadUtf8(u32 unused, char *output, const u16 *hint, u32 capacity,

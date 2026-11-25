@@ -1,6 +1,7 @@
 /* NON_MATCHING: the trace, level clamp, colour bytes (packedColorBytesSet per vertex) and hoisted colour parts now match retail's shape (row counts equal or within 2); remaining: saved-register/spill assignment (retail spills params to a 88-byte frame, loads the ramp pair with one vldmia) and the allocation-size/trace argument order. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonThunderBolt.h"
 #include "AsdSDK/AsdDebug.h"
+#include "runtime/String.h"
 
 /* One bolt of the effect (0x30 bytes). */
 struct ThunderBolt {
@@ -21,7 +22,6 @@ struct ThunderBoltBlock {
 extern "C" {
 extern const char g_effPolygonThunderSourceFileName[]; /* effect source file name (__FILE__) */
 void *memAlloc(int, int, int, int size, int align, int);
-void rt_memclr(void *block, int size);
 PolyGeom *effGeomBuildGridMesh(u32 segments, u8 *table, int w, int tableSize);
 
 extern u8 DAT_0047372c;

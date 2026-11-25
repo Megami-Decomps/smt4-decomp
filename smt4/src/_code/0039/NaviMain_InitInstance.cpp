@@ -2,6 +2,7 @@
 #include "gamedata/MapSaveBlock.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
+#include "runtime/String.h"
 
 /* A 0x8C-byte UI sprite. */
 struct NaviSprite {
@@ -94,9 +95,8 @@ static const s32 sKeysFifth[35] = {
 extern "C" {
 void NaviMain_InitCallbacks(NaviMainWork *work);
 void asdTMTexTableLoadTmx(s32 id, s32 arg);
-void rt_memclr(void *data, u32 size);
 void rectangleInitializeSelection(void *selection, s32 x, s32 y, s32 size);
-void FUN_003eb068(void *state);
+void __ARM_common_memclr4_5(void *state);
 void drawParameterBlockClear(UiResourceParameters *packet);
 
 void uiSpriteStateInitFromSource(NaviSprite *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
@@ -123,7 +123,7 @@ void NaviMain_InitInstance(NaviMainWork *work)
     rectangleInitializeSelection(work->selection, 0, 0, 0x1c);
     work->unk04 = 0;
     work->unk08 = 0;
-    FUN_003eb068(work->selectionState);
+    __ARM_common_memclr4_5(work->selectionState);
     drawParameterBlockClear(&work->packet);
     paramsInit(&work->packet, sKeysFirst, sizeof(sKeysFirst), sKeysSecond, sizeof(sKeysSecond),
                NULL, 0, NULL, 0, sKeysFifth, sizeof(sKeysFifth));

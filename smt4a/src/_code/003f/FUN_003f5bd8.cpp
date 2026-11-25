@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include "gamedata/FlagsB.h"
+#include "runtime/String.h"
 
 struct RankedUnlockEntry {
     u16 id;
@@ -31,7 +32,6 @@ typedef char RankedUnlockOffsets[sizeof(RankedUnlockEntry) == 0x34 &&
 extern "C" {
 void *asdOperatorNewD(u32);
 void asdOperatorDeleteC(void *);
-void rt_memclr(void *, u32);
 void __aeabi_memcpy(void *, const void *, u32);
 s32 entryCompareByRank(const void *, const void *);
 s32 gameFlagIsSet(u32);

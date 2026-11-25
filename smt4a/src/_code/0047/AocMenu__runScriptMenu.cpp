@@ -5,6 +5,7 @@
 #include "common.h"
 #include "test/BustupViewer.h"
 #include "util/BitsAndBytes.h"
+#include "script/ScriptEntry.h"
 
 struct AocMenuObject;
 
@@ -51,7 +52,6 @@ void aocMenuSetButtonHelp(AocMenuProcess *process, s32 a, s32 b);
 void FUN_00476e58(AocMenuProcess *process, s32 unused, s32 next);
 AocMenuObject *windowCreateStatusOperation(AocMenuObject *object, s32 kind);
 s32 tableGroupFindEntryIndex(void *table, const char *name);
-void scrScriptProcessStartEntry(void *script, s32 entry);
 s32 strIsEmpty(u32 *record);
 void jobFlagsWorkStop(AocMenuProcess *process);
 void obj04Finish(void);

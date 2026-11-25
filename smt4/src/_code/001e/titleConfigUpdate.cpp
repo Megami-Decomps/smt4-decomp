@@ -6,6 +6,7 @@
 #include "font/SearchWin/RunWin.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern TitleConfigCallbackView *g_titleConfig;
@@ -39,7 +40,6 @@ void workCommandRefreshActiveSlots(void);
 u32 messageVoiceBankGet(void);
 void voiceRequestPlayFile(u32 player, u32 sound, u32 bank, u32 priority, f32 left, f32 right);
 s32 gridNavigationHandleConfirm(void *cursor, u32 enabled);
-void scrScriptProcessStartEntry(void *process, u32 entry);
 s32 messageMainGetChoiceResult(void);
 
 /* Shows the help text of the setting the cursor is on. */

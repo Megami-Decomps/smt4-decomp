@@ -17,7 +17,7 @@ struct NpcShopUpdateState {
     }
 };
 extern "C" {
-void FUN_003e600c(NpcShopUpdateState *shop);
+void npcShopStartExchange(NpcShopUpdateState *shop);
 void npcShopUpdateSelectionScript(NpcShopUpdateState *shop);
 void npcShopExchangeStep(NpcShopUpdateState *shop);
 void FUN_003e647c(NpcShopUpdateState *shop);
@@ -43,7 +43,7 @@ extern "C" s32 npcShopUpdateState(NpcShopUpdateState *shop)
 {
     switch (shop->state) {
     case 1:
-        FUN_003e600c(shop);
+        npcShopStartExchange(shop);
         break;
     case 2:
         switch (shop->step) {

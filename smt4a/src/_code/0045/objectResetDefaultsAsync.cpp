@@ -2,6 +2,7 @@
 #include "shard/S1NnOs.h"
 #include "shard/S1Mover.h"
 #include "classes/ObjectCommandRequests.h"
+#include "runtime/String.h"
 
 struct ObjectScaleOffset {
     f32 scaleX, scaleY, offsetX, offsetY;
@@ -68,7 +69,6 @@ static __inline void objectResetParamScaleOffset(ObjectParamScaleOffset &values)
 extern "C" {
 extern u32 objectNextSerial;
 void nn_os_LightEvent_ClearSignal(LightEvent *event);
-void rt_memclr(void *data, u32 size);
 }
 
 /* Resets every parameter to its default and queues an asynchronous reset command. */

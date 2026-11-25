@@ -11,7 +11,6 @@ struct CategoryPair {
 extern "C" {
 s32 scrGetArg(u32 index);
 void *btlGetTable(void *state, u32 table);
-u32 dataTableGetCount(void *table);
 void scrSetResult(s32 result);
 
 // Pick a random table entry whose category matches the script argument.

@@ -21,7 +21,7 @@ int eventQueueAddUnique(int);
 int libc_strcpy(unsigned char *, int);
 int soundPlaySeUnpanned(int);
 int mapFlagsWriteBit(int, int);
-int FUN_002e8a78(void);
+int mapIfActivateNearbyMarkerWithSound(void);
 int mapIfActivateNearbyMarker(void);
 int FUN_002f3bc0(void);
 int MapDepart_Init(int [2], int);
@@ -75,7 +75,7 @@ extern int mathCirclesOverlap(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: mapFlagsWriteBit. */
-/* Supplied declaration required: FUN_002e8a78. */
+/* Supplied declaration required: mapIfActivateNearbyMarkerWithSound. */
 /* Supplied declaration required: mapIfActivateNearbyMarker. */
 /* Supplied declaration required: FUN_002f3bc0. */
 /* Supplied declaration required: MapDepart_Init. */
@@ -284,7 +284,7 @@ LAB_002709b8:
               }
               if ((*(char *)(temp_v23 + 0x12) != '\0') || (DAT_0049f934 != '\0')) break;
             }
-            FUN_002e8a78();
+            mapIfActivateNearbyMarkerWithSound();
             temp_v9 = temp_v9 + 1;
           }
         }

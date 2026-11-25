@@ -2,6 +2,7 @@
 #include "common.h"
 #include "nn/FsResult.h"
 #include "shard/Sys43e310.h"
+#include "sys/ExtendedSaveData.h"
 
 /* The save worker's request as this function sees it: the kind byte and, at 0x54, a flag byte. */
 struct SaveErrorRequest {
@@ -29,9 +30,8 @@ extern "C" {
 extern LazyScriptState g_lazyScriptState;
 s32 FUN_00138cb4(void);
 s32 FUN_001386b4(void);
-nn::Result FUN_0025cb5c(u32 id, u32 flag);
+nn::Result extendedSaveDataMount(u32 id, u32 flag);
 void scrScriptProcessStartEntry(void *process, u32 index);
-nn::Result FUN_00280ad4(u32 id, u32 flag, u32 size, u32 mode, ...);
 nn::Result nn_fs_DeleteExtSaveData(u32 id, u32 flag);
 void FUN_003cc97c(SaveErrorRequest *request, u32 code);
 
@@ -43,7 +43,7 @@ void FUN_00349e60(SaveErrorRequest *request)
     if (FUN_00138cb4() != 0) {
         FUN_001386b4();
     }
-    nn::Result result = FUN_0025cb5c(0x19A2, 0);
+    nn::Result result = extendedSaveDataMount(0x19A2, 0);
     u32 failed = result & 0x80000000;
     if ((s32)failed < 0) {
         reinterpret_cast<SaveLoadThreadStateView &>(g_saveLoadThread).busy = 0;
@@ -95,7 +95,8 @@ void FUN_00349e60(SaveErrorRequest *request)
         }
         request->reported = 1;
         scrScriptProcessStartEntry(g_lazyScriptState.process, 16);
-        nn::Result second = FUN_00280ad4(0x19A2, 0, 0x100, 2, reinterpret_cast<SaveLoadThreadStateView *>(&g_saveLoadThread)->unk0c);
+        nn::Result second = extendedSaveDataCreateAndMount(0x19A2, 0, 0x100, 2,
+            (const char *)reinterpret_cast<SaveLoadThreadStateView *>(&g_saveLoadThread)->unk0c);
         u32 secondFailed = second & 0x80000000;
         if ((s32)secondFailed < 0) {
             u32 code;

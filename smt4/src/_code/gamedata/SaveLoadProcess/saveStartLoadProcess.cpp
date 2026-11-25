@@ -6,7 +6,6 @@
 
 extern "C" {
 extern SaveByteSettings g_byteSettings;
-void gameDataBlocksAddFlags(u32 flags);
 void gameDataFlagsSetBits(u32 flags);
 void gameDataFlagsSet(u32 flags);
 GameSaveData *gameDataBlocksGetSaveData(void);

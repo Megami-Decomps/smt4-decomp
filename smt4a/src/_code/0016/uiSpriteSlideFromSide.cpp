@@ -1,10 +1,10 @@
-/* NON_MATCHING: retail keeps the completion getter's argument in r0 across both flag branches and calls it after the updated flag store; this build reads finished directly. */
+/* NON_MATCHING: retail stages the sprite pointer in both completion branches and reads finished after marking the sprite updated. */
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
-// Advances the sprite with its position track replaced by a slide from 320 pixels right (left when `reverse`) to 0,
-// decelerating; returns the finished flag.
+/* Slides the sprite toward zero from the right (or left in reverse), decelerating as it comes in.
+ * Returns the finished flag after advancing the other tracks. */
 s32 uiSpriteSlideFromSide(UiSpriteState *sprite, s32 reverse)
 {
     s32 frame = (s16)sprite->positionFrame;
@@ -42,4 +42,4 @@ s32 uiSpriteSlideFromSide(UiSpriteState *sprite, s32 reverse)
     sprite->updated = 1;
     return sprite->finished;
 }
-}
+} /* extern "C" */

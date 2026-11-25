@@ -16,6 +16,15 @@ struct AsdAnimCameraResource {
     /* 0x3C */ u32 streamBytes;
 };
 
+/* Resolves each table whose resource size is nonzero. Both the camera constructor and
+ * moriCameraAnimLoad inline this walk; the plain static form preserves the indexed output. */
+static void asdAnimCameraResolveTables(const AsdAnimCameraResource *resource, const void **tables)
+{
+    for (s32 i = 0; i < 6; ++i) {
+        tables[i] = resource->tablePresent[i] ? (const u8 *)resource + resource->tableOffset[i] : NULL;
+    }
+}
+
 /* What the animation initializer is given: the resolved tables and the work buffers. */
 struct AsdAnimCameraSetup {
     /* 0x00 */ const void *tables[6];

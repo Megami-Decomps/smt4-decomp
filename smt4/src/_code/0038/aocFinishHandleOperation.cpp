@@ -1,12 +1,12 @@
 #include "addon/AocHandleJob.h"
 #include "addon/aocMain.h"
 #include "nn/Result.h"
+#include "sys/WindowStatusCheck.h"
 
 extern "C" {
 AocHandleJob *_ZN21WindowOperationResultC1Eh(u32 id, u32 flags);
 WindowStatusResult aocOpenPackedArchive(void *parameters, AocHandleSource *source);
 WindowStatusResult archiveFileReplaceHandle(void *destination, void *source);
-s32 legacyResourceIdRemap(const WindowStatusResult *result);
 void recordClearWideHandle(void *handle);
 int jyoucyuGetTableEntry(s32 index);
 
@@ -15,7 +15,7 @@ void aocFinishHandleOperation(u32 id, AocHandleSource *source)
 {
     AocHandleJob *job = _ZN21WindowOperationResultC1Eh(id, 0);
     job->result = aocOpenPackedArchive(source->parameters, source);
-    if (nnResultIsFailure(legacyResourceIdRemap(&job->result))) {
+    if (windowStatusFailed(job->result)) {
         job->state = 100;
         if (legacyResourceIdRemap(&job->result) == (s32)0xC8813894 ||
             legacyResourceIdRemap(&job->result) == (s32)0xC8813887 ||
@@ -27,7 +27,7 @@ void aocFinishHandleOperation(u32 id, AocHandleSource *source)
         job->delay = 150;
     } else {
         job->result = archiveFileReplaceHandle((u8 *)g_aocMain + 0x28, (u8 *)g_aocMain + 0x18);
-        if (!nnResultIsFailure(legacyResourceIdRemap(&job->result))) {
+        if (!windowStatusFailed(job->result)) {
             recordClearWideHandle((u8 *)g_aocMain + 0x28);
             g_aocMain->flags |= 0x10000;
             return;

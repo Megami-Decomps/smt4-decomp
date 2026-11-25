@@ -55,7 +55,7 @@ s32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV
 s32 inputQueryButtonState(s32 button, s32 mode);
 u8 buttonHelpGetStatus(void);
 s32 FUN_002987d8(s32 unit, s32 skill);
-s32 FUN_00298848(u32 skill, s32 unit);
+s32 skillCanUseInField(u32 skill, s32 unit);
 void mapEnableAndClearState(void);
 void guestWinRequestOpen(void);
 u32 messageInitializeSavedBanner(void);
@@ -213,7 +213,7 @@ void campSkillListUpdate(void)
             return;
         }
         if ((inputQueryButtonState(0, 1) | touched) && FUN_0029dfa8()) {
-            if (FUN_00298848(camp->skills[row].skill, static_cast<s16>(camp->skills[row].unit)) &&
+            if (skillCanUseInField(camp->skills[row].skill, static_cast<s16>(camp->skills[row].unit)) &&
                 FUN_002987d8(camp->skills[row].unit, camp->skills[row].skill) &&
                 campSkillUserCanAct(&camp->skills[row])) {
                 if (camp->skills[row].skill == SKILL_ESTOMA) {

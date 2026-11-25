@@ -7,7 +7,6 @@
 extern "C" {
 
 
-extern s32 scrGetArg(s32 index);
 extern BtlEntry *btlMainFindActiveEntry(void);
 extern s32 btlScriptResolveGroupArg(s32 group);
 extern s32 btlCommandOwnerHasSlotId(BtlEntry *entry, s32 slot);

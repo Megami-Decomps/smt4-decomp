@@ -12,7 +12,7 @@ int CONCAT44(int, double);
 float mathSnapHeading16(float angle);
 float calcHeadingRoundedTo32Directions(float angle);
 int mathAngleDeltaDegrees(void);
-int FUN_00327ee8(void);
+int mapSelectContainingRegions(void);
 void lmapSceneStartMovement(unsigned char);
 int __hardfp_atan2f(void);
 
@@ -102,7 +102,7 @@ extern int saveSlotSelectedIsId175(void);
 /* Supplied declaration required: mapSpawnRandomEventKindEffect. */
 /* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: FUN_00325998. */
-/* Supplied declaration required: FUN_00327ee8. */
+/* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int gameDataFlagTestBit(unsigned int);
@@ -808,7 +808,7 @@ LAB_003270a0:
 LAB_003270b0:
   FUN_002e364c(g_lmapScene + 0x28);
 LAB_003270bc:
-  FUN_00327ee8();
+  mapSelectContainingRegions();
   mapEaseSceneHeading();
   temp_v3 = g_lmapScene;
   puVar9 = (unsigned int *)(g_lmapScene + 0x1c);

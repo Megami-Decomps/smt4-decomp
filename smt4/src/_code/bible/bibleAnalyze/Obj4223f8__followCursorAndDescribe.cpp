@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail tail-calls FUN_0029da34 with `mov r3,#0` live across the removed shopListItemGetId (needs the getter's clobber set) and moves the display-name fallback into r2 with movs/moveq. */
+/* NON_MATCHING: the custom-name branch now matches apart from literal offsets; retail keeps r3 live across the
+ * linker-inlined shopListItemGetId and explicitly zero-extends its result before the tail call. */
 #include "common.h"
 #include "runtime/Stdio.h"
 #include "classes/Obj4223f8.h"
@@ -51,9 +52,7 @@ extern BibleAnalyzeTextView g_btlDevilListCallbackContext;
 /* Follow the cursor, then open the selected demon's description on confirmation. */
 void Obj4223f8::followCursorAndDescribe()
 {
-    BibleAnalyzeWorkView *work = reinterpret_cast<BibleAnalyzeWorkView *>(this);
-    char text[64];
-    u8 nameBuffer[8];
+    BibleAnalyzeWorkView *work = (BibleAnalyzeWorkView *)this;
     UiSpriteState *cursor = &work->cursor;
     uiSlidingSpriteAdvance(cursor, 0);
     s32 y = vec2GetYInt(cursor);
@@ -64,15 +63,20 @@ void Obj4223f8::followCursorAndDescribe()
         work->state = 2;
         work->stateArg = 0;
         pointConvertToFloat(work->position, 0, 0);
-        if (!work->customName) {
+        if (work->customName) {
+            char text[64];
+            u8 nameBuffer[8];
+            const char *fallback = DAT_0040226c;
+            const char *name = dataLookupDisplayName(nameBuffer, work->nameId);
+            if (name == NULL) {
+                name = fallback;
+            }
+            __2sprintf(text, DAT_00402274, name, g_btlDevilListCallbackContext.suffix);
+            buttonHelpSetText(text, 0x323232ff);
+        } else {
             BibleAnalyzeEntryView *entries = work->entries;
             s32 selected = flaggedValueHolderGetTotal(work->selection);
             FUN_0029da34(0, 1, shopListItemGetId(&entries[selected]), 0);
-            return;
         }
-        const char *displayName = dataLookupDisplayName(nameBuffer, work->nameId);
-        const char *fallback = DAT_0040226c;
-        __2sprintf(text, DAT_00402274, displayName == NULL ? fallback : displayName, g_btlDevilListCallbackContext.suffix);
-        buttonHelpSetText(text, 0x323232ff);
     }
 }

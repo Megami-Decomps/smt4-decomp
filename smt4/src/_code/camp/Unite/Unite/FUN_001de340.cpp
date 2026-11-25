@@ -65,7 +65,7 @@ extern int devilCompareTablePriority(...); /* 0x1f6524 */
 extern int devilCompareRaceLevelDescending(...); /* 0x2073e4 */
 extern int devilCompareBySetCategoryGrade(...); /* 0x219720 */
 extern int uniteCandidateCompare(...); /* 0x2c6e90 */
-extern int FUN_002d0544(...); /* 0x2d0544 */
+extern int fusionCompareRecipeByDemon(...); /* 0x2d0544 */
 extern int devilCompareByEntryValue(...); /* 0x2dcf14 */
 extern unsigned char LAB_002dcf9c; /* 0x2dcf9c */
 extern int devilCompareByRankGradeId(...); /* 0x2e4b30 */
@@ -591,7 +591,7 @@ LAB_001dedf4:
               qsort(temp_v19,param_1[0x16d],8,&LAB_002dcf9c);
             }
             else {
-              qsort(temp_v19,temp_v13,8,FUN_002d0544);
+              qsort(temp_v19,temp_v13,8,fusionCompareRecipeByDemon);
             }
           }
           else {

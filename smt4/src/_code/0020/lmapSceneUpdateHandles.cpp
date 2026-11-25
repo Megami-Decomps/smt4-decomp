@@ -3,7 +3,6 @@
 
 extern "C" {
 
-void asdMdlManagerMarkDestroy(AsdMdlObject *model);
 void lmapSceneDeactivateHandles(Obj4206e8 *holder);
 
 

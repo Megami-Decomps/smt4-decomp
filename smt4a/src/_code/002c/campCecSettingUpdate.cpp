@@ -12,12 +12,12 @@
 #include "shard/Shard0032.h"
 #include "shard/W6_W6Match3_ForwardEffect.h"
 #include "cec/CecProcessGlobal.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
 extern CampCecSetting *g_campCecSetting;
 
-void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 s32 messageGetChoiceResult(void);
 void sysPlaySe(s32 id);
 s32 cecProcessGetValue(void);

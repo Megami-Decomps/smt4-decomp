@@ -1,49 +1,55 @@
-/* NON_MATCHING: the four entry checks are spelled out as in retail; retail also keeps an unused 9999 literal load in r6 and does not fold the first block's compare against the initial zero. */
 #include "battle/BtlMainAccess.h"
-#include "common.h"
+#include "battle/LabelValues.h"
 #include <string.h>
-
-struct NamedBattleValue {
-    /* 0x00 */ char name[16];
-    /* 0x10 */ s16 value;
-    /* 0x12 */ u8 unk12[4];
-};
-
-struct NamedBattleValues {
-    /* 0x0000 */ u8 unk0000[0x1cfc];
-    /* 0x1cfc */ NamedBattleValue *entries;
-};
 
 extern "C" {
 s32 btlScriptUnitIsIncapacitated(void *state);
 u32 libc_strlen(const char *);
 
-// Return the largest valid value among the four named entries, or -1 when unavailable.
-s32 btlGetMaximumNamedValue(NamedBattleValues *values)
+/* Returns the largest nonnegative value attached to a nonempty, nonzero battle label. */
+s32 btlGetMaximumNamedValue(BattleLabelValueStateIV *state)
 {
-    if (values->entries == NULL || btlScriptUnitIsIncapacitated(static_cast<void *>(btlGetMainState())))
+    if (state->labels == NULL || btlScriptUnitIsIncapacitated(btlGetMainState()))
         return -1;
     s32 maximum = 0;
-    if (libc_strlen(values->entries[0].name) &&
-        strcmp(values->entries[0].name, "0") != 0 &&
-        values->entries[0].value >= 0 &&
-        values->entries[0].value > maximum)
-        maximum = values->entries[0].value;
-    if (libc_strlen(values->entries[1].name) &&
-        strcmp(values->entries[1].name, "0") != 0 &&
-        values->entries[1].value >= 0 &&
-        values->entries[1].value > maximum)
-        maximum = values->entries[1].value;
-    if (libc_strlen(values->entries[2].name) &&
-        strcmp(values->entries[2].name, "0") != 0 &&
-        values->entries[2].value >= 0 &&
-        values->entries[2].value > maximum)
-        maximum = values->entries[2].value;
-    if (libc_strlen(values->entries[3].name) &&
-        strcmp(values->entries[3].name, "0") != 0 &&
-        values->entries[3].value >= 0 &&
-        values->entries[3].value > maximum)
-        maximum = values->entries[3].value;
+    /* The original tracks the minimum as well, but returns only the maximum. */
+    s32 minimum = 9999;
+    if (libc_strlen(state->labels[0].label) && strcmp(state->labels[0].label, "0") != 0) {
+        s32 value = state->labels[0].value;
+        if (value >= 0) {
+            minimum = value < minimum ? value : minimum;
+            if (value > maximum) {
+                maximum = value;
+            }
+        }
+    }
+    if (libc_strlen(state->labels[1].label) && strcmp(state->labels[1].label, "0") != 0) {
+        s32 value = state->labels[1].value;
+        if (value >= 0) {
+            minimum = value < minimum ? value : minimum;
+            if (value > maximum) {
+                maximum = value;
+            }
+        }
+    }
+    if (libc_strlen(state->labels[2].label) && strcmp(state->labels[2].label, "0") != 0) {
+        s32 value = state->labels[2].value;
+        if (value >= 0) {
+            minimum = value < minimum ? value : minimum;
+            if (value > maximum) {
+                maximum = value;
+            }
+        }
+    }
+    if (libc_strlen(state->labels[3].label) && strcmp(state->labels[3].label, "0") != 0) {
+        s32 value = state->labels[3].value;
+        if (value >= 0) {
+            minimum = value < minimum ? value : minimum;
+            if (value > maximum) {
+                maximum = value;
+            }
+        }
+    }
     return maximum;
 }
-}
+} /* extern "C" */

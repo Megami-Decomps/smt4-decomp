@@ -1,12 +1,9 @@
-/* NON_MATCHING: parameter registers (r8/r9 swapped), rank-base hoisting in the learn loop and clamp temp differ. */
-#include "gamedata/GameSaveDataA.h"
-#include "shard/Shard004B.h"
-#include "gamedata/SkillDataRecord.h"
+/* NON_MATCHING: armcc hoists the learned-skill array address above the equipped-skill scan;
+ * retail forms it at the start of the equip loop. */
+#include "gamedata/PartySkillRank.h"
 #include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-s32 partyRecordClampEquippedRankUp(u32);
-s32 partyRecordClampEquippedRankDown(u32);
 void unitCollectSkillsLearnedWithin(PartySlotA *, s16, u16 *);
 void FUN_004cd4b8(PartySlotA *, s16);
 
@@ -38,21 +35,8 @@ u32 partySlotLevelUpTo(u32 id, s32 targetLevel, s32 maximumIncrease)
     for (s32 count = 0; count < 8 && slot->record.skills[count]; ++count)
         ++nextSlot;
     for (s32 index = 0; index < 8 && learned[index]; ++index, ++nextSlot) {
-        u32 skill = learned[index];
-        if (slot && nextSlot < 8) {
-            slot->record.skills[nextSlot] = skill;
-            const ItemRankDefinition *definition = (const ItemRankDefinition *)skillDataFindById(skill);
-            s32 rank = 0;
-            if (definition && definition->category < 18)
-                rank = slot->record.categoryRanks[definition->category];
-            s32 maximum = partyRecordClampEquippedRankUp(skill);
-            s32 minimum = partyRecordClampEquippedRankDown(skill);
-            if (rank > maximum)
-                rank = maximum;
-            else if (rank < minimum)
-                rank = minimum;
-            slot->record.skillRanks[nextSlot] = rank;
-        }
+        u16 skill = learned[index];
+        partyRecordEquipSkillWithRank(&slot->record, skill, nextSlot);
     }
     FUN_004cd4b8(slot, (s16)increase);
     return 1;

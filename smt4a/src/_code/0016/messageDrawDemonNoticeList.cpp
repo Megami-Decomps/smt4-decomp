@@ -19,6 +19,7 @@
 #include "gamedata/GameDataAccess_Smt4a.h"
 #include "gfx/StereoParallax.h"
 #include "text/TextDraw.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ f32 jobGetScalarValue();
 void rt_aeabi_memclr(void *memory, s32 size);
 void drawSetColorFromRGBA8(u32 packed);
 void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 z, s32 tint);
-void numberFontDrawFormatted(s32 font, s32 x, s32 y, s32 align, s32 digits, s32 z, const char *text);
 
 enum {
     NOTICE_TABLE = 0x14,            /* the notification rows' sprite table */

@@ -6,7 +6,7 @@
 
 extern "C" {
 void *asdOperatorNewE(u32 bytes, ...);
-WindowOperationResult FUN_0047402c(WindowOperationState *state, const WindowOperationRequest *request);
+RequestParameters aocFileContentDispatchMountRequest(WindowOperationState *state, const WindowOperationRequest *request);
 }
 
 inline void *Obj4221d4::operator new[](u32 bytes) throw()
@@ -21,7 +21,7 @@ extern "C" void FUN_00471adc(AocPackageMountBatch *batch)
     WindowOperationResult result(0);
     batch->packages = new Obj4221d4[batch->count];
     for (s32 index = 0; index < batch->count; ++index) {
-        const WindowOperationResult &operation = FUN_0047402c(
+        const RequestParameters &operation = aocFileContentDispatchMountRequest(
             (WindowOperationState *)&batch->packages[index],
             (const WindowOperationRequest *)&batch->entries[index]);
         if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&operation))) {

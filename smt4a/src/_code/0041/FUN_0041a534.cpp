@@ -8,7 +8,6 @@
 
 struct BattleUi;
 extern "C" {
-s32 FUN_004ab718(void);
 void efctSetSpeed(f32 alpha);
 void cameraProjectToScreen(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 distance);

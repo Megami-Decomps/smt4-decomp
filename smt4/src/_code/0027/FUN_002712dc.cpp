@@ -12,7 +12,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMotionValueApi.h"
 #include "map/LmapViewGlobals.h"
 #include "game/GameState.h"
-#include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "map/LmapSoundPosition.h"
 #include "util/MathFunctions.h"
 #include "util/TrigF32.h"
 #include "sys/RuntimeObjects.h"
@@ -93,16 +93,6 @@ static __forceinline void lmapSceneUpdateRegions(void)
 {
     FUN_002804ec(&g_lmapScene->pose.targetPosition);
     mapSelectContainingRegions(g_lmapScene->pose.position.x, g_lmapScene->pose.position.z);
-}
-
-/* The player position as a sound position. */
-static __forceinline SoundActorQueuePosition lmapSceneSoundPosition(void)
-{
-    SoundActorQueuePosition position;
-    position.x = g_lmapScene->pose.position.x;
-    position.y = g_lmapScene->pose.position.y;
-    position.z = g_lmapScene->pose.position.z;
-    return position;
 }
 
 /* The warp's departure sounds: the effect kind's sound at the player, then one of two sounds 50 ahead

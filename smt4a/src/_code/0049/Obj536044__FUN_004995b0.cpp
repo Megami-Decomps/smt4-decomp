@@ -21,6 +21,7 @@
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "script/scrScriptProcess.h"
 #include "ui/UiSpriteApi.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
@@ -42,7 +43,6 @@ void FUN_004964e0(Obj536044 *shop, s32 changed);
 void shopScreenRebuildForSelection(Obj536044 *shop, u32 mode);
 void FUN_00499d14(Obj536044 *shop);
 s32 tableGroupFindEntryIndex(u32 table, const char *name);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 
 } /* extern "C" */
 

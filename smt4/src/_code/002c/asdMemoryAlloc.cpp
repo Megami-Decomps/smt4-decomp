@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "classes/AllocatorState.h"
 #include "bible/bibleDevil.h"
+#include "runtime/String.h"
 
 /* The header in front of an aligned allocation; the word just before the user data points back at it. */
 struct AlignedAllocationHeader {
@@ -16,7 +17,6 @@ void nn_os_CriticalSection_Enter(void *lock);
 void nn_os_CriticalSection_Leave(void *lock);
 void *asdMemoryAllocFromHeap(u32 heap, u32 alignment, u32 pool, u32 size, u32 flags);
 void asdMemoryTrackAllocation(AlignedAllocationHeader *allocation);
-void rt_memclr(void *memory, u32 size);
 
 // Align the user allocation after its header and install the preceding back-pointer.
 static __inline void *alignedAllocationInit(AlignedAllocationHeader *header, u32 size, u16 alignment, u16 flags)

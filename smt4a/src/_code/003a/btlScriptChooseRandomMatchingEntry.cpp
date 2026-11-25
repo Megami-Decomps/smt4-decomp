@@ -11,7 +11,6 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-s32 scrGetArg(s32 index);
 s32 btlCombatantHasSkillAction(BtlCombatantEntryA *, u32 condition);
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *);
 

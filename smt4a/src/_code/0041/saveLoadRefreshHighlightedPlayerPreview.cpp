@@ -5,7 +5,6 @@
 #include "gamedata/GameDataAccess.h"
 
 extern "C" {
-void FUN_0023b45c(s32 enabled);
 char *libc_strcpy(char *output, const char *input);
 void FUN_0033440c(u32 value);
 void FUN_0033449c(s32 value);

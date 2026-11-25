@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include "font/SearchWin/RunWin.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 s32 FUN_004bd098(void *owner, u32 stat);
 s32 partyRecordClampEquippedRankUp(u32 stat);
 s32 partyRecordClampEquippedRankDown(u32 stat);
 void drawSetColorFromRGBA8(u32 color);
-void numberFontDrawFormatted(s32 layer, s32 x, s32 y, s32 z, s32 mode, s32 depth, const char *format, ...);
 void gxResetColorQuadToWhite(void);
 
 enum {

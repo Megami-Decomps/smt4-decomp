@@ -8,7 +8,6 @@
 extern "C" {
 s32 btlCombatantTestApplicableActions(BtlCombatantEntryA *entry);
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle);
-void scrSetResult(s32 result);
 
 // Check the requested group and the special combatant against candidate masks and a predicate.
 u32 FUN_003b81ac(void)

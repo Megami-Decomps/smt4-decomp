@@ -1,13 +1,13 @@
 #include "battle/BattleEventStates.h"
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern void *g_btlAux;
 extern const char DAT_00400968[]; /* battle/event/%s/%s.tbb */
 void *dataTableFileGetTable(void *file, u32 index);
 s32 FUN_003c7760(BtlEvent *event, BtlMainState *state);
-void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void buttonHelpSetPreset(s32 preset);
 void btlEffectLoadTransitionFiles(void *state);
 s32 btlEventAreResourcesReady(void *state);

@@ -3,7 +3,6 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
-void lightOwnerRegister(AsdMdlObject *model, u32 enabled);
 void modelPartSetRotationDegrees(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 void nodeSetScale(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 void asdTMTexTablePrepareNodeImage(u32 group, u32 id);

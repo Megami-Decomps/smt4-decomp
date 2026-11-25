@@ -3,6 +3,7 @@
 #include "gamedata/SkillFlags.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "status/StatusCamera.h"
+#include "runtime/String.h"
 
 struct FusionCatalogOptions {
     u8 unk00[8];
@@ -21,7 +22,6 @@ s32 devilIsAvailable(void *, u16);
 s32 itemGetFlagBit1(u16);
 s32 itemIsCollectedWithRelated(u16);
 s32 arrayContainsU16(const u16 *, s32, u16);
-void rt_memclr(void *, u32);
 s32 devilCompareTablePriority(const void *, const void *);
 void qsort(void *, u32, u32, s32 (*)(const void *, const void *));
 s32 FUN_001a15f4(s16);

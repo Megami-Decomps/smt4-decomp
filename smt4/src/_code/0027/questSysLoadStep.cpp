@@ -1,13 +1,13 @@
 #include "addon/QuestScriptLoader.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern const char g_questScriptPath[];
 extern const char g_questMessagesPath[];
 void asdLoadFileAsyncSimple(const char *path, void **resource, s32 flags);
 void buttonHelpSetPreset(s32 preset);
-void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 s32 questHasNewMark();
 void FUN_0029016c(u32 selection, s32 flags);
 void FUN_002900d0();

@@ -4,7 +4,6 @@
 #include "shard/SpriteDetailPanel.h"
 
 extern "C" {
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *);
 void efctSetSpeed(f32);
 void renderCtxResetColorScale(RenderCtxA *);
 

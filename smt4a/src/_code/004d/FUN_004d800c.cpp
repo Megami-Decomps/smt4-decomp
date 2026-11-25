@@ -1,24 +1,41 @@
-/* NON_MATCHING: 16 lines. In BTL_EVENT_A_START_SCRIPT's two 64-bit mask operations retail holds the mask's low word
-   in r2 and r3 where this build uses r3 and r2. */
+/* NON_MATCHING: 10 lines. In BTL_EVENT_A_START_SCRIPT (btlEventStartScriptA) retail loads the battle flags with
+   ldm before the pending mask's words when it ORs them; this build loads the mask's low word first. */
 #include <stdio.h>
 #include "battle/BattleEventStatesA.h"
 #include "gamedata/DataTable.h"
 #include "battle/BtlMainAccess.h"
-
-/* unit-local: the event module's global, of which this function reads only the pending mask */
-struct BattleEventPendingMask {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ u64 mask;
-};
+#include "battle/BattleEventAction.h"
+#include "battle/btlMain.h"
 
 extern "C" {
-extern BattleEventPendingMask g_btlEvent;
 static const char s_proTablePathFormat[] = "battle/event/%s/ProTable_%s.tbb";
 void *dataTableFileGetTable(void *file, s32 index);
-u32 FUN_004d7ec0(BattleEventAssetLoadState *event, BtlMainStateA *battle);
-u32 btlActionStepFinishPendingChanges(BattleEventAssetLoadState *event, BtlMainStateA *battle);
-void scrScriptProcessStartEntry(void *process, s32 entry);
 void sysPlaySe(u32 sound);
+}
+
+enum {
+    BTL_EVENT_A_PENDING_CHANGE_TYPE = 5,
+    BTL_EVENT_A_PENDING_CHANGE_SOUND = 223
+};
+
+/* Starts the chosen script entry and applies its pending battle state: the START_SCRIPT step, also defined in
+ * battleEventPrepareAuxAndStartScript's unit, which runs it once the auxiliary resources are ready. */
+static __inline u32 btlEventStartScriptA(BattleEventAssetLoadState *event, BtlMainStateA *battle)
+{
+    if (event->entry < 0) {
+        return 0;
+    }
+    scrScriptProcessStartEntry(event->scriptProcess, event->entry);
+    event->frames = 0;
+    event->state = BTL_EVENT_A_RUN_SCRIPT;
+    if (battle->stateFlags64.bits & g_btlEvent.pendingMask) {
+        sysPlaySe(BTL_EVENT_A_PENDING_CHANGE_SOUND);
+    }
+    if (event->type == BTL_EVENT_A_PENDING_CHANGE_TYPE) {
+        battle->stateFlags64.bits |= g_btlEvent.pendingMask;
+        sysPlaySe(BTL_EVENT_A_PENDING_CHANGE_SOUND);
+    }
+    return btlActionStepFinishPendingChanges(event, battle);
 }
 
 /* BTL_EVENT_A_WAIT_TABLE: waits for the event table, then reads its records. */
@@ -60,25 +77,12 @@ extern "C" u32 FUN_004d800c(BattleEventAssetLoadState *event, const BattleEventA
         return btlEventWaitScriptA(event, source);
     case BTL_EVENT_A_CREATE_SCRIPT:
         return FUN_004d7e20(event, source);
-    case BTL_EVENT_A_START_SCRIPT: {
-        BtlMainStateA *battle = (BtlMainStateA *)source;
-        if (event->entry < 0)
-            return 0;
-        scrScriptProcessStartEntry(event->scriptProcess, event->entry);
-        event->frames = 0;
-        event->state = BTL_EVENT_A_RUN_SCRIPT;
-        if (battle->stateFlags64.bits & g_btlEvent.mask)
-            sysPlaySe(223);
-        if (event->type == 5) {
-            battle->stateFlags64.bits = g_btlEvent.mask | battle->stateFlags64.bits;
-            sysPlaySe(223);
-        }
-        return btlActionStepFinishPendingChanges(event, battle);
-    }
+    case BTL_EVENT_A_START_SCRIPT:
+        return btlEventStartScriptA(event, (BtlMainStateA *)source);
     case BTL_EVENT_A_RUN_SCRIPT:
         return btlActionStepFinishPendingChanges(event, (BtlMainStateA *)source);
     case BTL_EVENT_A_PREPARE:
-        return FUN_004d7ec0(event, (BtlMainStateA *)source);
+        return battleEventPrepareAuxAndStartScript(event, (BtlMainStateA *)source);
     default:
         return 0;
     }

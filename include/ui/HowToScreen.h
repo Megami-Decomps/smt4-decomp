@@ -14,6 +14,25 @@ typedef char HowToDrawTablesOffsets[sizeof(HowToDrawTables) == 444 &&
     offsetof(HowToDrawTables, second) == 36 &&
     offsetof(HowToDrawTables, last) == 108 ? 1 : -1];
 
+enum {
+    HOW_TO_PAGE_MAX_ROWS = 5,
+    HOW_TO_PAGE_MAX_COLUMNS = 3,
+    HOW_TO_PAGE_ROW_EMPTY = 0,
+    HOW_TO_PAGE_ROW_TEXT = 1,
+    HOW_TO_PAGE_ROW_IMAGE = 2,
+    HOW_TO_PAGE_NO_CHOICE = -1
+};
+
+/* One laid-out text or image row of a tutorial page. */
+struct HowToPageRow {
+    /* 0x00 */ s32 start;
+    /* 0x04 */ s32 end;
+    /* 0x08 */ u8 kind;
+    /* 0x09 */ u8 unk09[3];
+    /* 0x0C */ s32 choices[HOW_TO_PAGE_MAX_COLUMNS];
+    /* 0x18 */ s32 lastColumn;
+};
+
 struct HowToScreenWork {
     union {
         /* 0x000 */ u32 unk000[2];
@@ -38,11 +57,13 @@ struct HowToScreenWork {
         struct {
             /* 0x018 */ u8 unk018[0x68];
             /* 0x080 */ u32 selection;
-            /* 0x084 */ u8 unk084[4];
+            /* 0x084 */ HowToRecord *definition;
             /* 0x088 */ u32 handles[3];
+            /* 0x094 */ s32 height;
+            /* 0x098 */ HowToPageRow rows[HOW_TO_PAGE_MAX_ROWS];
         } display;
     };
-    /* 0x0E8 */ u8 unk0E8[0x108];
+    /* 0x124 */ u8 unk124[0xCC];
     /* 0x1F0 */ s32 scroll;                /* the list's first visible entry */
     /* 0x1F4 */ s32 cursor;                /* the selected row on the screen */
     /* 0x1F8 */ u8 unk1F8[4];
@@ -62,9 +83,12 @@ typedef char HowToScreenInstanceLayoutCheck[offsetof(HowToScreenWork, process) =
     offsetof(HowToScreenInstance, entryMode) == 0x470 &&
     offsetof(HowToScreenInstance, alternate) == 0x474 ? 1 : -1];
 typedef char HowToScreenWorkOffsets[sizeof(HowToScreenWork) == 0x46C &&
-    offsetof(HowToScreenWork, messages) == 8 &&
+    sizeof(HowToPageRow) == 0x1C && offsetof(HowToPageRow, choices) == 0xC &&
+    offsetof(HowToPageRow, lastColumn) == 0x18 && offsetof(HowToScreenWork, messages) == 8 &&
     offsetof(HowToScreenWork, display.selection) == 0x80 &&
+    offsetof(HowToScreenWork, display.definition) == 0x84 &&
     offsetof(HowToScreenWork, display.handles) == 0x88 &&
+    offsetof(HowToScreenWork, display.rows) == 0x98 && offsetof(HowToScreenWork, unk124) == 0x124 &&
     offsetof(HowToScreenWork, table.records) == 0x10 && offsetof(HowToScreenWork, entryIds) == 0x18 &&
     offsetof(HowToScreenWork, scroll) == 0x1F0 && offsetof(HowToScreenWork, cursor) == 0x1F4 &&
     offsetof(HowToScreenWork, rowRegions) == 0x1FC &&

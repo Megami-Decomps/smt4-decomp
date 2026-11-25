@@ -4,10 +4,10 @@
 #include "bible/bibleMain.h"
 #include "code/Code0026.h"
 #include "code/Code0029_Smt4.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 u32 messageMainGetChoiceResult(void);
 u32 messageTargetGetValue(void);
 u8 messageWindowIsState1(void);

@@ -40,10 +40,7 @@ u32 FUN_003db0c0(MaterialMergeOwner *owner, BtlActionRecord *action)
             if (owner->placements.entries[i].resource) {
                 BattleSpritePlacement *placement = &owner->placements.entries[i].placement;
                 placement->sprite = owner->placements.entries[i].resource;
-                /* The shared state's byte padding starts at an odd address; keep this view local. */
-                struct SelectionView { u8 unk000[0xc4]; s32 index; };
-                typedef char SelectionViewOffset[offsetof(SelectionView, index) == 0xc4 ? 1 : -1];
-                s32 selection = reinterpret_cast<SelectionView *>(state)->index;
+                s32 selection = state->core.selectionIndex;
                 u32 variant = 0;
                 if (selection >= 0) {
                     variant = tableFileFindByKeyPair(state, (s16)selection, kind);

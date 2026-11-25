@@ -6,17 +6,12 @@
 #include "util/SlotRangeSelect.h"
 #include "script/ScriptArgs.h"
 extern "C" {
-void scrSetResult(s32 result);
 s32 btlResolveEntryChoice(s32 choice);
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 
+/* Tests whether the named combatant has a negative value for the selected property. */
 u32 FUN_003bbf60(void)
 {
-    /* A 32-bit field in the shared union at +0xA would shift its alignment. */
-    struct PropertyView {
-        u8 prefix[0x74];
-        s32 values[12];
-    };
     u32 id = scrGetArg(0);
     s32 kind = scrGetArg(1);
     s32 property = 0;
@@ -28,23 +23,22 @@ u32 FUN_003bbf60(void)
         property = 10;
     else if (kind == 3)
         property = 11;
-    u32 first, count;
-    btlGetEntryChoiceRange(btlResolveEntryChoice(scrGetArg(2)), reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
-    for (s32 index = first; static_cast<s32>(first + count) > index; ++index) {
+    s32 first, count;
+    btlGetEntryChoiceRange(btlResolveEntryChoice(scrGetArg(2)), &first, &count);
+    for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         u64 flags = entry->flags;
         if (!(flags & g_btlCandidateMasks.unavailable) &&
             (flags & g_btlCandidateMasks.required) &&
             !(flags & g_btlCandidateMasks.excluded) && entry->data.id == id &&
-            reinterpret_cast<const PropertyView *>(entry)->values[property] <= -1) {
+            entry->properties[property] <= -1) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->unk4cd1) {
         BtlCombatantEntryA *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(btlGetMainState());
-        if (entry && entry->data.id == id &&
-            reinterpret_cast<const PropertyView *>(entry)->values[property] <= -1) {
+        if (entry && entry->data.id == id && entry->properties[property] <= -1) {
             scrSetResult(1);
             return 1;
         }

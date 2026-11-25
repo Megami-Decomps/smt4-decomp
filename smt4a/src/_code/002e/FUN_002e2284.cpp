@@ -1,5 +1,6 @@
 #include "shard/W6_W6Match4_CampCecResumeState.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern CampCecSceneGlobals g_campCec;
@@ -12,7 +13,6 @@ void linkHolderApplyFlag(u32 *holder, s32 flags);
 void progressConditionsUpdateUnlocks(void);
 s32 gameFlagIsSet(u32 flag);
 void sysPlaySe(u32 id);
-void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 void campHideNumericBanner(void);
 
 u32 FUN_002e2284(CampCecResumeState *work)

@@ -13,7 +13,6 @@ extern "C" {
 u8 useCounterIsFinished(void);
 void useCounterRelease(void);
 s32 useCounterGetValue(void);
-void gameGlobalsSetMenuOpenFlag(u8 value);
 void FUN_00498ff0(Obj536044 *menu);
 u8 useCounterGetCurrentValue(void);
 void arraySortQsort(void *entries, u32 count, u32 size, SortCompare compare);

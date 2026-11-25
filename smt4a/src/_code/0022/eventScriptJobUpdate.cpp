@@ -20,6 +20,7 @@
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "code/Code0013.h"
 #include "code/Code002e.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern EventScriptJobWork *g_aocJob;
@@ -49,7 +50,6 @@ s32 byteTableAGetValue3(void);
 void byteTableASetValue3(s8 value);
 s32 eventIsSkipping(void);
 u32 tableGroupFindEntryIndex(void *commands, const char *name);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 /* The game flag an event entry raises when it ends. Apocalypse's is a stub returning 0 that armlink
  * inlined at its only call and removed. */
 void aocBootResetAndReleaseBuffers(AocScriptHolder *holder, u8 showButtonHelp);

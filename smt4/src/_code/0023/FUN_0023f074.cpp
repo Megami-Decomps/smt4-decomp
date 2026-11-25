@@ -3,12 +3,12 @@
 #include "script/scrScriptProcess.h"
 #include "code/Code002c.h"
 #include "code/Code0013.h"
+#include "script/ScriptEntry.h"
 extern "C" {
 void commonBgAcquire(void);
 void buttonHelpCreate(void);
 void commonBgStopChildAndBeginTransition(void);
 void buttonHelpSetPreset(s32 preset);
-void scrScriptProcessStartEntry(ScriptProcess *runner, s32 entry);
 
 void uiFadeRelease(void);
 void buttonHelpRelease(void);

@@ -4,7 +4,6 @@
 #include "camp/CampMenuEntry.h"
 
 extern "C" {
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 u32 listCursorGetRowOfChildIfUnblocked(const void *selection);
 void FUN_00227294(s32 first, s32 second, s32 enabled);
 void skinObjectUpdateMatrices(RenderCtxA *context);

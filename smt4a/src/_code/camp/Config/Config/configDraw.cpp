@@ -1,4 +1,4 @@
-/* NON_MATCHING: 120 lines (70 by shape), registers and spill slots only; the instructions, the frame size and
+/* NON_MATCHING: 114 lines (64 by shape), registers and spill slots only; the frame size and
  * the block layout are retail's. The pass-flags push keeps the packed state in r2 (built: r0) and so numbers
  * its scratch registers differently; the first blend-state change of the glow swaps r1/r2; the three spilled
  * values sit at [sp, #28]/[sp, #40]/[sp, #44] (rows, first image, names) where the build has rows at 44, the
@@ -118,9 +118,8 @@ static __inline void configDrawRows(ConfigWorkA *config, f32 speed)
 
             __2sprintf(text, "%s", names->names[config->rows[i].helpId]);
             TextureTableEntryIV *labelArea = asdTMTexTableEntryAt(CONFIG_TABLE, CONFIG_ROW_LABEL_AREA);
-            s32 width = fontMeasureLineAdvance(text, 2);
-            s32 centred = labelArea->x + (labelArea->placement->width - width) / 2;
-            textDrawString((f32)(entry->x + centred + x), (f32)(entry->y + labelArea->y + y), 0.0f, 2, 0.0f, color, alpha,
+            s32 centred = labelArea->x + (labelArea->placement->width - fontMeasureLineAdvance(text, 2)) / 2;
+            textDrawString((f32)(entry->x + (x + centred)), (f32)(entry->y + labelArea->y + y), 0.0f, 2, 0.0f, color, alpha,
                            text);
         }
     }

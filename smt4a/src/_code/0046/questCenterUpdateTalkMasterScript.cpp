@@ -1,5 +1,6 @@
 #include "shard/W6_W6Match2_HelpResources.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 struct QuestTalkActor {
     u8 unk000[0x1fc];
@@ -27,7 +28,6 @@ extern "C" {
 void sysPlaySe(s32 sound);
 void asdLoadFileAsyncSimple(const char *path, void **output, s32 flags);
 u32 tableGroupFindEntryIndex(void *table, const char *name);
-void scrScriptProcessStartEntry(ScriptProcess *script, u32 entry);
 f32 candidateGetPreferredValue(QuestTalkActor *actor);
 void modelPlayClip(QuestTalkActor *actor, u32 animation, u32 mode, f32 frame, f32 blend);
 

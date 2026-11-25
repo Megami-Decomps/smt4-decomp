@@ -11,7 +11,7 @@ struct CampUnitComparison {
     /* 0x04 */ u8 kind;
     /* 0x05 */ u8 unk05;
     /* 0x06 */ u16 flags;
-    /* 0x08 */ u8 unk08[4];
+    /* 0x08 */ u32 amount;  /* summon cost or reward, depending on the list */
     /* 0x0C */ u16 level;
     /* 0x0E */ u16 otherLevel;
     /* 0x10 */ u16 maximum;
@@ -22,6 +22,7 @@ struct CampUnitComparison {
     /* 0x1C */ Table01Record *description;
 };
 typedef char CampUnitComparisonOffsets[
+    offsetof(CampUnitComparison, amount) == 0x8 &&
     offsetof(CampUnitComparison, level) == 0xC &&
     offsetof(CampUnitComparison, maximum) == 0x10 &&
     offsetof(CampUnitComparison, secondaryMaximum) == 0x14 &&

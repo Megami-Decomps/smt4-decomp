@@ -1,24 +1,8 @@
-#include "common.h"
+#include "gfx/MatrixSlots.h"
 
-struct GroupItemFlags {
-    u8 unk00;
-    u8 enabled; // 0x01
-};
-
-struct ItemPointerList {
-    GroupItemFlags **begin; // 0x00
-    GroupItemFlags **end; // 0x04
-    GroupItemFlags **capacity; // 0x08
-};
-
-struct GroupItemTable {
-    u8 unk000[0x114];
-    ItemPointerList groups[1]; // 0x114: variable-length group table
-};
-
-/* A vector-style iterator over the pointer list. */
+/* unit-local: a vector-style iterator over the pointer list. */
 struct ItemIterator {
-    GroupItemFlags **current;
+    SlotOwnerItem **current;
 };
 static __inline bool operator!=(const ItemIterator &a, const ItemIterator &b)
 {
@@ -26,10 +10,10 @@ static __inline bool operator!=(const ItemIterator &a, const ItemIterator &b)
 }
 
 extern "C" {
-// Report whether any item in the selected group is enabled.
-s32 itemGroupHasEnabledItem(GroupItemTable *table, s32 group)
+/* Reports whether any item in the selected group is enabled. */
+s32 itemGroupHasEnabledItem(SlotOwner *owner, s32 group)
 {
-    ItemPointerList *items = &table->groups[group];
+    SlotOwnerItemList *items = &owner->groups()[group];
     ItemIterator last = {items->end};
     for (ItemIterator item = {items->begin}; item != last; ++item.current) {
         if ((*item.current)->enabled != 0) {
@@ -38,4 +22,4 @@ s32 itemGroupHasEnabledItem(GroupItemTable *table, s32 group)
     }
     return 0;
 }
-}
+} /* extern "C" */

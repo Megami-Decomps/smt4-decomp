@@ -1,9 +1,8 @@
-/* NON_MATCHING: 33 lines: retail loads the point's kind separately in each arm where armcc hoists one load above
- * the index test, which also swaps the queue and previous-point registers (r6/r7). */
+/* NON_MATCHING: retail loads the point's kind in each arm instead of hoisting it. The previous-point address and position-base order also differ. */
 #include "shard/W6_W6Match2_VectorQueue.h"
+#include "shard/W6_W6Match1_PositionedStream.h"
 
 extern "C" {
-f32 distSpatial(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 
 /* Build normalized backward directions for the active queue, then advance it. */
 void vectorQueueFinishPath(void)
@@ -19,16 +18,10 @@ void vectorQueueFinishPath(void)
         } else {
             QueuedVector *previous = entry - 1;
             entry->kind |= 1;
-            f32 length = distSpatial(entry->position.x, entry->position.y, entry->position.z,
-                                     previous->position.x, previous->position.y, previous->position.z);
+            f32 length = distSpatial(entry->position, previous->position);
             if (length < 0.0f)
                 length = -length;
-            MapVector previousPosition = previous->position;
-            MapVector position = entry->position;
-            MapVector direction;
-            direction.x = previousPosition.x - position.x;
-            direction.y = previousPosition.y - position.y;
-            direction.z = previousPosition.z - position.z;
+            MapVector direction = mapVectorSub(previous->position, entry->position);
             if (length != 0.0f) {
                 f32 reciprocal = 1.0f / length;
                 direction.x *= reciprocal;

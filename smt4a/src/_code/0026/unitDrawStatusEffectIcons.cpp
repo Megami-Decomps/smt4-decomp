@@ -6,7 +6,6 @@
 #include "game/GameGlobalsRef.h"
 
 extern "C" {
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void unitGetStereoScreenPosition(s32 *x, s32 *y, s32 sprite, f32 scale);
 void efctSetSpeed(f32 alpha);
 

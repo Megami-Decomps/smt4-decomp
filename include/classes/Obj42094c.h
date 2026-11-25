@@ -2,6 +2,9 @@
 #define CLASSES_OBJ42094C_H
 
 #include "classes/Obj420794.h"
+#include "nw/math/MTX33.h"
+#include "nw/math/MTX44.h"
+#include <stddef.h>
 
 /* The four-polygon screen filter (Filter4Poly; vtable at 0x42094c, named after it until its real
  * name is settled): the filter base plus a second heap block. */
@@ -32,10 +35,8 @@ struct Filter4PolyVertex {
     /* 0x10 */ f32 v;
 };
 struct Filter4PolyMotion {
-    /* 0x00 */ f32 matrix[16];
-    /* 0x40 */ f32 x;
-    /* 0x44 */ f32 y;
-    /* 0x48 */ f32 z;
+    /* 0x00 */ nw::math::MTX44 matrix;
+    /* 0x40 */ nw::math::VEC3 velocity;
     /* 0x4C */ s32 frame;
 };
 struct Filter4PolyConfig {
@@ -65,7 +66,20 @@ struct Filter4PolyView {
     /* 0x1C */ Filter4PolyConfig *config;
 };
 
+/* The filter's refresh and periodic geometry update both set an unscaled XY direction first. */
+static __inline void setFilterPlanarVelocity(nw::math::VEC3 *out, f32 phase,
+                                             f32 (*cosine)(f32), f32 (*sine)(f32))
+{
+    const f32 planarZ = 0.0f;
+    f32 x = cosine(phase);
+    f32 y = sine(phase);
+    out->x = x;
+    out->y = y;
+    out->z = planarZ;
+}
+
 typedef char Filter4PolyVertexSizeCheck[sizeof(Filter4PolyVertex) == 0x14 ? 1 : -1];
-typedef char Filter4PolyMotionSizeCheck[sizeof(Filter4PolyMotion) == 0x50 ? 1 : -1];
+typedef char Filter4PolyMotionSizeCheck[sizeof(Filter4PolyMotion) == 0x50 &&
+    offsetof(Filter4PolyMotion, velocity) == 0x40 && offsetof(Filter4PolyMotion, frame) == 0x4C ? 1 : -1];
 
 #endif

@@ -18,7 +18,6 @@ struct EventOverlayTexture {
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
 extern EventOverlayTexture DAT_0057f430;
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void efctSetSpeed(f32 alpha);
 void gxResetColorQuadToWhite(void);
 

@@ -22,6 +22,7 @@
 #include "ui/AnimatedMessage.h"
 #include "ui/UiSpriteApi.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/NumberFont.h"
 
 /* A pair of screen coordinates (skillScreenDrawSlots takes one by value). */
 struct ScreenOffset {
@@ -32,7 +33,6 @@ struct ScreenOffset {
 extern "C" {
 
 s32 uiListGetVisibleCount(ScrollSelection *list);
-void numberFontDrawFormatted(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
 void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 z, s32 tint);
 void FUN_0020caec(u32 id, u32 a, u32 b, u32 c);
 void unitRecordBuild(s32 id, UnitRecord *out);

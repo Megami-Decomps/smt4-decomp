@@ -7,7 +7,6 @@ extern "C" {
 #define MSG_KIND_PLAIN_HELP 19
 
 void messageSlotSet(s32 slot);
-void scrCommMessageSetMode(s32 mode);
 void messageWindowSetupLayoutSprites(MessageWindow *window, u32 layout);
 void messageWindowOpen(MessageWindow *window, u32 a, u32 b, u32 kind, u32 c, u32 d, u32 options);
 int buttonHelpSetEnabled(void);

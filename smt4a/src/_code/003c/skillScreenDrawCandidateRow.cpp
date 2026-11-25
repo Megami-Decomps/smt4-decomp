@@ -14,9 +14,9 @@
 #include "shard/W6_W6Match8_BattleDebug.h"
 #include "gamedata/GameDataAccess.h"
 #include "ui/AnimatedMessage.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
-void numberFontDrawFormatted(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
 void FUN_00185e84(s16 id, s32 x, s32 y, u32 layer, u32 a, u32 b);
 void statDrawClampedDelta(SlotRecordA *record, s16 id, s32 x, s32 y, u32 layer, u32 a);
 

@@ -7,6 +7,7 @@
 #include <stddef.h>
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 #include "addon/AocSystem.h"
+#include "script/ScriptEntry.h"
 
 struct QuestAddonScriptWork {
     u32 state;
@@ -25,7 +26,6 @@ void aocQueueType07(AocSystem *system, u32 id, void **output, u32 flags);
 void aocQueueType08(AocSystem *system, u32 id, void **output, u32 flags);
 void buttonHelpSetPreset(u32 preset);
 u32 tableGroupFindEntryIndex(void *commands, const char *entry);
-void scrScriptProcessStartEntry(ScriptProcess *script, u32 entry);
 
 u32 itemEventStartupUpdate(QuestAddonScriptWork *work)
 {

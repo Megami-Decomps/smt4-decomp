@@ -1,7 +1,5 @@
 #include "classes/WindowOperation.h"
 
-WindowOperationResult::WindowOperationResult(u8 initialStatus)
-    : status(initialStatus), first(0), second(0)
+WindowOperationResult::WindowOperationResult(u8 initialStatus) : RequestParameters(initialStatus)
 {
-    result = WindowStatusResult(0);
 }

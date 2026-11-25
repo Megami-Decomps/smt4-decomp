@@ -59,7 +59,7 @@ void titleSetSlotValueState2(u32 index, u32 value);
 void cameraResourcesRelease(MikadoTalkWorkA *talk);
 void soundResetSpatialState(MikadoTalkWorkA *talk);
 void moveCameraCtrlSetup(MikadoTalkWorkA *talk, const char *cameraName, const char *dataName);
-void FUN_00407eb0(MikadoTalkWorkA *talk, s32 view, s32 immediate);
+void moveCameraCtrlMoveToKey(MikadoTalkWorkA *talk, s32 view, s32 immediate);
 void moveCameraCtrlCreateEntry(MikadoTalkWorkA *talk, const char *name, s32 index);
 void listSelectItem(MikadoTalkWorkA *talk, s32 index);
 void linkSlotSetFlag20(MikadoTalkWorkA *talk, s32 enable);
@@ -215,7 +215,7 @@ void mikadoCampVisitUpdate(CampScriptPanelResources *work)
             }
             current = menu4CGetCurrentEntry(&work->panel.menu);
             moveCameraCtrlSnapToNode(work->talkWork, 0, -1);
-            FUN_00407eb0(work->talkWork, current->cameraView, 1);
+            moveCameraCtrlMoveToKey(work->talkWork, current->cameraView, 1);
             if (work->panel.record->modelSet >= 0) {
                 const char *names = static_cast<const char *>(dataTable33Entries(table33, work->panel.record->modelSet));
 

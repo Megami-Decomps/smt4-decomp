@@ -4,6 +4,7 @@
 #include "classes/Obj422214Owner.h"
 #include "code/Code0023.h"
 #include "common.h"
+#include "script/ScriptEntry.h"
 
 struct AocMenuObject;
 
@@ -49,7 +50,6 @@ void aocLoadingTaskStart(AocMenuProcess *process, s32 value);
 void aocMenuSetButtonHelp(AocMenuProcess *process, s32 a, s32 b);
 void FUN_00233e70(AocMenuProcess *process, s32 unused, s32 next);
 s32 tableGroupFindEntryIndex(void *table, const char *name);
-void scrScriptProcessStartEntry(void *script, s32 entry);
 s32 strIsEmpty(u32 *record);
 u8 byteIsAtLeast100(u32 *record);
 void jobStopAndClearFlags(AocMenuProcess *process);

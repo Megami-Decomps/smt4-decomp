@@ -2,7 +2,6 @@
 #include "gamedata/EquipmentRecord.h"
 #include "gamedata/ConsumableRecord.h"
 extern "C" {
-u32 contentGetEntryKind(u32 id);
 EquipmentSortPowerPrimary *dataTable08Sub0GetRecord(u32 id);
 }
 

@@ -60,7 +60,7 @@ int btlGetResidentOrFallbackAction(...);
 int FUN_0047f138(...);
 int btlSlotSetStoreValue(...);
 int btlAdjustPropertyClamped(...);
-int FUN_004de7a0(...);
+int btlSelectTargetByScoreRank(...);
 int FUN_004fbeac(...);
 int btlReflectCreateKind15(...);
 int FUN_004fd508(...);
@@ -216,7 +216,7 @@ extern int isEntryUsable(int);
 /* Supplied declaration required: FUN_004dcc5c. */
 /* Supplied declaration required: FUN_004dce1c. */
 /* Supplied declaration required: FUN_004dd0c4. */
-/* Supplied declaration required: FUN_004de7a0. */
+/* Supplied declaration required: btlSelectTargetByScoreRank. */
 /* Supplied declaration required: btlUnitSetParam. */
 /* Supplied declaration required: FUN_004e20c0. */
 /* Supplied declaration required: FUN_004e5a40. */
@@ -239,7 +239,7 @@ extern int btlUnitGetSkillValue(int);
 extern int FUN_004f6478(int);
 /* Supplied declaration required: objRef1F50Release. */
 /* Supplied declaration required: obj4FSlots28Reset. */
-extern int FUN_004f80e4(int);
+extern int btlGetMaximumNamedValue(int);
 /* Supplied declaration required: btlLoadDefaultNiyariEffect. */
 /* Supplied declaration required: btlStageResetAndClearCameraFlag. */
 /* Supplied declaration required: FUN_004f8fa0. */
@@ -799,7 +799,7 @@ code_r0x004ef594:
         if (temp_v14 != 0) {
           if ((!((DAT_00571168 & **(unsigned int **)(temp_v20 + 0x24)) == 0 &&
                 ((*(unsigned int **)(temp_v20 + 0x24))[1] & DAT_0057116c) == 0)) && (temp_v14 >= 2)) {
-            FUN_004de7a0(piVar16,puVar25,&uStack_288);
+            btlSelectTargetByScoreRank(piVar16,puVar25,&uStack_288);
             temp_v2 = (short)(int)piVar16;
           }
           else {
@@ -1004,7 +1004,7 @@ code_r0x004ef7f0:
     if (temp_v6 != 0) {
       temp_v3 = 0;
       do {
-        temp_v22 = FUN_004f80e4(g_btlAux);
+        temp_v22 = btlGetMaximumNamedValue(g_btlAux);
         if (-1 < temp_v22) {
           temp_v22 = temp_v6 + temp_v3 * 0x16;
           btlQueueMessageTableReflectAction(*(short *)(temp_v22 + 0x10) + temp_v5,puVar29,

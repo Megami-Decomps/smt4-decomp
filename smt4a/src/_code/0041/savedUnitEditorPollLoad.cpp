@@ -3,6 +3,7 @@
 #include "gamedata/GameSaveDataA.h"
 #include "saveLoadUI/SaveLoadState.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern SaveLoadUIBaseA g_saveLoadUIBase;
@@ -13,7 +14,6 @@ void gameDataAddHomeButtonHold(u32 bits);
 void gameDataBlocksReleaseHold(u32 bits);
 void messageMainSetFlag(s32 enabled);
 void sysPlaySe(s32 sound);
-void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 void saveLoadStartLoad(s32 slot, s32 mode);
 
 /* Polls the selected slot's load, maintains the HOME-button hold and runs the completion script. */

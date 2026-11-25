@@ -3,6 +3,7 @@
 #include "nn/Result.h"
 #include "util/MemoryHelpers_Smt4a.h"
 #include "sys/ResultReport.h"
+#include "runtime/String.h"
 
 /* The allocator's global state, as far as the allocation entry points use it. */
 extern "C" {
@@ -11,7 +12,6 @@ extern "C" {
 void asdAllocatorLock(void);
 void *asdMemoryAllocImpl(u32 a, u32 b, u32 c, u32 size, u32 extra);
 void *asdMemInitAllocationHeader(void *block, u32 size, u32 alignment, u32 flags);
-void rt_memclr(void *memory, u32 size);
 
 // Allocates `size` zeroed bytes aligned to `alignment` (at least 0x80) under the allocator lock.
 void *asdMemoryAllocAligned(u32 a, u32 b, u32 c, u32 size, u32 alignment, u32 extra)

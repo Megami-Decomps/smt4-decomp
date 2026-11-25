@@ -150,7 +150,7 @@ extern int gameGetNavigationState(void);
 /* Supplied declaration required: FUN_0026d6a4. */
 extern int gameGetPendingNavigationState(void);
 extern int campCecIsActive(void);
-extern unsigned short FUN_00282ccc(void);
+extern unsigned short partyPanelGetSelectedDemonId(void);
 extern unsigned char partyPanelIsTransitionDone(void);
 /* Supplied declaration required: FUN_0028a924. */
 /* Supplied declaration required: FUN_0028d1f4. */
@@ -350,7 +350,7 @@ unsigned int FUN_001c3fd4(void)
     temp_v15 = temp_v15 + 1;
     temp_v10 = 0xffffffff;
   } while ((int)temp_v15 < 0x1c);
-  temp_v3 = FUN_00282ccc();
+  temp_v3 = partyPanelGetSelectedDemonId();
   *(unsigned short *)(temp_v1 + 0x3a) = temp_v3;
   temp_v2 = partyPanelIsTransitionDone();
   *(unsigned char *)(temp_v1 + 0x44) = temp_v2;

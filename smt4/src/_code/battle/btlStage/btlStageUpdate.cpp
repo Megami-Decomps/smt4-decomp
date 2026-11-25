@@ -17,7 +17,7 @@ void mapSetThreeTargetRotations(BattleStageModel *stage, f32 x, f32 y, f32 z);
 u32 FUN_00340558(BattleStageModel *stage);
 s32 FUN_0025bb34(s32 type, const char *name, s32 bank);
 void FUN_003c7cf0(BattleStageModel *stage, s32 key0, s32 key1);
-void FUN_003c8058(BattleStageModel *stage);
+void btlStageStartWorkerIfIdle(BattleStageModel *stage);
 static inline void stageSetLightColor(s32 slot, u32 bank, f32 red, f32 green, f32 blue)
 {
     if (slot >= 0)
@@ -43,7 +43,7 @@ u32 btlStageUpdate(BattleStageModel *stage, u32 work)
         break;
     case 1:
         frameTexConfigureCaptureTextures(0);
-        FUN_003c8058(stage);
+        btlStageStartWorkerIfIdle(stage);
         stage->state = 2;
         break;
     case 2: {

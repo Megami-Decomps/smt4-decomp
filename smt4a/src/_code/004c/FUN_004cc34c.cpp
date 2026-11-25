@@ -1,6 +1,7 @@
 /* NON_MATCHING: only scratch registers differ: retail computes the step increment of step 2 and the state constants 7 and 2 in r1, the build in r0. */
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 
 struct CallbackWorkflow {
@@ -33,7 +34,6 @@ s32 FUN_002effbc();
 s32 btlTalkBustUpGetValue();
 void btlTalkBustUpSetDemonTexture(u16 entry, u32 option);
 void btlTalkBustUpSetUnk2F4(u32 value);
-void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 s32 btlTalkBustupMatchesEntry(u16 entry);
 s32 bgmGetStateById(u32 id);
 void gameGlobalsSetSceneState(u32 value);

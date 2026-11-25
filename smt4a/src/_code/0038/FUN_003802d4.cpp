@@ -4,7 +4,6 @@
 #include "script/ScriptArgs.h"
 #include "gamedata/NkmEnemyLookup.h"
 extern "C" {
-void scrSetResult(s32);
 
 u32 FUN_003802d4(void)
 {

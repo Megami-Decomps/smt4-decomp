@@ -12,7 +12,6 @@ typedef char SkinDrawObjectOffsetsCheck[
     offsetof(SkinDrawObject, skinState) == 0x9C ? 1 : -1];
 
 extern "C" {
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void gxResetColorQuadToWhite(void);
 void FUN_004bade0(void *skinState);
 void skinObjectUpdateMatrices(RenderCtxA *context);

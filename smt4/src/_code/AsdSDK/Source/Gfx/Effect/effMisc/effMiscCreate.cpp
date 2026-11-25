@@ -1,38 +1,20 @@
-/* NON_MATCHING: after the clear, -1/0 land in r2/r1 instead of r1/r0 and the work pointer is built in r3 before the copy (retail builds it in r0). */
-#include "AsdSDK/Source/Gfx/Effect/effMisc.h"
-#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/Effect/EffMiscInit.h"
 
-extern "C" {
-extern const char g_effMiscHeaderSourceFileName[]; /* __FILE__ */
-
-void *memAlloc(int, int, int, int size, int align, int);
-void rt_memclr(void *block, s32 size);
-void *__aeabi_memcpy(void *dest, const void *src, u32 size);
-
-extern EffMiscKind g_effMiscKinds[];
-
-/* Allocates an effect object of the given kind, copies the kind's work area from `params` and lets
- * the kind build its state. */
-EffMiscObject *effMiscCreate(u32 kind, void *params)
+/* Allocates an effect object, copies the kind's work area, and lets the kind create its state. */
+extern "C" EffMiscObject *effMiscCreate(u32 kind, void *params)
 {
     s32 workSize = g_effMiscKinds[kind].workSize;
-    s32 objectSize = workSize + 0x30;
-    asdDebugTrace(g_effMiscHeaderSourceFileName, 450);
-    EffMiscObject *obj = (EffMiscObject *)memAlloc(0x10000, 0x100, 0, objectSize, 0x10, 1);
-    rt_memclr(obj, objectSize);
+    u32 objectSize = workSize + offsetof(EffMiscObject, workData);
+    EffMiscObject *obj = (EffMiscObject *)effMiscAllocateZeroed(objectSize);
     obj->unk10 = -1;
     obj->kind = kind;
     obj->scale = 1.0f;
     obj->shared = NULL;
-    EffMiscVec4 identity = {0.0f, 0.0f, 0.0f, 0.0f};
-    obj->rotation = identity;
-    obj->rotation.w = 1.0f;
+    effMiscSetIdentityRotation(&obj->rotation);
     obj->work = obj->workData;
-    __aeabi_memcpy(obj->work, params, workSize);
+    memcpy(obj->work, params, workSize);
     if (g_effMiscKinds[kind].create != NULL) {
         obj->state = g_effMiscKinds[kind].create(params);
     }
     return obj;
 }
-
-} /* extern "C" */

@@ -35,7 +35,7 @@ int FUN_00240170(void);
 int statusCameraSelectPreset(int);
 int aocDataBlockResolveEntries(void);
 int FUN_0031416c(...);
-int FUN_00316580(...);
+int uiSpriteSlideFromVerticalEdge(...);
 int statusBustUpPortraitAcquire(int, int);
 int statusBustUpPortraitRelease(...);
 int engineGetEnabledFloatTableValue(...);
@@ -98,7 +98,7 @@ extern int FUN_002c7cb4(void);
 extern int FUN_002effbc(void);
 extern unsigned int mapGetSelectedGroupName(int);
 /* Supplied declaration required: FUN_0031416c. */
-/* Supplied declaration required: FUN_00316580. */
+/* Supplied declaration required: uiSpriteSlideFromVerticalEdge. */
 extern int objStateNotEnding(void);
 extern int FUN_00334044(void);
 /* Supplied declaration required: FUN_00340a94. */
@@ -191,8 +191,8 @@ unsigned int FUN_00208c08(void)
       *(int *)(temp_v2 + 0x14) = *(int *)(temp_v2 + 0x14) + 1;
       return 0;
     }
-    FUN_00316580(temp_v2 + 0x4a4,1);
-    FUN_00316580(temp_v2 + 0x530,0);
+    uiSpriteSlideFromVerticalEdge(temp_v2 + 0x4a4,1);
+    uiSpriteSlideFromVerticalEdge(temp_v2 + 0x530,0);
     if (*(int *)(temp_v2 + 0x10) >= 6) {
       if ((DAT_00588fd4 != 0) && (*(char *)(DAT_00588fd4 + 0x20d1) != '\0')) {
         engineGetEnabledFloatTableValue(DAT_00588fd4 + 0x20d4,0,9);
@@ -765,8 +765,8 @@ LAB_00209dc4:
     }
   }
   else if (*(int *)(temp_v2 + 0x1368) >= 9) {
-    FUN_00316580(temp_v2 + 0x4a4,1);
-    FUN_00316580(temp_v2 + 0x530,0);
+    uiSpriteSlideFromVerticalEdge(temp_v2 + 0x4a4,1);
+    uiSpriteSlideFromVerticalEdge(temp_v2 + 0x530,0);
     if ((*(int *)(temp_v2 + 0x1c) >= 6) && (temp_v3 = uiSpriteAdvanceAnimation(temp_v2 + 0x5bc), temp_v3 != 0)) {
       *(unsigned char *)(temp_v2 + 0x20) = 1;
     }

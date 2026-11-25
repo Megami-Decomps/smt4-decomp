@@ -1,6 +1,7 @@
 /* NON_MATCHING: category switch now matches retail; saved-register assignment (zero r9 vs &initial r8) and the 0x1BE clear's address scheduling after unk116 still differ. */
 #include "battle/BattleUnitInit.h"
 #include "gamedata/NkmBaseRecordA.h"
+#include "runtime/String.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ s32 recordGetScaledMaximum(UnitSourceRecord *record);
 u32 randomGetLowerTenBits(UnitSourceRecord *record, u32 index);
 u32 randomGetUpperSixBits(UnitSourceRecord *record, u32 index);
 void clearTwoWords(void *words);
-void rt_memclr(void *memory, u32 size);
 void sysMemClear(void *memory, u32 size);
 
 /* Initializes a battle unit's state block from a demon record (or the selected save slot's record

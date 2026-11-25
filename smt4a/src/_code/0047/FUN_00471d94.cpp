@@ -9,7 +9,6 @@ void asdOperatorDeleteB(void *items);
 void *asdOperatorNewE(u32 size);
 s32 asdFsIsSdCardDetected();
 u32 objGetFlagBit16(AocMain *main);
-void entryStateClear(EntryState *entry);
 void *__aeabi_vec_ctor_nocookie_nodtor(void *array, void (*construct)(void *), u32 size, u32 count);
 void aocQueuePackageFilesByKind(AocSystemA *system, s32 kind, s32 capacity, AocPackageFile *output);
 

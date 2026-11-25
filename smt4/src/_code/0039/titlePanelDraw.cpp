@@ -22,7 +22,6 @@ struct TitlePanel {
 extern "C" {
 
 
-void renderCtxSelectStereoLayout(RenderCtx *context);
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);

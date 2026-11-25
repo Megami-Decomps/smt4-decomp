@@ -46,7 +46,7 @@ extern u64 DAT_00571260;
 
 void btlEntryBuildSummary(BattleActionInfo *info, BtlMainStateA *battle, u64 *unitFlags);
 s32 btlActionTargetSlotScore(EnemyAiContext *context, EnemyTurnWork *work, s32 target);
-s32 FUN_004de7a0(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate *candidates, s32 count);
+s32 btlSelectTargetByScoreRank(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate *candidates, s32 count);
 
 /* Marks a candidate slot unused. */
 static __inline void candidateClear(TargetCandidate *candidate)
@@ -110,7 +110,7 @@ void FUN_004e6b64(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
             return;
         s16 pick;
         if ((*work->unitFlags & DAT_00571168) && count >= 2) {
-            pick = (s16)FUN_004de7a0(context, work, scratch, count);
+            pick = (s16)btlSelectTargetByScoreRank(context, work, scratch, count);
         } else {
             s32 index = lcgRandomRange((u16)(count - 1));
             pick = scratch[index].id;

@@ -19,6 +19,7 @@
 #include "network/DataStore/DataStoreMain.h"
 #include "code/Code002a.h"
 #include "code/Code0035.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
@@ -48,7 +49,6 @@ u8 messageMainIsIdle(void);
 const char *itemGetNameOrFallback(u32 id, s32 payload);
 void scrSetStringSlot(u32 index, const char *value); // declcheck: local (declared in the model header)
 s32 tableGroupFindEntryIndex(u32 table, const char *name);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 void messageMainSetTargetFlags(u8 value);
 u8 gameRecordExists(void);
 void FUN_003720e4(u8 value);

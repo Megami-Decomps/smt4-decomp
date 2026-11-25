@@ -5,7 +5,6 @@
 
 extern "C" {
 
-extern s32 scrGetArg(s32 index);
 
 u32 FUN_0031cb7c(void)
 {

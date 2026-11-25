@@ -1,6 +1,6 @@
 /* NON_MATCHING: 186 raw / 138 shape lines (from the raw decompilation's 688/656), lmapOverviewPointStep's sibling with the
  * descent states: the blocks, calls and constants are retail's. `point` and `heading` live at function scope, as
- * retail's missing tail call to FUN_00327ee8 shows. Left: g_gameState's address and the zero swap r6/r7, the float
+ * retail's missing tail call to mapSelectContainingRegions shows. Left: g_gameState's address and the zero swap r6/r7, the float
  * constants sit in other VFP registers, and retail loads g_gameState+0x50 once in the confirm branch without using
  * it (not reproduced). */
 #include "game/GameStateA.h"
@@ -31,7 +31,7 @@ void mapIfReleaseResource(void);
 bool mapIfHasSelection(void);
 void FUN_002342b8(void);
 u32 FUN_002e364c(f32 *target);
-void FUN_00327ee8(f32 x, f32 z);
+void mapSelectContainingRegions(f32 x, f32 z);
 void mapObjFindNearestPointByCategory(s32 firstCategory, s32 secondCategory, s32 thirdCategory, MapVector *position,
                                       f32 *heading, s32 vertical, MapVector origin);
 
@@ -184,7 +184,7 @@ void lmapDescentPointStep(void)
         break;
     }
     FUN_002e364c(&g_lmapScene->pose.targetPosition.x);
-    FUN_00327ee8(g_lmapScene->pose.position.x, g_lmapScene->pose.position.z);
+    mapSelectContainingRegions(g_lmapScene->pose.position.x, g_lmapScene->pose.position.z);
 }
 
 } /* extern "C" */

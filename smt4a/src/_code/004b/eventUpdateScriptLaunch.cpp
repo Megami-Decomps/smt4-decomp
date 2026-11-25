@@ -2,6 +2,7 @@
 #include "game/GameStateA.h"
 #include "gfx/TransformInterpolation.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 struct EventScriptLaunchWorkView {
     TransformInterpolation transform;
@@ -18,7 +19,6 @@ void asdMemFree(void *);
 void messageSetScriptDisplayMode();
 void *asdLoadFileSyncDefault(const char *);
 u32 tableGroupFindEntryIndex(void *, const char *);
-void scrScriptProcessStartEntry(ScriptProcess *, u32);
 
 /* Load and run an event entry, releasing both resources after the script completes. */
 void eventUpdateScriptLaunch(EventScriptLaunchWorkView *work)

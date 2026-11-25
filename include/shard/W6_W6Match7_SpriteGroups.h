@@ -1,6 +1,7 @@
 #ifndef SHARD_W6_W6MATCH7_SPRITEGROUPS_H
 #define SHARD_W6_W6MATCH7_SPRITEGROUPS_H
 #include "common.h"
+#include <stddef.h>
 
 struct SpriteGroupDefinition {
     /* 0x00 */ u32 offset;
@@ -10,10 +11,18 @@ struct SpriteGroupDefinition {
     /* 0x10 */ u32 kind;
 };
 
+/* One drawable frame in the sprite group's packed animation table. */
 struct SpriteGroupData {
-    /* 0x00 */ u8 unk00[0x12];
+    /* 0x00 */ s16 width, height;
+    /* 0x04 */ s16 originX, originY;
+    /* 0x08 */ s16 u1, v1, u2, v2; /* texture coordinates in sixteenths of a texel */
+    /* 0x10 */ s16 texture;
     /* 0x12 */ s16 frameCount;
+    /* 0x14 */ f32 value;
 };
+typedef char SpriteGroupDataLayoutCheck[sizeof(SpriteGroupData) == 0x18 &&
+    offsetof(SpriteGroupData, texture) == 0x10 && offsetof(SpriteGroupData, frameCount) == 0x12 &&
+    offsetof(SpriteGroupData, value) == 0x14 ? 1 : -1];
 
 struct SpriteGroupResource {
     u8 *data;

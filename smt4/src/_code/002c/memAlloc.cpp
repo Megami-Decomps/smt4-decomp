@@ -1,11 +1,11 @@
 #include "sys/AllocationTracking.h"
 #include "classes/AllocatorState.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
+#include "runtime/String.h"
 
 extern "C" {
 AllocationHeader *asdMemoryAllocFromHeap(u32, u32, u32, u32, u32);
 void asdMemoryTrackAllocation(AllocationHeader *);
-void rt_memclr(void *, u32);
 void nn_os_CriticalSection_Enter(void *);
 void nn_os_CriticalSection_Leave(void *);
 

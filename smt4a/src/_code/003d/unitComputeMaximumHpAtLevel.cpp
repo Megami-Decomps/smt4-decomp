@@ -1,11 +1,11 @@
 /* NON_MATCHING: -O2 candidate; allocation-size CSE, range cursor folding, percentage constant lifetime and preserved registers differ. */
 #include "shard/W6_W6Match8_StatGrowth.h"
 #include "gamedata/DataTable.h"
+#include "runtime/String.h"
 
 extern "C" {
 void *asdOperatorNewD(u32 size);
 void asdOperatorDeleteC(void *memory);
-void rt_memclr(void *memory, u32 size);
 void aocCollectLevelEntries(LevelEntry *entries, s32 *count, u32 kind, s32 maximumLevel);
 
 u32 unitComputeMaximumHpAtLevel(s32 level, const StatGrowthParameters *parameters)

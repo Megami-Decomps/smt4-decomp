@@ -8,7 +8,6 @@ extern void FUN_00144ab4(s32 target);
 extern void asdGxFlushCommandBuffer(void);
 extern void renderTargetClear(s32 a, s32 b);
 extern void renderCtxResetFrameState(RenderCtxA *ctx);
-extern void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *ctx);
 
 s32 renderBeginPrimaryScreen(void)
 {

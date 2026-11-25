@@ -8,7 +8,6 @@ u32 renderCtxPackPassFlagsWithAlpha(u32, f32);
 void taskRunPhase(s32);
 void skinObjectUpdateMatrices(RenderCtxA *);
 void renderCtxResetColorScale(RenderCtxA *);
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *);
 
 /* Run this phase with temporary render states, then restore state and refresh the context. */
 s32 renderScopedTaskPhaseOne(u32 job)

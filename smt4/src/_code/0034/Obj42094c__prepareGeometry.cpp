@@ -1,6 +1,7 @@
-/* NON_MATCHING: retail fills the matrix from integer registers (no 1.0f in its pool), keeps the speed's
- * product and sum apart (no vmla) and reloads the direction before scaling it. */
+/* NON_MATCHING: the planar velocity stores and reloads, and the scratch registers used for its translation matrix, differ. */
 #include "classes/Obj42094c.h"
+#include "nw/math/VEC3.h"
+#include "nw/math/MTX44Transform.h"
 #include "util/Random.h"
 extern "C" {
 s32 randBetween(s32 minimum, s32 maximum);
@@ -17,32 +18,13 @@ void Obj42094c::prepareGeometry()
         ++motion->frame;
         if (motion->frame % filter->config->period == 0) {
             f32 fraction = (f32)randBetween(-32767, 32768) * (1.0f / 32768.0f);
-            f32 minimum = filter->config->minimumSpeed;
-            f32 speed = minimum + (filter->config->maximumSpeed - minimum) * fraction;
+            f32 speed = filter->config->maximumSpeed - filter->config->minimumSpeed;
+            speed *= fraction;
+            speed += filter->config->minimumSpeed;
             f32 phase = (f32)randNextInRange(65535) * (1.0f / 65536.0f) * 256.0f;
-            motion->x = phaseCosInterpolate(phase);
-            motion->y = mathSinFixedAngle(phase);
-            motion->z = 0;
-            motion->x *= speed;
-            motion->y *= speed;
-            motion->z *= speed;
+            setFilterPlanarVelocity(&motion->velocity, phase, phaseCosInterpolate, mathSinFixedAngle);
+            nw::math::VEC3Scale(&motion->velocity, &motion->velocity, speed);
         }
-        f32 *m = motion->matrix;
-        m[0] = 1;
-        m[1] = 0;
-        m[2] = 0;
-        m[3] = motion->x;
-        m[4] = 0;
-        m[5] = 1;
-        m[6] = 0;
-        m[7] = motion->y;
-        m[8] = 0;
-        m[9] = 0;
-        m[10] = 1;
-        m[11] = motion->z;
-        m[12] = 0;
-        m[13] = 0;
-        m[14] = 0;
-        m[15] = 1;
+        nw::math::MTX44Translate(&motion->matrix, &motion->velocity);
     }
 }

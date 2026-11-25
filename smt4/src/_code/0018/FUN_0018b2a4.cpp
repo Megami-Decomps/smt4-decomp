@@ -2,7 +2,6 @@
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
-void renderCtxSelectStereoLayout(RenderCtx *);
 void renderCtxResetColorScale(RenderCtx *);
 }
 

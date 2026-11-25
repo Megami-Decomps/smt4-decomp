@@ -29,6 +29,7 @@
 #include "code/Code002c_Smt4a.h"
 #include "code/Code0035.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "script/ScriptEntry.h"
 
 #define GAUNTLET_TEXTURES 20
 #define GAUNTLET_FLAG_INTRODUCED 0x4B7
@@ -41,7 +42,6 @@ extern GauntletAppMenuWorkA *g_gauntletAppMenu;
 
 void sysPlaySe(u32 id);
 u32 gauntletAppMenuSetMode(GauntletAppMenuWork *menu, u32 mode);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void campHideNumericBanner(void);
 void campResetScreen(void);
 s32 ifTouchRegionAddRequested(u32 file, s32 index);

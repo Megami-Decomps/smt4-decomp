@@ -4,6 +4,7 @@
 #include "code/Code002a_VariantA.h"
 #include "gamedata/SaveSlotTable.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 /* The partner select menu (only the fields the state machine reads). */
 struct PartnerMenuFull {
@@ -47,7 +48,6 @@ s32 padQueryLogicalKey(s32 a, s32 b);
 void dialogClose(s32 flag);
 void eventQueueAddUniqueIfValid(s32 event);
 s32 tableGroupFindEntryIndex(u32 group, const char *name);
-void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 void gameGlobalsSetOverlayActive(s32 flag);
 void statusPanelClose(void);
 

@@ -1,12 +1,12 @@
 /* NON_MATCHING: temporaries after the rt_memclr call land in r0/r1 where retail uses r1/r2. */
 #include "shard/W6_W6Match3_AppletMessageConfig.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "runtime/String.h"
 
 extern "C" {
 
 
 int wordTripleClear(u8 *sub);
-int rt_memclr(u8 *buffer, int size);
 
 /* Resets the record to its initial state: tables cleared, index = -1. */
 void FUN_0013c584(AppletMessageConfig *record)

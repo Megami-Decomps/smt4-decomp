@@ -5,11 +5,11 @@
 #include "saveLoadUI/SaveSlotRow.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 extern const char DAT_00533f48[];
 void drawSetColorFromRGBA8(u32 color);
-void numberFontDrawFormatted(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
 void gxResetColorQuadToWhite();
 
 /* Draws the numeric badge background, then its ones and tens digits at their glyph offsets. */

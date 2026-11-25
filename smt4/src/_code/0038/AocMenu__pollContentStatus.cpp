@@ -7,6 +7,7 @@
 #include "addon/aocMain.h"
 #include "nn/Result.h"
 #include "sys/RuntimeObjects.h"
+#include "sys/WindowStatusCheck.h"
 
 /* The status operation the menu is polling (its deleting destructor is vtable slot 1). */
 class AocPollHandler {
@@ -31,7 +32,7 @@ struct AocPollMenu {
 extern "C" {
 
 void FUN_00233e70(AocPollMenu *menu, s32 first, s32 second);
-WindowStatusResult FUN_002341d4(AocMain *main);
+WindowStatusResult resourceLoadDisplayMetadata(AocMain *main);
 s32 strIsEmpty(const RequestParameters *result);
 s32 byteIsAtLeast100(const RequestParameters *result);
 
@@ -105,8 +106,8 @@ void AocMenu::pollContentStatus()
         break;
     }
     case 4: {
-        WindowStatusResult status = FUN_002341d4(aocMain);
-        if (nnResultIsFailure(legacyResourceIdRemap(&status))) {
+        WindowStatusResult status = resourceLoadDisplayMetadata(aocMain);
+        if (windowStatusFailed(status)) {
             menu->step = 9999;
             failRequestOperation(&menu->result, status);
             break;

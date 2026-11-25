@@ -7,6 +7,7 @@
 #include "event/2dEvent/SmokeFade.h"
 #include "Model/MoriModelManager.h"
 #include "gfx/ControllerModel.h"
+#include "script/ScriptEntry.h"
 
 /* The scene with its page-transition step. */
 struct ShopMenuView : public Obj536044 {
@@ -19,7 +20,6 @@ void FUN_0038b010(u8 value);
 void uiSpriteBankApplyPreset(SpritePresetBank *, u32);
 void pointConvertToFloat(f32 *, s32, s32);
 u32 tableGroupFindEntryIndex(u32, const char *);
-void scrScriptProcessStartEntry(void *, u32);
 void scrRunOpcodesStub(void *);
 }
 

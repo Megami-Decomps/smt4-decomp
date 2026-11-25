@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include <string.h>
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern OnesRoom *g_onesRoom;
@@ -12,7 +13,6 @@ void campButtonHelpAcquire();
 void commonBgStopChildAndBeginTransition();
 void sysPlaySe(s32 sound);
 void *asdLoadFileSyncDefault(const char *path);
-void scrScriptProcessStartEntry(void *process, s32 entry);
 void titleRestartSlotState3(s32 screen, s32 alpha);
 s32 onesRoomTeardown(u32 job);
 void onesRoomRequestTransition();

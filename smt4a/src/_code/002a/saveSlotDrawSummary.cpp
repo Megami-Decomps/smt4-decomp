@@ -9,6 +9,7 @@
 #include "shard/W6_W6Match5_UnitCategory.h"
 #include "code/Code0019.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 void gxResetColorQuadToWhite(void);
@@ -17,7 +18,6 @@ void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 d
 void FUN_00169a1c(u32 image, s32 x, s32 y, s32 depth);
 u32 FUN_0036fcd0(void *unit, u32 mode);
 void drawSetColorFromRGBA8(u32 color);
-void numberFontDrawFormatted(s32 layer, s32 x, s32 y, s32 z, s32 scale, s32 depth, const char *format, ...);
 void digitsDrawPaddedNumber(u32 location, s32 x, s32 y, s32 depth);
 
 /* Draw a save-slot summary, including portraits and the elapsed-play-time fields. */

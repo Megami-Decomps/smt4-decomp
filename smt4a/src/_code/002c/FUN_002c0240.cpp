@@ -5,6 +5,7 @@
 #include "shard/W6_W6Match3_FormatBuffer.h"
 #include "gamedata/GameDataAccess.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 struct RankingTransitionWork {
     /* 0x00 */ u32 task;
@@ -28,7 +29,6 @@ extern RankingTransitionWork *g_campCecRanking;
 void uiSpriteSetKeyframe(void *sprite, u32 frame, u32 option);
 void uiSpriteSetImageKeyframe(void *sprite, u32 frame, u32 option);
 void sysPlaySe(u32 sound);
-void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 s32 uiSpriteAdvanceAnimation(void *sprite, f32 speed);
 s32 padQueryLogicalKey(u32 input, u32 mode);
 s32 padButtonIsPressed(u32 button);

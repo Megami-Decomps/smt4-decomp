@@ -9,6 +9,7 @@
 #include "ui/AnimatedMessage.h"
 #include "util/MemoryHelpers.h"
 #include "AsdSDK/Source/Sys/File/AsdFileReadRequest.h"
+#include "runtime/String.h"
 
 /* The panel sprites' animation key tables; the original file defined them after the handler table. */
 static const UiSpritePositionKey sNaviPanelPositionKeys[] = {
@@ -41,7 +42,6 @@ static const SpriteAnimationCommand sNaviPanelCommands[] = {
 extern "C" {
 
 void asdTMTexTableLoadTmx(s32 table, u32 flags);
-void rt_memclr(void *block, u32 size);
 void rectangleInitializeSelection(EmptyRange *range, s32 x, s32 y, s32 selection);
 void spritePresetBankInitialize(SpritePresetBank *bank);
 void FUN_001a90e0(void *pair);

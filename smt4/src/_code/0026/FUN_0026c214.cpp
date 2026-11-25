@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00282ccc(void);
+int partyPanelGetSelectedDemonId(void);
 int partyPanelIsTransitionDone(void);
 int FUN_0029dfa8(void);
 int buttonHelpSetPreset(u32 preset);
@@ -28,7 +28,7 @@ void FUN_0026c214(void)
         plain = false;
     }
     s32 a = partyPanelIsTransitionDone();
-    s32 b = FUN_00282ccc();
+    s32 b = partyPanelGetSelectedDemonId();
     u32 preset;
     bool apply = true;
 

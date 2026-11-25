@@ -1,29 +1,17 @@
-/* NON_MATCHING: frame-duration operand registers and the VFP allocation of the size conversions differ, and retail
-   stores x and y separately where the build pairs them (vstmia). */
+/* NON_MATCHING: the VFP size and coordinate conversions schedule differently, and the build pairs
+ * the x/y stores that retail emits separately. */
 #include "shard/W6_W6Match8_SpriteTextureResource.h"
 #include "gfx/SpriteGroupDrawState.h"
+#include "shard/W6_W6Match7_SpriteGroups.h"
 
 extern "C" void FUN_00256dbc(SpriteGroupPlayer *player, SpriteGroupDrawState *out)
 {
-    /* SpriteGroupData publishes only the duration prefix, not the final value. */
-    struct FrameView {
-        s16 width, height;
-        s16 originX, originY;
-        s16 u1, v1, u2, v2;
-        s16 texture;
-        s16 duration;
-        f32 value;
-    };
-    typedef char FrameViewSizeCheck[sizeof(FrameView) == 0x18 ? 1 : -1];
-
     SpriteGroupState *state = player->states;
     SpriteTextureResource *resource = (SpriteTextureResource *)player->resource;
     SpriteGroupDefinition *definition = state->definition;
     if (definition->kind & 0x10000000)
         return;
-    if (state->frameCount > 0) {
-        --state->frameCount;
-    } else {
+    if (state->frameCount <= 0) {
         ++state->frame;
         if ((u32)state->frame >= definition->count) {
             if (!(definition->kind & 0x10)) {
@@ -33,10 +21,11 @@ extern "C" void FUN_00256dbc(SpriteGroupPlayer *player, SpriteGroupDrawState *ou
                 state->frame = definition->count - 1;
             }
         }
-        s32 frame = state->frame;
-        state->frameCount = ((FrameView *)state->data)[frame].duration;
+        state->frameCount = state->data[state->frame].frameCount;
+    } else {
+        --state->frameCount;
     }
-    FrameView *frame = &((FrameView *)state->data)[state->frame];
+    const SpriteGroupData *frame = &state->data[state->frame];
     if (definition->kind & 1)
         out->optionalValue = ((f32 *)(resource->group.data + definition->unk04))[state->frame];
     else

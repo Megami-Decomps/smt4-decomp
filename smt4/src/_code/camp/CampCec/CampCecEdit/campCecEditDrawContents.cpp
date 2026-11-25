@@ -58,7 +58,6 @@ void uiDrawPanelWithValue(void *panel, s32 a, s32 b, u32 value, s32 c);
 void uiDrawCenteredResourceText(u32 text, void *area, s32 a, s32 b);
 void FUN_001eb874(u32 layer, u32 image, void *area, s32 x, s32 y, s32 flag);
 void FUN_002e15f8(void *area, s32 x, s32 y);
-void renderCtxSelectStereoLayout(RenderCtx *context);
 void gxResetColorQuadToWhite(void);
 void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 mode);
 void uiDrawDirectoryRows(void *list, u32 left, u32 top, s32 firstRow, u32 rowCount, u32 columnWidth);

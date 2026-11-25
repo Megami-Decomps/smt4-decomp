@@ -17,6 +17,7 @@
 #include "sys/RuntimeObjects.h"
 #include "sound/soundEffect.h"
 #include "code/Code0038.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 s32 soundPlaySeUnpanned(u32 id);
@@ -30,7 +31,6 @@ f32 asdAnimGetTrackLastFrame(const AnimationTracks *animation, s32 track);
 void modelSlotAttachChild(ModelSlotOwner *owner, s32 index);
 void modelRemoveFromSlotList(ModelRemovalRequestPrefixIV *request, s32 index);
 u32 gfxObjectDestroy(CameraObject *object);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entryIndex);
 void statusCameraDestroy();
 void statusCameraSelectPreset(s32 preset);
 void statusBustUpPortraitRelease(s32 devilId, u32 kind);

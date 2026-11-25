@@ -10,12 +10,12 @@
 #include "gamedata/SkillFlags.h"
 #include "gamedata/UnitStats.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
 StatBlock* partyMemberFindById(u32 id); // declcheck: local (returns the unit record; the shared prototype keeps the decompiler's int)
 void __aeabi_memcpy4(void* destination, const void* source, u32 size);
-void unitInitializeFromSavedRecord(u32 id, StatBlock* destination);
 int FUN_003c88f0(void* context, StatBlock* first, StatBlock* second);
 int FUN_003c92b8(void* context, u32 firstId,
                  u32 secondId, UnitePairEntryIV* selection);

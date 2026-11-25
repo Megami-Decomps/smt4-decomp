@@ -3,12 +3,12 @@
 #include "nn/svc.h"
 #include "nn/Result.h"
 #include "sys/ResultReport.h"
+#include "runtime/String.h"
 
 extern "C" {
 
 void asdAllocatorLock(void);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
-void rt_memclr(void *buffer, u32 size);
 
 // Allocate under the tracking lock and clear the block when the allocation succeeded.
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option)

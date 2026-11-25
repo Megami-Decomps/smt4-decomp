@@ -1,28 +1,13 @@
-#include "common.h"
+#include "gfx/TextureBindingBuckets.h"
 #include "shard/W6_W6Match7_DefaultTextureWork.h"
-
-namespace {
-struct GfxReleaseEntry {
-    /* 0x00 */ void *mainData;
-    /* 0x04 */ void *subData;
-    /* 0x08 */ u32 unk08[3];
-    /* 0x14 */ u32 mainKind;
-    /* 0x18 */ s32 kind;
-};
-struct GfxReleaseTarget {
-    /* 0x00 */ u32 address;
-    /* 0x04 */ u32 unk04;
-    /* 0x08 */ GfxReleaseEntry *entry;
-};
-}
 
 extern "C" {
 extern DriverTextureRelease *g_gfxReleaseCallback;
 
-// Hand an entry's main and sub blocks back to the driver, then clear both block pointers.
-void gfxReleaseEntryBlocks(GfxReleaseTarget *target)
+/* Returns an entry's main and sub blocks to the driver, then clears both pointers. */
+void gfxReleaseEntryBlocks(TextureBindingNode *target)
 {
-    GfxReleaseEntry *entry = target->entry;
+    GfxReleaseEntry *entry = (GfxReleaseEntry *)target->resource;
     switch (entry->kind) {
     case 0x2020000:
     case 0x2030000:
@@ -46,4 +31,4 @@ void gfxReleaseEntryBlocks(GfxReleaseTarget *target)
     entry->mainData = NULL;
     entry->subData = NULL;
 }
-}
+} /* extern "C" */

@@ -4,6 +4,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemCopy.h"
+#include "runtime/String.h"
 
 struct ObjectParticleResourceView {
     EffMiscDesc description;
@@ -29,11 +30,9 @@ extern const char g_effObjectParticleEffMiscHeaderFileName[], g_effObjectParticl
 ObjectParticleHeaderView *resourceResolveHeaderPointer(ObjectParticleResourceView *);
 const u8 *resourceResolveDataPointer(ObjectParticleResourceView *);
 void *memAlloc(u32, u32, u32, u32, u32, u32);
-void rt_memclr(void *, u32);
 void __aeabi_memcpy4(void *, const void *, u32);
 void effObjectParticleSetSource(EffObjectParticle *, u16, EffEmitterDesc *);
 void FUN_003b8ecc(EffObjectParticle *);
-AsdMdlObject *asdMdlManagerCreateFromSource(void *, u32, u32);
 
 /* effMisc.h's inline allocator (retail traces the allocation at ./effMisc.h line 450, as effEmitterCreateSmall's
  * effAllocCleared does): a cleared block from the effect heap. */

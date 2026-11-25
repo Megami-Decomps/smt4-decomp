@@ -7,7 +7,6 @@ extern "C" {
 void slotPlacementAssignSlotAndPosition(PartyPanelWidget *, u32);
 void partyPanelConfigureGridNavigation();
 void scrollOwnerSelectIndex(GridNavigation *, s32);
-void scrollListSetSelectionMarkChanged(ScrollSelection *, s32);
 }
 
 /* Flips the page flag, plays animation 5 and refreshes every character and demon widget. */

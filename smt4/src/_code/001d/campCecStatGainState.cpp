@@ -19,10 +19,10 @@
 #include "bible/bibleDevil.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 StatBlock *stockFindSelectedUnit(void);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void unitRecalculateEffectiveStats(StatBlock *unit);
 void FUN_0029d8f4(StatBlock *unit, s32 demonSide, u8 flag);
 void campMenuSessionReset(void);

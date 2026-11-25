@@ -6,7 +6,7 @@
 #include "util/BitsAndBytes.h"
 
 extern "C" {
-WindowOperationResult FUN_0038b6d8(WindowOperationState *state, const WindowOperationRequest *request);
+RequestParameters aocFileContentDispatchMountRequest(WindowOperationState *state, const WindowOperationRequest *request);
 }
 
 inline void *Obj4221d4::operator new[](u32 bytes) throw()
@@ -21,7 +21,7 @@ extern "C" void FUN_0038a048(AocPackageMountBatch *batch)
     WindowOperationResult result(0);
     batch->packages = new Obj4221d4[batch->count];
     for (s32 index = 0; index < batch->count; ++index) {
-        const WindowOperationResult &operation = FUN_0038b6d8(
+        const RequestParameters &operation = aocFileContentDispatchMountRequest(
             (WindowOperationState *)&batch->packages[index],
             (const WindowOperationRequest *)&batch->entries[index]);
         if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&operation))) {

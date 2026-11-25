@@ -5,7 +5,6 @@
 
 extern "C" {
 
-void animationSelectClip(Obj557b18 *model, u32 index, u8 flags, f32 time);
 
 /* Starts the loaded gimmick with the id from its first clip (clip 1 too for id 42) and registers its model; returns 1 when started. */
 u32 mapGimicStartById(s32 id)

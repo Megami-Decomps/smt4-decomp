@@ -1,5 +1,6 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/NumberFont.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ typedef struct StatListWork {
 
 f32 jobGetScalarValue(void);
 s32 itemIsCollectedWithRelated(u32 selection);
-void numberFontDrawFormatted(s32 a, s32 x, s32 y, s32 b, s32 c, s32 d, const char *format, ...);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 

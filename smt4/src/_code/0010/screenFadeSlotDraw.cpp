@@ -5,8 +5,6 @@
 
 extern "C" {
 extern W6Match3SlotState g_screenFadeSlots[2];
-u32 asdGxPresetsGetByKind(u32);
-u32 asdGxPresetsGetHeightByKind(u32);
 
 /* Draw the selected screen-fade color with its current interpolated opacity. */
 void screenFadeSlotDraw(s32 index)

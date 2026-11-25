@@ -4,9 +4,9 @@
 #include "quest_center/QuestRequirement.h"
 #include "gamedata/GameSaveLinkSlot.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "runtime/String.h"
 
 extern "C" {
-void rt_memclr(void *destination, u32 size);
 s32 questReadRuntimeFlag(u32 id, u32 flag);
 s32 gameFlagIsSet(u32 id); // declcheck: local (the shared declaration does not compile here or changes this unit)
 u32 questGetRequirementProgress(s32 quest, s32 index, QuestRequirementProgress *progress);

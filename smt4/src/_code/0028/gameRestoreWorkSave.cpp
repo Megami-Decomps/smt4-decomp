@@ -1,6 +1,9 @@
 /* NON_MATCHING: the minimal live flag arrays/spills use a 44-byte frame instead of retail's 76-byte frame; preserved-value address formation also differs. */
-#include "gamedata/GameData.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "camp/CampMenuEntry.h"
 #include "gamedata/GameFlags.h"
+#include "gamedata/GameSaveBlocks.h"
+#include "shard/W6_W6Match5_EntryCollection.h"
 
 struct RestoreSavePayload {
     /* 0x00000 */ u32 unk00000;
@@ -22,14 +25,10 @@ struct RestoreFlagIds {
 };
 
 extern "C" {
-extern GameDataBlocks g_gameDataBlocks;
 extern const RestoreFlagIds DAT_00404204;
-s32 gameFlagIsSet(u32 flag);
 
 void *FUN_0033f6d8(void);
 void flagBlockCopyRecord(void *snapshot);
-void asdMemFree(void *);
-void __aeabi_memcpy4(void *, const void *, u32 bytes);
 
 // Restore the work save while preserving the requested mode's flags and selected state.
 void gameRestoreWorkSave(s32 mode)

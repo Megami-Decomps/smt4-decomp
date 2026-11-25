@@ -14,6 +14,7 @@
 #include "sys/RuntimeObjects.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 extern ConfigWork *g_config;
@@ -27,7 +28,6 @@ void buttonHelpSetText(const char *text, u32 color);
 void messageMainSetEnabled(u8 enabled);
 void messageMainFinishWindow(void);
 u32 messageMainGetChoiceResult(void);
-u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void FUN_001d15fc(void);
 }
 

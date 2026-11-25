@@ -10,7 +10,7 @@ extern "C" {
 extern const char DAT_0052cf04[]; // event/HowTo/HowTo.mbm
 extern const char DAT_0052cee8[]; // event/HowTo/HowToHelp.mbm
 void sysMemClear(void *memory, u32 size);
-void FUN_0049dd74(HowToScreenWork *work);
+void howToClearPageLayout(HowToScreenWork *work);
 void asdLoadFileAsyncSimple(const char *path, void **result, u32 flags);
 void asdTMTexTableLoadTmx(u32 table, u32 mode);
 void paramsClearPacket(UiResourceParameters *parameters);
@@ -62,7 +62,7 @@ void FUN_0049d3f0(HowToScreenWork *work)
         work->display.handles[i] = handle;
         uiObjectSetColorRgb(handle, ~0u);
     }
-    FUN_0049dd74(work);
+    howToClearPageLayout(work);
     asdLoadFileAsyncSimple(DAT_0052cf04, &work->messages[0], 0);
     asdLoadFileAsyncSimple(DAT_0052cee8, &work->messages[1], 0);
     asdTMTexTableLoadTmx(51, 0);

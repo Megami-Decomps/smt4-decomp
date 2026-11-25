@@ -1,8 +1,8 @@
 #include "ui/ButtonHelpGlobal.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
-extern int scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 
 u8 buttonHelpStartScript(u32 value)
 {

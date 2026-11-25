@@ -1,4 +1,5 @@
 #include "shard/Shard003F.h"
+#include "runtime/String.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ typedef struct PartyBlock2A0 {
 } PartyBlock2A0;
 
 extern PartyBlock2A0 *gameFlagBlockGet(void);
-extern void rt_memclr(PartyBlock2A0 *block, u32 size);
 
 /* Clears the party block and flags entries 0x15E..0x18F with bit 0x20. */
 void partyFlagRange(void)

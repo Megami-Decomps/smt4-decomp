@@ -5,7 +5,6 @@
 #include "battle/BtlGlobals.h"
 
 extern "C" {
-s32 scrGetArg(s32 index);
 
 // Reports whether the listed battle entry has flag 0x10000.
 u32 scrCommBattleEntryHasFlag(void)

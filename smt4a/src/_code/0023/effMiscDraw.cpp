@@ -5,7 +5,6 @@
 
 extern "C" {
 extern EffMiscKind g_effMiscKinds[];
-void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void uiSpriteRefreshMode(RenderCtxA *context);
 
 static __inline void effMiscLateUpdate(EffMiscObject *object)

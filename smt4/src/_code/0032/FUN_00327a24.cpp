@@ -4,7 +4,6 @@
 #include "util/SlotRangeSelect.h"
 #include "script/ScriptArgs.h"
 extern "C" {
-s32 scrGetArg(s32 index);
 s32 btlScriptResolveGroupArg(s32 group);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 

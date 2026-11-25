@@ -1,6 +1,7 @@
 #include "common.h"
 #include "addon/AocSystem.h"
 #include "script/scrScriptProcess.h"
+#include "script/ScriptEntry.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ typedef struct BtlAiScriptLoader {
 
 void aocQueueType1d(AocSystem *system, s32 script, BtlAiScriptLoader *loader, u8 *request);
 void asdLoadFileAsyncSimple(u8 *request, BtlAiScriptLoader *loader, s32 flags);
-void scrScriptProcessStartEntry(void *process, s32 index);
 void asdMemFree(void *block);
 
 /* Steps the battle AI script: load the file (or the queued add-on script), start it, run it, free it. */
