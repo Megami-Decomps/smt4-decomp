@@ -1,325 +1,208 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033e590` (_code @ 0x33e590, 0x57c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
 #include "game/GameStateA.h"
-/* The decompiler copies some game state fields as raw words of another type: those uses cast. */
+#include "map/LmapGlobals.h"
+#include "map/LmapViewGlobals.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "code/Code0014.h"
+#include "map/MapActionMarker.h"
+#include "sys/RuntimeObjects.h"
+#include "code/Code002e.h"
 
 extern "C" {
 
+void sysPlaySe(u32 id);
+u32 padButtonIsPressed(u32 button);
+s32 FUN_004d0584(void);
+s32 inputIsQuestMenuPressed(void);
+void mapEaseSceneHeading(void);
+void FUN_00303460(s32 mode);
+void mapSetSceneState(s32 state);
+u32 FUN_00233e10(u8 blocked, s32 index);
+void mapIfShowActionMarker(MapMarkerPosition placement);
+void mapIfReleaseSlot4(void);
+void mapIfReleaseResource(void);
+bool mapIfHasSelection(void);
+void FUN_002342b8(void);
+u32 FUN_002e364c(f32 *target);
+void FUN_00327ee8(f32 x, f32 z);
 
-int slotSetRequest(...);
-int mapIfReleaseResource(void);
-int mapSetSceneState(...);
+f32 libm_sinf(f32 radians);
+f32 libm_cosf(f32 radians);
+void FUN_0033abd4(f32 x, f32 y, f32 z);
+void FUN_00324e38(s32 variant);
+u8 soundVolumeSettingGet(void);
+void soundVolumeSettingSet(u8 volume);
 
-int soundVolumeSettingSet(...);
-int FUN_0014af98(void);
-int sysPlaySe(int);
-int libm_cosf(void);
-int libm_sinf(void);
-int mapIfShowActionMarker(void);
-int FUN_00233e10(...);
-int FUN_002342b8(void);
-int mapIfReleaseSlot4(void);
-int mapEaseSceneHeading(void);
-int FUN_002e364c(...);
-int FUN_00303460(int);
-int FUN_00324e38(unsigned int);
-int FUN_00327ee8(void);
-int FUN_0033abd4(void);
-int sysPlayVoice(int);
-int soundActorStartOnFreeChannel(unsigned int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern int g_lmapView; /* 0x5806a4 */
-extern int g_lmapScene; /* 0x581288 */
-
-
-
-
-
-
-
-
-
-/* Supplied declaration required: soundVolumeSettingSet. */
-extern unsigned int soundVolumeSettingGet(void);
-/* Supplied declaration required: FUN_0014af98. */
-extern int padButtonIsPressed(unsigned int);
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: libm_cosf. */
-/* Supplied declaration required: libm_sinf. */
-/* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: mapIfShowActionMarker. */
-/* Supplied declaration required: FUN_00233e10. */
-/* Supplied declaration required: FUN_002342b8. */
-extern int mapIfHasSelection(void);
-/* Supplied declaration required: mapIfReleaseResource. */
-/* Supplied declaration required: mapIfReleaseSlot4. */
-/* Supplied declaration required: mapEaseSceneHeading. */
-extern int pairedAvailabilityBothReady(void);
-/* Supplied declaration required: FUN_002e364c. */
-/* Supplied declaration required: FUN_00303460. */
-/* Supplied declaration required: mapSetSceneState. */
-/* Supplied declaration required: FUN_00324e38. */
-/* Supplied declaration required: FUN_00327ee8. */
-/* Supplied declaration required: FUN_0033abd4. */
-/* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: soundActorStartOnFreeChannel. */
-extern int inputIsQuestMenuPressed(void);
-extern int FUN_004d0584(void);
-
-
-void FUN_0033e590(void)
-
+/* The area announcement is emitted inline by the field map step. */
+static __forceinline void lmapAnnounceArea(s32 part, u8 volume)
 {
-/* irregular: 20 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  float temp_v3;
-  float temp_v4;
-  unsigned int temp_v5;
-  float temp_v6;
-  
-  temp_v0 = soundVolumeSettingGet();
-  if (*(int *)(g_lmapScene + 4) < 10) {
-    mapEaseSceneHeading();
-    temp_v1 = g_lmapScene;
-    *(float *)(g_lmapScene + 0x1c) =
-         *(float *)(g_lmapScene + 0x1c) +
-         (*(float *)(g_lmapScene + 0x28) - *(float *)(g_lmapScene + 0x1c)) * 0.33333334f;
-    *(float *)(temp_v1 + 0x20) =
-         *(float *)(temp_v1 + 0x20) +
-         (*(float *)(temp_v1 + 0x2c) - *(float *)(temp_v1 + 0x20)) * 0.16666667f;
-    *(float *)(temp_v1 + 0x24) =
-         *(float *)(temp_v1 + 0x24) +
-         (*(float *)(temp_v1 + 0x30) - *(float *)(temp_v1 + 0x24)) * 0.33333334f;
-  }
-  temp_v1 = g_lmapScene;
-  temp_v5 = 0x40a00000;
-  temp_v2 = *(int *)(g_lmapScene + 4);
-  if (temp_v2 != 0xd) {
-    if (0xd >= temp_v2) {
-      temp_v4 = 0.017453292f;
-      if (temp_v2 != 10) {
-        if (temp_v2 < 0xb) {
-          if (temp_v2 != 0) {
-            if (temp_v2 != 1) {
-              if (temp_v2 == 2) {
-                *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-                FUN_00233e10(1,g_gameState.overviewRecord);
-                temp_v2 = FUN_004d0584();
-                temp_v1 = g_lmapScene;
-                if (temp_v2 != 0) {
-                  *(unsigned int *)(g_lmapScene + 4) = 10;
-                  *(unsigned int *)(temp_v1 + 8) = 0;
-                }
-                else {
-                  temp_v1 = padButtonIsPressed(6);
-                  if ((temp_v1 != 0) || (temp_v1 = inputIsQuestMenuPressed(), temp_v1 != 0)) {
-                    temp_v1 = g_lmapView;
-                    *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
-                    *(unsigned int *)(temp_v1 + 0xb0) = 0;
-                    FUN_00303460(0);
-                    temp_v1 = g_lmapScene;
-                    *(unsigned int *)(g_lmapScene + 0x54) = 0;
-                    *(unsigned int *)(temp_v1 + 0x58) = temp_v5;
-                    FUN_00233e10(0,g_gameState.overviewRecord);
-                    mapIfReleaseSlot4();
-                    temp_v1 = g_lmapScene;
-                    *(unsigned int *)(g_lmapScene + 4) = 0x5a;
-                    *(unsigned int *)(temp_v1 + 8) = 0;
-                  }
-                }
-              }
-            }
-            else {
-              *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-              FUN_00233e10(1,g_gameState.overviewRecord);
-              temp_v1 = g_lmapScene;
-              if (*(int *)(g_lmapScene + 8) >= 3) {
-                temp_v2 = *(int *)(g_lmapScene + 4);
-                *(unsigned int *)(g_lmapScene + 0x54) = 0x1c;
-                *(unsigned int *)(temp_v1 + 0x58) = 0x40000000;
-                *(int *)(temp_v1 + 4) = temp_v2 + 1;
-                *(unsigned int *)(temp_v1 + 8) = 0;
-              }
-            }
-            FUN_002e364c(g_lmapScene + 0x28);
-            FUN_00327ee8();
-            return;
-          }
-          *(unsigned int *)(g_lmapScene + 0x54) = 0;
-          *(unsigned int *)(temp_v1 + 0x58) = 0x40400000;
-          *(unsigned char *)(temp_v1 + 0x6c) = 0;
-          temp_v5 = (*(unsigned int *)&g_gameState.overviewPosition.z);
-          temp_v0 = (*(unsigned int *)&g_gameState.overviewPosition.y);
-          *(unsigned int *)(temp_v1 + 0x28) = (*(unsigned int *)&g_gameState.overviewPosition.x);
-          *(unsigned int *)(temp_v1 + 0x2c) = temp_v0;
-          *(unsigned int *)(temp_v1 + 0x30) = temp_v5;
-          temp_v3 = g_gameState.pointHeading * 0.017453292f;
-          libm_sinf();
-          temp_v6 = 25.0f;
-          *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v3 * 25.0f;
-          temp_v4 = g_gameState.pointHeading * temp_v4;
-          libm_cosf();
-          temp_v1 = g_lmapScene;
-          *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v4 * temp_v6;
-          *(unsigned int *)(temp_v1 + 0x50) = (*(unsigned int *)&g_gameState.overviewHeading);
-          FUN_00303460(0xd);
-          *(unsigned int *)(g_lmapView + 0xb0) = 1;
-          sysPlaySe(0xdc);
-          FUN_00233e10(1,g_gameState.overviewRecord);
-          mapIfShowActionMarker();
-          temp_v1 = g_lmapScene;
-          temp_v2 = *(int *)(temp_v1 + 4);
-          *(int *)(temp_v1 + 4) = temp_v2 + 1;
-          *(unsigned int *)(temp_v1 + 8) = 0;
-          FUN_002e364c(g_lmapScene + 0x28);
-          FUN_00327ee8();
-          return;
+    switch (g_gameState.selectedKind) {
+    case 0:
+        soundActorStartOnFreeChannel(0x10002c4 + part, soundActorPositionFromArray(&g_lmapScene->pose.position.x));
+        break;
+    case 1:
+        soundActorStartOnFreeChannel(0x10002c6 + part, soundActorPositionFromArray(&g_lmapScene->pose.position.x));
+        break;
+    case 2:
+        soundActorStartOnFreeChannel(0x10002c8 + part, soundActorPositionFromArray(&g_lmapScene->pose.position.x));
+        break;
+    case 3:
+        soundActorStartOnFreeChannel(0x10002ca + part, soundActorPositionFromArray(&g_lmapScene->pose.position.x));
+        break;
+    case 4:
+        soundActorStartOnFreeChannel(0x10002cc + part, soundActorPositionFromArray(&g_lmapScene->pose.position.x));
+        break;
+    case 5:
+        soundActorStartOnFreeChannel(0x10002d9 + part, soundActorPositionFromArray(&g_lmapScene->pose.position.x));
+        break;
+    }
+    FUN_00324e38(-1);
+    libm_sinf(g_lmapScene->pose.heading * 0.017453292f);
+    libm_cosf(g_lmapScene->pose.heading * 0.017453292f);
+    soundVolumeSettingSet(FUN_0014af98());
+    sysPlayVoice(0x10002e5 + part);
+    soundVolumeSettingSet(volume);
+}
+
+/* Steps the scene through the overview point's approach: walk up to the point and show its marker, wait for
+ * confirm (states 10-13: announce the area and leave for scene state 20) or cancel (90-92: back to the map,
+ * scene state 1); 100-102 leave after the slot request. Eases the position toward its target on the way. */
+void FUN_0033e590(void)
+{
+    u8 volume = soundVolumeSettingGet();
+    if (g_lmapScene->state < 10) {
+        mapEaseSceneHeading();
+        LmapSceneA *scene = g_lmapScene;
+        scene->pose.position.x += (scene->pose.targetPosition.x - scene->pose.position.x) * (1.0f / 3.0f);
+        scene->pose.position.y += (scene->pose.targetPosition.y - scene->pose.position.y) * (1.0f / 6.0f);
+        scene->pose.position.z += (scene->pose.targetPosition.z - scene->pose.position.z) * (1.0f / 3.0f);
+    }
+
+    LmapSceneA *scene = g_lmapScene;
+    s32 oldState;
+    switch (scene->state) {
+    case 0: {
+        /* walk to a point 25 units ahead of the overview point */
+        g_lmapScene->moveMode = 0;
+        g_lmapScene->moveSpeed = 3.0f;
+        g_lmapScene->unk06C = 0;
+        g_lmapScene->pose.targetPosition = g_gameState.overviewPosition;
+        g_lmapScene->pose.targetPosition.x += libm_sinf(g_gameState.pointHeading * 0.017453292f) * 25.0f;
+        g_lmapScene->pose.targetPosition.z += libm_cosf(g_gameState.pointHeading * 0.017453292f) * 25.0f;
+        g_lmapScene->pose.targetHeading = g_gameState.overviewHeading;
+        FUN_00303460(13);
+        g_lmapView->contextMode = 1;
+        sysPlaySe(220);
+        FUN_00233e10(1, g_gameState.overviewRecord);
+        MapMarkerPosition marker = { g_gameState.overviewPosition.x, g_gameState.overviewPosition.y,
+                                     g_gameState.overviewPosition.z, g_gameState.pointHeading };
+        mapIfShowActionMarker(marker);
+        scene = g_lmapScene;
+        goto readAdvance;
+    }
+    case 1:
+        g_lmapScene->stateTime++;
+        FUN_00233e10(1, g_gameState.overviewRecord);
+        if (g_lmapScene->stateTime > 2) {
+            g_lmapScene->moveMode = 28;
+            g_lmapScene->moveSpeed = 2.0f;
+            g_lmapScene->state++;
+            g_lmapScene->stateTime = 0;
         }
-        if (temp_v2 != 0xb) {
-          if ((temp_v2 != 0xc) || (temp_v1 = mapIfHasSelection(), temp_v1 != 0)) {
-            FUN_002e364c(g_lmapScene + 0x28);
-            FUN_00327ee8();
-            return;
-          }
-          mapIfReleaseSlot4();
-          temp_v1 = g_lmapView;
-          *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
-          *(unsigned int *)(temp_v1 + 0xb0) = 0;
-          FUN_00303460(0);
-          temp_v2 = *(int *)(g_lmapScene + 4);
-          temp_v1 = g_lmapScene;
+        break;
+    case 2:
+        g_lmapScene->stateTime++;
+        FUN_00233e10(1, g_gameState.overviewRecord);
+        if (FUN_004d0584()) {
+            g_lmapScene->state = 10;
+            g_lmapScene->stateTime = 0;
+        } else if (padButtonIsPressed(6) || inputIsQuestMenuPressed()) {
+            g_lmapView->heading = g_lmapScene->pose.targetHeading;
+            g_lmapView->contextMode = 0;
+            FUN_00303460(0);
+            g_lmapScene->moveMode = 0;
+            g_lmapScene->moveSpeed = 5.0f;
+            FUN_00233e10(0, g_gameState.overviewRecord);
+            mapIfReleaseSlot4();
+            g_lmapScene->state = 90;
+            g_lmapScene->stateTime = 0;
         }
-        else {
-          temp_v1 = *(int *)(g_lmapScene + 8) + 1;
-          *(int *)(g_lmapScene + 8) = temp_v1;
-          if (temp_v1 != 10) {
-            FUN_002e364c(g_lmapScene + 0x28);
-            FUN_00327ee8();
-            return;
-          }
-          FUN_0033abd4();
-          switch(g_gameState.selectedKind) {
-          case 0:
-            temp_v5 = 0x10002c4;
-            soundActorStartOnFreeChannel(temp_v5);
-            break;
-          case 1:
-            temp_v5 = 0x10002c6;
-            soundActorStartOnFreeChannel(temp_v5);
-            break;
-          case 2:
-            temp_v5 = 0x10002c8;
-            soundActorStartOnFreeChannel(temp_v5);
-            break;
-          case 3:
-            temp_v5 = 0x10002ca;
-            soundActorStartOnFreeChannel(temp_v5);
-            break;
-          case 4:
-            temp_v5 = 0x10002cc;
-            soundActorStartOnFreeChannel(temp_v5);
-            break;
-          case 5:
-            temp_v5 = 0x10002d9;
-            soundActorStartOnFreeChannel(temp_v5);
-            break;
-          default:
-          }
-LAB_0033e908:
-          FUN_00324e38(0xffffffff);
-          libm_sinf();
-          libm_cosf();
-          FUN_0014af98();
-          soundVolumeSettingSet();
-          sysPlayVoice(0x10002e5);
-          soundVolumeSettingSet(temp_v0);
-          FUN_002342b8();
-          temp_v2 = *(int *)(g_lmapScene + 4);
-          temp_v1 = g_lmapScene;
-        }
-      }
-      else {
+        break;
+    case 10: {
         g_gameState.transitionCompleted = 0;
-        *(unsigned int *)(g_lmapView + 0xc) = 1;
-        *(unsigned int *)(temp_v1 + 0x54) = 0x15;
-        *(unsigned int *)(temp_v1 + 0x58) = 0x40a00000;
-        temp_v2 = *(int *)(temp_v1 + 4);
-      }
+        g_lmapView->unk00C = 1;
+        scene->moveMode = 21;
+        scene->moveSpeed = 5.0f;
     }
-    else if (temp_v2 != 100) {
-      if (temp_v2 < 0x65) {
-        if (temp_v2 != 0x5a) {
-          if (temp_v2 != 0x5b) {
-            if ((temp_v2 == 0x5c) &&
-               (temp_v1 = *(int *)(g_lmapScene + 8) + 1, *(int *)(g_lmapScene + 8) = temp_v1,
-               temp_v1 >= 4)) {
-              mapSetSceneState(1);
-            }
-            FUN_002e364c(g_lmapScene + 0x28);
-            FUN_00327ee8();
-            return;
-          }
-          mapIfReleaseResource();
-          temp_v2 = *(int *)(g_lmapScene + 4);
-          temp_v1 = g_lmapScene;
+    readAdvance:
+        oldState = scene->state;
+        goto commitAdvance;
+    case 11:
+        /* announce the area: its sound at the player, the effect and the voice at the current volume */
+        if (++g_lmapScene->stateTime == 10) {
+            FUN_0033abd4(g_lmapScene->pose.position.x, g_lmapScene->pose.position.y, g_lmapScene->pose.position.z);
+            lmapAnnounceArea(0, volume);
+            FUN_002342b8();
+            scene = g_lmapScene;
+            const s32 currentState = scene->state;
+            scene->state = currentState + 1;
+            scene->stateTime = 0;
         }
-      }
-      else if (temp_v2 != 0x65) {
-        if (temp_v2 != 0x66) {
-          FUN_002e364c(g_lmapScene + 0x28);
-          FUN_00327ee8();
-          return;
+        break;
+    case 12:
+        if (!mapIfHasSelection()) {
+            mapIfReleaseSlot4();
+            g_lmapView->heading = g_lmapScene->pose.targetHeading;
+            g_lmapView->contextMode = 0;
+            FUN_00303460(0);
+            g_lmapScene->state++;
+            g_lmapScene->stateTime = 0;
         }
+        break;
+    case 13:
+    case 102:
         mapIfReleaseResource();
-        mapSetSceneState(0x14);
-        temp_v2 = *(int *)(g_lmapScene + 4);
-        temp_v1 = g_lmapScene;
-      }
-      else {
-        temp_v2 = pairedAvailabilityBothReady();
-        temp_v1 = g_lmapView;
-        if (temp_v2 == 0) {
-          FUN_002e364c(g_lmapScene + 0x28);
-          FUN_00327ee8();
-          return;
+        mapSetSceneState(20);
+        scene = g_lmapScene;
+        oldState = scene->state;
+    commitAdvance: {
+        scene->state = oldState + 1;
+        scene->stateTime = 0;
+        break;
+    }
+    case 90:
+        g_lmapScene->state++;
+        g_lmapScene->stateTime = 0;
+        break;
+    case 91:
+        mapIfReleaseResource();
+        g_lmapScene->state++;
+        g_lmapScene->stateTime = 0;
+        break;
+    case 92:
+        if (++g_lmapScene->stateTime > 3)
+            mapSetSceneState(1);
+        break;
+    case 100:
+        slotSetRequest(0, 10, 255);
+        g_lmapScene->state++;
+        g_lmapScene->stateTime = 0;
+        break;
+    case 101:
+        if (pairedAvailabilityBothReady()) {
+            g_lmapView->heading = g_lmapScene->pose.targetHeading;
+            g_lmapView->contextMode = 0;
+            FUN_00303460(0);
+            g_lmapScene->moveMode = 0;
+            g_lmapScene->moveSpeed = 5.0f;
+            FUN_00233e10(0, g_gameState.overviewRecord);
+            mapIfReleaseSlot4();
+            g_lmapScene->state++;
+            g_lmapScene->stateTime = 0;
         }
-        *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
-        *(unsigned int *)(temp_v1 + 0xb0) = 0;
-        FUN_00303460(0);
-        temp_v1 = g_lmapScene;
-        *(unsigned int *)(g_lmapScene + 0x54) = 0;
-        *(unsigned int *)(temp_v1 + 0x58) = temp_v5;
-        FUN_00233e10(0,g_gameState.overviewRecord);
-        mapIfReleaseSlot4();
-        temp_v2 = *(int *)(g_lmapScene + 4);
-        temp_v1 = g_lmapScene;
-      }
+        break;
     }
-    else {
-      slotSetRequest(0,10,0xff);
-      temp_v2 = *(int *)(g_lmapScene + 4);
-      temp_v1 = g_lmapScene;
-    }
-  }
-  else {
-    mapIfReleaseResource();
-    mapSetSceneState(0x14);
-    temp_v2 = *(int *)(g_lmapScene + 4);
-    temp_v1 = g_lmapScene;
-  }
-  *(int *)(temp_v1 + 4) = temp_v2 + 1;
-  *(unsigned int *)(temp_v1 + 8) = 0;
-  FUN_002e364c(g_lmapScene + 0x28);
-  FUN_00327ee8();
-  return;
+    FUN_002e364c(&g_lmapScene->pose.targetPosition.x);
+    FUN_00327ee8(g_lmapScene->pose.position.x, g_lmapScene->pose.position.z);
 }
 
 } /* extern "C" */
